@@ -35,12 +35,15 @@ const Navbar = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center gap-3 group">
             <img 
               src={logo} 
               alt="Realtor Desk AI" 
               className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform"
             />
+            <span className="text-xl md:text-2xl font-bold gradient-text">
+              Realtor Desk AI
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
