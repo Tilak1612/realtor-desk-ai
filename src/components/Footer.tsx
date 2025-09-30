@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Building2, Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import logo from "@/assets/realtor-desk-logo.png";
 
 const Footer = () => {
   return (
@@ -8,16 +9,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div>
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-lg">
-                <Building2 className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold gradient-text">Realtor Desk AI</span>
+            <Link to="/" className="flex items-center mb-4">
+              <img 
+                src={logo} 
+                alt="Realtor Desk AI" 
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               AI-powered solutions for Canadian real estate professionals.
             </p>
-            <p className="text-xs text-muted-foreground italic">
+            <p className="text-xs text-muted-foreground italic mb-4">
               Powered by Brainfy AI Inc
             </p>
             <div className="flex gap-3">
