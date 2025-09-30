@@ -71,7 +71,7 @@ const ROICalculator = () => {
 
       {/* Results */}
       <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-6">
-        <h4 className="text-lg font-semibold mb-4 text-center">With Brainfy AI, You Could Achieve:</h4>
+        <h4 className="text-lg font-semibold mb-4 text-center">With Realtor Desk AI, You Could Achieve:</h4>
         
         <div className="grid md:grid-cols-3 gap-6">
           {/* Result 1 */}
@@ -103,7 +103,7 @@ const ROICalculator = () => {
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-6">
-          Based on {leads} monthly leads at {conversionRate}% conversion → {brainfyConversionRate}% with Brainfy AI
+          Based on {leads} monthly leads at {conversionRate}% conversion → {brainfyConversionRate}% with Realtor Desk AI
         </p>
       </div>
     </Card>

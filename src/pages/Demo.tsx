@@ -37,7 +37,7 @@ const Demo = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <h1 className="mb-6 animate-fade-in-up">
-            See <span className="gradient-text">Brainfy AI</span> in Action
+            See <span className="gradient-text">Realtor Desk AI</span> in Action
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
             Schedule a personalized demo or start your free trial today
@@ -186,7 +186,7 @@ const Demo = () => {
                     <div>
                       <h4 className="font-semibold mb-1">Live Demo (30 min)</h4>
                       <p className="text-sm text-muted-foreground">
-                        See Brainfy AI in action with examples specific to your market
+                        See Realtor Desk AI in action with examples specific to your market
                       </p>
                     </div>
                   </div>

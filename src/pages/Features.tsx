@@ -178,14 +178,14 @@ const Features = () => {
       {/* Comparison Table Section */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
-          <h2 className="text-center mb-12">Brainfy AI vs. Traditional CRMs</h2>
+          <h2 className="text-center mb-12">Realtor Desk AI vs. Traditional CRMs</h2>
           
           <div className="overflow-x-auto">
             <table className="w-full bg-background rounded-lg overflow-hidden shadow-lg">
               <thead className="bg-gradient-to-r from-primary to-secondary text-white">
                 <tr>
                   <th className="p-4 text-left font-semibold">Feature</th>
-                  <th className="p-4 text-left font-semibold">Brainfy AI</th>
+                  <th className="p-4 text-left font-semibold">Realtor Desk AI</th>
                   <th className="p-4 text-left font-semibold">Traditional CRMs</th>
                 </tr>
               </thead>

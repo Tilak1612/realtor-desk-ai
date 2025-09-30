@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Brain } from "lucide-react";
+import { Menu, X, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
@@ -36,10 +36,10 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-lg group-hover:scale-110 transition-transform">
-              <Brain className="w-6 h-6 text-white" />
+              <Building2 className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl md:text-2xl font-bold gradient-text">
-              Brainfy AI
+              Realtor Desk AI
             </span>
           </Link>
 

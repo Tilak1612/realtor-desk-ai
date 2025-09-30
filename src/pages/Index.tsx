@@ -110,13 +110,13 @@ const Index = () => {
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="mb-4">Trusted by Top Canadian Realtors</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Join thousands of agents who have transformed their business with Brainfy AI
+              Join thousands of agents who have transformed their business with Realtor Desk AI
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <TestimonialCard
-              quote="Brainfy AI helped me close 14 additional deals in Q1 by identifying off-market sellers. The predictive intelligence is incredible."
+              quote="Realtor Desk AI helped me close 14 additional deals in Q1 by identifying off-market sellers. The predictive intelligence is incredible."
               name="Sarah Chen"
               title="Agent"
               company="Royal LePage Toronto"

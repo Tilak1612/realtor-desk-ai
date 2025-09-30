@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Brain, Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { Building2, Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -10,12 +10,15 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
               <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-lg">
-                <Brain className="w-5 h-5 text-white" />
+                <Building2 className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold gradient-text">Brainfy AI</span>
+              <span className="text-xl font-bold gradient-text">Realtor Desk AI</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               AI-powered solutions for Canadian real estate professionals.
+            </p>
+            <p className="text-xs text-muted-foreground italic">
+              Powered by Brainfy AI Inc
             </p>
             <div className="flex gap-3">
               <a
@@ -141,7 +144,7 @@ const Footer = () => {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2025 Brainfy AI Inc. All rights reserved.
+              © 2025 Realtor Desk AI. Powered by Brainfy AI Inc. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

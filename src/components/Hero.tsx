@@ -65,7 +65,7 @@ const Hero = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src={heroDashboard}
-                alt="Brainfy AI Dashboard showing AI analytics, property listings, and chat interface"
+                alt="Realtor Desk AI Dashboard showing AI analytics, property listings, and chat interface"
                 className="w-full h-auto"
               />
               {/* Floating Badge */}

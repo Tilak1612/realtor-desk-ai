@@ -27,7 +27,7 @@ const CanadianMarket = () => {
             <div className="relative animate-fade-in animation-delay-200">
               <img
                 src={agentSuccess}
-                alt="Canadian real estate professionals using Brainfy AI"
+                alt="Canadian real estate professionals using Realtor Desk AI"
                 className="rounded-2xl shadow-2xl"
               />
             </div>
@@ -87,7 +87,7 @@ const CanadianMarket = () => {
       {/* Solution Showcase */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
-          <h2 className="text-center mb-12">How Brainfy AI Solves Canadian Real Estate Challenges</h2>
+          <h2 className="text-center mb-12">How Realtor Desk AI Solves Canadian Real Estate Challenges</h2>
 
           <div className="space-y-12 max-w-5xl mx-auto">
             {/* Feature 1 */}
