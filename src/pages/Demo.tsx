@@ -9,24 +9,89 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle, Clock, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+// Form validation schema
+const demoFormSchema = z.object({
+  fullName: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email is too long"),
+  phone: z.string().trim().min(10, "Phone number must be at least 10 characters").max(20, "Phone number is too long"),
+  brokerage: z.string().trim().max(100, "Brokerage name is too long").optional(),
+  province: z.string().min(1, "Please select a province"),
+  currentCrm: z.string().optional(),
+  teamSize: z.string().optional(),
+  biggestChallenge: z.string().optional(),
+  comments: z.string().trim().max(1000, "Comments are too long").optional(),
+});
+
+type DemoFormValues = z.infer<typeof demoFormSchema>;
 
 const Demo = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const form = useForm<DemoFormValues>({
+    resolver: zodResolver(demoFormSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+      brokerage: "",
+      province: "",
+      currentCrm: "",
+      teamSize: "",
+      biggestChallenge: "",
+      comments: "",
+    },
+  });
+
+  const onSubmit = async (values: DemoFormValues) => {
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const { error } = await supabase.from("demo_requests").insert([
+        {
+          full_name: values.fullName,
+          email: values.email,
+          phone: values.phone,
+          brokerage: values.brokerage || null,
+          province: values.province,
+          current_crm: values.currentCrm || null,
+          team_size: values.teamSize || null,
+          biggest_challenge: values.biggestChallenge || null,
+          comments: values.comments || null,
+        },
+      ]);
+
+      if (error) throw error;
+
       toast({
-        title: "Demo Request Submitted!",
+        title: "Demo Request Submitted! ✅",
         description: "We'll contact you within 24 hours to schedule your personalized demo.",
       });
+
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting demo request:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your request. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
+    }
   };
 
   return (
@@ -53,118 +118,201 @@ const Demo = () => {
             <Card className="p-8">
               <h2 className="text-2xl font-bold mb-6">Request a Personalized Demo</h2>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="fullName">Full Name *</Label>
-                    <Input id="fullName" required placeholder="John Smith" />
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="fullName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Smith" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email Address *</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="john@example.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                  <div>
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" required placeholder="john@example.com" />
-                  </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input id="phone" type="tel" required placeholder="(555) 123-4567" />
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone Number *</FormLabel>
+                          <FormControl>
+                            <Input type="tel" placeholder="(555) 123-4567" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="brokerage"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Brokerage/Company</FormLabel>
+                          <FormControl>
+                            <Input placeholder="ABC Realty" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                  <div>
-                    <Label htmlFor="brokerage">Brokerage/Company</Label>
-                    <Input id="brokerage" placeholder="ABC Realty" />
-                  </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="province">Province *</Label>
-                    <Select required>
-                      <SelectTrigger id="province">
-                        <SelectValue placeholder="Select province" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ON">Ontario</SelectItem>
-                        <SelectItem value="QC">Quebec</SelectItem>
-                        <SelectItem value="BC">British Columbia</SelectItem>
-                        <SelectItem value="AB">Alberta</SelectItem>
-                        <SelectItem value="MB">Manitoba</SelectItem>
-                        <SelectItem value="SK">Saskatchewan</SelectItem>
-                        <SelectItem value="NS">Nova Scotia</SelectItem>
-                        <SelectItem value="NB">New Brunswick</SelectItem>
-                        <SelectItem value="PE">Prince Edward Island</SelectItem>
-                        <SelectItem value="NL">Newfoundland and Labrador</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="province"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Province *</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select province" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="ON">Ontario</SelectItem>
+                              <SelectItem value="QC">Quebec</SelectItem>
+                              <SelectItem value="BC">British Columbia</SelectItem>
+                              <SelectItem value="AB">Alberta</SelectItem>
+                              <SelectItem value="MB">Manitoba</SelectItem>
+                              <SelectItem value="SK">Saskatchewan</SelectItem>
+                              <SelectItem value="NS">Nova Scotia</SelectItem>
+                              <SelectItem value="NB">New Brunswick</SelectItem>
+                              <SelectItem value="PE">Prince Edward Island</SelectItem>
+                              <SelectItem value="NL">Newfoundland and Labrador</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="currentCrm"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Current CRM (if any)</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select CRM" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="none">None</SelectItem>
+                              <SelectItem value="followupboss">Follow Up Boss</SelectItem>
+                              <SelectItem value="liondesk">LionDesk</SelectItem>
+                              <SelectItem value="wiseagent">Wise Agent</SelectItem>
+                              <SelectItem value="ixact">IXACT Contact</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                  <div>
-                    <Label htmlFor="crm">Current CRM (if any)</Label>
-                    <Select>
-                      <SelectTrigger id="crm">
-                        <SelectValue placeholder="Select CRM" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="none">None</SelectItem>
-                        <SelectItem value="followupboss">Follow Up Boss</SelectItem>
-                        <SelectItem value="liondesk">LionDesk</SelectItem>
-                        <SelectItem value="wiseagent">Wise Agent</SelectItem>
-                        <SelectItem value="ixact">IXACT Contact</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="teamSize"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Number of Team Members</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select team size" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="solo">Solo</SelectItem>
+                              <SelectItem value="2-5">2-5</SelectItem>
+                              <SelectItem value="6-10">6-10</SelectItem>
+                              <SelectItem value="11-25">11-25</SelectItem>
+                              <SelectItem value="26+">26+</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="biggestChallenge"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Biggest Challenge</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select challenge" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="lead-gen">Lead generation</SelectItem>
+                              <SelectItem value="conversion">Lead conversion</SelectItem>
+                              <SelectItem value="transaction">Transaction management</SelectItem>
+                              <SelectItem value="marketing">Marketing</SelectItem>
+                              <SelectItem value="time">Time management</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
-                </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="teamSize">Number of Team Members</Label>
-                    <Select>
-                      <SelectTrigger id="teamSize">
-                        <SelectValue placeholder="Select team size" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="solo">Solo</SelectItem>
-                        <SelectItem value="2-5">2-5</SelectItem>
-                        <SelectItem value="6-10">6-10</SelectItem>
-                        <SelectItem value="11-25">11-25</SelectItem>
-                        <SelectItem value="26+">26+</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="challenge">Biggest Challenge</Label>
-                    <Select>
-                      <SelectTrigger id="challenge">
-                        <SelectValue placeholder="Select challenge" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="lead-gen">Lead generation</SelectItem>
-                        <SelectItem value="conversion">Lead conversion</SelectItem>
-                        <SelectItem value="transaction">Transaction management</SelectItem>
-                        <SelectItem value="marketing">Marketing</SelectItem>
-                        <SelectItem value="time">Time management</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                  <FormField
+                    control={form.control}
+                    name="comments"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Comments/Questions</FormLabel>
+                        <FormControl>
+                          <Textarea rows={4} placeholder="Tell us more about your needs..." {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-                <div>
-                  <Label htmlFor="comments">Comments/Questions</Label>
-                  <Textarea id="comments" rows={4} placeholder="Tell us more about your needs..." />
-                </div>
+                  <Button type="submit" className="btn-gradient w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting..." : "Request Demo"}
+                  </Button>
 
-                <Button type="submit" className="btn-gradient w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Request Demo"}
-                </Button>
-
-                <p className="text-sm text-muted-foreground text-center">
-                  Or{" "}
-                  <a href="#trial" className="text-primary font-semibold hover:underline">
-                    start your free trial
-                  </a>{" "}
-                  without a demo
-                </p>
-              </form>
+                  <p className="text-sm text-muted-foreground text-center">
+                    Or{" "}
+                    <a href="#trial" className="text-primary font-semibold hover:underline">
+                      start your free trial
+                    </a>{" "}
+                    without a demo
+                  </p>
+                </form>
+              </Form>
             </Card>
 
             {/* Right Column - Benefits */}

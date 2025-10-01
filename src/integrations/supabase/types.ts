@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      demo_requests: {
+        Row: {
+          biggest_challenge: string | null
+          brokerage: string | null
+          comments: string | null
+          created_at: string | null
+          current_crm: string | null
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          province: string
+          status: string | null
+          team_size: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          biggest_challenge?: string | null
+          brokerage?: string | null
+          comments?: string | null
+          created_at?: string | null
+          current_crm?: string | null
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          province: string
+          status?: string | null
+          team_size?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          biggest_challenge?: string | null
+          brokerage?: string | null
+          comments?: string | null
+          created_at?: string | null
+          current_crm?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          province?: string
+          status?: string | null
+          team_size?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
