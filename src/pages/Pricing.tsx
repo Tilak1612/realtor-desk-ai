@@ -20,9 +20,6 @@ const Pricing = () => {
       monthly: 249,
       yearly: 249 * 12 * 0.80, // 20% discount
       discount: "20%"
-    },
-    enterprise: {
-      discount: "25%"
     }
   };
 
@@ -115,7 +112,6 @@ const Pricing = () => {
               name="ENTERPRISE"
               price="Custom"
               description="Best for: Brokerages and large teams"
-              discount={isYearly ? pricingData.enterprise.discount : undefined}
               features={[
                 "Unlimited team members",
                 "White-label options",
