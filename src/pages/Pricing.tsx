@@ -17,7 +17,7 @@ const Pricing = () => {
             Transparent Pricing for <span className="gradient-text">Every Stage of Your Business</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            All plans include 14-day free trial, no credit card required
+            Choose the perfect plan for your business needs
           </p>
         </div>
       </section>
@@ -40,7 +40,7 @@ const Pricing = () => {
                 "1 team member",
                 "Email support",
               ]}
-              ctaText="Start Free Trial"
+              ctaText="Get Started"
               ctaLink="/demo"
             />
 
@@ -60,7 +60,7 @@ const Pricing = () => {
                 "Custom integrations",
               ]}
               popular
-              ctaText="Start Free Trial"
+              ctaText="Get Started"
               ctaLink="/demo"
             />
 
@@ -159,7 +159,7 @@ const Pricing = () => {
                 Can I try before I buy?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
-                Absolutely! All plans include a 14-day free trial with full access to all features. No credit card required.
+                Absolutely! Schedule a personalized demo to see all features in action before making your decision.
               </AccordionContent>
             </AccordionItem>
 

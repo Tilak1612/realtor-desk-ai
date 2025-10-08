@@ -177,12 +177,12 @@ const Index = () => {
         <div className="container-custom text-center">
           <h2 className="mb-6 text-white">Join 2,000+ Canadian Agents Growing Their Business with AI</h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Start your 14-day free trial today and experience the future of real estate
+            Get started today and experience the future of real estate
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" variant="secondary" className="text-lg">
-                Start Your 14-Day Free Trial
+                Get Started Today
               </Button>
             </Link>
             <Link to="/demo">

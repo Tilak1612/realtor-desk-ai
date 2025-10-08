@@ -43,7 +43,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient text-lg w-full sm:w-auto">
-                  Start Free Trial
+                  Get Started
                 </Button>
               </Link>
               <Link to="/demo">

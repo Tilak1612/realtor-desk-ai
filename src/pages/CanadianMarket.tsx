@@ -249,7 +249,7 @@ const CanadianMarket = () => {
           </p>
           <Link to="/demo">
             <Button size="lg" variant="secondary" className="text-lg">
-              Start Free Trial - No Credit Card Required
+              Schedule a Demo
             </Button>
           </Link>
         </div>

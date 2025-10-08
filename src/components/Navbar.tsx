@@ -76,7 +76,7 @@ const Navbar = () => {
               </Button>
             </Link>
             <Link to="/demo">
-              <Button className="btn-gradient">Start Free Trial</Button>
+              <Button className="btn-gradient">Get Started</Button>
             </Link>
           </div>
 
@@ -116,7 +116,7 @@ const Navbar = () => {
                 </Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-gradient w-full">Start Free Trial</Button>
+                <Button className="btn-gradient w-full">Get Started</Button>
               </Link>
             </div>
           </div>

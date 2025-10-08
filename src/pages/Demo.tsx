@@ -105,7 +105,7 @@ const Demo = () => {
             See <span className="gradient-text">Realtor Desk AI</span> in Action
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Schedule a personalized demo or start your free trial today
+            Schedule a personalized demo and see how we can help your business
           </p>
         </div>
       </section>
@@ -307,9 +307,9 @@ const Demo = () => {
                   <p className="text-sm text-muted-foreground text-center">
                     Or{" "}
                     <a href="#trial" className="text-primary font-semibold hover:underline">
-                      start your free trial
+                      get started
                     </a>{" "}
-                    without a demo
+                    right away
                   </p>
                 </form>
               </Form>
@@ -341,9 +341,9 @@ const Demo = () => {
                   <div className="flex gap-4">
                     <Clock className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">Custom Trial (14 days)</h4>
+                      <h4 className="font-semibold mb-1">Custom Onboarding</h4>
                       <p className="text-sm text-muted-foreground">
-                        Start your free trial with personalized onboarding
+                        Get started with personalized onboarding and support
                       </p>
                     </div>
                   </div>
@@ -374,9 +374,9 @@ const Demo = () => {
 
               <Card className="p-6 bg-gradient-to-r from-primary to-secondary text-white">
                 <h3 className="text-xl font-bold mb-2">Prefer to explore on your own?</h3>
-                <p className="mb-4 text-white/90">Start your 14-day free trial - no demo required</p>
+                <p className="mb-4 text-white/90">Get started today - no demo required</p>
                 <Button variant="secondary" className="w-full" size="lg">
-                  Start Free Trial
+                  Get Started
                 </Button>
               </Card>
             </div>
