@@ -76,11 +76,6 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
             <Link to="/demo">
-              <Button variant="ghost" className="font-semibold">
-                {t('nav.bookDemo')}
-              </Button>
-            </Link>
-            <Link to="/demo">
               <Button className="btn-gradient">{t('nav.startClosing')}</Button>
             </Link>
           </div>
@@ -118,11 +113,6 @@ const Navbar = () => {
               <div className="flex items-center gap-2 py-2">
                 <LanguageSwitcher />
               </div>
-              <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="outline" className="w-full">
-                  {t('nav.bookDemo')}
-                </Button>
-              </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button className="btn-gradient w-full">{t('nav.startClosing')}</Button>
               </Link>
