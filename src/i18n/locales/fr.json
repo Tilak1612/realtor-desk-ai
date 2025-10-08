@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "pricing": "Tarification",
+    "integrations": "Intégrations",
+    "canadianMarket": "Marché Canadien",
+    "resources": "Ressources",
+    "bookDemo": "Réserver Votre Démo Gratuite",
+    "startClosing": "Commencer à Conclure Plus de Ventes"
+  },
+  "hero": {
+    "title": "Concluez 3X Plus de Ventes avec l'Automatisation Immobilière par IA",
+    "subtitle": "Realtor Desk AI transforme les agents immobiliers canadiens en machines à conclure avec intelligence prédictive, engagement bilingue 24/7 et gestion automatisée des transactions.",
+    "getStarted": "Commencer à Conclure Plus de Ventes",
+    "watchDemo": "Réserver Votre Démo Gratuite",
+    "badge1": "Certifié CREA",
+    "badge2": "Conforme SOC 2",
+    "badge3": "500+ Agents Canadiens",
+    "conversionBadge": "Augmentation de 300% des Conversions"
+  },
+  "trust": {
+    "title": "Approuvé par Plus de 500 Professionnels de l'Immobilier Canadiens",
+    "crea": "Certifié CREA",
+    "google": "Partenaire Google",
+    "microsoft": "IA Microsoft"
+  },
+  "howItWorks": {
+    "title": "Comment Fonctionne Realtor Desk AI",
+    "subtitle": "Du prospect à la vente conclue en 4 étapes simples",
+    "step1Title": "Capturer les Prospects",
+    "step1Desc": "Le chatbot IA engage les visiteurs 24/7, qualifiant automatiquement les prospects",
+    "step2Title": "Suivi Intelligent",
+    "step2Desc": "Des campagnes e-mail et SMS personnalisées et automatisées convertissent les prospects",
+    "step3Title": "Intégration MLS",
+    "step3Desc": "Synchronisation avec CREA DDF® pour envoyer instantanément les propriétés parfaites",
+    "step4Title": "Conclure les Ventes",
+    "step4Desc": "La gestion des transactions par IA garantit des clôtures plus rapides et plus fluides"
+  },
+  "solutions": {
+    "title": "Découvrez Votre Système d'Exploitation Immobilier Propulsé par l'IA",
+    "subtitle": "Transformez votre façon de travailler avec l'automatisation intelligente conçue spécifiquement pour les agents immobiliers canadiens",
+    "feature1Title": "Intelligence Prédictive des Prospects",
+    "feature1Desc": "L'IA identifie les acheteurs/vendeurs à forte probabilité 3 à 6 mois avant qu'ils ne listent, augmentant les taux de conversion de 5% à 18%",
+    "feature2Title": "Agent IA Bilingue 24/7",
+    "feature2Desc": "Engagez les prospects en anglais ou en français, qualifiez les prospects et planifiez les visites automatiquement - même à 2h du matin",
+    "feature3Title": "Gestion Intelligente des Transactions",
+    "feature3Desc": "Réduisez le temps de clôture de 60 à 35 jours avec coordination par IA et prédiction des risques"
+  },
+  "faq": {
+    "title": "Questions Fréquemment Posées",
+    "subtitle": "Tout ce que vous devez savoir sur Realtor Desk AI",
+    "q1": "S'intègre-t-il avec MLS?",
+    "a1": "Oui, l'intégration native CREA DDF® est incluse dans tous les forfaits pour un accès transparent aux données MLS à travers le Canada.",
+    "q2": "L'IA est-elle vraiment bilingue?",
+    "a2": "Absolument. Notre IA gère les conversations contextuelles anglais-français naturellement, pas seulement la traduction.",
+    "q3": "Êtes-vous conforme aux réglementations canadiennes?",
+    "a3": "Oui, nous respectons automatiquement les réglementations RECO, BCFSA, RECA et toutes les réglementations immobilières provinciales.",
+    "q4": "Quelle est la sécurité de mes données clients?",
+    "a4": "Conforme SOC 2 avec chiffrement de niveau entreprise. Vos données sont stockées dans des centres de données canadiens.",
+    "q5": "Puis-je annuler à tout moment?",
+    "a5": "Oui, tous les forfaits sont mensuels sans contrat à long terme. Annulez à tout moment sans pénalité.",
+    "q6": "Puis-je importer mes contacts existants?",
+    "a6": "Oui, nous prenons en charge les importations CSV de tous les principaux CRM. Assistance à la migration gratuite incluse.",
+    "q7": "Que se passe-t-il si je dois améliorer mon forfait?",
+    "a7": "Vous pouvez mettre à niveau ou rétrograder à tout moment. Les changements prennent effet immédiatement avec facturation au prorata.",
+    "q8": "Quel type de support offrez-vous?",
+    "a8": "Support par e-mail sur Starter, téléphone et chat sur Professional, et support prioritaire 24/7 sur Enterprise."
+  },
+  "cta": {
+    "title": "Rejoignez 500+ Agents Canadiens qui Développent leur Entreprise avec l'IA",
+    "subtitle": "Commencez à conclure plus de ventes avec l'automatisation par IA aujourd'hui",
+    "urgency": "⚡ Places limitées ce mois-ci • Rejoignez les 14 agents qui se sont inscrits cette semaine"
+  }
+}

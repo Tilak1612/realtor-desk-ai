@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import logo from "@/assets/realtor-desk-logo.png";
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -18,11 +21,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Features", path: "/features" },
-    { name: "Pricing", path: "/pricing" },
-    { name: "Integrations", path: "/integrations" },
-    { name: "Canadian Market", path: "/canadian-market" },
-    { name: "Resources", path: "/resources" },
+    { name: t('nav.features'), path: "/features" },
+    { name: t('nav.pricing'), path: "/pricing" },
+    { name: t('nav.integrations'), path: "/integrations" },
+    { name: t('nav.canadianMarket'), path: "/canadian-market" },
+    { name: t('nav.resources'), path: "/resources" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -71,13 +74,14 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             <Link to="/demo">
               <Button variant="ghost" className="font-semibold">
-                Book Your Free Demo
+                {t('nav.bookDemo')}
               </Button>
             </Link>
             <Link to="/demo">
-              <Button className="btn-gradient">Start Closing More Deals</Button>
+              <Button className="btn-gradient">{t('nav.startClosing')}</Button>
             </Link>
           </div>
 
@@ -111,13 +115,16 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              <div className="flex items-center gap-2 py-2">
+                <LanguageSwitcher />
+              </div>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">
-                  Book Your Free Demo
+                  {t('nav.bookDemo')}
                 </Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-gradient w-full">Start Closing More Deals</Button>
+                <Button className="btn-gradient w-full">{t('nav.startClosing')}</Button>
               </Link>
             </div>
           </div>
