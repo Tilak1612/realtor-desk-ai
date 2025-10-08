@@ -10,6 +10,9 @@ import CanadianMarket from "./pages/CanadianMarket";
 import Demo from "./pages/Demo";
 import Resources from "./pages/Resources";
 import Integrations from "./pages/Integrations";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Contact from "./pages/Contact";
 import AdminDemoRequests from "./pages/AdminDemoRequests";
 import NotFound from "./pages/NotFound";
 
@@ -29,6 +32,9 @@ const App = () => (
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/integrations" element={<Integrations />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/admin/demo-requests" element={<AdminDemoRequests />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

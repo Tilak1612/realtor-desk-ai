@@ -355,19 +355,19 @@ const Demo = () => {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
-                    <a href="mailto:support@brainfyai.com" className="font-semibold text-primary hover:underline">
-                      support@brainfyai.com
+                    <a href="mailto:support@realtordeskai.com" className="font-semibold text-primary hover:underline">
+                      support@realtordeskai.com
                     </a>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Phone</p>
-                    <a href="tel:1-888-272-4639" className="font-semibold text-primary hover:underline">
-                      1-888-BRAINFY (1-888-272-4639)
+                    <a href="tel:1-800-732-5867" className="font-semibold text-primary hover:underline">
+                      1-800-REALTOR-AI
                     </a>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Address</p>
-                    <p className="font-semibold">Toronto, ON, Canada</p>
+                    <p className="font-semibold">123 King Street West, Suite 2500<br />Toronto, ON M5H 3T9</p>
                   </div>
                 </div>
               </Card>

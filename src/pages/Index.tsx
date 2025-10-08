@@ -5,8 +5,12 @@ import FeatureCard from "@/components/FeatureCard";
 import StatCard from "@/components/StatCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import ROICalculator from "@/components/ROICalculator";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
+import ChatWidget from "@/components/ChatWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { useState, useEffect } from "react";
 import { 
   Brain, 
   MessageSquare, 
@@ -16,16 +20,122 @@ import {
   TrendingDown,
   FileText,
   MapPin,
-  CheckCircle
+  CheckCircle,
+  Shield,
+  Play
 } from "lucide-react";
 
 const Index = () => {
+  const [agentsCount, setAgentsCount] = useState(500);
+  const [demosThisWeek, setDemosThisWeek] = useState(14);
+
+  // Animate counters on mount
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAgentsCount(prev => prev + 1);
+    }, 30000); // Increment every 30 seconds for demo
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar />
+      <ExitIntentPopup />
+      <ChatWidget />
       
       {/* Hero Section */}
       <Hero />
+
+      {/* Live Social Proof Bar */}
+      <section className="py-4 bg-gradient-to-r from-accent/10 to-accent/5 border-y">
+        <div className="container-custom">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+              <span className="font-semibold">{agentsCount} agents</span>
+              <span className="text-muted-foreground">using now</span>
+            </div>
+            <div className="hidden sm:block w-px h-4 bg-border"></div>
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-accent" />
+              <span className="font-semibold">{demosThisWeek} demos</span>
+              <span className="text-muted-foreground">booked this week</span>
+            </div>
+            <div className="hidden sm:block w-px h-4 bg-border"></div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-accent" />
+              <span className="text-muted-foreground">Join agents closing 3X more deals</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Credibility Section */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <h2 className="text-center mb-12">Trusted & Secure</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+            <Card className="p-6 text-center">
+              <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
+              <h3 className="font-bold mb-2">SOC 2 Compliant</h3>
+              <p className="text-sm text-muted-foreground">
+                Enterprise-grade security and data protection
+              </p>
+            </Card>
+            <Card className="p-6 text-center">
+              <CheckCircle className="w-12 h-12 text-primary mx-auto mb-4" />
+              <h3 className="font-bold mb-2">PIPEDA Compliant</h3>
+              <p className="text-sm text-muted-foreground">
+                Full Canadian privacy law compliance
+              </p>
+            </Card>
+            <Card className="p-6 text-center">
+              <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
+              <h3 className="font-bold mb-2">CREA Certified</h3>
+              <p className="text-sm text-muted-foreground">
+                Official CREA DDF® integration partner
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Live Demo Section */}
+      <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="mb-6">See Realtor Desk AI in Action</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Watch how AI can transform your real estate business in just 2 minutes
+            </p>
+            
+            {/* Video Placeholder */}
+            <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl shadow-2xl flex items-center justify-center mb-6">
+              <div className="text-center">
+                <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform cursor-pointer">
+                  <Play className="w-10 h-10 text-primary ml-1" />
+                </div>
+                <p className="text-muted-foreground">2-Minute Product Demo</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/demo">
+                <Button size="lg" className="btn-gradient">
+                  Book Live Demo
+                </Button>
+              </Link>
+              <Link to="/features">
+                <Button size="lg" variant="outline">
+                  Explore All Features
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Trust & Integration Partners Section */}
       <section className="section-padding bg-background border-y">

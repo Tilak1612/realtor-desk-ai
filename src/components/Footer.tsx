@@ -99,13 +99,13 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Help Center
-                </a>
+                <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors">
+                  Integrations
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  API Documentation
+                  Help Center
                 </a>
               </li>
               <li>
@@ -122,21 +122,27 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="mailto:support@brainfyai.com" className="text-muted-foreground hover:text-primary transition-colors">
-                  support@brainfyai.com
+                <a href="mailto:support@realtordeskai.com" className="text-muted-foreground hover:text-primary transition-colors">
+                  support@realtordeskai.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="tel:1-888-272-4639" className="text-muted-foreground hover:text-primary transition-colors">
-                  1-888-BRAINFY
+                <a href="tel:1-800-732-5867" className="text-muted-foreground hover:text-primary transition-colors">
+                  1-800-REALTOR-AI
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                 <span className="text-muted-foreground">
-                  Toronto, ON, Canada
+                  123 King St W, Suite 2500<br />
+                  Toronto, ON M5H 3T9
                 </span>
+              </li>
+              <li>
+                <Link to="/contact" className="text-primary hover:text-primary/80 transition-colors font-medium">
+                  Contact Form →
+                </Link>
               </li>
             </ul>
           </div>
@@ -146,18 +152,18 @@ const Footer = () => {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2025 Realtor Desk AI. Powered by Brainfy AI Inc. All rights reserved.
+              © 2025 Realtor Desk AI. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              </Link>
+              <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
                 Terms of Service
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                Cookie Policy
-              </a>
+              </Link>
+              <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                Contact
+              </Link>
             </div>
           </div>
         </div>
