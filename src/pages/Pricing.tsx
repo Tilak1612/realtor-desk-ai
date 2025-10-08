@@ -5,7 +5,7 @@ import PricingCard from "@/components/PricingCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield } from "lucide-react";
+import { Shield, CheckCircle, Brain } from "lucide-react";
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -81,7 +81,7 @@ const Pricing = () => {
                 "1 team member",
                 "Email support",
               ]}
-              ctaText="Get Started"
+              ctaText="Start Closing More Deals"
               ctaLink="/demo"
             />
 
@@ -104,7 +104,7 @@ const Pricing = () => {
                 "Custom integrations",
               ]}
               popular
-              ctaText="Get Started"
+              ctaText="Start Closing More Deals"
               ctaLink="/demo"
             />
 
@@ -123,7 +123,7 @@ const Pricing = () => {
                 "Brokerage compliance tools",
                 "Multi-office management",
               ]}
-              ctaText="Schedule Demo"
+              ctaText="Book Your Free Demo"
               ctaLink="/demo"
             />
           </div>
@@ -157,9 +157,37 @@ const Pricing = () => {
         </div>
       </section>
 
-      {/* ROI Guarantee Section */}
+      {/* Guarantees Section */}
       <section className="section-padding">
         <div className="container-custom">
+          <h2 className="text-center mb-12">Our Guarantees to You</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <Card className="p-8 text-center">
+              <Shield className="w-16 h-16 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-3">30-Day Money-Back Guarantee</h3>
+              <p className="text-muted-foreground">
+                Close at least one additional deal in your first 30 days or get a full refund. No questions asked.
+              </p>
+            </Card>
+            
+            <Card className="p-8 text-center">
+              <CheckCircle className="w-16 h-16 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-3">No Contracts, Cancel Anytime</h3>
+              <p className="text-muted-foreground">
+                All plans are month-to-month. Cancel anytime with one click. No penalties, no hassles.
+              </p>
+            </Card>
+            
+            <Card className="p-8 text-center">
+              <Brain className="w-16 h-16 text-accent mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-3">Free Setup & Migration</h3>
+              <p className="text-muted-foreground">
+                We'll migrate your contacts and data from any CRM for free. Plus complimentary onboarding and training.
+              </p>
+            </Card>
+          </div>
+          
           <Card className="p-12 bg-gradient-to-br from-accent/10 to-accent/5 border-accent/20">
             <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
               <Shield className="w-20 h-20 text-accent flex-shrink-0" />

@@ -178,7 +178,7 @@ const Features = () => {
       {/* Comparison Table Section */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
-          <h2 className="text-center mb-12">Realtor Desk AI vs. Traditional CRMs</h2>
+          <h2 className="text-center mb-12">How We Compare to Leading CRMs</h2>
           
           <div className="overflow-x-auto">
             <table className="w-full bg-background rounded-lg overflow-hidden shadow-lg">
@@ -186,27 +186,88 @@ const Features = () => {
                 <tr>
                   <th className="p-4 text-left font-semibold">Feature</th>
                   <th className="p-4 text-left font-semibold">Realtor Desk AI</th>
-                  <th className="p-4 text-left font-semibold">Traditional CRMs</th>
+                  <th className="p-4 text-left font-semibold">Follow Up Boss</th>
+                  <th className="p-4 text-left font-semibold">Wise Agent</th>
+                  <th className="p-4 text-left font-semibold">kvCORE</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  ["Predictive Lead Scoring", "✓ Advanced AI", "Basic manual scoring"],
-                  ["24/7 AI Chatbot", "✓ Bilingual", "Limited or none"],
-                  ["CREA DDF® Integration", "✓ Native", "Requires add-ons"],
-                  ["Transaction Intelligence", "✓ AI-powered", "Manual tracking"],
-                  ["Provincial Compliance", "✓ Automated", "Manual management"],
-                  ["Price", "Starting at $99/mo", "$69-$150/mo"],
-                  ["ROI", "$8.71 per $1 invested", "$3-4 per $1 invested"],
+                  ["Predictive Lead Scoring", "✓ Advanced AI", "Basic", "Manual", "Basic"],
+                  ["24/7 AI Chatbot", "✓ Bilingual", "Add-on", "Limited", "Basic"],
+                  ["CREA DDF® Integration", "✓ Native", "Third-party", "Third-party", "Third-party"],
+                  ["Transaction AI", "✓ Full automation", "✗", "Manual", "Basic"],
+                  ["Canadian Compliance", "✓ Built-in", "Manual", "Manual", "Manual"],
+                  ["Marketing Automation", "✓ AI-generated", "Templates", "Templates", "Templates"],
+                  ["Mobile App", "✓ Full-featured", "Limited", "Basic", "✓"],
+                  ["Starting Price", "$99/mo", "$69/mo", "$49/mo", "$149/mo"],
+                  ["Setup Fee", "$0", "$0", "$0", "$299"],
+                  ["Contract", "Month-to-month", "Annual", "Month-to-month", "Annual"],
+                  ["ROI", "$8.71 per $1", "$3-4 per $1", "$2-3 per $1", "$4-5 per $1"],
                 ].map((row, index) => (
-                  <tr key={index} className="border-t">
+                  <tr key={index} className="border-t hover:bg-muted/50 transition-colors">
                     <td className="p-4 font-medium">{row[0]}</td>
                     <td className="p-4 text-accent font-semibold">{row[1]}</td>
                     <td className="p-4 text-muted-foreground">{row[2]}</td>
+                    <td className="p-4 text-muted-foreground">{row[3]}</td>
+                    <td className="p-4 text-muted-foreground">{row[4]}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+          
+          <p className="text-center text-sm text-muted-foreground mt-6">
+            * Pricing and features as of October 2025. Contact competitors directly for current information.
+          </p>
+        </div>
+      </section>
+
+      {/* Mobile-First Section */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="mb-6">Work From Anywhere with Our Mobile App</h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Manage your entire real estate business from your phone. Respond to leads, schedule showings, and close deals on the go.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-semibold">Full CRM Access</div>
+                    <div className="text-sm text-muted-foreground">View and manage all contacts, leads, and deals from your phone</div>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-semibold">Push Notifications</div>
+                    <div className="text-sm text-muted-foreground">Get instant alerts for new leads, messages, and deal updates</div>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-semibold">Offline Mode</div>
+                    <div className="text-sm text-muted-foreground">Access your data even without internet connection</div>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="font-semibold">Voice Commands</div>
+                    <div className="text-sm text-muted-foreground">Add notes and create tasks hands-free while driving</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-12 text-center">
+              <MessageSquare className="w-32 h-32 mx-auto mb-6 text-primary" />
+              <p className="text-2xl font-bold mb-2">Available on iOS & Android</p>
+              <p className="text-muted-foreground">Download from App Store or Google Play</p>
+            </div>
           </div>
         </div>
       </section>

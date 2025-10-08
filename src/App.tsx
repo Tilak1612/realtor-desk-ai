@@ -9,6 +9,7 @@ import Pricing from "./pages/Pricing";
 import CanadianMarket from "./pages/CanadianMarket";
 import Demo from "./pages/Demo";
 import Resources from "./pages/Resources";
+import Integrations from "./pages/Integrations";
 import AdminDemoRequests from "./pages/AdminDemoRequests";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/canadian-market" element={<CanadianMarket />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/integrations" element={<Integrations />} />
           <Route path="/admin/demo-requests" element={<AdminDemoRequests />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

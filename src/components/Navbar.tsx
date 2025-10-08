@@ -20,6 +20,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Features", path: "/features" },
     { name: "Pricing", path: "/pricing" },
+    { name: "Integrations", path: "/integrations" },
     { name: "Canadian Market", path: "/canadian-market" },
     { name: "Resources", path: "/resources" },
   ];
@@ -72,11 +73,11 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             <Link to="/demo">
               <Button variant="ghost" className="font-semibold">
-                Watch Demo
+                Book Your Free Demo
               </Button>
             </Link>
             <Link to="/demo">
-              <Button className="btn-gradient">Get Started</Button>
+              <Button className="btn-gradient">Start Closing More Deals</Button>
             </Link>
           </div>
 
@@ -112,11 +113,11 @@ const Navbar = () => {
               ))}
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">
-                  Watch Demo
+                  Book Your Free Demo
                 </Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-gradient w-full">Get Started</Button>
+                <Button className="btn-gradient w-full">Start Closing More Deals</Button>
               </Link>
             </div>
           </div>
