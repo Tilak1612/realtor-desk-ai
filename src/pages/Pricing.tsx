@@ -1,11 +1,31 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Shield } from "lucide-react";
 
 const Pricing = () => {
+  const [isYearly, setIsYearly] = useState(false);
+
+  const pricingData = {
+    starter: {
+      monthly: 99,
+      yearly: 99 * 12 * 0.85, // 15% discount
+      discount: "15%"
+    },
+    professional: {
+      monthly: 249,
+      yearly: 249 * 12 * 0.80, // 20% discount
+      discount: "20%"
+    },
+    enterprise: {
+      discount: "25%"
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -19,6 +39,27 @@ const Pricing = () => {
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
             Choose the perfect plan for your business needs
           </p>
+          
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 mt-8 animate-fade-in-up animation-delay-300">
+            <span className={`text-sm font-medium transition-colors ${!isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Monthly
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsYearly(!isYearly)}
+              className="relative w-14 h-8 rounded-full p-0 border-2"
+            >
+              <div className={`absolute w-6 h-6 rounded-full bg-primary transition-transform ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`} />
+            </Button>
+            <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Yearly
+            </span>
+            <span className="text-sm font-semibold text-accent">
+              Save up to 25%
+            </span>
+          </div>
         </div>
       </section>
 
@@ -28,8 +69,11 @@ const Pricing = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             <PricingCard
               name="STARTER"
-              price="99"
+              price={isYearly ? Math.round(pricingData.starter.yearly / 12).toString() : pricingData.starter.monthly.toString()}
               description="Best for: Solo agents and new licensees"
+              billingPeriod={isYearly ? "year" : "month"}
+              discount={isYearly ? pricingData.starter.discount : undefined}
+              yearlyPrice={isYearly ? pricingData.starter.yearly : undefined}
               features={[
                 "Up to 500 contacts",
                 "Predictive lead scoring",
@@ -46,8 +90,11 @@ const Pricing = () => {
 
             <PricingCard
               name="PROFESSIONAL"
-              price="249"
+              price={isYearly ? Math.round(pricingData.professional.yearly / 12).toString() : pricingData.professional.monthly.toString()}
               description="Best for: Individual agents and small teams"
+              billingPeriod={isYearly ? "year" : "month"}
+              discount={isYearly ? pricingData.professional.discount : undefined}
+              yearlyPrice={isYearly ? pricingData.professional.yearly : undefined}
               features={[
                 "Unlimited contacts",
                 "Advanced AI chatbot (SMS, email, social media)",
@@ -68,6 +115,7 @@ const Pricing = () => {
               name="ENTERPRISE"
               price="Custom"
               description="Best for: Brokerages and large teams"
+              discount={isYearly ? pricingData.enterprise.discount : undefined}
               features={[
                 "Unlimited team members",
                 "White-label options",

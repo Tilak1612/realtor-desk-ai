@@ -11,6 +11,9 @@ interface PricingCardProps {
   popular?: boolean;
   ctaText: string;
   ctaLink: string;
+  billingPeriod?: string;
+  discount?: string;
+  yearlyPrice?: number;
 }
 
 const PricingCard = ({
@@ -21,6 +24,9 @@ const PricingCard = ({
   popular = false,
   ctaText,
   ctaLink,
+  billingPeriod = "month",
+  discount,
+  yearlyPrice,
 }: PricingCardProps) => {
   return (
     <Card className={`p-8 card-hover relative ${popular ? "border-2 border-primary shadow-xl" : ""}`}>
@@ -36,16 +42,31 @@ const PricingCard = ({
       <div className="mb-6">
         <h3 className="text-2xl font-bold mb-2">{name}</h3>
         <p className="text-sm text-muted-foreground mb-4">{description}</p>
+        
+        {discount && (
+          <div className="mb-2">
+            <span className="inline-block bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-semibold">
+              Save {discount}
+            </span>
+          </div>
+        )}
+        
         <div className="flex items-baseline gap-1">
           {price !== "Custom" ? (
             <>
               <span className="text-4xl font-bold gradient-text">${price}</span>
-              <span className="text-muted-foreground">/month</span>
+              <span className="text-muted-foreground">/{billingPeriod}</span>
             </>
           ) : (
             <span className="text-4xl font-bold gradient-text">{price}</span>
           )}
         </div>
+        
+        {yearlyPrice && (
+          <p className="text-sm text-muted-foreground mt-2">
+            Billed ${Math.round(yearlyPrice)} annually
+          </p>
+        )}
       </div>
 
       <ul className="space-y-3 mb-8">
