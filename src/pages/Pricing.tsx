@@ -5,7 +5,9 @@ import PricingCard from "@/components/PricingCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle, Brain } from "lucide-react";
+import { Shield } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import { Brain } from "lucide-react";
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);
