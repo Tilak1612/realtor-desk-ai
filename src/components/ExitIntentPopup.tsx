@@ -3,12 +3,15 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ExitIntentPopup = () => {
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [hasShown, setHasShown] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
@@ -27,14 +30,44 @@ const ExitIntentPopup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email) {
-      toast.error("Please enter your email");
+    if (!email.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter your email",
+        variant: "destructive",
+      });
       return;
     }
 
-    // Here you would integrate with your email service
-    toast.success("Thanks! We'll send you the free guide shortly.");
-    setIsOpen(false);
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("email_captures").insert([
+        {
+          email: email.trim(),
+          source: 'exit_intent',
+        },
+      ]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success! ✅",
+        description: "Thanks! We'll send you the free guide shortly.",
+      });
+      
+      setIsOpen(false);
+      setEmail("");
+    } catch (error) {
+      console.error("Error capturing email:", error);
+      toast({
+        title: "Error",
+        description: "There was an error. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -63,8 +96,8 @@ const ExitIntentPopup = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full"
             />
-            <Button type="submit" className="w-full btn-gradient">
-              Send Me The Free Guide
+            <Button type="submit" className="w-full btn-gradient" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Send Me The Free Guide"}
             </Button>
           </form>
           
