@@ -63,9 +63,9 @@ const Hero = () => {
                 className="w-full h-auto"
               />
               {/* Floating Badge */}
-              <div className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 bg-background/95 backdrop-blur-sm rounded-md sm:rounded-lg p-2 sm:p-2.5 md:p-3 shadow-md sm:shadow-lg animate-scale-in animation-delay-400">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold gradient-text leading-none">300%</div>
-                <div className="text-[9px] sm:text-[10px] text-muted-foreground mt-0.5 sm:mt-1">Conversion Increase</div>
+              <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 md:top-3 md:right-3 bg-background/95 backdrop-blur-sm rounded px-2 py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 shadow-md animate-scale-in animation-delay-400">
+                <div className="text-sm sm:text-base md:text-lg font-bold gradient-text leading-none">300%</div>
+                <div className="text-[8px] sm:text-[9px] text-muted-foreground mt-0.5">Increase</div>
               </div>
             </div>
 
