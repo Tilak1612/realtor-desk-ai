@@ -92,9 +92,7 @@ const Contact = () => {
                 <MapPin className="w-8 h-8 text-primary mb-4" />
                 <h3 className="font-bold mb-2">Visit Us</h3>
                 <p className="text-muted-foreground">
-                  10020 101A Avenue<br />
-                  Edmonton, AB T5J 3G2<br />
-                  Canada
+                  Edmonton, Alberta, Canada
                 </p>
               </Card>
 
@@ -173,7 +171,7 @@ const Contact = () => {
             <div className="text-center">
               <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
               <p className="text-muted-foreground">Map integration placeholder</p>
-              <p className="text-sm text-muted-foreground">10020 101A Avenue, Edmonton, AB</p>
+              <p className="text-sm text-muted-foreground">Edmonton, Alberta, Canada</p>
             </div>
           </div>
         </div>

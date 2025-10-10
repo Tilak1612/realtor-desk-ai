@@ -392,7 +392,7 @@ const Demo = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Address</p>
-                    <p className="font-semibold">10020 101A Avenue<br />Edmonton, AB T5J 3G2</p>
+                    <p className="font-semibold">Edmonton, Alberta, Canada</p>
                   </div>
                 </div>
               </Card>
