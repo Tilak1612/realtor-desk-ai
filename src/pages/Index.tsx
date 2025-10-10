@@ -10,6 +10,7 @@ import ChatWidget from "@/components/ChatWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useState, useEffect } from "react";
 import { 
   Brain, 
@@ -26,9 +27,13 @@ import {
 } from "lucide-react";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
+// YouTube Video Configuration - Replace with your actual video URL
+const DEMO_VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE";
+
 const Index = () => {
   const [agentsCount, setAgentsCount] = useState(500);
   const [demosThisWeek, setDemosThisWeek] = useState(14);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   // Animate counters on mount
   useEffect(() => {
@@ -113,7 +118,10 @@ const Index = () => {
             </p>
             
             {/* Demo Showcase */}
-            <div className="relative aspect-video rounded-2xl shadow-2xl overflow-hidden mb-6 group cursor-pointer">
+            <div 
+              className="relative aspect-video rounded-2xl shadow-2xl overflow-hidden mb-6 group cursor-pointer"
+              onClick={() => setIsVideoOpen(true)}
+            >
               <img 
                 src={demoShowcase} 
                 alt="Realtor Desk AI Platform Demo - Dashboard showing property analytics, AI chat, and client management"
@@ -128,6 +136,21 @@ const Index = () => {
                 </div>
               </div>
             </div>
+            
+            {/* Video Modal */}
+            <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+              <DialogContent className="max-w-5xl w-full p-0">
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    src={DEMO_VIDEO_URL}
+                    title="Realtor Desk AI Product Demo"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/demo">
