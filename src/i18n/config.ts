@@ -15,20 +15,54 @@ const resources = {
         "startClosing": "Start Closing More Deals"
       },
       "hero": {
-        "title": "Close 3X More Deals with AI-Powered Real Estate Automation",
-        "subtitle": "Realtor Desk AI transforms Canadian realtors into closing machines with predictive intelligence, 24/7 bilingual engagement, and automated transaction management.",
+        "title": "Transform Your Real Estate Business with AI-Powered Intelligence",
+        "subtitle": "The only AI platform built specifically for Canadian realtors - featuring CREA DDF® integration, bilingual capabilities, and predictive analytics that increase conversions by 300%",
         "getStarted": "Start Closing More Deals",
         "watchDemo": "Book Your Free Demo",
+        "trustLine": "No credit card required • Cancel anytime • Free onboarding included",
         "badge1": "CREA Certified",
         "badge2": "SOC 2 Compliant",
-        "badge3": "500+ Canadian Agents",
+        "badge3": "2,000+ Canadian Agents",
         "conversionBadge": "300% Conversion Increase"
+      },
+      "socialProof": {
+        "agentsUsing": "agents using now",
+        "demosBooked": "demos booked this week",
+        "joinAgents": "Join agents closing 3X more deals"
+      },
+      "credibility": {
+        "title": "Trusted & Secure",
+        "soc2": "SOC 2 Compliant",
+        "soc2Desc": "Enterprise-grade security and data protection",
+        "pipeda": "PIPEDA Compliant",
+        "pipedaDesc": "Full Canadian privacy law compliance",
+        "crea": "CREA Certified",
+        "creaDesc": "Official CREA DDF® integration partner"
+      },
+      "demo": {
+        "title": "See Realtor Desk AI in Action",
+        "subtitle": "Watch how AI can transform your real estate business in just 2 minutes",
+        "videoPlaceholder": "2-Minute Product Demo",
+        "bookLive": "Book Live Demo",
+        "exploreFeatures": "Explore All Features"
       },
       "trust": {
         "title": "Trusted by 500+ Canadian Real Estate Professionals",
         "crea": "CREA Certified",
         "google": "Google Partner",
         "microsoft": "Microsoft AI"
+      },
+      "problem": {
+        "title": "The Hidden Costs of Outdated Real Estate Technology",
+        "subtitle": "Traditional CRMs are holding Canadian realtors back from their full potential",
+        "stat1": "12%",
+        "stat1Desc": "of agents use AI capabilities despite 72% using CRMs",
+        "stat2": "48%",
+        "stat2Desc": "of buyer inquiries receive NO response",
+        "stat3": "15+",
+        "stat3Desc": "hours weekly spent on tasks that could be automated",
+        "stat4": "2-5%",
+        "stat4Desc": "lead conversion rate with traditional methods"
       },
       "howItWorks": {
         "title": "How Realtor Desk AI Works",
@@ -52,6 +86,16 @@ const resources = {
         "feature3Title": "Intelligent Transaction Management",
         "feature3Desc": "Reduce closing time from 60 days to 35 days with AI-powered coordination and risk prediction"
       },
+      "roi": {
+        "title": "Calculate Your Potential Revenue Increase",
+        "leads": "Monthly Leads",
+        "commission": "Average Commission ($)",
+        "conversion": "Current Conversion Rate (%)",
+        "achieve": "With Realtor Desk AI, You Could Achieve:",
+        "additionalRevenue": "Additional Annual Revenue",
+        "additionalDeals": "Additional Deals Closed/Year",
+        "timeSaved": "Time Saved Per Week"
+      },
       "faq": {
         "title": "Frequently Asked Questions",
         "subtitle": "Everything you need to know about Realtor Desk AI",
@@ -72,10 +116,130 @@ const resources = {
         "q8": "What kind of support do you offer?",
         "a8": "Email support on Starter, phone & chat on Professional, and 24/7 priority support on Enterprise."
       },
+      "canadian": {
+        "title": "Built for the Canadian Real Estate Market",
+        "subtitle": "Not adapted - designed from the ground up for Canadian realtors",
+        "crea": "CREA DDF® Integration",
+        "creaDesc": "Access national MLS data seamlessly",
+        "compliance": "Provincial Compliance Engine",
+        "complianceDesc": "RECO, BCFSA, RECA auto-compliance",
+        "bilingual": "True Bilingual AI",
+        "bilingualDesc": "Contextual English-French conversations",
+        "data": "Canadian Data Residency",
+        "dataDesc": "All data stored in Canadian servers"
+      },
       "cta": {
         "title": "Join 500+ Canadian Agents Growing Their Business with AI",
         "subtitle": "Start closing more deals with AI-powered automation today",
-        "urgency": "⚡ Limited spots available this month • Join 14 agents who signed up this week"
+        "urgency": "⚡ Limited spots available this month • Join 14 agents who signed up this week",
+        "bookDemo": "Book Your Free Demo",
+        "getStarted": "Get Started"
+      },
+      "demoPage": {
+        "title": "See Realtor Desk AI in Action",
+        "subtitle": "Schedule a personalized demo and see how we can help your business",
+        "formTitle": "Request a Personalized Demo",
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "brokerage": "Brokerage/Company",
+        "province": "Province",
+        "selectProvince": "Select province",
+        "currentCrm": "Current CRM (if any)",
+        "selectCrm": "Select CRM",
+        "teamSize": "Number of Team Members",
+        "selectTeam": "Select team size",
+        "challenge": "Biggest Challenge",
+        "selectChallenge": "Select challenge",
+        "comments": "Comments/Questions",
+        "commentsPlaceholder": "Tell us more about your needs...",
+        "submit": "Request Demo",
+        "submitting": "Submitting...",
+        "orGetStarted": "Or",
+        "getStartedNow": "get started",
+        "getStartedRight": "right away",
+        "whatToExpect": "What to Expect",
+        "discovery": "Discovery Call (15 min)",
+        "discoveryDesc": "We learn about your business, challenges, and goals",
+        "liveDemo": "Live Demo (30 min)",
+        "liveDemoDesc": "See Realtor Desk AI in action with examples specific to your market",
+        "onboarding": "Custom Onboarding",
+        "onboardingDesc": "Get started with personalized onboarding and support",
+        "contactInfo": "Contact Information",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone",
+        "addressLabel": "Address",
+        "exploreOwn": "Prefer to explore on your own?",
+        "exploreDesc": "Get started today - no demo required",
+        "getStartedBtn": "Get Started"
+      },
+      "contactPage": {
+        "title": "Get in Touch",
+        "subtitle": "Have questions? We're here to help you transform your real estate business with AI",
+        "emailUs": "Email Us",
+        "callUs": "Call Us",
+        "visitUs": "Visit Us",
+        "hours": "Business Hours",
+        "hoursLine1": "Monday - Friday: 9:00 AM - 6:00 PM EST",
+        "hoursLine2": "Saturday: 10:00 AM - 4:00 PM EST",
+        "hoursLine3": "Sunday: Closed",
+        "sendMessage": "Send Us a Message",
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Message",
+        "messagePlaceholder": "Tell us how we can help you...",
+        "send": "Send Message",
+        "sending": "Sending...",
+        "mapPlaceholder": "Map integration placeholder"
+      },
+      "footer": {
+        "tagline": "AI-powered solutions for Canadian real estate professionals.",
+        "poweredBy": "Powered by Brainfy AI Inc",
+        "product": "Product",
+        "features": "Features",
+        "pricing": "Pricing",
+        "canadianMarket": "Canadian Market",
+        "requestDemo": "Request Demo",
+        "resources": "Resources",
+        "blog": "Blog",
+        "integrations": "Integrations",
+        "helpCenter": "Help Center",
+        "systemStatus": "System Status",
+        "contact": "Contact Us",
+        "contactForm": "Contact Form →",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service",
+        "allRights": "All rights reserved."
+      },
+      "exitPopup": {
+        "title": "Wait! Before You Go...",
+        "subtitle": "Get our free guide: \"10 Ways AI Can Triple Your Real Estate Closings\"",
+        "emailPlaceholder": "Enter your email",
+        "submit": "Send Me The Free Guide",
+        "submitting": "Submitting...",
+        "noSpam": "No spam. Unsubscribe anytime."
+      },
+      "chat": {
+        "title": "Chat with us",
+        "greeting": "👋 Hi! Have questions about Realtor Desk AI? Send us a message and we'll get back to you right away.",
+        "placeholder": "Type your message...",
+        "send": "Send Message",
+        "emailUs": "Or email us at: support@realtordeskai.com"
+      },
+      "testimonials": {
+        "quote1": "I closed 14 additional deals in Q1 using Realtor Desk AI. The predictive lead scoring is a game-changer.",
+        "name1": "Sarah Chen",
+        "title1": "Top Producer",
+        "company1": "Royal LePage Toronto",
+        "quote2": "The bilingual AI chatbot captures leads 24/7. I wake up to qualified appointments every morning.",
+        "name2": "Marc Dubois",
+        "title2": "Broker",
+        "company2": "RE/MAX Québec",
+        "quote3": "My transaction closings went from 60 days to 35 days. The AI coordination is incredible.",
+        "name3": "Priya Sharma",
+        "title3": "Sales Representative",
+        "company3": "Century 21 Vancouver"
       }
     }
   },
@@ -88,23 +252,57 @@ const resources = {
         "canadianMarket": "Marché Canadien",
         "resources": "Ressources",
         "bookDemo": "Réserver Votre Démo Gratuite",
-        "startClosing": "Commencer à Conclure Plus de Ventes"
+        "startClosing": "Commencer à Conclure Plus"
       },
       "hero": {
-        "title": "Concluez 3X Plus de Ventes avec l'Automatisation Immobilière par IA",
-        "subtitle": "Realtor Desk AI transforme les agents immobiliers canadiens en machines à conclure avec intelligence prédictive, engagement bilingue 24/7 et gestion automatisée des transactions.",
-        "getStarted": "Commencer à Conclure Plus de Ventes",
+        "title": "Transformez Votre Entreprise Immobilière avec l'Intelligence IA",
+        "subtitle": "La seule plateforme IA construite spécifiquement pour les agents immobiliers canadiens - avec intégration CREA DDF®, capacités bilingues et analyses prédictives qui augmentent les conversions de 300%",
+        "getStarted": "Commencer à Conclure Plus",
         "watchDemo": "Réserver Votre Démo Gratuite",
+        "trustLine": "Aucune carte de crédit requise • Annulez à tout moment • Intégration gratuite incluse",
         "badge1": "Certifié CREA",
         "badge2": "Conforme SOC 2",
-        "badge3": "500+ Agents Canadiens",
+        "badge3": "2 000+ Agents Canadiens",
         "conversionBadge": "Augmentation de 300% des Conversions"
+      },
+      "socialProof": {
+        "agentsUsing": "agents l'utilisent maintenant",
+        "demosBooked": "démos réservées cette semaine",
+        "joinAgents": "Rejoignez les agents qui concluent 3X plus"
+      },
+      "credibility": {
+        "title": "Approuvé et Sécurisé",
+        "soc2": "Conforme SOC 2",
+        "soc2Desc": "Sécurité et protection des données de niveau entreprise",
+        "pipeda": "Conforme PIPEDA",
+        "pipedaDesc": "Conformité complète aux lois canadiennes sur la vie privée",
+        "crea": "Certifié CREA",
+        "creaDesc": "Partenaire officiel d'intégration CREA DDF®"
+      },
+      "demo": {
+        "title": "Voyez Realtor Desk AI en Action",
+        "subtitle": "Découvrez comment l'IA peut transformer votre entreprise immobilière en seulement 2 minutes",
+        "videoPlaceholder": "Démo Produit de 2 Minutes",
+        "bookLive": "Réserver une Démo en Direct",
+        "exploreFeatures": "Explorer Toutes les Fonctionnalités"
       },
       "trust": {
         "title": "Approuvé par Plus de 500 Professionnels de l'Immobilier Canadiens",
         "crea": "Certifié CREA",
         "google": "Partenaire Google",
         "microsoft": "IA Microsoft"
+      },
+      "problem": {
+        "title": "Les Coûts Cachés des Technologies Immobilières Obsolètes",
+        "subtitle": "Les CRM traditionnels empêchent les agents immobiliers canadiens d'atteindre leur plein potentiel",
+        "stat1": "12%",
+        "stat1Desc": "des agents utilisent les capacités IA malgré 72% utilisant des CRM",
+        "stat2": "48%",
+        "stat2Desc": "des demandes d'acheteurs ne reçoivent AUCUNE réponse",
+        "stat3": "15+",
+        "stat3Desc": "heures par semaine passées sur des tâches qui pourraient être automatisées",
+        "stat4": "2-5%",
+        "stat4Desc": "taux de conversion des prospects avec les méthodes traditionnelles"
       },
       "howItWorks": {
         "title": "Comment Fonctionne Realtor Desk AI",
@@ -128,6 +326,16 @@ const resources = {
         "feature3Title": "Gestion Intelligente des Transactions",
         "feature3Desc": "Réduisez le temps de clôture de 60 à 35 jours avec coordination par IA et prédiction des risques"
       },
+      "roi": {
+        "title": "Calculez Votre Augmentation Potentielle de Revenus",
+        "leads": "Prospects Mensuels",
+        "commission": "Commission Moyenne ($)",
+        "conversion": "Taux de Conversion Actuel (%)",
+        "achieve": "Avec Realtor Desk AI, Vous Pourriez Atteindre:",
+        "additionalRevenue": "Revenus Annuels Supplémentaires",
+        "additionalDeals": "Ventes Supplémentaires Conclues/An",
+        "timeSaved": "Temps Économisé Par Semaine"
+      },
       "faq": {
         "title": "Questions Fréquemment Posées",
         "subtitle": "Tout ce que vous devez savoir sur Realtor Desk AI",
@@ -148,10 +356,130 @@ const resources = {
         "q8": "Quel type de support offrez-vous?",
         "a8": "Support par e-mail sur Starter, téléphone et chat sur Professional, et support prioritaire 24/7 sur Enterprise."
       },
+      "canadian": {
+        "title": "Conçu pour le Marché Immobilier Canadien",
+        "subtitle": "Pas adapté - conçu dès le départ pour les agents immobiliers canadiens",
+        "crea": "Intégration CREA DDF®",
+        "creaDesc": "Accès transparent aux données MLS nationales",
+        "compliance": "Moteur de Conformité Provincial",
+        "complianceDesc": "Conformité automatique RECO, BCFSA, RECA",
+        "bilingual": "Véritable IA Bilingue",
+        "bilingualDesc": "Conversations contextuelles anglais-français",
+        "data": "Résidence des Données Canadiennes",
+        "dataDesc": "Toutes les données stockées sur des serveurs canadiens"
+      },
       "cta": {
         "title": "Rejoignez 500+ Agents Canadiens qui Développent leur Entreprise avec l'IA",
         "subtitle": "Commencez à conclure plus de ventes avec l'automatisation par IA aujourd'hui",
-        "urgency": "⚡ Places limitées ce mois-ci • Rejoignez les 14 agents qui se sont inscrits cette semaine"
+        "urgency": "⚡ Places limitées ce mois-ci • Rejoignez les 14 agents qui se sont inscrits cette semaine",
+        "bookDemo": "Réserver Votre Démo Gratuite",
+        "getStarted": "Commencer"
+      },
+      "demoPage": {
+        "title": "Voyez Realtor Desk AI en Action",
+        "subtitle": "Planifiez une démo personnalisée et voyez comment nous pouvons aider votre entreprise",
+        "formTitle": "Demander une Démo Personnalisée",
+        "fullName": "Nom Complet",
+        "email": "Adresse E-mail",
+        "phone": "Numéro de Téléphone",
+        "brokerage": "Courtage/Entreprise",
+        "province": "Province",
+        "selectProvince": "Sélectionner la province",
+        "currentCrm": "CRM Actuel (si applicable)",
+        "selectCrm": "Sélectionner le CRM",
+        "teamSize": "Nombre de Membres de l'Équipe",
+        "selectTeam": "Sélectionner la taille de l'équipe",
+        "challenge": "Plus Grand Défi",
+        "selectChallenge": "Sélectionner le défi",
+        "comments": "Commentaires/Questions",
+        "commentsPlaceholder": "Parlez-nous de vos besoins...",
+        "submit": "Demander une Démo",
+        "submitting": "Envoi en cours...",
+        "orGetStarted": "Ou",
+        "getStartedNow": "commencez",
+        "getStartedRight": "tout de suite",
+        "whatToExpect": "À Quoi S'Attendre",
+        "discovery": "Appel de Découverte (15 min)",
+        "discoveryDesc": "Nous en apprenons plus sur votre entreprise, vos défis et vos objectifs",
+        "liveDemo": "Démo en Direct (30 min)",
+        "liveDemoDesc": "Voyez Realtor Desk AI en action avec des exemples spécifiques à votre marché",
+        "onboarding": "Intégration Personnalisée",
+        "onboardingDesc": "Démarrez avec une intégration personnalisée et un support",
+        "contactInfo": "Informations de Contact",
+        "emailLabel": "E-mail",
+        "phoneLabel": "Téléphone",
+        "addressLabel": "Adresse",
+        "exploreOwn": "Vous préférez explorer par vous-même?",
+        "exploreDesc": "Commencez aujourd'hui - aucune démo requise",
+        "getStartedBtn": "Commencer"
+      },
+      "contactPage": {
+        "title": "Contactez-Nous",
+        "subtitle": "Vous avez des questions? Nous sommes là pour vous aider à transformer votre entreprise immobilière avec l'IA",
+        "emailUs": "Envoyez-nous un E-mail",
+        "callUs": "Appelez-nous",
+        "visitUs": "Visitez-nous",
+        "hours": "Heures d'Ouverture",
+        "hoursLine1": "Lundi - Vendredi: 9h00 - 18h00 EST",
+        "hoursLine2": "Samedi: 10h00 - 16h00 EST",
+        "hoursLine3": "Dimanche: Fermé",
+        "sendMessage": "Envoyez-nous un Message",
+        "name": "Nom Complet",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "message": "Message",
+        "messagePlaceholder": "Dites-nous comment nous pouvons vous aider...",
+        "send": "Envoyer le Message",
+        "sending": "Envoi...",
+        "mapPlaceholder": "Placeholder intégration carte"
+      },
+      "footer": {
+        "tagline": "Solutions IA pour les professionnels de l'immobilier canadiens.",
+        "poweredBy": "Propulsé par Brainfy AI Inc",
+        "product": "Produit",
+        "features": "Fonctionnalités",
+        "pricing": "Tarification",
+        "canadianMarket": "Marché Canadien",
+        "requestDemo": "Demander une Démo",
+        "resources": "Ressources",
+        "blog": "Blog",
+        "integrations": "Intégrations",
+        "helpCenter": "Centre d'Aide",
+        "systemStatus": "État du Système",
+        "contact": "Contactez-nous",
+        "contactForm": "Formulaire de Contact →",
+        "privacyPolicy": "Politique de Confidentialité",
+        "termsOfService": "Conditions d'Utilisation",
+        "allRights": "Tous droits réservés."
+      },
+      "exitPopup": {
+        "title": "Attendez! Avant de Partir...",
+        "subtitle": "Obtenez notre guide gratuit: \"10 Façons dont l'IA Peut Tripler Vos Ventes Immobilières\"",
+        "emailPlaceholder": "Entrez votre e-mail",
+        "submit": "Envoyez-moi le Guide Gratuit",
+        "submitting": "Envoi...",
+        "noSpam": "Pas de spam. Désabonnez-vous à tout moment."
+      },
+      "chat": {
+        "title": "Discutez avec nous",
+        "greeting": "👋 Bonjour! Vous avez des questions sur Realtor Desk AI? Envoyez-nous un message et nous vous répondrons immédiatement.",
+        "placeholder": "Tapez votre message...",
+        "send": "Envoyer le Message",
+        "emailUs": "Ou envoyez-nous un e-mail: support@realtordeskai.com"
+      },
+      "testimonials": {
+        "quote1": "J'ai conclu 14 ventes supplémentaires au T1 en utilisant Realtor Desk AI. Le scoring prédictif des prospects change la donne.",
+        "name1": "Sarah Chen",
+        "title1": "Meilleure Productrice",
+        "company1": "Royal LePage Toronto",
+        "quote2": "Le chatbot IA bilingue capture des prospects 24/7. Je me réveille avec des rendez-vous qualifiés chaque matin.",
+        "name2": "Marc Dubois",
+        "title2": "Courtier",
+        "company2": "RE/MAX Québec",
+        "quote3": "Mes clôtures de transactions sont passées de 60 à 35 jours. La coordination par IA est incroyable.",
+        "name3": "Priya Sharma",
+        "title3": "Représentante des Ventes",
+        "company3": "Century 21 Vancouver"
       }
     }
   }
