@@ -135,8 +135,8 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                 <span className="text-muted-foreground">
-                  123 King St W, Suite 2500<br />
-                  Toronto, ON M5H 3T9
+                  10020 101A Avenue<br />
+                  Edmonton, AB T5J 3G2
                 </span>
               </li>
               <li>

@@ -106,7 +106,7 @@ const TermsOfService = () => {
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">11. Governing Law</h2>
               <p>
                 These Terms shall be governed by and construed in accordance with the laws of the Province of 
-                Ontario and the federal laws of Canada applicable therein.
+                Alberta and the federal laws of Canada applicable therein.
               </p>
             </section>
 
@@ -118,7 +118,7 @@ const TermsOfService = () => {
               <ul className="list-none space-y-2">
                 <li>Email: support@realtordesk.ai</li>
                 <li>Phone: 1-800-REALTOR-AI</li>
-                <li>Address: 123 King Street West, Suite 2500, Toronto, ON M5H 3T9</li>
+                <li>Address: 10020 101A Avenue, Edmonton, AB T5J 3G2</li>
               </ul>
             </section>
           </div>
