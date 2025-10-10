@@ -37,21 +37,21 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-16 md:h-20 gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
             <img 
               src={logo} 
               alt="Realtor Desk AI" 
               className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform"
             />
-            <span className="text-xl md:text-2xl font-bold gradient-text">
+            <span className="text-lg md:text-xl lg:text-2xl font-bold gradient-text whitespace-nowrap">
               Realtor Desk AI
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-4 lg:gap-8 flex-1 justify-center">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
