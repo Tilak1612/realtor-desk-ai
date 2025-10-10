@@ -116,7 +116,7 @@ const TermsOfService = () => {
                 For questions about these Terms of Service, please contact us at:
               </p>
               <ul className="list-none space-y-2">
-                <li>Email: legal@realtordeskai.com</li>
+                <li>Email: support@realtordesk.ai</li>
                 <li>Phone: 1-800-REALTOR-AI</li>
                 <li>Address: 123 King Street West, Suite 2500, Toronto, ON M5H 3T9</li>
               </ul>

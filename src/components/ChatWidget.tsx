@@ -14,7 +14,7 @@ const ChatWidget = () => {
     
     // Here you would integrate with your chat service
     // For now, we'll just open email
-    window.location.href = `mailto:support@realtordeskai.com?subject=Chat Inquiry&body=${encodeURIComponent(message)}`;
+    window.location.href = `mailto:support@realtordesk.ai?subject=Chat Inquiry&body=${encodeURIComponent(message)}`;
     setMessage("");
     setIsOpen(false);
   };
@@ -73,7 +73,7 @@ const ChatWidget = () => {
             </form>
 
             <p className="text-xs text-muted-foreground mt-3 text-center">
-              Or email us at: support@realtordeskai.com
+              Or email us at: support@realtordesk.ai
             </p>
           </div>
         </Card>

@@ -380,8 +380,8 @@ const Demo = () => {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
-                    <a href="mailto:support@realtordeskai.com" className="font-semibold text-primary hover:underline">
-                      support@realtordeskai.com
+                    <a href="mailto:support@realtordesk.ai" className="font-semibold text-primary hover:underline">
+                      support@realtordesk.ai
                     </a>
                   </div>
                   <div>

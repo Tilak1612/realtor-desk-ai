@@ -225,7 +225,7 @@ const resources = {
         "greeting": "👋 Hi! Have questions about Realtor Desk AI? Send us a message and we'll get back to you right away.",
         "placeholder": "Type your message...",
         "send": "Send Message",
-        "emailUs": "Or email us at: support@realtordeskai.com"
+        "emailUs": "Or email us at: support@realtordesk.ai"
       },
       "testimonials": {
         "quote1": "I closed 14 additional deals in Q1 using Realtor Desk AI. The predictive lead scoring is a game-changer.",
@@ -465,7 +465,7 @@ const resources = {
         "greeting": "👋 Bonjour! Vous avez des questions sur Realtor Desk AI? Envoyez-nous un message et nous vous répondrons immédiatement.",
         "placeholder": "Tapez votre message...",
         "send": "Envoyer le Message",
-        "emailUs": "Ou envoyez-nous un e-mail: support@realtordeskai.com"
+        "emailUs": "Ou envoyez-nous un e-mail: support@realtordesk.ai"
       },
       "testimonials": {
         "quote1": "J'ai conclu 14 ventes supplémentaires au T1 en utilisant Realtor Desk AI. Le scoring prédictif des prospects change la donne.",

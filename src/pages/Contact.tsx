@@ -78,8 +78,7 @@ const Contact = () => {
               <Card className="p-6">
                 <Mail className="w-8 h-8 text-primary mb-4" />
                 <h3 className="font-bold mb-2">Email Us</h3>
-                <p className="text-muted-foreground">support@realtordeskai.com</p>
-                <p className="text-muted-foreground">sales@realtordeskai.com</p>
+                <p className="text-muted-foreground">support@realtordesk.ai</p>
               </Card>
 
               <Card className="p-6">

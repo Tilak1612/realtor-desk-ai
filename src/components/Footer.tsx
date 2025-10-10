@@ -122,8 +122,8 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="mailto:support@realtordeskai.com" className="text-muted-foreground hover:text-primary transition-colors">
-                  support@realtordeskai.com
+                <a href="mailto:support@realtordesk.ai" className="text-muted-foreground hover:text-primary transition-colors">
+                  support@realtordesk.ai
                 </a>
               </li>
               <li className="flex items-start gap-2">
