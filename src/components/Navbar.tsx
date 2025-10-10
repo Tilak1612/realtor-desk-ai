@@ -96,7 +96,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t animate-fade-in">
+          <div className="md:hidden py-4 border-t animate-fade-in bg-background/98 backdrop-blur-lg shadow-lg">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
