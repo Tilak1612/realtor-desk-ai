@@ -60,6 +60,7 @@ const Demo = () => {
     setIsSubmitting(true);
 
     try {
+      // Save to database
       const { error } = await supabase.from("demo_requests").insert([
         {
           full_name: values.fullName,
@@ -75,6 +76,30 @@ const Demo = () => {
       ]);
 
       if (error) throw error;
+
+      // Sync to HubSpot in background (don't block on this)
+      supabase.functions
+        .invoke("hubspot-sync", {
+          body: {
+            email: values.email,
+            fullName: values.fullName,
+            phone: values.phone,
+            brokerage: values.brokerage,
+            province: values.province,
+            currentCrm: values.currentCrm,
+            teamSize: values.teamSize,
+            biggestChallenge: values.biggestChallenge,
+            comments: values.comments,
+          },
+        })
+        .then((response) => {
+          if (response.error) {
+            console.error("HubSpot sync error:", response.error);
+          } else {
+            console.log("Successfully synced to HubSpot");
+          }
+        })
+        .catch((err) => console.error("HubSpot sync failed:", err));
 
       toast({
         title: "Demo Request Submitted! ✅",
