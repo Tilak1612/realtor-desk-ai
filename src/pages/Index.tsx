@@ -24,6 +24,7 @@ import {
   Shield,
   Play
 } from "lucide-react";
+import demoShowcase from "@/assets/demo-showcase.jpg";
 
 const Index = () => {
   const [agentsCount, setAgentsCount] = useState(500);
@@ -111,13 +112,20 @@ const Index = () => {
               Watch how AI can transform your real estate business in just 2 minutes
             </p>
             
-            {/* Video Placeholder */}
-            <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl shadow-2xl flex items-center justify-center mb-6">
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform cursor-pointer">
-                  <Play className="w-10 h-10 text-primary ml-1" />
+            {/* Demo Showcase */}
+            <div className="relative aspect-video rounded-2xl shadow-2xl overflow-hidden mb-6 group cursor-pointer">
+              <img 
+                src={demoShowcase} 
+                alt="Realtor Desk AI Platform Demo - Dashboard showing property analytics, AI chat, and client management"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                <div className="text-center">
+                  <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Play className="w-10 h-10 text-primary ml-1" />
+                  </div>
+                  <p className="text-white font-medium">Watch 2-Minute Product Demo</p>
                 </div>
-                <p className="text-muted-foreground">2-Minute Product Demo</p>
               </div>
             </div>
             
