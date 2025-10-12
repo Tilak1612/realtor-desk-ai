@@ -34,6 +34,7 @@ import Onboarding from "./pages/Onboarding";
 import Contacts from "./pages/Contacts";
 import ContactDetail from "./pages/ContactDetail";
 import Billing from "./pages/Billing";
+import Deals from "./pages/Deals";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 
 const queryClient = new QueryClient();
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/contacts/:id" element={<ContactDetail />} />
           <Route path="/app/billing" element={<Billing />} />
+          <Route path="/app/deals" element={<Deals />} />
           
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />

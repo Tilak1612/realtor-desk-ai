@@ -23,7 +23,7 @@ import { useState } from "react";
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Users, label: "Contacts", path: "/contacts" },
-  { icon: Briefcase, label: "Deals", path: "/deals" },
+  { icon: Briefcase, label: "Deals", path: "/app/deals" },
   { icon: CheckSquare, label: "Tasks", path: "/tasks" },
   { icon: Bot, label: "AI Chatbot", path: "/chatbot" },
   { icon: Mail, label: "Campaigns", path: "/campaigns" },
