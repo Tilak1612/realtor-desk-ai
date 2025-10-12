@@ -15,8 +15,10 @@ import {
   CheckCircle,
   Zap
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Integrations = () => {
+  const { t } = useTranslation();
   const integrationCategories = [
     {
       title: "MLS & Real Estate Platforms",
@@ -90,10 +92,10 @@ const Integrations = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <h1 className="mb-6 animate-fade-in-up">
-            Connect Your Entire <span className="gradient-text">Real Estate Tech Stack</span>
+            {t('integrations.hero.title')} <span className="gradient-text">{t('integrations.hero.titleGradient')}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Realtor Desk AI integrates seamlessly with all your favorite tools and platforms
+            {t('integrations.hero.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 animate-fade-in-up animation-delay-300">
             <Link to="/demo">

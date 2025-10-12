@@ -19,9 +19,11 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import agentSuccess from "@/assets/agent-success.jpg";
 
 const CanadianMarket = () => {
+  const { t } = useTranslation();
   const [openProvince, setOpenProvince] = useState<string | null>(null);
 
   const toggleProvince = (province: string) => {
@@ -38,11 +40,11 @@ const CanadianMarket = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <h1 className="mb-6">
-                The Only AI Platform Built Specifically for{" "}
-                <span className="gradient-text">Canadian Real Estate</span>
+                {t('canadianMarket.hero.title')}{" "}
+                <span className="gradient-text">{t('canadianMarket.hero.titleGradient')}</span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                CREA DDF®, bilingual AI, and provincial compliance - not an afterthought, but the foundation
+                {t('canadianMarket.hero.subtitle')}
               </p>
             </div>
             <div className="relative animate-fade-in animation-delay-200">

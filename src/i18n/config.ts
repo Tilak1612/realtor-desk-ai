@@ -172,6 +172,27 @@ const resources = {
         map: {
           placeholder: "Map integration placeholder"
         }
+      },
+      canadianMarket: {
+        hero: {
+          title: "The Only AI Platform Built Specifically for",
+          titleGradient: "Canadian Real Estate",
+          subtitle: "CREA DDF®, bilingual AI, and provincial compliance - not an afterthought, but the foundation"
+        }
+      },
+      resources: {
+        hero: {
+          title: "Real Estate",
+          titleGradient: "Intelligence Hub",
+          subtitle: "Guides, tips, and insights for Canadian real estate professionals"
+        }
+      },
+      integrations: {
+        hero: {
+          title: "Connect Your Entire",
+          titleGradient: "Real Estate Tech Stack",
+          subtitle: "Realtor Desk AI integrates seamlessly with all your favorite tools and platforms"
+        }
       }
     }
   },
@@ -343,6 +364,27 @@ const resources = {
         },
         map: {
           placeholder: "Placeholder de carte"
+        }
+      },
+      canadianMarket: {
+        hero: {
+          title: "La Seule Plateforme IA Construite Spécifiquement pour l'",
+          titleGradient: "Immobilier Canadien",
+          subtitle: "CREA DDF®, IA bilingue et conformité provinciale - pas une réflexion après coup, mais la fondation"
+        }
+      },
+      resources: {
+        hero: {
+          title: "Centre d'",
+          titleGradient: "Intelligence Immobilière",
+          subtitle: "Guides, conseils et perspectives pour les professionnels de l'immobilier canadiens"
+        }
+      },
+      integrations: {
+        hero: {
+          title: "Connectez Toute Votre",
+          titleGradient: "Suite Technologique Immobilière",
+          subtitle: "Realtor Desk AI s'intègre parfaitement avec tous vos outils et plateformes préférés"
         }
       }
     }

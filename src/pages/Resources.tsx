@@ -4,8 +4,10 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BookOpen, TrendingUp, FileText, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Resources = () => {
+  const { t } = useTranslation();
   const articles = [
     {
       category: "AI & Technology",
@@ -61,10 +63,10 @@ const Resources = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <h1 className="mb-6 animate-fade-in-up">
-            Real Estate <span className="gradient-text">Intelligence Hub</span>
+            {t('resources.hero.title')} <span className="gradient-text">{t('resources.hero.titleGradient')}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Guides, tips, and insights for Canadian real estate professionals
+            {t('resources.hero.subtitle')}
           </p>
         </div>
       </section>
