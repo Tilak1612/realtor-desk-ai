@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Phone, Mail, Eye } from "lucide-react";
+import LeadScoreBadge from "./LeadScoreBadge";
 
 interface ContactsCardViewProps {
   contacts: Contact[];
@@ -14,10 +15,7 @@ interface ContactsCardViewProps {
 
 const ContactsCardView = ({ contacts, loading, onRefresh }: ContactsCardViewProps) => {
   const getScoreBadge = (score: number | null) => {
-    if (!score) return <Badge variant="outline">-</Badge>;
-    if (score >= 80) return <Badge className="bg-accent">🔥 {score}</Badge>;
-    if (score >= 50) return <Badge variant="secondary">{score}</Badge>;
-    return <Badge variant="outline">{score}</Badge>;
+    return <LeadScoreBadge score={score} showLabel />;
   };
 
   if (loading) {

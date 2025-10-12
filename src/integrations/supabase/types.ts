@@ -14,6 +14,56 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_lead_scores: {
+        Row: {
+          calculated_at: string
+          contact_id: string
+          created_at: string
+          factors: Json
+          id: string
+          insights: string | null
+          optimal_contact_time: string | null
+          prediction_confidence: number
+          recommended_actions: string[]
+          score: number
+          updated_at: string
+        }
+        Insert: {
+          calculated_at?: string
+          contact_id: string
+          created_at?: string
+          factors?: Json
+          id?: string
+          insights?: string | null
+          optimal_contact_time?: string | null
+          prediction_confidence: number
+          recommended_actions?: string[]
+          score: number
+          updated_at?: string
+        }
+        Update: {
+          calculated_at?: string
+          contact_id?: string
+          created_at?: string
+          factors?: Json
+          id?: string
+          insights?: string | null
+          optimal_contact_time?: string | null
+          prediction_confidence?: number
+          recommended_actions?: string[]
+          score?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_lead_scores_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: true
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       calendar_settings: {
         Row: {
           availability: Json | null
@@ -445,6 +495,62 @@ export type Database = {
           status?: string | null
         }
         Relationships: []
+      }
+      engagement_stats: {
+        Row: {
+          avg_session_duration: number | null
+          contact_id: string
+          created_at: string
+          documents_viewed: number | null
+          emails_clicked: number | null
+          emails_opened: number | null
+          emails_replied: number | null
+          emails_sent: number | null
+          id: string
+          last_email_opened: string | null
+          properties_viewed: number | null
+          updated_at: string
+          website_visits: number | null
+        }
+        Insert: {
+          avg_session_duration?: number | null
+          contact_id: string
+          created_at?: string
+          documents_viewed?: number | null
+          emails_clicked?: number | null
+          emails_opened?: number | null
+          emails_replied?: number | null
+          emails_sent?: number | null
+          id?: string
+          last_email_opened?: string | null
+          properties_viewed?: number | null
+          updated_at?: string
+          website_visits?: number | null
+        }
+        Update: {
+          avg_session_duration?: number | null
+          contact_id?: string
+          created_at?: string
+          documents_viewed?: number | null
+          emails_clicked?: number | null
+          emails_opened?: number | null
+          emails_replied?: number | null
+          emails_sent?: number | null
+          id?: string
+          last_email_opened?: string | null
+          properties_viewed?: number | null
+          updated_at?: string
+          website_visits?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "engagement_stats_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: true
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       integrations: {
         Row: {

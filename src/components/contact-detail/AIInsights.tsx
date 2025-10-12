@@ -2,30 +2,68 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Brain, TrendingUp, Clock, Target } from "lucide-react";
+import { Brain, TrendingUp, Clock, Target, RefreshCw } from "lucide-react";
+import { useLeadScore } from "@/hooks/useLeadScore";
+import { Skeleton } from "@/components/ui/skeleton";
+import { formatDistanceToNow } from "date-fns";
 
 interface AIInsightsProps {
   contact: any;
 }
 
 const AIInsights = ({ contact }: AIInsightsProps) => {
-  const leadScore = contact.ai_score || 0;
-  
-  // Mock AI insights (would be calculated by real AI)
-  const engagement = Math.min(100, leadScore + Math.random() * 20);
-  const behavior = Math.min(100, leadScore + Math.random() * 15);
-  const budgetMatch = Math.min(100, leadScore - Math.random() * 10);
-  const timeline = Math.min(100, leadScore + Math.random() * 10);
-  
-  const closeProbability = Math.round((engagement + behavior + budgetMatch + timeline) / 4);
+  const { leadScore, loading, calculating, calculateLeadScore } = useLeadScore(contact.id);
+
+  if (loading) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Brain className="h-5 w-5 text-primary" />
+            AI Insights
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <Skeleton className="h-32" />
+          <Skeleton className="h-24" />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const score = leadScore?.score || contact.ai_score || 0;
+  const factors = leadScore?.factors || {
+    engagement: 0,
+    behavior: 0,
+    budget_match: 0,
+    timeline: 0,
+    qualification: 0,
+  };
+  const closeProbability = leadScore?.prediction_confidence
+    ? Math.round(leadScore.prediction_confidence * 100)
+    : Math.round(score * 0.85);
+  const recommendedActions = leadScore?.recommended_actions || [
+    "Update contact information",
+    "Calculate lead score",
+  ];
+  const optimalContactTime = leadScore?.optimal_contact_time || "Not enough data";
+  const insights = leadScore?.insights || "Calculate the lead score to get AI insights.";
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="flex items-center gap-2">
           <Brain className="h-5 w-5 text-primary" />
           AI Insights
         </CardTitle>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={calculateLeadScore}
+          disabled={calculating}
+        >
+          <RefreshCw className={`h-4 w-4 ${calculating ? "animate-spin" : ""}`} />
+        </Button>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Lead Score Breakdown */}
@@ -36,33 +74,41 @@ const AIInsights = ({ contact }: AIInsightsProps) => {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-muted-foreground">Engagement</span>
-                <span className="text-xs font-medium">{Math.round(engagement)}%</span>
+                <span className="text-xs font-medium">{factors.engagement}%</span>
               </div>
-              <Progress value={engagement} className="h-2" />
+              <Progress value={factors.engagement} className="h-2" />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-muted-foreground">Behavior</span>
-                <span className="text-xs font-medium">{Math.round(behavior)}%</span>
+                <span className="text-xs font-medium">{factors.behavior}%</span>
               </div>
-              <Progress value={behavior} className="h-2" />
+              <Progress value={factors.behavior} className="h-2" />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-muted-foreground">Budget Match</span>
-                <span className="text-xs font-medium">{Math.round(budgetMatch)}%</span>
+                <span className="text-xs font-medium">{factors.budget_match}%</span>
               </div>
-              <Progress value={budgetMatch} className="h-2" />
+              <Progress value={factors.budget_match} className="h-2" />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-muted-foreground">Timeline</span>
-                <span className="text-xs font-medium">{Math.round(timeline)}%</span>
+                <span className="text-xs font-medium">{factors.timeline}%</span>
               </div>
-              <Progress value={timeline} className="h-2" />
+              <Progress value={factors.timeline} className="h-2" />
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-muted-foreground">Qualification</span>
+                <span className="text-xs font-medium">{factors.qualification}%</span>
+              </div>
+              <Progress value={factors.qualification} className="h-2" />
             </div>
           </div>
         </div>
@@ -83,12 +129,12 @@ const AIInsights = ({ contact }: AIInsightsProps) => {
             <Clock className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium">Best Contact Times</span>
           </div>
-          <p className="text-sm text-muted-foreground mb-2">
-            Weekdays 10 AM - 12 PM
-          </p>
-          <p className="text-xs text-muted-foreground">
-            Based on email open rates and response patterns
-          </p>
+          <p className="text-sm text-muted-foreground mb-2">{optimalContactTime}</p>
+          {optimalContactTime !== "Not enough data" && (
+            <p className="text-xs text-muted-foreground">
+              Based on email open rates and response patterns
+            </p>
+          )}
         </div>
 
         {/* Recommended Actions */}
@@ -98,21 +144,28 @@ const AIInsights = ({ contact }: AIInsightsProps) => {
             <span className="text-sm font-medium">Recommended Actions</span>
           </div>
           <div className="space-y-2">
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              Send pre-approval checklist
-            </Button>
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              Schedule property viewing
-            </Button>
-            <Button variant="outline" size="sm" className="w-full justify-start">
-              Share market report
-            </Button>
+            {recommendedActions.slice(0, 3).map((action, i) => (
+              <Button key={i} variant="outline" size="sm" className="w-full justify-start text-left">
+                {action}
+              </Button>
+            ))}
           </div>
         </div>
 
+        {/* Insights */}
+        {insights && (
+          <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
+            <p className="text-xs text-muted-foreground">{insights}</p>
+          </div>
+        )}
+
         {/* Last Updated */}
         <p className="text-xs text-muted-foreground text-center">
-          Last updated: Just now
+          {leadScore?.calculated_at
+            ? `Updated ${formatDistanceToNow(new Date(leadScore.calculated_at), {
+                addSuffix: true,
+              })}`
+            : "Click refresh to calculate score"}
         </p>
       </CardContent>
     </Card>

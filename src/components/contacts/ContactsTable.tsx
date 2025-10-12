@@ -23,6 +23,7 @@ import { MoreHorizontal, Phone, Mail, Eye, Pencil, Trash2, ArrowUpDown } from "l
 import { formatDistanceToNow } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import LeadScoreBadge from "./LeadScoreBadge";
 
 interface ContactsTableProps {
   contacts: Contact[];
@@ -106,10 +107,7 @@ const ContactsTable = ({
   };
 
   const getScoreBadge = (score: number | null) => {
-    if (!score) return <Badge variant="outline">-</Badge>;
-    if (score >= 80) return <Badge className="bg-accent">{score}</Badge>;
-    if (score >= 50) return <Badge variant="secondary">{score}</Badge>;
-    return <Badge variant="outline">{score}</Badge>;
+    return <LeadScoreBadge score={score} />;
   };
 
   const handleDelete = async (id: string) => {
