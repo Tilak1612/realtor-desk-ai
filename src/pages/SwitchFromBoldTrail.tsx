@@ -236,9 +236,9 @@ const SwitchFromBoldTrail = () => {
       {/* Risk-Free Guarantee */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <h2 className="mb-6">Risk-Free 60-Day Guarantee</h2>
+          <h2 className="mb-6">Risk-Free 30-Day Guarantee</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Try Realtor Desk AI for 60 days. If it's not better than BoldTrail in every way, 
+            Try Realtor Desk AI for 30 days. If it's not better than BoldTrail in every way, 
             we'll refund 100% and help you migrate back. No questions asked.
           </p>
 

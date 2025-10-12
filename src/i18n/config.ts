@@ -82,7 +82,7 @@ const resources = {
             name: "AGENT",
             description: "Perfect for individual agents ready to scale",
             ctaMonthly: "Start Free Trial",
-            ctaYearly: "Start 60-Day Free Trial"
+            ctaYearly: "Start 30-Day Free Trial"
           },
           team: {
             name: "TEAM",
@@ -282,7 +282,7 @@ const resources = {
             name: "AGENT",
             description: "Parfait pour les agents individuels prêts à se développer",
             ctaMonthly: "Commencer l'Essai Gratuit",
-            ctaYearly: "Commencer l'Essai Gratuit de 60 Jours"
+            ctaYearly: "Commencer l'Essai Gratuit de 30 Jours"
           },
           team: {
             name: "ÉQUIPE",

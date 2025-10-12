@@ -34,7 +34,7 @@ const SwitchFromWiseAgent = () => {
         <div className="container-custom max-w-4xl text-center">
           <CheckCircle className="w-16 h-16 text-accent mx-auto mb-6" />
           <h2 className="mb-6">Switch to Canadian CRM Today</h2>
-          <p className="text-lg text-muted-foreground mb-8">Free migration. 60-day guarantee. Canadian support team.</p>
+          <p className="text-lg text-muted-foreground mb-8">Free migration. 30-day guarantee. Canadian support team.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo"><Button size="lg" className="btn-gradient">Schedule Migration</Button></Link>
             <Link to="/vs/wise-agent"><Button size="lg" variant="outline">See Comparison</Button></Link>

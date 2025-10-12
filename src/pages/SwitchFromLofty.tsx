@@ -306,7 +306,7 @@ const SwitchFromLofty = () => {
           <Brain className="w-16 h-16 text-accent mx-auto mb-6" />
           <h2 className="mb-6">Upgrade to Real AI Today</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            60-day money-back guarantee. If it's not better than Lofty, full refund. No questions asked.
+            30-day money-back guarantee. If it's not better than Lofty, full refund. No questions asked.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

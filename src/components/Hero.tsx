@@ -62,7 +62,7 @@ const Hero = () => {
 
             {/* Trust Line */}
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              <strong>No setup fees</strong> • <strong>No credit card required</strong> • <strong>60-day money-back guarantee</strong>
+              <strong>No setup fees</strong> • <strong>No credit card required</strong> • <strong>30-day money-back guarantee</strong>
             </p>
           </div>
 

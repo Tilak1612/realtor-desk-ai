@@ -242,7 +242,7 @@ const VsBoldTrail = () => {
 
             <Card className="p-6">
               <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
-              <h3 className="font-bold mb-2">60-Day Guarantee</h3>
+              <h3 className="font-bold mb-2">30-Day Guarantee</h3>
               <p className="text-sm text-muted-foreground">
                 If it's not better than BoldTrail, we refund 100%. No questions asked.
               </p>

@@ -156,7 +156,7 @@ const ROICalculator = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/demo" className="w-full sm:w-auto">
               <Button className="w-full btn-gradient">
-                Start 60-Day Free Trial
+                Start 30-Day Free Trial
               </Button>
             </Link>
             <Button variant="outline" className="w-full sm:w-auto">

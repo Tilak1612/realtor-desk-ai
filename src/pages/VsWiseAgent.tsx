@@ -227,7 +227,7 @@ const VsWiseAgent = () => {
               <Shield className="w-12 h-12 text-accent mx-auto mb-3" />
               <h3 className="font-bold mb-2">Risk-Free Trial</h3>
               <p className="text-sm text-muted-foreground">
-                60-day money-back guarantee. If you miss Wise Agent, full refund.
+                30-day money-back guarantee. If you miss Wise Agent, full refund.
               </p>
             </Card>
 

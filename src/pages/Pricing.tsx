@@ -91,7 +91,7 @@ const Pricing = () => {
                 "Free migration assistance",
                 "No setup fees"
               ]}
-              ctaText={isYearly ? "Start 60-Day Free Trial" : "Start Free Trial"}
+              ctaText={isYearly ? "Start 30-Day Free Trial" : "Start Free Trial"}
               ctaLink="/demo"
             />
 
@@ -264,9 +264,9 @@ const Pricing = () => {
             <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
               <Shield className="w-20 h-20 text-accent flex-shrink-0" />
               <div>
-                <h2 className="mb-4">60-Day Money-Back Guarantee</h2>
+                <h2 className="mb-4">30-Day Money-Back Guarantee</h2>
                 <p className="text-lg text-muted-foreground mb-4">
-                  If you don't see measurable ROI in 60 days, we'll refund 100%. No questions asked.
+                  If you don't see measurable ROI in 30 days, we'll refund 100%. No questions asked.
                 </p>
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm">
                   <Badge variant="secondary" className="gap-1">

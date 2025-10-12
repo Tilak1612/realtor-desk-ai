@@ -35,7 +35,7 @@ const SwitchFromIxact = () => {
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
           <CheckCircle className="w-16 h-16 text-accent mx-auto mb-6" />
-          <h2 className="mb-6">Free Migration + 60-Day Guarantee</h2>
+          <h2 className="mb-6">Free Migration + 30-Day Guarantee</h2>
           <p className="text-lg text-muted-foreground mb-8">We move all your IXACT data for free. If you don't close extra deals, full refund.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo"><Button size="lg" className="btn-gradient">Schedule Free Migration</Button></Link>
