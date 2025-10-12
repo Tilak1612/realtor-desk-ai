@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { 
   Brain, 
   MessageSquare, 
@@ -31,6 +32,7 @@ import demoShowcase from "@/assets/demo-showcase.jpg";
 const DEMO_VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE";
 
 const Index = () => {
+  const { t } = useTranslation();
   const [agentsCount, setAgentsCount] = useState(500);
   const [demosThisWeek, setDemosThisWeek] = useState(14);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -59,19 +61,19 @@ const Index = () => {
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="font-semibold">{agentsCount} agents</span>
-              <span className="text-muted-foreground">using now</span>
+              <span className="font-semibold">{agentsCount} {t('home.socialProof.agents')}</span>
+              <span className="text-muted-foreground">{t('home.socialProof.usingNow')}</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-accent" />
-              <span className="font-semibold">{demosThisWeek} demos</span>
-              <span className="text-muted-foreground">booked this week</span>
+              <span className="font-semibold">{demosThisWeek} {t('home.socialProof.demos')}</span>
+              <span className="text-muted-foreground">{t('home.socialProof.bookedThisWeek')}</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-accent" />
-              <span className="text-muted-foreground">Join agents closing 3X more deals</span>
+              <span className="text-muted-foreground">{t('home.socialProof.joinAgents')}</span>
             </div>
           </div>
         </div>
@@ -80,7 +82,7 @@ const Index = () => {
       {/* Credibility Section */}
       <section className="section-padding bg-background">
         <div className="container-custom">
-          <h2 className="text-center mb-12">Trusted & Secure</h2>
+          <h2 className="text-center mb-12">{t('home.credibility.title')}</h2>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
             <Card className="p-6 text-center">
@@ -112,9 +114,9 @@ const Index = () => {
       <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="mb-6">See Realtor Desk AI in Action</h2>
+            <h2 className="mb-6">{t('home.demo.title')}</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Watch how AI can transform your real estate business in just 2 minutes
+              {t('home.demo.description')}
             </p>
             
             {/* Demo Showcase */}
@@ -132,7 +134,7 @@ const Index = () => {
                   <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                     <Play className="w-10 h-10 text-primary ml-1" />
                   </div>
-                  <p className="text-white font-medium">Watch 2-Minute Product Demo</p>
+                  <p className="text-white font-medium">{t('home.demo.watchDemo')}</p>
                 </div>
               </div>
             </div>
@@ -155,12 +157,12 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">
-                  Book Live Demo
+                  {t('home.demo.bookDemo')}
                 </Button>
               </Link>
               <Link to="/features">
                 <Button size="lg" variant="outline">
-                  Explore All Features
+                  {t('home.demo.exploreFeatures')}
                 </Button>
               </Link>
             </div>

@@ -25,10 +25,24 @@ const resources = {
         "badge3": "2,000+ Canadian Agents",
         "conversionBadge": "300% Conversion Increase"
       },
-      "socialProof": {
-        "agentsUsing": "agents using now",
-        "demosBooked": "demos booked this week",
-        "joinAgents": "Join agents closing 3X more deals"
+      "home": {
+        "socialProof": {
+          "agents": "agents",
+          "usingNow": "using now",
+          "demos": "demos",
+          "bookedThisWeek": "booked this week",
+          "joinAgents": "Join agents closing 3X more deals"
+        },
+        "credibility": {
+          "title": "Trusted & Secure"
+        },
+        "demo": {
+          "title": "See Realtor Desk AI in Action",
+          "description": "Watch how AI can transform your real estate business in just 2 minutes",
+          "watchDemo": "Watch 2-Minute Product Demo",
+          "bookDemo": "Book Live Demo",
+          "exploreFeatures": "Explore All Features"
+        }
       },
       "credibility": {
         "title": "Trusted & Secure",
@@ -265,10 +279,24 @@ const resources = {
         "badge3": "2 000+ Agents Canadiens",
         "conversionBadge": "Augmentation de 300% des Conversions"
       },
-      "socialProof": {
-        "agentsUsing": "agents l'utilisent maintenant",
-        "demosBooked": "démos réservées cette semaine",
-        "joinAgents": "Rejoignez les agents qui concluent 3X plus"
+      "home": {
+        "socialProof": {
+          "agents": "agents",
+          "usingNow": "l'utilisent maintenant",
+          "demos": "démos",
+          "bookedThisWeek": "réservées cette semaine",
+          "joinAgents": "Rejoignez les agents qui concluent 3X plus"
+        },
+        "credibility": {
+          "title": "Approuvé et Sécurisé"
+        },
+        "demo": {
+          "title": "Voyez Realtor Desk AI en Action",
+          "description": "Découvrez comment l'IA peut transformer votre entreprise immobilière en seulement 2 minutes",
+          "watchDemo": "Regarder la Démo Produit de 2 Minutes",
+          "bookDemo": "Réserver une Démo en Direct",
+          "exploreFeatures": "Explorer Toutes les Fonctionnalités"
+        }
       },
       "credibility": {
         "title": "Approuvé et Sécurisé",
