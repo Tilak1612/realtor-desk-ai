@@ -23,7 +23,7 @@ const ROICalculator = () => {
   const additionalRevenue = brainfyRevenue - currentRevenue;
   const additionalDeals = (brainfyDeals - currentDeals) * 12; // Annual deals
   const timeSaved = 15; // hours per week
-  const investment = 699; // Annual cost
+  const investment = 999; // Founding member annual cost
   const roi = ((additionalRevenue / investment) * 100).toFixed(0);
 
   return (
@@ -149,7 +149,7 @@ const ROICalculator = () => {
             Based on {leads} monthly leads at {conversionRate}% → {brainfyConversionRate}% with AI
           </p>
           <p className="text-center text-sm font-semibold mb-4">
-            Investment: <span className="gradient-text">${investment}/year</span> • 
+            Founding Member Investment: <span className="gradient-text">${investment}/year</span> (Regular: $1,497) • 
             Your Return: <span className="gradient-text">${additionalRevenue.toLocaleString()}/year</span>
           </p>
           

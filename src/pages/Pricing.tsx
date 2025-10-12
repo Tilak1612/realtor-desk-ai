@@ -15,16 +15,17 @@ const Pricing = () => {
 
   const pricingData = {
     agent: {
-      monthly: 79,
-      yearly: 699,
-      savings: 249, // $79 x 12 = $948, save $249
-      discount: "$249"
+      monthly: 149,
+      yearly: 1497,
+      savings: 291, // $149 x 12 = $1,788, save $291
+      discount: "$291",
+      foundingPrice: 999 // Special founding member price
     },
     team: {
-      yearly: 1499,
-      perAgent: 300, // $1,499 / 5 agents
-      savings: 500,
-      discount: "$500"
+      yearly: 2997,
+      perAgent: 600, // $2,997 / 5 agents
+      savings: 1000,
+      discount: "$1,000"
     }
   };
 
@@ -37,6 +38,9 @@ const Pricing = () => {
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4 animate-fade-in-up">
             {t('pricing.hero.badge')}
+          </Badge>
+          <Badge variant="default" className="mb-4 animate-fade-in-up bg-accent text-white">
+            🎉 Limited Time: Founding Member Pricing - Save $498!
           </Badge>
           <h1 className="mb-6 animate-fade-in-up">
             {t('pricing.hero.title')} <span className="gradient-text">{t('pricing.hero.titleGradient')}</span>
@@ -62,7 +66,7 @@ const Pricing = () => {
               {t('pricing.hero.yearly')}
             </span>
             <Badge variant="secondary" className="text-accent font-semibold">
-              {t('pricing.hero.saveYearly')}
+              {t('pricing.hero.saveYearly')} + Founding Member Bonus
             </Badge>
           </div>
         </div>
@@ -74,11 +78,11 @@ const Pricing = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             <PricingCard
               name="AGENT"
-              price={isYearly ? "699" : pricingData.agent.monthly.toString()}
+              price={isYearly ? (pricingData.agent.foundingPrice.toString()) : pricingData.agent.monthly.toString()}
               description="Perfect for individual agents ready to scale"
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? `Save ${pricingData.agent.discount}` : undefined}
-              yearlyPrice={isYearly ? pricingData.agent.yearly : undefined}
+              discount={isYearly ? `Founding Member: Save $498` : `Save ${pricingData.agent.discount}/year`}
+              yearlyPrice={isYearly ? pricingData.agent.foundingPrice : undefined}
               features={[
                 "Unlimited contacts & leads",
                 "AI-powered predictive CRM",
@@ -89,7 +93,8 @@ const Pricing = () => {
                 "Bilingual support (EN/FR)",
                 "Mobile app included",
                 "Free migration assistance",
-                "No setup fees"
+                "No setup fees",
+                "Priority support"
               ]}
               ctaText={isYearly ? "Start 30-Day Free Trial" : "Start Free Trial"}
               ctaLink="/demo"
@@ -97,7 +102,7 @@ const Pricing = () => {
 
             <PricingCard
               name="TEAM"
-              price={isYearly ? "1,499" : "149"}
+              price={isYearly ? "2,997" : "299"}
               description="For growing teams of 2-5 agents"
               billingPeriod={isYearly ? "year" : "month"}
               discount={isYearly ? `Save ${pricingData.team.discount} annually` : undefined}
@@ -112,7 +117,8 @@ const Pricing = () => {
                 "Priority support",
                 "Dedicated account manager",
                 "Custom training sessions",
-                "API access available"
+                "API access available",
+                "White-label options"
               ]}
               popular
               ctaText="Request Team Demo"
@@ -169,11 +175,11 @@ const Pricing = () => {
                   <X className="w-5 h-5 text-destructive flex-shrink-0" />
                   <div>
                     <div className="font-semibold">Lofty</div>
-                    <div className="text-sm text-muted-foreground">$1,188 - $3,588/year per user</div>
+                    <div className="text-sm text-muted-foreground">$1,788 - $3,588/year per user</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xl font-bold text-destructive">$1,188+</div>
+                  <div className="text-xl font-bold text-destructive">$1,788+</div>
                   <div className="text-xs text-muted-foreground">Per year</div>
                 </div>
               </div>
@@ -184,11 +190,11 @@ const Pricing = () => {
                   <Check className="w-5 h-5 text-accent flex-shrink-0" />
                   <div>
                     <div className="font-semibold text-accent">Realtor Desk AI</div>
-                    <div className="text-sm text-muted-foreground">$699/year, $0 setup</div>
+                    <div className="text-sm text-muted-foreground">$999/year (Founding Member), $0 setup</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xl font-bold gradient-text">$699</div>
+                  <div className="text-xl font-bold gradient-text">$999</div>
                   <div className="text-xs text-accent font-semibold">Save thousands!</div>
                 </div>
               </div>
@@ -196,7 +202,7 @@ const Pricing = () => {
 
             <div className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <TrendingDown className="w-4 h-4 text-accent" />
-              <span>Save up to <span className="font-bold text-accent">90%</span> compared to BoldTrail</span>
+              <span>Save up to <span className="font-bold text-accent">85%</span> compared to BoldTrail, <span className="font-bold text-accent">45%</span> vs Lofty</span>
             </div>
           </Card>
         </div>
