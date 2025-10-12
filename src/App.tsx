@@ -18,6 +18,11 @@ import VsBoldTrail from "./pages/VsBoldTrail";
 import VsLofty from "./pages/VsLofty";
 import VsIxact from "./pages/VsIxact";
 import VsWiseAgent from "./pages/VsWiseAgent";
+import AIPoweredCRM from "./pages/AIPoweredCRM";
+import SwitchFromBoldTrail from "./pages/SwitchFromBoldTrail";
+import SwitchFromLofty from "./pages/SwitchFromLofty";
+import SwitchFromIxact from "./pages/SwitchFromIxact";
+import SwitchFromWiseAgent from "./pages/SwitchFromWiseAgent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +51,15 @@ const App = () => (
           <Route path="/vs/lofty" element={<VsLofty />} />
           <Route path="/vs/ixact" element={<VsIxact />} />
           <Route path="/vs/wise-agent" element={<VsWiseAgent />} />
+          
+          {/* AI Features */}
+          <Route path="/features/ai-powered-crm" element={<AIPoweredCRM />} />
+          
+          {/* Migration Pages */}
+          <Route path="/switch-from-boldtrail" element={<SwitchFromBoldTrail />} />
+          <Route path="/switch-from-lofty" element={<SwitchFromLofty />} />
+          <Route path="/switch-from-ixact" element={<SwitchFromIxact />} />
+          <Route path="/switch-from-wise-agent" element={<SwitchFromWiseAgent />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
