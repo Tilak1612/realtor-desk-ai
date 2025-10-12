@@ -2,14 +2,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { CheckCircle } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import ProfileSetup from "@/components/onboarding/ProfileSetup";
+import BusinessGoals from "@/components/onboarding/BusinessGoals";
+import ImportContacts from "@/components/onboarding/ImportContacts";
+import ChatbotSetup from "@/components/onboarding/ChatbotSetup";
+import CalendarIntegration from "@/components/onboarding/CalendarIntegration";
+import OnboardingComplete from "@/components/onboarding/OnboardingComplete";
 
 const Onboarding = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const [profileData, setProfileData] = useState<any>({});
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -18,85 +26,172 @@ const Onboarding = () => {
         navigate("/login");
         return;
       }
+      
       setUserId(session.user.id);
+      
+      // Load existing profile data
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", session.user.id)
+        .single();
+
+      if (profile) {
+        setProfileData(profile);
+        setCurrentStep(profile.onboarding_step || 1);
+      }
+      
+      setLoading(false);
     };
     checkAuth();
   }, [navigate]);
 
-  const handleCompleteOnboarding = async () => {
+  const saveProgress = async (step: number, data: any) => {
     if (!userId) return;
 
-    setLoading(true);
     try {
       const { error } = await supabase
         .from("profiles")
-        .update({ onboarding_completed: true })
+        .update({
+          ...data,
+          onboarding_step: step,
+        })
         .eq("id", userId);
 
       if (error) throw error;
-
-      toast.success("Welcome to Realtor Desk AI!");
-      navigate("/dashboard");
+      setProfileData({ ...profileData, ...data });
     } catch (error: any) {
-      toast.error("Failed to complete onboarding");
-      console.error(error);
-    } finally {
-      setLoading(false);
+      console.error("Error saving progress:", error);
+      toast.error("Failed to save progress");
     }
   };
 
+  const handleNext = async (data?: any) => {
+    if (data) {
+      await saveProgress(currentStep + 1, data);
+    }
+    setCurrentStep(currentStep + 1);
+  };
+
+  const handleBack = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const handleSkip = async () => {
+    await saveProgress(currentStep + 1, {});
+    setCurrentStep(currentStep + 1);
+  };
+
+  const handleComplete = async () => {
+    if (!userId) return;
+
+    try {
+      await supabase
+        .from("profiles")
+        .update({ onboarding_completed: true, onboarding_step: 6 })
+        .eq("id", userId);
+
+      // Call edge function to send welcome email
+      await supabase.functions.invoke("send-welcome-email", {
+        body: { userId },
+      });
+
+      toast.success("Welcome to Realtor Desk AI!");
+    } catch (error: any) {
+      console.error("Error completing onboarding:", error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  const progress = (currentStep / 5) * 100;
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-      <Card className="w-full max-w-2xl">
-        <CardHeader className="text-center space-y-2">
-          <div className="flex justify-center mb-4">
-            <CheckCircle className="w-16 h-16 text-primary" />
-          </div>
-          <CardTitle className="text-4xl font-bold">
-            Welcome to Realtor Desk AI!
-          </CardTitle>
-          <CardDescription className="text-lg">
-            You're all set to start your 60-day free trial
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-4">
-            <div className="p-4 bg-primary/5 rounded-lg">
-              <h3 className="font-semibold mb-2">✨ What's included:</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• AI-powered lead management and follow-ups</li>
-                <li>• Automated client communication</li>
-                <li>• Smart scheduling and calendar integration</li>
-                <li>• Transaction management tools</li>
-                <li>• Performance analytics and insights</li>
-              </ul>
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5 px-4 py-8">
+      <div className="max-w-4xl mx-auto">
+        {currentStep <= 5 && (
+          <>
+            {/* Progress Indicator */}
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-4">
+                {[1, 2, 3, 4, 5].map((step) => (
+                  <div
+                    key={step}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${
+                      step <= currentStep
+                        ? "bg-primary border-primary text-primary-foreground"
+                        : "bg-background border-border text-muted-foreground"
+                    }`}
+                  >
+                    {step}
+                  </div>
+                ))}
+              </div>
+              <Progress value={progress} className="h-2" />
+              <p className="text-center text-sm text-muted-foreground mt-2">
+                Step {currentStep} of 5
+              </p>
             </div>
 
-            <div className="p-4 bg-secondary/5 rounded-lg">
-              <h3 className="font-semibold mb-2">🎯 Next steps:</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Explore your dashboard and features</li>
-                <li>• Connect your email and calendar</li>
-                <li>• Import your existing contacts</li>
-                <li>• Set up your first AI automation</li>
-              </ul>
-            </div>
-          </div>
+            {/* Step Content */}
+            <Card>
+              <CardContent className="p-6">
+                {currentStep === 1 && (
+                  <ProfileSetup
+                    profileData={profileData}
+                    onNext={handleNext}
+                    onSkip={handleSkip}
+                    userId={userId}
+                  />
+                )}
+                {currentStep === 2 && (
+                  <BusinessGoals
+                    profileData={profileData}
+                    onNext={handleNext}
+                    onBack={handleBack}
+                  />
+                )}
+                {currentStep === 3 && (
+                  <ImportContacts
+                    userId={userId}
+                    onNext={handleNext}
+                    onSkip={handleSkip}
+                    onBack={handleBack}
+                  />
+                )}
+                {currentStep === 4 && (
+                  <ChatbotSetup
+                    profileData={profileData}
+                    userId={userId}
+                    onNext={handleNext}
+                    onBack={handleBack}
+                  />
+                )}
+                {currentStep === 5 && (
+                  <CalendarIntegration
+                    userId={userId}
+                    onNext={handleNext}
+                    onBack={handleBack}
+                  />
+                )}
+              </CardContent>
+            </Card>
+          </>
+        )}
 
-          <Button
-            className="w-full"
-            size="lg"
-            onClick={handleCompleteOnboarding}
-            disabled={loading}
-          >
-            {loading ? "Setting up..." : "Get Started"}
-          </Button>
-
-          <p className="text-center text-sm text-muted-foreground">
-            No credit card required during your trial period
-          </p>
-        </CardContent>
-      </Card>
+        {currentStep === 6 && (
+          <OnboardingComplete
+            profileData={profileData}
+            onComplete={handleComplete}
+          />
+        )}
+      </div>
     </div>
   );
 };

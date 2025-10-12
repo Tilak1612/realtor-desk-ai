@@ -14,6 +14,88 @@ export type Database = {
   }
   public: {
     Tables: {
+      calendar_settings: {
+        Row: {
+          availability: Json | null
+          buffer_time: number | null
+          created_at: string | null
+          id: string
+          meeting_types: Json | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          availability?: Json | null
+          buffer_time?: number | null
+          created_at?: string | null
+          id?: string
+          meeting_types?: Json | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          availability?: Json | null
+          buffer_time?: number | null
+          created_at?: string | null
+          id?: string
+          meeting_types?: Json | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chatbot_settings: {
+        Row: {
+          bot_name: string
+          created_at: string | null
+          greeting_message: string | null
+          handoff_rules: string | null
+          id: string
+          is_active: boolean | null
+          qualification_questions: string[] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          bot_name: string
+          created_at?: string | null
+          greeting_message?: string | null
+          handoff_rules?: string | null
+          id?: string
+          is_active?: boolean | null
+          qualification_questions?: string[] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          bot_name?: string
+          created_at?: string | null
+          greeting_message?: string | null
+          handoff_rules?: string | null
+          id?: string
+          is_active?: boolean | null
+          qualification_questions?: string[] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chatbot_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -46,6 +128,56 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      contacts: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          first_name: string | null
+          id: string
+          last_name: string | null
+          metadata: Json | null
+          phone: string | null
+          source: string | null
+          tags: string[] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          metadata?: Json | null
+          phone?: string | null
+          source?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          last_name?: string | null
+          metadata?: Json | null
+          phone?: string | null
+          source?: string | null
+          tags?: string[] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contacts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       demo_requests: {
         Row: {
@@ -119,15 +251,69 @@ export type Database = {
         }
         Relationships: []
       }
+      integrations: {
+        Row: {
+          access_token: string | null
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          metadata: Json | null
+          provider: string
+          provider_type: string
+          refresh_token: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          metadata?: Json | null
+          provider: string
+          provider_type: string
+          refresh_token?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          metadata?: Json | null
+          provider?: string
+          provider_type?: string
+          refresh_token?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "integrations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
+          avatar_url: string | null
+          business_preferences: Json | null
+          city: string | null
           company_name: string | null
           created_at: string | null
           email: string
           full_name: string
           id: string
+          license_number: string | null
           onboarding_completed: boolean | null
+          onboarding_step: number | null
           phone: string | null
+          primary_language: string | null
+          province: string | null
           role: string | null
           subscription_status:
             | Database["public"]["Enums"]["subscription_status"]
@@ -139,13 +325,20 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          avatar_url?: string | null
+          business_preferences?: Json | null
+          city?: string | null
           company_name?: string | null
           created_at?: string | null
           email: string
           full_name: string
           id: string
+          license_number?: string | null
           onboarding_completed?: boolean | null
+          onboarding_step?: number | null
           phone?: string | null
+          primary_language?: string | null
+          province?: string | null
           role?: string | null
           subscription_status?:
             | Database["public"]["Enums"]["subscription_status"]
@@ -157,13 +350,20 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          avatar_url?: string | null
+          business_preferences?: Json | null
+          city?: string | null
           company_name?: string | null
           created_at?: string | null
           email?: string
           full_name?: string
           id?: string
+          license_number?: string | null
           onboarding_completed?: boolean | null
+          onboarding_step?: number | null
           phone?: string | null
+          primary_language?: string | null
+          province?: string | null
           role?: string | null
           subscription_status?:
             | Database["public"]["Enums"]["subscription_status"]
