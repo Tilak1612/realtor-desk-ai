@@ -212,7 +212,10 @@ const ContactsTable = ({
                         {contact.first_name?.[0]?.toUpperCase() || "?"}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="font-medium">
+                    <span 
+                      className="font-medium cursor-pointer hover:text-primary transition-colors"
+                      onClick={() => window.location.href = `/contacts/${contact.id}`}
+                    >
                       {contact.first_name} {contact.last_name}
                     </span>
                   </div>
@@ -236,7 +239,7 @@ const ContactsTable = ({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => window.location.href = `/contacts/${contact.id}`}>
                         <Eye className="h-4 w-4 mr-2" />
                         View
                       </DropdownMenuItem>

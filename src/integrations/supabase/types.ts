@@ -96,6 +96,129 @@ export type Database = {
           },
         ]
       }
+      contact_activities: {
+        Row: {
+          activity_type: Database["public"]["Enums"]["activity_type"]
+          contact_id: string
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activity_type: Database["public"]["Enums"]["activity_type"]
+          contact_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activity_type?: Database["public"]["Enums"]["activity_type"]
+          contact_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_activities_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_documents: {
+        Row: {
+          contact_id: string
+          created_at: string
+          file_name: string
+          file_path: string
+          file_size: number
+          file_type: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          file_name: string
+          file_path: string
+          file_size: number
+          file_type: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number
+          file_type?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_documents_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      contact_notes: {
+        Row: {
+          contact_id: string
+          content: string
+          created_at: string
+          id: string
+          is_pinned: boolean | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          contact_id: string
+          content: string
+          created_at?: string
+          id?: string
+          is_pinned?: boolean | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          contact_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          is_pinned?: boolean | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_notes_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -448,6 +571,59 @@ export type Database = {
         }
         Relationships: []
       }
+      property_interests: {
+        Row: {
+          address: string
+          contact_id: string
+          created_at: string
+          id: string
+          image_url: string | null
+          interest_level: string | null
+          notes: string | null
+          price: number | null
+          property_type: string | null
+          updated_at: string
+          user_id: string
+          viewed_date: string | null
+        }
+        Insert: {
+          address: string
+          contact_id: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          interest_level?: string | null
+          notes?: string | null
+          price?: number | null
+          property_type?: string | null
+          updated_at?: string
+          user_id: string
+          viewed_date?: string | null
+        }
+        Update: {
+          address?: string
+          contact_id?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          interest_level?: string | null
+          notes?: string | null
+          price?: number | null
+          property_type?: string | null
+          updated_at?: string
+          user_id?: string
+          viewed_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_interests_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           completed_at: string | null
@@ -570,6 +746,21 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      activity_type:
+        | "email_sent"
+        | "email_received"
+        | "call_made"
+        | "call_received"
+        | "sms_sent"
+        | "sms_received"
+        | "meeting_held"
+        | "note_added"
+        | "status_changed"
+        | "tag_added"
+        | "tag_removed"
+        | "property_viewed"
+        | "deal_created"
+        | "deal_updated"
       subscription_status: "trial" | "active" | "cancelled" | "expired"
       subscription_tier: "agent" | "team" | "brokerage"
     }
@@ -699,6 +890,22 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      activity_type: [
+        "email_sent",
+        "email_received",
+        "call_made",
+        "call_received",
+        "sms_sent",
+        "sms_received",
+        "meeting_held",
+        "note_added",
+        "status_changed",
+        "tag_added",
+        "tag_removed",
+        "property_viewed",
+        "deal_created",
+        "deal_updated",
+      ],
       subscription_status: ["trial", "active", "cancelled", "expired"],
       subscription_tier: ["agent", "team", "brokerage"],
     },

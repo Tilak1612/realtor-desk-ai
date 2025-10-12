@@ -32,6 +32,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
 import Contacts from "./pages/Contacts";
+import ContactDetail from "./pages/ContactDetail";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/contacts" element={<Contacts />} />
+          <Route path="/contacts/:id" element={<ContactDetail />} />
           
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />

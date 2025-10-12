@@ -121,7 +121,11 @@ const ContactsCardView = ({ contacts, loading, onRefresh }: ContactsCardViewProp
                     Email
                   </a>
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => window.location.href = `/contacts/${contact.id}`}
+                >
                   <Eye className="h-3 w-3" />
                 </Button>
               </div>
