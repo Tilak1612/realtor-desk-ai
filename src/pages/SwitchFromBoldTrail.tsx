@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Phone, Upload, Download, GraduationCap, CheckCircle, DollarSign, TrendingDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const SwitchFromBoldTrail = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -37,13 +39,13 @@ const SwitchFromBoldTrail = () => {
             <Card className="p-4 border-accent">
               <div className="text-sm text-muted-foreground mb-1">Switch to</div>
               <div className="text-2xl font-bold gradient-text">$699/year</div>
-              <div className="text-xs text-accent font-semibold">Save $6,288!</div>
+              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $6,288!</div>
             </Card>
           </div>
 
           <Link to="/demo">
             <Button size="lg" className="btn-gradient">
-              Schedule Free Migration Call
+              {t('comparison.schedule')}
             </Button>
           </Link>
         </div>
@@ -52,7 +54,7 @@ const SwitchFromBoldTrail = () => {
       {/* Common Complaints */}
       <section className="section-padding">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Common BoldTrail Complaints We Hear</h2>
+          <h2 className="text-center mb-12">{t('comparison.complaints')}</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             {[

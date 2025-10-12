@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Brain, TrendingUp, DollarSign, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const SwitchFromIxact = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <Navbar />

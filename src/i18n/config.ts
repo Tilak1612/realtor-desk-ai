@@ -193,6 +193,13 @@ const resources = {
           titleGradient: "Real Estate Tech Stack",
           subtitle: "Realtor Desk AI integrates seamlessly with all your favorite tools and platforms"
         }
+      },
+      comparison: {
+        badge: "Comparison Guide",
+        savings: "Save",
+        firstYear: "first year!",
+        complaints: "Common Complaints We Hear",
+        schedule: "Schedule Free Migration Call"
       }
     }
   },
@@ -386,6 +393,13 @@ const resources = {
           titleGradient: "Suite Technologique Immobilière",
           subtitle: "Realtor Desk AI s'intègre parfaitement avec tous vos outils et plateformes préférés"
         }
+      },
+      comparison: {
+        badge: "Guide de Comparaison",
+        savings: "Économisez",
+        firstYear: "la première année!",
+        complaints: "Plaintes Courantes Que Nous Entendons",
+        schedule: "Planifier un Appel de Migration Gratuit"
       }
     }
   }

@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Check, X, TrendingDown, Shield, Clock, DollarSign } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const VsBoldTrail = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -15,7 +17,7 @@ const VsBoldTrail = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            Comparison Guide
+            {t('comparison.badge')}
           </Badge>
           <h1 className="mb-6">
             Why Canadian Agents Choose <span className="gradient-text">Realtor Desk AI</span> Over BoldTrail
@@ -37,7 +39,7 @@ const VsBoldTrail = () => {
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk AI</div>
               <div className="text-3xl font-bold gradient-text mb-1">$699</div>
-              <div className="text-xs text-accent font-semibold">Save $6,288 first year!</div>
+              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $6,288 {t('comparison.firstYear')}</div>
             </Card>
           </div>
         </div>
@@ -46,7 +48,7 @@ const VsBoldTrail = () => {
       {/* Common Complaints Section */}
       <section className="section-padding">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Common BoldTrail Complaints We Hear</h2>
+          <h2 className="text-center mb-12">{t('comparison.complaints')}</h2>
           
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             <Card className="p-6 border-destructive/20">

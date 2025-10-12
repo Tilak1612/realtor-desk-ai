@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Globe, Brain, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const SwitchFromWiseAgent = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <Navbar />

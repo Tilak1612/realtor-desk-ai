@@ -5,8 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Check, X, Brain, Shield, Clock, DollarSign } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const VsLofty = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <Navbar />
