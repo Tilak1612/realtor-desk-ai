@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
@@ -9,7 +9,10 @@ import HotLeadsWidget from "@/components/dashboard/HotLeadsWidget";
 import TasksWidget from "@/components/dashboard/TasksWidget";
 import DealsWidget from "@/components/dashboard/DealsWidget";
 import MarketWidget from "@/components/dashboard/MarketWidget";
-import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
+import { Users, Briefcase, CheckSquare, DollarSign, Crown, ArrowRight } from "lucide-react";
+import { useSubscription } from "@/contexts/SubscriptionContext";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -26,6 +29,7 @@ const Dashboard = () => {
     closing: { count: 0, value: 0 },
   });
   const [loading, setLoading] = useState(true);
+  const { subscribed, subscriptionTier } = useSubscription();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -179,6 +183,30 @@ const Dashboard = () => {
         <DashboardNavbar user={user} profile={profile} />
         
         <main className="p-6 space-y-6">
+          {/* Trial Banner */}
+          {!subscribed && getTrialDaysLeft() > 0 && (
+            <Card className="p-4 bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center gap-3">
+                  <Crown className="w-6 h-6 text-primary" />
+                  <div>
+                    <p className="font-semibold">
+                      {getTrialDaysLeft()} days left in your free trial
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Upgrade now to continue after your trial ends
+                    </p>
+                  </div>
+                </div>
+                <Link to="/app/billing">
+                  <Button className="btn-gradient">
+                    Upgrade Now <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+          )}
+
           {/* Welcome Section */}
           <div>
             <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.full_name?.split(' ')[0]}! 👋</h1>

@@ -15,6 +15,7 @@ import {
   Menu,
   X,
   Sparkles,
+  CreditCard,
 } from "lucide-react";
 import logo from "@/assets/realtor-desk-logo.png";
 import { useState } from "react";
@@ -29,6 +30,7 @@ const menuItems = [
   { icon: Calendar, label: "Calendar", path: "/calendar" },
   { icon: TrendingUp, label: "Reports", path: "/reports" },
   { icon: MapPin, label: "Market Intelligence", path: "/market" },
+  { icon: CreditCard, label: "Billing", path: "/app/billing" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
@@ -109,7 +111,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
                 <span className="font-bold text-foreground">{trialDaysLeft} days</span> left in your
                 trial
               </p>
-              <Link to="/pricing">
+              <Link to="/app/billing">
                 <Button className="w-full btn-gradient" size="sm">
                   Upgrade Now
                 </Button>
