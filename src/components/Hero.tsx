@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Play } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Play, MapPin } from "lucide-react";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 
 const Hero = () => {
@@ -13,6 +14,12 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           {/* Left Column - Content */}
           <div className="animate-fade-in-up order-2 lg:order-1">
+            {/* Canadian Badge */}
+            <Badge variant="secondary" className="mb-4 sm:mb-6 gap-1.5">
+              <MapPin className="w-3 h-3" />
+              🇨🇦 Built by Canadian Realtors, for Canadian Realtors
+            </Badge>
+            
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
               <span className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-[10px] sm:text-xs font-medium">
@@ -25,32 +32,37 @@ const Hero = () => {
               </span>
               <span className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-[10px] sm:text-xs font-medium">
                 <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" />
-                <span className="whitespace-nowrap">2,000+ Canadian Agents</span>
+                <span className="whitespace-nowrap">500+ Canadian Agents</span>
               </span>
             </div>
 
             <h1 className="mb-4 sm:mb-6 leading-tight">
-              Transform Your Real Estate Business with{" "}
-              <span className="gradient-text">AI-Powered Intelligence</span>
+              Canada's Most Intelligent{" "}
+              <span className="gradient-text">Real Estate CRM</span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
-              The only AI platform built specifically for Canadian realtors - featuring CREA DDF® integration, 
-              bilingual capabilities, and predictive analytics that increase conversions by 300%
+              AI-powered CRM built exclusively for Canadian real estate agents. Get predictive lead scoring, 
+              bilingual support, CREA integration, and market intelligence that closes 3X more deals.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
               <Link to="/demo" className="w-full sm:w-auto">
                 <Button size="lg" className="btn-gradient text-base sm:text-lg w-full sm:w-auto">
-                  Start Closing More Deals
+                  See Your ROI
+                </Button>
+              </Link>
+              <Link to="/demo" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto">
+                  Watch Demo
                 </Button>
               </Link>
             </div>
 
             {/* Trust Line */}
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              No credit card required • Cancel anytime • Free onboarding included
+              <strong>No setup fees</strong> • <strong>No credit card required</strong> • <strong>60-day money-back guarantee</strong>
             </p>
           </div>
 
