@@ -14,6 +14,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import AdminDemoRequests from "./pages/AdminDemoRequests";
+import VsBoldTrail from "./pages/VsBoldTrail";
+import VsLofty from "./pages/VsLofty";
+import VsIxact from "./pages/VsIxact";
+import VsWiseAgent from "./pages/VsWiseAgent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +40,13 @@ const App = () => (
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin/demo-requests" element={<AdminDemoRequests />} />
+          
+          {/* Comparison Pages */}
+          <Route path="/vs/boldtrail" element={<VsBoldTrail />} />
+          <Route path="/vs/lofty" element={<VsLofty />} />
+          <Route path="/vs/ixact" element={<VsIxact />} />
+          <Route path="/vs/wise-agent" element={<VsWiseAgent />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
