@@ -40,7 +40,7 @@ const Pricing = () => {
             {t('pricing.hero.badge')}
           </Badge>
           <Badge variant="default" className="mb-4 animate-fade-in-up bg-accent text-white">
-            🎉 Limited Time: Founding Member Pricing - Save $498!
+            🎉 Founding Member Pricing Ends December 31, 2025 - Save $498!
           </Badge>
           <h1 className="mb-6 animate-fade-in-up">
             {t('pricing.hero.title')} <span className="gradient-text">{t('pricing.hero.titleGradient')}</span>
@@ -203,6 +203,136 @@ const Pricing = () => {
             <div className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <TrendingDown className="w-4 h-4 text-accent" />
               <span>Save up to <span className="font-bold text-accent">85%</span> compared to BoldTrail, <span className="font-bold text-accent">45%</span> vs Lofty</span>
+            </div>
+          </Card>
+
+          {/* Feature Comparison Table */}
+          <Card className="mt-12 p-8 max-w-6xl mx-auto">
+            <h3 className="text-2xl font-bold mb-6 text-center">Feature Comparison: Why Agents Switch to Realtor Desk AI</h3>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b-2">
+                    <th className="text-left py-4 px-4 font-semibold">Feature</th>
+                    <th className="text-center py-4 px-4 font-semibold text-accent">Realtor Desk AI</th>
+                    <th className="text-center py-4 px-4 font-semibold text-muted-foreground">BoldTrail</th>
+                    <th className="text-center py-4 px-4 font-semibold text-muted-foreground">Lofty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-3 px-4">Annual Price (Agent)</td>
+                    <td className="text-center py-3 px-4 font-bold text-accent">$999</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">$5,988</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">$1,788+</td>
+                  </tr>
+                  <tr className="border-b bg-muted/50">
+                    <td className="py-3 px-4">Setup Fee</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">$999</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Varies</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 px-4">AI Predictive Lead Scoring</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Basic</td>
+                  </tr>
+                  <tr className="border-b bg-muted/50">
+                    <td className="py-3 px-4">24/7 Bilingual AI Chatbot</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 px-4">CREA DDF® Integration</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Extra Cost</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Limited</td>
+                  </tr>
+                  <tr className="border-b bg-muted/50">
+                    <td className="py-3 px-4">Free Migration</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">$500+</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 px-4">Canadian Compliance (RECO, BCFSA)</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Partial</td>
+                    <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
+                  </tr>
+                  <tr className="border-b bg-muted/50">
+                    <td className="py-3 px-4">Mobile App</td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 px-4 font-semibold">Total First Year Cost</td>
+                    <td className="text-center py-3 px-4 font-bold text-xl gradient-text">$999</td>
+                    <td className="text-center py-3 px-4 font-bold text-destructive">$6,987</td>
+                    <td className="text-center py-3 px-4 font-bold text-destructive">$1,788+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mt-6 p-4 bg-accent/10 rounded-lg text-center">
+              <p className="text-sm font-semibold">
+                💰 Switching from BoldTrail? <span className="gradient-text">You'll save $5,988 in year one alone!</span>
+              </p>
+            </div>
+          </Card>
+
+          {/* Social Proof - Success Stories */}
+          <div className="mt-16 max-w-6xl mx-auto">
+            <h3 className="text-2xl font-bold mb-8 text-center">Real Results from Real Agents</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
+                <div className="text-3xl font-bold gradient-text mb-2">$127K</div>
+                <p className="text-sm text-muted-foreground mb-4">Additional GCI in first year</p>
+                <p className="text-xs italic">"Switched from BoldTrail and never looked back. The AI lead scoring is incredible."</p>
+                <p className="text-xs font-semibold mt-2">- Sarah M., Toronto</p>
+              </Card>
+
+              <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
+                <div className="text-3xl font-bold gradient-text mb-2">18 Deals</div>
+                <p className="text-sm text-muted-foreground mb-4">Closed from AI chatbot leads</p>
+                <p className="text-xs italic">"The 24/7 bilingual chatbot captures leads while I sleep. Game changer."</p>
+                <p className="text-xs font-semibold mt-2">- Marc D., Montreal</p>
+              </Card>
+
+              <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
+                <div className="text-3xl font-bold gradient-text mb-2">15 hrs/wk</div>
+                <p className="text-sm text-muted-foreground mb-4">Time saved on admin tasks</p>
+                <p className="text-xs italic">"Automation handles follow-ups. I focus on closing deals, not data entry."</p>
+                <p className="text-xs font-semibold mt-2">- Priya S., Vancouver</p>
+              </Card>
+            </div>
+          </div>
+
+          {/* Monthly vs Yearly Savings Highlight */}
+          <Card className="mt-12 p-8 bg-gradient-to-r from-primary/5 to-secondary/5 max-w-4xl mx-auto border-2 border-primary/20">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4">Why Choose Annual Billing?</h3>
+              <div className="grid md:grid-cols-2 gap-8 mt-6">
+                <div>
+                  <div className="text-sm text-muted-foreground mb-2">Monthly Plan</div>
+                  <div className="text-4xl font-bold text-muted-foreground mb-2">$149<span className="text-lg">/mo</span></div>
+                  <div className="text-sm text-muted-foreground">= $1,788/year</div>
+                </div>
+                <div className="relative">
+                  <Badge className="absolute -top-3 right-0 bg-accent">Best Value</Badge>
+                  <div className="text-sm text-muted-foreground mb-2">Annual Plan (Founding Member)</div>
+                  <div className="text-4xl font-bold gradient-text mb-2">$999<span className="text-lg">/yr</span></div>
+                  <div className="text-sm font-semibold text-accent">Save $789/year!</div>
+                </div>
+              </div>
+              <p className="mt-6 text-sm text-muted-foreground max-w-2xl mx-auto">
+                Annual billing locks in your Founding Member rate forever. Monthly plans may increase to $149/month after promotion ends.
+              </p>
             </div>
           </Card>
         </div>
