@@ -16,7 +16,7 @@ const ROICalculator = () => {
   const currentDeals = (leads * conversionRate) / 100;
   const currentRevenue = currentDeals * dealSize * 12;
   
-  const brainfyConversionRate = 18; // AI-powered conversion rate (6x improvement)
+  const brainfyConversionRate = 8; // AI-powered conversion rate (2.5x improvement)
   const brainfyDeals = (leads * brainfyConversionRate) / 100;
   const brainfyRevenue = brainfyDeals * dealSize * 12;
   
