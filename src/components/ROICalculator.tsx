@@ -21,7 +21,7 @@ const ROICalculator = () => {
   const brainfyRevenue = brainfyDeals * dealSize * 12;
   
   const additionalRevenue = brainfyRevenue - currentRevenue;
-  const additionalDeals = brainfyDeals - currentDeals;
+  const additionalDeals = (brainfyDeals - currentDeals) * 12; // Annual deals
   const timeSaved = 15; // hours per week
   const investment = 699; // Annual cost
   const roi = ((additionalRevenue / investment) * 100).toFixed(0);
