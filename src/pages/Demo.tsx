@@ -11,8 +11,9 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 import {
   Form,
   FormControl,
@@ -38,6 +39,7 @@ const demoFormSchema = z.object({
 type DemoFormValues = z.infer<typeof demoFormSchema>;
 
 const Demo = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -127,10 +129,10 @@ const Demo = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <h1 className="mb-6 animate-fade-in-up">
-            See <span className="gradient-text">Realtor Desk AI</span> in Action
+            {t('demo.hero.title')} <span className="gradient-text">{t('demo.hero.titleGradient')}</span> {t('demo.hero.titleEnd')}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Schedule a personalized demo and see how we can help your business
+            {t('demo.hero.subtitle')}
           </p>
         </div>
       </section>

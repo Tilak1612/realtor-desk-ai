@@ -3,8 +3,10 @@ import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Brain, MessageSquare, TrendingUp, FileCheck, Megaphone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Features = () => {
+  const { t } = useTranslation();
   const featureTabs = [
     {
       value: "crm",
@@ -126,10 +128,10 @@ const Features = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <h1 className="mb-6 animate-fade-in-up">
-            Every Feature Your Real Estate Business Needs, <span className="gradient-text">Powered by AI</span>
+            {t('features.hero.title')} <span className="gradient-text">{t('features.hero.titleGradient')}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            From first contact to closed deal - intelligent automation at every step
+            {t('features.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -178,7 +180,7 @@ const Features = () => {
       {/* Comparison Table Section */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
-          <h2 className="text-center mb-12">How We Compare to Leading CRMs</h2>
+          <h2 className="text-center mb-12">{t('features.comparison.title')}</h2>
           
           <div className="overflow-x-auto">
             <table className="w-full bg-background rounded-lg overflow-hidden shadow-lg">
@@ -218,7 +220,7 @@ const Features = () => {
           </div>
           
           <p className="text-center text-sm text-muted-foreground mt-6">
-            * Pricing and features as of October 2025. Contact competitors directly for current information.
+            {t('features.comparison.disclaimer')}
           </p>
         </div>
       </section>
@@ -228,9 +230,9 @@ const Features = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="mb-6">Work From Anywhere with Our Mobile App</h2>
+              <h2 className="mb-6">{t('features.mobile.title')}</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Manage your entire real estate business from your phone. Respond to leads, schedule showings, and close deals on the go.
+                {t('features.mobile.subtitle')}
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
@@ -265,7 +267,7 @@ const Features = () => {
             </div>
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-12 text-center">
               <MessageSquare className="w-32 h-32 mx-auto mb-6 text-primary" />
-              <p className="text-2xl font-bold mb-2">Available on iOS & Android</p>
+              <p className="text-2xl font-bold mb-2">{t('features.mobile.appStores')}</p>
               <p className="text-muted-foreground">Download from App Store or Google Play</p>
             </div>
           </div>

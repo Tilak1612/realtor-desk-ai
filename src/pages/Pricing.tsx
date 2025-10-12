@@ -7,8 +7,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Shield, CheckCircle, Brain, Check, X, TrendingDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Pricing = () => {
+  const { t } = useTranslation();
   const [isYearly, setIsYearly] = useState(true); // Default to yearly
 
   const pricingData = {
@@ -34,19 +36,19 @@ const Pricing = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4 animate-fade-in-up">
-            🇨🇦 Proud Canadian Company
+            {t('pricing.hero.badge')}
           </Badge>
           <h1 className="mb-6 animate-fade-in-up">
-            Simple, Transparent Pricing for <span className="gradient-text">Canadian Real Estate Professionals</span>
+            {t('pricing.hero.title')} <span className="gradient-text">{t('pricing.hero.titleGradient')}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            No setup fees. No hidden costs. No surprises. Just powerful AI to grow your business.
+            {t('pricing.hero.subtitle')}
           </p>
           
           {/* Billing Toggle */}
           <div className="flex items-center justify-center gap-4 mt-8 animate-fade-in-up animation-delay-300">
             <span className={`text-sm font-medium transition-colors ${!isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
-              Monthly
+              {t('pricing.hero.monthly')}
             </span>
             <Button
               variant="outline"
@@ -57,10 +59,10 @@ const Pricing = () => {
               <div className={`absolute w-6 h-6 rounded-full bg-primary transition-transform ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`} />
             </Button>
             <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
-              Yearly
+              {t('pricing.hero.yearly')}
             </span>
             <Badge variant="secondary" className="text-accent font-semibold">
-              Save up to $500/year
+              {t('pricing.hero.saveYearly')}
             </Badge>
           </div>
         </div>

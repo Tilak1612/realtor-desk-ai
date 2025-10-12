@@ -8,8 +8,10 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -61,10 +63,10 @@ const Contact = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <h1 className="mb-6 animate-fade-in-up">
-            Get in <span className="gradient-text">Touch</span>
+            {t('contact.hero.title')} <span className="gradient-text">{t('contact.hero.titleGradient')}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Have questions? We're here to help you transform your real estate business with AI
+            {t('contact.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -77,20 +79,20 @@ const Contact = () => {
             <div className="lg:col-span-1 space-y-6">
               <Card className="p-6">
                 <Mail className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-bold mb-2">Email Us</h3>
+                <h3 className="font-bold mb-2">{t('contact.info.emailUs')}</h3>
                 <p className="text-muted-foreground">support@realtordesk.ai</p>
               </Card>
 
               <Card className="p-6">
                 <Phone className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-bold mb-2">Call Us</h3>
+                <h3 className="font-bold mb-2">{t('contact.info.callUs')}</h3>
                 <p className="text-muted-foreground">1-800-REALTOR-AI</p>
                 <p className="text-muted-foreground">(1-800-732-5867)</p>
               </Card>
 
               <Card className="p-6">
                 <MapPin className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-bold mb-2">Visit Us</h3>
+                <h3 className="font-bold mb-2">{t('contact.info.visitUs')}</h3>
                 <p className="text-muted-foreground">
                   Edmonton, Alberta, Canada
                 </p>
@@ -98,11 +100,9 @@ const Contact = () => {
 
               <Card className="p-6">
                 <Clock className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-bold mb-2">Business Hours</h3>
-                <p className="text-muted-foreground">
-                  Monday - Friday: 9:00 AM - 6:00 PM EST<br />
-                  Saturday: 10:00 AM - 4:00 PM EST<br />
-                  Sunday: Closed
+                <h3 className="font-bold mb-2">{t('contact.info.hours')}</h3>
+                <p className="text-muted-foreground whitespace-pre-line">
+                  {t('contact.info.hoursDetails')}
                 </p>
               </Card>
             </div>
@@ -110,11 +110,11 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <Card className="p-8">
-                <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
+                <h2 className="text-3xl font-bold mb-6">{t('contact.form.title')}</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Full Name *</label>
+                      <label className="block text-sm font-medium mb-2">{t('contact.form.name')}</label>
                       <Input
                         required
                         value={formData.name}
@@ -123,7 +123,7 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email *</label>
+                      <label className="block text-sm font-medium mb-2">{t('contact.form.email')}</label>
                       <Input
                         required
                         type="email"
@@ -135,7 +135,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Phone</label>
+                    <label className="block text-sm font-medium mb-2">{t('contact.form.phone')}</label>
                     <Input
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -144,7 +144,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Message *</label>
+                    <label className="block text-sm font-medium mb-2">{t('contact.form.message')}</label>
                     <Textarea
                       required
                       value={formData.message}
@@ -155,7 +155,7 @@ const Contact = () => {
                   </div>
 
                   <Button type="submit" size="lg" className="w-full btn-gradient" disabled={isSubmitting}>
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
                   </Button>
                 </form>
               </Card>
