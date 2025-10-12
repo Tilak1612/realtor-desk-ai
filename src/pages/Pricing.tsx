@@ -5,23 +5,24 @@ import PricingCard from "@/components/PricingCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield } from "lucide-react";
-import { CheckCircle } from "lucide-react";
-import { Brain } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Shield, CheckCircle, Brain, Check, X, TrendingDown } from "lucide-react";
 
 const Pricing = () => {
-  const [isYearly, setIsYearly] = useState(false);
+  const [isYearly, setIsYearly] = useState(true); // Default to yearly
 
   const pricingData = {
-    starter: {
-      monthly: 99,
-      yearly: 99 * 12 * 0.85, // 15% discount
-      discount: "15%"
+    agent: {
+      monthly: 79,
+      yearly: 699,
+      savings: 249, // $79 x 12 = $948, save $249
+      discount: "$249"
     },
-    professional: {
-      monthly: 249,
-      yearly: 249 * 12 * 0.80, // 20% discount
-      discount: "20%"
+    team: {
+      yearly: 1499,
+      perAgent: 300, // $1,499 / 5 agents
+      savings: 500,
+      discount: "$500"
     }
   };
 
@@ -32,11 +33,14 @@ const Pricing = () => {
       {/* Hero Section */}
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
+          <Badge variant="secondary" className="mb-4 animate-fade-in-up">
+            🇨🇦 Proud Canadian Company
+          </Badge>
           <h1 className="mb-6 animate-fade-in-up">
-            Transparent Pricing for <span className="gradient-text">Every Stage of Your Business</span>
+            Simple, Transparent Pricing for <span className="gradient-text">Canadian Real Estate Professionals</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
-            Choose the perfect plan for your business needs
+            No setup fees. No hidden costs. No surprises. Just powerful AI to grow your business.
           </p>
           
           {/* Billing Toggle */}
@@ -55,9 +59,9 @@ const Pricing = () => {
             <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
               Yearly
             </span>
-            <span className="text-sm font-semibold text-accent">
-              Save up to 25%
-            </span>
+            <Badge variant="secondary" className="text-accent font-semibold">
+              Save up to $500/year
+            </Badge>
           </div>
         </div>
       </section>
@@ -67,68 +71,132 @@ const Pricing = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             <PricingCard
-              name="STARTER"
-              price={isYearly ? Math.round(pricingData.starter.yearly / 12).toString() : pricingData.starter.monthly.toString()}
-              description="Best for: Solo agents and new licensees"
+              name="AGENT"
+              price={isYearly ? "699" : pricingData.agent.monthly.toString()}
+              description="Perfect for individual agents ready to scale"
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? pricingData.starter.discount : undefined}
-              yearlyPrice={isYearly ? pricingData.starter.yearly : undefined}
+              discount={isYearly ? `Save ${pricingData.agent.discount}` : undefined}
+              yearlyPrice={isYearly ? pricingData.agent.yearly : undefined}
               features={[
-                "Up to 500 contacts",
-                "Predictive lead scoring",
-                "Basic AI chatbot (website only)",
-                "Email automation (1,000 emails/month)",
-                "Mobile app access",
-                "CREA DDF® integration",
-                "1 team member",
-                "Email support",
+                "Unlimited contacts & leads",
+                "AI-powered predictive CRM",
+                "24/7 AI chatbot (website, SMS, email)",
+                "ROI tracking & analytics",
+                "Email & SMS automation",
+                "Canadian market intelligence",
+                "Bilingual support (EN/FR)",
+                "Mobile app included",
+                "Free migration assistance",
+                "No setup fees"
               ]}
-              ctaText="Start Closing More Deals"
+              ctaText={isYearly ? "Start 60-Day Free Trial" : "Start Free Trial"}
               ctaLink="/demo"
             />
 
             <PricingCard
-              name="PROFESSIONAL"
-              price={isYearly ? Math.round(pricingData.professional.yearly / 12).toString() : pricingData.professional.monthly.toString()}
-              description="Best for: Individual agents and small teams"
+              name="TEAM"
+              price={isYearly ? "1,499" : "149"}
+              description="For growing teams of 2-5 agents"
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? pricingData.professional.discount : undefined}
-              yearlyPrice={isYearly ? pricingData.professional.yearly : undefined}
+              discount={isYearly ? `Save ${pricingData.team.discount} annually` : undefined}
+              yearlyPrice={isYearly ? pricingData.team.yearly : undefined}
               features={[
-                "Unlimited contacts",
-                "Advanced AI chatbot (SMS, email, social media)",
-                "Conversational intelligence & sentiment analysis",
-                "Transaction management with AI orchestration",
-                "Marketing automation & content generation",
-                "Predictive market intelligence",
-                "5 team members",
-                "Phone & chat support",
-                "Custom integrations",
+                "Everything in Agent tier, plus:",
+                "Team collaboration tools",
+                "Lead distribution & routing",
+                "Team performance dashboard",
+                "Shared pipeline management",
+                "Advanced reporting & analytics",
+                "Priority support",
+                "Dedicated account manager",
+                "Custom training sessions",
+                "API access available"
               ]}
               popular
-              ctaText="Start Closing More Deals"
+              ctaText="Request Team Demo"
               ctaLink="/demo"
             />
 
             <PricingCard
-              name="ENTERPRISE"
+              name="BROKERAGE"
               price="Custom"
-              description="Best for: Brokerages and large teams"
+              description="For brokerages with 6+ agents"
               features={[
-                "Unlimited team members",
-                "White-label options",
-                "Advanced analytics & reporting",
-                "Dedicated account manager",
-                "Custom AI model training",
-                "API access",
-                "Priority 24/7 support",
-                "Brokerage compliance tools",
+                "Everything in Team tier, plus:",
+                "Unlimited agents",
+                "Custom branding & white-label",
+                "Advanced admin controls",
                 "Multi-office management",
+                "Brokerage compliance tools",
+                "Dedicated success manager",
+                "Custom AI model training",
+                "Volume pricing discounts",
+                "Premium 24/7 support"
               ]}
-              ctaText="Book Your Free Demo"
+              ctaText="Get Custom Quote"
               ctaLink="/demo"
             />
           </div>
+
+          {/* Competitor Comparison Box */}
+          <Card className="mt-16 p-8 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 max-w-4xl mx-auto">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold mb-2">Compare with Competitors</h3>
+              <p className="text-muted-foreground">See how much you save with Realtor Desk AI</p>
+            </div>
+            
+            <div className="grid gap-4">
+              {/* BoldTrail */}
+              <div className="flex items-center justify-between p-4 bg-background rounded-lg border">
+                <div className="flex items-center gap-4">
+                  <X className="w-5 h-5 text-destructive flex-shrink-0" />
+                  <div>
+                    <div className="font-semibold">BoldTrail</div>
+                    <div className="text-sm text-muted-foreground">$5,988/year + $999 setup fee</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xl font-bold text-destructive">$6,987</div>
+                  <div className="text-xs text-muted-foreground">First year</div>
+                </div>
+              </div>
+
+              {/* Lofty */}
+              <div className="flex items-center justify-between p-4 bg-background rounded-lg border">
+                <div className="flex items-center gap-4">
+                  <X className="w-5 h-5 text-destructive flex-shrink-0" />
+                  <div>
+                    <div className="font-semibold">Lofty</div>
+                    <div className="text-sm text-muted-foreground">$1,188 - $3,588/year per user</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xl font-bold text-destructive">$1,188+</div>
+                  <div className="text-xs text-muted-foreground">Per year</div>
+                </div>
+              </div>
+
+              {/* Realtor Desk AI */}
+              <div className="flex items-center justify-between p-4 bg-accent/10 rounded-lg border-2 border-accent">
+                <div className="flex items-center gap-4">
+                  <Check className="w-5 h-5 text-accent flex-shrink-0" />
+                  <div>
+                    <div className="font-semibold text-accent">Realtor Desk AI</div>
+                    <div className="text-sm text-muted-foreground">$699/year, $0 setup</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xl font-bold gradient-text">$699</div>
+                  <div className="text-xs text-accent font-semibold">Save thousands!</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <TrendingDown className="w-4 h-4 text-accent" />
+              <span>Save up to <span className="font-bold text-accent">90%</span> compared to BoldTrail</span>
+            </div>
+          </Card>
         </div>
       </section>
 
@@ -194,10 +262,24 @@ const Pricing = () => {
             <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
               <Shield className="w-20 h-20 text-accent flex-shrink-0" />
               <div>
-                <h2 className="mb-4">Our Promise: See Results in 30 Days or Your Money Back</h2>
-                <p className="text-lg text-muted-foreground">
-                  We're so confident in our platform that we guarantee you'll close at least one additional deal in your first 30 days, or we'll refund your entire subscription.
+                <h2 className="mb-4">60-Day Money-Back Guarantee</h2>
+                <p className="text-lg text-muted-foreground mb-4">
+                  If you don't see measurable ROI in 60 days, we'll refund 100%. No questions asked.
                 </p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm">
+                  <Badge variant="secondary" className="gap-1">
+                    <Check className="w-3 h-3" />
+                    No contracts
+                  </Badge>
+                  <Badge variant="secondary" className="gap-1">
+                    <Check className="w-3 h-3" />
+                    No setup fees
+                  </Badge>
+                  <Badge variant="secondary" className="gap-1">
+                    <Check className="w-3 h-3" />
+                    Cancel anytime
+                  </Badge>
+                </div>
               </div>
             </div>
           </Card>
