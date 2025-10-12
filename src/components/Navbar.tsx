@@ -75,6 +75,9 @@ const Navbar = () => {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
+            <Link to="/login">
+              <Button variant="outline">Sign In</Button>
+            </Link>
             <Link to="/demo">
               <Button className="btn-gradient">{t('nav.startClosing')}</Button>
             </Link>
@@ -113,6 +116,9 @@ const Navbar = () => {
               <div className="flex items-center gap-2 py-2">
                 <LanguageSwitcher />
               </div>
+              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                <Button variant="outline" className="w-full">Sign In</Button>
+              </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button className="btn-gradient w-full">{t('nav.startClosing')}</Button>
               </Link>

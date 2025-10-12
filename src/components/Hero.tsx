@@ -48,9 +48,9 @@ const Hero = () => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-              <Link to="/demo" className="w-full sm:w-auto">
+              <Link to="/signup" className="w-full sm:w-auto">
                 <Button size="lg" className="btn-gradient text-base sm:text-lg w-full sm:w-auto">
-                  See Your ROI
+                  Start Free Trial
                 </Button>
               </Link>
               <Link to="/demo" className="w-full sm:w-auto">

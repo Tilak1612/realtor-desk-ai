@@ -119,6 +119,63 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          company_name: string | null
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          onboarding_completed: boolean | null
+          phone: string | null
+          role: string | null
+          subscription_status:
+            | Database["public"]["Enums"]["subscription_status"]
+            | null
+          subscription_tier:
+            | Database["public"]["Enums"]["subscription_tier"]
+            | null
+          trial_ends_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string | null
+          email: string
+          full_name: string
+          id: string
+          onboarding_completed?: boolean | null
+          phone?: string | null
+          role?: string | null
+          subscription_status?:
+            | Database["public"]["Enums"]["subscription_status"]
+            | null
+          subscription_tier?:
+            | Database["public"]["Enums"]["subscription_tier"]
+            | null
+          trial_ends_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          onboarding_completed?: boolean | null
+          phone?: string | null
+          role?: string | null
+          subscription_status?:
+            | Database["public"]["Enums"]["subscription_status"]
+            | null
+          subscription_tier?:
+            | Database["public"]["Enums"]["subscription_tier"]
+            | null
+          trial_ends_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -127,7 +184,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      subscription_status: "trial" | "active" | "cancelled" | "expired"
+      subscription_tier: "agent" | "team" | "brokerage"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -254,6 +312,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      subscription_status: ["trial", "active", "cancelled", "expired"],
+      subscription_tier: ["agent", "team", "brokerage"],
+    },
   },
 } as const
