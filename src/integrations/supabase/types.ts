@@ -131,10 +131,13 @@ export type Database = {
       }
       contacts: {
         Row: {
+          ai_score: number | null
+          best_contact_time: string | null
           created_at: string | null
           email: string | null
           first_name: string | null
           id: string
+          last_contact_date: string | null
           last_name: string | null
           metadata: Json | null
           phone: string | null
@@ -144,10 +147,13 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          ai_score?: number | null
+          best_contact_time?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
           id?: string
+          last_contact_date?: string | null
           last_name?: string | null
           metadata?: Json | null
           phone?: string | null
@@ -157,10 +163,13 @@ export type Database = {
           user_id: string
         }
         Update: {
+          ai_score?: number | null
+          best_contact_time?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
           id?: string
+          last_contact_date?: string | null
           last_name?: string | null
           metadata?: Json | null
           phone?: string | null
@@ -172,6 +181,69 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "contacts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      deals: {
+        Row: {
+          contact_id: string | null
+          created_at: string | null
+          expected_close_date: string | null
+          id: string
+          metadata: Json | null
+          notes: string | null
+          probability: number | null
+          stage: string
+          status: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+          value: number | null
+        }
+        Insert: {
+          contact_id?: string | null
+          created_at?: string | null
+          expected_close_date?: string | null
+          id?: string
+          metadata?: Json | null
+          notes?: string | null
+          probability?: number | null
+          stage?: string
+          status?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+          value?: number | null
+        }
+        Update: {
+          contact_id?: string | null
+          created_at?: string | null
+          expected_close_date?: string | null
+          id?: string
+          metadata?: Json | null
+          notes?: string | null
+          probability?: number | null
+          stage?: string
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+          value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deals_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deals_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -375,6 +447,120 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      tasks: {
+        Row: {
+          completed_at: string | null
+          contact_id: string | null
+          created_at: string | null
+          deal_id: string | null
+          description: string | null
+          due_date: string | null
+          due_time: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          contact_id?: string | null
+          created_at?: string | null
+          deal_id?: string | null
+          description?: string | null
+          due_date?: string | null
+          due_time?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          contact_id?: string | null
+          created_at?: string | null
+          deal_id?: string | null
+          description?: string | null
+          due_date?: string | null
+          due_time?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_deal_id_fkey"
+            columns: ["deal_id"]
+            isOneToOne: false
+            referencedRelation: "deals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_analytics: {
+        Row: {
+          active_deals_count: number | null
+          annual_goal: number | null
+          id: string
+          leads_change_percent: number | null
+          monthly_leads: number | null
+          pipeline_value: number | null
+          updated_at: string | null
+          user_id: string
+          ytd_revenue: number | null
+        }
+        Insert: {
+          active_deals_count?: number | null
+          annual_goal?: number | null
+          id?: string
+          leads_change_percent?: number | null
+          monthly_leads?: number | null
+          pipeline_value?: number | null
+          updated_at?: string | null
+          user_id: string
+          ytd_revenue?: number | null
+        }
+        Update: {
+          active_deals_count?: number | null
+          annual_goal?: number | null
+          id?: string
+          leads_change_percent?: number | null
+          monthly_leads?: number | null
+          pipeline_value?: number | null
+          updated_at?: string | null
+          user_id?: string
+          ytd_revenue?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_analytics_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import StatCard from "@/components/dashboard/StatCard";
+import HotLeadsWidget from "@/components/dashboard/HotLeadsWidget";
+import TasksWidget from "@/components/dashboard/TasksWidget";
+import DealsWidget from "@/components/dashboard/DealsWidget";
+import MarketWidget from "@/components/dashboard/MarketWidget";
+import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
+  const [analytics, setAnalytics] = useState<any>(null);
+  const [hotLeads, setHotLeads] = useState<any[]>([]);
+  const [todayTasks, setTodayTasks] = useState<any[]>([]);
+  const [dealStats, setDealStats] = useState<any>({
+    lead: { count: 0, value: 0 },
+    viewing: { count: 0, value: 0 },
+    offer: { count: 0, value: 0 },
+    negotiation: { count: 0, value: 0 },
+    closing: { count: 0, value: 0 },
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,6 +53,7 @@ const Dashboard = () => {
         }
 
         setProfile(profileData);
+        await fetchDashboardData(session.user.id);
       } catch (error: any) {
         toast.error("Failed to load profile");
         console.error(error);
@@ -50,9 +65,102 @@ const Dashboard = () => {
     fetchUserData();
   }, [navigate]);
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
+  const fetchDashboardData = async (userId: string) => {
+    // Fetch analytics
+    const { data: analyticsData } = await supabase
+      .from("user_analytics")
+      .select("*")
+      .eq("user_id", userId)
+      .single();
+
+    if (analyticsData) {
+      setAnalytics(analyticsData);
+    }
+
+    // Fetch hot leads (AI score >= 80)
+    const { data: leadsData } = await supabase
+      .from("contacts")
+      .select("*")
+      .eq("user_id", userId)
+      .gte("ai_score", 80)
+      .order("ai_score", { ascending: false })
+      .limit(5);
+
+    if (leadsData) {
+      setHotLeads(leadsData.map(lead => ({
+        ...lead,
+        name: `${lead.first_name || ""} ${lead.last_name || ""}`.trim() || "Unknown",
+        insight: (lead.metadata as any)?.insight || "New lead",
+      })));
+    }
+
+    // Fetch today's tasks
+    const today = new Date().toISOString().split('T')[0];
+    const { data: tasksData } = await supabase
+      .from("tasks")
+      .select(`
+        *,
+        contact:contacts(first_name, last_name),
+        deal:deals(title)
+      `)
+      .eq("user_id", userId)
+      .eq("due_date", today)
+      .order("due_time", { ascending: true });
+
+    if (tasksData) {
+      setTodayTasks(tasksData);
+    }
+
+    // Fetch deal statistics
+    const { data: dealsData } = await supabase
+      .from("deals")
+      .select("stage, value")
+      .eq("user_id", userId)
+      .eq("status", "active");
+
+    if (dealsData) {
+      const stats: any = {
+        lead: { count: 0, value: 0 },
+        viewing: { count: 0, value: 0 },
+        offer: { count: 0, value: 0 },
+        negotiation: { count: 0, value: 0 },
+        closing: { count: 0, value: 0 },
+      };
+
+      dealsData.forEach(deal => {
+        if (stats[deal.stage]) {
+          stats[deal.stage].count++;
+          stats[deal.stage].value += Number(deal.value || 0);
+        }
+      });
+
+      setDealStats(stats);
+    }
+  };
+
+  const handleTaskComplete = (taskId: string) => {
+    setTodayTasks(tasks => tasks.filter(t => t.id !== taskId));
+  };
+
+  const getTrialDaysLeft = () => {
+    if (!profile?.trial_ends_at) return 0;
+    const endDate = new Date(profile.trial_ends_at);
+    const today = new Date();
+    const diffTime = endDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return Math.max(0, diffDays);
+  };
+
+  const getTasksDueToday = () => todayTasks.filter(t => t.status !== "completed").length;
+  const getOverdueTasks = () => {
+    const now = new Date();
+    return todayTasks.filter(task => {
+      if (!task.due_time || task.status === "completed") return false;
+      const [hours, minutes] = task.due_time.split(":");
+      const taskTime = new Date();
+      taskTime.setHours(parseInt(hours), parseInt(minutes));
+      return taskTime < now;
+    }).length;
   };
 
   if (loading) {
@@ -64,87 +172,74 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <div className="flex-1 px-4 py-12 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-4xl font-bold">Welcome back, {profile?.full_name}!</h1>
-              <p className="text-muted-foreground mt-2">
-                Manage your real estate business with AI-powered tools
-              </p>
+    <div className="min-h-screen bg-background">
+      <DashboardSidebar trialDaysLeft={getTrialDaysLeft()} />
+      
+      <div className="lg:pl-64">
+        <DashboardNavbar user={user} profile={profile} />
+        
+        <main className="p-6 space-y-6">
+          {/* Welcome Section */}
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.full_name?.split(' ')[0]}! 👋</h1>
+            <p className="text-muted-foreground">
+              You have <span className="font-semibold">{getTasksDueToday()} tasks</span> due today
+              {hotLeads.length > 0 && (
+                <> and <span className="font-semibold">{hotLeads.length} hot leads</span> to follow up</>
+              )}
+            </p>
+          </div>
+
+          {/* Stat Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StatCard
+              title="New Leads (This Month)"
+              value={analytics?.monthly_leads || 0}
+              change={analytics?.leads_change_percent || 0}
+              trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
+              icon={Users}
+            />
+            <StatCard
+              title="Active Deals"
+              value={analytics?.active_deals_count || 0}
+              subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()} pipeline`}
+              icon={Briefcase}
+            />
+            <StatCard
+              title="Tasks Due Today"
+              value={getTasksDueToday()}
+              subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} overdue` : undefined}
+              trend={getOverdueTasks() > 0 ? "down" : "neutral"}
+              icon={CheckSquare}
+            />
+            <StatCard
+              title="Revenue YTD"
+              value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
+              subtitle={
+                analytics?.annual_goal
+                  ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% of annual goal`
+                  : undefined
+              }
+              icon={DollarSign}
+            />
+          </div>
+
+          {/* Widgets Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-6">
+              <HotLeadsWidget leads={hotLeads} />
+              <TasksWidget tasks={todayTasks} onTaskComplete={handleTaskComplete} />
             </div>
-            <Button variant="outline" onClick={handleSignOut}>
-              Sign out
-            </Button>
+            
+            <div className="space-y-6">
+              <MarketWidget defaultCity={profile?.city} />
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Subscription</CardTitle>
-                <CardDescription>Your current plan</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-2xl font-bold capitalize">
-                  {profile?.subscription_tier} Plan
-                </p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Status: <span className="capitalize">{profile?.subscription_status}</span>
-                </p>
-                {profile?.trial_ends_at && (
-                  <p className="text-sm text-muted-foreground">
-                    Trial ends: {new Date(profile.trial_ends_at).toLocaleDateString()}
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Company</CardTitle>
-                <CardDescription>Your brokerage info</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="font-medium">{profile?.company_name}</p>
-                <p className="text-sm text-muted-foreground mt-2">{profile?.email}</p>
-                <p className="text-sm text-muted-foreground">{profile?.phone}</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-                <CardDescription>Get started</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
-                  View Features
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  Contact Support
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Getting Started</CardTitle>
-              <CardDescription>
-                Complete these steps to get the most out of Realtor Desk AI
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                Dashboard features coming soon! Start exploring our AI-powered CRM tools.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+          {/* Deals Pipeline - Full Width */}
+          <DealsWidget stats={dealStats} />
+        </main>
       </div>
-      <Footer />
     </div>
   );
 };
