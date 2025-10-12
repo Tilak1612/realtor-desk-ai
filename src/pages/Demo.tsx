@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -333,9 +334,9 @@ const Demo = () => {
 
                   <p className="text-sm text-muted-foreground text-center">
                     Or{" "}
-                    <a href="#trial" className="text-primary font-semibold hover:underline">
+                    <Link to="/pricing" className="text-primary font-semibold hover:underline">
                       get started
-                    </a>{" "}
+                    </Link>{" "}
                     right away
                   </p>
                 </form>
@@ -402,9 +403,11 @@ const Demo = () => {
               <Card className="p-6 bg-gradient-to-r from-primary to-secondary text-white">
                 <h3 className="text-xl font-bold mb-2">Prefer to explore on your own?</h3>
                 <p className="mb-4 text-white/90">Get started today - no demo required</p>
-                <Button variant="secondary" className="w-full" size="lg">
-                  Get Started
-                </Button>
+                <Link to="/pricing">
+                  <Button variant="secondary" className="w-full" size="lg">
+                    Get Started
+                  </Button>
+                </Link>
               </Card>
             </div>
           </div>
