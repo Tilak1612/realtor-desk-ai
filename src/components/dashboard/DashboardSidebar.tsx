@@ -25,7 +25,7 @@ const menuItems = [
   { icon: Users, label: "Contacts", path: "/contacts" },
   { icon: Briefcase, label: "Deals", path: "/app/deals" },
   { icon: CheckSquare, label: "Tasks", path: "/app/tasks" },
-  { icon: Bot, label: "AI Chatbot", path: "/chatbot" },
+  { icon: Bot, label: "AI Assistant", path: "/app/ai-assistant" },
   { icon: Mail, label: "Campaigns", path: "/campaigns" },
   { icon: Calendar, label: "Calendar", path: "/calendar" },
   { icon: TrendingUp, label: "Reports", path: "/reports" },
