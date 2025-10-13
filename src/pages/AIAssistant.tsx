@@ -99,7 +99,7 @@ const AIAssistant = () => {
               <div>
                 <h1 className="text-3xl font-bold flex items-center gap-2">
                   <Bot className="w-8 h-8 text-primary" />
-                  AI Assistant
+                  Realtor AI Assistant
                 </h1>
                 <p className="text-muted-foreground">
                   Your intelligent real estate CRM assistant
@@ -141,7 +141,7 @@ const AIAssistant = () => {
                 <div className="h-full flex items-center justify-center text-center">
                   <div>
                     <Bot className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="text-lg font-semibold mb-2">Welcome to your AI Assistant</h3>
+                    <h3 className="text-lg font-semibold mb-2">Welcome to Realtor AI Assistant</h3>
                     <p className="text-muted-foreground max-w-md">
                       I can help you manage contacts, analyze deals, create tasks, 
                       and provide real estate insights. Try one of the quick actions above!
