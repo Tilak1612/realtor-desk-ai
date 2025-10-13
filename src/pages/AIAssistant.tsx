@@ -102,7 +102,7 @@ const AIAssistant = () => {
                   AI Assistant
                 </h1>
                 <p className="text-muted-foreground">
-                  Powered by Claude AI - Your intelligent real estate CRM assistant
+                  Your intelligent real estate CRM assistant
                 </p>
               </div>
               {messages.length > 0 && (
