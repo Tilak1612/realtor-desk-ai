@@ -19,8 +19,8 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
-    const anthropicKey = Deno.env.get("ANTHROPIC_API_KEY");
-    if (!anthropicKey) throw new Error("ANTHROPIC_API_KEY is not set");
+    const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
+    if (!lovableApiKey) throw new Error("LOVABLE_API_KEY is not set");
 
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -93,32 +93,39 @@ Current user context:
 
 Be helpful, professional, and real-estate focused. Provide actionable advice and always consider the user's current CRM data in your responses.`;
 
-    logStep("Calling Claude API");
+    logStep("Calling Lovable AI (Gemini)");
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        "x-api-key": anthropicKey,
-        "anthropic-version": "2023-06-01",
+        "Authorization": `Bearer ${lovableApiKey}`,
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5",
-        max_tokens: 4096,
-        system: systemPrompt,
-        messages: messages,
+        model: "google/gemini-2.5-flash",
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...messages
+        ],
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      logStep("Claude API error", { status: response.status, error: errorText });
-      throw new Error(`Claude API error: ${response.status}`);
+      logStep("AI API error", { status: response.status, error: errorText });
+      
+      if (response.status === 429) {
+        throw new Error("Rate limit exceeded. Please try again later.");
+      }
+      if (response.status === 402) {
+        throw new Error("Payment required. Please add credits to your Lovable AI workspace.");
+      }
+      throw new Error(`AI API error: ${response.status}`);
     }
 
     const data = await response.json();
-    const assistantMessage = data.content[0].text;
-    logStep("Claude response received");
+    const assistantMessage = data.choices[0].message.content;
+    logStep("AI response received");
 
     // Save conversation
     if (conversationId) {
