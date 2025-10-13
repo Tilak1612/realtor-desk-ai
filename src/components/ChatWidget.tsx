@@ -33,11 +33,11 @@ const ChatWidget = () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         toast({
-          title: "Authentication required",
-          description: "Please sign in to use AI Assistant",
-          variant: "destructive",
+          title: "Sign in required",
+          description: "Redirecting to login...",
         });
         setLoading(false);
+        setTimeout(() => navigate('/login'), 1500);
         return;
       }
 
