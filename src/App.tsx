@@ -37,6 +37,7 @@ import Billing from "./pages/Billing";
 import Deals from "./pages/Deals";
 import Tasks from "./pages/Tasks";
 import AIAssistant from "./pages/AIAssistant";
+import Settings from "./pages/Settings";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 
 const queryClient = new QueryClient();
@@ -75,6 +76,7 @@ const App = () => (
           <Route path="/app/deals" element={<Deals />} />
           <Route path="/app/tasks" element={<Tasks />} />
           <Route path="/app/ai-assistant" element={<AIAssistant />} />
+          <Route path="/settings" element={<Settings />} />
           
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />
