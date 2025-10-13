@@ -1,22 +1,79 @@
 import { useState } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim()) return;
-    
-    // Here you would integrate with your chat service
-    // For now, we'll just open email
-    window.location.href = `mailto:support@realtordesk.ai?subject=Chat Inquiry&body=${encodeURIComponent(message)}`;
+    if (!message.trim() || loading) return;
+
+    const userMessage: Message = { role: 'user', content: message };
+    setMessages(prev => [...prev, userMessage]);
     setMessage("");
+    setLoading(true);
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Authentication required",
+          description: "Please sign in to use AI Assistant",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke('claude-chat', {
+        body: {
+          messages: [...messages, userMessage],
+          conversationId: null
+        },
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+
+      if (error) throw error;
+
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: data.message
+      };
+      setMessages(prev => [...prev, assistantMessage]);
+
+    } catch (error: any) {
+      console.error('Chat error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const openFullChat = () => {
     setIsOpen(false);
+    navigate('/app/ai-assistant');
   };
 
   return (
@@ -38,8 +95,8 @@ const ChatWidget = () => {
           {/* Header */}
           <div className="bg-gradient-to-r from-primary to-secondary text-white p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-5 h-5" />
-              <span className="font-semibold">Chat with us</span>
+              <Bot className="w-5 h-5" />
+              <span className="font-semibold">AI Assistant</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -51,30 +108,82 @@ const ChatWidget = () => {
           </div>
 
           {/* Chat Body */}
-          <div className="p-4 bg-background">
-            <div className="mb-4 p-3 bg-muted rounded-lg">
-              <p className="text-sm">
-                👋 Hi! Have questions about Realtor Desk AI? Send us a message and we'll get back to you right away.
-              </p>
+          <div className="flex flex-col h-96 bg-background">
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {messages.length === 0 ? (
+                <div className="p-3 bg-muted rounded-lg">
+                  <p className="text-sm">
+                    👋 Hi! I'm your AI assistant. Ask me about your contacts, deals, tasks, or real estate insights!
+                  </p>
+                </div>
+              ) : (
+                messages.map((msg, index) => (
+                  <div
+                    key={index}
+                    className={`flex gap-2 ${
+                      msg.role === 'assistant' ? 'flex-row' : 'flex-row-reverse'
+                    }`}
+                  >
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      msg.role === 'assistant' 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted'
+                    }`}>
+                      {msg.role === 'assistant' ? (
+                        <Bot className="w-4 h-4" />
+                      ) : (
+                        <User className="w-4 h-4" />
+                      )}
+                    </div>
+                    <div className={`flex-1 rounded-lg p-2 text-sm ${
+                      msg.role === 'assistant'
+                        ? 'bg-muted'
+                        : 'bg-primary text-primary-foreground'
+                    }`}>
+                      <p className="whitespace-pre-wrap">{msg.content}</p>
+                    </div>
+                  </div>
+                ))
+              )}
+              {loading && (
+                <div className="flex gap-2">
+                  <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                    <Bot className="w-4 h-4 text-primary-foreground" />
+                  </div>
+                  <div className="bg-muted rounded-lg p-2">
+                    <div className="flex gap-1">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" />
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <Input
-                type="text"
-                placeholder="Type your message..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full"
-              />
-              <Button type="submit" className="w-full btn-gradient">
-                <Send className="w-4 h-4 mr-2" />
-                Send Message
-              </Button>
-            </form>
-
-            <p className="text-xs text-muted-foreground mt-3 text-center">
-              Or email us at: support@realtordesk.ai
-            </p>
+            {/* Input */}
+            <div className="p-4 border-t">
+              <form onSubmit={handleSubmit} className="flex gap-2">
+                <Input
+                  type="text"
+                  placeholder="Ask me anything..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  disabled={loading}
+                  className="flex-1"
+                />
+                <Button type="submit" disabled={loading || !message.trim()} size="sm">
+                  <Send className="w-4 h-4" />
+                </Button>
+              </form>
+              <button
+                onClick={openFullChat}
+                className="text-xs text-muted-foreground hover:text-primary mt-2 underline"
+              >
+                Open full chat →
+              </button>
+            </div>
           </div>
         </Card>
       )}
