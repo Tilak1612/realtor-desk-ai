@@ -32,9 +32,10 @@ async function encrypt(data: string, key: string): Promise<string> {
   const iv = crypto.getRandomValues(new Uint8Array(12));
   
   // Import the key
+  const keyBuffer = stringToUint8Array(key.padEnd(32, '0').substring(0, 32));
   const cryptoKey = await crypto.subtle.importKey(
     'raw',
-    stringToUint8Array(key.padEnd(32, '0').substring(0, 32)),
+    keyBuffer.buffer as ArrayBuffer,
     { name: 'AES-GCM', length: 256 },
     false,
     ['encrypt']
@@ -65,9 +66,10 @@ async function decrypt(encryptedHex: string, key: string): Promise<string> {
   const encrypted = combined.slice(12);
   
   // Import the key
+  const keyBuffer = stringToUint8Array(key.padEnd(32, '0').substring(0, 32));
   const cryptoKey = await crypto.subtle.importKey(
     'raw',
-    stringToUint8Array(key.padEnd(32, '0').substring(0, 32)),
+    keyBuffer.buffer as ArrayBuffer,
     { name: 'AES-GCM', length: 256 },
     false,
     ['decrypt']
@@ -178,10 +180,10 @@ serve(async (req) => {
     } else {
       throw new Error('Invalid action. Use "encrypt_and_store" or "decrypt"');
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error?.message || 'Unknown error' }),
       { 
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
