@@ -1,174 +1,211 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Clock, Target, DollarSign } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { TrendingUp, ArrowRight } from "lucide-react";
 
 const ROICalculator = () => {
-  const [gci, setGci] = useState(250000);
-  const [dealSize, setDealSize] = useState(10000);
-  const [leads, setLeads] = useState(50);
+  const [monthlyLeads, setMonthlyLeads] = useState(50);
   const [conversionRate, setConversionRate] = useState(3);
+  const [avgCommission, setAvgCommission] = useState(15000);
+  const [selectedPlan, setSelectedPlan] = useState("solo");
 
-  // Calculations
-  const currentDeals = (leads * conversionRate) / 100;
-  const currentRevenue = currentDeals * dealSize * 12;
-  
-  const brainfyConversionRate = 8; // AI-powered conversion rate (2.5x improvement)
-  const brainfyDeals = (leads * brainfyConversionRate) / 100;
-  const brainfyRevenue = brainfyDeals * dealSize * 12;
-  
-  const additionalRevenue = brainfyRevenue - currentRevenue;
-  const additionalDeals = (brainfyDeals - currentDeals) * 12; // Annual deals
-  const timeSaved = 15; // hours per week
-  const investment = 999; // Founding member annual cost
-  const roi = ((additionalRevenue / investment) * 100).toFixed(0);
+  const planPricing = {
+    solo: 119,
+    team: 319
+  };
+
+  // Without AI calculations
+  const currentDealsPerMonth = (monthlyLeads * conversionRate) / 100;
+  const currentMonthlyRevenue = currentDealsPerMonth * avgCommission;
+  const currentAnnualRevenue = currentMonthlyRevenue * 12;
+
+  // With AI calculations (30% improvement)
+  const improvedConversionRate = conversionRate * 1.3;
+  const aiDealsPerMonth = (monthlyLeads * improvedConversionRate) / 100;
+  const aiMonthlyRevenue = aiDealsPerMonth * avgCommission;
+  const aiAnnualRevenue = aiMonthlyRevenue * 12;
+  const platformCost = planPricing[selectedPlan] * 12;
+  const netGain = aiAnnualRevenue - currentAnnualRevenue - platformCost;
+  const roi = ((netGain / platformCost) * 100).toFixed(0);
 
   return (
-    <Card className="p-4 sm:p-6 md:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-      <div className="text-center mb-6">
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
-          Calculate Your Potential Revenue Increase
+    <Card className="p-6 md:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+      <div className="text-center mb-8">
+        <h3 className="text-2xl md:text-3xl font-bold mb-2">
+          Calculate Your Potential ROI
         </h3>
-        <p className="text-sm sm:text-base text-muted-foreground">
-          See exactly how much more you could earn with Realtor Desk AI
+        <p className="text-sm text-muted-foreground">
+          See your projected returns with conservative estimates
         </p>
       </div>
       
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
-        {/* Input 1 */}
-        <div>
-          <Label htmlFor="gci" className="text-xs sm:text-sm font-medium mb-2 block">
-            Current Annual GCI ($)
-          </Label>
-          <Input
-            id="gci"
-            type="number"
-            value={gci}
-            onChange={(e) => setGci(Number(e.target.value))}
-            className="text-base sm:text-lg h-11 sm:h-12"
-            min="0"
+      {/* Interactive Inputs */}
+      <div className="grid md:grid-cols-2 gap-8 mb-8">
+        {/* Input 1: Monthly Leads */}
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <Label className="text-sm font-semibold">Current Monthly Leads</Label>
+            <span className="text-lg font-bold text-primary">{monthlyLeads} leads/month</span>
+          </div>
+          <Slider
+            value={[monthlyLeads]}
+            onValueChange={(value) => setMonthlyLeads(value[0])}
+            min={10}
+            max={200}
+            step={5}
+            className="w-full"
           />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>10</span>
+            <span>200</span>
+          </div>
         </div>
 
-        {/* Input 2 */}
-        <div>
-          <Label htmlFor="dealSize" className="text-xs sm:text-sm font-medium mb-2 block">
-            Average Deal Size ($)
-          </Label>
-          <Input
-            id="dealSize"
-            type="number"
-            value={dealSize}
-            onChange={(e) => setDealSize(Number(e.target.value))}
-            className="text-base sm:text-lg h-11 sm:h-12"
-            min="0"
+        {/* Input 2: Conversion Rate */}
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <Label className="text-sm font-semibold">Current Conversion Rate</Label>
+            <span className="text-lg font-bold text-primary">{conversionRate}%</span>
+          </div>
+          <Slider
+            value={[conversionRate]}
+            onValueChange={(value) => setConversionRate(value[0])}
+            min={1}
+            max={10}
+            step={0.5}
+            className="w-full"
           />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>1%</span>
+            <span>10%</span>
+          </div>
         </div>
 
-        {/* Input 3 */}
-        <div>
-          <Label htmlFor="leads" className="text-xs sm:text-sm font-medium mb-2 block">
-            Monthly Leads
-          </Label>
-          <Input
-            id="leads"
-            type="number"
-            value={leads}
-            onChange={(e) => setLeads(Number(e.target.value))}
-            className="text-base sm:text-lg h-11 sm:h-12"
-            min="0"
+        {/* Input 3: Average Commission */}
+        <div className="space-y-3">
+          <div className="flex justify-between items-center">
+            <Label className="text-sm font-semibold">Average Commission per Deal</Label>
+            <span className="text-lg font-bold text-primary">${avgCommission.toLocaleString()} CAD</span>
+          </div>
+          <Slider
+            value={[avgCommission]}
+            onValueChange={(value) => setAvgCommission(value[0])}
+            min={5000}
+            max={50000}
+            step={1000}
+            className="w-full"
           />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>$5k</span>
+            <span>$50k</span>
+          </div>
         </div>
 
-        {/* Input 4 */}
-        <div>
-          <Label htmlFor="conversion" className="text-xs sm:text-sm font-medium mb-2 block">
-            Current Conversion Rate (%)
-          </Label>
-          <Input
-            id="conversion"
-            type="number"
-            value={conversionRate}
-            onChange={(e) => setConversionRate(Number(e.target.value))}
-            className="text-base sm:text-lg h-11 sm:h-12"
-            min="0"
-            max="100"
-          />
+        {/* Input 4: Plan Selection */}
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold block mb-3">Plan Selection</Label>
+          <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="flex gap-4">
+            <div className="flex items-center space-x-2 flex-1">
+              <RadioGroupItem value="solo" id="solo" />
+              <Label htmlFor="solo" className="cursor-pointer flex-1 p-3 border rounded-lg hover:bg-accent/5">
+                <div className="font-semibold">Solo</div>
+                <div className="text-sm text-muted-foreground">$119/month</div>
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2 flex-1">
+              <RadioGroupItem value="team" id="team" />
+              <Label htmlFor="team" className="cursor-pointer flex-1 p-3 border rounded-lg hover:bg-accent/5">
+                <div className="font-semibold">Team</div>
+                <div className="text-sm text-muted-foreground">$319/month</div>
+              </Label>
+            </div>
+          </RadioGroup>
         </div>
       </div>
 
-      {/* Results */}
-      <div className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-accent/20">
-        <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-center">
-          With Realtor Desk AI, You Could Achieve:
-        </h4>
-        
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-          {/* Result 1 */}
-          <div className="text-center p-3 sm:p-4 bg-background/50 rounded-lg">
-            <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 text-accent" />
-            <div className="text-2xl sm:text-3xl font-bold gradient-text mb-1 leading-none">
-              ${additionalRevenue.toLocaleString()}
+      {/* Results Panel - Side by Side */}
+      <div className="grid md:grid-cols-2 gap-6 mb-6">
+        {/* Left: Without AI */}
+        <Card className="p-6 bg-muted/50">
+          <h4 className="text-lg font-bold mb-4 text-center">Without RealtorDesk AI</h4>
+          <div className="space-y-3">
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-sm text-muted-foreground">Deals per month:</span>
+              <span className="font-semibold">{currentDealsPerMonth.toFixed(1)}</span>
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground mt-2">Additional Annual Revenue</div>
-          </div>
-
-          {/* Result 2 */}
-          <div className="text-center p-3 sm:p-4 bg-background/50 rounded-lg">
-            <Target className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 text-accent" />
-            <div className="text-2xl sm:text-3xl font-bold gradient-text mb-1 leading-none">
-              {additionalDeals.toFixed(0)}
+            <div className="flex justify-between py-2 border-b">
+              <span className="text-sm text-muted-foreground">Monthly revenue:</span>
+              <span className="font-semibold">${currentMonthlyRevenue.toLocaleString('en-CA', {maximumFractionDigits: 0})}</span>
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground mt-2">Additional Deals/Year</div>
-          </div>
-
-          {/* Result 3 */}
-          <div className="text-center p-3 sm:p-4 bg-background/50 rounded-lg">
-            <Clock className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 text-accent" />
-            <div className="text-2xl sm:text-3xl font-bold gradient-text mb-1 leading-none">
-              {timeSaved}hrs
+            <div className="flex justify-between py-2">
+              <span className="text-sm text-muted-foreground">Annual revenue:</span>
+              <span className="font-bold text-lg">${currentAnnualRevenue.toLocaleString('en-CA', {maximumFractionDigits: 0})}</span>
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground mt-2">Time Saved Per Week</div>
           </div>
+        </Card>
 
-          {/* Result 4 - ROI */}
-          <div className="text-center p-3 sm:p-4 bg-background/50 rounded-lg">
-            <DollarSign className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 text-accent" />
-            <div className="text-2xl sm:text-3xl font-bold gradient-text mb-1 leading-none">
-              {roi}%
+        {/* Right: With AI */}
+        <Card className="p-6 bg-gradient-to-br from-accent/10 to-primary/10 border-accent/30">
+          <h4 className="text-lg font-bold mb-4 text-center flex items-center justify-center gap-2">
+            <TrendingUp className="w-5 h-5 text-accent" />
+            With RealtorDesk AI
+          </h4>
+          <div className="space-y-3">
+            <div className="flex justify-between py-2 border-b border-accent/20">
+              <span className="text-sm text-muted-foreground">Improved conversion:</span>
+              <span className="font-semibold text-accent">{improvedConversionRate.toFixed(1)}%</span>
             </div>
-            <div className="text-xs sm:text-sm text-muted-foreground mt-2">ROI ({roi}x return)</div>
+            <div className="flex justify-between py-2 border-b border-accent/20">
+              <span className="text-sm text-muted-foreground">Deals per month:</span>
+              <span className="font-semibold text-accent">{aiDealsPerMonth.toFixed(1)}</span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-accent/20">
+              <span className="text-sm text-muted-foreground">Monthly revenue:</span>
+              <span className="font-semibold">${aiMonthlyRevenue.toLocaleString('en-CA', {maximumFractionDigits: 0})}</span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-accent/20">
+              <span className="text-sm text-muted-foreground">Annual revenue:</span>
+              <span className="font-bold">${aiAnnualRevenue.toLocaleString('en-CA', {maximumFractionDigits: 0})}</span>
+            </div>
+            <div className="flex justify-between py-2 border-b border-accent/20">
+              <span className="text-sm text-muted-foreground">Platform cost:</span>
+              <span className="font-semibold text-red-600">-${platformCost.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between py-3 bg-accent/10 -mx-6 px-6 rounded">
+              <span className="font-bold">Net Gain:</span>
+              <span className="font-bold text-xl text-green-600">${netGain.toLocaleString('en-CA', {maximumFractionDigits: 0})}</span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span className="font-bold">ROI:</span>
+              <span className="font-bold text-2xl gradient-text">{roi}%</span>
+            </div>
           </div>
-        </div>
-
-        <div className="border-t border-border/20 pt-4 mt-4">
-          <p className="text-center text-xs sm:text-sm text-muted-foreground mb-4">
-            Based on {leads} monthly leads at {conversionRate}% → {brainfyConversionRate}% with AI
-          </p>
-          <p className="text-center text-sm font-semibold mb-4">
-            Founding Member Investment: <span className="gradient-text">${investment}/year</span> (Regular: $1,497) • 
-            Your Return: <span className="gradient-text">${additionalRevenue.toLocaleString()}/year</span>
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/demo" className="w-full sm:w-auto">
-              <Button className="w-full btn-gradient">
-                Start 30-Day Free Trial
-              </Button>
-            </Link>
-            <Button variant="outline" className="w-full sm:w-auto">
-              Download Full Report
-            </Button>
-          </div>
-        </div>
+        </Card>
       </div>
-      
-      <p className="text-center text-xs text-muted-foreground mt-4">
-        * Based on data from 500+ Canadian agents using Realtor Desk AI. Average GCI increase: 41% in first year.
-      </p>
+
+      {/* Disclaimers */}
+      <div className="text-center space-y-2 mb-6">
+        <p className="text-sm text-muted-foreground">
+          Conservative estimate based on improved response time and 24/7 availability.
+        </p>
+        <p className="text-xs text-[#6B7280]">
+          *Assumes 30% conversion improvement, lower than pilot program average.
+        </p>
+      </div>
+
+      {/* CTA */}
+      <div className="text-center">
+        <Link to="/signup">
+          <Button size="lg" className="btn-gradient text-lg group">
+            See this ROI for yourself—Start Free Trial
+            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </Link>
+      </div>
     </Card>
   );
 };
