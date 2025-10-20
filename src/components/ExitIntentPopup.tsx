@@ -69,7 +69,6 @@ const ExitIntentPopup = () => {
       setEmail("");
       setCurrentCRM("");
     } catch (error) {
-      console.error("Error capturing email:", error);
       toast({
         title: "Error",
         description: "There was an error. Please try again.",

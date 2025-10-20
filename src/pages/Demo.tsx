@@ -95,14 +95,9 @@ const Demo = () => {
             comments: values.comments,
           },
         })
-        .then((response) => {
-          if (response.error) {
-            console.error("HubSpot sync error:", response.error);
-          } else {
-            console.log("Successfully synced to HubSpot");
-          }
-        })
-        .catch((err) => console.error("HubSpot sync failed:", err));
+        .catch(() => {
+          // HubSpot sync failed silently - not critical for user experience
+        });
 
       toast({
         title: "Demo Request Submitted! ✅",
@@ -111,7 +106,6 @@ const Demo = () => {
 
       form.reset();
     } catch (error) {
-      console.error("Error submitting demo request:", error);
       toast({
         title: "Submission Failed",
         description: "There was an error submitting your request. Please try again or contact us directly.",

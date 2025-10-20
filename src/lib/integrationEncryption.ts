@@ -43,7 +43,6 @@ export async function storeEncryptedIntegration({
 
     return { data: data.integration, error: null };
   } catch (error: any) {
-    console.error("Failed to store encrypted integration:", error);
     return { data: null, error };
   }
 }
@@ -74,7 +73,6 @@ export async function getDecryptedTokens(integrationId: string) {
       error: null,
     };
   } catch (error: any) {
-    console.error("Failed to decrypt integration tokens:", error);
     return { accessToken: null, refreshToken: null, expiresAt: null, error };
   }
 }
@@ -94,7 +92,6 @@ export async function listIntegrations() {
 
     return { data, error: null };
   } catch (error: any) {
-    console.error("Failed to list integrations:", error);
     return { data: null, error };
   }
 }

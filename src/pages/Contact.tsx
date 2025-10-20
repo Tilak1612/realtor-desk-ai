@@ -59,14 +59,9 @@ const Contact = () => {
             comments: validatedData.message,
           },
         })
-        .then((response) => {
-          if (response.error) {
-            console.error("HubSpot sync error:", response.error);
-          } else {
-            console.log("Successfully synced to HubSpot");
-          }
-        })
-        .catch((err) => console.error("HubSpot sync failed:", err));
+        .catch(() => {
+          // HubSpot sync failed silently - not critical for user experience
+        });
 
       toast({
         title: "Message Sent! ✅",

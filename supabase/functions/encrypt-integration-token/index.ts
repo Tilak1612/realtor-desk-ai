@@ -31,8 +31,8 @@ async function encrypt(data: string, key: string): Promise<string> {
   // Generate a random IV (Initialization Vector)
   const iv = crypto.getRandomValues(new Uint8Array(12));
   
-  // Import the key
-  const keyBuffer = stringToUint8Array(key.padEnd(32, '0').substring(0, 32));
+  // Import the key (take first 32 bytes if longer)
+  const keyBuffer = stringToUint8Array(key.substring(0, 32));
   const cryptoKey = await crypto.subtle.importKey(
     'raw',
     keyBuffer.buffer as ArrayBuffer,
@@ -65,8 +65,8 @@ async function decrypt(encryptedHex: string, key: string): Promise<string> {
   const iv = combined.slice(0, 12);
   const encrypted = combined.slice(12);
   
-  // Import the key
-  const keyBuffer = stringToUint8Array(key.padEnd(32, '0').substring(0, 32));
+  // Import the key (take first 32 bytes if longer)
+  const keyBuffer = stringToUint8Array(key.substring(0, 32));
   const cryptoKey = await crypto.subtle.importKey(
     'raw',
     keyBuffer.buffer as ArrayBuffer,
@@ -94,8 +94,8 @@ serve(async (req) => {
 
   try {
     const encryptionKey = Deno.env.get('ENCRYPTION_KEY');
-    if (!encryptionKey) {
-      throw new Error('ENCRYPTION_KEY not configured');
+    if (!encryptionKey || encryptionKey.length < 32) {
+      throw new Error('ENCRYPTION_KEY must be at least 32 characters for secure AES-256 encryption');
     }
 
     // Create Supabase client
@@ -181,7 +181,6 @@ serve(async (req) => {
       throw new Error('Invalid action. Use "encrypt_and_store" or "decrypt"');
     }
   } catch (error: any) {
-    console.error('Error:', error);
     return new Response(
       JSON.stringify({ error: error?.message || 'Unknown error' }),
       { 

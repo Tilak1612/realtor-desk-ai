@@ -5,6 +5,28 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Simple in-memory rate limiting (resets on function restart)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const MAX_REQUESTS = 5; // 5 requests per minute per IP
+
+const checkRateLimit = (ip: string): boolean => {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+  
+  if (record.count >= MAX_REQUESTS) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+};
+
 // Validation helpers
 const isValidEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,9 +56,16 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Rate limiting check
+    const clientIP = req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown";
+    if (!checkRateLimit(clientIP)) {
+      return new Response(
+        JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
     const apiKey = Deno.env.get("HUBSPOT_API_KEY");
     if (!apiKey) {
-      console.error("HUBSPOT_API_KEY not configured");
       throw new Error("HubSpot API key not configured");
     }
 
@@ -65,10 +94,8 @@ const handler = async (req: Request): Promise<Response> => {
     const province = sanitizeString(data.province, 50);
     const currentCrm = data.currentCrm ? sanitizeString(data.currentCrm, 100) : "";
     const teamSize = data.teamSize ? sanitizeString(data.teamSize, 20) : "";
-    const biggestChallenge = data.biggestChallenge ? sanitizeString(data.biggestChallenge, 200) : "";
+      const biggestChallenge = data.biggestChallenge ? sanitizeString(data.biggestChallenge, 200) : "";
     const comments = data.comments ? sanitizeString(data.comments, 1000) : "";
-    
-    console.log("Syncing validated contact to HubSpot:", email);
 
     // Split full name into first and last name
     const nameParts = fullName.split(" ");
@@ -108,8 +135,6 @@ const handler = async (req: Request): Promise<Response> => {
     if (!hubspotResponse.ok) {
       // If contact already exists, try to update it
       if (hubspotResponse.status === 409) {
-        console.log("Contact exists, attempting to update");
-        
         // Search for contact by email
         const searchResponse = await fetch(
           `https://api.hubapi.com/crm/v3/objects/contacts/search`,
@@ -149,12 +174,8 @@ const handler = async (req: Request): Promise<Response> => {
           );
 
           if (!updateResponse.ok) {
-            const updateError = await updateResponse.text();
-            console.error("HubSpot update error:", updateError);
             throw new Error(`Failed to update contact in HubSpot: ${updateResponse.status}`);
           }
-
-          console.log("Successfully updated contact in HubSpot");
           return new Response(
             JSON.stringify({ success: true, action: "updated" }),
             {
@@ -165,13 +186,10 @@ const handler = async (req: Request): Promise<Response> => {
         }
       }
 
-      const errorText = await hubspotResponse.text();
-      console.error("HubSpot API error:", errorText);
       throw new Error(`HubSpot API error: ${hubspotResponse.status}`);
     }
 
     const result = await hubspotResponse.json();
-    console.log("Successfully created contact in HubSpot:", result.id);
 
     return new Response(
       JSON.stringify({ success: true, action: "created", contactId: result.id }),
@@ -181,7 +199,6 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
   } catch (error: any) {
-    console.error("Error in hubspot-sync function:", error);
     return new Response(
       JSON.stringify({ error: error.message }),
       {
