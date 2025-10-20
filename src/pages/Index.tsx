@@ -41,18 +41,7 @@ const DEMO_VIDEO_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
 
 const Index = () => {
   const { t } = useTranslation();
-  const [agentsCount, setAgentsCount] = useState(500);
-  const [demosThisWeek, setDemosThisWeek] = useState(14);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-
-  // Animate counters on mount
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAgentsCount(prev => prev + 1);
-    }, 30000); // Increment every 30 seconds for demo
-    
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="min-h-screen pb-20 md:pb-0">
@@ -70,21 +59,18 @@ const Index = () => {
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="font-semibold">{agentsCount}</span>
-              <span className="text-muted-foreground hidden sm:inline">{t('home.socialProof.usingNow')}</span>
-              <span className="text-muted-foreground sm:hidden">using now</span>
+              <span className="text-muted-foreground">Join Our Growing Beta Community</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
-              <span className="font-semibold">{demosThisWeek}</span>
-              <span className="text-muted-foreground hidden sm:inline">{t('home.socialProof.bookedThisWeek')}</span>
-              <span className="text-muted-foreground sm:hidden">demos today</span>
+              <span className="font-semibold">50+</span>
+              <span className="text-muted-foreground">Beta Participants</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
-              <span className="text-muted-foreground text-center sm:text-left">Join Canadian agents</span>
+              <span className="text-muted-foreground text-center sm:text-left">Limited Beta Spots Available</span>
             </div>
           </div>
         </div>

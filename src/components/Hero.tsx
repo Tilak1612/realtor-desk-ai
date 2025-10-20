@@ -16,11 +16,16 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Column - Content */}
           <div className="animate-fade-in-up order-2 lg:order-1">
-            {/* Canadian Badge */}
-            <Badge variant="secondary" className="mb-4 sm:mb-6 gap-1.5">
-              <MapPin className="w-3 h-3" />
-              🇨🇦 Built by Canadian Realtors, for Canadian Realtors
-            </Badge>
+            {/* Beta and Canadian Badge */}
+            <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
+              <Badge className="bg-orange-500 hover:bg-orange-600 text-white">
+                BETA
+              </Badge>
+              <Badge variant="secondary" className="gap-1.5">
+                <MapPin className="w-3 h-3" />
+                🇨🇦 Built by Canadian Realtors, for Canadian Realtors
+              </Badge>
+            </div>
             
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
@@ -74,10 +79,9 @@ const Hero = () => {
                 alt="Realtor Desk AI Dashboard showing AI analytics, property listings, and chat interface"
                 className="w-full h-auto"
               />
-              {/* Floating Badge - Mobile Optimized */}
-              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-background/95 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-scale-in animation-delay-400">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold gradient-text leading-none">300%</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{t('hero.conversionBadge').split(' ')[1]}</div>
+              {/* Beta Badge Overlay */}
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-orange-500 text-white backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-scale-in animation-delay-400">
+                <div className="text-xs sm:text-sm font-bold uppercase leading-none">Beta</div>
               </div>
             </div>
 

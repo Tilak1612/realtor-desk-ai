@@ -15,14 +15,14 @@ const resources = {
         startClosing: "Start Closing More Deals"
       },
       hero: {
-        title: "Transform Your Real Estate Business with AI-Powered Intelligence",
-        subtitle: "The only AI platform built specifically for Canadian realtors - featuring CREA DDF® integration, bilingual capabilities, and predictive analytics that increase conversions by 300%",
+        title: "The AI Platform Built for Canadian Realtors",
+        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with CREA DDF® integration and full bilingual support.",
         getStarted: "Start Closing More Deals",
         watchDemo: "Book Your Free Demo",
         trustLine: "No credit card required • Cancel anytime • Free onboarding included",
         badge1: "CREA Certified",
         badge2: "SOC 2 Compliant",
-        badge3: "2,000+ Canadian Agents",
+        badge3: "50+ Beta Users",
         conversionBadge: "300% Conversion Increase"
       },
       home: {
@@ -361,14 +361,14 @@ const resources = {
         startClosing: "Commencer à Conclure Plus"
       },
       hero: {
-        title: "Transformez Votre Entreprise Immobilière avec l'Intelligence IA",
-        subtitle: "La seule plateforme IA construite spécifiquement pour les agents immobiliers canadiens - avec intégration CREA DDF®, capacités bilingues et analyses prédictives qui augmentent les conversions de 300%",
+        title: "La Plateforme IA Conçue pour les Agents Immobiliers Canadiens",
+        subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec intégration CREA DDF® et support bilingue complet.",
         getStarted: "Commencer à Conclure Plus",
         watchDemo: "Réserver Votre Démo Gratuite",
         trustLine: "Aucune carte de crédit requise • Annulez à tout moment • Intégration gratuite incluse",
         badge1: "Certifié CREA",
         badge2: "Conforme SOC 2",
-        badge3: "2 000+ Agents Canadiens",
+        badge3: "50+ Utilisateurs Bêta",
         conversionBadge: "Augmentation de 300% des Conversions"
       },
       home: {
