@@ -9,6 +9,7 @@ import Pricing from "./pages/Pricing";
 import CanadianMarket from "./pages/CanadianMarket";
 import Demo from "./pages/Demo";
 import Resources from "./pages/Resources";
+import HowItWorks from "./pages/HowItWorks";
 import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -54,6 +55,7 @@ const App = () => (
           <Route path="/features" element={<Features />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/canadian-market" element={<CanadianMarket />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/integrations" element={<Integrations />} />

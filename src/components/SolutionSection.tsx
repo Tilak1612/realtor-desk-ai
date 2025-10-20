@@ -12,17 +12,17 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* AI Chatbot Card */}
-          <Card className="p-8 card-hover">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-6">
-              <MessageSquare className="w-8 h-8 text-white" />
+          <Card className="p-6 sm:p-8 card-hover">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-4 sm:mb-6">
+              <MessageSquare className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">AI Chatbot</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">AI Chatbot</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
               Intelligent lead capture that never sleeps
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {[
                 "Answers property questions instantly",
                 "Qualifies buyers/sellers automatically",
@@ -31,23 +31,23 @@ const SolutionSection = () => {
                 "Works on website & social media"
               ].map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">{feature}</span>
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm">{feature}</span>
                 </li>
               ))}
             </ul>
           </Card>
 
           {/* AI Voice Agent Card */}
-          <Card className="p-8 card-hover">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-6">
-              <Phone className="w-8 h-8 text-white" />
+          <Card className="p-6 sm:p-8 card-hover">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-4 sm:mb-6">
+              <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">AI Voice Agent</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">AI Voice Agent</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
               Smart call handling with natural conversation
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {[
                 "Takes calls when you're busy",
                 "Schedules showings automatically",
@@ -56,23 +56,23 @@ const SolutionSection = () => {
                 "Records & transcribes every call"
               ].map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">{feature}</span>
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm">{feature}</span>
                 </li>
               ))}
             </ul>
           </Card>
 
           {/* Email Automation Card */}
-          <Card className="p-8 card-hover">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-6">
-              <Mail className="w-8 h-8 text-white" />
+          <Card className="p-6 sm:p-8 card-hover sm:col-span-2 md:col-span-1">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-4 sm:mb-6">
+              <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">Email Automation</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Email Automation</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
               Follow-up that never stops nurturing leads
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {[
                 "Responds to inquiries instantly",
                 "Sends personalized property matches",
@@ -81,8 +81,8 @@ const SolutionSection = () => {
                 "CASL-compliant unsubscribe"
               ].map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">{feature}</span>
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm">{feature}</span>
                 </li>
               ))}
             </ul>

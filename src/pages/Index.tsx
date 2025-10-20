@@ -1,6 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import ProblemSection from "@/components/ProblemSection";
+import SolutionSection from "@/components/SolutionSection";
+import UnifiedDashboardSection from "@/components/UnifiedDashboardSection";
+import CanadianSection from "@/components/CanadianSection";
+import MobileCTA from "@/components/MobileCTA";
 import FeatureCard from "@/components/FeatureCard";
 import StatCard from "@/components/StatCard";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -26,6 +31,8 @@ import {
   Shield,
   Play
 } from "lucide-react";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 // Demo Video - Professional CRM Demo
@@ -47,37 +54,52 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-20 md:pb-0">
       <Navbar />
       <ExitIntentPopup />
       <ChatWidget />
+      <MobileCTA />
       
       {/* Hero Section */}
       <Hero />
 
-      {/* Live Social Proof Bar */}
-      <section className="py-4 bg-gradient-to-r from-accent/10 to-accent/5 border-y">
+      {/* Live Social Proof Bar - Mobile Optimized */}
+      <section className="py-3 sm:py-4 bg-gradient-to-r from-accent/10 to-accent/5 border-y">
         <div className="container-custom">
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 text-xs sm:text-sm">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="font-semibold">{agentsCount} {t('home.socialProof.agents')}</span>
-              <span className="text-muted-foreground">{t('home.socialProof.usingNow')}</span>
+              <span className="font-semibold">{agentsCount}</span>
+              <span className="text-muted-foreground hidden sm:inline">{t('home.socialProof.usingNow')}</span>
+              <span className="text-muted-foreground sm:hidden">using now</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-accent" />
-              <span className="font-semibold">{demosThisWeek} {t('home.socialProof.demos')}</span>
-              <span className="text-muted-foreground">{t('home.socialProof.bookedThisWeek')}</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
+              <span className="font-semibold">{demosThisWeek}</span>
+              <span className="text-muted-foreground hidden sm:inline">{t('home.socialProof.bookedThisWeek')}</span>
+              <span className="text-muted-foreground sm:hidden">demos today</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-accent" />
-              <span className="text-muted-foreground">{t('home.socialProof.joinAgents')}</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
+              <span className="text-muted-foreground text-center sm:text-left">Join Canadian agents</span>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Problem Section */}
+      <ProblemSection />
+
+      {/* Solution Section */}
+      <SolutionSection />
+
+      {/* Unified Dashboard Section */}
+      <UnifiedDashboardSection />
+
+      {/* Canadian Market Section */}
+      <CanadianSection />
 
       {/* Credibility Section */}
       <section className="section-padding bg-background">
@@ -110,18 +132,18 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Live Demo Section */}
+      {/* Live Demo Section - Mobile Optimized */}
       <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="mb-6">{t('home.demo.title')}</h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl">{t('home.demo.title')}</h2>
+            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
               {t('home.demo.description')}
             </p>
             
-            {/* Demo Showcase */}
+            {/* Demo Showcase - Touch Optimized */}
             <div 
-              className="relative aspect-video rounded-2xl shadow-2xl overflow-hidden mb-6 group cursor-pointer"
+              className="relative aspect-video rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden mb-4 sm:mb-6 group cursor-pointer touch-manipulation active:scale-98 transition-transform"
               onClick={() => setIsVideoOpen(true)}
             >
               <img 
@@ -129,19 +151,19 @@ const Index = () => {
                 alt="Realtor Desk AI Platform Demo - Dashboard showing property analytics, AI chat, and client management"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 group-active:bg-black/60 transition-colors">
                 <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Play className="w-10 h-10 text-primary ml-1" />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform">
+                    <Play className="w-8 h-8 sm:w-10 sm:h-10 text-primary ml-0.5 sm:ml-1" />
                   </div>
-                  <p className="text-white font-medium">{t('home.demo.watchDemo')}</p>
+                  <p className="text-white font-medium text-sm sm:text-base">{t('home.demo.watchDemo')}</p>
                 </div>
               </div>
             </div>
             
             {/* Video Modal */}
             <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
-              <DialogContent className="max-w-5xl w-full p-0">
+              <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0">
                 <div className="relative aspect-video w-full">
                   <iframe
                     src={DEMO_VIDEO_URL}
@@ -154,14 +176,14 @@ const Index = () => {
               </DialogContent>
             </Dialog>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/demo">
-                <Button size="lg" className="btn-gradient">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+              <Link to="/demo" className="w-full sm:w-auto">
+                <Button size="lg" className="btn-gradient w-full sm:w-auto min-h-[52px]">
                   {t('home.demo.bookDemo')}
                 </Button>
               </Link>
-              <Link to="/features">
-                <Button size="lg" variant="outline">
+              <Link to="/features" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[52px]">
                   {t('home.demo.exploreFeatures')}
                 </Button>
               </Link>
@@ -170,43 +192,43 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Trust & Integration Partners Section */}
+      {/* Trust & Testimonials Section - Mobile Optimized */}
       <section className="section-padding bg-background border-y">
         <div className="container-custom">
-          <h2 className="text-center mb-12">Trusted by 500+ Canadian Real Estate Professionals</h2>
+          <h2 className="text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl">Trusted by 500+ Canadian Real Estate Professionals</h2>
           
-          {/* Integration Logos */}
-          <div className="mb-12">
-            <p className="text-center text-sm text-muted-foreground mb-8">Seamlessly integrates with your existing tools</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center max-w-5xl mx-auto opacity-70">
+          {/* Integration Logos - Mobile Grid */}
+          <div className="mb-8 sm:mb-12">
+            <p className="text-center text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8">Seamlessly integrates with your existing tools</p>
+            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6 items-center justify-items-center max-w-5xl mx-auto opacity-70">
               <div className="text-center">
-                <Brain className="w-12 h-12 mx-auto mb-2" />
-                <p className="text-xs font-semibold">CREA DDF®</p>
+                <Brain className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
+                <p className="text-[10px] sm:text-xs font-semibold">CREA DDF®</p>
               </div>
               <div className="text-center">
-                <FileText className="w-12 h-12 mx-auto mb-2" />
-                <p className="text-xs font-semibold">Brivity CRM</p>
+                <FileText className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
+                <p className="text-[10px] sm:text-xs font-semibold">Brivity</p>
               </div>
               <div className="text-center">
-                <CheckCircle className="w-12 h-12 mx-auto mb-2" />
-                <p className="text-xs font-semibold">Follow Up Boss</p>
+                <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
+                <p className="text-[10px] sm:text-xs font-semibold">Follow Up Boss</p>
               </div>
               <div className="text-center">
-                <MessageSquare className="w-12 h-12 mx-auto mb-2" />
-                <p className="text-xs font-semibold">Gmail/Outlook</p>
+                <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
+                <p className="text-[10px] sm:text-xs font-semibold">Gmail/Outlook</p>
               </div>
               <div className="text-center">
-                <ClipboardCheck className="w-12 h-12 mx-auto mb-2" />
-                <p className="text-xs font-semibold">Google Calendar</p>
+                <ClipboardCheck className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
+                <p className="text-[10px] sm:text-xs font-semibold">Calendar</p>
               </div>
               <div className="text-center">
-                <Shield className="w-12 h-12 mx-auto mb-2" />
-                <p className="text-xs font-semibold">Zillow/Realtor.ca</p>
+                <Shield className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
+                <p className="text-[10px] sm:text-xs font-semibold">Realtor.ca</p>
               </div>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <TestimonialCard
               quote="I closed 14 additional deals in Q1 using Realtor Desk AI. The predictive lead scoring is a game-changer."
               name="Sarah Chen"
@@ -265,39 +287,7 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
-        <div className="container-custom">
-          <div className="text-center mb-16 animate-fade-in-up">
-            <h2 className="mb-4">How Realtor Desk AI Works</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              From lead to closed deal in 4 simple steps
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <div className="text-center animate-fade-in-up">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-              <h3 className="text-xl font-bold mb-3">Capture Leads</h3>
-              <p className="text-muted-foreground">AI chatbot engages visitors 24/7, qualifying prospects automatically</p>
-            </div>
-            <div className="text-center animate-fade-in-up animation-delay-200">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-              <h3 className="text-xl font-bold mb-3">Smart Follow-Up</h3>
-              <p className="text-muted-foreground">Automated, personalized email & SMS campaigns nurture leads to conversion</p>
-            </div>
-            <div className="text-center animate-fade-in-up animation-delay-300">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-              <h3 className="text-xl font-bold mb-3">MLS Integration</h3>
-              <p className="text-muted-foreground">Sync with CREA DDF® to send perfect property matches instantly</p>
-            </div>
-            <div className="text-center animate-fade-in-up animation-delay-400">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
-              <h3 className="text-xl font-bold mb-3">Close Deals</h3>
-              <p className="text-muted-foreground">AI-powered transaction management ensures faster, smoother closings</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowItWorksSection />
 
       {/* Solution Overview Section */}
       <section className="section-padding">
@@ -342,75 +332,7 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding bg-muted">
-        <div className="container-custom max-w-4xl">
-          <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-muted-foreground">
-              Everything you need to know about Realtor Desk AI
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                Does it integrate with MLS?
-              </h3>
-              <p className="text-sm text-muted-foreground">Yes, native CREA DDF® integration is included in all plans for seamless MLS data access across Canada.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                Is the AI truly bilingual?
-              </h3>
-              <p className="text-sm text-muted-foreground">Absolutely. Our AI handles contextual English-French conversations naturally, not just translation.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                Are you compliant with Canadian regulations?
-              </h3>
-              <p className="text-sm text-muted-foreground">Yes, we automatically adhere to RECO, BCFSA, RECA, and all provincial real estate regulations.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                How secure is my client data?
-              </h3>
-              <p className="text-sm text-muted-foreground">SOC 2 compliant with enterprise-grade encryption. Your data is stored in Canadian data centers.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                Can I cancel anytime?
-              </h3>
-              <p className="text-sm text-muted-foreground">Yes, all plans are month-to-month with no long-term contracts. Cancel anytime without penalty.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                Can I import my existing contacts?
-              </h3>
-              <p className="text-sm text-muted-foreground">Yes, we support CSV imports from all major CRMs. Free migration assistance included.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                What if I need to upgrade my plan?
-              </h3>
-              <p className="text-sm text-muted-foreground">You can upgrade or downgrade anytime. Changes take effect immediately with prorated billing.</p>
-            </div>
-            <div className="bg-background p-6 rounded-lg">
-              <h3 className="font-bold mb-2 flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                What kind of support do you offer?
-              </h3>
-              <p className="text-sm text-muted-foreground">Email support on Starter, phone & chat on Professional, and 24/7 priority support on Enterprise.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <MobileOptimizedFAQ />
 
       {/* Security & API Documentation Section */}
       <section className="section-padding bg-background border-y">

@@ -6,12 +6,12 @@ import heroDashboard from "@/assets/hero-dashboard.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-16 sm:pb-20 md:pb-24 lg:pb-32 overflow-hidden">
+    <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-12 sm:pb-16 md:pb-20 lg:pb-28 overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 hero-gradient -z-10" />
       
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Column - Content */}
           <div className="animate-fade-in-up order-2 lg:order-1">
             {/* Canadian Badge */}
@@ -36,54 +36,54 @@ const Hero = () => {
               </span>
             </div>
 
-            <h1 className="mb-4 sm:mb-6 leading-tight">
+            <h1 className="mb-3 sm:mb-4 md:mb-6 leading-[1.1] sm:leading-tight">
               Canada's Most Intelligent{" "}
               <span className="gradient-text">Real Estate CRM</span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-4 sm:mb-6 md:mb-8 leading-relaxed">
               AI-powered CRM built exclusively for Canadian real estate agents. Predictive lead scoring converts 18% (vs 5% industry avg), 
               true bilingual EN/FR AI, CREA DDF® MLS integration, PIPEDA/CASL compliant. Close 3X more deals in 35 days vs 60.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+            {/* CTAs - Mobile Optimized */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-4 sm:mb-6 md:mb-8">
               <Link to="/signup" className="w-full sm:w-auto">
-                <Button size="lg" className="btn-gradient text-base sm:text-lg w-full sm:w-auto">
+                <Button size="lg" className="btn-gradient text-base sm:text-lg w-full sm:w-auto min-h-[52px] sm:min-h-[56px]">
                   Start Free Trial
                 </Button>
               </Link>
               <Link to="/demo" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto min-h-[52px] sm:min-h-[56px]">
                   Watch Demo
                 </Button>
               </Link>
             </div>
 
             {/* Trust Line */}
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              <strong>No setup fees</strong> • <strong>No credit card required</strong> • <strong>30-day money-back guarantee</strong>
+            <p className="text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed">
+              <strong>No setup fees</strong> • <strong>No credit card</strong> • <strong>30-day guarantee</strong>
             </p>
           </div>
 
           {/* Right Column - Hero Image */}
-          <div className="relative animate-fade-in animation-delay-200 order-1 lg:order-2">
-            <div className="relative rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl">
+          <div className="relative animate-fade-in animation-delay-200 order-1 lg:order-2 px-2 sm:px-0">
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl">
               <img
                 src={heroDashboard}
                 alt="Realtor Desk AI Dashboard showing AI analytics, property listings, and chat interface"
                 className="w-full h-auto"
               />
-              {/* Floating Badge */}
-              <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 md:top-3 md:right-3 bg-background/95 backdrop-blur-sm rounded px-2 py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 shadow-md animate-scale-in animation-delay-400">
-                <div className="text-sm sm:text-base md:text-lg font-bold gradient-text leading-none">300%</div>
-                <div className="text-[8px] sm:text-[9px] text-muted-foreground mt-0.5">Increase</div>
+              {/* Floating Badge - Mobile Optimized */}
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-background/95 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-scale-in animation-delay-400">
+                <div className="text-lg sm:text-xl md:text-2xl font-bold gradient-text leading-none">300%</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">Increase</div>
               </div>
             </div>
 
-            {/* Decorative Elements - Hidden on very small screens */}
-            <div className="hidden sm:block absolute -top-10 -right-10 w-32 h-32 md:w-40 md:h-40 bg-primary/20 rounded-full blur-3xl -z-10" />
-            <div className="hidden sm:block absolute -bottom-10 -left-10 w-32 h-32 md:w-40 md:h-40 bg-secondary/20 rounded-full blur-3xl -z-10" />
+            {/* Decorative Elements - Hidden on mobile */}
+            <div className="hidden md:block absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl -z-10" />
+            <div className="hidden md:block absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl -z-10" />
           </div>
         </div>
       </div>

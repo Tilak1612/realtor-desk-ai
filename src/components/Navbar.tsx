@@ -22,9 +22,9 @@ const Navbar = () => {
 
   const navLinks = [
     { name: t('nav.features'), path: "/features" },
+    { name: "How It Works", path: "/how-it-works" },
     { name: t('nav.pricing'), path: "/pricing" },
     { name: t('nav.integrations'), path: "/integrations" },
-    { name: t('nav.canadianMarket'), path: "/canadian-market" },
     { name: t('nav.resources'), path: "/resources" },
   ];
 
@@ -37,15 +37,15 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20 gap-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3 group shrink-0">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 gap-2 sm:gap-4">
+          {/* Logo - Mobile Optimized */}
+          <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 group shrink-0">
             <img 
               src={logo} 
               alt="Realtor Desk AI" 
-              className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform"
+              className="h-8 sm:h-9 md:h-11 lg:h-12 w-auto group-hover:scale-105 transition-transform"
             />
-            <span className="text-lg md:text-xl lg:text-2xl font-bold gradient-text whitespace-nowrap">
+            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold gradient-text whitespace-nowrap">
               Realtor Desk AI
             </span>
           </Link>
@@ -83,44 +83,44 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Touch Optimized */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-3 -mr-2 touch-manipulation active:scale-95 transition-transform"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-7 h-7" />
             )}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Touch Optimized */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t animate-fade-in bg-background/98 backdrop-blur-lg shadow-lg">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-medium py-2 ${
-                    isActive(link.path) ? "text-primary" : "text-foreground/70"
+                  className={`font-medium py-3 px-2 rounded-lg touch-manipulation active:scale-98 transition-all ${
+                    isActive(link.path) ? "text-primary bg-primary/10" : "text-foreground/70 active:bg-muted"
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="flex items-center gap-2 py-2">
+              <div className="flex items-center gap-2 py-3 px-2">
                 <LanguageSwitcher />
               </div>
-              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="outline" className="w-full">Sign In</Button>
+              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="mt-2">
+                <Button variant="outline" className="w-full min-h-[52px] text-base">Sign In</Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-gradient w-full">{t('nav.startClosing')}</Button>
+                <Button className="btn-gradient w-full min-h-[52px] text-base">{t('nav.startClosing')}</Button>
               </Link>
             </div>
           </div>
