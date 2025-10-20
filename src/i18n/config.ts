@@ -200,6 +200,152 @@ const resources = {
         firstYear: "first year!",
         complaints: "Common Complaints We Hear",
         schedule: "Schedule Free Migration Call"
+      },
+      problem: {
+        title: "Tired of Missing Leads While You Sleep?",
+        lostOpportunities: {
+          title: "Lost Opportunities",
+          text: "67% of leads contact agents outside business hours. Are you there to respond?"
+        },
+        toolOverload: {
+          title: "Tool Overload",
+          text: "Juggling 5+ platforms for chat, email, calls, and CRM. There's a better way."
+        },
+        wastedSpend: {
+          title: "Wasted Ad Spend",
+          text: "You pay for leads, but slow response times mean competitors close them first."
+        }
+      },
+      solution: {
+        title: "Meet Your 24/7 AI Real Estate Team",
+        chatbot: {
+          title: "Intelligent Lead Capture",
+          feature1: "Answers property questions instantly",
+          feature2: "Qualifies buyers/sellers automatically",
+          feature3: "Captures contact info & preferences",
+          feature4: "Bilingual (English/French)",
+          feature5: "Works on your website & social media"
+        },
+        voice: {
+          title: "Smart Call Handling",
+          feature1: "Takes calls when you're busy",
+          feature2: "Schedules showings automatically",
+          feature3: "Natural-sounding Canadian voice",
+          feature4: "Routes hot leads to your phone",
+          feature5: "Records & transcribes every call"
+        },
+        email: {
+          title: "Follow-Up That Never Stops",
+          feature1: "Responds to inquiries instantly",
+          feature2: "Sends personalized property matches",
+          feature3: "Nurtures leads over 90+ days",
+          feature4: "Integrates with your email",
+          feature5: "CASL-compliant unsubscribe"
+        }
+      },
+      dashboard: {
+        title: "Everything in One Place",
+        subtitle: "Manage all your conversations, leads, and insights from a single powerful dashboard",
+        feature1: "All conversations (chat, voice, email) in one view",
+        feature2: "AI-powered lead scoring highlights hot prospects",
+        feature3: "Real-time notifications for urgent inquiries",
+        feature4: "One-click response templates",
+        feature5: "Performance analytics & ROI tracking"
+      },
+      canadian: {
+        title: "Built for the Canadian Market",
+        bilingual: "Bilingual Support (EN/FR)",
+        mls: "Integrates with Canadian MLS Systems",
+        compliant: "PIPEDA & CASL Compliant",
+        timezones: "All 6 Canadian Time Zones Covered",
+        crea: "CREA Code of Ethics Aligned",
+        pricing: "Pricing in CAD"
+      },
+      howItWorks: {
+        title: "Get Up and Running in Minutes",
+        step1: {
+          title: "Sign Up",
+          time: "2 minutes",
+          description: "Create account, choose your plan"
+        },
+        step2: {
+          title: "Connect Your Tools",
+          time: "5 minutes",
+          description: "Link CRM, email, website"
+        },
+        step3: {
+          title: "Train Your AI",
+          time: "10 minutes",
+          description: "Add property info, FAQs, your style"
+        },
+        step4: {
+          title: "Go Live",
+          time: "Instant",
+          description: "AI starts capturing leads 24/7"
+        }
+      },
+      faq: {
+        title: "Frequently Asked Questions",
+        q1: {
+          question: "Does the AI sound robotic?",
+          answer: "Our AI uses advanced natural language processing and sounds remarkably human. For voice calls, we use Canadian-accented voices that clients find warm and professional."
+        },
+        q2: {
+          question: "How long does setup take?",
+          answer: "Most agents are fully operational within 20 minutes. Our setup wizard guides you through connecting your tools, training the AI on your listings, and customizing responses."
+        },
+        q3: {
+          question: "What if the AI can't answer a question?",
+          answer: "The AI seamlessly escalates complex questions to you via SMS or phone. It provides full conversation context so you can pick up exactly where it left off."
+        },
+        q4: {
+          question: "Is this CASL compliant?",
+          answer: "Absolutely. RealtorDesk.ai is built specifically for Canadian regulations. All emails include proper sender identification, consent tracking, and easy unsubscribe options."
+        },
+        q5: {
+          question: "Which CRMs do you integrate with?",
+          answer: "We currently integrate with Follow Up Boss, Brivity, LionDesk, and RealtyJuggler - the most popular CRMs among Canadian agents."
+        },
+        q6: {
+          question: "Can I customize the AI's responses?",
+          answer: "Yes! You control the AI's personality, response templates, and which questions it handles vs. escalates to you. It learns your style over time."
+        }
+      },
+      cta: {
+        title: "Ready to Never Miss a Lead Again?",
+        subtitle: "Join 500+ Canadian realtors using AI to close more deals",
+        button: "Start Your Free 14-Day Trial",
+        note: "No credit card required • Setup in 20 minutes • Cancel anytime"
+      },
+      mobileCTA: {
+        title: "Start Your Free Trial",
+        subtitle: "Join 500+ Canadian Realtors"
+      },
+      footer: {
+        tagline: "AI-Powered Real Estate Success",
+        product: "Product",
+        features: "Features",
+        pricing: "Pricing",
+        howItWorks: "How It Works",
+        integrations: "Integrations",
+        roadmap: "Roadmap",
+        status: "Status Page",
+        resources: "Resources",
+        blog: "Blog",
+        helpCenter: "Help Center",
+        apiDocs: "API Docs",
+        videoTutorials: "Video Tutorials",
+        caseStudies: "Case Studies",
+        webinars: "Webinars",
+        company: "Company",
+        about: "About Us",
+        contact: "Contact",
+        careers: "Careers",
+        privacy: "Privacy Policy",
+        terms: "Terms of Service",
+        casl: "CASL Compliance",
+        copyright: "© 2025 RealtorDesk.ai. All rights reserved.",
+        madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors"
       }
     }
   },
@@ -400,6 +546,152 @@ const resources = {
         firstYear: "la première année!",
         complaints: "Plaintes Courantes Que Nous Entendons",
         schedule: "Planifier un Appel de Migration Gratuit"
+      },
+      problem: {
+        title: "Fatigué de Manquer des Prospects Pendant Votre Sommeil?",
+        lostOpportunities: {
+          title: "Opportunités Perdues",
+          text: "67% des prospects contactent les agents en dehors des heures d'ouverture. Êtes-vous là pour répondre?"
+        },
+        toolOverload: {
+          title: "Surcharge d'Outils",
+          text: "Jongler avec 5+ plateformes pour chat, email, appels et CRM. Il y a une meilleure façon."
+        },
+        wastedSpend: {
+          title: "Dépenses Publicitaires Gaspillées",
+          text: "Vous payez pour des prospects, mais les temps de réponse lents signifient que les concurrents les concluent en premier."
+        }
+      },
+      solution: {
+        title: "Rencontrez Votre Équipe Immobilière IA 24/7",
+        chatbot: {
+          title: "Capture de Prospects Intelligente",
+          feature1: "Répond aux questions sur les propriétés instantanément",
+          feature2: "Qualifie les acheteurs/vendeurs automatiquement",
+          feature3: "Capture les coordonnées et préférences",
+          feature4: "Bilingue (Anglais/Français)",
+          feature5: "Fonctionne sur votre site Web et réseaux sociaux"
+        },
+        voice: {
+          title: "Gestion d'Appels Intelligente",
+          feature1: "Prend les appels quand vous êtes occupé",
+          feature2: "Planifie les visites automatiquement",
+          feature3: "Voix canadienne au son naturel",
+          feature4: "Achemine les prospects chauds vers votre téléphone",
+          feature5: "Enregistre et transcrit chaque appel"
+        },
+        email: {
+          title: "Suivi Qui Ne S'Arrête Jamais",
+          feature1: "Répond aux demandes instantanément",
+          feature2: "Envoie des correspondances de propriétés personnalisées",
+          feature3: "Nourrit les prospects pendant plus de 90 jours",
+          feature4: "S'intègre avec votre email",
+          feature5: "Désinscription conforme à la LCAP"
+        }
+      },
+      dashboard: {
+        title: "Tout en Un Seul Endroit",
+        subtitle: "Gérez toutes vos conversations, prospects et perspectives depuis un tableau de bord puissant et unique",
+        feature1: "Toutes les conversations (chat, voix, email) en une vue",
+        feature2: "Le scoring de prospects propulsé par l'IA met en évidence les prospects chauds",
+        feature3: "Notifications en temps réel pour les demandes urgentes",
+        feature4: "Modèles de réponse en un clic",
+        feature5: "Analyses de performance et suivi du ROI"
+      },
+      canadian: {
+        title: "Conçu pour le Marché Canadien",
+        bilingual: "Support Bilingue (EN/FR)",
+        mls: "S'intègre avec les Systèmes MLS Canadiens",
+        compliant: "Conforme PIPEDA et LCAP",
+        timezones: "Couvre les 6 Fuseaux Horaires Canadiens",
+        crea: "Aligné avec le Code d'Éthique CREA",
+        pricing: "Tarification en CAD"
+      },
+      howItWorks: {
+        title: "Opérationnel en Quelques Minutes",
+        step1: {
+          title: "Inscription",
+          time: "2 minutes",
+          description: "Créez un compte, choisissez votre plan"
+        },
+        step2: {
+          title: "Connectez Vos Outils",
+          time: "5 minutes",
+          description: "Liez CRM, email, site Web"
+        },
+        step3: {
+          title: "Entraînez Votre IA",
+          time: "10 minutes",
+          description: "Ajoutez infos propriétés, FAQ, votre style"
+        },
+        step4: {
+          title: "En Direct",
+          time: "Instantané",
+          description: "L'IA commence à capturer des prospects 24/7"
+        }
+      },
+      faq: {
+        title: "Questions Fréquemment Posées",
+        q1: {
+          question: "L'IA sonne-t-elle robotique?",
+          answer: "Notre IA utilise un traitement du langage naturel avancé et sonne remarquablement humaine. Pour les appels vocaux, nous utilisons des voix à accent canadien que les clients trouvent chaleureuses et professionnelles."
+        },
+        q2: {
+          question: "Combien de temps prend la configuration?",
+          answer: "La plupart des agents sont pleinement opérationnels en 20 minutes. Notre assistant de configuration vous guide dans la connexion de vos outils, la formation de l'IA sur vos annonces et la personnalisation des réponses."
+        },
+        q3: {
+          question: "Que se passe-t-il si l'IA ne peut pas répondre à une question?",
+          answer: "L'IA transmet de manière transparente les questions complexes vers vous par SMS ou téléphone. Elle fournit le contexte complet de la conversation afin que vous puissiez reprendre exactement là où elle s'est arrêtée."
+        },
+        q4: {
+          question: "Est-ce conforme à la LCAP?",
+          answer: "Absolument. RealtorDesk.ai est construit spécifiquement pour les réglementations canadiennes. Tous les emails incluent une identification appropriée de l'expéditeur, un suivi du consentement et des options de désinscription faciles."
+        },
+        q5: {
+          question: "Avec quels CRM vous intégrez-vous?",
+          answer: "Nous nous intégrons actuellement avec Follow Up Boss, Brivity, LionDesk et RealtyJuggler - les CRM les plus populaires parmi les agents canadiens."
+        },
+        q6: {
+          question: "Puis-je personnaliser les réponses de l'IA?",
+          answer: "Oui! Vous contrôlez la personnalité de l'IA, les modèles de réponse et les questions qu'elle gère par rapport à celles qu'elle vous transmet. Elle apprend votre style au fil du temps."
+        }
+      },
+      cta: {
+        title: "Prêt à Ne Plus Jamais Manquer un Prospect?",
+        subtitle: "Rejoignez 500+ agents immobiliers canadiens utilisant l'IA pour conclure plus de ventes",
+        button: "Commencez Votre Essai Gratuit de 14 Jours",
+        note: "Aucune carte de crédit requise • Configuration en 20 minutes • Annulez à tout moment"
+      },
+      mobileCTA: {
+        title: "Commencez Votre Essai Gratuit",
+        subtitle: "Rejoignez 500+ Agents Canadiens"
+      },
+      footer: {
+        tagline: "Succès Immobilier Propulsé par l'IA",
+        product: "Produit",
+        features: "Fonctionnalités",
+        pricing: "Tarification",
+        howItWorks: "Comment Ça Marche",
+        integrations: "Intégrations",
+        roadmap: "Feuille de Route",
+        status: "Page de Statut",
+        resources: "Ressources",
+        blog: "Blog",
+        helpCenter: "Centre d'Aide",
+        apiDocs: "Documentation API",
+        videoTutorials: "Tutoriels Vidéo",
+        caseStudies: "Études de Cas",
+        webinars: "Webinaires",
+        company: "Entreprise",
+        about: "À Propos",
+        contact: "Contact",
+        careers: "Carrières",
+        privacy: "Politique de Confidentialité",
+        terms: "Conditions d'Utilisation",
+        casl: "Conformité LCAP",
+        copyright: "© 2025 RealtorDesk.ai. Tous droits réservés.",
+        madeInCanada: "Fabriqué au Canada 🇨🇦 pour les Agents Immobiliers Canadiens"
       }
     }
   }
