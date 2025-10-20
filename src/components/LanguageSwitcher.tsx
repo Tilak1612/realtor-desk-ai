@@ -18,23 +18,23 @@ const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2">
+        <Button variant="ghost" size="sm" className="gap-2 font-semibold hover:bg-muted">
           <Globe className="w-4 h-4" />
           <span className="uppercase text-xs font-semibold">
             {i18n.language === 'fr' ? 'FR' : 'EN'}
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="bg-background border shadow-lg z-[100]">
         <DropdownMenuItem 
           onClick={() => changeLanguage('en')}
-          className={i18n.language === 'en' ? 'bg-accent' : ''}
+          className={`cursor-pointer ${i18n.language === 'en' ? 'bg-accent text-accent-foreground' : ''}`}
         >
           <span className="mr-2">🇬🇧</span> English
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => changeLanguage('fr')}
-          className={i18n.language === 'fr' ? 'bg-accent' : ''}
+          className={`cursor-pointer ${i18n.language === 'fr' ? 'bg-accent text-accent-foreground' : ''}`}
         >
           <span className="mr-2">🇫🇷</span> Français
         </DropdownMenuItem>

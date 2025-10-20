@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
+        isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-background/80 backdrop-blur-sm"
       }`}
     >
       <div className="container-custom">
@@ -56,10 +56,10 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-medium transition-colors relative group ${
+                className={`font-medium transition-colors relative group text-base ${
                   isActive(link.path)
                     ? "text-primary"
-                    : "text-foreground/70 hover:text-primary"
+                    : "text-foreground hover:text-primary"
                 }`}
               >
                 {link.name}
@@ -72,20 +72,19 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
             <Link to="/login">
-              <Button variant="outline">Sign In</Button>
+              <Button variant="outline" className="font-semibold">Sign In</Button>
             </Link>
             <Link to="/demo">
-              <Button className="btn-gradient">{t('nav.startClosing')}</Button>
+              <Button className="btn-gradient font-semibold">{t('nav.startClosing')}</Button>
             </Link>
           </div>
 
           {/* Mobile Menu Button - Touch Optimized */}
           <button
-            className="md:hidden p-3 -mr-2 touch-manipulation active:scale-95 transition-transform"
+            className="md:hidden p-3 -mr-2 touch-manipulation active:scale-95 transition-transform text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -99,15 +98,15 @@ const Navbar = () => {
 
         {/* Mobile Menu - Touch Optimized */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t animate-fade-in bg-background/98 backdrop-blur-lg shadow-lg">
+          <div className="md:hidden py-4 border-t animate-fade-in bg-background backdrop-blur-lg shadow-lg">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-medium py-3 px-2 rounded-lg touch-manipulation active:scale-98 transition-all ${
-                    isActive(link.path) ? "text-primary bg-primary/10" : "text-foreground/70 active:bg-muted"
+                  className={`font-medium py-3 px-2 rounded-lg touch-manipulation active:scale-98 transition-all text-base ${
+                    isActive(link.path) ? "text-primary bg-primary/10" : "text-foreground hover:bg-muted"
                   }`}
                 >
                   {link.name}
@@ -117,10 +116,10 @@ const Navbar = () => {
                 <LanguageSwitcher />
               </div>
               <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="mt-2">
-                <Button variant="outline" className="w-full min-h-[52px] text-base">Sign In</Button>
+                <Button variant="outline" className="w-full min-h-[52px] text-base font-semibold">Sign In</Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-gradient w-full min-h-[52px] text-base">{t('nav.startClosing')}</Button>
+                <Button className="btn-gradient w-full min-h-[52px] text-base font-semibold">{t('nav.startClosing')}</Button>
               </Link>
             </div>
           </div>
