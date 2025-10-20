@@ -96,11 +96,11 @@ const HowItWorksSection = () => {
                 <p className="text-sm text-accent font-semibold text-center mb-4">⏱️ {step.time}</p>
 
                 {/* Visual Screenshot */}
-                <div className="rounded-lg overflow-hidden mb-4 shadow-md">
+                <div className="rounded-lg overflow-hidden mb-4 shadow-md bg-muted">
                   <img 
                     src={step.visual} 
                     alt={`RealtorDesk AI ${step.title} - ${step.details[0]} for Canadian realtors`}
-                    className="w-full h-40 object-cover"
+                    className="w-full h-auto object-contain"
                     loading="lazy"
                   />
                 </div>
