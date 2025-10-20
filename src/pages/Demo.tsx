@@ -28,13 +28,13 @@ import {
 const demoFormSchema = z.object({
   fullName: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
   email: z.string().trim().email("Invalid email address").max(255, "Email is too long"),
-  phone: z.string().trim().min(10, "Phone number must be at least 10 characters").max(20, "Phone number is too long"),
-  brokerage: z.string().trim().max(100, "Brokerage name is too long").optional(),
+  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Phone number must be 10-20 digits"),
+  brokerage: z.string().trim().max(100, "Brokerage name is too long").optional().or(z.literal("")),
   province: z.string().min(1, "Please select a province"),
   currentCrm: z.string().optional(),
   teamSize: z.string().optional(),
   biggestChallenge: z.string().optional(),
-  comments: z.string().trim().max(1000, "Comments are too long").optional(),
+  comments: z.string().trim().max(1000, "Comments are too long").optional().or(z.literal("")),
 });
 
 type DemoFormValues = z.infer<typeof demoFormSchema>;

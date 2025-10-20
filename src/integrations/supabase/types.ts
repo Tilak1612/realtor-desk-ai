@@ -970,11 +970,39 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean
@@ -996,6 +1024,7 @@ export type Database = {
         | "property_viewed"
         | "deal_created"
         | "deal_updated"
+      app_role: "admin" | "user"
       subscription_status: "trial" | "active" | "cancelled" | "expired"
       subscription_tier: "agent" | "team" | "brokerage"
     }
@@ -1141,6 +1170,7 @@ export const Constants = {
         "deal_created",
         "deal_updated",
       ],
+      app_role: ["admin", "user"],
       subscription_status: ["trial", "active", "cancelled", "expired"],
       subscription_tier: ["agent", "team", "brokerage"],
     },

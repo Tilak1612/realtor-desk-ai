@@ -9,6 +9,14 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email is too long"),
+  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Phone must be 10-20 digits").optional().or(z.literal("")),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message is too long")
+});
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -26,12 +34,15 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      // Validate input
+      const validatedData = contactSchema.parse(formData);
+
       const { error } = await supabase.from("contact_submissions").insert([
         {
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim() || null,
-          message: formData.message.trim(),
+          name: validatedData.name,
+          email: validatedData.email,
+          phone: validatedData.phone || null,
+          message: validatedData.message,
         },
       ]);
 
@@ -41,11 +52,11 @@ const Contact = () => {
       supabase.functions
         .invoke("hubspot-sync", {
           body: {
-            email: formData.email,
-            fullName: formData.name,
-            phone: formData.phone || "",
+            email: validatedData.email,
+            fullName: validatedData.name,
+            phone: validatedData.phone || "",
             province: "", // Not collected in contact form
-            comments: formData.message,
+            comments: validatedData.message,
           },
         })
         .then((response) => {
@@ -63,13 +74,20 @@ const Contact = () => {
       });
       
       setFormData({ name: "", email: "", phone: "", message: "" });
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
-      toast({
-        title: "Submission Failed",
-        description: "There was an error sending your message. Please try again or email us directly.",
-        variant: "destructive",
-      });
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "There was an error sending your message. Please try again or email us directly.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
