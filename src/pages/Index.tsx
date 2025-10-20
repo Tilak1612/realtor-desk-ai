@@ -8,7 +8,6 @@ import CanadianSection from "@/components/CanadianSection";
 import MobileCTA from "@/components/MobileCTA";
 import FeatureCard from "@/components/FeatureCard";
 import StatCard from "@/components/StatCard";
-import TestimonialCard from "@/components/TestimonialCard";
 import ROICalculator from "@/components/ROICalculator";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import ChatWidget from "@/components/ChatWidget";
@@ -34,6 +33,7 @@ import {
 import HowItWorksSection from "@/components/HowItWorksSection";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import TrustTransparencySection from "@/components/TrustTransparencySection";
+import BetaSuccessStories from "@/components/BetaSuccessStories";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 // Demo Video - Professional CRM Demo
@@ -187,69 +187,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Trust & Testimonials Section - Mobile Optimized */}
-      <section className="section-padding bg-background border-y">
-        <div className="container-custom">
-          <h2 className="text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl">Trusted by 500+ Canadian Real Estate Professionals</h2>
-          
-          {/* Integration Logos - Mobile Grid */}
-          <div className="mb-8 sm:mb-12">
-            <p className="text-center text-xs sm:text-sm text-muted-foreground mb-6 sm:mb-8">Seamlessly integrates with your existing tools</p>
-            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6 items-center justify-items-center max-w-5xl mx-auto opacity-70">
-              <div className="text-center">
-                <Brain className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
-                <p className="text-[10px] sm:text-xs font-semibold">CREA DDF®</p>
-              </div>
-              <div className="text-center">
-                <FileText className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
-                <p className="text-[10px] sm:text-xs font-semibold">Brivity</p>
-              </div>
-              <div className="text-center">
-                <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
-                <p className="text-[10px] sm:text-xs font-semibold">Follow Up Boss</p>
-              </div>
-              <div className="text-center">
-                <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
-                <p className="text-[10px] sm:text-xs font-semibold">Gmail/Outlook</p>
-              </div>
-              <div className="text-center">
-                <ClipboardCheck className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
-                <p className="text-[10px] sm:text-xs font-semibold">Calendar</p>
-              </div>
-              <div className="text-center">
-                <Shield className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2" />
-                <p className="text-[10px] sm:text-xs font-semibold">Realtor.ca</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-            <TestimonialCard
-              quote="I closed 14 additional deals in Q1 using Realtor Desk AI. The predictive lead scoring is a game-changer."
-              name="Sarah Chen"
-              title="Top Producer"
-              company="Royal LePage Toronto"
-            />
-            <TestimonialCard
-              quote="The bilingual AI chatbot captures leads 24/7. I wake up to qualified appointments every morning."
-              name="Marc Dubois"
-              title="Broker"
-              company="RE/MAX Québec"
-            />
-            <TestimonialCard
-              quote="My transaction closings went from 60 days to 35 days. The AI coordination is incredible."
-              name="Priya Sharma"
-              title="Sales Representative"
-              company="Century 21 Vancouver"
-            />
-          </div>
-          
-          {/* Testimonials Disclaimer */}
-          <p className="text-xs text-[#6B7280] text-center mt-8 max-w-3xl mx-auto">
-            *Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.
-          </p>
-        </div>
-      </section>
+      {/* Beta Success Stories Section */}
+      <BetaSuccessStories />
 
       {/* Problem Statement Section */}
       <section className="section-padding bg-muted">
