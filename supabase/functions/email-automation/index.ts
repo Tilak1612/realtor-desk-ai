@@ -1,8 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { Resend } from "npm:resend@4.0.0";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -118,17 +115,27 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Send email immediately
-    const emailResponse = await resend.emails.send({
-      from: "Realtor Desk AI <onboarding@resend.dev>",
-      to: [contact.email],
-      subject: template.subject,
-      html: template.html,
+    // Send email immediately using Resend API
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Realtor Desk AI <onboarding@resend.dev>",
+        to: [contact.email],
+        subject: template.subject,
+        html: template.html,
+      }),
     });
 
-    if (emailResponse.error) {
-      throw emailResponse.error;
+    if (!resendResponse.ok) {
+      const errorText = await resendResponse.text();
+      throw new Error(`Resend API error: ${errorText}`);
     }
+
+    const emailData = await resendResponse.json();
 
     // Log sent email
     await supabase.from("email_log").insert({
@@ -138,10 +145,10 @@ const handler = async (req: Request): Promise<Response> => {
       status: "sent",
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    console.log("Email sent successfully:", emailData);
 
     return new Response(
-      JSON.stringify({ success: true, action: "sent", emailId: emailResponse.data?.id }),
+      JSON.stringify({ success: true, action: "sent", emailId: emailData.id }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },

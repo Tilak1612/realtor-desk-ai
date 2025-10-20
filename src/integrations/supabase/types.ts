@@ -523,6 +523,33 @@ export type Database = {
         }
         Relationships: []
       }
+      email_log: {
+        Row: {
+          contact_id: string
+          created_at: string
+          id: string
+          sent_at: string
+          status: string
+          type: string
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          id?: string
+          sent_at?: string
+          status?: string
+          type: string
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          id?: string
+          sent_at?: string
+          status?: string
+          type?: string
+        }
+        Relationships: []
+      }
       engagement_stats: {
         Row: {
           avg_session_duration: number | null
@@ -625,6 +652,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      lead_scores: {
+        Row: {
+          calculated_at: string
+          communication_score: number | null
+          contact_id: string
+          created_at: string
+          demographics_score: number | null
+          engagement_score: number | null
+          id: string
+          property_match_score: number | null
+          quality: string
+          recency_score: number | null
+          score: number
+        }
+        Insert: {
+          calculated_at?: string
+          communication_score?: number | null
+          contact_id: string
+          created_at?: string
+          demographics_score?: number | null
+          engagement_score?: number | null
+          id?: string
+          property_match_score?: number | null
+          quality: string
+          recency_score?: number | null
+          score: number
+        }
+        Update: {
+          calculated_at?: string
+          communication_score?: number | null
+          contact_id?: string
+          created_at?: string
+          demographics_score?: number | null
+          engagement_score?: number | null
+          id?: string
+          property_match_score?: number | null
+          quality?: string
+          recency_score?: number | null
+          score?: number
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -756,6 +825,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      scheduled_emails: {
+        Row: {
+          contact_id: string
+          created_at: string
+          id: string
+          scheduled_for: string
+          sent_at: string | null
+          status: string
+          type: string
+        }
+        Insert: {
+          contact_id: string
+          created_at?: string
+          id?: string
+          scheduled_for: string
+          sent_at?: string | null
+          status?: string
+          type: string
+        }
+        Update: {
+          contact_id?: string
+          created_at?: string
+          id?: string
+          scheduled_for?: string
+          sent_at?: string | null
+          status?: string
+          type?: string
+        }
+        Relationships: []
       }
       tasks: {
         Row: {
