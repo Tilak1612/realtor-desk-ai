@@ -287,26 +287,50 @@ const resources = {
       faq: {
         title: "Frequently Asked Questions",
         q1: {
+          question: "Is RealtorDesk AI ready for production use?",
+          answer: "We're currently in public beta with 50+ active realtors across Canada. The platform is fully functional and stable, but we're actively gathering feedback and adding features. Beta users help shape our roadmap and receive lifetime discounts."
+        },
+        q2: {
+          question: "What does 'beta' mean for me?",
+          answer: "You get full access to all features at a discounted rate. We may add/modify features based on feedback. You'll receive priority support and direct access to our team. Your pricing is locked in for life—you'll never pay more than your beta rate."
+        },
+        q3: {
+          question: "Can I trust the platform with my client data?",
+          answer: "Absolutely. We use bank-level encryption (AES-256), store data exclusively in Canadian data centers (Toronto/Vancouver), and follow SOC 2 Type II controls. We're PIPEDA-ready with full right-to-erasure and breach notification protocols."
+        },
+        q4: {
+          question: "What if the platform doesn't work as described?",
+          answer: "We offer a 30-day money-back guarantee. If you're not satisfied for any reason, we'll refund you in full. During beta, we also offer unlimited support to ensure your success."
+        },
+        q5: {
+          question: "Are the '300% conversion increase' claims real?",
+          answer: "This metric comes from our pilot program participants who saw an average 300% improvement in lead response time, which correlated with increased conversions. Individual results vary based on market, lead quality, and how you use the platform. We're tracking metrics as we scale."
+        },
+        q6: {
+          question: "What certifications do you actually have?",
+          answer: "We're built on SOC 2 Type II compliant infrastructure and follow PIPEDA requirements. Our CREA DDF® integration is compatible with official data feeds. As we exit beta, we'll complete formal third-party audits and display certification badges."
+        },
+        q7: {
           question: "Does the AI sound robotic?",
           answer: "Our AI uses advanced natural language processing and sounds remarkably human. For voice calls, we use Canadian-accented voices that clients find warm and professional."
         },
-        q2: {
+        q8: {
           question: "How long does setup take?",
           answer: "Most agents are fully operational within 20 minutes. Our setup wizard guides you through connecting your tools, training the AI on your listings, and customizing responses."
         },
-        q3: {
+        q9: {
           question: "What if the AI can't answer a question?",
           answer: "The AI seamlessly escalates complex questions to you via SMS or phone. It provides full conversation context so you can pick up exactly where it left off."
         },
-        q4: {
+        q10: {
           question: "Is this CASL compliant?",
           answer: "Absolutely. RealtorDesk.ai is built specifically for Canadian regulations. All emails include proper sender identification, consent tracking, and easy unsubscribe options."
         },
-        q5: {
+        q11: {
           question: "Which CRMs do you integrate with?",
           answer: "We currently integrate with Follow Up Boss, Brivity, LionDesk, and RealtyJuggler - the most popular CRMs among Canadian agents."
         },
-        q6: {
+        q12: {
           question: "Can I customize the AI's responses?",
           answer: "Yes! You control the AI's personality, response templates, and which questions it handles vs. escalates to you. It learns your style over time."
         }
@@ -633,26 +657,50 @@ const resources = {
       faq: {
         title: "Questions Fréquemment Posées",
         q1: {
+          question: "RealtorDesk AI est-il prêt pour une utilisation en production?",
+          answer: "Nous sommes actuellement en bêta publique avec plus de 50 agents immobiliers actifs à travers le Canada. La plateforme est entièrement fonctionnelle et stable, mais nous recueillons activement des commentaires et ajoutons des fonctionnalités. Les utilisateurs bêta aident à façonner notre feuille de route et reçoivent des réductions à vie."
+        },
+        q2: {
+          question: "Que signifie 'bêta' pour moi?",
+          answer: "Vous obtenez un accès complet à toutes les fonctionnalités à un tarif réduit. Nous pouvons ajouter/modifier des fonctionnalités en fonction des commentaires. Vous recevrez un support prioritaire et un accès direct à notre équipe. Vos tarifs sont verrouillés à vie—vous ne paierez jamais plus que votre tarif bêta."
+        },
+        q3: {
+          question: "Puis-je faire confiance à la plateforme avec les données de mes clients?",
+          answer: "Absolument. Nous utilisons un chiffrement de niveau bancaire (AES-256), stockons les données exclusivement dans des centres de données canadiens (Toronto/Vancouver), et suivons les contrôles SOC 2 Type II. Nous sommes conformes à la LPRPDE avec droit complet à l'effacement et protocoles de notification de violation."
+        },
+        q4: {
+          question: "Que se passe-t-il si la plateforme ne fonctionne pas comme décrit?",
+          answer: "Nous offrons une garantie de remboursement de 30 jours. Si vous n'êtes pas satisfait pour quelque raison que ce soit, nous vous rembourserons intégralement. Pendant la bêta, nous offrons également un support illimité pour assurer votre succès."
+        },
+        q5: {
+          question: "Les affirmations d'augmentation de conversion de 300% sont-elles réelles?",
+          answer: "Cette métrique provient de nos participants au programme pilote qui ont constaté une amélioration moyenne de 300% du temps de réponse aux prospects, ce qui est corrélé avec une augmentation des conversions. Les résultats individuels varient en fonction du marché, de la qualité des prospects et de la façon dont vous utilisez la plateforme. Nous suivons les métriques à mesure que nous nous développons."
+        },
+        q6: {
+          question: "Quelles certifications avez-vous réellement?",
+          answer: "Nous sommes construits sur une infrastructure conforme SOC 2 Type II et suivons les exigences de la LPRPDE. Notre intégration CREA DDF® est compatible avec les flux de données officiels. Alors que nous quittons la bêta, nous compléterons des audits tiers formels et afficherons des badges de certification."
+        },
+        q7: {
           question: "L'IA sonne-t-elle robotique?",
           answer: "Notre IA utilise un traitement du langage naturel avancé et sonne remarquablement humaine. Pour les appels vocaux, nous utilisons des voix à accent canadien que les clients trouvent chaleureuses et professionnelles."
         },
-        q2: {
+        q8: {
           question: "Combien de temps prend la configuration?",
           answer: "La plupart des agents sont pleinement opérationnels en 20 minutes. Notre assistant de configuration vous guide dans la connexion de vos outils, la formation de l'IA sur vos annonces et la personnalisation des réponses."
         },
-        q3: {
+        q9: {
           question: "Que se passe-t-il si l'IA ne peut pas répondre à une question?",
           answer: "L'IA transmet de manière transparente les questions complexes vers vous par SMS ou téléphone. Elle fournit le contexte complet de la conversation afin que vous puissiez reprendre exactement là où elle s'est arrêtée."
         },
-        q4: {
+        q10: {
           question: "Est-ce conforme à la LCAP?",
           answer: "Absolument. RealtorDesk.ai est construit spécifiquement pour les réglementations canadiennes. Tous les emails incluent une identification appropriée de l'expéditeur, un suivi du consentement et des options de désinscription faciles."
         },
-        q5: {
+        q11: {
           question: "Avec quels CRM vous intégrez-vous?",
           answer: "Nous nous intégrons actuellement avec Follow Up Boss, Brivity, LionDesk et RealtyJuggler - les CRM les plus populaires parmi les agents canadiens."
         },
-        q6: {
+        q12: {
           question: "Puis-je personnaliser les réponses de l'IA?",
           answer: "Oui! Vous contrôlez la personnalité de l'IA, les modèles de réponse et les questions qu'elle gère par rapport à celles qu'elle vous transmet. Elle apprend votre style au fil du temps."
         }

@@ -29,6 +29,30 @@ const MobileOptimizedFAQ = () => {
     {
       q: t('faq.q6.question'),
       a: t('faq.q6.answer')
+    },
+    {
+      q: t('faq.q7.question'),
+      a: t('faq.q7.answer')
+    },
+    {
+      q: t('faq.q8.question'),
+      a: t('faq.q8.answer')
+    },
+    {
+      q: t('faq.q9.question'),
+      a: t('faq.q9.answer')
+    },
+    {
+      q: t('faq.q10.question'),
+      a: t('faq.q10.answer')
+    },
+    {
+      q: t('faq.q11.question'),
+      a: t('faq.q11.answer')
+    },
+    {
+      q: t('faq.q12.question'),
+      a: t('faq.q12.answer')
     }
   ];
 
