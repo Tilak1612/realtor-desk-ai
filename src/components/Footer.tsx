@@ -14,7 +14,7 @@ const Footer = () => {
             <Link to="/" className="flex items-center mb-4">
               <img 
                 src={logo} 
-                alt="Realtor Desk AI" 
+                alt="RealtorDesk AI Logo - AI-Powered Platform for Canadian Realtors" 
                 className="h-10 w-auto"
               />
             </Link>

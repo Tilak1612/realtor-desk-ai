@@ -42,7 +42,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 group shrink-0">
             <img 
               src={logo} 
-              alt="Realtor Desk AI" 
+              alt="RealtorDesk AI Logo - Canadian Real Estate AI Platform" 
               className="h-8 sm:h-9 md:h-11 lg:h-12 w-auto group-hover:scale-105 transition-transform"
             />
             <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold gradient-text whitespace-nowrap">

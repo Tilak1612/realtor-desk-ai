@@ -98,7 +98,7 @@ const Index = () => {
       <CanadianSection />
 
       {/* Credibility Section */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background" aria-label="Security and Compliance">
         <div className="container-custom">
           <h2 className="text-center mb-12">{t('home.credibility.title')}</h2>
           
@@ -129,7 +129,7 @@ const Index = () => {
       </section>
 
       {/* Live Demo Section - Mobile Optimized */}
-      <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
+      <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5" aria-label="Product Demo">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl">{t('home.demo.title')}</h2>
@@ -144,8 +144,9 @@ const Index = () => {
             >
               <img 
                 src={demoShowcase} 
-                alt="Realtor Desk AI Platform Demo - Dashboard showing property analytics, AI chat, and client management"
+                alt="RealtorDesk AI platform demo showcasing AI chatbot for property inquiries, lead scoring dashboard, and automated client management for Canadian real estate agents"
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 group-active:bg-black/60 transition-colors">
                 <div className="text-center">
@@ -195,7 +196,7 @@ const Index = () => {
       <DemoBookingSection />
 
       {/* Problem Statement Section */}
-      <section className="section-padding bg-muted">
+      <section className="section-padding bg-muted" aria-label="Industry Challenges">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="mb-4">The Hidden Costs of Outdated Real Estate Technology</h2>
@@ -233,7 +234,7 @@ const Index = () => {
       <HowItWorksSection />
 
       {/* Solution Overview Section */}
-      <section className="section-padding">
+      <section className="section-padding" aria-label="AI Features and Capabilities">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="mb-4">Meet Your AI-Powered Real Estate Operating System</h2>
@@ -266,7 +267,7 @@ const Index = () => {
       </section>
 
       {/* ROI Calculator Section */}
-      <section className="section-padding bg-muted">
+      <section className="section-padding bg-muted" aria-label="ROI Calculator">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto animate-fade-in-up">
             <ROICalculator />
@@ -283,7 +284,7 @@ const Index = () => {
       <MobileOptimizedFAQ />
 
       {/* Security & API Documentation Section */}
-      <section className="section-padding bg-background border-y">
+      <section className="section-padding bg-background border-y" aria-label="Security and Integration Documentation">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="mb-4">Enterprise-Grade Security & Developer Tools</h2>

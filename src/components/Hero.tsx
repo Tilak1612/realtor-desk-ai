@@ -76,7 +76,7 @@ const Hero = () => {
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl">
               <img
                 src={heroDashboard}
-                alt="Realtor Desk AI Dashboard showing AI analytics, property listings, and chat interface"
+                alt="RealtorDesk AI dashboard interface for Canadian realtors showing AI-powered lead scoring, bilingual chatbot, property analytics, and automated client management system"
                 className="w-full h-auto"
               />
               {/* Beta Badge Overlay */}

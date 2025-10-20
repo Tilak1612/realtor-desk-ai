@@ -20,8 +20,9 @@ const UnifiedDashboardSection = () => {
         <div className="relative max-w-6xl mx-auto mb-12">
           <img
             src={heroDashboard}
-            alt="Realtor Desk AI Unified Dashboard"
+            alt="RealtorDesk AI unified dashboard showing AI lead scoring, unified inbox, real-time alerts, and property management tools for Canadian realtors"
             className="w-full rounded-2xl shadow-2xl"
+            loading="lazy"
           />
           
           {/* Floating Callout Badges */}

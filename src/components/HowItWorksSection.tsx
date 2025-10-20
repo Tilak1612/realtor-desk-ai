@@ -99,8 +99,9 @@ const HowItWorksSection = () => {
                 <div className="rounded-lg overflow-hidden mb-4 shadow-md">
                   <img 
                     src={step.visual} 
-                    alt={`${step.title} screenshot`}
+                    alt={`RealtorDesk AI ${step.title} - ${step.details[0]} for Canadian realtors`}
                     className="w-full h-40 object-cover"
+                    loading="lazy"
                   />
                 </div>
 

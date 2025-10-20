@@ -12,3 +12,27 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap location
+Sitemap: https://realtordesk.ai/sitemap.xml
+
+# Disallow admin and backend pages
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /settings/
+Disallow: /billing/
+Disallow: /api/
+
+# Allow SEO-important pages
+Allow: /
+Allow: /features
+Allow: /pricing
+Allow: /how-it-works
+Allow: /demo
+Allow: /integrations
+Allow: /resources
+Allow: /signup
+Allow: /contact
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1
