@@ -37,6 +37,26 @@ const Contact = () => {
 
       if (error) throw error;
 
+      // Sync to HubSpot in background (don't block on this)
+      supabase.functions
+        .invoke("hubspot-sync", {
+          body: {
+            email: formData.email,
+            fullName: formData.name,
+            phone: formData.phone || "",
+            province: "", // Not collected in contact form
+            comments: formData.message,
+          },
+        })
+        .then((response) => {
+          if (response.error) {
+            console.error("HubSpot sync error:", response.error);
+          } else {
+            console.log("Successfully synced to HubSpot");
+          }
+        })
+        .catch((err) => console.error("HubSpot sync failed:", err));
+
       toast({
         title: "Message Sent! ✅",
         description: "Thanks for reaching out! We'll get back to you within 24 hours.",
