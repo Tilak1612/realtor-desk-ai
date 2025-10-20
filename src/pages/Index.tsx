@@ -73,6 +73,11 @@ const Index = () => {
               <span className="text-muted-foreground text-center sm:text-left">Limited Beta Spots Available</span>
             </div>
           </div>
+          
+          {/* Testimonials Disclaimer */}
+          <p className="text-xs text-[#6B7280] text-center mt-8 max-w-3xl mx-auto">
+            *Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.
+          </p>
         </div>
       </section>
 
@@ -238,6 +243,11 @@ const Index = () => {
               company="Century 21 Vancouver"
             />
           </div>
+          
+          {/* Testimonials Disclaimer */}
+          <p className="text-xs text-[#6B7280] text-center mt-8 max-w-3xl mx-auto">
+            *Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.
+          </p>
         </div>
       </section>
 
@@ -317,6 +327,11 @@ const Index = () => {
         <div className="container-custom">
           <div className="max-w-5xl mx-auto animate-fade-in-up">
             <ROICalculator />
+            
+            {/* ROI Disclaimer */}
+            <p className="text-xs text-[#6B7280] text-center mt-8">
+              *ROI calculations are projections based on industry averages and pilot program data. Actual results depend on market conditions, lead quality, individual effort, and other factors. Past performance does not guarantee future results.
+            </p>
           </div>
         </div>
       </section>
@@ -450,6 +465,18 @@ const Index = () => {
           <p className="mt-6 text-sm text-white/80 font-semibold">
             ⚡ Limited spots available this month • Join 14 agents who signed up this week
           </p>
+        </div>
+      </section>
+
+      {/* Beta Program Notice */}
+      <section className="py-8 bg-muted/50 border-t">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-sm font-semibold text-foreground mb-3">Beta Program Notice</h3>
+            <p className="text-xs text-[#6B7280] leading-relaxed">
+              RealtorDesk AI is currently in public beta. We're continuously improving based on user feedback. All features, pricing, and metrics are subject to change. Early adopters receive special lifetime pricing.
+            </p>
+          </div>
         </div>
       </section>
 
