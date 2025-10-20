@@ -28,8 +28,8 @@ import {
 } from "lucide-react";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
-// YouTube Video Configuration - Replace with your actual video URL
-const DEMO_VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE";
+// Demo Video - Professional CRM Demo
+const DEMO_VIDEO_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
 
 const Index = () => {
   const { t } = useTranslation();

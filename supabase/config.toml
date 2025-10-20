@@ -20,3 +20,12 @@ verify_jwt = false
 
 [functions.claude-chat]
 verify_jwt = true
+
+[functions.ai-chatbot]
+verify_jwt = true
+
+[functions.email-automation]
+verify_jwt = true
+
+[functions.lead-score-calculator]
+verify_jwt = true
