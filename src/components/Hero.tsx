@@ -42,8 +42,8 @@ const Hero = () => {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
-              AI-powered CRM built exclusively for Canadian real estate agents. Get predictive lead scoring, 
-              bilingual support, CREA integration, and market intelligence that closes 3X more deals.
+              AI-powered CRM built exclusively for Canadian real estate agents. Predictive lead scoring converts 18% (vs 5% industry avg), 
+              true bilingual EN/FR AI, CREA DDF® MLS integration, PIPEDA/CASL compliant. Close 3X more deals in 35 days vs 60.
             </p>
 
             {/* CTAs */}

@@ -175,18 +175,34 @@ const Index = () => {
         <div className="container-custom">
           <h2 className="text-center mb-12">Trusted by 500+ Canadian Real Estate Professionals</h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center max-w-4xl mx-auto mb-16 opacity-60">
-            <div className="text-center">
-              <FileText className="w-16 h-16 mx-auto mb-2" />
-              <p className="font-semibold">CREA Certified</p>
-            </div>
-            <div className="text-center">
-              <CheckCircle className="w-16 h-16 mx-auto mb-2" />
-              <p className="font-semibold">Google Partner</p>
-            </div>
-            <div className="text-center">
-              <Brain className="w-16 h-16 mx-auto mb-2" />
-              <p className="font-semibold">Microsoft AI</p>
+          {/* Integration Logos */}
+          <div className="mb-12">
+            <p className="text-center text-sm text-muted-foreground mb-8">Seamlessly integrates with your existing tools</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center max-w-5xl mx-auto opacity-70">
+              <div className="text-center">
+                <Brain className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-xs font-semibold">CREA DDF®</p>
+              </div>
+              <div className="text-center">
+                <FileText className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-xs font-semibold">Brivity CRM</p>
+              </div>
+              <div className="text-center">
+                <CheckCircle className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-xs font-semibold">Follow Up Boss</p>
+              </div>
+              <div className="text-center">
+                <MessageSquare className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-xs font-semibold">Gmail/Outlook</p>
+              </div>
+              <div className="text-center">
+                <ClipboardCheck className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-xs font-semibold">Google Calendar</p>
+              </div>
+              <div className="text-center">
+                <Shield className="w-12 h-12 mx-auto mb-2" />
+                <p className="text-xs font-semibold">Zillow/Realtor.ca</p>
+              </div>
             </div>
           </div>
 
@@ -296,20 +312,20 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
               icon={Brain}
-              title="Predictive Lead Intelligence"
-              description="AI identifies high-probability buyers/sellers 3-6 months before they list, increasing conversion rates from 5% to 18%"
+              title="Predictive Lead Scoring"
+              description="AI analyzes 40+ signals to identify hot leads 3-6 months early. Converts 18% vs industry 5%. Built on 500,000+ Canadian transactions"
               gradient
             />
             <FeatureCard
               icon={MessageSquare}
-              title="24/7 Bilingual AI Agent"
-              description="Engage leads in English or French, qualify prospects, and schedule showings automatically - even at 2 AM"
+              title="24/7 Bilingual AI Chatbot"
+              description="Captures leads in EN/FR, qualifies buyers, schedules showings, answers 200+ property questions. Never miss a 2 AM inquiry again"
               gradient
             />
             <FeatureCard
               icon={ClipboardCheck}
-              title="Intelligent Transaction Management"
-              description="Reduce closing time from 60 days to 35 days with AI-powered coordination and risk prediction"
+              title="Smart Transaction Coordinator"
+              description="Automate status updates, document requests, deadline tracking. Cut closing time from 60 to 35 days with 99% accuracy"
               gradient
             />
           </div>
@@ -396,37 +412,106 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Canadian-Specific Features Section */}
-      <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
+      {/* Security & API Documentation Section */}
+      <section className="section-padding bg-background border-y">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="mb-4">Built for the Canadian Real Estate Market</h2>
+            <h2 className="mb-4">Enterprise-Grade Security & Developer Tools</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Not adapted - designed from the ground up for Canadian realtors
+              Built for scale, secured for compliance, ready for integration
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <FeatureCard
-              icon={FileText}
-              title="CREA DDF® Integration"
-              description="Access national MLS data seamlessly"
-            />
-            <FeatureCard
-              icon={CheckCircle}
-              title="Provincial Compliance Engine"
-              description="Automatic adherence to RECO, BCFSA, RECA regulations"
-            />
-            <FeatureCard
-              icon={MessageSquare}
-              title="True Bilingual AI"
-              description="Not just translation, contextual English-French communication"
-            />
-            <FeatureCard
-              icon={MapPin}
-              title="Canadian Market Intelligence"
-              description="CMHC data, Bank of Canada rates, provincial policies integrated"
-            />
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Security Section */}
+            <Card className="p-8">
+              <Shield className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold mb-4">Security & Compliance</h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>SOC 2 Type II Certified:</strong> Annual audits, penetration testing, 99.9% uptime SLA</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>PIPEDA Compliant:</strong> Right to access, delete, data portability. Breach notification &lt;72hrs</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>CASL Compliant:</strong> Express consent tracking, auto-unsubscribe, 24-month proof retention</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Canadian Data Centers:</strong> All data stored in Toronto/Vancouver. No cross-border transfer</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Encryption:</strong> TLS 1.3 in transit, AES-256 at rest, end-to-end for sensitive docs</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Access Control:</strong> Role-based permissions, 2FA, SSO (Enterprise), audit logs</span>
+                </li>
+              </ul>
+            </Card>
+
+            {/* API & Integrations */}
+            <Card className="p-8">
+              <Brain className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-bold mb-4">API & Integration Capabilities</h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>REST API:</strong> Full CRUD access to contacts, deals, tasks. Rate limit: 1000 req/min</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Webhooks:</strong> Real-time events (new lead, deal closed, task overdue)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>CRM Sync:</strong> Pre-built connectors for Brivity, Follow Up Boss, Salesforce, HubSpot</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Calendar Integration:</strong> 2-way sync with Google/Outlook. Auto-create Zoom links</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Email Platforms:</strong> Gmail, Outlook, MailChimp, SendGrid. SMTP/IMAP support</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><strong>Documentation:</strong> Interactive API docs, SDK (JavaScript/Python), Postman collection</span>
+                </li>
+              </ul>
+              <Link to="/features" className="mt-4 inline-block">
+                <Button variant="outline" size="sm">View Integration Library</Button>
+              </Link>
+            </Card>
+          </div>
+
+          {/* Performance Metrics */}
+          <div className="bg-muted/50 rounded-xl p-8 text-center">
+            <h3 className="text-xl font-bold mb-6">Platform Performance</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div>
+                <div className="text-3xl font-bold text-primary mb-1">99.9%</div>
+                <div className="text-sm text-muted-foreground">Uptime SLA</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-1">&lt;2s</div>
+                <div className="text-sm text-muted-foreground">AI Response Time</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-1">10K+</div>
+                <div className="text-sm text-muted-foreground">Concurrent Users</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-1">24/7</div>
+                <div className="text-sm text-muted-foreground">Support (Enterprise)</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
