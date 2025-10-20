@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
+import TrustTransparencySection from "@/components/TrustTransparencySection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 // Demo Video - Professional CRM Demo
@@ -88,6 +89,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Trust & Transparency Section */}
+      <TrustTransparencySection />
 
       {/* Problem Section */}
       <ProblemSection />
