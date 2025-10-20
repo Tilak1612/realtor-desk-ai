@@ -34,6 +34,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import TrustTransparencySection from "@/components/TrustTransparencySection";
 import BetaSuccessStories from "@/components/BetaSuccessStories";
+import DemoBookingSection from "@/components/DemoBookingSection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 // Demo Video - Professional CRM Demo
@@ -189,6 +190,9 @@ const Index = () => {
 
       {/* Beta Success Stories Section */}
       <BetaSuccessStories />
+
+      {/* Demo Booking Section */}
+      <DemoBookingSection />
 
       {/* Problem Statement Section */}
       <section className="section-padding bg-muted">
