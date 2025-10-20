@@ -17,17 +17,17 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary: Blue 600 - Trust & Technology */
-    --primary: 217 91% 60%;
+    /* Primary: Teal - Trust & Technology */
+    --primary: 188 94% 43%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 221 83% 53%;
+    --primary-hover: 188 85% 35%;
 
-    /* Secondary: Purple 600 - Innovation & AI */
-    --secondary: 258 90% 66%;
+    /* Secondary: Dark Blue - Professionalism */
+    --secondary: 217 91% 12%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Accent: Emerald 500 - Success & Growth */
-    --accent: 158 64% 52%;
+    /* Accent: Orange - Action & Energy */
+    --accent: 20 95% 57%;
     --accent-foreground: 0 0% 100%;
 
     --muted: 220 14% 96%;
@@ -43,15 +43,15 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(258 90% 66%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(188 94% 43%) 0%, hsl(217 91% 12%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(220 14% 99%) 0%, hsl(220 14% 96%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60% / 0.1) 0%, hsl(258 90% 66% / 0.1) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 12%) 0%, hsl(188 94% 43%) 100%);
 
     /* Shadows */
     --shadow-soft: 0 4px 6px -1px hsl(220 9% 46% / 0.1), 0 2px 4px -1px hsl(220 9% 46% / 0.06);
     --shadow-medium: 0 10px 15px -3px hsl(220 9% 46% / 0.1), 0 4px 6px -2px hsl(220 9% 46% / 0.05);
     --shadow-large: 0 20px 25px -5px hsl(220 9% 46% / 0.1), 0 10px 10px -5px hsl(220 9% 46% / 0.04);
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
+    --shadow-glow: 0 0 40px hsl(188 94% 43% / 0.3);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -68,14 +68,14 @@ All colors MUST be HSL.
     --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
+    --primary: 188 94% 43%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 221 83% 53%;
+    --primary-hover: 188 85% 35%;
 
-    --secondary: 258 90% 66%;
+    --secondary: 217 91% 12%;
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 158 64% 52%;
+    --accent: 20 95% 57%;
     --accent-foreground: 0 0% 100%;
 
     --muted: 217 33% 17%;
@@ -88,14 +88,14 @@ All colors MUST be HSL.
     --input: 217 33% 17%;
     --ring: 224 77% 64%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(258 90% 66%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(188 94% 43%) 0%, hsl(217 91% 12%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(217 33% 20%) 0%, hsl(217 33% 17%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60% / 0.15) 0%, hsl(258 90% 66% / 0.15) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 12%) 0%, hsl(188 94% 43%) 100%);
 
     --shadow-soft: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
     --shadow-medium: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -2px hsl(0 0% 0% / 0.3);
     --shadow-large: 0 20px 25px -5px hsl(0 0% 0% / 0.5), 0 10px 10px -5px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.4);
+    --shadow-glow: 0 0 40px hsl(188 94% 43% / 0.4);
   }
 }
 
