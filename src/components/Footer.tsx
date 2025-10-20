@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/realtor-desk-logo.png";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-muted border-t">
       <div className="container-custom py-12 md:py-16">
@@ -17,7 +19,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
-              AI-powered solutions for Canadian real estate professionals.
+              {t('footer.tagline')}
             </p>
             <p className="text-xs text-muted-foreground italic mb-4">
               Powered by Brainfy AI Inc
@@ -64,26 +66,26 @@ const Footer = () => {
 
           {/* Product */}
           <div>
-            <h3 className="font-semibold mb-4">Product</h3>
+            <h3 className="font-semibold mb-4">{t('footer.product')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/features" className="text-muted-foreground hover:text-primary transition-colors">
-                  Features
+                  {t('footer.features')}
                 </Link>
               </li>
               <li>
                 <Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors">
-                  Pricing
+                  {t('footer.pricing')}
                 </Link>
               </li>
               <li>
-                <Link to="/canadian-market" className="text-muted-foreground hover:text-primary transition-colors">
-                  Canadian Market
+                <Link to="/how-it-works" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('footer.howItWorks')}
                 </Link>
               </li>
               <li>
                 <Link to="/demo" className="text-muted-foreground hover:text-primary transition-colors">
-                  Request Demo
+                  {t('nav.bookDemo')}
                 </Link>
               </li>
             </ul>
@@ -91,26 +93,21 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
+            <h3 className="font-semibold mb-4">{t('footer.resources')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/resources" className="text-muted-foreground hover:text-primary transition-colors">
-                  Blog
+                  {t('footer.blog')}
                 </Link>
               </li>
               <li>
                 <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors">
-                  Integrations
+                  {t('footer.integrations')}
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  System Status
+                  {t('footer.helpCenter')}
                 </Link>
               </li>
             </ul>
@@ -118,7 +115,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">Contact Us</h3>
+            <h3 className="font-semibold mb-4">{t('footer.contact')}</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
@@ -140,7 +137,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/contact" className="text-primary hover:text-primary/80 transition-colors font-medium">
-                  Contact Form →
+                  {t('footer.contact')} →
                 </Link>
               </li>
             </ul>
@@ -151,17 +148,17 @@ const Footer = () => {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2025 Realtor Desk AI. All rights reserved.
+              {t('footer.copyright')}
             </p>
             <div className="flex gap-6 text-sm">
               <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
-                Privacy Policy
+                {t('footer.privacy')}
               </Link>
               <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
-                Terms of Service
+                {t('footer.terms')}
               </Link>
               <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                Contact
+                {t('footer.contact')}
               </Link>
             </div>
           </div>

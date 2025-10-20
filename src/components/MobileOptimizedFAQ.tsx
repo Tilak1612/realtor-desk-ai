@@ -1,39 +1,34 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const MobileOptimizedFAQ = () => {
+  const { t } = useTranslation();
+  
   const faqs = [
     {
-      q: "Does the AI sound robotic?",
-      a: "Our AI uses advanced natural language processing and sounds remarkably human. For voice calls, we use Canadian-accented voices that clients find warm and professional. You can listen to samples before going live."
+      q: t('faq.q1.question'),
+      a: t('faq.q1.answer')
     },
     {
-      q: "How long does setup take?",
-      a: "Most agents are fully operational within 20 minutes. Our setup wizard guides you through connecting your tools, training the AI on your listings, and customizing responses."
+      q: t('faq.q2.question'),
+      a: t('faq.q2.answer')
     },
     {
-      q: "What if the AI can't answer?",
-      a: "The AI seamlessly escalates complex questions to you via SMS or phone. It provides full conversation context so you can pick up exactly where it left off."
+      q: t('faq.q3.question'),
+      a: t('faq.q3.answer')
     },
     {
-      q: "Is this CASL compliant?",
-      a: "Absolutely. RealtorDesk.ai is built specifically for Canadian regulations. All emails include proper sender identification, consent tracking, and easy unsubscribe options."
+      q: t('faq.q4.question'),
+      a: t('faq.q4.answer')
     },
     {
-      q: "Which CRMs do you integrate with?",
-      a: "We currently integrate with Follow Up Boss, Brivity, LionDesk, and RealtyJuggler - the most popular CRMs among Canadian agents. Additional integrations are added monthly."
+      q: t('faq.q5.question'),
+      a: t('faq.q5.answer')
     },
     {
-      q: "Can I customize the AI's responses?",
-      a: "Yes! You control the AI's personality, response templates, and which questions it handles vs. escalates to you. It learns your style over time."
-    },
-    {
-      q: "What about data privacy?",
-      a: "All data is encrypted and stored on Canadian servers. We're PIPEDA certified and never sell or share your client information. You maintain full ownership of your data."
-    },
-    {
-      q: "Can I cancel anytime?",
-      a: "Yes, there are no long-term contracts. Cancel anytime with 30 days notice. We'll even help you export your data if you leave."
+      q: t('faq.q6.question'),
+      a: t('faq.q6.answer')
     }
   ];
 
@@ -41,10 +36,7 @@ const MobileOptimizedFAQ = () => {
     <section className="section-padding bg-muted">
       <div className="container-custom max-w-4xl">
         <div className="text-center mb-8 sm:mb-12 animate-fade-in-up">
-          <h2 className="mb-3 sm:mb-4">Frequently Asked Questions</h2>
-          <p className="text-base sm:text-lg text-muted-foreground">
-            Everything you need to know about Realtor Desk AI
-          </p>
+          <h2 className="mb-3 sm:mb-4">{t('faq.title')}</h2>
         </div>
         
         <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">

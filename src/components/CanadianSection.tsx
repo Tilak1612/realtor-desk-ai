@@ -1,15 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { MapPin, Globe, Shield, Map, FileCheck, DollarSign } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CanadianSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="section-padding bg-background">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4">Built for the Canadian Market 🇨🇦</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Not just another US tool adapted for Canada. Purpose-built for Canadian realtors from day one.
-          </p>
+          <h2 className="mb-4">{t('canadian.title')} 🇨🇦</h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -17,60 +16,42 @@ const CanadianSection = () => {
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <Globe className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">Bilingual Support (EN/FR)</h3>
-            <p className="text-sm text-muted-foreground">
-              AI that truly understands both English and French, not just translation
-            </p>
+            <h3 className="font-bold mb-2">{t('canadian.bilingual')}</h3>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <FileCheck className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">CREA DDF® Integration</h3>
-            <p className="text-sm text-muted-foreground">
-              Native integration with Canadian MLS systems across all provinces
-            </p>
+            <h3 className="font-bold mb-2">{t('canadian.mls')}</h3>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <Shield className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">PIPEDA & CASL Compliant</h3>
-            <p className="text-sm text-muted-foreground">
-              Built-in compliance with Canadian privacy and anti-spam laws
-            </p>
+            <h3 className="font-bold mb-2">{t('canadian.compliant')}</h3>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <Map className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">All 6 Canadian Time Zones</h3>
-            <p className="text-sm text-muted-foreground">
-              From Newfoundland to Pacific, we cover every Canadian time zone
-            </p>
+            <h3 className="font-bold mb-2">{t('canadian.timezones')}</h3>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <FileCheck className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">CREA Code of Ethics</h3>
-            <p className="text-sm text-muted-foreground">
-              Aligned with Canadian Real Estate Association standards
-            </p>
+            <h3 className="font-bold mb-2">{t('canadian.crea')}</h3>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <DollarSign className="w-7 h-7 text-primary" />
             </div>
-            <h3 className="font-bold mb-2">Pricing in CAD</h3>
-            <p className="text-sm text-muted-foreground">
-              Transparent Canadian dollar pricing, no currency conversion surprises
-            </p>
+            <h3 className="font-bold mb-2">{t('canadian.pricing')}</h3>
           </Card>
         </div>
 

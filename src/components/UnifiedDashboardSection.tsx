@@ -2,15 +2,17 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Inbox, TrendingUp, Bell, MessageSquare, Zap } from "lucide-react";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+import { useTranslation } from "react-i18next";
 
 const UnifiedDashboardSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4">Everything in One Place</h2>
+          <h2 className="mb-4">{t('dashboard.title')}</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Stop switching between tools. Manage all conversations, leads, and deals from a single powerful dashboard.
+            {t('dashboard.subtitle')}
           </p>
         </div>
 
@@ -43,32 +45,27 @@ const UnifiedDashboardSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
           <Card className="p-6 text-center card-hover">
             <MessageSquare className="w-10 h-10 text-primary mx-auto mb-3" />
-            <h4 className="font-bold mb-2">All Conversations</h4>
-            <p className="text-sm text-muted-foreground">Chat, voice, email in one view</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.feature1')}</p>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <TrendingUp className="w-10 h-10 text-primary mx-auto mb-3" />
-            <h4 className="font-bold mb-2">Lead Scoring</h4>
-            <p className="text-sm text-muted-foreground">AI highlights hot prospects</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.feature2')}</p>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <Bell className="w-10 h-10 text-primary mx-auto mb-3" />
-            <h4 className="font-bold mb-2">Smart Alerts</h4>
-            <p className="text-sm text-muted-foreground">Urgent inquiries prioritized</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.feature3')}</p>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <Zap className="w-10 h-10 text-primary mx-auto mb-3" />
-            <h4 className="font-bold mb-2">Quick Responses</h4>
-            <p className="text-sm text-muted-foreground">One-click templates</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.feature4')}</p>
           </Card>
 
           <Card className="p-6 text-center card-hover">
             <TrendingUp className="w-10 h-10 text-primary mx-auto mb-3" />
-            <h4 className="font-bold mb-2">ROI Analytics</h4>
-            <p className="text-sm text-muted-foreground">Performance tracking</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.feature5')}</p>
           </Card>
         </div>
       </div>

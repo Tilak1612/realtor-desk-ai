@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Play, MapPin } from "lucide-react";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
   return (
     <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-12 sm:pb-16 md:pb-20 lg:pb-28 overflow-hidden">
       {/* Background Gradient */}
@@ -24,45 +26,43 @@ const Hero = () => {
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
               <span className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-[10px] sm:text-xs font-medium">
                 <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" />
-                <span className="whitespace-nowrap">CREA Certified</span>
+                <span className="whitespace-nowrap">{t('hero.badge1')}</span>
               </span>
               <span className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-[10px] sm:text-xs font-medium">
                 <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" />
-                <span className="whitespace-nowrap">SOC 2 Compliant</span>
+                <span className="whitespace-nowrap">{t('hero.badge2')}</span>
               </span>
               <span className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full bg-accent/10 text-accent text-[10px] sm:text-xs font-medium">
                 <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" />
-                <span className="whitespace-nowrap">500+ Canadian Agents</span>
+                <span className="whitespace-nowrap">{t('hero.badge3')}</span>
               </span>
             </div>
 
             <h1 className="mb-3 sm:mb-4 md:mb-6 leading-[1.1] sm:leading-tight">
-              Canada's Most Intelligent{" "}
-              <span className="gradient-text">Real Estate CRM</span>
+              {t('hero.title')}
             </h1>
 
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-4 sm:mb-6 md:mb-8 leading-relaxed">
-              AI-powered CRM built exclusively for Canadian real estate agents. Predictive lead scoring converts 18% (vs 5% industry avg), 
-              true bilingual EN/FR AI, CREA DDF® MLS integration, PIPEDA/CASL compliant. Close 3X more deals in 35 days vs 60.
+              {t('hero.subtitle')}
             </p>
 
             {/* CTAs - Mobile Optimized */}
             <div className="flex flex-col sm:flex-row gap-3 mb-4 sm:mb-6 md:mb-8">
               <Link to="/signup" className="w-full sm:w-auto">
                 <Button size="lg" className="btn-gradient text-base sm:text-lg w-full sm:w-auto min-h-[52px] sm:min-h-[56px]">
-                  Start Free Trial
+                  {t('hero.getStarted')}
                 </Button>
               </Link>
               <Link to="/demo" className="w-full sm:w-auto">
                 <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto min-h-[52px] sm:min-h-[56px]">
-                  Watch Demo
+                  {t('hero.watchDemo')}
                 </Button>
               </Link>
             </div>
 
             {/* Trust Line */}
             <p className="text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed">
-              <strong>No setup fees</strong> • <strong>No credit card</strong> • <strong>30-day guarantee</strong>
+              {t('hero.trustLine')}
             </p>
           </div>
 
@@ -77,7 +77,7 @@ const Hero = () => {
               {/* Floating Badge - Mobile Optimized */}
               <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-background/95 backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-scale-in animation-delay-400">
                 <div className="text-lg sm:text-xl md:text-2xl font-bold gradient-text leading-none">300%</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">Increase</div>
+                <div className="text-[10px] sm:text-xs text-muted-foreground mt-1">{t('hero.conversionBadge').split(' ')[1]}</div>
               </div>
             </div>
 

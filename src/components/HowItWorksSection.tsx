@@ -1,34 +1,37 @@
 import { UserPlus, Link as LinkIcon, Brain, Rocket } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const HowItWorksSection = () => {
+  const { t } = useTranslation();
+  
   const steps = [
     {
       number: 1,
       icon: UserPlus,
-      title: "Sign Up",
-      time: "2 min",
-      description: "Create account, choose plan"
+      title: t('howItWorks.step1.title'),
+      time: t('howItWorks.step1.time'),
+      description: t('howItWorks.step1.description')
     },
     {
       number: 2,
       icon: LinkIcon,
-      title: "Connect Tools",
-      time: "5 min",
-      description: "Link CRM, email, website"
+      title: t('howItWorks.step2.title'),
+      time: t('howItWorks.step2.time'),
+      description: t('howItWorks.step2.description')
     },
     {
       number: 3,
       icon: Brain,
-      title: "Train Your AI",
-      time: "10 min",
-      description: "Add properties, FAQs, style"
+      title: t('howItWorks.step3.title'),
+      time: t('howItWorks.step3.time'),
+      description: t('howItWorks.step3.description')
     },
     {
       number: 4,
       icon: Rocket,
-      title: "Go Live",
-      time: "Instant",
-      description: "Start capturing leads 24/7"
+      title: t('howItWorks.step4.title'),
+      time: t('howItWorks.step4.time'),
+      description: t('howItWorks.step4.description')
     }
   ];
 
@@ -36,10 +39,7 @@ const HowItWorksSection = () => {
     <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
       <div className="container-custom">
         <div className="text-center mb-8 sm:mb-12 animate-fade-in-up">
-          <h2 className="mb-3 sm:mb-4">Get Up and Running in 20 Minutes</h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
-            From signup to capturing leads - faster than driving to a showing
-          </p>
+          <h2 className="mb-3 sm:mb-4">{t('howItWorks.title')}</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">

@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: t('nav.features'), path: "/features" },
-    { name: "How It Works", path: "/how-it-works" },
+    { name: t('footer.howItWorks'), path: "/how-it-works" },
     { name: t('nav.pricing'), path: "/pricing" },
     { name: t('nav.integrations'), path: "/integrations" },
     { name: t('nav.resources'), path: "/resources" },
