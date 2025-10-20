@@ -22,11 +22,8 @@ type SignupForm = z.infer<typeof signupSchema>;
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<Partial<SignupForm> & { tier?: string }>({
-    tier: "agent",
-  });
+  const [formData, setFormData] = useState<Partial<SignupForm>>({});
   const [errors, setErrors] = useState<Partial<Record<keyof SignupForm, string>>>({});
 
   const validateStep1 = () => {
@@ -65,7 +62,6 @@ const Signup = () => {
 
   const handleSignup = async () => {
     if (!validateStep1()) {
-      setStep(1);
       return;
     }
 
@@ -81,7 +77,6 @@ const Signup = () => {
             full_name: formData.fullName,
             phone: formData.phone,
             company_name: formData.companyName,
-            subscription_tier: formData.tier,
           },
         },
       });
@@ -106,17 +101,14 @@ const Signup = () => {
         <Card className="w-full max-w-lg">
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold text-center">
-              {step === 1 ? "Create your account" : "Choose your plan"}
+              Create your account
             </CardTitle>
             <CardDescription className="text-center">
-              {step === 1
-                ? "Start your 60-day free trial today"
-                : "Select the plan that fits your needs"}
+              Start your 60-day free trial today
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {step === 1 && (
-              <>
+            <>
                 <div className="space-y-4">
                   <Button
                     variant="outline"
@@ -219,93 +211,12 @@ const Signup = () => {
 
                 <Button
                   className="w-full"
-                  onClick={() => {
-                    if (validateStep1()) setStep(2);
-                  }}
+                  onClick={handleSignup}
+                  disabled={loading}
                 >
-                  Continue
+                  {loading ? "Creating account..." : "Create Account"}
                 </Button>
               </>
-            )}
-
-            {step === 2 && (
-              <>
-                <div className="space-y-4">
-                  <Card
-                    className={`cursor-pointer transition-all border-2 ${
-                      formData.tier === "agent"
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                    onClick={() => setFormData({ ...formData, tier: "agent" })}
-                  >
-                    <CardHeader>
-                      <CardTitle>Agent Plan</CardTitle>
-                      <CardDescription>Perfect for individual realtors</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-3xl font-bold">$699/year</p>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        60-day free trial included
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card
-                    className={`cursor-pointer transition-all border-2 ${
-                      formData.tier === "team"
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                    onClick={() => setFormData({ ...formData, tier: "team" })}
-                  >
-                    <CardHeader>
-                      <CardTitle>Team Plan</CardTitle>
-                      <CardDescription>For small teams and groups</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-3xl font-bold">$1,499/year</p>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        60-day free trial included
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card
-                    className={`cursor-pointer transition-all border-2 ${
-                      formData.tier === "brokerage"
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/50"
-                    }`}
-                    onClick={() => setFormData({ ...formData, tier: "brokerage" })}
-                  >
-                    <CardHeader>
-                      <CardTitle>Brokerage Plan</CardTitle>
-                      <CardDescription>Custom solution for brokerages</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-3xl font-bold">Custom Pricing</p>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Contact us for details
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1" onClick={() => setStep(1)}>
-                    Back
-                  </Button>
-                  <Button
-                    className="flex-1"
-                    onClick={handleSignup}
-                    disabled={loading}
-                  >
-                    {loading ? "Creating account..." : "Create Account"}
-                  </Button>
-                </div>
-              </>
-            )}
 
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
