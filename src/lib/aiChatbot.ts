@@ -104,7 +104,6 @@ export async function streamChatResponse({
 
     onDone();
   } catch (error: any) {
-    console.error("AI chatbot error:", error);
     onError?.(error.message || "An error occurred");
   }
 }

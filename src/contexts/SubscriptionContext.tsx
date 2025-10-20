@@ -70,7 +70,6 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
       setPriceId(data.price_id || null);
       setSubscriptionEnd(data.subscription_end || null);
     } catch (error) {
-      console.error('Error checking subscription:', error);
       setSubscribed(false);
       setProductId(null);
       setPriceId(null);

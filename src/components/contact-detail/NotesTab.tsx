@@ -38,7 +38,7 @@ const NotesTab = ({ contactId }: NotesTabProps) => {
       if (error) throw error;
       setNotes(data || []);
     } catch (error) {
-      console.error("Error fetching notes:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

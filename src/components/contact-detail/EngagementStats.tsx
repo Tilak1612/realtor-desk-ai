@@ -41,7 +41,7 @@ const EngagementStats = ({ contactId }: EngagementStatsProps) => {
         avg_session_duration: 0,
       });
     } catch (error) {
-      console.error("Error fetching engagement stats:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

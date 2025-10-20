@@ -37,7 +37,7 @@ const SimilarContacts = ({ contact }: SimilarContactsProps) => {
       if (error) throw error;
       setSimilarContacts(data || []);
     } catch (error) {
-      console.error("Error fetching similar contacts:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

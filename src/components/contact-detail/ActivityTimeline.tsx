@@ -34,7 +34,7 @@ const ActivityTimeline = ({ contactId }: ActivityTimelineProps) => {
       if (error) throw error;
       setActivities(data || []);
     } catch (error) {
-      console.error("Error fetching activities:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

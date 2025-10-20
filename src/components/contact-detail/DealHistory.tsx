@@ -32,7 +32,7 @@ const DealHistory = ({ contactId }: DealHistoryProps) => {
       if (error) throw error;
       setDeals(data || []);
     } catch (error) {
-      console.error("Error fetching deals:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

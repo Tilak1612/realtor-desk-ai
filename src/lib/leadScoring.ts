@@ -26,7 +26,6 @@ export async function calculateLeadScore(contactId: string): Promise<LeadScoreRe
 
     return data as LeadScoreResult;
   } catch (error: any) {
-    console.error("Lead scoring error:", error);
     throw new Error(error.message || "Failed to calculate lead score");
   }
 }
@@ -45,7 +44,6 @@ export async function getLeadScore(contactId: string) {
 
     return data;
   } catch (error: any) {
-    console.error("Get lead score error:", error);
     return null;
   }
 }

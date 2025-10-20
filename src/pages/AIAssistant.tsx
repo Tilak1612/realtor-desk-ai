@@ -71,7 +71,6 @@ const AIAssistant = () => {
       setMessages(prev => [...prev, assistantMessage]);
 
     } catch (error: any) {
-      console.error('Error:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to send message",

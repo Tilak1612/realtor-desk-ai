@@ -61,7 +61,6 @@ const Onboarding = () => {
       if (error) throw error;
       setProfileData({ ...profileData, ...data });
     } catch (error: any) {
-      console.error("Error saving progress:", error);
       toast.error("Failed to save progress");
     }
   };
@@ -98,7 +97,7 @@ const Onboarding = () => {
 
       toast.success("Welcome to Realtor Desk AI!");
     } catch (error: any) {
-      console.error("Error completing onboarding:", error);
+      // Error silently handled
     }
   };
 

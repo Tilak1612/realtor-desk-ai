@@ -41,7 +41,7 @@ const Billing = () => {
 
         setProfile(profileData);
       } catch (error: any) {
-        console.error(error);
+        // Error silently handled
       } finally {
         setLoading(false);
       }

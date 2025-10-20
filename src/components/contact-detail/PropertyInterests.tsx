@@ -33,7 +33,7 @@ const PropertyInterests = ({ contactId }: PropertyInterestsProps) => {
       if (error) throw error;
       setProperties(data || []);
     } catch (error) {
-      console.error("Error fetching properties:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

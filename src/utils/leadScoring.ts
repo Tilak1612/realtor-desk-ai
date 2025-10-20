@@ -12,7 +12,6 @@ export const triggerLeadScoreCalculation = async (contactId: string) => {
     if (error) throw error;
     return data;
   } catch (error) {
-    console.error("Error triggering lead score calculation:", error);
     throw error;
   }
 };

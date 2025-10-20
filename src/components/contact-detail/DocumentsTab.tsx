@@ -33,7 +33,7 @@ const DocumentsTab = ({ contactId }: DocumentsTabProps) => {
       if (error) throw error;
       setDocuments(data || []);
     } catch (error) {
-      console.error("Error fetching documents:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }

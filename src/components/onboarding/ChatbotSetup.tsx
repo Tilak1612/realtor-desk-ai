@@ -58,7 +58,6 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
       onNext();
     } catch (error: any) {
       toast.error("Failed to save chatbot settings");
-      console.error(error);
     } finally {
       setLoading(false);
     }

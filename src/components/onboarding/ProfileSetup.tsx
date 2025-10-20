@@ -63,7 +63,6 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
       toast.success("Avatar uploaded!");
     } catch (error: any) {
       toast.error("Failed to upload avatar");
-      console.error(error);
     } finally {
       setUploading(false);
     }

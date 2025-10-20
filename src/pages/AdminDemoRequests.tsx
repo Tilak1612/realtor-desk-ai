@@ -50,7 +50,6 @@ const AdminDemoRequests = () => {
       if (error) throw error;
       setRequests(data || []);
     } catch (error) {
-      console.error("Error fetching demo requests:", error);
       toast({
         title: "Error",
         description: "Failed to load demo requests. Please make sure you're logged in.",
@@ -81,7 +80,6 @@ const AdminDemoRequests = () => {
         description: "Demo request status has been updated.",
       });
     } catch (error) {
-      console.error("Error updating status:", error);
       toast({
         title: "Error",
         description: "Failed to update status.",

@@ -73,7 +73,6 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
       onNext();
     } catch (error: any) {
       toast.error("Failed to import contacts");
-      console.error(error);
     } finally {
       setLoading(false);
     }

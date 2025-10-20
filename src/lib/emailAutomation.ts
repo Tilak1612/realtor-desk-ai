@@ -18,7 +18,6 @@ export async function sendEmailCampaign(campaign: EmailCampaign) {
 
     return { success: true, data };
   } catch (error: any) {
-    console.error("Email automation error:", error);
     throw new Error(error.message || "Failed to send email campaign");
   }
 }

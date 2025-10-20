@@ -60,7 +60,6 @@ const Dashboard = () => {
         await fetchDashboardData(session.user.id);
       } catch (error: any) {
         toast.error("Failed to load profile");
-        console.error(error);
       } finally {
         setLoading(false);
       }

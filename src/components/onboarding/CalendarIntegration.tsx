@@ -90,7 +90,6 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
       onNext();
     } catch (error: any) {
       toast.error("Failed to save calendar settings");
-      console.error(error);
     } finally {
       setLoading(false);
     }

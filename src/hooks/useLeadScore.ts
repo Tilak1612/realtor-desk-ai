@@ -41,7 +41,7 @@ export const useLeadScore = (contactId: string) => {
 
       setLeadScore(data as unknown as LeadScoreData);
     } catch (error: any) {
-      console.error("Error fetching lead score:", error);
+      // Error silently handled
     } finally {
       setLoading(false);
     }
@@ -65,7 +65,6 @@ export const useLeadScore = (contactId: string) => {
       await fetchLeadScore();
       return data;
     } catch (error: any) {
-      console.error("Error calculating lead score:", error);
       toast({
         title: "Error calculating lead score",
         description: error.message,
