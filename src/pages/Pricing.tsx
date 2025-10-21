@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 const Pricing = () => {
   const { t } = useTranslation();
-  const [isYearly, setIsYearly] = useState(true); // Default to yearly
+  const [isYearly, setIsYearly] = useState(false); // Default to monthly
 
   const pricingData = {
     agent: {
