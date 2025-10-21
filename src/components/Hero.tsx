@@ -43,11 +43,11 @@ const Hero = () => {
               </span>
             </div>
 
-            <h1 className="mb-3 sm:mb-4 md:mb-6 leading-[1.1] sm:leading-tight">
+            <h1 className="mb-3 sm:mb-4 md:mb-6 leading-[1.1] sm:leading-tight text-white">
               {t('hero.title')}
             </h1>
 
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-4 sm:mb-6 md:mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
               {t('hero.subtitle')}
             </p>
 
@@ -59,14 +59,14 @@ const Hero = () => {
                 </Button>
               </Link>
               <Link to="/demo" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto min-h-[52px] sm:min-h-[56px]">
+                <Button size="lg" variant="outline" className="text-base sm:text-lg w-full sm:w-auto min-h-[52px] sm:min-h-[56px] bg-white/10 text-white border-white/20 hover:bg-white/20">
                   {t('hero.watchDemo')}
                 </Button>
               </Link>
             </div>
 
             {/* Trust Line */}
-            <p className="text-[11px] sm:text-xs md:text-sm text-muted-foreground leading-relaxed">
+            <p className="text-[11px] sm:text-xs md:text-sm text-white/80 leading-relaxed">
               {t('hero.trustLine')}
             </p>
           </div>
