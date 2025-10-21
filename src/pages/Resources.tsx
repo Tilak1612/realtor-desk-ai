@@ -5,6 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BookOpen, TrendingUp, FileText, Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import blogAI from "@/assets/blog-ai-transformation.jpg";
+import blogCREA from "@/assets/blog-crea-ddf.jpg";
+import blogCompliance from "@/assets/blog-compliance.jpg";
+import blogLeads from "@/assets/blog-lead-conversion.jpg";
+import blogBilingual from "@/assets/blog-bilingual-marketing.jpg";
+import blogSuccess from "@/assets/blog-success-story.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
@@ -15,6 +22,8 @@ const Resources = () => {
       title: "How AI Is Transforming Canadian Real Estate in 2025",
       excerpt: "Discover the latest AI innovations revolutionizing how Canadian realtors work, from predictive analytics to automated transaction management.",
       readTime: "8 min read",
+      image: blogAI,
+      link: "/blog/ai-transformation",
     },
     {
       category: "Canadian Market",
@@ -22,6 +31,8 @@ const Resources = () => {
       title: "The Complete Guide to CREA DDF® Integration",
       excerpt: "Everything you need to know about accessing national MLS data and integrating CREA DDF® into your real estate workflow.",
       readTime: "12 min read",
+      image: blogCREA,
+      link: "/blog/crea-ddf",
     },
     {
       category: "Compliance",
@@ -29,6 +40,8 @@ const Resources = () => {
       title: "Provincial Compliance Checklist: ON, BC, AB, QC",
       excerpt: "Stay compliant with regulations across Canada. A comprehensive guide to RECO, BCFSA, RECA, and AMF requirements.",
       readTime: "10 min read",
+      image: blogCompliance,
+      link: "/blog/compliance",
     },
     {
       category: "Marketing",
@@ -36,6 +49,8 @@ const Resources = () => {
       title: "10 Ways to Increase Lead Conversion with Predictive Analytics",
       excerpt: "Learn how AI-powered lead scoring and predictive analytics can increase your conversion rate from 5% to 18%.",
       readTime: "7 min read",
+      image: blogLeads,
+      link: "/blog/lead-conversion",
     },
     {
       category: "Marketing",
@@ -43,6 +58,8 @@ const Resources = () => {
       title: "Bilingual Real Estate Marketing: Beyond Translation",
       excerpt: "Master the art of true bilingual marketing for Canadian markets. It's not just about translation - it's about cultural communication.",
       readTime: "9 min read",
+      image: blogBilingual,
+      link: "/blog/bilingual-marketing",
     },
     {
       category: "Success Stories",
@@ -50,6 +67,8 @@ const Resources = () => {
       title: "How Sarah Chen Closed 14 Extra Deals in Q1 with AI",
       excerpt: "A Toronto agent's journey from traditional CRM to AI-powered success. Real numbers, real results, real transformation.",
       readTime: "6 min read",
+      image: blogSuccess,
+      link: "/blog/success-story",
     },
   ];
 
@@ -94,8 +113,12 @@ const Resources = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article, index) => (
               <Card key={index} className="overflow-hidden card-hover">
-                {/* Category Badge */}
-                <div className="h-2 bg-gradient-to-r from-primary to-secondary" />
+                {/* Article Image */}
+                <img 
+                  src={article.image} 
+                  alt={article.title}
+                  className="w-full h-48 object-cover"
+                />
                 
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
@@ -113,9 +136,11 @@ const Resources = () => {
 
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">{article.readTime}</span>
-                    <Button variant="link" className="text-primary font-semibold p-0">
-                      Read More →
-                    </Button>
+                    <Link to={article.link}>
+                      <Button variant="link" className="text-primary font-semibold p-0">
+                        Read More →
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Card>

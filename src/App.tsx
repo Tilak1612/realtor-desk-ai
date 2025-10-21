@@ -10,6 +10,12 @@ import CanadianMarket from "./pages/CanadianMarket";
 import Demo from "./pages/Demo";
 import Resources from "./pages/Resources";
 import HowItWorks from "./pages/HowItWorks";
+import AITransformation from "./pages/blog/AITransformation";
+import CreaDDF from "./pages/blog/CreaDDF";
+import Compliance from "./pages/blog/Compliance";
+import LeadConversion from "./pages/blog/LeadConversion";
+import BilingualMarketing from "./pages/blog/BilingualMarketing";
+import SuccessStory from "./pages/blog/SuccessStory";
 import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -60,6 +66,12 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/blog/ai-transformation" element={<AITransformation />} />
+          <Route path="/blog/crea-ddf" element={<CreaDDF />} />
+          <Route path="/blog/compliance" element={<Compliance />} />
+          <Route path="/blog/lead-conversion" element={<LeadConversion />} />
+          <Route path="/blog/bilingual-marketing" element={<BilingualMarketing />} />
+          <Route path="/blog/success-story" element={<SuccessStory />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
