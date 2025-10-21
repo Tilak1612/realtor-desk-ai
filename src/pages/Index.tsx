@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import Hero from "@/components/Hero";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
@@ -47,6 +48,7 @@ const Index = () => {
   return (
     <div className="min-h-screen pb-20 md:pb-0">
       <Navbar />
+      <CookieConsent />
       <ExitIntentPopup />
       <ChatWidget />
       <MobileCTA />

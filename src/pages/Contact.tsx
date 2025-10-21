@@ -10,12 +10,17 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Link as RouterLink } from "react-router-dom";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
   email: z.string().trim().email("Invalid email address").max(255, "Email is too long"),
   phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Phone must be 10-20 digits").optional().or(z.literal("")),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message is too long")
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message is too long"),
+  privacyConsent: z.boolean().refine((val) => val === true, {
+    message: "You must consent to our Privacy Policy to submit this form",
+  }),
 });
 
 const Contact = () => {
@@ -26,7 +31,8 @@ const Contact = () => {
     name: "",
     email: "",
     phone: "",
-    message: ""
+    message: "",
+    privacyConsent: false
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -68,7 +74,7 @@ const Contact = () => {
         description: "Thanks for reaching out! We'll get back to you within 24 hours.",
       });
       
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "", privacyConsent: false });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         toast({
@@ -185,6 +191,32 @@ const Contact = () => {
                       placeholder="Tell us how we can help you..."
                       rows={6}
                     />
+                  </div>
+
+                  {/* PIPEDA Compliance - Privacy Consent */}
+                  <div className="flex items-start space-x-3">
+                    <Checkbox
+                      id="privacyConsent"
+                      checked={formData.privacyConsent}
+                      onCheckedChange={(checked) =>
+                        setFormData({ ...formData, privacyConsent: checked as boolean })
+                      }
+                    />
+                    <div className="space-y-1 leading-none">
+                      <label
+                        htmlFor="privacyConsent"
+                        className="text-sm font-medium leading-relaxed cursor-pointer"
+                      >
+                        I consent to my information being collected and used as described in the{" "}
+                        <RouterLink to="/privacy-policy" className="text-primary underline">
+                          Privacy Policy
+                        </RouterLink>
+                        {" "}*
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Required under PIPEDA - Your data will only be used to respond to your inquiry
+                      </p>
+                    </div>
                   </div>
 
                   <Button type="submit" size="lg" className="w-full btn-gradient" disabled={isSubmitting}>

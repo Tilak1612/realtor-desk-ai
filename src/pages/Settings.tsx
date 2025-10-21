@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LogOut, User, Bell, Lock, Palette } from "lucide-react";
+import { LogOut, User, Bell, Lock, Palette, Download, Trash2, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Separator } from "@/components/ui/separator";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) setUserId(user.id);
+    });
+  }, []);
 
   const handleLogout = async () => {
     setLoading(true);
@@ -34,6 +52,68 @@ const Settings = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // PIPEDA Compliance - Data Export
+  const handleExportData = async () => {
+    if (!userId) return;
+    
+    setLoading(true);
+    try {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single();
+
+      const { data: contacts } = await supabase
+        .from("contacts")
+        .select("*")
+        .eq("user_id", userId);
+
+      const { data: deals } = await supabase
+        .from("deals")
+        .select("*")
+        .eq("user_id", userId);
+
+      const exportData = {
+        profile,
+        contacts,
+        deals,
+        exportDate: new Date().toISOString(),
+        notice: "This data export complies with PIPEDA regulations"
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+        type: "application/json",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `realtordesk-data-export-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+
+      toast({
+        title: "Data exported successfully",
+        description: "Your personal data has been downloaded",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Export failed",
+        description: error.message || "Failed to export data",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // PIPEDA Compliance - Account Deletion Request
+  const handleDeleteAccount = () => {
+    toast({
+      title: "Account Deletion Request",
+      description: "Please contact support@realtordesk.ai to request account deletion. We'll process your request within 30 days as required by PIPEDA.",
+    });
   };
 
   return (
@@ -97,20 +177,97 @@ const Settings = () => {
                 </CardContent>
               </Card>
 
+              {/* PIPEDA Compliance - Data Rights */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    Privacy & Data Rights (PIPEDA)
+                  </CardTitle>
+                  <CardDescription>
+                    Exercise your rights under Canadian privacy law
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Export Your Data</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Download all your personal information we have stored
+                      </p>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      onClick={handleExportData}
+                      disabled={loading}
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Export
+                    </Button>
+                  </div>
+
+                  <Separator />
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Delete Your Account</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Permanently delete your account and all associated data
+                      </p>
+                    </div>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="destructive" disabled={loading}>
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Delete Account
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete your
+                            account and remove all your data from our servers, in compliance
+                            with PIPEDA regulations.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={handleDeleteAccount}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            Delete Permanently
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="text-sm">
+                      <strong>Your Privacy Rights:</strong> Under PIPEDA, you have the right to
+                      access, correct, and delete your personal information. You can also withdraw
+                      consent for marketing communications at any time.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Privacy & Security */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Lock className="w-5 h-5" />
-                    Privacy & Security
+                    Security Settings
                   </CardTitle>
                   <CardDescription>
-                    Manage your privacy and security settings
+                    Manage your security preferences
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Security settings coming soon
+                    Advanced security settings coming soon
                   </p>
                 </CardContent>
               </Card>

@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Link as RouterLink } from "react-router-dom";
 
 const signupSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -16,6 +18,10 @@ const signupSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
   phone: z.string().min(10, "Valid phone number required"),
   companyName: z.string().min(2, "Company name is required"),
+  privacyConsent: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the Privacy Policy and Terms of Service",
+  }),
+  marketingConsent: z.boolean().optional(),
 });
 
 type SignupForm = z.infer<typeof signupSchema>;
@@ -23,7 +29,10 @@ type SignupForm = z.infer<typeof signupSchema>;
 const Signup = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<Partial<SignupForm>>({});
+  const [formData, setFormData] = useState<Partial<SignupForm>>({
+    privacyConsent: false,
+    marketingConsent: false,
+  });
   const [errors, setErrors] = useState<Partial<Record<keyof SignupForm, string>>>({});
 
   const validateForm = () => {
@@ -207,6 +216,59 @@ const Signup = () => {
                 {errors.companyName && (
                   <p className="text-sm text-destructive">{errors.companyName}</p>
                 )}
+              </div>
+
+              {/* PIPEDA Compliance - Privacy Consent */}
+              <div className="space-y-4 pt-2">
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="privacyConsent"
+                    checked={formData.privacyConsent || false}
+                    onCheckedChange={(checked) =>
+                      setFormData({ ...formData, privacyConsent: checked as boolean })
+                    }
+                  />
+                  <div className="space-y-1 leading-none">
+                    <label
+                      htmlFor="privacyConsent"
+                      className="text-sm font-medium leading-relaxed cursor-pointer"
+                    >
+                      I agree to the{" "}
+                      <RouterLink to="/privacy-policy" className="text-primary underline">
+                        Privacy Policy
+                      </RouterLink>{" "}
+                      and{" "}
+                      <RouterLink to="/terms-of-service" className="text-primary underline">
+                        Terms of Service
+                      </RouterLink>
+                      {" "}*
+                    </label>
+                  </div>
+                </div>
+                {errors.privacyConsent && (
+                  <p className="text-sm text-destructive ml-7">{errors.privacyConsent}</p>
+                )}
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="marketingConsent"
+                    checked={formData.marketingConsent || false}
+                    onCheckedChange={(checked) =>
+                      setFormData({ ...formData, marketingConsent: checked as boolean })
+                    }
+                  />
+                  <div className="space-y-1 leading-none">
+                    <label
+                      htmlFor="marketingConsent"
+                      className="text-sm font-medium leading-relaxed cursor-pointer"
+                    >
+                      I consent to receive marketing communications and updates (Optional)
+                    </label>
+                    <p className="text-xs text-muted-foreground">
+                      You can unsubscribe at any time as per PIPEDA regulations
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <Button
