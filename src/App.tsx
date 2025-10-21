@@ -40,6 +40,7 @@ import Tasks from "./pages/Tasks";
 import AIAssistant from "./pages/AIAssistant";
 import Settings from "./pages/Settings";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <SubscriptionProvider>
           <Routes>
           <Route path="/" element={<Index />} />
