@@ -37,38 +37,24 @@ const CookieConsent = () => {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-slide-up">
-      <Card className="max-w-4xl mx-auto p-6 shadow-lg border-2">
-        <div className="flex items-start gap-4">
-          <Cookie className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-          <div className="flex-1">
-            <h3 className="font-semibold text-lg mb-2">We Value Your Privacy</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              We use cookies and similar technologies to enhance your experience, analyze site traffic, 
-              and personalize content. By clicking "Accept All", you consent to our use of cookies. 
-              You can manage your preferences or learn more in our{" "}
-              <Link to="/privacy-policy" className="text-primary underline">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 animate-slide-up">
+      <Card className="max-w-2xl mx-auto p-4 sm:p-5 shadow-lg border-2">
+        <div className="flex items-start gap-3">
+          <Cookie className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 hidden sm:block" />
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-base sm:text-lg mb-2">Cookie Consent</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground mb-3">
+              We use cookies to enhance your experience. By clicking "Accept All", you consent to our use of cookies.{" "}
+              <Link to="/privacy-policy" className="text-primary underline whitespace-nowrap">
                 Privacy Policy
-              </Link>.
+              </Link>
             </p>
-            <div className="space-y-2 text-xs text-muted-foreground mb-4">
-              <p><strong>Necessary Cookies:</strong> Required for basic site functionality (always enabled)</p>
-              <p><strong>Analytics Cookies:</strong> Help us understand how visitors use our site</p>
-              <p><strong>Marketing Cookies:</strong> Used to deliver relevant ads and track campaign performance</p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button onClick={handleAccept} size="sm" className="btn-gradient">
-                Accept All Cookies
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={handleAccept} size="sm" className="btn-gradient text-xs sm:text-sm h-8 sm:h-9 px-3 sm:px-4">
+                Accept All
               </Button>
-              <Button onClick={handleReject} size="sm" variant="outline">
+              <Button onClick={handleReject} size="sm" variant="outline" className="text-xs sm:text-sm h-8 sm:h-9 px-3 sm:px-4">
                 Necessary Only
-              </Button>
-              <Button 
-                onClick={() => setShowBanner(false)} 
-                size="sm" 
-                variant="ghost"
-              >
-                Close
               </Button>
             </div>
           </div>
@@ -76,7 +62,7 @@ const CookieConsent = () => {
             variant="ghost"
             size="icon"
             onClick={() => setShowBanner(false)}
-            className="flex-shrink-0"
+            className="flex-shrink-0 h-8 w-8"
           >
             <X className="w-4 h-4" />
           </Button>
