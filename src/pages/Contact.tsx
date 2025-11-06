@@ -14,12 +14,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email is too long"),
-  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Phone must be 10-20 digits").optional().or(z.literal("")),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message is too long"),
+  name: z.string().trim().min(2, "Please enter your full name (at least 2 characters)").max(100, "Name cannot exceed 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address (e.g., you@example.com)").max(255, "Email cannot exceed 255 characters"),
+  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Please enter a valid phone number (e.g., (416) 555-0123)").optional().or(z.literal("")),
+  message: z.string().trim().min(10, "Please provide more details (at least 10 characters)").max(2000, "Message cannot exceed 2000 characters"),
   privacyConsent: z.boolean().refine((val) => val === true, {
-    message: "You must consent to our Privacy Policy to submit this form",
+    message: "Please accept the Privacy Policy to continue",
   }),
 });
 
@@ -70,23 +70,26 @@ const Contact = () => {
         });
 
       toast({
-        title: "Message Sent! ✅",
-        description: "Thanks for reaching out! We'll get back to you within 24 hours.",
+        title: "Message Sent Successfully! ✅",
+        description: "Thank you for contacting us! We'll respond to your inquiry within 24 hours.",
+        duration: 6000,
       });
       
       setFormData({ name: "", email: "", phone: "", message: "", privacyConsent: false });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: "Please Check Your Information",
           description: error.errors[0].message,
           variant: "destructive",
+          duration: 6000,
         });
       } else {
         toast({
-          title: "Submission Failed",
-          description: "There was an error sending your message. Please try again or email us directly.",
+          title: "Unable to Send Message",
+          description: "There was an error submitting your message. Please try again or email us at support@realtordesk.ai",
           variant: "destructive",
+          duration: 6000,
         });
       }
     } finally {

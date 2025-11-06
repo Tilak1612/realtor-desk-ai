@@ -16,10 +16,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 const betaFormSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().trim().max(20, "Phone must be less than 20 characters").optional(),
-  province: z.string().min(1, "Please select a province"),
+  name: z.string().trim().min(1, "Please enter your name").max(100, "Name cannot exceed 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address (e.g., you@example.com)").max(255, "Email cannot exceed 255 characters"),
+  phone: z.string().trim().max(20, "Phone number cannot exceed 20 characters").optional(),
+  province: z.string().min(1, "Please select your province"),
 });
 
 const ExitIntentPopup = () => {
@@ -76,7 +76,8 @@ const ExitIntentPopup = () => {
 
       toast({
         title: "Welcome to Beta! 🎉",
-        description: "Your 20% lifetime discount is locked in! Check your email for next steps.",
+        description: "Success! Your 20% lifetime discount is secured. Check your email for next steps.",
+        duration: 6000,
       });
       
       setIsOpen(false);
@@ -88,15 +89,17 @@ const ExitIntentPopup = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: "Please Check Your Information",
           description: error.errors[0].message,
           variant: "destructive",
+          duration: 6000,
         });
       } else {
         toast({
-          title: "Error",
-          description: "There was an error. Please try again.",
+          title: "Unable to Submit",
+          description: "There was an error processing your request. Please try again or contact support.",
           variant: "destructive",
+          duration: 6000,
         });
       }
     } finally {
@@ -110,7 +113,7 @@ const ExitIntentPopup = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[600px] p-0 gap-0 bg-background shadow-2xl">
+      <DialogContent className="sm:max-w-[600px] p-0 gap-0 bg-background shadow-2xl" aria-describedby="beta-offer-description">
         <button
           onClick={() => setIsOpen(false)}
           className="absolute right-4 top-4 z-50 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100"
@@ -121,10 +124,10 @@ const ExitIntentPopup = () => {
         
         <div className="p-6 sm:p-8">
           <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2" id="beta-offer-title">
               Wait! Before You Go...
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground" id="beta-offer-description">
               Join our beta program and lock in 20% lifetime discount
             </p>
           </div>

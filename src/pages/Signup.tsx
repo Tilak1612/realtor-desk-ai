@@ -13,13 +13,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
 
 const signupSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-  fullName: z.string().min(2, "Full name is required"),
-  phone: z.string().min(10, "Valid phone number required"),
-  companyName: z.string().min(2, "Company name is required"),
+  email: z.string().email("Please enter a valid email address (e.g., you@example.com)"),
+  password: z.string().min(8, "Please create a password with at least 8 characters for security"),
+  fullName: z.string().min(2, "Please enter your full name (at least 2 characters)"),
+  phone: z.string().min(10, "Please enter a valid phone number (e.g., (555) 123-4567)"),
+  companyName: z.string().min(2, "Please enter your company or brokerage name"),
   privacyConsent: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the Privacy Policy and Terms of Service",
+    message: "Please accept the Privacy Policy and Terms of Service to continue",
   }),
   marketingConsent: z.boolean().optional(),
 });
@@ -95,11 +95,17 @@ const Signup = () => {
       if (error) throw error;
 
       if (data.user) {
-        toast.success("Account created! Check your email for verification.");
+        toast.success("Account Created Successfully! ✅", {
+          description: "Please check your email to verify your account and get started.",
+          duration: 6000,
+        });
         navigate("/verify-email", { state: { email: formData.email } });
       }
     } catch (error: any) {
-      toast.error(error.message || "Failed to create account");
+      toast.error("Unable to Create Account", {
+        description: error.message || "There was an error creating your account. Please try again or contact support.",
+        duration: 6000,
+      });
     } finally {
       setLoading(false);
     }

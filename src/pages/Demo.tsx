@@ -26,15 +26,15 @@ import {
 
 // Form validation schema
 const demoFormSchema = z.object({
-  fullName: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email is too long"),
-  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Phone number must be 10-20 digits"),
-  brokerage: z.string().trim().max(100, "Brokerage name is too long").optional().or(z.literal("")),
-  province: z.string().min(1, "Please select a province"),
+  fullName: z.string().trim().min(2, "Please enter your full name (at least 2 characters)").max(100, "Name cannot exceed 100 characters"),
+  email: z.string().trim().email("Please enter a valid email address (e.g., you@example.com)").max(255, "Email cannot exceed 255 characters"),
+  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Please enter a valid phone number (e.g., (555) 123-4567)"),
+  brokerage: z.string().trim().max(100, "Brokerage name cannot exceed 100 characters").optional().or(z.literal("")),
+  province: z.string().min(1, "Please select your province"),
   currentCrm: z.string().optional(),
   teamSize: z.string().optional(),
   biggestChallenge: z.string().optional(),
-  comments: z.string().trim().max(1000, "Comments are too long").optional().or(z.literal("")),
+  comments: z.string().trim().max(1000, "Comments cannot exceed 1000 characters").optional().or(z.literal("")),
 });
 
 type DemoFormValues = z.infer<typeof demoFormSchema>;
@@ -100,16 +100,18 @@ const Demo = () => {
         });
 
       toast({
-        title: "Demo Request Submitted! ✅",
-        description: "We'll contact you within 24 hours to schedule your personalized demo.",
+        title: "Demo Request Received! ✅",
+        description: "Success! We'll contact you within 24 hours to schedule your personalized demo session.",
+        duration: 6000,
       });
 
       form.reset();
     } catch (error) {
       toast({
-        title: "Submission Failed",
-        description: "There was an error submitting your request. Please try again or contact us directly.",
+        title: "Unable to Submit Request",
+        description: "There was an error processing your demo request. Please try again or call us at 1-800-REALTOR-AI",
         variant: "destructive",
+        duration: 6000,
       });
     } finally {
       setIsSubmitting(false);
@@ -328,10 +330,10 @@ const Demo = () => {
 
                   <p className="text-sm text-muted-foreground text-center">
                     Or{" "}
-                    <Link to="/pricing" className="text-primary font-semibold hover:underline">
-                      get started
+                    <Link to="/signup" className="text-primary font-semibold hover:underline">
+                      sign up now
                     </Link>{" "}
-                    right away
+                    to get started immediately
                   </p>
                 </form>
               </Form>
@@ -397,9 +399,9 @@ const Demo = () => {
               <Card className="p-6 bg-gradient-to-r from-primary to-secondary text-white">
                 <h3 className="text-xl font-bold mb-2">Prefer to explore on your own?</h3>
                 <p className="mb-4 text-white/90">Get started today - no demo required</p>
-                <Link to="/pricing">
+                <Link to="/signup">
                   <Button variant="secondary" className="w-full" size="lg">
-                    Get Started
+                    Sign Up Now
                   </Button>
                 </Link>
               </Card>
