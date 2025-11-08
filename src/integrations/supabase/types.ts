@@ -826,6 +826,84 @@ export type Database = {
           },
         ]
       }
+      property_listings: {
+        Row: {
+          address: string
+          bathrooms: number | null
+          bedrooms: number | null
+          city: string | null
+          created_at: string
+          description: string | null
+          features: Json | null
+          id: string
+          image_url: string | null
+          images: Json | null
+          listing_type: string | null
+          lot_size: number | null
+          metadata: Json | null
+          postal_code: string | null
+          price: number | null
+          property_type: string | null
+          province: string | null
+          square_feet: number | null
+          status: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          year_built: number | null
+        }
+        Insert: {
+          address: string
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          features?: Json | null
+          id?: string
+          image_url?: string | null
+          images?: Json | null
+          listing_type?: string | null
+          lot_size?: number | null
+          metadata?: Json | null
+          postal_code?: string | null
+          price?: number | null
+          property_type?: string | null
+          province?: string | null
+          square_feet?: number | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          year_built?: number | null
+        }
+        Update: {
+          address?: string
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          features?: Json | null
+          id?: string
+          image_url?: string | null
+          images?: Json | null
+          listing_type?: string | null
+          lot_size?: number | null
+          metadata?: Json | null
+          postal_code?: string | null
+          price?: number | null
+          property_type?: string | null
+          province?: string | null
+          square_feet?: number | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          year_built?: number | null
+        }
+        Relationships: []
+      }
       scheduled_emails: {
         Row: {
           contact_id: string
@@ -1003,10 +1081,7 @@ export type Database = {
         }
         Returns: boolean
       }
-      is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       activity_type:
