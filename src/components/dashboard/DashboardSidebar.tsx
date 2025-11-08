@@ -17,7 +17,7 @@ import {
   Sparkles,
   CreditCard,
 } from "lucide-react";
-import logo from "@/assets/logo-brand-2.png";
+import logo from "@/assets/realtor-desk-logo.png";
 import { useState } from "react";
 
 const menuItems = [
