@@ -346,7 +346,7 @@ export type Database = {
           status: string | null
           tags: string[] | null
           updated_at: string | null
-          user_id: string
+          user_id: string | null
         }
         Insert: {
           ai_score?: number | null
@@ -364,7 +364,7 @@ export type Database = {
           status?: string | null
           tags?: string[] | null
           updated_at?: string | null
-          user_id: string
+          user_id?: string | null
         }
         Update: {
           ai_score?: number | null
@@ -382,7 +382,7 @@ export type Database = {
           status?: string | null
           tags?: string[] | null
           updated_at?: string | null
-          user_id?: string
+          user_id?: string | null
         }
         Relationships: [
           {
