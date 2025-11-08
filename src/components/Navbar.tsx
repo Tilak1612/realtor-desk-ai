@@ -39,15 +39,12 @@ const Navbar = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 gap-2 sm:gap-4">
           {/* Logo - Mobile Optimized */}
-          <Link to="/" className="flex items-center gap-1.5 sm:gap-2 md:gap-3 group shrink-0">
+          <Link to="/" className="flex items-center group shrink-0">
             <img 
               src={logo} 
               alt="RealtorDesk AI Logo - Canadian Real Estate AI Platform" 
               className="h-8 sm:h-9 md:h-11 lg:h-12 w-auto group-hover:scale-105 transition-transform"
             />
-            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold gradient-text whitespace-nowrap">
-              Realtor Desk AI
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
