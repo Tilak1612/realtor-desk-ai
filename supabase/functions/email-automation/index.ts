@@ -115,27 +115,31 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Send email immediately using Resend API
-    const resendResponse = await fetch("https://api.resend.com/emails", {
+    // Send email immediately using HubSpot API
+    const hubspotResponse = await fetch("https://api.hubapi.com/marketing/v3/transactional/single-email/send", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
+        "Authorization": `Bearer ${Deno.env.get("HUBSPOT_API_KEY")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Realtor Desk AI <onboarding@resend.dev>",
-        to: [contact.email],
-        subject: template.subject,
-        html: template.html,
+        emailId: null, // We're using custom content instead of a template
+        message: {
+          to: contact.email,
+          from: "noreply@realtordesk.ai",
+          subject: template.subject,
+          html: template.html,
+        },
       }),
     });
 
-    if (!resendResponse.ok) {
-      const errorText = await resendResponse.text();
-      throw new Error(`Resend API error: ${errorText}`);
+    if (!hubspotResponse.ok) {
+      const errorText = await hubspotResponse.text();
+      console.error("HubSpot API error response:", errorText);
+      throw new Error(`HubSpot API error: ${errorText}`);
     }
 
-    const emailData = await resendResponse.json();
+    const emailData = await hubspotResponse.json();
 
     // Log sent email
     await supabase.from("email_log").insert({
@@ -145,10 +149,15 @@ const handler = async (req: Request): Promise<Response> => {
       status: "sent",
     });
 
-    console.log("Email sent successfully:", emailData);
+    console.log("Email sent successfully via HubSpot:", emailData);
 
     return new Response(
-      JSON.stringify({ success: true, action: "sent", emailId: emailData.id }),
+      JSON.stringify({ 
+        success: true, 
+        action: "sent", 
+        emailId: emailData.id || emailData.statusId || "sent",
+        hubspotResponse: emailData 
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
