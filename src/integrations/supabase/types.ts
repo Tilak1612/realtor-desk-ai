@@ -339,9 +339,11 @@ export type Database = {
           id: string
           last_contact_date: string | null
           last_name: string | null
+          lead_score: number | null
           metadata: Json | null
           phone: string | null
           source: string | null
+          status: string | null
           tags: string[] | null
           updated_at: string | null
           user_id: string
@@ -355,9 +357,11 @@ export type Database = {
           id?: string
           last_contact_date?: string | null
           last_name?: string | null
+          lead_score?: number | null
           metadata?: Json | null
           phone?: string | null
           source?: string | null
+          status?: string | null
           tags?: string[] | null
           updated_at?: string | null
           user_id: string
@@ -371,9 +375,11 @@ export type Database = {
           id?: string
           last_contact_date?: string | null
           last_name?: string | null
+          lead_score?: number | null
           metadata?: Json | null
           phone?: string | null
           source?: string | null
+          status?: string | null
           tags?: string[] | null
           updated_at?: string | null
           user_id?: string
