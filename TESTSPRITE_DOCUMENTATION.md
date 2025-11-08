@@ -460,6 +460,8 @@ Content-Type: application/json
 }
 ```
 
+**Note:** `user_id` is automatically set to `auth.uid()` via database trigger. Email format is validated server-side.
+
 #### Update Contact
 ```http
 PATCH https://pseqajrtcgiphfnworii.supabase.co/rest/v1/contacts?id=eq.{CONTACT_ID}
@@ -499,14 +501,17 @@ apikey: {ANON_KEY}
 Content-Type: application/json
 
 {
-  "name": "123 Main St Sale",
+  "title": "123 Main St Sale",
   "value": 450000,
   "stage": "qualified",
+  "probability": 75,
   "contact_id": "{CONTACT_ID}",
   "expected_close_date": "2025-12-31",
   "notes": "Hot lead, ready to buy"
 }
 ```
+
+**Note:** Field is `title` (not `name`). `user_id` is automatically set via database trigger.
 
 #### Update Deal Stage
 ```http
@@ -541,13 +546,15 @@ Content-Type: application/json
 {
   "title": "Call John Doe",
   "description": "Follow up on property viewing",
-  "type": "call",
   "priority": "high",
-  "due_date": "2025-11-10T10:00:00Z",
-  "contact_id": "{CONTACT_ID}",
-  "completed": false
+  "status": "pending",
+  "due_date": "2025-11-10",
+  "due_time": "10:00:00",
+  "contact_id": "{CONTACT_ID}"
 }
 ```
+
+**Note:** Use `status` field (not `completed` boolean). `user_id` is automatically set via database trigger.
 
 #### Mark Task Complete
 ```http
@@ -557,7 +564,7 @@ apikey: {ANON_KEY}
 Content-Type: application/json
 
 {
-  "completed": true,
+  "status": "completed",
   "completed_at": "2025-11-09T15:30:00Z"
 }
 ```
