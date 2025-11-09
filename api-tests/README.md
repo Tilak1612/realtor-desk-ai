@@ -23,29 +23,103 @@ JWT_TOKEN = "YOUR_JWT_TOKEN_HERE"
 
 ## Test Files
 
-### test_contacts_create.py
-Tests for creating new contacts:
+### Contacts API Tests
+**test_contacts_create.py** - Creating new contacts
 - ✅ Create contact with all fields
 - ✅ Create contact with minimal fields
 
-### test_contacts_read.py
-Tests for reading/querying contacts:
+**test_contacts_read.py** - Reading/querying contacts
 - ✅ Get all contacts
 - ✅ Get single contact by ID
 - ✅ Filter contacts by status
 - ✅ Search contacts by email domain
 
-### test_contacts_update.py
-Tests for updating contacts:
+**test_contacts_update.py** - Updating contacts
 - ✅ Update multiple fields
 - ✅ Update single field (lead score)
 - ✅ Update contact status
 
-### test_contacts_delete.py
-Tests for deleting contacts:
+**test_contacts_delete.py** - Deleting contacts
 - ✅ Delete existing contact
 - ✅ Verify deletion
 - ✅ Delete non-existent contact
+
+### Deals API Tests
+**test_deals_create.py** - Creating new deals
+- ✅ Create deal with all fields
+- ✅ Create deal with minimal fields
+- ✅ Create deal linked to contact
+
+**test_deals_read.py** - Reading/querying deals
+- ✅ Get all deals
+- ✅ Get single deal by ID
+- ✅ Filter deals by stage
+- ✅ Filter deals by value range
+- ✅ Sort deals by value
+
+**test_deals_update.py** - Updating deals
+- ✅ Update deal stage
+- ✅ Update deal value & probability
+- ✅ Update expected close date
+- ✅ Update deal notes
+
+**test_deals_delete.py** - Deleting deals
+- ✅ Delete existing deal
+- ✅ Verify deletion
+- ✅ Delete non-existent deal
+
+### Tasks API Tests
+**test_tasks_create.py** - Creating new tasks
+- ✅ Create task with all fields
+- ✅ Create task with minimal fields
+- ✅ Create task linked to contact
+- ✅ Create task linked to deal
+
+**test_tasks_read.py** - Reading/querying tasks
+- ✅ Get all tasks
+- ✅ Get single task by ID
+- ✅ Filter tasks by status
+- ✅ Filter tasks by priority
+- ✅ Sort tasks by due date
+- ✅ Filter overdue tasks
+
+**test_tasks_update.py** - Updating tasks
+- ✅ Complete task
+- ✅ Update task priority
+- ✅ Reschedule task
+- ✅ Update task description
+
+**test_tasks_delete.py** - Deleting tasks
+- ✅ Delete existing task
+- ✅ Verify deletion
+- ✅ Delete non-existent task
+
+### Property Listings API Tests
+**test_properties_create.py** - Creating new property listings
+- ✅ Create property with all fields
+- ✅ Create property with minimal fields
+- ✅ Create rental property
+- ✅ Create house listing
+
+**test_properties_read.py** - Reading/querying property listings
+- ✅ Get all property listings
+- ✅ Get single property by ID
+- ✅ Filter by property type
+- ✅ Filter by price range
+- ✅ Filter by bedrooms
+- ✅ Filter by city
+- ✅ Filter active listings
+
+**test_properties_update.py** - Updating property listings
+- ✅ Update property price
+- ✅ Update property status
+- ✅ Update property description
+- ✅ Update property features
+
+**test_properties_delete.py** - Deleting property listings
+- ✅ Delete existing property
+- ✅ Verify deletion
+- ✅ Delete non-existent property
 
 ## Running Tests
 
