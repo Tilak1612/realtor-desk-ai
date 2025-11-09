@@ -221,6 +221,48 @@ See [EDGE_FUNCTIONS_TESTING.md](EDGE_FUNCTIONS_TESTING.md) for comprehensive edg
 - ✅ create-checkout (Stripe)
 - ✅ customer-portal (Stripe)
 
+## Python SDK
+
+Professional Python client library with Pythonic interface.
+
+### Installation
+```bash
+cd api-tests
+pip install -e ./realtordesk_sdk
+```
+
+### Quick Start
+```python
+from realtordesk_sdk import RealtorDeskClient
+
+client = RealtorDeskClient(jwt_token="your_jwt_token")
+
+# List contacts
+contacts = client.contacts.list(status="lead", limit=10)
+
+# Create contact
+contact = client.contacts.create(
+    first_name="John",
+    last_name="Doe",
+    email="john@example.com"
+)
+
+# Update contact
+client.contacts.update(contact['id'], status="client")
+```
+
+See [SDK_USAGE_GUIDE.md](SDK_USAGE_GUIDE.md) for complete documentation.
+
+### Features
+- ✅ Pythonic interface with resource managers
+- ✅ Automatic retry logic with exponential backoff
+- ✅ Comprehensive error handling
+- ✅ Type hints throughout
+- ✅ Context manager support
+- ✅ Pagination helpers
+- ✅ Query builder pattern
+- ✅ Full edge functions support
+
 ## Notes
 
 - All endpoints require authentication
@@ -229,3 +271,4 @@ See [EDGE_FUNCTIONS_TESTING.md](EDGE_FUNCTIONS_TESTING.md) for comprehensive edg
 - The `user_id` is automatically set from the JWT token
 - Use `Prefer: return=representation` header to get created/updated records back
 - Edge functions include CORS headers for web access
+- SDK automatically handles retries and error responses
