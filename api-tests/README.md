@@ -176,10 +176,28 @@ To import these tests into TestSprite:
    - `Authorization`: Bearer {JWT_TOKEN}
    - `Content-Type`: application/json
 
+## Edge Functions Tests
+
+See [EDGE_FUNCTIONS_TESTING.md](EDGE_FUNCTIONS_TESTING.md) for comprehensive edge function testing guide.
+
+**test_edge_functions.py** - Tests all 11 edge functions:
+- ✅ check-subscription
+- ✅ lead-score-calculator
+- ✅ claude-chat
+- ✅ encrypt-integration-token
+- ✅ email-automation
+- ✅ ai-chatbot
+- ✅ hubspot-sync
+- ✅ calculate-lead-score
+- ✅ send-welcome-email
+- ✅ create-checkout (Stripe)
+- ✅ customer-portal (Stripe)
+
 ## Notes
 
 - All endpoints require authentication
 - JWT tokens expire after 1 hour
-- RLS policies ensure users only see their own contacts
+- RLS policies ensure users only see their own data
 - The `user_id` is automatically set from the JWT token
 - Use `Prefer: return=representation` header to get created/updated records back
+- Edge functions include CORS headers for web access
