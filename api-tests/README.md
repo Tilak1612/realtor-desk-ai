@@ -164,15 +164,43 @@ headers = {
 }
 ```
 
+## API Documentation
+
+### OpenAPI Specification
+Complete OpenAPI 3.0 specification available in `openapi.yaml`
+
+**Features:**
+- ✅ All REST API endpoints (Contacts, Deals, Tasks, Properties)
+- ✅ Request/response schemas with validation
+- ✅ Authentication requirements
+- ✅ Query operators and filtering
+- ✅ Error response formats
+
+**Import into:**
+- **Postman** - Auto-generate API collection
+- **Swagger UI** - Interactive documentation
+- **TestSprite** - Automated API testing
+- **Insomnia** - API client testing
+
+### Comprehensive Guide
+See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for:
+- Complete endpoint reference
+- Edge Functions documentation
+- Query operators guide
+- Error handling
+- Rate limiting
+- Code examples in multiple languages
+
 ## TestSprite Configuration
 
-To import these tests into TestSprite:
+To import into TestSprite:
 
-1. **API Name:** Realtor Desk Contacts API
-2. **Base URL:** `https://pseqajrtcgiphfnworii.supabase.co/rest/v1`
-3. **Auth Type:** Bearer Token
-4. **Headers:**
-   - `apikey`: Use the anon key
+1. **Import OpenAPI:** Use `openapi.yaml` for auto-configuration
+2. **API Name:** RealtorDesk AI API
+3. **Base URL:** `https://pseqajrtcgiphfnworii.supabase.co/rest/v1`
+4. **Auth Type:** Bearer Token
+5. **Headers:**
+   - `apikey`: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    - `Authorization`: Bearer {JWT_TOKEN}
    - `Content-Type`: application/json
 

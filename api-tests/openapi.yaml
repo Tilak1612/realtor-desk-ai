@@ -1,0 +1,845 @@
+openapi: 3.0.3
+info:
+  title: RealtorDesk AI API
+  version: 1.0.0
+  description: |
+    Complete REST API and Edge Functions documentation for RealtorDesk AI CRM.
+    
+    **Base URL:** `https://pseqajrtcgiphfnworii.supabase.co/rest/v1`
+    
+    **Edge Functions URL:** `https://pseqajrtcgiphfnworii.supabase.co/functions/v1`
+    
+    ## Authentication
+    All endpoints require JWT authentication via Bearer token in the Authorization header.
+    Additionally, the `apikey` header must be provided with the Supabase anon key.
+    
+    ## Rate Limiting
+    Standard rate limits apply. Contact support for increased limits.
+    
+    ## Pagination
+    Use `limit` and `offset` query parameters for pagination.
+    Default limit is 10, maximum is 1000.
+  contact:
+    name: RealtorDesk AI Support
+    email: support@realtordeskai.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://pseqajrtcgiphfnworii.supabase.co/rest/v1
+    description: REST API Server
+  - url: https://pseqajrtcgiphfnworii.supabase.co/functions/v1
+    description: Edge Functions Server
+
+security:
+  - BearerAuth: []
+    ApiKeyAuth: []
+
+tags:
+  - name: Contacts
+    description: Contact management operations
+  - name: Deals
+    description: Deal pipeline management
+  - name: Tasks
+    description: Task and activity tracking
+  - name: Properties
+    description: Property listing management
+  - name: Edge Functions
+    description: Serverless backend functions
+
+paths:
+  /contacts:
+    get:
+      tags:
+        - Contacts
+      summary: List all contacts
+      description: Retrieve all contacts for the authenticated user
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [lead, active, client, inactive]
+          description: Filter by contact status
+        - name: email
+          in: query
+          schema:
+            type: string
+          description: Filter by email (supports partial match with ~)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    post:
+      tags:
+        - Contacts
+      summary: Create a new contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '201':
+          description: Contact created successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    patch:
+      tags:
+        - Contacts
+      summary: Update a contact
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Contact ID (use eq.{id} format)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactUpdate'
+      responses:
+        '200':
+          description: Contact updated successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    delete:
+      tags:
+        - Contacts
+      summary: Delete a contact
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Contact ID (use eq.{id} format)
+      responses:
+        '204':
+          description: Contact deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /deals:
+    get:
+      tags:
+        - Deals
+      summary: List all deals
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - name: stage
+          in: query
+          schema:
+            type: string
+            enum: [lead, qualified, negotiation, closed]
+          description: Filter by deal stage
+        - name: value
+          in: query
+          schema:
+            type: string
+          description: Filter by value (supports gte, lte, eq operators)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deal'
+    
+    post:
+      tags:
+        - Deals
+      summary: Create a new deal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealCreate'
+      responses:
+        '201':
+          description: Deal created successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deal'
+    
+    patch:
+      tags:
+        - Deals
+      summary: Update a deal
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DealUpdate'
+      responses:
+        '200':
+          description: Deal updated successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deal'
+    
+    delete:
+      tags:
+        - Deals
+      summary: Delete a deal
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Deal deleted successfully
+
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: List all tasks
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, in_progress, completed, cancelled]
+        - name: priority
+          in: query
+          schema:
+            type: string
+            enum: [low, medium, high, urgent]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    
+    post:
+      tags:
+        - Tasks
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'
+      responses:
+        '201':
+          description: Task created successfully
+    
+    patch:
+      tags:
+        - Tasks
+      summary: Update a task
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdate'
+      responses:
+        '200':
+          description: Task updated successfully
+    
+    delete:
+      tags:
+        - Tasks
+      summary: Delete a task
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Task deleted successfully
+
+  /property_listings:
+    get:
+      tags:
+        - Properties
+      summary: List all property listings
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - name: property_type
+          in: query
+          schema:
+            type: string
+            enum: [house, condo, apartment, townhouse, land]
+        - name: listing_type
+          in: query
+          schema:
+            type: string
+            enum: [sale, rent]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, pending, sold, inactive]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Property'
+    
+    post:
+      tags:
+        - Properties
+      summary: Create a property listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreate'
+      responses:
+        '201':
+          description: Property created successfully
+    
+    patch:
+      tags:
+        - Properties
+      summary: Update a property listing
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyUpdate'
+      responses:
+        '200':
+          description: Property updated successfully
+    
+    delete:
+      tags:
+        - Properties
+      summary: Delete a property listing
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Property deleted successfully
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from authentication
+    
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: apikey
+      description: Supabase anon key
+
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 10
+        maximum: 1000
+      description: Maximum number of records to return
+    
+    Offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Number of records to skip
+    
+    OrderBy:
+      name: order
+      in: query
+      schema:
+        type: string
+      description: Order by field (e.g., created_at.desc)
+
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        source:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [lead, active, client, inactive]
+        lead_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+        best_contact_time:
+          type: string
+        metadata:
+          type: object
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    
+    ContactCreate:
+      type: object
+      required:
+        - first_name
+        - email
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        source:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [lead, active, client, inactive]
+          default: lead
+        best_contact_time:
+          type: string
+    
+    ContactUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum: [lead, active, client, inactive]
+        tags:
+          type: array
+          items:
+            type: string
+        lead_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+
+    Deal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        contact_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        stage:
+          type: string
+          enum: [lead, qualified, negotiation, closed]
+        value:
+          type: number
+          format: decimal
+        probability:
+          type: integer
+          minimum: 0
+          maximum: 100
+        expected_close_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [active, won, lost]
+        notes:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    
+    DealCreate:
+      type: object
+      required:
+        - title
+        - stage
+      properties:
+        title:
+          type: string
+        stage:
+          type: string
+          enum: [lead, qualified, negotiation, closed]
+        contact_id:
+          type: string
+          format: uuid
+        value:
+          type: number
+        probability:
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 50
+        expected_close_date:
+          type: string
+          format: date
+        notes:
+          type: string
+    
+    DealUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        stage:
+          type: string
+          enum: [lead, qualified, negotiation, closed]
+        value:
+          type: number
+        probability:
+          type: integer
+          minimum: 0
+          maximum: 100
+        expected_close_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [active, won, lost]
+        notes:
+          type: string
+
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        contact_id:
+          type: string
+          format: uuid
+        deal_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        due_date:
+          type: string
+          format: date
+        due_time:
+          type: string
+          format: time
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+        completed_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    
+    TaskCreate:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        contact_id:
+          type: string
+          format: uuid
+        deal_id:
+          type: string
+          format: uuid
+        due_date:
+          type: string
+          format: date
+        due_time:
+          type: string
+          format: time
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          default: medium
+    
+    TaskUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        due_date:
+          type: string
+          format: date
+        due_time:
+          type: string
+          format: time
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+        status:
+          type: string
+          enum: [pending, in_progress, completed, cancelled]
+        completed_at:
+          type: string
+          format: date-time
+
+    Property:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        postal_code:
+          type: string
+        property_type:
+          type: string
+          enum: [house, condo, apartment, townhouse, land]
+        listing_type:
+          type: string
+          enum: [sale, rent]
+        price:
+          type: number
+          format: decimal
+        bedrooms:
+          type: integer
+        bathrooms:
+          type: number
+        square_feet:
+          type: integer
+        lot_size:
+          type: number
+        year_built:
+          type: integer
+        status:
+          type: string
+          enum: [active, pending, sold, inactive]
+        features:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    
+    PropertyCreate:
+      type: object
+      required:
+        - title
+        - address
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        postal_code:
+          type: string
+        property_type:
+          type: string
+        listing_type:
+          type: string
+          enum: [sale, rent]
+          default: sale
+        price:
+          type: number
+        bedrooms:
+          type: integer
+        bathrooms:
+          type: number
+        square_feet:
+          type: integer
+        features:
+          type: array
+          items:
+            type: string
+    
+    PropertyUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        status:
+          type: string
+          enum: [active, pending, sold, inactive]
+        features:
+          type: array
+          items:
+            type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Invalid or expired JWT"
+    
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Invalid email format"
