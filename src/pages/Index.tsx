@@ -36,7 +36,6 @@ import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import TrustTransparencySection from "@/components/TrustTransparencySection";
 import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
-import FacebookPagePlugin from "@/components/FacebookPagePlugin";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 // Demo Video - Professional CRM Demo
@@ -423,27 +422,6 @@ const Index = () => {
             <p className="text-xs text-[#6B7280] leading-relaxed">
               RealtorDesk AI is currently in public beta. We're continuously improving based on user feedback. All features, pricing, and metrics are subject to change. Early adopters receive special lifetime pricing.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Facebook Feed Section */}
-      <section className="section-padding bg-background border-t" aria-label="Connect with us on Facebook">
-        <div className="container-custom">
-          <div className="text-center mb-8">
-            <h2 className="mb-4">Stay Connected</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Follow us on Facebook for the latest updates, tips, and success stories from the RealtorDesk AI community
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <FacebookPagePlugin 
-              pageUrl="https://www.facebook.com/profile.php?id=61583653411571"
-              width={500}
-              height={600}
-              showFacepile={true}
-              showPosts={true}
-            />
           </div>
         </div>
       </section>
