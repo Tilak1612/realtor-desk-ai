@@ -12,7 +12,6 @@ import StatCard from "@/components/StatCard";
 import ROICalculator from "@/components/ROICalculator";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import ChatWidget from "@/components/ChatWidget";
-import FacebookPagePlugin from "@/components/FacebookPagePlugin";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -423,21 +422,6 @@ const Index = () => {
             <p className="text-xs text-[#6B7280] leading-relaxed">
               RealtorDesk AI is currently in public beta. We're continuously improving based on user feedback. All features, pricing, and metrics are subject to change. Early adopters receive special lifetime pricing.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Stay Connected - Facebook Feed */}
-      <section className="section-padding bg-background" aria-label="Connect on Social Media">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">Stay Connected with RealtorDesk AI</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Follow us on Facebook for the latest updates, tips, and success stories from Canadian realtors
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <FacebookPagePlugin />
           </div>
         </div>
       </section>
