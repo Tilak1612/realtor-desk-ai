@@ -44,7 +44,7 @@ const Footer = () => {
                 <Twitter className="w-4 h-4" />
               </a>
               <a
-                href="https://facebook.com/brainfyai"
+                href="https://www.facebook.com/profile.php?id=61583653411571"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-background border flex items-center justify-center hover:border-primary transition-colors"
