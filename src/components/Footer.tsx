@@ -53,7 +53,7 @@ const Footer = () => {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://instagram.com/brainfyai"
+                href="https://www.instagram.com/realtor_desk_ai/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-background border flex items-center justify-center hover:border-primary transition-colors"
