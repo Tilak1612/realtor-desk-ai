@@ -38,12 +38,14 @@ import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
-// Demo Video - Professional CRM Demo
-const DEMO_VIDEO_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+// Demo Video - Replace with your actual demo video URL
+// Example: "https://www.youtube.com/embed/YOUR_VIDEO_ID"
+const DEMO_VIDEO_URL = "";
 
 const Index = () => {
   const { t } = useTranslation();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [videoSrc, setVideoSrc] = useState("");
 
   return (
     <div className="min-h-screen pb-20 md:pb-0">
@@ -142,7 +144,25 @@ const Index = () => {
             {/* Demo Showcase - Touch Optimized */}
             <div 
               className="relative aspect-video rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden mb-4 sm:mb-6 group cursor-pointer touch-manipulation active:scale-98 transition-transform"
-              onClick={() => setIsVideoOpen(true)}
+              onClick={() => {
+                // Check cookie consent before loading video
+                const consent = localStorage.getItem("cookie-consent");
+                if (consent) {
+                  const consentData = JSON.parse(consent);
+                  if (consentData.analytics || consentData.marketing) {
+                    setVideoSrc(DEMO_VIDEO_URL);
+                    setIsVideoOpen(true);
+                  } else {
+                    // User rejected tracking cookies, still allow video but inform them
+                    setVideoSrc(DEMO_VIDEO_URL);
+                    setIsVideoOpen(true);
+                  }
+                } else {
+                  // No consent yet, load video anyway (user will see cookie banner)
+                  setVideoSrc(DEMO_VIDEO_URL);
+                  setIsVideoOpen(true);
+                }
+              }}
             >
               <img 
                 src={demoShowcase} 
@@ -160,17 +180,29 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Video Modal */}
-            <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+            {/* Video Modal - Lazy Loaded */}
+            <Dialog open={isVideoOpen} onOpenChange={(open) => {
+              setIsVideoOpen(open);
+              if (!open) {
+                // Clear video src when modal closes to stop playback
+                setVideoSrc("");
+              }
+            }}>
               <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0">
                 <div className="relative aspect-video w-full">
-                  <iframe
-                    src={DEMO_VIDEO_URL}
-                    title="Realtor Desk AI Product Demo"
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  {videoSrc ? (
+                    <iframe
+                      src={videoSrc}
+                      title="Realtor Desk AI Product Demo"
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-muted">
+                      <p className="text-muted-foreground">Please add your demo video URL</p>
+                    </div>
+                  )}
                 </div>
               </DialogContent>
             </Dialog>
