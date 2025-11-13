@@ -46,6 +46,7 @@ const Index = () => {
   const { t } = useTranslation();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [videoSrc, setVideoSrc] = useState("");
+  const [showConsentMessage, setShowConsentMessage] = useState(false);
 
   return (
     <div className="min-h-screen pb-20 md:pb-0">
@@ -145,21 +146,25 @@ const Index = () => {
             <div 
               className="relative aspect-video rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden mb-4 sm:mb-6 group cursor-pointer touch-manipulation active:scale-98 transition-transform"
               onClick={() => {
-                // Check cookie consent before loading video
+                // Strictly enforce cookie consent before loading external video
                 const consent = localStorage.getItem("cookie-consent");
                 if (consent) {
                   const consentData = JSON.parse(consent);
+                  // Only load video if user explicitly accepted analytics or marketing cookies
                   if (consentData.analytics || consentData.marketing) {
-                    setVideoSrc(DEMO_VIDEO_URL);
+                    if (DEMO_VIDEO_URL) {
+                      setVideoSrc(DEMO_VIDEO_URL);
+                      setShowConsentMessage(false);
+                    }
                     setIsVideoOpen(true);
                   } else {
-                    // User rejected tracking cookies, still allow video but inform them
-                    setVideoSrc(DEMO_VIDEO_URL);
+                    // User rejected tracking cookies - show consent required message
+                    setShowConsentMessage(true);
                     setIsVideoOpen(true);
                   }
                 } else {
-                  // No consent yet, load video anyway (user will see cookie banner)
-                  setVideoSrc(DEMO_VIDEO_URL);
+                  // No consent given yet - show consent required message
+                  setShowConsentMessage(true);
                   setIsVideoOpen(true);
                 }
               }}
@@ -180,17 +185,31 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Video Modal - Lazy Loaded */}
+            {/* Video Modal - Privacy Compliant Lazy Loading */}
             <Dialog open={isVideoOpen} onOpenChange={(open) => {
               setIsVideoOpen(open);
               if (!open) {
-                // Clear video src when modal closes to stop playback
+                // Clear video src and message when modal closes
                 setVideoSrc("");
+                setShowConsentMessage(false);
               }
             }}>
               <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0">
                 <div className="relative aspect-video w-full">
-                  {videoSrc ? (
+                  {showConsentMessage ? (
+                    <div className="w-full h-full flex items-center justify-center bg-muted p-6">
+                      <div className="text-center max-w-md">
+                        <Shield className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                        <h3 className="font-semibold text-lg mb-2">Cookie Consent Required</h3>
+                        <p className="text-muted-foreground mb-4">
+                          To view this embedded video from YouTube, we need your consent to load external content that may use cookies for analytics or marketing purposes.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          Please accept cookies using the banner at the bottom of the page, then try again.
+                        </p>
+                      </div>
+                    </div>
+                  ) : videoSrc ? (
                     <iframe
                       src={videoSrc}
                       title="Realtor Desk AI Product Demo"
