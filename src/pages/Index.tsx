@@ -46,7 +46,6 @@ const Index = () => {
   const { t } = useTranslation();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [videoSrc, setVideoSrc] = useState("");
-  const [showConsentMessage, setShowConsentMessage] = useState(false);
 
   return (
     <div className="min-h-screen pb-20 md:pb-0">
@@ -146,26 +145,27 @@ const Index = () => {
             <div 
               className="relative aspect-video rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden mb-4 sm:mb-6 group cursor-pointer touch-manipulation active:scale-98 transition-transform"
               onClick={() => {
-                // Strictly enforce cookie consent before loading external video
-                const consent = localStorage.getItem("cookie-consent");
-                if (consent) {
-                  const consentData = JSON.parse(consent);
-                  // Only load video if user explicitly accepted analytics or marketing cookies
+                const consentString = localStorage.getItem("cookie-consent");
+                let canLoadVideo = false;
+
+                if (consentString) {
+                  // Assuming consent object has { necessary: true, analytics: boolean, marketing: boolean }
+                  const consentData = JSON.parse(consentString);
                   if (consentData.analytics || consentData.marketing) {
-                    if (DEMO_VIDEO_URL) {
-                      setVideoSrc(DEMO_VIDEO_URL);
-                      setShowConsentMessage(false);
-                    }
-                    setIsVideoOpen(true);
-                  } else {
-                    // User rejected tracking cookies - show consent required message
-                    setShowConsentMessage(true);
-                    setIsVideoOpen(true);
+                    canLoadVideo = true;
                   }
-                } else {
-                  // No consent given yet - show consent required message
-                  setShowConsentMessage(true);
+                }
+
+                if (canLoadVideo && DEMO_VIDEO_URL) {
+                  // Load video if consent is granted AND URL is configured
+                  setVideoSrc(DEMO_VIDEO_URL);
                   setIsVideoOpen(true);
+                } else if (!DEMO_VIDEO_URL) {
+                  // Show placeholder if URL is not configured
+                  setIsVideoOpen(true);
+                } else {
+                  // If no consent or rejected, show alert
+                  alert("Please accept marketing or analytics cookies via the banner at the bottom to watch the video.");
                 }
               }}
             >
@@ -189,27 +189,13 @@ const Index = () => {
             <Dialog open={isVideoOpen} onOpenChange={(open) => {
               setIsVideoOpen(open);
               if (!open) {
-                // Clear video src and message when modal closes
+                // Clear video src when modal closes
                 setVideoSrc("");
-                setShowConsentMessage(false);
               }
             }}>
               <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0">
                 <div className="relative aspect-video w-full">
-                  {showConsentMessage ? (
-                    <div className="w-full h-full flex items-center justify-center bg-muted p-6">
-                      <div className="text-center max-w-md">
-                        <Shield className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                        <h3 className="font-semibold text-lg mb-2">Cookie Consent Required</h3>
-                        <p className="text-muted-foreground mb-4">
-                          To view this embedded video from YouTube, we need your consent to load external content that may use cookies for analytics or marketing purposes.
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          Please accept cookies using the banner at the bottom of the page, then try again.
-                        </p>
-                      </div>
-                    </div>
-                  ) : videoSrc ? (
+                  {videoSrc ? (
                     <iframe
                       src={videoSrc}
                       title="Realtor Desk AI Product Demo"
@@ -219,7 +205,7 @@ const Index = () => {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-muted">
-                      <p className="text-muted-foreground">Please add your demo video URL</p>
+                      <p className="text-muted-foreground">Please add your demo video URL to DEMO_VIDEO_URL constant</p>
                     </div>
                   )}
                 </div>
