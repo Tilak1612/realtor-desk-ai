@@ -17,9 +17,12 @@ const Pricing = () => {
     agent: {
       monthly: 149,
       yearly: 1497,
-      savings: 291, // $149 x 12 = $1,788, save $291
-      discount: "$291",
-      foundingPrice: 999 // Special founding member price
+      yearlyTotal: 149 * 12, // $1,788
+      savings: 291, // Regular yearly saves $291 vs monthly
+      foundingPrice: 999,
+      foundingSavings: 789, // Founding price saves $789 vs paying monthly ($1,788 - $999)
+      foundingVsYearly: 498, // Founding price saves $498 vs regular yearly ($1,497 - $999)
+      discount: "$291"
     },
     team: {
       yearly: 2997,
@@ -81,7 +84,7 @@ const Pricing = () => {
               price={isYearly ? (pricingData.agent.foundingPrice.toString()) : pricingData.agent.monthly.toString()}
               description="Perfect for individual agents ready to scale"
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? `Founding Member: Save $498` : `Save ${pricingData.agent.discount}/year`}
+              discount={isYearly ? `Save $${pricingData.agent.foundingSavings} vs monthly ($${pricingData.agent.foundingVsYearly} vs regular yearly)` : `Save $${pricingData.agent.savings}/year with annual billing`}
               yearlyPrice={isYearly ? pricingData.agent.foundingPrice : undefined}
               features={[
                 "Unlimited contacts & leads",
