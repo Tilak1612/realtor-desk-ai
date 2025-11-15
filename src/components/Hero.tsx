@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Play, MapPin } from "lucide-react";
-import heroDashboard from "@/assets/hero-dashboard.jpg";
+import heroDashboardAI from "@/assets/hero-dashboard-ai.jpg";
 import { useTranslation } from "react-i18next";
 
 const Hero = () => {
@@ -16,14 +16,14 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Column - Content */}
           <div className="animate-fade-in-up order-2 lg:order-1">
-            {/* Beta and Canadian Badge */}
-            <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-6">
-              <Badge className="bg-orange-500 hover:bg-orange-600 text-white">
+            {/* Beta Badge and Canadian Badge */}
+            <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
+              <Badge className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
                 BETA
               </Badge>
               <Badge variant="secondary" className="gap-1.5">
                 <MapPin className="w-3 h-3" />
-                🇨🇦 Built by Canadian Realtors, for Canadian Realtors
+                🇨🇦 Built by Canadian Realtors
               </Badge>
             </div>
             
@@ -72,16 +72,19 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Hero Image */}
-          <div className="relative animate-fade-in animation-delay-200 order-1 lg:order-2 px-2 sm:px-0">
-            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl">
+          <div className="relative animate-fade-in animation-delay-200 order-1 lg:order-2">
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={heroDashboard}
-                alt="RealtorDesk AI dashboard interface for Canadian realtors showing AI-powered lead scoring, bilingual chatbot, property analytics, and automated client management system"
+                src={heroDashboardAI}
+                alt="RealtorDesk AI dashboard showing AI automation in action - live call handling, bilingual chat, lead scoring, and automated follow-ups for Canadian real estate agents"
                 className="w-full h-auto"
               />
-              {/* Beta Badge Overlay */}
-              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-orange-500 text-white backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-scale-in animation-delay-400">
-                <div className="text-xs sm:text-sm font-bold uppercase leading-none">Beta</div>
+              {/* AI Active Indicator */}
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-accent text-white backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-pulse">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                  <div className="text-xs sm:text-sm font-bold uppercase leading-none">🤖 AI Active</div>
+                </div>
               </div>
             </div>
 
