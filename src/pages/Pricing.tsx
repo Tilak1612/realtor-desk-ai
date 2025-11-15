@@ -86,7 +86,7 @@ const Pricing = () => {
               price={isYearly ? (pricingData.agent.foundingPrice.toString()) : pricingData.agent.monthly.toString()}
               description="Perfect for individual agents ready to scale"
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? `Save $${pricingData.agent.foundingSavings} vs monthly ($${pricingData.agent.foundingVsYearly} vs regular yearly)` : `Save $${pricingData.agent.savings}/year with annual billing`}
+              discount={isYearly ? `Save $789 vs monthly ($498 vs regular yearly)` : `Save $${pricingData.agent.savings}/year with annual billing`}
               yearlyPrice={isYearly ? pricingData.agent.foundingPrice : undefined}
               features={[
                 "Unlimited contacts & leads",
