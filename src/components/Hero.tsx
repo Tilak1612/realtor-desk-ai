@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Play, MapPin } from "lucide-react";
-import heroDashboardAI from "@/assets/hero-dashboard-ai.jpg";
+import heroDashboard from "@/assets/hero-dashboard-ai.jpg";
 import { useTranslation } from "react-i18next";
 
 const Hero = () => {
@@ -13,18 +13,27 @@ const Hero = () => {
       <div className="absolute inset-0 hero-gradient -z-10" />
       
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="animate-fade-in-up order-2 lg:order-1">
-            {/* Beta Badge and Canadian Badge */}
-            <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
-              <Badge className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
-                BETA
-              </Badge>
+            {/* Canadian Badge */}
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               <Badge variant="secondary" className="gap-1.5">
                 <MapPin className="w-3 h-3" />
-                🇨🇦 Built by Canadian Realtors
+                🇨🇦 Built by Canadian Realtors, for Canadian Realtors
               </Badge>
+            </div>
+            
+            {/* Headline with integrated Beta badge */}
+            <div className="mb-3 sm:mb-4 md:mb-6">
+              <div className="flex flex-wrap items-center gap-3 mb-2">
+                <h1 className="leading-[1.1] sm:leading-tight text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl break-words">
+                  {t('hero.title')}
+                </h1>
+                <Badge className="bg-orange-500 hover:bg-orange-600 text-white text-xs sm:text-sm">
+                  BETA
+                </Badge>
+              </div>
             </div>
             
             {/* Trust Badges */}
@@ -42,10 +51,6 @@ const Hero = () => {
                 <span className="whitespace-nowrap">{t('hero.badge3')}</span>
               </span>
             </div>
-
-            <h1 className="mb-3 sm:mb-4 md:mb-6 leading-[1.1] sm:leading-tight text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl break-words">
-              {t('hero.title')}
-            </h1>
 
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed">
               {t('hero.subtitle')}
@@ -75,22 +80,19 @@ const Hero = () => {
           <div className="relative animate-fade-in animation-delay-200 order-1 lg:order-2">
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={heroDashboardAI}
-                alt="RealtorDesk AI dashboard showing AI automation in action - live call handling, bilingual chat, lead scoring, and automated follow-ups for Canadian real estate agents"
+                src={heroDashboard}
+                alt="RealtorDesk AI dashboard showing real-time lead scoring, AI chatbot conversations, automated follow-ups, smart inbox, and analytics for Canadian realtors"
                 className="w-full h-auto"
               />
-              {/* AI Active Indicator */}
-              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-accent text-white backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-pulse">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                  <div className="text-xs sm:text-sm font-bold uppercase leading-none">🤖 AI Active</div>
-                </div>
+              {/* AI Automation Indicator */}
+              <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-accent/90 text-white backdrop-blur-sm rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 shadow-lg animate-pulse">
+                <div className="text-xs sm:text-sm font-bold leading-none">🤖 AI Active</div>
               </div>
             </div>
 
-            {/* Decorative Elements - Hidden on mobile */}
-            <div className="hidden md:block absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl -z-10" />
-            <div className="hidden md:block absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl -z-10" />
+            {/* Decorative Elements - Reduced */}
+            <div className="hidden lg:block absolute -top-8 -right-8 w-32 h-32 bg-primary/10 rounded-full blur-3xl -z-10" />
+            <div className="hidden lg:block absolute -bottom-8 -left-8 w-32 h-32 bg-accent/10 rounded-full blur-3xl -z-10" />
           </div>
         </div>
       </div>

@@ -52,8 +52,7 @@ const BetaSuccessStories = () => {
     <section className="section-padding bg-background border-y">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4 text-3xl md:text-4xl font-bold">Beta Community Results</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Canadian realtors are already seeing measurable results</p>
+          <h2 className="mb-4 text-3xl md:text-4xl font-bold">Real Results from Our Beta Community</h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
