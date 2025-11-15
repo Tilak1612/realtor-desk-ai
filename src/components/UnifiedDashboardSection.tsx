@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Inbox, TrendingUp, Bell, MessageSquare, Zap } from "lucide-react";
-import heroDashboard from "@/assets/hero-dashboard.jpg";
+import dashboardUnified from "@/assets/dashboard-unified.jpg";
 import { useTranslation } from "react-i18next";
 
 const UnifiedDashboardSection = () => {
@@ -19,8 +19,8 @@ const UnifiedDashboardSection = () => {
         {/* Dashboard Screenshot with Callouts */}
         <div className="relative max-w-6xl mx-auto mb-12">
           <img
-            src={heroDashboard}
-            alt="RealtorDesk AI unified dashboard showing AI lead scoring, unified inbox, real-time alerts, and property management tools for Canadian realtors"
+            src={dashboardUnified}
+            alt="RealtorDesk AI unified dashboard showing unified inbox, task management, pipeline visualization, and multi-channel communication for Canadian real estate professionals"
             className="w-full rounded-2xl shadow-2xl"
             loading="lazy"
           />
