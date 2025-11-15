@@ -25,10 +25,12 @@ const Pricing = () => {
       discount: "$291"
     },
     team: {
+      monthly: 299,
       yearly: 2997,
+      yearlyTotal: 299 * 12, // $3,588
       perAgent: 600, // $2,997 / 5 agents
-      savings: 1000,
-      discount: "$1,000"
+      savings: 591, // $3,588 - $2,997 = $591
+      discount: "$591"
     }
   };
 
