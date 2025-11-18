@@ -38,9 +38,8 @@ import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
-// Demo Video - Replace with your actual demo video URL
-// Example: "https://www.youtube.com/embed/YOUR_VIDEO_ID"
-const DEMO_VIDEO_URL = "";
+// Demo Video - HeyGen Product Demo
+const DEMO_VIDEO_URL = "https://app.heygen.com/share/4c80de4c5d7a4392b50941050220df54";
 
 const Index = () => {
   const { t } = useTranslation();
