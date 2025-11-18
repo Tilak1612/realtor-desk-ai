@@ -15,9 +15,22 @@ const PrivacyPolicy = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">1. Information We Collect</h2>
+              <p className="mb-4">
+                We collect information you provide directly to us, including:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 mb-4">
+                <li><strong>Personal Information:</strong> Name, email address, phone number, business name, license number</li>
+                <li><strong>Account Information:</strong> Username, password (encrypted), profile photo, preferences</li>
+                <li><strong>Business Information:</strong> Brokerage details, province of operation, primary language</li>
+                <li><strong>Client Data:</strong> Contact information you enter into the CRM system</li>
+                <li><strong>Usage Data:</strong> How you interact with our platform, features used, login times</li>
+                <li><strong>Technical Data:</strong> IP address, browser type, device information, cookies</li>
+                <li><strong>Communication Data:</strong> Records of support requests, demo bookings, feedback</li>
+              </ul>
               <p>
-                We collect information you provide directly to us, including name, email address, phone number, 
-                and business information when you register for our services or request a demo.
+                We collect this information when you register for our services, request a demo, use our platform, 
+                or communicate with our support team. All data collection is limited to what is necessary for 
+                providing our services and complying with legal obligations.
               </p>
             </section>
 
@@ -35,10 +48,29 @@ const PrivacyPolicy = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">3. Data Storage and Security</h2>
+              <p className="mb-4">
+                Your data is stored exclusively in secure Canadian data centers (Toronto and Vancouver regions) 
+                to ensure compliance with Canadian privacy laws and data sovereignty requirements.
+              </p>
+              <p className="mb-4"><strong>Security Measures:</strong></p>
+              <ul className="list-disc pl-6 space-y-2 mb-4">
+                <li><strong>Encryption:</strong> AES-256 encryption at rest, TLS 1.3 in transit</li>
+                <li><strong>Access Controls:</strong> Role-based access control (RBAC), multi-factor authentication</li>
+                <li><strong>Monitoring:</strong> 24/7 security monitoring and automated threat detection</li>
+                <li><strong>Audits:</strong> Regular security audits and penetration testing</li>
+                <li><strong>Backups:</strong> Daily encrypted backups with 30-day retention</li>
+                <li><strong>Compliance:</strong> SOC 2 Type II certified, PIPEDA compliant</li>
+              </ul>
+              <p className="mb-4">
+                <strong>Data Retention:</strong> We retain your personal information only as long as necessary 
+                to provide our services or as required by law. When you close your account, we will delete or 
+                anonymize your personal data within 90 days, except where we are legally required to retain it 
+                (e.g., for tax or legal purposes).
+              </p>
               <p>
-                Your data is stored in secure Canadian data centers. We implement industry-standard security 
-                measures including encryption, secure access controls, and regular security audits. We are 
-                SOC 2 compliant and adhere to all Canadian privacy regulations including PIPEDA.
+                <strong>Breach Notification:</strong> In the unlikely event of a data breach affecting your 
+                personal information, we will notify you and the Privacy Commissioner of Canada within 72 hours 
+                as required by PIPEDA, and provide details about the breach and steps we are taking to address it.
               </p>
             </section>
 
@@ -65,10 +97,25 @@ const PrivacyPolicy = () => {
 
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Cookies and Tracking</h2>
+              <p className="mb-4">
+                We use cookies and similar tracking technologies to enhance your experience and understand how 
+                you use our platform. You have full control over cookie preferences through our cookie consent banner.
+              </p>
+              <p className="mb-4"><strong>Types of Cookies We Use:</strong></p>
+              <ul className="list-disc pl-6 space-y-2 mb-4">
+                <li><strong>Necessary Cookies:</strong> Essential for site functionality (authentication, security). These cannot be disabled.</li>
+                <li><strong>Analytics Cookies:</strong> Help us understand visitor behavior and improve our platform (Google Analytics)</li>
+                <li><strong>Marketing Cookies:</strong> Used to deliver relevant advertisements and track campaign effectiveness</li>
+                <li><strong>Functional Cookies:</strong> Enable enhanced features like chat widgets and saved preferences</li>
+              </ul>
+              <p className="mb-4">
+                <strong>Your Cookie Choices:</strong> You can manage your cookie preferences at any time through 
+                the cookie settings link in our footer or by clearing your browser cookies. Note that disabling 
+                certain cookies may limit your ability to use some features of our platform.
+              </p>
               <p>
-                We use cookies and similar tracking technologies to track activity on our service and hold 
-                certain information. You can instruct your browser to refuse all cookies or to indicate when 
-                a cookie is being sent.
+                <strong>Consent Retention:</strong> We store records of your cookie consent choices for 24 months 
+                as required by Canadian privacy regulations.
               </p>
             </section>
 
@@ -81,14 +128,61 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. Contact Us</h2>
-              <p>
-                If you have any questions about this Privacy Policy, please contact us at:
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. PIPEDA Accountability</h2>
+              <p className="mb-4">
+                As required by the Personal Information Protection and Electronic Documents Act (PIPEDA), 
+                Brainfy AI Inc. is accountable for all personal information under our control.
               </p>
-              <ul className="list-none space-y-2">
-                <li>Email: support@realtordesk.ai</li>
-                <li>Phone: 1-800-REALTOR-AI</li>
-                <li>Address: Edmonton, Alberta, Canada</li>
+              <p className="mb-4"><strong>Our Accountability Officer:</strong></p>
+              <ul className="list-none space-y-2 mb-4">
+                <li><strong>Name:</strong> Privacy Officer</li>
+                <li><strong>Email:</strong> privacy@realtordesk.ai</li>
+                <li><strong>Mailing Address:</strong> Edmonton, Alberta, Canada</li>
+              </ul>
+              <p className="mb-4">
+                Our Privacy Officer is responsible for ensuring compliance with PIPEDA and addressing all 
+                privacy-related inquiries and complaints. We have implemented policies and procedures to protect 
+                personal information and provide training to all employees who handle personal data.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. International Data Transfers</h2>
+              <p>
+                Your personal information is stored and processed exclusively in Canada. We do not transfer 
+                personal information outside of Canada, ensuring full compliance with Canadian data residency 
+                requirements and PIPEDA regulations.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">10. Children's Privacy</h2>
+              <p>
+                Our services are intended for real estate professionals aged 18 and older. We do not knowingly 
+                collect personal information from individuals under 18. If we become aware that we have collected 
+                data from someone under 18, we will delete it immediately.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">11. Contact Us</h2>
+              <p className="mb-4">
+                If you have any questions about this Privacy Policy or wish to exercise your privacy rights, 
+                please contact us:
+              </p>
+              <ul className="list-none space-y-2 mb-4">
+                <li><strong>General Inquiries:</strong> support@realtordesk.ai</li>
+                <li><strong>Privacy Matters:</strong> privacy@realtordesk.ai</li>
+                <li><strong>Phone:</strong> 1-800-REALTOR-AI (1-800-732-5867)</li>
+                <li><strong>Mailing Address:</strong> Brainfy AI Inc., Edmonton, Alberta, Canada</li>
+              </ul>
+              <p>
+                <strong>Filing a Complaint:</strong> If you believe we have not addressed your privacy concerns 
+                adequately, you have the right to file a complaint with the Office of the Privacy Commissioner of Canada:
+              </p>
+              <ul className="list-none space-y-2 mt-2">
+                <li>Website: <a href="https://www.priv.gc.ca" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.priv.gc.ca</a></li>
+                <li>Toll-free: 1-800-282-1376</li>
               </ul>
             </section>
           </div>
