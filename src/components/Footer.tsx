@@ -157,6 +157,15 @@ const Footer = () => {
               <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.terms')}
               </Link>
+              <button 
+                onClick={() => {
+                  localStorage.removeItem("cookie-consent");
+                  window.location.reload();
+                }} 
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                Cookie Settings
+              </button>
               <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contact')}
               </Link>
