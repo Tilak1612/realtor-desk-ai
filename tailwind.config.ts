@@ -48,6 +48,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        decorative: {
+          orange: "hsl(var(--decorative-orange))",
+          pink: "hsl(var(--decorative-pink))",
+          purple: "hsl(var(--decorative-purple))",
+          blue: "hsl(var(--decorative-blue))",
+          yellow: "hsl(var(--decorative-yellow))",
+          green: "hsl(var(--decorative-green))",
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
