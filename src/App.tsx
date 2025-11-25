@@ -45,6 +45,10 @@ import Deals from "./pages/Deals";
 import Tasks from "./pages/Tasks";
 import AIAssistant from "./pages/AIAssistant";
 import Settings from "./pages/Settings";
+import Campaigns from "./pages/Campaigns";
+import CalendarPage from "./pages/Calendar";
+import Reports from "./pages/Reports";
+import Market from "./pages/Market";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -92,6 +96,10 @@ const App = () => (
           <Route path="/app/deals" element={<Deals />} />
           <Route path="/app/tasks" element={<Tasks />} />
           <Route path="/app/ai-assistant" element={<AIAssistant />} />
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/market" element={<Market />} />
           <Route path="/settings" element={<Settings />} />
           
           {/* Comparison Pages */}
