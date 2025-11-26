@@ -48,6 +48,8 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
     setLoading(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
+      
+      // Skip subscription check on public pages when not logged in
       if (!session) {
         setSubscribed(false);
         setProductId(null);
@@ -63,13 +65,23 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         },
       });
 
-      if (error) throw error;
+      // Silently handle errors on public pages
+      if (error) {
+        console.warn('Subscription check failed:', error);
+        setSubscribed(false);
+        setProductId(null);
+        setPriceId(null);
+        setSubscriptionEnd(null);
+        setLoading(false);
+        return;
+      }
 
       setSubscribed(data.subscribed || false);
       setProductId(data.product_id || null);
       setPriceId(data.price_id || null);
       setSubscriptionEnd(data.subscription_end || null);
     } catch (error) {
+      console.warn('Subscription check error:', error);
       setSubscribed(false);
       setProductId(null);
       setPriceId(null);
