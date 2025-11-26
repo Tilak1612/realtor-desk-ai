@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import logo from "@/assets/realtor-desk-logo.png";
+import logo from "@/assets/realtor-desk-logo-new.png";
 
 const Navbar = () => {
   const { t } = useTranslation();

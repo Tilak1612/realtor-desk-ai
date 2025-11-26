@@ -18,7 +18,7 @@ import {
   CreditCard,
   Building2,
 } from "lucide-react";
-import logo from "@/assets/realtor-desk-logo.png";
+import logo from "@/assets/realtor-desk-logo-new.png";
 import { useState } from "react";
 
 const menuItems = [
