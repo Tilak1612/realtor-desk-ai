@@ -264,7 +264,7 @@ const Billing = () => {
                   </div>
                   <div className="mt-4">
                     <span className="text-4xl font-bold">
-                      ${isYearly ? SUBSCRIPTION_PRODUCTS.agent.price : '149'}
+                      ${isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearlyPrice : SUBSCRIPTION_PRODUCTS.agent.monthlyPrice}
                     </span>
                     <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
                   </div>
@@ -304,11 +304,11 @@ const Billing = () => {
                   </ul>
                   {subscriptionTier !== 'agent' && (
                     <Button 
-                      onClick={() => handleCheckout(SUBSCRIPTION_PRODUCTS.agent.price_id)}
+                      onClick={() => handleCheckout(isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearly_price_id : SUBSCRIPTION_PRODUCTS.agent.monthly_price_id)}
                       disabled={checkoutLoading !== null}
                       className="w-full"
                     >
-                      {checkoutLoading === SUBSCRIPTION_PRODUCTS.agent.price_id ? (
+                      {checkoutLoading === (isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearly_price_id : SUBSCRIPTION_PRODUCTS.agent.monthly_price_id) ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                           Loading...
@@ -338,7 +338,7 @@ const Billing = () => {
                   </div>
                   <div className="mt-4">
                     <span className="text-4xl font-bold">
-                      ${isYearly ? SUBSCRIPTION_PRODUCTS.team.price : '299'}
+                      ${isYearly ? SUBSCRIPTION_PRODUCTS.team.yearlyPrice : SUBSCRIPTION_PRODUCTS.team.monthlyPrice}
                     </span>
                     <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
                   </div>
@@ -378,11 +378,11 @@ const Billing = () => {
                   </ul>
                   {subscriptionTier !== 'team' && (
                     <Button 
-                      onClick={() => handleCheckout(SUBSCRIPTION_PRODUCTS.team.price_id)}
+                      onClick={() => handleCheckout(isYearly ? SUBSCRIPTION_PRODUCTS.team.yearly_price_id : SUBSCRIPTION_PRODUCTS.team.monthly_price_id)}
                       disabled={checkoutLoading !== null}
                       className="w-full"
                     >
-                      {checkoutLoading === SUBSCRIPTION_PRODUCTS.team.price_id ? (
+                      {checkoutLoading === (isYearly ? SUBSCRIPTION_PRODUCTS.team.yearly_price_id : SUBSCRIPTION_PRODUCTS.team.monthly_price_id) ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                           Loading...

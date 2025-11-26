@@ -16,18 +16,22 @@ const SubscriptionContext = createContext<SubscriptionContextType | undefined>(u
 
 export const SUBSCRIPTION_PRODUCTS = {
   agent: {
-    price_id: 'price_1SHXQSLgITKN3nvobl2TSJ5w',
-    product_id: 'prod_TDzP5HfKLfKf8t',
+    monthly_price_id: 'price_1SXpyiS23MQcIdnrAphs809v',
+    yearly_price_id: 'price_1SXpzKS23MQcIdnrfH2rHhow',
+    monthly_product_id: 'prod_TUpecsjMV6TaBw',
+    yearly_product_id: 'prod_TUpevCKNFOGwCq',
     name: 'Agent Plan',
-    price: 999, // Yearly price
-    monthlyPrice: 149, // Monthly price
+    yearlyPrice: 999,
+    monthlyPrice: 149,
   },
   team: {
-    price_id: 'price_1SHXQqLgITKN3nvouli6jZOj',
-    product_id: 'prod_TDzPUXYbavZgZe',
+    monthly_price_id: 'price_1SXpz0S23MQcIdnrrD0UGqa5',
+    yearly_price_id: 'price_1SXpzZS23MQcIdnrVVyUShLT',
+    monthly_product_id: 'prod_TUpeTIPjzjd64Z',
+    yearly_product_id: 'prod_TUpeobzrNh5RNk',
     name: 'Team Plan',
-    price: 2997, // Yearly price
-    monthlyPrice: 299, // Monthly price
+    yearlyPrice: 2997,
+    monthlyPrice: 299,
   },
 };
 
@@ -41,8 +45,10 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const getSubscriptionTier = (): 'trial' | 'agent' | 'team' | null => {
     if (!subscribed) return 'trial';
-    if (productId === SUBSCRIPTION_PRODUCTS.agent.product_id) return 'agent';
-    if (productId === SUBSCRIPTION_PRODUCTS.team.product_id) return 'team';
+    if (productId === SUBSCRIPTION_PRODUCTS.agent.monthly_product_id || 
+        productId === SUBSCRIPTION_PRODUCTS.agent.yearly_product_id) return 'agent';
+    if (productId === SUBSCRIPTION_PRODUCTS.team.monthly_product_id || 
+        productId === SUBSCRIPTION_PRODUCTS.team.yearly_product_id) return 'team';
     return null;
   };
 
