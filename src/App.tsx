@@ -41,6 +41,7 @@ import Onboarding from "./pages/Onboarding";
 import Contacts from "./pages/Contacts";
 import ContactDetail from "./pages/ContactDetail";
 import Billing from "./pages/Billing";
+import Properties from "./pages/Properties";
 import Deals from "./pages/Deals";
 import Tasks from "./pages/Tasks";
 import AIAssistant from "./pages/AIAssistant";
@@ -92,6 +93,7 @@ const App = () => (
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/contacts/:id" element={<ContactDetail />} />
+          <Route path="/properties" element={<Properties />} />
           <Route path="/app/billing" element={<Billing />} />
           <Route path="/app/deals" element={<Deals />} />
           <Route path="/app/tasks" element={<Tasks />} />

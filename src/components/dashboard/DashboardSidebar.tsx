@@ -16,6 +16,7 @@ import {
   X,
   Sparkles,
   CreditCard,
+  Building2,
 } from "lucide-react";
 import logo from "@/assets/realtor-desk-logo.png";
 import { useState } from "react";
@@ -23,6 +24,7 @@ import { useState } from "react";
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Users, label: "Contacts", path: "/contacts" },
+  { icon: Building2, label: "Properties", path: "/properties" },
   { icon: Briefcase, label: "Deals", path: "/app/deals" },
   { icon: CheckSquare, label: "Tasks", path: "/app/tasks" },
   { icon: Bot, label: "AI Assistant", path: "/app/ai-assistant" },
