@@ -498,8 +498,8 @@ export type Database = {
           consent_given: boolean | null
           consent_source: string | null
           created_at: string | null
-          email: string | null
-          first_name: string | null
+          email: string
+          first_name: string
           id: string
           last_contact_date: string | null
           last_name: string | null
@@ -522,8 +522,8 @@ export type Database = {
           consent_given?: boolean | null
           consent_source?: string | null
           created_at?: string | null
-          email?: string | null
-          first_name?: string | null
+          email: string
+          first_name: string
           id?: string
           last_contact_date?: string | null
           last_name?: string | null
@@ -546,8 +546,8 @@ export type Database = {
           consent_given?: boolean | null
           consent_source?: string | null
           created_at?: string | null
-          email?: string | null
-          first_name?: string | null
+          email?: string
+          first_name?: string
           id?: string
           last_contact_date?: string | null
           last_name?: string | null
@@ -1786,6 +1786,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_contact_exists: {
+        Args: { checking_user_id: string; contact_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
