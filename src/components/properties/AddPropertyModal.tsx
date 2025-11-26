@@ -36,6 +36,8 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
     description: "",
     image_url: "",
     mls_number: "",
+    source_url: "",
+    data_source: "manual",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -65,6 +67,8 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
         description: formData.description || null,
         image_url: formData.image_url || null,
         mls_number: formData.mls_number || null,
+        source_url: formData.source_url || null,
+        data_source: formData.source_url ? 'url_scrape' : 'manual',
       }]);
 
       if (error) throw error;
@@ -92,6 +96,8 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
         description: "",
         image_url: "",
         mls_number: "",
+        source_url: "",
+        data_source: "manual",
       });
     } catch (error: any) {
       toast({
@@ -112,6 +118,23 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="bg-primary/10 p-4 rounded-lg mb-4">
+            <h3 className="font-semibold mb-2 flex items-center gap-2">
+              🚀 Quick Add from MLS Listing URL
+            </h3>
+            <Label htmlFor="source_url" className="text-sm">Paste Listing URL (Coming Soon: Auto-fill from CREA DDF)</Label>
+            <Input
+              id="source_url"
+              value={formData.source_url}
+              onChange={(e) => setFormData({ ...formData, source_url: e.target.value })}
+              placeholder="https://realtor.ca/listing/..."
+              className="mt-2"
+            />
+            <p className="text-xs text-muted-foreground mt-2">
+              Phase 1: We'll scrape basic info. Phase 2: Full CREA DDF integration coming Q1 2026.
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <Label htmlFor="title">Property Title *</Label>

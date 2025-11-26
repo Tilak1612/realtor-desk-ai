@@ -494,6 +494,9 @@ export type Database = {
         Row: {
           ai_score: number | null
           best_contact_time: string | null
+          consent_date: string | null
+          consent_given: boolean | null
+          consent_source: string | null
           created_at: string | null
           email: string | null
           first_name: string | null
@@ -503,15 +506,21 @@ export type Database = {
           lead_score: number | null
           metadata: Json | null
           phone: string | null
+          preferred_language: string | null
           source: string | null
           status: string | null
           tags: string[] | null
+          unsubscribe_date: string | null
+          unsubscribed: boolean | null
           updated_at: string | null
           user_id: string | null
         }
         Insert: {
           ai_score?: number | null
           best_contact_time?: string | null
+          consent_date?: string | null
+          consent_given?: boolean | null
+          consent_source?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
@@ -521,15 +530,21 @@ export type Database = {
           lead_score?: number | null
           metadata?: Json | null
           phone?: string | null
+          preferred_language?: string | null
           source?: string | null
           status?: string | null
           tags?: string[] | null
+          unsubscribe_date?: string | null
+          unsubscribed?: boolean | null
           updated_at?: string | null
           user_id?: string | null
         }
         Update: {
           ai_score?: number | null
           best_contact_time?: string | null
+          consent_date?: string | null
+          consent_given?: boolean | null
+          consent_source?: string | null
           created_at?: string | null
           email?: string | null
           first_name?: string | null
@@ -539,9 +554,12 @@ export type Database = {
           lead_score?: number | null
           metadata?: Json | null
           phone?: string | null
+          preferred_language?: string | null
           source?: string | null
           status?: string | null
           tags?: string[] | null
+          unsubscribe_date?: string | null
+          unsubscribed?: boolean | null
           updated_at?: string | null
           user_id?: string | null
         }
@@ -1263,12 +1281,15 @@ export type Database = {
           email: string
           full_name: string
           id: string
+          license_expiry: string | null
           license_number: string | null
           onboarding_completed: boolean | null
           onboarding_step: number | null
           phone: string | null
           primary_language: string | null
           province: string | null
+          province_code: string | null
+          regulatory_body: string | null
           role: string | null
           subscription_status:
             | Database["public"]["Enums"]["subscription_status"]
@@ -1276,6 +1297,7 @@ export type Database = {
           subscription_tier:
             | Database["public"]["Enums"]["subscription_tier"]
             | null
+          timezone: string | null
           trial_ends_at: string | null
           updated_at: string | null
         }
@@ -1288,12 +1310,15 @@ export type Database = {
           email: string
           full_name: string
           id: string
+          license_expiry?: string | null
           license_number?: string | null
           onboarding_completed?: boolean | null
           onboarding_step?: number | null
           phone?: string | null
           primary_language?: string | null
           province?: string | null
+          province_code?: string | null
+          regulatory_body?: string | null
           role?: string | null
           subscription_status?:
             | Database["public"]["Enums"]["subscription_status"]
@@ -1301,6 +1326,7 @@ export type Database = {
           subscription_tier?:
             | Database["public"]["Enums"]["subscription_tier"]
             | null
+          timezone?: string | null
           trial_ends_at?: string | null
           updated_at?: string | null
         }
@@ -1313,12 +1339,15 @@ export type Database = {
           email?: string
           full_name?: string
           id?: string
+          license_expiry?: string | null
           license_number?: string | null
           onboarding_completed?: boolean | null
           onboarding_step?: number | null
           phone?: string | null
           primary_language?: string | null
           province?: string | null
+          province_code?: string | null
+          regulatory_body?: string | null
           role?: string | null
           subscription_status?:
             | Database["public"]["Enums"]["subscription_status"]
@@ -1326,6 +1355,7 @@ export type Database = {
           subscription_tier?:
             | Database["public"]["Enums"]["subscription_tier"]
             | null
+          timezone?: string | null
           trial_ends_at?: string | null
           updated_at?: string | null
         }
@@ -1339,6 +1369,7 @@ export type Database = {
           city: string | null
           contact_id: string | null
           created_at: string | null
+          data_source: string | null
           days_on_market: number | null
           deal_id: string | null
           description: string | null
@@ -1346,6 +1377,7 @@ export type Database = {
           id: string
           image_url: string | null
           images: Json | null
+          last_synced_at: string | null
           listing_type: string | null
           lot_size: number | null
           metadata: Json | null
@@ -1354,6 +1386,7 @@ export type Database = {
           price: number | null
           property_type: string | null
           province: string | null
+          source_url: string | null
           square_feet: number | null
           status: Database["public"]["Enums"]["property_status"] | null
           title: string
@@ -1369,6 +1402,7 @@ export type Database = {
           city?: string | null
           contact_id?: string | null
           created_at?: string | null
+          data_source?: string | null
           days_on_market?: number | null
           deal_id?: string | null
           description?: string | null
@@ -1376,6 +1410,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           images?: Json | null
+          last_synced_at?: string | null
           listing_type?: string | null
           lot_size?: number | null
           metadata?: Json | null
@@ -1384,6 +1419,7 @@ export type Database = {
           price?: number | null
           property_type?: string | null
           province?: string | null
+          source_url?: string | null
           square_feet?: number | null
           status?: Database["public"]["Enums"]["property_status"] | null
           title: string
@@ -1399,6 +1435,7 @@ export type Database = {
           city?: string | null
           contact_id?: string | null
           created_at?: string | null
+          data_source?: string | null
           days_on_market?: number | null
           deal_id?: string | null
           description?: string | null
@@ -1406,6 +1443,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           images?: Json | null
+          last_synced_at?: string | null
           listing_type?: string | null
           lot_size?: number | null
           metadata?: Json | null
@@ -1414,6 +1452,7 @@ export type Database = {
           price?: number | null
           property_type?: string | null
           province?: string | null
+          source_url?: string | null
           square_feet?: number | null
           status?: Database["public"]["Enums"]["property_status"] | null
           title?: string

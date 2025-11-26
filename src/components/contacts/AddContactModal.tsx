@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,9 @@ const formSchema = z.object({
   source: z.string().optional(),
   tags: z.string().optional(),
   notes: z.string().optional(),
+  preferred_language: z.string().optional(),
+  consent_given: z.boolean().default(false),
+  consent_source: z.string().optional(),
 });
 
 interface AddContactModalProps {
@@ -60,6 +64,9 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       source: "",
       tags: "",
       notes: "",
+      preferred_language: "en",
+      consent_given: false,
+      consent_source: "",
     },
   });
 
@@ -90,6 +97,10 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
         source: values.source || null,
         tags,
         metadata: values.notes ? { notes: values.notes } : {},
+        preferred_language: values.preferred_language,
+        consent_given: values.consent_given,
+        consent_date: values.consent_given ? new Date().toISOString() : null,
+        consent_source: values.consent_source || values.source || 'manual_entry',
       });
 
       if (error) throw error;
@@ -239,6 +250,57 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
                 </FormItem>
               )}
             />
+
+            <div className="border-t pt-4">
+              <h3 className="font-semibold mb-3 text-sm">🇨🇦 Canadian Compliance (CASL)</h3>
+              
+              <FormField
+                control={form.control}
+                name="preferred_language"
+                render={({ field }) => (
+                  <FormItem className="mb-3">
+                    <FormLabel>Preferred Language</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select language" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="en">English</SelectItem>
+                        <SelectItem value="fr">French</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="consent_given"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                    <FormControl>
+                      <input
+                        type="checkbox"
+                        checked={field.value}
+                        onChange={field.onChange}
+                        className="h-4 w-4 mt-1"
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>
+                        Contact has given consent for communication (CASL)
+                      </FormLabel>
+                      <p className="text-xs text-muted-foreground">
+                        Required under Canada's Anti-Spam Legislation for sending commercial electronic messages
+                      </p>
+                    </div>
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <DialogFooter>
               <Button

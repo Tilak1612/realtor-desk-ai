@@ -128,6 +128,75 @@ const Settings = () => {
             </p>
 
             <div className="space-y-6">
+              {/* Canadian Real Estate Profile */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    🇨🇦 Canadian Real Estate Profile
+                  </CardTitle>
+                  <CardDescription>
+                    Provincial licensing and regulatory information
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Province</label>
+                      <select className="w-full p-2 border rounded-md bg-background">
+                        <option value="">Select Province</option>
+                        <option value="ON">Ontario (ON)</option>
+                        <option value="BC">British Columbia (BC)</option>
+                        <option value="AB">Alberta (AB)</option>
+                        <option value="QC">Quebec (QC)</option>
+                        <option value="MB">Manitoba (MB)</option>
+                        <option value="SK">Saskatchewan (SK)</option>
+                        <option value="NS">Nova Scotia (NS)</option>
+                        <option value="NB">New Brunswick (NB)</option>
+                        <option value="NL">Newfoundland & Labrador (NL)</option>
+                        <option value="PE">Prince Edward Island (PE)</option>
+                        <option value="NT">Northwest Territories (NT)</option>
+                        <option value="YT">Yukon (YT)</option>
+                        <option value="NU">Nunavut (NU)</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">Timezone</label>
+                      <select className="w-full p-2 border rounded-md bg-background">
+                        <option value="America/Toronto">Eastern (EST/EDT)</option>
+                        <option value="America/Halifax">Atlantic (AST/ADT)</option>
+                        <option value="America/St_Johns">Newfoundland (NST/NDT)</option>
+                        <option value="America/Winnipeg">Central (CST/CDT)</option>
+                        <option value="America/Edmonton">Mountain (MST/MDT)</option>
+                        <option value="America/Vancouver">Pacific (PST/PDT)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Regulatory Body</label>
+                    <select className="w-full p-2 border rounded-md bg-background">
+                      <option value="">Select Regulatory Body</option>
+                      <option value="RECO">RECO - Ontario</option>
+                      <option value="BCFSA">BCFSA - British Columbia</option>
+                      <option value="RECA">RECA - Alberta</option>
+                      <option value="OACIQ">OACIQ - Quebec</option>
+                      <option value="MRAC">MRAC - Manitoba</option>
+                      <option value="SREC">SREC - Saskatchewan</option>
+                      <option value="NSREC">NSREC - Nova Scotia</option>
+                      <option value="RECNB">RECNB - New Brunswick</option>
+                    </select>
+                  </div>
+
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="text-sm">
+                      <strong>Note:</strong> Your license information helps ensure compliance with
+                      provincial regulations and CREA Code of Ethics.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Account Section */}
               <Card>
                 <CardHeader>
