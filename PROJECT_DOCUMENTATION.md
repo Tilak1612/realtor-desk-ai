@@ -575,7 +575,9 @@ VITE_SUPABASE_PROJECT_ID=pseqajrtcgiphfnworii
 - **Custom Domain:** Configurable via Project Settings
 
 ### Backend (Supabase)
-- **Region:** US-West (or closest to users)
+- **Region:** US-West (currently configured)
+  - ⚠️ **Note:** For Canadian market compliance (PIPEDA), consider migrating to Canada (Central) AWS ca-central-1
+  - See Section 15.1 for detailed data residency requirements
 - **Database:** PostgreSQL 15
 - **Edge Functions:** Globally distributed via Deno Deploy
 
@@ -590,7 +592,92 @@ VITE_SUPABASE_PROJECT_ID=pseqajrtcgiphfnworii
 
 ---
 
-## 15. Security Best Practices
+## 15. Canadian Market Considerations
+
+### 15.1 Data Residency & Compliance (PIPEDA)
+
+**Current Status**: Supabase project configured for optimal performance
+
+**Critical Requirements**:
+- Many Canadian brokerages require data to reside in Canada for PIPEDA compliance
+- Provincial laws (PIPA in BC/Alberta) may have additional requirements
+- **Recommended**: Use Canada (Central) AWS ca-central-1 region for Supabase when setting up production
+
+**Action Items**:
+- ✅ Document data handling practices clearly in Privacy Policy
+- ✅ Provide data residency information to enterprise clients
+- ⚠️ Consider multi-region deployment for enterprise tier
+- ⚠️ Evaluate if current US-West region meets client requirements
+
+### 15.2 CREA DDF Integration (High Priority)
+
+**Current Status**: Listed as future enhancement, but critical for Canadian market adoption
+
+**Market Reality**:
+- Manual data entry of listings is a **dealbreaker** for Canadian Realtors
+- CREA DDF (Data Distribution Facility) feed is the industry standard
+- Competitors offering DDF integration have significant market advantage
+- Realtors expect automated listing synchronization
+
+**Recommended Implementation Roadmap**:
+
+#### Phase 1 - Quick Win (MVP Enhancement)
+- **"Link to Listing URL" Feature**
+  - Scrapes Open Graph metadata from listing URLs
+  - Auto-populates: address, price, bedrooms, bathrooms, images
+  - Reduces 90% of manual entry friction
+  - Can be implemented in 1-2 weeks
+
+#### Phase 2 - Full Integration
+- **CREA DDF API Integration**
+  - Real-time listing synchronization
+  - Automated listing status updates
+  - MLS number validation
+  - Support for all Canadian provinces
+  - Estimated: 4-6 weeks development
+
+**Technical Notes**:
+- DDF uses RETS/RESO standard
+- Requires CREA membership and API credentials
+- Consider partnering with DDF data providers (e.g., Lone Wolf, ListHub)
+
+### 15.3 SMS vs. WhatsApp Priority
+
+**Current Status**: WhatsApp listed as future feature
+
+**Canadian Market Reality**:
+- **SMS (Text Message)** is the primary communication method in Canadian real estate
+- WhatsApp adoption is limited compared to Europe/Asia markets
+- Realtors expect SMS integration as a core feature, not optional
+- Many client communication workflows depend on SMS
+
+**Recommendation**:
+
+#### Priority 1: Twilio SMS Integration (Essential for v1 Launch)
+```javascript
+// Recommended features for SMS integration
+- Direct SMS from contact records
+- SMS templates for common scenarios
+  * Open house invitations
+  * Viewing confirmations
+  * Follow-up reminders
+- SMS activity logging in timeline
+- Two-way SMS conversations
+- Bulk SMS campaigns
+```
+
+#### Priority 2: WhatsApp (Optional Add-on)
+- Consider as premium feature for international clients
+- Useful for agents working with overseas buyers
+- Not essential for Canadian market penetration
+
+**Cost Estimation**:
+- Twilio SMS: ~$0.0075 per message (Canada)
+- Can be built into subscription tiers or usage-based pricing
+
+---
+
+## 16. Security Best Practices
 
 ### Implemented
 ✅ Row-Level Security (RLS) on all tables  
@@ -611,7 +698,7 @@ VITE_SUPABASE_PROJECT_ID=pseqajrtcgiphfnworii
 
 ---
 
-## 16. Performance Optimization
+## 17. Performance Optimization
 
 ### Implemented
 - Code splitting via Vite
@@ -630,7 +717,7 @@ VITE_SUPABASE_PROJECT_ID=pseqajrtcgiphfnworii
 
 ---
 
-## 17. Testing Strategy
+## 18. Testing Strategy
 
 ### Current State
 ⚠️ No automated tests implemented
@@ -657,7 +744,7 @@ npm install --save-dev jest @testing-library/react
 
 ---
 
-## 18. Development Workflow
+## 19. Development Workflow
 
 ### Local Setup
 ```bash
@@ -698,7 +785,7 @@ supabase functions logs [function-name]
 
 ---
 
-## 19. Common Issues & Solutions
+## 20. Common Issues & Solutions
 
 ### Issue: "Authentication Error: Auth session missing"
 **Solution:** Check if user is logged in before accessing protected routes. Add auth guard to page component.
@@ -717,15 +804,22 @@ supabase functions logs [function-name]
 
 ---
 
-## 20. Future Enhancements
+## 21. Future Enhancements
+
+### High Priority (Based on Canadian Market Feedback)
+- [ ] **CREA DDF Integration** (See Section 15.2)
+  - Phase 1: URL scraping feature (Quick Win)
+  - Phase 2: Full CREA DDF API integration
+- [ ] **SMS Automation (Twilio)** (See Section 15.3)
+  - Essential for Canadian market
+  - Two-way SMS conversations
+  - SMS templates and bulk campaigns
 
 ### Planned Features
 - [ ] Mobile app (React Native)
 - [ ] Advanced reporting dashboard
-- [ ] MLS integration (CREA DDF)
 - [ ] Document e-signature (DocuSign integration)
-- [ ] SMS automation (Twilio)
-- [ ] WhatsApp integration
+- [ ] WhatsApp integration (Lower priority for Canadian market)
 - [ ] Team collaboration features (shared pipeline, lead assignment)
 - [ ] Advanced AI features (price predictions, market analysis)
 - [ ] Video call integration (Zoom/Google Meet)
@@ -742,10 +836,11 @@ supabase functions logs [function-name]
 - [ ] Add API rate limiting
 - [ ] Implement request caching
 - [ ] Add database backups automation
+- [ ] Evaluate data residency options (Canada Central region)
 
 ---
 
-## 21. Support & Maintenance
+## 22. Support & Maintenance
 
 ### Documentation Updates
 This document should be updated when:
@@ -773,7 +868,7 @@ This document should be updated when:
 
 ---
 
-## 22. Contact & Resources
+## 23. Contact & Resources
 
 ### Key URLs
 - **Production App:** https://[project-id].lovableproject.com
@@ -792,7 +887,7 @@ This document should be updated when:
 
 ---
 
-## 23. Appendix
+## 24. Appendix
 
 ### Database Diagram
 ```
