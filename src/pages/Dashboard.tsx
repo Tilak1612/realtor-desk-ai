@@ -197,7 +197,7 @@ const Dashboard = () => {
                     </p>
                   </div>
                 </div>
-                <Link to="/app/billing">
+                <Link to="/billing">
                   <Button className="btn-gradient">
                     Upgrade Now <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
