@@ -48,9 +48,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        success: "hsl(var(--success))",
-        warning: "hsl(var(--warning))",
-        info: "hsl(var(--info))",
         decorative: {
           orange: "hsl(var(--decorative-orange))",
           pink: "hsl(var(--decorative-pink))",
@@ -62,16 +59,6 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
-      fontSize: {
-        'h1': ['36px', { lineHeight: '1.2', fontWeight: '700' }],
-        'h1-md': ['42px', { lineHeight: '1.2', fontWeight: '700' }],
-        'h1-lg': ['48px', { lineHeight: '1.2', fontWeight: '700' }],
-        'h2': ['24px', { lineHeight: '1.3', fontWeight: '700' }],
-        'h2-md': ['27px', { lineHeight: '1.3', fontWeight: '700' }],
-        'h2-lg': ['30px', { lineHeight: '1.3', fontWeight: '700' }],
-        'body': ['16px', { lineHeight: '1.6' }],
-        'small': ['14px', { lineHeight: '1.5' }],
       },
       borderRadius: {
         lg: "var(--radius)",
