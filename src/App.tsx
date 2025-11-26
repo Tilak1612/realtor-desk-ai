@@ -94,10 +94,10 @@ const App = () => (
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/contacts/:id" element={<ContactDetail />} />
           <Route path="/properties" element={<Properties />} />
-          <Route path="/app/billing" element={<Billing />} />
-          <Route path="/app/deals" element={<Deals />} />
-          <Route path="/app/tasks" element={<Tasks />} />
-          <Route path="/app/ai-assistant" element={<AIAssistant />} />
+          <Route path="/billing" element={<Billing />} />
+          <Route path="/deals" element={<Deals />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/ai-assistant" element={<AIAssistant />} />
           <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/reports" element={<Reports />} />

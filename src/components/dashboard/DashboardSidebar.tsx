@@ -113,7 +113,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
                 <span className="font-bold text-foreground">{trialDaysLeft} days</span> left in your
                 trial
               </p>
-              <Link to="/app/billing">
+              <Link to="/billing">
                 <Button className="w-full btn-gradient" size="sm">
                   Upgrade Now
                 </Button>
