@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Button } from "@/components/ui/button";
@@ -10,14 +11,17 @@ import TasksCalendar from "@/components/tasks/TasksCalendar";
 import AddTaskModal from "@/components/tasks/AddTaskModal";
 import TasksFilters from "@/components/tasks/TasksFilters";
 import BulkActions from "@/components/tasks/BulkActions";
+import { toast } from "sonner";
 
 const Tasks = () => {
+  const navigate = useNavigate();
   const [view, setView] = useState<"list" | "calendar">("list");
   const [quickFilter, setQuickFilter] = useState<string>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
   const [filters, setFilters] = useState({
     search: "",
@@ -29,19 +33,38 @@ const Tasks = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUser(user);
-        const { data: profileData } = await supabase
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          navigate("/login");
+          return;
+        }
+
+        setUser(session.user);
+
+        const { data: profileData, error } = await supabase
           .from("profiles")
           .select("*")
-          .eq("id", user.id)
+          .eq("id", session.user.id)
           .single();
+
+        if (error) throw error;
+
+        if (!profileData?.onboarding_completed) {
+          navigate("/onboarding");
+          return;
+        }
+
         setProfile(profileData);
+      } catch (error: any) {
+        toast.error("Failed to load profile");
+      } finally {
+        setLoading(false);
       }
     };
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   const handleTaskAdded = () => {
     setRefreshTrigger(prev => prev + 1);
@@ -53,6 +76,20 @@ const Tasks = () => {
     { label: "This Week", value: "week" },
     { label: "Overdue", value: "overdue" }
   ];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex w-full bg-background">
+        <DashboardSidebar />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Loading tasks...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex w-full bg-background">
