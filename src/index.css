@@ -40,6 +40,14 @@ All colors MUST be HSL.
     --chart-4: 45 93% 47%;
     --chart-5: 0 72% 51%;
 
+    /* Decorative Colors for Hero Section */
+    --decorative-purple: 262 83% 58%;
+    --decorative-orange: 25 95% 53%;
+    --decorative-blue: 221 83% 53%;
+    --decorative-pink: 340 82% 52%;
+    --decorative-yellow: 45 93% 47%;
+    --decorative-green: 122 39% 49%;
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(122 39% 35%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(0 0% 14%) 0%, hsl(0 0% 11.8%) 100%);
