@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
-import { ExternalLink, Pencil, Trash2, Trophy, XCircle } from "lucide-react";
+import { ExternalLink, Pencil, Trash2, Trophy, XCircle, MapPin, Hash, DollarSign, Calendar, Percent } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -32,15 +32,21 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
     }).format(value);
   };
 
+  const calculateCommission = () => {
+    const price = deal.listing_price || deal.value || 0;
+    const percentage = deal.commission_percentage || 2.5;
+    return (price * percentage) / 100;
+  };
+
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this deal?")) return;
+    if (!confirm("Are you sure you want to delete this transaction?")) return;
 
     const { error } = await supabase.from("deals").delete().eq("id", deal.id);
     
     if (error) {
-      toast.error("Failed to delete deal");
+      toast.error("Failed to delete transaction");
     } else {
-      toast.success("Deal deleted");
+      toast.success("Transaction deleted");
       onDealUpdated();
       onOpenChange(false);
     }
@@ -55,12 +61,19 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
     ? `${deal.contacts.first_name} ${deal.contacts.last_name}`
     : "Unknown Contact";
 
+  const displayPrice = deal.listing_price || deal.value || 0;
+
   return (
     <>
       <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetContent className="sm:max-w-lg overflow-y-auto">
           <SheetHeader>
             <SheetTitle>{deal.title}</SheetTitle>
+            {deal.client_type && (
+              <Badge variant="outline" className="w-fit capitalize mt-2">
+                {deal.client_type}
+              </Badge>
+            )}
           </SheetHeader>
 
           <div className="space-y-6 mt-6">
@@ -78,19 +91,58 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
 
             <Separator />
 
-            {/* Deal Details */}
+            {/* Property Details */}
+            {(deal.property_address || deal.mls_number || deal.property_type) && (
+              <>
+                <div className="space-y-3">
+                  <h3 className="font-semibold">Property Details</h3>
+                  
+                  {deal.property_address && (
+                    <div className="flex items-start gap-2">
+                      <MapPin className="h-4 w-4 mt-0.5 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Address</p>
+                        <p className="font-medium">{deal.property_address}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {deal.mls_number && (
+                    <div className="flex items-start gap-2">
+                      <Hash className="h-4 w-4 mt-0.5 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">MLS Number</p>
+                        <p className="font-medium">{deal.mls_number}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {deal.property_type && (
+                    <div>
+                      <p className="text-sm text-muted-foreground">Property Type</p>
+                      <Badge variant="secondary" className="capitalize mt-1">
+                        {deal.property_type}
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+                <Separator />
+              </>
+            )}
+
+            {/* Financial Details */}
             <div className="space-y-3">
-              <h3 className="font-semibold">Deal Details</h3>
+              <h3 className="font-semibold">Financial Details</h3>
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Value</p>
-                  <p className="font-semibold">{formatCurrency(deal.value || 0)}</p>
+                  <p className="text-sm text-muted-foreground">Listing Price</p>
+                  <p className="font-semibold text-lg">{formatCurrency(displayPrice)}</p>
                 </div>
                 
                 <div>
                   <p className="text-sm text-muted-foreground">Stage</p>
-                  <Badge>{deal.stage}</Badge>
+                  <Badge className="mt-1">{deal.stage.replace(/_/g, ' ')}</Badge>
                 </div>
 
                 <div>
@@ -100,14 +152,44 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
 
                 <div>
                   <p className="text-sm text-muted-foreground">Status</p>
-                  <Badge variant="outline">{deal.status}</Badge>
+                  <Badge variant="outline" className="mt-1">{deal.status}</Badge>
                 </div>
+
+                {deal.commission_percentage && (
+                  <>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Commission Rate</p>
+                      <p className="font-semibold">{deal.commission_percentage}%</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Est. Commission</p>
+                      <p className="font-semibold text-primary">{formatCurrency(calculateCommission())}</p>
+                    </div>
+                  </>
+                )}
+
+                {deal.closing_date && (
+                  <div className="col-span-2">
+                    <p className="text-sm text-muted-foreground">Expected Closing</p>
+                    <p className="font-semibold">
+                      {new Date(deal.closing_date).toLocaleDateString('en-CA', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </p>
+                  </div>
+                )}
 
                 {deal.expected_close_date && (
                   <div className="col-span-2">
                     <p className="text-sm text-muted-foreground">Expected Close</p>
                     <p className="font-semibold">
-                      {new Date(deal.expected_close_date).toLocaleDateString()}
+                      {new Date(deal.expected_close_date).toLocaleDateString('en-CA', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
                     </p>
                   </div>
                 )}
@@ -136,17 +218,17 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
                 onClick={() => setEditModalOpen(true)}
               >
                 <Pencil className="h-4 w-4 mr-2" />
-                Edit Deal
+                Edit Transaction
               </Button>
 
-              {deal.stage !== "won" && deal.stage !== "lost" && (
+              {deal.stage !== "sold" && deal.stage !== "withdrawn" && (
                 <>
                   <Button 
                     className="w-full bg-green-600 hover:bg-green-700 text-white"
                     onClick={() => handleMarkAs("won")}
                   >
                     <Trophy className="h-4 w-4 mr-2" />
-                    Mark as Won
+                    Mark as Sold
                   </Button>
 
                   <Button 
@@ -155,7 +237,7 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
                     onClick={() => handleMarkAs("lost")}
                   >
                     <XCircle className="h-4 w-4 mr-2" />
-                    Mark as Lost
+                    Mark as Withdrawn
                   </Button>
                 </>
               )}
@@ -166,7 +248,7 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
                 onClick={handleDelete}
               >
                 <Trash2 className="h-4 w-4 mr-2" />
-                Delete Deal
+                Delete Transaction
               </Button>
             </div>
           </div>

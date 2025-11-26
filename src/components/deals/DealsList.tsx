@@ -55,11 +55,20 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
       .eq("user_id", user.id);
 
     if (filter === "active") {
-      query = query.eq("status", "active").neq("stage", "won").neq("stage", "lost");
-    } else if (filter === "won") {
-      query = query.eq("stage", "won");
-    } else if (filter === "lost") {
-      query = query.eq("stage", "lost");
+      query = query.eq("status", "active").neq("stage", "sold").neq("stage", "withdrawn");
+    } else if (filter === "sold") {
+      query = query.eq("stage", "sold");
+    } else if (filter === "withdrawn") {
+      query = query.eq("stage", "withdrawn");
+    } else if (filter === "buyer") {
+      query = query.eq("client_type", "buyer");
+    } else if (filter === "seller") {
+      query = query.eq("client_type", "seller");
+    } else if (filter === "closing_this_month") {
+      const now = new Date();
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      query = query.gte("closing_date", startOfMonth.toISOString()).lte("closing_date", endOfMonth.toISOString());
     }
 
     const { data } = await query.order("created_at", { ascending: false });
@@ -67,26 +76,27 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this deal?")) return;
+    if (!confirm("Are you sure you want to delete this transaction?")) return;
 
     const { error } = await supabase.from("deals").delete().eq("id", id);
     if (error) {
-      toast.error("Failed to delete deal");
+      toast.error("Failed to delete transaction");
     } else {
-      toast.success("Deal deleted");
+      toast.success("Transaction deleted");
       fetchDeals();
     }
   };
 
   const getStageColor = (stage: string) => {
     const colors: Record<string, string> = {
-      lead: "bg-slate-500",
-      viewing: "bg-blue-500",
-      offer: "bg-purple-500",
-      negotiation: "bg-amber-500",
+      new_lead: "bg-slate-500",
+      contacted: "bg-blue-500",
+      showing_scheduled: "bg-indigo-500",
+      offer_made: "bg-purple-500",
+      under_contract: "bg-amber-500",
       closing: "bg-orange-500",
-      won: "bg-green-500",
-      lost: "bg-red-500"
+      sold: "bg-green-500",
+      withdrawn: "bg-red-500"
     };
     return colors[stage] || "bg-gray-500";
   };
@@ -105,34 +115,49 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Deal Name</TableHead>
+              <TableHead>Transaction</TableHead>
               <TableHead>Contact</TableHead>
               <TableHead>Stage</TableHead>
-              <TableHead>Value</TableHead>
-              <TableHead>Probability</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead>Updated</TableHead>
+              <TableHead>Listing Price</TableHead>
+              <TableHead>Commission</TableHead>
+              <TableHead>Closing Date</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {deals.map((deal) => (
               <TableRow key={deal.id}>
-                <TableCell className="font-medium">{deal.title}</TableCell>
+                <TableCell>
+                  <div>
+                    <p className="font-medium">{deal.title}</p>
+                    {(deal as any).property_address && (
+                      <p className="text-xs text-muted-foreground">{(deal as any).property_address}</p>
+                    )}
+                    {(deal as any).mls_number && (
+                      <p className="text-xs text-muted-foreground">MLS# {(deal as any).mls_number}</p>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell>
                   {deal.contacts
                     ? `${deal.contacts.first_name} ${deal.contacts.last_name}`
                     : "-"}
                 </TableCell>
                 <TableCell>
-                  <Badge className={`${getStageColor(deal.stage)} text-white`}>
-                    {deal.stage}
+                  <Badge className={`${getStageColor(deal.stage)} text-white capitalize`}>
+                    {deal.stage.replace(/_/g, ' ')}
                   </Badge>
                 </TableCell>
-                <TableCell>{formatCurrency(deal.value || 0)}</TableCell>
-                <TableCell>{deal.probability}%</TableCell>
-                <TableCell>{new Date(deal.created_at).toLocaleDateString()}</TableCell>
-                <TableCell>{new Date(deal.updated_at).toLocaleDateString()}</TableCell>
+                <TableCell>{formatCurrency((deal as any).listing_price || deal.value || 0)}</TableCell>
+                <TableCell>
+                  {(deal as any).commission_percentage ? `${(deal as any).commission_percentage}%` : "-"}
+                </TableCell>
+                <TableCell>
+                  {(deal as any).closing_date 
+                    ? new Date((deal as any).closing_date).toLocaleDateString('en-CA')
+                    : "-"
+                  }
+                </TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

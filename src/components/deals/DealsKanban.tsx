@@ -32,13 +32,14 @@ interface DealsKanbanProps {
 }
 
 const STAGES = [
-  { key: "lead", label: "Lead", color: "bg-slate-500" },
-  { key: "viewing", label: "Viewing", color: "bg-blue-500" },
-  { key: "offer", label: "Offer Made", color: "bg-purple-500" },
-  { key: "negotiation", label: "Negotiation", color: "bg-amber-500" },
+  { key: "new_lead", label: "New Lead", color: "bg-slate-500" },
+  { key: "contacted", label: "Contacted", color: "bg-blue-500" },
+  { key: "showing_scheduled", label: "Showing Scheduled", color: "bg-indigo-500" },
+  { key: "offer_made", label: "Offer Made", color: "bg-purple-500" },
+  { key: "under_contract", label: "Under Contract", color: "bg-amber-500" },
   { key: "closing", label: "Closing", color: "bg-orange-500" },
-  { key: "won", label: "Won", color: "bg-green-500" },
-  { key: "lost", label: "Lost", color: "bg-red-500" }
+  { key: "sold", label: "Sold/Closed", color: "bg-green-500" },
+  { key: "withdrawn", label: "Withdrawn", color: "bg-red-500" }
 ];
 
 const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
@@ -76,17 +77,26 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
       .eq("user_id", user.id);
 
     if (filter === "active") {
-      query = query.eq("status", "active").neq("stage", "won").neq("stage", "lost");
-    } else if (filter === "won") {
-      query = query.eq("stage", "won");
-    } else if (filter === "lost") {
-      query = query.eq("stage", "lost");
+      query = query.eq("status", "active").neq("stage", "sold").neq("stage", "withdrawn");
+    } else if (filter === "sold") {
+      query = query.eq("stage", "sold");
+    } else if (filter === "withdrawn") {
+      query = query.eq("stage", "withdrawn");
+    } else if (filter === "buyer") {
+      query = query.eq("client_type", "buyer");
+    } else if (filter === "seller") {
+      query = query.eq("client_type", "seller");
+    } else if (filter === "closing_this_month") {
+      const now = new Date();
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      query = query.gte("closing_date", startOfMonth.toISOString()).lte("closing_date", endOfMonth.toISOString());
     }
 
     const { data, error } = await query.order("created_at", { ascending: false });
 
     if (error) {
-      toast.error("Failed to load deals");
+      toast.error("Failed to load transactions");
       return;
     }
 
@@ -121,10 +131,10 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
       .eq("id", dealId);
 
     if (error) {
-      toast.error("Failed to update deal stage");
+      toast.error("Failed to update transaction stage");
       fetchDeals(); // Revert on error
     } else {
-      toast.success(`Deal moved to ${STAGES.find(s => s.key === newStage)?.label}`);
+      toast.success(`Transaction moved to ${STAGES.find(s => s.key === newStage)?.label}`);
     }
 
     setActiveDeal(null);
