@@ -105,7 +105,7 @@ const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
         <DialogHeader>
           <DialogTitle>Edit Transaction</DialogTitle>
         </DialogHeader>
@@ -123,7 +123,7 @@ const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModa
           </div>
 
           {/* Client Type and Property Type */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="client_type">Client Type</Label>
               <Select value={formData.client_type} onValueChange={(v) => setFormData({...formData, client_type: v})}>
@@ -178,7 +178,7 @@ const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModa
           </div>
 
           {/* Listing Price and Commission */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="listing_price">Listing Price (CAD)</Label>
               <Input
@@ -277,11 +277,11 @@ const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModa
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-end gap-2 pt-4">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+          <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading} className="w-full sm:w-auto">
               {loading ? "Saving..." : "Save Changes"}
             </Button>
           </div>

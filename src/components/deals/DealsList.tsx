@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { MoreHorizontal, Eye, Pencil, Trash2 } from "lucide-react";
 import {
   DropdownMenu,
@@ -111,17 +112,18 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
 
   return (
     <>
-      <div className="rounded-md border">
+      {/* Desktop Table View */}
+      <div className="hidden md:block rounded-md border overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Transaction</TableHead>
-              <TableHead>Contact</TableHead>
-              <TableHead>Stage</TableHead>
-              <TableHead>Listing Price</TableHead>
-              <TableHead>Commission</TableHead>
-              <TableHead>Closing Date</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead className="min-w-[200px]">Transaction</TableHead>
+              <TableHead className="min-w-[150px]">Contact</TableHead>
+              <TableHead className="min-w-[120px]">Stage</TableHead>
+              <TableHead className="min-w-[120px]">Listing Price</TableHead>
+              <TableHead className="min-w-[100px]">Commission</TableHead>
+              <TableHead className="min-w-[120px]">Closing Date</TableHead>
+              <TableHead className="text-right min-w-[80px]">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -191,6 +193,83 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
             ))}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-3">
+        {deals.map((deal) => (
+          <Card key={deal.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => {
+            setSelectedDeal(deal);
+            setSidebarOpen(true);
+          }}>
+            <CardContent className="p-4">
+              <div className="space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm truncate">{deal.title}</p>
+                    {(deal as any).property_address && (
+                      <p className="text-xs text-muted-foreground truncate mt-0.5">{(deal as any).property_address}</p>
+                    )}
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                      <Button variant="ghost" size="sm">
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedDeal(deal);
+                        setSidebarOpen(true);
+                      }}>
+                        <Eye className="h-4 w-4 mr-2" />
+                        View
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingDeal(deal);
+                      }}>
+                        <Pencil className="h-4 w-4 mr-2" />
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(deal.id);
+                        }}
+                        className="text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+
+                <div className="flex items-center justify-between gap-2">
+                  <Badge className={`${getStageColor(deal.stage)} text-white capitalize text-xs`}>
+                    {deal.stage.replace(/_/g, ' ')}
+                  </Badge>
+                  <span className="text-sm font-bold">{formatCurrency((deal as any).listing_price || deal.value || 0)}</span>
+                </div>
+
+                <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t">
+                  <span>{deal.contacts ? `${deal.contacts.first_name} ${deal.contacts.last_name}` : "-"}</span>
+                  {(deal as any).commission_percentage && (
+                    <span className="font-medium text-primary">{(deal as any).commission_percentage}%</span>
+                  )}
+                </div>
+
+                {(deal as any).closing_date && (
+                  <div className="text-xs text-muted-foreground">
+                    Closes: {new Date((deal as any).closing_date).toLocaleDateString('en-CA')}
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
       <DealDetailSidebar

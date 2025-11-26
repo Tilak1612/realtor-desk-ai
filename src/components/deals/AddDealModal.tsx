@@ -127,7 +127,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
         <DialogHeader>
           <DialogTitle>Add New Transaction</DialogTitle>
         </DialogHeader>
@@ -162,7 +162,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
           </div>
 
           {/* Client Type and Property Type */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="client_type">Client Type</Label>
               <Select value={formData.client_type} onValueChange={(v) => setFormData({...formData, client_type: v})}>
@@ -217,7 +217,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
           </div>
 
           {/* Listing Price and Commission */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="listing_price">Listing Price (CAD)</Label>
               <Input
@@ -314,11 +314,11 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-end gap-2 pt-4">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+          <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading} className="w-full sm:w-auto">
               {loading ? "Creating..." : "Create Transaction"}
             </Button>
           </div>
