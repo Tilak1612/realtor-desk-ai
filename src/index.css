@@ -8,58 +8,47 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-
-    /* Primary: Teal - Trust & Technology */
-    --primary: 188 94% 43%;
+    /* Pipedrive Dark Theme - Charcoal Background with Green Accents */
+    --background: 0 0% 11.8%; /* #1E1E1E */
+    --foreground: 0 0% 98%;
+    --card: 0 0% 14%; /* #242424 */
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 14%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 122 39% 49%; /* #4CAF50 Green */
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 188 85% 35%;
-
-    /* Secondary: Dark Blue - Professionalism */
-    --secondary: 217 91% 12%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Accent: Orange - Action & Energy */
-    --accent: 20 95% 57%;
+    --secondary: 0 0% 20%; /* #333333 */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 18%; /* #2D2D2D */
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 122 39% 49%; /* Green accent */
     --accent-foreground: 0 0% 100%;
-
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 217 91% 60%;
-
-    --radius: 0.75rem;
-
-    /* Decorative Colors for Hero */
-    --decorative-orange: 25 95% 63%;
-    --decorative-pink: 340 82% 68%;
-    --decorative-purple: 270 75% 65%;
-    --decorative-blue: 200 94% 82%;
-    --decorative-yellow: 45 100% 65%;
-    --decorative-green: 156 73% 59%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 25%; /* #404040 */
+    --input: 0 0% 20%;
+    --ring: 122 39% 49%;
+    --radius: 0.5rem;
+    
+    /* CRM Specific Colors */
+    --success: 122 39% 49%; /* Green */
+    --warning: 45 93% 47%; /* Amber */
+    --info: 221 83% 53%; /* Blue */
+    --chart-1: 122 39% 49%;
+    --chart-2: 221 83% 53%;
+    --chart-3: 262 83% 58%;
+    --chart-4: 45 93% 47%;
+    --chart-5: 0 72% 51%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(188 94% 43%) 0%, hsl(217 91% 12%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(220 14% 99%) 0%, hsl(220 14% 96%) 100%);
-    --gradient-hero: radial-gradient(circle at 35% 45%, hsl(var(--decorative-orange) / 0.15) 0%, hsl(var(--decorative-pink) / 0.12) 20%, hsl(var(--decorative-purple) / 0.1) 40%, hsl(var(--decorative-yellow) / 0.08) 60%, transparent 80%);
+    --gradient-primary: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(122 39% 35%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 14%) 0%, hsl(0 0% 11.8%) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 6px -1px hsl(220 9% 46% / 0.1), 0 2px 4px -1px hsl(220 9% 46% / 0.06);
-    --shadow-medium: 0 10px 15px -3px hsl(220 9% 46% / 0.1), 0 4px 6px -2px hsl(220 9% 46% / 0.05);
-    --shadow-large: 0 20px 25px -5px hsl(220 9% 46% / 0.1), 0 10px 10px -5px hsl(220 9% 46% / 0.04);
-    --shadow-glow: 0 0 40px hsl(188 94% 43% / 0.3);
+    --shadow-soft: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-medium: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -2px hsl(0 0% 0% / 0.3);
+    --shadow-large: 0 20px 25px -5px hsl(0 0% 0% / 0.5), 0 10px 10px -5px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 40px hsl(122 39% 49% / 0.4);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -67,51 +56,29 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-
-    --card: 224 71% 4%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 188 94% 43%;
+    /* Keep dark mode same as light for Pipedrive consistency */
+    --background: 0 0% 11.8%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 14%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 14%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 122 39% 49%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 188 85% 35%;
-
-    --secondary: 217 91% 12%;
-    --secondary-foreground: 0 0% 100%;
-
-    --accent: 20 95% 57%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 122 39% 49%;
     --accent-foreground: 0 0% 100%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 224 77% 64%;
-
-    /* Decorative Colors for Hero (Dark Mode) */
-    --decorative-orange: 25 95% 63%;
-    --decorative-pink: 340 82% 68%;
-    --decorative-purple: 270 75% 65%;
-    --decorative-blue: 200 94% 82%;
-    --decorative-yellow: 45 100% 65%;
-    --decorative-green: 156 73% 59%;
-
-    --gradient-primary: linear-gradient(135deg, hsl(188 94% 43%) 0%, hsl(217 91% 12%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(217 33% 20%) 0%, hsl(217 33% 17%) 100%);
-    --gradient-hero: radial-gradient(circle at 35% 45%, hsl(var(--decorative-orange) / 0.2) 0%, hsl(var(--decorative-pink) / 0.15) 20%, hsl(var(--decorative-purple) / 0.12) 40%, hsl(var(--decorative-yellow) / 0.1) 60%, transparent 80%);
-
-    --shadow-soft: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
-    --shadow-medium: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -2px hsl(0 0% 0% / 0.3);
-    --shadow-large: 0 20px 25px -5px hsl(0 0% 0% / 0.5), 0 10px 10px -5px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 40px hsl(188 94% 43% / 0.4);
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 25%;
+    --input: 0 0% 20%;
+    --ring: 122 39% 49%;
+    --success: 122 39% 49%;
+    --warning: 45 93% 47%;
+    --info: 221 83% 53%;
   }
 }
 
