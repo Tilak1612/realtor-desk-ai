@@ -19,13 +19,13 @@ export const SUBSCRIPTION_PRODUCTS = {
     price_id: 'price_1SHXQSLgITKN3nvobl2TSJ5w',
     product_id: 'prod_TDzP5HfKLfKf8t',
     name: 'Agent Plan',
-    price: 699,
+    price: 999,
   },
   team: {
     price_id: 'price_1SHXQqLgITKN3nvouli6jZOj',
     product_id: 'prod_TDzPUXYbavZgZe',
     name: 'Team Plan',
-    price: 1499,
+    price: 2997,
   },
 };
 
