@@ -60,9 +60,9 @@ const Market = () => {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <DashboardSidebar />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-4 md:p-6">
           <div className="mb-6 flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold">Market Intelligence</h1>

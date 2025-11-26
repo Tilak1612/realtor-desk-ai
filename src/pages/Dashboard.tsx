@@ -175,13 +175,13 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen flex w-full bg-background">
       <DashboardSidebar trialDaysLeft={getTrialDaysLeft()} />
       
-      <div className="lg:pl-64">
+      <div className="flex-1 lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         
-        <main className="p-6 space-y-6">
+        <main className="p-4 md:p-6 space-y-4 md:space-y-6">
           {/* Trial Banner */}
           {!subscribed && getTrialDaysLeft() > 0 && (
             <Card className="p-4 bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20">

@@ -123,13 +123,13 @@ const Billing = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen flex w-full bg-background">
       <DashboardSidebar trialDaysLeft={getTrialDaysLeft()} />
       
-      <div className="lg:pl-64">
+      <div className="flex-1 lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         
-        <main className="p-6 space-y-6 max-w-6xl mx-auto">
+        <main className="p-4 md:p-6 space-y-6 max-w-6xl mx-auto">
           <div>
             <h1 className="text-3xl font-bold mb-2">Billing & Subscription</h1>
             <p className="text-muted-foreground">Manage your subscription and billing details</p>
