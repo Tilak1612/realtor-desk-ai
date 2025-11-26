@@ -44,18 +44,18 @@ const Deals = () => {
       <div className="flex-1 flex flex-col">
         <DashboardNavbar user={user} profile={profile} />
         
-        <main className="flex-1 p-6 overflow-auto">
-          <div className="max-w-7xl mx-auto space-y-6">
+        <main className="flex-1 p-4 md:p-6 overflow-auto">
+          <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
             {/* Top Bar */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex flex-col gap-4">
               <div>
-                <h1 className="text-3xl font-bold">Transactions Pipeline</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold">Transactions Pipeline</h1>
                 <p className="text-sm text-muted-foreground mt-1">Manage your listings and buyer transactions</p>
               </div>
               
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 <Select value={filter} onValueChange={setFilter}>
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-full sm:w-[200px]">
                     <SelectValue placeholder="Filter" />
                   </SelectTrigger>
                   <SelectContent>
@@ -69,27 +69,32 @@ const Deals = () => {
                   </SelectContent>
                 </Select>
 
-                <div className="flex items-center gap-1 bg-muted rounded-md p-1">
-                  <Button
-                    variant={view === "kanban" ? "secondary" : "ghost"}
-                    size="sm"
-                    onClick={() => setView("kanban")}
-                  >
-                    <LayoutGrid className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant={view === "list" ? "secondary" : "ghost"}
-                    size="sm"
-                    onClick={() => setView("list")}
-                  >
-                    <List className="h-4 w-4" />
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex items-center gap-1 bg-muted rounded-md p-1">
+                    <Button
+                      variant={view === "kanban" ? "secondary" : "ghost"}
+                      size="sm"
+                      onClick={() => setView("kanban")}
+                    >
+                      <LayoutGrid className="h-4 w-4" />
+                      <span className="ml-1 hidden sm:inline">Board</span>
+                    </Button>
+                    <Button
+                      variant={view === "list" ? "secondary" : "ghost"}
+                      size="sm"
+                      onClick={() => setView("list")}
+                    >
+                      <List className="h-4 w-4" />
+                      <span className="ml-1 hidden sm:inline">List</span>
+                    </Button>
+                  </div>
+
+                  <Button onClick={() => setIsAddModalOpen(true)} className="flex-1 sm:flex-initial">
+                    <Plus className="h-4 w-4 mr-2" />
+                    <span className="hidden sm:inline">New Transaction</span>
+                    <span className="sm:hidden">New</span>
                   </Button>
                 </div>
-
-                <Button onClick={() => setIsAddModalOpen(true)}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  New Transaction
-                </Button>
               </div>
             </div>
 

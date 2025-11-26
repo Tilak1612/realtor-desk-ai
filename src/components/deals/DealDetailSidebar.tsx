@@ -66,7 +66,7 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
   return (
     <>
       <Sheet open={open} onOpenChange={onOpenChange}>
-        <SheetContent className="sm:max-w-lg overflow-y-auto">
+        <SheetContent className="w-[95vw] sm:max-w-lg overflow-y-auto">
           <SheetHeader>
             <SheetTitle>{deal.title}</SheetTitle>
             {deal.client_type && (
@@ -134,7 +134,7 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
             <div className="space-y-3">
               <h3 className="font-semibold">Financial Details</h3>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Listing Price</p>
                   <p className="font-semibold text-lg">{formatCurrency(displayPrice)}</p>
@@ -169,7 +169,7 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
                 )}
 
                 {deal.closing_date && (
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <p className="text-sm text-muted-foreground">Expected Closing</p>
                     <p className="font-semibold">
                       {new Date(deal.closing_date).toLocaleDateString('en-CA', { 
@@ -182,7 +182,7 @@ const DealDetailSidebar = ({ deal, open, onOpenChange, onDealUpdated }: DealDeta
                 )}
 
                 {deal.expected_close_date && (
-                  <div className="col-span-2">
+                  <div className="sm:col-span-2">
                     <p className="text-sm text-muted-foreground">Expected Close</p>
                     <p className="font-semibold">
                       {new Date(deal.expected_close_date).toLocaleDateString('en-CA', { 

@@ -163,7 +163,7 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
         const deal = deals.find(d => d.id === e.active.id);
         setActiveDeal(deal || null);
       }}>
-        <div className="flex gap-4 overflow-x-auto pb-4">
+        <div className="flex gap-3 md:gap-4 overflow-x-auto pb-4 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory md:snap-none touch-pan-x">
           {STAGES.map(stage => (
             <KanbanColumn
               key={stage.key}
