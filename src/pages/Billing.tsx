@@ -18,6 +18,7 @@ const Billing = () => {
   const [loading, setLoading] = useState(true);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [portalLoading, setPortalLoading] = useState(false);
+  const [isYearly, setIsYearly] = useState(false); // Default to monthly
   
   const { subscribed, productId, subscriptionEnd, refreshSubscription, subscriptionTier, loading: subscriptionLoading } = useSubscription();
 
@@ -209,6 +210,39 @@ const Billing = () => {
             </Card>
           )}
 
+          {/* Billing Period Toggle */}
+          <Card className="p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div className="flex flex-col items-center gap-4">
+              <h3 className="text-lg font-semibold">Select Billing Period</h3>
+              <div className="flex items-center gap-4">
+                <span className={`text-sm font-medium transition-colors ${!isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Monthly
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsYearly(!isYearly)}
+                  className="relative w-14 h-8 rounded-full p-0 border-2"
+                >
+                  <div className={`absolute w-6 h-6 rounded-full bg-primary transition-transform ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`} />
+                </Button>
+                <span className={`text-sm font-medium transition-colors ${isYearly ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Yearly
+                </span>
+                {isYearly && (
+                  <Badge variant="secondary" className="text-accent font-semibold">
+                    Save up to $789/year
+                  </Badge>
+                )}
+              </div>
+              <p className="text-xs text-muted-foreground text-center max-w-md">
+                {isYearly 
+                  ? '🎉 Founding Member Special: Lock in $999/year pricing until Dec 31, 2025!' 
+                  : 'Switch to yearly billing to save hundreds and get Founding Member pricing'}
+              </p>
+            </div>
+          </Card>
+
           {/* Plan Comparison */}
           <div>
             <h2 className="text-2xl font-bold mb-4">
@@ -229,9 +263,18 @@ const Billing = () => {
                     )}
                   </div>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">${SUBSCRIPTION_PRODUCTS.agent.price}</span>
-                    <span className="text-muted-foreground">/year</span>
+                    <span className="text-4xl font-bold">
+                      ${isYearly ? SUBSCRIPTION_PRODUCTS.agent.price : '149'}
+                    </span>
+                    <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
                   </div>
+                  {isYearly && (
+                    <div className="mt-2">
+                      <Badge variant="secondary" className="text-accent font-semibold">
+                        🎉 Founding Member Price - Save $789/year
+                      </Badge>
+                    </div>
+                  )}
                   <CardDescription className="mt-2">
                     Perfect for individual agents
                   </CardDescription>
@@ -294,9 +337,18 @@ const Billing = () => {
                     )}
                   </div>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">${SUBSCRIPTION_PRODUCTS.team.price}</span>
-                    <span className="text-muted-foreground">/year</span>
+                    <span className="text-4xl font-bold">
+                      ${isYearly ? SUBSCRIPTION_PRODUCTS.team.price : '299'}
+                    </span>
+                    <span className="text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
                   </div>
+                  {isYearly && (
+                    <div className="mt-2">
+                      <Badge variant="secondary" className="text-accent font-semibold">
+                        Save $591/year with annual billing
+                      </Badge>
+                    </div>
+                  )}
                   <CardDescription className="mt-2">
                     For growing teams of 2-5 agents
                   </CardDescription>
