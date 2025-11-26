@@ -178,14 +178,14 @@ const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
         <div>
           <Label htmlFor="contact">Contact</Label>
           <Select 
-            value={filters.contactId} 
-            onValueChange={(v) => onFiltersChange({ ...filters, contactId: v })}
+            value={filters.contactId || "all"} 
+            onValueChange={(v) => onFiltersChange({ ...filters, contactId: v === "all" ? "" : v })}
           >
             <SelectTrigger className="mt-1">
               <SelectValue placeholder="All contacts" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All contacts</SelectItem>
+              <SelectItem value="all">All contacts</SelectItem>
               {contacts.map(contact => (
                 <SelectItem key={contact.id} value={contact.id}>
                   {contact.first_name} {contact.last_name}
