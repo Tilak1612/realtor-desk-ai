@@ -43,17 +43,18 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
     const { data: deals } = await query;
 
     if (deals) {
-      const activeDeals = deals.filter(d => d.status === "active" && d.stage !== "won" && d.stage !== "lost");
-      const totalValue = activeDeals.reduce((sum, d) => sum + (Number(d.value) || 0), 0);
+      const activeDeals = deals.filter(d => d.status === "active" && d.stage !== "sold" && d.stage !== "withdrawn");
+      // Use listing_price if available, otherwise fall back to value
+      const totalValue = activeDeals.reduce((sum, d) => sum + (Number(d.listing_price || d.value) || 0), 0);
       
       const wonDeals = deals.filter(d => 
-        d.stage === "won" && 
+        d.stage === "sold" && 
         new Date(d.updated_at) >= startOfMonth
       );
-      const wonValue = wonDeals.reduce((sum, d) => sum + (Number(d.value) || 0), 0);
+      const wonValue = wonDeals.reduce((sum, d) => sum + (Number(d.listing_price || d.value) || 0), 0);
 
       // Calculate average cycle time
-      const closedDeals = deals.filter(d => d.stage === "won" || d.stage === "lost");
+      const closedDeals = deals.filter(d => d.stage === "sold" || d.stage === "withdrawn");
       const avgCycleTime = closedDeals.length > 0
         ? closedDeals.reduce((sum, d) => {
             const created = new Date(d.created_at);
@@ -85,7 +86,7 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Active Deals</p>
+              <p className="text-sm text-muted-foreground">Active Transactions</p>
               <p className="text-2xl font-bold">{stats.activeDeals}</p>
             </div>
             <Target className="h-8 w-8 text-primary opacity-80" />
@@ -97,7 +98,7 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Total Pipeline</p>
+              <p className="text-sm text-muted-foreground">Total Pipeline Value</p>
               <p className="text-2xl font-bold">{formatCurrency(stats.totalValue)}</p>
             </div>
             <DollarSign className="h-8 w-8 text-primary opacity-80" />
@@ -109,7 +110,7 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Won This Month</p>
+              <p className="text-sm text-muted-foreground">Sold This Month</p>
               <p className="text-2xl font-bold">{stats.wonThisMonth.count}</p>
               <p className="text-xs text-muted-foreground">{formatCurrency(stats.wonThisMonth.value)}</p>
             </div>
@@ -122,7 +123,7 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Avg Cycle Time</p>
+              <p className="text-sm text-muted-foreground">Avg Close Time</p>
               <p className="text-2xl font-bold">{stats.avgCycleTime}</p>
               <p className="text-xs text-muted-foreground">days</p>
             </div>

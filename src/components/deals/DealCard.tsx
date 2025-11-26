@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { GripVertical } from "lucide-react";
+import { GripVertical, MapPin, Calendar, DollarSign } from "lucide-react";
 
 interface Deal {
   id: string;
@@ -17,6 +17,13 @@ interface Deal {
   expected_close_date: string | null;
   notes: string | null;
   metadata: any;
+  mls_number?: string;
+  property_address?: string;
+  listing_price?: number;
+  commission_percentage?: number;
+  closing_date?: string;
+  property_type?: string;
+  client_type?: string;
   contacts?: {
     first_name: string;
     last_name: string;
@@ -44,6 +51,7 @@ const DealCard = ({ deal, isDragging, onClick }: DealCardProps) => {
       style: 'currency',
       currency: 'CAD',
       minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(value);
   };
 
@@ -54,12 +62,6 @@ const DealCard = ({ deal, isDragging, onClick }: DealCardProps) => {
     return days;
   };
 
-  const getProbabilityColor = (prob: number) => {
-    if (prob >= 75) return "bg-green-500";
-    if (prob >= 50) return "bg-amber-500";
-    return "bg-red-500";
-  };
-
   const contactName = deal.contacts 
     ? `${deal.contacts.first_name} ${deal.contacts.last_name}`
     : "Unknown Contact";
@@ -68,11 +70,14 @@ const DealCard = ({ deal, isDragging, onClick }: DealCardProps) => {
     ? `${deal.contacts.first_name[0]}${deal.contacts.last_name[0]}`
     : "?";
 
+  // Use listing_price if available, otherwise fall back to value
+  const displayPrice = deal.listing_price || deal.value || 0;
+
   return (
     <Card
       ref={setNodeRef}
       style={style}
-      className={`cursor-pointer hover:shadow-md transition-shadow ${isDragging ? "opacity-50" : ""}`}
+      className={`cursor-pointer hover:shadow-md transition-shadow ${isDragging ? "opacity-50 ring-2 ring-primary" : ""}`}
       onClick={onClick}
     >
       <CardContent className="p-3">
@@ -81,10 +86,18 @@ const DealCard = ({ deal, isDragging, onClick }: DealCardProps) => {
             <GripVertical className="h-4 w-4 text-muted-foreground" />
           </div>
           
-          <div className="flex-1 min-w-0">
-            <div className="flex items-start justify-between gap-2 mb-2">
-              <div className="flex-1">
-                <p className="font-medium text-sm truncate">{deal.title}</p>
+          <div className="flex-1 min-w-0 space-y-2">
+            {/* Header with client type and avatar */}
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <p className="font-medium text-sm truncate">{deal.title}</p>
+                  {deal.client_type && (
+                    <Badge variant="outline" className="text-xs capitalize shrink-0">
+                      {deal.client_type}
+                    </Badge>
+                  )}
+                </div>
                 <p className="text-xs text-muted-foreground truncate">{contactName}</p>
               </div>
               <Avatar className="h-8 w-8 flex-shrink-0">
@@ -92,21 +105,48 @@ const DealCard = ({ deal, isDragging, onClick }: DealCardProps) => {
               </Avatar>
             </div>
 
-            <div className="space-y-1">
-              <p className="text-sm font-bold">{formatCurrency(deal.value || 0)}</p>
-              
-              <div className="flex items-center gap-2">
-                <Badge 
-                  variant="secondary" 
-                  className={`${getProbabilityColor(deal.probability || 0)} text-white text-xs`}
-                >
-                  {deal.probability}%
-                </Badge>
-                <span className="text-xs text-muted-foreground">
-                  {getDaysInStage()} days
-                </span>
+            {/* Property Address */}
+            {deal.property_address && (
+              <div className="flex items-start gap-1 text-xs text-muted-foreground">
+                <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0" />
+                <span className="truncate">{deal.property_address}</span>
               </div>
+            )}
+
+            {/* Price and Property Type */}
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-sm font-bold">{formatCurrency(displayPrice)}</p>
+              {deal.property_type && (
+                <Badge variant="secondary" className="text-xs capitalize">
+                  {deal.property_type}
+                </Badge>
+              )}
             </div>
+
+            {/* MLS Number */}
+            {deal.mls_number && (
+              <div className="text-xs text-muted-foreground">
+                MLS# {deal.mls_number}
+              </div>
+            )}
+
+            {/* Footer with commission and days in stage */}
+            <div className="flex items-center justify-between text-xs text-muted-foreground pt-1 border-t">
+              <span>{getDaysInStage()} days in stage</span>
+              {deal.commission_percentage && (
+                <span className="font-medium text-primary">
+                  {deal.commission_percentage}% comm.
+                </span>
+              )}
+            </div>
+
+            {/* Closing Date */}
+            {deal.closing_date && (
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Calendar className="h-3 w-3" />
+                <span>Closes: {new Date(deal.closing_date).toLocaleDateString('en-CA')}</span>
+              </div>
+            )}
           </div>
         </div>
       </CardContent>

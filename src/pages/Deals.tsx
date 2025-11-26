@@ -49,7 +49,8 @@ const Deals = () => {
             {/* Top Bar */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h1 className="text-3xl font-bold">Deals Pipeline</h1>
+                <h1 className="text-3xl font-bold">Transactions Pipeline</h1>
+                <p className="text-sm text-muted-foreground mt-1">Manage your listings and buyer transactions</p>
               </div>
               
               <div className="flex flex-wrap items-center gap-3">
@@ -58,10 +59,13 @@ const Deals = () => {
                     <SelectValue placeholder="Filter" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Stages</SelectItem>
+                    <SelectItem value="all">All Transactions</SelectItem>
                     <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="won">Won</SelectItem>
-                    <SelectItem value="lost">Lost</SelectItem>
+                    <SelectItem value="buyer">My Buyers</SelectItem>
+                    <SelectItem value="seller">My Listings</SelectItem>
+                    <SelectItem value="closing_this_month">Closing This Month</SelectItem>
+                    <SelectItem value="sold">Sold</SelectItem>
+                    <SelectItem value="withdrawn">Withdrawn</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -84,7 +88,7 @@ const Deals = () => {
 
                 <Button onClick={() => setIsAddModalOpen(true)}>
                   <Plus className="h-4 w-4 mr-2" />
-                  New Deal
+                  New Transaction
                 </Button>
               </div>
             </div>

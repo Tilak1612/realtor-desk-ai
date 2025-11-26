@@ -557,13 +557,20 @@ export type Database = {
       }
       deals: {
         Row: {
+          client_type: string | null
+          closing_date: string | null
+          commission_percentage: number | null
           contact_id: string | null
           created_at: string | null
           expected_close_date: string | null
           id: string
+          listing_price: number | null
           metadata: Json | null
+          mls_number: string | null
           notes: string | null
           probability: number | null
+          property_address: string | null
+          property_type: string | null
           stage: string
           status: string | null
           title: string
@@ -572,13 +579,20 @@ export type Database = {
           value: number | null
         }
         Insert: {
+          client_type?: string | null
+          closing_date?: string | null
+          commission_percentage?: number | null
           contact_id?: string | null
           created_at?: string | null
           expected_close_date?: string | null
           id?: string
+          listing_price?: number | null
           metadata?: Json | null
+          mls_number?: string | null
           notes?: string | null
           probability?: number | null
+          property_address?: string | null
+          property_type?: string | null
           stage?: string
           status?: string | null
           title: string
@@ -587,13 +601,20 @@ export type Database = {
           value?: number | null
         }
         Update: {
+          client_type?: string | null
+          closing_date?: string | null
+          commission_percentage?: number | null
           contact_id?: string | null
           created_at?: string | null
           expected_close_date?: string | null
           id?: string
+          listing_price?: number | null
           metadata?: Json | null
+          mls_number?: string | null
           notes?: string | null
           probability?: number | null
+          property_address?: string | null
+          property_type?: string | null
           stage?: string
           status?: string | null
           title?: string

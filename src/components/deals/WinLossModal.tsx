@@ -37,8 +37,8 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
     setLoading(true);
 
     const updateData: any = {
-      stage: type,
-      status: type === "won" ? "closed" : "lost",
+      stage: type === "won" ? "sold" : "withdrawn",
+      status: type === "won" ? "closed" : "withdrawn",
       updated_at: new Date().toISOString()
     };
 
@@ -93,9 +93,9 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
     setLoading(false);
 
     if (error) {
-      toast.error(`Failed to mark deal as ${type}`);
+      toast.error(`Failed to mark transaction as ${type === "won" ? "sold" : "withdrawn"}`);
     } else {
-      toast.success(`Deal marked as ${type}!`);
+      toast.success(`Transaction marked as ${type === "won" ? "Sold" : "Withdrawn"}!`);
       onSuccess();
       onOpenChange(false);
     }
@@ -108,7 +108,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {type === "won" ? "Mark Deal as Won 🎉" : "Mark Deal as Lost"}
+            {type === "won" ? "Mark Transaction as Sold 🎉" : "Mark Transaction as Withdrawn"}
           </DialogTitle>
         </DialogHeader>
 
@@ -175,17 +175,19 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
           ) : (
             <>
               <div>
-                <Label htmlFor="lostReason">Reason for Loss</Label>
+                <Label htmlFor="lostReason">Reason for Withdrawal</Label>
                 <Select value={formData.lostReason} onValueChange={(v) => setFormData({...formData, lostReason: v})}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select reason" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="price">Price too high</SelectItem>
-                    <SelectItem value="competitor">Chose competitor</SelectItem>
+                    <SelectItem value="competitor">Chose another agent</SelectItem>
                     <SelectItem value="timing">Bad timing</SelectItem>
                     <SelectItem value="financing">Financing fell through</SelectItem>
-                    <SelectItem value="cold_feet">Client got cold feet</SelectItem>
+                    <SelectItem value="cold_feet">Client changed mind</SelectItem>
+                    <SelectItem value="property_issues">Property issues found</SelectItem>
+                    <SelectItem value="listing_expired">Listing expired</SelectItem>
                     <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
@@ -197,7 +199,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
                   id="notes"
                   value={formData.notes}
                   onChange={(e) => setFormData({...formData, notes: e.target.value})}
-                  placeholder="Why did we lose this deal? What can we learn?"
+                  placeholder="Why was this transaction withdrawn? What can we learn?"
                   rows={3}
                 />
               </div>
@@ -236,7 +238,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
               Cancel
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? "Saving..." : `Mark as ${type === "won" ? "Won" : "Lost"}`}
+              {loading ? "Saving..." : `Mark as ${type === "won" ? "Sold" : "Withdrawn"}`}
             </Button>
           </div>
         </form>
