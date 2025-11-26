@@ -167,10 +167,10 @@ const Properties = () => {
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       <DashboardSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         <main className="flex-1 overflow-y-auto">
-          <div className="container mx-auto p-6 space-y-6">
+          <div className="container mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="flex items-center gap-3">

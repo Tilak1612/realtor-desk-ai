@@ -119,8 +119,8 @@ const Settings = () => {
   return (
     <div className="min-h-screen flex w-full bg-background">
       <DashboardSidebar />
-      <div className="flex-1 flex flex-col lg:ml-64">
-        <main className="flex-1 p-6">
+      <div className="flex-1 flex flex-col lg:ml-0">
+        <main className="flex-1 p-4 md:p-6">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-3xl font-bold mb-2">Settings</h1>
             <p className="text-muted-foreground mb-6">

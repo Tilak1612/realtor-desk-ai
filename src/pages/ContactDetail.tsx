@@ -147,7 +147,7 @@ const ContactDetail = () => {
   return (
     <div className="flex h-screen overflow-hidden bg-muted/30">
       <DashboardSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         <main className="flex-1 overflow-y-auto">
           {/* Top Action Bar */}

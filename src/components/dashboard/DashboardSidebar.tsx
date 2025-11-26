@@ -25,14 +25,14 @@ const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Users, label: "Contacts", path: "/contacts" },
   { icon: Building2, label: "Properties", path: "/properties" },
-  { icon: Briefcase, label: "Deals", path: "/app/deals" },
-  { icon: CheckSquare, label: "Tasks", path: "/app/tasks" },
-  { icon: Bot, label: "AI Assistant", path: "/app/ai-assistant" },
+  { icon: Briefcase, label: "Deals", path: "/deals" },
+  { icon: CheckSquare, label: "Tasks", path: "/tasks" },
+  { icon: Bot, label: "AI Assistant", path: "/ai-assistant" },
   { icon: Mail, label: "Campaigns", path: "/campaigns" },
   { icon: Calendar, label: "Calendar", path: "/calendar" },
   { icon: TrendingUp, label: "Reports", path: "/reports" },
   { icon: MapPin, label: "Market Intelligence", path: "/market" },
-  { icon: CreditCard, label: "Billing", path: "/app/billing" },
+  { icon: CreditCard, label: "Billing", path: "/billing" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
@@ -59,14 +59,14 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
+          className="lg:hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-30"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-background border-r flex flex-col transition-transform duration-300 z-40 ${
+        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-background border-r flex flex-col transition-transform duration-300 z-40 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
