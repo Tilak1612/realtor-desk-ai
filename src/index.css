@@ -8,55 +8,56 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pipedrive Dark Theme - Charcoal Background with Green Accents */
-    --background: 0 0% 11.8%; /* #1E1E1E */
-    --foreground: 0 0% 98%;
-    --card: 0 0% 14%; /* #242424 */
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 14%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 122 39% 49%; /* #4CAF50 Green */
+    /* Professional Dark Green Theme */
+    --background: 0 0% 100%; /* White #FFFFFF */
+    --foreground: 217 33% 17%; /* Dark Gray #1F2937 */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 217 33% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
+    --primary: 162 44% 20%; /* Dark Green #1B4D3E */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 20%; /* #333333 */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 18%; /* #2D2D2D */
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 122 39% 49%; /* Green accent */
+    --primary-hover: 162 44% 15%; /* Darker on hover */
+    --secondary: 210 20% 98%; /* Light Gray #F9FAFB */
+    --secondary-foreground: 217 33% 17%;
+    --muted: 210 20% 98%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 162 44% 45%; /* Light Green accent */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%; /* #404040 */
-    --input: 0 0% 20%;
-    --ring: 122 39% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%; /* Light border */
+    --input: 214 32% 91%;
+    --ring: 162 44% 20%;
     --radius: 0.5rem;
     
     /* CRM Specific Colors */
-    --success: 122 39% 49%; /* Green */
+    --success: 162 44% 45%; /* Light Green */
     --warning: 45 93% 47%; /* Amber */
     --info: 221 83% 53%; /* Blue */
-    --chart-1: 122 39% 49%;
+    --chart-1: 162 44% 20%;
     --chart-2: 221 83% 53%;
     --chart-3: 262 83% 58%;
     --chart-4: 45 93% 47%;
     --chart-5: 0 72% 51%;
 
-    /* Decorative Colors for Hero Section */
+    /* Decorative Colors */
     --decorative-purple: 262 83% 58%;
     --decorative-orange: 25 95% 53%;
     --decorative-blue: 221 83% 53%;
     --decorative-pink: 340 82% 52%;
     --decorative-yellow: 45 93% 47%;
-    --decorative-green: 122 39% 49%;
+    --decorative-green: 162 44% 45%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(122 39% 35%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 14%) 0%, hsl(0 0% 11.8%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(162 44% 20%) 0%, hsl(162 44% 15%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
-    --shadow-medium: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -2px hsl(0 0% 0% / 0.3);
-    --shadow-large: 0 20px 25px -5px hsl(0 0% 0% / 0.5), 0 10px 10px -5px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 40px hsl(122 39% 49% / 0.4);
+    --shadow-soft: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-medium: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+    --shadow-large: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 10px 10px -5px hsl(0 0% 0% / 0.04);
+    --shadow-glow: 0 0 40px hsl(162 44% 45% / 0.3);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -64,27 +65,28 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Keep dark mode same as light for Pipedrive consistency */
-    --background: 0 0% 11.8%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 14%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 14%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 122 39% 49%;
+    /* Dark mode with same professional green */
+    --background: 222 47% 11%; /* Dark background */
+    --foreground: 210 40% 98%;
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 162 44% 45%; /* Lighter green for dark mode */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 20%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 122 39% 49%;
+    --primary-hover: 162 44% 50%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 162 44% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%;
-    --input: 0 0% 20%;
-    --ring: 122 39% 49%;
-    --success: 122 39% 49%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 32% 27%;
+    --input: 217 32% 17%;
+    --ring: 162 44% 45%;
+    --success: 162 44% 45%;
     --warning: 45 93% 47%;
     --info: 221 83% 53%;
   }
@@ -97,24 +99,81 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    min-width: 320px; /* Ensure minimum width for very small screens */
+    min-width: 320px;
+    font-size: 16px; /* Standard body text size */
+    line-height: 1.6;
   }
 
+  /* Typography System - 4 Sizes Only */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-    word-wrap: break-word; /* Prevent long words from overflowing */
+    @apply font-bold tracking-tight text-foreground;
+    word-wrap: break-word;
   }
 
+  /* H1: Page Titles - 36-48px */
   h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+    font-size: 36px;
+    line-height: 1.2;
   }
 
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 42px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 48px;
+    }
+  }
+
+  /* H2: Section Headings - 24-30px */
   h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+    font-size: 24px;
+    line-height: 1.3;
   }
 
-  h3 {
-    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 27px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  /* H3-H6: Use H2 size for consistency */
+  h3, h4, h5, h6 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 768px) {
+    h3, h4, h5, h6 {
+      font-size: 27px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h3, h4, h5, h6 {
+      font-size: 30px;
+    }
+  }
+
+  /* Body Text: All paragraphs - 16px */
+  p, div, span, li, td, th, label, input, textarea, select, button {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Small Text: Captions, footer - 14px */
+  small, .text-small, caption {
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   /* Ensure images are responsive */
@@ -130,11 +189,13 @@ All colors MUST be HSL.
 
 @layer components {
   .btn-gradient {
-    @apply bg-gradient-to-r from-primary to-secondary text-white font-semibold px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-lg shadow-lg hover:shadow-xl active:scale-95 transition-all duration-300 text-base sm:text-lg min-h-[52px] sm:min-h-[56px] touch-manipulation;
+    @apply bg-gradient-to-r from-primary to-primary-hover text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl active:scale-95 transition-all duration-300 min-h-[52px] touch-manipulation;
+    font-size: 16px; /* Body text size */
   }
 
   .btn-ghost {
-    @apply bg-transparent border-2 border-primary text-primary font-semibold px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-lg hover:bg-primary hover:text-white active:scale-95 transition-all duration-300 text-base sm:text-lg min-h-[52px] sm:min-h-[56px] touch-manipulation;
+    @apply bg-transparent border-2 border-primary text-primary font-semibold px-8 py-4 rounded-lg hover:bg-primary hover:text-white active:scale-95 transition-all duration-300 min-h-[52px] touch-manipulation;
+    font-size: 16px; /* Body text size */
   }
 
   .card-hover {
@@ -142,7 +203,7 @@ All colors MUST be HSL.
   }
 
   .section-padding {
-    @apply py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24;
+    @apply py-16 lg:py-24;
   }
 
   .container-custom {
@@ -150,31 +211,78 @@ All colors MUST be HSL.
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
 
-.hero-gradient {
-  background: hsl(var(--background));
-  position: relative;
-  overflow: hidden;
+  .hero-gradient {
+    background: hsl(var(--background));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-subtle);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-gradient > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Typography Utility Classes */
+  .text-h1 {
+    font-size: 36px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .text-h1 {
+      font-size: 42px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-h1 {
+      font-size: 48px;
+    }
+  }
+
+  .text-h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .text-h2 {
+      font-size: 27px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-h2 {
+      font-size: 30px;
+    }
+  }
+
+  .text-body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .text-small {
+    font-size: 14px;
+    line-height: 1.5;
+  }
 }
 
-.hero-gradient::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-hero);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-gradient > * {
-  position: relative;
-  z-index: 1;
-}
-}
-
-  /* Blog Prose Styling - Match website typography */
+  /* Blog Prose Styling - Consistent Typography */
   .prose {
     @apply text-foreground font-sans;
   }
@@ -189,19 +297,58 @@ All colors MUST be HSL.
   }
 
   .prose h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl mb-6 mt-12;
+    font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .prose h1 {
+      font-size: 42px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .prose h1 {
+      font-size: 48px;
+    }
   }
 
   .prose h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl mb-4 mt-10;
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    margin-top: 2.5rem;
   }
 
-  .prose h3 {
-    @apply text-xl sm:text-2xl md:text-3xl mb-3 mt-8;
+  @media (min-width: 768px) {
+    .prose h2 {
+      font-size: 27px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .prose h2 {
+      font-size: 30px;
+    }
+  }
+
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    margin-top: 2rem;
   }
 
   .prose p {
-    @apply text-base md:text-lg leading-relaxed mb-6 text-foreground;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    @apply text-foreground;
   }
 
   .prose ul,
@@ -210,7 +357,8 @@ All colors MUST be HSL.
   }
 
   .prose li {
-    @apply text-base md:text-lg leading-relaxed;
+    font-size: 16px;
+    line-height: 1.6;
   }
 
   .prose strong {
@@ -222,7 +370,8 @@ All colors MUST be HSL.
   }
 
   .prose code {
-    @apply bg-muted px-2 py-1 rounded text-sm font-mono;
+    @apply bg-muted px-2 py-1 rounded font-mono;
+    font-size: 14px; /* Small text */
   }
 
   .prose blockquote {
