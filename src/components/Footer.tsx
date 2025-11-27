@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/realtor-desk-logo-new.png";
 import { useTranslation } from "react-i18next";
 
@@ -26,13 +26,13 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://linkedin.com/company/brainfyai"
+                href="https://www.youtube.com/@RealtorDeskAI"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
-                aria-label="LinkedIn"
+                aria-label="YouTube"
               >
-                <Linkedin className="w-5 h-5" />
+                <Youtube className="w-5 h-5" />
               </a>
               <a
                 href="https://twitter.com/brainfyai"
