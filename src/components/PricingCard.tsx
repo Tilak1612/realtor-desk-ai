@@ -63,11 +63,11 @@ const PricingCard = ({
         <div className="flex items-baseline gap-1">
           {price !== "Custom" ? (
             <>
-              <span className="text-4xl font-bold gradient-text">${price}</span>
-              <span className="text-muted-foreground">/{billingPeriod}</span>
+              <span className="text-5xl font-extrabold text-foreground">${price}</span>
+              <span className="text-muted-foreground font-medium">/{billingPeriod}</span>
             </>
           ) : (
-            <span className="text-4xl font-bold gradient-text">{price}</span>
+            <span className="text-5xl font-extrabold text-foreground">{price}</span>
           )}
         </div>
         
