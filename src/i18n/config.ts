@@ -371,13 +371,45 @@ const resources = {
         title: "Join Our Growing Beta Community",
         participants: "50+ Beta Participants",
         limitedSpots: "Limited Beta Spots Available",
-        resultsTitle: "Beta Community Results",
-        resultsSubtitle: "Canadian realtors are already seeing measurable results",
+        resultsTitle: "Real Results from Our Beta Community",
+        resultsSubtitle: "Canadian realtors are already seeing measurable results. Here's what early adopters are experiencing:",
         testimonialDisclaimer: "*Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.",
-        ctaTitle: "Want to be our next success story?",
-        ctaSubtitle: "Join the beta program today and get lifetime pricing.",
-        ctaButton: "Start Your Free Trial",
-        ctaNote: "*Beta participant results. Individual outcomes may vary."
+        ctaTitle: "Ready to Join Our Beta Program?",
+        ctaSubtitle: "Limited spots available. Be part of shaping the future of real estate AI in Canada.",
+        ctaButton: "Apply for Beta Access",
+        ctaNote: "Beta participants get lifetime discounts and priority feature access",
+        testimonials: {
+          sarah: {
+            quote: "I was skeptical about AI, but after the first week, I had 3 showings booked while I was sleeping. The voice agent sounds natural and captures all the details I need.",
+            brokerage: "Independent Agent",
+            stats: {
+              leads: "leads captured in first month",
+              showings: "showings booked automatically",
+              deals: "deals closed"
+            },
+            badge: "Beta Participant Since Nov 2024"
+          },
+          marc: {
+            quote: "The seamless English/French switching is perfect for Montreal. My AI handles both languages naturally, which has opened up my market significantly.",
+            brokerage: "Century 21",
+            stats: {
+              increase: "increase in francophone leads",
+              response: "of inquiries answered <2 minutes",
+              saved: "hours/week saved"
+            },
+            badge: "Beta Participant Since Dec 2024"
+          },
+          jennifer: {
+            quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
+            brokerage: "RE/MAX Team Lead",
+            stats: {
+              responseTime: "Team response time",
+              leadIncrease: "increase in qualified leads",
+              additionalDeals: "additional deals in Q1"
+            },
+            badge: "Beta Participant Since Jan 2025"
+          }
+        }
       },
       aiActive: "AI ACTIVE",
       roiCalculator: {
@@ -923,14 +955,46 @@ const resources = {
       betaCommunity: {
         title: "Rejoignez Notre Communauté Bêta en Croissance",
         participants: "50+ Participants Bêta",
-        limitedSpots: "Places Bêta Limitées Disponibles",
-        resultsTitle: "Résultats de la Communauté Bêta",
-        resultsSubtitle: "Les agents immobiliers canadiens voient déjà des résultats mesurables",
+        limitedSpots: "Places Bêta Limitées",
+        resultsTitle: "Résultats Réels de Notre Communauté Bêta",
+        resultsSubtitle: "Les agents immobiliers canadiens constatent déjà des résultats mesurables. Voici ce que vivent les premiers adopteurs :",
         testimonialDisclaimer: "*Les témoignages représentent des expériences individuelles de notre programme pilote. Les résultats varient et ne sont pas garantis. Les résultats moyens peuvent différer.",
-        ctaTitle: "Voulez-vous être notre prochaine histoire de succès?",
-        ctaSubtitle: "Rejoignez le programme bêta aujourd'hui et bénéficiez de tarifs à vie.",
-        ctaButton: "Commencez Votre Essai Gratuit",
-        ctaNote: "*Résultats des participants bêta. Les résultats individuels peuvent varier."
+        ctaTitle: "Prêt à Rejoindre Notre Programme Bêta?",
+        ctaSubtitle: "Places limitées disponibles. Participez à façonner l'avenir de l'IA immobilière au Canada.",
+        ctaButton: "Postuler pour l'Accès Bêta",
+        ctaNote: "Les participants bêta bénéficient de réductions à vie et d'un accès prioritaire aux fonctionnalités",
+        testimonials: {
+          sarah: {
+            quote: "J'étais sceptique à propos de l'IA, mais après la première semaine, j'avais 3 visites réservées pendant que je dormais. L'agent vocal semble naturel et capture tous les détails dont j'ai besoin.",
+            brokerage: "Agent Indépendant",
+            stats: {
+              leads: "prospects capturés le premier mois",
+              showings: "visites réservées automatiquement",
+              deals: "transactions conclues"
+            },
+            badge: "Participant Bêta Depuis Nov 2024"
+          },
+          marc: {
+            quote: "Le basculement transparent entre l'anglais et le français est parfait pour Montréal. Mon IA gère les deux langues naturellement, ce qui a considérablement élargi mon marché.",
+            brokerage: "Century 21",
+            stats: {
+              increase: "d'augmentation des prospects francophones",
+              response: "des demandes répondues en <2 minutes",
+              saved: "heures/semaine économisées"
+            },
+            badge: "Participant Bêta Depuis Déc 2024"
+          },
+          jennifer: {
+            quote: "Notre équipe de 5 agents fonctionne maintenant comme une équipe de 15. Le tableau de bord unifié signifie qu'aucun prospect ne passe entre les mailles du filet, même lorsque nous sommes tous occupés.",
+            brokerage: "Chef d'Équipe RE/MAX",
+            stats: {
+              responseTime: "Temps de réponse de l'équipe",
+              leadIncrease: "d'augmentation des prospects qualifiés",
+              additionalDeals: "transactions supplémentaires au T1"
+            },
+            badge: "Participant Bêta Depuis Jan 2025"
+          }
+        }
       },
       aiActive: "IA ACTIVE",
       roiCalculator: {

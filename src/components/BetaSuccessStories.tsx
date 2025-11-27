@@ -12,41 +12,41 @@ const BetaSuccessStories = () => {
     {
       name: "Sarah M.",
       location: "Toronto",
-      brokerage: "Independent Agent",
+      brokerage: t('betaCommunity.testimonials.sarah.brokerage'),
       avatar: "SM",
-      quote: "I was skeptical about AI, but after the first week, I had 3 showings booked while I was sleeping. The voice agent sounds natural and captures all the details I need.",
+      quote: t('betaCommunity.testimonials.sarah.quote'),
       metrics: [
-        { value: "23", label: "leads captured in first month" },
-        { value: "8", label: "showings booked automatically" },
-        { value: "2", label: "deals closed" }
+        { value: "23", label: t('betaCommunity.testimonials.sarah.stats.leads') },
+        { value: "8", label: t('betaCommunity.testimonials.sarah.stats.showings') },
+        { value: "2", label: t('betaCommunity.testimonials.sarah.stats.deals') }
       ],
-      badge: "Beta Participant Since Nov 2024"
+      badge: t('betaCommunity.testimonials.sarah.badge')
     },
     {
       name: "Marc D.",
       location: "Montreal",
-      brokerage: "Century 21",
+      brokerage: t('betaCommunity.testimonials.marc.brokerage'),
       avatar: "MD",
-      quote: "The seamless English/French switching is perfect for Montreal. My AI handles both languages naturally, which has opened up my market significantly.",
+      quote: t('betaCommunity.testimonials.marc.quote'),
       metrics: [
-        { value: "40%", label: "increase in francophone leads" },
-        { value: "100%", label: "of inquiries answered <2 minutes" },
-        { value: "15", label: "hours/week saved" }
+        { value: "40%", label: t('betaCommunity.testimonials.marc.stats.increase') },
+        { value: "100%", label: t('betaCommunity.testimonials.marc.stats.response') },
+        { value: "15", label: t('betaCommunity.testimonials.marc.stats.saved') }
       ],
-      badge: "Beta Participant Since Dec 2024"
+      badge: t('betaCommunity.testimonials.marc.badge')
     },
     {
       name: "Jennifer K.",
       location: "Calgary",
-      brokerage: "RE/MAX Team Lead",
+      brokerage: t('betaCommunity.testimonials.jennifer.brokerage'),
       avatar: "JK",
-      quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
+      quote: t('betaCommunity.testimonials.jennifer.quote'),
       metrics: [
-        { value: "<30s", label: "Team response time" },
-        { value: "45%", label: "increase in qualified leads" },
-        { value: "12", label: "additional deals in Q1" }
+        { value: "<30s", label: t('betaCommunity.testimonials.jennifer.stats.responseTime') },
+        { value: "45%", label: t('betaCommunity.testimonials.jennifer.stats.leadIncrease') },
+        { value: "12", label: t('betaCommunity.testimonials.jennifer.stats.additionalDeals') }
       ],
-      badge: "Beta Participant Since Jan 2025"
+      badge: t('betaCommunity.testimonials.jennifer.badge')
     }
   ];
 
