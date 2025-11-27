@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
-import demoShowcase from "@/assets/demo-showcase.jpg";
+import demoShowcase from "@/assets/dashboard-new-theme.jpg";
 import agentSuccess from "@/assets/agent-success.jpg";
 
 const HowItWorksSection = () => {
