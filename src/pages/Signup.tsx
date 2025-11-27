@@ -227,18 +227,20 @@ const Signup = () => {
               {/* PIPEDA Compliance - Privacy Consent */}
               <div className="space-y-4 pt-2">
                 <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="privacyConsent"
-                    checked={formData.privacyConsent || false}
-                    onCheckedChange={(checked) => {
-                      setFormData({ ...formData, privacyConsent: checked as boolean });
-                      // Clear the error when checkbox is checked
-                      if (checked) {
-                        setErrors({ ...errors, privacyConsent: undefined });
-                      }
-                    }}
-                  />
-                  <div className="space-y-1 leading-none">
+                  <div className="flex-shrink-0 pt-0.5">
+                    <Checkbox
+                      id="privacyConsent"
+                      checked={formData.privacyConsent || false}
+                      onCheckedChange={(checked) => {
+                        setFormData({ ...formData, privacyConsent: checked as boolean });
+                        // Clear the error when checkbox is checked
+                        if (checked) {
+                          setErrors({ ...errors, privacyConsent: undefined });
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 space-y-1 leading-none">
                     <label
                       htmlFor="privacyConsent"
                       className="text-sm font-medium leading-relaxed cursor-pointer"
@@ -260,14 +262,16 @@ const Signup = () => {
                 )}
 
                 <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="marketingConsent"
-                    checked={formData.marketingConsent || false}
-                    onCheckedChange={(checked) =>
-                      setFormData({ ...formData, marketingConsent: checked as boolean })
-                    }
-                  />
-                  <div className="space-y-1 leading-none">
+                  <div className="flex-shrink-0 pt-0.5">
+                    <Checkbox
+                      id="marketingConsent"
+                      checked={formData.marketingConsent || false}
+                      onCheckedChange={(checked) =>
+                        setFormData({ ...formData, marketingConsent: checked as boolean })
+                      }
+                    />
+                  </div>
+                  <div className="flex-1 space-y-1 leading-none">
                     <label
                       htmlFor="marketingConsent"
                       className="text-sm font-medium leading-relaxed cursor-pointer"
