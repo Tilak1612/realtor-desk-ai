@@ -63,24 +63,24 @@ const Index = () => {
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-muted-foreground">Join Our Growing Beta Community</span>
+              <span className="text-muted-foreground">{t('indexPage.socialProof.banner')}</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
               <span className="font-semibold">50+</span>
-              <span className="text-muted-foreground">Beta Participants</span>
+              <span className="text-muted-foreground">{t('indexPage.socialProof.betaParticipants')}</span>
             </div>
             <div className="hidden sm:block w-px h-4 bg-border"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-accent flex-shrink-0" />
-              <span className="text-muted-foreground text-center sm:text-left">Limited Beta Spots Available</span>
+              <span className="text-muted-foreground text-center sm:text-left">{t('indexPage.socialProof.limitedSpots')}</span>
             </div>
           </div>
           
           {/* Testimonials Disclaimer */}
-          <p className="text-xs text-[#6B7280] text-center mt-8 max-w-3xl mx-auto">
-            *Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.
+          <p className="text-xs text-muted-foreground text-center mt-8 max-w-3xl mx-auto">
+            {t('betaCommunity.testimonialDisclaimer')}
           </p>
         </div>
       </section>
@@ -108,23 +108,23 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
             <Card className="p-6 text-center">
               <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="font-bold mb-2">SOC 2 Compliant</h3>
+              <h3 className="font-bold mb-2">{t('indexPage.credibility.soc2Title')}</h3>
               <p className="text-sm text-muted-foreground">
-                Enterprise-grade security and data protection
+                {t('indexPage.credibility.soc2Desc')}
               </p>
             </Card>
             <Card className="p-6 text-center">
               <CheckCircle className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="font-bold mb-2">PIPEDA Compliant</h3>
+              <h3 className="font-bold mb-2">{t('indexPage.credibility.pipedaTitle')}</h3>
               <p className="text-sm text-muted-foreground">
-                Full Canadian privacy law compliance
+                {t('indexPage.credibility.pipedaDesc')}
               </p>
             </Card>
             <Card className="p-6 text-center">
               <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="font-bold mb-2">CREA Certified</h3>
+              <h3 className="font-bold mb-2">{t('indexPage.credibility.creaTitle')}</h3>
               <p className="text-sm text-muted-foreground">
-                Official CREA DDF® integration partner
+                {t('indexPage.credibility.creaDesc')}
               </p>
             </Card>
           </div>
@@ -237,9 +237,9 @@ const Index = () => {
       <section className="section-padding bg-muted" aria-label="Industry Challenges">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="mb-4">The Hidden Costs of Outdated Real Estate Technology</h2>
+            <h2 className="mb-4">{t('indexPage.problemStatement.title')}</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Traditional CRMs are holding Canadian realtors back from their full potential
+              {t('indexPage.problemStatement.subtitle')}
             </p>
           </div>
 
@@ -247,22 +247,22 @@ const Index = () => {
             <StatCard
               icon={TrendingDown}
               stat="12%"
-              description="of agents use AI capabilities despite 72% using CRMs"
+              description={t('indexPage.problemStatement.stat1')}
             />
             <StatCard
               icon={AlertCircle}
               stat="48%"
-              description="of buyer inquiries receive NO response"
+              description={t('indexPage.problemStatement.stat2')}
             />
             <StatCard
               icon={Zap}
               stat="15+"
-              description="hours weekly spent on tasks that could be automated"
+              description={t('indexPage.problemStatement.stat3')}
             />
             <StatCard
               icon={TrendingDown}
               stat="2-5%"
-              description="lead conversion rate with traditional methods"
+              description={t('indexPage.problemStatement.stat4')}
             />
           </div>
         </div>
@@ -275,29 +275,29 @@ const Index = () => {
       <section className="section-padding" aria-label="AI Features and Capabilities">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="mb-4">Meet Your AI-Powered Real Estate Operating System</h2>
+            <h2 className="mb-4">{t('indexPage.solutionOverview.title')}</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Transform how you work with intelligent automation designed specifically for Canadian realtors
+              {t('indexPage.solutionOverview.subtitle')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
               icon={Brain}
-              title="Predictive Lead Scoring"
-              description="AI analyzes 40+ signals to identify hot leads 3-6 months early. Converts 18% vs industry 5%. Built on 500,000+ Canadian transactions"
+              title={t('indexPage.solutionOverview.feature1Title')}
+              description={t('indexPage.solutionOverview.feature1Desc')}
               gradient
             />
             <FeatureCard
               icon={MessageSquare}
-              title="24/7 Bilingual AI Chatbot"
-              description="Captures leads in EN/FR, qualifies buyers, schedules showings, answers 200+ property questions. Never miss a 2 AM inquiry again"
+              title={t('indexPage.solutionOverview.feature2Title')}
+              description={t('indexPage.solutionOverview.feature2Desc')}
               gradient
             />
             <FeatureCard
               icon={ClipboardCheck}
-              title="Smart Transaction Coordinator"
-              description="Automate status updates, document requests, deadline tracking. Cut closing time from 60 to 35 days with 99% accuracy"
+              title={t('indexPage.solutionOverview.feature3Title')}
+              description={t('indexPage.solutionOverview.feature3Desc')}
               gradient
             />
           </div>
@@ -311,8 +311,8 @@ const Index = () => {
             <ROICalculator />
             
             {/* ROI Disclaimer */}
-            <p className="text-xs text-[#6B7280] text-center mt-8">
-              *ROI calculations are projections based on industry averages and pilot program data. Actual results depend on market conditions, lead quality, individual effort, and other factors. Past performance does not guarantee future results.
+            <p className="text-xs text-muted-foreground text-center mt-8">
+              {t('indexPage.roiDisclaimer')}
             </p>
           </div>
         </div>
@@ -325,9 +325,9 @@ const Index = () => {
       <section className="section-padding bg-background border-y" aria-label="Security and Integration Documentation">
         <div className="container-custom">
           <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="mb-4">Enterprise-Grade Security & Developer Tools</h2>
+            <h2 className="mb-4">{t('indexPage.security.title')}</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Built for scale, secured for compliance, ready for integration
+              {t('indexPage.security.subtitle')}
             </p>
           </div>
 
@@ -335,31 +335,31 @@ const Index = () => {
             {/* Security Section */}
             <Card className="p-8">
               <Shield className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-bold mb-4">Security & Compliance</h3>
+              <h3 className="text-xl font-bold mb-4">{t('indexPage.security.securityTitle')}</h3>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>SOC 2 Type II Certified:</strong> Annual audits, penetration testing, 99.9% uptime SLA</span>
+                  <span><strong>{t('indexPage.security.sec1')}</strong> {t('indexPage.security.sec1Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>PIPEDA Compliant:</strong> Right to access, delete, data portability. Breach notification &lt;72hrs</span>
+                  <span><strong>{t('indexPage.security.sec2')}</strong> {t('indexPage.security.sec2Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>CASL Compliant:</strong> Express consent tracking, auto-unsubscribe, 24-month proof retention</span>
+                  <span><strong>{t('indexPage.security.sec3')}</strong> {t('indexPage.security.sec3Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Canadian Data Centers:</strong> All data stored in Toronto/Vancouver. No cross-border transfer</span>
+                  <span><strong>{t('indexPage.security.sec4')}</strong> {t('indexPage.security.sec4Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Encryption:</strong> TLS 1.3 in transit, AES-256 at rest, end-to-end for sensitive docs</span>
+                  <span><strong>{t('indexPage.security.sec5')}</strong> {t('indexPage.security.sec5Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Access Control:</strong> Role-based permissions, 2FA, SSO (Enterprise), audit logs</span>
+                  <span><strong>{t('indexPage.security.sec6')}</strong> {t('indexPage.security.sec6Desc')}</span>
                 </li>
               </ul>
             </Card>
@@ -367,58 +367,58 @@ const Index = () => {
             {/* API & Integrations */}
             <Card className="p-8">
               <Brain className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-bold mb-4">API & Integration Capabilities</h3>
+              <h3 className="text-xl font-bold mb-4">{t('indexPage.security.apiTitle')}</h3>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>REST API:</strong> Full CRUD access to contacts, deals, tasks. Rate limit: 1000 req/min</span>
+                  <span><strong>{t('indexPage.security.api1')}</strong> {t('indexPage.security.api1Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Webhooks:</strong> Real-time events (new lead, deal closed, task overdue)</span>
+                  <span><strong>{t('indexPage.security.api2')}</strong> {t('indexPage.security.api2Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>CRM Sync:</strong> Pre-built connectors for Brivity, Follow Up Boss, Salesforce, HubSpot</span>
+                  <span><strong>{t('indexPage.security.api3')}</strong> {t('indexPage.security.api3Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Calendar Integration:</strong> 2-way sync with Google/Outlook. Auto-create Zoom links</span>
+                  <span><strong>{t('indexPage.security.api4')}</strong> {t('indexPage.security.api4Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Email Platforms:</strong> Gmail, Outlook, MailChimp, SendGrid. SMTP/IMAP support</span>
+                  <span><strong>{t('indexPage.security.api5')}</strong> {t('indexPage.security.api5Desc')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                  <span><strong>Documentation:</strong> Interactive API docs, SDK (JavaScript/Python), Postman collection</span>
+                  <span><strong>{t('indexPage.security.api6')}</strong> {t('indexPage.security.api6Desc')}</span>
                 </li>
               </ul>
               <Link to="/features" className="mt-4 inline-block">
-                <Button variant="outline" size="sm">View Integration Library</Button>
+                <Button variant="outline" size="sm">{t('indexPage.security.viewIntegrations')}</Button>
               </Link>
             </Card>
           </div>
 
           {/* Performance Metrics */}
           <div className="bg-muted/50 rounded-xl p-8 text-center">
-            <h3 className="text-xl font-bold mb-6">Platform Performance</h3>
+            <h3 className="text-xl font-bold mb-6">{t('indexPage.security.performanceTitle')}</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div>
                 <div className="text-3xl font-bold text-primary mb-1">99.9%</div>
-                <div className="text-sm text-muted-foreground">Uptime SLA</div>
+                <div className="text-sm text-muted-foreground">{t('indexPage.security.perf1')}</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-primary mb-1">&lt;2s</div>
-                <div className="text-sm text-muted-foreground">AI Response Time</div>
+                <div className="text-sm text-muted-foreground">{t('indexPage.security.perf2')}</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-primary mb-1">10K+</div>
-                <div className="text-sm text-muted-foreground">Concurrent Users</div>
+                <div className="text-sm text-muted-foreground">{t('indexPage.security.perf3')}</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-primary mb-1">24/7</div>
-                <div className="text-sm text-muted-foreground">Support (Enterprise)</div>
+                <div className="text-sm text-muted-foreground">{t('indexPage.security.perf4')}</div>
               </div>
             </div>
           </div>
@@ -428,24 +428,24 @@ const Index = () => {
       {/* Final CTA Section */}
       <section className="section-padding bg-gradient-to-r from-primary to-secondary text-white">
         <div className="container-custom text-center">
-          <h2 className="mb-6 text-white">Join 500+ Canadian Agents Growing Their Business with AI</h2>
+          <h2 className="mb-6 text-white">{t('indexPage.finalCTA.title')}</h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Start closing more deals with AI-powered automation today
+            {t('indexPage.finalCTA.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup">
               <Button size="lg" variant="secondary" className="text-lg">
-                Start Your 14-Day Free Trial
+                {t('indexPage.finalCTA.startTrial')}
               </Button>
             </Link>
             <Link to="/demo">
               <Button size="lg" variant="outline" className="text-lg bg-white/10 border-white text-white hover:bg-white hover:text-primary">
-                Book Your Free Demo
+                {t('indexPage.finalCTA.bookDemo')}
               </Button>
             </Link>
           </div>
           <p className="mt-6 text-sm text-white/80 font-semibold">
-            ⚡ 14 Days Free Trial • No credit card required • Cancel anytime
+            {t('indexPage.finalCTA.note')}
           </p>
         </div>
       </section>
@@ -454,9 +454,9 @@ const Index = () => {
       <section className="py-8 bg-muted/50 border-t">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Beta Program Notice</h3>
-            <p className="text-xs text-[#6B7280] leading-relaxed">
-              RealtorDesk AI is currently in public beta. We're continuously improving based on user feedback. All features, pricing, and metrics are subject to change. Early adopters receive special lifetime pricing.
+            <h3 className="text-sm font-semibold text-foreground mb-3">{t('indexPage.betaNotice.title')}</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              {t('indexPage.betaNotice.description')}
             </p>
           </div>
         </div>
