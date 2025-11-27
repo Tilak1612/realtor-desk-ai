@@ -72,7 +72,10 @@ const Signup = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log("Form data:", formData);
+    
     if (!validateForm()) {
+      console.log("Validation failed");
       return;
     }
 
@@ -92,16 +95,21 @@ const Signup = () => {
         },
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Signup error:", error);
+        throw error;
+      }
 
       if (data.user) {
+        console.log("User created successfully:", data.user);
         toast.success("Account Created Successfully! ✅", {
-          description: "Please check your email to verify your account and get started.",
+          description: "You can now sign in to your account.",
           duration: 6000,
         });
-        navigate("/verify-email", { state: { email: formData.email } });
+        navigate("/dashboard");
       }
     } catch (error: any) {
+      console.error("Signup exception:", error);
       toast.error("Unable to Create Account", {
         description: error.message || "There was an error creating your account. Please try again or contact support.",
         duration: 6000,
