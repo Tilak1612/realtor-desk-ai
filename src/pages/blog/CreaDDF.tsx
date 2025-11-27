@@ -151,7 +151,7 @@ const CreaDDF = () => {
               </p>
               <Link to="/signup">
                 <Button size="lg" className="btn-gradient">
-                  Get Started Free
+                  Start 14-Day Free Trial
                 </Button>
               </Link>
             </div>

@@ -14,6 +14,7 @@ interface PricingCardProps {
   billingPeriod?: string;
   discount?: string;
   yearlyPrice?: number;
+  trialBadge?: string;
 }
 
 const PricingCard = ({
@@ -27,6 +28,7 @@ const PricingCard = ({
   billingPeriod = "month",
   discount,
   yearlyPrice,
+  trialBadge,
 }: PricingCardProps) => {
   return (
     <Card className={`p-8 card-hover relative ${popular ? "border-2 border-primary shadow-xl" : ""}`}>
@@ -35,6 +37,13 @@ const PricingCard = ({
           <div className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
             <Star className="w-3 h-3" />
             Most Popular
+          </div>
+        </div>
+      )}
+      {trialBadge && !popular && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <div className="bg-accent text-white px-4 py-1 rounded-full text-xs font-semibold">
+            {trialBadge}
           </div>
         </div>
       )}

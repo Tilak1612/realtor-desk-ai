@@ -17,9 +17,9 @@ const resources = {
       hero: {
         title: "The AI Platform Built for Canadian Realtors",
         subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with CREA DDF® integration and full bilingual support.",
-        getStarted: "Start Closing More Deals",
+        getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book Your Free Demo",
-        trustLine: "No credit card required • Cancel anytime • Free onboarding included",
+        trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
         badge1: "CREA Certified",
         badge2: "SOC 2 Compliant",
         badge3: "50+ Beta Users",
@@ -81,8 +81,8 @@ const resources = {
           agent: {
             name: "AGENT",
             description: "Perfect for individual agents ready to scale",
-            ctaMonthly: "Start Free Trial",
-            ctaYearly: "Start 30-Day Free Trial"
+            ctaMonthly: "Start 14-Day Free Trial",
+            ctaYearly: "Start 14-Day Free Trial"
           },
           team: {
             name: "TEAM",
@@ -335,14 +335,14 @@ const resources = {
           answer: "Yes! You control the AI's personality, response templates, and which questions it handles vs. escalates to you. It learns your style over time."
         }
       },
-      cta: {
+        cta: {
         title: "Ready to Never Miss a Lead Again?",
         subtitle: "Join 500+ Canadian realtors using AI to close more deals",
-        button: "Start Your Free 14-Day Trial",
-        note: "No credit card required • Setup in 20 minutes • Cancel anytime"
+        button: "Start Your 14-Day Free Trial",
+        note: "14 Days Free • No credit card required • Cancel anytime"
       },
       mobileCTA: {
-        title: "Start Your Free Trial",
+        title: "Start Your 14-Day Free Trial",
         subtitle: "Join 500+ Canadian Realtors"
       },
       footer: {
@@ -387,9 +387,9 @@ const resources = {
       hero: {
         title: "La Plateforme IA Conçue pour les Agents Immobiliers Canadiens",
         subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec intégration CREA DDF® et support bilingue complet.",
-        getStarted: "Commencer à Conclure Plus",
+        getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réserver Votre Démo Gratuite",
-        trustLine: "Aucune carte de crédit requise • Annulez à tout moment • Intégration gratuite incluse",
+        trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment",
         badge1: "Certifié CREA",
         badge2: "Conforme SOC 2",
         badge3: "50+ Utilisateurs Bêta",

@@ -121,7 +121,7 @@ const Signup = () => {
               Create your account
             </CardTitle>
             <CardDescription className="text-center">
-              Start your 60-day free trial today
+              Start your 14-day free trial today - no credit card required
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">

@@ -17,9 +17,9 @@ const SwitchFromIxact = () => {
           <Badge variant="secondary" className="mb-4">Upgrade to AI</Badge>
           <h1 className="mb-6">Love IXACT's Price? <span className="gradient-text">You'll Love AI Even More.</span></h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            For just $20/month more ($699/year vs IXACT's $456/year), get AI that closes 6-8 extra deals per year.
+            For just $20/month more ($699/year vs IXACT's $456/year), get AI that closes 6-8 extra deals per year. Try free for 14 days.
           </p>
-          <Link to="/demo"><Button size="lg" className="btn-gradient">Upgrade to AI-Powered CRM</Button></Link>
+          <Link to="/signup"><Button size="lg" className="btn-gradient">Start 14-Day Free Trial</Button></Link>
         </div>
       </section>
       <section className="section-padding">
@@ -35,10 +35,10 @@ const SwitchFromIxact = () => {
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
           <CheckCircle className="w-16 h-16 text-accent mx-auto mb-6" />
-          <h2 className="mb-6">Free Migration + 30-Day Guarantee</h2>
-          <p className="text-lg text-muted-foreground mb-8">We move all your IXACT data for free. If you don't close extra deals, full refund.</p>
+          <h2 className="mb-6">14 Days Free Trial + Free Migration</h2>
+          <p className="text-lg text-muted-foreground mb-8">Try risk-free for 14 days. We move all your IXACT data for free. If you don't close extra deals, full refund.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/demo"><Button size="lg" className="btn-gradient">Schedule Free Migration</Button></Link>
+            <Link to="/signup"><Button size="lg" className="btn-gradient">Start 14-Day Free Trial</Button></Link>
             <Link to="/vs/ixact"><Button size="lg" variant="outline">See Comparison</Button></Link>
           </div>
         </div>
