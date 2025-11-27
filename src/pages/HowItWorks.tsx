@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { UserPlus, Link as LinkIcon, Brain, Settings, Rocket, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
-import heroDashboard from "@/assets/hero-dashboard.jpg";
+import dashboardShowcase from "@/assets/dashboard-hero-showcase.png";
 
 const HowItWorks = () => {
   const steps = [
@@ -170,8 +170,8 @@ const HowItWorks = () => {
             
             <div className="rounded-2xl overflow-hidden shadow-2xl mb-8">
               <img
-                src={heroDashboard}
-                alt="Realtor Desk AI Dashboard"
+                src={dashboardShowcase}
+                alt="Realtor Desk AI Dashboard showcasing unified interface with property listings, automated follow-ups, and mobile app"
                 className="w-full"
               />
             </div>
