@@ -226,7 +226,7 @@ const Signup = () => {
 
               {/* PIPEDA Compliance - Privacy Consent */}
               <div className="space-y-4 pt-2">
-                <div className="flex items-center gap-3">
+                <div className="flex items-start gap-3">
                   <Checkbox
                     id="privacyConsent"
                     checked={formData.privacyConsent || false}
@@ -237,11 +237,11 @@ const Signup = () => {
                         setErrors({ ...errors, privacyConsent: undefined });
                       }
                     }}
-                    className="mt-0.5"
+                    className="mt-1"
                   />
                   <label
                     htmlFor="privacyConsent"
-                    className="text-sm font-medium leading-relaxed cursor-pointer flex-1"
+                    className="text-sm font-medium leading-relaxed cursor-pointer block flex-1"
                   >
                     I agree to the{" "}
                     <RouterLink to="/privacy-policy" className="text-primary underline">
