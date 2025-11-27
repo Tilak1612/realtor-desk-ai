@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/realtor-desk-logo-new.png";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,7 @@ const Footer = () => {
               <img 
                 src={logo} 
                 alt="RealtorDesk AI Logo - AI-Powered Platform for Canadian Realtors" 
-                className="h-14 sm:h-12 md:h-13 lg:h-14 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
@@ -26,16 +26,16 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://youtube.com/@realtordeskai?si=SY-UQWdy33lF9-wv"
+                href="https://linkedin.com/company/brainfyai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
-                aria-label="YouTube"
+                aria-label="LinkedIn"
               >
-                <Youtube className="w-5 h-5" />
+                <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="https://x.com/Realtor_desk_AI"
+                href="https://twitter.com/brainfyai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"

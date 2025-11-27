@@ -1,12 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 import { TrendingUp, Clock, CheckCircle } from "lucide-react";
-import testimonialSarah from "@/assets/testimonial-sarah.jpg";
-import testimonialMarc from "@/assets/testimonial-marc.jpg";
-import testimonialJennifer from "@/assets/testimonial-jennifer.jpg";
 
 const BetaSuccessStories = () => {
   const stories = [
@@ -15,7 +12,6 @@ const BetaSuccessStories = () => {
       location: "Toronto",
       brokerage: "Independent Agent",
       avatar: "SM",
-      image: testimonialSarah,
       quote: "I was skeptical about AI, but after the first week, I had 3 showings booked while I was sleeping. The voice agent sounds natural and captures all the details I need.",
       metrics: [
         { value: "23", label: "leads captured in first month" },
@@ -29,7 +25,6 @@ const BetaSuccessStories = () => {
       location: "Montreal",
       brokerage: "Century 21",
       avatar: "MD",
-      image: testimonialMarc,
       quote: "The seamless English/French switching is perfect for Montreal. My AI handles both languages naturally, which has opened up my market significantly.",
       metrics: [
         { value: "40%", label: "increase in francophone leads" },
@@ -43,7 +38,6 @@ const BetaSuccessStories = () => {
       location: "Calgary",
       brokerage: "RE/MAX Team Lead",
       avatar: "JK",
-      image: testimonialJennifer,
       quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
       metrics: [
         { value: "<30s", label: "Team response time" },
@@ -72,7 +66,6 @@ const BetaSuccessStories = () => {
               {/* Header with Avatar */}
               <div className="flex items-start gap-4 mb-4">
                 <Avatar className="w-14 h-14">
-                  <AvatarImage src={story.image} alt={story.name} className="object-cover" />
                   <AvatarFallback className="bg-primary/10 text-primary font-bold text-lg">
                     {story.avatar}
                   </AvatarFallback>

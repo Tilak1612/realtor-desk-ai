@@ -39,7 +39,7 @@ import DemoBookingSection from "@/components/DemoBookingSection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 // Demo Video - HeyGen Product Demo
-const DEMO_VIDEO_URL = "https://www.youtube.com/embed/QGyWHv6sNLQ";
+const DEMO_VIDEO_URL = "https://app.heygen.com/share/4c80de4c5d7a4392b50941050220df54";
 
 const Index = () => {
   const { t } = useTranslation();

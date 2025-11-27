@@ -8,7 +8,7 @@ const Hero = () => {
   const {
     t
   } = useTranslation();
-  return <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-24 sm:pb-16 md:pb-20 lg:pb-28 overflow-hidden">
+  return <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-12 sm:pb-16 md:pb-20 lg:pb-28 overflow-hidden">
       {/* Decorative Colored Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-[5%] w-16 h-16 rounded-full bg-[hsl(var(--decorative-purple))] opacity-30 blur-2xl animate-pulse" style={{
@@ -76,14 +76,14 @@ const Hero = () => {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-10 animate-fade-in-up animation-delay-400 px-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-10 animate-fade-in-up animation-delay-400">
             <Link to="/signup" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
+              <Button size="lg" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
                 {t('hero.getStarted')}
               </Button>
             </Link>
             <Link to="/demo" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl border-2 hover:bg-secondary/50 transition-all duration-300 font-semibold">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl border-2 hover:bg-secondary/50 transition-all duration-300">
                 {t('hero.watchDemo')}
               </Button>
             </Link>
