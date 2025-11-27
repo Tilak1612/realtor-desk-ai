@@ -15,7 +15,7 @@ import ChatWidget from "@/components/ChatWidget";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { 
@@ -38,8 +38,8 @@ import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
-// Demo Video - HeyGen Product Demo
-const DEMO_VIDEO_URL = "https://app.heygen.com/share/4c80de4c5d7a4392b50941050220df54";
+// Demo Video - HeyGen Product Demo (Embed URL)
+const DEMO_VIDEO_URL = "https://app.heygen.com/embeds/4c80de4c5d7a4392b50941050220df54";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -192,15 +192,21 @@ const Index = () => {
                 setVideoSrc("");
               }
             }}>
-              <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0">
-                <div className="relative aspect-video w-full">
+              <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0 overflow-hidden">
+                <DialogTitle className="sr-only">Product Demo Video</DialogTitle>
+                <DialogDescription className="sr-only">
+                  Watch our product demo showcasing Realtor Desk AI features
+                </DialogDescription>
+                <div className="relative aspect-video w-full bg-black">
                   {videoSrc ? (
                     <iframe
                       src={videoSrc}
                       title="Realtor Desk AI Product Demo"
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                       allowFullScreen
+                      loading="lazy"
+                      style={{ border: 0 }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-muted">
