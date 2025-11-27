@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 import { TrendingUp, Clock, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const BetaSuccessStories = () => {
+  const { t } = useTranslation();
   const stories = [
     {
       name: "Sarah M.",
@@ -52,8 +54,8 @@ const BetaSuccessStories = () => {
     <section className="section-padding bg-background border-y">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4 text-3xl md:text-4xl font-bold">Beta Community Results</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Canadian realtors are already seeing measurable results</p>
+          <h2 className="mb-4 text-3xl md:text-4xl font-bold">{t('betaCommunity.resultsTitle')}</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{t('betaCommunity.resultsSubtitle')}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -106,18 +108,18 @@ const BetaSuccessStories = () => {
         {/* CTA Section */}
         <div className="text-center bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-8 md:p-12">
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Want to be our next success story?
+            {t('betaCommunity.ctaTitle')}
           </h3>
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Join the beta program today and get lifetime pricing.
+            {t('betaCommunity.ctaSubtitle')}
           </p>
           <Link to="/signup">
             <Button size="lg" className="btn-gradient text-lg">
-              Start Your Free Trial
+              {t('betaCommunity.ctaButton')}
             </Button>
           </Link>
-          <p className="text-xs text-[#6B7280] mt-6">
-            *Beta participant results. Individual outcomes may vary.
+          <p className="text-xs text-muted-foreground mt-6">
+            {t('betaCommunity.ctaNote')}
           </p>
         </div>
       </div>
