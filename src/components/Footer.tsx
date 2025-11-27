@@ -26,7 +26,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://youtube.com/@realtordeskai"
+                href="https://youtube.com/@realtordeskai?si=SY-UQWdy33lF9-wv"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
