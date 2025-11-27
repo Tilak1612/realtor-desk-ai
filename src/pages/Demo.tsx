@@ -398,10 +398,10 @@ const Demo = () => {
 
               <Card className="p-6 bg-gradient-to-r from-primary to-secondary text-white">
                 <h3 className="text-xl font-bold mb-2">Prefer to explore on your own?</h3>
-                <p className="mb-4 text-white/90">Get started today - no demo required</p>
+                <p className="mb-4 text-white/90">Start your 14-day free trial - no demo required</p>
                 <Link to="/signup">
                   <Button variant="secondary" className="w-full" size="lg">
-                    Sign Up Now
+                    Start 14-Day Free Trial
                   </Button>
                 </Link>
               </Card>

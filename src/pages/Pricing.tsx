@@ -45,6 +45,9 @@ const Pricing = () => {
             {t('pricing.hero.badge')}
           </Badge>
           <Badge variant="default" className="mb-4 animate-fade-in-up bg-accent text-white">
+            🎉 14 Days Free Trial - Start Today!
+          </Badge>
+          <Badge variant="default" className="mb-4 animate-fade-in-up bg-primary text-white">
             🎉 Founding Member Pricing Ends December 31, 2025 - Save $498!
           </Badge>
           <h1 className="mb-6 animate-fade-in-up">
@@ -101,8 +104,9 @@ const Pricing = () => {
                 "No setup fees",
                 "Priority support"
               ]}
-              ctaText={isYearly ? "Start 30-Day Free Trial" : "Start Free Trial"}
-              ctaLink="/demo"
+              ctaText="Start 14-Day Free Trial"
+              ctaLink="/signup"
+              trialBadge="14 Days Free Trial"
             />
 
             <PricingCard
@@ -126,8 +130,9 @@ const Pricing = () => {
                 "White-label options"
               ]}
               popular
-              ctaText="Request Team Demo"
-              ctaLink="/demo"
+              ctaText="Start 14-Day Free Trial"
+              ctaLink="/signup"
+              trialBadge="14 Days Free Trial"
             />
 
             <PricingCard
@@ -146,8 +151,9 @@ const Pricing = () => {
                 "Volume pricing discounts",
                 "Premium 24/7 support"
               ]}
-              ctaText="Get Custom Quote"
+              ctaText="Start 14-Day Free Trial"
               ctaLink="/demo"
+              trialBadge="14 Days Free Trial"
             />
           </div>
 

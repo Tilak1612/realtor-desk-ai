@@ -191,9 +191,9 @@ const HowItWorks = () => {
               </Card>
             </div>
 
-            <Link to="/demo">
+            <Link to="/signup">
               <Button size="lg" className="btn-gradient">
-                Start Your Free Trial
+                Start Your 14-Day Free Trial
               </Button>
             </Link>
           </div>

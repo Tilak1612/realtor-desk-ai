@@ -433,9 +433,9 @@ const Index = () => {
             Start closing more deals with AI-powered automation today
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/demo">
+            <Link to="/signup">
               <Button size="lg" variant="secondary" className="text-lg">
-                Start Closing More Deals
+                Start Your 14-Day Free Trial
               </Button>
             </Link>
             <Link to="/demo">
@@ -445,7 +445,7 @@ const Index = () => {
             </Link>
           </div>
           <p className="mt-6 text-sm text-white/80 font-semibold">
-            ⚡ Limited spots available this month • Join 14 agents who signed up this week
+            ⚡ 14 Days Free Trial • No credit card required • Cancel anytime
           </p>
         </div>
       </section>
