@@ -226,55 +226,51 @@ const Signup = () => {
 
               {/* PIPEDA Compliance - Privacy Consent */}
               <div className="space-y-4 pt-2">
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 pt-0.5">
-                    <Checkbox
-                      id="privacyConsent"
-                      checked={formData.privacyConsent || false}
-                      onCheckedChange={(checked) => {
-                        setFormData({ ...formData, privacyConsent: checked as boolean });
-                        // Clear the error when checkbox is checked
-                        if (checked) {
-                          setErrors({ ...errors, privacyConsent: undefined });
-                        }
-                      }}
-                    />
-                  </div>
-                  <div className="flex-1 space-y-1 leading-none">
-                    <label
-                      htmlFor="privacyConsent"
-                      className="text-sm font-medium leading-relaxed cursor-pointer"
-                    >
-                      I agree to the{" "}
-                      <RouterLink to="/privacy-policy" className="text-primary underline">
-                        Privacy Policy
-                      </RouterLink>{" "}
-                      and{" "}
-                      <RouterLink to="/terms-of-service" className="text-primary underline">
-                        Terms of Service
-                      </RouterLink>
-                      {" "}*
-                    </label>
-                  </div>
+                <div className="flex items-center gap-3">
+                  <Checkbox
+                    id="privacyConsent"
+                    checked={formData.privacyConsent || false}
+                    onCheckedChange={(checked) => {
+                      setFormData({ ...formData, privacyConsent: checked as boolean });
+                      // Clear the error when checkbox is checked
+                      if (checked) {
+                        setErrors({ ...errors, privacyConsent: undefined });
+                      }
+                    }}
+                    className="mt-0.5"
+                  />
+                  <label
+                    htmlFor="privacyConsent"
+                    className="text-sm font-medium leading-relaxed cursor-pointer flex-1"
+                  >
+                    I agree to the{" "}
+                    <RouterLink to="/privacy-policy" className="text-primary underline">
+                      Privacy Policy
+                    </RouterLink>{" "}
+                    and{" "}
+                    <RouterLink to="/terms-of-service" className="text-primary underline">
+                      Terms of Service
+                    </RouterLink>
+                    {" "}*
+                  </label>
                 </div>
                 {errors.privacyConsent && (
                   <p className="text-sm text-destructive ml-7">{errors.privacyConsent}</p>
                 )}
 
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 pt-0.5">
-                    <Checkbox
-                      id="marketingConsent"
-                      checked={formData.marketingConsent || false}
-                      onCheckedChange={(checked) =>
-                        setFormData({ ...formData, marketingConsent: checked as boolean })
-                      }
-                    />
-                  </div>
-                  <div className="flex-1 space-y-1 leading-none">
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    id="marketingConsent"
+                    checked={formData.marketingConsent || false}
+                    onCheckedChange={(checked) =>
+                      setFormData({ ...formData, marketingConsent: checked as boolean })
+                    }
+                    className="mt-0.5"
+                  />
+                  <div className="flex-1 space-y-1">
                     <label
                       htmlFor="marketingConsent"
-                      className="text-sm font-medium leading-relaxed cursor-pointer"
+                      className="text-sm font-medium leading-relaxed cursor-pointer block"
                     >
                       I consent to receive marketing communications and updates (Optional)
                     </label>
