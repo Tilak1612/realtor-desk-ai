@@ -345,6 +345,41 @@ const resources = {
         title: "Start Your 14-Day Free Trial",
         subtitle: "Join 500+ Canadian Realtors"
       },
+      trustTransparency: {
+        title: "Built on Trust & Transparency",
+        beta: {
+          title: "Beta Program",
+          description: "We're currently in beta with select Canadian realtors. Join our pilot program and help shape the future of AI in real estate.",
+          badge: "Limited Spots Available"
+        },
+        results: {
+          title: "Real Results",
+          description: "Performance metrics based on our pilot program with 50+ active users. Individual results may vary based on market conditions and usage.",
+          disclaimer: "*Results from pilot participants"
+        },
+        security: {
+          title: "Security First",
+          description: "SOC 2 compliant architecture, PIPEDA-ready data handling, and enterprise-grade security from day one."
+        },
+        canadian: {
+          title: "Canadian Built",
+          description: "Designed specifically for Canadian realtors with data residency in Toronto/Vancouver and full bilingual support."
+        },
+        disclaimer: "RealtorDesk AI is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary."
+      },
+      betaCommunity: {
+        title: "Join Our Growing Beta Community",
+        participants: "50+ Beta Participants",
+        limitedSpots: "Limited Beta Spots Available",
+        resultsTitle: "Beta Community Results",
+        resultsSubtitle: "Canadian realtors are already seeing measurable results",
+        testimonialDisclaimer: "*Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.",
+        ctaTitle: "Want to be our next success story?",
+        ctaSubtitle: "Join the beta program today and get lifetime pricing.",
+        ctaButton: "Start Your Free Trial",
+        ctaNote: "*Beta participant results. Individual outcomes may vary."
+      },
+      aiActive: "AI ACTIVE",
       footer: {
         tagline: "AI-Powered Real Estate Success",
         product: "Product",
@@ -712,9 +747,44 @@ const resources = {
         note: "Aucune carte de crédit requise • Configuration en 20 minutes • Annulez à tout moment"
       },
       mobileCTA: {
-        title: "Commencez Votre Essai Gratuit",
+        title: "Commencez Votre Essai Gratuit de 14 Jours",
         subtitle: "Rejoignez 500+ Agents Canadiens"
       },
+      trustTransparency: {
+        title: "Bâti sur la Confiance et la Transparence",
+        beta: {
+          title: "Programme Bêta",
+          description: "Nous sommes actuellement en version bêta avec des agents immobiliers canadiens sélectionnés. Rejoignez notre programme pilote et aidez à façonner l'avenir de l'IA dans l'immobilier.",
+          badge: "Places Limitées Disponibles"
+        },
+        results: {
+          title: "Résultats Réels",
+          description: "Métriques de performance basées sur notre programme pilote avec plus de 50 utilisateurs actifs. Les résultats individuels peuvent varier selon les conditions du marché et l'utilisation.",
+          disclaimer: "*Résultats des participants au programme pilote"
+        },
+        security: {
+          title: "La Sécurité d'Abord",
+          description: "Architecture conforme SOC 2, gestion des données prête pour PIPEDA et sécurité de niveau entreprise dès le premier jour."
+        },
+        canadian: {
+          title: "Conçu au Canada",
+          description: "Conçu spécifiquement pour les agents immobiliers canadiens avec résidence des données à Toronto/Vancouver et support bilingue complet."
+        },
+        disclaimer: "RealtorDesk AI est actuellement en version bêta. Toutes les métriques de performance sont basées sur les résultats du programme pilote. Les résultats individuels peuvent varier."
+      },
+      betaCommunity: {
+        title: "Rejoignez Notre Communauté Bêta en Croissance",
+        participants: "50+ Participants Bêta",
+        limitedSpots: "Places Bêta Limitées Disponibles",
+        resultsTitle: "Résultats de la Communauté Bêta",
+        resultsSubtitle: "Les agents immobiliers canadiens voient déjà des résultats mesurables",
+        testimonialDisclaimer: "*Les témoignages représentent des expériences individuelles de notre programme pilote. Les résultats varient et ne sont pas garantis. Les résultats moyens peuvent différer.",
+        ctaTitle: "Voulez-vous être notre prochaine histoire de succès?",
+        ctaSubtitle: "Rejoignez le programme bêta aujourd'hui et bénéficiez de tarifs à vie.",
+        ctaButton: "Commencez Votre Essai Gratuit",
+        ctaNote: "*Résultats des participants bêta. Les résultats individuels peuvent varier."
+      },
+      aiActive: "IA ACTIVE",
       footer: {
         tagline: "Succès Immobilier Propulsé par l'IA",
         product: "Produit",

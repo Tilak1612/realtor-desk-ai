@@ -10,7 +10,7 @@ const TrustTransparencySection = () => {
     <section className="section-padding bg-muted/30">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4 text-3xl md:text-4xl font-bold">Built on Trust & Transparency</h2>
+          <h2 className="mb-4 text-3xl md:text-4xl font-bold">{t('trustTransparency.title')}</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -20,12 +20,12 @@ const TrustTransparencySection = () => {
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <Beaker className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-bold text-lg mb-3">Beta Program</h3>
+              <h3 className="font-bold text-lg mb-3">{t('trustTransparency.beta.title')}</h3>
               <p className="text-sm text-muted-foreground mb-4 flex-grow">
-                We're currently in beta with select Canadian realtors. Join our pilot program and help shape the future of AI in real estate.
+                {t('trustTransparency.beta.description')}
               </p>
               <Badge variant="secondary" className="bg-accent/10 text-accent hover:bg-accent/20">
-                Limited Spots Available
+                {t('trustTransparency.beta.badge')}
               </Badge>
             </div>
           </Card>
@@ -36,12 +36,12 @@ const TrustTransparencySection = () => {
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <TrendingUp className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-bold text-lg mb-3">Real Results</h3>
+              <h3 className="font-bold text-lg mb-3">{t('trustTransparency.results.title')}</h3>
               <p className="text-sm text-muted-foreground mb-2 flex-grow">
-                Performance metrics based on our pilot program with 50+ active users. Individual results may vary based on market conditions and usage.
+                {t('trustTransparency.results.description')}
               </p>
               <p className="text-xs text-muted-foreground/70 italic">
-                *Results from pilot participants
+                {t('trustTransparency.results.disclaimer')}
               </p>
             </div>
           </Card>
@@ -52,9 +52,9 @@ const TrustTransparencySection = () => {
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <ShieldCheck className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-bold text-lg mb-3">Security First</h3>
+              <h3 className="font-bold text-lg mb-3">{t('trustTransparency.security.title')}</h3>
               <p className="text-sm text-muted-foreground flex-grow">
-                SOC 2 compliant architecture, PIPEDA-ready data handling, and enterprise-grade security from day one.
+                {t('trustTransparency.security.description')}
               </p>
             </div>
           </Card>
@@ -65,9 +65,9 @@ const TrustTransparencySection = () => {
               <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <MapPin className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-bold text-lg mb-3">Canadian Built</h3>
+              <h3 className="font-bold text-lg mb-3">{t('trustTransparency.canadian.title')}</h3>
               <p className="text-sm text-muted-foreground flex-grow">
-                Designed specifically for Canadian realtors with data residency in Toronto/Vancouver and full bilingual support.
+                {t('trustTransparency.canadian.description')}
               </p>
             </div>
           </Card>
@@ -76,7 +76,7 @@ const TrustTransparencySection = () => {
         {/* Disclaimer Banner */}
         <div className="bg-muted border border-border rounded-lg p-4 text-center">
           <p className="text-sm text-muted-foreground">
-            RealtorDesk AI is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary.
+            {t('trustTransparency.disclaimer')}
           </p>
         </div>
       </div>

@@ -102,7 +102,7 @@ const Hero = () => {
               <div className="absolute top-4 right-4 bg-accent text-accent-foreground backdrop-blur-md rounded-lg px-4 py-2.5 shadow-lg">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-accent-foreground rounded-full animate-pulse"></div>
-                  <div className="text-sm font-bold uppercase leading-none">🤖 AI Active</div>
+                  <div className="text-sm font-bold uppercase leading-none">🤖 {t('aiActive')}</div>
                 </div>
               </div>
             </div>
