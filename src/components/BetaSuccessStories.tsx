@@ -1,10 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 import { TrendingUp, Clock, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import sarahImage from "@/assets/realtor-sarah.jpg";
+import marcImage from "@/assets/realtor-marc.jpg";
+import jenniferImage from "@/assets/realtor-jennifer.jpg";
 
 const BetaSuccessStories = () => {
   const { t } = useTranslation();
@@ -14,6 +17,7 @@ const BetaSuccessStories = () => {
       location: "Toronto",
       brokerage: t('betaCommunity.testimonials.sarah.brokerage'),
       avatar: "SM",
+      image: sarahImage,
       quote: t('betaCommunity.testimonials.sarah.quote'),
       metrics: [
         { value: "23", label: t('betaCommunity.testimonials.sarah.stats.leads') },
@@ -27,6 +31,7 @@ const BetaSuccessStories = () => {
       location: "Montreal",
       brokerage: t('betaCommunity.testimonials.marc.brokerage'),
       avatar: "MD",
+      image: marcImage,
       quote: t('betaCommunity.testimonials.marc.quote'),
       metrics: [
         { value: "40%", label: t('betaCommunity.testimonials.marc.stats.increase') },
@@ -40,6 +45,7 @@ const BetaSuccessStories = () => {
       location: "Calgary",
       brokerage: t('betaCommunity.testimonials.jennifer.brokerage'),
       avatar: "JK",
+      image: jenniferImage,
       quote: t('betaCommunity.testimonials.jennifer.quote'),
       metrics: [
         { value: "<30s", label: t('betaCommunity.testimonials.jennifer.stats.responseTime') },
@@ -68,6 +74,7 @@ const BetaSuccessStories = () => {
               {/* Header with Avatar */}
               <div className="flex items-start gap-4 mb-4">
                 <Avatar className="w-14 h-14">
+                  <AvatarImage src={story.image} alt={story.name} />
                   <AvatarFallback className="bg-primary/10 text-primary font-bold text-lg">
                     {story.avatar}
                   </AvatarFallback>
