@@ -230,9 +230,13 @@ const Signup = () => {
                   <Checkbox
                     id="privacyConsent"
                     checked={formData.privacyConsent || false}
-                    onCheckedChange={(checked) =>
-                      setFormData({ ...formData, privacyConsent: checked as boolean })
-                    }
+                    onCheckedChange={(checked) => {
+                      setFormData({ ...formData, privacyConsent: checked as boolean });
+                      // Clear the error when checkbox is checked
+                      if (checked) {
+                        setErrors({ ...errors, privacyConsent: undefined });
+                      }
+                    }}
                   />
                   <div className="space-y-1 leading-none">
                     <label
