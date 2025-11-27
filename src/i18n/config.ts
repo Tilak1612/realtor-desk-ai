@@ -380,6 +380,87 @@ const resources = {
         ctaNote: "*Beta participant results. Individual outcomes may vary."
       },
       aiActive: "AI ACTIVE",
+      indexPage: {
+        socialProof: {
+          banner: "Join Our Growing Beta Community",
+          betaParticipants: "Beta Participants",
+          limitedSpots: "Limited Beta Spots Available"
+        },
+        credibility: {
+          soc2Title: "SOC 2 Compliant",
+          soc2Desc: "Enterprise-grade security and data protection",
+          pipedaTitle: "PIPEDA Compliant",
+          pipedaDesc: "Full Canadian privacy law compliance",
+          creaTitle: "CREA Certified",
+          creaDesc: "Official CREA DDF® integration partner"
+        },
+        problemStatement: {
+          title: "The Hidden Costs of Outdated Real Estate Technology",
+          subtitle: "Traditional CRMs are holding Canadian realtors back from their full potential",
+          stat1: "of agents use AI capabilities despite 72% using CRMs",
+          stat2: "of buyer inquiries receive NO response",
+          stat3: "hours weekly spent on tasks that could be automated",
+          stat4: "lead conversion rate with traditional methods"
+        },
+        solutionOverview: {
+          title: "Meet Your AI-Powered Real Estate Operating System",
+          subtitle: "Transform how you work with intelligent automation designed specifically for Canadian realtors",
+          feature1Title: "Predictive Lead Scoring",
+          feature1Desc: "AI analyzes 40+ signals to identify hot leads 3-6 months early. Converts 18% vs industry 5%. Built on 500,000+ Canadian transactions",
+          feature2Title: "24/7 Bilingual AI Chatbot",
+          feature2Desc: "Captures leads in EN/FR, qualifies buyers, schedules showings, answers 200+ property questions. Never miss a 2 AM inquiry again",
+          feature3Title: "Smart Transaction Coordinator",
+          feature3Desc: "Automate status updates, document requests, deadline tracking. Cut closing time from 60 to 35 days with 99% accuracy"
+        },
+        roiDisclaimer: "*ROI calculations are projections based on industry averages and pilot program data. Actual results depend on market conditions, lead quality, individual effort, and other factors. Past performance does not guarantee future results.",
+        security: {
+          title: "Enterprise-Grade Security & Developer Tools",
+          subtitle: "Built for scale, secured for compliance, ready for integration",
+          securityTitle: "Security & Compliance",
+          sec1: "SOC 2 Type II Certified:",
+          sec1Desc: "Annual audits, penetration testing, 99.9% uptime SLA",
+          sec2: "PIPEDA Compliant:",
+          sec2Desc: "Right to access, delete, data portability. Breach notification <72hrs",
+          sec3: "CASL Compliant:",
+          sec3Desc: "Express consent tracking, auto-unsubscribe, 24-month proof retention",
+          sec4: "Canadian Data Centers:",
+          sec4Desc: "All data stored in Toronto/Vancouver. No cross-border transfer",
+          sec5: "Encryption:",
+          sec5Desc: "TLS 1.3 in transit, AES-256 at rest, end-to-end for sensitive docs",
+          sec6: "Access Control:",
+          sec6Desc: "Role-based permissions, 2FA, SSO (Enterprise), audit logs",
+          apiTitle: "API & Integration Capabilities",
+          api1: "REST API:",
+          api1Desc: "Full CRUD access to contacts, deals, tasks. Rate limit: 1000 req/min",
+          api2: "Webhooks:",
+          api2Desc: "Real-time events (new lead, deal closed, task overdue)",
+          api3: "CRM Sync:",
+          api3Desc: "Pre-built connectors for Brivity, Follow Up Boss, Salesforce, HubSpot",
+          api4: "Calendar Integration:",
+          api4Desc: "2-way sync with Google/Outlook. Auto-create Zoom links",
+          api5: "Email Platforms:",
+          api5Desc: "Gmail, Outlook, MailChimp, SendGrid. SMTP/IMAP support",
+          api6: "Documentation:",
+          api6Desc: "Interactive API docs, SDK (JavaScript/Python), Postman collection",
+          viewIntegrations: "View Integration Library",
+          performanceTitle: "Platform Performance",
+          perf1: "Uptime SLA",
+          perf2: "AI Response Time",
+          perf3: "Concurrent Users",
+          perf4: "Support (Enterprise)"
+        },
+        finalCTA: {
+          title: "Join 500+ Canadian Agents Growing Their Business with AI",
+          subtitle: "Start closing more deals with AI-powered automation today",
+          startTrial: "Start Your 14-Day Free Trial",
+          bookDemo: "Book Your Free Demo",
+          note: "⚡ 14 Days Free Trial • No credit card required • Cancel anytime"
+        },
+        betaNotice: {
+          title: "Beta Program Notice",
+          description: "RealtorDesk AI is currently in public beta. We're continuously improving based on user feedback. All features, pricing, and metrics are subject to change. Early adopters receive special lifetime pricing."
+        }
+      },
       footer: {
         tagline: "AI-Powered Real Estate Success",
         product: "Product",
@@ -785,6 +866,87 @@ const resources = {
         ctaNote: "*Résultats des participants bêta. Les résultats individuels peuvent varier."
       },
       aiActive: "IA ACTIVE",
+      indexPage: {
+        socialProof: {
+          banner: "Rejoignez Notre Communauté Bêta en Croissance",
+          betaParticipants: "Participants Bêta",
+          limitedSpots: "Places Bêta Limitées"
+        },
+        credibility: {
+          soc2Title: "Conforme SOC 2",
+          soc2Desc: "Sécurité et protection des données de niveau entreprise",
+          pipedaTitle: "Conforme PIPEDA",
+          pipedaDesc: "Conformité totale aux lois canadiennes sur la vie privée",
+          creaTitle: "Certifié CREA",
+          creaDesc: "Partenaire officiel d'intégration CREA DDF®"
+        },
+        problemStatement: {
+          title: "Les Coûts Cachés de la Technologie Immobilière Désuète",
+          subtitle: "Les CRM traditionnels freinent les agents immobiliers canadiens",
+          stat1: "des agents utilisent les capacités IA malgré 72% utilisant des CRM",
+          stat2: "des demandes d'acheteurs ne reçoivent AUCUNE réponse",
+          stat3: "heures hebdomadaires consacrées à des tâches automatisables",
+          stat4: "taux de conversion avec les méthodes traditionnelles"
+        },
+        solutionOverview: {
+          title: "Rencontrez Votre Système d'Exploitation Immobilier Propulsé par l'IA",
+          subtitle: "Transformez votre façon de travailler avec l'automation intelligente conçue spécifiquement pour les agents immobiliers canadiens",
+          feature1Title: "Score de Prospects Prédictif",
+          feature1Desc: "L'IA analyse plus de 40 signaux pour identifier les prospects chauds 3 à 6 mois à l'avance. Convertit 18% vs 5% de l'industrie. Basé sur 500 000+ transactions canadiennes",
+          feature2Title: "Chatbot IA Bilingue 24/7",
+          feature2Desc: "Capture les prospects en EN/FR, qualifie les acheteurs, planifie les visites, répond à plus de 200 questions sur les propriétés. Ne manquez plus jamais une demande à 2h du matin",
+          feature3Title: "Coordinateur de Transactions Intelligent",
+          feature3Desc: "Automatisez les mises à jour de statut, les demandes de documents, le suivi des échéances. Réduisez le temps de clôture de 60 à 35 jours avec 99% de précision"
+        },
+        roiDisclaimer: "*Les calculs de ROI sont des projections basées sur les moyennes de l'industrie et les données du programme pilote. Les résultats réels dépendent des conditions du marché, de la qualité des prospects, des efforts individuels et d'autres facteurs. Les performances passées ne garantissent pas les résultats futurs.",
+        security: {
+          title: "Sécurité de Niveau Entreprise et Outils pour Développeurs",
+          subtitle: "Construit pour l'échelle, sécurisé pour la conformité, prêt pour l'intégration",
+          securityTitle: "Sécurité et Conformité",
+          sec1: "Certifié SOC 2 Type II:",
+          sec1Desc: "Audits annuels, tests de pénétration, SLA de disponibilité de 99,9%",
+          sec2: "Conforme PIPEDA:",
+          sec2Desc: "Droit d'accès, de suppression, portabilité des données. Notification de violation <72h",
+          sec3: "Conforme LCAP:",
+          sec3Desc: "Suivi du consentement exprès, désinscription automatique, preuve conservée 24 mois",
+          sec4: "Centres de Données Canadiens:",
+          sec4Desc: "Toutes les données stockées à Toronto/Vancouver. Aucun transfert transfrontalier",
+          sec5: "Chiffrement:",
+          sec5Desc: "TLS 1.3 en transit, AES-256 au repos, de bout en bout pour les documents sensibles",
+          sec6: "Contrôle d'Accès:",
+          sec6Desc: "Permissions basées sur les rôles, 2FA, SSO (Entreprise), journaux d'audit",
+          apiTitle: "Capacités API et Intégration",
+          api1: "API REST:",
+          api1Desc: "Accès CRUD complet aux contacts, offres, tâches. Limite: 1000 req/min",
+          api2: "Webhooks:",
+          api2Desc: "Événements en temps réel (nouveau prospect, offre conclue, tâche en retard)",
+          api3: "Synchronisation CRM:",
+          api3Desc: "Connecteurs pré-construits pour Brivity, Follow Up Boss, Salesforce, HubSpot",
+          api4: "Intégration Calendrier:",
+          api4Desc: "Synchronisation bidirectionnelle avec Google/Outlook. Création auto de liens Zoom",
+          api5: "Plateformes Email:",
+          api5Desc: "Gmail, Outlook, MailChimp, SendGrid. Support SMTP/IMAP",
+          api6: "Documentation:",
+          api6Desc: "Documentation API interactive, SDK (JavaScript/Python), collection Postman",
+          viewIntegrations: "Voir la Bibliothèque d'Intégration",
+          performanceTitle: "Performance de la Plateforme",
+          perf1: "SLA de Disponibilité",
+          perf2: "Temps de Réponse IA",
+          perf3: "Utilisateurs Simultanés",
+          perf4: "Support (Entreprise)"
+        },
+        finalCTA: {
+          title: "Rejoignez 500+ Agents Canadiens Qui Développent Leur Entreprise avec l'IA",
+          subtitle: "Commencez à conclure plus de ventes avec l'automation propulsée par l'IA aujourd'hui",
+          startTrial: "Commencez Votre Essai Gratuit de 14 Jours",
+          bookDemo: "Réservez Votre Démo Gratuite",
+          note: "⚡ 14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment"
+        },
+        betaNotice: {
+          title: "Avis sur le Programme Bêta",
+          description: "RealtorDesk AI est actuellement en version bêta publique. Nous nous améliorons continuellement en fonction des commentaires des utilisateurs. Toutes les fonctionnalités, tarifs et métriques sont sujets à changement. Les premiers adopteurs bénéficient de tarifs à vie spéciaux."
+        }
+      },
       footer: {
         tagline: "Succès Immobilier Propulsé par l'IA",
         product: "Produit",
