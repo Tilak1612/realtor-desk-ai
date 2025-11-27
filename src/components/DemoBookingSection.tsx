@@ -8,17 +8,19 @@ import { CheckCircle, Calendar, Clock, Video } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
-
-const demoFormSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().min(1, "Phone is required").max(20),
-  brokerage: z.string().trim().min(1, "Brokerage is required").max(100),
-  interests: z.array(z.string()).min(1, "Select at least one interest"),
-});
+import { useTranslation } from "react-i18next";
 
 const DemoBookingSection = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
+  
+  const demoFormSchema = z.object({
+    name: z.string().trim().min(1, t('demoBooking.nameRequired')).max(100),
+    email: z.string().trim().email(t('demoBooking.emailInvalid')).max(255),
+    phone: z.string().trim().min(1, t('demoBooking.phoneRequired')).max(20),
+    brokerage: z.string().trim().min(1, t('demoBooking.brokerageRequired')).max(100),
+    interests: z.array(z.string()).min(1, t('demoBooking.interestsRequired')),
+  });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -67,8 +69,8 @@ const DemoBookingSection = () => {
       if (error) throw error;
 
       toast({
-        title: "Demo Request Received! 🎉",
-        description: "We'll contact you within 24 hours to schedule your personalized demo.",
+        title: t('demoBooking.successTitle'),
+        description: t('demoBooking.successDescription'),
       });
 
       // Reset form
@@ -80,14 +82,14 @@ const DemoBookingSection = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: t('demoBooking.validationError'),
           description: error.errors[0].message,
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Error",
-          description: "There was an error submitting your request. Please try again.",
+          title: t('demoBooking.errorTitle'),
+          description: t('demoBooking.errorDescription'),
           variant: "destructive",
         });
       }
@@ -100,7 +102,7 @@ const DemoBookingSection = () => {
     <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4 text-3xl md:text-4xl font-bold">See RealtorDesk AI in Action</h2>
+          <h2 className="mb-4 text-3xl md:text-4xl font-bold">{t('demoBooking.title')}</h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -112,41 +114,41 @@ const DemoBookingSection = () => {
                   <Video className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">15-Minute Personalized Demo</h3>
-                  <p className="text-sm text-muted-foreground">Live, not recorded</p>
+                  <h3 className="text-xl font-bold">{t('demoBooking.demoTitle')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('demoBooking.liveDemo')}</p>
                 </div>
               </div>
 
               <div className="space-y-4 mb-6">
-                <p className="font-semibold mb-3">What you'll see:</p>
+                <p className="font-semibold mb-3">{t('demoBooking.whatYouSee')}</p>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Live walkthrough of AI chatbot, voice agent, and email automation</span>
+                  <span className="text-sm">{t('demoBooking.benefit1')}</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">How to set up in under 15 minutes</span>
+                  <span className="text-sm">{t('demoBooking.benefit2')}</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Custom configuration for your market and needs</span>
+                  <span className="text-sm">{t('demoBooking.benefit3')}</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Q&A with our team</span>
+                  <span className="text-sm">{t('demoBooking.benefit4')}</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Exclusive beta pricing offer</span>
+                  <span className="text-sm">{t('demoBooking.benefit5')}</span>
                 </div>
               </div>
 
               {/* Testimonial */}
               <div className="p-4 bg-accent/10 rounded-lg border border-accent/20">
                 <p className="text-sm italic mb-2">
-                  "The demo sold me instantly. Seeing the AI handle real estate questions in real-time was impressive."
+                  {t('demoBooking.testimonial')}
                 </p>
-                <p className="text-xs text-muted-foreground">- Beta Participant</p>
+                <p className="text-xs text-muted-foreground">{t('demoBooking.testimonialAuthor')}</p>
               </div>
             </Card>
 
@@ -154,9 +156,9 @@ const DemoBookingSection = () => {
             <div className="flex items-start gap-3 p-4 bg-background rounded-lg border">
               <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold text-sm mb-1">Flexible Scheduling</p>
+                <p className="font-semibold text-sm mb-1">{t('demoBooking.flexibleScheduling')}</p>
                 <p className="text-xs text-muted-foreground">
-                  Available across all Canadian time zones. We'll accommodate your schedule.
+                  {t('demoBooking.flexibleSchedulingDesc')}
                 </p>
               </div>
             </div>
@@ -166,16 +168,16 @@ const DemoBookingSection = () => {
           <Card className="p-6 bg-background">
             <div className="flex items-center gap-3 mb-6">
               <Calendar className="w-6 h-6 text-primary" />
-              <h3 className="text-xl font-bold">Book Your Demo</h3>
+              <h3 className="text-xl font-bold">{t('demoBooking.bookYourDemo')}</h3>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="demo-name" className="mb-2 block">Name *</Label>
+                <Label htmlFor="demo-name" className="mb-2 block">{t('demoBooking.nameLabel')}</Label>
                 <Input
                   id="demo-name"
                   type="text"
-                  placeholder="Your full name"
+                  placeholder={t('demoBooking.namePlaceholder')}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
@@ -183,11 +185,11 @@ const DemoBookingSection = () => {
               </div>
 
               <div>
-                <Label htmlFor="demo-email" className="mb-2 block">Email *</Label>
+                <Label htmlFor="demo-email" className="mb-2 block">{t('demoBooking.emailLabel')}</Label>
                 <Input
                   id="demo-email"
                   type="email"
-                  placeholder="your.email@example.com"
+                  placeholder={t('demoBooking.emailPlaceholder')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -195,11 +197,11 @@ const DemoBookingSection = () => {
               </div>
 
               <div>
-                <Label htmlFor="demo-phone" className="mb-2 block">Phone *</Label>
+                <Label htmlFor="demo-phone" className="mb-2 block">{t('demoBooking.phoneLabel')}</Label>
                 <Input
                   id="demo-phone"
                   type="tel"
-                  placeholder="(555) 123-4567"
+                  placeholder={t('demoBooking.phonePlaceholder')}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
@@ -207,11 +209,11 @@ const DemoBookingSection = () => {
               </div>
 
               <div>
-                <Label htmlFor="demo-brokerage" className="mb-2 block">Brokerage *</Label>
+                <Label htmlFor="demo-brokerage" className="mb-2 block">{t('demoBooking.brokerageLabel')}</Label>
                 <Input
                   id="demo-brokerage"
                   type="text"
-                  placeholder="Your brokerage name"
+                  placeholder={t('demoBooking.brokeragePlaceholder')}
                   value={brokerage}
                   onChange={(e) => setBrokerage(e.target.value)}
                   required
@@ -219,7 +221,7 @@ const DemoBookingSection = () => {
               </div>
 
               <div>
-                <Label className="mb-3 block">What interests you most? *</Label>
+                <Label className="mb-3 block">{t('demoBooking.interestsLabel')}</Label>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <Checkbox
@@ -228,7 +230,7 @@ const DemoBookingSection = () => {
                       onCheckedChange={() => handleInterestToggle("Chatbot")}
                     />
                     <Label htmlFor="interest-chatbot" className="cursor-pointer font-normal">
-                      AI Chatbot
+                      {t('demoBooking.interestChatbot')}
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -238,7 +240,7 @@ const DemoBookingSection = () => {
                       onCheckedChange={() => handleInterestToggle("Voice")}
                     />
                     <Label htmlFor="interest-voice" className="cursor-pointer font-normal">
-                      Voice Agent
+                      {t('demoBooking.interestVoice')}
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -248,7 +250,7 @@ const DemoBookingSection = () => {
                       onCheckedChange={() => handleInterestToggle("Email")}
                     />
                     <Label htmlFor="interest-email" className="cursor-pointer font-normal">
-                      Email Automation
+                      {t('demoBooking.interestEmail')}
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -258,7 +260,7 @@ const DemoBookingSection = () => {
                       onCheckedChange={() => handleInterestToggle("All")}
                     />
                     <Label htmlFor="interest-all" className="cursor-pointer font-normal">
-                      All Features
+                      {t('demoBooking.interestAll')}
                     </Label>
                   </div>
                 </div>
@@ -267,7 +269,7 @@ const DemoBookingSection = () => {
               {/* Timezone Display */}
               <div className="p-3 bg-muted rounded-lg">
                 <p className="text-xs text-muted-foreground">
-                  <strong>Detected timezone:</strong> {userTimezone}
+                  <strong>{t('demoBooking.detectedTimezone')}</strong> {userTimezone}
                 </p>
               </div>
 
@@ -276,17 +278,17 @@ const DemoBookingSection = () => {
                 className="w-full btn-gradient text-base py-6"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Request Demo"}
+                {isSubmitting ? t('demoBooking.submitting') : t('demoBooking.submitButton')}
               </Button>
             </form>
 
             <div className="mt-6 p-4 bg-muted/50 rounded-lg">
               <p className="text-xs text-center text-muted-foreground">
-                Can't find a time? Email{" "}
+                {t('demoBooking.cantFindTime')}{" "}
                 <a href="mailto:info@realtordesk.ai" className="text-primary hover:underline font-semibold">
                   info@realtordesk.ai
                 </a>
-                {" "}and we'll accommodate you.
+                {" "}{t('demoBooking.andAccommodate')}
               </p>
             </div>
           </Card>
