@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, MapPin } from "lucide-react";
-import heroDashboardAI from "@/assets/dashboard-new-theme.jpg";
+import heroDashboardAI from "@/assets/hero-dashboard-ai.jpg";
 import { useTranslation } from "react-i18next";
 const Hero = () => {
   const {

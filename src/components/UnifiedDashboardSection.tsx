@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Inbox, TrendingUp, Bell, MessageSquare, Zap } from "lucide-react";
-import dashboardUnified from "@/assets/dashboard-new-theme.jpg";
+import dashboardUnified from "@/assets/dashboard-unified.jpg";
 import { useTranslation } from "react-i18next";
 
 const UnifiedDashboardSection = () => {
