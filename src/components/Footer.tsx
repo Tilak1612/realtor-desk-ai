@@ -106,6 +106,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('nav.faq')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.helpCenter')}
                 </Link>

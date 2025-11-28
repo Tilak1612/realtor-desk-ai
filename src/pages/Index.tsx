@@ -32,7 +32,6 @@ import {
   Play
 } from "lucide-react";
 import HowItWorksSection from "@/components/HowItWorksSection";
-import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import TrustTransparencySection from "@/components/TrustTransparencySection";
 import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
@@ -324,8 +323,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <MobileOptimizedFAQ />
 
       {/* Security & API Documentation Section */}
       <section className="section-padding bg-background border-y" aria-label="Security and Integration Documentation">
