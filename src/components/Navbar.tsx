@@ -43,7 +43,7 @@ const Navbar = () => {
             <img 
               src={logo} 
               alt="RealtorDesk AI Logo - Canadian Real Estate AI Platform" 
-              className="h-10 w-auto group-hover:scale-105 transition-transform"
+              className="h-14 sm:h-12 md:h-13 lg:h-14 w-auto group-hover:scale-105 transition-transform"
             />
           </Link>
 
