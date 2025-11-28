@@ -29,37 +29,37 @@ const Footer = () => {
                 href="https://www.youtube.com/@RealtorDeskAI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 md:w-11 md:h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
                 aria-label="YouTube"
               >
-                <Youtube className="w-5 h-5" />
+                <Youtube className="w-4 h-4 md:w-5 md:h-5" />
               </a>
               <a
                 href="https://x.com/Realtor_desk_AI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 md:w-11 md:h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
                 aria-label="X (Twitter)"
               >
-                <Twitter className="w-5 h-5" />
+                <Twitter className="w-4 h-4 md:w-5 md:h-5" />
               </a>
               <a
                 href="https://www.facebook.com/profile.php?id=61583653411571"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 md:w-11 md:h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
                 aria-label="Facebook"
               >
-                <Facebook className="w-5 h-5" />
+                <Facebook className="w-4 h-4 md:w-5 md:h-5" />
               </a>
               <a
                 href="https://www.instagram.com/realtor_desk_ai/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 md:w-11 md:h-11 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-4 h-4 md:w-5 md:h-5" />
               </a>
             </div>
           </div>
