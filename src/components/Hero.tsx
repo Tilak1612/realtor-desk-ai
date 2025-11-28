@@ -66,7 +66,7 @@ const Hero = () => {
           </div>
 
           {/* Main Title */}
-          <h1 className="mb-4 sm:mb-6 leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">
+          <h1 className="mb-4 sm:mb-6 leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-b from-[hsl(122_39%_60%)] to-[hsl(122_39%_40%)] bg-clip-text text-transparent">
             {t('hero.title')}
           </h1>
 
