@@ -81,7 +81,10 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      const redirectUrl = `${window.location.origin}/`;
+      // Generate 6-digit verification code for phone
+      const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+      
+      const redirectUrl = `${window.location.origin}/dashboard`;
       const { data, error } = await supabase.auth.signUp({
         email: formData.email!,
         password: formData.password!,
@@ -91,6 +94,8 @@ const Signup = () => {
             full_name: formData.fullName,
             phone: formData.phone,
             company_name: formData.companyName,
+            phone_verification_code: verificationCode,
+            phone_verified: false,
           },
         },
       });
@@ -102,11 +107,38 @@ const Signup = () => {
 
       if (data.user) {
         console.log("User created successfully:", data.user);
-        toast.success("Account Created Successfully! ✅", {
-          description: "You can now sign in to your account.",
+        
+        // Send phone verification code via SMS
+        try {
+          const { error: smsError } = await supabase.functions.invoke("send-phone-verification", {
+            body: {
+              phone: formData.phone,
+              code: verificationCode,
+            },
+          });
+
+          if (smsError) {
+            console.error("SMS send error:", smsError);
+            toast.error("Failed to send phone verification code. Please try again.");
+          } else {
+            console.log("Verification SMS sent successfully");
+          }
+        } catch (smsError) {
+          console.error("SMS error:", smsError);
+        }
+
+        toast.success("Account Created! Please verify your email and phone.", {
+          description: "Check your email and phone for verification codes.",
           duration: 6000,
         });
-        navigate("/dashboard");
+        
+        navigate("/verify-email", { 
+          state: { 
+            email: formData.email, 
+            phone: formData.phone,
+            userId: data.user.id 
+          } 
+        });
       }
     } catch (error: any) {
       console.error("Signup exception:", error);
