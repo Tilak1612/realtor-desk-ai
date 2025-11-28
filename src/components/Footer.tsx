@@ -15,7 +15,7 @@ const Footer = () => {
               <img 
                 src={logo} 
                 alt="RealtorDesk AI Logo - AI-Powered Platform for Canadian Realtors" 
-                className="h-10 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
