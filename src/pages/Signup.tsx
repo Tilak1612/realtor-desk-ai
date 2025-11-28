@@ -16,7 +16,7 @@ const signupSchema = z.object({
   email: z.string().email("Please enter a valid email address (e.g., you@example.com)"),
   password: z.string().min(8, "Please create a password with at least 8 characters for security"),
   fullName: z.string().min(2, "Please enter your full name (at least 2 characters)"),
-  phone: z.string().min(10, "Please enter a valid phone number (e.g., (555) 123-4567)"),
+  phone: z.string().optional(),
   companyName: z.string().min(2, "Please enter your company or brokerage name"),
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: "Please accept the Privacy Policy and Terms of Service to continue",
@@ -81,9 +81,6 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      // Generate 6-digit verification code for phone
-      const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-      
       const redirectUrl = `${window.location.origin}/dashboard`;
       const { data, error } = await supabase.auth.signUp({
         email: formData.email!,
@@ -94,8 +91,6 @@ const Signup = () => {
             full_name: formData.fullName,
             phone: formData.phone,
             company_name: formData.companyName,
-            phone_verification_code: verificationCode,
-            phone_verified: false,
           },
         },
       });
@@ -108,34 +103,14 @@ const Signup = () => {
       if (data.user) {
         console.log("User created successfully:", data.user);
         
-        // Send phone verification code via SMS
-        try {
-          const { error: smsError } = await supabase.functions.invoke("send-phone-verification", {
-            body: {
-              phone: formData.phone,
-              code: verificationCode,
-            },
-          });
-
-          if (smsError) {
-            console.error("SMS send error:", smsError);
-            toast.error("Failed to send phone verification code. Please try again.");
-          } else {
-            console.log("Verification SMS sent successfully");
-          }
-        } catch (smsError) {
-          console.error("SMS error:", smsError);
-        }
-
-        toast.success("Account Created! Please verify your email and phone.", {
-          description: "Check your email and phone for verification codes.",
+        toast.success("Account Created! Please verify your email.", {
+          description: "Check your email for a verification link.",
           duration: 6000,
         });
         
         navigate("/verify-email", { 
           state: { 
-            email: formData.email, 
-            phone: formData.phone,
+            email: formData.email,
             userId: data.user.id 
           } 
         });
