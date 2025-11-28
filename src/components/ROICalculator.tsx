@@ -202,9 +202,11 @@ const ROICalculator = () => {
       {/* CTA */}
       <div className="text-center">
         <Link to="/signup">
-          <Button size="lg" className="btn-gradient text-lg group">
-            {t('roiCalculator.ctaButton')}
-            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          <Button size="lg" className="btn-gradient text-base md:text-lg group w-full sm:w-auto px-6 py-6 h-auto whitespace-normal">
+            <span className="flex items-center justify-center gap-2 flex-wrap">
+              {t('roiCalculator.ctaButton')}
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+            </span>
           </Button>
         </Link>
       </div>
