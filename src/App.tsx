@@ -20,6 +20,7 @@ import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
 import AdminDemoRequests from "./pages/AdminDemoRequests";
 import VsBoldTrail from "./pages/VsBoldTrail";
 import VsLofty from "./pages/VsLofty";
@@ -78,6 +79,7 @@ const App = () => (
           <Route path="/blog/bilingual-marketing" element={<BilingualMarketing />} />
           <Route path="/blog/success-story" element={<SuccessStory />} />
           <Route path="/integrations" element={<Integrations />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />

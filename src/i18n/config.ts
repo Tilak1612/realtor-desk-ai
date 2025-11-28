@@ -11,6 +11,7 @@ const resources = {
         integrations: "Integrations",
         canadianMarket: "Canadian Market",
         resources: "Resources",
+        faq: "FAQ",
         bookDemo: "Book Your Free Demo",
         startClosing: "Start Closing More Deals"
       },
@@ -596,6 +597,7 @@ const resources = {
         integrations: "Intégrations",
         canadianMarket: "Marché Canadien",
         resources: "Ressources",
+        faq: "FAQ",
         bookDemo: "Réserver Votre Démo Gratuite",
         startClosing: "Commencer à Conclure Plus"
       },

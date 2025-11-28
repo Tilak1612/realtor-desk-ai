@@ -2,7 +2,11 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const MobileOptimizedFAQ = () => {
+interface MobileOptimizedFAQProps {
+  searchQuery?: string;
+}
+
+const MobileOptimizedFAQ = ({ searchQuery = "" }: MobileOptimizedFAQProps) => {
   const { t } = useTranslation();
   
   const faqs = [
@@ -56,15 +60,33 @@ const MobileOptimizedFAQ = () => {
     }
   ];
 
+  // Filter FAQs based on search query
+  const filteredFaqs = searchQuery
+    ? faqs.filter(
+        (faq) =>
+          faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          faq.a.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : faqs;
+
   return (
     <section className="section-padding bg-muted">
       <div className="container-custom max-w-4xl">
-        <div className="text-center mb-8 sm:mb-12 animate-fade-in-up">
-          <h2 className="mb-3 sm:mb-4">{t('faq.title')}</h2>
-        </div>
+        {!searchQuery && (
+          <div className="text-center mb-8 sm:mb-12 animate-fade-in-up">
+            <h2 className="mb-3 sm:mb-4">{t('faq.title')}</h2>
+          </div>
+        )}
         
-        <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
-          {faqs.map((faq, idx) => (
+        {filteredFaqs.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">
+              No FAQs found matching your search. Try different keywords.
+            </p>
+          </div>
+        ) : (
+          <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
+            {filteredFaqs.map((faq, idx) => (
             <AccordionItem 
               key={idx} 
               value={`item-${idx}`}
@@ -80,8 +102,9 @@ const MobileOptimizedFAQ = () => {
                 {faq.a}
               </AccordionContent>
             </AccordionItem>
-          ))}
-        </Accordion>
+            ))}
+          </Accordion>
+        )}
       </div>
     </section>
   );
