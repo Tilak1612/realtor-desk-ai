@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import Hero from "@/components/Hero";
-import TrustedBrands from "@/components/TrustedBrands";
+import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import UnifiedDashboardSection from "@/components/UnifiedDashboardSection";
 import CanadianSection from "@/components/CanadianSection";
@@ -87,8 +87,8 @@ const Index = () => {
       {/* Trust & Transparency Section */}
       <TrustTransparencySection />
 
-      {/* Trusted Brands Section */}
-      <TrustedBrands />
+      {/* Problem Section */}
+      <ProblemSection />
 
       {/* Solution Section */}
       <SolutionSection />
