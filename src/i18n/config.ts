@@ -16,14 +16,14 @@ const resources = {
         startClosing: "Start Closing More Deals"
       },
       hero: {
-        title: "Canada's Only CREA-Native AI Real Estate Platform",
-        subtitle: "Built exclusively for Canadian agents, teams, and brokerages. CREA DDF® integration, true bilingual AI, provincial compliance, and Canadian data residency—all in one platform.",
+        title: "The AI Platform Built for Canadian Realtors",
+        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with CREA DDF® integration and full bilingual support.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book Your Free Demo",
-        trustLine: "14 Days Free Trial • No credit card required • Cancel anytime • All data hosted in Canada",
-        badge1: "CREA DDF® Native",
-        badge2: "Canadian Data Residency",
-        badge3: "Bilingual EN/FR",
+        trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
+        badge1: "CREA Certified",
+        badge2: "SOC 2 Compliant",
+        badge3: "50+ Beta Users",
         conversionBadge: "300% Conversion Increase"
       },
       home: {
@@ -254,15 +254,13 @@ const resources = {
         feature5: "Performance analytics & ROI tracking"
       },
       canadian: {
-        title: "Canada-Only. CREA-Native. Fully Bilingual.",
-        bilingual: "True Bilingual AI (EN/FR)",
-        mls: "CREA DDF® Native Integration",
-        compliant: "PIPEDA, CASL & FINTRAC Ready",
-        timezones: "All 6 Canadian Time Zones",
+        title: "Built for the Canadian Market",
+        bilingual: "Bilingual Support (EN/FR)",
+        mls: "Integrates with Canadian MLS Systems",
+        compliant: "PIPEDA & CASL Compliant",
+        timezones: "All 6 Canadian Time Zones Covered",
         crea: "CREA Code of Ethics Aligned",
-        pricing: "CAD Pricing • Canadian Payment Rails",
-        dataResidency: "Canadian Data Residency",
-        dataResidencyDesc: "All data hosted and processed in Canadian data centers (Toronto/Vancouver)"
+        pricing: "Pricing in CAD"
       },
       howItWorks: {
         title: "Get Up and Running in Minutes",
@@ -604,14 +602,14 @@ const resources = {
         startClosing: "Commencer à Conclure Plus"
       },
       hero: {
-        title: "La Seule Plateforme IA CREA-Native au Canada",
-        subtitle: "Conçue exclusivement pour les agents, équipes et courtages canadiens. Intégration CREA DDF®, IA véritablement bilingue, conformité provinciale et hébergement des données au Canada—tout en une plateforme.",
+        title: "La Plateforme IA Conçue pour les Agents Immobiliers Canadiens",
+        subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec intégration CREA DDF® et support bilingue complet.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réserver Votre Démo Gratuite",
-        trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment • Données hébergées au Canada",
-        badge1: "CREA DDF® Natif",
-        badge2: "Données Hébergées au Canada",
-        badge3: "Bilingue EN/FR",
+        trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment",
+        badge1: "Certifié CREA",
+        badge2: "Conforme SOC 2",
+        badge3: "50+ Utilisateurs Bêta",
         conversionBadge: "Augmentation de 300% des Conversions"
       },
       home: {
@@ -842,15 +840,13 @@ const resources = {
         feature5: "Analyses de performance et suivi du ROI"
       },
       canadian: {
-        title: "Canada Uniquement. CREA-Natif. Entièrement Bilingue.",
-        bilingual: "IA Véritablement Bilingue (EN/FR)",
-        mls: "Intégration Native CREA DDF®",
-        compliant: "Prêt PIPEDA, LCAP et CANAFE",
-        timezones: "Tous les 6 Fuseaux Horaires Canadiens",
+        title: "Conçu pour le Marché Canadien",
+        bilingual: "Support Bilingue (EN/FR)",
+        mls: "S'intègre avec les Systèmes MLS Canadiens",
+        compliant: "Conforme PIPEDA et LCAP",
+        timezones: "Couvre les 6 Fuseaux Horaires Canadiens",
         crea: "Aligné avec le Code d'Éthique CREA",
-        pricing: "Tarification en CAD • Paiements Canadiens",
-        dataResidency: "Résidence des Données au Canada",
-        dataResidencyDesc: "Toutes les données hébergées et traitées dans des centres de données canadiens (Toronto/Vancouver)"
+        pricing: "Tarification en CAD"
       },
       howItWorks: {
         title: "Opérationnel en Quelques Minutes",
