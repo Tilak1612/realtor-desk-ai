@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -6,172 +7,144 @@ import { Link } from "react-router-dom";
 import { 
   Globe,
   CheckCircle,
-  Building2,
-  BarChart3,
-  Code,
-  Database,
-  Cloud,
-  Video,
-  Users,
-  Phone,
-  FileText,
-  Calendar,
-  Chrome,
-  Contact,
-  TrendingUp,
-  Mail,
-  GraduationCap,
-  Home,
-  Search,
-  Briefcase,
-  MessageSquare,
-  DollarSign,
-  FileSignature,
-  Repeat,
-  Megaphone,
-  Image,
-  Headphones,
-  PenTool,
-  Target,
-  Bot,
-  LineChart,
-  Award,
-  Send,
-  Settings,
-  Share2,
-  Play,
-  Zap,
-  ShoppingCart,
-  List,
-  type LucideIcon
+  Building2
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface Partner {
   name: string;
-  icon: LucideIcon;
+  domain: string;
 }
 
 const Integrations = () => {
   const { t } = useTranslation();
+  const [failedLogos, setFailedLogos] = useState<Set<string>>(new Set());
   
   const partners: Partner[] = [
-    { name: "AgentFire", icon: Target },
-    { name: "Altos Research", icon: BarChart3 },
-    { name: "API Nation", icon: Code },
-    { name: "ARMLS", icon: Database },
-    { name: "AWS", icon: Cloud },
-    { name: "Behind Your Curtain", icon: Video },
-    { name: "Benutech", icon: Settings },
-    { name: "Bold Leads", icon: TrendingUp },
-    { name: "BombBomb", icon: Video },
-    { name: "Brokermint", icon: Briefcase },
-    { name: "Call Action", icon: Phone },
-    { name: "Callingly", icon: Phone },
-    { name: "Canopy MLS", icon: Database },
-    { name: "Cloud CMA", icon: BarChart3 },
-    { name: "Cloud Streams", icon: Cloud },
-    { name: "Club Wealth", icon: Award },
-    { name: "Cole Realty Resource", icon: Search },
-    { name: "Constant Contact", icon: Mail },
-    { name: "Contra Costa Association of REALTORS®", icon: Building2 },
-    { name: "Craig Proctor Success", icon: GraduationCap },
-    { name: "CRM Rehab", icon: Settings },
-    { name: "CRMLS", icon: Database },
-    { name: "Docusign", icon: FileSignature },
-    { name: "Dot Loop", icon: Repeat },
-    { name: "Dubb", icon: Video },
-    { name: "Easy Agent Pro", icon: Globe },
-    { name: "Express Copy", icon: FileText },
-    { name: "Facebook", icon: Share2 },
-    { name: "Fast Forward Stories", icon: Video },
-    { name: "Florida Realtors®", icon: Building2 },
-    { name: "Floyd Wickman Team", icon: GraduationCap },
-    { name: "FMLS", icon: Database },
-    { name: "Form Simplicity", icon: FileText },
-    { name: "GAMLS", icon: Database },
-    { name: "Georgia REALTORS®", icon: Building2 },
-    { name: "Global MLS, Inc.", icon: Database },
-    { name: "Gmail Conversations", icon: Mail },
-    { name: "GoDaddy", icon: Globe },
-    { name: "Google Ads", icon: Megaphone },
-    { name: "Google Calendar", icon: Calendar },
-    { name: "Google Chrome Extension", icon: Chrome },
-    { name: "Google Contacts", icon: Contact },
-    { name: "GrizzlyLeads", icon: TrendingUp },
-    { name: "Happy Grasshopper", icon: MessageSquare },
-    { name: "Home Junction", icon: Home },
-    { name: "Homes.com", icon: Home },
-    { name: "HomeStack", icon: Home },
-    { name: "Houston Association of Realtors®", icon: Building2 },
-    { name: "IDX Broker", icon: Globe },
-    { name: "iFoundagent", icon: Search },
-    { name: "iList", icon: List },
-    { name: "Immoviewer", icon: Image },
-    { name: "Jared James", icon: GraduationCap },
-    { name: "JMan Seminars", icon: GraduationCap },
-    { name: "Karen Coffey", icon: GraduationCap },
-    { name: "Keeping Current Matters", icon: BarChart3 },
-    { name: "Lake Martin Area Association of Realtors®", icon: Building2 },
-    { name: "LandVoice", icon: Phone },
-    { name: "Lending Tree", icon: DollarSign },
-    { name: "Listings 2 Leads", icon: TrendingUp },
-    { name: "Lone Wolf", icon: Briefcase },
-    { name: "Lubbock Association of Realtors®", icon: Building2 },
-    { name: "Mailchimp", icon: Send },
-    { name: "McKissock", icon: GraduationCap },
-    { name: "Midwest Real Estate Data", icon: Database },
-    { name: "Mojo", icon: Phone },
-    { name: "My Computer Works", icon: Headphones },
-    { name: "National Association of Real Estate Brokers", icon: Building2 },
-    { name: "NC REALTORS®", icon: Building2 },
-    { name: "New York State Association of REALTORS®", icon: Building2 },
-    { name: "NorthstarMLS", icon: Database },
-    { name: "Oakley Signs & Graphics", icon: PenTool },
-    { name: "Ohio REALTORS®", icon: Building2 },
-    { name: "OneTap Connect", icon: Users },
-    { name: "Open House Wizard", icon: Home },
-    { name: "Open Houses Direct", icon: Home },
-    { name: "PhoneBurner", icon: Phone },
-    { name: "Popl", icon: Contact },
-    { name: "Postamo", icon: Share2 },
-    { name: "Prime Seller Leads", icon: TrendingUp },
-    { name: "Productive AI", icon: Bot },
-    { name: "Real Geeks", icon: Globe },
-    { name: "REDX Vortex®", icon: Phone },
-    { name: "Relitix", icon: LineChart },
-    { name: "ReMarkiTable", icon: PenTool },
-    { name: "REMBA", icon: Building2 },
-    { name: "RentSpree", icon: FileText },
-    { name: "Reti", icon: Bot },
-    { name: "Revaluate", icon: BarChart3 },
-    { name: "Rhode Island Association of REALTORS®", icon: Building2 },
-    { name: "Roomvu", icon: Video },
-    { name: "SalesTalk", icon: MessageSquare },
-    { name: "Score Approve", icon: CheckCircle },
-    { name: "SEO Real Estate Experts", icon: Search },
-    { name: "SkySlope Forms", icon: FileText },
-    { name: "Spacio", icon: Home },
-    { name: "Summit VA Solutions", icon: Headphones },
-    { name: "The CE Shop", icon: GraduationCap },
-    { name: "The Share Group", icon: Users },
-    { name: "theRRD", icon: BarChart3 },
-    { name: "UtahRealEstate.com", icon: Home },
-    { name: "Virtuance", icon: Image },
-    { name: "Walled Garden", icon: Target },
-    { name: "WAVV", icon: Phone },
-    { name: "West Alabama MLS", icon: Database },
-    { name: "Wichita Falls Association of Realtors®", icon: Building2 },
-    { name: "Xpressdocs", icon: FileText },
-    { name: "Ylopo", icon: Megaphone },
-    { name: "Your Coaching Matters", icon: GraduationCap },
-    { name: "YourMLSSearch", icon: Search },
-    { name: "YouTube", icon: Play },
-    { name: "Zapier", icon: Zap },
-    { name: "zBuyer", icon: ShoppingCart },
-    { name: "Zenlist", icon: List },
-    { name: "Zillow", icon: Home },
+    { name: "AgentFire", domain: "agentfire.com" },
+    { name: "Altos Research", domain: "altosresearch.com" },
+    { name: "API Nation", domain: "apination.com" },
+    { name: "ARMLS", domain: "armls.com" },
+    { name: "AWS", domain: "aws.amazon.com" },
+    { name: "Behind Your Curtain", domain: "behindyourcurtain.com" },
+    { name: "Benutech", domain: "benutech.com" },
+    { name: "Bold Leads", domain: "boldleads.com" },
+    { name: "BombBomb", domain: "bombbomb.com" },
+    { name: "Brokermint", domain: "brokermint.com" },
+    { name: "Call Action", domain: "callaction.co" },
+    { name: "Callingly", domain: "callingly.com" },
+    { name: "Canopy MLS", domain: "canopymls.com" },
+    { name: "Cloud CMA", domain: "cloudcma.com" },
+    { name: "Cloud Streams", domain: "cloudstreams.net" },
+    { name: "Club Wealth", domain: "clubwealth.com" },
+    { name: "Cole Realty Resource", domain: "coleinformation.com" },
+    { name: "Constant Contact", domain: "constantcontact.com" },
+    { name: "Contra Costa Association of REALTORS®", domain: "ccar.net" },
+    { name: "Craig Proctor Success", domain: "craigproctor.com" },
+    { name: "CRM Rehab", domain: "crmrehab.com" },
+    { name: "CRMLS", domain: "crmls.org" },
+    { name: "Docusign", domain: "docusign.com" },
+    { name: "Dot Loop", domain: "dotloop.com" },
+    { name: "Dubb", domain: "dubb.com" },
+    { name: "Easy Agent Pro", domain: "easyagentpro.com" },
+    { name: "Express Copy", domain: "expresscopy.com" },
+    { name: "Facebook", domain: "facebook.com" },
+    { name: "Fast Forward Stories", domain: "fastforwardstories.com" },
+    { name: "Florida Realtors®", domain: "floridarealtors.org" },
+    { name: "Floyd Wickman Team", domain: "floydwickman.com" },
+    { name: "FMLS", domain: "fmls.com" },
+    { name: "Form Simplicity", domain: "formsimplicity.com" },
+    { name: "GAMLS", domain: "gamls.com" },
+    { name: "Georgia REALTORS®", domain: "garealtor.com" },
+    { name: "Global MLS, Inc.", domain: "globalmlx.com" },
+    { name: "Gmail Conversations", domain: "gmail.com" },
+    { name: "GoDaddy", domain: "godaddy.com" },
+    { name: "Google Ads", domain: "ads.google.com" },
+    { name: "Google Calendar", domain: "calendar.google.com" },
+    { name: "Google Chrome Extension", domain: "chrome.google.com" },
+    { name: "Google Contacts", domain: "contacts.google.com" },
+    { name: "GrizzlyLeads", domain: "grizzlyleads.com" },
+    { name: "Happy Grasshopper", domain: "happygrasshopper.com" },
+    { name: "Home Junction", domain: "homejunction.com" },
+    { name: "Homes.com", domain: "homes.com" },
+    { name: "HomeStack", domain: "homestack.com" },
+    { name: "Houston Association of Realtors®", domain: "har.com" },
+    { name: "IDX Broker", domain: "idxbroker.com" },
+    { name: "iFoundagent", domain: "ifoundagent.com" },
+    { name: "iList", domain: "ilistdata.com" },
+    { name: "Immoviewer", domain: "immoviewer.com" },
+    { name: "Jared James", domain: "jaredjamestoday.com" },
+    { name: "JMan Seminars", domain: "jmanseminars.com" },
+    { name: "Karen Coffey", domain: "karencoffey.com" },
+    { name: "Keeping Current Matters", domain: "keepingcurrentmatters.com" },
+    { name: "Lake Martin Area Association of Realtors®", domain: "lakemartinrealtors.com" },
+    { name: "LandVoice", domain: "landvoice.com" },
+    { name: "Lending Tree", domain: "lendingtree.com" },
+    { name: "Listings 2 Leads", domain: "listings2leads.com" },
+    { name: "Lone Wolf", domain: "lwolf.com" },
+    { name: "Lubbock Association of Realtors®", domain: "lubbockrealtors.com" },
+    { name: "Mailchimp", domain: "mailchimp.com" },
+    { name: "McKissock", domain: "mckissock.com" },
+    { name: "Midwest Real Estate Data", domain: "mredllc.com" },
+    { name: "Mojo", domain: "mojosells.com" },
+    { name: "My Computer Works", domain: "mycomputerworks.com" },
+    { name: "National Association of Real Estate Brokers", domain: "nareb.com" },
+    { name: "NC REALTORS®", domain: "ncrealtors.org" },
+    { name: "New York State Association of REALTORS®", domain: "nysar.com" },
+    { name: "NorthstarMLS", domain: "northstarmls.com" },
+    { name: "Oakley Signs & Graphics", domain: "oakleysign.com" },
+    { name: "Ohio REALTORS®", domain: "ohiorealtors.org" },
+    { name: "OneTap Connect", domain: "onetapconnect.com" },
+    { name: "Open House Wizard", domain: "openhousewizard.com" },
+    { name: "Open Houses Direct", domain: "openhousesdirect.com" },
+    { name: "PhoneBurner", domain: "phoneburner.com" },
+    { name: "Popl", domain: "popl.co" },
+    { name: "Postamo", domain: "postamo.com" },
+    { name: "Prime Seller Leads", domain: "primesellerleads.com" },
+    { name: "Productive AI", domain: "productiveai.com" },
+    { name: "Real Geeks", domain: "realgeeks.com" },
+    { name: "REDX Vortex®", domain: "theredx.com" },
+    { name: "Relitix", domain: "relitix.com" },
+    { name: "ReMarkiTable", domain: "remarkitable.com" },
+    { name: "REMBA", domain: "remba.com" },
+    { name: "RentSpree", domain: "rentspree.com" },
+    { name: "Reti", domain: "reti.us" },
+    { name: "Revaluate", domain: "revaluate.com" },
+    { name: "Rhode Island Association of REALTORS®", domain: "rirealtors.org" },
+    { name: "Roomvu", domain: "roomvu.com" },
+    { name: "SalesTalk", domain: "salestalk.ai" },
+    { name: "Score Approve", domain: "scoreapprove.com" },
+    { name: "SEO Real Estate Experts", domain: "seorealestateexperts.com" },
+    { name: "SkySlope Forms", domain: "skyslope.com" },
+    { name: "Spacio", domain: "spacio.com" },
+    { name: "Summit VA Solutions", domain: "summitvasolutions.com" },
+    { name: "The CE Shop", domain: "theceshop.com" },
+    { name: "The Share Group", domain: "thesharegroup.com" },
+    { name: "theRRD", domain: "therrd.com" },
+    { name: "UtahRealEstate.com", domain: "utahrealestate.com" },
+    { name: "Virtuance", domain: "virtuance.com" },
+    { name: "Walled Garden", domain: "walledgarden.com" },
+    { name: "WAVV", domain: "wavv.com" },
+    { name: "West Alabama MLS", domain: "wamls.com" },
+    { name: "Wichita Falls Association of Realtors®", domain: "wfar.org" },
+    { name: "Xpressdocs", domain: "xpressdocs.com" },
+    { name: "Ylopo", domain: "ylopo.com" },
+    { name: "Your Coaching Matters", domain: "yourcoachingmatters.com" },
+    { name: "YourMLSSearch", domain: "yourmlssearch.com" },
+    { name: "YouTube", domain: "youtube.com" },
+    { name: "Zapier", domain: "zapier.com" },
+    { name: "zBuyer", domain: "zbuyer.com" },
+    { name: "Zenlist", domain: "zenlist.com" },
+    { name: "Zillow", domain: "zillow.com" },
   ];
+
+  const handleLogoError = (domain: string) => {
+    setFailedLogos(prev => new Set(prev).add(domain));
+  };
+
+  const getLogoUrl = (domain: string) => {
+    return `https://logo.clearbit.com/${domain}`;
+  };
 
   return (
     <div className="min-h-screen">
@@ -231,17 +204,23 @@ const Integrations = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {partners.map((partner, index) => {
-              const IconComponent = partner.icon;
-              return (
-                <Card key={index} className="p-4 card-hover text-center flex flex-col items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <IconComponent className="w-5 h-5 text-primary" />
-                  </div>
-                  <h3 className="font-medium text-sm leading-tight">{partner.name}</h3>
-                </Card>
-              );
-            })}
+            {partners.map((partner, index) => (
+              <Card key={index} className="p-4 card-hover text-center flex flex-col items-center gap-3">
+                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
+                  {failedLogos.has(partner.domain) ? (
+                    <Building2 className="w-6 h-6 text-muted-foreground" />
+                  ) : (
+                    <img
+                      src={getLogoUrl(partner.domain)}
+                      alt={`${partner.name} logo`}
+                      className="w-10 h-10 object-contain"
+                      onError={() => handleLogoError(partner.domain)}
+                    />
+                  )}
+                </div>
+                <h3 className="font-medium text-sm leading-tight">{partner.name}</h3>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
