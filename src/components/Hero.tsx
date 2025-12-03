@@ -49,6 +49,13 @@ const Hero = () => {
           {/* Beta Badge and Canadian Badge */}
           
           
+          {/* Canada-First Badge */}
+          <div className="mb-4 animate-fade-in-up">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-semibold backdrop-blur-sm border border-accent/20">
+              🇨🇦 Canada-Only • CREA-Native • Bilingual AI
+            </span>
+          </div>
+
           {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 animate-fade-in-up animation-delay-100">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium backdrop-blur-sm">
