@@ -33,7 +33,6 @@ import {
 } from "lucide-react";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import TrustTransparencySection from "@/components/TrustTransparencySection";
-import TrustedBrandsSection from "@/components/TrustedBrandsSection";
 import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
 import demoShowcase from "@/assets/demo-showcase.jpg";
@@ -56,9 +55,6 @@ const Index = () => {
       
       {/* Hero Section */}
       <Hero />
-
-      {/* Trusted Brands Section */}
-      <TrustedBrandsSection />
 
       {/* Live Social Proof Bar - Mobile Optimized */}
       <section className="py-3 sm:py-4 bg-gradient-to-r from-accent/10 to-accent/5 border-y">
