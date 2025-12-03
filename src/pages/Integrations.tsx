@@ -10,15 +10,44 @@ import {
   Building2
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Partner {
   name: string;
   domain: string;
 }
 
+const PartnerLogo = ({ partner }: { partner: Partner }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  const logoUrl = `https://logo.clearbit.com/${partner.domain}`;
+
+  return (
+    <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden relative">
+      {isLoading && !hasError && (
+        <Skeleton className="absolute inset-0 w-full h-full animate-pulse" />
+      )}
+      {hasError ? (
+        <Building2 className="w-6 h-6 text-muted-foreground" />
+      ) : (
+        <img
+          src={logoUrl}
+          alt={`${partner.name} logo`}
+          className={`w-10 h-10 object-contain transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+          onLoad={() => setIsLoading(false)}
+          onError={() => {
+            setIsLoading(false);
+            setHasError(true);
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
 const Integrations = () => {
   const { t } = useTranslation();
-  const [failedLogos, setFailedLogos] = useState<Set<string>>(new Set());
   
   const partners: Partner[] = [
     { name: "AgentFire", domain: "agentfire.com" },
@@ -138,14 +167,6 @@ const Integrations = () => {
     { name: "Zillow", domain: "zillow.com" },
   ];
 
-  const handleLogoError = (domain: string) => {
-    setFailedLogos(prev => new Set(prev).add(domain));
-  };
-
-  const getLogoUrl = (domain: string) => {
-    return `https://logo.clearbit.com/${domain}`;
-  };
-
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -206,18 +227,7 @@ const Integrations = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {partners.map((partner, index) => (
               <Card key={index} className="p-4 card-hover text-center flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
-                  {failedLogos.has(partner.domain) ? (
-                    <Building2 className="w-6 h-6 text-muted-foreground" />
-                  ) : (
-                    <img
-                      src={getLogoUrl(partner.domain)}
-                      alt={`${partner.name} logo`}
-                      className="w-10 h-10 object-contain"
-                      onError={() => handleLogoError(partner.domain)}
-                    />
-                  )}
-                </div>
+                <PartnerLogo partner={partner} />
                 <h3 className="font-medium text-sm leading-tight">{partner.name}</h3>
               </Card>
             ))}
