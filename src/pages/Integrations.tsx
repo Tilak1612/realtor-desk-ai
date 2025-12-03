@@ -4,84 +4,130 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
-  FileText, 
-  Mail, 
-  MessageSquare, 
-  Calendar, 
-  Database,
-  Share2,
-  Smartphone,
   Globe,
-  CheckCircle,
-  Zap
+  CheckCircle
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Integrations = () => {
   const { t } = useTranslation();
-  const integrationCategories = [
-    {
-      title: "MLS & Real Estate Platforms",
-      icon: FileText,
-      integrations: [
-        { name: "CREA DDF®", description: "Native integration with Canadian MLS data", status: "Native" },
-        { name: "Realtor.ca", description: "Sync listings and lead capture", status: "Native" },
-        { name: "IDX Broker", description: "Website listing syndication", status: "Available" },
-        { name: "MLS®", description: "Provincial MLS board connections", status: "Available" },
-      ]
-    },
-    {
-      title: "Communication Tools",
-      icon: MessageSquare,
-      integrations: [
-        { name: "Gmail", description: "Email sync and automation", status: "Native" },
-        { name: "Outlook", description: "Microsoft email integration", status: "Native" },
-        { name: "Twilio SMS", description: "Text message automation", status: "Available" },
-        { name: "WhatsApp Business", description: "WhatsApp messaging", status: "Available" },
-        { name: "Slack", description: "Team notifications", status: "Available" },
-      ]
-    },
-    {
-      title: "Calendar & Scheduling",
-      icon: Calendar,
-      integrations: [
-        { name: "Google Calendar", description: "Sync showings and appointments", status: "Native" },
-        { name: "Microsoft Outlook Calendar", description: "Calendar synchronization", status: "Native" },
-        { name: "Calendly", description: "Automated scheduling", status: "Available" },
-        { name: "Acuity Scheduling", description: "Client booking system", status: "Available" },
-      ]
-    },
-    {
-      title: "Marketing & Social Media",
-      icon: Share2,
-      integrations: [
-        { name: "Facebook", description: "Lead ads and posting automation", status: "Native" },
-        { name: "Instagram", description: "Story and post scheduling", status: "Native" },
-        { name: "LinkedIn", description: "Professional networking posts", status: "Available" },
-        { name: "Mailchimp", description: "Email marketing campaigns", status: "Available" },
-        { name: "Canva", description: "Design templates and graphics", status: "Available" },
-      ]
-    },
-    {
-      title: "Transaction Management",
-      icon: Database,
-      integrations: [
-        { name: "DocuSign", description: "Electronic signatures", status: "Native" },
-        { name: "Dotloop", description: "Transaction coordination", status: "Available" },
-        { name: "SkySlope", description: "Compliance and forms", status: "Available" },
-        { name: "TransactionDesk", description: "Deal management", status: "Available" },
-      ]
-    },
-    {
-      title: "Productivity & Tools",
-      icon: Zap,
-      integrations: [
-        { name: "Zapier", description: "Connect 5,000+ apps", status: "Native" },
-        { name: "Google Drive", description: "Cloud storage and docs", status: "Native" },
-        { name: "Dropbox", description: "File sharing and storage", status: "Available" },
-        { name: "Zoom", description: "Virtual showings and meetings", status: "Available" },
-      ]
-    },
+  
+  const partners = [
+    "AgentFire",
+    "Altos Research",
+    "API Nation",
+    "ARMLS",
+    "AWS",
+    "Behind Your Curtain",
+    "Benutech",
+    "Bold Leads",
+    "BombBomb",
+    "Brokermint",
+    "Call Action",
+    "Callingly",
+    "Canopy MLS",
+    "Cloud CMA",
+    "Cloud Streams",
+    "Club Wealth",
+    "Cole Realty Resource",
+    "Constant Contact",
+    "Contra Costa Association of REALTORS®",
+    "Craig Proctor Success",
+    "CRM Rehab",
+    "CRMLS",
+    "Docusign",
+    "Dot Loop",
+    "Dubb",
+    "Easy Agent Pro",
+    "Express Copy",
+    "Facebook",
+    "Fast Forward Stories",
+    "Florida Realtors®",
+    "Floyd Wickman Team",
+    "FMLS",
+    "Form Simplicity",
+    "GAMLS",
+    "Georgia REALTORS®",
+    "Global MLS, Inc.",
+    "Gmail Conversations",
+    "GoDaddy",
+    "Google Ads",
+    "Google Calendar",
+    "Google Chrome Extension",
+    "Google Contacts",
+    "GrizzlyLeads",
+    "Happy Grasshopper",
+    "Home Junction",
+    "Homes.com",
+    "HomeStack",
+    "Houston Association of Realtors®",
+    "IDX Broker",
+    "iFoundagent",
+    "iList",
+    "Immoviewer",
+    "Jared James",
+    "JMan Seminars",
+    "Karen Coffey",
+    "Keeping Current Matters",
+    "Lake Martin Area Association of Realtors®",
+    "LandVoice",
+    "Lending Tree",
+    "Listings 2 Leads",
+    "Lone Wolf",
+    "Lubbock Association of Realtors®",
+    "Mailchimp",
+    "McKissock",
+    "Midwest Real Estate Data",
+    "Mojo",
+    "My Computer Works",
+    "National Association of Real Estate Brokers",
+    "NC REALTORS®",
+    "New York State Association of REALTORS®",
+    "NorthstarMLS",
+    "Oakley Signs & Graphics",
+    "Ohio REALTORS®",
+    "OneTap Connect",
+    "Open House Wizard",
+    "Open Houses Direct",
+    "PhoneBurner",
+    "Popl",
+    "Postamo",
+    "Prime Seller Leads",
+    "Productive AI",
+    "Real Geeks",
+    "REDX Vortex®",
+    "Relitix",
+    "ReMarkiTable",
+    "REMBA",
+    "RentSpree",
+    "Reti",
+    "Revaluate",
+    "Rhode Island Association of REALTORS®",
+    "Roomvu",
+    "SalesTalk",
+    "Score Approve",
+    "SEO Real Estate Experts",
+    "SkySlope Forms",
+    "Spacio",
+    "Summit VA Solutions",
+    "The CE Shop",
+    "The Share Group",
+    "theRRD",
+    "UtahRealEstate.com",
+    "Virtuance",
+    "Walled Garden",
+    "WAVV",
+    "West Alabama MLS",
+    "Wichita Falls Association of Realtors®",
+    "Xpressdocs",
+    "Ylopo",
+    "Your Coaching Matters",
+    "YourMLSSearch",
+    "YouTube",
+    "Zapier",
+    "zBuyer",
+    "Zenlist",
+    "Zillow",
   ];
 
   return (
@@ -117,7 +163,7 @@ const Integrations = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <div className="text-5xl font-bold gradient-text mb-2">50+</div>
+              <div className="text-5xl font-bold gradient-text mb-2">111+</div>
               <p className="text-muted-foreground">Native Integrations</p>
             </div>
             <div>
@@ -132,35 +178,20 @@ const Integrations = () => {
         </div>
       </section>
 
-      {/* Integrations Grid */}
+      {/* Partners Grid */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="space-y-16">
-            {integrationCategories.map((category, categoryIndex) => (
-              <div key={categoryIndex}>
-                <div className="flex items-center gap-3 mb-6">
-                  <category.icon className="w-8 h-8 text-primary" />
-                  <h2 className="text-2xl font-bold">{category.title}</h2>
-                </div>
-                
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {category.integrations.map((integration, index) => (
-                    <Card key={index} className="p-6 card-hover">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="font-bold text-lg">{integration.name}</h3>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          integration.status === 'Native' 
-                            ? 'bg-accent/10 text-accent font-semibold' 
-                            : 'bg-muted text-muted-foreground'
-                        }`}>
-                          {integration.status}
-                        </span>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{integration.description}</p>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Integration Partners</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Connect with {partners.length}+ industry-leading tools and platforms
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {partners.map((partner, index) => (
+              <Card key={index} className="p-4 card-hover text-center">
+                <h3 className="font-medium text-sm">{partner}</h3>
+              </Card>
             ))}
           </div>
         </div>
