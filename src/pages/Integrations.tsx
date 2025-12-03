@@ -5,130 +5,87 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
   Globe,
-  CheckCircle
+  CheckCircle,
+  Users,
+  Zap,
+  MessageSquare,
+  Calendar,
+  Contact
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
+interface Integration {
+  name: string;
+  subtitle: string;
+  logo: string;
+}
+
+interface IntegrationCategory {
+  title: string;
+  icon: React.ReactNode;
+  integrations: Integration[];
+}
 
 const Integrations = () => {
   const { t } = useTranslation();
   
-  const partners = [
-    "AgentFire",
-    "Altos Research",
-    "API Nation",
-    "ARMLS",
-    "AWS",
-    "Behind Your Curtain",
-    "Benutech",
-    "Bold Leads",
-    "BombBomb",
-    "Brokermint",
-    "Call Action",
-    "Callingly",
-    "Canopy MLS",
-    "Cloud CMA",
-    "Cloud Streams",
-    "Club Wealth",
-    "Cole Realty Resource",
-    "Constant Contact",
-    "Contra Costa Association of REALTORS®",
-    "Craig Proctor Success",
-    "CRM Rehab",
-    "CRMLS",
-    "Docusign",
-    "Dot Loop",
-    "Dubb",
-    "Easy Agent Pro",
-    "Express Copy",
-    "Facebook",
-    "Fast Forward Stories",
-    "Florida Realtors®",
-    "Floyd Wickman Team",
-    "FMLS",
-    "Form Simplicity",
-    "GAMLS",
-    "Georgia REALTORS®",
-    "Global MLS, Inc.",
-    "Gmail Conversations",
-    "GoDaddy",
-    "Google Ads",
-    "Google Calendar",
-    "Google Chrome Extension",
-    "Google Contacts",
-    "GrizzlyLeads",
-    "Happy Grasshopper",
-    "Home Junction",
-    "Homes.com",
-    "HomeStack",
-    "Houston Association of Realtors®",
-    "IDX Broker",
-    "iFoundagent",
-    "iList",
-    "Immoviewer",
-    "Jared James",
-    "JMan Seminars",
-    "Karen Coffey",
-    "Keeping Current Matters",
-    "Lake Martin Area Association of Realtors®",
-    "LandVoice",
-    "Lending Tree",
-    "Listings 2 Leads",
-    "Lone Wolf",
-    "Lubbock Association of Realtors®",
-    "Mailchimp",
-    "McKissock",
-    "Midwest Real Estate Data",
-    "Mojo",
-    "My Computer Works",
-    "National Association of Real Estate Brokers",
-    "NC REALTORS®",
-    "New York State Association of REALTORS®",
-    "NorthstarMLS",
-    "Oakley Signs & Graphics",
-    "Ohio REALTORS®",
-    "OneTap Connect",
-    "Open House Wizard",
-    "Open Houses Direct",
-    "PhoneBurner",
-    "Popl",
-    "Postamo",
-    "Prime Seller Leads",
-    "Productive AI",
-    "Real Geeks",
-    "REDX Vortex®",
-    "Relitix",
-    "ReMarkiTable",
-    "REMBA",
-    "RentSpree",
-    "Reti",
-    "Revaluate",
-    "Rhode Island Association of REALTORS®",
-    "Roomvu",
-    "SalesTalk",
-    "Score Approve",
-    "SEO Real Estate Experts",
-    "SkySlope Forms",
-    "Spacio",
-    "Summit VA Solutions",
-    "The CE Shop",
-    "The Share Group",
-    "theRRD",
-    "UtahRealEstate.com",
-    "Virtuance",
-    "Walled Garden",
-    "WAVV",
-    "West Alabama MLS",
-    "Wichita Falls Association of Realtors®",
-    "Xpressdocs",
-    "Ylopo",
-    "Your Coaching Matters",
-    "YourMLSSearch",
-    "YouTube",
-    "Zapier",
-    "zBuyer",
-    "Zenlist",
-    "Zillow",
+  const categories: IntegrationCategory[] = [
+    {
+      title: "CRM Platforms",
+      icon: <Users className="w-5 h-5" />,
+      integrations: [
+        { name: "HubSpot", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg" },
+        { name: "Salesforce", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" },
+        { name: "Zoho CRM", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/zoho-1.svg" },
+        { name: "Pipedrive", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/pipedrive-1.svg" },
+        { name: "Freshsales", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/freshworks-icon.svg" },
+        { name: "Microsoft Dynamics", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-dynamics-2.svg" },
+        { name: "Keap", subtitle: "Via Zapier/Make", logo: "https://cdn.worldvectorlogo.com/logos/keap-1.svg" },
+        { name: "Agile CRM", subtitle: "Via Zapier/Make", logo: "https://cdn.worldvectorlogo.com/logos/agile-crm.svg" },
+        { name: "Close CRM", subtitle: "Via Zapier/Make", logo: "https://cdn.worldvectorlogo.com/logos/close-io.svg" },
+        { name: "Nutshell", subtitle: "Via Zapier/Make", logo: "https://cdn.worldvectorlogo.com/logos/nutshell.svg" },
+      ]
+    },
+    {
+      title: "Automation & Workflow Tools",
+      icon: <Zap className="w-5 h-5" />,
+      integrations: [
+        { name: "Zapier", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/zapier.svg" },
+        { name: "Make", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/make-horizontal.svg" },
+        { name: "n8n", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/n8n.svg" },
+        { name: "IFTTT", subtitle: "Via Zapier/Make", logo: "https://cdn.worldvectorlogo.com/logos/ifttt.svg" },
+      ]
+    },
+    {
+      title: "Communication Tools",
+      icon: <MessageSquare className="w-5 h-5" />,
+      integrations: [
+        { name: "Twilio", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/twilio-2.svg" },
+        { name: "WhatsApp Cloud API", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/whatsapp-2.svg" },
+        { name: "Email SMTP Providers", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/email-icon.svg" },
+      ]
+    },
+    {
+      title: "Calendar Tools",
+      icon: <Calendar className="w-5 h-5" />,
+      integrations: [
+        { name: "Google Calendar", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/google-calendar-2020.svg" },
+        { name: "Outlook Calendar", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/outlook-1.svg" },
+      ]
+    },
+    {
+      title: "Contact & Lead Tools",
+      icon: <Contact className="w-5 h-5" />,
+      integrations: [
+        { name: "Google Contacts", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/google-contacts.svg" },
+        { name: "Microsoft Contacts", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-icon.svg" },
+        { name: "LinkedIn Lead Gen Forms", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg" },
+        { name: "Facebook Lead Ads", subtitle: "Native integration", logo: "https://cdn.worldvectorlogo.com/logos/facebook-icon.svg" },
+      ]
+    },
   ];
+
+  const totalIntegrations = categories.reduce((acc, cat) => acc + cat.integrations.length, 0);
 
   return (
     <div className="min-h-screen">
@@ -163,7 +120,7 @@ const Integrations = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <div className="text-5xl font-bold gradient-text mb-2">111+</div>
+              <div className="text-5xl font-bold gradient-text mb-2">{totalIntegrations}+</div>
               <p className="text-muted-foreground">Native Integrations</p>
             </div>
             <div>
@@ -178,20 +135,53 @@ const Integrations = () => {
         </div>
       </section>
 
-      {/* Partners Grid */}
+      {/* Categorized Integrations Grid */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Integration Partners</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Connect with {partners.length}+ industry-leading tools and platforms
+              Connect with {totalIntegrations}+ industry-leading tools and platforms
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {partners.map((partner, index) => (
-              <Card key={index} className="p-4 card-hover text-center">
-                <h3 className="font-medium text-sm">{partner}</h3>
-              </Card>
+          
+          <div className="space-y-12">
+            {categories.map((category, categoryIndex) => (
+              <div key={categoryIndex}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold">{category.title}</h3>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {category.integrations.map((integration, index) => (
+                    <Card 
+                      key={index} 
+                      className="p-4 card-hover flex flex-col items-center text-center group focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                      tabIndex={0}
+                    >
+                      <div className="w-12 h-12 mb-3 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-300">
+                        <img 
+                          src={integration.logo} 
+                          alt={`${integration.name} logo`}
+                          className="max-w-full max-h-full object-contain"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent) {
+                              parent.innerHTML = `<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-bold text-lg">${integration.name.charAt(0)}</div>`;
+                            }
+                          }}
+                        />
+                      </div>
+                      <h4 className="font-medium text-sm mb-1">{integration.name}</h4>
+                      <p className="text-xs text-muted-foreground">{integration.subtitle}</p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
