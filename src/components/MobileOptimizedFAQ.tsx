@@ -70,35 +70,40 @@ const MobileOptimizedFAQ = ({ searchQuery = "" }: MobileOptimizedFAQProps) => {
     : faqs;
 
   return (
-    <section className="section-padding bg-muted">
-      <div className="container-custom max-w-4xl">
+    <section className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 bg-muted">
+      <div className="container-custom px-4 sm:px-6 lg:px-8 max-w-4xl">
         {!searchQuery && (
-          <div className="text-center mb-8 sm:mb-12 animate-fade-in-up">
-            <h2 className="mb-3 sm:mb-4">{t('faq.title')}</h2>
+          <div className="text-center mb-6 sm:mb-8 md:mb-12 animate-fade-in-up">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4">
+              {t('faq.title')}
+            </h1>
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Find answers to common questions about Realtor Desk AI
+            </p>
           </div>
         )}
         
         {filteredFaqs.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">
+          <div className="text-center py-8 sm:py-12">
+            <p className="text-sm sm:text-base text-muted-foreground">
               No FAQs found matching your search. Try different keywords.
             </p>
           </div>
         ) : (
-          <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
+          <Accordion type="single" collapsible className="space-y-2 sm:space-y-3 md:space-y-4">
             {filteredFaqs.map((faq, idx) => (
             <AccordionItem 
               key={idx} 
               value={`item-${idx}`}
-              className="bg-background rounded-lg px-4 sm:px-6 border shadow-sm"
+              className="bg-background rounded-lg px-3 sm:px-4 md:px-6 border shadow-sm"
             >
-              <AccordionTrigger className="text-left py-4 sm:py-5 hover:no-underline">
+              <AccordionTrigger className="text-left py-3 sm:py-4 md:py-5 hover:no-underline">
                 <div className="flex items-start gap-2 sm:gap-3 pr-2">
-                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0 mt-0.5 sm:mt-1" />
-                  <span className="font-semibold text-sm sm:text-base">{faq.q}</span>
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="font-semibold text-sm sm:text-base md:text-lg leading-snug">{faq.q}</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm text-muted-foreground leading-relaxed pb-4 sm:pb-5 pl-7 sm:pl-8">
+              <AccordionContent className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed pb-3 sm:pb-4 md:pb-5 pl-6 sm:pl-7 md:pl-8">
                 {faq.a}
               </AccordionContent>
             </AccordionItem>
