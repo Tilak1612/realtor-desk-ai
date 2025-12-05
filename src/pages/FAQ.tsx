@@ -7,21 +7,13 @@ import Footer from "@/components/Footer";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 const FAQ = () => {
-  const { t } = useTranslation();
+  const {
+    t
+  } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navbar />
       
       {/* Hero Section */}
@@ -30,43 +22,12 @@ const FAQ = () => {
           {/* Breadcrumb Navigation */}
           <div className="mb-6 sm:mb-8">
             <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/">Home</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <ChevronRight className="h-4 w-4" />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>FAQ</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
+              
             </Breadcrumb>
           </div>
 
           {/* Page Header */}
-          <div className="text-center mb-8 sm:mb-12 max-w-3xl mx-auto animate-fade-in-up">
-            <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold">
-              {t('faq.title')}
-            </h1>
-            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
-              Find answers to common questions about RealtorDesk AI
-            </p>
-            
-            {/* Search Bar */}
-            <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search for answers..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-12"
-              />
-            </div>
-          </div>
+          
         </div>
       </section>
 
@@ -103,8 +64,6 @@ const FAQ = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default FAQ;
