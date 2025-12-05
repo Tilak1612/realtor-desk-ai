@@ -50,20 +50,7 @@ const Hero = () => {
           
           
           {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 animate-fade-in-up animation-delay-100">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium backdrop-blur-sm">
-              <CheckCircle className="w-3 h-3 flex-shrink-0" />
-              <span className="whitespace-nowrap">{t('hero.badge1')}</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium backdrop-blur-sm">
-              <CheckCircle className="w-3 h-3 flex-shrink-0" />
-              <span className="whitespace-nowrap">{t('hero.badge2')}</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium backdrop-blur-sm">
-              <CheckCircle className="w-3 h-3 flex-shrink-0" />
-              <span className="whitespace-nowrap">{t('hero.badge3')}</span>
-            </span>
-          </div>
+          
 
           {/* Main Title */}
           <h1 className="mb-4 sm:mb-6 leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-r from-[hsl(122_39%_49%)] via-[hsl(0_0%_85%)] to-[hsl(0_0%_35%)] bg-clip-text text-transparent">
