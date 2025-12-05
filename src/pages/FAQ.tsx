@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Search, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 const FAQ = () => {
   const {
     t
@@ -16,21 +13,6 @@ const FAQ = () => {
   return <div className="min-h-screen">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
-        <div className="container-custom">
-          {/* Breadcrumb Navigation */}
-          <div className="mb-6 sm:mb-8">
-            <Breadcrumb>
-              
-            </Breadcrumb>
-          </div>
-
-          {/* Page Header */}
-          
-        </div>
-      </section>
-
       {/* FAQ Content */}
       <MobileOptimizedFAQ searchQuery={searchQuery} />
 
