@@ -72,10 +72,7 @@ const Signup = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    console.log("Form data:", formData);
-    
     if (!validateForm()) {
-      console.log("Validation failed");
       return;
     }
 
