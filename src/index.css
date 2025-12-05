@@ -384,6 +384,46 @@
   animation-play-state: paused;
 }
 
+/* Audio Wave Animation */
+@keyframes audio-wave {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleY(1.5);
+    opacity: 1;
+  }
+}
+
+.animate-audio-wave {
+  animation: audio-wave 1s ease-in-out infinite;
+}
+
+/* Float Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glass Panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
