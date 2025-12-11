@@ -171,7 +171,11 @@ const Integrations = () => {
                             target.style.display = 'none';
                             const parent = target.parentElement;
                             if (parent) {
-                              parent.innerHTML = `<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-bold text-lg">${integration.name.charAt(0)}</div>`;
+                              // Use safe DOM manipulation instead of innerHTML to prevent XSS
+                              const fallback = document.createElement('div');
+                              fallback.className = 'w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-bold text-lg';
+                              fallback.textContent = integration.name.charAt(0);
+                              parent.appendChild(fallback);
                             }
                           }}
                         />
