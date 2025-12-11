@@ -7,6 +7,11 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
+// UUID validation regex
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const isValidUUID = (id: string): boolean => UUID_REGEX.test(id);
+
 interface WelcomeEmailRequest {
   userId: string;
 }
@@ -22,7 +27,42 @@ const handler = async (req: Request): Promise<Response> => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    const { userId }: WelcomeEmailRequest = await req.json();
+    // Parse and validate input
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const { userId }: WelcomeEmailRequest = body;
+
+    // Validate userId
+    if (!userId || typeof userId !== "string") {
+      return new Response(
+        JSON.stringify({ error: "User ID is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!isValidUUID(userId)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid user ID format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
     // Fetch user profile
     const { data: profile, error: profileError } = await supabaseClient
@@ -31,14 +71,18 @@ const handler = async (req: Request): Promise<Response> => {
       .eq("id", userId)
       .single();
 
-    if (profileError) throw profileError;
+    if (profileError || !profile) {
+      console.error("Profile lookup failed:", profileError?.message);
+      return new Response(
+        JSON.stringify({ error: "User not found" }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
-    console.log("Welcome email would be sent to:", profile.email);
-    console.log("User details:", {
-      name: profile.full_name,
-      company: profile.company_name,
-      trial_ends: profile.trial_ends_at,
-    });
+    console.log("Welcome email would be sent to user");
 
     // In production, you would send the actual email here using Resend or similar
     // Example:
@@ -57,12 +101,21 @@ const handler = async (req: Request): Promise<Response> => {
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-  } catch (error: any) {
-    console.error("Error in send-welcome-email function:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+  } catch (error) {
+    // Log full error details server-side only
+    console.error("Error in send-welcome-email function:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
     });
+    
+    // Return generic error message to client
+    return new Response(
+      JSON.stringify({ error: "An error occurred processing your request" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      }
+    );
   }
 };
 

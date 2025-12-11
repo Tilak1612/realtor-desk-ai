@@ -6,9 +6,26 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const logStep = (step: string, details?: any) => {
+// UUID validation regex
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const isValidUUID = (id: string): boolean => UUID_REGEX.test(id);
+
+const logStep = (step: string, details?: Record<string, unknown>) => {
   const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
   console.log(`[CLAUDE-CHAT] ${step}${detailsStr}`);
+};
+
+// Validate message structure
+const isValidMessage = (msg: unknown): msg is { role: string; content: string } => {
+  if (typeof msg !== "object" || msg === null) return false;
+  const m = msg as Record<string, unknown>;
+  return (
+    typeof m.role === "string" &&
+    ["user", "assistant", "system"].includes(m.role) &&
+    typeof m.content === "string" &&
+    m.content.length <= 50000 // Max 50k chars per message
+  );
 };
 
 serve(async (req) => {
@@ -20,7 +37,16 @@ serve(async (req) => {
     logStep("Function started");
 
     const lovableApiKey = Deno.env.get("LOVABLE_API_KEY");
-    if (!lovableApiKey) throw new Error("LOVABLE_API_KEY is not set");
+    if (!lovableApiKey) {
+      console.error("LOVABLE_API_KEY is not configured");
+      return new Response(
+        JSON.stringify({ error: "Service configuration error" }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
 
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -29,16 +55,84 @@ serve(async (req) => {
     );
 
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header provided");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "No authorization header" }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
 
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
+    if (userError || !userData.user?.email) {
+      console.error("Authentication failed:", userError?.message);
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
     const user = userData.user;
-    if (!user?.email) throw new Error("User not authenticated");
     logStep("User authenticated", { userId: user.id });
 
-    const { messages, conversationId } = await req.json();
+    // Parse and validate input
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const { messages, conversationId } = body;
+
+    // Validate messages array
+    if (!Array.isArray(messages) || messages.length === 0 || messages.length > 100) {
+      return new Response(
+        JSON.stringify({ error: "Invalid messages format" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // Validate each message
+    for (const msg of messages) {
+      if (!isValidMessage(msg)) {
+        return new Response(
+          JSON.stringify({ error: "Invalid message structure" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+
+    // Validate conversationId if provided
+    if (conversationId !== undefined && conversationId !== null) {
+      if (typeof conversationId !== "string" || !isValidUUID(conversationId)) {
+        return new Response(
+          JSON.stringify({ error: "Invalid conversation ID format" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+
     logStep("Received messages", { messageCount: messages.length, conversationId });
 
     // Fetch user context
@@ -112,15 +206,34 @@ Be helpful, professional, and real-estate focused. Provide actionable advice and
 
     if (!response.ok) {
       const errorText = await response.text();
-      logStep("AI API error", { status: response.status, error: errorText });
+      logStep("AI API error", { status: response.status });
       
       if (response.status === 429) {
-        throw new Error("Rate limit exceeded. Please try again later.");
+        return new Response(
+          JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
+          {
+            status: 429,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
       }
       if (response.status === 402) {
-        throw new Error("Payment required. Please add credits to your Lovable AI workspace.");
+        return new Response(
+          JSON.stringify({ error: "AI credits depleted. Please add credits to continue." }),
+          {
+            status: 402,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
       }
-      throw new Error(`AI API error: ${response.status}`);
+      console.error("AI API error details:", errorText);
+      return new Response(
+        JSON.stringify({ error: "AI service temporarily unavailable" }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
     }
 
     const data = await response.json();
@@ -133,21 +246,25 @@ Be helpful, professional, and real-estate focused. Provide actionable advice and
         .from('ai_conversations')
         .select('messages')
         .eq('id', conversationId)
+        .eq('user_id', user.id) // Verify ownership
         .single();
 
-      const updatedMessages = [
-        ...(conversation?.messages || []),
-        ...messages,
-        { role: 'assistant', content: assistantMessage }
-      ];
+      if (conversation) {
+        const updatedMessages = [
+          ...(conversation?.messages || []),
+          ...messages,
+          { role: 'assistant', content: assistantMessage }
+        ];
 
-      await supabaseClient
-        .from('ai_conversations')
-        .update({ 
-          messages: updatedMessages,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', conversationId);
+        await supabaseClient
+          .from('ai_conversations')
+          .update({ 
+            messages: updatedMessages,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', conversationId)
+          .eq('user_id', user.id);
+      }
     } else {
       // Create new conversation
       const title = messages[0]?.content?.substring(0, 50) || 'New Chat';
@@ -165,11 +282,19 @@ Be helpful, professional, and real-estate focused. Provide actionable advice and
       status: 200,
     });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    logStep("ERROR", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+    // Log full error details server-side only
+    console.error("[CLAUDE-CHAT] ERROR:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
     });
+    
+    // Return generic error message to client
+    return new Response(
+      JSON.stringify({ error: "An error occurred processing your request" }),
+      {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      }
+    );
   }
 });

@@ -6,6 +6,11 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// UUID validation regex
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const isValidUUID = (id: string): boolean => UUID_REGEX.test(id);
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -49,8 +54,21 @@ serve(async (req) => {
     const userId = userData.user.id;
     console.log("Authenticated user:", userId);
 
-    const { contact_id } = await req.json();
-    console.log("Calculating lead score for contact:", contact_id);
+    // Parse and validate input
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const { contact_id } = body;
 
     if (!contact_id) {
       return new Response(
@@ -61,6 +79,19 @@ serve(async (req) => {
         }
       );
     }
+
+    // Validate UUID format
+    if (typeof contact_id !== "string" || !isValidUUID(contact_id)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid contact_id format" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    console.log("Calculating lead score for contact:", contact_id);
 
     // Create service role client for database operations
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -333,10 +364,15 @@ serve(async (req) => {
       }
     );
   } catch (error) {
-    console.error("Error calculating lead score:", error);
-    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+    // Log full error details server-side only
+    console.error("Error calculating lead score:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    
+    // Return generic error message to client
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: "An error occurred processing your request" }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
