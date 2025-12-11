@@ -25,6 +25,38 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // ============ AUTHENTICATION CHECK ============
+    const supabaseAuth = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    );
+
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
+    
+    if (authError || !user) {
+      console.error("Authentication failed:", authError?.message);
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+    // ============ END AUTHENTICATION CHECK ============
+
     // Parse and validate input
     let body;
     try {
@@ -67,17 +99,18 @@ const handler = async (req: Request): Promise<Response> => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    // Get contact details
+    // Get contact details - verify ownership
     const { data: contact, error: contactError } = await supabase
       .from("contacts")
       .select("*")
       .eq("id", contactId)
+      .eq("user_id", user.id) // Only allow access to user's own contacts
       .single();
 
     if (contactError || !contact) {
       console.error("Contact lookup failed:", contactError?.message);
       return new Response(
-        JSON.stringify({ error: "Contact not found" }),
+        JSON.stringify({ error: "Contact not found or unauthorized" }),
         {
           status: 404,
           headers: { "Content-Type": "application/json", ...corsHeaders },

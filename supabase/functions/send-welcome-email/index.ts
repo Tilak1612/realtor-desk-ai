@@ -22,6 +22,38 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // ============ AUTHENTICATION CHECK ============
+    const supabaseAuth = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    );
+
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
+    
+    if (authError || !user) {
+      console.error("Authentication failed:", authError?.message);
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+    // ============ END AUTHENTICATION CHECK ============
+
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
@@ -59,6 +91,17 @@ const handler = async (req: Request): Promise<Response> => {
         JSON.stringify({ error: "Invalid user ID format" }),
         {
           status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Security: Users can only send welcome email to themselves
+    if (userId !== user.id) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized - can only send welcome email for your own account" }),
+        {
+          status: 403,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         }
       );
