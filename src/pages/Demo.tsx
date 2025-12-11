@@ -44,6 +44,15 @@ const Demo = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // SEO: Update document title and meta for demo page
+  if (typeof document !== 'undefined') {
+    document.title = "Free Demo | Best CRM for Real Estate Agents | AI Lead Generation Software";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Book a free demo of the best CRM for real estate agents. See AI lead generation software, virtual tour integration, and real estate video marketing tools in action. 14-day free trial.');
+    }
+  }
+
   const form = useForm<DemoFormValues>({
     resolver: zodResolver(demoFormSchema),
     defaultValues: {
@@ -246,10 +255,13 @@ const Demo = () => {
                             </FormControl>
                             <SelectContent>
                               <SelectItem value="none">None</SelectItem>
+                              <SelectItem value="boldtrail">BoldTrail</SelectItem>
+                              <SelectItem value="lofty">Lofty</SelectItem>
                               <SelectItem value="followupboss">Follow Up Boss</SelectItem>
                               <SelectItem value="liondesk">LionDesk</SelectItem>
                               <SelectItem value="wiseagent">Wise Agent</SelectItem>
                               <SelectItem value="ixact">IXACT Contact</SelectItem>
+                              <SelectItem value="kvcore">kvCORE</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>

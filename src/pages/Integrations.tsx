@@ -28,6 +28,15 @@ interface IntegrationCategory {
 
 const Integrations = () => {
   const { t } = useTranslation();
+
+  // SEO: Update document title and meta for integrations page
+  if (typeof document !== 'undefined') {
+    document.title = "Real Estate CRM Integrations | Virtual Tour Platforms | RealtorDesk AI";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Integrate with virtual tour platforms, real estate website builders, video marketing tools, and top CRMs. Best integrations for real estate agents. CREA DDF® native.');
+    }
+  }
   
   const categories: IntegrationCategory[] = [
     {

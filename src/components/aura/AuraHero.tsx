@@ -39,17 +39,17 @@ const AuraHero = () => {
                 {t('hero.badge', '14-Day Free Trial')}
               </div>
 
-              {/* Main Title */}
+              {/* Main Title - SEO Optimized */}
               <h1 className="lg:text-7xl leading-[1.05] text-4xl sm:text-5xl mb-8 tracking-tighter text-white">
-                {t('hero.titlePart1', 'Transform Your')}{' '}
-                <span className="text-muted-foreground">{t('hero.titlePart2', 'Real Estate')}</span>{' '}
+                {t('hero.titlePart1', 'Best CRM for')}{' '}
+                <span className="text-muted-foreground">{t('hero.titlePart2', 'Real Estate Agents')}</span>{' '}
                 {t('hero.titlePart3', 'With')}{' '}
-                <span className="gradient-text">{t('hero.titlePart4', 'AI Power')}</span>
+                <span className="gradient-text">{t('hero.titlePart4', 'AI Tools')}</span>
               </h1>
 
-              {/* Subtitle */}
+              {/* Subtitle - Keyword Rich */}
               <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-lg font-light">
-                {t('hero.subtitle')}
+                {t('hero.subtitle', 'AI-powered real estate lead generation software with 24/7 chatbot, virtual tour integration, and video marketing tools. Built for Canadian Realtors.')}
               </p>
 
               {/* CTA Buttons */}

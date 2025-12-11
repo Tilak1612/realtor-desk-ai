@@ -13,6 +13,15 @@ const Pricing = () => {
   const { t } = useTranslation();
   const [isYearly, setIsYearly] = useState(false); // Default to monthly
 
+  // SEO: Update document title and meta for pricing page
+  if (typeof document !== 'undefined') {
+    document.title = "Real Estate CRM Pricing | Best CRM for Real Estate Agents | Save 85% vs BoldTrail";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Best CRM for real estate agents pricing: $149/month or $999/year. Save 85% vs BoldTrail, 45% vs Lofty. AI lead generation software, 24/7 chatbot included. 14-day free trial.');
+    }
+  }
+
   const pricingData = {
     agent: {
       monthly: 149,
