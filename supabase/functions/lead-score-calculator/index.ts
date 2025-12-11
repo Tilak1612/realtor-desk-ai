@@ -6,6 +6,11 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// UUID validation regex
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const isValidUUID = (id: string): boolean => UUID_REGEX.test(id);
+
 interface LeadScoreFactors {
   engagement: number; // 0-30
   recency: number; // 0-20
@@ -20,7 +25,42 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { contactId } = await req.json();
+    // Parse and validate input
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const { contactId } = body;
+
+    // Validate contactId
+    if (!contactId || typeof contactId !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Contact ID is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!isValidUUID(contactId)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid contact ID format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -35,7 +75,14 @@ const handler = async (req: Request): Promise<Response> => {
       .single();
 
     if (contactError || !contact) {
-      throw new Error("Contact not found");
+      console.error("Contact lookup failed:", contactError?.message);
+      return new Response(
+        JSON.stringify({ error: "Contact not found" }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     // Calculate lead score factors
@@ -173,10 +220,16 @@ const handler = async (req: Request): Promise<Response> => {
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-  } catch (error: any) {
-    console.error("Error in lead-score-calculator function:", error);
+  } catch (error) {
+    // Log full error details server-side only
+    console.error("Error in lead-score-calculator function:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    
+    // Return generic error message to client
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An error occurred processing your request" }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },

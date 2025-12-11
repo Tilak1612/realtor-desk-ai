@@ -6,10 +6,23 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// UUID validation regex
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const isValidUUID = (id: string): boolean => UUID_REGEX.test(id);
+
+// Valid email campaign types
+const VALID_CAMPAIGN_TYPES = ["welcome", "nurture", "follow_up", "property_alert"] as const;
+type CampaignType = typeof VALID_CAMPAIGN_TYPES[number];
+
+const isValidCampaignType = (type: string): type is CampaignType => {
+  return VALID_CAMPAIGN_TYPES.includes(type as CampaignType);
+};
+
 interface EmailCampaign {
   contactId: string;
-  type: "welcome" | "nurture" | "follow_up" | "property_alert";
-  delay?: number; // Days to delay
+  type: CampaignType;
+  delay?: number; // Days to delay (0-365)
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -18,7 +31,75 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { contactId, type, delay = 0 }: EmailCampaign = await req.json();
+    // Parse and validate input
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const { contactId, type, delay = 0 } = body;
+
+    // Validate contactId
+    if (!contactId || typeof contactId !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Contact ID is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!isValidUUID(contactId)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid contact ID format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Validate type
+    if (!type || typeof type !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Campaign type is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!isValidCampaignType(type)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid campaign type" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Validate delay (must be a number between 0 and 365)
+    const parsedDelay = typeof delay === "number" ? delay : parseInt(delay, 10);
+    if (isNaN(parsedDelay) || parsedDelay < 0 || parsedDelay > 365) {
+      return new Response(
+        JSON.stringify({ error: "Delay must be between 0 and 365 days" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -33,7 +114,14 @@ const handler = async (req: Request): Promise<Response> => {
       .single();
 
     if (contactError || !contact) {
-      throw new Error("Contact not found");
+      console.error("Contact lookup failed:", contactError?.message);
+      return new Response(
+        JSON.stringify({ error: "Contact not found" }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     // Email templates based on campaign type
@@ -97,19 +185,32 @@ const handler = async (req: Request): Promise<Response> => {
     const template = templates[type];
 
     // Schedule or send immediately
-    if (delay > 0) {
+    if (parsedDelay > 0) {
       // Log scheduled email
       await supabase.from("scheduled_emails").insert({
         contact_id: contactId,
         type,
-        scheduled_for: new Date(Date.now() + delay * 24 * 60 * 60 * 1000).toISOString(),
+        scheduled_for: new Date(Date.now() + parsedDelay * 24 * 60 * 60 * 1000).toISOString(),
         status: "scheduled",
       });
 
       return new Response(
-        JSON.stringify({ success: true, message: "Email scheduled", delay }),
+        JSON.stringify({ success: true, message: "Email scheduled", delay: parsedDelay }),
         {
           status: 200,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Check for HubSpot API key
+    const hubspotApiKey = Deno.env.get("HUBSPOT_API_KEY");
+    if (!hubspotApiKey) {
+      console.error("HUBSPOT_API_KEY is not configured");
+      return new Response(
+        JSON.stringify({ error: "Email service configuration error" }),
+        {
+          status: 500,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         }
       );
@@ -119,7 +220,7 @@ const handler = async (req: Request): Promise<Response> => {
     const hubspotResponse = await fetch("https://api.hubapi.com/marketing/v3/transactional/single-email/send", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${Deno.env.get("HUBSPOT_API_KEY")}`,
+        "Authorization": `Bearer ${hubspotApiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -135,8 +236,14 @@ const handler = async (req: Request): Promise<Response> => {
 
     if (!hubspotResponse.ok) {
       const errorText = await hubspotResponse.text();
-      console.error("HubSpot API error response:", errorText);
-      throw new Error(`HubSpot API error: ${errorText}`);
+      console.error("Email service error:", hubspotResponse.status, errorText);
+      return new Response(
+        JSON.stringify({ error: "Failed to send email" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     const emailData = await hubspotResponse.json();
@@ -149,24 +256,29 @@ const handler = async (req: Request): Promise<Response> => {
       status: "sent",
     });
 
-    console.log("Email sent successfully via HubSpot:", emailData);
+    console.log("Email sent successfully");
 
     return new Response(
       JSON.stringify({ 
         success: true, 
         action: "sent", 
         emailId: emailData.id || emailData.statusId || "sent",
-        hubspotResponse: emailData 
       }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-  } catch (error: any) {
-    console.error("Error in email-automation function:", error);
+  } catch (error) {
+    // Log full error details server-side only
+    console.error("Error in email-automation function:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    
+    // Return generic error message to client
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An error occurred processing your request" }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },

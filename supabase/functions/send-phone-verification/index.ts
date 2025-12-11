@@ -5,6 +5,14 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Phone number validation (E.164 format)
+const PHONE_REGEX = /^\+[1-9]\d{1,14}$/;
+
+const isValidPhone = (phone: string): boolean => PHONE_REGEX.test(phone);
+
+// Verification code validation (6 digits)
+const isValidCode = (code: string): boolean => /^\d{6}$/.test(code);
+
 interface VerificationRequest {
   phone: string;
   code: string;
@@ -16,14 +24,77 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { phone, code }: VerificationRequest = await req.json();
+    // Parse and validate input
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const { phone, code }: VerificationRequest = body;
+
+    // Validate phone
+    if (!phone || typeof phone !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Phone number is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!isValidPhone(phone)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid phone number format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Validate code
+    if (!code || typeof code !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Verification code is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    if (!isValidCode(code)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid verification code format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
     const accountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
     const authToken = Deno.env.get("TWILIO_AUTH_TOKEN");
     const twilioPhone = Deno.env.get("TWILIO_PHONE_NUMBER");
 
     if (!accountSid || !authToken || !twilioPhone) {
-      throw new Error("Twilio credentials not configured");
+      console.error("Twilio credentials not configured");
+      return new Response(
+        JSON.stringify({ error: "SMS service configuration error" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     // Send SMS via Twilio
@@ -45,8 +116,14 @@ const handler = async (req: Request): Promise<Response> => {
 
     if (!twilioResponse.ok) {
       const error = await twilioResponse.text();
-      console.error("Twilio error:", error);
-      throw new Error("Failed to send SMS");
+      console.error("SMS service error:", twilioResponse.status, error);
+      return new Response(
+        JSON.stringify({ error: "Failed to send verification code" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     const result = await twilioResponse.json();
@@ -59,10 +136,16 @@ const handler = async (req: Request): Promise<Response> => {
         headers: { "Content-Type": "application/json", ...corsHeaders },
       }
     );
-  } catch (error: any) {
-    console.error("Error in send-phone-verification:", error);
+  } catch (error) {
+    // Log full error details server-side only
+    console.error("Error in send-phone-verification:", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    
+    // Return generic error message to client
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An error occurred processing your request" }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
