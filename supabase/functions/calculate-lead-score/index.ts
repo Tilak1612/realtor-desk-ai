@@ -13,27 +13,81 @@ serve(async (req) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    
+    // Create client with anon key for auth verification
+    const supabaseAuth = createClient(supabaseUrl, supabaseAnonKey);
+    
+    // Verify authentication
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) {
+      console.error("No authorization header provided");
+      return new Response(
+        JSON.stringify({ error: "No authorization header" }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const token = authHeader.replace("Bearer ", "");
+    const { data: userData, error: userError } = await supabaseAuth.auth.getUser(token);
+    
+    if (userError || !userData.user) {
+      console.error("Authentication failed:", userError?.message);
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const userId = userData.user.id;
+    console.log("Authenticated user:", userId);
 
     const { contact_id } = await req.json();
     console.log("Calculating lead score for contact:", contact_id);
 
     if (!contact_id) {
-      throw new Error("contact_id is required");
+      return new Response(
+        JSON.stringify({ error: "contact_id is required" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
     }
 
-    // Fetch contact data
+    // Create service role client for database operations
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Fetch contact data AND verify ownership
     const { data: contact, error: contactError } = await supabase
       .from("contacts")
       .select("*")
       .eq("id", contact_id)
+      .eq("user_id", userId)
       .single();
 
-    if (contactError) throw contactError;
+    if (contactError || !contact) {
+      console.error("Contact not found or unauthorized:", contactError?.message);
+      return new Response(
+        JSON.stringify({ error: "Contact not found or unauthorized" }),
+        {
+          status: 404,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    console.log("Contact ownership verified for user:", userId);
 
     // Fetch engagement stats
-    const { data: engagementStats, error: statsError } = await supabase
+    const { data: engagementStats } = await supabase
       .from("engagement_stats")
       .select("*")
       .eq("contact_id", contact_id)
