@@ -35,6 +35,15 @@ const Contact = () => {
     privacyConsent: false
   });
 
+  // SEO: Update document title and meta for contact page
+  if (typeof document !== 'undefined') {
+    document.title = "Contact Us | Real Estate CRM Support | RealtorDesk AI";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Contact RealtorDesk AI for the best CRM for real estate agents. Get help with AI lead generation software, virtual tour integration, and real estate tools. Canadian support team.');
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);

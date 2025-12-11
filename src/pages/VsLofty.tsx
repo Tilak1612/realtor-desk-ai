@@ -9,21 +9,46 @@ import { useTranslation } from "react-i18next";
 
 const VsLofty = () => {
   const { t } = useTranslation();
+  
+  // SEO: Update document title and meta for this comparison page
+  if (typeof document !== 'undefined') {
+    document.title = "Lofty Alternative | Real Estate Website Builders & AI CRM | RealtorDesk AI";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Looking for a Lofty alternative? RealtorDesk AI offers real estate website builders, virtual tour platforms integration, AI tools for Realtors, and real estate video marketing tools. True AI vs basic chatbots.');
+    }
+  }
+
   return (
     <div className="min-h-screen">
       <Navbar />
+
+      {/* Structured Data for Comparison */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Lofty vs RealtorDesk AI Comparison",
+        "description": "Compare Lofty with RealtorDesk AI - real estate website builders and AI tools for Realtors. See why agents choose true AI over basic chatbots.",
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "Basic chatbot automation, unpredictable costs"},
+            {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "True AI lead scoring, virtual tour integration, transparent pricing"}
+          ]
+        }
+      })}} />
 
       {/* Hero Section */}
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            Comparison Guide
+            AI Tools for Realtors Comparison
           </Badge>
           <h1 className="mb-6">
-            True AI vs. Basic Chatbots: <span className="gradient-text">Realtor Desk AI</span> vs Lofty
+            Best Lofty Alternative: <span className="gradient-text">True AI</span> vs Basic Chatbots
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Get predictive intelligence that actually closes deals, not just automated responses
+            Real estate website builders with AI tools for Realtors. Get predictive intelligence, virtual tour integration, and real estate video marketing tools.
           </p>
         </div>
       </section>

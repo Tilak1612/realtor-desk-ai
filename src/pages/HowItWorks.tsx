@@ -7,6 +7,15 @@ import { UserPlus, Link as LinkIcon, Brain, Settings, Rocket, TrendingUp, CheckC
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 
 const HowItWorks = () => {
+  // SEO: Update document title and meta for how it works page
+  if (typeof document !== 'undefined') {
+    document.title = "How Real Estate CRM Works | AI Tools for Realtors Setup Guide | RealtorDesk AI";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Get started with the best CRM for real estate agents in 20 minutes. Easy AI tools for Realtors setup, real estate lead generation software configuration, virtual tour integration.');
+    }
+  }
+
   const steps = [
     {
       number: 1,

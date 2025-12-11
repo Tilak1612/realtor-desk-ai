@@ -9,21 +9,46 @@ import { useTranslation } from "react-i18next";
 
 const VsBoldTrail = () => {
   const { t } = useTranslation();
+  
+  // SEO: Update document title and meta for this comparison page
+  if (typeof document !== 'undefined') {
+    document.title = "BoldTrail Alternative | Best CRM for Real Estate Agents | Save $6,288 | RealtorDesk AI";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Looking for a BoldTrail alternative? RealtorDesk AI is the best CRM for real estate agents - save $6,288 first year. AI lead generation software, 24/7 chatbot, faster support. Compare now.');
+    }
+  }
+
   return (
     <div className="min-h-screen">
       <Navbar />
+
+      {/* Structured Data for Comparison */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "BoldTrail vs RealtorDesk AI Comparison",
+        "description": "Compare BoldTrail with RealtorDesk AI - the best CRM for real estate agents. See pricing, features, and why agents are switching.",
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "BoldTrail", "description": "$6,987 first year with $999 setup fee"},
+            {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "$699/year, $0 setup, AI-powered lead generation"}
+          ]
+        }
+      })}} />
 
       {/* Hero Section */}
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            {t('comparison.badge')}
+            Best CRM for Real Estate Agents Comparison
           </Badge>
           <h1 className="mb-6">
-            Why Canadian Agents Choose <span className="gradient-text">Realtor Desk AI</span> Over BoldTrail
+            Best BoldTrail Alternative: <span className="gradient-text">Realtor Desk AI</span> - Save $6,288
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Save $6,288 in your first year while getting better AI, faster support, and Canadian-focused features
+            The best CRM for real estate agents with AI lead generation software. Save $6,288 vs BoldTrail while getting faster support and Canadian-focused features.
           </p>
           
           {/* Cost Comparison */}

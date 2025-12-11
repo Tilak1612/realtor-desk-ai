@@ -7,6 +7,16 @@ import { useTranslation } from "react-i18next";
 
 const Features = () => {
   const { t } = useTranslation();
+  
+  // SEO: Update document title and meta for features page
+  if (typeof document !== 'undefined') {
+    document.title = "AI Tools for Realtors | Real Estate Lead Generation Software | RealtorDesk AI Features";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Discover AI tools for Realtors: predictive CRM, 24/7 chatbot, real estate lead generation software, virtual tour platforms, video marketing tools. Best features for real estate agents.');
+    }
+  }
+
   const featureTabs = [
     {
       value: "crm",

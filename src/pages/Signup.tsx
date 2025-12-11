@@ -35,6 +35,15 @@ const Signup = () => {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof SignupForm, string>>>({});
 
+  // SEO: Update document title and meta for signup page
+  if (typeof document !== 'undefined') {
+    document.title = "Start 14-Day Free Trial | Best CRM for Real Estate Agents | RealtorDesk AI";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Start your 14-day free trial of the best CRM for real estate agents. AI lead generation software, 24/7 chatbot, virtual tour integration. No credit card required.');
+    }
+  }
+
   const validateForm = () => {
     try {
       signupSchema.parse(formData);
