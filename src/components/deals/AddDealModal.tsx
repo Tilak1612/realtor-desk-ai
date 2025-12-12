@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +22,7 @@ interface AddDealModalProps {
 }
 
 const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) => {
+  const { t } = useTranslation();
   const [contacts, setContacts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -83,7 +85,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
     e.preventDefault();
     
     if (!formData.contact_id || !formData.title) {
-      toast.error("Please fill in contact and title");
+      toast.error(t("app.modals.addDeal.fillRequired"));
       return;
     }
 
@@ -116,10 +118,10 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
     setLoading(false);
 
     if (error) {
-      toast.error("Failed to create transaction");
+      toast.error(t("app.modals.addDeal.failedCreate"));
       console.error(error);
     } else {
-      toast.success("Transaction created successfully");
+      toast.success(t("app.modals.addDeal.successCreate"));
       onDealAdded();
       onOpenChange(false);
     }
@@ -129,16 +131,16 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
         <DialogHeader>
-          <DialogTitle>Add New Transaction</DialogTitle>
+          <DialogTitle>{t("app.modals.addDeal.title")}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Contact Selection */}
           <div>
-            <Label htmlFor="contact">Contact *</Label>
+            <Label htmlFor="contact">{t("app.modals.addDeal.contact")} *</Label>
             <Select value={formData.contact_id} onValueChange={(v) => setFormData({...formData, contact_id: v})}>
               <SelectTrigger>
-                <SelectValue placeholder="Select a contact" />
+                <SelectValue placeholder={t("app.modals.addDeal.selectContact")} />
               </SelectTrigger>
               <SelectContent>
                 {contacts.map(contact => (
@@ -152,44 +154,44 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
 
           {/* Title */}
           <div>
-            <Label htmlFor="title">Transaction Title *</Label>
+            <Label htmlFor="title">{t("app.modals.addDeal.transactionTitle")} *</Label>
             <Input
               id="title"
               value={formData.title}
               onChange={(e) => setFormData({...formData, title: e.target.value})}
-              placeholder="e.g., Downtown Condo Purchase"
+              placeholder={t("app.modals.addDeal.titlePlaceholder")}
             />
           </div>
 
           {/* Client Type and Property Type */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="client_type">Client Type</Label>
+              <Label htmlFor="client_type">{t("app.modals.addDeal.clientType")}</Label>
               <Select value={formData.client_type} onValueChange={(v) => setFormData({...formData, client_type: v})}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select type" />
+                  <SelectValue placeholder={t("app.modals.addDeal.selectType")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="buyer">Buyer</SelectItem>
-                  <SelectItem value="seller">Seller</SelectItem>
-                  <SelectItem value="both">Both</SelectItem>
+                  <SelectItem value="buyer">{t("app.modals.addDeal.buyer")}</SelectItem>
+                  <SelectItem value="seller">{t("app.modals.addDeal.seller")}</SelectItem>
+                  <SelectItem value="both">{t("app.modals.addDeal.both")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label htmlFor="property_type">Property Type</Label>
+              <Label htmlFor="property_type">{t("app.modals.addDeal.propertyType")}</Label>
               <Select value={formData.property_type} onValueChange={(v) => setFormData({...formData, property_type: v})}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select type" />
+                  <SelectValue placeholder={t("app.modals.addDeal.selectType")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="condo">Condo</SelectItem>
-                  <SelectItem value="house">House</SelectItem>
-                  <SelectItem value="townhouse">Townhouse</SelectItem>
-                  <SelectItem value="commercial">Commercial</SelectItem>
-                  <SelectItem value="land">Land</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="condo">{t("app.modals.addDeal.propertyTypes.condo")}</SelectItem>
+                  <SelectItem value="house">{t("app.modals.addDeal.propertyTypes.house")}</SelectItem>
+                  <SelectItem value="townhouse">{t("app.modals.addDeal.propertyTypes.townhouse")}</SelectItem>
+                  <SelectItem value="commercial">{t("app.modals.addDeal.propertyTypes.commercial")}</SelectItem>
+                  <SelectItem value="land">{t("app.modals.addDeal.propertyTypes.land")}</SelectItem>
+                  <SelectItem value="other">{t("app.modals.addDeal.propertyTypes.other")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -197,17 +199,17 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
 
           {/* Property Address and MLS */}
           <div>
-            <Label htmlFor="property_address">Property Address</Label>
+            <Label htmlFor="property_address">{t("app.modals.addDeal.propertyAddress")}</Label>
             <Input
               id="property_address"
               value={formData.property_address}
               onChange={(e) => setFormData({...formData, property_address: e.target.value})}
-              placeholder="123 Main St, Toronto, ON M1A 1A1"
+              placeholder={t("app.modals.addDeal.addressPlaceholder")}
             />
           </div>
 
           <div>
-            <Label htmlFor="mls_number">MLS Number</Label>
+            <Label htmlFor="mls_number">{t("app.modals.addDeal.mlsNumber")}</Label>
             <Input
               id="mls_number"
               value={formData.mls_number}
@@ -219,7 +221,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
           {/* Listing Price and Commission */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="listing_price">Listing Price (CAD)</Label>
+              <Label htmlFor="listing_price">{t("app.modals.addDeal.listingPrice")}</Label>
               <Input
                 id="listing_price"
                 type="number"
@@ -230,7 +232,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
             </div>
 
             <div>
-              <Label htmlFor="commission_percentage">Commission %</Label>
+              <Label htmlFor="commission_percentage">{t("app.modals.addDeal.commission")}</Label>
               <Input
                 id="commission_percentage"
                 type="number"
@@ -244,25 +246,25 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
 
           {/* Stage */}
           <div>
-            <Label htmlFor="stage">Stage</Label>
+            <Label htmlFor="stage">{t("app.modals.addDeal.stage")}</Label>
             <Select value={formData.stage} onValueChange={(v) => setFormData({...formData, stage: v})}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="new_lead">New Lead</SelectItem>
-                <SelectItem value="contacted">Contacted</SelectItem>
-                <SelectItem value="showing_scheduled">Showing Scheduled</SelectItem>
-                <SelectItem value="offer_made">Offer Made</SelectItem>
-                <SelectItem value="under_contract">Under Contract</SelectItem>
-                <SelectItem value="closing">Closing</SelectItem>
+                <SelectItem value="new_lead">{t("app.modals.addDeal.stages.newLead")}</SelectItem>
+                <SelectItem value="contacted">{t("app.modals.addDeal.stages.contacted")}</SelectItem>
+                <SelectItem value="showing_scheduled">{t("app.modals.addDeal.stages.showingScheduled")}</SelectItem>
+                <SelectItem value="offer_made">{t("app.modals.addDeal.stages.offerMade")}</SelectItem>
+                <SelectItem value="under_contract">{t("app.modals.addDeal.stages.underContract")}</SelectItem>
+                <SelectItem value="closing">{t("app.modals.addDeal.stages.closing")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Probability Slider */}
           <div>
-            <Label>Deal Probability: {formData.probability}%</Label>
+            <Label>{t("app.modals.addDeal.dealProbability")}: {formData.probability}%</Label>
             <Slider
               value={[formData.probability]}
               onValueChange={([v]) => setFormData({...formData, probability: v})}
@@ -275,7 +277,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
 
           {/* Closing Date */}
           <div>
-            <Label>Expected Closing Date</Label>
+            <Label>{t("app.modals.addDeal.expectedClosingDate")}</Label>
             <Popover>
               <PopoverTrigger asChild>
                 <Button
@@ -286,7 +288,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
                   )}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.closing_date ? format(formData.closing_date, "PPP") : "Pick a date"}
+                  {formData.closing_date ? format(formData.closing_date, "PPP") : t("app.modals.addDeal.pickDate")}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
@@ -303,12 +305,12 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
 
           {/* Notes */}
           <div>
-            <Label htmlFor="notes">Notes</Label>
+            <Label htmlFor="notes">{t("app.modals.addDeal.notes")}</Label>
             <Textarea
               id="notes"
               value={formData.notes}
               onChange={(e) => setFormData({...formData, notes: e.target.value})}
-              placeholder="Additional details about this transaction..."
+              placeholder={t("app.modals.addDeal.notesPlaceholder")}
               rows={3}
             />
           </div>
@@ -316,10 +318,10 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-end gap-2 pt-4">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="w-full sm:w-auto">
-              Cancel
+              {t("app.modals.addDeal.cancel")}
             </Button>
             <Button type="submit" disabled={loading} className="w-full sm:w-auto">
-              {loading ? "Creating..." : "Create Transaction"}
+              {loading ? t("app.modals.addDeal.creating") : t("app.modals.addDeal.createTransaction")}
             </Button>
           </div>
         </form>

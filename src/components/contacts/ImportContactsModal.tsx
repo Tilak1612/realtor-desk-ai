@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +19,7 @@ interface ImportContactsModalProps {
 }
 
 const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsModalProps) => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [file, setFile] = useState<File | null>(null);
   const [importing, setImporting] = useState(false);
@@ -31,8 +33,8 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       setResult(null);
     } else {
       toast({
-        title: "Invalid file type",
-        description: "Please select a CSV file",
+        title: t("app.modals.importContacts.invalidFileType"),
+        description: t("app.modals.importContacts.pleaseSelectCSV"),
         variant: "destructive",
       });
     }
@@ -66,8 +68,8 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         toast({
-          title: "Not authenticated",
-          description: "Please log in to import contacts",
+          title: t("app.modals.importContacts.notAuthenticated"),
+          description: t("app.modals.importContacts.pleaseLogin"),
           variant: "destructive",
         });
         return;
@@ -109,14 +111,14 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       setResult({ success: successCount, errors: errorCount });
 
       toast({
-        title: "Import complete",
-        description: `${successCount} contacts imported successfully. ${errorCount} errors.`,
+        title: t("app.modals.importContacts.importComplete"),
+        description: `${successCount} ${t("app.modals.importContacts.importSuccess")} ${errorCount} ${t("app.modals.importContacts.errors").toLowerCase()}.`,
       });
 
       onSuccess();
     } catch (error: any) {
       toast({
-        title: "Import failed",
+        title: t("app.modals.importContacts.importFailed"),
         description: error.message,
         variant: "destructive",
       });
@@ -136,7 +138,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
     <Dialog open={open} onOpenChange={resetModal}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Import Contacts</DialogTitle>
+          <DialogTitle>{t("app.modals.importContacts.title")}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -146,7 +148,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
               <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                 <p className="text-sm text-muted-foreground mb-4">
-                  Upload a CSV file with your contacts
+                  {t("app.modals.importContacts.uploadDescription")}
                 </p>
                 <input
                   type="file"
@@ -157,21 +159,21 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
                 />
                 <label htmlFor="csv-upload">
                   <Button variant="outline" asChild>
-                    <span>Choose File</span>
+                    <span>{t("app.modals.importContacts.chooseFile")}</span>
                   </Button>
                 </label>
                 {file && (
                   <p className="text-sm text-muted-foreground mt-2">
-                    Selected: {file.name}
+                    {t("app.modals.importContacts.selected")} {file.name}
                   </p>
                 )}
               </div>
 
               {/* CSV Format Guide */}
               <div className="bg-muted p-4 rounded-lg">
-                <h4 className="font-semibold mb-2">CSV Format Guide</h4>
+                <h4 className="font-semibold mb-2">{t("app.modals.importContacts.formatGuide")}</h4>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Your CSV should include these columns:
+                  {t("app.modals.importContacts.formatDescription")}
                 </p>
                 <code className="text-xs bg-background p-2 rounded block">
                   FirstName, LastName, Email, Phone, Source, Tags
@@ -183,7 +185,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
                 <div className="space-y-2">
                   <Progress value={progress} />
                   <p className="text-sm text-center text-muted-foreground">
-                    Importing contacts... {progress}%
+                    {t("app.modals.importContacts.importing")} {progress}%
                   </p>
                 </div>
               )}
@@ -191,10 +193,10 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
               {/* Actions */}
               <div className="flex justify-end gap-2">
                 <Button variant="outline" onClick={resetModal} disabled={importing}>
-                  Cancel
+                  {t("app.modals.importContacts.cancel")}
                 </Button>
                 <Button onClick={handleImport} disabled={!file || importing}>
-                  {importing ? "Importing..." : "Import"}
+                  {importing ? t("app.modals.importContacts.importingBtn") : t("app.modals.importContacts.import")}
                 </Button>
               </div>
             </>
@@ -205,19 +207,19 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
                 <div className="flex justify-center gap-4">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-accent" />
-                    <span className="font-semibold">{result.success} Imported</span>
+                    <span className="font-semibold">{result.success} {t("app.modals.importContacts.imported")}</span>
                   </div>
                   {result.errors > 0 && (
                     <div className="flex items-center gap-2">
                       <AlertCircle className="h-5 w-5 text-destructive" />
-                      <span className="font-semibold">{result.errors} Errors</span>
+                      <span className="font-semibold">{result.errors} {t("app.modals.importContacts.errors")}</span>
                     </div>
                   )}
                 </div>
               </div>
 
               <Button onClick={resetModal} className="w-full">
-                Done
+                {t("app.modals.importContacts.done")}
               </Button>
             </>
           )}

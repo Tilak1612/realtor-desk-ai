@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -24,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,7 @@ interface AddContactModalProps {
 }
 
 const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps) => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -77,8 +78,8 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         toast({
-          title: "Not authenticated",
-          description: "Please log in to add contacts",
+          title: t("app.modals.addContact.notAuthenticated"),
+          description: t("app.modals.addContact.pleaseLogin"),
           variant: "destructive",
         });
         return;
@@ -114,8 +115,8 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       }
 
       toast({
-        title: "Contact added successfully",
-        description: `${values.first_name} ${values.last_name} has been added to your contacts`,
+        title: t("app.modals.addContact.success"),
+        description: `${values.first_name} ${values.last_name} ${t("app.modals.addContact.contactAdded")}`,
       });
 
       form.reset();
@@ -123,7 +124,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       onSuccess();
     } catch (error: any) {
       toast({
-        title: "Error adding contact",
+        title: t("app.modals.addContact.errorAdding"),
         description: error.message,
         variant: "destructive",
       });
@@ -136,7 +137,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add New Contact</DialogTitle>
+          <DialogTitle>{t("app.modals.addContact.title")}</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -147,7 +148,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
                 name="first_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>First Name *</FormLabel>
+                    <FormLabel>{t("app.modals.addContact.firstName")} *</FormLabel>
                     <FormControl>
                       <Input placeholder="John" {...field} />
                     </FormControl>
@@ -161,7 +162,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
                 name="last_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Last Name *</FormLabel>
+                    <FormLabel>{t("app.modals.addContact.lastName")} *</FormLabel>
                     <FormControl>
                       <Input placeholder="Doe" {...field} />
                     </FormControl>
@@ -176,7 +177,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("app.modals.addContact.email")}</FormLabel>
                   <FormControl>
                     <Input type="email" placeholder="john.doe@example.com" {...field} />
                   </FormControl>
@@ -190,7 +191,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone</FormLabel>
+                  <FormLabel>{t("app.modals.addContact.phone")}</FormLabel>
                   <FormControl>
                     <Input placeholder="+1 (555) 123-4567" {...field} />
                   </FormControl>
@@ -204,22 +205,22 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
               name="source"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Source</FormLabel>
+                  <FormLabel>{t("app.modals.addContact.source")}</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select source" />
+                        <SelectValue placeholder={t("app.modals.addContact.selectSource")} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Website">Website</SelectItem>
-                      <SelectItem value="Referral">Referral</SelectItem>
-                      <SelectItem value="Open House">Open House</SelectItem>
-                      <SelectItem value="Zillow">Zillow</SelectItem>
-                      <SelectItem value="Realtor.com">Realtor.com</SelectItem>
-                      <SelectItem value="Social Media">Social Media</SelectItem>
-                      <SelectItem value="Import">Import</SelectItem>
-                      <SelectItem value="Other">Other</SelectItem>
+                      <SelectItem value="Website">{t("app.modals.addContact.sources.website")}</SelectItem>
+                      <SelectItem value="Referral">{t("app.modals.addContact.sources.referral")}</SelectItem>
+                      <SelectItem value="Open House">{t("app.modals.addContact.sources.openHouse")}</SelectItem>
+                      <SelectItem value="Zillow">{t("app.modals.addContact.sources.zillow")}</SelectItem>
+                      <SelectItem value="Realtor.com">{t("app.modals.addContact.sources.realtorCom")}</SelectItem>
+                      <SelectItem value="Social Media">{t("app.modals.addContact.sources.socialMedia")}</SelectItem>
+                      <SelectItem value="Import">{t("app.modals.addContact.sources.import")}</SelectItem>
+                      <SelectItem value="Other">{t("app.modals.addContact.sources.other")}</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -232,9 +233,9 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
               name="tags"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tags</FormLabel>
+                  <FormLabel>{t("app.modals.addContact.tags")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="First-time buyer, Pre-approved, Urgent (comma separated)" {...field} />
+                    <Input placeholder={t("app.modals.addContact.tagsPlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -246,10 +247,10 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes</FormLabel>
+                  <FormLabel>{t("app.modals.addContact.notes")}</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Add any additional information about this contact..."
+                      placeholder={t("app.modals.addContact.notesPlaceholder")}
                       className="min-h-[100px]"
                       {...field}
                     />
@@ -260,23 +261,23 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
             />
 
             <div className="border-t pt-4">
-              <h3 className="font-semibold mb-3 text-sm">🇨🇦 Canadian Compliance (CASL)</h3>
+              <h3 className="font-semibold mb-3 text-sm">{t("app.modals.addContact.caslTitle")}</h3>
               
               <FormField
                 control={form.control}
                 name="preferred_language"
                 render={({ field }) => (
                   <FormItem className="mb-3">
-                    <FormLabel>Preferred Language</FormLabel>
+                    <FormLabel>{t("app.modals.addContact.preferredLanguage")}</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select language" />
+                          <SelectValue placeholder={t("app.modals.addContact.selectLanguage")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="en">English</SelectItem>
-                        <SelectItem value="fr">French</SelectItem>
+                        <SelectItem value="en">{t("app.modals.addContact.english")}</SelectItem>
+                        <SelectItem value="fr">{t("app.modals.addContact.french")}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -299,10 +300,10 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
                     </FormControl>
                     <div className="space-y-1 leading-none">
                       <FormLabel>
-                        Contact has given consent for communication (CASL)
+                        {t("app.modals.addContact.consentLabel")}
                       </FormLabel>
                       <p className="text-xs text-muted-foreground">
-                        Required under Canada's Anti-Spam Legislation for sending commercial electronic messages
+                        {t("app.modals.addContact.consentDescription")}
                       </p>
                     </div>
                   </FormItem>
@@ -317,10 +318,10 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
                 onClick={() => onOpenChange(false)}
                 disabled={loading}
               >
-                Cancel
+                {t("app.modals.addContact.cancel")}
               </Button>
               <Button type="submit" disabled={loading}>
-                {loading ? "Adding..." : "Add Contact"}
+                {loading ? t("app.modals.addContact.adding") : t("app.modals.addContact.addContact")}
               </Button>
             </DialogFooter>
           </form>

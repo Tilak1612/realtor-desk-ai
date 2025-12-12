@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +21,7 @@ interface AddTaskModalProps {
 }
 
 const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) => {
+  const { t } = useTranslation();
   const [contacts, setContacts] = useState<any[]>([]);
   const [deals, setDeals] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -97,7 +99,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
     e.preventDefault();
     
     if (!formData.title || !formData.due_date) {
-      toast.error("Please fill in required fields");
+      toast.error(t("app.modals.addTask.fillRequired"));
       return;
     }
 
@@ -123,9 +125,9 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
     setLoading(false);
 
     if (error) {
-      toast.error("Failed to create task");
+      toast.error(t("app.modals.addTask.failedCreate"));
     } else {
-      toast.success("Task created successfully");
+      toast.success(t("app.modals.addTask.successCreate"));
       onTaskAdded();
       
       if (addAnother) {
@@ -140,34 +142,34 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add New Task</DialogTitle>
+          <DialogTitle>{t("app.modals.addTask.title")}</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={(e) => handleSubmit(e, addAnother)} className="space-y-4">
           <div>
-            <Label htmlFor="title">Task Title *</Label>
+            <Label htmlFor="title">{t("app.modals.addTask.taskTitle")} *</Label>
             <Input
               id="title"
               value={formData.title}
               onChange={(e) => setFormData({...formData, title: e.target.value})}
-              placeholder="e.g., Call client about property viewing"
+              placeholder={t("app.modals.addTask.titlePlaceholder")}
             />
           </div>
 
           <div>
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">{t("app.modals.addTask.description")}</Label>
             <Textarea
               id="description"
               value={formData.description}
               onChange={(e) => setFormData({...formData, description: e.target.value})}
-              placeholder="Additional details..."
+              placeholder={t("app.modals.addTask.descriptionPlaceholder")}
               rows={3}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label>Due Date *</Label>
+              <Label>{t("app.modals.addTask.dueDate")} *</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -178,7 +180,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.due_date ? format(formData.due_date, "PPP") : "Pick a date"}
+                    {formData.due_date ? format(formData.due_date, "PPP") : t("app.modals.addTask.pickDate")}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
@@ -194,7 +196,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
             </div>
 
             <div>
-              <Label htmlFor="due_time">Due Time</Label>
+              <Label htmlFor="due_time">{t("app.modals.addTask.dueTime")}</Label>
               <Input
                 id="due_time"
                 type="time"
@@ -206,43 +208,43 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="priority">Priority</Label>
+              <Label htmlFor="priority">{t("app.modals.addTask.priority")}</Label>
               <Select value={formData.priority} onValueChange={(v) => setFormData({...formData, priority: v})}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="low">Low</SelectItem>
-                  <SelectItem value="medium">Normal</SelectItem>
-                  <SelectItem value="high">High</SelectItem>
-                  <SelectItem value="urgent">Urgent</SelectItem>
+                  <SelectItem value="low">{t("app.modals.addTask.priorities.low")}</SelectItem>
+                  <SelectItem value="medium">{t("app.modals.addTask.priorities.medium")}</SelectItem>
+                  <SelectItem value="high">{t("app.modals.addTask.priorities.high")}</SelectItem>
+                  <SelectItem value="urgent">{t("app.modals.addTask.priorities.urgent")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label htmlFor="task_type">Task Type</Label>
+              <Label htmlFor="task_type">{t("app.modals.addTask.taskType")}</Label>
               <Select value={formData.task_type} onValueChange={(v) => setFormData({...formData, task_type: v})}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="call">Call</SelectItem>
-                  <SelectItem value="email">Email</SelectItem>
-                  <SelectItem value="meeting">Meeting</SelectItem>
-                  <SelectItem value="viewing">Viewing</SelectItem>
-                  <SelectItem value="followup">Follow-up</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="call">{t("app.modals.addTask.taskTypes.call")}</SelectItem>
+                  <SelectItem value="email">{t("app.modals.addTask.taskTypes.email")}</SelectItem>
+                  <SelectItem value="meeting">{t("app.modals.addTask.taskTypes.meeting")}</SelectItem>
+                  <SelectItem value="viewing">{t("app.modals.addTask.taskTypes.viewing")}</SelectItem>
+                  <SelectItem value="followup">{t("app.modals.addTask.taskTypes.followup")}</SelectItem>
+                  <SelectItem value="other">{t("app.modals.addTask.taskTypes.other")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
           <div>
-            <Label htmlFor="contact">Associated Contact</Label>
+            <Label htmlFor="contact">{t("app.modals.addTask.associatedContact")}</Label>
             <Select value={formData.contact_id} onValueChange={(v) => setFormData({...formData, contact_id: v})}>
               <SelectTrigger>
-                <SelectValue placeholder="Select a contact (optional)" />
+                <SelectValue placeholder={t("app.modals.addTask.selectContactOptional")} />
               </SelectTrigger>
               <SelectContent>
                 {contacts.map(contact => (
@@ -256,10 +258,10 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
 
           {formData.contact_id && deals.length > 0 && (
             <div>
-              <Label htmlFor="deal">Associated Deal</Label>
+              <Label htmlFor="deal">{t("app.modals.addTask.associatedDeal")}</Label>
               <Select value={formData.deal_id} onValueChange={(v) => setFormData({...formData, deal_id: v})}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a deal (optional)" />
+                  <SelectValue placeholder={t("app.modals.addTask.selectDealOptional")} />
                 </SelectTrigger>
                 <SelectContent>
                   {deals.map(deal => (
@@ -273,23 +275,23 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
           )}
 
           <div>
-            <Label htmlFor="reminder">Reminder</Label>
+            <Label htmlFor="reminder">{t("app.modals.addTask.reminder")}</Label>
             <Select value={formData.reminder} onValueChange={(v) => setFormData({...formData, reminder: v})}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">None</SelectItem>
-                <SelectItem value="15min">15 minutes before</SelectItem>
-                <SelectItem value="1hour">1 hour before</SelectItem>
-                <SelectItem value="1day">1 day before</SelectItem>
+                <SelectItem value="none">{t("app.modals.addTask.reminders.none")}</SelectItem>
+                <SelectItem value="15min">{t("app.modals.addTask.reminders.fifteenMin")}</SelectItem>
+                <SelectItem value="1hour">{t("app.modals.addTask.reminders.oneHour")}</SelectItem>
+                <SelectItem value="1day">{t("app.modals.addTask.reminders.oneDay")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="flex justify-end gap-2 pt-4">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              {t("app.modals.addTask.cancel")}
             </Button>
             <Button 
               type="submit" 
@@ -297,14 +299,14 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
               onClick={() => setAddAnother(true)}
               disabled={loading}
             >
-              Add & Add Another
+              {t("app.modals.addTask.addAnother")}
             </Button>
             <Button 
               type="submit"
               onClick={() => setAddAnother(false)}
               disabled={loading}
             >
-              {loading ? "Creating..." : "Add Task"}
+              {loading ? t("app.modals.addTask.creating") : t("app.modals.addTask.addTask")}
             </Button>
           </div>
         </form>

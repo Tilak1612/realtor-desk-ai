@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +17,7 @@ interface AddPropertyModalProps {
 }
 
 const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalProps) => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -73,7 +75,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
 
       if (error) throw error;
 
-      toast({ title: "Property added successfully" });
+      toast({ title: t("app.modals.addProperty.success") });
       onOpenChange(false);
       onSuccess();
       
@@ -101,7 +103,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
       });
     } catch (error: any) {
       toast({
-        title: "Error adding property",
+        title: t("app.modals.addProperty.errorAdding"),
         description: error.message,
         variant: "destructive",
       });
@@ -114,104 +116,104 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add New Property</DialogTitle>
+          <DialogTitle>{t("app.modals.addProperty.title")}</DialogTitle>
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="bg-primary/10 p-4 rounded-lg mb-4">
             <h3 className="font-semibold mb-2 flex items-center gap-2">
-              🚀 Quick Add from MLS Listing URL
+              {t("app.modals.addProperty.quickAdd")}
             </h3>
-            <Label htmlFor="source_url" className="text-sm">Paste Listing URL (Coming Soon: Auto-fill from CREA DDF)</Label>
+            <Label htmlFor="source_url" className="text-sm">{t("app.modals.addProperty.pasteUrl")}</Label>
             <Input
               id="source_url"
               value={formData.source_url}
               onChange={(e) => setFormData({ ...formData, source_url: e.target.value })}
-              placeholder="https://realtor.ca/listing/..."
+              placeholder={t("app.modals.addProperty.urlPlaceholder")}
               className="mt-2"
             />
             <p className="text-xs text-muted-foreground mt-2">
-              Phase 1: We'll scrape basic info. Phase 2: Full CREA DDF integration coming Q1 2026.
+              {t("app.modals.addProperty.urlNote")}
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
-              <Label htmlFor="title">Property Title *</Label>
+              <Label htmlFor="title">{t("app.modals.addProperty.propertyTitle")} *</Label>
               <Input
                 id="title"
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                placeholder="Beautiful 3BR Family Home"
+                placeholder={t("app.modals.addProperty.titlePlaceholder")}
               />
             </div>
 
             <div className="col-span-2">
-              <Label htmlFor="address">Address *</Label>
+              <Label htmlFor="address">{t("app.modals.addProperty.address")} *</Label>
               <Input
                 id="address"
                 required
                 value={formData.address}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                placeholder="123 Main Street"
+                placeholder={t("app.modals.addProperty.addressPlaceholder")}
               />
             </div>
 
             <div>
-              <Label htmlFor="city">City</Label>
+              <Label htmlFor="city">{t("app.modals.addProperty.city")}</Label>
               <Input
                 id="city"
                 value={formData.city}
                 onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                placeholder="Toronto"
+                placeholder={t("app.modals.addProperty.cityPlaceholder")}
               />
             </div>
 
             <div>
-              <Label htmlFor="province">Province</Label>
+              <Label htmlFor="province">{t("app.modals.addProperty.province")}</Label>
               <Input
                 id="province"
                 value={formData.province}
                 onChange={(e) => setFormData({ ...formData, province: e.target.value })}
-                placeholder="ON"
+                placeholder={t("app.modals.addProperty.provincePlaceholder")}
               />
             </div>
 
             <div>
-              <Label htmlFor="property_type">Property Type</Label>
+              <Label htmlFor="property_type">{t("app.modals.addProperty.propertyType")}</Label>
               <Select value={formData.property_type} onValueChange={(val) => setFormData({ ...formData, property_type: val })}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="house">House</SelectItem>
-                  <SelectItem value="condo">Condo</SelectItem>
-                  <SelectItem value="townhouse">Townhouse</SelectItem>
-                  <SelectItem value="land">Land</SelectItem>
-                  <SelectItem value="commercial">Commercial</SelectItem>
+                  <SelectItem value="house">{t("app.modals.addProperty.types.house")}</SelectItem>
+                  <SelectItem value="condo">{t("app.modals.addProperty.types.condo")}</SelectItem>
+                  <SelectItem value="townhouse">{t("app.modals.addProperty.types.townhouse")}</SelectItem>
+                  <SelectItem value="land">{t("app.modals.addProperty.types.land")}</SelectItem>
+                  <SelectItem value="commercial">{t("app.modals.addProperty.types.commercial")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label htmlFor="status">Status</Label>
+              <Label htmlFor="status">{t("app.modals.addProperty.status")}</Label>
               <Select value={formData.status} onValueChange={(val) => setFormData({ ...formData, status: val })}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
-                  <SelectItem value="sold">Sold</SelectItem>
-                  <SelectItem value="coming_soon">Coming Soon</SelectItem>
-                  <SelectItem value="off_market">Off Market</SelectItem>
+                  <SelectItem value="active">{t("app.modals.addProperty.statuses.active")}</SelectItem>
+                  <SelectItem value="pending">{t("app.modals.addProperty.statuses.pending")}</SelectItem>
+                  <SelectItem value="sold">{t("app.modals.addProperty.statuses.sold")}</SelectItem>
+                  <SelectItem value="coming_soon">{t("app.modals.addProperty.statuses.comingSoon")}</SelectItem>
+                  <SelectItem value="off_market">{t("app.modals.addProperty.statuses.offMarket")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label htmlFor="price">Price (CAD)</Label>
+              <Label htmlFor="price">{t("app.modals.addProperty.price")}</Label>
               <Input
                 id="price"
                 type="number"
@@ -222,7 +224,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
             </div>
 
             <div>
-              <Label htmlFor="bedrooms">Bedrooms</Label>
+              <Label htmlFor="bedrooms">{t("app.modals.addProperty.bedrooms")}</Label>
               <Input
                 id="bedrooms"
                 type="number"
@@ -233,7 +235,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
             </div>
 
             <div>
-              <Label htmlFor="bathrooms">Bathrooms</Label>
+              <Label htmlFor="bathrooms">{t("app.modals.addProperty.bathrooms")}</Label>
               <Input
                 id="bathrooms"
                 type="number"
@@ -245,7 +247,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
             </div>
 
             <div>
-              <Label htmlFor="square_feet">Square Feet</Label>
+              <Label htmlFor="square_feet">{t("app.modals.addProperty.squareFeet")}</Label>
               <Input
                 id="square_feet"
                 type="number"
@@ -256,7 +258,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
             </div>
 
             <div>
-              <Label htmlFor="mls_number">MLS Number</Label>
+              <Label htmlFor="mls_number">{t("app.modals.addProperty.mlsNumber")}</Label>
               <Input
                 id="mls_number"
                 value={formData.mls_number}
@@ -266,7 +268,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
             </div>
 
             <div>
-              <Label htmlFor="image_url">Image URL</Label>
+              <Label htmlFor="image_url">{t("app.modals.addProperty.imageUrl")}</Label>
               <Input
                 id="image_url"
                 value={formData.image_url}
@@ -276,12 +278,12 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
             </div>
 
             <div className="col-span-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">{t("app.modals.addProperty.description")}</Label>
               <Textarea
                 id="description"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Describe the property features, amenities, location benefits..."
+                placeholder={t("app.modals.addProperty.descriptionPlaceholder")}
                 rows={4}
               />
             </div>
@@ -289,11 +291,11 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              {t("app.modals.addProperty.cancel")}
             </Button>
             <Button type="submit" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Add Property
+              {t("app.modals.addProperty.addProperty")}
             </Button>
           </DialogFooter>
         </form>
