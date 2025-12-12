@@ -262,29 +262,6 @@ const resources = {
         crea: "CREA Code of Ethics Aligned",
         pricing: "Pricing in CAD"
       },
-      howItWorks: {
-        title: "Get Up and Running in Minutes",
-        step1: {
-          title: "Sign Up",
-          time: "2 minutes",
-          description: "Create account, choose your plan"
-        },
-        step2: {
-          title: "Connect Your Tools",
-          time: "5 minutes",
-          description: "Link CRM, email, website"
-        },
-        step3: {
-          title: "Train Your AI",
-          time: "10 minutes",
-          description: "Add property info, FAQs, your style"
-        },
-        step4: {
-          title: "Go Live",
-          time: "Instant",
-          description: "AI starts capturing leads 24/7"
-        }
-      },
       faq: {
         title: "Frequently Asked Questions",
         q1: {
@@ -1024,6 +1001,195 @@ const resources = {
           }
         }
       },
+      howItWorks: {
+        hero: {
+          title: "Get Up and Running in",
+          titleGradient: "20 Minutes",
+          subtitle: "From signup to capturing leads in less time than it takes to drive to a showing. No technical skills required."
+        },
+        steps: {
+          signUp: {
+            title: "Sign Up",
+            time: "2 minutes",
+            description: "Create your account and choose your plan. No credit card required for 14-day trial.",
+            details: [
+              "Enter your name, email, and brokerage info",
+              "Choose your subscription tier",
+              "Verify your email address",
+              "Access your dashboard immediately"
+            ]
+          },
+          connectTools: {
+            title: "Connect Your Tools",
+            time: "5 minutes",
+            description: "Link your CRM, email, website, and phone system with simple one-click integrations.",
+            details: [
+              "Connect existing CRM (Follow Up Boss, Brivity, etc.)",
+              "Link Gmail or Outlook email",
+              "Add website widget code snippet",
+              "Import existing contacts (CSV or direct sync)"
+            ]
+          },
+          trainAI: {
+            title: "Train Your AI",
+            time: "10 minutes",
+            description: "Teach the AI about your properties, style, and preferences. Our wizard makes it easy.",
+            details: [
+              "Upload current listings and property info",
+              "Add frequently asked questions",
+              "Define your communication style",
+              "Set qualification criteria for leads",
+              "Configure notification preferences"
+            ]
+          },
+          customize: {
+            title: "Customize",
+            time: "5 minutes",
+            description: "Fine-tune greetings, response templates, and escalation rules to match your workflow.",
+            details: [
+              "Customize chatbot greeting messages",
+              "Set business hours and after-hours behavior",
+              "Create response templates",
+              "Define when to escalate to human",
+              "Configure lead routing rules"
+            ]
+          },
+          goLive: {
+            title: "Go Live",
+            time: "Instant",
+            description: "Flip the switch and watch your AI team start capturing and qualifying leads 24/7.",
+            details: [
+              "Enable chatbot on your website",
+              "Activate email automation",
+              "Turn on voice agent",
+              "Start receiving lead notifications",
+              "Monitor dashboard for real-time activity"
+            ]
+          },
+          optimize: {
+            title: "Optimize & Scale",
+            time: "Ongoing",
+            description: "Review analytics, improve responses, and watch your conversion rates soar.",
+            details: [
+              "Review weekly performance reports",
+              "Refine AI responses based on data",
+              "A/B test different approaches",
+              "Scale up as you grow",
+              "Access ongoing support & training"
+            ]
+          }
+        },
+        dashboard: {
+          title: "Your Command Center Awaits",
+          subtitle: "Everything you need to manage leads, conversations, and deals in one beautiful interface",
+          unifiedInbox: "Unified Inbox",
+          unifiedInboxDesc: "All conversations in one place",
+          aiInsights: "AI Insights",
+          aiInsightsDesc: "Smart lead scoring & recommendations",
+          analytics: "Real-time Analytics",
+          analyticsDesc: "Track performance & ROI",
+          cta: "Start Your 14-Day Free Trial"
+        },
+        support: {
+          title: "We're Here to Help Every Step",
+          subtitle: "Our Canadian-based support team ensures you never feel stuck",
+          videoTutorials: "📚 Video Tutorials",
+          videoTutorialsDesc: "Step-by-step guides for every feature",
+          liveChat: "💬 Live Chat",
+          liveChatDesc: "Instant answers during business hours",
+          freeOnboarding: "🎓 Free Onboarding",
+          freeOnboardingDesc: "Personalized setup assistance",
+          avgSetupTime: "Average setup time: 22 minutes",
+          basedOn: "(based on 500+ agent onboardings)"
+        }
+      },
+      integrationsPage: {
+        stats: {
+          nativeIntegrations: "Native Integrations",
+          viaZapier: "Via Zapier Connection",
+          realTimeSync: "Real-Time Sync"
+        },
+        partners: {
+          title: "Our Integration Partners",
+          subtitle: "Connect with {count}+ industry-leading tools and platforms"
+        },
+        categories: {
+          crmPlatforms: "CRM Platforms",
+          automationTools: "Automation & Workflow Tools",
+          communicationTools: "Communication Tools",
+          calendarTools: "Calendar Tools",
+          contactLeadTools: "Contact & Lead Tools"
+        },
+        api: {
+          title: "Need a Custom Integration?",
+          subtitle: "Our REST API and Zapier integration give you unlimited flexibility to connect any tool in your workflow.",
+          restApi: "Full REST API Access",
+          restApiDesc: "Enterprise plan includes complete API documentation",
+          zapier: "Zapier Integration",
+          zapierDesc: "Connect to 5,000+ apps without coding",
+          webhooks: "Webhook Support",
+          webhooksDesc: "Real-time data sync with your custom tools",
+          devSupport: "Developer Support",
+          devSupportDesc: "Dedicated technical team for custom integrations",
+          enterpriseApi: "Enterprise API Access",
+          enterpriseApiDesc: "Build custom integrations with our comprehensive API. Available on Enterprise plans."
+        },
+        cta: {
+          title: "Ready to Connect Your Tech Stack?",
+          subtitle: "Start integrating your tools today and experience seamless workflow automation",
+          button: "Start Closing More Deals",
+          pricing: "View Pricing"
+        },
+        buttons: {
+          bookDemo: "Book Your Free Demo",
+          viewFeatures: "View All Features"
+        }
+      },
+      resourcesPage: {
+        categories: {
+          all: "All Articles",
+          aiTech: "AI & Technology",
+          canadianMarket: "Canadian Market",
+          marketing: "Marketing",
+          compliance: "Compliance",
+          successStories: "Success Stories"
+        },
+        articles: {
+          aiTransformation: {
+            title: "How AI Is Transforming Canadian Real Estate in 2025",
+            excerpt: "Discover the latest AI innovations revolutionizing how Canadian realtors work, from predictive analytics to automated transaction management."
+          },
+          creaDdf: {
+            title: "The Complete Guide to CREA DDF® Integration",
+            excerpt: "Everything you need to know about accessing national MLS data and integrating CREA DDF® into your real estate workflow."
+          },
+          compliance: {
+            title: "Provincial Compliance Checklist: ON, BC, AB, QC",
+            excerpt: "Stay compliant with regulations across Canada. A comprehensive guide to RECO, BCFSA, RECA, and AMF requirements."
+          },
+          leadConversion: {
+            title: "10 Ways to Increase Lead Conversion with Predictive Analytics",
+            excerpt: "Learn how AI-powered lead scoring and predictive analytics can increase your conversion rate from 5% to 18%."
+          },
+          bilingual: {
+            title: "Bilingual Real Estate Marketing: Beyond Translation",
+            excerpt: "Master the art of true bilingual marketing for Canadian markets. It's not just about translation - it's about cultural communication."
+          },
+          successStory: {
+            title: "How Sarah Chen Closed 14 Extra Deals in Q1 with AI",
+            excerpt: "A Toronto agent's journey from traditional CRM to AI-powered success. Real numbers, real results, real transformation."
+          }
+        },
+        readTime: "min read",
+        readMore: "Read More",
+        newsletter: {
+          title: "Get Weekly Insights Delivered to Your Inbox",
+          subtitle: "Join 2,000+ Canadian realtors receiving actionable AI and real estate tips every week",
+          placeholder: "Enter your email",
+          subscribe: "Subscribe",
+          noSpam: "No spam. Unsubscribe anytime. Privacy policy."
+        }
+      },
       footer: {
         tagline: "AI-Powered Real Estate Success",
         product: "Product",
@@ -1310,29 +1476,6 @@ const resources = {
         timezones: "Couvre les 6 Fuseaux Horaires Canadiens",
         crea: "Aligné avec le Code d'Éthique CREA",
         pricing: "Tarification en CAD"
-      },
-      howItWorks: {
-        title: "Opérationnel en Quelques Minutes",
-        step1: {
-          title: "Inscription",
-          time: "2 minutes",
-          description: "Créez un compte, choisissez votre plan"
-        },
-        step2: {
-          title: "Connectez Vos Outils",
-          time: "5 minutes",
-          description: "Liez CRM, email, site Web"
-        },
-        step3: {
-          title: "Entraînez Votre IA",
-          time: "10 minutes",
-          description: "Ajoutez infos propriétés, FAQ, votre style"
-        },
-        step4: {
-          title: "En Direct",
-          time: "Instantané",
-          description: "L'IA commence à capturer des prospects 24/7"
-        }
       },
       faq: {
         title: "Questions Fréquemment Posées",
@@ -2071,6 +2214,195 @@ const resources = {
             notAuthenticated: "Non authentifié",
             pleaseLogin: "Veuillez vous connecter pour importer des contacts"
           }
+        }
+      },
+      howItWorks: {
+        hero: {
+          title: "Soyez Opérationnel en",
+          titleGradient: "20 Minutes",
+          subtitle: "De l'inscription à la capture de prospects en moins de temps qu'il n'en faut pour se rendre à une visite. Aucune compétence technique requise."
+        },
+        steps: {
+          signUp: {
+            title: "Inscription",
+            time: "2 minutes",
+            description: "Créez votre compte et choisissez votre forfait. Aucune carte de crédit requise pour l'essai de 14 jours.",
+            details: [
+              "Entrez votre nom, courriel et info courtage",
+              "Choisissez votre niveau d'abonnement",
+              "Vérifiez votre adresse courriel",
+              "Accédez immédiatement à votre tableau de bord"
+            ]
+          },
+          connectTools: {
+            title: "Connectez Vos Outils",
+            time: "5 minutes",
+            description: "Liez votre CRM, courriel, site web et système téléphonique avec des intégrations en un clic.",
+            details: [
+              "Connectez votre CRM existant (Follow Up Boss, Brivity, etc.)",
+              "Liez Gmail ou Outlook",
+              "Ajoutez le code widget à votre site",
+              "Importez vos contacts existants (CSV ou sync directe)"
+            ]
+          },
+          trainAI: {
+            title: "Entraînez Votre IA",
+            time: "10 minutes",
+            description: "Enseignez à l'IA vos propriétés, style et préférences. Notre assistant rend cela facile.",
+            details: [
+              "Téléversez vos inscriptions actuelles et infos propriétés",
+              "Ajoutez les questions fréquemment posées",
+              "Définissez votre style de communication",
+              "Configurez les critères de qualification des prospects",
+              "Configurez les préférences de notification"
+            ]
+          },
+          customize: {
+            title: "Personnalisez",
+            time: "5 minutes",
+            description: "Affinez les salutations, modèles de réponse et règles d'escalade selon votre flux de travail.",
+            details: [
+              "Personnalisez les messages d'accueil du chatbot",
+              "Définissez les heures d'ouverture et le comportement hors heures",
+              "Créez des modèles de réponse",
+              "Définissez quand escalader vers un humain",
+              "Configurez les règles de routage des prospects"
+            ]
+          },
+          goLive: {
+            title: "Mettez en Ligne",
+            time: "Instantané",
+            description: "Activez le commutateur et regardez votre équipe IA capturer et qualifier des prospects 24/7.",
+            details: [
+              "Activez le chatbot sur votre site web",
+              "Activez l'automatisation des courriels",
+              "Activez l'agent vocal",
+              "Commencez à recevoir des notifications de prospects",
+              "Surveillez le tableau de bord pour l'activité en temps réel"
+            ]
+          },
+          optimize: {
+            title: "Optimisez et Développez",
+            time: "En continu",
+            description: "Examinez les analyses, améliorez les réponses et regardez vos taux de conversion monter.",
+            details: [
+              "Examinez les rapports de performance hebdomadaires",
+              "Affinez les réponses IA selon les données",
+              "Testez différentes approches en A/B",
+              "Développez à mesure que vous grandissez",
+              "Accédez au support et formation continus"
+            ]
+          }
+        },
+        dashboard: {
+          title: "Votre Centre de Commande Vous Attend",
+          subtitle: "Tout ce dont vous avez besoin pour gérer prospects, conversations et transactions dans une interface élégante",
+          unifiedInbox: "Boîte de Réception Unifiée",
+          unifiedInboxDesc: "Toutes les conversations au même endroit",
+          aiInsights: "Insights IA",
+          aiInsightsDesc: "Notation intelligente des prospects et recommandations",
+          analytics: "Analyses en Temps Réel",
+          analyticsDesc: "Suivez la performance et le ROI",
+          cta: "Commencez Votre Essai Gratuit de 14 Jours"
+        },
+        support: {
+          title: "Nous Sommes Là pour Vous Aider à Chaque Étape",
+          subtitle: "Notre équipe de support basée au Canada s'assure que vous ne soyez jamais bloqué",
+          videoTutorials: "📚 Tutoriels Vidéo",
+          videoTutorialsDesc: "Guides étape par étape pour chaque fonctionnalité",
+          liveChat: "💬 Chat en Direct",
+          liveChatDesc: "Réponses instantanées pendant les heures d'ouverture",
+          freeOnboarding: "🎓 Intégration Gratuite",
+          freeOnboardingDesc: "Assistance personnalisée à la configuration",
+          avgSetupTime: "Temps de configuration moyen : 22 minutes",
+          basedOn: "(basé sur 500+ intégrations d'agents)"
+        }
+      },
+      integrationsPage: {
+        stats: {
+          nativeIntegrations: "Intégrations Natives",
+          viaZapier: "Via Connexion Zapier",
+          realTimeSync: "Synchronisation en Temps Réel"
+        },
+        partners: {
+          title: "Nos Partenaires d'Intégration",
+          subtitle: "Connectez-vous à {count}+ outils et plateformes de premier plan"
+        },
+        categories: {
+          crmPlatforms: "Plateformes CRM",
+          automationTools: "Outils d'Automatisation et Flux de Travail",
+          communicationTools: "Outils de Communication",
+          calendarTools: "Outils de Calendrier",
+          contactLeadTools: "Outils de Contacts et Prospects"
+        },
+        api: {
+          title: "Besoin d'une Intégration Personnalisée?",
+          subtitle: "Notre API REST et intégration Zapier vous offrent une flexibilité illimitée pour connecter n'importe quel outil.",
+          restApi: "Accès API REST Complet",
+          restApiDesc: "Le plan Entreprise inclut la documentation API complète",
+          zapier: "Intégration Zapier",
+          zapierDesc: "Connectez-vous à 5 000+ applications sans coder",
+          webhooks: "Support Webhook",
+          webhooksDesc: "Synchronisation de données en temps réel avec vos outils personnalisés",
+          devSupport: "Support Développeur",
+          devSupportDesc: "Équipe technique dédiée pour les intégrations personnalisées",
+          enterpriseApi: "Accès API Entreprise",
+          enterpriseApiDesc: "Créez des intégrations personnalisées avec notre API complète. Disponible sur les plans Entreprise."
+        },
+        cta: {
+          title: "Prêt à Connecter Votre Pile Technologique?",
+          subtitle: "Commencez à intégrer vos outils aujourd'hui et profitez d'une automatisation fluide",
+          button: "Commencez à Conclure Plus",
+          pricing: "Voir les Tarifs"
+        },
+        buttons: {
+          bookDemo: "Réserver Votre Démo Gratuite",
+          viewFeatures: "Voir Toutes les Fonctionnalités"
+        }
+      },
+      resourcesPage: {
+        categories: {
+          all: "Tous les Articles",
+          aiTech: "IA et Technologie",
+          canadianMarket: "Marché Canadien",
+          marketing: "Marketing",
+          compliance: "Conformité",
+          successStories: "Histoires de Succès"
+        },
+        articles: {
+          aiTransformation: {
+            title: "Comment l'IA Transforme l'Immobilier Canadien en 2025",
+            excerpt: "Découvrez les dernières innovations IA qui révolutionnent le travail des agents immobiliers canadiens, de l'analyse prédictive à la gestion automatisée des transactions."
+          },
+          creaDdf: {
+            title: "Le Guide Complet de l'Intégration CREA DDF®",
+            excerpt: "Tout ce que vous devez savoir pour accéder aux données MLS nationales et intégrer CREA DDF® dans votre flux de travail immobilier."
+          },
+          compliance: {
+            title: "Liste de Contrôle de Conformité Provinciale : ON, BC, AB, QC",
+            excerpt: "Restez conforme aux réglementations à travers le Canada. Un guide complet des exigences RECO, BCFSA, RECA et AMF."
+          },
+          leadConversion: {
+            title: "10 Façons d'Augmenter la Conversion des Prospects avec l'Analyse Prédictive",
+            excerpt: "Apprenez comment la notation des prospects et l'analyse prédictive alimentées par l'IA peuvent augmenter votre taux de conversion de 5% à 18%."
+          },
+          bilingual: {
+            title: "Marketing Immobilier Bilingue : Au-delà de la Traduction",
+            excerpt: "Maîtrisez l'art du vrai marketing bilingue pour les marchés canadiens. Ce n'est pas juste de la traduction - c'est de la communication culturelle."
+          },
+          successStory: {
+            title: "Comment Sarah Chen a Conclu 14 Transactions de Plus au T1 avec l'IA",
+            excerpt: "Le parcours d'une agente de Toronto du CRM traditionnel au succès propulsé par l'IA. Vrais chiffres, vrais résultats, vraie transformation."
+          }
+        },
+        readTime: "min de lecture",
+        readMore: "Lire la Suite",
+        newsletter: {
+          title: "Recevez des Insights Hebdomadaires dans Votre Boîte de Réception",
+          subtitle: "Rejoignez 2 000+ agents immobiliers canadiens qui reçoivent des conseils pratiques sur l'IA et l'immobilier chaque semaine",
+          placeholder: "Entrez votre courriel",
+          subscribe: "S'abonner",
+          noSpam: "Pas de spam. Désabonnez-vous à tout moment. Politique de confidentialité."
         }
       },
       footer: {
