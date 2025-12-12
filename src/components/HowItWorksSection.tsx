@@ -8,52 +8,68 @@ import demoShowcase from "@/assets/demo-showcase.jpg";
 import agentSuccess from "@/assets/agent-success.jpg";
 
 const HowItWorksSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isFrench = i18n.language === 'fr';
   
   const steps = [
     {
       number: 1,
       icon: Rocket,
-      title: "Quick Setup",
-      time: "15 Minutes",
+      title: isFrench ? "Configuration Rapide" : "Quick Setup",
+      time: isFrench ? "15 Minutes" : "15 Minutes",
       visual: heroDashboard,
-      details: [
+      details: isFrench ? [
+        "Créez votre compte",
+        "Personnalisez les réponses IA",
+        "Connectez vos outils existants (CRM, calendrier, courriel)",
+        "Regardez notre tutoriel de 5 minutes"
+      ] : [
         "Create your account",
         "Customize AI responses",
         "Connect your existing tools (CRM, calendar, email)",
         "Watch our 5-minute tutorial"
       ],
-      buttonText: "See Setup Guide",
+      buttonText: isFrench ? "Voir le Guide" : "See Setup Guide",
       buttonLink: "/demo"
     },
     {
       number: 2,
       icon: ClipboardCheck,
-      title: "Test & Train",
-      time: "First Week",
+      title: isFrench ? "Tester et Entraîner" : "Test & Train",
+      time: isFrench ? "Première Semaine" : "First Week",
       visual: demoShowcase,
-      details: [
+      details: isFrench ? [
+        "Votre IA commence à capturer des prospects 24/7",
+        "Examinez et affinez les réponses IA",
+        "Nous vous accompagnons pendant la première semaine",
+        "Appel de coaching personnalisé inclus"
+      ] : [
         "Your AI starts capturing leads 24/7",
         "Review and refine AI responses",
         "We monitor with you during first week",
         "Personalized coaching call included"
       ],
-      buttonText: "Book Onboarding Call",
+      buttonText: isFrench ? "Réserver un Appel" : "Book Onboarding Call",
       buttonLink: "/demo"
     },
     {
       number: 3,
       icon: TrendingUp,
-      title: "Scale & Grow",
-      time: "Ongoing",
+      title: isFrench ? "Développer et Croître" : "Scale & Grow",
+      time: isFrench ? "En Continu" : "Ongoing",
       visual: agentSuccess,
-      details: [
+      details: isFrench ? [
+        "L'IA gère automatiquement les demandes courantes",
+        "Concentrez-vous sur les activités à haute valeur",
+        "Suivez le ROI avec les analyses intégrées",
+        "Améliorations continues ajoutées"
+      ] : [
         "AI handles routine inquiries automatically",
         "Focus on high-value activities",
         "Track ROI with built-in analytics",
         "Continuous improvements added"
       ],
-      buttonText: "See Success Stories",
+      buttonText: isFrench ? "Voir les Succès" : "See Success Stories",
       buttonLink: "/resources"
     }
   ];
@@ -62,7 +78,11 @@ const HowItWorksSection = () => {
     <section className="section-padding bg-gradient-to-br from-primary/5 to-secondary/5">
       <div className="container-custom">
         <div className="text-center mb-12 sm:mb-16 animate-fade-in-up">
-          <h2 className="mb-3 sm:mb-4">From Sign-Up to Success in 3 Steps</h2>
+          <h2 className="mb-3 sm:mb-4">
+            {isFrench 
+              ? "De l'Inscription au Succès en 3 Étapes" 
+              : "From Sign-Up to Success in 3 Steps"}
+          </h2>
         </div>
 
         {/* Timeline */}
@@ -129,12 +149,20 @@ const HowItWorksSection = () => {
         {/* Stats Below Timeline */}
         <div className="mt-12 sm:mt-16 grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto text-center">
           <Card className="p-6 bg-primary/5 border-primary/20">
-            <div className="text-3xl font-bold text-primary mb-2">2.5 hours</div>
-            <p className="text-sm text-muted-foreground">Average time to first AI-captured lead</p>
+            <div className="text-3xl font-bold text-primary mb-2">2.5 {isFrench ? "heures" : "hours"}</div>
+            <p className="text-sm text-muted-foreground">
+              {isFrench 
+                ? "Temps moyen pour le premier prospect capturé par l'IA" 
+                : "Average time to first AI-captured lead"}
+            </p>
           </Card>
           <Card className="p-6 bg-accent/5 border-accent/20">
-            <div className="text-3xl font-bold text-accent mb-2">15+ hours</div>
-            <p className="text-sm text-muted-foreground">Average time saved per week</p>
+            <div className="text-3xl font-bold text-accent mb-2">15+ {isFrench ? "heures" : "hours"}</div>
+            <p className="text-sm text-muted-foreground">
+              {isFrench 
+                ? "Temps économisé en moyenne par semaine" 
+                : "Average time saved per week"}
+            </p>
           </Card>
         </div>
       </div>
