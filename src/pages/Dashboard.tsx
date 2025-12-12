@@ -69,16 +69,36 @@ const Dashboard = () => {
   }, [navigate]);
 
   const fetchDashboardData = async (userId: string) => {
-    // Fetch analytics
-    const { data: analyticsData } = await supabase
-      .from("user_analytics")
-      .select("*")
+    // Calculate this month's date range
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    
+    // Fetch new leads this month (count from contacts table)
+    const { count: monthlyLeadsCount } = await supabase
+      .from("contacts")
+      .select("*", { count: "exact", head: true })
       .eq("user_id", userId)
-      .single();
+      .gte("created_at", startOfMonth);
 
-    if (analyticsData) {
-      setAnalytics(analyticsData);
-    }
+    // Fetch active deals count and pipeline value
+    const { data: dealsData } = await supabase
+      .from("deals")
+      .select("stage, value")
+      .eq("user_id", userId)
+      .eq("status", "active");
+
+    const activeDealsCount = dealsData?.length || 0;
+    const pipelineValue = dealsData?.reduce((sum, deal) => sum + Number(deal.value || 0), 0) || 0;
+
+    // Set analytics from live data
+    setAnalytics({
+      monthly_leads: monthlyLeadsCount || 0,
+      leads_change_percent: 0,
+      active_deals_count: activeDealsCount,
+      pipeline_value: pipelineValue,
+      ytd_revenue: 0,
+      annual_goal: 0,
+    });
 
     // Fetch hot leads (AI score >= 80)
     const { data: leadsData } = await supabase
@@ -114,13 +134,7 @@ const Dashboard = () => {
       setTodayTasks(tasksData);
     }
 
-    // Fetch deal statistics
-    const { data: dealsData } = await supabase
-      .from("deals")
-      .select("stage, value")
-      .eq("user_id", userId)
-      .eq("status", "active");
-
+    // Set deal statistics by stage
     if (dealsData) {
       const stats: any = {
         lead: { count: 0, value: 0 },
