@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
@@ -15,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
@@ -184,7 +186,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
+        <p>{t('app.dashboard.loading')}</p>
       </div>
     );
   }
@@ -205,16 +207,16 @@ const Dashboard = () => {
                   <Crown className="w-6 h-6 text-primary" />
                   <div>
                     <p className="font-semibold">
-                      {getTrialDaysLeft()} days left in your free trial
+                      {getTrialDaysLeft()} {t('app.dashboard.trialDaysLeft')}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      Upgrade now to continue after your trial ends
+                      {t('app.dashboard.upgradeNowContinue')}
                     </p>
                   </div>
                 </div>
                 <Link to="/billing">
                   <Button className="btn-gradient">
-                    Upgrade Now <ArrowRight className="w-4 h-4 ml-2" />
+                    {t('app.sidebar.upgradeNow')} <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
               </div>
@@ -223,11 +225,11 @@ const Dashboard = () => {
 
           {/* Welcome Section */}
           <div>
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {profile?.full_name?.split(' ')[0]}! 👋</h1>
+            <h1 className="text-3xl font-bold mb-2">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}! 👋</h1>
             <p className="text-muted-foreground">
-              You have <span className="font-semibold">{getTasksDueToday()} tasks</span> due today
+              {t('app.dashboard.tasksDueToday', { count: getTasksDueToday() }).replace('{{count}}', String(getTasksDueToday()))}
               {hotLeads.length > 0 && (
-                <> and <span className="font-semibold">{hotLeads.length} hot leads</span> to follow up</>
+                <> {t('app.dashboard.hotLeadsToFollow', { count: hotLeads.length }).replace('{{count}}', String(hotLeads.length))}</>
               )}
             </p>
           </div>
@@ -235,31 +237,31 @@ const Dashboard = () => {
           {/* Stat Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <StatCard
-              title="New Leads (This Month)"
+              title={t('app.dashboard.newLeadsThisMonth')}
               value={analytics?.monthly_leads || 0}
               change={analytics?.leads_change_percent || 0}
               trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
               icon={Users}
             />
             <StatCard
-              title="Active Deals"
+              title={t('app.dashboard.activeDeals')}
               value={analytics?.active_deals_count || 0}
-              subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()} pipeline`}
+              subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()} ${t('app.dashboard.pipeline')}`}
               icon={Briefcase}
             />
             <StatCard
-              title="Tasks Due Today"
+              title={t('app.dashboard.tasksDue')}
               value={getTasksDueToday()}
-              subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} overdue` : undefined}
+              subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} ${t('app.dashboard.overdue')}` : undefined}
               trend={getOverdueTasks() > 0 ? "down" : "neutral"}
               icon={CheckSquare}
             />
             <StatCard
-              title="Revenue YTD"
+              title={t('app.dashboard.revenueYTD')}
               value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
               subtitle={
                 analytics?.annual_goal
-                  ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% of annual goal`
+                  ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% ${t('app.dashboard.ofAnnualGoal')}`
                   : undefined
               }
               icon={DollarSign}

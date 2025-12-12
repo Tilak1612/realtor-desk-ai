@@ -13,6 +13,8 @@ const LanguageSwitcher = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    // Store preference in localStorage for persistence
+    localStorage.setItem('preferred-language', lng);
   };
 
   return (
@@ -30,13 +32,13 @@ const LanguageSwitcher = () => {
           onClick={() => changeLanguage('en')}
           className={`cursor-pointer ${i18n.language === 'en' ? 'bg-accent text-accent-foreground' : ''}`}
         >
-          <span className="mr-2">🇬🇧</span> English
+          <span className="mr-2">🇨🇦</span> English
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => changeLanguage('fr')}
           className={`cursor-pointer ${i18n.language === 'fr' ? 'bg-accent text-accent-foreground' : ''}`}
         >
-          <span className="mr-2">🇫🇷</span> Français
+          <span className="mr-2">🇨🇦</span> Français
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

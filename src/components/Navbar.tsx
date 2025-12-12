@@ -73,7 +73,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
             <Link to="/login">
-              <Button variant="outline" className="font-semibold">Sign In</Button>
+              <Button variant="outline" className="font-semibold">{t('app.auth.signIn')}</Button>
             </Link>
             <Link to="/demo">
               <Button className="btn-gradient font-semibold">{t('nav.startClosing')}</Button>
@@ -114,7 +114,7 @@ const Navbar = () => {
                 <LanguageSwitcher />
               </div>
               <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="mt-2">
-                <Button variant="outline" className="w-full min-h-[52px] text-base font-semibold">Sign In</Button>
+                <Button variant="outline" className="w-full min-h-[52px] text-base font-semibold">{t('app.auth.signIn')}</Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button className="btn-gradient w-full min-h-[52px] text-base font-semibold">{t('nav.startClosing')}</Button>
