@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   Users,
@@ -21,28 +22,29 @@ import {
 import logo from "@/assets/realtor-desk-icon.png";
 import { useState } from "react";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-  { icon: Users, label: "Contacts", path: "/contacts" },
-  { icon: Building2, label: "Properties", path: "/properties" },
-  { icon: Briefcase, label: "Deals", path: "/deals" },
-  { icon: CheckSquare, label: "Tasks", path: "/tasks" },
-  { icon: Bot, label: "AI Assistant", path: "/ai-assistant" },
-  { icon: Mail, label: "Campaigns", path: "/campaigns" },
-  { icon: Calendar, label: "Calendar", path: "/calendar" },
-  { icon: TrendingUp, label: "Reports", path: "/reports" },
-  { icon: MapPin, label: "Market Intelligence", path: "/market" },
-  { icon: CreditCard, label: "Billing", path: "/billing" },
-  { icon: Settings, label: "Settings", path: "/settings" },
-];
-
 interface DashboardSidebarProps {
   trialDaysLeft?: number;
 }
 
 const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  const menuItems = [
+    { icon: LayoutDashboard, label: t('app.sidebar.dashboard'), path: "/dashboard" },
+    { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts" },
+    { icon: Building2, label: t('app.sidebar.properties'), path: "/properties" },
+    { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals" },
+    { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
+    { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
+    { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
+    { icon: Calendar, label: t('app.sidebar.calendar'), path: "/calendar" },
+    { icon: TrendingUp, label: t('app.sidebar.reports'), path: "/reports" },
+    { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
+    { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
+    { icon: Settings, label: t('app.sidebar.settings'), path: "/settings" },
+  ];
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -106,16 +108,15 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-primary" />
                 <Badge variant="secondary" className="font-semibold">
-                  Trial Active
+                  {t('app.sidebar.trialActive')}
                 </Badge>
               </div>
               <p className="text-sm text-muted-foreground">
-                <span className="font-bold text-foreground">{trialDaysLeft} days</span> left in your
-                trial
+                <span className="font-bold text-foreground">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
               </p>
               <Link to="/billing">
                 <Button className="w-full btn-gradient" size="sm">
-                  Upgrade Now
+                  {t('app.sidebar.upgradeNow')}
                 </Button>
               </Link>
             </div>
