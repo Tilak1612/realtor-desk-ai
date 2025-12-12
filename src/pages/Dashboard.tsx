@@ -83,12 +83,13 @@ const Dashboard = () => {
     // Fetch active deals count and pipeline value
     const { data: dealsData } = await supabase
       .from("deals")
-      .select("stage, value")
+      .select("stage, value, listing_price")
       .eq("user_id", userId)
       .eq("status", "active");
 
     const activeDealsCount = dealsData?.length || 0;
-    const pipelineValue = dealsData?.reduce((sum, deal) => sum + Number(deal.value || 0), 0) || 0;
+    // Use listing_price as fallback if value is null
+    const pipelineValue = dealsData?.reduce((sum, deal) => sum + Number(deal.value || deal.listing_price || 0), 0) || 0;
 
     // Set analytics from live data
     setAnalytics({
@@ -147,7 +148,7 @@ const Dashboard = () => {
       dealsData.forEach(deal => {
         if (stats[deal.stage]) {
           stats[deal.stage].count++;
-          stats[deal.stage].value += Number(deal.value || 0);
+          stats[deal.stage].value += Number(deal.value || deal.listing_price || 0);
         }
       });
 
