@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,6 +12,7 @@ import AddDealModal from "@/components/deals/AddDealModal";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Deals = () => {
+  const { t } = useTranslation();
   const [view, setView] = useState<"kanban" | "list">("kanban");
   const [filter, setFilter] = useState<string>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -49,23 +51,23 @@ const Deals = () => {
             {/* Top Bar */}
             <div className="flex flex-col gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold">Transactions Pipeline</h1>
-                <p className="text-sm text-muted-foreground mt-1">Manage your listings and buyer transactions</p>
+                <h1 className="text-2xl sm:text-3xl font-bold">{t('app.deals.title')} {t('app.deals.pipeline')}</h1>
+                <p className="text-sm text-muted-foreground mt-1">{t('app.deals.allDeals')}</p>
               </div>
               
               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 <Select value={filter} onValueChange={setFilter}>
                   <SelectTrigger className="w-full sm:w-[200px]">
-                    <SelectValue placeholder="Filter" />
+                    <SelectValue placeholder={t('app.common.filter')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Transactions</SelectItem>
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="buyer">My Buyers</SelectItem>
-                    <SelectItem value="seller">My Listings</SelectItem>
-                    <SelectItem value="closing_this_month">Closing This Month</SelectItem>
-                    <SelectItem value="sold">Sold</SelectItem>
-                    <SelectItem value="withdrawn">Withdrawn</SelectItem>
+                    <SelectItem value="all">{t('app.deals.allDeals')}</SelectItem>
+                    <SelectItem value="active">{t('app.deals.active')}</SelectItem>
+                    <SelectItem value="buyer">{t('app.deals.stages.viewing')}</SelectItem>
+                    <SelectItem value="seller">{t('app.deals.stages.offer')}</SelectItem>
+                    <SelectItem value="closing_this_month">{t('app.deals.stages.closing')}</SelectItem>
+                    <SelectItem value="sold">{t('app.deals.won')}</SelectItem>
+                    <SelectItem value="withdrawn">{t('app.deals.lost')}</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -77,7 +79,7 @@ const Deals = () => {
                       onClick={() => setView("kanban")}
                     >
                       <LayoutGrid className="h-4 w-4" />
-                      <span className="ml-1 hidden sm:inline">Board</span>
+                      <span className="ml-1 hidden sm:inline">{t('app.deals.pipeline')}</span>
                     </Button>
                     <Button
                       variant={view === "list" ? "secondary" : "ghost"}
@@ -85,14 +87,14 @@ const Deals = () => {
                       onClick={() => setView("list")}
                     >
                       <List className="h-4 w-4" />
-                      <span className="ml-1 hidden sm:inline">List</span>
+                      <span className="ml-1 hidden sm:inline">{t('app.common.all')}</span>
                     </Button>
                   </div>
 
                   <Button onClick={() => setIsAddModalOpen(true)} className="flex-1 sm:flex-initial">
                     <Plus className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">New Transaction</span>
-                    <span className="sm:hidden">New</span>
+                    <span className="hidden sm:inline">{t('app.deals.addDeal')}</span>
+                    <span className="sm:hidden">{t('app.common.add')}</span>
                   </Button>
                 </div>
               </div>
