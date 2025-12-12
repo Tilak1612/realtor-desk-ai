@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -52,6 +53,7 @@ export interface PropertyFiltersState {
 }
 
 const Properties = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [properties, setProperties] = useState<Property[]>([]);
@@ -108,7 +110,7 @@ const Properties = () => {
       setProperties(data || []);
     } catch (error: any) {
       toast({
-        title: "Error loading properties",
+        title: t('app.common.error'),
         description: error.message,
         variant: "destructive",
       });
@@ -176,26 +178,26 @@ const Properties = () => {
               <div className="flex items-center gap-3">
                 <Building2 className="h-8 w-8 text-primary" />
                 <div>
-                  <h1 className="text-3xl font-bold">Properties</h1>
+                  <h1 className="text-3xl font-bold">{t('app.properties.title')}</h1>
                   <div className="flex items-center gap-3 mt-1">
                     <Badge variant="secondary">
-                      {statusCounts.total} Total
+                      {statusCounts.total} {t('app.common.all')}
                     </Badge>
                     <Badge variant="outline" className="bg-success/10 text-success border-success/20">
-                      {statusCounts.active} Active
+                      {statusCounts.active} {t('app.properties.active')}
                     </Badge>
                     <Badge variant="outline" className="bg-warning/10 text-warning border-warning/20">
-                      {statusCounts.pending} Pending
+                      {statusCounts.pending} {t('app.properties.pending')}
                     </Badge>
                     <Badge variant="outline" className="bg-muted text-muted-foreground">
-                      {statusCounts.sold} Sold
+                      {statusCounts.sold} {t('app.properties.sold')}
                     </Badge>
                   </div>
                 </div>
               </div>
               <Button onClick={() => setIsAddModalOpen(true)} size="lg">
                 <Plus className="h-4 w-4 mr-2" />
-                Add Property
+                {t('app.properties.addProperty')}
               </Button>
             </div>
 
@@ -208,11 +210,11 @@ const Properties = () => {
                 <TabsList>
                   <TabsTrigger value="grid">
                     <LayoutGrid className="h-4 w-4 mr-2" />
-                    Grid
+                    {t('app.common.all')}
                   </TabsTrigger>
                   <TabsTrigger value="list">
                     <List className="h-4 w-4 mr-2" />
-                    List
+                    {t('app.common.all')}
                   </TabsTrigger>
                 </TabsList>
               </div>

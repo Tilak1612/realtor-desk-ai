@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ import BulkActions from "@/components/tasks/BulkActions";
 import { toast } from "sonner";
 
 const Tasks = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [view, setView] = useState<"list" | "calendar">("list");
   const [quickFilter, setQuickFilter] = useState<string>("all");
@@ -58,23 +60,23 @@ const Tasks = () => {
 
         setProfile(profileData);
       } catch (error: any) {
-        toast.error("Failed to load profile");
+        toast.error(t('app.notifications.errorOccurred'));
       } finally {
         setLoading(false);
       }
     };
     fetchUserData();
-  }, [navigate]);
+  }, [navigate, t]);
 
   const handleTaskAdded = () => {
     setRefreshTrigger(prev => prev + 1);
   };
 
   const quickFilterButtons = [
-    { label: "All", value: "all" },
-    { label: "Today", value: "today" },
-    { label: "This Week", value: "week" },
-    { label: "Overdue", value: "overdue" }
+    { label: t('app.tasks.allTasks'), value: "all" },
+    { label: t('app.tasks.today'), value: "today" },
+    { label: t('app.tasks.upcoming'), value: "week" },
+    { label: t('app.tasks.overdue'), value: "overdue" }
   ];
 
   if (loading) {
@@ -84,7 +86,7 @@ const Tasks = () => {
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">Loading tasks...</p>
+            <p className="mt-4 text-muted-foreground">{t('app.common.loading')}</p>
           </div>
         </div>
       </div>
@@ -102,7 +104,7 @@ const Tasks = () => {
             {/* Top Bar */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h1 className="text-3xl font-bold">Tasks</h1>
+                <h1 className="text-3xl font-bold">{t('app.tasks.title')}</h1>
               </div>
               
               <div className="flex flex-wrap items-center gap-3">
@@ -140,7 +142,7 @@ const Tasks = () => {
 
                 <Button onClick={() => setIsAddModalOpen(true)}>
                   <Plus className="h-4 w-4 mr-2" />
-                  Add Task
+                  {t('app.tasks.addTask')}
                 </Button>
               </div>
             </div>

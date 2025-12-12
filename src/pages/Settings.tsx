@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LogOut, User, Bell, Lock, Palette, Download, Trash2, Shield } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { LogOut, User, Bell, Lock, Palette, Download, Trash2, Shield, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Separator } from "@/components/ui/separator";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,6 +22,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const Settings = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -38,15 +41,15 @@ const Settings = () => {
       if (error) throw error;
       
       toast({
-        title: "Logged out successfully",
-        description: "You have been signed out of your account",
+        title: t('app.common.success'),
+        description: t('app.auth.signOut'),
       });
       
       navigate("/login");
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "Failed to log out",
+        title: t('app.common.error'),
+        description: error.message || t('app.notifications.errorOccurred'),
         variant: "destructive",
       });
     } finally {
@@ -94,13 +97,13 @@ const Settings = () => {
       a.click();
 
       toast({
-        title: "Data exported successfully",
-        description: "Your personal data has been downloaded",
+        title: t('app.common.success'),
+        description: t('app.common.export'),
       });
     } catch (error: any) {
       toast({
-        title: "Export failed",
-        description: error.message || "Failed to export data",
+        title: t('app.common.error'),
+        description: error.message || t('app.notifications.errorOccurred'),
         variant: "destructive",
       });
     } finally {
@@ -111,7 +114,7 @@ const Settings = () => {
   // PIPEDA Compliance - Account Deletion Request
   const handleDeleteAccount = () => {
     toast({
-      title: "Account Deletion Request",
+      title: t('app.common.info'),
       description: "Please contact support@realtordesk.ai to request account deletion. We'll process your request within 30 days as required by PIPEDA.",
     });
   };
@@ -122,28 +125,52 @@ const Settings = () => {
       <div className="flex-1 flex flex-col lg:ml-0">
         <main className="flex-1 p-4 md:p-6">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-2">Settings</h1>
+            <h1 className="text-3xl font-bold mb-2">{t('app.settings.title')}</h1>
             <p className="text-muted-foreground mb-6">
-              Manage your account settings and preferences
+              {t('app.settings.account')}
             </p>
 
             <div className="space-y-6">
+              {/* Language Settings */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Globe className="w-5 h-5" />
+                    {t('app.settings.language')}
+                  </CardTitle>
+                  <CardDescription>
+                    {t('canadian.bilingual')}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">{t('app.settings.language')}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        English / Français
+                      </p>
+                    </div>
+                    <LanguageSwitcher />
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Canadian Real Estate Profile */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    🇨🇦 Canadian Real Estate Profile
+                    🇨🇦 {t('app.settings.profile')}
                   </CardTitle>
                   <CardDescription>
-                    Provincial licensing and regulatory information
+                    {t('app.settings.province')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Province</label>
+                      <label className="text-sm font-medium mb-2 block">{t('app.settings.province')}</label>
                       <select className="w-full p-2 border rounded-md bg-background">
-                        <option value="">Select Province</option>
+                        <option value="">{t('app.settings.province')}</option>
                         <option value="ON">Ontario (ON)</option>
                         <option value="BC">British Columbia (BC)</option>
                         <option value="AB">Alberta (AB)</option>
@@ -161,7 +188,7 @@ const Settings = () => {
                     </div>
                     
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Timezone</label>
+                      <label className="text-sm font-medium mb-2 block">{t('app.settings.timezone')}</label>
                       <select className="w-full p-2 border rounded-md bg-background">
                         <option value="America/Toronto">Eastern (EST/EDT)</option>
                         <option value="America/Halifax">Atlantic (AST/ADT)</option>
@@ -174,9 +201,9 @@ const Settings = () => {
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Regulatory Body</label>
+                    <label className="text-sm font-medium mb-2 block">{t('app.settings.licenseNumber')}</label>
                     <select className="w-full p-2 border rounded-md bg-background">
-                      <option value="">Select Regulatory Body</option>
+                      <option value="">{t('app.settings.licenseNumber')}</option>
                       <option value="RECO">RECO - Ontario</option>
                       <option value="BCFSA">BCFSA - British Columbia</option>
                       <option value="RECA">RECA - Alberta</option>
@@ -190,8 +217,7 @@ const Settings = () => {
 
                   <div className="bg-muted p-4 rounded-lg">
                     <p className="text-sm">
-                      <strong>Note:</strong> Your license information helps ensure compliance with
-                      provincial regulations and CREA Code of Ethics.
+                      <strong>Note:</strong> {t('canadian.crea')}
                     </p>
                   </div>
                 </CardContent>
@@ -202,18 +228,18 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <User className="w-5 h-5" />
-                    Account
+                    {t('app.settings.account')}
                   </CardTitle>
                   <CardDescription>
-                    Manage your account settings
+                    {t('app.settings.account')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-medium">Sign Out</h3>
+                      <h3 className="font-medium">{t('app.auth.signOut')}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Sign out of your account
+                        {t('app.auth.signOut')}
                       </p>
                     </div>
                     <Button 
@@ -222,7 +248,7 @@ const Settings = () => {
                       disabled={loading}
                     >
                       <LogOut className="w-4 h-4 mr-2" />
-                      {loading ? "Logging out..." : "Log Out"}
+                      {loading ? t('app.common.loading') : t('app.auth.signOut')}
                     </Button>
                   </div>
                 </CardContent>
@@ -233,15 +259,15 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Bell className="w-5 h-5" />
-                    Notifications
+                    {t('app.settings.notifications')}
                   </CardTitle>
                   <CardDescription>
-                    Configure how you receive notifications
+                    {t('app.settings.notifications')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Notification settings coming soon
+                    {t('app.common.loading')}
                   </p>
                 </CardContent>
               </Card>
@@ -251,18 +277,18 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="w-5 h-5" />
-                    Privacy & Data Rights (PIPEDA)
+                    {t('app.settings.security')} (PIPEDA)
                   </CardTitle>
                   <CardDescription>
-                    Exercise your rights under Canadian privacy law
+                    {t('canadian.compliant')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-medium">Export Your Data</h3>
+                      <h3 className="font-medium">{t('app.common.export')}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Download all your personal information we have stored
+                        {t('app.common.export')}
                       </p>
                     </div>
                     <Button 
@@ -271,7 +297,7 @@ const Settings = () => {
                       disabled={loading}
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      Export
+                      {t('app.common.export')}
                     </Button>
                   </div>
 
@@ -279,34 +305,32 @@ const Settings = () => {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-medium">Delete Your Account</h3>
+                      <h3 className="font-medium">{t('app.common.delete')}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Permanently delete your account and all associated data
+                        {t('app.common.delete')}
                       </p>
                     </div>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button variant="destructive" disabled={loading}>
                           <Trash2 className="w-4 h-4 mr-2" />
-                          Delete Account
+                          {t('app.common.delete')}
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                          <AlertDialogTitle>{t('app.common.confirm')}</AlertDialogTitle>
                           <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete your
-                            account and remove all your data from our servers, in compliance
-                            with PIPEDA regulations.
+                            {t('app.common.confirm')} PIPEDA
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogCancel>{t('app.common.cancel')}</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={handleDeleteAccount}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                           >
-                            Delete Permanently
+                            {t('app.common.delete')}
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
@@ -315,9 +339,7 @@ const Settings = () => {
 
                   <div className="bg-muted p-4 rounded-lg">
                     <p className="text-sm">
-                      <strong>Your Privacy Rights:</strong> Under PIPEDA, you have the right to
-                      access, correct, and delete your personal information. You can also withdraw
-                      consent for marketing communications at any time.
+                      <strong>{t('app.settings.security')}:</strong> PIPEDA
                     </p>
                   </div>
                 </CardContent>
@@ -328,15 +350,15 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Lock className="w-5 h-5" />
-                    Security Settings
+                    {t('app.settings.security')}
                   </CardTitle>
                   <CardDescription>
-                    Manage your security preferences
+                    {t('app.settings.security')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Advanced security settings coming soon
+                    {t('app.common.loading')}
                   </p>
                 </CardContent>
               </Card>
@@ -346,15 +368,15 @@ const Settings = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Palette className="w-5 h-5" />
-                    Appearance
+                    {t('app.settings.profile')}
                   </CardTitle>
                   <CardDescription>
-                    Customize the look and feel
+                    {t('app.settings.profile')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Theme settings coming soon
+                    {t('app.common.loading')}
                   </p>
                 </CardContent>
               </Card>

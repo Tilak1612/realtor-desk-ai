@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Login = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -48,7 +50,7 @@ const Login = () => {
       });
       if (error) throw error;
     } catch (error: any) {
-      toast.error(error.message || "Failed to sign in");
+      toast.error(error.message || t('app.notifications.errorOccurred'));
     }
   };
 
@@ -56,7 +58,7 @@ const Login = () => {
     e.preventDefault();
     
     if (!email || !password) {
-      toast.error("Please fill in all fields");
+      toast.error(t('app.validation.required'));
       return;
     }
 
@@ -85,9 +87,9 @@ const Login = () => {
       }
     } catch (error: any) {
       if (error.message.includes("Invalid login credentials")) {
-        toast.error("Invalid email or password");
+        toast.error(t('app.auth.invalidCredentials'));
       } else {
-        toast.error(error.message || "Failed to sign in");
+        toast.error(error.message || t('app.notifications.errorOccurred'));
       }
     } finally {
       setLoading(false);
@@ -101,10 +103,10 @@ const Login = () => {
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold text-center">
-              Welcome back
+              {t('app.dashboard.welcomeBack')}
             </CardTitle>
             <CardDescription className="text-center">
-              Sign in to your Realtor Desk AI account
+              {t('app.auth.signIn')} Realtor Desk AI
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -114,14 +116,14 @@ const Login = () => {
                 className="w-full"
                 onClick={() => handleOAuthSignIn("google")}
               >
-                Continue with Google
+                {t('app.auth.signIn')} Google
               </Button>
               <Button
                 variant="outline"
                 className="w-full"
                 onClick={() => handleOAuthSignIn("azure")}
               >
-                Continue with Microsoft
+                {t('app.auth.signIn')} Microsoft
               </Button>
             </div>
 
@@ -131,14 +133,14 @@ const Login = () => {
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background px-2 text-muted-foreground">
-                  Or continue with email
+                  {t('demo.form.orStart')} {t('app.auth.email').toLowerCase()}
                 </span>
               </div>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('app.auth.email')}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -151,12 +153,12 @@ const Login = () => {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t('app.auth.password')}</Label>
                   <Link
                     to="/forgot-password"
                     className="text-sm text-primary hover:underline"
                   >
-                    Forgot password?
+                    {t('app.auth.forgotPassword')}
                   </Link>
                 </div>
                 <Input
@@ -170,14 +172,14 @@ const Login = () => {
               </div>
 
               <Button className="w-full" type="submit" disabled={loading}>
-                {loading ? "Signing in..." : "Sign in"}
+                {loading ? `${t('app.common.loading')}` : t('app.auth.signIn')}
               </Button>
             </form>
 
             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{" "}
+              {t('app.auth.dontHaveAccount')}{" "}
               <Link to="/signup" className="text-primary hover:underline font-medium">
-                Sign up
+                {t('app.auth.signUp')}
               </Link>
             </p>
           </CardContent>

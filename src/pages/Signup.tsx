@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,23 +13,25 @@ import Footer from "@/components/Footer";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
 
-const signupSchema = z.object({
-  email: z.string().email("Please enter a valid email address (e.g., you@example.com)"),
-  password: z.string().min(8, "Please create a password with at least 8 characters for security"),
-  fullName: z.string().min(2, "Please enter your full name (at least 2 characters)"),
-  phone: z.string().optional(),
-  companyName: z.string().min(2, "Please enter your company or brokerage name"),
-  privacyConsent: z.boolean().refine((val) => val === true, {
-    message: "Please accept the Privacy Policy and Terms of Service to continue",
-  }),
-  marketingConsent: z.boolean().optional(),
-});
-
-type SignupForm = z.infer<typeof signupSchema>;
-
 const Signup = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  const signupSchema = z.object({
+    email: z.string().email(t('app.validation.email')),
+    password: z.string().min(8, t('app.auth.passwordMinLength')),
+    fullName: z.string().min(2, t('app.validation.minLength', { min: 2 })),
+    phone: z.string().optional(),
+    companyName: z.string().min(2, t('app.validation.minLength', { min: 2 })),
+    privacyConsent: z.boolean().refine((val) => val === true, {
+      message: t('app.validation.required'),
+    }),
+    marketingConsent: z.boolean().optional(),
+  });
+
+  type SignupForm = z.infer<typeof signupSchema>;
+
   const [formData, setFormData] = useState<Partial<SignupForm>>({
     privacyConsent: false,
     marketingConsent: false,
@@ -74,7 +77,7 @@ const Signup = () => {
       });
       if (error) throw error;
     } catch (error: any) {
-      toast.error(error.message || "Failed to sign in with OAuth");
+      toast.error(error.message || t('app.notifications.errorOccurred'));
     }
   };
 
@@ -109,8 +112,8 @@ const Signup = () => {
       if (data.user) {
         console.log("User created successfully:", data.user);
         
-        toast.success("Account Created! Please verify your email.", {
-          description: "Check your email for a verification link.",
+        toast.success(t('app.auth.verifyEmail'), {
+          description: t('app.auth.checkYourEmail'),
           duration: 6000,
         });
         
@@ -123,8 +126,8 @@ const Signup = () => {
       }
     } catch (error: any) {
       console.error("Signup exception:", error);
-      toast.error("Unable to Create Account", {
-        description: error.message || "There was an error creating your account. Please try again or contact support.",
+      toast.error(t('app.common.error'), {
+        description: error.message || t('app.notifications.errorOccurred'),
         duration: 6000,
       });
     } finally {
@@ -139,10 +142,10 @@ const Signup = () => {
         <Card className="w-full max-w-lg">
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold text-center">
-              Create your account
+              {t('app.auth.createAccount')}
             </CardTitle>
             <CardDescription className="text-center">
-              Start your 14-day free trial today - no credit card required
+              {t('hero.trustLine')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -152,14 +155,14 @@ const Signup = () => {
                 className="w-full"
                 onClick={() => handleOAuthSignIn("google")}
               >
-                Continue with Google
+                {t('app.auth.signIn')} Google
               </Button>
               <Button
                 variant="outline"
                 className="w-full"
                 onClick={() => handleOAuthSignIn("azure")}
               >
-                Continue with Microsoft
+                {t('app.auth.signIn')} Microsoft
               </Button>
             </div>
 
@@ -169,14 +172,14 @@ const Signup = () => {
               </div>
               <div className="relative flex justify-center text-xs uppercase">
                 <span className="bg-background px-2 text-muted-foreground">
-                  Or continue with email
+                  {t('demo.form.orStart')} {t('app.auth.email').toLowerCase()}
                 </span>
               </div>
             </div>
 
             <form onSubmit={handleSignup} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('app.auth.email')}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -190,7 +193,7 @@ const Signup = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t('app.auth.password')}</Label>
                 <Input
                   id="password"
                   type="password"
@@ -204,7 +207,7 @@ const Signup = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="fullName">Full Name</Label>
+                <Label htmlFor="fullName">{t('app.settings.fullName')}</Label>
                 <Input
                   id="fullName"
                   placeholder="John Doe"
@@ -217,7 +220,7 @@ const Signup = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone</Label>
+                <Label htmlFor="phone">{t('app.contacts.phone')}</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -231,7 +234,7 @@ const Signup = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="companyName">Company Name</Label>
+                <Label htmlFor="companyName">{t('app.settings.company')}</Label>
                 <Input
                   id="companyName"
                   placeholder="Your Brokerage"
@@ -253,7 +256,6 @@ const Signup = () => {
                     checked={formData.privacyConsent || false}
                     onCheckedChange={(checked) => {
                       setFormData({ ...formData, privacyConsent: checked as boolean });
-                      // Clear the error when checkbox is checked
                       if (checked) {
                         setErrors({ ...errors, privacyConsent: undefined });
                       }
@@ -264,13 +266,13 @@ const Signup = () => {
                     htmlFor="privacyConsent"
                     className="text-sm font-medium leading-relaxed cursor-pointer block flex-1"
                   >
-                    I agree to the{" "}
+                    {t('footer.privacy')}{" "}
                     <RouterLink to="/privacy-policy" className="text-primary underline">
-                      Privacy Policy
+                      {t('footer.privacy')}
                     </RouterLink>{" "}
-                    and{" "}
+                    &{" "}
                     <RouterLink to="/terms-of-service" className="text-primary underline">
-                      Terms of Service
+                      {t('footer.terms')}
                     </RouterLink>
                     {" "}*
                   </label>
@@ -293,10 +295,10 @@ const Signup = () => {
                       htmlFor="marketingConsent"
                       className="text-sm font-medium leading-relaxed cursor-pointer block"
                     >
-                      I consent to receive marketing communications and updates (Optional)
+                      {t('app.common.optional')}
                     </label>
                     <p className="text-xs text-muted-foreground">
-                      You can unsubscribe at any time as per PIPEDA regulations
+                      PIPEDA
                     </p>
                   </div>
                 </div>
@@ -307,14 +309,14 @@ const Signup = () => {
                 className="w-full"
                 disabled={loading}
               >
-                {loading ? "Creating account..." : "Create Account"}
+                {loading ? t('app.common.loading') : t('app.auth.createAccount')}
               </Button>
             </form>
 
             <p className="text-center text-sm text-muted-foreground">
-              Already have an account?{" "}
+              {t('app.auth.alreadyHaveAccount')}{" "}
               <Link to="/login" className="text-primary hover:underline font-medium">
-                Sign in
+                {t('app.auth.signIn')}
               </Link>
             </p>
           </CardContent>

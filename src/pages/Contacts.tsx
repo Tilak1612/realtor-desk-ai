@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +41,7 @@ export interface ContactFiltersState {
 }
 
 const Contacts = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -99,7 +101,7 @@ const Contacts = () => {
       setContacts(data || []);
     } catch (error: any) {
       toast({
-        title: "Error loading contacts",
+        title: t('app.common.error'),
         description: error.message,
         variant: "destructive",
       });
@@ -169,8 +171,8 @@ const Contacts = () => {
     window.URL.revokeObjectURL(url);
 
     toast({
-      title: "Export successful",
-      description: `${filteredContacts.length} contacts exported to CSV`,
+      title: t('app.common.success'),
+      description: `${filteredContacts.length} ${t('app.contacts.title').toLowerCase()}`,
     });
   };
 
@@ -184,7 +186,7 @@ const Contacts = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="flex items-center gap-3">
-                <h1 className="text-3xl font-bold">Contacts</h1>
+                <h1 className="text-3xl font-bold">{t('app.contacts.title')}</h1>
                 <Badge variant="secondary" className="text-sm">
                   {filteredContacts.length}
                 </Badge>
@@ -196,7 +198,7 @@ const Contacts = () => {
                   onClick={() => setIsImportModalOpen(true)}
                 >
                   <Upload className="h-4 w-4 mr-2" />
-                  Import
+                  {t('app.contacts.importContacts')}
                 </Button>
                 <Button
                   variant="outline"
@@ -205,11 +207,11 @@ const Contacts = () => {
                   disabled={filteredContacts.length === 0}
                 >
                   <Download className="h-4 w-4 mr-2" />
-                  Export CSV
+                  {t('app.contacts.exportContacts')}
                 </Button>
                 <Button onClick={() => setIsAddModalOpen(true)}>
                   <Plus className="h-4 w-4 mr-2" />
-                  Add Contact
+                  {t('app.contacts.addContact')}
                 </Button>
               </div>
             </div>
@@ -229,7 +231,7 @@ const Contacts = () => {
                     .in("id", selectedContacts);
 
                   if (!error) {
-                    toast({ title: "Contacts deleted successfully" });
+                    toast({ title: t('app.notifications.contactDeleted') });
                     setSelectedContacts([]);
                     fetchContacts();
                   }
@@ -243,11 +245,11 @@ const Contacts = () => {
                 <TabsList>
                   <TabsTrigger value="table">
                     <List className="h-4 w-4 mr-2" />
-                    Table
+                    {t('app.common.all')}
                   </TabsTrigger>
                   <TabsTrigger value="cards">
                     <LayoutGrid className="h-4 w-4 mr-2" />
-                    Cards
+                    {t('app.common.all')}
                   </TabsTrigger>
                 </TabsList>
               </div>
