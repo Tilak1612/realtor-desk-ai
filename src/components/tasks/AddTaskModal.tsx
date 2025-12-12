@@ -118,10 +118,6 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
       status: "pending",
       contact_id: formData.contact_id || null,
       deal_id: formData.deal_id || null,
-      metadata: {
-        task_type: formData.task_type,
-        reminder: formData.reminder
-      }
     });
 
     setLoading(false);

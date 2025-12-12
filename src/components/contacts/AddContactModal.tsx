@@ -88,7 +88,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
         ? values.tags.split(",").map((t) => t.trim()).filter(Boolean)
         : [];
 
-      const { error } = await supabase.from("contacts").insert({
+      const { data: contactData, error } = await supabase.from("contacts").insert({
         user_id: session.user.id,
         first_name: values.first_name,
         last_name: values.last_name,
@@ -96,14 +96,22 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
         phone: values.phone || null,
         source: values.source || null,
         tags,
-        metadata: values.notes ? { notes: values.notes } : {},
         preferred_language: values.preferred_language,
         consent_given: values.consent_given,
         consent_date: values.consent_given ? new Date().toISOString() : null,
         consent_source: values.consent_source || values.source || 'manual_entry',
-      });
+      }).select('id').single();
 
       if (error) throw error;
+
+      // If notes were provided, save them to contact_notes table
+      if (values.notes && values.notes.trim() && contactData) {
+        await supabase.from("contact_notes").insert({
+          user_id: session.user.id,
+          contact_id: contactData.id,
+          content: values.notes.trim(),
+        });
+      }
 
       toast({
         title: "Contact added successfully",
