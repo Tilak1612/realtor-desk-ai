@@ -84,7 +84,7 @@ const Hero = () => {
           {/* Hero Image */}
           <div className="relative animate-fade-in-up animation-delay-600 max-w-4xl mx-auto">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/50 backdrop-blur-sm">
-              <img src={heroDashboardAI} alt="RealtorDesk AI dashboard showing AI automation in action - live call handling, bilingual chat, lead scoring, and automated follow-ups for Canadian real estate agents" className="w-full h-auto" />
+              <img src={heroDashboardAI} alt="Realtor Desk dashboard showing AI automation in action - live call handling, bilingual chat, lead scoring, and automated follow-ups for Canadian real estate agents" className="w-full h-auto" />
               {/* AI Active Indicator */}
               <div className="absolute top-4 right-4 bg-accent text-accent-foreground backdrop-blur-md rounded-lg px-4 py-2.5 shadow-lg">
                 <div className="flex items-center gap-2">

@@ -38,7 +38,7 @@ const resources = {
           title: "Trusted & Secure"
         },
         demo: {
-          title: "See Realtor Desk AI in Action",
+          title: "See Realtor Desk in Action",
           description: "Watch how AI can transform your real estate business in just 2 minutes",
           watchDemo: "Watch 2-Minute Product Demo",
           bookDemo: "Book Live Demo",
@@ -110,12 +110,12 @@ const resources = {
           title: "Frequently Asked Questions"
         }
       },
-      demo: {
-        hero: {
-          title: "See",
-          titleGradient: "Realtor Desk AI",
-          titleEnd: "in Action",
-          subtitle: "Schedule a personalized demo and see how we can help your business"
+        demo: {
+          hero: {
+            title: "See",
+            titleGradient: "Realtor Desk",
+            titleEnd: "in Action",
+            subtitle: "Schedule a personalized demo and see how we can help your business"
         },
         form: {
           title: "Request a Personalized Demo",
@@ -125,13 +125,13 @@ const resources = {
           getStarted: "get started",
           rightAway: "right away"
         },
-        expect: {
-          title: "What to Expect",
-          discovery: "Discovery Call (15 min)",
-          discoveryDesc: "We learn about your business, challenges, and goals",
-          liveDemo: "Live Demo (30 min)",
-          liveDemoDesc: "See Realtor Desk AI in action with examples specific to your market",
-          onboarding: "Custom Onboarding",
+          expect: {
+            title: "What to Expect",
+            discovery: "Discovery Call (15 min)",
+            discoveryDesc: "We learn about your business, challenges, and goals",
+            liveDemo: "Live Demo (30 min)",
+            liveDemoDesc: "See Realtor Desk in action with examples specific to your market",
+            onboarding: "Custom Onboarding",
           onboardingDesc: "Get started with personalized onboarding and support"
         },
         contact: {
@@ -265,7 +265,7 @@ const resources = {
       faq: {
         title: "Frequently Asked Questions",
         q1: {
-          question: "Is RealtorDesk AI ready for production use?",
+          question: "Is Realtor Desk ready for production use?",
           answer: "We're currently in public beta with 50+ active realtors across Canada. The platform is fully functional and stable, but we're actively gathering feedback and adding features. Beta users help shape our roadmap and receive lifetime discounts."
         },
         q2: {
@@ -343,7 +343,7 @@ const resources = {
           title: "Canadian Built",
           description: "Designed specifically for Canadian realtors with data residency in Toronto/Vancouver and full bilingual support."
         },
-        disclaimer: "RealtorDesk AI is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary."
+        disclaimer: "Realtor Desk is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary."
       },
       betaCommunity: {
         title: "Join Our Growing Beta Community",

@@ -23,7 +23,7 @@ const SwitchFromBoldTrail = () => {
             Frustrated with <span className="gradient-text">BoldTrail?</span> You're Not Alone.
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Join 200+ agents who switched to Realtor Desk AI in 2024 and saved $6,288/year 
+            Join 200+ agents who switched to Realtor Desk in 2024 and saved $6,288/year 
             while getting better AI, faster support, and Canadian features BoldTrail lacks.
           </p>
           
@@ -127,7 +127,7 @@ const SwitchFromBoldTrail = () => {
               <div className="text-lg font-bold mb-2">Step 3</div>
               <h3 className="font-semibold mb-2">We Import</h3>
               <p className="text-sm text-muted-foreground">
-                Everything moved to your new Realtor Desk AI account
+                Everything moved to your new Realtor Desk account
               </p>
             </Card>
 
@@ -199,7 +199,7 @@ const SwitchFromBoldTrail = () => {
                 </div>
                 <div className="flex-1">
                   <p className="italic mb-3">
-                    "BoldTrail kept crashing. Realtor Desk AI is rock solid. Plus the AI actually works—
+                    "BoldTrail kept crashing. Realtor Desk is rock solid. Plus the AI actually works—
                     it closed a lead at 2am while I slept. BoldTrail could never do that."
                   </p>
                   <div className="flex items-center gap-2">
@@ -238,7 +238,7 @@ const SwitchFromBoldTrail = () => {
         <div className="container-custom max-w-4xl text-center">
           <h2 className="mb-6">Risk-Free 30-Day Guarantee</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Try Realtor Desk AI for 30 days. If it's not better than BoldTrail in every way, 
+            Try Realtor Desk for 30 days. If it's not better than BoldTrail in every way, 
             we'll refund 100% and help you migrate back. No questions asked.
           </p>
 

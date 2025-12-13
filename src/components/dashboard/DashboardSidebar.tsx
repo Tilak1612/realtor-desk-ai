@@ -78,8 +78,8 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
           className="flex items-center gap-3 p-6 border-b hover:bg-accent/50 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          <img src={logo} alt="Realtor Desk AI" className="h-10 w-auto" />
-          <span className="text-lg font-bold gradient-text">Realtor Desk AI</span>
+          <img src={logo} alt="Realtor Desk" className="h-10 w-auto" />
+          <span className="text-lg font-bold gradient-text">Realtor Desk</span>
         </Link>
 
         {/* Navigation */}
