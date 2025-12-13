@@ -71,7 +71,7 @@ const VsWiseAgent = () => {
             <Card className="p-8 border-accent">
               <div className="text-center mb-4">
                 <div className="text-4xl mb-3">🇨🇦</div>
-                <Badge className="mb-2 bg-accent">Realtor Desk AI</Badge>
+                <Badge className="mb-2 bg-accent">Realtor Desk</Badge>
                 <h3 className="text-xl font-bold">Built for Canada</h3>
               </div>
               <ul className="space-y-3">
@@ -168,7 +168,7 @@ const VsWiseAgent = () => {
               <thead>
                 <tr className="border-b-2">
                   <th className="text-left p-4 font-bold">Feature</th>
-                  <th className="text-center p-4 font-bold">Realtor Desk AI</th>
+                  <th className="text-center p-4 font-bold">Realtor Desk</th>
                   <th className="text-center p-4 font-bold">Wise Agent</th>
                 </tr>
               </thead>

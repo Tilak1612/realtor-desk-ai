@@ -458,7 +458,7 @@ const AIPoweredCRM = () => {
                   <th className="text-left p-4 font-bold">Capability</th>
                   <th className="text-center p-4 font-bold">Basic CRMs</th>
                   <th className="text-center p-4 font-bold">Other "AI" CRMs</th>
-                  <th className="text-center p-4 font-bold">Realtor Desk AI</th>
+                  <th className="text-center p-4 font-bold">Realtor Desk</th>
                 </tr>
               </thead>
               <tbody>

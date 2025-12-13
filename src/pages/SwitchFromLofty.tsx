@@ -110,7 +110,7 @@ const SwitchFromLofty = () => {
             </Card>
 
             <Card className="p-8 border-accent">
-              <Badge className="mb-4 bg-accent">Realtor Desk AI</Badge>
+              <Badge className="mb-4 bg-accent">Realtor Desk</Badge>
               <h3 className="text-xl font-bold mb-4">True Intelligence</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
@@ -139,7 +139,7 @@ const SwitchFromLofty = () => {
 
           <Card className="mt-8 p-6 bg-accent/10 border-accent/20">
             <p className="text-center italic mb-2">
-              "Lofty's 'AI' sent the same generic email to everyone. Realtor Desk AI actually 
+              "Lofty's 'AI' sent the same generic email to everyone. Realtor Desk actually 
               personalizes based on what each lead clicks. Night and day difference."
             </p>
             <p className="text-center font-semibold">- Marcus R., Vancouver</p>
@@ -182,7 +182,7 @@ const SwitchFromLofty = () => {
               <div className="text-lg font-bold mb-2">Step 3</div>
               <h3 className="font-semibold mb-2">Import</h3>
               <p className="text-sm text-muted-foreground">
-                Everything moved to Realtor Desk AI
+                Everything moved to Realtor Desk
               </p>
             </Card>
 
@@ -230,7 +230,7 @@ const SwitchFromLofty = () => {
             </Card>
 
             <Card className="p-8 border-accent">
-              <Badge className="mb-4 bg-accent">Realtor Desk AI</Badge>
+              <Badge className="mb-4 bg-accent">Realtor Desk</Badge>
               <div className="text-3xl font-bold gradient-text mb-4">$699/year</div>
               <ul className="space-y-2 mb-6">
                 <li className="text-sm">✓ All features included</li>
@@ -247,7 +247,7 @@ const SwitchFromLofty = () => {
             <p className="font-semibold mb-2">What You Actually Pay:</p>
             <p className="text-sm text-muted-foreground">
               Lofty: $1,188-3,600/year + unpredictable charges<br/>
-              Realtor Desk AI: <span className="text-accent font-semibold">$699/year, period.</span>
+              Realtor Desk: <span className="text-accent font-semibold">$699/year, period.</span>
             </p>
           </Card>
         </div>
@@ -267,7 +267,7 @@ const SwitchFromLofty = () => {
                 <div className="flex-1">
                   <p className="italic mb-3">
                     "The AI actually understands my clients. Lofty was just automated spam. 
-                    Realtor Desk AI has real conversations and books qualified appointments."
+                    Realtor Desk has real conversations and books qualified appointments."
                   </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Marcus R.</span>
@@ -285,7 +285,7 @@ const SwitchFromLofty = () => {
                 </div>
                 <div className="flex-1">
                   <p className="italic mb-3">
-                    "My Lofty bill kept growing. $99 turned into $250+/month. Realtor Desk AI is 
+                    "My Lofty bill kept growing. $99 turned into $250+/month. Realtor Desk is 
                     $699/year with EVERYTHING included. I'm saving thousands."
                   </p>
                   <div className="flex items-center gap-2">

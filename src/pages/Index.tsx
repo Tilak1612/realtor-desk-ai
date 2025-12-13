@@ -156,7 +156,7 @@ const Index = () => {
           >
             <img 
               src={demoShowcase} 
-              alt="RealtorDesk AI platform demo"
+              alt="Realtor Desk platform demo"
               className="w-full h-full object-cover"
               loading="lazy"
             />
@@ -177,13 +177,13 @@ const Index = () => {
             <DialogContent className="max-w-[95vw] sm:max-w-5xl w-full p-0 overflow-hidden bg-card border-white/10">
               <DialogTitle className="sr-only">Product Demo Video</DialogTitle>
               <DialogDescription className="sr-only">
-                Watch our product demo showcasing Realtor Desk AI features
+                Watch our product demo showcasing Realtor Desk features
               </DialogDescription>
               <div className="relative aspect-video w-full bg-black">
                 {videoSrc ? (
                   <iframe
                     src={videoSrc}
-                    title="Realtor Desk AI Product Demo"
+                    title="Realtor Desk Product Demo"
                     className="w-full h-full border-0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     allowFullScreen

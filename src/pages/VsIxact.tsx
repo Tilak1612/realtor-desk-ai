@@ -37,7 +37,7 @@ const VsIxact = () => {
             <div className="text-2xl font-bold">→</div>
             
             <Card className="p-6 flex-1 border-accent">
-              <div className="text-sm text-muted-foreground mb-2">Realtor Desk AI</div>
+              <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
               <div className="text-3xl font-bold gradient-text mb-1">$699/year</div>
               <div className="text-xs text-accent font-semibold">+$243 for AI superpowers</div>
             </Card>
@@ -155,7 +155,7 @@ const VsIxact = () => {
               <thead>
                 <tr className="border-b-2">
                   <th className="text-left p-4 font-bold">Feature</th>
-                  <th className="text-center p-4 font-bold">Realtor Desk AI</th>
+                  <th className="text-center p-4 font-bold">Realtor Desk</th>
                   <th className="text-center p-4 font-bold">IXACT Contact</th>
                 </tr>
               </thead>
