@@ -74,9 +74,9 @@ const MobileOptimizedFAQ = ({ searchQuery = "" }: MobileOptimizedFAQProps) => {
       <div className="container-custom px-4 sm:px-6 lg:px-8 max-w-4xl">
         {!searchQuery && (
           <div className="text-center mb-6 sm:mb-8 md:mb-12 animate-fade-in-up">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 md:mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               {t('faq.title')}
-            </h1>
+            </h2>
             <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               Find answers to common questions about Realtor Desk AI
             </p>
