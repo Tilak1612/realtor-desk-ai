@@ -9,7 +9,7 @@ const AuraHero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen pt-32 lg:pt-40 pb-20">
+    <section className="relative min-h-screen pt-20 sm:pt-28 lg:pt-40 pb-20">
       {/* Vertical Lines Background */}
       <div className="fixed inset-0 z-0 pointer-events-none flex justify-center w-full max-w-7xl mx-auto px-6">
         <div className="w-full h-full border-x border-dashed border-white/5 flex justify-center relative">
