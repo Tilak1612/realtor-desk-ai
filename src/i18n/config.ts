@@ -263,7 +263,8 @@ const resources = {
         pricing: "Pricing in CAD"
       },
       faq: {
-        title: "Frequently Asked Questions",
+        title: "Frequently Asked",
+        titleGradient: "Questions",
         q1: {
           question: "Is Realtor Desk ready for production use?",
           answer: "We're currently in public beta with 50+ active realtors across Canada. The platform is fully functional and stable, but we're actively gathering feedback and adding features. Beta users help shape our roadmap and receive lifetime discounts."
@@ -1478,7 +1479,8 @@ const resources = {
         pricing: "Tarification en CAD"
       },
       faq: {
-        title: "Questions Fréquemment Posées",
+        title: "Questions",
+        titleGradient: "Fréquentes",
         q1: {
           question: "RealtorDesk AI est-il prêt pour une utilisation en production?",
           answer: "Nous sommes actuellement en bêta publique avec plus de 50 agents immobiliers actifs à travers le Canada. La plateforme est entièrement fonctionnelle et stable, mais nous recueillons activement des commentaires et ajoutons des fonctionnalités. Les utilisateurs bêta aident à façonner notre feuille de route et reçoivent des réductions à vie."
