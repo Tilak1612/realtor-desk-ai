@@ -776,7 +776,15 @@ const resources = {
           emailRequired: "Email is required",
           passwordRequired: "Password is required",
           passwordMinLength: "Password must be at least 8 characters",
-          passwordsDoNotMatch: "Passwords do not match"
+          passwordsDoNotMatch: "Passwords do not match",
+          passwordRequirements: {
+            minLength: "At least 8 characters",
+            uppercase: "At least 1 uppercase letter (A-Z)",
+            lowercase: "At least 1 lowercase letter (a-z)",
+            number: "At least 1 number (0-9)",
+            special: "At least 1 special character (!@#$%^&*)",
+            notMet: "Password does not meet all requirements"
+          }
         },
         validation: {
           required: "This field is required",
@@ -1992,7 +2000,15 @@ const resources = {
           emailRequired: "Le courriel est requis",
           passwordRequired: "Le mot de passe est requis",
           passwordMinLength: "Le mot de passe doit contenir au moins 8 caractères",
-          passwordsDoNotMatch: "Les mots de passe ne correspondent pas"
+          passwordsDoNotMatch: "Les mots de passe ne correspondent pas",
+          passwordRequirements: {
+            minLength: "Au moins 8 caractères",
+            uppercase: "Au moins 1 lettre majuscule (A-Z)",
+            lowercase: "Au moins 1 lettre minuscule (a-z)",
+            number: "Au moins 1 chiffre (0-9)",
+            special: "Au moins 1 caractère spécial (!@#$%^&*)",
+            notMet: "Le mot de passe ne répond pas à toutes les exigences"
+          }
         },
         validation: {
           required: "Ce champ est requis",

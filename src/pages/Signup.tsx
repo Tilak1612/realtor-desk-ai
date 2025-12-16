@@ -12,15 +12,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
+import { PasswordInput, validatePassword } from "@/components/ui/password-input";
 
 const Signup = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const signupSchema = z.object({
     email: z.string().email(t('app.validation.email')),
-    password: z.string().min(8, t('app.auth.passwordMinLength')),
+    password: z.string().refine((val) => validatePassword(val), {
+      message: t('app.auth.passwordRequirements.notMet', 'Password does not meet all requirements'),
+    }),
     fullName: z.string().min(2, t('app.validation.minLength', { min: 2 })),
     phone: z.string().optional(),
     companyName: z.string().min(2, t('app.validation.minLength', { min: 2 })),
@@ -194,12 +198,13 @@ const Signup = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="password">{t('app.auth.password')}</Label>
-                <Input
+                <PasswordInput
                   id="password"
-                  type="password"
                   placeholder="••••••••"
                   value={formData.password || ""}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  showValidation={true}
+                  onValidationChange={setIsPasswordValid}
                 />
                 {errors.password && (
                   <p className="text-sm text-destructive">{errors.password}</p>
