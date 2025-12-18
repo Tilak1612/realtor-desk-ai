@@ -15,6 +15,8 @@ import AddContactModal from "@/components/contacts/AddContactModal";
 import ImportContactsModal from "@/components/contacts/ImportContactsModal";
 import ContactFilters from "@/components/contacts/ContactFilters";
 import BulkActionsToolbar from "@/components/contacts/BulkActionsToolbar";
+import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 export interface Contact {
   id: string;
@@ -44,6 +46,7 @@ const Contacts = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { trialExpired } = useSubscription();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
@@ -287,6 +290,8 @@ const Contacts = () => {
         onOpenChange={setIsImportModalOpen}
         onSuccess={fetchContacts}
       />
+
+      <TrialExpiredModal isOpen={trialExpired} />
     </div>
   );
 };

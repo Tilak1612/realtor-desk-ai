@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
 
 interface SubscriptionContextType {
   subscribed: boolean;
@@ -10,6 +9,9 @@ interface SubscriptionContextType {
   loading: boolean;
   refreshSubscription: () => Promise<void>;
   subscriptionTier: 'trial' | 'agent' | 'team' | null;
+  trialDaysLeft: number;
+  trialExpired: boolean;
+  trialEndsAt: string | null;
 }
 
 const SubscriptionContext = createContext<SubscriptionContextType | undefined>(undefined);
@@ -41,7 +43,19 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [priceId, setPriceId] = useState<string | null>(null);
   const [subscriptionEnd, setSubscriptionEnd] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null);
+
+  const calculateTrialDaysLeft = (trialEndDate: string | null): number => {
+    if (!trialEndDate) return 0;
+    const endDate = new Date(trialEndDate);
+    const today = new Date();
+    const diffTime = endDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return Math.max(0, diffDays);
+  };
+
+  const trialDaysLeft = calculateTrialDaysLeft(trialEndsAt);
+  const trialExpired = !subscribed && trialDaysLeft <= 0 && trialEndsAt !== null;
 
   const getSubscriptionTier = (): 'trial' | 'agent' | 'team' | null => {
     if (!subscribed) return 'trial';
@@ -63,8 +77,20 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         setProductId(null);
         setPriceId(null);
         setSubscriptionEnd(null);
+        setTrialEndsAt(null);
         setLoading(false);
         return;
+      }
+
+      // Fetch trial_ends_at from profile
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('trial_ends_at')
+        .eq('id', session.user.id)
+        .single();
+
+      if (profileData?.trial_ends_at) {
+        setTrialEndsAt(profileData.trial_ends_at);
       }
 
       const { data, error } = await supabase.functions.invoke('check-subscription', {
@@ -110,6 +136,7 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         setProductId(null);
         setPriceId(null);
         setSubscriptionEnd(null);
+        setTrialEndsAt(null);
       }
     });
 
@@ -132,6 +159,9 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         loading,
         refreshSubscription,
         subscriptionTier: getSubscriptionTier(),
+        trialDaysLeft,
+        trialExpired,
+        trialEndsAt,
       }}
     >
       {children}

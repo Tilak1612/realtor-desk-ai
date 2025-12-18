@@ -10,9 +10,12 @@ import DealsKanban from "@/components/deals/DealsKanban";
 import DealsList from "@/components/deals/DealsList";
 import AddDealModal from "@/components/deals/AddDealModal";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const Deals = () => {
   const { t } = useTranslation();
+  const { trialExpired } = useSubscription();
   const [view, setView] = useState<"kanban" | "list">("kanban");
   const [filter, setFilter] = useState<string>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -118,6 +121,8 @@ const Deals = () => {
         onOpenChange={setIsAddModalOpen}
         onDealAdded={handleDealAdded}
       />
+
+      <TrialExpiredModal isOpen={trialExpired} />
     </div>
   );
 };
