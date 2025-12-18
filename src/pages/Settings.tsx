@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LogOut, User, Bell, Lock, Palette, Download, Trash2, Shield, Globe } from "lucide-react";
+import { LogOut, User, Bell, Lock, Palette, Download, Trash2, Shield, Globe, Crown, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,6 +9,8 @@ import { useToast } from "@/hooks/use-toast";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Separator } from "@/components/ui/separator";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useSubscription } from "@/contexts/SubscriptionContext";
+import { Badge } from "@/components/ui/badge";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,6 +29,7 @@ const Settings = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const { subscribed, trialDaysLeft, trialExpired, subscriptionTier, trialEndsAt, subscriptionEnd } = useSubscription();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -131,6 +134,67 @@ const Settings = () => {
             </p>
 
             <div className="space-y-6">
+              {/* Subscription Status Section */}
+              <Card className={subscribed ? "border-accent/30 bg-accent/5" : trialExpired ? "border-destructive/30 bg-destructive/5" : "border-primary/30 bg-primary/5"}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Crown className="w-5 h-5" />
+                    {t('trial.status.title', 'Subscription Status')}
+                  </CardTitle>
+                  <CardDescription>
+                    {subscribed 
+                      ? t('trial.status.subscribed', 'Active Subscription')
+                      : trialExpired 
+                        ? t('trial.status.trialExpired', 'Trial Expired')
+                        : t('trial.status.trialActive', 'Trial Active')}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      {subscribed ? (
+                        <>
+                          <Badge variant="default" className="bg-accent text-accent-foreground">
+                            {subscriptionTier === 'agent' ? 'Agent Plan' : subscriptionTier === 'team' ? 'Team Plan' : 'Subscribed'}
+                          </Badge>
+                          {subscriptionEnd && (
+                            <p className="text-sm text-muted-foreground">
+                              {t('trial.status.endsOn', 'Ends on {{date}}').replace('{{date}}', new Date(subscriptionEnd).toLocaleDateString())}
+                            </p>
+                          )}
+                        </>
+                      ) : trialExpired ? (
+                        <>
+                          <Badge variant="destructive">
+                            {t('trial.status.trialExpired', 'Trial Expired')}
+                          </Badge>
+                          <p className="text-sm text-muted-foreground">
+                            {t('trial.expired.description', 'Subscribe now to continue using Realtor Desk')}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                            {t('trial.status.daysLeft', '{{count}} days left in trial').replace('{{count}}', String(trialDaysLeft))}
+                          </Badge>
+                          {trialEndsAt && (
+                            <p className="text-sm text-muted-foreground">
+                              {t('trial.status.endsOn', 'Ends on {{date}}').replace('{{date}}', new Date(trialEndsAt).toLocaleDateString())}
+                            </p>
+                          )}
+                        </>
+                      )}
+                    </div>
+                    <Link to="/billing">
+                      <Button variant={subscribed ? "outline" : "default"} className={!subscribed ? "btn-gradient" : ""}>
+                        <CreditCard className="w-4 h-4 mr-2" />
+                        {subscribed ? t('app.billing.manageBilling', 'Manage Billing') : t('trial.upgradeNow', 'Upgrade Now')}
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Language Settings */}
               <Card>
                 <CardHeader>

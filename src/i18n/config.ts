@@ -1224,6 +1224,42 @@ const resources = {
         casl: "CASL Compliance",
         copyright: "© 2025 RealtorDesk.ai. All rights reserved.",
         madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors"
+      },
+      trial: {
+        daysRemaining: "{{count}} days remaining in your free trial",
+        oneDay: "1 day remaining in your free trial",
+        expirestoday: "Your trial expires today!",
+        upgradeMessage: "Upgrade now to keep all your data and unlock premium features",
+        upgradeNow: "Upgrade Now",
+        expired: {
+          title: "Your Free Trial Has Ended",
+          description: "Subscribe now to continue using Realtor Desk and keep all your data"
+        },
+        monthly: "Monthly",
+        yearly: "Yearly",
+        savePercent: "Save 44%",
+        billedYearly: "Billed annually at ${{price}}",
+        subscribeMonthly: "Subscribe Monthly",
+        subscribeYearly: "Subscribe Yearly",
+        includesFeatures: "All plans include:",
+        guarantee: "30-day money-back guarantee • Cancel anytime",
+        feature: {
+          unlimitedContacts: "Unlimited contacts & leads",
+          aiLeadScoring: "AI-powered lead scoring",
+          emailAutomation: "Email automation",
+          dealPipeline: "Deal pipeline management",
+          marketInsights: "Market insights & analytics",
+          prioritySupport: "Priority support"
+        },
+        status: {
+          title: "Subscription Status",
+          trialActive: "Trial Active",
+          trialExpired: "Trial Expired",
+          subscribed: "Active Subscription",
+          daysLeft: "{{count}} days left in trial",
+          endsOn: "Ends on {{date}}",
+          tier: "Current plan: {{tier}}"
+        }
       }
     }
   },
@@ -2448,6 +2484,42 @@ const resources = {
         casl: "Conformité LCAP",
         copyright: "© 2025 RealtorDesk.ai. Tous droits réservés.",
         madeInCanada: "Fabriqué au Canada 🇨🇦 pour les Agents Immobiliers Canadiens"
+      },
+      trial: {
+        daysRemaining: "{{count}} jours restants dans votre essai gratuit",
+        oneDay: "1 jour restant dans votre essai gratuit",
+        expirestoday: "Votre essai expire aujourd'hui !",
+        upgradeMessage: "Passez à l'offre supérieure maintenant pour conserver vos données et débloquer les fonctionnalités premium",
+        upgradeNow: "Passer à l'Offre Supérieure",
+        expired: {
+          title: "Votre Essai Gratuit Est Terminé",
+          description: "Abonnez-vous maintenant pour continuer à utiliser Realtor Desk et conserver toutes vos données"
+        },
+        monthly: "Mensuel",
+        yearly: "Annuel",
+        savePercent: "Économisez 44%",
+        billedYearly: "Facturé annuellement à {{price}} $",
+        subscribeMonthly: "S'Abonner Mensuellement",
+        subscribeYearly: "S'Abonner Annuellement",
+        includesFeatures: "Tous les plans incluent :",
+        guarantee: "Garantie de remboursement de 30 jours • Annulez à tout moment",
+        feature: {
+          unlimitedContacts: "Contacts et prospects illimités",
+          aiLeadScoring: "Score de prospects propulsé par l'IA",
+          emailAutomation: "Automatisation des courriels",
+          dealPipeline: "Gestion du pipeline de transactions",
+          marketInsights: "Analyses et aperçus du marché",
+          prioritySupport: "Support prioritaire"
+        },
+        status: {
+          title: "Statut de l'Abonnement",
+          trialActive: "Essai Actif",
+          trialExpired: "Essai Expiré",
+          subscribed: "Abonnement Actif",
+          daysLeft: "{{count}} jours restants dans l'essai",
+          endsOn: "Se termine le {{date}}",
+          tier: "Plan actuel : {{tier}}"
+        }
       }
     }
   }

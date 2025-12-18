@@ -13,10 +13,13 @@ import AddTaskModal from "@/components/tasks/AddTaskModal";
 import TasksFilters from "@/components/tasks/TasksFilters";
 import BulkActions from "@/components/tasks/BulkActions";
 import { toast } from "sonner";
+import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const Tasks = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { trialExpired } = useSubscription();
   const [view, setView] = useState<"list" | "calendar">("list");
   const [quickFilter, setQuickFilter] = useState<string>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -200,6 +203,8 @@ const Tasks = () => {
         onOpenChange={setIsAddModalOpen}
         onTaskAdded={handleTaskAdded}
       />
+
+      <TrialExpiredModal isOpen={trialExpired} />
     </div>
   );
 };

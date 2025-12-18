@@ -13,6 +13,8 @@ import PropertiesGrid from "@/components/properties/PropertiesGrid";
 import PropertiesList from "@/components/properties/PropertiesList";
 import PropertyFilters from "@/components/properties/PropertyFilters";
 import AddPropertyModal from "@/components/properties/AddPropertyModal";
+import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 export interface Property {
   id: string;
@@ -56,6 +58,7 @@ const Properties = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { trialExpired } = useSubscription();
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
@@ -244,6 +247,8 @@ const Properties = () => {
         onOpenChange={setIsAddModalOpen}
         onSuccess={fetchProperties}
       />
+
+      <TrialExpiredModal isOpen={trialExpired} />
     </div>
   );
 };

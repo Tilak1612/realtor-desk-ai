@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -10,10 +10,10 @@ import HotLeadsWidget from "@/components/dashboard/HotLeadsWidget";
 import TasksWidget from "@/components/dashboard/TasksWidget";
 import DealsWidget from "@/components/dashboard/DealsWidget";
 import MarketWidget from "@/components/dashboard/MarketWidget";
-import { Users, Briefcase, CheckSquare, DollarSign, Crown, ArrowRight } from "lucide-react";
+import TrialBanner from "@/components/dashboard/TrialBanner";
+import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ const Dashboard = () => {
     closing: { count: 0, value: 0 },
   });
   const [loading, setLoading] = useState(true);
-  const { subscribed, subscriptionTier } = useSubscription();
+  const { subscribed, trialDaysLeft, trialExpired } = useSubscription();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -162,15 +162,6 @@ const Dashboard = () => {
     setTodayTasks(tasks => tasks.filter(t => t.id !== taskId));
   };
 
-  const getTrialDaysLeft = () => {
-    if (!profile?.trial_ends_at) return 0;
-    const endDate = new Date(profile.trial_ends_at);
-    const today = new Date();
-    const diffTime = endDate.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return Math.max(0, diffDays);
-  };
-
   const getTasksDueToday = () => todayTasks.filter(t => t.status !== "completed").length;
   const getOverdueTasks = () => {
     const now = new Date();
@@ -193,34 +184,18 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex w-full bg-background">
-      <DashboardSidebar trialDaysLeft={getTrialDaysLeft()} />
+      {/* Trial Expired Modal - blocks all access */}
+      <TrialExpiredModal isOpen={trialExpired} />
+      
+      <DashboardSidebar trialDaysLeft={trialDaysLeft} />
       
       <div className="flex-1 lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         
         <main className="p-4 md:p-6 space-y-4 md:space-y-6">
           {/* Trial Banner */}
-          {!subscribed && getTrialDaysLeft() > 0 && (
-            <Card className="p-4 bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div className="flex items-center gap-3">
-                  <Crown className="w-6 h-6 text-primary" />
-                  <div>
-                    <p className="font-semibold">
-                      {getTrialDaysLeft()} {t('app.dashboard.trialDaysLeft')}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {t('app.dashboard.upgradeNowContinue')}
-                    </p>
-                  </div>
-                </div>
-                <Link to="/billing">
-                  <Button className="btn-gradient">
-                    {t('app.sidebar.upgradeNow')} <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-              </div>
-            </Card>
+          {!subscribed && trialDaysLeft > 0 && (
+            <TrialBanner daysLeft={trialDaysLeft} />
           )}
 
           {/* Welcome Section */}

@@ -8,9 +8,12 @@ import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const CalendarPage = () => {
   const navigate = useNavigate();
+  const { trialExpired } = useSubscription();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -167,6 +170,8 @@ const CalendarPage = () => {
           </div>
         </main>
       </div>
+
+      <TrialExpiredModal isOpen={trialExpired} />
     </div>
   );
 };
