@@ -12,6 +12,8 @@ import DealsWidget from "@/components/dashboard/DealsWidget";
 import MarketWidget from "@/components/dashboard/MarketWidget";
 import TrialBanner from "@/components/dashboard/TrialBanner";
 import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
+import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
+import AIInsightsWidget from "@/components/dashboard/AIInsightsWidget";
 import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
@@ -243,9 +245,15 @@ const Dashboard = () => {
             />
           </div>
 
+          {/* Onboarding Checklist for new users */}
+          {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
+            <OnboardingChecklist userId={user.id} />
+          )}
+
           {/* Widgets Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
+              {user && <AIInsightsWidget userId={user.id} />}
               <HotLeadsWidget leads={hotLeads} />
               <TasksWidget tasks={todayTasks} onTaskComplete={handleTaskComplete} />
             </div>
