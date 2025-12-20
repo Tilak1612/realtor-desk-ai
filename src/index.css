@@ -256,6 +256,32 @@
     @apply text-muted-foreground;
   }
 
+  /* Animated Gradient Text */
+  .gradient-text-animated {
+    background: linear-gradient(
+      90deg,
+      hsl(0 0% 100%) 0%,
+      hsl(25 95% 60%) 25%,
+      hsl(0 0% 100%) 50%,
+      hsl(25 95% 60%) 75%,
+      hsl(0 0% 100%) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% center;
+    }
+    50% {
+      background-position: 100% center;
+    }
+  }
+
   /* Badge Styles */
   .aura-badge {
     @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
