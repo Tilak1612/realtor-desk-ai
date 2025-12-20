@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, MapPin } from "lucide-react";
+import { CheckCircle, Play } from "lucide-react";
 import heroDashboardAI from "@/assets/hero-dashboard-ai.jpg";
-import { useTranslation } from "react-i18next";
+
 const Hero = () => {
-  const {
-    t
-  } = useTranslation();
   return <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-12 sm:pb-16 md:pb-20 lg:pb-28 overflow-hidden">
       {/* Decorative Colored Circles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -46,39 +43,59 @@ const Hero = () => {
       
       <div className="container-custom relative z-10">
         <div className="max-w-5xl mx-auto text-center">
-          {/* Beta Badge and Canadian Badge */}
-          
-          
-          {/* Trust Badges */}
-          
+          {/* 14-Day Free Trial Badge */}
+          <div className="flex justify-center mb-6 animate-fade-in-up">
+            <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2 text-sm font-semibold">
+              14-DAY FREE TRIAL
+            </Badge>
+          </div>
 
           {/* Main Title */}
-          <h1 className="mb-4 sm:mb-6 leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-r from-[hsl(122_39%_49%)] via-[hsl(0_0%_85%)] to-[hsl(0_0%_35%)] bg-clip-text text-transparent">
-            {t('hero.title')}
+          <h1 className="mb-6 sm:mb-8 leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-r from-[hsl(122_39%_49%)] via-[hsl(0_0%_85%)] to-[hsl(0_0%_35%)] bg-clip-text text-transparent">
+            Stop Losing Leads to Slow Follow-Ups
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 leading-relaxed animate-fade-in-up animation-delay-300 max-w-2xl mx-auto">
-            {t('hero.subtitle')}
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-300 max-w-3xl mx-auto">
+            Your AI assistant responds to leads in under 60 seconds, 24/7—booking showings and qualifying buyers while you sleep. Built exclusively for Canadian realtors with PIPEDA compliance.
           </p>
+
+          {/* Trust Signals Line */}
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 animate-fade-in-up animation-delay-350">
+            <span className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              Avg. response time: 47 seconds
+            </span>
+            <span className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              CREA DDF® integrated
+            </span>
+            <span className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              Bilingual EN/FR
+            </span>
+          </div>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-10 animate-fade-in-up animation-delay-400">
             <Link to="/signup" className="w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-                {t('hero.getStarted')}
+                START YOUR 14-DAY FREE TRIAL →
               </Button>
             </Link>
             <Link to="/demo" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl border-2 hover:bg-secondary/50 transition-all duration-300">
-                {t('hero.watchDemo')}
+              <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl border-2 hover:bg-secondary/50 transition-all duration-300 gap-2">
+                <Play className="w-5 h-5" />
+                Book Your Free Demo
               </Button>
             </Link>
           </div>
 
-          {/* Trust Line */}
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed animate-fade-in-up animation-delay-500 max-w-2xl mx-auto mb-12">
-            {t('hero.trustLine')}
+          {/* Social Proof */}
+          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed animate-fade-in-up animation-delay-500 max-w-2xl mx-auto mb-12">
+            <span className="italic">"Captured 3 leads in my first 48 hours I would have lost"</span>
+            <br />
+            <span className="text-xs sm:text-sm">— Sarah K., Toronto • Join 50+ Canadian agents</span>
           </p>
 
           {/* Hero Image */}
@@ -89,7 +106,7 @@ const Hero = () => {
               <div className="absolute top-4 right-4 bg-accent text-accent-foreground backdrop-blur-md rounded-lg px-4 py-2.5 shadow-lg">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-accent-foreground rounded-full animate-pulse"></div>
-                  <div className="text-sm font-bold uppercase leading-none">🤖 {t('aiActive')}</div>
+                  <div className="text-sm font-bold uppercase leading-none">🤖 AI Active</div>
                 </div>
               </div>
             </div>
