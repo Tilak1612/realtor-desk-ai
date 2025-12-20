@@ -96,17 +96,17 @@ const AIAssistant = () => {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-3xl font-bold flex items-center gap-2">
-                  <Bot className="w-8 h-8 text-primary" />
+                <h1 className="text-xl font-semibold flex items-center gap-2">
+                  <Bot className="w-5 h-5 text-primary" />
                   Realtor AI Assistant
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground">
                   Your intelligent real estate CRM assistant
                 </p>
               </div>
               {messages.length > 0 && (
-                <Button variant="outline" onClick={clearChat} size="sm">
-                  <Trash2 className="w-4 h-4 mr-2" />
+                <Button variant="outline" onClick={clearChat} size="sm" className="h-8 text-xs">
+                  <Trash2 className="w-3.5 h-3.5 mr-1.5" />
                   Clear Chat
                 </Button>
               )}
@@ -115,17 +115,17 @@ const AIAssistant = () => {
             {/* Quick Actions */}
             {messages.length === 0 && (
               <div className="mb-6">
-                <h3 className="text-sm font-medium mb-3 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-primary" />
+                <h3 className="text-xs font-medium mb-2 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-primary" />
                   Quick Actions
                 </h3>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2">
                   {quickActions.map((action, index) => (
                     <Button
                       key={index}
                       variant="outline"
                       onClick={() => handleQuickAction(action.prompt)}
-                      className="h-auto py-3 text-left justify-start"
+                      className="h-auto py-2 text-left justify-start text-xs"
                     >
                       {action.label}
                     </Button>

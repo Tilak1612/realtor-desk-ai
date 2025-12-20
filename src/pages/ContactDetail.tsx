@@ -161,13 +161,13 @@ const ContactDetail = () => {
                 >
                   <ArrowLeft className="h-4 w-4" />
                 </Button>
-                <h1 className="text-2xl font-bold">
+                <h1 className="text-xl font-semibold">
                   {contact.first_name} {contact.last_name}
                 </h1>
               </div>
               <div className="flex items-center gap-2">
-                <Button onClick={() => setIsEditModalOpen(true)}>
-                  <Edit className="h-4 w-4 mr-2" />
+                <Button onClick={() => setIsEditModalOpen(true)} size="sm" className="h-8 text-xs">
+                  <Edit className="h-3.5 w-3.5 mr-1.5" />
                   Edit
                 </Button>
                 <DropdownMenu>

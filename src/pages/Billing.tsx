@@ -132,8 +132,8 @@ const Billing = () => {
         
         <main className="p-4 md:p-6 space-y-6 max-w-6xl mx-auto">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Billing & Subscription</h1>
-            <p className="text-muted-foreground">Manage your subscription and billing details</p>
+            <h1 className="text-xl font-semibold mb-2">Billing & Subscription</h1>
+            <p className="text-sm text-muted-foreground">Manage your subscription and billing details</p>
           </div>
 
           {/* Current Status Card */}
