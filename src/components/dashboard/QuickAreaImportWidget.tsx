@@ -85,11 +85,37 @@ export function QuickAreaImportWidget() {
       });
     } catch (error) {
       console.error("Import error:", error);
-      toast({
-        title: "Import Failed",
-        description: error instanceof Error ? error.message : "Failed to fetch data",
-        variant: "destructive",
-      });
+      const errorMessage = error instanceof Error ? error.message : "Failed to fetch data";
+      
+      // Check for Apify subscription errors
+      const isSubscriptionError = 
+        errorMessage.toLowerCase().includes('actor') && 
+        (errorMessage.toLowerCase().includes('not rented') || 
+         errorMessage.toLowerCase().includes('subscription') ||
+         errorMessage.toLowerCase().includes('expired') ||
+         errorMessage.toLowerCase().includes('trial'));
+      
+      if (isSubscriptionError) {
+        setUrlError(
+          "⚠️ Apify Subscription Required\n\n" +
+          "The Realtor.ca scraper requires an active Apify subscription.\n\n" +
+          "To fix this:\n" +
+          "1. Go to apify.com and log in\n" +
+          "2. Subscribe to the Realtor.ca Scraper actor\n" +
+          "3. Ensure your APIFY_TOKEN is configured in project secrets"
+        );
+        toast({
+          title: "Subscription Required",
+          description: "The Apify actor subscription has expired. Please renew to continue importing.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Import Failed",
+          description: errorMessage,
+          variant: "destructive",
+        });
+      }
     } finally {
       setLoading(false);
     }
