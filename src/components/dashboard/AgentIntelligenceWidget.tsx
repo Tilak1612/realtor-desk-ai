@@ -186,15 +186,15 @@ export function AgentIntelligenceWidget() {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <Users className="h-5 w-5 text-primary" />
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <Users className="h-4 w-4 text-primary" />
             Agent Intelligence
             <Badge variant="secondary" className="ml-2 text-xs">Beta</Badge>
           </CardTitle>
         </div>
-        <CardDescription>
+        <CardDescription className="text-sm">
           Search for real estate agents by city or Realtor.ca URL
         </CardDescription>
       </CardHeader>

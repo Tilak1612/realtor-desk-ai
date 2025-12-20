@@ -321,10 +321,10 @@ export function ImportListingsWidget() {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <Home className="h-5 w-5 text-primary" />
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <Home className="h-4 w-4 text-primary" />
             Import Listings from Realtor.ca
             <Badge variant="secondary" className="ml-2 text-xs">Beta</Badge>
           </CardTitle>
@@ -333,7 +333,7 @@ export function ImportListingsWidget() {
             <span>{usageStats.todayImports}/10 imports today</span>
           </div>
         </div>
-        <CardDescription>
+        <CardDescription className="text-sm">
           Enter a Realtor.ca search URL to import property listings
         </CardDescription>
       </CardHeader>

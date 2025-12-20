@@ -265,15 +265,15 @@ export function QuickAreaImportWidget() {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <MapPin className="h-5 w-5 text-primary" />
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <MapPin className="h-4 w-4 text-primary" />
             Quick Area Import
             <Badge variant="secondary" className="ml-2 text-xs">Beta</Badge>
           </CardTitle>
         </div>
-        <CardDescription>
+        <CardDescription className="text-sm">
           Import listings and agents from a Realtor.ca map area in one action
         </CardDescription>
       </CardHeader>

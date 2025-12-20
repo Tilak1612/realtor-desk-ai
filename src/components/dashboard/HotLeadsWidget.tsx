@@ -38,9 +38,9 @@ const HotLeadsWidget = ({ leads }: HotLeadsWidgetProps) => {
   if (leads.length === 0) {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Flame className="w-5 h-5 text-orange-500" />
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <Flame className="w-4 h-4 text-orange-500" />
             Hot Leads (AI Scored 80+)
           </CardTitle>
         </CardHeader>
@@ -58,9 +58,9 @@ const HotLeadsWidget = ({ leads }: HotLeadsWidgetProps) => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Flame className="w-5 h-5 text-orange-500" />
+      <CardHeader className="pb-3">
+        <CardTitle className="flex items-center gap-2 text-base font-medium">
+          <Flame className="w-4 h-4 text-orange-500" />
           Hot Leads (AI Scored 80+)
         </CardTitle>
       </CardHeader>
@@ -76,17 +76,17 @@ const HotLeadsWidget = ({ leads }: HotLeadsWidgetProps) => {
                 {getInitials(lead.name)}
               </AvatarFallback>
             </Avatar>
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 space-y-1.5">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="font-semibold">{lead.name}</p>
-                  <p className="text-sm text-muted-foreground">{lead.email}</p>
+                  <p className="text-sm font-medium">{lead.name}</p>
+                  <p className="text-xs text-muted-foreground">{lead.email}</p>
                 </div>
-                <Badge className={`${getScoreColor(lead.ai_score)} text-white`}>
+                <Badge className={`${getScoreColor(lead.ai_score)} text-white text-xs`}>
                   {lead.ai_score}
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground">{lead.insight}</p>
+              <p className="text-xs text-muted-foreground">{lead.insight}</p>
               {lead.best_contact_time && (
                 <p className="text-xs text-muted-foreground">
                   Best time: {lead.best_contact_time}

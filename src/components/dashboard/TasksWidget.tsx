@@ -62,14 +62,14 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
   if (tasks.length === 0) {
     return (
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <CheckSquare className="w-5 h-5" />
+        <CardHeader className="flex flex-row items-center justify-between pb-3">
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <CheckSquare className="w-4 h-4" />
             Today's Tasks
           </CardTitle>
           <Link to="/tasks">
-            <Button size="sm">
-              <Plus className="w-4 h-4 mr-1" />
+            <Button size="sm" className="h-8 text-xs">
+              <Plus className="w-3 h-3 mr-1" />
               Add Task
             </Button>
           </Link>
@@ -88,14 +88,14 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="flex items-center gap-2">
-          <CheckSquare className="w-5 h-5" />
+      <CardHeader className="flex flex-row items-center justify-between pb-3">
+        <CardTitle className="flex items-center gap-2 text-base font-medium">
+          <CheckSquare className="w-4 h-4" />
           Today's Tasks
         </CardTitle>
         <Link to="/tasks">
-          <Button size="sm">
-            <Plus className="w-4 h-4 mr-1" />
+          <Button size="sm" className="h-8 text-xs">
+            <Plus className="w-3 h-3 mr-1" />
             Add Task
           </Button>
         </Link>
@@ -113,16 +113,16 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
               onCheckedChange={() => handleTaskToggle(task.id, task.status)}
               className="mt-1"
             />
-            <div className="flex-1 space-y-1">
+            <div className="flex-1 space-y-0.5">
               <div className="flex items-center gap-2">
-                <p className={`font-medium ${task.status === "completed" ? "line-through text-muted-foreground" : ""}`}>
+                <p className={`text-sm font-medium ${task.status === "completed" ? "line-through text-muted-foreground" : ""}`}>
                   {task.title}
                 </p>
                 {isOverdue(task.due_time) && task.status !== "completed" && (
-                  <AlertCircle className="w-4 h-4 text-destructive" />
+                  <AlertCircle className="w-3 h-3 text-destructive" />
                 )}
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 {task.due_time && (
                   <span className={isOverdue(task.due_time) && task.status !== "completed" ? "text-destructive" : ""}>
                     {task.due_time}
