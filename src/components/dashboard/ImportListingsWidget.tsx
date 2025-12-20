@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -7,8 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { fetchRealtorListings, ListingResult, validateRealtorUrl } from "@/lib/apify";
-import { Home, Loader2, Download, Save, ExternalLink, AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { 
+  fetchRealtorListingsWithTracking, 
+  ListingResult, 
+  validateRealtorUrl,
+  checkRateLimit,
+  checkConcurrentImport,
+  updateImportHistory,
+  getApifyUsageStats,
+  PARSER_VERSION
+} from "@/lib/apify";
+import { Home, Loader2, Download, Save, ExternalLink, AlertCircle, AlertTriangle, CheckCircle2, History, Info } from "lucide-react";
 
 export function ImportListingsWidget() {
   const [url, setUrl] = useState("");
@@ -21,9 +30,23 @@ export function ImportListingsWidget() {
   const [savedCount, setSavedCount] = useState(0);
   const [duplicateCount, setDuplicateCount] = useState(0);
   const [bulkSaving, setBulkSaving] = useState(false);
+  const [currentImportId, setCurrentImportId] = useState<string | null>(null);
+  const [usageStats, setUsageStats] = useState<{ todayImports: number; totalRecords: number }>({ todayImports: 0, totalRecords: 0 });
   const { toast } = useToast();
 
   const COOLDOWN_MS = 5000; // 5 second cooldown between imports
+
+  // Fetch usage stats on mount
+  useEffect(() => {
+    const fetchStats = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const stats = await getApifyUsageStats(user.id);
+        setUsageStats(stats);
+      }
+    };
+    fetchStats();
+  }, []);
 
   const handleUrlChange = (value: string) => {
     setUrl(value);
@@ -68,6 +91,39 @@ export function ImportListingsWidget() {
       return;
     }
 
+    // Get user for rate limiting
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to import listings",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check rate limit
+    const rateLimitCheck = await checkRateLimit(user.id);
+    if (!rateLimitCheck.allowed) {
+      toast({
+        title: "Rate Limit Reached",
+        description: rateLimitCheck.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check concurrent imports
+    const concurrentCheck = await checkConcurrentImport(user.id);
+    if (!concurrentCheck.allowed) {
+      toast({
+        title: "Import In Progress",
+        description: concurrentCheck.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
     setUrlError(null);
     setSavedCount(0);
@@ -75,14 +131,22 @@ export function ImportListingsWidget() {
     setLastImportTime(now);
 
     try {
-      const data = await fetchRealtorListings({
-        startUrls: [url],
-        maxListings,
-      });
-      setResults(data);
+      const { listings, importHistoryId } = await fetchRealtorListingsWithTracking(
+        { startUrls: [url], maxListings },
+        user.id,
+        url
+      );
+      
+      setResults(listings);
+      setCurrentImportId(importHistoryId);
+      
+      // Update usage stats
+      const stats = await getApifyUsageStats(user.id);
+      setUsageStats(stats);
+      
       toast({
         title: "Import Complete",
-        description: `Found ${data.length} listings`,
+        description: `Found ${listings.length} listings`,
       });
     } catch (error) {
       console.error("Import error:", error);
@@ -148,6 +212,7 @@ export function ImportListingsWidget() {
         agentEmail: listing.agentEmail,
         importedAt: new Date().toISOString(),
         importedFrom: "import-listings-widget",
+        parserVersion: PARSER_VERSION,
       },
     });
 
@@ -219,6 +284,14 @@ export function ImportListingsWidget() {
       setSavedCount(saved);
       setDuplicateCount(duplicates);
 
+      // Update import history with save results
+      if (currentImportId) {
+        await updateImportHistory(currentImportId, {
+          saved_records: saved,
+          duplicate_records: duplicates,
+        });
+      }
+
       toast({
         title: "Bulk Save Complete",
         description: `Saved ${saved} listing${saved !== 1 ? 's' : ''}${duplicates > 0 ? `, ${duplicates} duplicate${duplicates !== 1 ? 's' : ''} skipped` : ''}`,
@@ -238,7 +311,7 @@ export function ImportListingsWidget() {
     } finally {
       setBulkSaving(false);
     }
-  }, [results, toast]);
+  }, [results, currentImportId, toast]);
 
   const formatPrice = (price: string | number | undefined) => {
     if (!price) return "N/A";
@@ -255,6 +328,10 @@ export function ImportListingsWidget() {
             Import Listings from Realtor.ca
             <Badge variant="secondary" className="ml-2 text-xs">Beta</Badge>
           </CardTitle>
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <History className="h-3 w-3" />
+            <span>{usageStats.todayImports}/10 imports today</span>
+          </div>
         </div>
         <CardDescription>
           Enter a Realtor.ca search URL to import property listings
@@ -267,7 +344,7 @@ export function ImportListingsWidget() {
           <AlertTitle className="text-amber-600 dark:text-amber-400">Data Source Notice</AlertTitle>
           <AlertDescription className="text-sm text-muted-foreground">
             This data is scraped from Realtor.ca and is NOT official MLS or CREA DDF data. 
-            Use for research purposes only.
+            Use for research purposes only. Parser v{PARSER_VERSION}
           </AlertDescription>
         </Alert>
 
@@ -296,7 +373,7 @@ export function ImportListingsWidget() {
             max={500}
             disabled={loading}
           />
-          <Button onClick={handleImport} disabled={loading}>
+          <Button onClick={handleImport} disabled={loading || usageStats.todayImports >= 10}>
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -310,6 +387,25 @@ export function ImportListingsWidget() {
             )}
           </Button>
         </div>
+
+        {/* Rate limit warning */}
+        {usageStats.todayImports >= 8 && usageStats.todayImports < 10 && (
+          <Alert className="border-amber-500/50 bg-amber-500/10">
+            <Info className="h-4 w-4 text-amber-500" />
+            <AlertDescription className="text-amber-600 dark:text-amber-400">
+              You have {10 - usageStats.todayImports} import{10 - usageStats.todayImports !== 1 ? 's' : ''} remaining today.
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {usageStats.todayImports >= 10 && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              Daily import limit reached (10/day). Limit resets at midnight.
+            </AlertDescription>
+          </Alert>
+        )}
 
         {/* Success/duplicate status */}
         {(savedCount > 0 || duplicateCount > 0) && (
