@@ -373,15 +373,15 @@ export function ImportListingsWidget() {
             max={500}
             disabled={loading}
           />
-          <Button onClick={handleImport} disabled={loading || usageStats.todayImports >= 10}>
+          <Button onClick={handleImport} disabled={loading || usageStats.todayImports >= 10} size="sm" className="h-8">
             {loading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                 Importing...
               </>
             ) : (
               <>
-                <Download className="mr-2 h-4 w-4" />
+                <Download className="mr-1.5 h-3 w-3" />
                 Import
               </>
             )}
@@ -466,14 +466,15 @@ export function ImportListingsWidget() {
                         <Button
                           size="sm"
                           variant="outline"
+                          className="h-7 text-xs"
                           onClick={() => handleSaveToCRM(listing, index)}
                           disabled={savingIds.has(index)}
                         >
                           {savingIds.has(index) ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <Loader2 className="h-3 w-3 animate-spin" />
                           ) : (
                             <>
-                              <Save className="h-4 w-4 mr-1" />
+                              <Save className="h-3 w-3 mr-1" />
                               Save
                             </>
                           )}
@@ -485,22 +486,23 @@ export function ImportListingsWidget() {
               </Table>
             </div>
             <div className="p-3 bg-muted/50 border-t flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 Showing {results.length} listings
               </span>
               <Button 
                 onClick={handleSaveAll} 
                 disabled={bulkSaving || results.length === 0}
                 size="sm"
+                className="h-7 text-xs"
               >
                 {bulkSaving ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                     Saving All...
                   </>
                 ) : (
                   <>
-                    <CheckCircle2 className="mr-2 h-4 w-4" />
+                    <CheckCircle2 className="mr-1.5 h-3 w-3" />
                     Save All ({results.length})
                   </>
                 )}

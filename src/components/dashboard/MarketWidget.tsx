@@ -112,9 +112,9 @@ const MarketWidget = ({ defaultCity = "Toronto" }: MarketWidgetProps) => {
         </div>
 
         <Link to="/market" className="block">
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" size="sm" className="w-full h-8 text-xs">
             View Full Report
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <ArrowRight className="w-3 h-3 ml-1" />
           </Button>
         </Link>
       </CardContent>

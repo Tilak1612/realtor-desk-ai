@@ -317,15 +317,15 @@ export function QuickAreaImportWidget() {
               </Label>
             </div>
             
-            <Button onClick={handleImport} disabled={loading}>
+            <Button onClick={handleImport} disabled={loading} size="sm" className="h-8">
               {loading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                   Importing...
                 </>
               ) : (
                 <>
-                  <Download className="mr-2 h-4 w-4" />
+                  <Download className="mr-1.5 h-3 w-3" />
                   Import Area
                 </>
               )}
@@ -361,15 +361,15 @@ export function QuickAreaImportWidget() {
                   Found {results.listings.length} listings and {results.agents.length} agents
                 </p>
               </div>
-              <Button onClick={handleSaveAll} disabled={saving}>
+              <Button onClick={handleSaveAll} disabled={saving} size="sm" className="h-8">
                 {saving ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                     Saving...
                   </>
                 ) : (
                   <>
-                    <CheckCircle2 className="mr-2 h-4 w-4" />
+                    <CheckCircle2 className="mr-1.5 h-3 w-3" />
                     Save All to CRM
                   </>
                 )}

@@ -45,10 +45,10 @@ const DealsWidget = ({ stats }: DealsWidgetProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8">
-            <p className="text-muted-foreground mb-4">No active deals yet</p>
+          <div className="text-center py-6">
+            <p className="text-sm text-muted-foreground mb-3">No active deals yet</p>
             <Link to="/deals">
-              <Button>Create Your First Deal</Button>
+              <Button size="sm">Create Your First Deal</Button>
             </Link>
           </div>
         </CardContent>
@@ -100,9 +100,9 @@ const DealsWidget = ({ stats }: DealsWidgetProps) => {
               </p>
             </div>
             <Link to="/deals">
-              <Button variant="outline">
+              <Button variant="outline" size="sm" className="h-8 text-xs">
                 View All Deals
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-3 h-3 ml-1" />
               </Button>
             </Link>
           </div>

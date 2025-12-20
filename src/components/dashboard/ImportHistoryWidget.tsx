@@ -134,9 +134,9 @@ export function ImportHistoryWidget() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-lg font-semibold flex items-center gap-2">
-          <History className="h-5 w-5 text-primary" />
+      <CardHeader className="flex flex-row items-center justify-between pb-3">
+        <CardTitle className="text-base font-medium flex items-center gap-2">
+          <History className="h-4 w-4 text-primary" />
           Import History
           {isLive && (
             <Badge variant="outline" className="ml-2 flex items-center gap-1 text-xs">
@@ -145,31 +145,31 @@ export function ImportHistoryWidget() {
             </Badge>
           )}
           {runningCount > 0 && (
-            <Badge variant="default" className="ml-1">
+            <Badge variant="default" className="ml-1 text-xs">
               {runningCount} running
             </Badge>
           )}
         </CardTitle>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Button 
             variant={isLive ? "default" : "outline"} 
             size="sm" 
             onClick={() => setIsLive(!isLive)}
-            className="text-xs"
+            className="h-7 text-xs"
           >
             {isLive ? "Live" : "Paused"}
           </Button>
-          <Button variant="ghost" size="sm" onClick={fetchImports} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={fetchImports} disabled={loading}>
+            <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
           </Button>
         </div>
       </CardHeader>
       <CardContent>
         {imports.length === 0 && !loading ? (
-          <div className="text-center py-8 text-muted-foreground">
-            <History className="h-12 w-12 mx-auto mb-2 opacity-50" />
-            <p>No imports yet</p>
-            <p className="text-sm">Your import history will appear here</p>
+          <div className="text-center py-6 text-muted-foreground">
+            <History className="h-10 w-10 mx-auto mb-2 opacity-50" />
+            <p className="text-sm">No imports yet</p>
+            <p className="text-xs">Your import history will appear here</p>
           </div>
         ) : (
           <ScrollArea className="h-[400px]">
@@ -209,10 +209,11 @@ export function ImportHistoryWidget() {
                         <DialogTrigger asChild>
                           <Button
                             variant="ghost"
-                            size="sm"
+                            size="icon"
+                            className="h-7 w-7"
                             onClick={() => setSelectedImport(imp)}
                           >
-                            <Eye className="h-4 w-4" />
+                            <Eye className="h-3 w-3" />
                           </Button>
                         </DialogTrigger>
                         <DialogContent className="max-w-lg">

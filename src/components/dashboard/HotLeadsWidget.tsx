@@ -45,10 +45,10 @@ const HotLeadsWidget = ({ leads }: HotLeadsWidgetProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8">
-            <p className="text-muted-foreground mb-4">No hot leads yet</p>
+          <div className="text-center py-6">
+            <p className="text-sm text-muted-foreground mb-3">No hot leads yet</p>
             <Link to="/contacts">
-              <Button>Add Contacts</Button>
+              <Button size="sm">Add Contacts</Button>
             </Link>
           </div>
         </CardContent>
@@ -93,16 +93,16 @@ const HotLeadsWidget = ({ leads }: HotLeadsWidgetProps) => {
                 </p>
               )}
               <div className="flex gap-2">
-                <Button size="sm" variant="outline">
-                  <Phone className="w-4 h-4 mr-1" />
+                <Button size="sm" variant="outline" className="h-7 text-xs">
+                  <Phone className="w-3 h-3 mr-1" />
                   Call
                 </Button>
-                <Button size="sm" variant="outline">
-                  <Mail className="w-4 h-4 mr-1" />
+                <Button size="sm" variant="outline" className="h-7 text-xs">
+                  <Mail className="w-3 h-3 mr-1" />
                   Email
                 </Button>
-                <Button size="sm" variant="outline">
-                  <Calendar className="w-4 h-4 mr-1" />
+                <Button size="sm" variant="outline" className="h-7 text-xs">
+                  <Calendar className="w-3 h-3 mr-1" />
                   Schedule
                 </Button>
               </div>
@@ -110,9 +110,9 @@ const HotLeadsWidget = ({ leads }: HotLeadsWidgetProps) => {
           </div>
         ))}
         <Link to="/contacts" className="block">
-          <Button variant="ghost" className="w-full">
+          <Button variant="ghost" size="sm" className="w-full h-8 text-xs">
             View All Leads
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <ArrowRight className="w-3 h-3 ml-1" />
           </Button>
         </Link>
       </CardContent>

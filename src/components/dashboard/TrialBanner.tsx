@@ -74,12 +74,13 @@ const TrialBanner = ({ daysLeft }: TrialBannerProps) => {
         </div>
         <Link to="/billing">
           <Button 
+            size="sm"
             className={cn(
-              "btn-gradient",
+              "btn-gradient h-8 text-xs",
               daysLeft <= 3 && "animate-pulse"
             )}
           >
-            {t('trial.upgradeNow', 'Upgrade Now')} <ArrowRight className="w-4 h-4 ml-2" />
+            {t('trial.upgradeNow', 'Upgrade Now')} <ArrowRight className="w-3 h-3 ml-1" />
           </Button>
         </Link>
       </div>
