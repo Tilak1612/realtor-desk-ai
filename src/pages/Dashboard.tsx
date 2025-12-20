@@ -14,6 +14,9 @@ import TrialBanner from "@/components/dashboard/TrialBanner";
 import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
 import AIInsightsWidget from "@/components/dashboard/AIInsightsWidget";
+import { ImportListingsWidget } from "@/components/dashboard/ImportListingsWidget";
+import { AgentIntelligenceWidget } from "@/components/dashboard/AgentIntelligenceWidget";
+import { QuickAreaImportWidget } from "@/components/dashboard/QuickAreaImportWidget";
 import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
@@ -265,6 +268,14 @@ const Dashboard = () => {
 
           {/* Deals Pipeline - Full Width */}
           <DealsWidget stats={dealStats} />
+
+          {/* Realtor.ca Import Tools */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold">Data Import Tools</h2>
+            <ImportListingsWidget />
+            <AgentIntelligenceWidget />
+            <QuickAreaImportWidget />
+          </div>
         </main>
       </div>
     </div>
