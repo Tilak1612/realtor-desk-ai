@@ -17,6 +17,7 @@ import AIInsightsWidget from "@/components/dashboard/AIInsightsWidget";
 import { ImportListingsWidget } from "@/components/dashboard/ImportListingsWidget";
 import { AgentIntelligenceWidget } from "@/components/dashboard/AgentIntelligenceWidget";
 import { QuickAreaImportWidget } from "@/components/dashboard/QuickAreaImportWidget";
+import { ImportHistoryWidget } from "@/components/dashboard/ImportHistoryWidget";
 import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
@@ -275,6 +276,7 @@ const Dashboard = () => {
             <ImportListingsWidget />
             <AgentIntelligenceWidget />
             <QuickAreaImportWidget />
+            <ImportHistoryWidget />
           </div>
         </main>
       </div>
