@@ -240,7 +240,32 @@ const callApifyRunner = async (actorId: string, input: Record<string, unknown>) 
   });
 
   if (response.error) {
-    // Try to extract more specific error message
+    // Try to extract the function's JSON error body (more reliable than error.message)
+    try {
+      const resp = (response as any).response as Response | undefined;
+      if (resp) {
+        const contentType = resp.headers.get("Content-Type") || "";
+        if (contentType.includes("application/json")) {
+          const body = await resp.json();
+          if (body?.code === "ACTOR_NOT_RENTED") {
+            throw new Error(
+              body.details ||
+                "Apify actor subscription required (expired / not rented). Please renew your Apify actor subscription and try again."
+            );
+          }
+          if (body?.details || body?.error) {
+            throw new Error(body.details || body.error);
+          }
+        } else {
+          const text = await resp.text();
+          if (text) throw new Error(text);
+        }
+      }
+    } catch (parseErr) {
+      // Fall back to generic message
+      console.log("[Apify] Could not parse function error body:", parseErr);
+    }
+
     const errorMessage = response.error.message || "Failed to run Apify actor";
     throw new Error(errorMessage);
   }

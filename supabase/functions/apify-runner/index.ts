@@ -75,24 +75,35 @@ const runApifyActor = async (
         return runApifyActor(actorId, input, token, retryCount + 1);
       }
       
-      // Handle specific error codes
-      if (response.status === 402 || errorText.includes('actor-is-not-rented')) {
+      // Handle subscription / rental issues (these can surface as 402 or 403 depending on the actor/account)
+      const looksLikeNotRented =
+        response.status === 402 ||
+        errorText.includes('actor-is-not-rented') ||
+        errorText.toLowerCase().includes('not rented') ||
+        errorText.toLowerCase().includes('actor is not rented') ||
+        errorText.toLowerCase().includes('insufficient access') ||
+        errorText.toLowerCase().includes('payment required');
+
+      if (looksLikeNotRented) {
         return {
           error: {
             error: 'Apify actor subscription required',
-            details: 'The Apify actor free trial has expired. Please subscribe to the actor at apify.com to continue.',
+            details:
+              `This Apify actor is not available under the current subscription (expired / not rented). ` +
+              `Please rent/subscribe to the actor in your Apify account, then retry. ` +
+              `Actor: ${actorId}`,
             code: 'ACTOR_NOT_RENTED',
-          }
+          },
         };
       }
-      
+
       if (response.status === 403) {
         return {
           error: {
             error: 'Access denied',
             details: errorDetails,
             code: 'ACCESS_DENIED',
-          }
+          },
         };
       }
       
