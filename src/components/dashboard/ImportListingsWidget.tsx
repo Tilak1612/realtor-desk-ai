@@ -20,6 +20,7 @@ export function ImportListingsWidget() {
   const [lastImportTime, setLastImportTime] = useState<number>(0);
   const [savedCount, setSavedCount] = useState(0);
   const [duplicateCount, setDuplicateCount] = useState(0);
+  const [bulkSaving, setBulkSaving] = useState(false);
   const { toast } = useToast();
 
   const COOLDOWN_MS = 5000; // 5 second cooldown between imports
@@ -96,19 +97,16 @@ export function ImportListingsWidget() {
     }
   }, [url, maxListings, lastImportTime, toast]);
 
-  const checkDuplicate = async (listing: ListingResult): Promise<boolean> => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return false;
-
+  const saveSingleListing = async (listing: ListingResult, userId: string): Promise<{ saved: boolean; duplicate: boolean }> => {
     // Check by MLS number first (more reliable)
     if (listing.mlsNumber) {
       const { data: byMls } = await supabase
         .from("properties")
         .select("id")
-        .eq("user_id", user.id)
+        .eq("user_id", userId)
         .eq("mls_number", listing.mlsNumber)
         .limit(1);
-      if ((byMls?.length || 0) > 0) return true;
+      if ((byMls?.length || 0) > 0) return { saved: false, duplicate: true };
     }
 
     // Check by address
@@ -116,13 +114,44 @@ export function ImportListingsWidget() {
       const { data: byAddress } = await supabase
         .from("properties")
         .select("id")
-        .eq("user_id", user.id)
+        .eq("user_id", userId)
         .eq("address", listing.address)
         .limit(1);
-      if ((byAddress?.length || 0) > 0) return true;
+      if ((byAddress?.length || 0) > 0) return { saved: false, duplicate: true };
     }
 
-    return false;
+    const priceValue = typeof listing.price === 'string' 
+      ? parseFloat(listing.price.replace(/[^0-9.]/g, '')) 
+      : listing.price;
+
+    const { error } = await supabase.from("properties").insert({
+      user_id: userId,
+      title: listing.address || "Imported Listing",
+      address: listing.address || "",
+      price: priceValue || null,
+      bedrooms: listing.bedrooms || null,
+      bathrooms: listing.bathrooms || null,
+      mls_number: listing.mlsNumber || null,
+      property_type: listing.propertyType || null,
+      square_feet: listing.squareFeet || null,
+      description: listing.description || null,
+      image_url: listing.imageUrl || null,
+      city: listing.city || null,
+      province: listing.province || null,
+      postal_code: listing.postalCode || null,
+      source_url: listing.url || null,
+      data_source: "realtor.ca",
+      status: "active",
+      metadata: {
+        agentName: listing.agentName,
+        agentPhone: listing.agentPhone,
+        agentEmail: listing.agentEmail,
+        importedAt: new Date().toISOString(),
+        importedFrom: "import-listings-widget",
+      },
+    });
+
+    return { saved: !error, duplicate: false };
   };
 
   const handleSaveToCRM = async (listing: ListingResult, index: number) => {
@@ -132,56 +161,25 @@ export function ImportListingsWidget() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
-      // Check for duplicates
-      const isDuplicate = await checkDuplicate(listing);
-      if (isDuplicate) {
+      const result = await saveSingleListing(listing, user.id);
+      
+      if (result.duplicate) {
         setDuplicateCount(prev => prev + 1);
         toast({
           title: "Duplicate Listing",
-          description: `${listing.address || listing.mlsNumber || "This listing"} already exists in your properties`,
+          description: `${listing.address || listing.mlsNumber || "This listing"} already exists`,
           variant: "destructive",
         });
         return;
       }
 
-      const priceValue = typeof listing.price === 'string' 
-        ? parseFloat(listing.price.replace(/[^0-9.]/g, '')) 
-        : listing.price;
-
-      const { error } = await supabase.from("properties").insert({
-        user_id: user.id,
-        title: listing.address || "Imported Listing",
-        address: listing.address || "",
-        price: priceValue || null,
-        bedrooms: listing.bedrooms || null,
-        bathrooms: listing.bathrooms || null,
-        mls_number: listing.mlsNumber || null,
-        property_type: listing.propertyType || null,
-        square_feet: listing.squareFeet || null,
-        description: listing.description || null,
-        image_url: listing.imageUrl || null,
-        city: listing.city || null,
-        province: listing.province || null,
-        postal_code: listing.postalCode || null,
-        source_url: listing.url || null,
-        data_source: "realtor.ca",
-        status: "active",
-        metadata: {
-          agentName: listing.agentName,
-          agentPhone: listing.agentPhone,
-          agentEmail: listing.agentEmail,
-          importedAt: new Date().toISOString(),
-          importedFrom: "import-listings-widget",
-        },
-      });
-
-      if (error) throw error;
-
-      setSavedCount(prev => prev + 1);
-      toast({
-        title: "Saved!",
-        description: `${listing.address} added to your properties`,
-      });
+      if (result.saved) {
+        setSavedCount(prev => prev + 1);
+        toast({
+          title: "Saved!",
+          description: `${listing.address} added to your properties`,
+        });
+      }
     } catch (error) {
       console.error("Save error:", error);
       toast({
@@ -197,6 +195,50 @@ export function ImportListingsWidget() {
       });
     }
   };
+
+  const handleSaveAll = useCallback(async () => {
+    if (results.length === 0) return;
+    
+    setBulkSaving(true);
+    setSavedCount(0);
+    setDuplicateCount(0);
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      let saved = 0;
+      let duplicates = 0;
+
+      for (const listing of results) {
+        const result = await saveSingleListing(listing, user.id);
+        if (result.saved) saved++;
+        if (result.duplicate) duplicates++;
+      }
+
+      setSavedCount(saved);
+      setDuplicateCount(duplicates);
+
+      toast({
+        title: "Bulk Save Complete",
+        description: `Saved ${saved} listing${saved !== 1 ? 's' : ''}${duplicates > 0 ? `, ${duplicates} duplicate${duplicates !== 1 ? 's' : ''} skipped` : ''}`,
+      });
+
+      // Clear results after successful save
+      if (saved > 0) {
+        setResults([]);
+      }
+    } catch (error) {
+      console.error("Bulk save error:", error);
+      toast({
+        title: "Bulk Save Failed",
+        description: error instanceof Error ? error.message : "Failed to save listings",
+        variant: "destructive",
+      });
+    } finally {
+      setBulkSaving(false);
+    }
+  }, [results, toast]);
 
   const formatPrice = (price: string | number | undefined) => {
     if (!price) return "N/A";
@@ -346,8 +388,27 @@ export function ImportListingsWidget() {
                 </TableBody>
               </Table>
             </div>
-            <div className="p-3 bg-muted/50 border-t text-sm text-muted-foreground">
-              Showing {results.length} listings
+            <div className="p-3 bg-muted/50 border-t flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">
+                Showing {results.length} listings
+              </span>
+              <Button 
+                onClick={handleSaveAll} 
+                disabled={bulkSaving || results.length === 0}
+                size="sm"
+              >
+                {bulkSaving ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Saving All...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="mr-2 h-4 w-4" />
+                    Save All ({results.length})
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         )}
