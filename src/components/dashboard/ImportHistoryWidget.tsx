@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/integrations/supabase/client";
-import { History, RefreshCw, Eye, AlertCircle, CheckCircle, Clock, XCircle } from "lucide-react";
+import { History, RefreshCw, Eye, AlertCircle, CheckCircle, Clock, XCircle, Radio } from "lucide-react";
 import { format } from "date-fns";
 
 interface ImportRecord {
@@ -37,8 +37,9 @@ export function ImportHistoryWidget() {
   const [imports, setImports] = useState<ImportRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImport, setSelectedImport] = useState<ImportRecord | null>(null);
+  const [isLive, setIsLive] = useState(true);
 
-  const fetchImports = async () => {
+  const fetchImports = useCallback(async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase
@@ -54,11 +55,57 @@ export function ImportHistoryWidget() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
+  // Subscribe to realtime updates
   useEffect(() => {
     fetchImports();
-  }, []);
+
+    if (!isLive) return;
+
+    const channel = supabase
+      .channel('import-history-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'import_history'
+        },
+        (payload) => {
+          console.log('Import history change:', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            setImports(prev => [payload.new as ImportRecord, ...prev].slice(0, 50));
+          } else if (payload.eventType === 'UPDATE') {
+            setImports(prev => 
+              prev.map(imp => 
+                imp.id === (payload.new as ImportRecord).id 
+                  ? payload.new as ImportRecord 
+                  : imp
+              )
+            );
+            // Also update selected import if it's the one being viewed
+            setSelectedImport(prev => 
+              prev?.id === (payload.new as ImportRecord).id 
+                ? payload.new as ImportRecord 
+                : prev
+            );
+          } else if (payload.eventType === 'DELETE') {
+            setImports(prev => prev.filter(imp => imp.id !== (payload.old as ImportRecord).id));
+          }
+        }
+      )
+      .subscribe((status) => {
+        console.log('Realtime subscription status:', status);
+      });
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [fetchImports, isLive]);
+
+  const runningCount = imports.filter(i => i.status === 'running').length;
 
   const getStatusBadge = (status: string) => {
     const config = statusConfig[status] || statusConfig.pending;
@@ -91,10 +138,31 @@ export function ImportHistoryWidget() {
         <CardTitle className="text-lg font-semibold flex items-center gap-2">
           <History className="h-5 w-5 text-primary" />
           Import History
+          {isLive && (
+            <Badge variant="outline" className="ml-2 flex items-center gap-1 text-xs">
+              <Radio className={`h-3 w-3 ${runningCount > 0 ? 'text-green-500 animate-pulse' : 'text-muted-foreground'}`} />
+              Live
+            </Badge>
+          )}
+          {runningCount > 0 && (
+            <Badge variant="default" className="ml-1">
+              {runningCount} running
+            </Badge>
+          )}
         </CardTitle>
-        <Button variant="ghost" size="sm" onClick={fetchImports} disabled={loading}>
-          <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button 
+            variant={isLive ? "default" : "outline"} 
+            size="sm" 
+            onClick={() => setIsLive(!isLive)}
+            className="text-xs"
+          >
+            {isLive ? "Live" : "Paused"}
+          </Button>
+          <Button variant="ghost" size="sm" onClick={fetchImports} disabled={loading}>
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
         {imports.length === 0 && !loading ? (
