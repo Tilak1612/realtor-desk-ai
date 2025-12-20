@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { fetchCombinedData, CombinedResult } from "@/lib/apify";
-import { MapPin, Loader2, Download, CheckCircle2 } from "lucide-react";
+import { fetchCombinedData, CombinedResult, validateRealtorUrl } from "@/lib/apify";
+import { MapPin, Loader2, Download, CheckCircle2, AlertCircle, AlertTriangle } from "lucide-react";
 
 export function QuickAreaImportWidget() {
   const [url, setUrl] = useState("");
@@ -15,9 +17,24 @@ export function QuickAreaImportWidget() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [results, setResults] = useState<CombinedResult | null>(null);
+  const [urlError, setUrlError] = useState<string | null>(null);
+  const [lastImportTime, setLastImportTime] = useState<number>(0);
+  const [saveResult, setSaveResult] = useState<{ listings: number; contacts: number; duplicates: number } | null>(null);
   const { toast } = useToast();
 
-  const handleImport = async () => {
+  const COOLDOWN_MS = 5000; // 5 second cooldown between imports
+
+  const handleUrlChange = (value: string) => {
+    setUrl(value);
+    if (value.trim()) {
+      const validation = validateRealtorUrl(value);
+      setUrlError(validation.valid ? null : validation.error || null);
+    } else {
+      setUrlError(null);
+    }
+  };
+
+  const handleImport = useCallback(async () => {
     if (!url.trim()) {
       toast({
         title: "URL Required",
@@ -27,7 +44,34 @@ export function QuickAreaImportWidget() {
       return;
     }
 
+    // Check cooldown
+    const now = Date.now();
+    if (now - lastImportTime < COOLDOWN_MS) {
+      toast({
+        title: "Please Wait",
+        description: "Please wait a few seconds before importing again",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate URL
+    const validation = validateRealtorUrl(url);
+    if (!validation.valid) {
+      setUrlError(validation.error || "Invalid URL");
+      toast({
+        title: "Invalid URL",
+        description: validation.error || "Please enter a valid search or map URL",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
+    setUrlError(null);
+    setSaveResult(null);
+    setLastImportTime(now);
+
     try {
       const data = await fetchCombinedData({
         startUrls: [url],
@@ -49,9 +93,49 @@ export function QuickAreaImportWidget() {
     } finally {
       setLoading(false);
     }
+  }, [url, includeDetails, lastImportTime, toast]);
+
+  const checkListingDuplicate = async (mlsNumber: string | undefined, address: string, userId: string): Promise<boolean> => {
+    if (!mlsNumber && !address) return false;
+
+    // Check by MLS number first (more reliable)
+    if (mlsNumber) {
+      const { data: byMls } = await supabase
+        .from("properties")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("mls_number", mlsNumber)
+        .limit(1);
+      if ((byMls?.length || 0) > 0) return true;
+    }
+
+    // Check by address
+    if (address) {
+      const { data: byAddress } = await supabase
+        .from("properties")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("address", address)
+        .limit(1);
+      if ((byAddress?.length || 0) > 0) return true;
+    }
+
+    return false;
   };
 
-  const handleSaveAll = async () => {
+  const checkContactDuplicate = async (firstName: string, lastName: string | null, userId: string): Promise<boolean> => {
+    const { data: existing } = await supabase
+      .from("contacts")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("first_name", firstName)
+      .eq("last_name", lastName || "")
+      .limit(1);
+
+    return (existing?.length || 0) > 0;
+  };
+
+  const handleSaveAll = useCallback(async () => {
     if (!results) return;
     
     setSaving(true);
@@ -61,9 +145,16 @@ export function QuickAreaImportWidget() {
 
       let savedListings = 0;
       let savedContacts = 0;
+      let duplicates = 0;
 
-      // Save listings
+      // Save listings with duplicate check
       for (const listing of results.listings) {
+        const isDuplicate = await checkListingDuplicate(listing.mlsNumber, listing.address || "", user.id);
+        if (isDuplicate) {
+          duplicates++;
+          continue;
+        }
+
         const priceValue = typeof listing.price === 'string' 
           ? parseFloat(listing.price.replace(/[^0-9.]/g, '')) 
           : listing.price;
@@ -82,6 +173,10 @@ export function QuickAreaImportWidget() {
           source_url: listing.url || null,
           data_source: "realtor.ca",
           status: "active",
+          metadata: {
+            importedAt: new Date().toISOString(),
+            importedFrom: "quick-area-import",
+          },
         });
 
         if (!error) savedListings++;
@@ -97,6 +192,12 @@ export function QuickAreaImportWidget() {
         const firstName = nameParts[0] || "Unknown";
         const lastName = nameParts.slice(1).join(" ") || null;
 
+        const isDuplicate = await checkContactDuplicate(firstName, lastName, user.id);
+        if (isDuplicate) {
+          duplicates++;
+          continue;
+        }
+
         const { error } = await supabase.from("contacts").insert({
           user_id: user.id,
           first_name: firstName,
@@ -109,15 +210,18 @@ export function QuickAreaImportWidget() {
           metadata: {
             office: agent.office,
             importedFrom: "quick-area-import",
+            importedAt: new Date().toISOString(),
           },
         });
 
         if (!error) savedContacts++;
       }
 
+      setSaveResult({ listings: savedListings, contacts: savedContacts, duplicates });
+
       toast({
         title: "All Data Saved!",
-        description: `Saved ${savedListings} listings and ${savedContacts} contacts`,
+        description: `Saved ${savedListings} listings and ${savedContacts} contacts${duplicates > 0 ? ` (${duplicates} duplicates skipped)` : ''}`,
       });
       
       setResults(null);
@@ -131,25 +235,47 @@ export function QuickAreaImportWidget() {
     } finally {
       setSaving(false);
     }
-  };
+  }, [results, toast]);
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <MapPin className="h-5 w-5 text-primary" />
-          Quick Area Import
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-primary" />
+            Quick Area Import
+            <Badge variant="secondary" className="ml-2 text-xs">Beta</Badge>
+          </CardTitle>
+        </div>
         <CardDescription>
           Import listings and agents from a Realtor.ca map area in one action
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Data Source Disclaimer */}
+        <Alert variant="default" className="border-amber-500/50 bg-amber-500/10">
+          <AlertTriangle className="h-4 w-4 text-amber-500" />
+          <AlertTitle className="text-amber-600 dark:text-amber-400">Data Source Notice</AlertTitle>
+          <AlertDescription className="text-sm text-muted-foreground">
+            This data is scraped from Realtor.ca and is NOT official MLS or CREA DDF data. 
+            Use for research purposes only.
+          </AlertDescription>
+        </Alert>
+
+        {urlError && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription className="whitespace-pre-line">{urlError}</AlertDescription>
+          </Alert>
+        )}
+
         <div className="flex flex-col gap-4">
           <Input
-            placeholder="https://www.realtor.ca/map#..."
+            placeholder="https://www.realtor.ca/map#... or .../city/real-estate"
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) => handleUrlChange(e.target.value)}
+            className={urlError ? 'border-destructive' : ''}
+            disabled={loading}
           />
           
           <div className="flex items-center justify-between">
@@ -158,6 +284,7 @@ export function QuickAreaImportWidget() {
                 id="include-details"
                 checked={includeDetails}
                 onCheckedChange={setIncludeDetails}
+                disabled={loading}
               />
               <Label htmlFor="include-details" className="text-sm">
                 Include listing details (slower but more data)
@@ -179,6 +306,25 @@ export function QuickAreaImportWidget() {
             </Button>
           </div>
         </div>
+
+        {/* Success message */}
+        {saveResult && (
+          <Alert className="border-green-500/50 bg-green-500/10">
+            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            <AlertDescription className="text-green-600 dark:text-green-400">
+              Saved {saveResult.listings} listings and {saveResult.contacts} contacts
+              {saveResult.duplicates > 0 && ` (${saveResult.duplicates} duplicates skipped)`}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {/* Empty state */}
+        {!loading && !results && url && !saveResult && (
+          <div className="text-center py-6 text-muted-foreground">
+            <MapPin className="h-10 w-10 mx-auto mb-2 opacity-30" />
+            <p className="text-sm">Enter a Realtor.ca map URL and click Import</p>
+          </div>
+        )}
 
         {results && (
           <div className="border rounded-lg p-4 bg-muted/30 space-y-3">

@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchRealtorListings, ListingResult, validateRealtorUrl } from "@/lib/apify";
-import { Home, Loader2, Download, Save, ExternalLink, AlertCircle } from "lucide-react";
+import { Home, Loader2, Download, Save, ExternalLink, AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 
 export function ImportListingsWidget() {
   const [url, setUrl] = useState("");
@@ -17,7 +17,12 @@ export function ImportListingsWidget() {
   const [results, setResults] = useState<ListingResult[]>([]);
   const [savingIds, setSavingIds] = useState<Set<number>>(new Set());
   const [urlError, setUrlError] = useState<string | null>(null);
+  const [lastImportTime, setLastImportTime] = useState<number>(0);
+  const [savedCount, setSavedCount] = useState(0);
+  const [duplicateCount, setDuplicateCount] = useState(0);
   const { toast } = useToast();
+
+  const COOLDOWN_MS = 5000; // 5 second cooldown between imports
 
   const handleUrlChange = (value: string) => {
     setUrl(value);
@@ -29,11 +34,22 @@ export function ImportListingsWidget() {
     }
   };
 
-  const handleImport = async () => {
+  const handleImport = useCallback(async () => {
     if (!url.trim()) {
       toast({
         title: "URL Required",
         description: "Please enter a Realtor.ca search URL",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check cooldown
+    const now = Date.now();
+    if (now - lastImportTime < COOLDOWN_MS) {
+      toast({
+        title: "Please Wait",
+        description: "Please wait a few seconds before importing again",
         variant: "destructive",
       });
       return;
@@ -53,6 +69,10 @@ export function ImportListingsWidget() {
 
     setLoading(true);
     setUrlError(null);
+    setSavedCount(0);
+    setDuplicateCount(0);
+    setLastImportTime(now);
+
     try {
       const data = await fetchRealtorListings({
         startUrls: [url],
@@ -74,6 +94,35 @@ export function ImportListingsWidget() {
     } finally {
       setLoading(false);
     }
+  }, [url, maxListings, lastImportTime, toast]);
+
+  const checkDuplicate = async (listing: ListingResult): Promise<boolean> => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return false;
+
+    // Check by MLS number first (more reliable)
+    if (listing.mlsNumber) {
+      const { data: byMls } = await supabase
+        .from("properties")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("mls_number", listing.mlsNumber)
+        .limit(1);
+      if ((byMls?.length || 0) > 0) return true;
+    }
+
+    // Check by address
+    if (listing.address) {
+      const { data: byAddress } = await supabase
+        .from("properties")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("address", listing.address)
+        .limit(1);
+      if ((byAddress?.length || 0) > 0) return true;
+    }
+
+    return false;
   };
 
   const handleSaveToCRM = async (listing: ListingResult, index: number) => {
@@ -82,6 +131,18 @@ export function ImportListingsWidget() {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
+
+      // Check for duplicates
+      const isDuplicate = await checkDuplicate(listing);
+      if (isDuplicate) {
+        setDuplicateCount(prev => prev + 1);
+        toast({
+          title: "Duplicate Listing",
+          description: `${listing.address || listing.mlsNumber || "This listing"} already exists in your properties`,
+          variant: "destructive",
+        });
+        return;
+      }
 
       const priceValue = typeof listing.price === 'string' 
         ? parseFloat(listing.price.replace(/[^0-9.]/g, '')) 
@@ -105,10 +166,18 @@ export function ImportListingsWidget() {
         source_url: listing.url || null,
         data_source: "realtor.ca",
         status: "active",
+        metadata: {
+          agentName: listing.agentName,
+          agentPhone: listing.agentPhone,
+          agentEmail: listing.agentEmail,
+          importedAt: new Date().toISOString(),
+          importedFrom: "import-listings-widget",
+        },
       });
 
       if (error) throw error;
 
+      setSavedCount(prev => prev + 1);
       toast({
         title: "Saved!",
         description: `${listing.address} added to your properties`,
@@ -138,27 +207,42 @@ export function ImportListingsWidget() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Home className="h-5 w-5 text-primary" />
-          Import Listings from Realtor.ca
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <Home className="h-5 w-5 text-primary" />
+            Import Listings from Realtor.ca
+            <Badge variant="secondary" className="ml-2 text-xs">Beta</Badge>
+          </CardTitle>
+        </div>
         <CardDescription>
           Enter a Realtor.ca search URL to import property listings
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Data Source Disclaimer */}
+        <Alert variant="default" className="border-amber-500/50 bg-amber-500/10">
+          <AlertTriangle className="h-4 w-4 text-amber-500" />
+          <AlertTitle className="text-amber-600 dark:text-amber-400">Data Source Notice</AlertTitle>
+          <AlertDescription className="text-sm text-muted-foreground">
+            This data is scraped from Realtor.ca and is NOT official MLS or CREA DDF data. 
+            Use for research purposes only.
+          </AlertDescription>
+        </Alert>
+
         {urlError && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription className="whitespace-pre-line">{urlError}</AlertDescription>
           </Alert>
         )}
+
         <div className="flex flex-col sm:flex-row gap-3">
           <Input
             placeholder="https://www.realtor.ca/map#... or .../city/real-estate"
             value={url}
             onChange={(e) => handleUrlChange(e.target.value)}
             className={`flex-1 ${urlError ? 'border-destructive' : ''}`}
+            disabled={loading}
           />
           <Input
             type="number"
@@ -168,6 +252,7 @@ export function ImportListingsWidget() {
             className="w-32"
             min={1}
             max={500}
+            disabled={loading}
           />
           <Button onClick={handleImport} disabled={loading}>
             {loading ? (
@@ -183,6 +268,26 @@ export function ImportListingsWidget() {
             )}
           </Button>
         </div>
+
+        {/* Success/duplicate status */}
+        {(savedCount > 0 || duplicateCount > 0) && (
+          <Alert className="border-green-500/50 bg-green-500/10">
+            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            <AlertDescription className="text-green-600 dark:text-green-400">
+              {savedCount} listing{savedCount !== 1 ? 's' : ''} saved to your CRM
+              {duplicateCount > 0 && ` (${duplicateCount} duplicate${duplicateCount !== 1 ? 's' : ''} skipped)`}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {/* Empty state */}
+        {!loading && results.length === 0 && url && (
+          <div className="text-center py-8 text-muted-foreground">
+            <Home className="h-12 w-12 mx-auto mb-3 opacity-30" />
+            <p>No listings found. Try a different URL or check the format.</p>
+            <p className="text-xs mt-2">Use a search or map URL, not a single listing page.</p>
+          </div>
+        )}
 
         {results.length > 0 && (
           <div className="border rounded-lg overflow-hidden">
