@@ -4,10 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { fetchRealtorListings, ListingResult } from "@/lib/apify";
-import { Home, Loader2, Download, Save, ExternalLink } from "lucide-react";
+import { fetchRealtorListings, ListingResult, validateRealtorUrl } from "@/lib/apify";
+import { Home, Loader2, Download, Save, ExternalLink, AlertCircle } from "lucide-react";
 
 export function ImportListingsWidget() {
   const [url, setUrl] = useState("");
@@ -15,7 +16,18 @@ export function ImportListingsWidget() {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<ListingResult[]>([]);
   const [savingIds, setSavingIds] = useState<Set<number>>(new Set());
+  const [urlError, setUrlError] = useState<string | null>(null);
   const { toast } = useToast();
+
+  const handleUrlChange = (value: string) => {
+    setUrl(value);
+    if (value.trim()) {
+      const validation = validateRealtorUrl(value);
+      setUrlError(validation.valid ? null : validation.error || null);
+    } else {
+      setUrlError(null);
+    }
+  };
 
   const handleImport = async () => {
     if (!url.trim()) {
@@ -27,7 +39,20 @@ export function ImportListingsWidget() {
       return;
     }
 
+    // Validate URL before making request
+    const validation = validateRealtorUrl(url);
+    if (!validation.valid) {
+      setUrlError(validation.error || "Invalid URL");
+      toast({
+        title: "Invalid URL",
+        description: validation.error || "Please enter a valid search or map URL",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
+    setUrlError(null);
     try {
       const data = await fetchRealtorListings({
         startUrls: [url],
@@ -40,9 +65,10 @@ export function ImportListingsWidget() {
       });
     } catch (error) {
       console.error("Import error:", error);
+      const errorMessage = error instanceof Error ? error.message : "Failed to fetch listings";
       toast({
         title: "Import Failed",
-        description: error instanceof Error ? error.message : "Failed to fetch listings",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -121,12 +147,18 @@ export function ImportListingsWidget() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {urlError && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription className="whitespace-pre-line">{urlError}</AlertDescription>
+          </Alert>
+        )}
         <div className="flex flex-col sm:flex-row gap-3">
           <Input
-            placeholder="https://www.realtor.ca/map#..."
+            placeholder="https://www.realtor.ca/map#... or .../city/real-estate"
             value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="flex-1"
+            onChange={(e) => handleUrlChange(e.target.value)}
+            className={`flex-1 ${urlError ? 'border-destructive' : ''}`}
           />
           <Input
             type="number"

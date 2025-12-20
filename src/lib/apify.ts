@@ -50,6 +50,47 @@ export interface CombinedResult {
   agents: AgentResult[];
 }
 
+// Validates if a URL is a supported Realtor.ca URL type
+export const validateRealtorUrl = (url: string): { valid: boolean; error?: string; type?: 'search' | 'map' | 'listing' } => {
+  const trimmedUrl = url.trim();
+  
+  if (!trimmedUrl) {
+    return { valid: false, error: "URL is required" };
+  }
+  
+  if (!trimmedUrl.includes("realtor.ca")) {
+    return { valid: false, error: "Please enter a valid Realtor.ca URL" };
+  }
+  
+  // Single listing URL pattern: /real-estate/{id}/
+  const singleListingPattern = /realtor\.ca\/real-estate\/\d+\//;
+  if (singleListingPattern.test(trimmedUrl)) {
+    return { 
+      valid: false, 
+      type: 'listing',
+      error: "Single listing URLs are not supported. Please use a search or map URL instead.\n\nExample formats:\n• Map: realtor.ca/map#...\n• Search: realtor.ca/edmonton/real-estate" 
+    };
+  }
+  
+  // Map URL pattern
+  if (trimmedUrl.includes("/map#") || trimmedUrl.includes("/map?")) {
+    return { valid: true, type: 'map' };
+  }
+  
+  // Search URL pattern (city/real-estate or province/city/real-estate)
+  if (trimmedUrl.match(/realtor\.ca\/[a-z-]+\/real-estate/i) || trimmedUrl.match(/realtor\.ca\/[a-z-]+\/[a-z-]+\/real-estate/i)) {
+    return { valid: true, type: 'search' };
+  }
+  
+  // Agent search patterns
+  if (trimmedUrl.includes("/agent/") || trimmedUrl.includes("/agents")) {
+    return { valid: true, type: 'search' };
+  }
+  
+  // Generic realtor.ca URL - allow but warn
+  return { valid: true, type: 'search' };
+};
+
 const callApifyRunner = async (actorId: string, input: Record<string, unknown>) => {
   const { data: { session } } = await supabase.auth.getSession();
   
@@ -62,7 +103,24 @@ const callApifyRunner = async (actorId: string, input: Record<string, unknown>) 
   });
 
   if (response.error) {
-    throw new Error(response.error.message || "Failed to run Apify actor");
+    // Try to extract more specific error message
+    const errorMessage = response.error.message || "Failed to run Apify actor";
+    throw new Error(errorMessage);
+  }
+
+  // Check if the response contains an error from Apify
+  if (response.data && typeof response.data === 'object' && 'error' in response.data) {
+    const apifyError = response.data as { error: string; details?: string };
+    
+    // Parse common Apify error types for better messaging
+    if (apifyError.details?.includes("actor-is-not-rented")) {
+      throw new Error("Apify actor subscription required. The free trial has expired. Please rent the actor at apify.com to continue.");
+    }
+    if (apifyError.details?.includes("rate-limit")) {
+      throw new Error("Rate limit exceeded. Please wait a moment and try again.");
+    }
+    
+    throw new Error(apifyError.details || apifyError.error || "Apify actor failed");
   }
 
   return response.data;
