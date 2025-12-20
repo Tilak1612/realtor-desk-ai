@@ -206,8 +206,8 @@ const Dashboard = () => {
 
           {/* Welcome Section */}
           <div>
-            <h1 className="text-3xl font-bold mb-2">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}! 👋</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-xl md:text-2xl font-semibold mb-1">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}! 👋</h1>
+            <p className="text-sm text-muted-foreground">
               {t('app.dashboard.tasksDueToday', { count: getTasksDueToday() }).replace('{{count}}', String(getTasksDueToday()))}
               {hotLeads.length > 0 && (
                 <> {t('app.dashboard.hotLeadsToFollow', { count: hotLeads.length }).replace('{{count}}', String(hotLeads.length))}</>
@@ -272,7 +272,7 @@ const Dashboard = () => {
 
           {/* Realtor.ca Import Tools */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold">Data Import Tools</h2>
+            <h2 className="text-lg font-semibold">Data Import Tools</h2>
             <ImportListingsWidget />
             <AgentIntelligenceWidget />
             <QuickAreaImportWidget />

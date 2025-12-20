@@ -38,9 +38,9 @@ const DealsWidget = ({ stats }: DealsWidgetProps) => {
   if (totalDeals === 0) {
     return (
       <Card className="col-span-full">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5" />
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <TrendingUp className="w-4 h-4" />
             Active Deals Pipeline
           </CardTitle>
         </CardHeader>
@@ -58,9 +58,9 @@ const DealsWidget = ({ stats }: DealsWidgetProps) => {
 
   return (
     <Card className="col-span-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <TrendingUp className="w-5 h-5" />
+      <CardHeader className="pb-3">
+        <CardTitle className="flex items-center gap-2 text-base font-medium">
+          <TrendingUp className="w-4 h-4" />
           Active Deals Pipeline
         </CardTitle>
       </CardHeader>
@@ -76,11 +76,11 @@ const DealsWidget = ({ stats }: DealsWidgetProps) => {
                   to={`/deals?stage=${stage.key}`}
                   className="text-center hover:bg-accent/50 p-4 rounded-lg transition-colors"
                 >
-                  <div className="space-y-2">
-                    <div className={`h-2 ${stage.color} rounded-full mb-2`} />
-                    <p className="font-semibold">{stage.label}</p>
-                    <p className="text-2xl font-bold">{stageStats.count}</p>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="space-y-1">
+                    <div className={`h-1.5 ${stage.color} rounded-full mb-2`} />
+                    <p className="text-xs font-medium text-muted-foreground">{stage.label}</p>
+                    <p className="text-xl font-semibold">{stageStats.count}</p>
+                    <p className="text-xs text-muted-foreground">
                       {formatCurrency(stageStats.value)}
                     </p>
                   </div>
@@ -92,8 +92,8 @@ const DealsWidget = ({ stats }: DealsWidgetProps) => {
           {/* Summary */}
           <div className="flex items-center justify-between pt-4 border-t">
             <div>
-              <p className="text-sm text-muted-foreground">Total Pipeline Value</p>
-              <p className="text-2xl font-bold">
+              <p className="text-xs text-muted-foreground">Total Pipeline Value</p>
+              <p className="text-lg font-semibold">
                 {formatCurrency(
                   Object.values(stats).reduce((sum, stage) => sum + stage.value, 0)
                 )}

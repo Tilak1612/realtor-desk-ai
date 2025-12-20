@@ -164,9 +164,9 @@ const AIInsightsWidget = ({ userId }: AIInsightsWidgetProps) => {
   if (loading) {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Bot className="h-5 w-5 text-primary" />
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <Bot className="h-4 w-4 text-primary" />
             AI Insights
           </CardTitle>
         </CardHeader>
@@ -184,12 +184,12 @@ const AIInsightsWidget = ({ userId }: AIInsightsWidgetProps) => {
   if (visibleInsights.length === 0) {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Bot className="h-5 w-5 text-primary" />
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center gap-2 text-base font-medium">
+            <Bot className="h-4 w-4 text-primary" />
             AI Insights
           </CardTitle>
-          <CardDescription>Proactive recommendations for your business</CardDescription>
+          <CardDescription className="text-sm">Proactive recommendations for your business</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center py-6 text-muted-foreground">
@@ -204,14 +204,14 @@ const AIInsightsWidget = ({ userId }: AIInsightsWidgetProps) => {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center gap-2">
-              <Bot className="h-5 w-5 text-primary" />
+            <CardTitle className="flex items-center gap-2 text-base font-medium">
+              <Bot className="h-4 w-4 text-primary" />
               AI Insights
             </CardTitle>
-            <CardDescription>Proactive recommendations based on your data</CardDescription>
+            <CardDescription className="text-sm">Proactive recommendations based on your data</CardDescription>
           </div>
           <Badge variant="outline" className="text-xs">
             <Sparkles className="h-3 w-3 mr-1" />

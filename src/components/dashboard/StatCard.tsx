@@ -36,10 +36,10 @@ const StatCard = ({ title, value, change, subtitle, icon: Icon, trend = "neutral
           )}
         </div>
         <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">{title}</p>
-          <p className="text-3xl font-bold">{value}</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wide">{title}</p>
+          <p className="text-2xl font-semibold">{value}</p>
           {subtitle && (
-            <p className="text-sm text-muted-foreground">{subtitle}</p>
+            <p className="text-xs text-muted-foreground">{subtitle}</p>
           )}
         </div>
       </CardContent>

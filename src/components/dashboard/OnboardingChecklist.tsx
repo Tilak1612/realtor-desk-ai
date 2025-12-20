@@ -131,9 +131,9 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <CardTitle className="text-lg">Getting Started</CardTitle>
-            <Badge variant="secondary" className="ml-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <CardTitle className="text-base font-medium">Getting Started</CardTitle>
+            <Badge variant="secondary" className="ml-2 text-xs">
               {completedItems.size}/{checklistItems.length}
             </Badge>
           </div>
@@ -143,8 +143,8 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
             </Button>
           )}
         </div>
-        <CardDescription>Complete these steps to get the most out of Realtor Desk</CardDescription>
-        <Progress value={progress} className="h-2 mt-2" />
+        <CardDescription className="text-sm">Complete these steps to get the most out of Realtor Desk</CardDescription>
+        <Progress value={progress} className="h-1.5 mt-2" />
       </CardHeader>
       <CardContent className="pt-0">
         <div className="space-y-2">

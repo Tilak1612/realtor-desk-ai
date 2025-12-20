@@ -44,13 +44,13 @@ const MarketWidget = ({ defaultCity = "Toronto" }: MarketWidgetProps) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0">
-        <CardTitle className="flex items-center gap-2">
-          <MapPin className="w-5 h-5 text-primary" />
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+        <CardTitle className="flex items-center gap-2 text-base font-medium">
+          <MapPin className="w-4 h-4 text-primary" />
           Market Intelligence
         </CardTitle>
         <Select value={selectedCity} onValueChange={setSelectedCity}>
-          <SelectTrigger className="w-[140px]">
+          <SelectTrigger className="w-[120px] h-8 text-xs">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -62,52 +62,52 @@ const MarketWidget = ({ defaultCity = "Toronto" }: MarketWidgetProps) => {
           </SelectContent>
         </Select>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3">
         {/* Average Price */}
-        <div className="flex items-center justify-between p-4 bg-accent/50 rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-accent/50 rounded-lg">
           <div>
-            <p className="text-sm text-muted-foreground">Average Price</p>
-            <p className="text-2xl font-bold">{formatCurrency(marketData.averagePrice)}</p>
+            <p className="text-xs text-muted-foreground">Average Price</p>
+            <p className="text-lg font-semibold">{formatCurrency(marketData.averagePrice)}</p>
           </div>
           <div className={`flex items-center gap-1 ${marketData.priceChange >= 0 ? "text-green-500" : "text-destructive"}`}>
             {marketData.priceChange >= 0 ? (
-              <TrendingUp className="w-5 h-5" />
+              <TrendingUp className="w-4 h-4" />
             ) : (
-              <TrendingDown className="w-5 h-5" />
+              <TrendingDown className="w-4 h-4" />
             )}
-            <span className="font-semibold">{Math.abs(marketData.priceChange)}%</span>
+            <span className="text-sm font-medium">{Math.abs(marketData.priceChange)}%</span>
           </div>
         </div>
 
         {/* Days on Market */}
-        <div className="flex items-center justify-between p-4 bg-accent/50 rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-accent/50 rounded-lg">
           <div>
-            <p className="text-sm text-muted-foreground">Avg. Days on Market</p>
-            <p className="text-2xl font-bold">{marketData.daysOnMarket} days</p>
+            <p className="text-xs text-muted-foreground">Avg. Days on Market</p>
+            <p className="text-lg font-semibold">{marketData.daysOnMarket} days</p>
           </div>
           <div className={`flex items-center gap-1 ${marketData.daysChange <= 0 ? "text-green-500" : "text-destructive"}`}>
             {marketData.daysChange <= 0 ? (
-              <TrendingDown className="w-5 h-5" />
+              <TrendingDown className="w-4 h-4" />
             ) : (
-              <TrendingUp className="w-5 h-5" />
+              <TrendingUp className="w-4 h-4" />
             )}
-            <span className="font-semibold">{Math.abs(marketData.daysChange)} days</span>
+            <span className="text-sm font-medium">{Math.abs(marketData.daysChange)} days</span>
           </div>
         </div>
 
         {/* Active Listings */}
-        <div className="flex items-center justify-between p-4 bg-accent/50 rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-accent/50 rounded-lg">
           <div>
-            <p className="text-sm text-muted-foreground">Active Listings</p>
-            <p className="text-2xl font-bold">{marketData.activeListings.toLocaleString()}</p>
+            <p className="text-xs text-muted-foreground">Active Listings</p>
+            <p className="text-lg font-semibold">{marketData.activeListings.toLocaleString()}</p>
           </div>
           <div className={`flex items-center gap-1 ${marketData.listingsChange >= 0 ? "text-green-500" : "text-destructive"}`}>
             {marketData.listingsChange >= 0 ? (
-              <TrendingUp className="w-5 h-5" />
+              <TrendingUp className="w-4 h-4" />
             ) : (
-              <TrendingDown className="w-5 h-5" />
+              <TrendingDown className="w-4 h-4" />
             )}
-            <span className="font-semibold">{Math.abs(marketData.listingsChange)}%</span>
+            <span className="text-sm font-medium">{Math.abs(marketData.listingsChange)}%</span>
           </div>
         </div>
 
