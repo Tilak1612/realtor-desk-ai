@@ -40,7 +40,7 @@ const AuraHero = () => {
               </div>
 
               {/* Main Title */}
-              <h1 className="lg:text-6xl leading-[1.05] text-4xl sm:text-5xl mb-8 tracking-tighter text-white">
+              <h1 className="lg:text-6xl leading-[1.05] text-4xl sm:text-5xl mb-8 tracking-tighter gradient-text-animated">
                 Stop Losing Leads to Slow Follow-Ups
               </h1>
 
