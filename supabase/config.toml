@@ -29,3 +29,6 @@ verify_jwt = true
 
 [functions.lead-score-calculator]
 verify_jwt = true
+
+[functions.apify-runner]
+verify_jwt = true
