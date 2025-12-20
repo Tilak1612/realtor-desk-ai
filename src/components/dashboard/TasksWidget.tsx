@@ -75,10 +75,10 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
           </Link>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8">
-            <p className="text-muted-foreground mb-4">No tasks for today</p>
+          <div className="text-center py-6">
+            <p className="text-sm text-muted-foreground mb-3">No tasks for today</p>
             <Link to="/tasks">
-              <Button>Create Your First Task</Button>
+              <Button size="sm">Create Your First Task</Button>
             </Link>
           </div>
         </CardContent>
@@ -145,9 +145,9 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
         ))}
         {tasks.length > 5 && (
           <Link to="/tasks" className="block">
-            <Button variant="ghost" className="w-full">
+            <Button variant="ghost" size="sm" className="w-full h-8 text-xs">
               View All Tasks
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-3 h-3 ml-1" />
             </Button>
           </Link>
         )}

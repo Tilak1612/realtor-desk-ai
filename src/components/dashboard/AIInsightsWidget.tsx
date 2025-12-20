@@ -277,7 +277,7 @@ const AIInsightsWidget = ({ userId }: AIInsightsWidgetProps) => {
             <Clock className="h-3 w-3" />
             Updated every hour
           </p>
-          <Button variant="ghost" size="sm" onClick={generateInsights}>
+          <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={generateInsights}>
             Refresh
           </Button>
         </div>

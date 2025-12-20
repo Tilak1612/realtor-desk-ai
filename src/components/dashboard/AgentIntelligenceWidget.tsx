@@ -225,15 +225,15 @@ export function AgentIntelligenceWidget() {
             onKeyDown={(e) => e.key === "Enter" && !loading && handleSearch()}
             disabled={loading}
           />
-          <Button onClick={handleSearch} disabled={loading}>
+          <Button onClick={handleSearch} disabled={loading} size="sm" className="h-8">
             {loading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                 Searching...
               </>
             ) : (
               <>
-                <Search className="mr-2 h-4 w-4" />
+                <Search className="mr-1.5 h-3 w-3" />
                 Search Agents
               </>
             )}
@@ -293,14 +293,15 @@ export function AgentIntelligenceWidget() {
                         <Button
                           size="sm"
                           variant="outline"
+                          className="h-7 text-xs"
                           onClick={() => handleSaveAsContact(agent, index)}
                           disabled={savingIds.has(index)}
                         >
                           {savingIds.has(index) ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <Loader2 className="h-3 w-3 animate-spin" />
                           ) : (
                             <>
-                              <UserPlus className="h-4 w-4 mr-1" />
+                              <UserPlus className="h-3 w-3 mr-1" />
                               Save
                             </>
                           )}
