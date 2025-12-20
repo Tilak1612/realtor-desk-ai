@@ -199,6 +199,54 @@ export type Database = {
           },
         ]
       }
+      apify_usage: {
+        Row: {
+          actor_id: string
+          created_at: string
+          credits_used: number | null
+          id: string
+          import_history_id: string | null
+          records_fetched: number | null
+          request_date: string
+          user_id: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          credits_used?: number | null
+          id?: string
+          import_history_id?: string | null
+          records_fetched?: number | null
+          request_date?: string
+          user_id: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          credits_used?: number | null
+          id?: string
+          import_history_id?: string | null
+          records_fetched?: number | null
+          request_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apify_usage_import_history_id_fkey"
+            columns: ["import_history_id"]
+            isOneToOne: false
+            referencedRelation: "import_history"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "apify_usage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       automation_workflows: {
         Row: {
           actions: Json | null
@@ -1001,6 +1049,68 @@ export type Database = {
           },
         ]
       }
+      import_history: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          duplicate_records: number | null
+          error_message: string | null
+          failed_records: number | null
+          id: string
+          import_type: string
+          parser_version: string | null
+          raw_payload: Json | null
+          saved_records: number | null
+          source_url: string
+          started_at: string | null
+          status: string
+          total_records: number | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          duplicate_records?: number | null
+          error_message?: string | null
+          failed_records?: number | null
+          id?: string
+          import_type: string
+          parser_version?: string | null
+          raw_payload?: Json | null
+          saved_records?: number | null
+          source_url: string
+          started_at?: string | null
+          status?: string
+          total_records?: number | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          duplicate_records?: number | null
+          error_message?: string | null
+          failed_records?: number | null
+          id?: string
+          import_type?: string
+          parser_version?: string | null
+          raw_payload?: Json | null
+          saved_records?: number | null
+          source_url?: string
+          started_at?: string | null
+          status?: string
+          total_records?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "import_history_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       integrations: {
         Row: {
           access_token: string | null
@@ -1281,6 +1391,7 @@ export type Database = {
           email: string
           full_name: string
           id: string
+          is_qa_account: boolean | null
           license_expiry: string | null
           license_number: string | null
           onboarding_completed: boolean | null
@@ -1310,6 +1421,7 @@ export type Database = {
           email: string
           full_name: string
           id: string
+          is_qa_account?: boolean | null
           license_expiry?: string | null
           license_number?: string | null
           onboarding_completed?: boolean | null
@@ -1339,6 +1451,7 @@ export type Database = {
           email?: string
           full_name?: string
           id?: string
+          is_qa_account?: boolean | null
           license_expiry?: string | null
           license_number?: string | null
           onboarding_completed?: boolean | null
@@ -1786,6 +1899,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_apify_rate_limit: {
+        Args: { checking_user_id: string; max_daily_imports?: number }
+        Returns: boolean
+      }
+      check_concurrent_import: {
+        Args: { checking_user_id: string }
+        Returns: boolean
+      }
       check_contact_exists: {
         Args: { checking_user_id: string; contact_id: string }
         Returns: boolean
