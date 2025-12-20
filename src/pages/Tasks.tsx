@@ -105,19 +105,20 @@ const Tasks = () => {
         <main className="flex-1 p-4 md:p-6 overflow-auto">
           <div className="max-w-7xl mx-auto space-y-6">
             {/* Top Bar */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div>
-                <h1 className="text-3xl font-bold">{t('app.tasks.title')}</h1>
+                <h1 className="text-xl font-semibold">{t('app.tasks.title')}</h1>
               </div>
               
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2">
                 {/* Quick Filters */}
-                <div className="flex gap-2">
+                <div className="flex gap-1">
                   {quickFilterButtons.map(btn => (
                     <Button
                       key={btn.value}
                       variant={quickFilter === btn.value ? "default" : "outline"}
                       size="sm"
+                      className="h-7 text-xs px-2"
                       onClick={() => setQuickFilter(btn.value)}
                     >
                       {btn.label}
@@ -126,25 +127,27 @@ const Tasks = () => {
                 </div>
 
                 {/* View Toggle */}
-                <div className="flex items-center gap-1 bg-muted rounded-md p-1">
+                <div className="flex items-center gap-0.5 bg-muted rounded-md p-0.5">
                   <Button
                     variant={view === "list" ? "secondary" : "ghost"}
                     size="sm"
+                    className="h-7 w-7 p-0"
                     onClick={() => setView("list")}
                   >
-                    <List className="h-4 w-4" />
+                    <List className="h-3.5 w-3.5" />
                   </Button>
                   <Button
                     variant={view === "calendar" ? "secondary" : "ghost"}
                     size="sm"
+                    className="h-7 w-7 p-0"
                     onClick={() => setView("calendar")}
                   >
-                    <CalendarIcon className="h-4 w-4" />
+                    <CalendarIcon className="h-3.5 w-3.5" />
                   </Button>
                 </div>
 
-                <Button onClick={() => setIsAddModalOpen(true)}>
-                  <Plus className="h-4 w-4 mr-2" />
+                <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+                  <Plus className="h-3.5 w-3.5 mr-1.5" />
                   {t('app.tasks.addTask')}
                 </Button>
               </div>

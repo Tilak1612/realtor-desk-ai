@@ -50,16 +50,16 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   };
 
   return (
-    <header className="sticky top-0 z-30 h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-16 items-center gap-4 px-6">
+    <header className="sticky top-0 z-30 h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex h-14 items-center gap-3 px-4">
         {/* Search Bar */}
         <form onSubmit={handleSearch} className="flex-1 max-w-md">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search contacts, deals, tasks..."
-              className="pl-9"
+              className="pl-8 h-8 text-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -69,37 +69,37 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
         {/* Notifications */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="relative h-8 w-8">
+              <Bell className="h-4 w-4" />
               {notificationCount > 0 && (
                 <Badge
                   variant="destructive"
-                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  className="absolute -top-0.5 -right-0.5 h-4 w-4 flex items-center justify-center p-0 text-[10px]"
                 >
                   {notificationCount}
                 </Badge>
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80">
-            <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+          <DropdownMenuContent align="end" className="w-72">
+            <DropdownMenuLabel className="text-sm">Notifications</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <div className="space-y-2 p-2">
-              <div className="p-3 hover:bg-accent rounded-lg cursor-pointer">
+            <div className="space-y-1 p-1.5">
+              <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
                 <p className="text-sm font-medium">New lead: John Smith</p>
                 <p className="text-xs text-muted-foreground">2 minutes ago</p>
               </div>
-              <div className="p-3 hover:bg-accent rounded-lg cursor-pointer">
+              <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
                 <p className="text-sm font-medium">Task due: Follow up with client</p>
                 <p className="text-xs text-muted-foreground">1 hour ago</p>
               </div>
-              <div className="p-3 hover:bg-accent rounded-lg cursor-pointer">
+              <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
                 <p className="text-sm font-medium">Deal closed: $450,000</p>
                 <p className="text-xs text-muted-foreground">3 hours ago</p>
               </div>
             </div>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem className="cursor-pointer text-sm">
               View all notifications
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -108,34 +108,34 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
         {/* User Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-              <Avatar>
+            <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+              <Avatar className="h-8 w-8">
                 <AvatarImage src={profile?.avatar_url} />
-                <AvatarFallback className="bg-primary text-primary-foreground">
+                <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                   {profile?.full_name ? getInitials(profile.full_name) : "U"}
                 </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuLabel>
-              <div className="flex flex-col space-y-1">
+          <DropdownMenuContent align="end" className="w-52">
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col space-y-0.5">
                 <p className="text-sm font-medium">{profile?.full_name || "User"}</p>
                 <p className="text-xs text-muted-foreground">{profile?.email}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer">
-              <User className="mr-2 h-4 w-4" />
+            <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer text-sm">
+              <User className="mr-2 h-3.5 w-3.5" />
               Profile
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer">
-              <Settings className="mr-2 h-4 w-4" />
+            <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer text-sm">
+              <Settings className="mr-2 h-3.5 w-3.5" />
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
-              <LogOut className="mr-2 h-4 w-4" />
+            <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-sm text-destructive">
+              <LogOut className="mr-2 h-3.5 w-3.5" />
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>

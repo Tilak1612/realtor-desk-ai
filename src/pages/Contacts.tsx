@@ -188,9 +188,9 @@ const Contacts = () => {
           <div className="container mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="flex items-center gap-3">
-                <h1 className="text-3xl font-bold">{t('app.contacts.title')}</h1>
-                <Badge variant="secondary" className="text-sm">
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-semibold">{t('app.contacts.title')}</h1>
+                <Badge variant="secondary" className="text-xs">
                   {filteredContacts.length}
                 </Badge>
               </div>
@@ -198,22 +198,24 @@ const Contacts = () => {
                 <Button
                   variant="outline"
                   size="sm"
+                  className="h-8 text-xs"
                   onClick={() => setIsImportModalOpen(true)}
                 >
-                  <Upload className="h-4 w-4 mr-2" />
+                  <Upload className="h-3.5 w-3.5 mr-1.5" />
                   {t('app.contacts.importContacts')}
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
+                  className="h-8 text-xs"
                   onClick={handleExportCSV}
                   disabled={filteredContacts.length === 0}
                 >
-                  <Download className="h-4 w-4 mr-2" />
+                  <Download className="h-3.5 w-3.5 mr-1.5" />
                   {t('app.contacts.exportContacts')}
                 </Button>
-                <Button onClick={() => setIsAddModalOpen(true)}>
-                  <Plus className="h-4 w-4 mr-2" />
+                <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+                  <Plus className="h-3.5 w-3.5 mr-1.5" />
                   {t('app.contacts.addContact')}
                 </Button>
               </div>

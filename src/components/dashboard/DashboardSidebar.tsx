@@ -75,27 +75,27 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
         {/* Logo */}
         <Link
           to="/dashboard"
-          className="flex items-center gap-3 p-6 border-b hover:bg-accent/50 transition-colors"
+          className="flex items-center gap-2.5 p-4 border-b hover:bg-accent/50 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          <img src={logo} alt="Realtor Desk" className="h-10 w-auto" />
-          <span className="text-lg font-bold gradient-text">Realtor Desk</span>
+          <img src={logo} alt="Realtor Desk" className="h-8 w-auto" />
+          <span className="text-base font-semibold gradient-text">Realtor Desk</span>
         </Link>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto p-4 space-y-1">
+        <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
           {menuItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+              className={`flex items-center gap-2.5 px-3 py-2 rounded-md transition-all text-sm ${
                 isActive(item.path)
-                  ? "bg-primary text-primary-foreground shadow-md"
+                  ? "bg-primary text-primary-foreground shadow-sm"
                   : "hover:bg-accent text-muted-foreground hover:text-foreground"
               }`}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon className="w-4 h-4" />
               <span className="font-medium">{item.label}</span>
             </Link>
           ))}
@@ -103,19 +103,19 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
         {/* Upgrade Badge */}
         {trialDaysLeft > 0 && (
-          <div className="p-4 border-t">
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-4 rounded-lg space-y-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary" />
-                <Badge variant="secondary" className="font-semibold">
+          <div className="p-3 border-t">
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-3 rounded-md space-y-2">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <Badge variant="secondary" className="text-xs font-medium">
                   {t('app.sidebar.trialActive')}
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-bold text-foreground">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
+              <p className="text-xs text-muted-foreground">
+                <span className="font-semibold text-foreground">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
               </p>
               <Link to="/billing">
-                <Button className="w-full btn-gradient" size="sm">
+                <Button className="w-full btn-gradient h-7 text-xs" size="sm">
                   {t('app.sidebar.upgradeNow')}
                 </Button>
               </Link>
