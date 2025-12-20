@@ -177,29 +177,29 @@ const Properties = () => {
         <main className="flex-1 overflow-y-auto">
           <div className="container mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="flex items-center gap-3">
-                <Building2 className="h-8 w-8 text-primary" />
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+              <div className="flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-primary" />
                 <div>
-                  <h1 className="text-3xl font-bold">{t('app.properties.title')}</h1>
-                  <div className="flex items-center gap-3 mt-1">
-                    <Badge variant="secondary">
+                  <h1 className="text-xl font-semibold">{t('app.properties.title')}</h1>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <Badge variant="secondary" className="text-xs">
                       {statusCounts.total} {t('app.common.all')}
                     </Badge>
-                    <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+                    <Badge variant="outline" className="text-xs bg-success/10 text-success border-success/20">
                       {statusCounts.active} {t('app.properties.active')}
                     </Badge>
-                    <Badge variant="outline" className="bg-warning/10 text-warning border-warning/20">
+                    <Badge variant="outline" className="text-xs bg-warning/10 text-warning border-warning/20">
                       {statusCounts.pending} {t('app.properties.pending')}
                     </Badge>
-                    <Badge variant="outline" className="bg-muted text-muted-foreground">
+                    <Badge variant="outline" className="text-xs bg-muted text-muted-foreground">
                       {statusCounts.sold} {t('app.properties.sold')}
                     </Badge>
                   </div>
                 </div>
               </div>
-              <Button onClick={() => setIsAddModalOpen(true)} size="lg">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+                <Plus className="h-3.5 w-3.5 mr-1.5" />
                 {t('app.properties.addProperty')}
               </Button>
             </div>

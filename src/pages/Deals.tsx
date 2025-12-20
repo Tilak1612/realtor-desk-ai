@@ -52,15 +52,15 @@ const Deals = () => {
         <main className="flex-1 p-4 md:p-6 overflow-auto">
           <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
             {/* Top Bar */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold">{t('app.deals.title')} {t('app.deals.pipeline')}</h1>
-                <p className="text-sm text-muted-foreground mt-1">{t('app.deals.allDeals')}</p>
+                <h1 className="text-xl font-semibold">{t('app.deals.title')} {t('app.deals.pipeline')}</h1>
+                <p className="text-sm text-muted-foreground mt-0.5">{t('app.deals.allDeals')}</p>
               </div>
               
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <Select value={filter} onValueChange={setFilter}>
-                  <SelectTrigger className="w-full sm:w-[200px]">
+                  <SelectTrigger className="w-full sm:w-[180px] h-8 text-sm">
                     <SelectValue placeholder={t('app.common.filter')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -74,28 +74,30 @@ const Deals = () => {
                   </SelectContent>
                 </Select>
 
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="flex items-center gap-1 bg-muted rounded-md p-1">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-0.5 bg-muted rounded-md p-0.5">
                     <Button
                       variant={view === "kanban" ? "secondary" : "ghost"}
                       size="sm"
+                      className="h-7 text-xs px-2"
                       onClick={() => setView("kanban")}
                     >
-                      <LayoutGrid className="h-4 w-4" />
+                      <LayoutGrid className="h-3.5 w-3.5" />
                       <span className="ml-1 hidden sm:inline">{t('app.deals.pipeline')}</span>
                     </Button>
                     <Button
                       variant={view === "list" ? "secondary" : "ghost"}
                       size="sm"
+                      className="h-7 text-xs px-2"
                       onClick={() => setView("list")}
                     >
-                      <List className="h-4 w-4" />
+                      <List className="h-3.5 w-3.5" />
                       <span className="ml-1 hidden sm:inline">{t('app.common.all')}</span>
                     </Button>
                   </div>
 
-                  <Button onClick={() => setIsAddModalOpen(true)} className="flex-1 sm:flex-initial">
-                    <Plus className="h-4 w-4 mr-2" />
+                  <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+                    <Plus className="h-3.5 w-3.5 mr-1.5" />
                     <span className="hidden sm:inline">{t('app.deals.addDeal')}</span>
                     <span className="sm:hidden">{t('app.common.add')}</span>
                   </Button>
