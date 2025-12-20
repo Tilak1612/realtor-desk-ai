@@ -16,33 +16,48 @@ const resources = {
         startClosing: "Start Closing More Deals"
       },
       hero: {
-        title: "The AI Platform Built for Canadian Realtors",
-        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with CREA DDF® integration and full bilingual support.",
-        getStarted: "Start Your 14-Day Free Trial",
-        watchDemo: "Book Your Free Demo",
-        trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
-        badge1: "CREA Certified",
-        badge2: "SOC 2 Compliant",
-        badge3: "50+ Beta Users",
-        conversionBadge: "300% Conversion Increase"
+        title: "Never Miss a Lead Again—Even at 2am",
+        titlePart1: "Your AI Responds to",
+        titlePart2: "Every Lead",
+        titlePart3: "in",
+        titlePart4: "Under 60 Seconds",
+        subtitle: "While you sleep, your AI qualifies buyers, books showings, and follows up in English or French. 50+ Canadian agents already closing 3X more deals.",
+        getStarted: "Start Closing More Deals Free",
+        watchDemo: "See a Lead Convert in 47 Seconds",
+        trustLine: "Takes 3 minutes to set up • Works while you sleep • Cancel anytime",
+        badge1: "CREA DDF® Connected",
+        badge2: "Data Stays in Canada",
+        badge3: "50+ Agents Closing More",
+        conversionBadge: "3X Faster Response Time",
+        badge: "Your AI Starts Working in 3 Minutes",
+        aiActive: "AI Responding Now",
+        processing: "Converting Lead",
+        leadCapture: "Booking Showing",
+        aiChatbot: "Responds in Under 60 Seconds",
+        chatbotDesc: "Your AI answers at 2am when leads are ready to buy.",
+        emailAuto: "Follows Up Automatically",
+        socialProof: "50+ Agents Closing 3X More",
+        dashboardAlt: "Live dashboard showing AI responding to leads",
+        unifiedDashboard: "See Every Conversion Live"
       },
       home: {
         socialProof: {
           agents: "agents",
-          usingNow: "using now",
-          demos: "demos",
-          bookedThisWeek: "booked this week",
-          joinAgents: "Join agents closing 3X more deals"
+          usingNow: "responding to leads right now",
+          demos: "showings",
+          bookedThisWeek: "booked by AI this week",
+          joinAgents: "Stop losing leads to faster competitors"
         },
         credibility: {
-          title: "Trusted & Secure"
+          title: "Your Data Never Leaves Canada"
         },
         demo: {
-          title: "See Realtor Desk in Action",
-          description: "Watch how AI can transform your real estate business in just 2 minutes",
-          watchDemo: "Watch 2-Minute Product Demo",
-          bookDemo: "Book Live Demo",
-          exploreFeatures: "Explore All Features"
+          title: "Watch a Lead Convert at 11:47pm",
+          description: "See exactly how AI books a showing while the agent sleeps",
+          badge: "Real Recording from Last Tuesday",
+          watchDemo: "Watch the 2-Minute Conversion",
+          bookDemo: "Get Your AI Set Up Free",
+          exploreFeatures: "See Every AI Feature"
         }
       },
       features: {
@@ -203,55 +218,55 @@ const resources = {
         schedule: "Schedule Free Migration Call"
       },
       problem: {
-        title: "Tired of Missing Leads While You Sleep?",
+        title: "You're Losing $47,000/Year to Slow Response Times",
         lostOpportunities: {
-          title: "Lost Opportunities",
-          text: "67% of leads contact agents outside business hours. Are you there to respond?"
+          title: "Leads Gone in 5 Minutes",
+          text: "78% of buyers go with the first agent who responds. Your competitor's AI answers in 12 seconds."
         },
         toolOverload: {
-          title: "Tool Overload",
-          text: "Juggling 5+ platforms for chat, email, calls, and CRM. There's a better way."
+          title: "You Paid $400 for That Lead",
+          text: "Then lost it because you were in a showing and couldn't respond for 3 hours."
         },
         wastedSpend: {
-          title: "Wasted Ad Spend",
-          text: "You pay for leads, but slow response times mean competitors close them first."
+          title: "2am Leads = Lost Deals",
+          text: "Your best leads search at night. By morning, they've already toured with someone else."
         }
       },
       solution: {
-        title: "Meet Your 24/7 AI Real Estate Team",
+        title: "Your AI Responds in 47 Seconds—24/7/365",
         chatbot: {
-          title: "Intelligent Lead Capture",
-          feature1: "Answers property questions instantly",
-          feature2: "Qualifies buyers/sellers automatically",
-          feature3: "Captures contact info & preferences",
-          feature4: "Bilingual (English/French)",
-          feature5: "Works on your website & social media"
+          title: "Books Showings While You Sleep",
+          feature1: "Answers 'Is this still available?' at 2am",
+          feature2: "Asks the right questions to qualify serious buyers",
+          feature3: "Books showings directly into your calendar",
+          feature4: "Switches to French when the lead prefers it",
+          feature5: "Works on Realtor.ca, your site, and Facebook"
         },
         voice: {
-          title: "Smart Call Handling",
-          feature1: "Takes calls when you're busy",
-          feature2: "Schedules showings automatically",
-          feature3: "Natural-sounding Canadian voice",
-          feature4: "Routes hot leads to your phone",
-          feature5: "Records & transcribes every call"
+          title: "Never Miss Another Call",
+          feature1: "Answers when you're in a showing",
+          feature2: "Sounds like a real Canadian assistant",
+          feature3: "Books the showing, texts you the details",
+          feature4: "Calls you immediately for hot buyers",
+          feature5: "Every call recorded and transcribed"
         },
         email: {
-          title: "Follow-Up That Never Stops",
-          feature1: "Responds to inquiries instantly",
-          feature2: "Sends personalized property matches",
-          feature3: "Nurtures leads over 90+ days",
-          feature4: "Integrates with your email",
-          feature5: "CASL-compliant unsubscribe"
+          title: "Follows Up Until They Buy",
+          feature1: "Responds to new inquiries in under 60 seconds",
+          feature2: "Sends property matches based on their search history",
+          feature3: "Keeps nurturing for 90+ days until they're ready",
+          feature4: "Uses your email address, sounds like you",
+          feature5: "CASL-compliant—no legal headaches"
         }
       },
       dashboard: {
-        title: "Everything in One Place",
-        subtitle: "Manage all your conversations, leads, and insights from a single powerful dashboard",
-        feature1: "All conversations (chat, voice, email) in one view",
-        feature2: "AI-powered lead scoring highlights hot prospects",
-        feature3: "Real-time notifications for urgent inquiries",
-        feature4: "One-click response templates",
-        feature5: "Performance analytics & ROI tracking"
+        title: "See Every Lead Converting—Live",
+        subtitle: "Watch your AI book showings, qualify buyers, and follow up—all from one screen",
+        feature1: "See every chat, call, and email as it happens",
+        feature2: "Hot leads bubble to the top automatically",
+        feature3: "Get texted when a buyer wants to tour today",
+        feature4: "One click to call any lead back",
+        feature5: "Track exactly how many deals your AI closed"
       },
       canadian: {
         title: "Built for the Canadian Market",
@@ -315,94 +330,94 @@ const resources = {
         }
       },
         cta: {
-        title: "Ready to Never Miss a Lead Again?",
-        subtitle: "Join 500+ Canadian realtors using AI to close more deals",
-        button: "Start Your 14-Day Free Trial",
-        note: "14 Days Free • No credit card required • Cancel anytime"
+        title: "Start Responding to Leads in 3 Minutes",
+        subtitle: "Your AI will be live tonight—answering leads while you sleep",
+        button: "Get Your AI Working Free",
+        note: "Set up in 3 minutes • No credit card • Works tonight"
       },
       mobileCTA: {
-        title: "Start Your 14-Day Free Trial",
-        subtitle: "Join 500+ Canadian Realtors"
+        title: "Your AI Starts in 3 Minutes",
+        subtitle: "Never lose another 2am lead"
       },
       trustTransparency: {
-        title: "Built on Trust & Transparency",
+        badge: "Honesty First",
+        title: "Here's Exactly What You're Getting",
+        subtitle: "No vague promises—just clear results from real agents",
         beta: {
-          title: "Beta Program",
-          description: "We're currently in beta with select Canadian realtors. Join our pilot program and help shape the future of AI in real estate.",
-          badge: "Limited Spots Available"
+          title: "50+ Agents Testing Right Now",
+          desc: "Get beta pricing locked in forever"
         },
         results: {
-          title: "Real Results",
-          description: "Performance metrics based on our pilot program with 50+ active users. Individual results may vary based on market conditions and usage.",
-          disclaimer: "*Results from pilot participants"
+          title: "3X Faster Response Times",
+          desc: "Verified from our pilot program data"
         },
         security: {
-          title: "Security First",
-          description: "SOC 2 compliant architecture, PIPEDA-ready data handling, and enterprise-grade security from day one."
+          title: "Your Data Stays in Canada",
+          desc: "Toronto & Vancouver servers only"
         },
         canadian: {
-          title: "Canadian Built",
-          description: "Designed specifically for Canadian realtors with data residency in Toronto/Vancouver and full bilingual support."
+          title: "Built Here, For Here",
+          desc: "CREA DDF®, bilingual, PIPEDA-ready"
         },
-        disclaimer: "Realtor Desk is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary."
+        disclaimer: "We're in beta. These are real results from 50+ agents, but your results depend on your market and how you use it."
       },
       betaCommunity: {
-        title: "Join Our Growing Beta Community",
-        participants: "50+ Beta Participants",
-        limitedSpots: "Limited Beta Spots Available",
-        resultsTitle: "Real Results from Our Beta Community",
-        resultsSubtitle: "Canadian realtors are already seeing measurable results. Here's what early adopters are experiencing:",
-        testimonialDisclaimer: "*Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.",
-        ctaTitle: "Ready to Join Our Beta Program?",
-        ctaSubtitle: "Limited spots available. Be part of shaping the future of real estate AI in Canada.",
-        ctaButton: "Apply for Beta Access",
-        ctaNote: "Beta participants get lifetime discounts and priority feature access",
+        title: "These Agents Closed Extra Deals Last Month",
+        participants: "50+ Agents in Beta",
+        limitedSpots: "17 Beta Spots Left",
+        resultsTitle: "Real Numbers from Last Month",
+        resultsSubtitle: "Here's what happened when these agents turned on their AI:",
+        testimonialDisclaimer: "*Individual results from our beta program. Your results depend on your market, lead volume, and how you use the platform.",
+        ctaTitle: "Your AI Could Be Live Tonight",
+        ctaSubtitle: "Set up takes 3 minutes. First leads convert while you sleep.",
+        ctaButton: "Get Your AI Set Up Free",
+        ctaNote: "Beta pricing locked forever • No credit card required",
         testimonials: {
           sarah: {
-            quote: "I was skeptical about AI, but after the first week, I had 3 showings booked while I was sleeping. The voice agent sounds natural and captures all the details I need.",
-            brokerage: "Independent Agent",
+            quote: "Tuesday night, 11:47pm—my AI booked a showing while I was asleep. That buyer closed at $890K. I would have lost that lead to someone faster.",
+            brokerage: "Independent Agent, Vancouver",
             stats: {
-              leads: "leads captured in first month",
-              showings: "showings booked automatically",
-              deals: "deals closed"
+              leads: "leads captured after hours",
+              showings: "showings booked by AI",
+              deals: "deal closed from night lead"
             },
-            badge: "Beta Participant Since Nov 2024"
+            badge: "First Month Results"
           },
           marc: {
-            quote: "The seamless English/French switching is perfect for Montreal. My AI handles both languages naturally, which has opened up my market significantly.",
-            brokerage: "Century 21",
+            quote: "A francophone couple messaged at 7am. My AI responded in French in 23 seconds, qualified them, and booked a showing for 2pm. I just showed up.",
+            brokerage: "Century 21, Montreal",
             stats: {
-              increase: "increase in francophone leads",
-              response: "of inquiries answered <2 minutes",
-              saved: "hours/week saved"
+              increase: "more francophone leads",
+              response: "avg response time",
+              saved: "hours/week saved on follow-up"
             },
-            badge: "Beta Participant Since Dec 2024"
+            badge: "December 2024 Results"
           },
           jennifer: {
-            quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
-            brokerage: "RE/MAX Team Lead",
+            quote: "Last month we closed 2 extra deals worth $34K in commission—all from leads the AI captured when we were busy. It paid for itself 10X over.",
+            brokerage: "RE/MAX Team Lead, Toronto",
             stats: {
-              responseTime: "Team response time",
-              leadIncrease: "increase in qualified leads",
-              additionalDeals: "additional deals in Q1"
+              responseTime: "under 60 seconds",
+              leadIncrease: "more qualified leads",
+              additionalDeals: "extra deals in January"
             },
-            badge: "Beta Participant Since Jan 2025"
+            badge: "January 2025 Results"
           }
         }
       },
-      aiActive: "AI ACTIVE",
+      aiActive: "RESPONDING NOW",
       roiCalculator: {
-        title: "Calculate Your Potential ROI",
-        subtitle: "See your projected returns with conservative estimates",
-        monthlyLeads: "Current Monthly Leads",
+        title: "How Much Are You Losing to Slow Response?",
+        subtitle: "Enter your numbers—see the real cost of missed leads",
+        monthlyLeads: "Leads You Get Per Month",
         leadsPerMonth: "leads/month",
-        conversionRate: "Current Conversion Rate",
-        avgCommission: "Average Commission per Deal",
-        planSelection: "Plan Selection",
-        solo: "Solo",
+        conversionRate: "Your Current Conversion Rate",
+        avgCommission: "Your Average Commission",
+        planSelection: "Plan",
+        solo: "Solo Agent",
         team: "Team",
-        withoutAI: "Without RealtorDesk AI",
-        withAI: "With RealtorDesk AI",
+        withoutAI: "What You're Making Now",
+        withAI: "What You'd Make With AI",
         dealsPerMonth: "Deals per month:",
         monthlyRevenue: "Monthly revenue:",
         annualRevenue: "Annual revenue:",

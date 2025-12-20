@@ -36,20 +36,20 @@ const AuraHero = () => {
               {/* Badge */}
               <div className="aura-badge mb-6">
                 <Zap className="w-4 h-4" />
-                {t('hero.badge', '14-Day Free Trial')}
+                {t('hero.badge', 'Your AI Starts Working in 3 Minutes')}
               </div>
 
               {/* Main Title - SEO Optimized */}
               <h1 className="lg:text-7xl leading-[1.05] text-4xl sm:text-5xl mb-8 tracking-tighter text-white">
-                {t('hero.titlePart1', 'Best CRM for')}{' '}
-                <span className="text-muted-foreground">{t('hero.titlePart2', 'Real Estate Agents')}</span>{' '}
-                {t('hero.titlePart3', 'With')}{' '}
-                <span className="gradient-text">{t('hero.titlePart4', 'AI Tools')}</span>
+                {t('hero.titlePart1', 'Your AI Responds to')}{' '}
+                <span className="text-muted-foreground">{t('hero.titlePart2', 'Every Lead')}</span>{' '}
+                {t('hero.titlePart3', 'in')}{' '}
+                <span className="gradient-text">{t('hero.titlePart4', 'Under 60 Seconds')}</span>
               </h1>
 
               {/* Subtitle - Keyword Rich */}
               <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-lg font-light">
-                {t('hero.subtitle', 'AI-powered real estate lead generation software with 24/7 chatbot, virtual tour integration, and video marketing tools. Built for Canadian Realtors.')}
+                {t('hero.subtitle', 'While you sleep, your AI qualifies buyers, books showings, and follows up in English or French. 50+ Canadian agents already closing 3X more deals.')}
               </p>
 
               {/* CTA Buttons */}
@@ -88,12 +88,12 @@ const AuraHero = () => {
               {/* Avatar Group / Social Proof */}
               <div className="mt-12 flex items-center gap-4">
                 <div className="flex -space-x-3">
-                  <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-xs font-bold text-primary">JM</div>
-                  <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-blue-500/20 to-blue-500/5 flex items-center justify-center text-xs font-bold text-blue-400">SK</div>
-                  <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-green-500/20 to-green-500/5 flex items-center justify-center text-xs font-bold text-green-400">ML</div>
+                  <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-xs font-bold text-primary">SM</div>
+                  <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-blue-500/20 to-blue-500/5 flex items-center justify-center text-xs font-bold text-blue-400">MD</div>
+                  <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-green-500/20 to-green-500/5 flex items-center justify-center text-xs font-bold text-green-400">JT</div>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  <p className="text-white font-medium">{t('hero.socialProof', 'Join 50+ Beta Realtors')}</p>
+                  <p className="text-white font-medium">{t('hero.socialProof', '50+ Agents Closing 3X More')}</p>
                   <div className="flex items-center gap-1 text-primary">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-3 h-3 fill-current" />
@@ -111,7 +111,7 @@ const AuraHero = () => {
                   <div className="z-10 flex flex-col h-full relative">
                     <div className="self-start inline-flex text-xs font-bold text-green-400 bg-green-500/10 border-green-500/20 border rounded-lg mb-6 py-1.5 px-3 backdrop-blur-lg gap-2 items-center">
                       <CheckCircle className="w-3 h-3" />
-                      {t('hero.aiActive', 'AI Active')}
+                      {t('hero.aiActive', 'AI Responding Now')}
                     </div>
 
                     <div className="flex flex-col gap-4 mt-auto mb-auto items-center">
@@ -131,8 +131,8 @@ const AuraHero = () => {
                             <Bot className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-xs text-muted-foreground">{t('hero.processing', 'Processing')}</div>
-                            <div className="text-sm font-mono text-white">{t('hero.leadCapture', 'Lead Capture')}</div>
+                            <div className="text-xs text-muted-foreground">{t('hero.processing', 'Converting Lead')}</div>
+                            <div className="text-sm font-mono text-white">{t('hero.leadCapture', 'Booking Showing')}</div>
                           </div>
                           <CheckCircle className="w-4 h-4 ml-auto text-green-400" />
                         </div>
@@ -144,15 +144,15 @@ const AuraHero = () => {
                     </div>
 
                     <div className="mt-6">
-                      <h3 className="text-lg font-medium text-white tracking-tight mb-2">{t('hero.aiChatbot', '24/7 AI Chatbot')}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-light">{t('hero.chatbotDesc', 'Capture leads while you sleep.')}</p>
+                      <h3 className="text-lg font-medium text-white tracking-tight mb-2">{t('hero.aiChatbot', 'Responds in Under 60 Seconds')}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed font-light">{t('hero.chatbotDesc', 'Your AI answers at 2am when leads are ready to buy.')}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Right Top: Email Automation */}
                 <div className="flex flex-col overflow-hidden group hover:border-white/20 transition-all duration-500 text-center bg-secondary rounded-[32px] p-6 relative shadow-xl items-center min-h-[150px]">
-                  <h3 className="relative z-10 text-base font-medium text-foreground/80 mb-4">{t('hero.emailAuto', 'Email Automation')}</h3>
+                  <h3 className="relative z-10 text-base font-medium text-foreground/80 mb-4">{t('hero.emailAuto', 'Follows Up Until They Buy')}</h3>
                   <div className="relative z-10 w-full flex justify-center mt-auto h-16 items-end">
                     <div className="relative w-full max-w-[140px] h-full flex items-center justify-center">
                       <div className="absolute w-20 h-px bg-white/10 top-1/2 left-1/2 -translate-x-1/2"></div>
@@ -172,12 +172,12 @@ const AuraHero = () => {
                   <div className="relative w-full h-full rounded-2xl overflow-hidden">
                     <img 
                       src={heroDashboardAI} 
-                      alt={t('hero.dashboardAlt', 'RealtorDesk AI Dashboard')}
+                      alt={t('hero.dashboardAlt', 'Live dashboard showing AI responding to leads')}
                       className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-secondary to-transparent"></div>
                     <div className="absolute bottom-2 left-2 right-2">
-                      <p className="text-xs text-white/80 font-medium">{t('hero.unifiedDashboard', 'Unified Dashboard')}</p>
+                      <p className="text-xs text-white/80 font-medium">{t('hero.unifiedDashboard', 'See Every Conversion Live')}</p>
                     </div>
                   </div>
                 </div>

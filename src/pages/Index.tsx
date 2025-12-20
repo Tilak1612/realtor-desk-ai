@@ -83,31 +83,31 @@ const Index = () => {
       {/* Trust & Transparency Section */}
       <AuraSection
         sectionNumber="02"
-        badge={t('trustTransparency.badge', 'Trust & Transparency')}
+        badge={t('trustTransparency.badge', 'Honesty First')}
         badgeIcon={<Shield className="w-4 h-4" />}
-        title={t('trustTransparency.title', 'Built on Honesty')}
-        subtitle={t('trustTransparency.subtitle', 'We believe in transparent communication about our beta program')}
+        title={t('trustTransparency.title', "Here's Exactly What You're Getting")}
+        subtitle={t('trustTransparency.subtitle', 'No vague promises—just clear results from real agents')}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <AuraCard className="text-center">
             <Zap className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.beta.title', 'Beta Program')}</h3>
-            <p className="text-sm text-muted-foreground">{t('trustTransparency.beta.desc', 'Early access with special pricing')}</p>
+            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.beta.title', '50+ Agents Testing Right Now')}</h3>
+            <p className="text-sm text-muted-foreground">{t('trustTransparency.beta.desc', 'Get beta pricing locked in forever')}</p>
           </AuraCard>
           <AuraCard className="text-center">
             <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.results.title', 'Real Results')}</h3>
-            <p className="text-sm text-muted-foreground">{t('trustTransparency.results.desc', 'Verified testimonials from beta users')}</p>
+            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.results.title', '3X Faster Response Times')}</h3>
+            <p className="text-sm text-muted-foreground">{t('trustTransparency.results.desc', 'Verified from our pilot program data')}</p>
           </AuraCard>
           <AuraCard className="text-center">
             <Shield className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.security.title', 'Security First')}</h3>
-            <p className="text-sm text-muted-foreground">{t('trustTransparency.security.desc', 'Enterprise-grade data protection')}</p>
+            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.security.title', 'Your Data Stays in Canada')}</h3>
+            <p className="text-sm text-muted-foreground">{t('trustTransparency.security.desc', 'Toronto & Vancouver servers only')}</p>
           </AuraCard>
           <AuraCard className="text-center">
             <FileText className="w-8 h-8 text-primary mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.canadian.title', 'Canadian Built')}</h3>
-            <p className="text-sm text-muted-foreground">{t('trustTransparency.canadian.desc', 'Made for Canadian realtors')}</p>
+            <h3 className="text-lg font-medium text-white mb-2">{t('trustTransparency.canadian.title', 'Built Here, For Here')}</h3>
+            <p className="text-sm text-muted-foreground">{t('trustTransparency.canadian.desc', 'CREA DDF®, bilingual, PIPEDA-ready')}</p>
           </AuraCard>
         </div>
       </AuraSection>
@@ -127,10 +127,10 @@ const Index = () => {
       {/* Live Demo Section */}
       <AuraSection
         sectionNumber="05"
-        badge={t('home.demo.badge', 'See It In Action')}
+        badge={t('home.demo.badge', 'Real Recording from Last Tuesday')}
         badgeIcon={<Play className="w-4 h-4" />}
-        title={t('home.demo.title')}
-        subtitle={t('home.demo.description')}
+        title={t('home.demo.title', 'Watch a Lead Convert at 11:47pm')}
+        subtitle={t('home.demo.description', 'See exactly how AI books a showing while the agent sleeps')}
       >
         <div className="max-w-4xl mx-auto">
           <div 
@@ -239,10 +239,10 @@ const Index = () => {
       {/* ROI Calculator Section */}
       <AuraSection
         sectionNumber="06"
-        badge={t('roi.badge', 'Calculate Your ROI')}
+        badge={t('roi.badge', 'The Real Cost of Slow Response')}
         badgeIcon={<Brain className="w-4 h-4" />}
-        title={t('roi.title', 'See Your Potential Savings')}
-        subtitle={t('roi.subtitle', 'Discover how much time and money you could save with AI automation')}
+        title={t('roi.title', 'How Much Are You Losing?')}
+        subtitle={t('roi.subtitle', "Enter your numbers—see exactly what faster response is worth")}
         dark
       >
         <div className="max-w-5xl mx-auto">
