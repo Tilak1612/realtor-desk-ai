@@ -295,7 +295,7 @@ export interface FetchResult<T> {
 }
 
 export const fetchRealtorListings = async (input: ApifyListingInput): Promise<ListingResult[]> => {
-  const actorId = "scrapemind~Realtor-ca-Scraper";
+  const actorId = "scrapemind~realtor-ca-scraper";
   const data = await callApifyRunner(actorId, {
     startUrls: input.startUrls.map(url => ({ url })),
     maxItems: input.maxListings || 100,
@@ -332,7 +332,7 @@ export const fetchRealtorListingsWithTracking = async (
   userId: string,
   sourceUrl: string
 ): Promise<{ listings: ListingResult[]; importHistoryId: string | null }> => {
-  const actorId = "scrapemind~Realtor-ca-Scraper";
+  const actorId = "scrapemind~realtor-ca-scraper";
   
   // Create import history record
   const importHistoryId = await createImportHistory({
