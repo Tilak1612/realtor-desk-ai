@@ -117,18 +117,18 @@ const Market = () => {
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-3xl font-bold">Market Snapshot</h1>
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                <h1 className="text-xl font-semibold">Market Snapshot</h1>
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs">
                   Beta
                 </Badge>
               </div>
-              <p className="text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Sample market data for demonstration purposes
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Select value={selectedCity} onValueChange={setSelectedCity}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[150px] h-8 text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -139,8 +139,8 @@ const Market = () => {
                   <SelectItem value="Ottawa">Ottawa</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" onClick={handleExportCSV}>
-                <Download className="h-4 w-4 mr-2" />
+              <Button variant="outline" onClick={handleExportCSV} size="sm" className="h-8 text-xs">
+                <Download className="h-3.5 w-3.5 mr-1.5" />
                 Export CSV
               </Button>
             </div>

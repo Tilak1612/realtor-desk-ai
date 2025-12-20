@@ -77,13 +77,13 @@ const Campaigns = () => {
         <main className="flex-1 p-4 md:p-6">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Email Campaigns</h1>
-              <p className="text-muted-foreground">
+              <h1 className="text-xl font-semibold">Email Campaigns</h1>
+              <p className="text-sm text-muted-foreground">
                 Manage and track your email marketing campaigns
               </p>
             </div>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
+            <Button size="sm" className="h-8 text-xs">
+              <Plus className="mr-1.5 h-3.5 w-3.5" />
               New Campaign
             </Button>
           </div>
@@ -132,8 +132,8 @@ const Campaigns = () => {
           </div>
 
           <Card>
-            <CardHeader>
-              <CardTitle>Recent Campaigns</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-medium">Recent Campaigns</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -169,10 +169,10 @@ const Campaigns = () => {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="h-7 text-xs px-2">
                         View
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="h-7 text-xs px-2">
                         Edit
                       </Button>
                     </div>
