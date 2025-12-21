@@ -64,48 +64,48 @@ const BetaSuccessStories = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto">{t('betaCommunity.resultsSubtitle')}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
           {stories.map((story, index) => (
             <Card 
               key={index} 
-              className="p-6 hover:shadow-xl transition-all duration-300 flex flex-col"
+              className="p-4 sm:p-6 hover:shadow-xl transition-all duration-300 flex flex-col"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Header with Avatar */}
-              <div className="flex items-start gap-4 mb-4">
-                <Avatar className="w-14 h-14">
+              <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <Avatar className="w-11 h-11 sm:w-14 sm:h-14 flex-shrink-0">
                   <AvatarImage src={story.image} alt={story.name} />
-                  <AvatarFallback className="bg-primary/10 text-primary font-bold text-lg">
+                  <AvatarFallback className="bg-primary/10 text-primary font-bold text-base sm:text-lg">
                     {story.avatar}
                   </AvatarFallback>
                 </Avatar>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg">{story.name}</h3>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-base sm:text-lg">{story.name}</h3>
                   <p className="text-sm text-muted-foreground">{story.location}</p>
-                  <p className="text-xs text-muted-foreground">{story.brokerage}</p>
+                  <p className="text-xs text-muted-foreground truncate">{story.brokerage}</p>
                 </div>
               </div>
 
               {/* Quote */}
-              <blockquote className="text-sm text-muted-foreground mb-6 leading-relaxed flex-grow">
+              <blockquote className="text-sm text-muted-foreground mb-4 sm:mb-6 leading-relaxed flex-grow">
                 "{story.quote}"
               </blockquote>
 
               {/* Metrics */}
-              <div className="space-y-3 mb-4">
+              <div className="grid grid-cols-3 gap-2 sm:space-y-0 sm:grid-cols-1 sm:gap-0 sm:space-y-3 mb-4">
                 {story.metrics.map((metric, idx) => (
-                  <div key={idx} className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <div key={idx} className="flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-2 text-center sm:text-left">
+                    <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 hidden sm:block" />
                     <div>
-                      <span className="font-bold text-primary">{metric.value}</span>
-                      <span className="text-xs text-muted-foreground ml-1">{metric.label}</span>
+                      <span className="font-bold text-primary text-sm sm:text-base block sm:inline">{metric.value}</span>
+                      <span className="text-[10px] sm:text-xs text-muted-foreground sm:ml-1 block sm:inline">{metric.label}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Badge */}
-              <Badge variant="secondary" className="text-xs bg-accent/10 text-accent hover:bg-accent/20">
+              <Badge variant="secondary" className="text-xs bg-accent/10 text-accent hover:bg-accent/20 self-start">
                 {story.badge}
               </Badge>
             </Card>
