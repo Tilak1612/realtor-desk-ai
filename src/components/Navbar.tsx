@@ -42,8 +42,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 gap-2 sm:gap-4">
           {/* Logo - Mobile Optimized */}
           <Link to="/" className="flex items-center gap-2 group shrink-0">
-            <img src={logo} alt="Realtor Desk" className="h-8 w-8 object-contain" />
-            <span className="text-base font-semibold text-foreground group-hover:text-accent transition-colors">
+            <img src={logo} alt="Realtor Desk" className="h-9 w-9 object-contain" />
+            <span className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">
               Realtor Desk
             </span>
           </Link>
@@ -54,7 +54,7 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-medium transition-colors relative group text-sm ${
+                className={`font-medium transition-colors relative group text-base ${
                   isActive(link.path)
                     ? "text-primary"
                     : "text-foreground hover:text-primary"
@@ -70,13 +70,13 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
             <LanguageSwitcher />
             <Link to="/login">
-              <Button variant="outline" size="sm" className="h-8 text-xs font-medium">{t('app.auth.signIn')}</Button>
+              <Button variant="outline" className="font-semibold">{t('app.auth.signIn')}</Button>
             </Link>
             <Link to="/demo">
-              <Button size="sm" className="btn-gradient h-8 text-xs font-medium">{t('nav.startClosing')}</Button>
+              <Button className="btn-gradient font-semibold">{t('nav.startClosing')}</Button>
             </Link>
           </div>
 
@@ -103,21 +103,21 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-medium py-2.5 px-2 rounded-lg touch-manipulation active:scale-98 transition-all text-sm ${
+                  className={`font-medium py-3 px-2 rounded-lg touch-manipulation active:scale-98 transition-all text-base ${
                     isActive(link.path) ? "text-primary bg-primary/10" : "text-foreground hover:bg-muted"
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="flex items-center gap-2 py-2.5 px-2">
+              <div className="flex items-center gap-2 py-3 px-2">
                 <LanguageSwitcher />
               </div>
               <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="mt-2">
-                <Button variant="outline" className="w-full min-h-[44px] text-sm font-medium">{t('app.auth.signIn')}</Button>
+                <Button variant="outline" className="w-full min-h-[52px] text-base font-semibold">{t('app.auth.signIn')}</Button>
               </Link>
               <Link to="/demo" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="btn-gradient w-full min-h-[44px] text-sm font-medium">{t('nav.startClosing')}</Button>
+                <Button className="btn-gradient w-full min-h-[52px] text-base font-semibold">{t('nav.startClosing')}</Button>
               </Link>
             </div>
           </div>

@@ -155,16 +155,16 @@ const Reports = () => {
         <main className="flex-1 p-4 md:p-6">
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-xl font-semibold">Reports & Analytics</h1>
-              <p className="text-sm text-muted-foreground">
+              <h1 className="text-3xl font-bold">Reports & Analytics</h1>
+              <p className="text-muted-foreground">
                 Track your performance and business metrics
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-3">
               {/* Date Range Filter */}
               <Select value={dateRange} onValueChange={setDateRange}>
-                <SelectTrigger className="w-[140px] h-8 text-sm">
-                  <Calendar className="h-3.5 w-3.5 mr-1.5" />
+                <SelectTrigger className="w-[150px]">
+                  <Calendar className="h-4 w-4 mr-2" />
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -177,8 +177,8 @@ const Reports = () => {
 
               {/* Source Filter */}
               <Select value={sourceFilter} onValueChange={setSourceFilter}>
-                <SelectTrigger className="w-[130px] h-8 text-sm">
-                  <Filter className="h-3.5 w-3.5 mr-1.5" />
+                <SelectTrigger className="w-[140px]">
+                  <Filter className="h-4 w-4 mr-2" />
                   <SelectValue placeholder="Source" />
                 </SelectTrigger>
                 <SelectContent>
@@ -192,7 +192,7 @@ const Reports = () => {
 
               {/* Status Filter */}
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[130px] h-8 text-sm">
+                <SelectTrigger className="w-[140px]">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
