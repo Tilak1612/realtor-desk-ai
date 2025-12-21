@@ -62,23 +62,23 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
   if (tasks.length === 0) {
     return (
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between pb-3">
-          <CardTitle className="flex items-center gap-2 text-base font-medium">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="flex items-center gap-2 text-heading-3">
             <CheckSquare className="w-4 h-4" />
             Today's Tasks
           </CardTitle>
           <Link to="/tasks">
-            <Button size="sm" className="h-8 text-xs">
+            <Button size="sm" className="h-6 text-meta">
               <Plus className="w-3 h-3 mr-1" />
               Add Task
             </Button>
           </Link>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-6">
-            <p className="text-sm text-muted-foreground mb-3">No tasks for today</p>
+          <div className="text-center py-4">
+            <p className="text-body-sm text-muted-foreground mb-2">No tasks for today</p>
             <Link to="/tasks">
-              <Button size="sm">Create Your First Task</Button>
+              <Button size="sm" className="text-body-sm">Create Your First Task</Button>
             </Link>
           </div>
         </CardContent>
@@ -88,64 +88,64 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-3">
-        <CardTitle className="flex items-center gap-2 text-base font-medium">
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="flex items-center gap-2 text-heading-3">
           <CheckSquare className="w-4 h-4" />
           Today's Tasks
         </CardTitle>
         <Link to="/tasks">
-          <Button size="sm" className="h-8 text-xs">
+          <Button size="sm" className="h-6 text-meta">
             <Plus className="w-3 h-3 mr-1" />
             Add Task
           </Button>
         </Link>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-2">
         {tasks.slice(0, 5).map((task) => (
           <div
             key={task.id}
-            className={`flex items-start gap-3 p-3 rounded-lg border ${
+            className={`flex items-start gap-2.5 p-2.5 rounded-lg border ${
               task.status === "completed" ? "bg-accent/30" : "hover:bg-accent/50"
             } transition-colors`}
           >
             <Checkbox
               checked={task.status === "completed"}
               onCheckedChange={() => handleTaskToggle(task.id, task.status)}
-              className="mt-1"
+              className="mt-0.5"
             />
-            <div className="flex-1 space-y-0.5">
+            <div className="flex-1 space-y-0.5 min-w-0">
               <div className="flex items-center gap-2">
-                <p className={`text-sm font-medium ${task.status === "completed" ? "line-through text-muted-foreground" : ""}`}>
+                <p className={`text-body-sm font-medium truncate ${task.status === "completed" ? "line-through text-muted-foreground" : ""}`}>
                   {task.title}
                 </p>
                 {isOverdue(task.due_time) && task.status !== "completed" && (
-                  <AlertCircle className="w-3 h-3 text-destructive" />
+                  <AlertCircle className="w-3 h-3 text-destructive shrink-0" />
                 )}
               </div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2 text-meta text-muted-foreground">
                 {task.due_time && (
                   <span className={isOverdue(task.due_time) && task.status !== "completed" ? "text-destructive" : ""}>
                     {task.due_time}
                   </span>
                 )}
                 {task.contact && (
-                  <Link to={`/contacts/${task.contact}`} className="hover:underline">
+                  <Link to={`/contacts/${task.contact}`} className="hover:underline truncate">
                     {task.contact.first_name} {task.contact.last_name}
                   </Link>
                 )}
                 {task.deal && (
-                  <Link to={`/deals/${task.deal}`} className="hover:underline">
+                  <Link to={`/deals/${task.deal}`} className="hover:underline truncate">
                     {task.deal.title}
                   </Link>
                 )}
               </div>
             </div>
-            <div className={`w-2 h-2 rounded-full ${getPriorityColor(task.priority)} shrink-0 mt-2`} />
+            <div className={`w-2 h-2 rounded-full ${getPriorityColor(task.priority)} shrink-0 mt-1.5`} />
           </div>
         ))}
         {tasks.length > 5 && (
           <Link to="/tasks" className="block">
-            <Button variant="ghost" size="sm" className="w-full h-8 text-xs">
+            <Button variant="ghost" size="sm" className="w-full h-7 text-meta">
               View All Tasks
               <ArrowRight className="w-3 h-3 ml-1" />
             </Button>
