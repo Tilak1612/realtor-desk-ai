@@ -32,6 +32,21 @@
     --success: 142 71% 45%; /* Green */
     --warning: 45 93% 47%; /* Amber */
     --info: 221 83% 53%; /* Blue */
+    
+    /* Status Colors for CRM */
+    --status-active: 142 71% 45%; /* Green */
+    --status-active-foreground: 0 0% 100%;
+    --status-pending: 45 93% 47%; /* Yellow/Amber */
+    --status-pending-foreground: 0 0% 10%;
+    --status-closed: 221 83% 53%; /* Blue */
+    --status-closed-foreground: 0 0% 100%;
+    --status-sold: 221 83% 53%; /* Blue */
+    --status-sold-foreground: 0 0% 100%;
+    --status-coming-soon: 262 83% 58%; /* Purple */
+    --status-coming-soon-foreground: 0 0% 100%;
+    --status-off-market: 0 0% 50%; /* Gray */
+    --status-off-market-foreground: 0 0% 100%;
+    
     --chart-1: 25 95% 53%;
     --chart-2: 221 83% 53%;
     --chart-3: 262 83% 58%;
