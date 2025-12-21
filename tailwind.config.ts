@@ -76,6 +76,52 @@ export default {
             DEFAULT: "hsl(var(--status-sold))",
             foreground: "hsl(var(--status-sold-foreground))",
           },
+          // Lead statuses
+          new: {
+            DEFAULT: "hsl(var(--status-new))",
+            foreground: "hsl(var(--status-new-foreground))",
+          },
+          contacted: {
+            DEFAULT: "hsl(var(--status-contacted))",
+            foreground: "hsl(var(--status-contacted-foreground))",
+          },
+          nurturing: {
+            DEFAULT: "hsl(var(--status-nurturing))",
+            foreground: "hsl(var(--status-nurturing-foreground))",
+          },
+          hot: {
+            DEFAULT: "hsl(var(--status-hot))",
+            foreground: "hsl(var(--status-hot-foreground))",
+          },
+          qualified: {
+            DEFAULT: "hsl(var(--status-qualified))",
+            foreground: "hsl(var(--status-qualified-foreground))",
+          },
+          unqualified: {
+            DEFAULT: "hsl(var(--status-unqualified))",
+            foreground: "hsl(var(--status-unqualified-foreground))",
+          },
+          converted: {
+            DEFAULT: "hsl(var(--status-converted))",
+            foreground: "hsl(var(--status-converted-foreground))",
+          },
+          // Deal statuses
+          open: {
+            DEFAULT: "hsl(var(--status-open))",
+            foreground: "hsl(var(--status-open-foreground))",
+          },
+          underContract: {
+            DEFAULT: "hsl(var(--status-under-contract))",
+            foreground: "hsl(var(--status-under-contract-foreground))",
+          },
+          won: {
+            DEFAULT: "hsl(var(--status-won))",
+            foreground: "hsl(var(--status-won-foreground))",
+          },
+          lost: {
+            DEFAULT: "hsl(var(--status-lost))",
+            foreground: "hsl(var(--status-lost-foreground))",
+          },
         },
       },
       fontFamily: {

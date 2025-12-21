@@ -34,6 +34,7 @@
     --info: 221 83% 53%; /* Blue */
     
     /* Status Colors for CRM */
+    /* Property statuses */
     --status-active: 142 71% 45%; /* Green */
     --status-active-foreground: 0 0% 100%;
     --status-pending: 45 93% 47%; /* Yellow/Amber */
@@ -46,6 +47,32 @@
     --status-coming-soon-foreground: 0 0% 100%;
     --status-off-market: 0 0% 50%; /* Gray */
     --status-off-market-foreground: 0 0% 100%;
+    
+    /* Lead statuses */
+    --status-new: 262 83% 58%; /* Purple - fresh lead */
+    --status-new-foreground: 0 0% 100%;
+    --status-contacted: 221 83% 53%; /* Blue - in progress */
+    --status-contacted-foreground: 0 0% 100%;
+    --status-nurturing: 199 89% 48%; /* Cyan - ongoing care */
+    --status-nurturing-foreground: 0 0% 100%;
+    --status-hot: 25 95% 53%; /* Orange - ready to convert */
+    --status-hot-foreground: 0 0% 100%;
+    --status-qualified: 142 71% 45%; /* Green - ready */
+    --status-qualified-foreground: 0 0% 100%;
+    --status-unqualified: 0 0% 50%; /* Gray - not a fit */
+    --status-unqualified-foreground: 0 0% 100%;
+    --status-converted: 142 71% 45%; /* Green - success */
+    --status-converted-foreground: 0 0% 100%;
+    
+    /* Deal statuses */
+    --status-open: 221 83% 53%; /* Blue - active deal */
+    --status-open-foreground: 0 0% 100%;
+    --status-under-contract: 45 93% 47%; /* Amber - in negotiation */
+    --status-under-contract-foreground: 0 0% 10%;
+    --status-won: 142 71% 45%; /* Green - closed won */
+    --status-won-foreground: 0 0% 100%;
+    --status-lost: 0 72% 51%; /* Red - closed lost */
+    --status-lost-foreground: 0 0% 100%;
     
     --chart-1: 25 95% 53%;
     --chart-2: 221 83% 53%;
