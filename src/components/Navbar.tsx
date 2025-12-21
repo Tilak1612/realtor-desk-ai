@@ -70,13 +70,16 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
             <LanguageSwitcher />
             <Link to="/login">
-              <Button variant="outline" className="font-semibold">{t('app.auth.signIn')}</Button>
+              <Button variant="outline" className="font-semibold text-sm lg:text-base">{t('app.auth.signIn')}</Button>
             </Link>
             <Link to="/demo">
-              <Button className="btn-gradient font-semibold">{t('nav.startClosing')}</Button>
+              <Button className="btn-gradient font-semibold text-sm lg:text-base whitespace-nowrap">
+                <span className="hidden lg:inline">{t('nav.startClosing')}</span>
+                <span className="lg:hidden">Get Started</span>
+              </Button>
             </Link>
           </div>
 
@@ -103,8 +106,8 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-medium py-3 px-2 rounded-lg touch-manipulation active:scale-98 transition-all text-base ${
-                    isActive(link.path) ? "text-primary bg-primary/10" : "text-foreground hover:bg-muted"
+                  className={`font-medium py-3.5 px-3 rounded-lg touch-manipulation active:scale-[0.98] transition-all text-base min-h-[44px] flex items-center ${
+                    isActive(link.path) ? "text-primary bg-primary/10" : "text-foreground hover:bg-muted active:bg-muted"
                   }`}
                 >
                   {link.name}

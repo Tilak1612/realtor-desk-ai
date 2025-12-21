@@ -222,47 +222,63 @@ const DemoBookingSection = () => {
 
               <div>
                 <Label className="mb-3 block">{t('demoBooking.interestsLabel')}</Label>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
+                <div className="space-y-2 sm:space-y-3">
+                  <label 
+                    htmlFor="interest-chatbot" 
+                    className="flex items-center gap-3 p-3 sm:p-2 rounded-lg border border-transparent hover:bg-muted/50 cursor-pointer min-h-[44px] touch-manipulation active:bg-muted transition-colors"
+                  >
                     <Checkbox
                       id="interest-chatbot"
                       checked={interests.includes("Chatbot")}
                       onCheckedChange={() => handleInterestToggle("Chatbot")}
+                      className="h-5 w-5"
                     />
-                    <Label htmlFor="interest-chatbot" className="cursor-pointer font-normal">
+                    <span className="text-sm font-normal">
                       {t('demoBooking.interestChatbot')}
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
+                    </span>
+                  </label>
+                  <label 
+                    htmlFor="interest-voice" 
+                    className="flex items-center gap-3 p-3 sm:p-2 rounded-lg border border-transparent hover:bg-muted/50 cursor-pointer min-h-[44px] touch-manipulation active:bg-muted transition-colors"
+                  >
                     <Checkbox
                       id="interest-voice"
                       checked={interests.includes("Voice")}
                       onCheckedChange={() => handleInterestToggle("Voice")}
+                      className="h-5 w-5"
                     />
-                    <Label htmlFor="interest-voice" className="cursor-pointer font-normal">
+                    <span className="text-sm font-normal">
                       {t('demoBooking.interestVoice')}
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
+                    </span>
+                  </label>
+                  <label 
+                    htmlFor="interest-email" 
+                    className="flex items-center gap-3 p-3 sm:p-2 rounded-lg border border-transparent hover:bg-muted/50 cursor-pointer min-h-[44px] touch-manipulation active:bg-muted transition-colors"
+                  >
                     <Checkbox
                       id="interest-email"
                       checked={interests.includes("Email")}
                       onCheckedChange={() => handleInterestToggle("Email")}
+                      className="h-5 w-5"
                     />
-                    <Label htmlFor="interest-email" className="cursor-pointer font-normal">
+                    <span className="text-sm font-normal">
                       {t('demoBooking.interestEmail')}
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
+                    </span>
+                  </label>
+                  <label 
+                    htmlFor="interest-all" 
+                    className="flex items-center gap-3 p-3 sm:p-2 rounded-lg border border-transparent hover:bg-muted/50 cursor-pointer min-h-[44px] touch-manipulation active:bg-muted transition-colors"
+                  >
                     <Checkbox
                       id="interest-all"
                       checked={interests.includes("All")}
                       onCheckedChange={() => handleInterestToggle("All")}
+                      className="h-5 w-5"
                     />
-                    <Label htmlFor="interest-all" className="cursor-pointer font-normal">
+                    <span className="text-sm font-normal">
                       {t('demoBooking.interestAll')}
-                    </Label>
-                  </div>
+                    </span>
+                  </label>
                 </div>
               </div>
 
@@ -275,7 +291,7 @@ const DemoBookingSection = () => {
 
               <Button
                 type="submit"
-                className="w-full btn-gradient text-base py-6"
+                className="w-full btn-gradient text-base min-h-[52px] sm:min-h-[56px] touch-manipulation active:scale-[0.98] transition-transform"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? t('demoBooking.submitting') : t('demoBooking.submitButton')}

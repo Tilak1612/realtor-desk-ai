@@ -44,14 +44,14 @@ const Hero = () => {
       <div className="container-custom relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* 14-Day Free Trial Badge */}
-          <div className="flex justify-center mb-6 animate-fade-in-up">
-            <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2 text-sm font-semibold">
+          <div className="flex justify-center mb-4 sm:mb-6 animate-fade-in-up">
+            <Badge className="bg-primary/10 text-primary border-primary/20 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold whitespace-nowrap">
               14-DAY FREE TRIAL
             </Badge>
           </div>
 
           {/* Main Title */}
-          <h1 className="mb-6 sm:mb-8 leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-r from-[hsl(122_39%_49%)] via-[hsl(0_0%_85%)] to-[hsl(0_0%_35%)] bg-clip-text text-transparent">
+          <h1 className="mb-4 sm:mb-6 md:mb-8 leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-r from-[hsl(122_39%_49%)] via-[hsl(0_0%_85%)] to-[hsl(0_0%_35%)] bg-clip-text text-transparent px-2 sm:px-0">
             Stop Losing Leads to Slow Follow-Ups
           </h1>
 
@@ -77,16 +77,18 @@ const Hero = () => {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-10 animate-fade-in-up animation-delay-400">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8 md:mb-10 animate-fade-in-up animation-delay-400 px-2 sm:px-0">
             <Link to="/signup" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-                START YOUR 14-DAY FREE TRIAL →
+              <Button size="lg" className="w-full sm:w-auto min-h-[52px] sm:min-h-[56px] text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 whitespace-nowrap">
+                <span className="hidden sm:inline">START YOUR 14-DAY FREE TRIAL →</span>
+                <span className="sm:hidden">Start Free Trial →</span>
               </Button>
             </Link>
             <Link to="/demo" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[56px] text-base sm:text-lg px-8 rounded-xl border-2 hover:bg-secondary/50 transition-all duration-300 gap-2">
-                <Play className="w-5 h-5" />
-                Book Your Free Demo
+              <Button size="lg" variant="outline" className="w-full sm:w-auto min-h-[52px] sm:min-h-[56px] text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 rounded-xl border-2 hover:bg-secondary/50 transition-all duration-300 gap-2">
+                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Book Your Free Demo</span>
+                <span className="sm:hidden">Book Demo</span>
               </Button>
             </Link>
           </div>
