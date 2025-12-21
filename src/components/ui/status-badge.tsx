@@ -2,19 +2,26 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 type StatusType = 
+  // Property statuses
   | "active" 
   | "pending" 
   | "sold" 
   | "closed" 
   | "coming_soon" 
   | "off_market"
-  | "won"
-  | "lost"
+  // Lead statuses
   | "new"
   | "contacted"
+  | "nurturing"
+  | "hot"
   | "qualified"
   | "unqualified"
-  | "converted";
+  | "converted"
+  // Deal statuses
+  | "open"
+  | "under_contract"
+  | "won"
+  | "lost";
 
 interface StatusBadgeProps {
   status: string;
@@ -29,19 +36,19 @@ const statusConfig: Record<string, {
   // Property statuses
   active: { 
     label: "Active", 
-    className: "bg-[hsl(var(--status-active))] text-[hsl(var(--status-active-foreground))] border-transparent" 
+    className: "bg-status-active text-status-active-foreground border-transparent" 
   },
   pending: { 
     label: "Pending", 
-    className: "bg-[hsl(var(--status-pending))] text-[hsl(var(--status-pending-foreground))] border-transparent" 
+    className: "bg-status-pending text-status-pending-foreground border-transparent" 
   },
   sold: { 
     label: "Sold", 
-    className: "bg-[hsl(var(--status-closed))] text-[hsl(var(--status-closed-foreground))] border-transparent" 
+    className: "bg-status-sold text-status-sold-foreground border-transparent" 
   },
   closed: { 
     label: "Closed", 
-    className: "bg-[hsl(var(--status-closed))] text-[hsl(var(--status-closed-foreground))] border-transparent" 
+    className: "bg-status-closed text-status-closed-foreground border-transparent" 
   },
   coming_soon: { 
     label: "Coming Soon", 
@@ -52,36 +59,52 @@ const statusConfig: Record<string, {
     className: "bg-[hsl(var(--status-off-market))] text-[hsl(var(--status-off-market-foreground))] border-transparent" 
   },
   
-  // Deal statuses
-  won: { 
-    label: "Won", 
-    className: "bg-[hsl(var(--status-active))] text-[hsl(var(--status-active-foreground))] border-transparent" 
-  },
-  lost: { 
-    label: "Lost", 
-    className: "bg-destructive text-destructive-foreground border-transparent" 
-  },
-  
-  // Lead/Contact statuses
+  // Lead statuses
   new: { 
     label: "New", 
-    className: "bg-[hsl(var(--status-coming-soon))] text-[hsl(var(--status-coming-soon-foreground))] border-transparent" 
+    className: "bg-status-new text-status-new-foreground border-transparent" 
   },
   contacted: { 
     label: "Contacted", 
-    className: "bg-[hsl(var(--status-pending))] text-[hsl(var(--status-pending-foreground))] border-transparent" 
+    className: "bg-status-contacted text-status-contacted-foreground border-transparent" 
+  },
+  nurturing: { 
+    label: "Nurturing", 
+    className: "bg-status-nurturing text-status-nurturing-foreground border-transparent" 
+  },
+  hot: { 
+    label: "Hot", 
+    className: "bg-status-hot text-status-hot-foreground border-transparent" 
   },
   qualified: { 
     label: "Qualified", 
-    className: "bg-[hsl(var(--status-active))] text-[hsl(var(--status-active-foreground))] border-transparent" 
+    className: "bg-status-qualified text-status-qualified-foreground border-transparent" 
   },
   unqualified: { 
     label: "Unqualified", 
-    className: "bg-[hsl(var(--status-off-market))] text-[hsl(var(--status-off-market-foreground))] border-transparent" 
+    className: "bg-status-unqualified text-status-unqualified-foreground border-transparent" 
   },
   converted: { 
     label: "Converted", 
-    className: "bg-[hsl(var(--status-closed))] text-[hsl(var(--status-closed-foreground))] border-transparent" 
+    className: "bg-status-converted text-status-converted-foreground border-transparent" 
+  },
+  
+  // Deal statuses
+  open: { 
+    label: "Open", 
+    className: "bg-status-open text-status-open-foreground border-transparent" 
+  },
+  under_contract: { 
+    label: "Under Contract", 
+    className: "bg-status-underContract text-status-underContract-foreground border-transparent" 
+  },
+  won: { 
+    label: "Closed Won", 
+    className: "bg-status-won text-status-won-foreground border-transparent" 
+  },
+  lost: { 
+    label: "Closed Lost", 
+    className: "bg-status-lost text-status-lost-foreground border-transparent" 
   },
 };
 
