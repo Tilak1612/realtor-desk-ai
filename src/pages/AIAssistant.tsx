@@ -96,8 +96,8 @@ const AIAssistant = () => {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-3xl font-bold flex items-center gap-2">
-                  <Bot className="w-8 h-8 text-primary" />
+                <h1 className="text-xl font-semibold flex items-center gap-2">
+                  <Bot className="w-5 h-5 text-primary" />
                   Realtor AI Assistant
                 </h1>
                 <p className="text-muted-foreground">

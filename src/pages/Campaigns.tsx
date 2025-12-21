@@ -77,7 +77,7 @@ const Campaigns = () => {
         <main className="flex-1 p-4 md:p-6">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Email Campaigns</h1>
+              <h1 className="text-xl font-semibold">Email Campaigns</h1>
               <p className="text-muted-foreground">
                 Manage and track your email marketing campaigns
               </p>

@@ -78,7 +78,7 @@ const CalendarPage = () => {
         <main className="flex-1 p-4 md:p-6">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Calendar</h1>
+              <h1 className="text-xl font-semibold">Calendar</h1>
               <p className="text-muted-foreground">
                 Manage your appointments and schedule
               </p>

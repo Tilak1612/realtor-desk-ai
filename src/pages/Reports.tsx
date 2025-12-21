@@ -155,7 +155,7 @@ const Reports = () => {
         <main className="flex-1 p-4 md:p-6">
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold">Reports & Analytics</h1>
+              <h1 className="text-xl font-semibold">Reports & Analytics</h1>
               <p className="text-muted-foreground">
                 Track your performance and business metrics
               </p>
