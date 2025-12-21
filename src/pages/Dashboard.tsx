@@ -13,7 +13,9 @@ import MarketWidget from "@/components/dashboard/MarketWidget";
 import TrialBanner from "@/components/dashboard/TrialBanner";
 import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
-import AIInsightsWidget from "@/components/dashboard/AIInsightsWidget";
+import TodayFocusWidget from "@/components/dashboard/TodayFocusWidget";
+import RecentActivityWidget from "@/components/dashboard/RecentActivityWidget";
+import RevenueBreakdownWidget from "@/components/dashboard/RevenueBreakdownWidget";
 import { ImportListingsWidget } from "@/components/dashboard/ImportListingsWidget";
 import { AgentIntelligenceWidget } from "@/components/dashboard/AgentIntelligenceWidget";
 import { QuickAreaImportWidget } from "@/components/dashboard/QuickAreaImportWidget";
@@ -29,6 +31,12 @@ const Dashboard = () => {
   const [analytics, setAnalytics] = useState<any>(null);
   const [hotLeads, setHotLeads] = useState<any[]>([]);
   const [todayTasks, setTodayTasks] = useState<any[]>([]);
+  const [revenueData, setRevenueData] = useState({
+    ytdRevenue: 0,
+    closedDealsCount: 0,
+    grossVolume: 0,
+    commissionRate: 2.5,
+  });
   const [dealStats, setDealStats] = useState<any>({
     lead: { count: 0, value: 0 },
     viewing: { count: 0, value: 0 },
@@ -77,24 +85,21 @@ const Dashboard = () => {
   }, [navigate]);
 
   const fetchDashboardData = async (userId: string) => {
-    // Calculate this month's date range
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    const yearStart = new Date(now.getFullYear(), 0, 1).toISOString();
     
-    // Fetch new leads this month (count from contacts table)
     const { count: monthlyLeadsCount } = await supabase
       .from("contacts")
       .select("*", { count: "exact", head: true })
       .eq("user_id", userId)
       .gte("created_at", startOfMonth);
 
-    // Fetch active deals count and pipeline value
     const { data: dealsData } = await supabase
       .from("deals")
       .select("stage, value, listing_price, commission_percentage, status, closing_date")
       .eq("user_id", userId);
 
-    // Fetch properties data for additional commission calculations
     const { data: propertiesData } = await supabase
       .from("properties")
       .select("price, status")
@@ -102,16 +107,17 @@ const Dashboard = () => {
 
     const activeDeals = dealsData?.filter(d => d.status === "active") || [];
     const activeDealsCount = activeDeals.length;
-    // Use listing_price as fallback if value is null
     const pipelineValue = activeDeals.reduce((sum, deal) => sum + Number(deal.value || deal.listing_price || 0), 0);
 
-    // Calculate YTD Revenue from closed deals (2.5% default commission)
-    const yearStart = new Date(now.getFullYear(), 0, 1).toISOString();
     const closedDeals = dealsData?.filter(d => 
       d.status === "won" && 
       d.closing_date && 
       new Date(d.closing_date) >= new Date(yearStart)
     ) || [];
+
+    const grossVolume = closedDeals.reduce((sum, deal) => {
+      return sum + Number(deal.value || deal.listing_price || 0);
+    }, 0);
     
     const ytdRevenue = closedDeals.reduce((sum, deal) => {
       const dealValue = Number(deal.value || deal.listing_price || 0);
@@ -119,7 +125,6 @@ const Dashboard = () => {
       return sum + (dealValue * commission / 100);
     }, 0);
 
-    // Also add sold properties commission (2.5% default)
     const soldProperties = propertiesData?.filter(p => p.status === "sold") || [];
     const propertiesRevenue = soldProperties.reduce((sum, prop) => {
       return sum + (Number(prop.price || 0) * 0.025);
@@ -127,17 +132,22 @@ const Dashboard = () => {
 
     const totalYtdRevenue = ytdRevenue + propertiesRevenue;
 
-    // Set analytics from live data
+    setRevenueData({
+      ytdRevenue: totalYtdRevenue,
+      closedDealsCount: closedDeals.length,
+      grossVolume,
+      commissionRate: 2.5,
+    });
+
     setAnalytics({
       monthly_leads: monthlyLeadsCount || 0,
       leads_change_percent: 0,
       active_deals_count: activeDealsCount,
       pipeline_value: pipelineValue,
       ytd_revenue: totalYtdRevenue,
-      annual_goal: 150000, // Default annual goal
+      annual_goal: 150000,
     });
 
-    // Fetch hot leads (AI score >= 80)
     const { data: leadsData } = await supabase
       .from("contacts")
       .select("*")
@@ -154,7 +164,6 @@ const Dashboard = () => {
       })));
     }
 
-    // Fetch today's tasks
     const today = new Date().toISOString().split('T')[0];
     const { data: tasksData } = await supabase
       .from("tasks")
@@ -171,7 +180,6 @@ const Dashboard = () => {
       setTodayTasks(tasksData);
     }
 
-    // Set deal statistics by stage
     if (dealsData) {
       const stats: any = {
         lead: { count: 0, value: 0 },
@@ -211,96 +219,118 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p>{t('app.dashboard.loading')}</p>
+        <p className="text-body-sm">{t('app.dashboard.loading')}</p>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex w-full bg-background">
-      {/* Trial Expired Modal - blocks all access */}
       <TrialExpiredModal isOpen={trialExpired} />
-      
       <DashboardSidebar trialDaysLeft={trialDaysLeft} />
       
       <div className="flex-1 lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         
-        <main className="p-4 md:p-6 space-y-4 md:space-y-6">
-          {/* Trial Banner */}
+        <main className="p-4 md:p-5 space-y-4">
           {!subscribed && trialDaysLeft > 0 && (
             <TrialBanner daysLeft={trialDaysLeft} />
           )}
 
-          {/* Welcome Section */}
-          <div>
-            <h1 className="text-xl md:text-2xl font-semibold mb-1">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}! 👋</h1>
-            <p className="text-sm text-muted-foreground">
-              {t('app.dashboard.tasksDueToday', { count: getTasksDueToday() }).replace('{{count}}', String(getTasksDueToday()))}
-              {hotLeads.length > 0 && (
-                <> {t('app.dashboard.hotLeadsToFollow', { count: hotLeads.length }).replace('{{count}}', String(hotLeads.length))}</>
-              )}
+          {/* Welcome - Compact */}
+          <div className="pb-1">
+            <h1 className="text-heading-1">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}!</h1>
+            <p className="text-body-sm text-muted-foreground">
+              {getTasksDueToday()} tasks due today
+              {hotLeads.length > 0 && ` • ${hotLeads.length} hot leads to follow up`}
             </p>
           </div>
 
-          {/* Stat Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCard
-              title={t('app.dashboard.newLeadsThisMonth')}
-              value={analytics?.monthly_leads || 0}
-              change={analytics?.leads_change_percent || 0}
-              trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
-              icon={Users}
-            />
-            <StatCard
-              title={t('app.dashboard.activeDeals')}
-              value={analytics?.active_deals_count || 0}
-              subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()} ${t('app.dashboard.pipeline')}`}
-              icon={Briefcase}
-            />
-            <StatCard
-              title={t('app.dashboard.tasksDue')}
-              value={getTasksDueToday()}
-              subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} ${t('app.dashboard.overdue')}` : undefined}
-              trend={getOverdueTasks() > 0 ? "down" : "neutral"}
-              icon={CheckSquare}
-            />
-            <StatCard
-              title={t('app.dashboard.revenueYTD')}
-              value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
-              subtitle={
-                analytics?.annual_goal
-                  ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% ${t('app.dashboard.ofAnnualGoal')}`
-                  : undefined
-              }
-              icon={DollarSign}
-            />
-          </div>
-
-          {/* Onboarding Checklist for new users */}
-          {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
-            <OnboardingChecklist userId={user.id} />
-          )}
-
-          {/* Widgets Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 space-y-6">
-              {user && <AIInsightsWidget userId={user.id} />}
-              <HotLeadsWidget leads={hotLeads} />
+          {/* Row 1 - Action First: Today Focus + Tasks Due */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+            <div className="xl:col-span-2">
+              <TodayFocusWidget 
+                tasksDueToday={getTasksDueToday()} 
+                hotLeadsCount={hotLeads.length}
+                overdueCount={getOverdueTasks()}
+              />
+            </div>
+            <div>
               <TasksWidget tasks={todayTasks} onTaskComplete={handleTaskComplete} />
             </div>
-            
-            <div className="space-y-6">
-              <MarketWidget defaultCity={profile?.city} />
+          </div>
+
+          {/* Row 2 - Opportunity: Hot Leads + Pipeline Summary */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+            <div className="xl:col-span-2">
+              <HotLeadsWidget leads={hotLeads} />
+            </div>
+            <div>
+              {/* Pipeline Summary Stats */}
+              <div className="grid grid-cols-2 gap-3">
+                <StatCard
+                  title={t('app.dashboard.newLeadsThisMonth')}
+                  value={analytics?.monthly_leads || 0}
+                  change={analytics?.leads_change_percent || 0}
+                  trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
+                  icon={Users}
+                />
+                <StatCard
+                  title={t('app.dashboard.activeDeals')}
+                  value={analytics?.active_deals_count || 0}
+                  subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()}`}
+                  icon={Briefcase}
+                />
+                <StatCard
+                  title={t('app.dashboard.tasksDue')}
+                  value={getTasksDueToday()}
+                  subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} overdue` : undefined}
+                  trend={getOverdueTasks() > 0 ? "down" : "neutral"}
+                  icon={CheckSquare}
+                />
+                <StatCard
+                  title={t('app.dashboard.revenueYTD')}
+                  value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
+                  subtitle={
+                    analytics?.annual_goal
+                      ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% of goal`
+                      : undefined
+                  }
+                  icon={DollarSign}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Deals Pipeline - Full Width */}
+          {/* Row 3 - Context: Recent Activity + Revenue */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+            <div className="xl:col-span-2">
+              {user && <RecentActivityWidget userId={user.id} />}
+            </div>
+            <div>
+              <RevenueBreakdownWidget
+                ytdRevenue={revenueData.ytdRevenue}
+                closedDealsCount={revenueData.closedDealsCount}
+                grossVolume={revenueData.grossVolume}
+                commissionRate={revenueData.commissionRate}
+              />
+            </div>
+          </div>
+
+          {/* Row 4 - Pipeline Overview */}
           <DealsWidget stats={dealStats} />
 
-          {/* Realtor.ca Import Tools */}
-          <div className="space-y-6">
-            <h2 className="text-lg font-semibold">Data Import Tools</h2>
+          {/* Row 5 - Onboarding & Data Health (only for new users) */}
+          {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+              <OnboardingChecklist userId={user.id} />
+              <MarketWidget defaultCity={profile?.city} />
+            </div>
+          )}
+
+          {/* Row 6 - Import Tools */}
+          <div className="space-y-4">
+            <h2 className="text-heading-2">Data Import Tools</h2>
             <ImportListingsWidget />
             <AgentIntelligenceWidget />
             <QuickAreaImportWidget />

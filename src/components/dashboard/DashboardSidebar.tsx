@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard,
   Users,
@@ -20,22 +22,51 @@ import {
   Building2,
 } from "lucide-react";
 import logo from "@/assets/realtor-desk-icon.png";
-import { useState } from "react";
 
 interface DashboardSidebarProps {
   trialDaysLeft?: number;
+}
+
+interface EntityCounts {
+  contacts: number;
+  properties: number;
+  deals: number;
 }
 
 const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [counts, setCounts] = useState<EntityCounts>({ contacts: 0, properties: 0, deals: 0 });
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+
+      const userId = session.user.id;
+      
+      const [contactsRes, propertiesRes, dealsRes] = await Promise.all([
+        supabase.from("contacts").select("*", { count: "exact", head: true }).eq("user_id", userId),
+        supabase.from("properties").select("*", { count: "exact", head: true }).eq("user_id", userId),
+        supabase.from("deals").select("*", { count: "exact", head: true }).eq("user_id", userId).eq("status", "active"),
+      ]);
+
+      setCounts({
+        contacts: contactsRes.count || 0,
+        properties: propertiesRes.count || 0,
+        deals: dealsRes.count || 0,
+      });
+    };
+
+    fetchCounts();
+  }, []);
 
   const menuItems = [
     { icon: LayoutDashboard, label: t('app.sidebar.dashboard'), path: "/dashboard" },
-    { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts" },
-    { icon: Building2, label: t('app.sidebar.properties'), path: "/properties" },
-    { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals" },
+    { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts", count: counts.contacts },
+    { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
+    { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
     { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
     { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
     { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
@@ -55,7 +86,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-background border rounded-lg shadow-lg"
       >
-        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
       {/* Overlay */}
@@ -68,54 +99,65 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-background border-r flex flex-col transition-transform duration-300 z-40 ${
+        className={`fixed lg:sticky left-0 top-0 h-screen w-56 bg-background border-r flex flex-col transition-transform duration-300 z-40 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Logo */}
         <Link
           to="/dashboard"
-          className="flex items-center gap-2.5 p-4 border-b hover:bg-accent/50 transition-colors"
+          className="flex items-center gap-2 p-3 border-b hover:bg-accent/50 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          <img src={logo} alt="Realtor Desk" className="h-8 w-auto" />
-          <span className="text-base font-semibold gradient-text">Realtor Desk</span>
+          <img src={logo} alt="Realtor Desk" className="h-7 w-auto" />
+          <span className="text-body-sm font-semibold gradient-text">Realtor Desk</span>
         </Link>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
+        <nav className="flex-1 overflow-y-auto p-2 space-y-0.5">
           {menuItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-2.5 px-3 py-2 rounded-md transition-all text-sm ${
+              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md transition-all text-body-sm ${
                 isActive(item.path)
-                  ? "bg-primary text-primary-foreground shadow-sm"
+                  ? "bg-primary text-primary-foreground font-medium shadow-sm"
                   : "hover:bg-accent text-muted-foreground hover:text-foreground"
               }`}
             >
-              <item.icon className="w-4 h-4" />
-              <span className="font-medium">{item.label}</span>
+              <span className="flex items-center gap-2">
+                <item.icon className="w-4 h-4 flex-shrink-0" />
+                <span>{item.label}</span>
+              </span>
+              {typeof item.count === 'number' && item.count > 0 && (
+                <span className={`text-meta px-1.5 py-0.5 rounded-full ${
+                  isActive(item.path) 
+                    ? "bg-primary-foreground/20 text-primary-foreground" 
+                    : "bg-muted text-muted-foreground"
+                }`}>
+                  {item.count}
+                </span>
+              )}
             </Link>
           ))}
         </nav>
 
         {/* Upgrade Badge */}
         {trialDaysLeft > 0 && (
-          <div className="p-3 border-t">
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-3 rounded-md space-y-2">
+          <div className="p-2 border-t">
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-2.5 rounded-md space-y-1.5">
               <div className="flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <Badge variant="secondary" className="text-xs font-medium">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                <Badge variant="secondary" className="text-meta font-medium">
                   {t('app.sidebar.trialActive')}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-meta text-muted-foreground">
                 <span className="font-semibold text-foreground">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
               </p>
               <Link to="/billing">
-                <Button className="w-full btn-gradient h-7 text-xs" size="sm">
+                <Button className="w-full btn-gradient h-6 text-meta" size="sm">
                   {t('app.sidebar.upgradeNow')}
                 </Button>
               </Link>
