@@ -18,9 +18,7 @@ import { ImportListingsWidget } from "@/components/dashboard/ImportListingsWidge
 import { AgentIntelligenceWidget } from "@/components/dashboard/AgentIntelligenceWidget";
 import { QuickAreaImportWidget } from "@/components/dashboard/QuickAreaImportWidget";
 import { ImportHistoryWidget } from "@/components/dashboard/ImportHistoryWidget";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, UserPlus } from "lucide-react";
+import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const Dashboard = () => {
@@ -31,7 +29,6 @@ const Dashboard = () => {
   const [analytics, setAnalytics] = useState<any>(null);
   const [hotLeads, setHotLeads] = useState<any[]>([]);
   const [todayTasks, setTodayTasks] = useState<any[]>([]);
-  const [dateRange, setDateRange] = useState("30");
   const [dealStats, setDealStats] = useState<any>({
     lead: { count: 0, value: 0 },
     viewing: { count: 0, value: 0 },
@@ -80,22 +77,16 @@ const Dashboard = () => {
   }, [navigate]);
 
   const fetchDashboardData = async (userId: string) => {
-    // Calculate date range
+    // Calculate this month's date range
     const now = new Date();
-    const daysAgo = parseInt(dateRange);
-    const startDate = new Date(now.getTime() - daysAgo * 24 * 60 * 60 * 1000).toISOString();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
     
-    // Fetch contacts count
-    const { count: contactsCount } = await supabase
+    // Fetch new leads this month (count from contacts table)
+    const { count: monthlyLeadsCount } = await supabase
       .from("contacts")
       .select("*", { count: "exact", head: true })
-      .eq("user_id", userId);
-
-    // Fetch properties count
-    const { count: propertiesCount } = await supabase
-      .from("properties")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", userId);
+      .eq("user_id", userId)
+      .gte("created_at", startOfMonth);
 
     // Fetch active deals count and pipeline value
     const { data: dealsData } = await supabase
@@ -105,22 +96,17 @@ const Dashboard = () => {
       .eq("status", "active");
 
     const activeDealsCount = dealsData?.length || 0;
+    // Use listing_price as fallback if value is null
     const pipelineValue = dealsData?.reduce((sum, deal) => sum + Number(deal.value || deal.listing_price || 0), 0) || 0;
-
-    // Fetch tasks count
-    const { count: tasksCount } = await supabase
-      .from("tasks")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .neq("status", "completed");
 
     // Set analytics from live data
     setAnalytics({
-      contacts_count: contactsCount || 0,
-      properties_count: propertiesCount || 0,
+      monthly_leads: monthlyLeadsCount || 0,
+      leads_change_percent: 0,
       active_deals_count: activeDealsCount,
       pipeline_value: pipelineValue,
-      tasks_pending: tasksCount || 0,
+      ytd_revenue: 0,
+      annual_goal: 0,
     });
 
     // Fetch hot leads (AI score >= 80)
@@ -182,10 +168,22 @@ const Dashboard = () => {
     setTodayTasks(tasks => tasks.filter(t => t.id !== taskId));
   };
 
+  const getTasksDueToday = () => todayTasks.filter(t => t.status !== "completed").length;
+  const getOverdueTasks = () => {
+    const now = new Date();
+    return todayTasks.filter(task => {
+      if (!task.due_time || task.status === "completed") return false;
+      const [hours, minutes] = task.due_time.split(":");
+      const taskTime = new Date();
+      taskTime.setHours(parseInt(hours), parseInt(minutes));
+      return taskTime < now;
+    }).length;
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-muted-foreground">{t('app.dashboard.loading')}</p>
+      <div className="min-h-screen flex items-center justify-center">
+        <p>{t('app.dashboard.loading')}</p>
       </div>
     );
   }
@@ -200,72 +198,61 @@ const Dashboard = () => {
       <div className="flex-1 lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         
-        <main className="p-4 md:p-6 space-y-6">
+        <main className="p-4 md:p-6 space-y-4 md:space-y-6">
           {/* Trial Banner */}
           {!subscribed && trialDaysLeft > 0 && (
             <TrialBanner daysLeft={trialDaysLeft} />
           )}
 
-          {/* Header with Actions */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h1 className="text-xl font-semibold text-foreground">Dashboard</h1>
-            <div className="flex items-center gap-2">
-              <Button 
-                size="sm" 
-                className="h-8 text-xs"
-                onClick={() => navigate("/contacts")}
-              >
-                <UserPlus className="h-3.5 w-3.5 mr-1.5" />
-                Add new contact
-              </Button>
-              <Select value={dateRange} onValueChange={setDateRange}>
-                <SelectTrigger className="h-8 w-28 text-xs">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="7">7 days</SelectItem>
-                  <SelectItem value="30">30 days</SelectItem>
-                  <SelectItem value="90">90 days</SelectItem>
-                  <SelectItem value="365">1 year</SelectItem>
-                </SelectContent>
-              </Select>
-              <Button variant="outline" size="icon" className="h-8 w-8">
-                <Download className="h-3.5 w-3.5" />
-              </Button>
-            </div>
+          {/* Welcome Section */}
+          <div>
+            <h1 className="text-xl md:text-2xl font-semibold mb-1">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}! 👋</h1>
+            <p className="text-sm text-muted-foreground">
+              {t('app.dashboard.tasksDueToday', { count: getTasksDueToday() }).replace('{{count}}', String(getTasksDueToday()))}
+              {hotLeads.length > 0 && (
+                <> {t('app.dashboard.hotLeadsToFollow', { count: hotLeads.length }).replace('{{count}}', String(hotLeads.length))}</>
+              )}
+            </p>
           </div>
 
-          {/* Stats Row */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 py-4 border-b border-border">
+          {/* Stat Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <StatCard
-              title="Total Contacts"
-              value={analytics?.contacts_count || 0}
-              subtitle="(To-date)"
+              title={t('app.dashboard.newLeadsThisMonth')}
+              value={analytics?.monthly_leads || 0}
+              change={analytics?.leads_change_percent || 0}
+              trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
+              icon={Users}
             />
             <StatCard
-              title="Properties Listed"
-              value={analytics?.properties_count || 0}
-              subtitle="(To-date)"
-            />
-            <StatCard
-              title="Active Deals"
+              title={t('app.dashboard.activeDeals')}
               value={analytics?.active_deals_count || 0}
-              subtitle="(To-date)"
+              subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()} ${t('app.dashboard.pipeline')}`}
+              icon={Briefcase}
             />
             <StatCard
-              title="Pipeline Value"
-              value={`$${((analytics?.pipeline_value || 0) / 1000).toFixed(0)}k`}
-              subtitle={`(${dateRange} days)`}
+              title={t('app.dashboard.tasksDue')}
+              value={getTasksDueToday()}
+              subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} ${t('app.dashboard.overdue')}` : undefined}
+              trend={getOverdueTasks() > 0 ? "down" : "neutral"}
+              icon={CheckSquare}
             />
             <StatCard
-              title="Pending Tasks"
-              value={analytics?.tasks_pending || 0}
-              subtitle={`(${dateRange} days)`}
+              title={t('app.dashboard.revenueYTD')}
+              value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
+              subtitle={
+                analytics?.annual_goal
+                  ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% ${t('app.dashboard.ofAnnualGoal')}`
+                  : undefined
+              }
+              icon={DollarSign}
             />
           </div>
 
-          {/* Onboarding Checklist */}
-          {user && <OnboardingChecklist userId={user.id} />}
+          {/* Onboarding Checklist for new users */}
+          {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
+            <OnboardingChecklist userId={user.id} />
+          )}
 
           {/* Widgets Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -285,7 +272,7 @@ const Dashboard = () => {
 
           {/* Realtor.ca Import Tools */}
           <div className="space-y-6">
-            <h2 className="text-base font-semibold text-foreground">Data Import Tools</h2>
+            <h2 className="text-lg font-semibold">Data Import Tools</h2>
             <ImportListingsWidget />
             <AgentIntelligenceWidget />
             <QuickAreaImportWidget />
