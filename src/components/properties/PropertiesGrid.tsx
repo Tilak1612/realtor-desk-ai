@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Home, Bed, Bath, Maximize, MapPin, DollarSign, Edit, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,21 +19,6 @@ interface PropertiesGridProps {
 const PropertiesGrid = ({ properties, loading, onRefresh }: PropertiesGridProps) => {
   const { toast } = useToast();
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "active":
-        return "bg-success/10 text-success border-success/20";
-      case "pending":
-        return "bg-warning/10 text-warning border-warning/20";
-      case "sold":
-        return "bg-muted text-muted-foreground";
-      case "coming_soon":
-        return "bg-info/10 text-info border-info/20";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
 
   const formatPrice = (price: number | null) => {
     if (!price) return "Price on Request";
@@ -113,9 +99,7 @@ const PropertiesGrid = ({ properties, loading, onRefresh }: PropertiesGridProps)
                 </div>
               )}
               <div className="absolute top-3 right-3">
-                <Badge variant="outline" className={getStatusColor(property.status)}>
-                  {property.status}
-                </Badge>
+                <StatusBadge status={property.status} />
               </div>
               {property.mls_number && (
                 <div className="absolute top-3 left-3">

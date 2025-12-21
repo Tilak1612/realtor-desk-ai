@@ -24,7 +24,7 @@ export const propertyValidationSchema = z.object({
   
   province: z
     .string()
-    .min(2, "Province is required")
+    .min(1, "Province is required")
     .max(50, "Province must be less than 50 characters"),
   
   postal_code: z

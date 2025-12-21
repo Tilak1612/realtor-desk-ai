@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Edit, Trash2, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,21 +19,6 @@ interface PropertiesListProps {
 const PropertiesList = ({ properties, loading, onRefresh }: PropertiesListProps) => {
   const { toast } = useToast();
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "active":
-        return "bg-success/10 text-success border-success/20";
-      case "pending":
-        return "bg-warning/10 text-warning border-warning/20";
-      case "sold":
-        return "bg-muted text-muted-foreground";
-      case "coming_soon":
-        return "bg-info/10 text-info border-info/20";
-      default:
-        return "bg-muted text-muted-foreground";
-    }
-  };
 
   const formatPrice = (price: number | null) => {
     if (!price) return "POA";
@@ -114,9 +100,7 @@ const PropertiesList = ({ properties, loading, onRefresh }: PropertiesListProps)
                   {property.bedrooms || "-"} / {property.bathrooms || "-"}
                 </TableCell>
                 <TableCell>
-                  <Badge variant="outline" className={getStatusColor(property.status)}>
-                    {property.status}
-                  </Badge>
+                  <StatusBadge status={property.status} size="sm" />
                 </TableCell>
                 <TableCell className="text-muted-foreground text-sm">
                   {property.mls_number || "-"}

@@ -35,8 +35,44 @@ const AIAssistant = () => {
     { label: "Market research", prompt: "What are the current real estate market trends I should know about?" }
   ];
 
-  const handleQuickAction = (prompt: string) => {
-    setInput(prompt);
+  const handleQuickAction = async (prompt: string) => {
+    if (loading) return;
+    
+    const userMessage: Message = { role: 'user', content: prompt };
+    setMessages(prev => [...prev, userMessage]);
+    setLoading(true);
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error("Not authenticated");
+
+      const { data, error } = await supabase.functions.invoke('claude-chat', {
+        body: {
+          messages: [...messages, userMessage],
+          conversationId
+        },
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+
+      if (error) throw error;
+
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: data.message
+      };
+      setMessages(prev => [...prev, assistantMessage]);
+
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

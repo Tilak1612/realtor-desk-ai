@@ -56,6 +56,27 @@ export default {
           yellow: "hsl(var(--decorative-yellow))",
           green: "hsl(var(--decorative-green))",
         },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
+        info: "hsl(var(--info))",
+        status: {
+          active: {
+            DEFAULT: "hsl(var(--status-active))",
+            foreground: "hsl(var(--status-active-foreground))",
+          },
+          pending: {
+            DEFAULT: "hsl(var(--status-pending))",
+            foreground: "hsl(var(--status-pending-foreground))",
+          },
+          closed: {
+            DEFAULT: "hsl(var(--status-closed))",
+            foreground: "hsl(var(--status-closed-foreground))",
+          },
+          sold: {
+            DEFAULT: "hsl(var(--status-sold))",
+            foreground: "hsl(var(--status-sold-foreground))",
+          },
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

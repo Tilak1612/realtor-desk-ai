@@ -91,13 +91,41 @@ const Dashboard = () => {
     // Fetch active deals count and pipeline value
     const { data: dealsData } = await supabase
       .from("deals")
-      .select("stage, value, listing_price")
-      .eq("user_id", userId)
-      .eq("status", "active");
+      .select("stage, value, listing_price, commission_percentage, status, closing_date")
+      .eq("user_id", userId);
 
-    const activeDealsCount = dealsData?.length || 0;
+    // Fetch properties data for additional commission calculations
+    const { data: propertiesData } = await supabase
+      .from("properties")
+      .select("price, status")
+      .eq("user_id", userId);
+
+    const activeDeals = dealsData?.filter(d => d.status === "active") || [];
+    const activeDealsCount = activeDeals.length;
     // Use listing_price as fallback if value is null
-    const pipelineValue = dealsData?.reduce((sum, deal) => sum + Number(deal.value || deal.listing_price || 0), 0) || 0;
+    const pipelineValue = activeDeals.reduce((sum, deal) => sum + Number(deal.value || deal.listing_price || 0), 0);
+
+    // Calculate YTD Revenue from closed deals (2.5% default commission)
+    const yearStart = new Date(now.getFullYear(), 0, 1).toISOString();
+    const closedDeals = dealsData?.filter(d => 
+      d.status === "won" && 
+      d.closing_date && 
+      new Date(d.closing_date) >= new Date(yearStart)
+    ) || [];
+    
+    const ytdRevenue = closedDeals.reduce((sum, deal) => {
+      const dealValue = Number(deal.value || deal.listing_price || 0);
+      const commission = deal.commission_percentage || 2.5;
+      return sum + (dealValue * commission / 100);
+    }, 0);
+
+    // Also add sold properties commission (2.5% default)
+    const soldProperties = propertiesData?.filter(p => p.status === "sold") || [];
+    const propertiesRevenue = soldProperties.reduce((sum, prop) => {
+      return sum + (Number(prop.price || 0) * 0.025);
+    }, 0);
+
+    const totalYtdRevenue = ytdRevenue + propertiesRevenue;
 
     // Set analytics from live data
     setAnalytics({
@@ -105,8 +133,8 @@ const Dashboard = () => {
       leads_change_percent: 0,
       active_deals_count: activeDealsCount,
       pipeline_value: pipelineValue,
-      ytd_revenue: 0,
-      annual_goal: 0,
+      ytd_revenue: totalYtdRevenue,
+      annual_goal: 150000, // Default annual goal
     });
 
     // Fetch hot leads (AI score >= 80)
@@ -153,7 +181,7 @@ const Dashboard = () => {
         closing: { count: 0, value: 0 },
       };
 
-      dealsData.forEach(deal => {
+      dealsData.filter(d => d.status === "active").forEach(deal => {
         if (stats[deal.stage]) {
           stats[deal.stage].count++;
           stats[deal.stage].value += Number(deal.value || deal.listing_price || 0);
