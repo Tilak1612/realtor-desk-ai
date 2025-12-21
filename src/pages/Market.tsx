@@ -117,7 +117,7 @@ const Market = () => {
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-3xl font-bold">Market Snapshot</h1>
+                <h1 className="text-xl font-semibold">Market Snapshot</h1>
                 <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
                   Beta
                 </Badge>
