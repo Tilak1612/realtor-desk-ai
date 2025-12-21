@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -177,6 +178,34 @@ serve(async (req) => {
   }
 
   try {
+    // Authentication check - require valid user session
+    const supabaseAuth = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? ''
+    );
+
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      console.error('[APIFY] No authorization header provided');
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized', details: 'Authentication required', code: 'NO_AUTH' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser(token);
+    
+    if (authError || !user) {
+      console.error('[APIFY] Authentication failed:', authError?.message);
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized', details: 'Invalid or expired session', code: 'AUTH_FAILED' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log(`[APIFY] Authenticated user: ${user.id}`);
+
     const { actorId, input } = await req.json();
     const APIFY_TOKEN = Deno.env.get('APIFY_TOKEN');
     
