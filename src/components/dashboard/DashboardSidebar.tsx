@@ -84,7 +84,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-background border rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-card border border-border rounded-lg shadow-md"
       >
         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
@@ -99,65 +99,67 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky left-0 top-0 h-screen w-56 bg-background border-r flex flex-col transition-transform duration-300 z-40 ${
+        className={`fixed lg:sticky left-0 top-0 h-screen w-60 bg-card border-r border-border flex flex-col transition-transform duration-300 z-40 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Logo */}
         <Link
           to="/dashboard"
-          className="flex items-center gap-2 p-3 border-b hover:bg-accent/50 transition-colors"
+          className="flex items-center gap-2.5 h-14 px-4 border-b border-border hover:bg-accent/50 transition-colors"
           onClick={() => setIsOpen(false)}
         >
           <img src={logo} alt="Realtor Desk" className="h-7 w-auto" />
-          <span className="text-body-sm font-semibold gradient-text">Realtor Desk</span>
+          <span className="text-sm font-semibold text-foreground">Realtor Desk</span>
         </Link>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto p-2 space-y-0.5">
-          {menuItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setIsOpen(false)}
-              className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md transition-all text-body-sm ${
-                isActive(item.path)
-                  ? "bg-primary text-primary-foreground font-medium shadow-sm"
-                  : "hover:bg-accent text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <span className="flex items-center gap-2">
-                <item.icon className="w-4 h-4 flex-shrink-0" />
-                <span>{item.label}</span>
-              </span>
-              {typeof item.count === 'number' && item.count > 0 && (
-                <span className={`text-meta px-1.5 py-0.5 rounded-full ${
-                  isActive(item.path) 
-                    ? "bg-primary-foreground/20 text-primary-foreground" 
-                    : "bg-muted text-muted-foreground"
-                }`}>
-                  {item.count}
+        <nav className="flex-1 overflow-y-auto py-3 px-3">
+          <div className="space-y-1">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-colors text-sm ${
+                  isActive(item.path)
+                    ? "bg-primary text-primary-foreground font-medium"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                }`}
+              >
+                <span className="flex items-center gap-2.5">
+                  <item.icon className="w-4 h-4 flex-shrink-0" />
+                  <span>{item.label}</span>
                 </span>
-              )}
-            </Link>
-          ))}
+                {typeof item.count === 'number' && item.count > 0 && (
+                  <span className={`text-xs px-1.5 py-0.5 rounded ${
+                    isActive(item.path) 
+                      ? "bg-primary-foreground/20 text-primary-foreground" 
+                      : "bg-muted text-muted-foreground"
+                  }`}>
+                    {item.count}
+                  </span>
+                )}
+              </Link>
+            ))}
+          </div>
         </nav>
 
         {/* Upgrade Badge */}
         {trialDaysLeft > 0 && (
-          <div className="p-2 border-t">
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 p-2.5 rounded-md space-y-1.5">
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-primary" />
-                <Badge variant="secondary" className="text-meta font-medium">
+          <div className="p-3 border-t border-border">
+            <div className="bg-accent/50 p-3 rounded-lg space-y-2">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <Badge variant="secondary" className="text-xs font-medium">
                   {t('app.sidebar.trialActive')}
                 </Badge>
               </div>
-              <p className="text-meta text-muted-foreground">
+              <p className="text-xs text-muted-foreground">
                 <span className="font-semibold text-foreground">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
               </p>
               <Link to="/billing">
-                <Button className="w-full btn-gradient h-6 text-meta" size="sm">
+                <Button className="w-full h-8 text-xs" size="sm">
                   {t('app.sidebar.upgradeNow')}
                 </Button>
               </Link>

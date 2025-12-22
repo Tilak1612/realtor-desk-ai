@@ -3,24 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
 import HotLeadsWidget from "@/components/dashboard/HotLeadsWidget";
 import TasksWidget from "@/components/dashboard/TasksWidget";
 import DealsWidget from "@/components/dashboard/DealsWidget";
 import MarketWidget from "@/components/dashboard/MarketWidget";
 import TrialBanner from "@/components/dashboard/TrialBanner";
-import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
 import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
 import TodayFocusWidget from "@/components/dashboard/TodayFocusWidget";
 import RecentActivityWidget from "@/components/dashboard/RecentActivityWidget";
 import RevenueBreakdownWidget from "@/components/dashboard/RevenueBreakdownWidget";
-import { ImportListingsWidget } from "@/components/dashboard/ImportListingsWidget";
-import { AgentIntelligenceWidget } from "@/components/dashboard/AgentIntelligenceWidget";
-import { QuickAreaImportWidget } from "@/components/dashboard/QuickAreaImportWidget";
-import { ImportHistoryWidget } from "@/components/dashboard/ImportHistoryWidget";
-import { Users, Briefcase, CheckSquare, DollarSign } from "lucide-react";
+import DataImportCard from "@/components/dashboard/DataImportCard";
+import { Users, Briefcase, CheckSquare, DollarSign, Home, MapPin, Brain } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const Dashboard = () => {
@@ -45,7 +40,7 @@ const Dashboard = () => {
     closing: { count: 0, value: 0 },
   });
   const [loading, setLoading] = useState(true);
-  const { subscribed, trialDaysLeft, trialExpired } = useSubscription();
+  const { subscribed, trialDaysLeft } = useSubscription();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -218,127 +213,139 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-body-sm">{t('app.dashboard.loading')}</p>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-sm text-muted-foreground">{t('app.dashboard.loading')}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex w-full bg-background">
-      <TrialExpiredModal isOpen={trialExpired} />
-      <DashboardSidebar trialDaysLeft={trialDaysLeft} />
-      
-      <div className="flex-1 lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        
-        <main className="p-4 md:p-5 space-y-4">
-          {!subscribed && trialDaysLeft > 0 && (
-            <TrialBanner daysLeft={trialDaysLeft} />
-          )}
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Trial Banner */}
+        {!subscribed && trialDaysLeft > 0 && (
+          <TrialBanner daysLeft={trialDaysLeft} />
+        )}
 
-          {/* Welcome - Compact */}
-          <div className="pb-1">
-            <h1 className="text-heading-1">{t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}!</h1>
-            <p className="text-body-sm text-muted-foreground">
-              {getTasksDueToday()} tasks due today
-              {hotLeads.length > 0 && ` • ${hotLeads.length} hot leads to follow up`}
-            </p>
-          </div>
+        {/* Page Header */}
+        <div>
+          <h1 className="text-xl md:text-2xl font-semibold text-foreground">
+            {t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}!
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            {getTasksDueToday()} tasks due today
+            {hotLeads.length > 0 && ` • ${hotLeads.length} hot leads to follow up`}
+          </p>
+        </div>
 
-          {/* Row 1 - Action First: Today Focus + Tasks Due */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <div className="xl:col-span-2">
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard
+            title={t('app.dashboard.newLeadsThisMonth')}
+            value={analytics?.monthly_leads || 0}
+            change={analytics?.leads_change_percent || 0}
+            trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
+            icon={Users}
+          />
+          <StatCard
+            title={t('app.dashboard.activeDeals')}
+            value={analytics?.active_deals_count || 0}
+            subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()}`}
+            icon={Briefcase}
+          />
+          <StatCard
+            title={t('app.dashboard.tasksDue')}
+            value={getTasksDueToday()}
+            subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} overdue` : undefined}
+            trend={getOverdueTasks() > 0 ? "down" : "neutral"}
+            icon={CheckSquare}
+          />
+          <StatCard
+            title={t('app.dashboard.revenueYTD')}
+            value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
+            subtitle={
+              analytics?.annual_goal
+                ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% of goal`
+                : undefined
+            }
+            icon={DollarSign}
+          />
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {/* Left Column - 2/3 width */}
+          <div className="xl:col-span-2 space-y-6">
+            {/* Today Focus + Tasks Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <TodayFocusWidget 
                 tasksDueToday={getTasksDueToday()} 
                 hotLeadsCount={hotLeads.length}
                 overdueCount={getOverdueTasks()}
               />
-            </div>
-            <div>
               <TasksWidget tasks={todayTasks} onTaskComplete={handleTaskComplete} />
             </div>
+
+            {/* Hot Leads */}
+            <HotLeadsWidget leads={hotLeads} />
+
+            {/* Recent Activity */}
+            {user && <RecentActivityWidget userId={user.id} />}
+
+            {/* Pipeline Overview */}
+            <DealsWidget stats={dealStats} />
           </div>
 
-          {/* Row 2 - Opportunity: Hot Leads + Pipeline Summary */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <div className="xl:col-span-2">
-              <HotLeadsWidget leads={hotLeads} />
-            </div>
-            <div>
-              {/* Pipeline Summary Stats */}
-              <div className="grid grid-cols-2 gap-3">
-                <StatCard
-                  title={t('app.dashboard.newLeadsThisMonth')}
-                  value={analytics?.monthly_leads || 0}
-                  change={analytics?.leads_change_percent || 0}
-                  trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
-                  icon={Users}
-                />
-                <StatCard
-                  title={t('app.dashboard.activeDeals')}
-                  value={analytics?.active_deals_count || 0}
-                  subtitle={`$${(analytics?.pipeline_value || 0).toLocaleString()}`}
-                  icon={Briefcase}
-                />
-                <StatCard
-                  title={t('app.dashboard.tasksDue')}
-                  value={getTasksDueToday()}
-                  subtitle={getOverdueTasks() > 0 ? `${getOverdueTasks()} overdue` : undefined}
-                  trend={getOverdueTasks() > 0 ? "down" : "neutral"}
-                  icon={CheckSquare}
-                />
-                <StatCard
-                  title={t('app.dashboard.revenueYTD')}
-                  value={`$${(analytics?.ytd_revenue || 0).toLocaleString()}`}
-                  subtitle={
-                    analytics?.annual_goal
-                      ? `${Math.round((analytics.ytd_revenue / analytics.annual_goal) * 100)}% of goal`
-                      : undefined
-                  }
-                  icon={DollarSign}
-                />
-              </div>
-            </div>
-          </div>
+          {/* Right Column - 1/3 width */}
+          <div className="space-y-6">
+            {/* Revenue Breakdown */}
+            <RevenueBreakdownWidget
+              ytdRevenue={revenueData.ytdRevenue}
+              closedDealsCount={revenueData.closedDealsCount}
+              grossVolume={revenueData.grossVolume}
+              commissionRate={revenueData.commissionRate}
+            />
 
-          {/* Row 3 - Context: Recent Activity + Revenue */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <div className="xl:col-span-2">
-              {user && <RecentActivityWidget userId={user.id} />}
-            </div>
-            <div>
-              <RevenueBreakdownWidget
-                ytdRevenue={revenueData.ytdRevenue}
-                closedDealsCount={revenueData.closedDealsCount}
-                grossVolume={revenueData.grossVolume}
-                commissionRate={revenueData.commissionRate}
-              />
-            </div>
-          </div>
-
-          {/* Row 4 - Pipeline Overview */}
-          <DealsWidget stats={dealStats} />
-
-          {/* Row 5 - Onboarding & Data Health (only for new users) */}
-          {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            {/* Onboarding (for new users) */}
+            {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
               <OnboardingChecklist userId={user.id} />
-              <MarketWidget defaultCity={profile?.city} />
-            </div>
-          )}
+            )}
 
-          {/* Row 6 - Import Tools */}
-          <div className="space-y-4">
-            <h2 className="text-heading-2">Data Import Tools</h2>
-            <ImportListingsWidget />
-            <AgentIntelligenceWidget />
-            <QuickAreaImportWidget />
-            <ImportHistoryWidget />
+            {/* Market Widget */}
+            <MarketWidget defaultCity={profile?.city} />
           </div>
-        </main>
+        </div>
+
+        {/* Data Import Tools Section */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-foreground">Data Import Tools</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <DataImportCard
+              title="Import Listings"
+              description="Import property listings from Realtor.ca search URLs"
+              icon={Home}
+              ctaLabel="Import Listings"
+              onAction={() => navigate("/properties")}
+              badge="Beta"
+            />
+            <DataImportCard
+              title="Area Search"
+              description="Quick import by city, neighborhood, or postal code"
+              icon={MapPin}
+              ctaLabel="Search Area"
+              onAction={() => navigate("/properties")}
+            />
+            <DataImportCard
+              title="AI Intelligence"
+              description="Get AI-powered market insights and lead scoring"
+              icon={Brain}
+              ctaLabel="View Insights"
+              onAction={() => navigate("/ai-assistant")}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 
