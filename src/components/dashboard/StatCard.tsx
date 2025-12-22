@@ -18,10 +18,10 @@ const StatCard = ({ title, value, change, subtitle, icon: Icon, trend = "neutral
   };
 
   return (
-    <Card className="hover:shadow-lg transition-shadow">
-      <CardContent className="p-4">
-        <div className="flex items-start justify-between mb-3">
-          <div className="p-1.5 bg-primary/10 rounded-lg">
+    <Card className="bg-card border-border">
+      <CardContent className="p-5">
+        <div className="flex items-center justify-between mb-3">
+          <div className="p-2 bg-accent/50 rounded-lg">
             <Icon className="w-4 h-4 text-primary" />
           </div>
           {change !== undefined && (
@@ -31,15 +31,15 @@ const StatCard = ({ title, value, change, subtitle, icon: Icon, trend = "neutral
               ) : trend === "down" ? (
                 <TrendingDown className="w-3.5 h-3.5" />
               ) : null}
-              <span className="text-meta font-medium">{Math.abs(change)}%</span>
+              <span className="text-xs font-medium">{Math.abs(change)}%</span>
             </div>
           )}
         </div>
-        <div className="space-y-0.5">
-          <p className="text-meta text-muted-foreground uppercase tracking-wide">{title}</p>
-          <p className="text-heading-2">{value}</p>
+        <div className="space-y-1">
+          <p className="text-xs text-muted-foreground uppercase tracking-wide">{title}</p>
+          <p className="text-2xl font-semibold text-foreground">{value}</p>
           {subtitle && (
-            <p className="text-meta text-muted-foreground">{subtitle}</p>
+            <p className="text-xs text-muted-foreground">{subtitle}</p>
           )}
         </div>
       </CardContent>

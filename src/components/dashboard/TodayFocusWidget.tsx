@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Target, CheckCircle2, Phone, Mail, Calendar } from "lucide-react";
+import { Target, CheckCircle2, Phone, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface TodayFocusWidgetProps {
@@ -40,38 +40,38 @@ const TodayFocusWidget = ({ tasksDueToday, hotLeadsCount, overdueCount }: TodayF
   }
 
   return (
-    <Card className="bg-gradient-to-br from-primary/5 to-card">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-heading-3 flex items-center gap-2">
+    <Card className="bg-card border-border h-full">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-base font-medium flex items-center gap-2">
           <Target className="h-4 w-4 text-primary" />
           Today's Focus
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-3">
+        <div className="space-y-2">
           {focusItems.map((item, index) => (
             <button
               key={index}
               onClick={item.action}
-              className="w-full flex items-center justify-between p-2.5 rounded-lg bg-background/50 hover:bg-background transition-colors"
+              className="w-full flex items-center justify-between p-3 rounded-lg bg-accent/30 hover:bg-accent/50 transition-colors"
             >
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2.5">
                 <item.icon className={`h-4 w-4 ${item.color}`} />
-                <span className="text-body-sm">{item.label}</span>
+                <span className="text-sm text-foreground">{item.label}</span>
               </span>
-              <span className={`text-heading-3 ${item.color}`}>{item.value}</span>
+              <span className={`text-lg font-semibold ${item.color}`}>{item.value}</span>
             </button>
           ))}
           
           {tasksDueToday === 0 && hotLeadsCount === 0 && overdueCount === 0 && (
-            <div className="text-center py-4">
-              <p className="text-body-sm text-muted-foreground mb-2">
+            <div className="text-center py-6">
+              <p className="text-sm text-muted-foreground mb-3">
                 You're all caught up! Great job.
               </p>
               <Button
                 variant="outline"
                 size="sm"
-                className="text-body-sm"
+                className="text-sm"
                 onClick={() => navigate("/contacts")}
               >
                 Find new leads
