@@ -3,14 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TrendingUp, DollarSign, Users, Briefcase, Download, Calendar, Filter, FileText } from "lucide-react";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import { Download, Calendar, Filter, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
-import { format, subDays, subMonths, startOfMonth, endOfMonth } from "date-fns";
+import { format } from "date-fns";
+import AppLayout from "@/components/layout/AppLayout";
+import StatCard from "@/components/dashboard/StatCard";
+import { DollarSign, Users, Briefcase, TrendingUp } from "lucide-react";
 
 const Reports = () => {
   const navigate = useNavigate();
@@ -106,337 +107,249 @@ const Reports = () => {
     });
   };
 
-  const exportToPDF = (reportName: string) => {
-    // In a real implementation, this would use a PDF library like jsPDF or react-pdf
-    toast({
-      title: "PDF Export",
-      description: `${reportName} PDF export will be available in the next update.`,
-    });
-  };
-
-  const exportPipelineCSV = () => {
-    const data = conversionData.map(d => ({
-      stage: d.stage,
-      count: d.count,
-      percentage: `${d.percentage}%`
-    }));
-    exportToCSV(data, "pipeline-report", ["Stage", "Count", "Percentage"]);
-  };
-
-  const exportActivityCSV = () => {
-    const data = activityData.map(d => ({
-      date: d.date,
-      calls: d.calls,
-      emails: d.emails,
-      meetings: d.meetings
-    }));
-    exportToCSV(data, "activity-report", ["Date", "Calls", "Emails", "Meetings"]);
-  };
-
-  const exportConversionCSV = () => {
-    const data = monthlyData.map(d => ({
-      month: d.month,
-      leads: d.leads,
-      deals: d.deals,
-      revenue: `$${d.revenue.toLocaleString()}`
-    }));
-    exportToCSV(data, "conversion-report", ["Month", "Leads", "Deals", "Revenue"]);
-  };
-
   if (!user || !profile) {
-    return <div>Loading...</div>;
+    return (
+      <AppLayout user={user} profile={profile}>
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+      </AppLayout>
+    );
   }
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      <DashboardSidebar />
-      <div className="flex flex-col flex-1 lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        <main className="flex-1 p-4 md:p-6">
-          <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <h1 className="text-xl font-semibold">Reports & Analytics</h1>
-              <p className="text-muted-foreground">
-                Track your performance and business metrics
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              {/* Date Range Filter */}
-              <Select value={dateRange} onValueChange={setDateRange}>
-                <SelectTrigger className="w-[150px]">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="7d">Last 7 Days</SelectItem>
-                  <SelectItem value="30d">Last 30 Days</SelectItem>
-                  <SelectItem value="90d">Last 90 Days</SelectItem>
-                  <SelectItem value="12m">Last 12 Months</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {/* Source Filter */}
-              <Select value={sourceFilter} onValueChange={setSourceFilter}>
-                <SelectTrigger className="w-[140px]">
-                  <Filter className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Source" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Sources</SelectItem>
-                  <SelectItem value="website">Website</SelectItem>
-                  <SelectItem value="referral">Referral</SelectItem>
-                  <SelectItem value="social">Social Media</SelectItem>
-                  <SelectItem value="open_house">Open House</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {/* Status Filter */}
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="closed">Closed</SelectItem>
-                  <SelectItem value="lost">Lost</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-xl md:text-2xl font-semibold">Reports & Analytics</h1>
+            <p className="text-sm text-muted-foreground">
+              Track your performance and business metrics
+            </p>
           </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <Select value={dateRange} onValueChange={setDateRange}>
+              <SelectTrigger className="w-[140px] h-8 text-xs">
+                <Calendar className="h-3.5 w-3.5 mr-1.5" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="7d">Last 7 Days</SelectItem>
+                <SelectItem value="30d">Last 30 Days</SelectItem>
+                <SelectItem value="90d">Last 90 Days</SelectItem>
+                <SelectItem value="12m">Last 12 Months</SelectItem>
+              </SelectContent>
+            </Select>
 
-          {/* Summary Cards */}
-          <div className="grid gap-4 md:grid-cols-4 mb-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                <DollarSign className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">$2.65M</div>
-                <p className="text-xs text-muted-foreground">+23% from last period</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Leads</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">343</div>
-                <p className="text-xs text-muted-foreground">+12% from last period</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Closed Deals</CardTitle>
-                <Briefcase className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">63</div>
-                <p className="text-xs text-muted-foreground">+8 from last period</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
-                <TrendingUp className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">18.4%</div>
-                <p className="text-xs text-muted-foreground">+2.1% from last period</p>
-              </CardContent>
-            </Card>
+            <Select value={sourceFilter} onValueChange={setSourceFilter}>
+              <SelectTrigger className="w-[130px] h-8 text-xs">
+                <Filter className="h-3.5 w-3.5 mr-1.5" />
+                <SelectValue placeholder="Source" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Sources</SelectItem>
+                <SelectItem value="website">Website</SelectItem>
+                <SelectItem value="referral">Referral</SelectItem>
+                <SelectItem value="social">Social Media</SelectItem>
+                <SelectItem value="open_house">Open House</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
+        </div>
 
-          <Tabs defaultValue="pipeline" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="pipeline">Pipeline</TabsTrigger>
-              <TabsTrigger value="activities">Activities</TabsTrigger>
-              <TabsTrigger value="conversions">Conversions</TabsTrigger>
-              <TabsTrigger value="sources">Lead Sources</TabsTrigger>
-            </TabsList>
+        {/* Stats */}
+        <div className="grid gap-4 md:grid-cols-4">
+          <StatCard
+            title="Total Revenue"
+            value="$2.65M"
+            subtitle="+23% from last period"
+            icon={DollarSign}
+            trend="up"
+            change={23}
+          />
+          <StatCard
+            title="Total Leads"
+            value={343}
+            subtitle="+12% from last period"
+            icon={Users}
+            trend="up"
+            change={12}
+          />
+          <StatCard
+            title="Closed Deals"
+            value={63}
+            subtitle="+8 from last period"
+            icon={Briefcase}
+            trend="up"
+            change={15}
+          />
+          <StatCard
+            title="Conversion Rate"
+            value="18.4%"
+            subtitle="+2.1% from last period"
+            icon={TrendingUp}
+            trend="up"
+            change={2}
+          />
+        </div>
 
-            {/* Pipeline Report */}
-            <TabsContent value="pipeline" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>Pipeline Report</CardTitle>
-                      <CardDescription>{getDateRangeLabel()} • Showing deal progression</CardDescription>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={exportPipelineCSV}>
-                        <Download className="h-4 w-4 mr-2" />
-                        CSV
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={() => exportToPDF("Pipeline Report")}>
-                        <FileText className="h-4 w-4 mr-2" />
-                        PDF
-                      </Button>
-                    </div>
+        {/* Charts */}
+        <Tabs defaultValue="pipeline" className="space-y-4">
+          <TabsList className="h-8">
+            <TabsTrigger value="pipeline" className="text-xs h-7">Pipeline</TabsTrigger>
+            <TabsTrigger value="activities" className="text-xs h-7">Activities</TabsTrigger>
+            <TabsTrigger value="conversions" className="text-xs h-7">Conversions</TabsTrigger>
+            <TabsTrigger value="sources" className="text-xs h-7">Lead Sources</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="pipeline" className="space-y-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-base font-medium">Pipeline Report</CardTitle>
+                    <CardDescription className="text-xs">{getDateRangeLabel()} • Showing deal progression</CardDescription>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={conversionData} layout="vertical">
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis type="number" />
-                      <YAxis dataKey="stage" type="category" width={80} />
-                      <Tooltip 
-                        formatter={(value: number, name: string) => [value, name === "count" ? "Deals" : name]}
-                        contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                      />
-                      <Bar dataKey="count" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
-                    </BarChart>
+                  <Button variant="outline" size="sm" className="h-7 text-xs">
+                    <Download className="h-3.5 w-3.5 mr-1.5" />
+                    CSV
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={conversionData} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" />
+                    <YAxis dataKey="stage" type="category" width={80} className="text-xs" />
+                    <Tooltip 
+                      formatter={(value: number) => [value, "Deals"]}
+                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
+                    />
+                    <Bar dataKey="count" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="activities" className="space-y-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-base font-medium">Activity Report</CardTitle>
+                    <CardDescription className="text-xs">{getDateRangeLabel()} • Calls, emails, and meetings</CardDescription>
+                  </div>
+                  <Button variant="outline" size="sm" className="h-7 text-xs">
+                    <Download className="h-3.5 w-3.5 mr-1.5" />
+                    CSV
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={activityData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" className="text-xs" />
+                    <YAxis className="text-xs" />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
+                    />
+                    <Bar dataKey="calls" fill="hsl(var(--primary))" name="Calls" />
+                    <Bar dataKey="emails" fill="hsl(var(--secondary))" name="Emails" />
+                    <Bar dataKey="meetings" fill="hsl(var(--accent))" name="Meetings" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="conversions" className="space-y-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-base font-medium">Conversion Report</CardTitle>
+                    <CardDescription className="text-xs">{getDateRangeLabel()} • Monthly performance</CardDescription>
+                  </div>
+                  <Button variant="outline" size="sm" className="h-7 text-xs">
+                    <Download className="h-3.5 w-3.5 mr-1.5" />
+                    CSV
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={monthlyData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" className="text-xs" />
+                    <YAxis yAxisId="left" className="text-xs" />
+                    <YAxis yAxisId="right" orientation="right" className="text-xs" />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
+                    />
+                    <Line yAxisId="left" type="monotone" dataKey="leads" stroke="hsl(var(--primary))" strokeWidth={2} name="Leads" />
+                    <Line yAxisId="left" type="monotone" dataKey="deals" stroke="hsl(var(--secondary))" strokeWidth={2} name="Deals" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="sources" className="space-y-4">
+            <Card>
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-base font-medium">Lead Sources</CardTitle>
+                    <CardDescription className="text-xs">{getDateRangeLabel()} • Where your leads come from</CardDescription>
+                  </div>
+                  <Button variant="outline" size="sm" className="h-7 text-xs">
+                    <Download className="h-3.5 w-3.5 mr-1.5" />
+                    CSV
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <ResponsiveContainer width="100%" height={250}>
+                    <PieChart>
+                      <Pie
+                        data={leadSourceData}
+                        dataKey="count"
+                        nameKey="source"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        label={({ source, count }) => `${source}: ${count}`}
+                      >
+                        {leadSourceData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
                   </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Activities Report */}
-            <TabsContent value="activities" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>Activity Report</CardTitle>
-                      <CardDescription>{getDateRangeLabel()} • Calls, emails, and meetings</CardDescription>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={exportActivityCSV}>
-                        <Download className="h-4 w-4 mr-2" />
-                        CSV
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={() => exportToPDF("Activity Report")}>
-                        <FileText className="h-4 w-4 mr-2" />
-                        PDF
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={activityData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="date" />
-                      <YAxis />
-                      <Tooltip 
-                        contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                      />
-                      <Bar dataKey="calls" fill="hsl(var(--primary))" name="Calls" />
-                      <Bar dataKey="emails" fill="hsl(var(--secondary))" name="Emails" />
-                      <Bar dataKey="meetings" fill="hsl(var(--accent))" name="Meetings" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Conversions Report */}
-            <TabsContent value="conversions" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>Conversion Report</CardTitle>
-                      <CardDescription>{getDateRangeLabel()} • Monthly performance</CardDescription>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={exportConversionCSV}>
-                        <Download className="h-4 w-4 mr-2" />
-                        CSV
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={() => exportToPDF("Conversion Report")}>
-                        <FileText className="h-4 w-4 mr-2" />
-                        PDF
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={monthlyData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis yAxisId="left" />
-                      <YAxis yAxisId="right" orientation="right" />
-                      <Tooltip 
-                        contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                      />
-                      <Line yAxisId="left" type="monotone" dataKey="leads" stroke="hsl(var(--primary))" strokeWidth={2} name="Leads" />
-                      <Line yAxisId="left" type="monotone" dataKey="deals" stroke="hsl(var(--secondary))" strokeWidth={2} name="Deals" />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Lead Sources */}
-            <TabsContent value="sources" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>Lead Sources</CardTitle>
-                      <CardDescription>{getDateRangeLabel()} • Where your leads come from</CardDescription>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={() => {
-                        const data = leadSourceData.map(d => ({ source: d.source, count: d.count }));
-                        exportToCSV(data, "lead-sources", ["Source", "Count"]);
-                      }}>
-                        <Download className="h-4 w-4 mr-2" />
-                        CSV
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <ResponsiveContainer width="100%" height={300}>
-                      <PieChart>
-                        <Pie
-                          data={leadSourceData}
-                          dataKey="count"
-                          nameKey="source"
-                          cx="50%"
-                          cy="50%"
-                          outerRadius={100}
-                          label={({ source, count }) => `${source}: ${count}`}
-                        >
-                          {leadSourceData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
-                        </Pie>
-                        <Tooltip />
-                      </PieChart>
-                    </ResponsiveContainer>
-                    <div className="space-y-3">
-                      {leadSourceData.map((source, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
-                          <div className="flex items-center gap-3">
-                            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: source.color }} />
-                            <span className="font-medium">{source.source}</span>
-                          </div>
-                          <div className="text-right">
-                            <span className="font-bold">{source.count}</span>
-                            <span className="text-muted-foreground text-sm ml-2">
-                              ({Math.round((source.count / leadSourceData.reduce((a, b) => a + b.count, 0)) * 100)}%)
-                            </span>
-                          </div>
+                  <div className="space-y-3">
+                    {leadSourceData.map((source) => (
+                      <div key={source.source} className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: source.color }} />
+                          <span className="text-sm">{source.source}</span>
                         </div>
-                      ))}
-                    </div>
+                        <span className="text-sm font-medium">{source.count}</span>
+                      </div>
+                    ))}
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </main>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 

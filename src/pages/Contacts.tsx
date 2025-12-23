@@ -7,16 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LayoutGrid, List, Plus, Upload, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import AppLayout from "@/components/layout/AppLayout";
 import ContactsTable from "@/components/contacts/ContactsTable";
 import ContactsCardView from "@/components/contacts/ContactsCardView";
 import AddContactModal from "@/components/contacts/AddContactModal";
 import ImportContactsModal from "@/components/contacts/ImportContactsModal";
 import ContactFilters from "@/components/contacts/ContactFilters";
 import BulkActionsToolbar from "@/components/contacts/BulkActionsToolbar";
-import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
-import { useSubscription } from "@/contexts/SubscriptionContext";
 
 export interface Contact {
   id: string;
@@ -46,7 +43,6 @@ const Contacts = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { trialExpired } = useSubscription();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
@@ -81,7 +77,6 @@ const Contacts = () => {
     
     setUser(session.user);
     
-    // Fetch profile
     const { data: profileData } = await supabase
       .from("profiles")
       .select("*")
@@ -116,7 +111,6 @@ const Contacts = () => {
   const applyFilters = () => {
     let filtered = [...contacts];
 
-    // Search filter
     if (filters.search) {
       const searchLower = filters.search.toLowerCase();
       filtered = filtered.filter(
@@ -128,19 +122,16 @@ const Contacts = () => {
       );
     }
 
-    // Score range filter
     filtered = filtered.filter(
       (c) =>
         (c.ai_score || 0) >= filters.scoreRange[0] &&
         (c.ai_score || 0) <= filters.scoreRange[1]
     );
 
-    // Source filter
     if (filters.source.length > 0) {
       filtered = filtered.filter((c) => c.source && filters.source.includes(c.source));
     }
 
-    // Tags filter
     if (filters.tags.length > 0) {
       filtered = filtered.filter((c) =>
         c.tags?.some((tag) => filters.tags.includes(tag))
@@ -180,105 +171,99 @@ const Contacts = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-muted/30">
-      <DashboardSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        <main className="flex-1 overflow-y-auto">
-          <div className="container mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-semibold">{t('app.contacts.title')}</h1>
-                <Badge variant="secondary" className="text-xs">
-                  {filteredContacts.length}
-                </Badge>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 text-xs"
-                  onClick={() => setIsImportModalOpen(true)}
-                >
-                  <Upload className="h-3.5 w-3.5 mr-1.5" />
-                  {t('app.contacts.importContacts')}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-8 text-xs"
-                  onClick={handleExportCSV}
-                  disabled={filteredContacts.length === 0}
-                >
-                  <Download className="h-3.5 w-3.5 mr-1.5" />
-                  {t('app.contacts.exportContacts')}
-                </Button>
-                <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
-                  <Plus className="h-3.5 w-3.5 mr-1.5" />
-                  {t('app.contacts.addContact')}
-                </Button>
-              </div>
-            </div>
-
-            {/* Filters */}
-            <ContactFilters filters={filters} onFiltersChange={setFilters} />
-
-            {/* Bulk Actions */}
-            {selectedContacts.length > 0 && (
-              <BulkActionsToolbar
-                selectedCount={selectedContacts.length}
-                onClearSelection={() => setSelectedContacts([])}
-                onBulkDelete={async () => {
-                  const { error } = await supabase
-                    .from("contacts")
-                    .delete()
-                    .in("id", selectedContacts);
-
-                  if (!error) {
-                    toast({ title: t('app.notifications.contactDeleted') });
-                    setSelectedContacts([]);
-                    fetchContacts();
-                  }
-                }}
-              />
-            )}
-
-            {/* View Toggle and Content */}
-            <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
-              <div className="flex justify-end mb-4">
-                <TabsList>
-                  <TabsTrigger value="table">
-                    <List className="h-4 w-4 mr-2" />
-                    {t('app.common.all')}
-                  </TabsTrigger>
-                  <TabsTrigger value="cards">
-                    <LayoutGrid className="h-4 w-4 mr-2" />
-                    {t('app.common.all')}
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="table">
-                <ContactsTable
-                  contacts={filteredContacts}
-                  loading={loading}
-                  selectedContacts={selectedContacts}
-                  onSelectionChange={setSelectedContacts}
-                  onRefresh={fetchContacts}
-                />
-              </TabsContent>
-
-              <TabsContent value="cards">
-                <ContactsCardView
-                  contacts={filteredContacts}
-                  loading={loading}
-                  onRefresh={fetchContacts}
-                />
-              </TabsContent>
-            </Tabs>
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl md:text-2xl font-semibold">{t('app.contacts.title')}</h1>
+            <Badge variant="secondary" className="text-xs">
+              {filteredContacts.length}
+            </Badge>
           </div>
-        </main>
+          <div className="flex items-center gap-2 flex-wrap">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs"
+              onClick={() => setIsImportModalOpen(true)}
+            >
+              <Upload className="h-3.5 w-3.5 mr-1.5" />
+              {t('app.contacts.importContacts')}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs"
+              onClick={handleExportCSV}
+              disabled={filteredContacts.length === 0}
+            >
+              <Download className="h-3.5 w-3.5 mr-1.5" />
+              {t('app.contacts.exportContacts')}
+            </Button>
+            <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+              <Plus className="h-3.5 w-3.5 mr-1.5" />
+              {t('app.contacts.addContact')}
+            </Button>
+          </div>
+        </div>
+
+        {/* Filters */}
+        <ContactFilters filters={filters} onFiltersChange={setFilters} />
+
+        {/* Bulk Actions */}
+        {selectedContacts.length > 0 && (
+          <BulkActionsToolbar
+            selectedCount={selectedContacts.length}
+            onClearSelection={() => setSelectedContacts([])}
+            onBulkDelete={async () => {
+              const { error } = await supabase
+                .from("contacts")
+                .delete()
+                .in("id", selectedContacts);
+
+              if (!error) {
+                toast({ title: t('app.notifications.contactDeleted') });
+                setSelectedContacts([]);
+                fetchContacts();
+              }
+            }}
+          />
+        )}
+
+        {/* View Toggle and Content */}
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
+          <div className="flex justify-end mb-4">
+            <TabsList className="h-8">
+              <TabsTrigger value="table" className="text-xs h-7 px-3">
+                <List className="h-3.5 w-3.5 mr-1.5" />
+                Table
+              </TabsTrigger>
+              <TabsTrigger value="cards" className="text-xs h-7 px-3">
+                <LayoutGrid className="h-3.5 w-3.5 mr-1.5" />
+                Cards
+              </TabsTrigger>
+            </TabsList>
+          </div>
+
+          <TabsContent value="table">
+            <ContactsTable
+              contacts={filteredContacts}
+              loading={loading}
+              selectedContacts={selectedContacts}
+              onSelectionChange={setSelectedContacts}
+              onRefresh={fetchContacts}
+            />
+          </TabsContent>
+
+          <TabsContent value="cards">
+            <ContactsCardView
+              contacts={filteredContacts}
+              loading={loading}
+              onRefresh={fetchContacts}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
 
       <AddContactModal
@@ -292,9 +277,7 @@ const Contacts = () => {
         onOpenChange={setIsImportModalOpen}
         onSuccess={fetchContacts}
       />
-
-      <TrialExpiredModal isOpen={trialExpired} />
-    </div>
+    </AppLayout>
   );
 };
 
