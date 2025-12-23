@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, TrendingUp, TrendingDown, Home, DollarSign, Calendar, Download, Info, BarChart3 } from "lucide-react";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { useToast } from "@/hooks/use-toast";
+import AppLayout from "@/components/layout/AppLayout";
+import StatCard from "@/components/dashboard/StatCard";
 
 const Market = () => {
   const navigate = useNavigate();
@@ -39,7 +39,6 @@ const Market = () => {
     checkAuth();
   }, [navigate]);
 
-  // Sample price trend data
   const priceTrendData = [
     { month: "Jul", avgPrice: 1180000, daysOnMarket: 22 },
     { month: "Aug", avgPrice: 1195000, daysOnMarket: 20 },
@@ -105,276 +104,223 @@ const Market = () => {
   };
 
   if (!user || !profile) {
-    return <div>Loading...</div>;
+    return (
+      <AppLayout user={user} profile={profile}>
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+      </AppLayout>
+    );
   }
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      <DashboardSidebar />
-      <div className="flex flex-col flex-1 lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        <main className="flex-1 p-4 md:p-6">
-          <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-xl font-semibold">Market Snapshot</h1>
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                  Beta
-                </Badge>
-              </div>
-              <p className="text-muted-foreground">
-                Sample market data for demonstration purposes
-              </p>
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <h1 className="text-xl md:text-2xl font-semibold">Market Snapshot</h1>
+              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs">
+                Beta
+              </Badge>
             </div>
-            <div className="flex items-center gap-3">
-              <Select value={selectedCity} onValueChange={setSelectedCity}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Toronto">Toronto</SelectItem>
-                  <SelectItem value="Vancouver">Vancouver</SelectItem>
-                  <SelectItem value="Calgary">Calgary</SelectItem>
-                  <SelectItem value="Montreal">Montreal</SelectItem>
-                  <SelectItem value="Ottawa">Ottawa</SelectItem>
-                </SelectContent>
-              </Select>
-              <Button variant="outline" onClick={handleExportCSV}>
-                <Download className="h-4 w-4 mr-2" />
-                Export CSV
-              </Button>
-            </div>
+            <p className="text-sm text-muted-foreground">
+              Sample market data for demonstration purposes
+            </p>
           </div>
+          <div className="flex items-center gap-2">
+            <Select value={selectedCity} onValueChange={setSelectedCity}>
+              <SelectTrigger className="w-[150px] h-8 text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Toronto">Toronto</SelectItem>
+                <SelectItem value="Vancouver">Vancouver</SelectItem>
+                <SelectItem value="Calgary">Calgary</SelectItem>
+                <SelectItem value="Montreal">Montreal</SelectItem>
+                <SelectItem value="Ottawa">Ottawa</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button variant="outline" size="sm" className="h-8 text-xs" onClick={handleExportCSV}>
+              <Download className="h-3.5 w-3.5 mr-1.5" />
+              Export CSV
+            </Button>
+          </div>
+        </div>
 
-          {/* Beta Notice */}
-          <Card className="mb-6 border-primary/20 bg-primary/5">
-            <CardContent className="py-4">
-              <div className="flex items-start gap-3">
-                <Info className="h-5 w-5 text-primary mt-0.5" />
-                <div>
-                  <p className="font-medium text-sm">Market Snapshot (Beta)</p>
-                  <p className="text-sm text-muted-foreground">
-                    This feature displays sample market data for demonstration. Real MLS/CREA integration with live data is coming soon. 
-                    Data shown is illustrative and should not be used for actual market analysis.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Key Stats */}
-          <div className="grid gap-4 md:grid-cols-3 mb-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Average Price</CardTitle>
-                <DollarSign className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  ${marketData.averagePrice.toLocaleString()}
-                </div>
-                <div className="flex items-center text-xs text-green-600">
-                  <TrendingUp className="h-3 w-3 mr-1" />
-                  +{marketData.priceChange}% from last month
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Median Days on Market</CardTitle>
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{marketData.medianDays} days</div>
-                <p className="text-xs text-muted-foreground">Fast-moving market</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Listings</CardTitle>
-                <Home className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{marketData.activeListings}</div>
+        {/* Beta Notice */}
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="py-4">
+            <div className="flex items-start gap-3">
+              <Info className="h-4 w-4 text-primary mt-0.5" />
+              <div>
+                <p className="text-sm font-medium">Market Snapshot (Beta)</p>
                 <p className="text-xs text-muted-foreground">
-                  {marketData.soldLastMonth} sold last month
+                  This feature displays sample market data for demonstration. Real MLS/CREA integration with live data is coming soon.
                 </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Charts Row */}
-          <div className="grid gap-6 lg:grid-cols-2 mb-6">
-            {/* Price Trend Chart */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5" />
-                  Price Trends (6 Months)
-                </CardTitle>
-                <CardDescription>Average listing price over time</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={250}>
-                  <LineChart data={priceTrendData}>
-                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                    <XAxis dataKey="month" className="text-xs" />
-                    <YAxis 
-                      tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
-                      className="text-xs"
-                    />
-                    <Tooltip 
-                      formatter={(value: number) => [`$${value.toLocaleString()}`, "Avg Price"]}
-                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="avgPrice" 
-                      stroke="hsl(var(--primary))" 
-                      strokeWidth={2}
-                      dot={{ fill: 'hsl(var(--primary))' }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-
-            {/* Days on Market Chart */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5" />
-                  Days on Market Distribution
-                </CardTitle>
-                <CardDescription>How quickly properties sell</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={daysOnMarketData}>
-                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                    <XAxis dataKey="range" className="text-xs" />
-                    <YAxis className="text-xs" />
-                    <Tooltip 
-                      formatter={(value: number) => [value, "Properties"]}
-                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                    />
-                    <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Neighborhood Table with Drill-down */}
-          <Card className="mb-6">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle>Neighborhood Trends</CardTitle>
-                  <CardDescription>Click on a neighborhood to see detailed comparables</CardDescription>
-                </div>
               </div>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b text-left">
-                      <th className="pb-3 font-medium text-muted-foreground">Neighborhood</th>
-                      <th className="pb-3 font-medium text-muted-foreground text-right">Avg Price</th>
-                      <th className="pb-3 font-medium text-muted-foreground text-right">Change</th>
-                      <th className="pb-3 font-medium text-muted-foreground text-right">Listings</th>
-                      <th className="pb-3 font-medium text-muted-foreground text-right">Avg DOM</th>
-                      <th className="pb-3 font-medium text-muted-foreground text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {neighborhoods.map((neighborhood) => (
-                      <tr
-                        key={neighborhood.name}
-                        className="border-b last:border-0 hover:bg-muted/50 transition-colors"
-                      >
-                        <td className="py-4">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4 text-primary" />
-                            <span className="font-medium">{neighborhood.name}</span>
-                          </div>
-                        </td>
-                        <td className="py-4 text-right">
-                          ${neighborhood.avgPrice.toLocaleString()}
-                        </td>
-                        <td className="py-4 text-right">
-                          <Badge
-                            variant={neighborhood.trend === "up" ? "default" : "destructive"}
-                            className="flex items-center gap-1 w-fit ml-auto"
-                          >
-                            {neighborhood.trend === "up" ? (
-                              <TrendingUp className="h-3 w-3" />
-                            ) : (
-                              <TrendingDown className="h-3 w-3" />
-                            )}
-                            {Math.abs(neighborhood.change)}%
-                          </Badge>
-                        </td>
-                        <td className="py-4 text-right">{neighborhood.listings}</td>
-                        <td className="py-4 text-right">{neighborhood.avgDom} days</td>
-                        <td className="py-4 text-right">
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            onClick={() => {
-                              toast({
-                                title: "Coming Soon",
-                                description: `Detailed comparables for ${neighborhood.name} will be available with MLS integration.`,
-                              });
-                            }}
-                          >
-                            View Comps
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Market Insights */}
+        {/* Stats */}
+        <div className="grid gap-4 md:grid-cols-3">
+          <StatCard
+            title="Average Price"
+            value={`$${marketData.averagePrice.toLocaleString()}`}
+            subtitle={`+${marketData.priceChange}% from last month`}
+            icon={DollarSign}
+            trend="up"
+            change={marketData.priceChange}
+          />
+          <StatCard
+            title="Median Days on Market"
+            value={`${marketData.medianDays} days`}
+            subtitle="Fast-moving market"
+            icon={Calendar}
+          />
+          <StatCard
+            title="Active Listings"
+            value={marketData.activeListings}
+            subtitle={`${marketData.soldLastMonth} sold last month`}
+            icon={Home}
+          />
+        </div>
+
+        {/* Charts */}
+        <div className="grid gap-6 lg:grid-cols-2">
           <Card>
-            <CardHeader>
-              <CardTitle>Market Insights</CardTitle>
-              <CardDescription>AI-generated insights based on market data</CardDescription>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-medium flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                Price Trends (6 Months)
+              </CardTitle>
+              <CardDescription className="text-xs">Average listing price over time</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                <div className="p-4 bg-primary/10 rounded-lg">
-                  <h4 className="font-semibold mb-1">🔥 Hot Market Alert</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Downtown Core is experiencing high demand with properties selling 40% faster
-                    than the city average.
-                  </p>
-                </div>
-                <div className="p-4 bg-secondary/10 rounded-lg">
-                  <h4 className="font-semibold mb-1">💡 Investment Opportunity</h4>
-                  <p className="text-sm text-muted-foreground">
-                    East York shows strong growth potential with prices up 7.8% and increasing
-                    buyer interest.
-                  </p>
-                </div>
-                <div className="p-4 bg-muted rounded-lg">
-                  <h4 className="font-semibold mb-1">📊 Market Forecast</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Analysts predict continued growth in the {selectedCity} market with an
-                    expected 5-8% increase over the next quarter.
-                  </p>
-                </div>
-              </div>
+              <ResponsiveContainer width="100%" height={220}>
+                <LineChart data={priceTrendData}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="month" className="text-xs" />
+                  <YAxis 
+                    tickFormatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                    className="text-xs"
+                  />
+                  <Tooltip 
+                    formatter={(value: number) => [`$${value.toLocaleString()}`, "Avg Price"]}
+                    contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="avgPrice" 
+                    stroke="hsl(var(--primary))" 
+                    strokeWidth={2}
+                    dot={{ fill: 'hsl(var(--primary))' }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </CardContent>
           </Card>
-        </main>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-medium flex items-center gap-2">
+                <BarChart3 className="h-4 w-4" />
+                Days on Market Distribution
+              </CardTitle>
+              <CardDescription className="text-xs">How quickly properties sell</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={daysOnMarketData}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                  <XAxis dataKey="range" className="text-xs" />
+                  <YAxis className="text-xs" />
+                  <Tooltip 
+                    formatter={(value: number) => [value, "Properties"]}
+                    contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
+                  />
+                  <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Neighborhood Table */}
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-medium">Neighborhood Trends</CardTitle>
+            <CardDescription className="text-xs">Click on a neighborhood to see detailed comparables</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b text-left">
+                    <th className="pb-3 text-xs font-medium text-muted-foreground">Neighborhood</th>
+                    <th className="pb-3 text-xs font-medium text-muted-foreground text-right">Avg Price</th>
+                    <th className="pb-3 text-xs font-medium text-muted-foreground text-right">Change</th>
+                    <th className="pb-3 text-xs font-medium text-muted-foreground text-right">Listings</th>
+                    <th className="pb-3 text-xs font-medium text-muted-foreground text-right">Avg DOM</th>
+                    <th className="pb-3 text-xs font-medium text-muted-foreground text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {neighborhoods.map((neighborhood) => (
+                    <tr
+                      key={neighborhood.name}
+                      className="border-b last:border-0 hover:bg-muted/50 transition-colors"
+                    >
+                      <td className="py-3">
+                        <div className="flex items-center gap-2">
+                          <MapPin className="h-3.5 w-3.5 text-primary" />
+                          <span className="text-sm font-medium">{neighborhood.name}</span>
+                        </div>
+                      </td>
+                      <td className="py-3 text-right text-sm">
+                        ${neighborhood.avgPrice.toLocaleString()}
+                      </td>
+                      <td className="py-3 text-right">
+                        <Badge
+                          variant={neighborhood.trend === "up" ? "default" : "destructive"}
+                          className="text-xs"
+                        >
+                          {neighborhood.trend === "up" ? (
+                            <TrendingUp className="h-3 w-3 mr-1" />
+                          ) : (
+                            <TrendingDown className="h-3 w-3 mr-1" />
+                          )}
+                          {Math.abs(neighborhood.change)}%
+                        </Badge>
+                      </td>
+                      <td className="py-3 text-right text-sm">{neighborhood.listings}</td>
+                      <td className="py-3 text-right text-sm">{neighborhood.avgDom} days</td>
+                      <td className="py-3 text-right">
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          className="h-7 text-xs"
+                          onClick={() => {
+                            toast({
+                              title: "Coming Soon",
+                              description: `Detailed comparables for ${neighborhood.name} will be available with MLS integration.`,
+                            });
+                          }}
+                        >
+                          View Comps
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 

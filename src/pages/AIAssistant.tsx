@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import AppLayout from "@/components/layout/AppLayout";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -17,6 +17,8 @@ const AIAssistant = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -27,6 +29,22 @@ const AIAssistant = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUser(user);
+        const { data: profileData } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+        setProfile(profileData);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   const quickActions = [
     { label: "Analyze my pipeline", prompt: "Can you analyze my current pipeline and provide insights?" },
@@ -123,137 +141,131 @@ const AIAssistant = () => {
   };
 
   return (
-    <div className="min-h-screen flex w-full bg-background">
-      <DashboardSidebar />
-      <div className="flex-1 flex flex-col lg:ml-0">
-        
-        <main className="flex-1 p-4 md:p-6">
-          <div className="max-w-4xl mx-auto h-full flex flex-col">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+    <AppLayout user={user} profile={profile}>
+      <div className="h-full flex flex-col max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-xl md:text-2xl font-semibold flex items-center gap-2">
+              <Bot className="w-5 h-5 text-primary" />
+              Realtor AI Assistant
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Your intelligent real estate CRM assistant
+            </p>
+          </div>
+          {messages.length > 0 && (
+            <Button variant="outline" onClick={clearChat} size="sm" className="h-8 text-xs">
+              <Trash2 className="w-3.5 h-3.5 mr-1.5" />
+              Clear Chat
+            </Button>
+          )}
+        </div>
+
+        {/* Quick Actions */}
+        {messages.length === 0 && (
+          <div className="mb-6">
+            <h3 className="text-sm font-medium mb-3 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-primary" />
+              Quick Actions
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              {quickActions.map((action, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  onClick={() => handleQuickAction(action.prompt)}
+                  className="h-auto py-3 text-left justify-start text-sm"
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Messages */}
+        <Card className="flex-1 mb-4 p-4 overflow-y-auto bg-card">
+          {messages.length === 0 ? (
+            <div className="h-full flex items-center justify-center text-center">
               <div>
-                <h1 className="text-xl font-semibold flex items-center gap-2">
-                  <Bot className="w-5 h-5 text-primary" />
-                  Realtor AI Assistant
-                </h1>
-                <p className="text-muted-foreground">
-                  Your intelligent real estate CRM assistant
+                <Bot className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-lg font-semibold mb-2">Welcome to Realtor AI Assistant</h3>
+                <p className="text-sm text-muted-foreground max-w-md">
+                  I can help you manage contacts, analyze deals, create tasks, 
+                  and provide real estate insights. Try one of the quick actions above!
                 </p>
               </div>
-              {messages.length > 0 && (
-                <Button variant="outline" onClick={clearChat} size="sm">
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Clear Chat
-                </Button>
-              )}
             </div>
-
-            {/* Quick Actions */}
-            {messages.length === 0 && (
-              <div className="mb-6">
-                <h3 className="text-sm font-medium mb-3 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                  Quick Actions
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {quickActions.map((action, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      onClick={() => handleQuickAction(action.prompt)}
-                      className="h-auto py-3 text-left justify-start"
-                    >
-                      {action.label}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Messages */}
-            <Card className="flex-1 mb-4 p-4 overflow-y-auto">
-              {messages.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-center">
-                  <div>
-                    <Bot className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                    <h3 className="text-lg font-semibold mb-2">Welcome to Realtor AI Assistant</h3>
-                    <p className="text-muted-foreground max-w-md">
-                      I can help you manage contacts, analyze deals, create tasks, 
-                      and provide real estate insights. Try one of the quick actions above!
-                    </p>
+          ) : (
+            <div className="space-y-4">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex gap-3 ${
+                    message.role === 'assistant' ? 'flex-row' : 'flex-row-reverse'
+                  }`}
+                >
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    message.role === 'assistant' 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'bg-muted'
+                  }`}>
+                    {message.role === 'assistant' ? (
+                      <Bot className="w-5 h-5" />
+                    ) : (
+                      <User className="w-5 h-5" />
+                    )}
+                  </div>
+                  <div className={`flex-1 rounded-lg p-3 ${
+                    message.role === 'assistant'
+                      ? 'bg-muted'
+                      : 'bg-primary text-primary-foreground'
+                  }`}>
+                    {message.role === 'assistant' ? (
+                      <div className="prose prose-sm max-w-none dark:prose-invert">
+                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                      </div>
+                    ) : (
+                      <p className="text-sm">{message.content}</p>
+                    )}
                   </div>
                 </div>
-              ) : (
-                <div className="space-y-4">
-                  {messages.map((message, index) => (
-                    <div
-                      key={index}
-                      className={`flex gap-3 ${
-                        message.role === 'assistant' ? 'flex-row' : 'flex-row-reverse'
-                      }`}
-                    >
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        message.role === 'assistant' 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted'
-                      }`}>
-                        {message.role === 'assistant' ? (
-                          <Bot className="w-5 h-5" />
-                        ) : (
-                          <User className="w-5 h-5" />
-                        )}
-                      </div>
-                      <div className={`flex-1 rounded-lg p-3 ${
-                        message.role === 'assistant'
-                          ? 'bg-muted'
-                          : 'bg-primary text-primary-foreground'
-                      }`}>
-                        {message.role === 'assistant' ? (
-                          <div className="prose prose-sm max-w-none dark:prose-invert">
-                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                          </div>
-                        ) : (
-                          <p className="text-sm">{message.content}</p>
-                        )}
-                      </div>
+              ))}
+              {loading && (
+                <div className="flex gap-3">
+                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-primary-foreground" />
+                  </div>
+                  <div className="bg-muted rounded-lg p-3">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                     </div>
-                  ))}
-                  {loading && (
-                    <div className="flex gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                        <Bot className="w-5 h-5 text-primary-foreground" />
-                      </div>
-                      <div className="bg-muted rounded-lg p-3">
-                        <div className="flex gap-1">
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" />
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div ref={messagesEndRef} />
+                  </div>
                 </div>
               )}
-            </Card>
+              <div ref={messagesEndRef} />
+            </div>
+          )}
+        </Card>
 
-            {/* Input */}
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything about your CRM, contacts, deals..."
-                disabled={loading}
-                className="flex-1"
-              />
-              <Button type="submit" disabled={loading || !input.trim()}>
-                <Send className="w-4 h-4" />
-              </Button>
-            </form>
-          </div>
-        </main>
+        {/* Input */}
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask me anything about your CRM, contacts, deals..."
+            disabled={loading}
+            className="flex-1"
+          />
+          <Button type="submit" disabled={loading || !input.trim()} size="sm" className="h-10">
+            <Send className="w-4 h-4" />
+          </Button>
+        </form>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 

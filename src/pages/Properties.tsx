@@ -7,14 +7,11 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LayoutGrid, List, Plus, Building2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
+import AppLayout from "@/components/layout/AppLayout";
 import PropertiesGrid from "@/components/properties/PropertiesGrid";
 import PropertiesList from "@/components/properties/PropertiesList";
 import PropertyFilters from "@/components/properties/PropertyFilters";
 import AddPropertyModal from "@/components/properties/AddPropertyModal";
-import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
-import { useSubscription } from "@/contexts/SubscriptionContext";
 
 export interface Property {
   id: string;
@@ -58,7 +55,6 @@ const Properties = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { trialExpired } = useSubscription();
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
@@ -170,76 +166,70 @@ const Properties = () => {
   const statusCounts = getStatusCounts();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      <DashboardSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        <main className="flex-1 overflow-y-auto">
-          <div className="container mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div className="flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-primary" />
-                <div>
-                  <h1 className="text-xl font-semibold">{t('app.properties.title')}</h1>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <Badge variant="secondary" className="text-xs">
-                      {statusCounts.total} {t('app.common.all')}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs bg-success/10 text-success border-success/20">
-                      {statusCounts.active} {t('app.properties.active')}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs bg-warning/10 text-warning border-warning/20">
-                      {statusCounts.pending} {t('app.properties.pending')}
-                    </Badge>
-                    <Badge variant="outline" className="text-xs bg-muted text-muted-foreground">
-                      {statusCounts.sold} {t('app.properties.sold')}
-                    </Badge>
-                  </div>
-                </div>
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="flex items-center gap-3">
+            <Building2 className="h-5 w-5 text-primary" />
+            <div>
+              <h1 className="text-xl md:text-2xl font-semibold">{t('app.properties.title')}</h1>
+              <div className="flex items-center gap-2 mt-1">
+                <Badge variant="secondary" className="text-xs">
+                  {statusCounts.total} {t('app.common.all')}
+                </Badge>
+                <Badge variant="outline" className="text-xs bg-status-active/10 text-status-active border-status-active/20">
+                  {statusCounts.active} {t('app.properties.active')}
+                </Badge>
+                <Badge variant="outline" className="text-xs bg-status-pending/10 text-status-pending border-status-pending/20">
+                  {statusCounts.pending} {t('app.properties.pending')}
+                </Badge>
+                <Badge variant="outline" className="text-xs bg-muted text-muted-foreground">
+                  {statusCounts.sold} {t('app.properties.sold')}
+                </Badge>
               </div>
-              <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
-                <Plus className="h-3.5 w-3.5 mr-1.5" />
-                {t('app.properties.addProperty')}
-              </Button>
             </div>
-
-            {/* Filters */}
-            <PropertyFilters filters={filters} onFiltersChange={setFilters} />
-
-            {/* View Toggle and Content */}
-            <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
-              <div className="flex justify-end mb-4">
-                <TabsList>
-                  <TabsTrigger value="grid">
-                    <LayoutGrid className="h-4 w-4 mr-2" />
-                    {t('app.common.all')}
-                  </TabsTrigger>
-                  <TabsTrigger value="list">
-                    <List className="h-4 w-4 mr-2" />
-                    {t('app.common.all')}
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-
-              <TabsContent value="grid">
-                <PropertiesGrid
-                  properties={filteredProperties}
-                  loading={loading}
-                  onRefresh={fetchProperties}
-                />
-              </TabsContent>
-
-              <TabsContent value="list">
-                <PropertiesList
-                  properties={filteredProperties}
-                  loading={loading}
-                  onRefresh={fetchProperties}
-                />
-              </TabsContent>
-            </Tabs>
           </div>
-        </main>
+          <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+            <Plus className="h-3.5 w-3.5 mr-1.5" />
+            {t('app.properties.addProperty')}
+          </Button>
+        </div>
+
+        {/* Filters */}
+        <PropertyFilters filters={filters} onFiltersChange={setFilters} />
+
+        {/* View Toggle and Content */}
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
+          <div className="flex justify-end mb-4">
+            <TabsList className="h-8">
+              <TabsTrigger value="grid" className="text-xs h-7 px-3">
+                <LayoutGrid className="h-3.5 w-3.5 mr-1.5" />
+                Grid
+              </TabsTrigger>
+              <TabsTrigger value="list" className="text-xs h-7 px-3">
+                <List className="h-3.5 w-3.5 mr-1.5" />
+                List
+              </TabsTrigger>
+            </TabsList>
+          </div>
+
+          <TabsContent value="grid">
+            <PropertiesGrid
+              properties={filteredProperties}
+              loading={loading}
+              onRefresh={fetchProperties}
+            />
+          </TabsContent>
+
+          <TabsContent value="list">
+            <PropertiesList
+              properties={filteredProperties}
+              loading={loading}
+              onRefresh={fetchProperties}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
 
       <AddPropertyModal
@@ -247,9 +237,7 @@ const Properties = () => {
         onOpenChange={setIsAddModalOpen}
         onSuccess={fetchProperties}
       />
-
-      <TrialExpiredModal isOpen={trialExpired} />
-    </div>
+    </AppLayout>
   );
 };
 

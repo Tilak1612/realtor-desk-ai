@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { Button } from "@/components/ui/button";
 import { Plus, List, Calendar as CalendarIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import AppLayout from "@/components/layout/AppLayout";
 import TasksStats from "@/components/tasks/TasksStats";
 import TasksList from "@/components/tasks/TasksList";
 import TasksCalendar from "@/components/tasks/TasksCalendar";
@@ -13,13 +12,10 @@ import AddTaskModal from "@/components/tasks/AddTaskModal";
 import TasksFilters from "@/components/tasks/TasksFilters";
 import BulkActions from "@/components/tasks/BulkActions";
 import { toast } from "sonner";
-import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
-import { useSubscription } from "@/contexts/SubscriptionContext";
 
 const Tasks = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { trialExpired } = useSubscription();
   const [view, setView] = useState<"list" | "calendar">("list");
   const [quickFilter, setQuickFilter] = useState<string>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -84,121 +80,113 @@ const Tasks = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex w-full bg-background">
-        <DashboardSidebar />
-        <div className="flex-1 flex items-center justify-center">
+      <AppLayout user={user} profile={profile}>
+        <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-muted-foreground">{t('app.common.loading')}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{t('app.common.loading')}</p>
           </div>
         </div>
-      </div>
+      </AppLayout>
     );
   }
 
   return (
-    <div className="min-h-screen flex w-full bg-background">
-      <DashboardSidebar />
-      <div className="flex-1 flex flex-col lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        
-        <main className="flex-1 p-4 md:p-6 overflow-auto">
-          <div className="max-w-7xl mx-auto space-y-6">
-            {/* Top Bar */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div>
-                <h1 className="text-xl font-semibold">{t('app.tasks.title')}</h1>
-              </div>
-              
-              <div className="flex flex-wrap items-center gap-2">
-                {/* Quick Filters */}
-                <div className="flex gap-1">
-                  {quickFilterButtons.map(btn => (
-                    <Button
-                      key={btn.value}
-                      variant={quickFilter === btn.value ? "default" : "outline"}
-                      size="sm"
-                      className="h-7 text-xs px-2"
-                      onClick={() => setQuickFilter(btn.value)}
-                    >
-                      {btn.label}
-                    </Button>
-                  ))}
-                </div>
-
-                {/* View Toggle */}
-                <div className="flex items-center gap-0.5 bg-muted rounded-md p-0.5">
-                  <Button
-                    variant={view === "list" ? "secondary" : "ghost"}
-                    size="sm"
-                    className="h-7 w-7 p-0"
-                    onClick={() => setView("list")}
-                  >
-                    <List className="h-3.5 w-3.5" />
-                  </Button>
-                  <Button
-                    variant={view === "calendar" ? "secondary" : "ghost"}
-                    size="sm"
-                    className="h-7 w-7 p-0"
-                    onClick={() => setView("calendar")}
-                  >
-                    <CalendarIcon className="h-3.5 w-3.5" />
-                  </Button>
-                </div>
-
-                <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
-                  <Plus className="h-3.5 w-3.5 mr-1.5" />
-                  {t('app.tasks.addTask')}
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Top Bar */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div>
+            <h1 className="text-xl md:text-2xl font-semibold">{t('app.tasks.title')}</h1>
+          </div>
+          
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Quick Filters */}
+            <div className="flex gap-1">
+              {quickFilterButtons.map(btn => (
+                <Button
+                  key={btn.value}
+                  variant={quickFilter === btn.value ? "default" : "outline"}
+                  size="sm"
+                  className="h-7 text-xs px-2"
+                  onClick={() => setQuickFilter(btn.value)}
+                >
+                  {btn.label}
                 </Button>
-              </div>
+              ))}
             </div>
 
-            {/* Stats */}
-            <TasksStats 
-              quickFilter={quickFilter} 
-              refreshTrigger={refreshTrigger}
-              filters={filters}
-            />
+            {/* View Toggle */}
+            <div className="flex items-center gap-0.5 bg-muted rounded-md p-0.5">
+              <Button
+                variant={view === "list" ? "secondary" : "ghost"}
+                size="sm"
+                className="h-7 w-7 p-0"
+                onClick={() => setView("list")}
+              >
+                <List className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                variant={view === "calendar" ? "secondary" : "ghost"}
+                size="sm"
+                className="h-7 w-7 p-0"
+                onClick={() => setView("calendar")}
+              >
+                <CalendarIcon className="h-3.5 w-3.5" />
+              </Button>
+            </div>
 
-            {/* Bulk Actions */}
-            {selectedTasks.length > 0 && (
-              <BulkActions
+            <Button size="sm" className="h-8 text-xs" onClick={() => setIsAddModalOpen(true)}>
+              <Plus className="h-3.5 w-3.5 mr-1.5" />
+              {t('app.tasks.addTask')}
+            </Button>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <TasksStats 
+          quickFilter={quickFilter} 
+          refreshTrigger={refreshTrigger}
+          filters={filters}
+        />
+
+        {/* Bulk Actions */}
+        {selectedTasks.length > 0 && (
+          <BulkActions
+            selectedTasks={selectedTasks}
+            onClearSelection={() => setSelectedTasks([])}
+            onTasksUpdated={handleTaskAdded}
+          />
+        )}
+
+        {/* Main Content */}
+        <div className="flex gap-6">
+          {/* Filters Sidebar */}
+          <TasksFilters
+            filters={filters}
+            onFiltersChange={setFilters}
+          />
+
+          {/* Content Area */}
+          <div className="flex-1">
+            {view === "list" ? (
+              <TasksList
+                quickFilter={quickFilter}
+                refreshTrigger={refreshTrigger}
+                filters={filters}
                 selectedTasks={selectedTasks}
-                onClearSelection={() => setSelectedTasks([])}
-                onTasksUpdated={handleTaskAdded}
+                onTaskSelection={setSelectedTasks}
+                onTaskUpdated={handleTaskAdded}
+              />
+            ) : (
+              <TasksCalendar
+                refreshTrigger={refreshTrigger}
+                filters={filters}
+                onTaskUpdated={handleTaskAdded}
               />
             )}
-
-            {/* Main Content */}
-            <div className="flex gap-6">
-              {/* Filters Sidebar */}
-              <TasksFilters
-                filters={filters}
-                onFiltersChange={setFilters}
-              />
-
-              {/* Content Area */}
-              <div className="flex-1">
-                {view === "list" ? (
-                  <TasksList
-                    quickFilter={quickFilter}
-                    refreshTrigger={refreshTrigger}
-                    filters={filters}
-                    selectedTasks={selectedTasks}
-                    onTaskSelection={setSelectedTasks}
-                    onTaskUpdated={handleTaskAdded}
-                  />
-                ) : (
-                  <TasksCalendar
-                    refreshTrigger={refreshTrigger}
-                    filters={filters}
-                    onTaskUpdated={handleTaskAdded}
-                  />
-                )}
-              </div>
-            </div>
           </div>
-        </main>
+        </div>
       </div>
 
       <AddTaskModal 
@@ -206,9 +194,7 @@ const Tasks = () => {
         onOpenChange={setIsAddModalOpen}
         onTaskAdded={handleTaskAdded}
       />
-
-      <TrialExpiredModal isOpen={trialExpired} />
-    </div>
+    </AppLayout>
   );
 };
 

@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Plus, Send, Users, TrendingUp } from "lucide-react";
-import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect } from "react";
+import AppLayout from "@/components/layout/AppLayout";
+import StatCard from "@/components/dashboard/StatCard";
 
 const Campaigns = () => {
   const navigate = useNavigate();
@@ -66,124 +65,122 @@ const Campaigns = () => {
   ];
 
   if (!user || !profile) {
-    return <div>Loading...</div>;
+    return (
+      <AppLayout user={user} profile={profile}>
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+      </AppLayout>
+    );
   }
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      <DashboardSidebar />
-      <div className="flex flex-col flex-1 lg:ml-0">
-        <DashboardNavbar user={user} profile={profile} />
-        <main className="flex-1 p-4 md:p-6">
-          <div className="mb-6 flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-semibold">Email Campaigns</h1>
-              <p className="text-muted-foreground">
-                Manage and track your email marketing campaigns
-              </p>
-            </div>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              New Campaign
-            </Button>
+    <AppLayout user={user} profile={profile}>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl md:text-2xl font-semibold">Email Campaigns</h1>
+            <p className="text-sm text-muted-foreground">
+              Manage and track your email marketing campaigns
+            </p>
           </div>
+          <Button size="sm" className="h-8 text-xs">
+            <Plus className="mr-1.5 h-3.5 w-3.5" />
+            New Campaign
+          </Button>
+        </div>
 
-          <div className="grid gap-4 md:grid-cols-4 mb-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Campaigns</CardTitle>
-                <Mail className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">12</div>
-                <p className="text-xs text-muted-foreground">+2 from last month</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Emails Sent</CardTitle>
-                <Send className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">1,284</div>
-                <p className="text-xs text-muted-foreground">+18% from last month</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Avg. Open Rate</CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">68%</div>
-                <p className="text-xs text-muted-foreground">+5% from last month</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Click Rate</CardTitle>
-                <TrendingUp className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">24%</div>
-                <p className="text-xs text-muted-foreground">+3% from last month</p>
-              </CardContent>
-            </Card>
-          </div>
+        {/* Stats */}
+        <div className="grid gap-4 md:grid-cols-4">
+          <StatCard
+            title="Total Campaigns"
+            value={12}
+            subtitle="+2 from last month"
+            icon={Mail}
+            trend="up"
+            change={20}
+          />
+          <StatCard
+            title="Emails Sent"
+            value="1,284"
+            subtitle="+18% from last month"
+            icon={Send}
+            trend="up"
+            change={18}
+          />
+          <StatCard
+            title="Avg. Open Rate"
+            value="68%"
+            subtitle="+5% from last month"
+            icon={Users}
+            trend="up"
+            change={5}
+          />
+          <StatCard
+            title="Click Rate"
+            value="24%"
+            subtitle="+3% from last month"
+            icon={TrendingUp}
+            trend="up"
+            change={3}
+          />
+        </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Campaigns</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {campaigns.map((campaign) => (
-                  <div
-                    key={campaign.id}
-                    className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
-                  >
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold">{campaign.name}</h3>
-                        <Badge
-                          variant={
-                            campaign.status === "active"
-                              ? "default"
-                              : campaign.status === "scheduled"
-                              ? "secondary"
-                              : "outline"
-                          }
-                        >
-                          {campaign.status}
-                        </Badge>
-                      </div>
-                      <div className="flex gap-4 text-sm text-muted-foreground">
-                        <span>Sent: {campaign.sent}</span>
-                        <span>Opened: {campaign.opened}</span>
-                        <span>Clicked: {campaign.clicked}</span>
-                        {campaign.openRate > 0 && (
-                          <span className="text-green-600 font-medium">
-                            {campaign.openRate}% open rate
-                          </span>
-                        )}
-                      </div>
+        {/* Campaigns List */}
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-medium">Recent Campaigns</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {campaigns.map((campaign) => (
+                <div
+                  key={campaign.id}
+                  className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-sm font-medium">{campaign.name}</h3>
+                      <Badge
+                        variant={
+                          campaign.status === "active"
+                            ? "default"
+                            : campaign.status === "scheduled"
+                            ? "secondary"
+                            : "outline"
+                        }
+                        className="text-xs"
+                      >
+                        {campaign.status}
+                      </Badge>
                     </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        View
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Edit
-                      </Button>
+                    <div className="flex gap-4 text-xs text-muted-foreground">
+                      <span>Sent: {campaign.sent}</span>
+                      <span>Opened: {campaign.opened}</span>
+                      <span>Clicked: {campaign.clicked}</span>
+                      {campaign.openRate > 0 && (
+                        <span className="text-green-600 font-medium">
+                          {campaign.openRate}% open rate
+                        </span>
+                      )}
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </main>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="h-7 text-xs">
+                      View
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-7 text-xs">
+                      Edit
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 
