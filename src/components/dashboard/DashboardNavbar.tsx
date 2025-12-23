@@ -68,27 +68,19 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   return (
     <header className="sticky top-0 z-30 h-14 border-b border-border bg-card">
       <div className="flex h-14 items-center justify-between px-4 lg:px-6">
-        {/* Spacer for mobile menu button */}
-        <div className="w-10 lg:hidden" />
-        
-        {/* Search Bar - hidden on small mobile, visible on sm+ */}
-        <form onSubmit={handleSearch} className="hidden sm:block flex-1 max-w-md">
+        {/* Search Bar */}
+        <form onSubmit={handleSearch} className="flex-1 max-w-md">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search contacts, properties, deals..."
-              className="pl-9 h-9 text-sm bg-background border-border w-full"
+              className="pl-9 h-9 text-sm bg-background border-border"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
         </form>
-        
-        {/* Mobile search icon */}
-        <Button variant="ghost" size="icon" className="sm:hidden h-8 w-8">
-          <Search className="h-4 w-4" />
-        </Button>
 
         {/* Right side actions */}
         <div className="flex items-center gap-2 ml-4">
