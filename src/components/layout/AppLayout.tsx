@@ -22,7 +22,7 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
         <DashboardNavbar user={user} profile={profile} />
         
         <main className="flex-1 overflow-y-auto">
-          <div className="p-6 max-w-7xl mx-auto">
+          <div className="p-4 sm:p-6 max-w-7xl mx-auto">
             {children}
           </div>
         </main>
