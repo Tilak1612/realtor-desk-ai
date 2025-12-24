@@ -81,10 +81,11 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button - Fixed position, always visible on mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-card border border-border rounded-lg shadow-md"
+        className="lg:hidden fixed top-3 left-3 z-50 p-2.5 bg-card border border-border rounded-lg shadow-lg"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
       >
         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
@@ -99,7 +100,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky left-0 top-0 h-screen w-60 bg-card border-r border-border flex flex-col transition-transform duration-300 z-40 ${
+        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-card border-r border-border flex flex-col transition-transform duration-300 ease-in-out z-40 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >

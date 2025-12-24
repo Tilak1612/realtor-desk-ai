@@ -81,7 +81,7 @@ const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
   }
 
   return (
-    <Card className="w-64 flex-shrink-0">
+    <Card className="hidden lg:block w-64 flex-shrink-0">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
         <CardTitle className="text-sm font-medium">Filters</CardTitle>
         <Button

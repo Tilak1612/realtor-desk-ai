@@ -68,8 +68,11 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   return (
     <header className="sticky top-0 z-30 h-14 border-b border-border bg-card">
       <div className="flex h-14 items-center justify-between px-4 lg:px-6">
-        {/* Search Bar */}
-        <form onSubmit={handleSearch} className="flex-1 max-w-md">
+        {/* Spacer for mobile menu button */}
+        <div className="w-12 lg:hidden" />
+        
+        {/* Search Bar - Hidden on very small screens, visible on sm+ */}
+        <form onSubmit={handleSearch} className="hidden sm:block flex-1 max-w-md">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
@@ -83,7 +86,12 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
         </form>
 
         {/* Right side actions */}
-        <div className="flex items-center gap-2 ml-4">
+        <div className="flex items-center gap-1 sm:gap-2 ml-auto">
+          {/* Mobile Search Button */}
+          <Button variant="ghost" size="icon" className="sm:hidden h-8 w-8">
+            <Search className="h-4 w-4" />
+          </Button>
+
           {/* Quick Add Button */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

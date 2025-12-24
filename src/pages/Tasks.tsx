@@ -160,15 +160,15 @@ const Tasks = () => {
         )}
 
         {/* Main Content */}
-        <div className="flex gap-6">
-          {/* Filters Sidebar */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Filters Sidebar - Hidden on mobile */}
           <TasksFilters
             filters={filters}
             onFiltersChange={setFilters}
           />
 
           {/* Content Area */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {view === "list" ? (
               <TasksList
                 quickFilter={quickFilter}
