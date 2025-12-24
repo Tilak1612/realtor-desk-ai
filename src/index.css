@@ -146,17 +146,30 @@
     word-wrap: break-word;
   }
 
-  /* Marketing page headings - larger */
-  .marketing h1 {
+  /* Default website heading scale (marketing/public) */
+  h1 {
     @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
   }
 
-  .marketing h2 {
+  h2 {
     @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
-  .marketing h3 {
+  h3 {
     @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  /* Authenticated app heading scale (CRM) */
+  .app h1 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  .app h2 {
+    @apply text-lg;
+  }
+
+  .app h3 {
+    @apply text-base;
   }
 
   img {

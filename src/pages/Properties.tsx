@@ -173,7 +173,7 @@ const Properties = () => {
           <div className="flex items-center gap-3">
             <Building2 className="h-5 w-5 text-primary" />
             <div>
-              <h1 className="text-xl md:text-2xl font-semibold">{t('app.properties.title')}</h1>
+              <h1 className="text-2xl md:text-3xl font-semibold">{t('app.properties.title')}</h1>
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant="secondary" className="text-xs">
                   {statusCounts.total} {t('app.common.all')}

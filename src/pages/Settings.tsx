@@ -137,7 +137,7 @@ const Settings = () => {
     <AppLayout user={user} profile={profile}>
       <div className="max-w-3xl space-y-6">
         <div>
-          <h1 className="text-xl md:text-2xl font-semibold mb-1">{t('app.settings.title')}</h1>
+          <h1 className="text-2xl md:text-3xl font-semibold mb-1">{t('app.settings.title')}</h1>
           <p className="text-sm text-muted-foreground">
             {t('app.settings.account')}
           </p>

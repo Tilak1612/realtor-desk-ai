@@ -80,7 +80,7 @@ const Campaigns = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl md:text-2xl font-semibold">Email Campaigns</h1>
+            <h1 className="text-2xl md:text-3xl font-semibold">Email Campaigns</h1>
             <p className="text-sm text-muted-foreground">
               Manage and track your email marketing campaigns
             </p>

@@ -45,7 +45,7 @@ const Deals = () => {
         {/* Top Bar */}
         <div className="flex flex-col gap-3">
           <div>
-            <h1 className="text-xl md:text-2xl font-semibold">{t('app.deals.title')} {t('app.deals.pipeline')}</h1>
+            <h1 className="text-2xl md:text-3xl font-semibold">{t('app.deals.title')} {t('app.deals.pipeline')}</h1>
             <p className="text-sm text-muted-foreground mt-0.5">{t('app.deals.allDeals')}</p>
           </div>
           

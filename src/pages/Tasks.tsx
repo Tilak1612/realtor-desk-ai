@@ -97,7 +97,7 @@ const Tasks = () => {
         {/* Top Bar */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <h1 className="text-xl md:text-2xl font-semibold">{t('app.tasks.title')}</h1>
+            <h1 className="text-2xl md:text-3xl font-semibold">{t('app.tasks.title')}</h1>
           </div>
           
           <div className="flex flex-wrap items-center gap-2">

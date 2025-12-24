@@ -123,7 +123,7 @@ const Reports = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-semibold">Reports & Analytics</h1>
+            <h1 className="text-2xl md:text-3xl font-semibold">Reports & Analytics</h1>
             <p className="text-sm text-muted-foreground">
               Track your performance and business metrics
             </p>

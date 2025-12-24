@@ -229,7 +229,7 @@ const Dashboard = () => {
 
         {/* Page Header */}
         <div>
-          <h1 className="text-xl md:text-2xl font-semibold text-foreground">
+          <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
             {t('app.dashboard.welcomeBack')}, {profile?.full_name?.split(' ')[0]}!
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
