@@ -14,7 +14,7 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
   const { trialExpired, trialDaysLeft } = useSubscription();
 
   return (
-    <div className="min-h-screen flex w-full bg-background">
+    <div className="app min-h-screen flex w-full bg-background">
       <TrialExpiredModal isOpen={trialExpired} />
       <DashboardSidebar trialDaysLeft={trialDaysLeft} />
       

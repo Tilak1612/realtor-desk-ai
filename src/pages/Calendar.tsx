@@ -78,7 +78,7 @@ const CalendarPage = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl md:text-2xl font-semibold">Calendar</h1>
+            <h1 className="text-2xl md:text-3xl font-semibold">Calendar</h1>
             <p className="text-sm text-muted-foreground">
               Manage your appointments and schedule
             </p>

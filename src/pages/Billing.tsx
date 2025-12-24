@@ -126,7 +126,7 @@ const Billing = () => {
     <AppLayout user={user} profile={profile}>
       <div className="space-y-6 max-w-4xl">
         <div>
-          <h1 className="text-xl md:text-2xl font-semibold mb-1">Billing & Subscription</h1>
+          <h1 className="text-2xl md:text-3xl font-semibold mb-1">Billing & Subscription</h1>
           <p className="text-sm text-muted-foreground">Manage your subscription and billing details</p>
         </div>
 
