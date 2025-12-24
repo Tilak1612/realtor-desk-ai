@@ -52,12 +52,12 @@ const Hero = () => {
 
           {/* Main Title */}
           <h1 className="mb-4 sm:mb-6 md:mb-8 leading-[1.1] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold animate-fade-in-up animation-delay-200 max-w-4xl mx-auto bg-gradient-to-r from-[hsl(122_39%_49%)] via-[hsl(0_0%_85%)] to-[hsl(0_0%_35%)] bg-clip-text text-transparent px-2 sm:px-0">
-            Stop Losing Leads to Slow Follow-Ups
+            Built for Canadian Realtors. Powered by AI.
           </h1>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-300 max-w-3xl mx-auto">
-            Your AI assistant responds to leads in under 60 seconds, 24/7—booking showings and qualifying buyers while you sleep. Built exclusively for Canadian realtors with PIPEDA compliance.
+            Instant follow-ups, CREA DDF integration, and complete PIPEDA compliance
           </p>
 
           {/* Trust Signals Line */}
