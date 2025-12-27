@@ -34,6 +34,7 @@ import SpotlightCard from "@/components/aura/SpotlightCard";
 
 import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
+import AudienceSegments from "@/components/AudienceSegments";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 
 const DEMO_VIDEO_URL = "https://app.heygen.com/embeds/4c80de4c5d7a4392b50941050220df54";
@@ -53,6 +54,9 @@ const Index = () => {
       
       {/* Hero Section */}
       <AuraHero />
+
+      {/* Audience Segments - For Agents, Teams, Brokers */}
+      <AudienceSegments />
 
       {/* Live Social Proof Bar */}
       <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4">
