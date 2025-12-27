@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
-import { Zap, Play, Star, ArrowRight, CheckCircle, Bot, MessageSquare, Mail } from "lucide-react";
+import { Zap, Play, Star, ArrowRight, CheckCircle, Bot, MessageSquare, Mail, Users } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
-import heroDashboardAI from "@/assets/hero-dashboard-ai.jpg";
+import heroAgentsTablet from "@/assets/hero-agents-tablet.jpg";
 
 const AuraHero = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ const AuraHero = () => {
           <div className="absolute inset-0 z-0 pointer-events-none opacity-20 grid-pattern"></div>
 
           {/* Main Hero Content */}
-          <main className="z-10 container lg:px-12 grid lg:grid-cols-2 gap-16 mx-auto py-20 px-6 relative items-center">
+          <main className="z-10 container lg:px-12 grid lg:grid-cols-2 gap-12 mx-auto py-20 px-6 relative items-center">
             {/* Left Column: Text */}
             <div className="max-w-2xl relative">
               {/* Badge */}
@@ -115,82 +115,40 @@ const AuraHero = () => {
               </div>
             </div>
 
-            {/* Right Column: Bento Grid */}
+            {/* Right Column: Professional Hero Image */}
             <div className="relative w-full flex items-center justify-center lg:justify-end">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-[520px]">
-                {/* Left Tall Card: AI Chatbot */}
-                <div className="sm:row-span-2 flex flex-col overflow-hidden group hover:border-white/20 transition-all duration-500 bg-secondary rounded-[32px] p-6 relative shadow-xl justify-between min-h-[320px]">
-                  <div className="z-10 flex flex-col h-full relative">
-                    <div className="self-start inline-flex text-xs font-bold text-green-400 bg-green-500/10 border-green-500/20 border rounded-lg mb-6 py-1.5 px-3 backdrop-blur-lg gap-2 items-center">
-                      <CheckCircle className="w-3 h-3" />
-                      {t('hero.aiActive', 'AI Active')}
+              <div className="relative w-full max-w-[560px]">
+                {/* Main Image Container */}
+                <div className="relative rounded-[32px] overflow-hidden shadow-2xl border border-white/10">
+                  <img 
+                    src={heroAgentsTablet} 
+                    alt="Professional real estate agents using RealtorDesk on tablet"
+                    className="w-full h-auto object-cover"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"></div>
+                </div>
+
+                {/* Floating Stats Card - Top Right */}
+                <div className="absolute -top-4 -right-4 bg-card/90 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-white/10 hidden sm:block">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                      <Users className="w-5 h-5 text-primary" />
                     </div>
-
-                    <div className="flex flex-col gap-4 mt-auto mb-auto items-center">
-                      <div className="flex items-center gap-[3px] h-8 opacity-60">
-                        {[3, 8, 6, 4, 5].map((h, i) => (
-                          <div
-                            key={i}
-                            className={`w-1 rounded-full ${i > 0 && i < 4 ? 'bg-primary animate-pulse' : 'bg-white/20'}`}
-                            style={{ height: `${h * 4}px`, animationDelay: `${i * 0.2}s` }}
-                          ></div>
-                        ))}
-                      </div>
-
-                      <div className="relative w-full">
-                        <div className="flex bg-gradient-to-br from-white/10 to-white/0 rounded-xl py-3 px-4 relative shadow-lg backdrop-blur-xl gap-3 items-center border border-white/10">
-                          <div className="w-8 h-8 rounded bg-primary/20 flex items-center justify-center text-primary">
-                            <Bot className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <div className="text-xs text-muted-foreground">{t('hero.processing', 'Processing')}</div>
-                            <div className="text-sm font-mono text-white">{t('hero.leadCapture', 'Lead Capture')}</div>
-                          </div>
-                          <CheckCircle className="w-4 h-4 ml-auto text-green-400" />
-                        </div>
-                      </div>
-
-                      <button className="flex hover:scale-110 transition-all cursor-pointer text-primary bg-primary/10 w-10 h-10 rounded-full mt-2 backdrop-blur-lg items-center justify-center border border-primary/20">
-                        <Zap className="w-4 h-4" />
-                      </button>
-                    </div>
-
-                    <div className="mt-6">
-                      <h3 className="text-lg font-medium text-white tracking-tight mb-2">{t('hero.aiChatbot', '24/7 AI Chatbot')}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed font-light">{t('hero.chatbotDesc', 'Capture leads while you sleep.')}</p>
+                    <div>
+                      <div className="text-xs text-muted-foreground">Active Agents</div>
+                      <div className="text-lg font-bold text-white">+999 Leads</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Top: Email Automation */}
-                <div className="flex flex-col overflow-hidden group hover:border-white/20 transition-all duration-500 text-center bg-secondary rounded-[32px] p-6 relative shadow-xl items-center min-h-[150px]">
-                  <h3 className="relative z-10 text-base font-medium text-foreground/80 mb-4">{t('hero.emailAuto', 'Email Automation')}</h3>
-                  <div className="relative z-10 w-full flex justify-center mt-auto h-16 items-end">
-                    <div className="relative w-full max-w-[140px] h-full flex items-center justify-center">
-                      <div className="absolute w-20 h-px bg-white/10 top-1/2 left-1/2 -translate-x-1/2"></div>
-                      <div className="flex -translate-x-12 z-10 text-muted-foreground bg-gradient-to-br from-white/10 to-white/0 w-10 h-10 rounded-lg absolute shadow-lg backdrop-blur-lg items-center justify-center border border-white/10">
-                        <Mail className="w-4 h-4" />
-                      </div>
-                      <div className="flex z-10 text-muted-foreground bg-gradient-to-br from-white/10 to-white/0 w-10 h-10 rounded-lg absolute shadow-lg backdrop-blur-lg translate-x-12 items-center justify-center border border-white/10">
-                        <MessageSquare className="w-4 h-4" />
-                      </div>
-                      <div className="absolute w-3 h-3 bg-primary rounded-full z-20 animate-ping"></div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Bottom: Dashboard Preview */}
-                <div className="flex flex-col overflow-hidden group hover:border-white/20 transition-all duration-500 bg-secondary rounded-[32px] p-4 relative shadow-xl items-center min-h-[150px] border border-white/5">
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                    <img 
-                      src={heroDashboardAI} 
-                      alt={t('hero.dashboardAlt', 'RealtorDesk AI Dashboard')}
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary to-transparent"></div>
-                    <div className="absolute bottom-2 left-2 right-2">
-                      <p className="text-xs text-white/80 font-medium">{t('hero.unifiedDashboard', 'Unified Dashboard')}</p>
-                    </div>
+                {/* Floating AI Active Badge - Bottom Left */}
+                <div className="absolute -bottom-4 -left-4 bg-card/90 backdrop-blur-xl rounded-2xl py-3 px-4 shadow-xl border border-white/10 hidden sm:block">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span className="text-sm font-medium text-white">AI Active</span>
+                    <span className="text-xs text-muted-foreground">• 24/7</span>
                   </div>
                 </div>
               </div>
