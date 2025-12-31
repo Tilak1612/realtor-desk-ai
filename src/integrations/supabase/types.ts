@@ -247,6 +247,150 @@ export type Database = {
           },
         ]
       }
+      automation_enrollments: {
+        Row: {
+          automation_id: string
+          completed_at: string | null
+          contact_id: string
+          current_step: number
+          enrolled_at: string
+          id: string
+          metadata: Json | null
+          next_action_at: string | null
+          status: string
+        }
+        Insert: {
+          automation_id: string
+          completed_at?: string | null
+          contact_id: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          metadata?: Json | null
+          next_action_at?: string | null
+          status?: string
+        }
+        Update: {
+          automation_id?: string
+          completed_at?: string | null
+          contact_id?: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          metadata?: Json | null
+          next_action_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_enrollments_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_enrollments_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_logs: {
+        Row: {
+          action_type: string
+          automation_id: string
+          enrollment_id: string
+          error_message: string | null
+          executed_at: string
+          id: string
+          metadata: Json | null
+          status: string
+          step_id: string | null
+        }
+        Insert: {
+          action_type: string
+          automation_id: string
+          enrollment_id: string
+          error_message?: string | null
+          executed_at?: string
+          id?: string
+          metadata?: Json | null
+          status: string
+          step_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          automation_id?: string
+          enrollment_id?: string
+          error_message?: string | null
+          executed_at?: string
+          id?: string
+          metadata?: Json | null
+          status?: string
+          step_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_logs_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_logs_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "automation_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_logs_step_id_fkey"
+            columns: ["step_id"]
+            isOneToOne: false
+            referencedRelation: "automation_steps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_steps: {
+        Row: {
+          action_config: Json
+          action_type: string
+          automation_id: string
+          created_at: string
+          id: string
+          step_order: number
+        }
+        Insert: {
+          action_config?: Json
+          action_type: string
+          automation_id: string
+          created_at?: string
+          id?: string
+          step_order: number
+        }
+        Update: {
+          action_config?: Json
+          action_type?: string
+          automation_id?: string
+          created_at?: string
+          id?: string
+          step_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_steps_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       automation_workflows: {
         Row: {
           actions: Json | null
@@ -817,6 +961,50 @@ export type Database = {
           },
           {
             foreignKeyName: "documents_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_automations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          status: string
+          trigger_config: Json | null
+          trigger_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          status?: string
+          trigger_config?: Json | null
+          trigger_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          status?: string
+          trigger_config?: Json | null
+          trigger_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_automations_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"

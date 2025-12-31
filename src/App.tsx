@@ -52,6 +52,7 @@ import Campaigns from "./pages/Campaigns";
 import CalendarPage from "./pages/Calendar";
 import Reports from "./pages/Reports";
 import Market from "./pages/Market";
+import Automations from "./pages/Automations";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -106,6 +107,7 @@ const App = () => (
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/market" element={<Market />} />
+          <Route path="/automations" element={<Automations />} />
           <Route path="/settings" element={<Settings />} />
           
           {/* Comparison Pages */}

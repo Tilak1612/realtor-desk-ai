@@ -20,6 +20,7 @@ import {
   Sparkles,
   CreditCard,
   Building2,
+  Zap,
 } from "lucide-react";
 import logo from "@/assets/realtor-desk-icon.png";
 
@@ -69,6 +70,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
     { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
     { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
     { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
+    { icon: Zap, label: "Automations", path: "/automations" },
     { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
     { icon: Calendar, label: t('app.sidebar.calendar'), path: "/calendar" },
     { icon: TrendingUp, label: t('app.sidebar.reports'), path: "/reports" },
