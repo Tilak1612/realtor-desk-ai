@@ -28,6 +28,7 @@ import {
   Users, 
   Clock,
   Mail,
+  MessageSquare,
   Plus,
   Trash2,
   GripVertical
@@ -41,13 +42,14 @@ interface CreateAutomationModalProps {
 
 interface AutomationStep {
   id: string;
-  action_type: "send_email" | "wait" | "add_tag" | "create_task";
+  action_type: "send_email" | "send_sms" | "wait" | "add_tag" | "create_task";
   action_config: {
     subject?: string;
     body?: string;
     delay_days?: number;
     tag_name?: string;
     task_title?: string;
+    sms_message?: string;
   };
 }
 
@@ -305,6 +307,23 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
                             />
                           </>
                         )}
+                        {s.action_type === "send_sms" && (
+                          <>
+                            <div className="flex items-center gap-2">
+                              <MessageSquare className="w-4 h-4 text-green-500" />
+                              <span className="font-medium text-sm">Send SMS</span>
+                            </div>
+                            <Textarea
+                              placeholder="SMS message (supports {{first_name}}, {{last_name}} variables). Max 160 chars for single SMS."
+                              value={s.action_config.sms_message || ""}
+                              onChange={(e) => updateStep(s.id, { sms_message: e.target.value })}
+                              rows={2}
+                            />
+                            <p className="text-xs text-muted-foreground">
+                              {(s.action_config.sms_message || "").length}/160 characters
+                            </p>
+                          </>
+                        )}
                       </div>
                       <Button
                         variant="ghost"
@@ -324,6 +343,9 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="sm" onClick={() => addStep("send_email")} className="gap-1">
                 <Mail className="w-3 h-3" /> Send Email
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => addStep("send_sms")} className="gap-1">
+                <MessageSquare className="w-3 h-3" /> Send SMS
               </Button>
               <Button variant="outline" size="sm" onClick={() => addStep("wait")} className="gap-1">
                 <Clock className="w-3 h-3" /> Wait
