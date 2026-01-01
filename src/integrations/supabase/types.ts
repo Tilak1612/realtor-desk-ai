@@ -1947,6 +1947,167 @@ export type Database = {
         }
         Relationships: []
       }
+      sms_consent: {
+        Row: {
+          consent_source: string | null
+          contact_id: string
+          created_at: string
+          id: string
+          opted_in: boolean
+          opted_in_at: string | null
+          opted_out_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          consent_source?: string | null
+          contact_id: string
+          created_at?: string
+          id?: string
+          opted_in?: boolean
+          opted_in_at?: string | null
+          opted_out_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          consent_source?: string | null
+          contact_id?: string
+          created_at?: string
+          id?: string
+          opted_in?: boolean
+          opted_in_at?: string | null
+          opted_out_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_consent_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sms_consent_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sms_messages: {
+        Row: {
+          contact_id: string | null
+          created_at: string
+          delivered_at: string | null
+          direction: string
+          error_message: string | null
+          from_phone: string | null
+          id: string
+          message: string
+          sent_at: string | null
+          status: string
+          to_phone: string
+          twilio_sid: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          contact_id?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          direction?: string
+          error_message?: string | null
+          from_phone?: string | null
+          id?: string
+          message: string
+          sent_at?: string | null
+          status?: string
+          to_phone: string
+          twilio_sid?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          contact_id?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          direction?: string
+          error_message?: string | null
+          from_phone?: string | null
+          id?: string
+          message?: string
+          sent_at?: string | null
+          status?: string
+          to_phone?: string
+          twilio_sid?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_messages_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sms_messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sms_templates: {
+        Row: {
+          category: string | null
+          created_at: string
+          id: string
+          message: string
+          name: string
+          updated_at: string
+          usage_count: number | null
+          user_id: string
+          variables: string[] | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          name: string
+          updated_at?: string
+          usage_count?: number | null
+          user_id: string
+          variables?: string[] | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          name?: string
+          updated_at?: string
+          usage_count?: number | null
+          user_id?: string
+          variables?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_templates_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           completed_at: string | null

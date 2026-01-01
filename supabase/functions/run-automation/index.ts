@@ -19,6 +19,7 @@ interface AutomationStep {
     delay_days?: number;
     tag_name?: string;
     task_title?: string;
+    sms_message?: string;
   };
 }
 
@@ -27,6 +28,7 @@ interface Contact {
   first_name: string;
   last_name: string | null;
   email: string;
+  phone: string | null;
   tags: string[] | null;
 }
 
@@ -253,6 +255,80 @@ const handler = async (req: Request): Promise<Response> => {
                 due_date: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split("T")[0],
               });
             console.log("Task created:", taskTitle);
+            break;
+
+          case "send_sms":
+            if (!contact.phone) {
+              console.error("Contact has no phone number for SMS");
+              throw new Error("Contact has no phone number");
+            }
+
+            const smsMessage = replaceVariables(step.action_config.sms_message || "", contact);
+            
+            // Get Twilio credentials
+            const twilioAccountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
+            const twilioAuthToken = Deno.env.get("TWILIO_AUTH_TOKEN");
+            const twilioPhoneNumber = Deno.env.get("TWILIO_PHONE_NUMBER");
+
+            if (!twilioAccountSid || !twilioAuthToken || !twilioPhoneNumber) {
+              throw new Error("SMS service not configured");
+            }
+
+            // Create SMS record
+            const { data: smsRecord } = await supabase
+              .from("sms_messages")
+              .insert({
+                user_id: user.id,
+                contact_id: contactId,
+                direction: "outbound",
+                message: smsMessage,
+                to_phone: contact.phone,
+                from_phone: twilioPhoneNumber,
+                status: "pending",
+              })
+              .select()
+              .single();
+
+            // Send SMS via Twilio
+            const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`;
+            const formData = new URLSearchParams();
+            formData.append("To", contact.phone);
+            formData.append("From", twilioPhoneNumber);
+            formData.append("Body", smsMessage);
+
+            const twilioResponse = await fetch(twilioUrl, {
+              method: "POST",
+              headers: {
+                "Authorization": `Basic ${btoa(`${twilioAccountSid}:${twilioAuthToken}`)}`,
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: formData,
+            });
+
+            const twilioResult = await twilioResponse.json();
+
+            if (!twilioResponse.ok) {
+              if (smsRecord) {
+                await supabase
+                  .from("sms_messages")
+                  .update({ status: "failed", error_message: twilioResult.message })
+                  .eq("id", smsRecord.id);
+              }
+              throw new Error(twilioResult.message || "Failed to send SMS");
+            }
+
+            if (smsRecord) {
+              await supabase
+                .from("sms_messages")
+                .update({ 
+                  status: twilioResult.status || "queued",
+                  twilio_sid: twilioResult.sid,
+                  sent_at: new Date().toISOString(),
+                })
+                .eq("id", smsRecord.id);
+            }
+
+            console.log("SMS sent:", twilioResult.sid);
             break;
         }
       } catch (error: any) {
