@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, FileText, Award } from "lucide-react";
+import { BookOpen, TrendingUp, FileText, Award, Home, Cpu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import blogAI from "@/assets/blog-ai-transformation.jpg";
@@ -12,11 +12,33 @@ import blogCompliance from "@/assets/blog-compliance.jpg";
 import blogLeads from "@/assets/blog-lead-conversion.jpg";
 import blogBilingual from "@/assets/blog-bilingual-marketing.jpg";
 import blogSuccess from "@/assets/blog-success-story.jpg";
+import blogHousingForecast from "@/assets/blog-housing-forecast.jpg";
+import blogAIAutomation from "@/assets/blog-ai-automation-realtor.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
   
   const articles = [
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: Home,
+      title: "Canada Housing Market Forecast 2025-2026: What Realtors Need to Know",
+      excerpt: "Expert analysis of Canada's housing market forecast for 2025-2026. Interest rates, regional trends, and strategies for Canadian Realtors to succeed.",
+      readTime: 15,
+      image: blogHousingForecast,
+      link: "/canada-housing-market-forecast-2025-2026",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.aiTech",
+      icon: Cpu,
+      title: "How Canadian Realtors Can Thrive in a Slower Market with AI Automation",
+      excerpt: "Discover proven AI automation strategies helping Canadian Realtors close more deals in slower markets. Lead generation, follow-up systems & CRM tools.",
+      readTime: 18,
+      image: blogAIAutomation,
+      link: "/canadian-realtors-thrive-slower-market-ai-automation",
+      useTranslation: false,
+    },
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: TrendingUp,
@@ -25,6 +47,7 @@ const Resources = () => {
       readTime: 8,
       image: blogAI,
       link: "/blog/ai-transformation",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.canadianMarket",
@@ -34,6 +57,7 @@ const Resources = () => {
       readTime: 12,
       image: blogCREA,
       link: "/blog/crea-ddf",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.compliance",
@@ -43,6 +67,7 @@ const Resources = () => {
       readTime: 10,
       image: blogCompliance,
       link: "/blog/compliance",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.marketing",
@@ -52,6 +77,7 @@ const Resources = () => {
       readTime: 7,
       image: blogLeads,
       link: "/blog/lead-conversion",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.marketing",
@@ -61,6 +87,7 @@ const Resources = () => {
       readTime: 9,
       image: blogBilingual,
       link: "/blog/bilingual-marketing",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.successStories",
@@ -70,6 +97,7 @@ const Resources = () => {
       readTime: 6,
       image: blogSuccess,
       link: "/blog/success-story",
+      useTranslation: true,
     },
   ];
 
@@ -124,7 +152,7 @@ const Resources = () => {
                 {/* Article Image */}
                 <img 
                   src={article.image} 
-                  alt={t(article.titleKey)}
+                  alt={article.useTranslation ? t(article.titleKey!) : article.title}
                   className="w-full h-48 object-cover"
                 />
                 
@@ -136,10 +164,12 @@ const Resources = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-3 line-clamp-2">{t(article.titleKey)}</h3>
+                  <h3 className="text-xl font-bold mb-3 line-clamp-2">
+                    {article.useTranslation ? t(article.titleKey!) : article.title}
+                  </h3>
                   
                   <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
-                    {t(article.excerptKey)}
+                    {article.useTranslation ? t(article.excerptKey!) : article.excerpt}
                   </p>
 
                   <div className="flex items-center justify-between">
