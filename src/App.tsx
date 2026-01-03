@@ -22,6 +22,7 @@ import AIAutomationSlowerMarket from "./pages/blog/AIAutomationSlowerMarket";
 import LeadResponseTime from "./pages/blog/LeadResponseTime";
 import AICRMGuide from "./pages/blog/AICRMGuide";
 import TorontoVsVancouver from "./pages/blog/TorontoVsVancouver";
+import PIPEDACompliance from "./pages/blog/PIPEDACompliance";
 import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -91,6 +92,7 @@ const App = () => (
           <Route path="/lead-response-time-canadian-realtors" element={<LeadResponseTime />} />
           <Route path="/ai-crm-canadian-real-estate-agents-guide" element={<AICRMGuide />} />
           <Route path="/toronto-vs-vancouver-real-estate-market-2025" element={<TorontoVsVancouver />} />
+          <Route path="/pipeda-compliance-real-estate-ai-tools-canada" element={<PIPEDACompliance />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
