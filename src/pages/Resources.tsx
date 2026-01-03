@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, FileText, Award, Home, Cpu } from "lucide-react";
+import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import blogAI from "@/assets/blog-ai-transformation.jpg";
@@ -14,6 +14,9 @@ import blogBilingual from "@/assets/blog-bilingual-marketing.jpg";
 import blogSuccess from "@/assets/blog-success-story.jpg";
 import blogHousingForecast from "@/assets/blog-housing-forecast.jpg";
 import blogAIAutomation from "@/assets/blog-ai-automation-realtor.jpg";
+import blogLeadResponse from "@/assets/blog-lead-conversion.jpg";
+import blogAICRM from "@/assets/blog-ai-transformation.jpg";
+import blogTorontoVancouver from "@/assets/blog-success-story.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
@@ -37,6 +40,36 @@ const Resources = () => {
       readTime: 18,
       image: blogAIAutomation,
       link: "/canadian-realtors-thrive-slower-market-ai-automation",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.marketing",
+      icon: Clock,
+      title: "Lead Response Time: Why Canadian Realtors Lose Deals in the First 5 Minutes",
+      excerpt: "78% of buyers choose the first agent who responds. Learn why fast lead response is critical for Canadian Realtors and how to automate instant follow-up.",
+      readTime: 12,
+      image: blogLeadResponse,
+      link: "/lead-response-time-canadian-realtors",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.aiTech",
+      icon: Database,
+      title: "The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025",
+      excerpt: "Everything Canadian Realtors need to know about AI-powered CRM systems. Features, benefits, PIPEDA compliance, and how to choose the right platform.",
+      readTime: 15,
+      image: blogAICRM,
+      link: "/ai-crm-canadian-real-estate-agents-guide",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: MapPin,
+      title: "Toronto vs Vancouver Real Estate: Market Trends & Predictions for 2025",
+      excerpt: "Compare Toronto and Vancouver housing markets for 2025. Price trends, inventory levels, and opportunities for buyers, sellers, and Realtors.",
+      readTime: 14,
+      image: blogTorontoVancouver,
+      link: "/toronto-vs-vancouver-real-estate-market-2025",
       useTranslation: false,
     },
     {
