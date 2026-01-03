@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin } from "lucide-react";
+import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import blogAI from "@/assets/blog-ai-transformation.jpg";
@@ -17,6 +17,7 @@ import blogAIAutomation from "@/assets/blog-ai-automation-realtor.jpg";
 import blogLeadResponse from "@/assets/blog-lead-conversion.jpg";
 import blogAICRM from "@/assets/blog-ai-transformation.jpg";
 import blogTorontoVancouver from "@/assets/blog-success-story.jpg";
+import blogPIPEDA from "@/assets/blog-compliance.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
@@ -70,6 +71,16 @@ const Resources = () => {
       readTime: 14,
       image: blogTorontoVancouver,
       link: "/toronto-vs-vancouver-real-estate-market-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.compliance",
+      icon: Shield,
+      title: "PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada",
+      excerpt: "Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements, best practices, and how to choose compliant platforms.",
+      readTime: 16,
+      image: blogPIPEDA,
+      link: "/pipeda-compliance-real-estate-ai-tools-canada",
       useTranslation: false,
     },
     {
