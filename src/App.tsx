@@ -19,6 +19,9 @@ import BilingualMarketing from "./pages/blog/BilingualMarketing";
 import SuccessStory from "./pages/blog/SuccessStory";
 import HousingForecast2025 from "./pages/blog/HousingForecast2025";
 import AIAutomationSlowerMarket from "./pages/blog/AIAutomationSlowerMarket";
+import LeadResponseTime from "./pages/blog/LeadResponseTime";
+import AICRMGuide from "./pages/blog/AICRMGuide";
+import TorontoVsVancouver from "./pages/blog/TorontoVsVancouver";
 import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -85,6 +88,9 @@ const App = () => (
           <Route path="/blog/success-story" element={<SuccessStory />} />
           <Route path="/canada-housing-market-forecast-2025-2026" element={<HousingForecast2025 />} />
           <Route path="/canadian-realtors-thrive-slower-market-ai-automation" element={<AIAutomationSlowerMarket />} />
+          <Route path="/lead-response-time-canadian-realtors" element={<LeadResponseTime />} />
+          <Route path="/ai-crm-canadian-real-estate-agents-guide" element={<AICRMGuide />} />
+          <Route path="/toronto-vs-vancouver-real-estate-market-2025" element={<TorontoVsVancouver />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
