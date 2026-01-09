@@ -18,11 +18,44 @@ import blogLeadResponse from "@/assets/blog-lead-conversion.jpg";
 import blogAICRM from "@/assets/blog-ai-transformation.jpg";
 import blogTorontoVancouver from "@/assets/blog-success-story.jpg";
 import blogPIPEDA from "@/assets/blog-compliance.jpg";
+import blogFirstTimeBuyer from "@/assets/blog-first-time-buyer.jpg";
+import blogSellHomeFast from "@/assets/blog-sell-home-fast.jpg";
+import blogEdmontonMarket from "@/assets/blog-edmonton-market.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
   
   const articles = [
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: Home,
+      title: "First-Time Home Buyer Guide for Canada 2025: Everything You Need to Know",
+      excerpt: "Complete first-time home buyer guide for Canada 2025. Learn about down payments, mortgage pre-approval, closing costs, and CMHC insurance.",
+      readTime: 18,
+      image: blogFirstTimeBuyer,
+      link: "/first-time-home-buyer-guide-canada-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.marketing",
+      icon: Clock,
+      title: "How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025",
+      excerpt: "Learn how to sell your home fast in Canada with these 10 proven strategies. From pricing to staging to marketing, get expert tips for quick sales.",
+      readTime: 16,
+      image: blogSellHomeFast,
+      link: "/sell-home-fast-canada-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: MapPin,
+      title: "Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide",
+      excerpt: "Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions.",
+      readTime: 17,
+      image: blogEdmontonMarket,
+      link: "/edmonton-real-estate-market-2025",
+      useTranslation: false,
+    },
     {
       categoryKey: "resourcesPage.categories.canadianMarket",
       icon: Home,

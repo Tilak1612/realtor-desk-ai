@@ -23,6 +23,9 @@ import LeadResponseTime from "./pages/blog/LeadResponseTime";
 import AICRMGuide from "./pages/blog/AICRMGuide";
 import TorontoVsVancouver from "./pages/blog/TorontoVsVancouver";
 import PIPEDACompliance from "./pages/blog/PIPEDACompliance";
+import FirstTimeBuyerGuide from "./pages/blog/FirstTimeBuyerGuide";
+import SellHomeFast from "./pages/blog/SellHomeFast";
+import EdmontonMarket2025 from "./pages/blog/EdmontonMarket2025";
 import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -93,6 +96,9 @@ const App = () => (
           <Route path="/ai-crm-canadian-real-estate-agents-guide" element={<AICRMGuide />} />
           <Route path="/toronto-vs-vancouver-real-estate-market-2025" element={<TorontoVsVancouver />} />
           <Route path="/pipeda-compliance-real-estate-ai-tools-canada" element={<PIPEDACompliance />} />
+          <Route path="/first-time-home-buyer-guide-canada-2025" element={<FirstTimeBuyerGuide />} />
+          <Route path="/sell-home-fast-canada-2025" element={<SellHomeFast />} />
+          <Route path="/edmonton-real-estate-market-2025" element={<EdmontonMarket2025 />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
