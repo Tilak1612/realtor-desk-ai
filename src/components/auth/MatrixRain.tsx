@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface MatrixLetter {
   x: number;
@@ -12,13 +12,20 @@ const MatrixRain = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const lettersRef = useRef<MatrixLetter[]>([]);
   const animationRef = useRef<number>();
+  const [columns, setColumns] = useState(0);
 
   useEffect(() => {
+    // Set columns on client side only
+    setColumns(Math.floor(window.innerWidth / 30));
+  }, []);
+
+  useEffect(() => {
+    if (columns === 0) return;
+    
     const container = containerRef.current;
     if (!container) return;
 
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
-    const columns = Math.floor(window.innerWidth / 30);
     
     // Initialize letters
     lettersRef.current = Array.from({ length: columns }, (_, i) => ({
@@ -30,7 +37,7 @@ const MatrixRain = () => {
     }));
 
     const animate = () => {
-      lettersRef.current.forEach((letter, i) => {
+      lettersRef.current.forEach((letter) => {
         letter.y += letter.speed;
         
         if (letter.y > window.innerHeight) {
@@ -62,9 +69,9 @@ const MatrixRain = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [columns]);
 
-  const columns = Math.floor(typeof window !== 'undefined' ? window.innerWidth / 30 : 40);
+  if (columns === 0) return null;
 
   return (
     <div 
