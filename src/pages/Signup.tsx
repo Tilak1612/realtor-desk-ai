@@ -10,9 +10,11 @@ import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
 import { PasswordInput, validatePassword } from "@/components/ui/password-input";
-import { Mail, User, Phone, Building2, ArrowRight, Info } from "lucide-react";
+import { Mail, User, Building2, ArrowRight, Info } from "lucide-react";
 import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { PasswordStrengthMeter } from "@/components/ui/password-strength-meter";
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -218,6 +220,7 @@ const Signup = () => {
                 onValidationChange={setIsPasswordValid}
                 className="bg-gray-700 border-white/10 text-white placeholder-gray-400 focus:ring-primary focus:bg-gray-600"
               />
+              <PasswordStrengthMeter password={formData.password || ""} />
               {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
             </div>
 
@@ -244,17 +247,13 @@ const Signup = () => {
               <Label htmlFor="phone" className="text-sm font-medium text-gray-200">
                 {t('app.contacts.phone')}
               </Label>
-              <div className="relative">
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="(555) 123-4567"
-                  value={formData.phone || ""}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className={inputClassName}
-                />
-                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              </div>
+              <PhoneInput
+                id="phone"
+                placeholder="(555) 123-4567"
+                value={formData.phone || ""}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-4 py-3 pl-12 border border-white/10 rounded-xl bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent focus:bg-gray-600 transition-all duration-300 hover:border-white/20"
+              />
             </div>
 
             {/* Company Name */}
