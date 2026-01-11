@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StatusBadge } from "@/components/ui/status-badge";
-import { Home, Bed, Bath, Maximize, MapPin, DollarSign, Edit, Trash2 } from "lucide-react";
+import { Home, Bed, Bath, Maximize, MapPin, DollarSign, Edit, Trash2, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import type { Property } from "@/pages/Properties";
@@ -66,12 +66,29 @@ const PropertiesGrid = ({ properties, loading, onRefresh }: PropertiesGridProps)
 
   if (properties.length === 0) {
     return (
-      <Card className="p-12 text-center">
-        <Home className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-        <h3 className="text-lg font-semibold mb-2">No properties found</h3>
-        <p className="text-muted-foreground mb-4">
-          Start by adding your first property listing
-        </p>
+      <Card className="p-12 text-center border-dashed border-2 bg-muted/20">
+        <div className="max-w-md mx-auto">
+          <div className="p-4 bg-primary/10 rounded-full w-fit mx-auto mb-4">
+            <Home className="h-10 w-10 text-primary" />
+          </div>
+          <h3 className="text-xl font-semibold mb-2">No properties yet</h3>
+          <p className="text-muted-foreground mb-6">
+            Add your first property to start tracking listings, managing showings, and closing deals faster.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button onClick={onRefresh} variant="outline" size="sm">
+              <MapPin className="h-4 w-4 mr-2" />
+              Import from MLS
+            </Button>
+            <Button size="sm" onClick={() => window.dispatchEvent(new CustomEvent('open-add-property-modal'))}>
+              <Plus className="h-4 w-4 mr-2" />
+              Add Property Manually
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground mt-4">
+            💡 Tip: You can also import properties from Realtor.ca search URLs
+          </p>
+        </div>
       </Card>
     );
   }
