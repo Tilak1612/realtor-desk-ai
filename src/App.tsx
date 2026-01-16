@@ -17,6 +17,19 @@ import Compliance from "./pages/blog/Compliance";
 import LeadConversion from "./pages/blog/LeadConversion";
 import BilingualMarketing from "./pages/blog/BilingualMarketing";
 import SuccessStory from "./pages/blog/SuccessStory";
+import VsKvCore from "./pages/blog/VsKvCore";
+import VsFollowUpBoss from "./pages/blog/VsFollowUpBoss";
+import IxactAlternatives from "./pages/blog/IxactAlternatives";
+import BestCRMCanada2025 from "./pages/blog/BestCRMCanada2025";
+import AIvsTraditionalCRM from "./pages/blog/AIvsTraditionalCRM";
+import VsLoftyCRM from "./pages/blog/VsLoftyCRM";
+import BoomTownAlternative from "./pages/blog/BoomTownAlternative";
+import VsPropertybase from "./pages/blog/VsPropertybase";
+import AIChatbotGuide from "./pages/blog/AIChatbotGuide";
+import VoiceAIGuide from "./pages/blog/VoiceAIGuide";
+import CalgaryMarketingGuide from "./pages/blog/CalgaryMarketingGuide";
+import CASLComplianceGuide from "./pages/blog/CASLComplianceGuide";
+import CostOfMissedLeads from "./pages/blog/CostOfMissedLeads";
 import Integrations from "./pages/Integrations";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -80,6 +93,19 @@ const App = () => (
           <Route path="/blog/lead-conversion" element={<LeadConversion />} />
           <Route path="/blog/bilingual-marketing" element={<BilingualMarketing />} />
           <Route path="/blog/success-story" element={<SuccessStory />} />
+          <Route path="/blog/vs-kvcore" element={<VsKvCore />} />
+          <Route path="/blog/vs-follow-up-boss" element={<VsFollowUpBoss />} />
+          <Route path="/blog/ixact-alternatives" element={<IxactAlternatives />} />
+          <Route path="/blog/best-crm-canada-2025" element={<BestCRMCanada2025 />} />
+          <Route path="/blog/ai-vs-traditional-crm" element={<AIvsTraditionalCRM />} />
+          <Route path="/blog/vs-lofty-crm" element={<VsLoftyCRM />} />
+          <Route path="/blog/boomtown-alternative-canada" element={<BoomTownAlternative />} />
+          <Route path="/blog/vs-propertybase" element={<VsPropertybase />} />
+          <Route path="/blog/ai-chatbot-real-estate-websites-canada" element={<AIChatbotGuide />} />
+          <Route path="/resources/voice-ai-real-estate-lead-follow-up-canada" element={<VoiceAIGuide />} />
+          <Route path="/resources/calgary-real-estate-marketing-strategies" element={<CalgaryMarketingGuide />} />
+          <Route path="/resources/casl-compliance-real-estate-email-marketing-canada" element={<CASLComplianceGuide />} />
+          <Route path="/resources/cost-of-missed-real-estate-leads-canada" element={<CostOfMissedLeads />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

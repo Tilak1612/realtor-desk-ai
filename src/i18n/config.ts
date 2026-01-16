@@ -1161,7 +1161,8 @@ const resources = {
           canadianMarket: "Canadian Market",
           marketing: "Marketing",
           compliance: "Compliance",
-          successStories: "Success Stories"
+          successStories: "Success Stories",
+          comparison: "CRM Comparisons"
         },
         articles: {
           aiTransformation: {
@@ -2421,7 +2422,8 @@ const resources = {
           canadianMarket: "Marché Canadien",
           marketing: "Marketing",
           compliance: "Conformité",
-          successStories: "Histoires de Succès"
+          successStories: "Histoires de Succès",
+          comparison: "Comparaisons CRM"
         },
         articles: {
           aiTransformation: {
