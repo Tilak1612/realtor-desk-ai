@@ -17,6 +17,15 @@ import Compliance from "./pages/blog/Compliance";
 import LeadConversion from "./pages/blog/LeadConversion";
 import BilingualMarketing from "./pages/blog/BilingualMarketing";
 import SuccessStory from "./pages/blog/SuccessStory";
+import HousingForecast2025 from "./pages/blog/HousingForecast2025";
+import AIAutomationSlowerMarket from "./pages/blog/AIAutomationSlowerMarket";
+import LeadResponseTime from "./pages/blog/LeadResponseTime";
+import AICRMGuide from "./pages/blog/AICRMGuide";
+import TorontoVsVancouver from "./pages/blog/TorontoVsVancouver";
+import PIPEDACompliance from "./pages/blog/PIPEDACompliance";
+import FirstTimeBuyerGuide from "./pages/blog/FirstTimeBuyerGuide";
+import SellHomeFast from "./pages/blog/SellHomeFast";
+import EdmontonMarket2025 from "./pages/blog/EdmontonMarket2025";
 import VsKvCore from "./pages/blog/VsKvCore";
 import VsFollowUpBoss from "./pages/blog/VsFollowUpBoss";
 import IxactAlternatives from "./pages/blog/IxactAlternatives";
@@ -65,6 +74,7 @@ import Campaigns from "./pages/Campaigns";
 import CalendarPage from "./pages/Calendar";
 import Reports from "./pages/Reports";
 import Market from "./pages/Market";
+import Automations from "./pages/Automations";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -93,6 +103,15 @@ const App = () => (
           <Route path="/blog/lead-conversion" element={<LeadConversion />} />
           <Route path="/blog/bilingual-marketing" element={<BilingualMarketing />} />
           <Route path="/blog/success-story" element={<SuccessStory />} />
+          <Route path="/canada-housing-market-forecast-2025-2026" element={<HousingForecast2025 />} />
+          <Route path="/canadian-realtors-thrive-slower-market-ai-automation" element={<AIAutomationSlowerMarket />} />
+          <Route path="/lead-response-time-canadian-realtors" element={<LeadResponseTime />} />
+          <Route path="/ai-crm-canadian-real-estate-agents-guide" element={<AICRMGuide />} />
+          <Route path="/toronto-vs-vancouver-real-estate-market-2025" element={<TorontoVsVancouver />} />
+          <Route path="/pipeda-compliance-real-estate-ai-tools-canada" element={<PIPEDACompliance />} />
+          <Route path="/first-time-home-buyer-guide-canada-2025" element={<FirstTimeBuyerGuide />} />
+          <Route path="/sell-home-fast-canada-2025" element={<SellHomeFast />} />
+          <Route path="/edmonton-real-estate-market-2025" element={<EdmontonMarket2025 />} />
           <Route path="/blog/vs-kvcore" element={<VsKvCore />} />
           <Route path="/blog/vs-follow-up-boss" element={<VsFollowUpBoss />} />
           <Route path="/blog/ixact-alternatives" element={<IxactAlternatives />} />
@@ -132,6 +151,7 @@ const App = () => (
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/market" element={<Market />} />
+          <Route path="/automations" element={<Automations />} />
           <Route path="/settings" element={<Settings />} />
           
           {/* Comparison Pages */}

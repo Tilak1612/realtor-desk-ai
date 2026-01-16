@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, FileText, Award, GitCompare } from "lucide-react";
+import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import blogAI from "@/assets/blog-ai-transformation.jpg";
@@ -12,6 +12,15 @@ import blogCompliance from "@/assets/blog-compliance.jpg";
 import blogLeads from "@/assets/blog-lead-conversion.jpg";
 import blogBilingual from "@/assets/blog-bilingual-marketing.jpg";
 import blogSuccess from "@/assets/blog-success-story.jpg";
+import blogHousingForecast from "@/assets/blog-housing-forecast.jpg";
+import blogAIAutomation from "@/assets/blog-ai-automation-realtor.jpg";
+import blogLeadResponse from "@/assets/blog-lead-conversion.jpg";
+import blogAICRM from "@/assets/blog-ai-transformation.jpg";
+import blogTorontoVancouver from "@/assets/blog-success-story.jpg";
+import blogPIPEDA from "@/assets/blog-compliance.jpg";
+import blogFirstTimeBuyer from "@/assets/blog-first-time-buyer.jpg";
+import blogSellHomeFast from "@/assets/blog-sell-home-fast.jpg";
+import blogEdmontonMarket from "@/assets/blog-edmonton-market.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
@@ -25,6 +34,7 @@ const Resources = () => {
       readTime: 15,
       image: blogLeads,
       link: "/resources/cost-of-missed-real-estate-leads-canada",
+      useTranslation: false,
     },
     {
       categoryKey: "resourcesPage.categories.compliance",
@@ -34,6 +44,7 @@ const Resources = () => {
       readTime: 16,
       image: blogCompliance,
       link: "/resources/casl-compliance-real-estate-email-marketing-canada",
+      useTranslation: false,
     },
     {
       categoryKey: "resourcesPage.categories.marketing",
@@ -43,6 +54,7 @@ const Resources = () => {
       readTime: 13,
       image: blogAI,
       link: "/resources/calgary-real-estate-marketing-strategies",
+      useTranslation: false,
     },
     {
       categoryKey: "resourcesPage.categories.aiTech",
@@ -52,15 +64,107 @@ const Resources = () => {
       readTime: 14,
       image: blogAI,
       link: "/resources/voice-ai-real-estate-lead-follow-up-canada",
+      useTranslation: false,
     },
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: TrendingUp,
-      title: "AI Chatbot for Real Estate Websites in Canada: Complete 2025 Implementation Guide",
-      excerpt: "67% of leads come after 6 PM. Learn how AI chatbots capture and qualify leads 24/7 with sub-3-second response times, 391% higher conversions, and PIPEDA/CASL compliance.",
-      readTime: 15,
+      title: "AI Chatbot for Real Estate Websites: Complete Canadian Implementation Guide 2026",
+      excerpt: "AI chatbots capture 67% of leads that arrive after hours. See how Canadian real estate agents implement AI chatbots to convert visitors 24/7 and never miss a lead again.",
+      readTime: 14,
       image: blogAI,
       link: "/blog/ai-chatbot-real-estate-websites-canada",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: Home,
+      title: "First-Time Home Buyer Guide for Canada 2025: Everything You Need to Know",
+      excerpt: "Complete first-time home buyer guide for Canada 2025. Learn about down payments, mortgage pre-approval, closing costs, and CMHC insurance.",
+      readTime: 18,
+      image: blogFirstTimeBuyer,
+      link: "/first-time-home-buyer-guide-canada-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.marketing",
+      icon: Clock,
+      title: "How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025",
+      excerpt: "Learn how to sell your home fast in Canada with these 10 proven strategies. From pricing to staging to marketing, get expert tips for quick sales.",
+      readTime: 16,
+      image: blogSellHomeFast,
+      link: "/sell-home-fast-canada-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: MapPin,
+      title: "Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide",
+      excerpt: "Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions.",
+      readTime: 17,
+      image: blogEdmontonMarket,
+      link: "/edmonton-real-estate-market-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: Home,
+      title: "Canada Housing Market Forecast 2025-2026: What Realtors Need to Know",
+      excerpt: "Expert analysis of Canada's housing market forecast for 2025-2026. Interest rates, regional trends, and strategies for Canadian Realtors to succeed.",
+      readTime: 15,
+      image: blogHousingForecast,
+      link: "/canada-housing-market-forecast-2025-2026",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.aiTech",
+      icon: Cpu,
+      title: "How Canadian Realtors Can Thrive in a Slower Market with AI Automation",
+      excerpt: "Discover proven AI automation strategies helping Canadian Realtors close more deals in slower markets. Lead generation, follow-up systems & CRM tools.",
+      readTime: 18,
+      image: blogAIAutomation,
+      link: "/canadian-realtors-thrive-slower-market-ai-automation",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.marketing",
+      icon: Clock,
+      title: "Lead Response Time: Why Canadian Realtors Lose Deals in the First 5 Minutes",
+      excerpt: "78% of buyers choose the first agent who responds. Learn why fast lead response is critical for Canadian Realtors and how to automate instant follow-up.",
+      readTime: 12,
+      image: blogLeadResponse,
+      link: "/lead-response-time-canadian-realtors",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.aiTech",
+      icon: Database,
+      title: "The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025",
+      excerpt: "Everything Canadian Realtors need to know about AI-powered CRM systems. Features, benefits, PIPEDA compliance, and how to choose the right platform.",
+      readTime: 15,
+      image: blogAICRM,
+      link: "/ai-crm-canadian-real-estate-agents-guide",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.canadianMarket",
+      icon: MapPin,
+      title: "Toronto vs Vancouver Real Estate: Market Trends & Predictions for 2025",
+      excerpt: "Compare Toronto and Vancouver housing markets for 2025. Price trends, inventory levels, and opportunities for buyers, sellers, and Realtors.",
+      readTime: 14,
+      image: blogTorontoVancouver,
+      link: "/toronto-vs-vancouver-real-estate-market-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.compliance",
+      icon: Shield,
+      title: "PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada",
+      excerpt: "Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements, best practices, and how to choose compliant platforms.",
+      readTime: 16,
+      image: blogPIPEDA,
+      link: "/pipeda-compliance-real-estate-ai-tools-canada",
+      useTranslation: false,
     },
     {
       categoryKey: "resourcesPage.categories.aiTech",
@@ -70,6 +174,7 @@ const Resources = () => {
       readTime: 8,
       image: blogAI,
       link: "/blog/ai-transformation",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.canadianMarket",
@@ -79,6 +184,7 @@ const Resources = () => {
       readTime: 12,
       image: blogCREA,
       link: "/blog/crea-ddf",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.compliance",
@@ -88,6 +194,7 @@ const Resources = () => {
       readTime: 10,
       image: blogCompliance,
       link: "/blog/compliance",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.marketing",
@@ -97,6 +204,7 @@ const Resources = () => {
       readTime: 7,
       image: blogLeads,
       link: "/blog/lead-conversion",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.marketing",
@@ -106,6 +214,7 @@ const Resources = () => {
       readTime: 9,
       image: blogBilingual,
       link: "/blog/bilingual-marketing",
+      useTranslation: true,
     },
     {
       categoryKey: "resourcesPage.categories.successStories",
@@ -115,78 +224,7 @@ const Resources = () => {
       readTime: 6,
       image: blogSuccess,
       link: "/blog/success-story",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: GitCompare,
-      title: "RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?",
-      excerpt: "Canadian agents compare RealtorDesk AI vs kvCORE. See pricing, features, PIPEDA compliance, and why 73% of switchers choose AI-first platforms.",
-      readTime: 12,
-      image: blogAI,
-      link: "/blog/vs-kvcore",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: GitCompare,
-      title: "RealtorDesk AI vs Follow Up Boss: Speed vs Features",
-      excerpt: "Follow Up Boss costs $810 CAD/month for a team of 5. RealtorDesk AI costs $299 CAD—and responds 98% faster. See the complete comparison.",
-      readTime: 10,
-      image: blogLeads,
-      link: "/blog/vs-follow-up-boss",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: GitCompare,
-      title: "IXACT Contact Alternatives: Why Canadian Agents Are Switching to AI",
-      excerpt: "IXACT Contact hasn't had a major update since 2019. Discover the top 5 modern alternatives with AI automation, Canadian compliance, and better ROI.",
-      readTime: 11,
-      image: blogCompliance,
-      link: "/blog/ixact-alternatives",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: Award,
-      title: "Best CRM for Canadian Real Estate Agents in 2025",
-      excerpt: "Complete comparison of the top 10 CRMs for Canadian agents. Features, pricing, PIPEDA compliance, AI capabilities, and real-world testing results.",
-      readTime: 15,
-      image: blogAI,
-      link: "/blog/best-crm-canada-2025",
-    },
-    {
-      categoryKey: "resourcesPage.categories.aiTech",
-      icon: TrendingUp,
-      title: "AI CRM vs Traditional Real Estate CRM: ROI Analysis",
-      excerpt: "Data-driven comparison showing why AI CRMs deliver 9,543% ROI. Response times, conversion rates, costs, and real performance data from 100 agents.",
-      readTime: 12,
-      image: blogLeads,
-      link: "/blog/ai-vs-traditional-crm",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: GitCompare,
-      title: "Lofty CRM vs RealtorDesk AI: Why Simplicity Beats Feature Bloat",
-      excerpt: "Lofty has 237 features. You'll use 12. RealtorDesk AI has 8 core features. You'll use all 8. See why feature bloat doesn't equal better results.",
-      readTime: 12,
-      image: blogAI,
-      link: "/blog/vs-lofty-crm",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: GitCompare,
-      title: "BoomTown Alternative for Canada: PIPEDA-Compliant Options",
-      excerpt: "BoomTown costs $1,350-2,700 CAD/month. Canadian agents can get better results for under $300 CAD/month. Top 5 alternatives compared.",
-      readTime: 10,
-      image: blogCompliance,
-      link: "/blog/boomtown-alternative-canada",
-    },
-    {
-      categoryKey: "resourcesPage.categories.comparison",
-      icon: GitCompare,
-      title: "Propertybase vs RealtorDesk AI: Enterprise vs Agile",
-      excerpt: "Propertybase brings Salesforce power—and complexity. See why 95% of Canadian teams choose agile over enterprise. Save $203,236 over 3 years.",
-      readTime: 9,
-      image: blogLeads,
-      link: "/blog/vs-propertybase",
+      useTranslation: true,
     },
   ];
 
@@ -196,8 +234,7 @@ const Resources = () => {
     "resourcesPage.categories.canadianMarket",
     "resourcesPage.categories.marketing",
     "resourcesPage.categories.compliance",
-    "resourcesPage.categories.successStories",
-    "resourcesPage.categories.comparison"
+    "resourcesPage.categories.successStories"
   ];
 
   return (
@@ -242,7 +279,7 @@ const Resources = () => {
                 {/* Article Image */}
                 <img 
                   src={article.image} 
-                  alt={article.title || t(article.titleKey)}
+                  alt={article.useTranslation ? t(article.titleKey!) : article.title}
                   className="w-full h-48 object-cover"
                 />
                 
@@ -255,11 +292,11 @@ const Resources = () => {
                   </div>
 
                   <h3 className="text-xl font-bold mb-3 line-clamp-2">
-                    {article.title || t(article.titleKey)}
+                    {article.useTranslation ? t(article.titleKey!) : article.title}
                   </h3>
                   
                   <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
-                    {article.excerpt || t(article.excerptKey)}
+                    {article.useTranslation ? t(article.excerptKey!) : article.excerpt}
                   </p>
 
                   <div className="flex items-center justify-between">

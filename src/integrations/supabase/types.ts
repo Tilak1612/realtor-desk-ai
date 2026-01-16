@@ -247,6 +247,150 @@ export type Database = {
           },
         ]
       }
+      automation_enrollments: {
+        Row: {
+          automation_id: string
+          completed_at: string | null
+          contact_id: string
+          current_step: number
+          enrolled_at: string
+          id: string
+          metadata: Json | null
+          next_action_at: string | null
+          status: string
+        }
+        Insert: {
+          automation_id: string
+          completed_at?: string | null
+          contact_id: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          metadata?: Json | null
+          next_action_at?: string | null
+          status?: string
+        }
+        Update: {
+          automation_id?: string
+          completed_at?: string | null
+          contact_id?: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          metadata?: Json | null
+          next_action_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_enrollments_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_enrollments_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_logs: {
+        Row: {
+          action_type: string
+          automation_id: string
+          enrollment_id: string
+          error_message: string | null
+          executed_at: string
+          id: string
+          metadata: Json | null
+          status: string
+          step_id: string | null
+        }
+        Insert: {
+          action_type: string
+          automation_id: string
+          enrollment_id: string
+          error_message?: string | null
+          executed_at?: string
+          id?: string
+          metadata?: Json | null
+          status: string
+          step_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          automation_id?: string
+          enrollment_id?: string
+          error_message?: string | null
+          executed_at?: string
+          id?: string
+          metadata?: Json | null
+          status?: string
+          step_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_logs_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_logs_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "automation_enrollments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_logs_step_id_fkey"
+            columns: ["step_id"]
+            isOneToOne: false
+            referencedRelation: "automation_steps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_steps: {
+        Row: {
+          action_config: Json
+          action_type: string
+          automation_id: string
+          created_at: string
+          id: string
+          step_order: number
+        }
+        Insert: {
+          action_config?: Json
+          action_type: string
+          automation_id: string
+          created_at?: string
+          id?: string
+          step_order: number
+        }
+        Update: {
+          action_config?: Json
+          action_type?: string
+          automation_id?: string
+          created_at?: string
+          id?: string
+          step_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_steps_automation_id_fkey"
+            columns: ["automation_id"]
+            isOneToOne: false
+            referencedRelation: "email_automations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       automation_workflows: {
         Row: {
           actions: Json | null
@@ -817,6 +961,50 @@ export type Database = {
           },
           {
             foreignKeyName: "documents_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_automations: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          status: string
+          trigger_config: Json | null
+          trigger_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          status?: string
+          trigger_config?: Json | null
+          trigger_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          status?: string
+          trigger_config?: Json | null
+          trigger_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_automations_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -1758,6 +1946,167 @@ export type Database = {
           type?: string
         }
         Relationships: []
+      }
+      sms_consent: {
+        Row: {
+          consent_source: string | null
+          contact_id: string
+          created_at: string
+          id: string
+          opted_in: boolean
+          opted_in_at: string | null
+          opted_out_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          consent_source?: string | null
+          contact_id: string
+          created_at?: string
+          id?: string
+          opted_in?: boolean
+          opted_in_at?: string | null
+          opted_out_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          consent_source?: string | null
+          contact_id?: string
+          created_at?: string
+          id?: string
+          opted_in?: boolean
+          opted_in_at?: string | null
+          opted_out_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_consent_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sms_consent_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sms_messages: {
+        Row: {
+          contact_id: string | null
+          created_at: string
+          delivered_at: string | null
+          direction: string
+          error_message: string | null
+          from_phone: string | null
+          id: string
+          message: string
+          sent_at: string | null
+          status: string
+          to_phone: string
+          twilio_sid: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          contact_id?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          direction?: string
+          error_message?: string | null
+          from_phone?: string | null
+          id?: string
+          message: string
+          sent_at?: string | null
+          status?: string
+          to_phone: string
+          twilio_sid?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          contact_id?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          direction?: string
+          error_message?: string | null
+          from_phone?: string | null
+          id?: string
+          message?: string
+          sent_at?: string | null
+          status?: string
+          to_phone?: string
+          twilio_sid?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_messages_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sms_messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sms_templates: {
+        Row: {
+          category: string | null
+          created_at: string
+          id: string
+          message: string
+          name: string
+          updated_at: string
+          usage_count: number | null
+          user_id: string
+          variables: string[] | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          name: string
+          updated_at?: string
+          usage_count?: number | null
+          user_id: string
+          variables?: string[] | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          name?: string
+          updated_at?: string
+          usage_count?: number | null
+          user_id?: string
+          variables?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_templates_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tasks: {
         Row: {

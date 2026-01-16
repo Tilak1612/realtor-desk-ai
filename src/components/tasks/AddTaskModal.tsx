@@ -6,13 +6,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Repeat, ChevronDown, ChevronUp } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import TaskTemplates, { TaskTemplate } from "./TaskTemplates";
 
 interface AddTaskModalProps {
   open: boolean;
@@ -26,6 +28,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
   const [deals, setDeals] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [addAnother, setAddAnother] = useState(false);
+  const [showTemplates, setShowTemplates] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -35,7 +38,9 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
     task_type: "other",
     contact_id: "",
     deal_id: "",
-    reminder: "none"
+    reminder: "none",
+    is_recurring: false,
+    recurring_interval: "weekly" as "daily" | "weekly" | "monthly" | "yearly",
   });
 
   useEffect(() => {
@@ -91,8 +96,24 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
       task_type: "other",
       contact_id: "",
       deal_id: "",
-      reminder: "none"
+      reminder: "none",
+      is_recurring: false,
+      recurring_interval: "weekly",
     });
+    setShowTemplates(true);
+  };
+
+  const handleTemplateSelect = (template: TaskTemplate) => {
+    setFormData(prev => ({
+      ...prev,
+      title: template.title,
+      description: template.description,
+      task_type: template.task_type,
+      priority: template.priority,
+      is_recurring: template.isRecurring || false,
+      recurring_interval: (template.recurringInterval as any) || "weekly",
+    }));
+    setShowTemplates(false);
   };
 
   const handleSubmit = async (e: React.FormEvent, addAnother = false) => {
@@ -144,6 +165,36 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
         <DialogHeader>
           <DialogTitle>{t("app.modals.addTask.title")}</DialogTitle>
         </DialogHeader>
+
+        {/* Templates Section */}
+        {showTemplates && (
+          <div className="border-b pb-4 mb-4">
+            <TaskTemplates onSelectTemplate={handleTemplateSelect} />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="mt-2 text-xs"
+              onClick={() => setShowTemplates(false)}
+            >
+              <ChevronUp className="h-3 w-3 mr-1" />
+              Hide templates
+            </Button>
+          </div>
+        )}
+
+        {!showTemplates && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="text-xs mb-2"
+            onClick={() => setShowTemplates(true)}
+          >
+            <ChevronDown className="h-3 w-3 mr-1" />
+            Show templates
+          </Button>
+        )}
 
         <form onSubmit={(e) => handleSubmit(e, addAnother)} className="space-y-4">
           <div>
@@ -274,19 +325,42 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
             </div>
           )}
 
-          <div>
-            <Label htmlFor="reminder">{t("app.modals.addTask.reminder")}</Label>
-            <Select value={formData.reminder} onValueChange={(v) => setFormData({...formData, reminder: v})}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">{t("app.modals.addTask.reminders.none")}</SelectItem>
-                <SelectItem value="15min">{t("app.modals.addTask.reminders.fifteenMin")}</SelectItem>
-                <SelectItem value="1hour">{t("app.modals.addTask.reminders.oneHour")}</SelectItem>
-                <SelectItem value="1day">{t("app.modals.addTask.reminders.oneDay")}</SelectItem>
-              </SelectContent>
-            </Select>
+          {/* Recurring Task Section */}
+          <div className="border rounded-lg p-4 space-y-3 bg-muted/30">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Repeat className="h-4 w-4 text-muted-foreground" />
+                <Label htmlFor="is_recurring" className="font-medium">Recurring Task</Label>
+              </div>
+              <Switch
+                id="is_recurring"
+                checked={formData.is_recurring}
+                onCheckedChange={(checked) => setFormData({...formData, is_recurring: checked})}
+              />
+            </div>
+            
+            {formData.is_recurring && (
+              <div className="pt-2">
+                <Label htmlFor="recurring_interval">Repeat every</Label>
+                <Select 
+                  value={formData.recurring_interval} 
+                  onValueChange={(v: any) => setFormData({...formData, recurring_interval: v})}
+                >
+                  <SelectTrigger className="mt-1">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="daily">Day</SelectItem>
+                    <SelectItem value="weekly">Week</SelectItem>
+                    <SelectItem value="monthly">Month</SelectItem>
+                    <SelectItem value="yearly">Year</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground mt-2">
+                  A new task will be automatically created after you complete this one.
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-end gap-2 pt-4">
