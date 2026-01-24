@@ -4,6 +4,8 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  # Environment variables for build
+  environment = { NODE_ENV = "production" }
 
 # Enable prerendering for all HTML pages (critical for SEO)
 [[plugins]]
@@ -70,14 +72,18 @@
     ]
 
 # Headers for SEO and security
+# Note: Additional headers defined in public/_headers file
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Access-Control-Allow-Origin = "*"
+
+# Prerender plugin configuration with longer timeout
+[plugins.inputs]
+  timeout = 180
+  concurrency = 5
+  # crawler-specific headers to ensure proper rendering
+  renderWith = "puppeteer"
 
 # Cache static assets
 [[headers]]
