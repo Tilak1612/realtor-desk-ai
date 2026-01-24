@@ -40,6 +40,7 @@ import CalgaryMarketingGuide from "./pages/blog/CalgaryMarketingGuide";
 import CASLComplianceGuide from "./pages/blog/CASLComplianceGuide";
 import CostOfMissedLeads from "./pages/blog/CostOfMissedLeads";
 import Integrations from "./pages/Integrations";
+import PIPEDACompliancePage from "./pages/PIPEDACompliancePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
@@ -54,6 +55,7 @@ import SwitchFromBoldTrail from "./pages/SwitchFromBoldTrail";
 import SwitchFromLofty from "./pages/SwitchFromLofty";
 import SwitchFromIxact from "./pages/SwitchFromIxact";
 import SwitchFromWiseAgent from "./pages/SwitchFromWiseAgent";
+import LoftyAlternative from "./pages/LoftyAlternative";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -127,6 +129,7 @@ const App = () => (
           <Route path="/resources/cost-of-missed-real-estate-leads-canada" element={<CostOfMissedLeads />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
@@ -159,6 +162,9 @@ const App = () => (
           <Route path="/vs/lofty" element={<VsLofty />} />
           <Route path="/vs/ixact" element={<VsIxact />} />
           <Route path="/vs/wise-agent" element={<VsWiseAgent />} />
+          
+          {/* Alternative Pages (for SEO) */}
+          <Route path="/lofty-alternative" element={<LoftyAlternative />} />
           
           {/* AI Features */}
           <Route path="/features/ai-powered-crm" element={<AIPoweredCRM />} />

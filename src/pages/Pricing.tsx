@@ -2,6 +2,8 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
+import { SEO } from "@/components/SEO";
+import { pricingPageFAQSchema, productSchema } from "@/lib/structuredData";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,15 +14,6 @@ import { useTranslation } from "react-i18next";
 const Pricing = () => {
   const { t } = useTranslation();
   const [isYearly, setIsYearly] = useState(false); // Default to monthly
-
-  // SEO: Update document title and meta for pricing page
-  if (typeof document !== 'undefined') {
-    document.title = "Real Estate CRM Pricing | Best CRM for Real Estate Agents | Save 85% vs BoldTrail";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Best CRM for real estate agents pricing: $149/month or $999/year. Save 85% vs BoldTrail, 45% vs Lofty. AI lead generation software, 24/7 chatbot included. 14-day free trial.');
-    }
-  }
 
   const pricingData = {
     agent: {
@@ -45,6 +38,17 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Real Estate CRM Pricing - From $149/mo | RealtorDesk AI"
+        description="RealtorDesk AI pricing: $149/mo Starter, $299/mo Pro, $599/mo Teams. Save 85% vs Lofty ($700/mo). No setup fees, 14-day free trial. CREA DDF® native, PIPEDA compliant."
+        keywords="real estate CRM pricing, CRM for real estate agents cost, Lofty alternative pricing, best CRM for real estate agents Canada, affordable real estate CRM"
+        structuredData={[
+          pricingPageFAQSchema,
+          productSchema("Starter", 149, "AI-powered real estate CRM for individual agents with CREA DDF® integration"),
+          productSchema("Professional", 299, "Advanced CRM with AI voice agent and SMS automation for growing agents"),
+          productSchema("Teams", 599, "Enterprise CRM with unlimited users and custom AI training")
+        ]}
+      />
       <Navbar />
 
       {/* Hero Section */}

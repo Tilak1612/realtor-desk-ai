@@ -4,35 +4,17 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://realtordesk.ai/sitemap.xml
-
-# Disallow admin and backend pages
 Disallow: /dashboard/
 Disallow: /admin/
 Disallow: /settings/
 Disallow: /billing/
 Disallow: /api/
+Disallow: /auth/
 
-# Allow SEO-important pages
-Allow: /
-Allow: /features
-Allow: /pricing
-Allow: /how-it-works
-Allow: /demo
-Allow: /integrations
-Allow: /resources
-Allow: /signup
-Allow: /contact
-
-# Crawl-delay (optional, adjust as needed)
+# Keep crawl rate reasonable for SPA assets
 Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://realtordesk.ai/sitemap.xml

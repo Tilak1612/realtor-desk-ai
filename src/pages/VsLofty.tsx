@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,45 +11,41 @@ import { useTranslation } from "react-i18next";
 const VsLofty = () => {
   const { t } = useTranslation();
   
-  // SEO: Update document title and meta for this comparison page
-  if (typeof document !== 'undefined') {
-    document.title = "Lofty Alternative | Real Estate Website Builders & AI CRM | Realtor Desk";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Looking for a Lofty alternative? Realtor Desk offers real estate website builders, virtual tour platforms integration, AI tools for Realtors, and real estate video marketing tools. True AI vs basic chatbots.');
+  const comparisonSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Lofty vs RealtorDesk AI Comparison",
+    "description": "Compare Lofty with RealtorDesk AI for Canadian real estate agents. See pricing, features, CREA DDF® integration, and why agents save 85% with RealtorDesk AI.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "$700+ USD/mo with setup fees, US-focused"},
+        {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "$149 CAD/mo, CREA DDF® native, PIPEDA compliant, bilingual"}
+      ]
     }
-  }
+  };
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Lofty Alternative for Canadian Agents | RealtorDesk AI vs Lofty"
+        description="Why Canadian real estate agents choose RealtorDesk AI over Lofty: Save 85% ($149 vs $700/mo), CREA DDF® native, PIPEDA compliant, bilingual. No setup fees. 14-day free trial."
+        keywords="Lofty alternative, Lofty CRM alternative Canada, real estate CRM cheaper than Lofty, best CRM for Canadian realtors, CREA DDF integration, PIPEDA compliant CRM"
+        structuredData={[comparisonSchema]}
+      />
       <Navbar />
-
-      {/* Structured Data for Comparison */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Lofty vs Realtor Desk Comparison",
-        "description": "Compare Lofty with Realtor Desk - real estate website builders and AI tools for Realtors. See why agents choose true AI over basic chatbots.",
-        "mainEntity": {
-          "@type": "ItemList",
-          "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "Basic chatbot automation, unpredictable costs"},
-            {"@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "True AI lead scoring, virtual tour integration, transparent pricing"}
-          ]
-        }
-      })}} />
 
       {/* Hero Section */}
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            AI Tools for Realtors Comparison
+            Lofty Alternative for Canadian Agents
           </Badge>
           <h1 className="mb-6">
-            Best Lofty Alternative: <span className="gradient-text">True AI</span> vs Basic Chatbots
+            Why Canadian Agents Choose <span className="gradient-text">RealtorDesk AI</span> Over Lofty
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Real estate website builders with AI tools for Realtors. Get predictive intelligence, virtual tour integration, and real estate video marketing tools.
+            Save 85% with CREA DDF® native integration, PIPEDA compliance, bilingual support, and true AI-powered automation built for the Canadian market.
           </p>
         </div>
       </section>

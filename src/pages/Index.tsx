@@ -5,6 +5,12 @@ import MobileCTA from "@/components/MobileCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import ChatWidget from "@/components/ChatWidget";
 import ROICalculator from "@/components/ROICalculator";
+import { SEO } from "@/components/SEO";
+import { 
+  organizationSchema, 
+  softwareApplicationSchema, 
+  homepageFAQSchema 
+} from "@/lib/structuredData";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useState } from "react";
@@ -46,6 +52,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen pb-20 md:pb-0 bg-background">
+      <SEO 
+        title="AI Real Estate CRM for Canadian Agents | RealtorDesk AI - CREA DDF®"
+        description="RealtorDesk AI is the AI-first real estate CRM built for Canadian agents. CREA DDF® native, PIPEDA compliant, bilingual. From $149/mo vs Lofty's $700/mo. Start 14-day free trial."
+        keywords="best CRM for real estate agents, real estate CRM Canada, AI tools for Realtors, CREA DDF integration, real estate automation, Lofty alternative, Follow Up Boss alternative, PIPEDA compliant CRM, bilingual real estate AI, real estate lead generation software"
+        structuredData={[
+          organizationSchema,
+          softwareApplicationSchema,
+          homepageFAQSchema
+        ]}
+      />
       <Navbar />
       <CookieConsent />
       <ExitIntentPopup />
