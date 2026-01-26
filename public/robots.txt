@@ -1,19 +1,54 @@
+User-agent: *
+Allow: /
+
+# Block sensitive/app areas
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /settings
+Disallow: /billing
+Disallow: /api
+Disallow: /auth
+Disallow: /onboarding
+Disallow: /contacts
+Disallow: /properties
+Disallow: /deals
+Disallow: /tasks
+Disallow: /ai-assistant
+Disallow: /campaigns
+Disallow: /calendar
+Disallow: /reports
+Disallow: /market
+Disallow: /automations
+Disallow: /signup
+Disallow: /login
+Disallow: /verify-email
+Disallow: /forgot-password
+Disallow: /reset-password
+
+# Key crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: *
+User-agent: GPTBot
 Allow: /
-Disallow: /dashboard/
-Disallow: /admin/
-Disallow: /settings/
-Disallow: /billing/
-Disallow: /api/
-Disallow: /auth/
+Crawl-delay: 1
 
-# Keep crawl rate reasonable for SPA assets
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 2
+
+# Default crawl rate
 Crawl-delay: 1
 
 # Sitemap

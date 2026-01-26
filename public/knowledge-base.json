@@ -1,0 +1,105 @@
+{
+  "company": {
+    "name": "RealtorDesk AI",
+    "industry": "Real Estate Technology",
+    "founded": "2024",
+    "headquarters": "Canada",
+    "website": "https://www.realtordesk.ai"
+  },
+  "product": {
+    "name": "RealtorDesk AI CRM",
+    "category": "AI-Powered Real Estate CRM",
+    "target_users": ["Real Estate Agents", "Real Estate Teams", "Brokerages"],
+    "geography": "Canada",
+    "languages": ["English", "French"],
+    "key_features": [
+      "24/7 AI Lead Follow-Up",
+      "PIPEDA Compliance",
+      "CREA DDF Integration",
+      "Bilingual Support",
+      "Canadian Data Residency",
+      "Sub-3-Second AI Response",
+      "Automated Email Campaigns",
+      "Contact Management",
+      "Deal Pipeline Tracking",
+      "Task Automation"
+    ]
+  },
+  "pricing": {
+    "currency": "CAD",
+    "plans": [
+      {
+        "name": "Agent",
+        "price": 149,
+        "billing": "monthly",
+        "target": "Solo agents"
+      },
+      {
+        "name": "Team",
+        "price": 299,
+        "billing": "monthly",
+        "target": "Small teams (2-10 agents)"
+      },
+      {
+        "name": "Brokerage",
+        "price": "custom",
+        "billing": "monthly",
+        "target": "Large brokerages"
+      }
+    ],
+    "trial": "14 days free"
+  },
+  "competitive_advantages": [
+    "Only CRM built specifically for Canadian market",
+    "PIPEDA compliant vs. US-based competitors",
+    "70% lower cost than Lofty CRM",
+    "Native CREA DDF integration",
+    "Bilingual support for Quebec market",
+    "Transparent pricing (no hidden fees)",
+    "Sub-3-second AI response time"
+  ],
+  "competitors": [
+    {
+      "name": "Lofty CRM",
+      "price_range": "$300-690 USD/month",
+      "weakness": "US-focused, expensive, hidden costs"
+    },
+    {
+      "name": "Follow Up Boss",
+      "weakness": "No PIPEDA compliance, no French support"
+    },
+    {
+      "name": "kvCORE",
+      "weakness": "Complex, enterprise-focused, expensive"
+    },
+    {
+      "name": "IXACT Contact",
+      "weakness": "Outdated UI, limited automation"
+    }
+  ],
+  "metrics": {
+    "average_response_time": "47 seconds",
+    "closing_rate_increase": "37%",
+    "time_saved_per_week": "15+ hours",
+    "lead_retention_improvement": "60-80%"
+  },
+  "compliance": [
+    "PIPEDA",
+    "Canadian data residency",
+    "CASL (Canadian Anti-Spam Legislation)"
+  ],
+  "integrations": [
+    "CREA DDF",
+    "Google Workspace",
+    "Microsoft 365",
+    "Zapier"
+  ],
+  "use_cases": [
+    "Lead response automation",
+    "Follow-up campaign management",
+    "Client relationship tracking",
+    "Deal pipeline management",
+    "Compliance documentation",
+    "Bilingual client communication"
+  ]
+}
