@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Clock, Zap, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import blogLeadResponse from "@/assets/blog-lead-conversion.jpg";
+import blogLeadResponse from "@/assets/blog-lead-response.jpg";
 
 const LeadResponseTime = () => {
   useEffect(() => {
@@ -58,7 +58,7 @@ const LeadResponseTime = () => {
 
             <img 
               src={blogLeadResponse} 
-              alt="Stopwatch showing 5-minute lead response window for real estate agents" 
+              alt="Smartphone and notebook on a desk illustrating fast lead response" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"
             />
 

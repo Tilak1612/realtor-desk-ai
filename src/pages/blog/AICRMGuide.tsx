@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Database, Shield, Globe, Smartphone, BarChart3, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import blogAICRM from "@/assets/blog-ai-transformation.jpg";
+import blogAICRM from "@/assets/blog-ai-crm.jpg";
 
 const AICRMGuide = () => {
   useEffect(() => {
@@ -58,7 +58,7 @@ const AICRMGuide = () => {
 
             <img 
               src={blogAICRM} 
-              alt="Canadian Realtor using AI-powered CRM dashboard" 
+              alt="Canadian Realtor reviewing analytics on an AI-powered CRM dashboard" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"
             />
 

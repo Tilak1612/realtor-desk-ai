@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Shield, CheckCircle, AlertTriangle, Lock, FileText, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import blogCompliance from "@/assets/blog-compliance.jpg";
+import blogCompliance from "@/assets/blog-privacy-compliance.jpg";
 
 const PIPEDACompliance = () => {
   useEffect(() => {
@@ -58,7 +58,7 @@ const PIPEDACompliance = () => {
 
             <img 
               src={blogCompliance} 
-              alt="PIPEDA compliance and data privacy for Canadian real estate agents" 
+              alt="Data privacy documents and laptop illustrating PIPEDA compliance for Realtors" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"
             />
 

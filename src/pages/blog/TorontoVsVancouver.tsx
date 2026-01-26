@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Building2, TrendingUp, DollarSign, Users, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import blogTorontoVancouver from "@/assets/blog-success-story.jpg";
+import blogTorontoVancouver from "@/assets/blog-toronto-vancouver.jpg";
 
 const TorontoVsVancouver = () => {
   useEffect(() => {
@@ -58,7 +58,7 @@ const TorontoVsVancouver = () => {
 
             <img 
               src={blogTorontoVancouver} 
-              alt="Toronto and Vancouver skyline comparison for real estate market analysis" 
+              alt="Toronto skyline view used for comparing Toronto and Vancouver real estate markets" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"
             />
 
