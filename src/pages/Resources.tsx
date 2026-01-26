@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+// Unique images for each resource - no duplicates
 import blogAI from "@/assets/blog-ai-transformation.jpg";
 import blogCREA from "@/assets/blog-crea-ddf.jpg";
 import blogCompliance from "@/assets/blog-compliance.jpg";
@@ -14,13 +15,27 @@ import blogBilingual from "@/assets/blog-bilingual-marketing.jpg";
 import blogSuccess from "@/assets/blog-success-story.jpg";
 import blogHousingForecast from "@/assets/blog-housing-forecast.jpg";
 import blogAIAutomation from "@/assets/blog-ai-automation-realtor.jpg";
-import blogLeadResponse from "@/assets/blog-lead-conversion.jpg";
-import blogAICRM from "@/assets/blog-ai-transformation.jpg";
-import blogTorontoVancouver from "@/assets/blog-success-story.jpg";
-import blogPIPEDA from "@/assets/blog-compliance.jpg";
 import blogFirstTimeBuyer from "@/assets/blog-first-time-buyer.jpg";
 import blogSellHomeFast from "@/assets/blog-sell-home-fast.jpg";
 import blogEdmontonMarket from "@/assets/blog-edmonton-market.jpg";
+// Newly generated unique images
+import blogCostMissedLeads from "@/assets/blog-cost-missed-leads.jpg";
+import blogCASLCompliance from "@/assets/blog-casl-compliance.jpg";
+import blogCalgaryMarketing from "@/assets/blog-calgary-marketing.jpg";
+import blogVoiceAI from "@/assets/blog-voice-ai.jpg";
+import blogAIChatbot from "@/assets/blog-ai-chatbot.jpg";
+import blogBestCRM2025 from "@/assets/blog-best-crm-2025.jpg";
+import blogAIvsTraditional from "@/assets/blog-ai-vs-traditional.jpg";
+import blogVsKvcore from "@/assets/blog-vs-kvcore.jpg";
+import blogVsFollowUpBoss from "@/assets/blog-vs-followupboss.jpg";
+import blogIxactAlternatives from "@/assets/blog-ixact-alternatives.jpg";
+import blogVsLofty from "@/assets/blog-vs-lofty.jpg";
+import blogBoomtownAlternative from "@/assets/blog-boomtown-alternative.jpg";
+import blogVsPropertybase from "@/assets/blog-vs-propertybase.jpg";
+import blogTorontoVancouver from "@/assets/blog-toronto-vancouver-compare.jpg";
+import blogPIPEDA from "@/assets/blog-pipeda-privacy.jpg";
+import blogLeadResponse from "@/assets/blog-lead-response-time.jpg";
+import blogAICRMGuide from "@/assets/blog-ai-crm-guide.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
@@ -32,7 +47,7 @@ const Resources = () => {
       title: "The Real Cost of Missed Real Estate Leads in Canada: 2025 Analysis",
       excerpt: "Every missed lead costs $12,000+. See the true cost of slow response times and poor follow-up. Most agents lose $90,000-165,000/year. Includes ROI calculator.",
       readTime: 15,
-      image: blogLeads,
+      image: blogCostMissedLeads,
       link: "/resources/cost-of-missed-real-estate-leads-canada",
       useTranslation: false,
     },
@@ -42,7 +57,7 @@ const Resources = () => {
       title: "CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide",
       excerpt: "Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines. Learn consent requirements, penalties, templates, and automation strategies.",
       readTime: 16,
-      image: blogCompliance,
+      image: blogCASLCompliance,
       link: "/resources/casl-compliance-real-estate-email-marketing-canada",
       useTranslation: false,
     },
@@ -52,7 +67,7 @@ const Resources = () => {
       title: "Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026",
       excerpt: "Calgary's market is unique. Oil economy, suburban sprawl, and -30°C winters require specialized strategies. Learn 7 AI-powered tactics Calgary agents use to dominate—even in winter.",
       readTime: 13,
-      image: blogAI,
+      image: blogCalgaryMarketing,
       link: "/resources/calgary-real-estate-marketing-strategies",
       useTranslation: false,
     },
@@ -62,7 +77,7 @@ const Resources = () => {
       title: "Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals",
       excerpt: "Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. See how Canadian agents use AI to follow up instantly and close 3x more deals with 9,131% ROI.",
       readTime: 14,
-      image: blogAI,
+      image: blogVoiceAI,
       link: "/resources/voice-ai-real-estate-lead-follow-up-canada",
       useTranslation: false,
     },
@@ -72,7 +87,7 @@ const Resources = () => {
       title: "AI Chatbot for Real Estate Websites: Complete Canadian Implementation Guide 2026",
       excerpt: "AI chatbots capture 67% of leads that arrive after hours. See how Canadian real estate agents implement AI chatbots to convert visitors 24/7 and never miss a lead again.",
       readTime: 14,
-      image: blogAI,
+      image: blogAIChatbot,
       link: "/blog/ai-chatbot-real-estate-websites-canada",
       useTranslation: false,
     },
@@ -82,7 +97,7 @@ const Resources = () => {
       title: "Best Real Estate CRM for Canada 2025: Complete Comparison Guide",
       excerpt: "Compare the top 10 real estate CRMs in Canada. Features, pricing, pros/cons, and which CRM fits your business. Updated for 2025.",
       readTime: 16,
-      image: blogAICRM,
+      image: blogBestCRM2025,
       link: "/blog/best-crm-canada-2025",
       useTranslation: false,
     },
@@ -92,7 +107,7 @@ const Resources = () => {
       title: "AI CRM vs Traditional CRM for Real Estate: Which Wins in 2025?",
       excerpt: "AI CRMs deliver 847% ROI vs 89% for traditional CRMs. See feature-by-feature comparison, cost analysis, and why Canadian agents are switching.",
       readTime: 14,
-      image: blogAICRM,
+      image: blogAIvsTraditional,
       link: "/blog/ai-vs-traditional-crm",
       useTranslation: false,
     },
@@ -102,7 +117,7 @@ const Resources = () => {
       title: "RealtorDesk AI vs kvCORE: Canadian Real Estate CRM Comparison 2025",
       excerpt: "Compare kvCORE and RealtorDesk AI for Canadian real estate. Features, pricing, Canadian compliance, and which CRM delivers better ROI.",
       readTime: 15,
-      image: blogAICRM,
+      image: blogVsKvcore,
       link: "/blog/vs-kvcore",
       useTranslation: false,
     },
@@ -112,7 +127,7 @@ const Resources = () => {
       title: "RealtorDesk AI vs Follow Up Boss: Which CRM for Canadian Realtors?",
       excerpt: "Follow Up Boss vs RealtorDesk AI comparison. See which CRM offers better AI automation, Canadian features, and ROI for real estate agents.",
       readTime: 14,
-      image: blogAICRM,
+      image: blogVsFollowUpBoss,
       link: "/blog/vs-follow-up-boss",
       useTranslation: false,
     },
@@ -122,7 +137,7 @@ const Resources = () => {
       title: "Best IXACT Contact Alternatives for Canadian Realtors in 2025",
       excerpt: "IXACT Contact alternatives comparison. See top CRMs for Canadian real estate with better AI, pricing, and features than IXACT.",
       readTime: 15,
-      image: blogAICRM,
+      image: blogIxactAlternatives,
       link: "/blog/ixact-alternatives",
       useTranslation: false,
     },
@@ -132,7 +147,7 @@ const Resources = () => {
       title: "RealtorDesk AI vs Lofty (Chime) CRM: Canadian Real Estate Comparison",
       excerpt: "Compare Lofty CRM and RealtorDesk AI for Canadian agents. Features, pricing, AI capabilities, and Canadian market compliance.",
       readTime: 14,
-      image: blogAICRM,
+      image: blogVsLofty,
       link: "/blog/vs-lofty-crm",
       useTranslation: false,
     },
@@ -142,7 +157,7 @@ const Resources = () => {
       title: "Best BoomTown Alternative for Canadian Real Estate Agents 2025",
       excerpt: "BoomTown alternatives comparison. Find better CRMs for Canadian realtors with lower pricing, better AI, and Canadian compliance.",
       readTime: 15,
-      image: blogAICRM,
+      image: blogBoomtownAlternative,
       link: "/blog/boomtown-alternative-canada",
       useTranslation: false,
     },
@@ -152,7 +167,7 @@ const Resources = () => {
       title: "RealtorDesk AI vs Propertybase: Canadian Real Estate CRM Showdown",
       excerpt: "Propertybase vs RealtorDesk AI comparison. Features, pricing, AI automation, and which CRM is better for Canadian real estate teams.",
       readTime: 14,
-      image: blogAICRM,
+      image: blogVsPropertybase,
       link: "/blog/vs-propertybase",
       useTranslation: false,
     },
@@ -222,7 +237,7 @@ const Resources = () => {
       title: "The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025",
       excerpt: "Everything Canadian Realtors need to know about AI-powered CRM systems. Features, benefits, PIPEDA compliance, and how to choose the right platform.",
       readTime: 15,
-      image: blogAICRM,
+      image: blogAICRMGuide,
       link: "/ai-crm-canadian-real-estate-agents-guide",
       useTranslation: false,
     },
