@@ -43,7 +43,7 @@ const AuraHero = () => {
               <div className="relative mb-8">
                 <div className="absolute inset-0 blur-3xl bg-primary/20 animate-pulse-glow rounded-full scale-150 -z-10"></div>
                 <h1 className="lg:text-6xl leading-[1.05] text-4xl sm:text-5xl tracking-tighter gradient-text-animated relative">
-                  Close More Deals Faster with RealtorDesk
+                  Stop Losing Deals to Slow Follow-Up
                 </h1>
               </div>
 
