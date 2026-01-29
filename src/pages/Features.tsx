@@ -4,18 +4,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Brain, MessageSquare, TrendingUp, FileCheck, Megaphone } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
+import { howToSchema } from "@/lib/structuredData";
 
 const Features = () => {
   const { t } = useTranslation();
   
-  // SEO: Update document title and meta for features page
-  if (typeof document !== 'undefined') {
-    document.title = "AI Tools for Realtors | Real Estate Lead Generation Software | RealtorDesk AI Features";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Discover AI tools for Realtors: predictive CRM, 24/7 chatbot, real estate lead generation software, virtual tour platforms, video marketing tools. Best features for real estate agents.');
-    }
-  }
+  const featuresSchema = howToSchema(
+    "How to Use AI Tools for Real Estate Lead Generation",
+    "Step-by-step guide to using RealtorDesk AI's features for lead generation and client management",
+    [
+      { name: "Set Up AI Chatbot", text: "Configure your 24/7 AI chatbot to respond to property inquiries and qualify leads automatically" },
+      { name: "Enable Lead Scoring", text: "Activate predictive lead scoring to prioritize hot leads and optimize your follow-up strategy" },
+      { name: "Automate Follow-Ups", text: "Create automated email and SMS campaigns to nurture leads and maintain client relationships" },
+      { name: "Track Performance", text: "Monitor your conversion rates, response times, and ROI through comprehensive analytics" }
+    ]
+  );
 
   const featureTabs = [
     {
@@ -132,6 +136,13 @@ const Features = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="AI Tools for Realtors | Real Estate Lead Generation Software"
+        description="Discover AI tools for Realtors: predictive CRM, 24/7 chatbot, real estate lead generation software, virtual tour platforms, video marketing tools. Best features for real estate agents."
+        keywords="AI tools for realtors, real estate lead generation software, AI chatbot for real estate, predictive CRM, real estate automation"
+        answerFor="best AI tools for realtors, real estate lead generation software, AI features for real estate agents"
+        structuredData={[featuresSchema]}
+      />
       <Navbar />
 
       {/* Hero Section */}

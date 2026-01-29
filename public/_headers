@@ -1,16 +1,36 @@
-# Security headers
+# Security and SEO headers
 /* 
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: upgrade-insecure-requests
   Access-Control-Allow-Origin: *
+  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
+  X-DNS-Prefetch-Control: on
+  X-Permitted-Cross-Domain-Policies: none
 
 # Allow search engine crawlers and AI bots
 /
   Access-Control-Allow-Origin: *
   X-Robots-Tag: index, follow
+  Link: <https://realtordesk.ai/knowledge-base.json>; rel="alternate"; type="application/json"
+  Link: <https://realtordesk.ai/sitemap.xml>; rel="sitemap"; type="application/xml"
+
+# AI-specific content files
+/knowledge-base.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: *
+  X-Robots-Tag: all
+
+/ai-company-info.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: *
+  X-Robots-Tag: all
 
 # Cache static assets for a year
 /assets/*

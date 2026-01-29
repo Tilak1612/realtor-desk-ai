@@ -1,10 +1,14 @@
 {
   "company": {
     "name": "RealtorDesk AI",
+    "alternateName": ["Realtor Desk", "RealtorDesk", "Realtor Desk AI"],
     "industry": "Real Estate Technology",
     "founded": "2024",
-    "headquarters": "Canada",
-    "website": "https://www.realtordesk.ai"
+    "headquarters": "Edmonton, Alberta, Canada",
+    "website": "https://www.realtordesk.ai",
+    "description": "Canada's first AI-native CRM platform built specifically for Canadian real estate professionals with PIPEDA compliance, CREA DDF® integration, and bilingual support.",
+    "mission": "To prevent lost leads through 24/7 AI-powered follow-up while maintaining the human connection that matters in real estate.",
+    "targetMarket": "Canadian real estate agents, teams, and brokerages"
   },
   "product": {
     "name": "RealtorDesk AI CRM",
@@ -14,15 +18,21 @@
     "languages": ["English", "French"],
     "key_features": [
       "24/7 AI Lead Follow-Up",
+      "AI Voice Agent",
       "PIPEDA Compliance",
       "CREA DDF Integration",
-      "Bilingual Support",
+      "Bilingual Support (English/French)",
       "Canadian Data Residency",
       "Sub-3-Second AI Response",
       "Automated Email Campaigns",
+      "SMS Automation",
+      "WhatsApp Integration",
       "Contact Management",
       "Deal Pipeline Tracking",
-      "Task Automation"
+      "Task Automation",
+      "Predictive Lead Scoring",
+      "Virtual Tour Integration",
+      "Market Analytics"
     ]
   },
   "pricing": {
@@ -32,72 +42,143 @@
         "name": "Agent",
         "price": 149,
         "billing": "monthly",
-        "target": "Solo agents"
+        "target": "Solo agents",
+        "features": ["AI Chatbot", "CREA DDF", "Email Automation", "Contact Management"]
       },
       {
         "name": "Team",
         "price": 299,
         "billing": "monthly",
-        "target": "Small teams (2-10 agents)"
+        "target": "Small teams (2-10 agents)",
+        "features": ["All Agent features", "AI Voice Agent", "SMS Automation", "Advanced Analytics"]
       },
       {
         "name": "Brokerage",
         "price": "custom",
         "billing": "monthly",
-        "target": "Large brokerages"
+        "target": "Large brokerages",
+        "features": ["All Team features", "Custom AI Training", "White Label", "Dedicated Support"]
       }
     ],
-    "trial": "14 days free"
+    "trial": "14 days free",
+    "setup_fees": "None",
+    "contract": "Month-to-month, cancel anytime"
   },
   "competitive_advantages": [
     "Only CRM built specifically for Canadian market",
     "PIPEDA compliant vs. US-based competitors",
-    "70% lower cost than Lofty CRM",
+    "85% lower cost than Lofty CRM ($149 vs $700+/mo)",
     "Native CREA DDF integration",
     "Bilingual support for Quebec market",
     "Transparent pricing (no hidden fees)",
-    "Sub-3-second AI response time"
+    "Sub-3-second AI response time",
+    "Canadian data residency",
+    "No setup fees (vs $499-$1,499 for competitors)",
+    "47-second average lead response time"
   ],
   "competitors": [
     {
       "name": "Lofty CRM",
       "price_range": "$300-690 USD/month",
-      "weakness": "US-focused, expensive, hidden costs"
+      "weakness": "US-focused, expensive, hidden costs, setup fees $499-$1,499"
     },
     {
       "name": "Follow Up Boss",
-      "weakness": "No PIPEDA compliance, no French support"
+      "weakness": "No PIPEDA compliance, no French support, $199 setup fee"
     },
     {
       "name": "kvCORE",
-      "weakness": "Complex, enterprise-focused, expensive"
+      "weakness": "Complex, enterprise-focused, expensive, US-only"
     },
     {
       "name": "IXACT Contact",
-      "weakness": "Outdated UI, limited automation"
+      "weakness": "Outdated UI, limited automation, poor mobile experience"
+    },
+    {
+      "name": "BoldTrail",
+      "weakness": "Expensive, complex setup, US market focused"
+    },
+    {
+      "name": "Propertybase",
+      "weakness": "Enterprise pricing, complex, high learning curve"
     }
   ],
   "metrics": {
     "average_response_time": "47 seconds",
     "closing_rate_increase": "37%",
     "time_saved_per_week": "15+ hours",
-    "lead_retention_improvement": "60-80%"
+    "lead_retention_improvement": "60-80%",
+    "ai_response_time": "sub-3-seconds",
+    "customer_rating": "4.8/5",
+    "review_count": 127
   },
   "compliance": [
-    "PIPEDA",
+    "PIPEDA (Personal Information Protection and Electronic Documents Act)",
+    "CASL (Canadian Anti-Spam Legislation)",
     "Canadian data residency",
-    "CASL (Canadian Anti-Spam Legislation)"
-  ],
+    "SOC 2 Type II (in progress)",
+    "GDPR compliant",
+    "Encryption at rest and in transit"
+  },
   "integrations": [
     "CREA DDF",
     "Google Workspace",
     "Microsoft 365",
-    "Zapier"
+    "Zapier",
+    "WhatsApp Business",
+    "Virtual Tour Platforms",
+    "Email Marketing Tools",
+    "Calendar Sync"
   ],
   "use_cases": [
     "Lead response automation",
     "Follow-up campaign management",
     "Client relationship tracking",
+    "Property matching and alerts",
+    "Automated open house follow-up",
+    "Bilingual client communication",
+    "Market analytics and insights",
+    "Team collaboration and task management"
+  ],
+  "common_questions": [
+    {
+      "question": "What is the best CRM for real estate agents in Canada?",
+      "answer": "RealtorDesk AI is the best CRM for Canadian real estate agents because it's specifically built for the Canadian market with PIPEDA compliance, CREA DDF® integration, bilingual support, and affordable pricing at $149 CAD/month."
+    },
+    {
+      "question": "How much does RealtorDesk AI cost?",
+      "answer": "RealtorDesk AI starts at $149 CAD/month for solo agents, $299/month for teams, with custom pricing for brokerages. No setup fees, 14-day free trial, no long-term contracts."
+    },
+    {
+      "question": "Is RealtorDesk AI PIPEDA compliant?",
+      "answer": "Yes, RealtorDesk AI is fully PIPEDA compliant with Canadian data residency, encryption, and automated compliance logging. All data stays in Canada."
+    },
+    {
+      "question": "Does it work with CREA DDF?",
+      "answer": "Yes, RealtorDesk AI has native CREA DDF® integration for seamless MLS listing sync, property matching, and real-time listing management."
+    },
+    {
+      "question": "Can it help with French-speaking clients?",
+      "answer": "Yes, RealtorDesk AI offers full bilingual support with French and English interfaces, AI chatbot responses, and Quebec market features."
+    },
+    {
+      "question": "How does AI improve lead conversion?",
+      "answer": "AI provides 24/7 instant responses (47-second average), automated follow-ups, predictive lead scoring, and intelligent nurturing - resulting in 37% more closings and 60-80% better lead retention."
+    }
+  ],
+  "key_markets": [
+    "Toronto, ON",
+    "Vancouver, BC",
+    "Calgary, AB",
+    "Edmonton, AB",
+    "Montreal, QC",
+    "Ottawa, ON",
+    "Mississauga, ON",
+    "Winnipeg, MB",
+    "Quebec City, QC",
+    "Hamilton, ON"
+  ]
+}
     "Deal pipeline management",
     "Compliance documentation",
     "Bilingual client communication"

@@ -5,22 +5,54 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
+
 const FAQ = () => {
   const {
     t
   } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // SEO: Update document title and meta for FAQ page
-  if (typeof document !== 'undefined') {
-    document.title = "FAQ | Best CRM for Real Estate Agents Questions | RealtorDesk AI";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Frequently asked questions about the best CRM for real estate agents. Learn about AI lead generation software, virtual tour integration, pricing, and how to switch from BoldTrail or Lofty.');
-    }
-  }
+  // FAQ Schema for AEO
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": t('faq.q1.question'),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": t('faq.q1.answer')
+        }
+      },
+      {
+        "@type": "Question",
+        "name": t('faq.q2.question'),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": t('faq.q2.answer')
+        }
+      },
+      {
+        "@type": "Question",
+        "name": t('faq.q3.question'),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": t('faq.q3.answer')
+        }
+      }
+    ]
+  };
 
   return <div className="min-h-screen">
+      <SEO 
+        title="FAQ | Best CRM for Real Estate Agents Questions"
+        description="Frequently asked questions about the best CRM for real estate agents. Learn about AI lead generation software, virtual tour integration, pricing, and how to switch from BoldTrail or Lofty."
+        keywords="real estate CRM FAQ, AI CRM questions, PIPEDA compliance questions, CREA DDF FAQ, real estate software questions"
+        answerFor="real estate CRM questions, how does AI CRM work, real estate software FAQ"
+        structuredData={[faqSchema]}
+      />
       <Navbar />
       
       {/* FAQ Content */}

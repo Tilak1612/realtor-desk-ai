@@ -42,6 +42,9 @@ const Pricing = () => {
         title="Real Estate CRM Pricing - From $149/mo | RealtorDesk AI"
         description="RealtorDesk AI pricing: $149/mo Starter, $299/mo Pro, $599/mo Teams. Save 85% vs Lofty ($700/mo). No setup fees, 14-day free trial. CREA DDF® native, PIPEDA compliant."
         keywords="real estate CRM pricing, CRM for real estate agents cost, Lofty alternative pricing, best CRM for real estate agents Canada, affordable real estate CRM"
+        productPrice="149"
+        productCurrency="CAD"
+        answerFor="how much does real estate CRM cost, real estate CRM pricing Canada, affordable real estate CRM, Lofty pricing alternative"
         structuredData={[
           pricingPageFAQSchema,
           productSchema("Starter", 149, "AI-powered real estate CRM for individual agents with CREA DDF® integration"),
