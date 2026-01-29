@@ -26,7 +26,6 @@ const Navbar = () => {
     { name: t('footer.howItWorks'), path: "/how-it-works" },
     { name: t('nav.pricing'), path: "/pricing" },
     { name: t('nav.integrations'), path: "/integrations" },
-    { name: t('nav.faq'), path: "/faq" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
