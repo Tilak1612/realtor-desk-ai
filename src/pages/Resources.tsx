@@ -36,11 +36,44 @@ import blogTorontoVancouver from "@/assets/blog-toronto-vancouver-compare.jpg";
 import blogPIPEDA from "@/assets/blog-pipeda-privacy.jpg";
 import blogLeadResponse from "@/assets/blog-lead-response-time.jpg";
 import blogAICRMGuide from "@/assets/blog-ai-crm-guide.jpg";
+import blogLeadGeneration from "@/assets/blog-lead-generation-strategies.jpg";
+import blogOpenHouse from "@/assets/blog-open-house-digital.jpg";
+import blogDripCampaign from "@/assets/blog-drip-campaign-templates.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
   
   const articles = [
+    {
+      categoryKey: "resourcesPage.categories.sales",
+      icon: TrendingUp,
+      title: "17 Proven Real Estate Lead Generation Strategies for Canadian Agents in 2025",
+      excerpt: "Generate more qualified real estate leads with these battle-tested strategies. Includes cost breakdowns, ROI expectations, and free templates. Updated for the 2025 Canadian market.",
+      readTime: 16,
+      image: blogLeadGeneration,
+      link: "/blog/real-estate-lead-generation-strategies-canada-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.sales",
+      icon: TrendingUp,
+      title: "Open House Sign-In Sheets: Digital vs Paper 2025 (CASL Compliance Guide)",
+      excerpt: "Digital open house sign-in sheets capture 3x more contact details and enable instant follow-up. Learn CASL requirements, conversion rate differences, and get free templates.",
+      readTime: 12,
+      image: blogOpenHouse,
+      link: "/blog/open-house-digital-sign-in-sheets-vs-paper-2025",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.marketing",
+      icon: FileText,
+      title: "15 Real Estate Drip Campaign Templates for Canadian Agents (2025 Edition)",
+      excerpt: "Copy-paste email sequences that convert cold leads into closed deals. Includes buyer nurture, seller follow-up, and expired listing templates. CASL-compliant and pre-tested.",
+      readTime: 14,
+      image: blogDripCampaign,
+      link: "/blog/real-estate-drip-campaign-templates-canada-2025",
+      useTranslation: false,
+    },
     {
       categoryKey: "resourcesPage.categories.sales",
       icon: TrendingUp,

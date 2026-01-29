@@ -39,6 +39,9 @@ import VoiceAIGuide from "./pages/blog/VoiceAIGuide";
 import CalgaryMarketingGuide from "./pages/blog/CalgaryMarketingGuide";
 import CASLComplianceGuide from "./pages/blog/CASLComplianceGuide";
 import CostOfMissedLeads from "./pages/blog/CostOfMissedLeads";
+import LeadGenerationStrategies from "./pages/blog/LeadGenerationStrategies";
+import OpenHouseDigitalSignIn from "./pages/blog/OpenHouseDigitalSignIn";
+import DripCampaignTemplates from "./pages/blog/DripCampaignTemplates";
 import Integrations from "./pages/Integrations";
 import PIPEDACompliancePage from "./pages/PIPEDACompliancePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -129,6 +132,9 @@ const App = () => (
           <Route path="/resources/calgary-real-estate-marketing-strategies" element={<CalgaryMarketingGuide />} />
           <Route path="/resources/casl-compliance-real-estate-email-marketing-canada" element={<CASLComplianceGuide />} />
           <Route path="/resources/cost-of-missed-real-estate-leads-canada" element={<CostOfMissedLeads />} />
+          <Route path="/blog/real-estate-lead-generation-strategies-canada-2025" element={<LeadGenerationStrategies />} />
+          <Route path="/blog/open-house-digital-sign-in-sheets-vs-paper-2025" element={<OpenHouseDigitalSignIn />} />
+          <Route path="/blog/real-estate-drip-campaign-templates-canada-2025" element={<DripCampaignTemplates />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
