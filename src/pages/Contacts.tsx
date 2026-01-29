@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LayoutGrid, List, Plus, Upload, Download } from "lucide-react";
+import { LayoutGrid, List, Plus, Upload, Download, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AppLayout from "@/components/layout/AppLayout";
 import ContactsTable from "@/components/contacts/ContactsTable";
@@ -170,6 +170,27 @@ const Contacts = () => {
     });
   };
 
+  const handleStartCallSession = () => {
+    // Get contacts with phone numbers that need follow-up
+    const callableContacts = filteredContacts
+      .filter(c => c.phone)
+      .slice(0, 10);
+    
+    if (callableContacts.length === 0) {
+      toast({
+        title: "No contacts to call",
+        description: "Filter your contacts or add phone numbers to start a call session",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const contactQueue = callableContacts.map(c => c.id);
+    navigate(`/call-workflow/${contactQueue[0]}`, {
+      state: { contactQueue }
+    });
+  };
+
   return (
     <AppLayout user={user} profile={profile}>
       <div className="space-y-6">
@@ -182,6 +203,15 @@ const Contacts = () => {
             </Badge>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
+            <Button
+              variant="default"
+              size="sm"
+              className="h-8 text-xs font-semibold"
+              onClick={handleStartCallSession}
+            >
+              <Phone className="h-3.5 w-3.5 mr-1.5" />
+              Start Call Session
+            </Button>
             <Button
               variant="outline"
               size="sm"

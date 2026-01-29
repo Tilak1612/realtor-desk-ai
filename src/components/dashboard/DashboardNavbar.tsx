@@ -15,6 +15,7 @@ import { Bell, Search, User, Settings, LogOut, Plus, Building2, Briefcase, Check
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import FeedbackDialog from "@/components/feedback/FeedbackDialog";
 
 interface DashboardNavbarProps {
   user: any;
@@ -87,6 +88,9 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
 
         {/* Right side actions */}
         <div className="flex items-center gap-1 sm:gap-2 ml-auto">
+          {/* Feedback Button */}
+          <FeedbackDialog />
+
           {/* Mobile Search Button */}
           <Button variant="ghost" size="icon" className="sm:hidden h-8 w-8">
             <Search className="h-4 w-4" />

@@ -50,7 +50,7 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
 
   const handleGoToDashboard = async () => {
     await onComplete();
-    navigate("/dashboard");
+    navigate("/today");
   };
 
   return (

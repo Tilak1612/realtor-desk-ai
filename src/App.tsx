@@ -63,6 +63,8 @@ import VerifyEmail from "./pages/VerifyEmail";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import Today from "./pages/Today";
+import CallWorkflow from "./pages/CallWorkflow";
 import Onboarding from "./pages/Onboarding";
 import Contacts from "./pages/Contacts";
 import ContactDetail from "./pages/ContactDetail";
@@ -141,6 +143,8 @@ const App = () => (
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/today" element={<Today />} />
+          <Route path="/call-workflow/:contactId" element={<CallWorkflow />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/contacts" element={<Contacts />} />

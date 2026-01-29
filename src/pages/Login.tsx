@@ -30,7 +30,7 @@ const Login = () => {
           .single();
 
         if (profile?.onboarding_completed) {
-          navigate("/dashboard");
+          navigate("/today");
         } else {
           navigate("/onboarding");
         }
@@ -79,7 +79,7 @@ const Login = () => {
           .single();
 
         if (profile?.onboarding_completed) {
-          navigate("/dashboard");
+          navigate("/today");
         } else {
           navigate("/onboarding");
         }

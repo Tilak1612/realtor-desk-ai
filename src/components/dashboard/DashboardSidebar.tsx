@@ -64,19 +64,22 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
   }, []);
 
   const menuItems = [
-    { icon: LayoutDashboard, label: t('app.sidebar.dashboard'), path: "/dashboard" },
+    { icon: LayoutDashboard, label: "Today", path: "/today", featured: true },
     { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts", count: counts.contacts },
-    { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
     { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
-    { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
-    { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
-    { icon: Zap, label: "Automations", path: "/automations" },
     { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
     { icon: Calendar, label: t('app.sidebar.calendar'), path: "/calendar" },
     { icon: TrendingUp, label: t('app.sidebar.reports'), path: "/reports" },
-    { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
-    { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
     { icon: Settings, label: t('app.sidebar.settings'), path: "/settings" },
+  ];
+
+  const advancedItems = [
+    { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
+    { icon: Zap, label: "Automations", path: "/automations" },
+    { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
+    { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
+    { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
+    { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -108,7 +111,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
       >
         {/* Logo */}
         <Link
-          to="/dashboard"
+          to="/today"
           className="flex items-center gap-2.5 h-14 px-4 border-b border-border hover:bg-accent/50 transition-colors"
           onClick={() => setIsOpen(false)}
         >
@@ -118,33 +121,71 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-3 px-3">
-          <div className="space-y-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-colors text-sm ${
-                  isActive(item.path)
-                    ? "bg-primary text-primary-foreground font-medium"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                }`}
-              >
-                <span className="flex items-center gap-2.5">
-                  <item.icon className="w-4 h-4 flex-shrink-0" />
-                  <span>{item.label}</span>
-                </span>
-                {typeof item.count === 'number' && item.count > 0 && (
-                  <span className={`text-xs px-1.5 py-0.5 rounded ${
-                    isActive(item.path) 
-                      ? "bg-primary-foreground/20 text-primary-foreground" 
-                      : "bg-muted text-muted-foreground"
-                  }`}>
-                    {item.count}
+          <div className="space-y-4">
+            {/* Main Navigation */}
+            <div className="space-y-1">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-colors text-sm ${
+                    isActive(item.path)
+                      ? "bg-primary text-primary-foreground font-medium"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <item.icon className="w-4 h-4 flex-shrink-0" />
+                    <span>{item.label}</span>
                   </span>
-                )}
-              </Link>
-            ))}
+                  {typeof item.count === 'number' && item.count > 0 && (
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${
+                      isActive(item.path) 
+                        ? "bg-primary-foreground/20 text-primary-foreground" 
+                        : "bg-muted text-muted-foreground"
+                    }`}>
+                      {item.count}
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            {/* Advanced Section */}
+            <div className="space-y-1">
+              <div className="px-3 py-2">
+                <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  Advanced
+                </h3>
+              </div>
+              {advancedItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-colors text-sm ${
+                    isActive(item.path)
+                      ? "bg-primary text-primary-foreground font-medium"
+                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <item.icon className="w-4 h-4 flex-shrink-0" />
+                    <span>{item.label}</span>
+                  </span>
+                  {typeof item.count === 'number' && item.count > 0 && (
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${
+                      isActive(item.path) 
+                        ? "bg-primary-foreground/20 text-primary-foreground" 
+                        : "bg-muted text-muted-foreground"
+                    }`}>
+                      {item.count}
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </div>
           </div>
         </nav>
 
