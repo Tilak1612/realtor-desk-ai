@@ -28,81 +28,25 @@ Disallow: /reset-password
 # Key crawlers
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0.5
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 0.5
 
-# AI Search Engine Crawlers (AEO Optimization)
 User-agent: GPTBot
 Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
-Allow: /sitemap.xml
-Crawl-delay: 1
-
-User-agent: ChatGPT-User
-Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
 Crawl-delay: 1
 
 User-agent: ClaudeBot
 Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
-Allow: /sitemap.xml
 Crawl-delay: 1
 
 User-agent: Google-Extended
 Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
 Crawl-delay: 1
 
 User-agent: CCBot
 Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
 Crawl-delay: 2
-
-User-agent: anthropic-ai
-Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
-Crawl-delay: 1
-
-User-agent: PerplexityBot
-Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
-Crawl-delay: 1
-
-User-agent: YouBot
-Allow: /
-Allow: /knowledge-base.json
-Allow: /knowledge-base-fr.json
-Allow: /ai-company-info.txt
-Allow: /ai-company-info-fr.txt
-Crawl-delay: 1
-
-# Sitemap location for all crawlers
-Sitemap: https://realtordesk.ai/sitemap.xml
 
 # Default crawl rate
 Crawl-delay: 1

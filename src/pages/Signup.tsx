@@ -196,7 +196,7 @@ const Signup = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder={t('placeholders.email')}
+                  placeholder="your@email.com"
                   value={formData.email || ""}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className={inputClassName}

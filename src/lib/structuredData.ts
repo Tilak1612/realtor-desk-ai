@@ -110,18 +110,10 @@ export const homepageFAQSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the best CRM for real estate agents in Canada?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "RealtorDesk AI is the best CRM for Canadian real estate agents because it's specifically built for the Canadian market with PIPEDA compliance, CREA DDF® integration, bilingual support, and pricing starting at $149 CAD/month - 85% less than US alternatives like Lofty."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "Is RealtorDesk AI PIPEDA compliant?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, RealtorDesk AI is fully PIPEDA compliant with Canadian data residency, encryption at rest and in transit, and automated compliance logging. All data is hosted in Canada to meet Canadian privacy regulations."
+        "text": "Yes, RealtorDesk AI is fully PIPEDA compliant with Canadian data residency, encryption at rest and in transit, and automated compliance logging. All data is hosted in Canada."
       }
     },
     {
@@ -154,22 +146,6 @@ export const homepageFAQSchema = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "RealtorDesk AI includes a 24/7 AI chatbot, AI voice agent, predictive lead scoring, automated follow-ups, smart email/SMS sequences, WhatsApp integration, and custom AI training for your specific needs."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does AI help real estate agents generate more leads?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "AI helps real estate agents by providing instant 24/7 lead response (average 47 seconds), automated follow-up sequences, predictive lead scoring to prioritize hot leads, and intelligent nurturing campaigns - resulting in 37% more closings and 60-80% better lead retention."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I try RealtorDesk AI before buying?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, RealtorDesk AI offers a 14-day free trial with full access to all features and no credit card required. You can cancel anytime with no long-term contracts."
       }
     }
   ]
@@ -293,115 +269,4 @@ export const howToSchema = (name: string, description: string, steps: { name: st
     "name": step.name,
     "text": step.text
   }))
-});
-
-// AEO: Video Object Schema for demo videos and tutorials
-export const videoObjectSchema = ({
-  name,
-  description,
-  thumbnailUrl,
-  uploadDate,
-  duration,
-  contentUrl
-}: {
-  name: string;
-  description: string;
-  thumbnailUrl: string;
-  uploadDate: string;
-  duration: string;
-  contentUrl: string;
-}) => ({
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  "name": name,
-  "description": description,
-  "thumbnailUrl": thumbnailUrl,
-  "uploadDate": uploadDate,
-  "duration": duration,
-  "contentUrl": contentUrl,
-  "embedUrl": contentUrl,
-  "publisher": {
-    "@type": "Organization",
-    "name": "RealtorDesk AI",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://realtordesk.ai/logo.png"
-    }
-  }
-});
-
-// AEO: Review/Testimonial Schema for user reviews
-export const reviewSchema = ({
-  author,
-  rating,
-  reviewBody,
-  datePublished
-}: {
-  author: string;
-  rating: number;
-  reviewBody: string;
-  datePublished: string;
-}) => ({
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "itemReviewed": {
-    "@type": "SoftwareApplication",
-    "name": "RealtorDesk AI"
-  },
-  "author": {
-    "@type": "Person",
-    "name": author
-  },
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": rating,
-    "bestRating": 5,
-    "worstRating": 1
-  },
-  "reviewBody": reviewBody,
-  "datePublished": datePublished
-});
-
-// AEO: Speakable Schema for voice search optimization
-export const speakableSchema = (cssSelectors: string[]) => ({
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": cssSelectors
-  }
-});
-
-// AEO: Q&A Schema for answer engines
-export const qaSchema = (questions: Array<{ question: string; answer: string }>) => ({
-  "@context": "https://schema.org",
-  "@type": "QAPage",
-  "mainEntity": questions.map(q => ({
-    "@type": "Question",
-    "name": q.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": q.answer
-    }
-  }))
-});
-
-// AEO: Enhanced AggregateRating for social proof
-export const aggregateRatingSchema = ({
-  ratingValue,
-  reviewCount,
-  bestRating = 5,
-  worstRating = 1
-}: {
-  ratingValue: number;
-  reviewCount: number;
-  bestRating?: number;
-  worstRating?: number;
-}) => ({
-  "@context": "https://schema.org",
-  "@type": "AggregateRating",
-  "ratingValue": ratingValue.toString(),
-  "reviewCount": reviewCount.toString(),
-  "bestRating": bestRating.toString(),
-  "worstRating": worstRating.toString()
 });

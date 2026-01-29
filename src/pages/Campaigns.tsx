@@ -7,10 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
-import { useTranslation } from "react-i18next";
 
 const Campaigns = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
@@ -82,14 +80,14 @@ const Campaigns = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl font-semibold">{t('campaigns.title')}</h1>
+            <h1 className="text-2xl md:text-3xl font-semibold">Email Campaigns</h1>
             <p className="text-sm text-muted-foreground">
-              {t('campaigns.subtitle')}
+              Manage and track your email marketing campaigns
             </p>
           </div>
           <Button size="sm" className="h-8 text-xs">
             <Plus className="mr-1.5 h-3.5 w-3.5" />
-            {t('campaigns.newCampaign')}
+            New Campaign
           </Button>
         </div>
 
@@ -132,7 +130,7 @@ const Campaigns = () => {
         {/* Campaigns List */}
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-medium">{t('campaigns.recentCampaigns')}</CardTitle>
+            <CardTitle className="text-base font-medium">Recent Campaigns</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -170,10 +168,10 @@ const Campaigns = () => {
                   </div>
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="h-7 text-xs">
-                      {t('campaigns.view')}
+                      View
                     </Button>
                     <Button variant="outline" size="sm" className="h-7 text-xs">
-                      {t('campaigns.edit')}
+                      Edit
                     </Button>
                   </div>
                 </div>

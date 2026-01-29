@@ -1226,64 +1226,6 @@ const resources = {
         copyright: "© 2025 RealtorDesk.ai. All rights reserved.",
         madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors"
       },
-      campaigns: {
-        title: "Email Campaigns",
-        subtitle: "Manage and track your email marketing campaigns",
-        newCampaign: "New Campaign",
-        totalCampaigns: "Total Campaigns",
-        emailsSent: "Emails Sent",
-        avgOpenRate: "Avg. Open Rate",
-        clickRate: "Click Rate",
-        recentCampaigns: "Recent Campaigns",
-        view: "View",
-        edit: "Edit",
-        status: {
-          active: "Active",
-          scheduled: "Scheduled",
-          draft: "Draft",
-          completed: "Completed"
-        }
-      },
-      switchFrom: {
-        ixact: {
-          badge: "Upgrade to AI",
-          title: "Love IXACT's Price?",
-          titleGradient: "You'll Love AI Even More.",
-          subtitle: "For just $20/month more ($699/year vs IXACT's $456/year), get AI that closes 6-8 extra deals per year. Try free for 14 days.",
-          upgradeTitle: "The $20/Month Upgrade That Pays for Itself",
-          investment: "$243/year",
-          investmentDesc: "Investment for AI upgrade",
-          extraDeals: "6-8 deals",
-          extraDealsDesc: "Extra closes per year",
-          additionalRevenue: "$60K+",
-          additionalRevenueDesc: "Additional revenue",
-          trialTitle: "14 Days Free Trial + Free Migration",
-          trialDesc: "Try risk-free for 14 days. We move all your IXACT data for free. If you don't close extra deals, full refund.",
-          startTrial: "Start 14-Day Free Trial",
-          seeComparison: "See Comparison"
-        }
-      },
-      placeholders: {
-        email: "your@email.com",
-        name: "John Smith",
-        fullName: "John Doe",
-        brokerage: "Your Brokerage",
-        company: "ABC Realty",
-        selectProvince: "Select province",
-        selectCRM: "Select CRM",
-        selectTeamSize: "Select team size",
-        selectChallenge: "Select challenge",
-        tellUsMore: "Tell us more about your needs...",
-        askAnything: "Ask me anything...",
-        city: "Toronto",
-        postalCode: "M5V 1A1",
-        mlsNumber: "C1234567",
-        imageUrl: "https://...",
-        searchAddress: "Search by address, MLS#, city...",
-        bedrooms: "Bedrooms",
-        searchDashboard: "Search contacts, properties, deals...",
-        helpMessage: "Tell us how we can help you..."
-      },
       trial: {
         daysRemaining: "{{count}} days remaining in your free trial",
         oneDay: "1 day remaining in your free trial",
@@ -2544,64 +2486,6 @@ const resources = {
         casl: "Conformité LCAP",
         copyright: "© 2025 RealtorDesk.ai. Tous droits réservés.",
         madeInCanada: "Fabriqué au Canada 🇨🇦 pour les Agents Immobiliers Canadiens"
-      },
-      campaigns: {
-        title: "Campagnes Email",
-        subtitle: "Gérez et suivez vos campagnes de marketing par courriel",
-        newCampaign: "Nouvelle Campagne",
-        totalCampaigns: "Total des Campagnes",
-        emailsSent: "Courriels Envoyés",
-        avgOpenRate: "Taux d'Ouverture Moy.",
-        clickRate: "Taux de Clics",
-        recentCampaigns: "Campagnes Récentes",
-        view: "Voir",
-        edit: "Modifier",
-        status: {
-          active: "Active",
-          scheduled: "Planifiée",
-          draft: "Brouillon",
-          completed: "Terminée"
-        }
-      },
-      switchFrom: {
-        ixact: {
-          badge: "Passer à l'IA",
-          title: "Vous Aimez le Prix d'IXACT?",
-          titleGradient: "Vous Aimerez Encore Plus l'IA.",
-          subtitle: "Pour seulement 20$/mois de plus (699$/an vs 456$/an d'IXACT), obtenez une IA qui conclut 6 à 8 transactions supplémentaires par an. Essayez gratuitement pendant 14 jours.",
-          upgradeTitle: "La Mise à Niveau de 20$/Mois Qui Se Rentabilise",
-          investment: "243$/an",
-          investmentDesc: "Investissement pour la mise à niveau IA",
-          extraDeals: "6-8 transactions",
-          extraDealsDesc: "Conclusions supplémentaires par an",
-          additionalRevenue: "60K$+",
-          additionalRevenueDesc: "Revenus supplémentaires",
-          trialTitle: "Essai Gratuit de 14 Jours + Migration Gratuite",
-          trialDesc: "Essayez sans risque pendant 14 jours. Nous transférons toutes vos données IXACT gratuitement. Si vous ne concluez pas de transactions supplémentaires, remboursement intégral.",
-          startTrial: "Commencer l'Essai de 14 Jours",
-          seeComparison: "Voir la Comparaison"
-        }
-      },
-      placeholders: {
-        email: "votre@email.com",
-        name: "Jean Tremblay",
-        fullName: "Jean Dupont",
-        brokerage: "Votre Courtage",
-        company: "Immobilier ABC",
-        selectProvince: "Sélectionner la province",
-        selectCRM: "Sélectionner le CRM",
-        selectTeamSize: "Sélectionner la taille d'équipe",
-        selectChallenge: "Sélectionner le défi",
-        tellUsMore: "Dites-nous en plus sur vos besoins...",
-        askAnything: "Demandez-moi n'importe quoi...",
-        city: "Montréal",
-        postalCode: "H1A 1A1",
-        mlsNumber: "C1234567",
-        imageUrl: "https://...",
-        searchAddress: "Rechercher par adresse, MLS#, ville...",
-        bedrooms: "Chambres",
-        searchDashboard: "Rechercher contacts, propriétés, transactions...",
-        helpMessage: "Dites-nous comment nous pouvons vous aider..."
       },
       trial: {
         daysRemaining: "{{count}} jours restants dans votre essai gratuit",

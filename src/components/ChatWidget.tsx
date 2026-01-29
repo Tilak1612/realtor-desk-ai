@@ -166,7 +166,7 @@ const ChatWidget = () => {
               <form onSubmit={handleSubmit} className="flex gap-2">
                 <Input
                   type="text"
-                  placeholder={t('placeholders.askAnything')}
+                  placeholder="Ask me anything..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   disabled={loading}

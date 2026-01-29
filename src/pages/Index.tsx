@@ -56,9 +56,6 @@ const Index = () => {
         title="AI Real Estate CRM for Canadian Agents | RealtorDesk AI - CREA DDF®"
         description="RealtorDesk AI is the AI-first real estate CRM built for Canadian agents. CREA DDF® native, PIPEDA compliant, bilingual. From $149/mo vs Lofty's $700/mo. Start 14-day free trial."
         keywords="best CRM for real estate agents, real estate CRM Canada, AI tools for Realtors, CREA DDF integration, real estate automation, Lofty alternative, Follow Up Boss alternative, PIPEDA compliant CRM, bilingual real estate AI, real estate lead generation software"
-        productPrice="149"
-        productCurrency="CAD"
-        answerFor="best CRM for real estate agents Canada, AI real estate software, PIPEDA compliant CRM, CREA DDF integration, bilingual real estate CRM"
         structuredData={[
           organizationSchema,
           softwareApplicationSchema,
