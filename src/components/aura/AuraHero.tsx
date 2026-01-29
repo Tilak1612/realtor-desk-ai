@@ -36,35 +36,35 @@ const AuraHero = () => {
               {/* Badge */}
               <div className="aura-badge mb-6">
                 <Zap className="w-4 h-4" />
-                {t('hero.badge', '14-Day Free Trial')}
+                {t('hero.badge1', 'CREA Certified')}
               </div>
 
               {/* Main Title */}
               <div className="relative mb-8">
                 <div className="absolute inset-0 blur-3xl bg-primary/20 animate-pulse-glow rounded-full scale-150 -z-10"></div>
                 <h1 className="lg:text-6xl leading-[1.05] text-4xl sm:text-5xl tracking-tighter gradient-text-animated relative">
-                  Stop Losing Deals to Slow Follow-Up
+                  {t('hero.title')}
                 </h1>
               </div>
 
               {/* Subtitle */}
               <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-lg font-light">
-                Instant follow-ups, CREA DDF integration, and complete PIPEDA compliance
+                {t('hero.subtitle')}
               </p>
 
               {/* Trust Signals Line */}
               <div className="flex flex-wrap gap-4 mb-10 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Avg. response time: 47 seconds
+                  {t('hero.badge2', 'SOC 2 Compliant')}
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  CREA DDF® integrated
+                  {t('hero.badge1', 'CREA Certified')}
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Bilingual EN/FR
+                  {t('canadian.bilingual', 'Bilingual Support (EN/FR)')}
                 </span>
               </div>
 
@@ -85,7 +85,7 @@ const AuraHero = () => {
                     </div>
 
                     <span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-                      START YOUR 14-DAY FREE TRIAL
+                      {t('hero.getStarted', 'Start Your 14-Day Free Trial').toUpperCase()}
                     </span>
                     <ArrowRight className="relative z-10 ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
@@ -94,7 +94,7 @@ const AuraHero = () => {
                 <Link to="/demo">
                   <button className="hover:bg-white/5 transition-all flex text-base font-medium text-muted-foreground bg-white/5 rounded-full py-4 px-8 items-center justify-center relative overflow-hidden group/btn border border-white/10">
                     <span className="text-base font-medium text-foreground/80 tracking-tight relative z-10">
-                      Book Your Free Demo
+                      {t('hero.watchDemo', 'Book Your Free Demo')}
                     </span>
                     <Play className="w-4 h-4 ml-2 opacity-70 relative z-10 group-hover/btn:scale-110 transition-transform" fill="currentColor" />
                   </button>
@@ -109,8 +109,8 @@ const AuraHero = () => {
                   <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-green-500/20 to-green-500/5 flex items-center justify-center text-xs font-bold text-green-400">ML</div>
                 </div>
                 <div className="text-sm">
-                  <p className="text-muted-foreground italic">"Captured 3 leads in my first 48 hours I would have lost"</p>
-                  <p className="text-xs text-muted-foreground mt-1">— Sarah K., Toronto • Join 50+ Canadian agents</p>
+                  <p className="text-muted-foreground italic">"{t('home.socialProof.joinAgents', 'Join agents closing 3X more deals')}"</p>
+                  <p className="text-xs text-muted-foreground mt-1">— {t('home.socialProof.agents', 'agents')} {t('home.socialProof.usingNow', 'using now')}</p>
                 </div>
               </div>
             </div>
@@ -137,8 +137,8 @@ const AuraHero = () => {
                       <Users className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground">Active Agents</div>
-                      <div className="text-lg font-bold text-white">+999 Leads</div>
+                      <div className="text-xs text-muted-foreground">{t('home.socialProof.agents', 'Active Agents')}</div>
+                      <div className="text-lg font-bold text-white">+999 {t('home.socialProof.leads', 'Leads')}</div>
                     </div>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const AuraHero = () => {
                 <div className="absolute -bottom-4 -left-4 bg-card/90 backdrop-blur-xl rounded-2xl py-3 px-4 shadow-xl border border-white/10 hidden sm:block">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <span className="text-sm font-medium text-white">AI Active</span>
+                    <span className="text-sm font-medium text-white">{t('aiActive', 'AI ACTIVE')}</span>
                     <span className="text-xs text-muted-foreground">• 24/7</span>
                   </div>
                 </div>
