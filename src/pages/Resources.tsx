@@ -404,68 +404,117 @@ const Resources = () => {
       {/* Articles Grouped by Category */}
       <section className="section-padding">
         <div className="container-custom">
-          {categoryKeys.slice(1).map((categoryKey) => {
-            const categoryArticles = articles.filter(article => article.categoryKey === categoryKey);
-            
-            if (categoryArticles.length === 0) return null;
-
-            // Show all categories or only selected category
-            const shouldDisplay = selectedCategory === "all" || selectedCategory === categoryKey;
-            
-            return shouldDisplay ? (
-              <div key={categoryKey} className="mb-16">
-                {/* Category Heading */}
-                <div className="mb-8" id={categoryKey}>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                    {t(categoryKey)}
-                  </h2>
-                  <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-                </div>
-                
-                {/* Articles Grid for this Category */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                  {categoryArticles.map((article, index) => (
-                    <Card key={index} className="overflow-hidden card-hover">
-                      {/* Article Image */}
-                      <img 
-                        src={article.image} 
-                        alt={article.useTranslation ? t(article.titleKey!) : article.title}
-                        className="w-full h-48 object-cover"
-                      />
-                      
-                      <div className="p-6">
-                        <div className="flex items-center gap-2 mb-3">
-                          <article.icon className="w-4 h-4 text-primary" />
-                          <span className="text-xs font-semibold text-primary uppercase tracking-wide">
-                            {t(article.categoryKey)}
-                          </span>
-                        </div>
-
-                        <h3 className="text-xl font-bold mb-3 line-clamp-2">
-                          {article.useTranslation ? t(article.titleKey!) : article.title}
-                        </h3>
-                        
-                        <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
-                          {article.useTranslation ? t(article.excerptKey!) : article.excerpt}
-                        </p>
-
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-muted-foreground">
-                            {article.readTime} {t('resourcesPage.readTime')}
-                          </span>
-                          <Link to={article.link}>
-                            <Button variant="link" className="text-primary font-semibold p-0">
-                              {t('resourcesPage.readMore')} →
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
+          {selectedCategory === "all" ? (
+            // Show All Articles in single section
+            <div className="mb-16">
+              <div className="mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                  All Articles
+                </h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
               </div>
-            ) : null;
-          })}
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {articles.map((article, index) => (
+                  <Card key={index} className="overflow-hidden card-hover">
+                    <img 
+                      src={article.image} 
+                      alt={article.useTranslation ? t(article.titleKey!) : article.title}
+                      className="w-full h-48 object-cover"
+                    />
+                    
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <article.icon className="w-4 h-4 text-primary" />
+                        <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+                          {t(article.categoryKey)}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-bold mb-3 line-clamp-2">
+                        {article.useTranslation ? t(article.titleKey!) : article.title}
+                      </h3>
+                      
+                      <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
+                        {article.useTranslation ? t(article.excerptKey!) : article.excerpt}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          {article.readTime} {t('resourcesPage.readTime')}
+                        </span>
+                        <Link to={article.link}>
+                          <Button variant="link" className="text-primary font-semibold p-0">
+                            {t('resourcesPage.readMore')} →
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          ) : (
+            // Show specific category
+            categoryKeys.slice(1).map((categoryKey) => {
+              const categoryArticles = articles.filter(article => article.categoryKey === categoryKey);
+              
+              if (categoryArticles.length === 0) return null;
+
+              const shouldDisplay = selectedCategory === categoryKey;
+              
+              return shouldDisplay ? (
+                <div key={categoryKey} className="mb-16">
+                  <div className="mb-8" id={categoryKey}>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                      {t(categoryKey)}
+                    </h2>
+                    <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    {categoryArticles.map((article, index) => (
+                      <Card key={index} className="overflow-hidden card-hover">
+                        <img 
+                          src={article.image} 
+                          alt={article.useTranslation ? t(article.titleKey!) : article.title}
+                          className="w-full h-48 object-cover"
+                        />
+                        
+                        <div className="p-6">
+                          <div className="flex items-center gap-2 mb-3">
+                            <article.icon className="w-4 h-4 text-primary" />
+                            <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+                              {t(article.categoryKey)}
+                            </span>
+                          </div>
+
+                          <h3 className="text-xl font-bold mb-3 line-clamp-2">
+                            {article.useTranslation ? t(article.titleKey!) : article.title}
+                          </h3>
+                          
+                          <p className="text-muted-foreground mb-4 line-clamp-3 text-sm leading-relaxed">
+                            {article.useTranslation ? t(article.excerptKey!) : article.excerpt}
+                          </p>
+
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-muted-foreground">
+                              {article.readTime} {t('resourcesPage.readTime')}
+                            </span>
+                            <Link to={article.link}>
+                              <Button variant="link" className="text-primary font-semibold p-0">
+                                {t('resourcesPage.readMore')} →
+                              </Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              ) : null;
+            })
+          )}
         </div>
       </section>
 
