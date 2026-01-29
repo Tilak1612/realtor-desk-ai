@@ -312,6 +312,38 @@ const resources = {
         q12: {
           question: "Can I customize the AI's responses?",
           answer: "Yes! You control the AI's personality, response templates, and which questions it handles vs. escalates to you. It learns your style over time."
+        },
+        q13: {
+          question: "How does RealtorDesk AI compare to Follow Up Boss?",
+          answer: "RealtorDesk AI offers AI-powered instant lead response (under 3 seconds), native CREA DDF® integration, and bilingual support starting at $149/mo CAD. Follow Up Boss requires manual follow-up, lacks AI features, and costs $49-$99 USD/user/month without Canadian-specific features."
+        },
+        q14: {
+          question: "Does RealtorDesk AI work with CREA DDF®?",
+          answer: "Yes! RealtorDesk AI has native CREA DDF® integration built specifically for Canadian agents. Sync MLS listings automatically, match buyers to properties in real-time, and manage listing data directly within the CRM—no third-party tools needed."
+        },
+        q15: {
+          question: "What's the average ROI for agents using RealtorDesk AI?",
+          answer: "Based on our beta user data, agents see an average 3X increase in lead conversion due to sub-3-second response times. With an average agent closing 12-18 deals per year, adding just 2-3 extra deals from better follow-up pays for the CRM 10X over."
+        },
+        q16: {
+          question: "Can RealtorDesk AI handle phone calls?",
+          answer: "Yes! Our AI Voice Agent can handle inbound phone calls 24/7, answer questions about listings, qualify leads, and book appointments directly into your calendar—all with a natural Canadian accent in English or French."
+        },
+        q17: {
+          question: "Is RealtorDesk AI suitable for real estate teams?",
+          answer: "Absolutely. Our Teams plan supports unlimited users with shared inbox, team performance analytics, round-robin lead distribution, and custom AI training. Perfect for brokerages and teams of 2-50+ agents."
+        },
+        q18: {
+          question: "How long does it take to see results with RealtorDesk AI?",
+          answer: "Most agents see immediate improvements in response time (instant instead of hours/days). Within the first 30 days, agents typically see 25-40% more qualified appointments booked. Measurable deal increases usually show within 60-90 days."
+        },
+        q19: {
+          question: "Does RealtorDesk AI integrate with my existing website?",
+          answer: "Yes! Our AI chatbot widget installs on any website with a simple code snippet (works with WordPress, Wix, Squarespace, custom sites). It takes less than 5 minutes to set up and starts capturing leads immediately."
+        },
+        q20: {
+          question: "What makes RealtorDesk AI different from traditional CRMs?",
+          answer: "Traditional CRMs organize contacts but require YOU to do all the follow-up. RealtorDesk AI actively engages leads 24/7 via chat, email, SMS, and voice—qualifying them and booking appointments while you focus on closings. It's the difference between a filing cabinet and an AI assistant."
         }
       },
         cta: {
@@ -1573,6 +1605,38 @@ const resources = {
         q12: {
           question: "Puis-je personnaliser les réponses de l'IA?",
           answer: "Oui! Vous contrôlez la personnalité de l'IA, les modèles de réponse et les questions qu'elle gère par rapport à celles qu'elle vous transmet. Elle apprend votre style au fil du temps."
+        },
+        q13: {
+          question: "Comment RealtorDesk AI se compare-t-il à Follow Up Boss?",
+          answer: "RealtorDesk AI offre une réponse instantanée aux prospects par IA (moins de 3 secondes), une intégration native CREA DDF® et un support bilingue à partir de 149$/mois CAD. Follow Up Boss nécessite un suivi manuel, manque de fonctionnalités IA et coûte 49-99$ USD/utilisateur/mois sans fonctionnalités spécifiques au Canada."
+        },
+        q14: {
+          question: "RealtorDesk AI fonctionne-t-il avec CREA DDF®?",
+          answer: "Oui! RealtorDesk AI a une intégration native CREA DDF® conçue spécifiquement pour les agents canadiens. Synchronisez les inscriptions MLS automatiquement, jumelez les acheteurs aux propriétés en temps réel et gérez les données d'inscription directement dans le CRM—aucun outil tiers requis."
+        },
+        q15: {
+          question: "Quel est le ROI moyen pour les agents utilisant RealtorDesk AI?",
+          answer: "Selon les données de nos utilisateurs bêta, les agents voient une augmentation moyenne de 3X de la conversion des prospects grâce à des temps de réponse inférieurs à 3 secondes. Avec un agent moyen concluant 12-18 transactions par an, ajouter seulement 2-3 transactions supplémentaires grâce à un meilleur suivi paie le CRM 10X."
+        },
+        q16: {
+          question: "RealtorDesk AI peut-il gérer les appels téléphoniques?",
+          answer: "Oui! Notre Agent Vocal IA peut gérer les appels téléphoniques entrants 24/7, répondre aux questions sur les inscriptions, qualifier les prospects et réserver des rendez-vous directement dans votre calendrier—le tout avec un accent canadien naturel en anglais ou en français."
+        },
+        q17: {
+          question: "RealtorDesk AI convient-il aux équipes immobilières?",
+          answer: "Absolument. Notre plan Teams prend en charge un nombre illimité d'utilisateurs avec boîte de réception partagée, analyses de performance d'équipe, distribution de prospects en rotation et formation IA personnalisée. Parfait pour les courtages et équipes de 2 à 50+ agents."
+        },
+        q18: {
+          question: "Combien de temps faut-il pour voir des résultats avec RealtorDesk AI?",
+          answer: "La plupart des agents voient des améliorations immédiates du temps de réponse (instantané au lieu d'heures/jours). Dans les 30 premiers jours, les agents voient généralement 25-40% plus de rendez-vous qualifiés réservés. Les augmentations mesurables de transactions apparaissent généralement dans les 60-90 jours."
+        },
+        q19: {
+          question: "RealtorDesk AI s'intègre-t-il avec mon site web existant?",
+          answer: "Oui! Notre widget de chatbot IA s'installe sur n'importe quel site web avec un simple extrait de code (fonctionne avec WordPress, Wix, Squarespace, sites personnalisés). La configuration prend moins de 5 minutes et commence à capturer des prospects immédiatement."
+        },
+        q20: {
+          question: "Qu'est-ce qui rend RealtorDesk AI différent des CRM traditionnels?",
+          answer: "Les CRM traditionnels organisent les contacts mais nécessitent que VOUS fassiez tout le suivi. RealtorDesk AI engage activement les prospects 24/7 via chat, courriel, SMS et voix—les qualifiant et réservant des rendez-vous pendant que vous vous concentrez sur les clôtures. C'est la différence entre un classeur et un assistant IA."
         }
       },
       cta: {

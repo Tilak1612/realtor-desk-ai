@@ -57,6 +57,38 @@ const MobileOptimizedFAQ = ({ searchQuery = "" }: MobileOptimizedFAQProps) => {
     {
       q: t('faq.q12.question'),
       a: t('faq.q12.answer')
+    },
+    {
+      q: t('faq.q13.question'),
+      a: t('faq.q13.answer')
+    },
+    {
+      q: t('faq.q14.question'),
+      a: t('faq.q14.answer')
+    },
+    {
+      q: t('faq.q15.question'),
+      a: t('faq.q15.answer')
+    },
+    {
+      q: t('faq.q16.question'),
+      a: t('faq.q16.answer')
+    },
+    {
+      q: t('faq.q17.question'),
+      a: t('faq.q17.answer')
+    },
+    {
+      q: t('faq.q18.question'),
+      a: t('faq.q18.answer')
+    },
+    {
+      q: t('faq.q19.question'),
+      a: t('faq.q19.answer')
+    },
+    {
+      q: t('faq.q20.question'),
+      a: t('faq.q20.answer')
     }
   ];
 
