@@ -16,7 +16,7 @@ const resources = {
         startClosing: "Start Closing More Deals"
       },
       hero: {
-        title: "The AI Platform Built for Canadian Realtors",
+        title: "Close 3X More Deals with AI Automation",
         subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with CREA DDF® integration and full bilingual support.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book Your Free Demo",
@@ -1277,7 +1277,7 @@ const resources = {
         startClosing: "Commencer à Conclure Plus"
       },
       hero: {
-        title: "La Plateforme IA Conçue pour les Agents Immobiliers Canadiens",
+        title: "Concluez 3X Plus de Transactions avec l'Automatisation IA",
         subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec intégration CREA DDF® et support bilingue complet.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réserver Votre Démo Gratuite",
