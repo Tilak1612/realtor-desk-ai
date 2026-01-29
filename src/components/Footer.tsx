@@ -135,9 +135,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Blogs */}
           <div>
-            <h3 className="font-semibold mb-4">{t('footer.resources')}</h3>
+            <h3 className="font-semibold mb-4">Blogs</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/resources" className="text-muted-foreground hover:text-primary transition-colors">
