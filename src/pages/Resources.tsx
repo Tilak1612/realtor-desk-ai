@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -42,6 +43,7 @@ import blogDripCampaign from "@/assets/blog-drip-campaign-templates.jpg";
 
 const Resources = () => {
   const { t } = useTranslation();
+  const [selectedCategory, setSelectedCategory] = useState("all");
   
   const articles = [
     {
@@ -381,6 +383,24 @@ const Resources = () => {
         </div>
       </section>
 
+      {/* Category Filter - Sticky */}
+      <section className="py-8 border-b sticky top-20 z-40 bg-background/95 backdrop-blur-md">
+        <div className="container-custom">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {categoryKeys.map((key, index) => (
+              <Button
+                key={key}
+                onClick={() => setSelectedCategory(key)}
+                variant={selectedCategory === key ? "default" : "outline"}
+                className={selectedCategory === key ? "btn-gradient" : "hover:border-primary transition-colors"}
+              >
+                {t(key)}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Articles Grouped by Category */}
       <section className="section-padding">
         <div className="container-custom">
@@ -388,11 +408,14 @@ const Resources = () => {
             const categoryArticles = articles.filter(article => article.categoryKey === categoryKey);
             
             if (categoryArticles.length === 0) return null;
+
+            // Show all categories or only selected category
+            const shouldDisplay = selectedCategory === "all" || selectedCategory === categoryKey;
             
-            return (
+            return shouldDisplay ? (
               <div key={categoryKey} className="mb-16">
                 {/* Category Heading */}
-                <div className="mb-8">
+                <div className="mb-8" id={categoryKey}>
                   <h2 className="text-3xl md:text-4xl font-bold mb-2">
                     {t(categoryKey)}
                   </h2>
@@ -441,7 +464,7 @@ const Resources = () => {
                   ))}
                 </div>
               </div>
-            );
+            ) : null;
           })}
         </div>
       </section>
