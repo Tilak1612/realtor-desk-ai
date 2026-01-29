@@ -78,13 +78,6 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
 
-# Prerender plugin configuration with longer timeout
-[plugins.inputs]
-  timeout = 180
-  concurrency = 5
-  # crawler-specific headers to ensure proper rendering
-  renderWith = "puppeteer"
-
 # Cache static assets
 [[headers]]
   for = "/assets/*"
