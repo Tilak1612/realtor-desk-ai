@@ -357,6 +357,61 @@ const Index = () => {
         </div>
       </SpotlightCard>
 
+      {/* FAQ Section - Home Page Only */}
+      <AuraSection
+        sectionNumber="08"
+        badge={t('faq.title', 'FAQ')}
+        badgeIcon={<MessageSquare className="w-4 h-4" />}
+        title="Frequently Asked Questions"
+        subtitle="Get answers to common questions about RealtorDesk AI"
+      >
+        <div className="max-w-3xl mx-auto">
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+              <details key={num} className="group bg-card rounded-2xl border border-white/10 overflow-hidden">
+                <summary className="flex items-start justify-between gap-4 p-6 cursor-pointer list-none hover:bg-white/5 transition-colors">
+                  <div className="flex items-start gap-3 flex-1">
+                    <MessageSquare className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="font-semibold text-white text-left">{t(`faq.q${num}.question`)}</span>
+                  </div>
+                  <CheckCircle className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="px-6 pb-6 pl-14 text-muted-foreground text-sm leading-relaxed">
+                  {t(`faq.q${num}.answer`)}
+                </div>
+              </details>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-muted-foreground mb-6">
+              Have more questions? We're here to help!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/faq">
+                <button className="hover:bg-white/10 transition-all flex text-base font-medium text-foreground bg-white/5 rounded-full py-3 px-8 items-center justify-center border border-white/10">
+                  View All FAQs
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </button>
+              </Link>
+              <Link to="/contact">
+                <button className="group flex overflow-hidden uppercase transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_40px_-10px_rgba(234,88,12,0.5)] focus:outline-none text-sm font-bold text-white tracking-widest rounded-full py-3 px-8 relative items-center justify-center">
+                  <div className="absolute inset-0 -z-20 rounded-full overflow-hidden p-[1px]">
+                    <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_300deg,hsl(var(--primary))_360deg)]" style={{ animation: 'beam-spin 3s linear infinite' }}></div>
+                    <div className="absolute inset-[1px] rounded-full bg-card"></div>
+                  </div>
+                  <div className="-z-10 overflow-hidden bg-card rounded-full absolute top-[2px] right-[2px] bottom-[2px] left-[2px]">
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-primary/10 blur-2xl rounded-full pointer-events-none transition-colors duration-500 group-hover:bg-primary/30"></div>
+                  </div>
+                  <span className="relative z-10">Contact Support</span>
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </AuraSection>
+
       <Footer />
     </div>
   );

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram, MessageSquare, ChevronDown } from "lucide-react";
+import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import logo from "@/assets/realtor-desk-icon.png";
 
@@ -7,51 +7,6 @@ const Footer = () => {
   const { t } = useTranslation();
   return (
     <footer className="bg-muted border-t">
-      {/* FAQ Section */}
-      <div className="bg-background border-b">
-        <div className="container-custom py-12 md:py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
-                <MessageSquare className="w-4 h-4" />
-                {t('faq.title')}
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Frequently Asked Questions</h2>
-              <p className="text-muted-foreground">Get answers to common questions about RealtorDesk AI</p>
-            </div>
-
-            <div className="space-y-3">
-              {[1, 2, 3, 4, 5, 6].map((num) => (
-                <details key={num} className="group bg-muted rounded-lg border border-border overflow-hidden">
-                  <summary className="flex items-start justify-between gap-4 p-5 cursor-pointer list-none hover:bg-accent/5 transition-colors">
-                    <div className="flex items-start gap-3 flex-1">
-                      <MessageSquare className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="font-semibold text-foreground text-left">{t(`faq.q${num}.question`)}</span>
-                    </div>
-                    <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5 transition-transform group-open:rotate-180" />
-                  </summary>
-                  <div className="px-5 pb-5 pl-14 text-muted-foreground text-sm leading-relaxed">
-                    {t(`faq.q${num}.answer`)}
-                  </div>
-                </details>
-              ))}
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-muted-foreground mb-4">Have more questions?</p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link to="/faq" className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium text-sm">
-                  View All FAQs
-                </Link>
-                <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg border border-border hover:bg-accent transition-colors font-medium text-sm">
-                  Contact Support
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
