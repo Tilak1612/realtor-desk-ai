@@ -1,0 +1,34 @@
+API Name,HTTP Method,Endpoint Path,Full URL,Auth Type,Request Body Example,Special Headers,Status,Environment Variables Required
+List Contacts,GET,/rest/v1/contacts,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/contacts,Bearer Token + API Key,None,None,Ready,None
+Get Contact,GET,/rest/v1/contacts?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/contacts?id=eq.{uuid},Bearer Token + API Key,None,None,Ready,None
+Create Contact,POST,/rest/v1/contacts,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/contacts,Bearer Token + API Key,"{""first_name"":""John"",""email"":""john@example.com""}",None,Ready,None
+Update Contact,PATCH,/rest/v1/contacts?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/contacts?id=eq.{uuid},Bearer Token + API Key,"{""status"":""client"",""lead_score"":85}",None,Ready,None
+Delete Contact,DELETE,/rest/v1/contacts?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/contacts?id=eq.{uuid},Bearer Token + API Key,None,None,Ready,None
+List Deals,GET,/rest/v1/deals,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/deals,Bearer Token + API Key,None,None,Ready,None
+Create Deal,POST,/rest/v1/deals,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/deals,Bearer Token + API Key,"{""title"":""Property Deal"",""stage"":""qualified"",""value"":500000}",None,Ready,None
+Update Deal,PATCH,/rest/v1/deals?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/deals?id=eq.{uuid},Bearer Token + API Key,"{""stage"":""closed_won"",""status"":""won""}",None,Ready,None
+Delete Deal,DELETE,/rest/v1/deals?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/deals?id=eq.{uuid},Bearer Token + API Key,None,None,Ready,None
+List Tasks,GET,/rest/v1/tasks,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/tasks,Bearer Token + API Key,None,None,Ready,None
+Create Task,POST,/rest/v1/tasks,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/tasks,Bearer Token + API Key,"{""title"":""Follow up"",""priority"":""high"",""due_date"":""2026-02-15""}",None,Ready,None
+Update Task,PATCH,/rest/v1/tasks?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/tasks?id=eq.{uuid},Bearer Token + API Key,"{""status"":""completed""}",None,Ready,None
+Delete Task,DELETE,/rest/v1/tasks?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/tasks?id=eq.{uuid},Bearer Token + API Key,None,None,Ready,None
+List Properties,GET,/rest/v1/property_listings,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/property_listings,Bearer Token + API Key,None,None,Ready,None
+Create Property,POST,/rest/v1/property_listings,https://pseqajrtcgiphfnworii.supabase.co/rest/v1/property_listings,Bearer Token + API Key,"{""title"":""3BR Condo"",""address"":""123 King St"",""price"":899000}",None,Ready,None
+Update Property,PATCH,/rest/v1/property_listings?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/property_listings?id=eq.{uuid},Bearer Token + API Key,"{""status"":""sold"",""price"":920000}",None,Ready,None
+Delete Property,DELETE,/rest/v1/property_listings?id=eq.{uuid},https://pseqajrtcgiphfnworii.supabase.co/rest/v1/property_listings?id=eq.{uuid},Bearer Token + API Key,None,None,Ready,None
+AI Chatbot,POST,/functions/v1/ai-chatbot,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/ai-chatbot,Bearer Token + API Key,"{""messages"":[{""role"":""user"",""content"":""Tell me about Toronto""}]}",None,Ready,None
+Claude Chat,POST,/functions/v1/claude-chat,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/claude-chat,Bearer Token + API Key,"{""message"":""Write listing description"",""context"":""3BR condo""}",None,Ready,None
+Generate Call Summary,POST,/functions/v1/generate-call-summary,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/generate-call-summary,Bearer Token + API Key,"{""notes"":""Discussed condos"",""contactName"":""John"",""currentStage"":""lead""}",None,Needs Setup,OPENAI_API_KEY
+Calculate Lead Score,POST,/functions/v1/calculate-lead-score,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/calculate-lead-score,Bearer Token + API Key,"{""contactId"":""uuid""}",None,Ready,None
+Lead Score Calculator,POST,/functions/v1/lead-score-calculator,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/lead-score-calculator,Bearer Token + API Key,"{""contactId"":""uuid""}",None,Ready,None
+Check Subscription,GET,/functions/v1/check-subscription,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/check-subscription,Bearer Token + API Key,None,None,Needs Setup,STRIPE_SECRET_KEY
+Create Checkout,POST,/functions/v1/create-checkout,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/create-checkout,Bearer Token + API Key,"{""priceId"":""price_123"",""tier"":""team""}",None,Needs Setup,STRIPE_SECRET_KEY
+Customer Portal,GET,/functions/v1/customer-portal,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/customer-portal,Bearer Token + API Key,None,None,Needs Setup,STRIPE_SECRET_KEY
+Email Automation,POST,/functions/v1/email-automation,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/email-automation,Bearer Token + API Key,"{""contactId"":""uuid"",""type"":""welcome"",""delay"":0}",None,Needs Setup,HUBSPOT_API_KEY
+Send Welcome Email,POST,/functions/v1/send-welcome-email,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/send-welcome-email,Bearer Token + API Key,"{""userId"":""uuid""}",None,Ready,None
+Send SMS,POST,/functions/v1/send-sms,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/send-sms,Bearer Token + API Key,"{""to"":""+14165551234"",""message"":""Hello""}",None,Needs Setup,"TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN,TWILIO_PHONE_NUMBER"
+Send Phone Verification,POST,/functions/v1/send-phone-verification,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/send-phone-verification,Bearer Token + API Key,"{""phoneNumber"":""+14165551234""}",None,Needs Setup,"TWILIO_ACCOUNT_SID,TWILIO_AUTH_TOKEN"
+HubSpot Sync,POST,/functions/v1/hubspot-sync,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/hubspot-sync,Public (No Auth),"{""contactId"":""uuid"",""action"":""sync""}",None,Needs Setup,HUBSPOT_API_KEY
+Encrypt Token,POST,/functions/v1/encrypt-integration-token,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/encrypt-integration-token,Bearer Token + API Key,"{""token"":""api_key"",""provider"":""hubspot""}",None,Ready,None
+Apify Runner,POST,/functions/v1/apify-runner,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/apify-runner,Bearer Token + API Key,"{""url"":""https://realtor.ca/..."",""actorId"":""...""}",None,Needs Setup,APIFY_API_TOKEN
+Run Automation,POST,/functions/v1/run-automation,https://pseqajrtcgiphfnworii.supabase.co/functions/v1/run-automation,Bearer Token + API Key,"{""automationId"":""uuid"",""trigger"":""manual""}",None,Ready,None
