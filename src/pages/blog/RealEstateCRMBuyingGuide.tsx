@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, XCircle, TrendingUp, Shield, Users, Zap, DollarSign, HeadphonesIcon } from "lucide-react";
-import SEO from "@/components/SEO";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-ai-crm-guide.jpg";
 
 const RealEstateCRMBuyingGuide = () => {
