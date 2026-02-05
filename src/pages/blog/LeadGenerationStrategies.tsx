@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Target, TrendingUp, Users, Zap, CheckCircle2, DollarSign, BarChart3, Megaphone } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Target, TrendingUp, Users, Zap, CheckCircle2, DollarSign, BarChart3, Megaphone, XCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

@@ -250,11 +250,12 @@ const CallWorkflow = () => {
         try {
           // Use existing activities table with proper activity_type
           await supabase.from("activities").insert({
-            contact_id: contact.id,
             user_id: user.id,
             activity_type: "call_made",
-            notes: `Outcome: ${callOutcome}${callNotes ? '\n\n' + callNotes : ''}`,
-            activity_date: new Date().toISOString(),
+            title: `Call with ${contact.first_name} ${contact.last_name || ''}`,
+            description: `Outcome: ${callOutcome}${callNotes ? '\n\n' + callNotes : ''}`,
+            start_date: new Date().toISOString(),
+            contact_id: contact.id,
           });
         } catch (activityError) {
           console.error("Error logging activity:", activityError);
