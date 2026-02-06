@@ -19,10 +19,25 @@ import {
   Users,
   Mail
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const AIPoweredCRM = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="AI-Powered CRM for Real Estate | RealtorDesk AI"
+        description="Real AI for Canadian agents with predictive lead scoring, market intelligence, and 24/7 automation."
+        keywords="AI powered CRM, real estate AI CRM, predictive lead scoring, Canadian real estate CRM"
+        canonicalUrl="https://realtordesk.ai/features/ai-powered-crm"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "AI-Powered CRM",
+            "description": "AI-powered CRM for Canadian real estate agents with predictive lead scoring and automation."
+          }
+        ]}
+      />
       <Navbar />
 
       {/* Hero Section */}

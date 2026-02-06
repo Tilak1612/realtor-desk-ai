@@ -9,12 +9,12 @@ import { Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface TasksFiltersProps {
-  filters: any;
-  onFiltersChange: (filters: any) => void;
+  filters: unknown;
+  onFiltersChange: (filters: unknown) => void;
 }
 
 const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
-  const [contacts, setContacts] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<unknown[]>([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {

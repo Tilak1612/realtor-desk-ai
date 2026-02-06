@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,26 +8,16 @@ import TaskItem from "./TaskItem";
 
 interface TasksCalendarProps {
   refreshTrigger: number;
-  filters: any;
+  filters: unknown;
   onTaskUpdated: () => void;
 }
 
 const TasksCalendar = ({ refreshTrigger, filters, onTaskUpdated }: TasksCalendarProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-  const [tasks, setTasks] = useState<any[]>([]);
-  const [tasksForSelectedDate, setTasksForSelectedDate] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<unknown[]>([]);
+  const [tasksForSelectedDate, setTasksForSelectedDate] = useState<unknown[]>([]);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [refreshTrigger, filters]);
-
-  useEffect(() => {
-    if (selectedDate) {
-      filterTasksByDate(selectedDate);
-    }
-  }, [selectedDate, tasks]);
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
@@ -55,13 +45,23 @@ const TasksCalendar = ({ refreshTrigger, filters, onTaskUpdated }: TasksCalendar
 
     const { data } = await query;
     setTasks(data || []);
-  };
+  }, [filters]);
 
-  const filterTasksByDate = (date: Date) => {
+  const filterTasksByDate = useCallback((date: Date) => {
     const dateStr = format(date, "yyyy-MM-dd");
     const filtered = tasks.filter(task => task.due_date === dateStr);
     setTasksForSelectedDate(filtered);
-  };
+  }, [tasks]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks, refreshTrigger]);
+
+  useEffect(() => {
+    if (selectedDate) {
+      filterTasksByDate(selectedDate);
+    }
+  }, [selectedDate, filterTasksByDate]);
 
   const getTaskCountForDate = (date: Date): number => {
     const dateStr = format(date, "yyyy-MM-dd");

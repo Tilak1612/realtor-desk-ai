@@ -4,10 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, TrendingUp, MapPin, Snowflake, Users, Building2, Video, Zap, Target, DollarSign, Calendar, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const CalgaryMarketingGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <SEO
+        title="Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026"
+        description="Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights for Alberta."
+        keywords="Calgary real estate marketing, Alberta real estate agents, Calgary lead generation, AI marketing tools real estate"
+        article
+        publishedTime="2026-01-01"
+        modifiedTime="2026-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/resources/calgary-real-estate-marketing-strategies"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026",
+            "description": "Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights for Alberta.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2026-01-01",
+            "dateModified": "2026-01-01"
+          }
+        ]}
+      />
       <Navbar />
       
       {/* Hero Section */}

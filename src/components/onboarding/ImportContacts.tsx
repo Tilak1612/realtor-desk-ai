@@ -42,7 +42,7 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
         },
       });
       if (error) throw error;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to connect ${provider}`);
     }
   };
@@ -71,7 +71,7 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
 
       toast.success(`Imported ${contacts.length} contacts!`);
       onNext();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Failed to import contacts");
     } finally {
       setLoading(false);

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Database, Shield, Globe, Smartphone, BarChart3, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import blogAICRM from "@/assets/blog-ai-crm.jpg";
+import { SEO } from "@/components/SEO";
 
 const AICRMGuide = () => {
   useEffect(() => {
@@ -13,13 +13,18 @@ const AICRMGuide = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Complete Guide to AI CRM for Canadian Real Estate Agents 2025 | RealtorDesk</title>
-        <meta name="description" content="Everything Canadian Realtors need to know about AI-powered CRM systems. Features, benefits, PIPEDA compliance, and how to choose the right platform." />
-        <meta name="keywords" content="AI CRM for Canadian Realtors, best CRM for real estate agents Canada, Canadian real estate CRM software, PIPEDA compliant CRM for Realtors, AI automation CRM real estate, CREA DDF CRM integration, real estate customer relationship management Canada" />
-        <link rel="canonical" href="https://realtordesk.ai/ai-crm-canadian-real-estate-agents-guide" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Complete Guide to AI CRM for Canadian Real Estate Agents 2025"
+        description="Everything Canadian Realtors need to know about AI-powered CRM systems, PIPEDA compliance, and how to choose the right platform."
+        keywords="AI CRM for Canadian Realtors, best CRM for real estate agents Canada, PIPEDA compliant CRM, CREA DDF CRM integration"
+        image={blogAICRM}
+        article
+        publishedTime="2025-01-18"
+        modifiedTime="2025-01-18"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/ai-crm-canadian-real-estate-agents-guide"
+        structuredData={[
+          {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025",
@@ -28,9 +33,9 @@ const AICRMGuide = () => {
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2025-01-18",
             "dateModified": "2025-01-18"
-          })}
-        </script>
-      </Helmet>
+          }
+        ]}
+      />
       
       <div className="min-h-screen bg-background">
         <Navbar />

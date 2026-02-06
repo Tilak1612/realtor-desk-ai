@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Phone, Upload, Download, GraduationCap, CheckCircle, Brain, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const SwitchFromLofty = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Switch from Lofty | Upgrade to Real AI"
+        description="Move from Lofty to RealtorDesk AI for true predictive intelligence, transparent pricing, and Canadian support."
+        keywords="switch from Lofty, Lofty CRM migration, Lofty alternative Canada, RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/switch-from-lofty"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Switch from Lofty",
+            "description": "Upgrade from Lofty to RealtorDesk AI with real AI features and Canadian market support."
+          }
+        ]}
+      />
       <Navbar />
 
       {/* Hero */}

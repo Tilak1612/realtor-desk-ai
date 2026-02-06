@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-ai-transformation.jpg";
+import { SEO } from "@/components/SEO";
 
 const AITransformation = () => {
   useEffect(() => {
@@ -13,6 +14,29 @@ const AITransformation = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="How AI Is Transforming Canadian Real Estate in 2025"
+        description="Discover the latest AI innovations transforming how Canadian realtors work, from predictive analytics to automated transaction management."
+        keywords="ai real estate canada, real estate ai tools, canadian realtors ai, predictive analytics real estate, ai crm"
+        image={blogImage}
+        article
+        publishedTime="2025-01-15"
+        modifiedTime="2025-01-15"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/ai-transformation"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "How AI Is Transforming Canadian Real Estate in 2025",
+            "description": "Discover the latest AI innovations transforming how Canadian realtors work, from predictive analytics to automated transaction management.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-15",
+            "dateModified": "2025-01-15"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -53,9 +53,10 @@ const CallWorkflow = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { contactId } = useParams<{ contactId: string }>();
+  const contactQueueState = location.state?.contactQueue as string[] | undefined;
   
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [contact, setContact] = useState<Contact | null>(null);
   const [contactQueue, setContactQueue] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -70,11 +71,32 @@ const CallWorkflow = () => {
   
   // AI panel state
   const [showAIPanel, setShowAIPanel] = useState(true);
-  const [aiSummary, setAISummary] = useState<any>(null);
+  const [aiSummary, setAISummary] = useState<unknown>(null);
   const [generatingAI, setGeneratingAI] = useState(false);
   
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  const fetchContactData = useCallback(async (id: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("contacts")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error) throw error;
+
+      // Type assertion for contact data with optional fields
+      const contactData: unknown = data;
+      setContact(contactData);
+      setNewStage(contactData.stage || "");
+      setCallNotes(contactData.notes || "");
+    } catch (error) {
+      console.error("Error fetching contact:", error);
+      toast.error("Failed to load contact details");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -97,12 +119,12 @@ const CallWorkflow = () => {
         setProfile(profileData);
 
         // Get contact queue from location state
-        const queue = location.state?.contactQueue || [contactId];
+        const queue = contactQueueState || [contactId];
         setContactQueue(queue);
         setCurrentIndex(queue.indexOf(contactId));
 
         await fetchContactData(contactId!);
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Error:", error);
         toast.error("Failed to load contact");
       } finally {
@@ -111,28 +133,7 @@ const CallWorkflow = () => {
     };
 
     fetchUserData();
-  }, [contactId, navigate]);
-
-  const fetchContactData = async (id: string) => {
-    try {
-      const { data, error } = await supabase
-        .from("contacts")
-        .select("*")
-        .eq("id", id)
-        .single();
-
-      if (error) throw error;
-
-      // Type assertion for contact data with optional fields
-      const contactData: any = data;
-      setContact(contactData);
-      setNewStage(contactData.stage || "");
-      setCallNotes(contactData.notes || "");
-    } catch (error) {
-      console.error("Error fetching contact:", error);
-      toast.error("Failed to load contact details");
-    }
-  };
+  }, [contactId, contactQueueState, fetchContactData, navigate]);
 
   const handleGenerateAISummary = async () => {
     if (!callNotes.trim()) {
@@ -203,7 +204,7 @@ const CallWorkflow = () => {
     }
   };
 
-  const logAdoptionEvent = async (eventType: string, metadata?: any) => {
+  const logAdoptionEvent = async (eventType: string, metadata?: unknown) => {
     try {
       // Note: This will work after database migration is run
       // For now, just log to console
@@ -227,7 +228,7 @@ const CallWorkflow = () => {
     setSaving(true);
     try {
       // Update contact
-      const updates: any = {
+      const updates: unknown = {
         notes: callNotes,
         stage: newStage || contact.stage,
         last_contact_date: new Date().toISOString(),

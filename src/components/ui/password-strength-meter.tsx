@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
@@ -24,10 +25,10 @@ const getPasswordStrength = (password: string): { level: StrengthLevel; score: n
   if (/[a-z]/.test(password)) score += 1;
   if (/[A-Z]/.test(password)) score += 1;
   if (/[0-9]/.test(password)) score += 1;
-  if (/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) score += 1;
+  if (/[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(password)) score += 1;
   
   // Bonus for mixing
-  if (password.length >= 8 && /[A-Za-z]/.test(password) && /[0-9]/.test(password) && /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {
+  if (password.length >= 8 && /[A-Za-z]/.test(password) && /[0-9]/.test(password) && /[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(password)) {
     score += 1;
   }
   

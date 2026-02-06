@@ -4,10 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, CheckCircle2, XCircle, Clock, Zap, Brain, MessageSquare, TrendingUp, Shield, Users, DollarSign, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const AIChatbotGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <SEO
+        title="AI Chatbot for Real Estate Websites in Canada: 2025 Implementation Guide"
+        description="Learn how AI chatbots capture and qualify real estate leads 24/7 with sub-3-second response times. Complete Canadian implementation guide."
+        keywords="AI chatbot real estate Canada, real estate website chatbot, AI lead capture, realtor chatbot"
+        article
+        publishedTime="2025-01-01"
+        modifiedTime="2025-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/ai-chatbot-real-estate-websites-canada"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "AI Chatbot for Real Estate Websites in Canada: Complete 2025 Implementation Guide",
+            "description": "Learn how AI chatbots capture and qualify real estate leads 24/7 with sub-3-second response times. Complete Canadian implementation guide.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-01",
+            "dateModified": "2025-01-01"
+          }
+        ]}
+      />
       <Navbar />
       
       {/* Hero Section */}

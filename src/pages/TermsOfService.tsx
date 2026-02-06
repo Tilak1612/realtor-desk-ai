@@ -1,9 +1,16 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Terms of Service | RealtorDesk AI"
+        description="Review the Terms of Service for using RealtorDesk AI, including subscriptions, data ownership, and compliance obligations."
+        keywords="terms of service, RealtorDesk AI terms, Canadian real estate CRM terms"
+        canonicalUrl="https://realtordesk.ai/terms-of-service"
+      />
       <Navbar />
 
       <section className="pt-32 md:pt-40 pb-16">

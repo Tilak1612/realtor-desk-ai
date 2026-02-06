@@ -17,7 +17,7 @@ const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
-  const [profileData, setProfileData] = useState<any>({});
+  const [profileData, setProfileData] = useState<unknown>({});
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -46,7 +46,7 @@ const Onboarding = () => {
     checkAuth();
   }, [navigate]);
 
-  const saveProgress = async (step: number, data: any) => {
+  const saveProgress = async (step: number, data: unknown) => {
     if (!userId) return;
 
     try {
@@ -60,12 +60,12 @@ const Onboarding = () => {
 
       if (error) throw error;
       setProfileData({ ...profileData, ...data });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Failed to save progress");
     }
   };
 
-  const handleNext = async (data?: any) => {
+  const handleNext = async (data?: unknown) => {
     if (data) {
       await saveProgress(currentStep + 1, data);
     }
@@ -96,7 +96,7 @@ const Onboarding = () => {
       });
 
       toast.success("Welcome to Realtor Desk AI!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Error silently handled
     }
   };

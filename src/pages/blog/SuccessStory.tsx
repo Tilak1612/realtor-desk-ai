@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Share2, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-success-story.jpg";
+import { SEO } from "@/components/SEO";
 
 const SuccessStory = () => {
   useEffect(() => {
@@ -13,6 +14,29 @@ const SuccessStory = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="How Sarah Chen Closed 14 Extra Deals in Q1 with AI"
+        description="A Toronto agent's journey from traditional CRM to AI-powered success, with real numbers and results."
+        keywords="real estate success story, AI CRM results, realtor productivity, canadian real estate crm"
+        image={blogImage}
+        article
+        publishedTime="2024-12-15"
+        modifiedTime="2024-12-15"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/success-story"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "How Sarah Chen Closed 14 Extra Deals in Q1 with AI",
+            "description": "A Toronto agent's journey from traditional CRM to AI-powered success, with real numbers and results.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2024-12-15",
+            "dateModified": "2024-12-15"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

@@ -20,7 +20,7 @@ export async function storeEncryptedIntegration({
   accessToken: string | null;
   refreshToken: string | null;
   expiresAt?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }) {
   try {
     const { data, error } = await supabase.functions.invoke(
@@ -42,7 +42,7 @@ export async function storeEncryptedIntegration({
     if (error) throw error;
 
     return { data: data.integration, error: null };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return { data: null, error };
   }
 }
@@ -72,7 +72,7 @@ export async function getDecryptedTokens(integrationId: string) {
       expiresAt: data.expires_at,
       error: null,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return { accessToken: null, refreshToken: null, expiresAt: null, error };
   }
 }
@@ -91,7 +91,7 @@ export async function listIntegrations() {
     if (error) throw error;
 
     return { data, error: null };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return { data: null, error };
   }
 }

@@ -21,8 +21,8 @@ const MAJOR_CITIES = [
 ];
 
 interface ProfileSetupProps {
-  profileData: any;
-  onNext: (data: any) => void;
+  profileData: unknown;
+  onNext: (data: unknown) => void;
   onSkip: () => void;
   userId: string | null;
 }
@@ -61,7 +61,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
 
       setFormData({ ...formData, avatar_url: publicUrl });
       toast.success("Avatar uploaded!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Failed to upload avatar");
     } finally {
       setUploading(false);

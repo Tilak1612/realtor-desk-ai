@@ -14,8 +14,8 @@ import StatCard from "@/components/dashboard/StatCard";
 const Market = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [selectedCity, setSelectedCity] = useState("Toronto");
 
   useEffect(() => {

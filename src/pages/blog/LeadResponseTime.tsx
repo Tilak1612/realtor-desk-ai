@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Clock, Zap, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import blogLeadResponse from "@/assets/blog-lead-response.jpg";
+import { SEO } from "@/components/SEO";
 
 const LeadResponseTime = () => {
   useEffect(() => {
@@ -13,13 +13,18 @@ const LeadResponseTime = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Lead Response Time: Why Canadian Realtors Lose Deals in 5 Minutes | RealtorDesk</title>
-        <meta name="description" content="78% of buyers choose the first agent who responds. Learn why fast lead response is critical for Canadian Realtors and how to automate instant follow-up." />
-        <meta name="keywords" content="lead response time real estate, Canadian Realtor lead follow-up, instant lead response for Realtors, why Realtors lose leads, real estate lead conversion Canada, automated lead response system, first response wins real estate" />
-        <link rel="canonical" href="https://realtordesk.ai/lead-response-time-canadian-realtors" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Lead Response Time: Why Canadian Realtors Lose Deals in 5 Minutes"
+        description="78% of buyers choose the first agent who responds. Learn why fast lead response is critical for Canadian Realtors and how to automate follow-up."
+        keywords="lead response time real estate, Canadian Realtor lead follow-up, instant lead response, real estate lead conversion Canada"
+        image={blogLeadResponse}
+        article
+        publishedTime="2025-01-15"
+        modifiedTime="2025-01-15"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/lead-response-time-canadian-realtors"
+        structuredData={[
+          {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Lead Response Time: Why Canadian Realtors Lose Deals in the First 5 Minutes",
@@ -28,9 +33,9 @@ const LeadResponseTime = () => {
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2025-01-15",
             "dateModified": "2025-01-15"
-          })}
-        </script>
-      </Helmet>
+          }
+        ]}
+      />
       
       <div className="min-h-screen bg-background">
         <Navbar />

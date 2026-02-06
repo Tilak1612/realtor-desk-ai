@@ -5,7 +5,7 @@ import { CheckCircle, Play, ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 
 interface OnboardingCompleteProps {
-  profileData: any;
+  profileData: unknown;
   onComplete: () => void;
 }
 

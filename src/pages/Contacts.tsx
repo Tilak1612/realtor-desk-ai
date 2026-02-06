@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +26,7 @@ export interface Contact {
   ai_score: number | null;
   last_contact_date: string | null;
   best_contact_time: string | null;
-  metadata: any;
+  metadata: unknown;
   created_at: string;
   updated_at: string;
 }
@@ -50,8 +50,8 @@ const Contacts = () => {
   const [viewMode, setViewMode] = useState<"table" | "cards">("table");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [filters, setFilters] = useState<ContactFiltersState>({
     search: "",
     scoreRange: [0, 100],
@@ -60,15 +60,28 @@ const Contacts = () => {
     tags: [],
   });
 
-  useEffect(() => {
-    checkAuthAndFetch();
-  }, []);
+  const fetchContacts = useCallback(async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("contacts")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-  useEffect(() => {
-    applyFilters();
-  }, [contacts, filters]);
+      if (error) throw error;
+      setContacts(data || []);
+    } catch (error: unknown) {
+      toast({
+        title: t('app.common.error'),
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [t, toast]);
 
-  const checkAuthAndFetch = async () => {
+  const checkAuthAndFetch = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       navigate("/login");
@@ -85,30 +98,9 @@ const Contacts = () => {
     
     setProfile(profileData);
     fetchContacts();
-  };
+  }, [fetchContacts, navigate]);
 
-  const fetchContacts = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("contacts")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setContacts(data || []);
-    } catch (error: any) {
-      toast({
-        title: t('app.common.error'),
-        description: error.message,
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...contacts];
 
     if (filters.search) {
@@ -139,7 +131,15 @@ const Contacts = () => {
     }
 
     setFilteredContacts(filtered);
-  };
+  }, [contacts, filters]);
+
+  useEffect(() => {
+    checkAuthAndFetch();
+  }, [checkAuthAndFetch]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
 
   const handleExportCSV = () => {
     const csvData = filteredContacts.map((c) => ({
@@ -262,7 +262,7 @@ const Contacts = () => {
         )}
 
         {/* View Toggle and Content */}
-        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as unknown)}>
           <div className="flex justify-end mb-4">
             <TabsList className="h-8">
               <TabsTrigger value="table" className="text-xs h-7 px-3">

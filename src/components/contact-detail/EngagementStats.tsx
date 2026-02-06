@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Mail, MousePointer, Eye, Clock } from "lucide-react";
@@ -11,14 +11,10 @@ interface EngagementStatsProps {
 }
 
 const EngagementStats = ({ contactId }: EngagementStatsProps) => {
-  const [stats, setStats] = useState<any>(null);
+  const [stats, setStats] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchStats();
-  }, [contactId]);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -45,7 +41,11 @@ const EngagementStats = ({ contactId }: EngagementStatsProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
 
   if (loading) {
     return (

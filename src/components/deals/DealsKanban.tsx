@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { DndContext, DragEndEvent, DragOverlay, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { toast } from "sonner";
@@ -18,7 +18,7 @@ interface Deal {
   updated_at: string;
   expected_close_date: string | null;
   notes: string | null;
-  metadata: any;
+  metadata: unknown;
   contacts?: {
     first_name: string;
     last_name: string;
@@ -56,11 +56,7 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
     })
   );
 
-  useEffect(() => {
-    fetchDeals();
-  }, [filter, refreshTrigger]);
-
-  const fetchDeals = async () => {
+  const fetchDeals = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
@@ -101,7 +97,11 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
     }
 
     setDeals(data || []);
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchDeals();
+  }, [fetchDeals, refreshTrigger]);
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;

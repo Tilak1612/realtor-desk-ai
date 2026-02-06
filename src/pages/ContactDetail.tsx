@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -30,36 +30,13 @@ const ContactDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [contact, setContact] = useState<any>(null);
+  const [contact, setContact] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  useEffect(() => {
-    checkAuthAndFetch();
-  }, [id]);
-
-  const checkAuthAndFetch = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      navigate("/login");
-      return;
-    }
-
-    setUser(session.user);
-
-    const { data: profileData } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", session.user.id)
-      .single();
-
-    setProfile(profileData);
-    fetchContact();
-  };
-
-  const fetchContact = async () => {
+  const fetchContact = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -83,7 +60,7 @@ const ContactDetail = () => {
       }
 
       setContact(data);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error loading contact",
         description: error.message,
@@ -93,7 +70,30 @@ const ContactDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, navigate, toast]);
+
+  const checkAuthAndFetch = useCallback(async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      navigate("/login");
+      return;
+    }
+
+    setUser(session.user);
+
+    const { data: profileData } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", session.user.id)
+      .single();
+
+    setProfile(profileData);
+    fetchContact();
+  }, [fetchContact, navigate]);
+
+  useEffect(() => {
+    checkAuthAndFetch();
+  }, [checkAuthAndFetch]);
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this contact? This action cannot be undone.")) {

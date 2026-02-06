@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Star, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 const IxactAlternatives = () => {
   useEffect(() => {
@@ -13,6 +14,28 @@ const IxactAlternatives = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="IXACT Contact Alternatives: Why Canadian Agents Are Switching to AI-First CRMs"
+        description="Compare IXACT Contact alternatives for Canadian agents. See why agents are switching to faster, more affordable AI-first CRMs."
+        keywords="IXACT Contact alternatives, Canadian real estate CRM, AI CRM for realtors, IXACT alternative"
+        article
+        publishedTime="2025-01-16"
+        modifiedTime="2025-01-16"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/ixact-alternatives"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "IXACT Contact Alternatives: Why Canadian Agents Are Switching to AI-First CRMs in 2025",
+            "description": "Compare IXACT Contact alternatives for Canadian agents. See why agents are switching to faster, more affordable AI-first CRMs.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-16",
+            "dateModified": "2025-01-16"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

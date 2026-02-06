@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TaskItem from "./TaskItem";
@@ -15,7 +15,7 @@ interface Task {
   contact_id: string | null;
   deal_id: string | null;
   created_at: string;
-  metadata: any | null;
+  metadata: unknown | null;
   contacts?: {
     first_name: string;
     last_name: string;
@@ -25,7 +25,7 @@ interface Task {
 interface TasksListProps {
   quickFilter: string;
   refreshTrigger: number;
-  filters: any;
+  filters: unknown;
   selectedTasks: string[];
   onTaskSelection: (tasks: string[]) => void;
   onTaskUpdated: () => void;
@@ -35,11 +35,7 @@ const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTask
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [quickFilter, refreshTrigger, filters]);
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     setLoading(true);
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -91,7 +87,11 @@ const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTask
 
     setTasks((data || []) as unknown as Task[]);
     setLoading(false);
-  };
+  }, [quickFilter, filters]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks, refreshTrigger]);
 
   const groupTasksByDate = (tasks: Task[]) => {
     const now = new Date();

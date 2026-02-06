@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,11 +28,7 @@ const AIInsightsWidget = ({ userId }: AIInsightsWidgetProps) => {
   const [loading, setLoading] = useState(true);
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    generateInsights();
-  }, [userId]);
-
-  const generateInsights = async () => {
+  const generateInsights = useCallback(async () => {
     setLoading(true);
     try {
       // Fetch contacts with high AI scores that haven't been contacted recently
@@ -126,7 +122,11 @@ const AIInsightsWidget = ({ userId }: AIInsightsWidgetProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userId]);
+
+  useEffect(() => {
+    generateInsights();
+  }, [generateInsights]);
 
   const handleDismiss = (id: string) => {
     setDismissedIds((prev) => new Set([...prev, id]));

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,14 +13,10 @@ interface DealHistoryProps {
 
 const DealHistory = ({ contactId }: DealHistoryProps) => {
   const navigate = useNavigate();
-  const [deals, setDeals] = useState<any[]>([]);
+  const [deals, setDeals] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchDeals();
-  }, [contactId]);
-
-  const fetchDeals = async () => {
+  const fetchDeals = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -36,7 +32,11 @@ const DealHistory = ({ contactId }: DealHistoryProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
+
+  useEffect(() => {
+    fetchDeals();
+  }, [fetchDeals]);
 
   const getStageColor = (stage: string) => {
     switch (stage) {

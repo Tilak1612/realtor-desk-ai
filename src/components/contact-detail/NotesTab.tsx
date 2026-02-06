@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,17 +15,13 @@ interface NotesTabProps {
 
 const NotesTab = ({ contactId }: NotesTabProps) => {
   const { toast } = useToast();
-  const [notes, setNotes] = useState<any[]>([]);
+  const [notes, setNotes] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
   const [newNote, setNewNote] = useState("");
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
 
-  useEffect(() => {
-    fetchNotes();
-  }, [contactId]);
-
-  const fetchNotes = async () => {
+  const fetchNotes = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -42,7 +38,11 @@ const NotesTab = ({ contactId }: NotesTabProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
+
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
 
   const handleSaveNote = async () => {
     if (!newNote.trim()) return;

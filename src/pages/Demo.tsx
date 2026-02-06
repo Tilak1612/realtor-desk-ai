@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,7 +29,7 @@ import {
 const demoFormSchema = z.object({
   fullName: z.string().trim().min(2, "Please enter your full name (at least 2 characters)").max(100, "Name cannot exceed 100 characters"),
   email: z.string().trim().email("Please enter a valid email address (e.g., you@example.com)").max(255, "Email cannot exceed 255 characters"),
-  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Please enter a valid phone number (e.g., (555) 123-4567)"),
+  phone: z.string().trim().regex(/^[0-9\s()+-]{10,20}$/, "Please enter a valid phone number (e.g., (555) 123-4567)"),
   brokerage: z.string().trim().max(100, "Brokerage name cannot exceed 100 characters").optional().or(z.literal("")),
   province: z.string().min(1, "Please select your province"),
   currentCrm: z.string().optional(),
@@ -43,15 +44,6 @@ const Demo = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // SEO: Update document title and meta for demo page
-  if (typeof document !== 'undefined') {
-    document.title = "Free Demo | Best CRM for Real Estate Agents | AI Lead Generation Software";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Book a free demo of the best CRM for real estate agents. See AI lead generation software, virtual tour integration, and real estate video marketing tools in action. 14-day free trial.');
-    }
-  }
 
   const form = useForm<DemoFormValues>({
     resolver: zodResolver(demoFormSchema),
@@ -129,6 +121,11 @@ const Demo = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Book a Free Demo | RealtorDesk AI"
+        description="Book a free demo of RealtorDesk AI. See AI lead generation, virtual tour integration, and real estate marketing tools in action."
+        keywords="real estate crm demo, ai crm demo, realtor software demo, real estate lead generation software demo"
+      />
       <Navbar />
 
       {/* Hero Section */}

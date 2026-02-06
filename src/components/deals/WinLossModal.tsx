@@ -14,7 +14,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
 interface WinLossModalProps {
-  deal: any;
+  deal: unknown;
   type: "won" | "lost";
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -36,7 +36,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
     e.preventDefault();
     setLoading(true);
 
-    const updateData: any = {
+    const updateData: unknown = {
       stage: type === "won" ? "sold" : "withdrawn",
       status: type === "won" ? "closed" : "withdrawn",
       updated_at: new Date().toISOString()

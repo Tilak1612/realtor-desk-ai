@@ -10,8 +10,8 @@ import AppLayout from "@/components/layout/AppLayout";
 
 const CalendarPage = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   useEffect(() => {

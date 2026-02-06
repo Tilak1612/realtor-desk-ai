@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Share2, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-lead-conversion.jpg";
+import { SEO } from "@/components/SEO";
 
 const LeadConversion = () => {
   useEffect(() => {
@@ -13,6 +14,29 @@ const LeadConversion = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="10 Ways to Increase Lead Conversion with Predictive Analytics"
+        description="Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%."
+        keywords="real estate lead conversion, predictive analytics real estate, AI lead scoring, realtor lead generation, CRM analytics"
+        image={blogImage}
+        article
+        publishedTime="2024-12-28"
+        modifiedTime="2024-12-28"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/lead-conversion"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "10 Ways to Increase Lead Conversion with Predictive Analytics",
+            "description": "Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2024-12-28",
+            "dateModified": "2024-12-28"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

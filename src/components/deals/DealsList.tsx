@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -42,11 +42,7 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [editingDeal, setEditingDeal] = useState<Deal | null>(null);
 
-  useEffect(() => {
-    fetchDeals();
-  }, [filter, refreshTrigger]);
-
-  const fetchDeals = async () => {
+  const fetchDeals = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
@@ -74,7 +70,11 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
 
     const { data } = await query.order("created_at", { ascending: false });
     setDeals(data || []);
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchDeals();
+  }, [fetchDeals, refreshTrigger]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this transaction?")) return;
@@ -132,11 +132,11 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                 <TableCell>
                   <div>
                     <p className="font-medium">{deal.title}</p>
-                    {(deal as any).property_address && (
-                      <p className="text-xs text-muted-foreground">{(deal as any).property_address}</p>
+                    {(deal as unknown).property_address && (
+                      <p className="text-xs text-muted-foreground">{(deal as unknown).property_address}</p>
                     )}
-                    {(deal as any).mls_number && (
-                      <p className="text-xs text-muted-foreground">MLS# {(deal as any).mls_number}</p>
+                    {(deal as unknown).mls_number && (
+                      <p className="text-xs text-muted-foreground">MLS# {(deal as unknown).mls_number}</p>
                     )}
                   </div>
                 </TableCell>
@@ -150,13 +150,13 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                     {deal.stage.replace(/_/g, ' ')}
                   </Badge>
                 </TableCell>
-                <TableCell>{formatCurrency((deal as any).listing_price || deal.value || 0)}</TableCell>
+                <TableCell>{formatCurrency((deal as unknown).listing_price || deal.value || 0)}</TableCell>
                 <TableCell>
-                  {(deal as any).commission_percentage ? `${(deal as any).commission_percentage}%` : "-"}
+                  {(deal as unknown).commission_percentage ? `${(deal as unknown).commission_percentage}%` : "-"}
                 </TableCell>
                 <TableCell>
-                  {(deal as any).closing_date 
-                    ? new Date((deal as any).closing_date).toLocaleDateString('en-CA')
+                  {(deal as unknown).closing_date 
+                    ? new Date((deal as unknown).closing_date).toLocaleDateString('en-CA')
                     : "-"
                   }
                 </TableCell>
@@ -207,8 +207,8 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm truncate">{deal.title}</p>
-                    {(deal as any).property_address && (
-                      <p className="text-xs text-muted-foreground truncate mt-0.5">{(deal as any).property_address}</p>
+                    {(deal as unknown).property_address && (
+                      <p className="text-xs text-muted-foreground truncate mt-0.5">{(deal as unknown).property_address}</p>
                     )}
                   </div>
                   <DropdownMenu>
@@ -251,19 +251,19 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                   <Badge className={`${getStageColor(deal.stage)} text-white capitalize text-xs`}>
                     {deal.stage.replace(/_/g, ' ')}
                   </Badge>
-                  <span className="text-sm font-bold">{formatCurrency((deal as any).listing_price || deal.value || 0)}</span>
+                  <span className="text-sm font-bold">{formatCurrency((deal as unknown).listing_price || deal.value || 0)}</span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t">
                   <span>{deal.contacts ? `${deal.contacts.first_name} ${deal.contacts.last_name}` : "-"}</span>
-                  {(deal as any).commission_percentage && (
-                    <span className="font-medium text-primary">{(deal as any).commission_percentage}%</span>
+                  {(deal as unknown).commission_percentage && (
+                    <span className="font-medium text-primary">{(deal as unknown).commission_percentage}%</span>
                   )}
                 </div>
 
-                {(deal as any).closing_date && (
+                {(deal as unknown).closing_date && (
                   <div className="text-xs text-muted-foreground">
-                    Closes: {new Date((deal as any).closing_date).toLocaleDateString('en-CA')}
+                    Closes: {new Date((deal as unknown).closing_date).toLocaleDateString('en-CA')}
                   </div>
                 )}
               </div>

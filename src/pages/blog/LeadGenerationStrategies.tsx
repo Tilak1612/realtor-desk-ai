@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, Clock, Target, TrendingUp, Users, Zap, CheckCircle
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Helmet } from "react-helmet";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-lead-generation-strategies.jpg";
 
 const LeadGenerationStrategies = () => {
@@ -15,12 +15,29 @@ const LeadGenerationStrategies = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Real Estate Lead Generation Strategies Canada 2025 | 17 Proven Methods</title>
-        <meta name="description" content="17 proven real estate lead generation strategies for Canadian agents in 2025. Includes digital marketing, social media, referrals, and AI automation. Free templates included." />
-        <meta name="keywords" content="real estate lead generation Canada, realtor marketing strategies, real estate leads Canada, lead generation for realtors, real estate digital marketing" />
-        <link rel="canonical" href="https://realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025" />
-      </Helmet>
+      <SEO
+        title="Real Estate Lead Generation Strategies Canada 2025"
+        description="17 proven real estate lead generation strategies for Canadian agents in 2025. Includes digital marketing, social media, referrals, and AI automation."
+        keywords="real estate lead generation Canada, realtor marketing strategies, real estate leads Canada, lead generation for realtors, real estate digital marketing"
+        image={blogImage}
+        article
+        publishedTime="2025-01-29"
+        modifiedTime="2025-01-29"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "17 Proven Real Estate Lead Generation Strategies for Canadian Agents in 2025",
+            "description": "17 proven real estate lead generation strategies for Canadian agents in 2025. Includes digital marketing, social media, referrals, and AI automation.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-29",
+            "dateModified": "2025-01-29"
+          }
+        ]}
+      />
 
       <Navbar />
       

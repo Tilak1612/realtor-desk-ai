@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -9,15 +10,6 @@ import heroDashboard from "@/assets/hero-dashboard.jpg";
 
 const HowItWorks = () => {
   const { t } = useTranslation();
-
-  // SEO: Update document title and meta for how it works page
-  if (typeof document !== 'undefined') {
-    document.title = "How Real Estate CRM Works | AI Tools for Realtors Setup Guide | RealtorDesk AI";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Get started with the best CRM for real estate agents in 20 minutes. Easy AI tools for Realtors setup, real estate lead generation software configuration, virtual tour integration.');
-    }
-  }
 
   const steps = [
     {
@@ -72,6 +64,11 @@ const HowItWorks = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="How RealtorDesk AI Works | Setup in 20 Minutes"
+        description="Get started with RealtorDesk AI in about 20 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration."
+        keywords="real estate crm setup, ai crm onboarding, realtor crm implementation, real estate lead generation software setup"
+      />
       <Navbar />
 
       {/* Hero Section */}

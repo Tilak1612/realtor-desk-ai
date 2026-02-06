@@ -10,8 +10,8 @@ const PROPERTY_TYPES = [
 ];
 
 interface BusinessGoalsProps {
-  profileData: any;
-  onNext: (data: any) => void;
+  profileData: unknown;
+  onNext: (data: unknown) => void;
   onBack: () => void;
 }
 

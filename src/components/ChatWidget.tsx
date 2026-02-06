@@ -59,7 +59,7 @@ const ChatWidget = () => {
       };
       setMessages(prev => [...prev, assistantMessage]);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
         description: error.message || "Failed to send message",

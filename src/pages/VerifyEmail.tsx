@@ -45,7 +45,7 @@ const VerifyEmail = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, [userId]);
+  }, [navigate, userId]);
 
   const handleResendEmail = async () => {
     if (!email) {
@@ -64,7 +64,7 @@ const VerifyEmail = () => {
 
       setEmailSent(true);
       toast.success("Verification email resent!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(error.message || "Failed to resend email");
     } finally {
       setLoading(false);

@@ -16,7 +16,7 @@ interface Deal {
   updated_at: string;
   expected_close_date: string | null;
   notes: string | null;
-  metadata: any;
+  metadata: unknown;
   mls_number?: string;
   property_address?: string;
   listing_price?: number;

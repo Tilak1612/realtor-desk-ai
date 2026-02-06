@@ -10,8 +10,8 @@ import StatCard from "@/components/dashboard/StatCard";
 
 const Campaigns = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
 
   useEffect(() => {
     const checkAuth = async () => {

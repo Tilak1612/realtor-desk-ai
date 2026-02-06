@@ -34,7 +34,7 @@ const ForgotPassword = () => {
 
       setSent(true);
       toast.success("Password reset email sent!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(error.message || "Failed to send reset email");
     } finally {
       setLoading(false);

@@ -6,7 +6,7 @@
 const isDevelopment = import.meta.env.DEV;
 
 export const logger = {
-  error: (message: string, error?: any) => {
+  error: (message: string, error?: unknown) => {
     if (isDevelopment) {
       console.error(message, error);
     }

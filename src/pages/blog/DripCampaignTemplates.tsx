@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, Clock, Mail, Target, TrendingUp, CheckCircle2, Zap
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Helmet } from "react-helmet";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-drip-campaign-templates.jpg";
 
 const DripCampaignTemplates = () => {
@@ -15,12 +15,29 @@ const DripCampaignTemplates = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Real Estate Drip Campaign Templates Canada 2025 | Free Email Sequences</title>
-        <meta name="description" content="15 proven real estate email drip campaign templates for Canadian agents. Buyer nurture, seller follow-up, and listing alerts. CASL-compliant with free downloads." />
-        <meta name="keywords" content="real estate email templates, drip campaign real estate, realtor email sequences, CASL compliant email marketing, real estate nurture campaigns" />
-        <link rel="canonical" href="https://realtordesk.ai/blog/real-estate-drip-campaign-templates-canada-2025" />
-      </Helmet>
+      <SEO
+        title="Real Estate Drip Campaign Templates Canada 2025"
+        description="15 proven real estate email drip campaign templates for Canadian agents. Buyer nurture, seller follow-up, and listing alerts. CASL-compliant."
+        keywords="real estate email templates, drip campaign real estate, realtor email sequences, CASL compliant email marketing, real estate nurture campaigns"
+        image={blogImage}
+        article
+        publishedTime="2025-01-29"
+        modifiedTime="2025-01-29"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/real-estate-drip-campaign-templates-canada-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "15 Real Estate Drip Campaign Templates for Canadian Agents (2025 Edition)",
+            "description": "15 proven real estate email drip campaign templates for Canadian agents. Buyer nurture, seller follow-up, and listing alerts. CASL-compliant.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-29",
+            "dateModified": "2025-01-29"
+          }
+        ]}
+      />
 
       <Navbar />
       

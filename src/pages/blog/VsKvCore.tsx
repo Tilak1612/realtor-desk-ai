@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, CheckCircle2, XCircle } from "lucide-react"
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 const VsKvCore = () => {
   useEffect(() => {
@@ -13,6 +14,28 @@ const VsKvCore = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?"
+        description="Compare RealtorDesk AI vs kvCORE for Canadian agents. Pricing, features, PIPEDA compliance, and why many switch to AI-first platforms."
+        keywords="RealtorDesk AI vs kvCORE, kvCORE alternative Canada, Canadian real estate CRM comparison, PIPEDA compliant CRM"
+        article
+        publishedTime="2025-01-16"
+        modifiedTime="2025-01-16"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/vs-kvcore"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?",
+            "description": "Compare RealtorDesk AI vs kvCORE for Canadian agents. Pricing, features, PIPEDA compliance, and why many switch to AI-first platforms.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-16",
+            "dateModified": "2025-01-16"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -13,15 +13,11 @@ interface DocumentsTabProps {
 
 const DocumentsTab = ({ contactId }: DocumentsTabProps) => {
   const { toast } = useToast();
-  const [documents, setDocuments] = useState<any[]>([]);
+  const [documents, setDocuments] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    fetchDocuments();
-  }, [contactId]);
-
-  const fetchDocuments = async () => {
+  const fetchDocuments = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -37,7 +33,11 @@ const DocumentsTab = ({ contactId }: DocumentsTabProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
+
+  useEffect(() => {
+    fetchDocuments();
+  }, [fetchDocuments]);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -71,7 +71,7 @@ const DocumentsTab = ({ contactId }: DocumentsTabProps) => {
 
       toast({ title: "Document uploaded successfully" });
       fetchDocuments();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error uploading document",
         description: error.message,
@@ -82,7 +82,7 @@ const DocumentsTab = ({ contactId }: DocumentsTabProps) => {
     }
   };
 
-  const handleDownload = async (document: any) => {
+  const handleDownload = async (document: unknown) => {
     const { data, error } = await supabase.storage
       .from("contact-documents")
       .download(document.file_path);
@@ -103,7 +103,7 @@ const DocumentsTab = ({ contactId }: DocumentsTabProps) => {
     URL.revokeObjectURL(url);
   };
 
-  const handleDelete = async (document: any) => {
+  const handleDelete = async (document: unknown) => {
     if (!confirm("Are you sure you want to delete this document?")) return;
 
     const { error: storageError } = await supabase.storage

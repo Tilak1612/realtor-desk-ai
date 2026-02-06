@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Check, X, Brain, Globe, Shield, TrendingUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const VsWiseAgent = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Wise Agent vs RealtorDesk AI | Canadian CRM Comparison"
+        description="Wise Agent is built for the US market. Compare with RealtorDesk AI for Canadian compliance, bilingual support, and AI automation."
+        keywords="Wise Agent vs RealtorDesk AI, Wise Agent alternative Canada, Canadian real estate CRM, AI CRM comparison"
+        canonicalUrl="https://realtordesk.ai/vs/wise-agent"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Wise Agent vs Realtor Desk",
+            "description": "Compare Wise Agent with Realtor Desk AI for Canadian market features and AI capabilities."
+          }
+        ]}
+      />
       <Navbar />
 
       {/* Hero Section */}

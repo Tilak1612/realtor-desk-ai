@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,14 +14,10 @@ interface PropertyInterestsProps {
 
 const PropertyInterests = ({ contactId }: PropertyInterestsProps) => {
   const { toast } = useToast();
-  const [properties, setProperties] = useState<any[]>([]);
+  const [properties, setProperties] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchProperties();
-  }, [contactId]);
-
-  const fetchProperties = async () => {
+  const fetchProperties = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -37,7 +33,11 @@ const PropertyInterests = ({ contactId }: PropertyInterestsProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
+
+  useEffect(() => {
+    fetchProperties();
+  }, [fetchProperties]);
 
   const handleDelete = async (id: string) => {
     const { error } = await supabase

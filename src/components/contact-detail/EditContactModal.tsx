@@ -41,7 +41,7 @@ const formSchema = z.object({
 });
 
 interface EditContactModalProps {
-  contact: any;
+  contact: unknown;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSuccess: () => void;
@@ -90,7 +90,7 @@ const EditContactModal = ({ contact, open, onOpenChange, onSuccess }: EditContac
       toast({ title: "Contact updated successfully" });
       onOpenChange(false);
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error updating contact",
         description: error.message,

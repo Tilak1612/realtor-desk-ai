@@ -1,9 +1,16 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Privacy Policy | RealtorDesk AI"
+        description="Read RealtorDesk AI's privacy policy covering data collection, storage, security, and your rights under Canadian law."
+        keywords="privacy policy, PIPEDA, Canadian data privacy, RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/privacy-policy"
+      />
       <Navbar />
 
       <section className="pt-32 md:pt-40 pb-16">

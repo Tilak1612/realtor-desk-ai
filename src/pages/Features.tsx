@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Brain, MessageSquare, TrendingUp, FileCheck, Megaphone } from "lucide-react";
@@ -7,15 +8,6 @@ import { useTranslation } from "react-i18next";
 
 const Features = () => {
   const { t } = useTranslation();
-  
-  // SEO: Update document title and meta for features page
-  if (typeof document !== 'undefined') {
-    document.title = "AI Tools for Realtors | Real Estate Lead Generation Software | RealtorDesk AI Features";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Discover AI tools for Realtors: predictive CRM, 24/7 chatbot, real estate lead generation software, virtual tour platforms, video marketing tools. Best features for real estate agents.');
-    }
-  }
 
   const featureTabs = [
     {
@@ -132,6 +124,11 @@ const Features = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="AI Tools for Realtors | Real Estate CRM Features"
+        description="Discover AI tools for Realtors: predictive CRM, 24/7 chatbot, real estate lead generation software, virtual tour platforms, and video marketing tools built for agents."
+        keywords="real estate crm features, ai tools for realtors, real estate lead generation software, virtual tour integration, real estate video marketing tools, CREA DDF integration"
+      />
       <Navbar />
 
       {/* Hero Section */}

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react";
 import { useState } from "react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
@@ -46,7 +47,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
       {
         id: "special",
         label: t('app.auth.passwordRequirements.special', 'At least 1 special character (!@#$%^&*()_+-=[]{}|;:,.<>?)'),
-        validator: (pwd) => /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(pwd),
+        validator: (pwd) => /[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(pwd),
       },
     ];
 
@@ -145,7 +146,7 @@ export const validatePassword = (password: string): boolean => {
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
   const hasNumber = /[0-9]/.test(password);
-  const hasSpecial = /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password);
+  const hasSpecial = /[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(password);
   
   return hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecial;
 };

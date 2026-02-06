@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { formatDistanceToNow } from "date-fns";
 
 interface AIInsightsProps {
-  contact: any;
+  contact: unknown;
 }
 
 const AIInsights = ({ contact }: AIInsightsProps) => {

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 // Unique images for each resource - no duplicates
 import blogAI from "@/assets/blog-ai-transformation.jpg";
 import blogCREA from "@/assets/blog-crea-ddf.jpg";
@@ -369,6 +370,11 @@ const Resources = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Resources | Guides for Canadian Real Estate Agents"
+        description="Expert guides on AI tools, lead generation, compliance, and marketing for Canadian real estate agents using RealtorDesk AI."
+        keywords="real estate crm resources, canadian real estate marketing guides, realtor ai tools guide, real estate lead generation strategies"
+      />
       <Navbar />
 
       {/* Hero Section */}

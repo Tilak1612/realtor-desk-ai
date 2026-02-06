@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, Clock, Shield, Smartphone, Zap, CheckCircle2, XCir
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Helmet } from "react-helmet";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-open-house-digital.jpg";
 
 const OpenHouseDigitalSignIn = () => {
@@ -15,12 +15,29 @@ const OpenHouseDigitalSignIn = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Open House Sign-In Sheets: Digital vs Paper 2025 | CASL Compliance</title>
-        <meta name="description" content="Digital open house sign-in sheets vs traditional paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents." />
-        <meta name="keywords" content="open house sign in sheet Canada, digital sign in sheet, CASL compliant open house, real estate open house leads, open house follow up" />
-        <link rel="canonical" href="https://realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025" />
-      </Helmet>
+      <SEO
+        title="Open House Sign-In Sheets: Digital vs Paper 2025"
+        description="Digital open house sign-in sheets vs paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents."
+        keywords="open house sign in sheet Canada, digital sign in sheet, CASL compliant open house, real estate open house leads, open house follow up"
+        image={blogImage}
+        article
+        publishedTime="2025-01-29"
+        modifiedTime="2025-01-29"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Open House Sign-In Sheets: Digital vs Paper in 2025 (CASL Compliance Guide)",
+            "description": "Digital open house sign-in sheets vs paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-29",
+            "dateModified": "2025-01-29"
+          }
+        ]}
+      />
 
       <Navbar />
       

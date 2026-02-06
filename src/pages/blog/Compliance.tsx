@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Share2, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-compliance.jpg";
+import { SEO } from "@/components/SEO";
 
 const Compliance = () => {
   useEffect(() => {
@@ -13,6 +14,29 @@ const Compliance = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Provincial Compliance Checklist: ON, BC, AB, QC"
+        description="Stay compliant with Canadian real estate regulations. A practical checklist for RECO, BCFSA, RECA, and AMF requirements."
+        keywords="real estate compliance canada, RECO requirements, BCFSA compliance, RECA rules, AMF real estate, PIPEDA"
+        image={blogImage}
+        article
+        publishedTime="2025-01-05"
+        modifiedTime="2025-01-05"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/compliance"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Provincial Compliance Checklist: ON, BC, AB, QC",
+            "description": "Stay compliant with Canadian real estate regulations. A practical checklist for RECO, BCFSA, RECA, and AMF requirements.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-05",
+            "dateModified": "2025-01-05"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

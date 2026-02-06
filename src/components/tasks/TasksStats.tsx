@@ -6,7 +6,7 @@ import { AlertCircle, CheckCircle2, Calendar, Clock } from "lucide-react";
 interface TasksStatsProps {
   quickFilter: string;
   refreshTrigger: number;
-  filters: any;
+  filters: unknown;
 }
 
 const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) => {

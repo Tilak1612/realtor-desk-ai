@@ -97,7 +97,7 @@ const EnrollInAutomationModal = ({
 
       toast.success(`${contactName} enrolled in automation`);
       onOpenChange(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error enrolling contact:", error);
       toast.error(error.message || "Failed to enroll contact");
     } finally {

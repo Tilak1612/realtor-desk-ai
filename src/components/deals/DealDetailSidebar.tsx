@@ -11,7 +11,7 @@ import WinLossModal from "./WinLossModal";
 import EditDealModal from "./EditDealModal";
 
 interface DealDetailSidebarProps {
-  deal: any;
+  deal: unknown;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onDealUpdated: () => void;

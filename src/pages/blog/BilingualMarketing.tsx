@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Share2, Languages } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-bilingual-marketing.jpg";
+import { SEO } from "@/components/SEO";
 
 const BilingualMarketing = () => {
   useEffect(() => {
@@ -13,6 +14,29 @@ const BilingualMarketing = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Bilingual Real Estate Marketing: Beyond Translation"
+        description="Master true bilingual real estate marketing for Canadian markets with cultural localization, compliance, and SEO in both languages."
+        keywords="bilingual real estate marketing, french real estate canada, quebec real estate marketing, bilingual CRM"
+        image={blogImage}
+        article
+        publishedTime="2024-12-20"
+        modifiedTime="2024-12-20"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/bilingual-marketing"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Bilingual Real Estate Marketing: Beyond Translation",
+            "description": "Master true bilingual real estate marketing for Canadian markets with cultural localization, compliance, and SEO in both languages.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2024-12-20",
+            "dateModified": "2024-12-20"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

@@ -4,10 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, CheckCircle2, XCircle, DollarSign, Clock, Zap, Brain, Building2, Users, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const VsPropertybase = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <SEO
+        title="Propertybase vs RealtorDesk AI: Enterprise vs Agile for Canadian Teams"
+        description="Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams."
+        keywords="Propertybase vs RealtorDesk AI, Canadian real estate CRM comparison, Salesforce real estate CRM alternative"
+        article
+        publishedTime="2025-01-01"
+        modifiedTime="2025-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/vs-propertybase"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Propertybase vs RealtorDesk AI: Enterprise vs Agile for Canadian Teams",
+            "description": "Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-01",
+            "dateModified": "2025-01-01"
+          }
+        ]}
+      />
       <Navbar />
       
       {/* Hero Section */}

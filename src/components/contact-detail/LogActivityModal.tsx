@@ -65,13 +65,13 @@ const LogActivityModal = ({ contactId, open, onOpenChange, onSuccess }: LogActiv
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) return;
 
-      const metadata: any = {};
+      const metadata: unknown = {};
       if (values.duration) metadata.duration = values.duration;
 
       const { error } = await supabase.from("contact_activities").insert({
         contact_id: contactId,
         user_id: session.user.id,
-        activity_type: values.activity_type as any,
+        activity_type: values.activity_type as unknown,
         title: values.title,
         description: values.description || null,
         metadata,
@@ -83,7 +83,7 @@ const LogActivityModal = ({ contactId, open, onOpenChange, onSuccess }: LogActiv
       form.reset();
       onOpenChange(false);
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error logging activity",
         description: error.message,

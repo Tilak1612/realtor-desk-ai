@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Star, Award, TrendingUp, CheckCircle2, XCir
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 const BestCRMCanada2025 = () => {
   useEffect(() => {
@@ -13,6 +14,28 @@ const BestCRMCanada2025 = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Best CRM for Canadian Real Estate Agents in 2025"
+        description="Compare the top real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities. Updated January 2025."
+        keywords="best CRM Canada 2025, real estate CRM comparison, Canadian real estate CRM, PIPEDA compliant CRM, CREA DDF CRM"
+        article
+        publishedTime="2025-01-16"
+        modifiedTime="2025-01-16"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/best-crm-canada-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Best CRM for Canadian Real Estate Agents in 2025: Complete Comparison Guide",
+            "description": "Compare the top real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-16",
+            "dateModified": "2025-01-16"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

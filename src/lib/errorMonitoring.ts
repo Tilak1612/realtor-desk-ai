@@ -8,7 +8,7 @@ export interface ErrorLog {
   type: 'error' | 'warning' | 'info';
   category: string;
   message: string;
-  details?: any;
+  details?: unknown;
   userId?: string;
   userEmail?: string;
   url?: string;
@@ -36,7 +36,7 @@ class ErrorMonitor {
   logError(
     category: string,
     message: string,
-    details?: any,
+    details?: unknown,
     userId?: string,
     userEmail?: string
   ): void {
@@ -70,7 +70,7 @@ class ErrorMonitor {
   logWarning(
     category: string,
     message: string,
-    details?: any,
+    details?: unknown,
     userId?: string
   ): void {
     const warningLog: ErrorLog = {
@@ -94,7 +94,7 @@ class ErrorMonitor {
   /**
    * Log general info
    */
-  logInfo(category: string, message: string, details?: any): void {
+  logInfo(category: string, message: string, details?: unknown): void {
     const infoLog: ErrorLog = {
       timestamp: new Date(),
       type: 'info',
@@ -313,7 +313,7 @@ export async function withErrorLogging<T>(
     const result = await fn();
     errorMonitor.logInfo(category, `${operation} succeeded`);
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     errorMonitor.logError(
       category,
       `${operation} failed`,
@@ -342,7 +342,7 @@ export async function measureAPICall<T>(
     const duration = performance.now() - startTime;
     errorMonitor.logAPICall(endpoint, method, 200, duration, undefined, userId);
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     const duration = performance.now() - startTime;
     const statusCode = error.status || error.statusCode || 500;
     errorMonitor.logAPICall(

@@ -19,7 +19,7 @@ const QUALIFICATION_QUESTIONS = [
 ];
 
 interface ChatbotSetupProps {
-  profileData: any;
+  profileData: unknown;
   userId: string | null;
   onNext: () => void;
   onBack: () => void;
@@ -56,7 +56,7 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
       if (error) throw error;
       toast.success("Chatbot configured!");
       onNext();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Failed to save chatbot settings");
     } finally {
       setLoading(false);

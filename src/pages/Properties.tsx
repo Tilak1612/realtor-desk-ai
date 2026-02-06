@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -32,9 +32,9 @@ export interface Property {
   year_built: number | null;
   description: string | null;
   image_url: string | null;
-  images: any;
+  images: unknown;
   virtual_tour_url: string | null;
-  features: any;
+  features: unknown;
   mls_number: string | null;
   days_on_market: number;
   contact_id: string | null;
@@ -60,8 +60,8 @@ const Properties = () => {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [filters, setFilters] = useState<PropertyFiltersState>({
     search: "",
     status: [],
@@ -70,15 +70,28 @@ const Properties = () => {
     bedrooms: "any",
   });
 
-  useEffect(() => {
-    checkAuthAndFetch();
-  }, []);
+  const fetchProperties = useCallback(async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("properties")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-  useEffect(() => {
-    applyFilters();
-  }, [properties, filters]);
+      if (error) throw error;
+      setProperties(data || []);
+    } catch (error: unknown) {
+      toast({
+        title: t('app.common.error'),
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [t, toast]);
 
-  const checkAuthAndFetch = async () => {
+  const checkAuthAndFetch = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       navigate("/login");
@@ -95,30 +108,9 @@ const Properties = () => {
     
     setProfile(profileData);
     fetchProperties();
-  };
+  }, [fetchProperties, navigate]);
 
-  const fetchProperties = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("properties")
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setProperties(data || []);
-    } catch (error: any) {
-      toast({
-        title: t('app.common.error'),
-        description: error.message,
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...properties];
 
     if (filters.search) {
@@ -152,7 +144,15 @@ const Properties = () => {
     }
 
     setFilteredProperties(filtered);
-  };
+  }, [properties, filters]);
+
+  useEffect(() => {
+    checkAuthAndFetch();
+  }, [checkAuthAndFetch]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
 
   const getStatusCounts = () => {
     return {
@@ -200,7 +200,7 @@ const Properties = () => {
         <PropertyFilters filters={filters} onFiltersChange={setFilters} />
 
         {/* View Toggle and Content */}
-        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as unknown)}>
           <div className="flex justify-end mb-4">
             <TabsList className="h-8">
               <TabsTrigger value="grid" className="text-xs h-7 px-3">

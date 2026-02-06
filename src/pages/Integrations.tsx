@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -28,15 +29,6 @@ interface IntegrationCategory {
 
 const Integrations = () => {
   const { t } = useTranslation();
-
-  // SEO: Update document title and meta for integrations page
-  if (typeof document !== 'undefined') {
-    document.title = "Real Estate CRM Integrations | Virtual Tour Platforms | RealtorDesk AI";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Integrate with virtual tour platforms, real estate website builders, video marketing tools, and top CRMs. Best integrations for real estate agents. CREA DDF® native.');
-    }
-  }
   
   const categories: IntegrationCategory[] = [
     {
@@ -103,6 +95,11 @@ const Integrations = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Real Estate CRM Integrations | RealtorDesk AI"
+        description="Integrate RealtorDesk AI with virtual tour platforms, real estate website builders, video marketing tools, and top CRMs. CREA DDF® native."
+        keywords="real estate crm integrations, virtual tour platforms, real estate website builders, real estate video marketing tools, CREA DDF integration"
+      />
       <Navbar />
 
       {/* Hero Section */}

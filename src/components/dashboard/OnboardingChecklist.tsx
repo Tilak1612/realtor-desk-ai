@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -26,7 +26,7 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
   const [loading, setLoading] = useState(true);
   const [dismissed, setDismissed] = useState(false);
 
-  const checklistItems: ChecklistItem[] = [
+  const checklistItems: ChecklistItem[] = useMemo(() => [
     {
       id: "add_property",
       title: "Add your first property",
@@ -94,7 +94,7 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
         return false;
       },
     },
-  ];
+  ], [userId]);
 
   useEffect(() => {
     const checkProgress = async () => {
@@ -117,7 +117,7 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
     };
 
     checkProgress();
-  }, [userId]);
+  }, [checklistItems]);
 
   const progress = (completedItems.size / checklistItems.length) * 100;
   const allComplete = completedItems.size === checklistItems.length;

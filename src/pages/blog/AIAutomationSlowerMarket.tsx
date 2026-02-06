@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-ai-automation-realtor.jpg";
+import { SEO } from "@/components/SEO";
 
 const AIAutomationSlowerMarket = () => {
   useEffect(() => {
@@ -14,34 +14,29 @@ const AIAutomationSlowerMarket = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>How Canadian Realtors Can Thrive in a Slower Market with AI Automation | RealtorDesk</title>
-        <meta name="description" content="Discover proven AI automation strategies helping Canadian Realtors close more deals in slower markets. Lead generation, follow-up systems & CRM tools." />
-        <meta name="keywords" content="AI automation for Canadian Realtors, real estate CRM Canada, Realtor lead generation automation, AI tools for real estate agents Canada, how to succeed in slow real estate market, automated follow-up system for Realtors, Canadian Realtor technology tools 2025" />
-        <link rel="canonical" href="https://realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation" />
-        <meta property="og:title" content="How Canadian Realtors Can Thrive in a Slower Market with AI Automation" />
-        <meta property="og:description" content="Discover proven AI automation strategies helping Canadian Realtors close more deals in slower markets. Lead generation, follow-up systems & CRM tools." />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="How Canadian Realtors Can Thrive in a Slower Market with AI Automation"
+        description="Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems."
+        keywords="AI automation for Canadian Realtors, real estate CRM Canada, Realtor lead generation automation, automated follow-up system"
+        image={blogImage}
+        article
+        publishedTime="2025-01-02"
+        modifiedTime="2025-01-02"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation"
+        structuredData={[
+          {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "How Canadian Realtors Can Thrive in a Slower Market with AI Automation",
-            "description": "Discover proven AI automation strategies helping Canadian Realtors close more deals in slower markets. Lead generation, follow-up systems & CRM tools.",
-            "author": {
-              "@type": "Organization",
-              "name": "RealtorDesk"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "RealtorDesk"
-            },
+            "description": "Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2025-01-02",
             "dateModified": "2025-01-02"
-          })}
-        </script>
-      </Helmet>
+          }
+        ]}
+      />
       
       <Navbar />
       

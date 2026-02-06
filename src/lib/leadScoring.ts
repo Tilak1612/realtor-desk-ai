@@ -25,7 +25,7 @@ export async function calculateLeadScore(contactId: string): Promise<LeadScoreRe
     if (error) throw error;
 
     return data as LeadScoreResult;
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new Error(error.message || "Failed to calculate lead score");
   }
 }
@@ -43,7 +43,7 @@ export async function getLeadScore(contactId: string) {
     if (error) throw error;
 
     return data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     return null;
   }
 }

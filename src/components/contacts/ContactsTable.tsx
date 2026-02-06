@@ -59,7 +59,7 @@ const ContactsTable = ({
   };
 
   const sortedContacts = [...contacts].sort((a, b) => {
-    let aVal: any, bVal: any;
+    let aVal: unknown, bVal: unknown;
 
     switch (sortField) {
       case "name":

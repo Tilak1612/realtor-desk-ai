@@ -4,18 +4,35 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Clock, Calendar, DollarSign, Home, Camera, Megaphone, Users, TrendingDown, CalendarCheck, Gift, Cpu, AlertTriangle, HelpCircle, CheckCircle2, Lightbulb } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-sell-home-fast.jpg";
 
 const SellHomeFast = () => {
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025 | RealtorDesk AI</title>
-        <meta name="description" content="Learn how to sell your home fast in Canada with these 10 proven strategies. From pricing to staging to marketing, get expert tips for quick sales in 2025's market." />
-        <meta name="keywords" content="how to sell home fast Canada, home staging tips, real estate pricing strategy, sell house quickly, best time to sell house" />
-        <link rel="canonical" href="https://realtordesk.ai/sell-home-fast-canada-2025" />
-      </Helmet>
+      <SEO
+        title="How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025"
+        description="Learn how to sell your home fast in Canada with 10 proven strategies. From pricing to staging and marketing, get expert tips for quick sales."
+        keywords="how to sell home fast Canada, home staging tips, real estate pricing strategy, sell house quickly, best time to sell house"
+        image={blogImage}
+        article
+        publishedTime="2025-01-01"
+        modifiedTime="2025-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/sell-home-fast-canada-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025",
+            "description": "Learn how to sell your home fast in Canada with 10 proven strategies. From pricing to staging and marketing, get expert tips for quick sales.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-01",
+            "dateModified": "2025-01-01"
+          }
+        ]}
+      />
 
       <Navbar />
 

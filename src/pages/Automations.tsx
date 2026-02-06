@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import AppLayout from "@/components/layout/AppLayout";
@@ -69,17 +69,38 @@ const triggerLabels: Record<string, string> = {
 
 const Automations = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [automations, setAutomations] = useState<Automation[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-  useEffect(() => {
-    checkAuthAndFetch();
+  const fetchAutomations = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("email_automations")
+      .select(`
+        *,
+        automation_steps(count),
+        automation_enrollments(count)
+      `)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching automations:", error);
+      toast.error("Failed to load automations");
+      return;
+    }
+
+    const formattedAutomations = (data || []).map((auto: unknown) => ({
+      ...auto,
+      steps_count: auto.automation_steps?.[0]?.count || 0,
+      enrollments_count: auto.automation_enrollments?.[0]?.count || 0,
+    }));
+
+    setAutomations(formattedAutomations);
   }, []);
 
-  const checkAuthAndFetch = async () => {
+  const checkAuthAndFetch = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       navigate("/login");
@@ -99,32 +120,11 @@ const Automations = () => {
 
     await fetchAutomations();
     setLoading(false);
-  };
+  }, [fetchAutomations, navigate]);
 
-  const fetchAutomations = async () => {
-    const { data, error } = await supabase
-      .from("email_automations")
-      .select(`
-        *,
-        automation_steps(count),
-        automation_enrollments(count)
-      `)
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching automations:", error);
-      toast.error("Failed to load automations");
-      return;
-    }
-
-    const formattedAutomations = (data || []).map((auto: any) => ({
-      ...auto,
-      steps_count: auto.automation_steps?.[0]?.count || 0,
-      enrollments_count: auto.automation_enrollments?.[0]?.count || 0,
-    }));
-
-    setAutomations(formattedAutomations);
-  };
+  useEffect(() => {
+    checkAuthAndFetch();
+  }, [checkAuthAndFetch]);
 
   const toggleAutomationStatus = async (id: string, currentStatus: string) => {
     const newStatus = currentStatus === "active" ? "paused" : "active";

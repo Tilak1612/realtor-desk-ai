@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Shield, CheckCircle, AlertTriangle, Lock, FileText, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import blogCompliance from "@/assets/blog-privacy-compliance.jpg";
+import { SEO } from "@/components/SEO";
 
 const PIPEDACompliance = () => {
   useEffect(() => {
@@ -13,13 +13,18 @@ const PIPEDACompliance = () => {
 
   return (
     <>
-      <Helmet>
-        <title>PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada | RealtorDesk</title>
-        <meta name="description" content="Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements, best practices, and how to choose compliant platforms." />
-        <meta name="keywords" content="PIPEDA compliance for Canadian Realtors, real estate data privacy Canada, PIPEDA requirements for CRM, Canadian real estate AI compliance, Realtor data protection laws Canada, PIPEDA compliant real estate software, privacy regulations for Canadian agents" />
-        <link rel="canonical" href="https://realtordesk.ai/pipeda-compliance-real-estate-ai-tools-canada" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada"
+        description="Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements, best practices, and how to choose compliant platforms."
+        keywords="PIPEDA compliance for Canadian Realtors, real estate data privacy Canada, PIPEDA requirements for CRM, Canadian real estate AI compliance, Realtor data protection laws Canada"
+        image={blogCompliance}
+        article
+        publishedTime="2025-01-22"
+        modifiedTime="2025-01-22"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/pipeda-compliance-real-estate-ai-tools-canada"
+        structuredData={[
+          {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada",
@@ -28,9 +33,9 @@ const PIPEDACompliance = () => {
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2025-01-22",
             "dateModified": "2025-01-22"
-          })}
-        </script>
-      </Helmet>
+          }
+        ]}
+      />
       
       <div className="min-h-screen bg-background">
         <Navbar />

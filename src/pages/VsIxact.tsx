@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Check, X, Brain, Zap, TrendingUp, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const VsIxact = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
+      <SEO
+        title="IXACT Contact vs RealtorDesk AI | Upgrade to AI"
+        description="Upgrade from IXACT to AI-powered intelligence without breaking your budget. See pricing, features, and why Canadian agents switch."
+        keywords="IXACT Contact vs RealtorDesk AI, IXACT alternative, Canadian real estate CRM comparison, AI CRM for realtors"
+        canonicalUrl="https://realtordesk.ai/vs/ixact"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "IXACT Contact vs Realtor Desk",
+            "description": "Compare IXACT Contact with Realtor Desk AI for pricing, AI features, and Canadian market support."
+          }
+        ]}
+      />
       <Navbar />
 
       {/* Hero Section */}

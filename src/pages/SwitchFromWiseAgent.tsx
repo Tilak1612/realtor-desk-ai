@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Globe, Brain, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const SwitchFromWiseAgent = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Switch from Wise Agent | Canadian CRM Upgrade"
+        description="Switch from Wise Agent to RealtorDesk AI for bilingual support, CREA integration, and Canadian market intelligence."
+        keywords="switch from Wise Agent, Wise Agent alternative Canada, Canadian real estate CRM, RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/switch-from-wise-agent"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Switch from Wise Agent",
+            "description": "Upgrade from Wise Agent to RealtorDesk AI with Canadian compliance and AI automation."
+          }
+        ]}
+      />
       <Navbar />
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">

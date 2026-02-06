@@ -192,7 +192,7 @@ const handler = async (req: Request): Promise<Response> => {
 
       try {
         switch (step.action_type) {
-          case "send_email":
+          case "send_email": {
             const subject = replaceVariables(step.action_config.subject || "No Subject", contact);
             const bodyHtml = replaceVariables(step.action_config.body || "", contact)
               .split("\n")
@@ -212,11 +212,12 @@ const handler = async (req: Request): Promise<Response> => {
 
             console.log("Email sent:", emailResult);
             break;
+          }
 
-          case "wait":
+          case "wait": {
             const delayDays = step.action_config.delay_days || 1;
             const nextActionAt = new Date(Date.now() + delayDays * 24 * 60 * 60 * 1000);
-            
+
             await supabase
               .from("automation_enrollments")
               .update({ 
@@ -227,8 +228,9 @@ const handler = async (req: Request): Promise<Response> => {
 
             console.log(`Wait step: next action at ${nextActionAt.toISOString()}`);
             break;
+          }
 
-          case "add_tag":
+          case "add_tag": {
             const tagName = step.action_config.tag_name;
             if (tagName) {
               const currentTags = contact.tags || [];
@@ -241,8 +243,9 @@ const handler = async (req: Request): Promise<Response> => {
             }
             console.log("Tag added:", tagName);
             break;
+          }
 
-          case "create_task":
+          case "create_task": {
             const taskTitle = replaceVariables(step.action_config.task_title || "Follow up", contact);
             await supabase
               .from("tasks")
@@ -256,15 +259,16 @@ const handler = async (req: Request): Promise<Response> => {
               });
             console.log("Task created:", taskTitle);
             break;
+          }
 
-          case "send_sms":
+          case "send_sms": {
             if (!contact.phone) {
               console.error("Contact has no phone number for SMS");
               throw new Error("Contact has no phone number");
             }
 
             const smsMessage = replaceVariables(step.action_config.sms_message || "", contact);
-            
+
             // Get Twilio credentials
             const twilioAccountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
             const twilioAuthToken = Deno.env.get("TWILIO_AUTH_TOKEN");
@@ -330,11 +334,12 @@ const handler = async (req: Request): Promise<Response> => {
 
             console.log("SMS sent:", twilioResult.sid);
             break;
+          }
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Error executing step:", error);
         executionStatus = "failed";
-        errorMessage = error.message;
+        errorMessage = error instanceof Error ? error.message : "Unknown error";
       }
 
       // Log the execution
@@ -370,7 +375,7 @@ const handler = async (req: Request): Promise<Response> => {
       { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in run-automation function:", error);
     return new Response(
       JSON.stringify({ error: "An error occurred processing your request" }),

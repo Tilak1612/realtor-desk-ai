@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -25,7 +25,7 @@ export const useLeadScore = (contactId: string) => {
   const [calculating, setCalculating] = useState(false);
   const { toast } = useToast();
 
-  const fetchLeadScore = async () => {
+  const fetchLeadScore = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -40,12 +40,12 @@ export const useLeadScore = (contactId: string) => {
       }
 
       setLeadScore(data as unknown as LeadScoreData);
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Error silently handled
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
 
   const calculateLeadScore = async () => {
     try {
@@ -64,7 +64,7 @@ export const useLeadScore = (contactId: string) => {
 
       await fetchLeadScore();
       return data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error calculating lead score",
         description: error.message,
@@ -79,7 +79,7 @@ export const useLeadScore = (contactId: string) => {
     if (contactId) {
       fetchLeadScore();
     }
-  }, [contactId]);
+  }, [contactId, fetchLeadScore]);
 
   return {
     leadScore,

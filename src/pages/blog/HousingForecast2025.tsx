@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-housing-forecast.jpg";
+import { SEO } from "@/components/SEO";
 
 const HousingForecast2025 = () => {
   useEffect(() => {
@@ -14,34 +14,29 @@ const HousingForecast2025 = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Canada Housing Market Forecast 2025-2026: What Realtors Need to Know | RealtorDesk</title>
-        <meta name="description" content="Expert analysis of Canada's housing market forecast for 2025-2026. Interest rates, regional trends, and strategies for Canadian Realtors to succeed." />
-        <meta name="keywords" content="Canada housing market forecast 2025, Canadian real estate market predictions 2026, interest rates Canada 2025 housing, Toronto Vancouver housing market trends, Canadian Realtor market strategies 2025, CREA housing forecast Canada, real estate market trends Canada 2025" />
-        <link rel="canonical" href="https://realtordesk.ai/canada-housing-market-forecast-2025-2026" />
-        <meta property="og:title" content="Canada Housing Market Forecast 2025-2026: What Realtors Need to Know" />
-        <meta property="og:description" content="Expert analysis of Canada's housing market forecast for 2025-2026. Interest rates, regional trends, and strategies for Canadian Realtors to succeed." />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://realtordesk.ai/canada-housing-market-forecast-2025-2026" />
-        <script type="application/ld+json">
-          {JSON.stringify({
+      <SEO
+        title="Canada Housing Market Forecast 2025-2026: What Realtors Need to Know"
+        description="Expert analysis of Canada's housing market forecast for 2025-2026 with interest rates, regional trends, and strategies for Canadian Realtors."
+        keywords="Canada housing market forecast 2025, Canadian real estate market predictions 2026, interest rates Canada housing, Toronto Vancouver housing trends, CREA housing forecast"
+        image={blogImage}
+        article
+        publishedTime="2025-01-02"
+        modifiedTime="2025-01-02"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/canada-housing-market-forecast-2025-2026"
+        structuredData={[
+          {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Canada Housing Market Forecast 2025-2026: What Realtors Need to Know",
-            "description": "Expert analysis of Canada's housing market forecast for 2025-2026. Interest rates, regional trends, and strategies for Canadian Realtors to succeed.",
-            "author": {
-              "@type": "Organization",
-              "name": "RealtorDesk"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "RealtorDesk"
-            },
+            "description": "Expert analysis of Canada's housing market forecast for 2025-2026 with interest rates, regional trends, and strategies for Canadian Realtors.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2025-01-02",
             "dateModified": "2025-01-02"
-          })}
-        </script>
-      </Helmet>
+          }
+        ]}
+      />
       
       <Navbar />
       

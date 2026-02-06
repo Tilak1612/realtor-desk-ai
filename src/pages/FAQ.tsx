@@ -5,22 +5,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileOptimizedFAQ from "@/components/MobileOptimizedFAQ";
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
 const FAQ = () => {
   const {
     t
   } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // SEO: Update document title and meta for FAQ page
-  if (typeof document !== 'undefined') {
-    document.title = "FAQ | Best CRM for Real Estate Agents Questions | RealtorDesk AI";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Frequently asked questions about the best CRM for real estate agents. Learn about AI lead generation software, virtual tour integration, pricing, and how to switch from BoldTrail or Lofty.');
-    }
-  }
-
   return <div className="min-h-screen">
+      <SEO
+        title="FAQ | RealtorDesk AI"
+        description="Frequently asked questions about RealtorDesk AI, including AI lead generation, virtual tour integrations, pricing, and switching from other CRMs."
+        keywords="real estate crm faq, realtor crm questions, ai real estate crm, real estate lead generation software"
+      />
       <Navbar />
       
       {/* FAQ Content */}

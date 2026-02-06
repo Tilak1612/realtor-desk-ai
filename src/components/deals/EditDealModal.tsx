@@ -15,7 +15,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
 interface EditDealModalProps {
-  deal: any;
+  deal: unknown;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onDealUpdated: () => void;

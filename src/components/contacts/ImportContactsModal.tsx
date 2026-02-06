@@ -40,7 +40,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
     }
   };
 
-  const parseCSV = (text: string): any[] => {
+  const parseCSV = (text: string): unknown[] => {
     const lines = text.split("\n");
     const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
     const data = [];
@@ -48,7 +48,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
     for (let i = 1; i < lines.length; i++) {
       if (!lines[i].trim()) continue;
       const values = lines[i].split(",");
-      const row: any = {};
+      const row: unknown = {};
       headers.forEach((header, index) => {
         row[header] = values[index]?.trim() || "";
       });
@@ -116,7 +116,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       });
 
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t("app.modals.importContacts.importFailed"),
         description: error.message,

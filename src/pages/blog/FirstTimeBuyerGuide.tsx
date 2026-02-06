@@ -4,18 +4,35 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Clock, Calendar, Home, DollarSign, FileText, CheckCircle2, AlertTriangle, Lightbulb, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-first-time-buyer.jpg";
 
 const FirstTimeBuyerGuide = () => {
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>First-Time Home Buyer Guide for Canada 2025 | RealtorDesk AI</title>
-        <meta name="description" content="Complete first-time home buyer guide for Canada 2025. Learn about down payments, mortgage pre-approval, closing costs, and CMHC insurance. Expert tips for Canadian buyers." />
-        <meta name="keywords" content="first time home buyer Canada, down payment requirements Canada, CMHC insurance, home buying process Canada, first time buyer programs" />
-        <link rel="canonical" href="https://realtordesk.ai/first-time-home-buyer-guide-canada-2025" />
-      </Helmet>
+      <SEO
+        title="First-Time Home Buyer Guide for Canada 2025"
+        description="Complete first-time home buyer guide for Canada 2025. Learn about down payments, mortgage pre-approval, closing costs, and CMHC insurance."
+        keywords="first time home buyer Canada, down payment requirements Canada, CMHC insurance, home buying process Canada, first time buyer programs"
+        image={blogImage}
+        article
+        publishedTime="2025-01-01"
+        modifiedTime="2025-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/first-time-home-buyer-guide-canada-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "First-Time Home Buyer Guide for Canada 2025: Everything You Need to Know",
+            "description": "Complete first-time home buyer guide for Canada 2025. Learn about down payments, mortgage pre-approval, closing costs, and CMHC insurance.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-01",
+            "dateModified": "2025-01-01"
+          }
+        ]}
+      />
 
       <Navbar />
 

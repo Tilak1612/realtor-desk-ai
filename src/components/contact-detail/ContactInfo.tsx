@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 
 interface ContactInfoProps {
-  contact: any;
+  contact: unknown;
 }
 
 const ContactInfo = ({ contact }: ContactInfoProps) => {

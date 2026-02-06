@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Share2, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-crea-ddf.jpg";
+import { SEO } from "@/components/SEO";
 
 const CreaDDF = () => {
   useEffect(() => {
@@ -13,6 +14,29 @@ const CreaDDF = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="The Complete Guide to CREA DDF Integration"
+        description="Everything you need to know about accessing national MLS data and integrating CREA DDF into your real estate workflow."
+        keywords="CREA DDF integration, Canadian MLS data, real estate CRM Canada, CREA DDF guide, MLS integration"
+        image={blogImage}
+        article
+        publishedTime="2025-01-10"
+        modifiedTime="2025-01-10"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/crea-ddf"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "The Complete Guide to CREA DDF Integration",
+            "description": "Everything you need to know about accessing national MLS data and integrating CREA DDF into your real estate workflow.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-10",
+            "dateModified": "2025-01-10"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

@@ -6,8 +6,8 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 
 interface AppLayoutProps {
   children: ReactNode;
-  user?: any;
-  profile?: any;
+  user?: unknown;
+  profile?: unknown;
 }
 
 const AppLayout = ({ children, user, profile }: AppLayoutProps) => {

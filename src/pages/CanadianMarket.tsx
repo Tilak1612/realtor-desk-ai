@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import agentSuccess from "@/assets/agent-success.jpg";
+import { SEO } from "@/components/SEO";
 
 const CanadianMarket = () => {
   const { t } = useTranslation();
@@ -32,6 +33,11 @@ const CanadianMarket = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Canadian Real Estate CRM | Built for CREA DDF and PIPEDA"
+        description="RealtorDesk AI is built for Canadian agents with CREA DDF® integration, bilingual support, and PIPEDA-compliant data handling across provinces."
+        keywords="canadian real estate crm, CREA DDF, PIPEDA compliant crm, bilingual real estate crm, canadian realtors"
+      />
       <Navbar />
 
       {/* Hero Section */}

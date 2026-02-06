@@ -180,7 +180,7 @@ serve(async (req) => {
     } else {
       throw new Error('Invalid action. Use "encrypt_and_store" or "decrypt"');
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     return new Response(
       JSON.stringify({ error: error?.message || 'Unknown error' }),
       { 

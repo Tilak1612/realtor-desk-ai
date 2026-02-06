@@ -4,16 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
  * Triggers lead score calculation for a contact
  */
 export const triggerLeadScoreCalculation = async (contactId: string) => {
-  try {
-    const { data, error } = await supabase.functions.invoke("calculate-lead-score", {
-      body: { contact_id: contactId },
-    });
+  const { data, error } = await supabase.functions.invoke("calculate-lead-score", {
+    body: { contact_id: contactId },
+  });
 
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  if (error) throw error;
+  return data;
 };
 
 /**

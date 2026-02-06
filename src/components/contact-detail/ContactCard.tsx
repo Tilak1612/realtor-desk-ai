@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 
 interface ContactCardProps {
-  contact: any;
+  contact: unknown;
   onUpdate: () => void;
 }
 

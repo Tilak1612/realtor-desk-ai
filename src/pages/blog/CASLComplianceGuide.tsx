@@ -4,10 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, Shield, AlertTriangle, CheckCircle2, XCircle, FileText, Mail, Scale, Lock, Users, DollarSign, Bell, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const CASLComplianceGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <SEO
+        title="CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide"
+        description="Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines with consent requirements, templates, and checklists."
+        keywords="CASL compliance real estate, Canadian email marketing laws, CASL checklist, real estate email compliance"
+        article
+        publishedTime="2026-01-01"
+        modifiedTime="2026-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/resources/casl-compliance-real-estate-email-marketing-canada"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide",
+            "description": "Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines with consent requirements, templates, and checklists.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2026-01-01",
+            "dateModified": "2026-01-01"
+          }
+        ]}
+      />
       <Navbar />
       
       {/* Hero Section */}

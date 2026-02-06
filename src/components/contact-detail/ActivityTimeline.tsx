@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,15 +13,11 @@ interface ActivityTimelineProps {
 }
 
 const ActivityTimeline = ({ contactId }: ActivityTimelineProps) => {
-  const [activities, setActivities] = useState<any[]>([]);
+  const [activities, setActivities] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
   const [isLogModalOpen, setIsLogModalOpen] = useState(false);
 
-  useEffect(() => {
-    fetchActivities();
-  }, [contactId]);
-
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -38,7 +34,11 @@ const ActivityTimeline = ({ contactId }: ActivityTimelineProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contactId]);
+
+  useEffect(() => {
+    fetchActivities();
+  }, [fetchActivities]);
 
   const getActivityIcon = (type: string) => {
     switch (type) {

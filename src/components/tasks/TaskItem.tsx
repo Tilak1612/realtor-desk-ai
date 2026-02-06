@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import EditTaskModal from "./EditTaskModal";
 
 interface TaskItemProps {
-  task: any;
+  task: unknown;
   isSelected: boolean;
   onSelect: (selected: boolean) => void;
   onTaskUpdated: () => void;
@@ -70,9 +70,9 @@ const TaskItem = ({ task, isSelected, onSelect, onTaskUpdated }: TaskItemProps) 
     return colors[priority] || "bg-gray-500";
   };
 
-  const getTaskTypeIcon = (metadata: any) => {
+  const getTaskTypeIcon = (metadata: unknown) => {
     const type = metadata?.task_type || "other";
-    const icons: Record<string, any> = {
+    const icons: Record<string, unknown> = {
       call: Phone,
       email: Mail,
       meeting: Calendar,

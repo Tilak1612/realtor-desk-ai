@@ -49,7 +49,7 @@ const Login = () => {
         },
       });
       if (error) throw error;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(error.message || t('app.notifications.errorOccurred'));
     }
   };
@@ -84,7 +84,7 @@ const Login = () => {
           navigate("/onboarding");
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error.message.includes("Invalid login credentials")) {
         toast.error(t('app.auth.invalidCredentials'));
       } else {

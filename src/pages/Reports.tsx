@@ -16,8 +16,8 @@ import { DollarSign, Users, Briefcase, TrendingUp } from "lucide-react";
 const Reports = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [dateRange, setDateRange] = useState("30d");
   const [sourceFilter, setSourceFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -87,7 +87,7 @@ const Reports = () => {
     }
   };
 
-  const exportToCSV = (data: any[], filename: string, headers: string[]) => {
+  const exportToCSV = (data: unknown[], filename: string, headers: string[]) => {
     const csvContent = [
       headers.join(","),
       ...data.map(row => headers.map(h => row[h.toLowerCase().replace(/ /g, "_")] || row[h.toLowerCase()] || "").join(","))

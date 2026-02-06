@@ -122,7 +122,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       form.reset();
       onOpenChange(false);
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t("app.modals.addContact.errorAdding"),
         description: error.message,

@@ -12,11 +12,12 @@ import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your full name (at least 2 characters)").max(100, "Name cannot exceed 100 characters"),
   email: z.string().trim().email("Please enter a valid email address (e.g., you@example.com)").max(255, "Email cannot exceed 255 characters"),
-  phone: z.string().trim().regex(/^[0-9\s\-\(\)\+]{10,20}$/, "Please enter a valid phone number (e.g., (416) 555-0123)").optional().or(z.literal("")),
+  phone: z.string().trim().regex(/^[0-9\s()+-]{10,20}$/, "Please enter a valid phone number (e.g., (416) 555-0123)").optional().or(z.literal("")),
   message: z.string().trim().min(10, "Please provide more details (at least 10 characters)").max(2000, "Message cannot exceed 2000 characters"),
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: "Please accept the Privacy Policy to continue",
@@ -34,15 +35,6 @@ const Contact = () => {
     message: "",
     privacyConsent: false
   });
-
-  // SEO: Update document title and meta for contact page
-  if (typeof document !== 'undefined') {
-    document.title = "Contact Us | Real Estate CRM Support | RealtorDesk AI";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Contact RealtorDesk AI for the best CRM for real estate agents. Get help with AI lead generation software, virtual tour integration, and real estate tools. Canadian support team.');
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +77,7 @@ const Contact = () => {
       });
       
       setFormData({ name: "", email: "", phone: "", message: "", privacyConsent: false });
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof z.ZodError) {
         toast({
           title: "Please Check Your Information",
@@ -108,6 +100,11 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Contact RealtorDesk AI | Canadian Support"
+        description="Contact RealtorDesk AI for CRM support, AI lead generation questions, and Canadian real estate compliance help."
+        keywords="real estate crm support, realtor desk contact, crm help for realtors"
+      />
       <Navbar />
 
       {/* Hero Section */}

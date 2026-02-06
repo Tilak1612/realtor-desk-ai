@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, CheckCircle2, XCircle, Zap } from "lucide-r
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 const VsFollowUpBoss = () => {
   useEffect(() => {
@@ -13,6 +14,28 @@ const VsFollowUpBoss = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="RealtorDesk AI vs Follow Up Boss: Speed vs Features for Canadian Real Estate"
+        description="Follow Up Boss alternative comparison for Canadian agents. AI automation, PIPEDA compliance, bilingual support, and transparent pricing."
+        keywords="Follow Up Boss alternative, RealtorDesk AI vs Follow Up Boss, Canadian real estate CRM comparison, PIPEDA compliant CRM"
+        article
+        publishedTime="2025-01-16"
+        modifiedTime="2025-01-16"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/vs-follow-up-boss"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "RealtorDesk AI vs Follow Up Boss: Speed vs Features for Canadian Real Estate",
+            "description": "Follow Up Boss alternative comparison for Canadian agents. AI automation, PIPEDA compliance, bilingual support, and transparent pricing.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-16",
+            "dateModified": "2025-01-16"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

@@ -4,18 +4,35 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Clock, Calendar, MapPin, TrendingUp, Home, DollarSign, Building, Users, Lightbulb, HelpCircle, CheckCircle2, AlertTriangle } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-edmonton-market.jpg";
 
 const EdmontonMarket2025 = () => {
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide | RealtorDesk AI</title>
-        <meta name="description" content="Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions. Expert insights for buyers and investors in Alberta." />
-        <meta name="keywords" content="Edmonton real estate market 2025, best neighborhoods Edmonton, Edmonton housing prices, invest in Edmonton real estate, Edmonton vs Calgary real estate" />
-        <link rel="canonical" href="https://realtordesk.ai/edmonton-real-estate-market-2025" />
-      </Helmet>
+      <SEO
+        title="Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide"
+        description="Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions for Alberta buyers and investors."
+        keywords="Edmonton real estate market 2025, best neighborhoods Edmonton, Edmonton housing prices, invest in Edmonton real estate, Edmonton vs Calgary real estate"
+        image={blogImage}
+        article
+        publishedTime="2025-01-01"
+        modifiedTime="2025-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/edmonton-real-estate-market-2025"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide",
+            "description": "Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions for Alberta buyers and investors.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-01",
+            "dateModified": "2025-01-01"
+          }
+        ]}
+      />
 
       <Navbar />
 

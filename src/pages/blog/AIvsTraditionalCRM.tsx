@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock, Zap, Brain, Users, TrendingUp, DollarSign }
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 const AIvsTraditionalCRM = () => {
   useEffect(() => {
@@ -13,6 +14,28 @@ const AIvsTraditionalCRM = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="AI CRM vs Traditional Real Estate CRM: ROI Analysis for Canadian Agents"
+        description="Compare AI-powered CRMs vs traditional real estate CRMs. See response times, conversion rates, costs, and why Canadian agents are switching to AI."
+        keywords="AI CRM vs traditional CRM, real estate CRM ROI, Canadian realtor CRM, AI real estate automation"
+        article
+        publishedTime="2025-01-16"
+        modifiedTime="2025-01-16"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/blog/ai-vs-traditional-crm"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "AI CRM vs Traditional Real Estate CRM: ROI Analysis for Canadian Agents",
+            "description": "Compare AI-powered CRMs vs traditional real estate CRMs. See response times, conversion rates, costs, and why Canadian agents are switching to AI.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2025-01-16",
+            "dateModified": "2025-01-16"
+          }
+        ]}
+      />
       <Navbar />
       
       <article className="pt-32 md:pt-40 pb-20">

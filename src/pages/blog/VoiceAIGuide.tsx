@@ -4,10 +4,33 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, CheckCircle2, XCircle, Phone, Zap, TrendingUp, Shield, Users, DollarSign, Clock, MessageSquare, Globe, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 
 const VoiceAIGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <SEO
+        title="Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals"
+        description="Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close 3x more deals."
+        keywords="voice AI for real estate, AI lead follow-up, real estate voice assistant, Canadian real estate automation"
+        article
+        publishedTime="2026-01-01"
+        modifiedTime="2026-01-01"
+        author="RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/resources/voice-ai-real-estate-lead-follow-up-canada"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals",
+            "description": "Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close 3x more deals.",
+            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "datePublished": "2026-01-01",
+            "dateModified": "2026-01-01"
+          }
+        ]}
+      />
       <Navbar />
       
       {/* Hero Section */}

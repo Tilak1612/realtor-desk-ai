@@ -21,7 +21,7 @@ interface Deal {
   updated_at: string;
   expected_close_date: string | null;
   notes: string | null;
-  metadata: any;
+  metadata: unknown;
   contacts?: {
     first_name: string;
     last_name: string;

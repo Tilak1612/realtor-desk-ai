@@ -17,7 +17,7 @@ export async function sendEmailCampaign(campaign: EmailCampaign) {
     if (error) throw error;
 
     return { success: true, data };
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new Error(error.message || "Failed to send email campaign");
   }
 }

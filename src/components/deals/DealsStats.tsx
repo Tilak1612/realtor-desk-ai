@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { TrendingUp, DollarSign, Target, Clock } from "lucide-react";
@@ -16,11 +16,7 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
     avgCycleTime: 0
   });
 
-  useEffect(() => {
-    fetchStats();
-  }, [filter, refreshTrigger]);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
@@ -71,7 +67,11 @@ const DealsStats = ({ filter, refreshTrigger }: DealsStatsProps) => {
         avgCycleTime: Math.round(avgCycleTime)
       });
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats, refreshTrigger]);
 
   const formatCurrency = (value: number) => {
     if (value >= 1000000) {

@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Brain, TrendingUp, DollarSign, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const SwitchFromIxact = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Switch from IXACT | Upgrade to AI CRM"
+        description="For just $20/month more than IXACT, get AI that closes 6-8 extra deals per year with free migration."
+        keywords="switch from IXACT, IXACT migration, IXACT alternative, AI CRM for Canadian realtors"
+        canonicalUrl="https://realtordesk.ai/switch-from-ixact"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Switch from IXACT",
+            "description": "Upgrade from IXACT to RealtorDesk AI with free migration and AI-powered lead conversion."
+          }
+        ]}
+      />
       <Navbar />
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">

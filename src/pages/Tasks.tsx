@@ -20,8 +20,8 @@ const Tasks = () => {
   const [quickFilter, setQuickFilter] = useState<string>("all");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
   const [filters, setFilters] = useState({
@@ -58,7 +58,7 @@ const Tasks = () => {
         }
 
         setProfile(profileData);
-      } catch (error: any) {
+      } catch (error: unknown) {
         toast.error(t('app.notifications.errorOccurred'));
       } finally {
         setLoading(false);

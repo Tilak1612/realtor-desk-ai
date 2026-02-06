@@ -28,8 +28,8 @@ const Settings = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<unknown>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const { subscribed, trialDaysLeft, trialExpired, subscriptionTier, trialEndsAt, subscriptionEnd } = useSubscription();
 
@@ -62,7 +62,7 @@ const Settings = () => {
       });
       
       navigate("/login");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t('app.common.error'),
         description: error.message || t('app.notifications.errorOccurred'),
@@ -115,7 +115,7 @@ const Settings = () => {
         title: t('app.common.success'),
         description: t('app.common.export'),
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t('app.common.error'),
         description: error.message || t('app.notifications.errorOccurred'),

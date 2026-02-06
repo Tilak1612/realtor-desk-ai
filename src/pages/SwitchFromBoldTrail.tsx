@@ -6,11 +6,26 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Phone, Upload, Download, GraduationCap, CheckCircle, DollarSign, TrendingDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const SwitchFromBoldTrail = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Switch from BoldTrail | Free Migration to RealtorDesk AI"
+        description="Join 200+ agents who switched from BoldTrail to RealtorDesk AI and saved $6,288/year with better AI and Canadian features."
+        keywords="switch from BoldTrail, BoldTrail migration, BoldTrail alternative Canada, RealtorDesk AI"
+        canonicalUrl="https://realtordesk.ai/switch-from-boldtrail"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Switch from BoldTrail",
+            "description": "Free migration from BoldTrail to RealtorDesk AI with Canadian support and AI automation."
+          }
+        ]}
+      />
       <Navbar />
 
       {/* Hero */}

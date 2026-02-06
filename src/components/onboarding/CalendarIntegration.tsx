@@ -30,7 +30,7 @@ interface CalendarIntegrationProps {
 
 const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProps) => {
   const [loading, setLoading] = useState(false);
-  const [availability, setAvailability] = useState<any>({
+  const [availability, setAvailability] = useState<unknown>({
     Monday: { start: "09:00", end: "17:00" },
     Tuesday: { start: "09:00", end: "17:00" },
     Wednesday: { start: "09:00", end: "17:00" },
@@ -57,7 +57,7 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
         },
       });
       if (error) throw error;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to connect ${provider} Calendar`);
     }
   };
@@ -88,7 +88,7 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
       if (error) throw error;
       toast.success("Calendar settings saved!");
       onNext();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Failed to save calendar settings");
     } finally {
       setLoading(false);

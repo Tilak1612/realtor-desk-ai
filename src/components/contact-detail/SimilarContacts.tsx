@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -7,19 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
 interface SimilarContactsProps {
-  contact: any;
+  contact: unknown;
 }
 
 const SimilarContacts = ({ contact }: SimilarContactsProps) => {
   const navigate = useNavigate();
-  const [similarContacts, setSimilarContacts] = useState<any[]>([]);
+  const [similarContacts, setSimilarContacts] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchSimilarContacts();
-  }, [contact]);
-
-  const fetchSimilarContacts = async () => {
+  const fetchSimilarContacts = useCallback(async () => {
     try {
       setLoading(true);
       // Fetch contacts with similar AI scores (±15 points)
@@ -41,7 +37,11 @@ const SimilarContacts = ({ contact }: SimilarContactsProps) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [contact]);
+
+  useEffect(() => {
+    fetchSimilarContacts();
+  }, [fetchSimilarContacts]);
 
   const getScoreBadgeColor = (score: number | null) => {
     if (!score) return "outline";
