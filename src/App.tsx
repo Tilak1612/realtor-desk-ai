@@ -2,7 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
@@ -86,6 +88,67 @@ import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
+const siteUrl = "https://realtordesk.ai";
+const GA_MEASUREMENT_ID = "G-95T79D2KJ7";
+
+const SeoDefaults = () => {
+  const location = useLocation();
+  const canonicalPath = location.pathname === "/" ? "" : location.pathname;
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
+  const noindexPrefixes = [
+    "/signup",
+    "/login",
+    "/verify-email",
+    "/forgot-password",
+    "/reset-password",
+    "/dashboard",
+    "/today",
+    "/onboarding",
+    "/contacts",
+    "/properties",
+    "/deals",
+    "/tasks",
+    "/ai-assistant",
+    "/campaigns",
+    "/calendar",
+    "/reports",
+    "/market",
+    "/automations",
+    "/settings",
+    "/billing",
+    "/admin",
+    "/call-workflow",
+  ];
+  const shouldNoindex = noindexPrefixes.some((prefix) =>
+    location.pathname === prefix || location.pathname.startsWith(`${prefix}/`)
+  );
+
+  return (
+    <Helmet>
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:url" content={canonicalUrl} />
+      {shouldNoindex && <meta name="robots" content="noindex, nofollow" />}
+    </Helmet>
+  );
+};
+
+const RouteAnalytics = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window.gtag !== "function") {
+      return;
+    }
+
+    const pagePath = `${location.pathname}${location.search}${location.hash}`;
+    window.gtag("config", GA_MEASUREMENT_ID, {
+      page_path: pagePath,
+      page_title: document.title,
+    });
+  }, [location]);
+
+  return null;
+};
 
 const App = () => (
   <ErrorBoundary>
@@ -95,6 +158,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <SeoDefaults />
+          <RouteAnalytics />
           <SubscriptionProvider>
           <Routes>
           <Route path="/" element={<Index />} />
