@@ -3,398 +3,332 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Homepage - AI Real Estate CRM for Canadian Agents -->
   <url>
     <loc>https://realtordesk.ai/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Main Pages - Features & Pricing -->
+
   <url>
     <loc>https://realtordesk.ai/features</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/pricing</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/how-it-works</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/demo</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/canadian-market</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/integrations</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/pipeda-compliance</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/resources</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/faq</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/contact</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/privacy-policy</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/terms-of-service</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://realtordesk.ai/pipeda-compliance</loc>
-    <lastmod>2026-01-24</lastmod>
+    <loc>https://realtordesk.ai/features/ai-powered-crm</loc>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/resources</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Competitor Alternative Pages (Critical for SEO) -->
   <url>
     <loc>https://realtordesk.ai/lofty-alternative</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/vs/lofty</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
   <url>
     <loc>https://realtordesk.ai/vs/boldtrail</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-  
+  <url>
+    <loc>https://realtordesk.ai/vs/lofty</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
   <url>
     <loc>https://realtordesk.ai/vs/ixact</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/vs/wise-agent</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-  
-  <!-- Migration/Switch Pages -->
-  <url>
-    <loc>https://realtordesk.ai/switch-from-lofty</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
   <url>
     <loc>https://realtordesk.ai/switch-from-boldtrail</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+  <url>
+    <loc>https://realtordesk.ai/switch-from-lofty</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://realtordesk.ai/switch-from-ixact</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>https://realtordesk.ai/switch-from-wise-agent</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  
-  <!-- AI Features -->
-  <url>
-    <loc>https://realtordesk.ai/features/ai-powered-crm</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Support & Legal Pages -->
-  <url>
-    <loc>https://realtordesk.ai/faq</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/contact</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/privacy-policy</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/terms-of-service</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <!-- Blog - Pillar Content for SEO & AI Citations -->
-  <url>
-    <loc>https://realtordesk.ai/blog/best-crm-canada-2025</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/vs-lofty-crm</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/ai-crm-canadian-real-estate-agents-guide</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/pipeda-compliance-real-estate-ai-tools-canada</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/crea-ddf</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/ai-transformation</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/lead-conversion</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/ai-vs-traditional-crm</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/vs-follow-up-boss</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/vs-kvcore</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/ixact-alternatives</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/boomtown-alternative-canada</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/vs-propertybase</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Automation & AI Features Blog Posts -->
-  <url>
-    <loc>https://realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/lead-response-time-canadian-realtors</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/blog/ai-chatbot-real-estate-websites-canada</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/resources/voice-ai-real-estate-lead-follow-up-canada</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <!-- Market & Regional Content -->
-  <url>
-    <loc>https://realtordesk.ai/canada-housing-market-forecast-2025-2026</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/toronto-vs-vancouver-real-estate-market-2025</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/edmonton-real-estate-market-2025</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/resources/calgary-real-estate-marketing-strategies</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <!-- Compliance & Legal Content -->
-  <url>
-    <loc>https://realtordesk.ai/blog/compliance</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/resources/casl-compliance-real-estate-email-marketing-canada</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <!-- Bilingual & Quebec Market -->
-  <url>
-    <loc>https://realtordesk.ai/blog/bilingual-marketing</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <!-- Case Studies & Success Stories -->
-  <url>
-    <loc>https://realtordesk.ai/blog/success-story</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/resources/cost-of-missed-real-estate-leads-canada</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <!-- Consumer Guides -->
-  <url>
-    <loc>https://realtordesk.ai/first-time-home-buyer-guide-canada-2025</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/sell-home-fast-canada-2025</loc>
-    <lastmod>2026-01-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Legal Pages -->
-  <url>
-    <loc>https://realtordesk.ai/privacy-policy</loc>
-    <lastmod>2025-12-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  
-  <url>
-    <loc>https://realtordesk.ai/terms-of-service</loc>
-    <lastmod>2025-12-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
   </url>
 
-  <!-- Canadian Market Page -->
   <url>
-    <loc>https://realtordesk.ai/canadian-market</loc>
-    <lastmod>2025-12-11</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://realtordesk.ai/blog/ai-transformation</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+  <url>
+    <loc>https://realtordesk.ai/blog/crea-ddf</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/compliance</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/lead-conversion</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/bilingual-marketing</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/success-story</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/canada-housing-market-forecast-2025-2026</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/lead-response-time-canadian-realtors</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/ai-crm-canadian-real-estate-agents-guide</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/toronto-vs-vancouver-real-estate-market-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/pipeda-compliance-real-estate-ai-tools-canada</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/first-time-home-buyer-guide-canada-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/sell-home-fast-canada-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/edmonton-real-estate-market-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/vs-kvcore</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/vs-follow-up-boss</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/ixact-alternatives</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/best-crm-canada-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/ai-vs-traditional-crm</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/vs-lofty-crm</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/boomtown-alternative-canada</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/vs-propertybase</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/ai-chatbot-real-estate-websites-canada</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/blog/real-estate-drip-campaign-templates-canada-2025</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://realtordesk.ai/resources/voice-ai-real-estate-lead-follow-up-canada</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/resources/calgary-real-estate-marketing-strategies</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/resources/casl-compliance-real-estate-email-marketing-canada</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://realtordesk.ai/resources/cost-of-missed-real-estate-leads-canada</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
