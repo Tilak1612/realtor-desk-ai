@@ -64,7 +64,7 @@ export const useLeadScore = (contactId: string) => {
 
       await fetchLeadScore();
       return data;
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: "Error calculating lead score",
         description: error.message,

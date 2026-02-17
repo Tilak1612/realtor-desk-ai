@@ -124,7 +124,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
         postal_code: formData.postal_code || null,
         property_type: formData.property_type,
         listing_type: formData.listing_type,
-        status: formData.status as unknown,
+        status: formData.status as "active" | "coming_soon" | "off_market" | "pending" | "sold",
         price: formData.price ? parseFloat(formData.price) : null,
         bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : null,
         bathrooms: formData.bathrooms ? parseFloat(formData.bathrooms) : null,
@@ -168,7 +168,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
       });
       setErrors({});
       setTouched(new Set());
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: t("app.modals.addProperty.errorAdding"),
         description: error.message,

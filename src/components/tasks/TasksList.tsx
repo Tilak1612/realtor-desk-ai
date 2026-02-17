@@ -22,10 +22,18 @@ interface Task {
   };
 }
 
+interface TaskFilters {
+  search: string;
+  priorities: string[];
+  types: string[];
+  status: string[];
+  contactId: string;
+}
+
 interface TasksListProps {
   quickFilter: string;
   refreshTrigger: number;
-  filters: unknown;
+  filters: TaskFilters;
   selectedTasks: string[];
   onTaskSelection: (tasks: string[]) => void;
   onTaskUpdated: () => void;

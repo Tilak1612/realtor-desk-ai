@@ -91,7 +91,7 @@ const Automations = () => {
       return;
     }
 
-    const formattedAutomations = (data || []).map((auto: unknown) => ({
+    const formattedAutomations = (data || []).map((auto: any) => ({
       ...auto,
       steps_count: auto.automation_steps?.[0]?.count || 0,
       enrollments_count: auto.automation_enrollments?.[0]?.count || 0,

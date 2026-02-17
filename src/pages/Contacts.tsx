@@ -70,7 +70,7 @@ const Contacts = () => {
 
       if (error) throw error;
       setContacts(data || []);
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: t('app.common.error'),
         description: error.message,
@@ -262,7 +262,7 @@ const Contacts = () => {
         )}
 
         {/* View Toggle and Content */}
-        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as unknown)}>
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "cards" | "table")}>
           <div className="flex justify-end mb-4">
             <TabsList className="h-8">
               <TabsTrigger value="table" className="text-xs h-7 px-3">

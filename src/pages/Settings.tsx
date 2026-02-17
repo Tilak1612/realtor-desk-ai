@@ -62,7 +62,7 @@ const Settings = () => {
       });
       
       navigate("/login");
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: t('app.common.error'),
         description: error.message || t('app.notifications.errorOccurred'),
@@ -115,7 +115,7 @@ const Settings = () => {
         title: t('app.common.success'),
         description: t('app.common.export'),
       });
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: t('app.common.error'),
         description: error.message || t('app.notifications.errorOccurred'),

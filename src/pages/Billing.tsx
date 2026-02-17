@@ -12,8 +12,8 @@ import { useSubscription, SUBSCRIPTION_PRODUCTS } from '@/contexts/SubscriptionC
 const Billing = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [user, setUser] = useState<unknown>(null);
-  const [profile, setProfile] = useState<unknown>(null);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [portalLoading, setPortalLoading] = useState(false);
@@ -73,7 +73,7 @@ const Billing = () => {
       if (data.url) {
         window.open(data.url, '_blank');
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error(error.message || 'Failed to start checkout');
     } finally {
       setCheckoutLoading(null);
@@ -96,7 +96,7 @@ const Billing = () => {
       if (data.url) {
         window.open(data.url, '_blank');
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error(error.message || 'Failed to open billing portal');
     } finally {
       setPortalLoading(false);

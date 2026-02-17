@@ -55,8 +55,8 @@ const CallWorkflow = () => {
   const { contactId } = useParams<{ contactId: string }>();
   const contactQueueState = location.state?.contactQueue as string[] | undefined;
   
-  const [user, setUser] = useState<unknown>(null);
-  const [profile, setProfile] = useState<unknown>(null);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
   const [contact, setContact] = useState<Contact | null>(null);
   const [contactQueue, setContactQueue] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,7 +71,7 @@ const CallWorkflow = () => {
   
   // AI panel state
   const [showAIPanel, setShowAIPanel] = useState(true);
-  const [aiSummary, setAISummary] = useState<unknown>(null);
+  const [aiSummary, setAISummary] = useState<any>(null);
   const [generatingAI, setGeneratingAI] = useState(false);
   
   const [loading, setLoading] = useState(true);
@@ -88,7 +88,7 @@ const CallWorkflow = () => {
       if (error) throw error;
 
       // Type assertion for contact data with optional fields
-      const contactData: unknown = data;
+      const contactData: any = data;
       setContact(contactData);
       setNewStage(contactData.stage || "");
       setCallNotes(contactData.notes || "");
@@ -228,7 +228,7 @@ const CallWorkflow = () => {
     setSaving(true);
     try {
       // Update contact
-      const updates: unknown = {
+      const updates: any = {
         notes: callNotes,
         stage: newStage || contact.stage,
         last_contact_date: new Date().toISOString(),

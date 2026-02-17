@@ -103,7 +103,7 @@ export async function streamChatResponse({
     }
 
     onDone();
-  } catch (error: unknown) {
+  } catch (error: any) {
     onError?.(error.message || "An error occurred");
   }
 }
