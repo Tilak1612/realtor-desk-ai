@@ -44,7 +44,7 @@ const TrialExpiredModal = ({ isOpen }: TrialExpiredModalProps) => {
       if (data?.url) {
         window.open(data.url, '_blank');
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error(error.message || 'Failed to start checkout');
     } finally {
       setLoading(null);

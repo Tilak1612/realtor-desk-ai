@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import EditTaskModal from "./EditTaskModal";
 
 interface TaskItemProps {
-  task: unknown;
+  task: any;
   isSelected: boolean;
   onSelect: (selected: boolean) => void;
   onTaskUpdated: () => void;

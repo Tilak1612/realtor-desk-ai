@@ -82,7 +82,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       let errorCount = 0;
 
       for (let i = 0; i < rows.length; i++) {
-        const row = rows[i];
+        const row: any = rows[i];
         
         try {
           const { error } = await supabase.from("contacts").insert({
@@ -116,7 +116,7 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       });
 
       onSuccess();
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: t("app.modals.importContacts.importFailed"),
         description: error.message,

@@ -149,7 +149,7 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
       toast.success("Automation created successfully!");
       handleClose();
       onCreated();
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error("Error creating automation:", error);
       toast.error(error.message || "Failed to create automation");
     } finally {

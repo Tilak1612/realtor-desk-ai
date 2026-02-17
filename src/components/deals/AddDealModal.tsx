@@ -23,7 +23,7 @@ interface AddDealModalProps {
 
 const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) => {
   const { t } = useTranslation();
-  const [contacts, setContacts] = useState<unknown[]>([]);
+  const [contacts, setContacts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     contact_id: "",

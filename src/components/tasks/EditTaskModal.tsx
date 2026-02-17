@@ -15,7 +15,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
 interface EditTaskModalProps {
-  task: unknown;
+  task: any;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onTaskUpdated: () => void;

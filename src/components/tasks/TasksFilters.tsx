@@ -9,8 +9,8 @@ import { Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface TasksFiltersProps {
-  filters: unknown;
-  onFiltersChange: (filters: unknown) => void;
+  filters: any;
+  onFiltersChange: (filters: any) => void;
 }
 
 const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {

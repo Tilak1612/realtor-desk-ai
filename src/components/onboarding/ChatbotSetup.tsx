@@ -19,7 +19,7 @@ const QUALIFICATION_QUESTIONS = [
 ];
 
 interface ChatbotSetupProps {
-  profileData: unknown;
+  profileData: any;
   userId: string | null;
   onNext: () => void;
   onBack: () => void;
