@@ -313,7 +313,7 @@ export async function withErrorLogging<T>(
     const result = await fn();
     errorMonitor.logInfo(category, `${operation} succeeded`);
     return result;
-  } catch (error: unknown) {
+  } catch (error: any) {
     errorMonitor.logError(
       category,
       `${operation} failed`,
@@ -342,7 +342,7 @@ export async function measureAPICall<T>(
     const duration = performance.now() - startTime;
     errorMonitor.logAPICall(endpoint, method, 200, duration, undefined, userId);
     return result;
-  } catch (error: unknown) {
+  } catch (error: any) {
     const duration = performance.now() - startTime;
     const statusCode = error.status || error.statusCode || 500;
     errorMonitor.logAPICall(

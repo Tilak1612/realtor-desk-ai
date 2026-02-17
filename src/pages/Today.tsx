@@ -32,8 +32,8 @@ interface WeeklySummary {
 const Today = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<unknown>(null);
-  const [profile, setProfile] = useState<unknown>(null);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
   const [contactsToCall, setContactsToCall] = useState<ContactToCall[]>([]);
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary>({
     callsLogged: 0,
@@ -94,7 +94,7 @@ const Today = () => {
       if (contactsError) throw contactsError;
 
       // Calculate priority and reason to call for each contact
-      const enrichedContacts: ContactToCall[] = (contactsData || []).map((contact: unknown) => {
+      const enrichedContacts: ContactToCall[] = (contactsData || []).map((contact: any) => {
         const lastContactDate = contact.last_contact_date;
         const nextFollowupDate = contact.next_followup_date || null;
         const stage = contact.stage || 'new_lead';

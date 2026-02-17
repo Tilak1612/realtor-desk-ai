@@ -82,7 +82,7 @@ const Signup = () => {
         },
       });
       if (error) throw error;
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error(error.message || t('app.notifications.errorOccurred'));
     }
   };
@@ -128,7 +128,7 @@ const Signup = () => {
           } 
         });
       }
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error("Signup exception:", error);
       toast.error(t('app.common.error'), {
         description: error.message || t('app.notifications.errorOccurred'),

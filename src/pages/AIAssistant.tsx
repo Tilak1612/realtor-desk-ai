@@ -82,7 +82,7 @@ const AIAssistant = () => {
       };
       setMessages(prev => [...prev, assistantMessage]);
 
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: "Error",
         description: error.message || "Failed to send message",
@@ -124,7 +124,7 @@ const AIAssistant = () => {
       };
       setMessages(prev => [...prev, assistantMessage]);
 
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: "Error",
         description: error.message || "Failed to send message",

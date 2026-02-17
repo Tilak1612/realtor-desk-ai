@@ -36,7 +36,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
     e.preventDefault();
     setLoading(true);
 
-    const updateData: unknown = {
+    const updateData: Record<string, any> = {
       stage: type === "won" ? "sold" : "withdrawn",
       status: type === "won" ? "closed" : "withdrawn",
       updated_at: new Date().toISOString()

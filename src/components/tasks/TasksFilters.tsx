@@ -14,7 +14,7 @@ interface TasksFiltersProps {
 }
 
 const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
-  const [contacts, setContacts] = useState<unknown[]>([]);
+  const [contacts, setContacts] = useState<Array<{ id: string; first_name: string; last_name: string }>>([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {

@@ -25,6 +25,12 @@ interface Deal {
   contact_id: string;
   created_at: string;
   updated_at: string;
+  property_address?: string;
+  mls_number?: string;
+  listing_price?: number;
+  commission_percentage?: number;
+  closing_date?: string;
+  metadata?: any;
   contacts?: {
     first_name: string;
     last_name: string;
@@ -132,11 +138,11 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                 <TableCell>
                   <div>
                     <p className="font-medium">{deal.title}</p>
-                    {(deal as unknown).property_address && (
-                      <p className="text-xs text-muted-foreground">{(deal as unknown).property_address}</p>
+                    {deal.property_address && (
+                      <p className="text-xs text-muted-foreground">{deal.property_address}</p>
                     )}
-                    {(deal as unknown).mls_number && (
-                      <p className="text-xs text-muted-foreground">MLS# {(deal as unknown).mls_number}</p>
+                    {deal.mls_number && (
+                      <p className="text-xs text-muted-foreground">MLS# {deal.mls_number}</p>
                     )}
                   </div>
                 </TableCell>
@@ -150,13 +156,13 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                     {deal.stage.replace(/_/g, ' ')}
                   </Badge>
                 </TableCell>
-                <TableCell>{formatCurrency((deal as unknown).listing_price || deal.value || 0)}</TableCell>
+                <TableCell>{formatCurrency(deal.listing_price || deal.value || 0)}</TableCell>
                 <TableCell>
-                  {(deal as unknown).commission_percentage ? `${(deal as unknown).commission_percentage}%` : "-"}
+                  {deal.commission_percentage ? `${deal.commission_percentage}%` : "-"}
                 </TableCell>
                 <TableCell>
-                  {(deal as unknown).closing_date 
-                    ? new Date((deal as unknown).closing_date).toLocaleDateString('en-CA')
+                  {deal.closing_date 
+                    ? new Date(deal.closing_date).toLocaleDateString('en-CA')
                     : "-"
                   }
                 </TableCell>
@@ -207,8 +213,8 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm truncate">{deal.title}</p>
-                    {(deal as unknown).property_address && (
-                      <p className="text-xs text-muted-foreground truncate mt-0.5">{(deal as unknown).property_address}</p>
+                    {deal.property_address && (
+                      <p className="text-xs text-muted-foreground truncate mt-0.5">{deal.property_address}</p>
                     )}
                   </div>
                   <DropdownMenu>
@@ -251,19 +257,19 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
                   <Badge className={`${getStageColor(deal.stage)} text-white capitalize text-xs`}>
                     {deal.stage.replace(/_/g, ' ')}
                   </Badge>
-                  <span className="text-sm font-bold">{formatCurrency((deal as unknown).listing_price || deal.value || 0)}</span>
+                  <span className="text-sm font-bold">{formatCurrency(deal.listing_price || deal.value || 0)}</span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t">
                   <span>{deal.contacts ? `${deal.contacts.first_name} ${deal.contacts.last_name}` : "-"}</span>
-                  {(deal as unknown).commission_percentage && (
-                    <span className="font-medium text-primary">{(deal as unknown).commission_percentage}%</span>
+                  {deal.commission_percentage && (
+                    <span className="font-medium text-primary">{deal.commission_percentage}%</span>
                   )}
                 </div>
 
-                {(deal as unknown).closing_date && (
+                {deal.closing_date && (
                   <div className="text-xs text-muted-foreground">
-                    Closes: {new Date((deal as unknown).closing_date).toLocaleDateString('en-CA')}
+                    Closes: {new Date(deal.closing_date).toLocaleDateString('en-CA')}
                   </div>
                 )}
               </div>

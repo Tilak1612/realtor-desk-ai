@@ -17,7 +17,7 @@ const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
-  const [profileData, setProfileData] = useState<unknown>({});
+  const [profileData, setProfileData] = useState<any>({});
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -46,7 +46,7 @@ const Onboarding = () => {
     checkAuth();
   }, [navigate]);
 
-  const saveProgress = async (step: number, data: unknown) => {
+  const saveProgress = async (step: number, data: any) => {
     if (!userId) return;
 
     try {
@@ -60,12 +60,12 @@ const Onboarding = () => {
 
       if (error) throw error;
       setProfileData({ ...profileData, ...data });
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast.error("Failed to save progress");
     }
   };
 
-  const handleNext = async (data?: unknown) => {
+  const handleNext = async (data?: any) => {
     if (data) {
       await saveProgress(currentStep + 1, data);
     }

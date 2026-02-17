@@ -24,8 +24,8 @@ interface AddTaskModalProps {
 
 const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) => {
   const { t } = useTranslation();
-  const [contacts, setContacts] = useState<unknown[]>([]);
-  const [deals, setDeals] = useState<unknown[]>([]);
+  const [contacts, setContacts] = useState<Array<{ id: string; first_name: string; last_name: string; email: string }>>([]);
+  const [deals, setDeals] = useState<Array<{ id: string; title: string; stage: string }>>([]);
   const [loading, setLoading] = useState(false);
   const [addAnother, setAddAnother] = useState(false);
   const [showTemplates, setShowTemplates] = useState(true);
@@ -111,7 +111,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
       task_type: template.task_type,
       priority: template.priority,
       is_recurring: template.isRecurring || false,
-      recurring_interval: (template.recurringInterval as unknown) || "weekly",
+      recurring_interval: (template.recurringInterval as "daily" | "weekly" | "monthly" | "yearly") || "weekly",
     }));
     setShowTemplates(false);
   };
@@ -344,7 +344,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
                 <Label htmlFor="recurring_interval">Repeat every</Label>
                 <Select 
                   value={formData.recurring_interval} 
-                  onValueChange={(v: unknown) => setFormData({...formData, recurring_interval: v})}
+                  onValueChange={(v: string) => setFormData({...formData, recurring_interval: v as "daily" | "weekly" | "monthly" | "yearly"})}
                 >
                   <SelectTrigger className="mt-1">
                     <SelectValue />

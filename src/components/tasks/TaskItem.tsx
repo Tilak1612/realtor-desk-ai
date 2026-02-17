@@ -70,9 +70,9 @@ const TaskItem = ({ task, isSelected, onSelect, onTaskUpdated }: TaskItemProps) 
     return colors[priority] || "bg-gray-500";
   };
 
-  const getTaskTypeIcon = (metadata: unknown) => {
+  const getTaskTypeIcon = (metadata: any) => {
     const type = metadata?.task_type || "other";
-    const icons: Record<string, unknown> = {
+    const icons: Record<string, any> = {
       call: Phone,
       email: Mail,
       meeting: Calendar,

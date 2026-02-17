@@ -80,7 +80,7 @@ const Properties = () => {
 
       if (error) throw error;
       setProperties(data || []);
-    } catch (error: unknown) {
+    } catch (error: any) {
       toast({
         title: t('app.common.error'),
         description: error.message,
@@ -200,7 +200,7 @@ const Properties = () => {
         <PropertyFilters filters={filters} onFiltersChange={setFilters} />
 
         {/* View Toggle and Content */}
-        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as unknown)}>
+        <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "grid" | "list")}>
           <div className="flex justify-end mb-4">
             <TabsList className="h-8">
               <TabsTrigger value="grid" className="text-xs h-7 px-3">

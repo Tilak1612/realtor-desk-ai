@@ -21,18 +21,18 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<unknown>(null);
-  const [profile, setProfile] = useState<unknown>(null);
-  const [analytics, setAnalytics] = useState<unknown>(null);
-  const [hotLeads, setHotLeads] = useState<unknown[]>([]);
-  const [todayTasks, setTodayTasks] = useState<unknown[]>([]);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
+  const [analytics, setAnalytics] = useState<any>(null);
+  const [hotLeads, setHotLeads] = useState<any[]>([]);
+  const [todayTasks, setTodayTasks] = useState<any[]>([]);
   const [revenueData, setRevenueData] = useState({
     ytdRevenue: 0,
     closedDealsCount: 0,
     grossVolume: 0,
     commissionRate: 2.5,
   });
-  const [dealStats, setDealStats] = useState<unknown>({
+  const [dealStats, setDealStats] = useState<any>({
     lead: { count: 0, value: 0 },
     viewing: { count: 0, value: 0 },
     offer: { count: 0, value: 0 },
@@ -155,7 +155,7 @@ const Dashboard = () => {
       setHotLeads(leadsData.map(lead => ({
         ...lead,
         name: `${lead.first_name || ""} ${lead.last_name || ""}`.trim() || "Unknown",
-        insight: (lead.metadata as unknown)?.insight || "New lead",
+        insight: (lead.metadata as any)?.insight || "New lead",
       })));
     }
 
@@ -176,7 +176,7 @@ const Dashboard = () => {
     }
 
     if (dealsData) {
-      const stats: unknown = {
+      const stats: any = {
         lead: { count: 0, value: 0 },
         viewing: { count: 0, value: 0 },
         offer: { count: 0, value: 0 },
