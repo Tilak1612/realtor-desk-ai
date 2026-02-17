@@ -21,8 +21,8 @@ const MAJOR_CITIES = [
 ];
 
 interface ProfileSetupProps {
-  profileData: unknown;
-  onNext: (data: unknown) => void;
+  profileData: any;
+  onNext: (data: any) => void;
   onSkip: () => void;
   userId: string | null;
 }

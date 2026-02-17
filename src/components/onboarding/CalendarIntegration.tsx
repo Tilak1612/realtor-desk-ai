@@ -30,7 +30,7 @@ interface CalendarIntegrationProps {
 
 const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProps) => {
   const [loading, setLoading] = useState(false);
-  const [availability, setAvailability] = useState<unknown>({
+  const [availability, setAvailability] = useState<any>({
     Monday: { start: "09:00", end: "17:00" },
     Tuesday: { start: "09:00", end: "17:00" },
     Wednesday: { start: "09:00", end: "17:00" },

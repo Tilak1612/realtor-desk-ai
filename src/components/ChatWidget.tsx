@@ -60,9 +60,10 @@ const ChatWidget = () => {
       setMessages(prev => [...prev, assistantMessage]);
 
     } catch (error: unknown) {
+      const err = error as Error;
       toast({
         title: "Error",
-        description: error.message || "Failed to send message",
+        description: err.message || "Failed to send message",
         variant: "destructive",
       });
     } finally {

@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { format } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
+import type { Contact } from "@/types/contact";
 
 interface ContactInfoProps {
-  contact: unknown;
+  contact: Contact;
 }
 
 const ContactInfo = ({ contact }: ContactInfoProps) => {
@@ -28,58 +29,39 @@ const ContactInfo = ({ contact }: ContactInfoProps) => {
               <span className="text-muted-foreground">Email</span>
               <p className="font-medium break-all">{contact.email}</p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(contact.email, "Email")}
-            >
-              <Copy className="h-4 w-4" />
-            </Button>
+            <Button variant="ghost" size="icon" onClick={() => copyToClipboard(contact.email, "Email")}><Copy className="h-4 w-4" /></Button>
           </div>
         )}
-
         {contact.phone && (
           <div className="flex items-center justify-between">
             <div>
               <span className="text-muted-foreground">Phone</span>
               <p className="font-medium">{contact.phone}</p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => copyToClipboard(contact.phone, "Phone")}
-            >
-              <Copy className="h-4 w-4" />
-            </Button>
+            <Button variant="ghost" size="icon" onClick={() => copyToClipboard(contact.phone!, "Phone")}><Copy className="h-4 w-4" /></Button>
           </div>
         )}
-
         {contact.metadata?.company && (
           <div>
             <span className="text-muted-foreground">Company</span>
             <p className="font-medium">{contact.metadata.company}</p>
           </div>
         )}
-
         {contact.metadata?.license_number && (
           <div>
             <span className="text-muted-foreground">License Number</span>
             <p className="font-medium">{contact.metadata.license_number}</p>
           </div>
         )}
-
         {contact.source && (
           <div>
             <span className="text-muted-foreground">Source</span>
             <p className="font-medium">{contact.source}</p>
           </div>
         )}
-
         <div>
           <span className="text-muted-foreground">Created</span>
-          <p className="font-medium">
-            {format(new Date(contact.created_at), "MMM d, yyyy")}
-          </p>
+          <p className="font-medium">{contact.created_at ? format(new Date(contact.created_at), "MMM d, yyyy") : "Unknown"}</p>
         </div>
       </CardContent>
     </Card>

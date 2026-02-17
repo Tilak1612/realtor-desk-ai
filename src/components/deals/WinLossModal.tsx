@@ -14,7 +14,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
 interface WinLossModalProps {
-  deal: unknown;
+  deal: any;
   type: "won" | "lost";
   open: boolean;
   onOpenChange: (open: boolean) => void;

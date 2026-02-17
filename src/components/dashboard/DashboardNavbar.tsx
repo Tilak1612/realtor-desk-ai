@@ -18,8 +18,8 @@ import { toast } from "sonner";
 import FeedbackDialog from "@/components/feedback/FeedbackDialog";
 
 interface DashboardNavbarProps {
-  user: unknown;
-  profile: unknown;
+  user: any;
+  profile: any;
 }
 
 const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {

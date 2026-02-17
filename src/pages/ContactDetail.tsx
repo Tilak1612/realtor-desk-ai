@@ -25,15 +25,16 @@ import SimilarContacts from "@/components/contact-detail/SimilarContacts";
 import DealHistory from "@/components/contact-detail/DealHistory";
 import EditContactModal from "@/components/contact-detail/EditContactModal";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { Contact } from "@/types/contact";
 
 const ContactDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [contact, setContact] = useState<unknown>(null);
+  const [contact, setContact] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<unknown>(null);
-  const [profile, setProfile] = useState<unknown>(null);
+  const [user, setUser] = useState<Record<string, unknown> | null>(null);
+  const [profile, setProfile] = useState<Record<string, unknown> | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const fetchContact = useCallback(async () => {
@@ -47,7 +48,6 @@ const ContactDetail = () => {
 
       if (error) throw error;
       
-      // Check if contact belongs to user
       const { data: { user } } = await supabase.auth.getUser();
       if (data.user_id !== user?.id) {
         toast({
@@ -59,11 +59,12 @@ const ContactDetail = () => {
         return;
       }
 
-      setContact(data);
+      setContact(data as Contact);
     } catch (error: unknown) {
+      const err = error as Error;
       toast({
         title: "Error loading contact",
-        description: error.message,
+        description: err.message,
         variant: "destructive",
       });
       navigate("/contacts");
@@ -79,7 +80,7 @@ const ContactDetail = () => {
       return;
     }
 
-    setUser(session.user);
+    setUser(session.user as unknown as Record<string, unknown>);
 
     const { data: profileData } = await supabase
       .from("profiles")
@@ -87,7 +88,7 @@ const ContactDetail = () => {
       .eq("id", session.user.id)
       .single();
 
-    setProfile(profileData);
+    setProfile(profileData as Record<string, unknown> | null);
     fetchContact();
   }, [fetchContact, navigate]);
 
@@ -150,15 +151,10 @@ const ContactDetail = () => {
       <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
         <DashboardNavbar user={user} profile={profile} />
         <main className="flex-1 overflow-y-auto">
-          {/* Top Action Bar */}
           <div className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b p-4">
             <div className="container mx-auto flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => navigate("/contacts")}
-                >
+                <Button variant="ghost" size="icon" onClick={() => navigate("/contacts")}>
                   <ArrowLeft className="h-4 w-4" />
                 </Button>
                 <h1 className="text-2xl font-bold">
@@ -181,10 +177,7 @@ const ContactDetail = () => {
                     <DropdownMenuItem>Mark as Inactive</DropdownMenuItem>
                     <DropdownMenuItem>Merge Contact</DropdownMenuItem>
                     <DropdownMenuItem>Export Data</DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={handleDelete}
-                      className="text-destructive"
-                    >
+                    <DropdownMenuItem onClick={handleDelete} className="text-destructive">
                       <Trash2 className="h-4 w-4 mr-2" />
                       Delete Contact
                     </DropdownMenuItem>
@@ -194,16 +187,13 @@ const ContactDetail = () => {
             </div>
           </div>
 
-          {/* Three Column Layout */}
           <div className="container mx-auto p-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Left Column - Contact Card & Info */}
               <div className="lg:col-span-3 space-y-6">
                 <ContactCard contact={contact} onUpdate={fetchContact} />
                 <ContactInfo contact={contact} />
               </div>
 
-              {/* Center Column - Tabs */}
               <div className="lg:col-span-6">
                 <Tabs defaultValue="activity" className="space-y-4">
                   <TabsList className="grid w-full grid-cols-4">
@@ -212,26 +202,21 @@ const ContactDetail = () => {
                     <TabsTrigger value="properties">Properties</TabsTrigger>
                     <TabsTrigger value="documents">Documents</TabsTrigger>
                   </TabsList>
-
                   <TabsContent value="activity">
                     <ActivityTimeline contactId={contact.id} />
                   </TabsContent>
-
                   <TabsContent value="notes">
                     <NotesTab contactId={contact.id} />
                   </TabsContent>
-
                   <TabsContent value="properties">
                     <PropertyInterests contactId={contact.id} />
                   </TabsContent>
-
                   <TabsContent value="documents">
                     <DocumentsTab contactId={contact.id} />
                   </TabsContent>
                 </Tabs>
               </div>
 
-              {/* Right Column - AI Insights & Stats */}
               <div className="lg:col-span-3 space-y-6">
                 <AIInsights contact={contact} />
                 <EngagementStats contactId={contact.id} />
