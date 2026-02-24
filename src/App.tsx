@@ -49,6 +49,7 @@ import PIPEDACompliancePage from "./pages/PIPEDACompliancePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
+import Careers from "./pages/Careers";
 import FAQ from "./pages/FAQ";
 import AdminDemoRequests from "./pages/AdminDemoRequests";
 import VsBoldTrail from "./pages/VsBoldTrail";
@@ -202,6 +203,7 @@ const App = () => (
           <Route path="/blog/real-estate-drip-campaign-templates-canada-2025" element={<DripCampaignTemplates />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
