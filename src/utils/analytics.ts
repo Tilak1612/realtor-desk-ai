@@ -1,11 +1,6 @@
 const PRODUCT = 'realtordesk';
 const IS_DEV = import.meta.env.DEV;
-
-declare global {
-  interface Window {
-    gtag: (...args: unknown[]) => void;
-  }
-}
+// Window.gtag is declared in vite-env.d.ts
 
 export const trackPageView = (path: string, title: string) => {
   if (typeof window.gtag !== 'function') return;

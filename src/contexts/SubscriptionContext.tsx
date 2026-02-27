@@ -127,11 +127,22 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
   };
 
   useEffect(() => {
-    refreshSubscription();
+    let lastCheckTime = 0;
+    const MIN_CHECK_INTERVAL = 30000; // 30s minimum between checks
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        refreshSubscription();
+    const throttledRefresh = async () => {
+      const now = Date.now();
+      if (now - lastCheckTime < MIN_CHECK_INTERVAL) return;
+      lastCheckTime = now;
+      await refreshSubscription();
+    };
+
+    throttledRefresh();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_IN') {
+        // Small delay to avoid burst with initial load
+        setTimeout(throttledRefresh, 2000);
       } else if (event === 'SIGNED_OUT') {
         setSubscribed(false);
         setProductId(null);
@@ -139,10 +150,11 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         setSubscriptionEnd(null);
         setTrialEndsAt(null);
       }
+      // Skip TOKEN_REFRESHED to reduce Stripe API calls
     });
 
-    // Refresh subscription status every minute
-    const interval = setInterval(refreshSubscription, 60000);
+    // Refresh every 5 minutes instead of every minute
+    const interval = setInterval(throttledRefresh, 300000);
 
     return () => {
       authListener.subscription.unsubscribe();
