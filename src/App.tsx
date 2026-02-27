@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { supabase } from "@/integrations/supabase/client";
+import { trackEvent, trackPageView } from "@/utils/analytics";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
@@ -90,7 +92,6 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 const siteUrl = "https://realtordesk.ai";
-const GA_MEASUREMENT_ID = "G-95T79D2KJ7";
 
 const SeoDefaults = () => {
   const location = useLocation();
@@ -137,16 +138,36 @@ const RouteAnalytics = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (typeof window.gtag !== "function") {
-      return;
-    }
-
     const pagePath = `${location.pathname}${location.search}${location.hash}`;
-    window.gtag("config", GA_MEASUREMENT_ID, {
-      page_path: pagePath,
-      page_title: document.title,
-    });
+    trackPageView(pagePath, document.title);
   }, [location]);
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event !== "SIGNED_IN" || !session?.user) {
+        return;
+      }
+
+      const pendingMethod = sessionStorage.getItem("ga_pending_signup_method");
+      if (!pendingMethod) {
+        return;
+      }
+
+      const firedKey = `ga_signup_fired_${session.user.id}`;
+      if (sessionStorage.getItem(firedKey) === "1") {
+        return;
+      }
+
+      trackEvent("sign_up", { method: pendingMethod });
+      trackEvent("trial_start", { method: pendingMethod });
+      sessionStorage.setItem(firedKey, "1");
+      sessionStorage.removeItem("ga_pending_signup_method");
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   return null;
 };

@@ -15,12 +15,15 @@ import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { PasswordStrengthMeter } from "@/components/ui/password-strength-meter";
+import { trackEvent } from "@/utils/analytics";
 
 const Signup = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const flushAnalytics = () => new Promise((resolve) => setTimeout(resolve, 150));
 
   const signupSchema = z.object({
     email: z.string().email(t('app.validation.email')),
@@ -74,6 +77,8 @@ const Signup = () => {
 
   const handleOAuthSignIn = async (provider: "google" | "azure") => {
     try {
+      const method = provider === "google" ? "google" : "microsoft";
+      sessionStorage.setItem("ga_pending_signup_method", method);
       const redirectUrl = `${window.location.origin}/`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
@@ -83,6 +88,7 @@ const Signup = () => {
       });
       if (error) throw error;
     } catch (error: any) {
+      sessionStorage.removeItem("ga_pending_signup_method");
       toast.error(error.message || t('app.notifications.errorOccurred'));
     }
   };
@@ -116,6 +122,10 @@ const Signup = () => {
       }
 
       if (data.user) {
+        trackEvent("sign_up", { method: "email" });
+        trackEvent("trial_start", { method: "email" });
+        await flushAnalytics();
+
         toast.success(t('app.auth.verifyEmail'), {
           description: t('app.auth.checkYourEmail'),
           duration: 6000,

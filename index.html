@@ -47,7 +47,12 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-95T79D2KJ7');
+      gtag('config', 'G-95T79D2KJ7', { send_page_view: false });
+    </script>
+    <script>
+      if (window.location.hostname === 'localhost') {
+        window.gtag('set', { debug_mode: true });
+      }
     </script>
 
     <!-- Structured Data - Organization -->

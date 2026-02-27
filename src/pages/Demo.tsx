@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "@/utils/analytics";
 import {
   Form,
   FormControl,
@@ -80,6 +81,10 @@ const Demo = () => {
       ]);
 
       if (error) throw error;
+
+      trackEvent("demo_request", {
+        demo_type: "live_demo",
+      });
 
       // Sync to HubSpot in background (don't block on this)
       supabase.functions

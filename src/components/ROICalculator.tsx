@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -7,6 +7,7 @@ import { Slider } from "@/components/ui/slider";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { TrendingUp, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "@/utils/analytics";
 
 const ROICalculator = () => {
   const { t } = useTranslation();
@@ -14,6 +15,15 @@ const ROICalculator = () => {
   const [conversionRate, setConversionRate] = useState(3);
   const [avgCommission, setAvgCommission] = useState(15000);
   const [selectedPlan, setSelectedPlan] = useState("solo");
+  const hasTrackedRoiCalculation = useRef(false);
+
+  const trackRoiCalculation = () => {
+    if (hasTrackedRoiCalculation.current) return;
+    hasTrackedRoiCalculation.current = true;
+    trackEvent("roi_calculator_used", {
+      result_shown: true,
+    });
+  };
 
   const planPricing = {
     solo: 119,
@@ -55,7 +65,10 @@ const ROICalculator = () => {
           </div>
           <Slider
             value={[monthlyLeads]}
-            onValueChange={(value) => setMonthlyLeads(value[0])}
+            onValueChange={(value) => {
+              trackRoiCalculation();
+              setMonthlyLeads(value[0]);
+            }}
             min={10}
             max={200}
             step={5}
@@ -75,7 +88,10 @@ const ROICalculator = () => {
           </div>
           <Slider
             value={[conversionRate]}
-            onValueChange={(value) => setConversionRate(value[0])}
+            onValueChange={(value) => {
+              trackRoiCalculation();
+              setConversionRate(value[0]);
+            }}
             min={1}
             max={10}
             step={0.5}
@@ -95,7 +111,10 @@ const ROICalculator = () => {
           </div>
           <Slider
             value={[avgCommission]}
-            onValueChange={(value) => setAvgCommission(value[0])}
+            onValueChange={(value) => {
+              trackRoiCalculation();
+              setAvgCommission(value[0]);
+            }}
             min={5000}
             max={50000}
             step={1000}
@@ -110,7 +129,14 @@ const ROICalculator = () => {
         {/* Input 4: Plan Selection */}
         <div className="space-y-3">
           <Label className="text-sm font-semibold block mb-3">{t('roiCalculator.planSelection')}</Label>
-          <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="flex gap-4">
+          <RadioGroup
+            value={selectedPlan}
+            onValueChange={(value) => {
+              trackRoiCalculation();
+              setSelectedPlan(value);
+            }}
+            className="flex gap-4"
+          >
             <div className="flex items-center space-x-2 flex-1">
               <RadioGroupItem value="solo" id="solo" />
               <Label htmlFor="solo" className="cursor-pointer flex-1 p-3 border rounded-lg hover:bg-accent/5">

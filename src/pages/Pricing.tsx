@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
@@ -10,10 +10,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Shield, CheckCircle, Brain, Check, X, TrendingDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "@/utils/analytics";
 
 const Pricing = () => {
   const { t } = useTranslation();
   const [isYearly, setIsYearly] = useState(false); // Default to monthly
+
+  useEffect(() => {
+    trackEvent("view_pricing", {});
+  }, []);
 
   const pricingData = {
     agent: {
