@@ -124,7 +124,7 @@ const Signup = () => {
       if (data.user) {
         trackEvent("sign_up", { method: "email" });
         trackEvent("trial_start", { method: "email" });
-        await flushAnalytics();
+        await new Promise((resolve) => setTimeout(resolve, 300));
 
         toast.success(t('app.auth.verifyEmail'), {
           description: t('app.auth.checkYourEmail'),
