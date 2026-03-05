@@ -23,7 +23,7 @@ const LeadConversion = () => {
         publishedTime="2024-12-28"
         modifiedTime="2024-12-28"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/lead-conversion"
+        canonicalUrl="https://www.realtordesk.ai/blog/lead-conversion"
         structuredData={[
           {
             "@context": "https://schema.org",

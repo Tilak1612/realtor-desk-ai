@@ -19,7 +19,7 @@ const FirstTimeBuyerGuide = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/first-time-home-buyer-guide-canada-2025"
+        canonicalUrl="https://www.realtordesk.ai/first-time-home-buyer-guide-canada-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

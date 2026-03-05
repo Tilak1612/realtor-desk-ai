@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
         title="Privacy Policy | RealtorDesk AI"
         description="Read RealtorDesk AI's privacy policy covering data collection, storage, security, and your rights under Canadian law."
         keywords="privacy policy, PIPEDA, Canadian data privacy, RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/privacy-policy"
+        canonicalUrl="https://www.realtordesk.ai/privacy-policy"
       />
       <Navbar />
 

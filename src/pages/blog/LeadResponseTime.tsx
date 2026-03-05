@@ -22,7 +22,7 @@ const LeadResponseTime = () => {
         publishedTime="2025-01-15"
         modifiedTime="2025-01-15"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/lead-response-time-canadian-realtors"
+        canonicalUrl="https://www.realtordesk.ai/lead-response-time-canadian-realtors"
         structuredData={[
           {
             "@context": "https://schema.org",

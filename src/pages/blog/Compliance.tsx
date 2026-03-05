@@ -23,7 +23,7 @@ const Compliance = () => {
         publishedTime="2025-01-05"
         modifiedTime="2025-01-05"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/compliance"
+        canonicalUrl="https://www.realtordesk.ai/blog/compliance"
         structuredData={[
           {
             "@context": "https://schema.org",

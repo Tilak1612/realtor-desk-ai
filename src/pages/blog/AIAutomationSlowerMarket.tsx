@@ -23,7 +23,7 @@ const AIAutomationSlowerMarket = () => {
         publishedTime="2025-01-02"
         modifiedTime="2025-01-02"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation"
+        canonicalUrl="https://www.realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation"
         structuredData={[
           {
             "@context": "https://schema.org",

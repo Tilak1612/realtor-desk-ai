@@ -17,7 +17,7 @@ const VoiceAIGuide = () => {
         publishedTime="2026-01-01"
         modifiedTime="2026-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/resources/voice-ai-real-estate-lead-follow-up-canada"
+        canonicalUrl="https://www.realtordesk.ai/resources/voice-ai-real-estate-lead-follow-up-canada"
         structuredData={[
           {
             "@context": "https://schema.org",

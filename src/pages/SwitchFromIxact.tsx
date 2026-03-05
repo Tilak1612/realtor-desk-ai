@@ -16,7 +16,7 @@ const SwitchFromIxact = () => {
         title="Switch from IXACT | Upgrade to AI CRM"
         description="For just $20/month more than IXACT, get AI that closes 6-8 extra deals per year with free migration."
         keywords="switch from IXACT, IXACT migration, IXACT alternative, AI CRM for Canadian realtors"
-        canonicalUrl="https://realtordesk.ai/switch-from-ixact"
+        canonicalUrl="https://www.realtordesk.ai/switch-from-ixact"
         structuredData={[
           {
             "@context": "https://schema.org",

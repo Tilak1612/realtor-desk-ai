@@ -22,7 +22,7 @@ const TorontoVsVancouver = () => {
         publishedTime="2025-01-20"
         modifiedTime="2025-01-20"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/toronto-vs-vancouver-real-estate-market-2025"
+        canonicalUrl="https://www.realtordesk.ai/toronto-vs-vancouver-real-estate-market-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

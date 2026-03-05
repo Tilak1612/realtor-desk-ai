@@ -23,7 +23,7 @@ const HousingForecast2025 = () => {
         publishedTime="2025-01-02"
         modifiedTime="2025-01-02"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/canada-housing-market-forecast-2025-2026"
+        canonicalUrl="https://www.realtordesk.ai/canada-housing-market-forecast-2025-2026"
         structuredData={[
           {
             "@context": "https://schema.org",

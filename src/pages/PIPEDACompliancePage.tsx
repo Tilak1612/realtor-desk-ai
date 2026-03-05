@@ -53,7 +53,7 @@ const PIPEDACompliance = () => {
         title="PIPEDA Compliance | Canadian Data Privacy for Real Estate Agents"
         description="RealtorDesk AI is fully PIPEDA compliant with Canadian data residency, encryption, and automated compliance logging. Built for Canadian real estate agents who need to protect client data."
         keywords="PIPEDA compliance, real estate data privacy Canada, PIPEDA CRM, Canadian data residency, real estate data protection, PIPEDA requirements real estate"
-        canonicalUrl="https://realtordesk.ai/pipeda-compliance"
+        canonicalUrl="https://www.realtordesk.ai/pipeda-compliance"
         structuredData={[faqSchema]}
       />
       <Navbar />

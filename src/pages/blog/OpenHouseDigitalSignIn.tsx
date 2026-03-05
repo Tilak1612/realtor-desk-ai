@@ -24,7 +24,7 @@ const OpenHouseDigitalSignIn = () => {
         publishedTime="2025-01-29"
         modifiedTime="2025-01-29"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025"
+        canonicalUrl="https://www.realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

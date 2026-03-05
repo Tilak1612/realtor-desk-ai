@@ -23,7 +23,7 @@ const AITransformation = () => {
         publishedTime="2025-01-15"
         modifiedTime="2025-01-15"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/ai-transformation"
+        canonicalUrl="https://www.realtordesk.ai/blog/ai-transformation"
         structuredData={[
           {
             "@context": "https://schema.org",

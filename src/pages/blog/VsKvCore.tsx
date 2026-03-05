@@ -22,7 +22,7 @@ const VsKvCore = () => {
         publishedTime="2025-01-16"
         modifiedTime="2025-01-16"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/vs-kvcore"
+        canonicalUrl="https://www.realtordesk.ai/blog/vs-kvcore"
         structuredData={[
           {
             "@context": "https://schema.org",

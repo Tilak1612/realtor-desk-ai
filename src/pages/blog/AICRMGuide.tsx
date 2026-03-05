@@ -22,7 +22,7 @@ const AICRMGuide = () => {
         publishedTime="2025-01-18"
         modifiedTime="2025-01-18"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/ai-crm-canadian-real-estate-agents-guide"
+        canonicalUrl="https://www.realtordesk.ai/ai-crm-canadian-real-estate-agents-guide"
         structuredData={[
           {
             "@context": "https://schema.org",

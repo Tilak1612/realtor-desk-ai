@@ -17,7 +17,7 @@ const CASLComplianceGuide = () => {
         publishedTime="2026-01-01"
         modifiedTime="2026-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/resources/casl-compliance-real-estate-email-marketing-canada"
+        canonicalUrl="https://www.realtordesk.ai/resources/casl-compliance-real-estate-email-marketing-canada"
         structuredData={[
           {
             "@context": "https://schema.org",

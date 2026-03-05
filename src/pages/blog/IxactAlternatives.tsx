@@ -22,7 +22,7 @@ const IxactAlternatives = () => {
         publishedTime="2025-01-16"
         modifiedTime="2025-01-16"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/ixact-alternatives"
+        canonicalUrl="https://www.realtordesk.ai/blog/ixact-alternatives"
         structuredData={[
           {
             "@context": "https://schema.org",

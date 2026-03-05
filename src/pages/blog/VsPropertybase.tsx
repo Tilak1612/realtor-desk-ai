@@ -17,7 +17,7 @@ const VsPropertybase = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/vs-propertybase"
+        canonicalUrl="https://www.realtordesk.ai/blog/vs-propertybase"
         structuredData={[
           {
             "@context": "https://schema.org",

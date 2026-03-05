@@ -13,7 +13,7 @@ const RealEstateCRMBuyingGuide = () => {
     "@type": "Article",
     "headline": "How to Choose a Real Estate CRM in 2026: The Ultimate Buying Guide",
     "description": "Complete guide to choosing the best CRM for real estate agents. Learn what features matter, pricing models, Canadian compliance requirements, and how to avoid expensive mistakes.",
-    "image": "https://realtordesk.ai/blog-ai-crm-guide.jpg",
+    "image": "https://www.realtordesk.ai/blog-ai-crm-guide.jpg",
     "author": {
       "@type": "Organization",
       "name": "RealtorDesk AI"
@@ -23,7 +23,7 @@ const RealEstateCRMBuyingGuide = () => {
       "name": "RealtorDesk AI",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://realtordesk.ai/realtor-desk-icon.png"
+        "url": "https://www.realtordesk.ai/realtor-desk-icon.png"
       }
     },
     "datePublished": "2026-01-29",
@@ -36,7 +36,7 @@ const RealEstateCRMBuyingGuide = () => {
         title="How to Choose a Real Estate CRM in 2026 | Ultimate Buying Guide"
         description="Complete guide to choosing the best CRM for real estate agents. Compare features, pricing, Canadian compliance, AI capabilities, and avoid common mistakes. Expert analysis of 20+ CRMs."
         keywords="how to choose real estate CRM, best CRM for realtors, real estate CRM comparison, CRM buying guide, real estate software selection, choosing CRM for agents"
-        canonicalUrl="https://realtordesk.ai/blog/real-estate-crm-buying-guide"
+        canonicalUrl="https://www.realtordesk.ai/blog/real-estate-crm-buying-guide"
         structuredData={[articleSchema]}
       />
       <Navbar />

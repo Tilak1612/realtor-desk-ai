@@ -23,7 +23,7 @@ const BilingualMarketing = () => {
         publishedTime="2024-12-20"
         modifiedTime="2024-12-20"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/bilingual-marketing"
+        canonicalUrl="https://www.realtordesk.ai/blog/bilingual-marketing"
         structuredData={[
           {
             "@context": "https://schema.org",

@@ -23,7 +23,7 @@ const SuccessStory = () => {
         publishedTime="2024-12-15"
         modifiedTime="2024-12-15"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/success-story"
+        canonicalUrl="https://www.realtordesk.ai/blog/success-story"
         structuredData={[
           {
             "@context": "https://schema.org",

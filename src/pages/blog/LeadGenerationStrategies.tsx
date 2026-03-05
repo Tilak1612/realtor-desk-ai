@@ -24,7 +24,7 @@ const LeadGenerationStrategies = () => {
         publishedTime="2025-01-29"
         modifiedTime="2025-01-29"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025"
+        canonicalUrl="https://www.realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

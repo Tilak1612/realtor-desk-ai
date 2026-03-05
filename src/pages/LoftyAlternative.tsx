@@ -79,7 +79,7 @@ const LoftyAlternative = () => {
         title="Lofty CRM Alternative for Canadian Agents in 2026"
         description="Best Lofty alternative for Canadian real estate agents. RealtorDesk AI offers CREA DDF®, PIPEDA compliance, AI voice agent, and bilingual support at $149 CAD/mo vs Lofty's $700+ USD/mo. Save 85%. Free migration."
         keywords="Lofty alternative, Lofty CRM alternative Canada, cheaper than Lofty, best real estate CRM Canada, CREA DDF CRM, PIPEDA compliant CRM, Lofty vs RealtorDesk, switch from Lofty"
-        canonicalUrl="https://realtordesk.ai/lofty-alternative"
+        canonicalUrl="https://www.realtordesk.ai/lofty-alternative"
         structuredData={[comparisonFAQSchema, comparisonTableSchema]}
       />
       <Navbar />

@@ -28,7 +28,7 @@ const AIPoweredCRM = () => {
         title="AI-Powered CRM for Real Estate | RealtorDesk AI"
         description="Real AI for Canadian agents with predictive lead scoring, market intelligence, and 24/7 automation."
         keywords="AI powered CRM, real estate AI CRM, predictive lead scoring, Canadian real estate CRM"
-        canonicalUrl="https://realtordesk.ai/features/ai-powered-crm"
+        canonicalUrl="https://www.realtordesk.ai/features/ai-powered-crm"
         structuredData={[
           {
             "@context": "https://schema.org",

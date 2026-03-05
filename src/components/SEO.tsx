@@ -19,7 +19,7 @@ export const SEO = ({
   title,
   description,
   keywords,
-  image = 'https://realtordesk.ai/og-image.png',
+  image = 'https://www.realtordesk.ai/og-image.png',
   article = false,
   publishedTime,
   modifiedTime,
@@ -29,7 +29,7 @@ export const SEO = ({
   structuredData = [],
 }: SEOProps) => {
   const location = useLocation();
-  const siteUrl = 'https://realtordesk.ai';
+  const siteUrl = 'https://www.realtordesk.ai';
   const currentUrl = canonicalUrl || `${siteUrl}${location.pathname}`;
   
   // Ensure title includes brand name

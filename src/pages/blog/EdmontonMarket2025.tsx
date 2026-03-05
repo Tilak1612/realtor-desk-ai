@@ -19,7 +19,7 @@ const EdmontonMarket2025 = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/edmonton-real-estate-market-2025"
+        canonicalUrl="https://www.realtordesk.ai/edmonton-real-estate-market-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

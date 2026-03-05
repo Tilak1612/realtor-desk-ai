@@ -16,7 +16,7 @@ const SwitchFromBoldTrail = () => {
         title="Switch from BoldTrail | Free Migration to RealtorDesk AI"
         description="Join 200+ agents who switched from BoldTrail to RealtorDesk AI and saved $6,288/year with better AI and Canadian features."
         keywords="switch from BoldTrail, BoldTrail migration, BoldTrail alternative Canada, RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/switch-from-boldtrail"
+        canonicalUrl="https://www.realtordesk.ai/switch-from-boldtrail"
         structuredData={[
           {
             "@context": "https://schema.org",

@@ -17,7 +17,7 @@ const CalgaryMarketingGuide = () => {
         publishedTime="2026-01-01"
         modifiedTime="2026-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/resources/calgary-real-estate-marketing-strategies"
+        canonicalUrl="https://www.realtordesk.ai/resources/calgary-real-estate-marketing-strategies"
         structuredData={[
           {
             "@context": "https://schema.org",

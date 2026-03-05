@@ -19,7 +19,7 @@ const SellHomeFast = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/sell-home-fast-canada-2025"
+        canonicalUrl="https://www.realtordesk.ai/sell-home-fast-canada-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

@@ -1,9 +1,18 @@
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
+import * as Sentry from "@sentry/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import App from "./App.tsx";
 import "./index.css";
 import "./i18n/config";
 import { setupGlobalErrorHandling } from "./lib/errorMonitoring";
+
+Sentry.init({
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  integrations: [Sentry.browserTracingIntegration()],
+  tracesSampleRate: 0.2,
+  enabled: import.meta.env.PROD && Boolean(import.meta.env.VITE_SENTRY_DSN),
+});
 
 // Initialize global error monitoring
 setupGlobalErrorHandling();
@@ -15,6 +24,7 @@ if (rootElement) {
     createRoot(rootElement).render(
       <HelmetProvider>
         <App />
+        <SpeedInsights />
       </HelmetProvider>
     );
   } catch (error) {

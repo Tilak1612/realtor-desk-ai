@@ -16,7 +16,7 @@ const SwitchFromWiseAgent = () => {
         title="Switch from Wise Agent | Canadian CRM Upgrade"
         description="Switch from Wise Agent to RealtorDesk AI for bilingual support, CREA integration, and Canadian market intelligence."
         keywords="switch from Wise Agent, Wise Agent alternative Canada, Canadian real estate CRM, RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/switch-from-wise-agent"
+        canonicalUrl="https://www.realtordesk.ai/switch-from-wise-agent"
         structuredData={[
           {
             "@context": "https://schema.org",

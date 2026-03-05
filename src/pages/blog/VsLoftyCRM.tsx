@@ -17,7 +17,7 @@ const VsLoftyCRM = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/vs-lofty-crm"
+        canonicalUrl="https://www.realtordesk.ai/blog/vs-lofty-crm"
         structuredData={[
           {
             "@context": "https://schema.org",

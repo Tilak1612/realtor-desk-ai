@@ -22,7 +22,7 @@ const BestCRMCanada2025 = () => {
         publishedTime="2025-01-16"
         modifiedTime="2025-01-16"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/best-crm-canada-2025"
+        canonicalUrl="https://www.realtordesk.ai/blog/best-crm-canada-2025"
         structuredData={[
           {
             "@context": "https://schema.org",

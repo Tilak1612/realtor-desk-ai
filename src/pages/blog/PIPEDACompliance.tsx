@@ -22,7 +22,7 @@ const PIPEDACompliance = () => {
         publishedTime="2025-01-22"
         modifiedTime="2025-01-22"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/pipeda-compliance-real-estate-ai-tools-canada"
+        canonicalUrl="https://www.realtordesk.ai/pipeda-compliance-real-estate-ai-tools-canada"
         structuredData={[
           {
             "@context": "https://schema.org",

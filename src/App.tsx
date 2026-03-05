@@ -91,7 +91,7 @@ import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
-const siteUrl = "https://realtordesk.ai";
+const siteUrl = "https://www.realtordesk.ai";
 
 const SeoDefaults = () => {
   const location = useLocation();

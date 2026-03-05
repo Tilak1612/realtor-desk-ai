@@ -16,7 +16,7 @@ const VsIxact = () => {
         title="IXACT Contact vs RealtorDesk AI | Upgrade to AI"
         description="Upgrade from IXACT to AI-powered intelligence without breaking your budget. See pricing, features, and why Canadian agents switch."
         keywords="IXACT Contact vs RealtorDesk AI, IXACT alternative, Canadian real estate CRM comparison, AI CRM for realtors"
-        canonicalUrl="https://realtordesk.ai/vs/ixact"
+        canonicalUrl="https://www.realtordesk.ai/vs/ixact"
         structuredData={[
           {
             "@context": "https://schema.org",

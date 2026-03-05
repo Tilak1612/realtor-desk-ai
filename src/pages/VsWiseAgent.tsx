@@ -16,7 +16,7 @@ const VsWiseAgent = () => {
         title="Wise Agent vs RealtorDesk AI | Canadian CRM Comparison"
         description="Wise Agent is built for the US market. Compare with RealtorDesk AI for Canadian compliance, bilingual support, and AI automation."
         keywords="Wise Agent vs RealtorDesk AI, Wise Agent alternative Canada, Canadian real estate CRM, AI CRM comparison"
-        canonicalUrl="https://realtordesk.ai/vs/wise-agent"
+        canonicalUrl="https://www.realtordesk.ai/vs/wise-agent"
         structuredData={[
           {
             "@context": "https://schema.org",

@@ -17,7 +17,7 @@ const BoomTownAlternative = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/boomtown-alternative-canada"
+        canonicalUrl="https://www.realtordesk.ai/blog/boomtown-alternative-canada"
         structuredData={[
           {
             "@context": "https://schema.org",

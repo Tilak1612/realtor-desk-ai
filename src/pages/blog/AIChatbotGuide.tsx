@@ -17,7 +17,7 @@ const AIChatbotGuide = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/ai-chatbot-real-estate-websites-canada"
+        canonicalUrl="https://www.realtordesk.ai/blog/ai-chatbot-real-estate-websites-canada"
         structuredData={[
           {
             "@context": "https://schema.org",

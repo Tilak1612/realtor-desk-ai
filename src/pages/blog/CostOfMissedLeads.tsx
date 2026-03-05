@@ -31,7 +31,7 @@ const CostOfMissedLeads = () => {
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/resources/cost-of-missed-real-estate-leads-canada"
+        canonicalUrl="https://www.realtordesk.ai/resources/cost-of-missed-real-estate-leads-canada"
         structuredData={[
           {
             "@context": "https://schema.org",

@@ -9,7 +9,7 @@ const TermsOfService = () => {
         title="Terms of Service | RealtorDesk AI"
         description="Review the Terms of Service for using RealtorDesk AI, including subscriptions, data ownership, and compliance obligations."
         keywords="terms of service, RealtorDesk AI terms, Canadian real estate CRM terms"
-        canonicalUrl="https://realtordesk.ai/terms-of-service"
+        canonicalUrl="https://www.realtordesk.ai/terms-of-service"
       />
       <Navbar />
 

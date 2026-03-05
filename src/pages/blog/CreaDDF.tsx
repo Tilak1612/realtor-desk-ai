@@ -23,7 +23,7 @@ const CreaDDF = () => {
         publishedTime="2025-01-10"
         modifiedTime="2025-01-10"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/crea-ddf"
+        canonicalUrl="https://www.realtordesk.ai/blog/crea-ddf"
         structuredData={[
           {
             "@context": "https://schema.org",

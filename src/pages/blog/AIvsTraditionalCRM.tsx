@@ -22,7 +22,7 @@ const AIvsTraditionalCRM = () => {
         publishedTime="2025-01-16"
         modifiedTime="2025-01-16"
         author="RealtorDesk AI"
-        canonicalUrl="https://realtordesk.ai/blog/ai-vs-traditional-crm"
+        canonicalUrl="https://www.realtordesk.ai/blog/ai-vs-traditional-crm"
         structuredData={[
           {
             "@context": "https://schema.org",

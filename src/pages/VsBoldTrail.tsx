@@ -17,7 +17,7 @@ const VsBoldTrail = () => {
         title="BoldTrail Alternative | RealtorDesk AI vs BoldTrail"
         description="Looking for a BoldTrail alternative? RealtorDesk AI helps Canadian agents save $6,288 in year one with AI lead generation and faster support."
         keywords="BoldTrail alternative, RealtorDesk AI vs BoldTrail, Canadian real estate CRM, AI CRM for realtors"
-        canonicalUrl="https://realtordesk.ai/vs/boldtrail"
+        canonicalUrl="https://www.realtordesk.ai/vs/boldtrail"
         structuredData={[
           {
             "@context": "https://schema.org",

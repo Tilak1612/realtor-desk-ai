@@ -5,8 +5,8 @@ export const organizationSchema = {
   "@type": "Organization",
   "name": "RealtorDesk AI",
   "legalName": "Brainfy AI Inc.",
-  "url": "https://realtordesk.ai",
-  "logo": "https://realtordesk.ai/logo.png",
+  "url": "https://www.realtordesk.ai",
+  "logo": "https://www.realtordesk.ai/logo.png",
   "description": "AI-first real estate CRM built for Canadian agents with CREA DDF® integration, PIPEDA compliance, and bilingual support.",
   "foundingDate": "2024",
   "address": {
@@ -79,8 +79,8 @@ export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "RealtorDesk AI",
-  "image": "https://realtordesk.ai/logo.png",
-  "url": "https://realtordesk.ai",
+  "image": "https://www.realtordesk.ai/logo.png",
+  "url": "https://www.realtordesk.ai",
   "telephone": "+1-XXX-XXX-XXXX",
   "address": {
     "@type": "PostalAddress",
@@ -204,7 +204,7 @@ export const productSchema = (planName: string, price: number, description: stri
     "price": price.toFixed(2),
     "priceCurrency": "CAD",
     "availability": "https://schema.org/InStock",
-    "url": "https://realtordesk.ai/pricing",
+    "url": "https://www.realtordesk.ai/pricing",
     "priceValidUntil": "2026-12-31"
   },
   "aggregateRating": {
@@ -221,7 +221,7 @@ export const breadcrumbSchema = (items: { name: string; url: string }[]) => ({
     "@type": "ListItem",
     "position": index + 1,
     "name": item.name,
-    "item": `https://realtordesk.ai${item.url}`
+    "item": `https://www.realtordesk.ai${item.url}`
   }))
 });
 
@@ -247,14 +247,14 @@ export const articleSchema = (
     "name": "RealtorDesk AI",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://realtordesk.ai/logo.png"
+      "url": "https://www.realtordesk.ai/logo.png"
     }
   },
   "datePublished": publishedDate,
   "dateModified": modifiedDate,
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://realtordesk.ai"
+    "@id": "https://www.realtordesk.ai"
   }
 });
 
