@@ -9,22 +9,22 @@ const AuraProblemSection = () => {
   const problems = [
     {
       icon: Clock,
-      title: t('problem.lostOpportunities'),
-      description: t('problem.lostOpportunitiesDesc'),
+      title: t('problem.lostOpportunities.title'),
+      description: t('problem.lostOpportunities.text'),
       stat: "78%",
       statLabel: t('problem.leadsLost', 'of leads lost'),
     },
     {
       icon: Monitor,
-      title: t('problem.toolOverload'),
-      description: t('problem.toolOverloadDesc'),
+      title: t('problem.toolOverload.title'),
+      description: t('problem.toolOverload.text'),
       stat: "15+",
       statLabel: t('problem.toolsUsed', 'tools used daily'),
     },
     {
       icon: DollarSign,
-      title: t('problem.wastedSpend'),
-      description: t('problem.wastedSpendDesc'),
+      title: t('problem.wastedSpend.title'),
+      description: t('problem.wastedSpend.text'),
       stat: "$2.5K",
       statLabel: t('problem.monthlyWaste', 'wasted monthly'),
     },
