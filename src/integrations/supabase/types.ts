@@ -1107,6 +1107,33 @@ export type Database = {
         }
         Relationships: []
       }
+      email_events: {
+        Row: {
+          event_type: string
+          id: string
+          metadata: Json | null
+          recipient_email: string
+          sent_at: string
+          user_id: string
+        }
+        Insert: {
+          event_type: string
+          id?: string
+          metadata?: Json | null
+          recipient_email: string
+          sent_at?: string
+          user_id: string
+        }
+        Update: {
+          event_type?: string
+          id?: string
+          metadata?: Json | null
+          recipient_email?: string
+          sent_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       email_log: {
         Row: {
           contact_id: string
