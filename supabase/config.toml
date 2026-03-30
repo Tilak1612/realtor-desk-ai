@@ -44,3 +44,9 @@ verify_jwt = true
 
 [functions.encrypt-integration-token]
 verify_jwt = true
+
+[functions.send-lifecycle-email]
+verify_jwt = true
+
+[functions.stripe-webhook-email]
+verify_jwt = false

@@ -126,6 +126,11 @@ const Signup = () => {
         trackEvent("trial_start", { method: "email" });
         await new Promise((resolve) => setTimeout(resolve, 300));
 
+        // Send welcome email (fire and forget)
+        supabase.functions.invoke("send-welcome-email", {
+          body: { userId: data.user.id },
+        }).catch((err) => console.error("Welcome email error:", err));
+
         toast.success(t('app.auth.verifyEmail'), {
           description: t('app.auth.checkYourEmail'),
           duration: 6000,
