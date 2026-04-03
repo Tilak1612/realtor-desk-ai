@@ -15,6 +15,11 @@ dist-ssr
 # Temporary / scratch files — never commit binaries or scratch work
 src/temp/
 
+# Environment variables (never commit secrets)
+.env
+.env.local
+.env.production
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
