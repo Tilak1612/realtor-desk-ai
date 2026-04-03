@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { trackEvent } from "@/utils/analytics";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
@@ -121,6 +122,11 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
       toast.error(t("app.modals.addDeal.failedCreate"));
       console.error(error);
     } else {
+      trackEvent('deal_created', {
+        stage: formData.stage,
+        has_value: !!formData.value,
+        client_type: formData.client_type || null,
+      });
       toast.success(t("app.modals.addDeal.successCreate"));
       onDealAdded();
       onOpenChange(false);

@@ -7,10 +7,12 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Valid price IDs whitelist - update these with your actual Stripe price IDs
+// Valid price IDs whitelist — sourced from SubscriptionContext.tsx SUBSCRIPTION_PRODUCTS
 const VALID_PRICE_IDS: Set<string> = new Set([
-  // Add your actual Stripe price IDs here
-  // Example: "price_1OxyzABC123def456"
+  "price_1SXpyiS23MQcIdnrAphs809v", // Agent monthly
+  "price_1SXpzKS23MQcIdnrfH2rHhow", // Agent yearly
+  "price_1SXpz0S23MQcIdnrrD0UGqa5", // Team monthly
+  "price_1SXpzZS23MQcIdnrVVyUShLT", // Team yearly
 ]);
 
 // Validate price ID format (Stripe price IDs start with "price_")
@@ -153,8 +155,8 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
-      success_url: `${origin}/app/billing?success=true`,
-      cancel_url: `${origin}/app/billing`,
+      success_url: `${origin}/billing?success=true`,
+      cancel_url: `${origin}/billing`,
     });
 
     logStep("Checkout session created");

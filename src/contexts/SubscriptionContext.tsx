@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { trackEvent } from '@/utils/analytics';
 
 interface SubscriptionContextType {
   subscribed: boolean;
@@ -45,6 +46,7 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [subscriptionEnd, setSubscriptionEnd] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null);
+  const prevSubscribedRef = useRef<boolean | null>(null);
 
   const calculateTrialDaysLeft = (trialEndDate: string | null): number => {
     if (!trialEndDate) return 0;
@@ -111,7 +113,15 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         return;
       }
 
-      setSubscribed(data.subscribed || false);
+      const newSubscribed = data.subscribed || false;
+      if (prevSubscribedRef.current !== null && prevSubscribedRef.current !== newSubscribed) {
+        trackEvent('subscription_status_changed', {
+          subscribed: newSubscribed,
+          product_id: data.product_id || null,
+        });
+      }
+      prevSubscribedRef.current = newSubscribed;
+      setSubscribed(newSubscribed);
       setProductId(data.product_id || null);
       setPriceId(data.price_id || null);
       setSubscriptionEnd(data.subscription_end || null);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/utils/analytics";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
@@ -85,19 +86,26 @@ const Onboarding = () => {
     if (!userId) return;
 
     try {
-      await supabase
+      const { error: updateError } = await supabase
         .from("profiles")
         .update({ onboarding_completed: true, onboarding_step: 6 })
         .eq("id", userId);
 
-      // Call edge function to send welcome email
-      await supabase.functions.invoke("send-welcome-email", {
+      if (updateError) throw updateError;
+
+      trackEvent("onboarding_completed");
+
+      // Send welcome email (fire and forget — do not block navigation on email failure)
+      supabase.functions.invoke("send-welcome-email", {
         body: { userId },
+      }).catch(() => {
+        // Email failure is non-fatal; user is already onboarded
       });
 
       toast.success("Welcome to Realtor Desk AI!");
+      navigate("/dashboard");
     } catch (error: unknown) {
-      // Error silently handled
+      toast.error("Failed to complete setup. Please try again.");
     }
   };
 
@@ -109,7 +117,8 @@ const Onboarding = () => {
     );
   }
 
-  const progress = (currentStep / 5) * 100;
+  // Steps 1–5 are the form steps; step 6 is the completion screen shown outside the progress bar
+  const progress = Math.min((currentStep / 5) * 100, 100);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5 px-4 py-8">

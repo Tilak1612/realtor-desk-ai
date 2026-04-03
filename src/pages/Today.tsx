@@ -151,51 +151,45 @@ const Today = () => {
 
       setContactsToCall(enrichedContacts.slice(0, 10));
 
-      // Fetch weekly summary from analytics/events table
-      // Note: These queries will work after database migration is run
+      // Weekly summary from existing tables:
+      // - callsLogged   → contact_activities with activity_type in (call_made, call_received) this week
+      // - followUpsScheduled → tasks created this week
+      // - dealsMoved    → contact_activities with activity_type = deal_updated this week
+      // Note: "deals moved" is a proxy via activity log; a dedicated deal-stage history
+      // table would give a more precise count.
       try {
         const weekStart = new Date();
         weekStart.setDate(weekStart.getDate() - 7);
-        
-        // For now, use placeholder data until migration is run
-        // After migration, uncomment the queries below
-        setWeeklySummary({
-          callsLogged: 0,
-          followUpsScheduled: 0,
-          dealsMoved: 0,
-        });
+        const weekStartIso = weekStart.toISOString();
 
-        /* Uncomment after running database migration:
-        const { data: callEvents } = await supabase
-          .from("adoption_events")
-          .select("*")
-          .eq("user_id", userId)
-          .eq("event_type", "call_logged")
-          .gte("created_at", weekStart.toISOString());
-
-        const { data: followupEvents } = await supabase
-          .from("adoption_events")
-          .select("*")
-          .eq("user_id", userId)
-          .eq("event_type", "followup_scheduled")
-          .gte("created_at", weekStart.toISOString());
-
-        const { data: dealEvents } = await supabase
-          .from("adoption_events")
-          .select("*")
-          .eq("user_id", userId)
-          .eq("event_type", "deal_stage_changed")
-          .gte("created_at", weekStart.toISOString());
+        const [{ data: callActivities }, { data: weekTasks }, { data: dealActivities }] =
+          await Promise.all([
+            supabase
+              .from("contact_activities")
+              .select("id", { count: "exact", head: false })
+              .eq("user_id", userId)
+              .in("activity_type", ["call_made", "call_received"])
+              .gte("created_at", weekStartIso),
+            supabase
+              .from("tasks")
+              .select("id", { count: "exact", head: false })
+              .eq("user_id", userId)
+              .gte("created_at", weekStartIso),
+            supabase
+              .from("contact_activities")
+              .select("id", { count: "exact", head: false })
+              .eq("user_id", userId)
+              .eq("activity_type", "deal_updated")
+              .gte("created_at", weekStartIso),
+          ]);
 
         setWeeklySummary({
-          callsLogged: callEvents?.length || 0,
-          followUpsScheduled: followupEvents?.length || 0,
-          dealsMoved: dealEvents?.length || 0,
+          callsLogged: callActivities?.length ?? 0,
+          followUpsScheduled: weekTasks?.length ?? 0,
+          dealsMoved: dealActivities?.length ?? 0,
         });
-        */
-      } catch (error) {
-        // Gracefully handle if table doesn't exist yet
-        console.log("Adoption events table not available yet");
+      } catch {
+        // Non-fatal — leave summary at zeros if queries fail
       }
     } catch (error) {
       console.error("Error fetching today data:", error);

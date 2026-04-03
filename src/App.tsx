@@ -46,6 +46,8 @@ import CostOfMissedLeads from "./pages/blog/CostOfMissedLeads";
 import LeadGenerationStrategies from "./pages/blog/LeadGenerationStrategies";
 import OpenHouseDigitalSignIn from "./pages/blog/OpenHouseDigitalSignIn";
 import DripCampaignTemplates from "./pages/blog/DripCampaignTemplates";
+import RealEstateCRMBuyingGuide from "./pages/blog/RealEstateCRMBuyingGuide";
+import LeadMagnetFollowUp from "./pages/LeadMagnetFollowUp";
 import Integrations from "./pages/Integrations";
 import PIPEDACompliancePage from "./pages/PIPEDACompliancePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -64,6 +66,7 @@ import SwitchFromLofty from "./pages/SwitchFromLofty";
 import SwitchFromIxact from "./pages/SwitchFromIxact";
 import SwitchFromWiseAgent from "./pages/SwitchFromWiseAgent";
 import LoftyAlternative from "./pages/LoftyAlternative";
+import Unsubscribe from "./pages/Unsubscribe";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -89,6 +92,7 @@ import Market from "./pages/Market";
 import Automations from "./pages/Automations";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 const siteUrl = "https://www.realtordesk.ai";
@@ -219,9 +223,11 @@ const App = () => (
           <Route path="/resources/calgary-real-estate-marketing-strategies" element={<CalgaryMarketingGuide />} />
           <Route path="/resources/casl-compliance-real-estate-email-marketing-canada" element={<CASLComplianceGuide />} />
           <Route path="/resources/cost-of-missed-real-estate-leads-canada" element={<CostOfMissedLeads />} />
+          <Route path="/resources/slow-follow-up-calculator-canadian-realtors" element={<LeadMagnetFollowUp />} />
           <Route path="/blog/real-estate-lead-generation-strategies-canada-2025" element={<LeadGenerationStrategies />} />
           <Route path="/blog/open-house-digital-sign-in-sheets-vs-paper-2025" element={<OpenHouseDigitalSignIn />} />
           <Route path="/blog/real-estate-drip-campaign-templates-canada-2025" element={<DripCampaignTemplates />} />
+          <Route path="/blog/real-estate-crm-buying-guide" element={<RealEstateCRMBuyingGuide />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/careers" element={<Careers />} />
@@ -229,6 +235,7 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/unsubscribe" element={<Unsubscribe />} />
           <Route path="/admin/demo-requests" element={<AdminDemoRequests />} />
           
           {/* Auth Pages */}
@@ -237,23 +244,23 @@ const App = () => (
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/today" element={<Today />} />
-          <Route path="/call-workflow/:contactId" element={<CallWorkflow />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/contacts/:id" element={<ContactDetail />} />
-          <Route path="/properties" element={<Properties />} />
-          <Route path="/billing" element={<Billing />} />
-          <Route path="/deals" element={<Deals />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/ai-assistant" element={<AIAssistant />} />
-          <Route path="/campaigns" element={<Campaigns />} />
-          <Route path="/calendar" element={<CalendarPage />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/market" element={<Market />} />
-          <Route path="/automations" element={<Automations />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/today" element={<ProtectedRoute><Today /></ProtectedRoute>} />
+          <Route path="/call-workflow/:contactId" element={<ProtectedRoute><CallWorkflow /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+          <Route path="/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
+          <Route path="/contacts/:id" element={<ProtectedRoute><ContactDetail /></ProtectedRoute>} />
+          <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
+          <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
+          <Route path="/deals" element={<ProtectedRoute><Deals /></ProtectedRoute>} />
+          <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
+          <Route path="/ai-assistant" element={<ProtectedRoute><AIAssistant /></ProtectedRoute>} />
+          <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
+          <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
+          <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
+          <Route path="/market" element={<ProtectedRoute><Market /></ProtectedRoute>} />
+          <Route path="/automations" element={<ProtectedRoute><Automations /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />

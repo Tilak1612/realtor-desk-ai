@@ -18,15 +18,16 @@ const ResetPassword = () => {
 
   useEffect(() => {
     // Check if the user has a valid recovery session
-    supabase.auth.onAuthStateChange((event) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === "PASSWORD_RECOVERY") {
-        // User is in password recovery mode
+        // User is in password recovery mode — stay on this page
       } else if (event === "SIGNED_IN") {
-        // Password was successfully reset
+        // Password was successfully reset and session established
         toast.success("Password reset successful!");
-        navigate("/dashboard");
+        navigate("/today");
       }
     });
+    return () => subscription.unsubscribe();
   }, [navigate]);
 
   const handleResetPassword = async (e: React.FormEvent) => {

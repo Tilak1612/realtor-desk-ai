@@ -2,13 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Link as RouterLink } from "react-router-dom";
 import { PasswordInput, validatePassword } from "@/components/ui/password-input";
 import { Mail, User, Building2, ArrowRight, Info } from "lucide-react";
 import AuthLayout from "@/components/auth/AuthLayout";
@@ -21,9 +19,6 @@ const Signup = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-
-  const flushAnalytics = () => new Promise((resolve) => setTimeout(resolve, 150));
 
   const signupSchema = z.object({
     email: z.string().email(t('app.validation.email')),
@@ -79,7 +74,9 @@ const Signup = () => {
     try {
       const method = provider === "google" ? "google" : "microsoft";
       sessionStorage.setItem("ga_pending_signup_method", method);
-      const redirectUrl = `${window.location.origin}/`;
+      // Redirect to /today so ProtectedRoute + Today.tsx handle the
+      // onboarding_completed check — avoids stranding users on the landing page.
+      const redirectUrl = `${window.location.origin}/today`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
@@ -117,7 +114,6 @@ const Signup = () => {
       });
 
       if (error) {
-        console.error("Signup error:", error);
         throw error;
       }
 
@@ -126,10 +122,8 @@ const Signup = () => {
         trackEvent("trial_start", { method: "email" });
         await new Promise((resolve) => setTimeout(resolve, 300));
 
-        // Send welcome email (fire and forget)
-        supabase.functions.invoke("send-welcome-email", {
-          body: { userId: data.user.id },
-        }).catch((err) => console.error("Welcome email error:", err));
+        // Welcome email is sent after onboarding completes (Onboarding.tsx handleComplete)
+        // to avoid sending it before the user has verified their email.
 
         toast.success(t('app.auth.verifyEmail'), {
           description: t('app.auth.checkYourEmail'),
@@ -144,7 +138,6 @@ const Signup = () => {
         });
       }
     } catch (error: any) {
-      console.error("Signup exception:", error);
       toast.error(t('app.common.error'), {
         description: error.message || t('app.notifications.errorOccurred'),
         duration: 6000,
@@ -232,7 +225,6 @@ const Signup = () => {
                 value={formData.password || ""}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 showValidation={true}
-                onValidationChange={setIsPasswordValid}
                 className="bg-gray-700 border-white/10 text-white placeholder-gray-400 focus:ring-primary focus:bg-gray-600"
               />
               <PasswordStrengthMeter password={formData.password || ""} />
@@ -305,13 +297,13 @@ const Signup = () => {
                 />
                 <label htmlFor="privacyConsent" className="text-sm text-gray-300 leading-relaxed cursor-pointer">
                   I agree to the{" "}
-                  <RouterLink to="/privacy-policy" className="text-primary hover:underline">
+                  <Link to="/privacy-policy" className="text-primary hover:underline">
                     Privacy Policy
-                  </RouterLink>{" "}
+                  </Link>{" "}
                   &{" "}
-                  <RouterLink to="/terms-of-service" className="text-primary hover:underline">
+                  <Link to="/terms-of-service" className="text-primary hover:underline">
                     Terms of Service
-                  </RouterLink>
+                  </Link>
                   {" "}*
                 </label>
               </div>

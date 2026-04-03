@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Temporary / scratch files — never commit binaries or scratch work
+src/temp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

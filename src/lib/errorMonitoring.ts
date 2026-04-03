@@ -2,6 +2,7 @@
  * Error Monitoring and Logging System
  * Tracks errors, API failures, and user actions for debugging
  */
+import * as Sentry from '@sentry/react';
 
 export interface ErrorLog {
   timestamp: Date;
@@ -245,17 +246,14 @@ class ErrorMonitor {
    * Replace with actual implementation
    */
   private sendToMonitoringService(log: ErrorLog): void {
-    // In production, implement sending to your monitoring service
-    // For now, this is a placeholder
-    
-    // Example: Sentry
-    // if (import.meta.env.PROD) {
-    //   Sentry.captureException(new Error(log.message), {
-    //     level: log.type,
-    //     tags: { category: log.category },
-    //     extra: log.details,
-    //   });
-    // }
+    if (log.type === 'error') {
+      Sentry.captureException(new Error(log.message), {
+        level: 'error',
+        tags: { category: log.category },
+        extra: { details: log.details, url: log.url },
+        user: log.userId ? { id: log.userId, email: log.userEmail } : undefined,
+      });
+    }
   }
 }
 

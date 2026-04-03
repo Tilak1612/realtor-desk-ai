@@ -79,6 +79,35 @@ serve(async (req) => {
       logStep("No active subscription found");
     }
 
+    // Cache subscription state back into profiles so the app can read
+    // subscription_status and subscription_tier locally without extra Stripe calls.
+    const newStatus = hasActiveSub ? "active" : "trial";
+
+    // Map Stripe product_id → tier using known product IDs (mirrors SubscriptionContext.tsx)
+    const AGENT_PRODUCT_IDS = new Set([
+      "prod_TUpecsjMV6TaBw", // Agent monthly
+      "prod_TUpevCKNFOGwCq", // Agent yearly
+    ]);
+    const TEAM_PRODUCT_IDS = new Set([
+      "prod_TUpeTIPjzjd64Z", // Team monthly
+      "prod_TUpeobzrNh5RNk", // Team yearly
+    ]);
+    const newTier = AGENT_PRODUCT_IDS.has(productId ?? "")
+      ? "agent"
+      : TEAM_PRODUCT_IDS.has(productId ?? "")
+      ? "team"
+      : null;
+
+    const profileUpdate: Record<string, string> = { subscription_status: newStatus };
+    if (newTier) profileUpdate.subscription_tier = newTier;
+
+    await supabaseClient
+      .from("profiles")
+      .update(profileUpdate)
+      .eq("id", user.id);
+
+    logStep("Profile subscription status cached", { newStatus, newTier });
+
     return new Response(JSON.stringify({
       subscribed: hasActiveSub,
       product_id: productId,

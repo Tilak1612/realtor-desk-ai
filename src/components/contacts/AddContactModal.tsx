@@ -30,6 +30,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/utils/analytics";
 
 const formSchema = z.object({
   first_name: z.string().min(1, "First name is required").max(100),
@@ -104,6 +105,8 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       }).select('id').single();
 
       if (error) throw error;
+
+      trackEvent('contact_created', { source: values.source || 'manual_entry' });
 
       // If notes were provided, save them to contact_notes table
       if (values.notes && values.notes.trim() && contactData) {

@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Mail, Lock, ArrowRight, Info, Eye, EyeOff } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
 import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
 
@@ -17,7 +16,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -41,7 +39,9 @@ const Login = () => {
 
   const handleOAuthSignIn = async (provider: "google" | "azure") => {
     try {
-      const redirectUrl = `${window.location.origin}/`;
+      // Redirect to /today so ProtectedRoute + Today.tsx handle the
+      // onboarding_completed check — avoids stranding users on the landing page.
+      const redirectUrl = `${window.location.origin}/today`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
@@ -188,19 +188,8 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="rememberMe"
-                  checked={rememberMe}
-                  onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-                  className="border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                />
-                <label htmlFor="rememberMe" className="text-sm text-gray-300 cursor-pointer">
-                  Remember me for 30 days
-                </label>
-              </div>
+            {/* Forgot Password */}
+            <div className="flex items-center justify-end">
               <Link
                 to="/forgot-password"
                 className="text-sm text-primary hover:text-primary/80 font-medium transition-colors hover:underline"

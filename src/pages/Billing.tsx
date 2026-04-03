@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { trackEvent } from '@/utils/analytics';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,6 +16,7 @@ const Billing = () => {
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [profileError, setProfileError] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [portalLoading, setPortalLoading] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
@@ -40,8 +42,8 @@ const Billing = () => {
           .single();
 
         setProfile(profileData);
-      } catch (error: unknown) {
-        // Error silently handled
+      } catch {
+        setProfileError(true);
       } finally {
         setLoading(false);
       }
@@ -51,13 +53,15 @@ const Billing = () => {
 
     if (searchParams.get('success') === 'true') {
       toast.success('Subscription activated successfully!');
+      trackEvent('checkout_completed');
       refreshSubscription();
-      navigate('/app/billing', { replace: true });
+      navigate('/billing', { replace: true });
     }
   }, [navigate, searchParams, refreshSubscription]);
 
   const handleCheckout = async (priceId: string) => {
     setCheckoutLoading(priceId);
+    trackEvent('checkout_started', { price_id: priceId });
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) throw new Error('Not authenticated');
@@ -117,6 +121,22 @@ const Billing = () => {
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
           <Loader2 className="w-8 h-8 animate-spin" />
+        </div>
+      </AppLayout>
+    );
+  }
+
+  if (profileError) {
+    return (
+      <AppLayout user={user} profile={profile}>
+        <div className="flex flex-col items-center justify-center h-64 gap-4">
+          <p className="text-muted-foreground">Unable to load billing information. Please refresh the page.</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="text-sm text-primary underline"
+          >
+            Refresh
+          </button>
         </div>
       </AppLayout>
     );

@@ -9,7 +9,7 @@ const corsHeaders = {
 
 const RESEND_API_URL = "https://api.resend.com/emails";
 const FROM_EMAIL = "RealtorDesk AI <support@realtordesk.ai>";
-const APP_URL = "https://realtordesk.ai";
+const APP_URL = "https://www.realtordesk.ai";
 
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {

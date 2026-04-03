@@ -3,12 +3,13 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
 };
 
 const RESEND_API_URL = "https://api.resend.com/emails";
-const FROM_EMAIL = "RealtorDesk AI <no-reply@realtordesk.ai>";
-const APP_URL = "https://realtordesk.ai";
+const FROM_EMAIL = "RealtorDesk AI <support@realtordesk.ai>";
+const APP_URL = "https://www.realtordesk.ai";
 
 interface EmailTemplate {
   subject: string;
@@ -16,123 +17,195 @@ interface EmailTemplate {
 }
 
 function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTemplate | null {
-  const name = data.firstName || data.name || "there";
-  
+  const name = data.name || "there";
+
   const templates: Record<string, EmailTemplate> = {
-    realtordesk_onboarding_welcome: {
-      subject: `Welcome to RealtorDesk AI, ${name} — your 24/7 AI chatbot is live and ready`,
-      html: buildEmail(`Welcome to RealtorDesk AI, ${name}!`, `
-        <p>Welcome to RealtorDesk AI — rated #1 for Canadian agents, 85% less than BoldTrail.</p>
-        <p>Two things are live right now:</p>
-        <ul>
-          <li>Your 24/7 AI chatbot — capturing leads even while you sleep.</li>
-          <li>Your CRM — CREA DDF® native, bilingual EN/FR, PIPEDA compliant.</li>
+    onboarding_step1: {
+      subject: "Getting Started with RealtorDesk AI — Your Quick Guide",
+      html: buildEmail(
+        "Let's Get You Set Up! 🚀",
+        `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">We noticed you haven't completed your profile setup yet. Here's a quick checklist to get the most out of RealtorDesk AI:</p>
+        <ul style="font-size:16px;color:#374151;line-height:2;">
+          <li>✅ Add your brokerage details</li>
+          <li>✅ Import your first contacts</li>
+          <li>✅ Configure your AI chatbot</li>
+          <li>✅ Set up your calendar</li>
         </ul>
         <div style="text-align:center;margin:30px 0;">
-          <a href="${APP_URL}/dashboard" style="background:#1e3a5f;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;">Add My First Lead</a>
-        </div>
-        <p>Plans start at $79/month CAD — 14-day free trial active.</p>
-      `),
+          <a href="${APP_URL}/onboarding" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Complete Setup →</a>
+        </div>`
+      ),
     },
-    realtordesk_onboarding_quickwin: {
-      subject: `${name}, your AI chatbot answered 0 leads last night. Here's why.`,
-      html: buildEmail(`Get Your Pipeline Running`, `
-        <p>Hi ${name}, your chatbot is active but has no leads yet. Fix in under 5 minutes:</p>
-        <ol>
-          <li>Manual add — 5 hottest leads, 30 seconds each</li>
-          <li>CSV import — export from old CRM, 2 minutes</li>
-          <li>Live capture — embed lead form on website</li>
-        </ol>
-        <div style="text-align:center;margin:30px 0;">
-          <a href="${APP_URL}/leads/import" style="background:#1e3a5f;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;">Add My Leads + Configure My Chatbot</a>
-        </div>
-      `),
-    },
-    realtordesk_onboarding_checklist: {
-      subject: "5 RealtorDesk AI features that top Canadian agents activate in week one",
-      html: buildEmail(`Your Setup Checklist`, `
-        <p>Hi ${name}, here is your week one checklist:</p>
-        <ul>
-          <li>✅ Add or import your leads</li>
-          <li>⬜ Connect CREA DDF® — pulls live Canadian MLS data</li>
-          <li>⬜ Set chatbot language — EN, FR, or bilingual</li>
-          <li>⬜ Link virtual tour provider — Matterport, iGuide</li>
-          <li>⬜ Enable predictive lead scoring</li>
+    trial_ending: {
+      subject: `Your RealtorDesk AI Trial Ends in ${data.days_remaining || 3} Days`,
+      html: buildEmail(
+        "Your Trial Is Almost Over ⏰",
+        `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">Your 14-day free trial of RealtorDesk AI ends in <strong>${data.days_remaining || 3} days</strong>.</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">Don't lose access to:</p>
+        <ul style="font-size:16px;color:#374151;line-height:2;">
+          <li>🤖 AI-powered lead scoring</li>
+          <li>💬 24/7 chatbot lead capture</li>
+          <li>📊 Smart CRM dashboard</li>
+          <li>🏠 Property management tools</li>
         </ul>
         <div style="text-align:center;margin:30px 0;">
-          <a href="${APP_URL}/settings/checklist" style="background:#1e3a5f;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;">Complete My Setup</a>
+          <a href="${APP_URL}/billing" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Upgrade Now →</a>
         </div>
-      `),
+        <p style="font-size:14px;color:#6b7280;">Plans start at just $79 CAD/month.</p>`
+      ),
     },
-    realtordesk_onboarding_trialnudge: {
-      subject: "$79/month vs a missed lead. The math is easy.",
-      html: buildEmail(`Trial Ending Soon`, `
-        <p>Hi ${name}, your trial ends on ${data.trial_end_date || 'soon'}.</p>
-        <p>When it expires, your AI chatbot goes offline and access to leads and CREA DDF® sync pauses.</p>
+    payment_success: {
+      subject: "Payment Confirmed — RealtorDesk AI",
+      html: buildEmail(
+        "Payment Confirmed ✅",
+        `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">Your payment of <strong>${data.amount || ""}</strong> has been successfully processed.</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">Your subscription is active and you have full access to all RealtorDesk AI features.</p>
         <div style="text-align:center;margin:30px 0;">
-          <a href="${APP_URL}/billing" style="background:#1e3a5f;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;">Upgrade RealtorDesk AI — $79/month CAD</a>
+          <a href="${APP_URL}/dashboard" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Go to Dashboard →</a>
         </div>
-      `),
+        <p style="font-size:14px;color:#6b7280;">View your billing history in <a href="${APP_URL}/billing" style="color:#6366f1;">Settings → Billing</a>.</p>`
+      ),
     },
-    realtordesk_activation_celebrate: {
-      subject: `First lead in, ${name} — your AI chatbot is now working for you 24/7`,
-      html: buildEmail(`First Lead Captured!`, `
-        <p>Hi ${name}, your first lead is in! Here are two things to do now:</p>
-        <ol>
-          <li>Enable predictive lead scoring in Settings</li>
-          <li>Set a follow-up reminder for this lead today</li>
-        </ol>
+    payment_failed: {
+      subject: "Action Required: Payment Failed — RealtorDesk AI",
+      html: buildEmail(
+        "Payment Failed ⚠️",
+        `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">We were unable to process your latest payment. To avoid losing access to RealtorDesk AI, please update your payment method.</p>
         <div style="text-align:center;margin:30px 0;">
-          <a href="${APP_URL}/dashboard" style="background:#1e3a5f;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;">Activate Lead Scoring</a>
+          <a href="${APP_URL}/billing" style="background:#ef4444;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Update Payment Method →</a>
         </div>
-      `),
-    }
+        <p style="font-size:14px;color:#6b7280;">If you believe this is an error, please contact us at support@realtordesk.ai.</p>`
+      ),
+    },
+    winback: {
+      subject: "We Miss You — Come Back to RealtorDesk AI 🏡",
+      html: buildEmail(
+        "We Miss You! 🏡",
+        `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">It's been a while since you've logged into RealtorDesk AI. Here's what's new:</p>
+        <ul style="font-size:16px;color:#374151;line-height:2;">
+          <li>🆕 Enhanced AI lead scoring</li>
+          <li>🆕 CREA DDF® integration improvements</li>
+          <li>🆕 Faster chatbot response times</li>
+        </ul>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">Your data is still safe and waiting for you.</p>
+        <div style="text-align:center;margin:30px 0;">
+          <a href="${APP_URL}/dashboard" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Log Back In →</a>
+        </div>`
+      ),
+    },
   };
-  
+
   return templates[eventType] || null;
 }
 
 function buildEmail(heading: string, content: string): string {
-  return `
-    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #f2f4f8; background-color: #f2f4f8;">
-      <div style="background-color: #ffffff; padding: 40px; border-radius: 8px;">
-        <h2 style="color: #1e3a5f; border-bottom: 2px solid #8aabcc; padding-bottom: 10px;">${heading}</h2>
-        <div style="color: #333; line-height: 1.6; font-size: 16px;">
-          ${content}
-        </div>
-        <p style="margin-top: 40px; color: #666; font-size: 14px;">
-          — The RealtorDesk AI team<br>
-          <a href="${APP_URL}" style="color: #1e3a5f;">realtordesk.ai</a>
-        </p>
-      </div>
-      <div style="text-align: center; margin-top: 20px; color: #999; font-size: 12px;">
-        Built for Canadian Real Estate Agents | PIPEDA Compliant
-      </div>
-    </div>
-  `;
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:40px 20px;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;">
+<tr><td style="background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:30px;text-align:center;">
+<h1 style="color:#ffffff;font-size:24px;margin:0;">${heading}</h1>
+</td></tr>
+<tr><td style="padding:30px;">
+${content}
+<p style="font-size:14px;color:#6b7280;margin-top:30px;">— The RealtorDesk AI Team 🇨🇦</p>
+</td></tr>
+<tr><td style="background:#f9fafb;padding:20px 30px;text-align:center;">
+<p style="font-size:12px;color:#9ca3af;margin:0;">RealtorDesk AI — Built for Canadian Real Estate Agents</p>
+</td></tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
 }
 
 const handler = async (req: Request): Promise<Response> => {
-  if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
 
   try {
-    const supabaseAdmin = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-    );
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+    const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+
+    if (!resendApiKey) {
+      return new Response(JSON.stringify({ error: "Email service not configured" }), {
+        status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+
+    // This function is invoked by other edge functions (e.g. stripe-webhook-email)
+    // using the service role — no per-user auth required here.
 
     const body = await req.json();
     const { eventType, userId, recipientEmail, data: templateData } = body;
 
-    const template = getTemplate(eventType, templateData);
-    if (!template) {
-      return new Response(JSON.stringify({ error: "Template not found" }), { status: 404 });
+    if (!eventType || !userId || !recipientEmail) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields: eventType, userId, recipientEmail" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
 
-    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    const validEvents = ["onboarding_step1", "trial_ending", "payment_success", "payment_failed", "winback"];
+    if (!validEvents.includes(eventType)) {
+      return new Response(
+        JSON.stringify({ error: `Invalid eventType. Must be one of: ${validEvents.join(", ")}` }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Check for duplicate
+    const { data: existing } = await supabaseAdmin
+      .from("email_events")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("event_type", eventType)
+      .gte("sent_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+      .limit(1);
+
+    if (existing && existing.length > 0) {
+      return new Response(
+        JSON.stringify({ success: true, message: `${eventType} email already sent recently` }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Get profile name for template
+    const { data: profile } = await supabaseAdmin
+      .from("profiles")
+      .select("full_name")
+      .eq("id", userId)
+      .single();
+
+    const mergedData = { name: profile?.full_name || "there", ...templateData };
+    const template = getTemplate(eventType, mergedData);
+
+    if (!template) {
+      return new Response(JSON.stringify({ error: "Template not found" }), {
+        status: 404, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // Send via Resend
     const emailRes = await fetch(RESEND_API_URL, {
       method: "POST",
-      headers: { "Authorization": \`Bearer \${resendApiKey}\`, "Content-Type": "application/json" },
+      headers: {
+        "Authorization": `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         from: FROM_EMAIL,
         to: [recipientEmail],
@@ -141,9 +214,31 @@ const handler = async (req: Request): Promise<Response> => {
       }),
     });
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
+    if (!emailRes.ok) {
+      const errBody = await emailRes.text();
+      console.error("Resend API error:", errBody);
+      return new Response(JSON.stringify({ error: "Failed to send email" }), {
+        status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // Log event
+    await supabaseAdmin.from("email_events").insert({
+      user_id: userId,
+      event_type: eventType,
+      recipient_email: recipientEmail,
+      metadata: { template_data: templateData, resend_response: await emailRes.json() },
+    });
+
+    return new Response(
+      JSON.stringify({ success: true, message: `${eventType} email sent` }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+    );
   } catch (error) {
-    return new Response(JSON.stringify({ error: "An error occurred" }), { status: 500 });
+    console.error("Error in send-lifecycle-email:", error instanceof Error ? error.message : String(error));
+    return new Response(JSON.stringify({ error: "An error occurred" }), {
+      status: 500, headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
   }
 };
 

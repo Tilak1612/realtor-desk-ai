@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/vs-lofty", "destination": "/lofty-alternative", "permanent": true },
+    { "source": "/lofty", "destination": "/lofty-alternative", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
