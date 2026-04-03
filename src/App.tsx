@@ -48,6 +48,7 @@ import OpenHouseDigitalSignIn from "./pages/blog/OpenHouseDigitalSignIn";
 import DripCampaignTemplates from "./pages/blog/DripCampaignTemplates";
 import RealEstateCRMBuyingGuide from "./pages/blog/RealEstateCRMBuyingGuide";
 import LeadMagnetFollowUp from "./pages/LeadMagnetFollowUp";
+import LionDeskAlternative from "./pages/blog/LionDeskAlternative";
 import Integrations from "./pages/Integrations";
 import PIPEDACompliancePage from "./pages/PIPEDACompliancePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -65,6 +66,9 @@ import SwitchFromBoldTrail from "./pages/SwitchFromBoldTrail";
 import SwitchFromLofty from "./pages/SwitchFromLofty";
 import SwitchFromIxact from "./pages/SwitchFromIxact";
 import SwitchFromWiseAgent from "./pages/SwitchFromWiseAgent";
+import SwitchFromLionDesk from "./pages/SwitchFromLionDesk";
+import SwitchFromFollowUpBoss from "./pages/SwitchFromFollowUpBoss";
+import FintracCompliance from "./pages/FintracCompliance";
 import LoftyAlternative from "./pages/LoftyAlternative";
 import Unsubscribe from "./pages/Unsubscribe";
 import NotFound from "./pages/NotFound";
@@ -228,6 +232,7 @@ const App = () => (
           <Route path="/blog/open-house-digital-sign-in-sheets-vs-paper-2025" element={<OpenHouseDigitalSignIn />} />
           <Route path="/blog/real-estate-drip-campaign-templates-canada-2025" element={<DripCampaignTemplates />} />
           <Route path="/blog/real-estate-crm-buying-guide" element={<RealEstateCRMBuyingGuide />} />
+          <Route path="/blog/best-liondesk-alternative-canadian-realtors" element={<LionDeskAlternative />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/careers" element={<Careers />} />
@@ -279,6 +284,9 @@ const App = () => (
           <Route path="/switch-from-lofty" element={<SwitchFromLofty />} />
           <Route path="/switch-from-ixact" element={<SwitchFromIxact />} />
           <Route path="/switch-from-wise-agent" element={<SwitchFromWiseAgent />} />
+          <Route path="/switch-from-liondesk" element={<SwitchFromLionDesk />} />
+          <Route path="/switch-from-follow-up-boss" element={<SwitchFromFollowUpBoss />} />
+          <Route path="/fintrac-compliance" element={<FintracCompliance />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

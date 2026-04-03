@@ -9,18 +9,18 @@ const AuraFeatureGrid = () => {
   const features = [
     {
       icon: Shield,
-      title: t('indexPage.credibility.soc2Title', 'SOC 2 Type II'),
-      description: t('indexPage.credibility.soc2Desc', 'Enterprise-grade security for your data'),
+      title: 'Security-First Architecture',
+      description: 'Enterprise-grade encryption and security practices protecting your client data',
     },
     {
       icon: CheckCircle,
-      title: t('indexPage.credibility.pipedaTitle', 'PIPEDA Compliant'),
-      description: t('indexPage.credibility.pipedaDesc', 'Full Canadian privacy law compliance'),
+      title: 'PIPEDA-Aware Design',
+      description: 'Built with Canadian privacy principles — consent management, right to erasure, breach notifications',
     },
     {
       icon: FileText,
-      title: t('indexPage.credibility.creaTitle', 'CREA DDF® Partner'),
-      description: t('indexPage.credibility.creaDesc', 'Official integration with Canadian MLS'),
+      title: 'Canadian MLS Integration',
+      description: 'Import and sync Canadian property data directly into your CRM',
     },
     {
       icon: Globe,
@@ -29,8 +29,8 @@ const AuraFeatureGrid = () => {
     },
     {
       icon: MapPin,
-      title: t('canadian.dataResidency', 'Canadian Data'),
-      description: t('canadian.dataResidencyDesc', 'Your data stays in Canada'),
+      title: 'Canadian-Optimized Infrastructure',
+      description: 'Hosted on infrastructure designed to keep your data within Canadian borders',
     },
     {
       icon: Brain,

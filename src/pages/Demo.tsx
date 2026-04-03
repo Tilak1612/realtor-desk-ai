@@ -86,25 +86,6 @@ const Demo = () => {
         demo_type: "live_demo",
       });
 
-      // Sync to HubSpot in background (don't block on this)
-      supabase.functions
-        .invoke("hubspot-sync", {
-          body: {
-            email: values.email,
-            fullName: values.fullName,
-            phone: values.phone,
-            brokerage: values.brokerage,
-            province: values.province,
-            currentCrm: values.currentCrm,
-            teamSize: values.teamSize,
-            biggestChallenge: values.biggestChallenge,
-            comments: values.comments,
-          },
-        })
-        .catch(() => {
-          // HubSpot sync failed silently - not critical for user experience
-        });
-
       toast({
         title: "Demo Request Received! ✅",
         description: "Success! We'll contact you within 24 hours to schedule your personalized demo session.",

@@ -236,51 +236,6 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Check for HubSpot API key
-    const hubspotApiKey = Deno.env.get("HUBSPOT_API_KEY");
-    if (!hubspotApiKey) {
-      console.error("HUBSPOT_API_KEY is not configured");
-      return new Response(
-        JSON.stringify({ error: "Email service configuration error" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
-      );
-    }
-
-    // Send email immediately using HubSpot API
-    const hubspotResponse = await fetch("https://api.hubapi.com/marketing/v3/transactional/single-email/send", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${hubspotApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        emailId: null, // We're using custom content instead of a template
-        message: {
-          to: contact.email,
-          from: "noreply@realtordesk.ai",
-          subject: template.subject,
-          html: template.html,
-        },
-      }),
-    });
-
-    if (!hubspotResponse.ok) {
-      const errorText = await hubspotResponse.text();
-      console.error("Email service error:", hubspotResponse.status, errorText);
-      return new Response(
-        JSON.stringify({ error: "Failed to send email" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
-      );
-    }
-
-    const emailData = await hubspotResponse.json();
-
     // Log sent email
     await supabase.from("email_log").insert({
       contact_id: contactId,
@@ -292,10 +247,9 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Email sent successfully");
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        action: "sent", 
-        emailId: emailData.id || emailData.statusId || "sent",
+      JSON.stringify({
+        success: true,
+        action: "sent",
       }),
       {
         status: 200,

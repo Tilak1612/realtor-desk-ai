@@ -59,11 +59,15 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
       // Update user analytics
       const { data: { user } } = await supabase.auth.getUser();
       if (user && formData.commission) {
-        const { data: analytics } = await supabase
+        const { data: analytics, error: analyticsError } = await supabase
           .from("user_analytics")
           .select("ytd_revenue")
           .eq("user_id", user.id)
           .single();
+
+        if (analyticsError && analyticsError.code !== "PGRST116") {
+          console.error("Failed to fetch analytics:", analyticsError.message);
+        }
 
         const currentRevenue = analytics?.ytd_revenue || 0;
         const newRevenue = currentRevenue + parseFloat(formData.commission);

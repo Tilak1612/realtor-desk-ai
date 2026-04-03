@@ -113,7 +113,7 @@ export const homepageFAQSchema = {
       "name": "Is RealtorDesk AI PIPEDA compliant?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, RealtorDesk AI is fully PIPEDA compliant with Canadian data residency, encryption at rest and in transit, and automated compliance logging. All data is hosted in Canada."
+        "text": "RealtorDesk AI is designed with PIPEDA principles — encryption at rest and in transit, consent management, automated compliance logging, and Canadian-optimized infrastructure. We follow PIPEDA's 10 fair information principles in our data practices."
       }
     },
     {
@@ -121,7 +121,7 @@ export const homepageFAQSchema = {
       "name": "Does RealtorDesk AI integrate with CREA DDF®?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, RealtorDesk AI has native CREA DDF® integration, allowing you to sync MLS listings, match buyers to properties, and manage listing data in real-time directly within the CRM."
+        "text": "RealtorDesk AI integrates with Canadian MLS property data, allowing you to import listings, match buyers to properties, and manage listing information directly within the CRM."
       }
     },
     {
@@ -145,7 +145,7 @@ export const homepageFAQSchema = {
       "name": "What AI features does RealtorDesk AI include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "RealtorDesk AI includes a 24/7 AI chatbot, AI voice agent, predictive lead scoring, automated follow-ups, smart email/SMS sequences, WhatsApp integration, and custom AI training for your specific needs."
+        "text": "RealtorDesk AI includes a 24/7 AI chatbot, predictive lead scoring, automated follow-ups, smart email/SMS sequences, and custom AI training for your specific needs. AI voice agent and WhatsApp integration are coming soon."
       }
     }
   ]

@@ -55,21 +55,6 @@ const Contact = () => {
 
       if (error) throw error;
 
-      // Sync to HubSpot in background (don't block on this)
-      supabase.functions
-        .invoke("hubspot-sync", {
-          body: {
-            email: validatedData.email,
-            fullName: validatedData.name,
-            phone: validatedData.phone || "",
-            province: "", // Not collected in contact form
-            comments: validatedData.message,
-          },
-        })
-        .catch(() => {
-          // HubSpot sync failed silently - not critical for user experience
-        });
-
       toast({
         title: "Message Sent Successfully! ✅",
         description: "Thank you for contacting us! We'll respond to your inquiry within 24 hours.",

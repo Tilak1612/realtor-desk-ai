@@ -57,18 +57,18 @@ const Hero = () => {
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-300 max-w-3xl mx-auto">
-            Instant follow-ups, CREA DDF integration, and complete PIPEDA compliance
+            Instant follow-ups, Canadian MLS data integration, and PIPEDA-aware data handling
           </p>
 
           {/* Trust Signals Line */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 animate-fade-in-up animation-delay-350">
             <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="w-4 h-4 text-primary" />
-              Avg. response time: 47 seconds
+              AI responds to leads instantly, 24/7
             </span>
             <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="w-4 h-4 text-primary" />
-              CREA DDF® integrated
+              Canadian MLS data integration
             </span>
             <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="w-4 h-4 text-primary" />

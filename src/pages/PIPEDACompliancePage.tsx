@@ -17,7 +17,7 @@ const PIPEDACompliance = () => {
         "name": "Is RealtorDesk AI PIPEDA compliant?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, RealtorDesk AI is fully PIPEDA compliant. All client data is stored in Canadian data centers, encrypted at rest and in transit, and processed according to PIPEDA's 10 fair information principles."
+          "text": "RealtorDesk AI is designed with PIPEDA's 10 fair information principles in mind. All client data is encrypted at rest and in transit, hosted on Canadian-optimized infrastructure, and processed with consent-first workflows."
         }
       },
       {
@@ -25,7 +25,7 @@ const PIPEDACompliance = () => {
         "name": "Where is my data stored?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "All RealtorDesk AI data is stored exclusively in Canadian data centers (Toronto and Montreal) to ensure compliance with PIPEDA's data residency requirements and protect Canadian real estate client information."
+          "text": "RealtorDesk AI data is hosted on Canadian-optimized infrastructure to support PIPEDA data residency best practices and protect Canadian real estate client information."
         }
       },
       {
@@ -64,14 +64,14 @@ const PIPEDACompliance = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">
               <Shield className="w-4 h-4 mr-2" />
-              PIPEDA Certified
+              PIPEDA-Aware Design
             </Badge>
             <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
-              <span className="gradient-text">PIPEDA Compliant</span><br />
-              CRM for Canadian Agents
+              <span className="gradient-text">Built with PIPEDA</span><br />
+              Principles for Canadian Agents
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              RealtorDesk AI meets all PIPEDA requirements with Canadian data residency, encryption, consent management, and automated compliance logging—so you can focus on clients, not compliance headaches.
+              RealtorDesk AI is designed with PIPEDA principles at its core — encryption, consent management, automated compliance logging, and Canadian-optimized infrastructure — so you can focus on clients, not compliance headaches.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
@@ -169,7 +169,7 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">1. Canadian Data Residency</h3>
                     <p className="text-muted-foreground mb-3">
-                      All client data is stored exclusively in Canadian data centers (Toronto and Montreal) using Supabase's Canadian infrastructure. No data crosses borders to the US or other jurisdictions.
+                      Client data is hosted on Canadian-optimized infrastructure. We are working to ensure data remains within Canadian borders as our infrastructure scales.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
@@ -410,14 +410,14 @@ const PIPEDACompliance = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Is RealtorDesk AI PIPEDA compliant?</h3>
                 <p className="text-muted-foreground">
-                  Yes, RealtorDesk AI is fully PIPEDA compliant. All client data is stored in Canadian data centers, encrypted at rest and in transit, and processed according to PIPEDA's 10 fair information principles.
+                  RealtorDesk AI is designed with PIPEDA's 10 fair information principles in mind. All client data is encrypted at rest and in transit, hosted on Canadian-optimized infrastructure, and processed with consent-first workflows.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Where is my data stored?</h3>
                 <p className="text-muted-foreground">
-                  All RealtorDesk AI data is stored exclusively in Canadian data centers (Toronto and Montreal) to ensure compliance with PIPEDA's data residency requirements and protect Canadian real estate client information.
+                  RealtorDesk AI data is hosted on Canadian-optimized infrastructure to support PIPEDA data residency best practices and protect Canadian real estate client information.
                 </p>
               </Card>
 

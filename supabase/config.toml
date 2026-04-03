@@ -1,8 +1,5 @@
 project_id = "pseqajrtcgiphfnworii"
 
-[functions.hubspot-sync]
-verify_jwt = false
-
 [functions.send-welcome-email]
 verify_jwt = true
 

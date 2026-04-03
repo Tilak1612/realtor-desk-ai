@@ -7,12 +7,12 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Valid price IDs whitelist — sourced from SubscriptionContext.tsx SUBSCRIPTION_PRODUCTS
+// Valid price IDs whitelist - keep in sync with SubscriptionContext.tsx
 const VALID_PRICE_IDS: Set<string> = new Set([
-  "price_1SXpyiS23MQcIdnrAphs809v", // Agent monthly
-  "price_1SXpzKS23MQcIdnrfH2rHhow", // Agent yearly
-  "price_1SXpz0S23MQcIdnrrD0UGqa5", // Team monthly
-  "price_1SXpzZS23MQcIdnrVVyUShLT", // Team yearly
+  "price_1SXpyiS23MQcIdnrAphs809v", // Agent - Monthly
+  "price_1SXpzKS23MQcIdnrfH2rHhow", // Agent - Yearly
+  "price_1SXpz0S23MQcIdnrrD0UGqa5", // Team - Monthly
+  "price_1SXpzZS23MQcIdnrVVyUShLT", // Team - Yearly
 ]);
 
 // Validate price ID format (Stripe price IDs start with "price_")

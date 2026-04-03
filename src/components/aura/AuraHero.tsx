@@ -49,18 +49,18 @@ const AuraHero = () => {
 
               {/* Subtitle */}
               <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-lg font-light">
-                Instant follow-ups, CREA DDF integration, and complete PIPEDA compliance
+                Instant follow-ups, Canadian MLS data integration, and PIPEDA-aware data handling
               </p>
 
               {/* Trust Signals Line */}
               <div className="flex flex-wrap gap-4 mb-10 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Avg. response time: 47 seconds
+                  AI responds to leads instantly, 24/7
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  CREA DDF® integrated
+                  Canadian MLS data integration
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />

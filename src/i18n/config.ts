@@ -275,7 +275,7 @@ const resources = {
         },
         q3: {
           question: "Can I trust the platform with my client data?",
-          answer: "Absolutely. We use bank-level encryption (AES-256), store data exclusively in Canadian data centers (Toronto/Vancouver), and follow SOC 2 Type II controls. We're PIPEDA-ready with full right-to-erasure and breach notification protocols."
+          answer: "Absolutely. We use bank-level encryption (AES-256), host data on Canadian-optimized infrastructure, and are designed with PIPEDA principles — including right-to-erasure and breach notification protocols."
         },
         q4: {
           question: "What if the platform doesn't work as described?",
@@ -287,7 +287,7 @@ const resources = {
         },
         q6: {
           question: "What certifications do you actually have?",
-          answer: "We're built on SOC 2 Type II compliant infrastructure and follow PIPEDA requirements. Our CREA DDF® integration is compatible with official data feeds. As we exit beta, we'll complete formal third-party audits and display certification badges."
+          answer: "We are built on enterprise-grade infrastructure with strong security practices, designed with PIPEDA principles, and use Canadian MLS data integration. As we grow, we plan to pursue formal third-party security certifications and display them proudly."
         },
         q7: {
           question: "Does the AI sound robotic?",
@@ -527,14 +527,14 @@ const resources = {
           title: "Enterprise-Grade Security & Developer Tools",
           subtitle: "Built for scale, secured for compliance, ready for integration",
           securityTitle: "Security & Compliance",
-          sec1: "SOC 2 Type II Certified:",
-          sec1Desc: "Annual audits, penetration testing, 99.9% uptime SLA",
-          sec2: "PIPEDA Compliant:",
+          sec1: "Security-First Architecture:",
+          sec1Desc: "Enterprise-grade encryption, regular security reviews, high-availability infrastructure",
+          sec2: "PIPEDA-Aware Design:",
           sec2Desc: "Right to access, delete, data portability. Breach notification <72hrs",
-          sec3: "CASL Compliant:",
+          sec3: "CASL-Aware:",
           sec3Desc: "Express consent tracking, auto-unsubscribe, 24-month proof retention",
-          sec4: "Canadian Data Centers:",
-          sec4Desc: "All data stored in Toronto/Vancouver. No cross-border transfer",
+          sec4: "Canadian-Optimized Infrastructure:",
+          sec4Desc: "Hosted on infrastructure optimized for Canadian data residency requirements",
           sec5: "Encryption:",
           sec5Desc: "TLS 1.3 in transit, AES-256 at rest, end-to-end for sensitive docs",
           sec6: "Access Control:",
@@ -1568,7 +1568,7 @@ const resources = {
         },
         q3: {
           question: "Puis-je faire confiance à la plateforme avec les données de mes clients?",
-          answer: "Absolument. Nous utilisons un chiffrement de niveau bancaire (AES-256), stockons les données exclusivement dans des centres de données canadiens (Toronto/Vancouver), et suivons les contrôles SOC 2 Type II. Nous sommes conformes à la LPRPDE avec droit complet à l'effacement et protocoles de notification de violation."
+          answer: "Absolument. Nous utilisons un chiffrement de niveau bancaire (AES-256), hébergeons les données sur une infrastructure optimisée pour le Canada, et sommes conçus selon les principes de la LPRPDE — y compris le droit à l'effacement et les protocoles de notification de violation."
         },
         q4: {
           question: "Que se passe-t-il si la plateforme ne fonctionne pas comme décrit?",
@@ -1820,14 +1820,14 @@ const resources = {
           title: "Sécurité de Niveau Entreprise et Outils pour Développeurs",
           subtitle: "Construit pour l'échelle, sécurisé pour la conformité, prêt pour l'intégration",
           securityTitle: "Sécurité et Conformité",
-          sec1: "Certifié SOC 2 Type II:",
-          sec1Desc: "Audits annuels, tests de pénétration, SLA de disponibilité de 99,9%",
-          sec2: "Conforme PIPEDA:",
+          sec1: "Architecture Axée sur la Sécurité:",
+          sec1Desc: "Chiffrement de niveau entreprise, révisions de sécurité régulières, infrastructure haute disponibilité",
+          sec2: "Conception LPRPDE-Consciente:",
           sec2Desc: "Droit d'accès, de suppression, portabilité des données. Notification de violation <72h",
-          sec3: "Conforme LCAP:",
+          sec3: "Conscient de la LCAP:",
           sec3Desc: "Suivi du consentement exprès, désinscription automatique, preuve conservée 24 mois",
-          sec4: "Centres de Données Canadiens:",
-          sec4Desc: "Toutes les données stockées à Toronto/Vancouver. Aucun transfert transfrontalier",
+          sec4: "Infrastructure Optimisée pour le Canada:",
+          sec4Desc: "Hébergé sur une infrastructure optimisée pour les exigences canadiennes de résidence des données",
           sec5: "Chiffrement:",
           sec5Desc: "TLS 1.3 en transit, AES-256 au repos, de bout en bout pour les documents sensibles",
           sec6: "Contrôle d'Accès:",

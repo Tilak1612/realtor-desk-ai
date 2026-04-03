@@ -323,7 +323,7 @@ const Index = () => {
           <h3 className="text-xl font-medium text-white mb-6">{t('indexPage.security.performanceTitle')}</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <div className="text-3xl font-bold text-primary mb-1">99.9%</div>
+              <div className="text-3xl font-bold text-primary mb-1">99%+</div>
               <div className="text-sm text-muted-foreground">{t('indexPage.security.perf1')}</div>
             </div>
             <div>

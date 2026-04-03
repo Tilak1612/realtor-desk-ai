@@ -66,7 +66,7 @@ const PrivacyPolicy = () => {
                 <li><strong>Monitoring:</strong> 24/7 security monitoring and automated threat detection</li>
                 <li><strong>Audits:</strong> Regular security audits and penetration testing</li>
                 <li><strong>Backups:</strong> Daily encrypted backups with 30-day retention</li>
-                <li><strong>Compliance:</strong> SOC 2 Type II certified, PIPEDA compliant</li>
+                <li><strong>Compliance:</strong> Security-first architecture with enterprise-grade encryption, designed with PIPEDA principles</li>
               </ul>
               <p className="mb-4">
                 <strong>Data Retention:</strong> We retain your personal information only as long as necessary 

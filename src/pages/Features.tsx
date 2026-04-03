@@ -17,8 +17,8 @@ const Features = () => {
       features: [
         {
           title: "Multi-Dimensional Lead Scoring",
-          description: "AI analyzes 50+ data points including property searches, email engagement, social signals, mortgage pre-approval status, and life events",
-          benefit: "Increase conversion from 5% to 18%",
+          description: "AI analyzes engagement signals including property searches, email opens, social activity, mortgage indicators, and life events to rank your leads",
+          benefit: "Focus on your hottest leads and close more deals",
         },
         {
           title: "Conversational Intelligence",
@@ -28,7 +28,7 @@ const Features = () => {
         {
           title: "Automated Data Enrichment",
           description: "Autonomous contact profile building from public records, social media, and behavior tracking",
-          benefit: "90% reduction in manual data entry",
+          benefit: "Dramatically reduce manual data entry with automated profile building",
         },
       ],
     },
@@ -40,7 +40,7 @@ const Features = () => {
         {
           title: "24/7 Multilingual Engagement",
           description: "Intelligent conversations in English and French, handles property inquiries, qualifies leads, schedules showings",
-          benefit: "250% increase in after-hours lead capture",
+          benefit: "Maximize after-hours lead capture with AI that never sleeps",
         },
         {
           title: "Smart Qualification System",
@@ -60,9 +60,9 @@ const Features = () => {
       icon: TrendingUp,
       features: [
         {
-          title: "Predictive Property Valuation",
-          description: "95% accurate valuations using 300+ property data points and local market trends",
-          benefit: "CMAs in 3 minutes vs. 3 hours",
+          title: "AI-Powered Property Insights (Coming Soon)",
+          description: "AI-assisted property analysis using local market trends, comparable sales, and neighbourhood data to support your CMA process",
+          benefit: "Faster, data-backed CMAs for your clients",
         },
         {
           title: "Off-Market Opportunity Detection",
@@ -84,7 +84,7 @@ const Features = () => {
         {
           title: "Intelligent Timeline Prediction",
           description: "AI forecasts closing dates based on transaction type, parties involved, and historical performance",
-          benefit: "Reduce closing time from 60 to 35 days",
+          benefit: "Designed to accelerate your closing timeline with fewer missed steps",
         },
         {
           title: "Automated Vendor Coordination",

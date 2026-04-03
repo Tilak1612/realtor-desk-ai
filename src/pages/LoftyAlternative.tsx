@@ -41,7 +41,7 @@ const LoftyAlternative = () => {
         "name": "Does RealtorDesk AI have the same features as Lofty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus AI voice agent, CREA DDF® integration, PIPEDA compliance, and bilingual support that Lofty doesn't offer."
+          "text": "Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus Canadian MLS data integration, PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon) that Lofty doesn't offer."
         }
       }
     ]
@@ -221,7 +221,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">AI Voice Agent (Inbound/Outbound)</td>
-                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500">Included</Badge></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-600 border-yellow-500">Coming Soon</Badge></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -254,7 +254,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">WhatsApp Integration</td>
-                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-600 border-yellow-500">Coming Soon</Badge></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -309,9 +309,9 @@ const LoftyAlternative = () => {
               </Card>
               <Card className="p-6">
                 <MessageSquare className="w-10 h-10 mb-4 text-primary" />
-                <h3 className="text-xl font-bold mb-2">AI Voice Agent Included</h3>
+                <h3 className="text-xl font-bold mb-2">AI Voice Agent (Coming Soon)</h3>
                 <p className="text-muted-foreground">
-                  Unlike Lofty, our AI voice agent is included at no extra cost. Handle inbound calls, make outbound follow-ups, and qualify leads 24/7 automatically.
+                  AI voice calling for inbound and outbound lead qualification is on our roadmap. Already included in your plan at no extra cost when it launches.
                 </p>
               </Card>
               <Card className="p-6">
@@ -353,7 +353,7 @@ const LoftyAlternative = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Does RealtorDesk AI have the same features as Lofty?</h3>
                 <p className="text-muted-foreground">
-                  Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus AI voice agent, CREA DDF® integration, PIPEDA compliance, and bilingual support that Lofty doesn't offer.
+                  Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus Canadian MLS data integration, PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon) that Lofty doesn't offer.
                 </p>
               </Card>
               <Card className="p-6">

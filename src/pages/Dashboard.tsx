@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -77,9 +77,9 @@ const Dashboard = () => {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [navigate, fetchDashboardData]);
 
-  const fetchDashboardData = async (userId: string) => {
+  const fetchDashboardData = useCallback(async (userId: string) => {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
     const yearStart = new Date(now.getFullYear(), 0, 1).toISOString();
@@ -155,7 +155,7 @@ const Dashboard = () => {
       setHotLeads(leadsData.map(lead => ({
         ...lead,
         name: `${lead.first_name || ""} ${lead.last_name || ""}`.trim() || "Unknown",
-        insight: (lead.metadata as any)?.insight || "New lead",
+        insight: (lead.metadata as Record<string, unknown>)?.insight as string || "New lead",
       })));
     }
 
@@ -193,7 +193,7 @@ const Dashboard = () => {
 
       setDealStats(stats);
     }
-  };
+  }, []);
 
   const handleTaskComplete = (taskId: string) => {
     setTodayTasks(tasks => tasks.filter(t => t.id !== taskId));

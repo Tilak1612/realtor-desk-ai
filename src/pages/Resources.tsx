@@ -170,6 +170,16 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: Database,
+      title: "Best LionDesk Alternative for Canadian Realtors in 2026 — LionDesk is Shutting Down",
+      excerpt: "LionDesk is being discontinued in September 2025. Here are the top LionDesk alternatives for Canadian agents — with honest pros, cons, and pricing compared.",
+      readTime: 10,
+      image: blogBestCRM2025,
+      link: "/blog/best-liondesk-alternative-canadian-realtors",
+      useTranslation: false,
+    },
+    {
+      categoryKey: "resourcesPage.categories.aiTech",
+      icon: Database,
       title: "Best IXACT Contact Alternatives for Canadian Realtors in 2025",
       excerpt: "IXACT Contact alternatives comparison. See top CRMs for Canadian real estate with better AI, pricing, and features than IXACT.",
       readTime: 15,

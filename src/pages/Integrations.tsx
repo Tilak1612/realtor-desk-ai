@@ -35,8 +35,7 @@ const Integrations = () => {
       titleKey: "integrationsPage.categories.crmPlatforms",
       icon: <Users className="w-5 h-5" />,
       integrations: [
-        { name: "HubSpot", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/hubspot.svg" },
-        { name: "Salesforce", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" },
+{ name: "Salesforce", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" },
         { name: "Zoho CRM", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/zoho-1.svg" },
         { name: "Pipedrive", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/pipedrive-1.svg" },
         { name: "Freshsales", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/freshworks-icon.svg" },
@@ -62,7 +61,7 @@ const Integrations = () => {
       icon: <MessageSquare className="w-5 h-5" />,
       integrations: [
         { name: "Twilio", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/twilio-2.svg" },
-        { name: "WhatsApp Cloud API", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/whatsapp-2.svg" },
+        { name: "WhatsApp Cloud API", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/whatsapp-2.svg" },
         { name: "Email SMTP Providers", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/email-icon.svg" },
       ]
     },
@@ -82,6 +81,7 @@ const Integrations = () => {
         { name: "Microsoft Contacts", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-icon.svg" },
         { name: "LinkedIn Lead Gen Forms", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg" },
         { name: "Facebook Lead Ads", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/facebook-icon.svg" },
+        { name: "Centris (Quebec MLS)", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/canada-flag-icon.svg" },
       ]
     },
   ];
@@ -90,6 +90,7 @@ const Integrations = () => {
 
   const getSubtitle = (key: string) => {
     if (key === 'native') return t('integrations.hero.subtitle').includes('seamlessly') ? 'Native integration' : 'Intégration native';
+    if (key === 'comingSoon') return 'Coming Soon';
     return 'Via Zapier/Make';
   };
 

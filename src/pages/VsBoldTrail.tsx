@@ -141,9 +141,9 @@ const VsBoldTrail = () => {
 
             <Card className="p-6 border-accent/20">
               <Check className="w-8 h-8 text-accent mb-3" />
-              <h3 className="font-bold mb-2">99.9% Uptime Guarantee</h3>
+              <h3 className="font-bold mb-2">Enterprise-Grade Reliability</h3>
               <p className="text-sm text-muted-foreground">
-                Enterprise-grade infrastructure. Your CRM works when you need it. No embarrassing crashes.
+                Built on enterprise infrastructure. Your CRM works when you need it. No embarrassing crashes.
               </p>
             </Card>
 
@@ -205,7 +205,7 @@ const VsBoldTrail = () => {
                   { feature: "Canadian Market Intelligence", rdai: true, boldtrail: false },
                   { feature: "Bilingual Support (EN/FR)", rdai: true, boldtrail: false },
                   { feature: "Support Response Time", rdai: "30 min", boldtrail: "3-5 days" },
-                  { feature: "Uptime Guarantee", rdai: "99.9%", boldtrail: "No SLA" },
+                  { feature: "Reliability", rdai: "Enterprise-grade", boldtrail: "No published SLA" },
                   { feature: "CREA DDF® Integration", rdai: true, boldtrail: true },
                   { feature: "Email Automation", rdai: true, boldtrail: true },
                   { feature: "Mobile App", rdai: true, boldtrail: true },
