@@ -11,8 +11,8 @@
       "Bash(bun run typecheck)",
       "Bash(bun run test)",
       "Bash(bun run build)",
-      "Bash(npx supabase gen types typescript*)",
-      "Bash(npx supabase db diff*)",
+      "Bash(bunx supabase gen types typescript*)",
+      "Bash(bunx supabase db diff*)",
       "Bash(git status)",
       "Bash(git diff*)",
       "Bash(git log*)",
@@ -23,14 +23,14 @@
       "Bash(cat*)",
       "Bash(find*)",
       "Bash(grep*)",
-      "Bash(npx i18next*)"
+      "Bash(bunx i18next*)"
     ],
     "deny": [
       "Bash(git push*)",
       "Bash(git merge*)",
       "Bash(rm -rf*)",
       "Bash(supabase db push*)",
-      "Bash(npx supabase db reset*)",
+      "Bash(bunx supabase db reset*)",
       "Bash(vercel --prod*)",
       "Bash(stripe*)"
     ]
@@ -54,7 +54,7 @@
       "command": "npx",
       "args": ["-y", "@supabase/mcp-server"],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "{GITHUB_TOKEN}"
+        "SUPABASE_ACCESS_TOKEN": "$SUPABASE_ACCESS_TOKEN"
       }
     }
   }
