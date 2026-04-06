@@ -45,8 +45,8 @@
   },
 
   "model": {
-    "default": "claude-sonnet-4-20250514",
-    "// options": "claude-sonnet-4-20250514 | claude-opus-4-20250514"
+    "default": "claude-sonnet-4-6",
+    "// options": "claude-sonnet-4-6 | claude-opus-4-6"
   },
 
   "mcpServers": {
