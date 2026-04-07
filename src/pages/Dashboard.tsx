@@ -42,43 +42,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const { subscribed, trialDaysLeft } = useSubscription();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!session) {
-          navigate("/login");
-          return;
-        }
-
-        setUser(session.user);
-
-        const { data: profileData, error } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", session.user.id)
-          .single();
-
-        if (error) throw error;
-
-        if (!profileData?.onboarding_completed) {
-          navigate("/onboarding");
-          return;
-        }
-
-        setProfile(profileData);
-        await fetchDashboardData(session.user.id);
-      } catch (error: unknown) {
-        toast.error("Failed to load profile");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [navigate, fetchDashboardData]);
-
   const fetchDashboardData = useCallback(async (userId: string) => {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
@@ -194,6 +157,43 @@ const Dashboard = () => {
       setDealStats(stats);
     }
   }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          navigate("/login");
+          return;
+        }
+
+        setUser(session.user);
+
+        const { data: profileData, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", session.user.id)
+          .single();
+
+        if (error) throw error;
+
+        if (!profileData?.onboarding_completed) {
+          navigate("/onboarding");
+          return;
+        }
+
+        setProfile(profileData);
+        await fetchDashboardData(session.user.id);
+      } catch (error: unknown) {
+        toast.error("Failed to load profile");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [navigate, fetchDashboardData]);
 
   const handleTaskComplete = (taskId: string) => {
     setTodayTasks(tasks => tasks.filter(t => t.id !== taskId));
