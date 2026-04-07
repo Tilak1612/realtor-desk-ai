@@ -158,6 +158,43 @@ const Dashboard = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          navigate("/login");
+          return;
+        }
+
+        setUser(session.user);
+
+        const { data: profileData, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", session.user.id)
+          .single();
+
+        if (error) throw error;
+
+        if (!profileData?.onboarding_completed) {
+          navigate("/onboarding");
+          return;
+        }
+
+        setProfile(profileData);
+        await fetchDashboardData(session.user.id);
+      } catch (error: unknown) {
+        toast.error("Failed to load profile");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [navigate, fetchDashboardData]);
+
   const handleTaskComplete = (taskId: string) => {
     setTodayTasks(tasks => tasks.filter(t => t.id !== taskId));
   };
