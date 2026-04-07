@@ -1,6 +1,5 @@
 {
-  "// INFO": "Claude Code settings for RealtorDesk AI — realtor-desk-ai repo",
-
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
       "Read",
@@ -35,23 +34,9 @@
       "Bash(stripe*)"
     ]
   },
-
-  "context": {
-    "files": [
-      "CLAUDE.md",
-      "SKILL.md",
-      "docs/brand-context-pack.md"
-    ]
-  },
-
-  "model": {
-    "default": "claude-sonnet-4-6",
-    "// options": "claude-sonnet-4-6 | claude-opus-4-6"
-  },
-
   "mcpServers": {
     "supabase": {
-      "command": "npx",
+      "command": "bunx",
       "args": ["-y", "@supabase/mcp-server"],
       "env": {
         "SUPABASE_ACCESS_TOKEN": "$SUPABASE_ACCESS_TOKEN"
