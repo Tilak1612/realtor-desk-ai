@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CookieConsent from "@/components/CookieConsent";
 import MobileCTA from "@/components/MobileCTA";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import ChatWidget from "@/components/ChatWidget";
@@ -63,7 +62,6 @@ const Index = () => {
         ]}
       />
       <Navbar />
-      <CookieConsent />
       <ExitIntentPopup />
       <ChatWidget />
       <MobileCTA />

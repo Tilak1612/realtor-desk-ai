@@ -97,6 +97,7 @@ import Automations from "./pages/Automations";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CookieConsent from "./components/CookieConsent";
 
 const queryClient = new QueryClient();
 const siteUrl = "https://www.realtordesk.ai";
@@ -292,6 +293,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
           </Routes>
           </SubscriptionProvider>
+          <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
