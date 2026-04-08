@@ -204,7 +204,7 @@ const Features = () => {
                 {[
                   ["Predictive Lead Scoring", "✓ Advanced AI", "Basic", "Manual", "Basic"],
                   ["24/7 AI Chatbot", "✓ Bilingual", "Add-on", "Limited", "Basic"],
-                  ["CREA DDF® Integration", "✓ Native", "Third-party", "Third-party", "Third-party"],
+                  ["CREA DDF® Integration", "Coming Q3 2026", "Third-party", "Third-party", "Third-party"],
                   ["Transaction AI", "✓ Full automation", "✗", "Manual", "Basic"],
                   ["Canadian Compliance", "✓ Built-in", "Manual", "Manual", "Manual"],
                   ["Marketing Automation", "✓ AI-generated", "Templates", "Templates", "Templates"],

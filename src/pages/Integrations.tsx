@@ -35,11 +35,11 @@ const Integrations = () => {
       titleKey: "integrationsPage.categories.crmPlatforms",
       icon: <Users className="w-5 h-5" />,
       integrations: [
-{ name: "Salesforce", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" },
-        { name: "Zoho CRM", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/zoho-1.svg" },
-        { name: "Pipedrive", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/pipedrive-1.svg" },
-        { name: "Freshsales", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/freshworks-icon.svg" },
-        { name: "Microsoft Dynamics", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-dynamics-2.svg" },
+{ name: "Salesforce", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/salesforce-2.svg" },
+        { name: "Zoho CRM", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/zoho-1.svg" },
+        { name: "Pipedrive", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/pipedrive-1.svg" },
+        { name: "Freshsales", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/freshworks-icon.svg" },
+        { name: "Microsoft Dynamics", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-dynamics-2.svg" },
         { name: "Keap", subtitleKey: "zapier", logo: "https://cdn.worldvectorlogo.com/logos/keap-1.svg" },
         { name: "Agile CRM", subtitleKey: "zapier", logo: "https://cdn.worldvectorlogo.com/logos/agile-crm.svg" },
         { name: "Close CRM", subtitleKey: "zapier", logo: "https://cdn.worldvectorlogo.com/logos/close-io.svg" },
@@ -79,8 +79,8 @@ const Integrations = () => {
       integrations: [
         { name: "Google Contacts", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/google-contacts.svg" },
         { name: "Microsoft Contacts", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-icon.svg" },
-        { name: "LinkedIn Lead Gen Forms", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg" },
-        { name: "Facebook Lead Ads", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/facebook-icon.svg" },
+        { name: "LinkedIn Lead Gen Forms", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg" },
+        { name: "Facebook Lead Ads", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/facebook-icon.svg" },
         { name: "Centris (Quebec MLS)", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/canada-flag-icon.svg" },
       ]
     },

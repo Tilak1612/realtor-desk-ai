@@ -49,7 +49,7 @@ const AuraSolutionSection = () => {
       badgeIcon={<Zap className="w-4 h-4" />}
       title={t('solution.title', 'AI-Powered Tools')}
       titleHighlight={t('solution.titleHighlight', 'Built for Canadian Realtors')}
-      subtitle={t('solution.subtitle', '24/7 automation that speaks English and French, integrates with CREA DDF®, and respects PIPEDA compliance.')}
+      subtitle={t('solution.subtitle', '24/7 automation that speaks English and French, with PIPEDA compliance and CREA DDF® integration coming soon.')}
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {solutions.map((solution, index) => (
