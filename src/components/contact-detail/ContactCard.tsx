@@ -7,6 +7,7 @@ import { Phone, Mail, MessageSquare, Calendar, Plus, X } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import type { Contact } from "@/types/contact";
 
@@ -17,6 +18,7 @@ interface ContactCardProps {
 
 const ContactCard = ({ contact, onUpdate }: ContactCardProps) => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [isAddingTag, setIsAddingTag] = useState(false);
   const [newTag, setNewTag] = useState("");
 
@@ -72,14 +74,14 @@ const ContactCard = ({ contact, onUpdate }: ContactCardProps) => {
             </div>
             <span className="text-sm text-muted-foreground">Lead Score</span>
           </div>
-          <Badge variant="outline" className="mb-4">{contact.source || "Unknown Source"}</Badge>
+          <Badge variant="outline" className="mb-4">{contact.source || t('contact.unknownSource', 'Unknown Source')}</Badge>
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <Button variant="outline" size="sm" asChild><a href={`tel:${contact.phone}`}><Phone className="h-4 w-4 mr-2" />Call</a></Button>
-          <Button variant="outline" size="sm" asChild><a href={`mailto:${contact.email}`}><Mail className="h-4 w-4 mr-2" />Email</a></Button>
-          <Button variant="outline" size="sm"><MessageSquare className="h-4 w-4 mr-2" />Text</Button>
-          <Button variant="outline" size="sm"><Calendar className="h-4 w-4 mr-2" />Schedule</Button>
+          <Button variant="outline" size="sm" asChild><a href={`tel:${contact.phone}`}><Phone className="h-4 w-4 mr-2" />{t('contact.call', 'Call')}</a></Button>
+          <Button variant="outline" size="sm" asChild><a href={`mailto:${contact.email}`}><Mail className="h-4 w-4 mr-2" />{t('contact.email', 'Email')}</a></Button>
+          <Button variant="outline" size="sm"><MessageSquare className="h-4 w-4 mr-2" />{t('contact.text', 'Text')}</Button>
+          <Button variant="outline" size="sm"><Calendar className="h-4 w-4 mr-2" />{t('contact.schedule', 'Schedule')}</Button>
         </div>
 
         <div className="space-y-2">
@@ -92,7 +94,7 @@ const ContactCard = ({ contact, onUpdate }: ContactCardProps) => {
               </Badge>
             ))}
             {!isAddingTag ? (
-              <Button variant="ghost" size="sm" onClick={() => setIsAddingTag(true)} className="h-6"><Plus className="h-3 w-3 mr-1" />Add Tag</Button>
+              <Button variant="ghost" size="sm" onClick={() => setIsAddingTag(true)} className="h-6"><Plus className="h-3 w-3 mr-1" />{t('contact.addTag', 'Add Tag')}</Button>
             ) : (
               <div className="flex gap-2 w-full">
                 <Input placeholder="New tag" value={newTag} onChange={(e) => setNewTag(e.target.value)} onKeyPress={(e) => e.key === "Enter" && handleAddTag()} className="h-8 text-sm" autoFocus />
@@ -105,11 +107,11 @@ const ContactCard = ({ contact, onUpdate }: ContactCardProps) => {
         <div className="space-y-3 text-sm">
           <div>
             <span className="text-muted-foreground">Last contacted:</span>
-            <p className="font-medium">{contact.last_contact_date ? formatDistanceToNow(new Date(contact.last_contact_date), { addSuffix: true }) : "Never"}</p>
+            <p className="font-medium">{contact.last_contact_date ? formatDistanceToNow(new Date(contact.last_contact_date), { addSuffix: true }) : t('contact.never', 'Never')}</p>
           </div>
           <div>
             <span className="text-muted-foreground">Best time to contact:</span>
-            <p className="font-medium">{contact.best_contact_time || "Not set"}</p>
+            <p className="font-medium">{contact.best_contact_time || t('contact.notSet', 'Not set')}</p>
           </div>
         </div>
       </CardContent>

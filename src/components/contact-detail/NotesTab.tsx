@@ -8,12 +8,14 @@ import { Save, Pin, Trash2, Edit } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 import type { ContactNote } from "@/types/contact";
 
 interface NotesTabProps { contactId: string; }
 
 const NotesTab = ({ contactId }: NotesTabProps) => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [notes, setNotes] = useState<ContactNote[]>([]);
   const [loading, setLoading] = useState(true);
   const [newNote, setNewNote] = useState("");
@@ -36,23 +38,23 @@ const NotesTab = ({ contactId }: NotesTabProps) => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return;
     const { error } = await supabase.from("contact_notes").insert({ contact_id: contactId, user_id: session.user.id, content: newNote.trim() });
-    if (!error) { toast({ title: "Note saved" }); setNewNote(""); fetchNotes(); }
+    if (!error) { toast({ title: t('notes.saved', 'Note saved') }); setNewNote(""); fetchNotes(); }
   };
 
   const handleTogglePin = async (noteId: string, isPinned: boolean) => {
     const { error } = await supabase.from("contact_notes").update({ is_pinned: !isPinned }).eq("id", noteId);
-    if (!error) { toast({ title: isPinned ? "Note unpinned" : "Note pinned" }); fetchNotes(); }
+    if (!error) { toast({ title: isPinned ? t('notes.unpinned', 'Note unpinned') : t('notes.pinned', 'Note pinned') }); fetchNotes(); }
   };
 
   const handleDeleteNote = async (noteId: string) => {
     if (!confirm("Are you sure you want to delete this note?")) return;
     const { error } = await supabase.from("contact_notes").delete().eq("id", noteId);
-    if (!error) { toast({ title: "Note deleted" }); fetchNotes(); }
+    if (!error) { toast({ title: t('notes.deleted', 'Note deleted') }); fetchNotes(); }
   };
 
   const handleUpdateNote = async (noteId: string) => {
     const { error } = await supabase.from("contact_notes").update({ content: editContent }).eq("id", noteId);
-    if (!error) { toast({ title: "Note updated" }); setEditingNoteId(null); fetchNotes(); }
+    if (!error) { toast({ title: t('notes.updated', 'Note updated') }); setEditingNoteId(null); fetchNotes(); }
   };
 
   if (loading) return (<Card><CardContent className="p-6 space-y-4"><Skeleton className="h-32" /><Skeleton className="h-24" /><Skeleton className="h-24" /></CardContent></Card>);
@@ -61,12 +63,12 @@ const NotesTab = ({ contactId }: NotesTabProps) => {
     <Card>
       <CardContent className="p-6 space-y-6">
         <div className="space-y-2">
-          <Textarea placeholder="Add a new note..." value={newNote} onChange={(e) => setNewNote(e.target.value)} className="min-h-[120px]" />
-          <Button onClick={handleSaveNote} disabled={!newNote.trim()}><Save className="h-4 w-4 mr-2" />Save Note</Button>
+          <Textarea placeholder={t('notes.placeholder', 'Add a new note...')} value={newNote} onChange={(e) => setNewNote(e.target.value)} className="min-h-[120px]" />
+          <Button onClick={handleSaveNote} disabled={!newNote.trim()}><Save className="h-4 w-4 mr-2" />{t('notes.save', 'Save Note')}</Button>
         </div>
         <div className="space-y-4">
           {notes.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">No notes yet. Add your first note above.</p>
+            <p className="text-center text-muted-foreground py-8">{t('notes.empty', 'No notes yet. Add your first note above.')}</p>
           ) : (
             notes.map((note) => (
               <div key={note.id} className="p-4 rounded-lg border bg-card space-y-3">
@@ -85,8 +87,8 @@ const NotesTab = ({ contactId }: NotesTabProps) => {
                   <div className="flex gap-2">
                     {editingNoteId === note.id ? (
                       <>
-                        <Button size="sm" variant="ghost" onClick={() => handleUpdateNote(note.id)}>Save</Button>
-                        <Button size="sm" variant="ghost" onClick={() => setEditingNoteId(null)}>Cancel</Button>
+                        <Button size="sm" variant="ghost" onClick={() => handleUpdateNote(note.id)}>{t('app.common.save', 'Save')}</Button>
+                        <Button size="sm" variant="ghost" onClick={() => setEditingNoteId(null)}>{t('app.common.cancel', 'Cancel')}</Button>
                       </>
                     ) : (
                       <>
