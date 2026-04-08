@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield } from "lucide-react";
+import MFASetup from "@/components/settings/MFASetup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,6 +32,7 @@ const Settings = () => {
   const [user, setUser] = useState<unknown>(null);
   const [profile, setProfile] = useState<unknown>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [mfaEnabled, setMfaEnabled] = useState(false);
   const { subscribed, trialDaysLeft, trialExpired, subscriptionTier, trialEndsAt, subscriptionEnd } = useSubscription();
 
   useEffect(() => {
@@ -45,6 +47,10 @@ const Settings = () => {
           .eq("id", user.id)
           .single();
         setProfile(profileData);
+
+        // Check MFA status
+        const { data: factors } = await supabase.auth.mfa.listFactors();
+        setMfaEnabled((factors?.totp?.length ?? 0) > 0);
       }
     };
     fetchData();
@@ -355,7 +361,7 @@ const Settings = () => {
             </CardContent>
           </Card>
 
-          {/* Privacy & Security */}
+          {/* Privacy & Security — 2FA */}
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
@@ -363,13 +369,17 @@ const Settings = () => {
                 {t('app.settings.security')}
               </CardTitle>
               <CardDescription className="text-xs">
-                {t('app.settings.security')}
+                Protect your account with two-factor authentication
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-xs text-muted-foreground">
-                {t('app.common.loading')}
-              </p>
+              <MFASetup
+                mfaEnabled={mfaEnabled}
+                onStatusChange={async () => {
+                  const { data: factors } = await supabase.auth.mfa.listFactors();
+                  setMfaEnabled((factors?.totp?.length ?? 0) > 0);
+                }}
+              />
             </CardContent>
           </Card>
         </div>
