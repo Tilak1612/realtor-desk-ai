@@ -145,7 +145,7 @@ const ContactsTable = ({
 
   return (
     <div className="space-y-4">
-      <div className="border rounded-lg bg-card overflow-hidden">
+      <div className="border rounded-lg bg-card overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -166,8 +166,8 @@ const ContactsTable = ({
                   <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
               </TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Phone</TableHead>
+              <TableHead className="hidden md:table-cell">Email</TableHead>
+              <TableHead className="hidden lg:table-cell">Phone</TableHead>
               <TableHead>
                 <Button
                   variant="ghost"
@@ -179,8 +179,8 @@ const ContactsTable = ({
                   <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
               </TableHead>
-              <TableHead>Source</TableHead>
-              <TableHead>
+              <TableHead className="hidden lg:table-cell">Source</TableHead>
+              <TableHead className="hidden md:table-cell">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -218,13 +218,13 @@ const ContactsTable = ({
                     </span>
                   </div>
                 </TableCell>
-                <TableCell className="text-muted-foreground">{contact.email || "-"}</TableCell>
-                <TableCell className="text-muted-foreground">{contact.phone || "-"}</TableCell>
+                <TableCell className="hidden md:table-cell text-muted-foreground">{contact.email || "-"}</TableCell>
+                <TableCell className="hidden lg:table-cell text-muted-foreground">{contact.phone || "-"}</TableCell>
                 <TableCell>{getScoreBadge(contact.ai_score)}</TableCell>
-                <TableCell>
+                <TableCell className="hidden lg:table-cell">
                   {contact.source && <Badge variant="outline">{contact.source}</Badge>}
                 </TableCell>
-                <TableCell className="text-muted-foreground text-sm">
+                <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
                   {contact.last_contact_date
                     ? formatDistanceToNow(new Date(contact.last_contact_date), { addSuffix: true })
                     : "-"}
