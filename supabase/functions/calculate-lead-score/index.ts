@@ -290,16 +290,82 @@ serve(async (req) => {
       ? "Weekdays 10 AM - 12 PM"
       : "Not enough data";
 
-    // Generate insights
+    // ─── LLM-Assisted Insights (OpenAI) ──────────────────────
+    // The rule-based score is the source of truth. OpenAI enriches
+    // insights and recommended actions with contextual analysis.
+    // Falls back to rule-based insights if OpenAI is unavailable.
+
     let insights = "";
-    if (totalScore >= 80) {
-      insights = "This lead has high engagement and is ready to view properties. Act quickly!";
-    } else if (totalScore >= 60) {
-      insights = "This lead shows strong interest. Continue nurturing with targeted content.";
-    } else if (totalScore >= 40) {
-      insights = "This lead needs consistent engagement to move forward in their journey.";
-    } else {
-      insights = "This lead requires basic information updates and long-term nurturing.";
+    const openaiKey = Deno.env.get("OPENAI_API_KEY");
+
+    if (openaiKey) {
+      try {
+        const llmPrompt = `You are a Canadian real estate CRM lead scoring analyst. Analyze this lead and provide a 2-sentence insight plus 3 specific next-step recommendations.
+
+Lead Data:
+- Name: ${contact.first_name} ${contact.last_name}
+- Score: ${totalScore}/100
+- Tags: ${(contact.tags || []).join(", ") || "none"}
+- Source: ${contact.source || "unknown"}
+- Notes: ${(contact.notes || "").substring(0, 300)}
+- Engagement: ${stats.emails_sent} emails sent, ${stats.emails_opened} opened, ${stats.emails_replied} replied
+- Website: ${stats.website_visits} visits, ${stats.properties_viewed} properties viewed
+- Budget: ${contact.metadata?.budget_min ? "$" + contact.metadata.budget_min + "-$" + contact.metadata.budget_max : "unknown"}
+- Timeline: ${contact.metadata?.timeline || "unknown"}
+- Pre-approved: ${contact.metadata?.pre_approved ? "yes" : "no/unknown"}
+- Last contacted: ${contact.last_contact_date || "never"}
+
+Respond as JSON: {"insights": "2-sentence analysis", "actions": ["action1", "action2", "action3"]}`;
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+
+        const llmRes = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${openaiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [{ role: "user", content: llmPrompt }],
+            max_tokens: 250,
+            temperature: 0.3,
+            response_format: { type: "json_object" },
+          }),
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeout);
+
+        if (llmRes.ok) {
+          const llmData = await llmRes.json();
+          const parsed = JSON.parse(llmData.choices[0].message.content);
+          if (parsed.insights) insights = parsed.insights;
+          if (Array.isArray(parsed.actions) && parsed.actions.length > 0) {
+            recommendedActions.length = 0;
+            recommendedActions.push(...parsed.actions.slice(0, 5));
+          }
+          console.log("LLM insights generated for contact:", contact_id);
+        } else {
+          console.warn("OpenAI API returned non-OK status:", llmRes.status);
+        }
+      } catch (llmError) {
+        console.warn("LLM scoring fallback to rules:", llmError instanceof Error ? llmError.message : String(llmError));
+      }
+    }
+
+    // Fallback to rule-based insights if LLM didn't produce any
+    if (!insights) {
+      if (totalScore >= 80) {
+        insights = "This lead has high engagement and is ready to view properties. Act quickly!";
+      } else if (totalScore >= 60) {
+        insights = "This lead shows strong interest. Continue nurturing with targeted content.";
+      } else if (totalScore >= 40) {
+        insights = "This lead needs consistent engagement to move forward in their journey.";
+      } else {
+        insights = "This lead requires basic information updates and long-term nurturing.";
+      }
     }
 
     // Save or update lead score
