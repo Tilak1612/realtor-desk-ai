@@ -112,6 +112,7 @@ const Deals = lazy(() => import("./pages/Deals"));
 const Tasks = lazy(() => import("./pages/Tasks"));
 const AIAssistant = lazy(() => import("./pages/AIAssistant"));
 const Settings = lazy(() => import("./pages/Settings"));
+const IntegrationHub = lazy(() => import("./pages/IntegrationHub"));
 const Campaigns = lazy(() => import("./pages/Campaigns"));
 const CalendarPage = lazy(() => import("./pages/Calendar"));
 const Reports = lazy(() => import("./pages/Reports"));
@@ -288,6 +289,7 @@ const App = () => (
           <Route path="/market" element={<ProtectedRoute><Market /></ProtectedRoute>} />
           <Route path="/automations" element={<ProtectedRoute><Automations /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/dashboard/integrations" element={<ProtectedRoute><IntegrationHub /></ProtectedRoute>} />
 
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />

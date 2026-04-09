@@ -21,6 +21,7 @@ import {
   CreditCard,
   Building2,
   Zap,
+  Plug,
 } from "lucide-react";
 import logo from "@/assets/realtor-desk-icon.png";
 
@@ -80,6 +81,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
     { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
     { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
     { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
+    { icon: Plug, label: t('app.sidebar.integrations', 'Integrations'), path: "/dashboard/integrations" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
