@@ -39,7 +39,7 @@ const SegmentCard = ({ image, title, description, link }: SegmentCardProps) => (
       to={link}
       className="text-primary hover:text-primary/80 font-medium text-sm inline-flex items-center gap-1 group/link transition-colors"
     >
-      Learn More
+      {t('home.audience.learnMore', 'Learn More')}
       <svg 
         className="w-4 h-4 transition-transform group-hover/link:translate-x-1" 
         fill="none" 
@@ -58,20 +58,20 @@ const AudienceSegments = () => {
   const segments = [
     {
       image: agentProfileFemale,
-      title: "For Agents",
-      description: "To automate your marketing programs, capture and convert more leads into transactions.",
+      title: t('home.audience.agentTitle', 'For Agents'),
+      description: t('home.audience.agentDesc', 'To automate your marketing programs, capture and convert more leads into transactions.'),
       link: "/features"
     },
     {
       image: agentProfileTeam,
-      title: "For Teams",
-      description: "To streamline your sales process, maximize collaboration, and close more team deals.",
+      title: t('home.audience.teamTitle', 'For Teams'),
+      description: t('home.audience.teamDesc', 'To streamline your sales process, maximize collaboration, and close more team deals.'),
       link: "/features"
     },
     {
       image: agentProfileBroker,
-      title: "For Brokers",
-      description: "To accelerate profitable growth by boosting agent productivity and lowering operational costs.",
+      title: t('home.audience.brokerTitle', 'For Brokers'),
+      description: t('home.audience.brokerDesc', 'To accelerate profitable growth by boosting agent productivity and lowering operational costs.'),
       link: "/features"
     }
   ];

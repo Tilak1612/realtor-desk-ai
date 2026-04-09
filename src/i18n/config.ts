@@ -48,6 +48,15 @@ const resources = {
         aiActive: "AI Active"
       },
       home: {
+        audience: {
+          agentTitle: "For Agents",
+          agentDesc: "To automate your marketing programs, capture and convert more leads into transactions.",
+          teamTitle: "For Teams",
+          teamDesc: "To streamline your sales process, maximize collaboration, and close more team deals.",
+          brokerTitle: "For Brokers",
+          brokerDesc: "To accelerate profitable growth by boosting agent productivity and lowering operational costs.",
+          learnMore: "Learn More"
+        },
         socialProof: {
           agents: "agents",
           usingNow: "using now",
@@ -501,23 +510,29 @@ const resources = {
         subtitle: "Join 500+ Canadian Realtors"
       },
       trustTransparency: {
-        title: "Built on Trust & Transparency",
+        badge: "Trust & Transparency",
+        title: "Built on Honesty",
+        subtitle: "We believe in transparent communication about our beta program",
         beta: {
           title: "Beta Program",
+          desc: "Early access with special pricing",
           description: "We're currently in beta with select Canadian realtors. Join our pilot program and help shape the future of AI in real estate.",
           badge: "Limited Spots Available"
         },
         results: {
           title: "Real Results",
+          desc: "Verified testimonials from beta users",
           description: "Performance metrics based on our pilot program with 50+ active users. Individual results may vary based on market conditions and usage.",
           disclaimer: "*Results from pilot participants"
         },
         security: {
           title: "Security First",
+          desc: "Enterprise-grade data protection",
           description: "SOC 2 compliant architecture, PIPEDA-ready data handling, and enterprise-grade security from day one."
         },
         canadian: {
           title: "Canadian Built",
+          desc: "Made for Canadian realtors",
           description: "Designed specifically for Canadian realtors with data residency in Toronto/Vancouver and full bilingual support."
         },
         disclaimer: "Realtor Desk is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary."
@@ -1708,6 +1723,15 @@ const resources = {
         aiActive: "IA Active"
       },
       home: {
+        audience: {
+          agentTitle: "Pour les Agents",
+          agentDesc: "Pour automatiser vos programmes marketing, capturer et convertir plus de prospects en transactions.",
+          teamTitle: "Pour les Équipes",
+          teamDesc: "Pour optimiser votre processus de vente, maximiser la collaboration et conclure plus de transactions d'équipe.",
+          brokerTitle: "Pour les Courtages",
+          brokerDesc: "Pour accélérer la croissance rentable en augmentant la productivité des courtiers et en réduisant les coûts opérationnels.",
+          learnMore: "En Savoir Plus"
+        },
         socialProof: {
           agents: "agents",
           usingNow: "l'utilisent maintenant",
@@ -2161,24 +2185,30 @@ const resources = {
         subtitle: "Rejoignez 500+ Agents Canadiens"
       },
       trustTransparency: {
-        title: "Bâti sur la Confiance et la Transparence",
+        badge: "Confiance et Transparence",
+        title: "Bâti sur l'Honnêteté",
+        subtitle: "Nous croyons en une communication transparente sur notre programme bêta",
         beta: {
           title: "Programme Bêta",
+          desc: "Accès anticipé avec tarification spéciale",
           description: "Nous sommes actuellement en version bêta avec des agents immobiliers canadiens sélectionnés. Rejoignez notre programme pilote et aidez à façonner l'avenir de l'IA dans l'immobilier.",
           badge: "Places Limitées Disponibles"
         },
         results: {
           title: "Résultats Réels",
+          desc: "Témoignages vérifiés d'utilisateurs bêta",
           description: "Métriques de performance basées sur notre programme pilote avec plus de 50 utilisateurs actifs. Les résultats individuels peuvent varier selon les conditions du marché et l'utilisation.",
           disclaimer: "*Résultats des participants au programme pilote"
         },
         security: {
           title: "La Sécurité d'Abord",
-          description: "Architecture conforme SOC 2, gestion des données prête pour PIPEDA et sécurité de niveau entreprise dès le premier jour."
+          desc: "Protection des données de niveau entreprise",
+          description: "Architecture conforme SOC 2, gestion des données prête pour LPRPDE et sécurité de niveau entreprise dès le premier jour."
         },
         canadian: {
           title: "Conçu au Canada",
-          description: "Conçu spécifiquement pour les agents immobiliers canadiens avec résidence des données à Toronto/Vancouver et support bilingue complet."
+          desc: "Conçu pour les courtiers immobiliers canadiens",
+          description: "Conçu spécifiquement pour les courtiers immobiliers canadiens avec résidence des données à Toronto/Vancouver et support bilingue complet."
         },
         disclaimer: "RealtorDesk AI est actuellement en version bêta. Toutes les métriques de performance sont basées sur les résultats du programme pilote. Les résultats individuels peuvent varier."
       },
