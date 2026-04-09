@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import FeedbackDialog from "@/components/feedback/FeedbackDialog";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 interface DashboardNavbarProps {
   user: any;
@@ -24,13 +25,14 @@ interface DashboardNavbarProps {
 }
 
 const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const notificationCount = 3;
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    toast.success("Signed out successfully");
+    toast.success(t('nav.signedOut', 'Signed out successfully'));
     navigate("/");
   };
 
@@ -79,7 +81,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search contacts, properties, deals..."
+              placeholder={t('nav.searchPlaceholder', 'Search contacts, properties, deals...')}
               className="pl-9 h-9 text-sm bg-background border-border"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -105,25 +107,25 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             <DropdownMenuTrigger asChild>
               <Button size="sm" className="h-8 gap-1.5 text-sm">
                 <Plus className="h-4 w-4" />
-                <span className="hidden sm:inline">Add</span>
+                <span className="hidden sm:inline">{t('nav.add', 'Add')}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-44">
               <DropdownMenuItem onClick={() => handleQuickAdd("contact")} className="cursor-pointer text-sm">
                 <User className="mr-2 h-4 w-4" />
-                Contact
+                {t('nav.addContact', 'Contact')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleQuickAdd("property")} className="cursor-pointer text-sm">
                 <Building2 className="mr-2 h-4 w-4" />
-                Property
+                {t('nav.addProperty', 'Property')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleQuickAdd("deal")} className="cursor-pointer text-sm">
                 <Briefcase className="mr-2 h-4 w-4" />
-                Deal
+                {t('nav.addDeal', 'Deal')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleQuickAdd("task")} className="cursor-pointer text-sm">
                 <CheckSquare className="mr-2 h-4 w-4" />
-                Task
+                {t('nav.addTask', 'Task')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -144,7 +146,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-72">
-              <DropdownMenuLabel className="text-sm">Notifications</DropdownMenuLabel>
+              <DropdownMenuLabel className="text-sm">{t('nav.notifications', 'Notifications')}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <div className="space-y-1 p-1">
                 <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
@@ -162,7 +164,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
               </div>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer text-sm">
-                View all notifications
+                {t('nav.viewAllNotifications', 'View all notifications')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -189,16 +191,16 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer text-sm">
                 <User className="mr-2 h-4 w-4" />
-                Profile
+                {t('nav.profile', 'Profile')}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer text-sm">
                 <Settings className="mr-2 h-4 w-4" />
-                Settings
+                {t('nav.settings', 'Settings')}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-sm text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
-                Sign out
+                {t('nav.signOut', 'Sign out')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

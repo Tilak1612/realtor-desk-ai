@@ -64,7 +64,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
   }, []);
 
   const menuItems = [
-    { icon: LayoutDashboard, label: "Today", path: "/today", featured: true },
+    { icon: LayoutDashboard, label: t('app.sidebar.today', 'Today'), path: "/today", featured: true },
     { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts", count: counts.contacts },
     { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
     { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
@@ -75,7 +75,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
   const advancedItems = [
     { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
-    { icon: Zap, label: "Automations", path: "/automations" },
+    { icon: Zap, label: t('app.sidebar.automations', 'Automations'), path: "/automations" },
     { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
     { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
     { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },

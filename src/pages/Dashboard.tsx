@@ -186,7 +186,7 @@ const Dashboard = () => {
         setProfile(profileData);
         await fetchDashboardData(session.user.id);
       } catch (error: unknown) {
-        toast.error("Failed to load profile");
+        toast.error(t('dashboard.loadFailed', 'Failed to load profile'));
       } finally {
         setLoading(false);
       }

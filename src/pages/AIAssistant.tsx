@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import AppLayout from "@/components/layout/AppLayout";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -13,6 +14,7 @@ interface Message {
 }
 
 const AIAssistant = () => {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,10 +49,10 @@ const AIAssistant = () => {
   }, []);
 
   const quickActions = [
-    { label: "Analyze my pipeline", prompt: "Can you analyze my current pipeline and provide insights?" },
-    { label: "Draft follow-up email", prompt: "Help me draft a follow-up email for my top contact" },
-    { label: "Create task", prompt: "Help me create a task for today" },
-    { label: "Market research", prompt: "What are the current real estate market trends I should know about?" }
+    { label: t('ai.actions.analyzePipeline', 'Analyze my pipeline'), prompt: "Can you analyze my current pipeline and provide insights?" },
+    { label: t('ai.actions.draftEmail', 'Draft follow-up email'), prompt: "Help me draft a follow-up email for my top contact" },
+    { label: t('ai.actions.createTask', 'Create task'), prompt: "Help me create a task for today" },
+    { label: t('ai.actions.marketResearch', 'Market research'), prompt: "What are the current real estate market trends I should know about?" }
   ];
 
   const handleQuickAction = async (prompt: string) => {
@@ -148,16 +150,16 @@ const AIAssistant = () => {
           <div>
             <h1 className="text-2xl md:text-3xl font-semibold flex items-center gap-2">
               <Bot className="w-5 h-5 text-primary" />
-              Realtor AI Assistant
+              {t('ai.title', 'Realtor AI Assistant')}
             </h1>
             <p className="text-sm text-muted-foreground">
-              Your intelligent real estate CRM assistant
+              {t('ai.subtitle', 'Your intelligent real estate CRM assistant')}
             </p>
           </div>
           {messages.length > 0 && (
             <Button variant="outline" onClick={clearChat} size="sm" className="h-8 text-xs">
               <Trash2 className="w-3.5 h-3.5 mr-1.5" />
-              Clear Chat
+              {t('ai.clearChat', 'Clear Chat')}
             </Button>
           )}
         </div>
@@ -167,7 +169,7 @@ const AIAssistant = () => {
           <div className="mb-6">
             <h3 className="text-sm font-medium mb-3 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-primary" />
-              Quick Actions
+              {t('ai.quickActions', 'Quick Actions')}
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {quickActions.map((action, index) => (
@@ -190,10 +192,9 @@ const AIAssistant = () => {
             <div className="h-full flex items-center justify-center text-center">
               <div>
                 <Bot className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-lg font-semibold mb-2">Welcome to Realtor AI Assistant</h3>
+                <h3 className="text-lg font-semibold mb-2">{t('ai.welcomeTitle', 'Welcome to Realtor AI Assistant')}</h3>
                 <p className="text-sm text-muted-foreground max-w-md">
-                  I can help you manage contacts, analyze deals, create tasks, 
-                  and provide real estate insights. Try one of the quick actions above!
+                  {t('ai.welcomeDesc', 'I can help you manage contacts, analyze deals, create tasks, and provide real estate insights. Try one of the quick actions above!')}
                 </p>
               </div>
             </div>
@@ -256,7 +257,7 @@ const AIAssistant = () => {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything about your CRM, contacts, deals..."
+            placeholder={t('ai.placeholder', 'Ask me anything about your CRM, contacts, deals...')}
             disabled={loading}
             className="flex-1"
           />
