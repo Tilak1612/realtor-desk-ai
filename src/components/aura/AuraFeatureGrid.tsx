@@ -9,33 +9,33 @@ const AuraFeatureGrid = () => {
   const features = [
     {
       icon: Shield,
-      title: 'Security-First Architecture',
-      description: 'Enterprise-grade encryption and security practices protecting your client data',
+      title: t('home.security.archTitle', 'Security-First Architecture'),
+      description: t('home.security.archDesc', 'Enterprise-grade encryption and security practices protecting your client data'),
     },
     {
       icon: CheckCircle,
-      title: 'PIPEDA-Aware Design',
-      description: 'Built with Canadian privacy principles — consent management, right to erasure, breach notifications',
+      title: t('home.security.pipedaTitle', 'PIPEDA-Aware Design'),
+      description: t('home.security.pipedaDesc', 'Built with Canadian privacy principles — consent management, right to erasure, breach notifications'),
     },
     {
       icon: FileText,
-      title: 'Canadian MLS Integration',
-      description: 'Import and sync Canadian property data directly into your CRM',
+      title: t('home.security.mlsTitle', 'Canadian MLS Integration'),
+      description: t('home.security.mlsDesc', 'Import and sync Canadian property data directly into your CRM'),
     },
     {
       icon: Globe,
-      title: t('canadian.bilingual', 'Bilingual Support'),
-      description: t('canadian.bilingualDesc', 'Seamless English & French communication'),
+      title: t('home.security.bilingualTitle', 'Bilingual Support'),
+      description: t('home.security.bilingualDesc', 'Seamless English & French communication'),
     },
     {
       icon: MapPin,
-      title: 'Canadian-Optimized Infrastructure',
-      description: 'Hosted on infrastructure designed to keep your data within Canadian borders',
+      title: t('home.security.infraTitle', 'Canadian-Optimized Infrastructure'),
+      description: t('home.security.infraDesc', 'Hosted on infrastructure designed to keep your data within Canadian borders'),
     },
     {
       icon: Brain,
-      title: t('indexPage.solutionOverview.feature1Title', 'AI Lead Scoring'),
-      description: t('indexPage.solutionOverview.feature1Desc', 'Prioritize hot leads automatically'),
+      title: t('home.security.aiTitle', 'AI Lead Scoring'),
+      description: t('home.security.aiDesc', 'Prioritize hot leads automatically'),
     },
   ];
 

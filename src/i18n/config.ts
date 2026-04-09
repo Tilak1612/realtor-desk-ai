@@ -61,6 +61,20 @@ const resources = {
           viewAll: "View All FAQs",
           contactSupport: "Contact Support"
         },
+        security: {
+          archTitle: "Security-First Architecture",
+          archDesc: "Enterprise-grade encryption and security practices protecting your client data",
+          pipedaTitle: "PIPEDA-Aware Design",
+          pipedaDesc: "Built with Canadian privacy principles — consent management, right to erasure, breach notifications",
+          mlsTitle: "Canadian MLS Integration",
+          mlsDesc: "Import and sync Canadian property data directly into your CRM",
+          bilingualTitle: "Bilingual Support",
+          bilingualDesc: "Seamless English & French communication",
+          infraTitle: "Canadian-Optimized Infrastructure",
+          infraDesc: "Hosted on infrastructure designed to keep your data within Canadian borders",
+          aiTitle: "AI Lead Scoring",
+          aiDesc: "Prioritize hot leads automatically"
+        },
         audience: {
           agentTitle: "For Agents",
           agentDesc: "To automate your marketing programs, capture and convert more leads into transactions.",
@@ -1840,6 +1854,20 @@ const resources = {
           moreQuestions: "Vous avez d'autres questions? Nous sommes là pour vous aider!",
           viewAll: "Voir Toutes les FAQ",
           contactSupport: "Contacter le Support"
+        },
+        security: {
+          archTitle: "Architecture Axée sur la Sécurité",
+          archDesc: "Chiffrement de niveau entreprise et pratiques de sécurité protégeant vos données clients",
+          pipedaTitle: "Conception Axée sur la LPRPDE",
+          pipedaDesc: "Construit avec les principes canadiens de confidentialité — gestion du consentement, droit à l'effacement, notifications de violation",
+          mlsTitle: "Intégration MLS Canadienne",
+          mlsDesc: "Importez et synchronisez les données de propriétés canadiennes directement dans votre CRM",
+          bilingualTitle: "Support Bilingue",
+          bilingualDesc: "Communication transparente en anglais et en français",
+          infraTitle: "Infrastructure Optimisée pour le Canada",
+          infraDesc: "Hébergé sur une infrastructure conçue pour maintenir vos données au Canada",
+          aiTitle: "Score IA des Prospects",
+          aiDesc: "Priorisez les prospects chauds automatiquement"
         },
         audience: {
           agentTitle: "Pour les Agents",

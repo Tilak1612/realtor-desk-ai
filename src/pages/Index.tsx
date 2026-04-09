@@ -383,12 +383,12 @@ const Index = () => {
 
           <div className="mt-12 text-center">
             <p className="text-muted-foreground mb-6">
-              Have more questions? We're here to help!
+              {t('home.faq.moreQuestions', "Have more questions? We're here to help!")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/faq">
                 <button className="hover:bg-white/10 transition-all flex text-base font-medium text-foreground bg-white/5 rounded-full py-3 px-8 items-center justify-center border border-white/10">
-                  View All FAQs
+                  {t('home.faq.viewAll', 'View All FAQs')}
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
               </Link>

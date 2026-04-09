@@ -390,7 +390,7 @@ const Demo = () => {
                 <p className="mb-4 text-white/90">{ t("demo.selfServe.sub", "Start your 14-day free trial - no demo required") }</p>
                 <Link to="/signup">
                   <Button variant="secondary" className="w-full" size="lg">
-                    Start 14-Day Free Trial
+                    {t('demo.selfServe.cta', 'Start 14-Day Free Trial')}
                   </Button>
                 </Link>
               </Card>
