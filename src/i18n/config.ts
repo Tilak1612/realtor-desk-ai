@@ -106,33 +106,122 @@ const resources = {
         plans: {
           agent: {
             name: "AGENT",
+            badge: "14 Days Free Trial",
             description: "Perfect for individual agents ready to scale",
+            savings: "Save $291/year with annual billing",
+            period: "/month",
             ctaMonthly: "Start 14-Day Free Trial",
-            ctaYearly: "Start 14-Day Free Trial"
+            ctaYearly: "Start 14-Day Free Trial",
+            feature1: "Unlimited contacts & leads",
+            feature2: "AI-powered predictive CRM",
+            feature3: "24/7 AI chatbot (website, SMS, email)",
+            feature4: "ROI tracking & analytics",
+            feature5: "Email & SMS automation",
+            feature6: "Canadian market intelligence",
+            feature7: "Bilingual support (EN/FR)",
+            feature8: "Mobile app included",
+            feature9: "Free migration assistance",
+            feature10: "No setup fees",
+            feature11: "Priority support"
           },
           team: {
             name: "TEAM",
+            badge: "Most Popular",
             description: "For growing teams of 2-5 agents",
-            cta: "Request Team Demo"
+            period: "/month",
+            cta: "Start 14-Day Free Trial",
+            feature1: "Everything in Agent tier, plus:",
+            feature2: "Team collaboration tools",
+            feature3: "Lead distribution & routing",
+            feature4: "Team performance dashboard",
+            feature5: "Shared pipeline management",
+            feature6: "Advanced reporting & analytics",
+            feature7: "Priority support",
+            feature8: "Dedicated account manager",
+            feature9: "Custom training sessions",
+            feature10: "API access available",
+            feature11: "White-label options"
           },
           brokerage: {
             name: "BROKERAGE",
+            badge: "14 Days Free Trial",
             price: "Custom",
             description: "For brokerages with 6+ agents",
-            cta: "Get Custom Quote"
+            cta: "Start 14-Day Free Trial",
+            feature1: "Everything in Team tier, plus:",
+            feature2: "Unlimited agents",
+            feature3: "Custom branding & white-label",
+            feature4: "Advanced admin controls",
+            feature5: "Multi-office management",
+            feature6: "Brokerage compliance tools",
+            feature7: "Dedicated success manager",
+            feature8: "Custom AI model training",
+            feature9: "Volume pricing discounts",
+            feature10: "Premium 24/7 support"
           }
         },
+        compare: {
+          heading: "Compare with Competitors",
+          sub: "See how much you save with Realtor Desk AI",
+          firstYear: "First year",
+          perYear: "Per year",
+          saveThousands: "Save thousands!"
+        },
+        table: {
+          heading: "Feature Comparison: Why Agents Switch to Realtor Desk AI",
+          featureCol: "Feature",
+          comingQ3: "(Coming Q3 2026)",
+          comingSoon: "Coming Soon",
+          extraCost: "Extra Cost",
+          partial: "Partial",
+          basic: "Basic",
+          limited: "Limited",
+          varies: "Varies"
+        },
+        social: {
+          heading: "Real Results from Real Agents",
+          stat1: "Additional GCI in first year",
+          stat2: "Closed from AI chatbot leads",
+          stat3: "Time saved on admin tasks"
+        },
+        annual: {
+          heading: "Why Choose Annual Billing?",
+          monthly: "Monthly Plan",
+          mo: "/mo",
+          bestValue: "Best Value",
+          annualPlan: "Annual Plan (Founding Member)",
+          yr: "/yr",
+          save: "Save $789/year!",
+          foundingBonus: "Founding Member Bonus"
+        },
         addons: {
-          title: "Enhance Your Plan with Add-Ons"
+          heading: "Enhance Your Plan with Add-Ons",
+          staging: "Virtual Staging AI",
+          stagingDesc: "Unlimited virtual staging for all your listings",
+          reports: "Advanced Market Reports",
+          reportsDesc: "Branded reports with your logo and branding",
+          leads: "Lead Generation Module",
+          leadsDesc: "Targeted seller/buyer lead identification"
         },
         guarantees: {
-          title: "Our Guarantees to You",
+          heading: "Our Guarantees to You",
           moneyBack: "30-Day Money-Back Guarantee",
+          moneyBackDesc: "Close at least one additional deal in your first 30 days or get a full refund. No questions asked.",
           noContracts: "No Contracts, Cancel Anytime",
-          freeSetup: "Free Setup & Migration"
+          noContractsDesc: "All plans are month-to-month. Cancel anytime with one click. No penalties, no hassles.",
+          freeSetup: "Free Setup & Migration",
+          freeSetupDesc: "We'll migrate your contacts and data from any CRM for free. Plus complimentary onboarding and training.",
+          badge1: "No contracts",
+          badge2: "No setup fees",
+          badge3: "Cancel anytime"
         },
         faq: {
-          title: "Frequently Asked Questions"
+          heading: "Frequently Asked Questions",
+          q1: "Do I need to sign a long-term contract?",
+          q2: "Is CREA DDF® integration included?",
+          q3: "Can I try before I buy?",
+          q4: "What if I exceed my contact limit?",
+          q5: "Do you offer training?"
         }
       },
         demo: {
@@ -1663,33 +1752,122 @@ const resources = {
         plans: {
           agent: {
             name: "AGENT",
-            description: "Parfait pour les agents individuels prêts à se développer",
-            ctaMonthly: "Commencer l'Essai Gratuit",
-            ctaYearly: "Commencer l'Essai Gratuit de 30 Jours"
+            badge: "14 Jours d'Essai Gratuit",
+            description: "Idéal pour les courtiers individuels prêts à se développer",
+            savings: "Économisez 291 $/an avec la facturation annuelle",
+            period: "/mois",
+            ctaMonthly: "Commencer l'Essai Gratuit de 14 Jours",
+            ctaYearly: "Commencer l'Essai Gratuit de 14 Jours",
+            feature1: "Contacts et prospects illimités",
+            feature2: "CRM prédictif propulsé par l'IA",
+            feature3: "Chatbot IA 24/7 (site web, SMS, courriel)",
+            feature4: "Suivi du ROI et analyses",
+            feature5: "Automatisation courriel et SMS",
+            feature6: "Intelligence du marché canadien",
+            feature7: "Support bilingue (EN/FR)",
+            feature8: "Application mobile incluse",
+            feature9: "Assistance à la migration gratuite",
+            feature10: "Aucuns frais d'installation",
+            feature11: "Support prioritaire"
           },
           team: {
             name: "ÉQUIPE",
-            description: "Pour les équipes en croissance de 2 à 5 agents",
-            cta: "Demander une Démo Équipe"
+            badge: "Le Plus Populaire",
+            description: "Pour les équipes en croissance de 2 à 5 courtiers",
+            period: "/mois",
+            cta: "Commencer l'Essai Gratuit de 14 Jours",
+            feature1: "Tout du plan Agent, plus :",
+            feature2: "Outils de collaboration d'équipe",
+            feature3: "Distribution et routage des prospects",
+            feature4: "Tableau de bord de performance d'équipe",
+            feature5: "Gestion de pipeline partagée",
+            feature6: "Rapports et analyses avancés",
+            feature7: "Support prioritaire",
+            feature8: "Gestionnaire de compte dédié",
+            feature9: "Sessions de formation personnalisées",
+            feature10: "Accès API disponible",
+            feature11: "Options en marque blanche"
           },
           brokerage: {
             name: "COURTAGE",
-            price: "Personnalisé",
-            description: "Pour les courtages avec 6+ agents",
-            cta: "Obtenir un Devis Personnalisé"
+            badge: "14 Jours d'Essai Gratuit",
+            price: "Sur devis",
+            description: "Pour les courtages avec 6 courtiers et plus",
+            cta: "Commencer l'Essai Gratuit de 14 Jours",
+            feature1: "Tout du plan Équipe, plus :",
+            feature2: "Courtiers illimités",
+            feature3: "Image de marque personnalisée et marque blanche",
+            feature4: "Contrôles administratifs avancés",
+            feature5: "Gestion multi-bureau",
+            feature6: "Outils de conformité pour courtage",
+            feature7: "Gestionnaire de succès dédié",
+            feature8: "Formation de modèle IA personnalisée",
+            feature9: "Remises sur volume",
+            feature10: "Support premium 24/7"
           }
         },
+        compare: {
+          heading: "Comparer avec les Concurrents",
+          sub: "Voyez combien vous économisez avec Realtor Desk AI",
+          firstYear: "Première année",
+          perYear: "Par année",
+          saveThousands: "Économisez des milliers !"
+        },
+        table: {
+          heading: "Comparaison des Fonctionnalités : Pourquoi les Courtiers Passent à Realtor Desk AI",
+          featureCol: "Fonctionnalité",
+          comingQ3: "(Disponible T3 2026)",
+          comingSoon: "Bientôt disponible",
+          extraCost: "Coût supplémentaire",
+          partial: "Partielle",
+          basic: "De base",
+          limited: "Limité",
+          varies: "Variable"
+        },
+        social: {
+          heading: "Résultats Réels de Courtiers Réels",
+          stat1: "GCI supplémentaire la première année",
+          stat2: "Transactions conclues via le chatbot IA",
+          stat3: "Temps économisé sur les tâches administratives"
+        },
+        annual: {
+          heading: "Pourquoi Choisir la Facturation Annuelle ?",
+          monthly: "Plan Mensuel",
+          mo: "/mois",
+          bestValue: "Meilleur Rapport Qualité-Prix",
+          annualPlan: "Plan Annuel (Membre Fondateur)",
+          yr: "/an",
+          save: "Économisez 789 $/an !",
+          foundingBonus: "Bonus Membre Fondateur"
+        },
         addons: {
-          title: "Améliorez Votre Plan avec des Modules Complémentaires"
+          heading: "Améliorez Votre Plan avec des Modules Complémentaires",
+          staging: "Mise en Scène Virtuelle IA",
+          stagingDesc: "Mise en scène virtuelle illimitée pour toutes vos inscriptions",
+          reports: "Rapports de Marché Avancés",
+          reportsDesc: "Rapports personnalisés avec votre logo et votre image de marque",
+          leads: "Module de Génération de Prospects",
+          leadsDesc: "Identification ciblée de prospects vendeurs/acheteurs"
         },
         guarantees: {
-          title: "Nos Garanties Pour Vous",
+          heading: "Nos Garanties pour Vous",
           moneyBack: "Garantie de Remboursement de 30 Jours",
-          noContracts: "Aucun Contrat, Annulez à Tout Moment",
-          freeSetup: "Installation et Migration Gratuites"
+          moneyBackDesc: "Concluez au moins une transaction supplémentaire dans vos 30 premiers jours ou obtenez un remboursement complet. Sans questions.",
+          noContracts: "Sans Contrat, Annulez à Tout Moment",
+          noContractsDesc: "Tous les plans sont mensuels. Annulez à tout moment en un clic. Sans pénalités, sans tracas.",
+          freeSetup: "Installation et Migration Gratuites",
+          freeSetupDesc: "Nous migrerons vos contacts et données depuis n'importe quel CRM gratuitement. Plus une intégration et une formation offertes.",
+          badge1: "Sans contrat",
+          badge2: "Aucuns frais d'installation",
+          badge3: "Annulez à tout moment"
         },
         faq: {
-          title: "Questions Fréquemment Posées"
+          heading: "Questions Fréquemment Posées",
+          q1: "Dois-je signer un contrat à long terme ?",
+          q2: "L'intégration CREA DDF® est-elle incluse ?",
+          q3: "Puis-je essayer avant d'acheter ?",
+          q4: "Que se passe-t-il si je dépasse ma limite de contacts ?",
+          q5: "Offrez-vous de la formation ?"
         }
       },
       demo: {
