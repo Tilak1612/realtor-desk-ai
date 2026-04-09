@@ -294,9 +294,13 @@ const resources = {
           brokerage: "Brokerage/Company",
           brokeragePlaceholder: "ABC Realty",
           province: "Province *",
+          provincePlaceholder: "Select province",
           crm: "Current CRM (if any)",
+          crmPlaceholder: "Select CRM",
           teamSize: "Number of Team Members",
+          teamSizePlaceholder: "Select team size",
           challenge: "Biggest Challenge",
+          challengePlaceholder: "Select challenge",
           comments: "Comments/Questions",
           commentsPlaceholder: "Tell us more about your needs…",
           submit: "Request Demo",
@@ -315,10 +319,16 @@ const resources = {
           onboardingDesc: "Get started with personalized onboarding and support"
         },
         contact: {
+          heading: "Contact Information",
           title: "Contact Information",
           email: "Email",
           phone: "Phone",
           address: "Address"
+        },
+        selfServe: {
+          heading: "Prefer to explore on your own?",
+          sub: "Start your 14-day free trial - no demo required",
+          cta: "Start 14-Day Free Trial"
         },
         explore: {
           title: "Prefer to explore on your own?",
@@ -336,6 +346,8 @@ const resources = {
           emailUs: "Email Us",
           callUs: "Call Us",
           visitUs: "Visit Us",
+          support: "Support",
+          responseTime: "We respond within 24 hours",
           hours: "Business Hours",
           hoursDetails: "Monday - Friday: 9:00 AM - 6:00 PM EST\nSaturday: 10:00 AM - 4:00 PM EST\nSunday: Closed"
         },
@@ -2046,9 +2058,13 @@ const resources = {
           brokerage: "Courtage/Entreprise",
           brokeragePlaceholder: "ABC Immobilier",
           province: "Province *",
+          provincePlaceholder: "Sélectionner la province",
           crm: "CRM Actuel (le cas échéant)",
+          crmPlaceholder: "Sélectionner le CRM",
           teamSize: "Nombre de Membres d'Équipe",
+          teamSizePlaceholder: "Sélectionner la taille d'équipe",
           challenge: "Principal Défi",
+          challengePlaceholder: "Sélectionner le défi",
           comments: "Commentaires/Questions",
           commentsPlaceholder: "Parlez-nous de vos besoins…",
           submit: "Demander une Démo",
@@ -2067,10 +2083,16 @@ const resources = {
           onboardingDesc: "Démarrez avec une intégration et un support personnalisés"
         },
         contact: {
+          heading: "Coordonnées",
           title: "Informations de Contact",
-          email: "E-mail",
+          email: "Courriel",
           phone: "Téléphone",
           address: "Adresse"
+        },
+        selfServe: {
+          heading: "Vous préférez explorer par vous-même?",
+          sub: "Commencez votre essai gratuit de 14 jours — sans démo requise",
+          cta: "Commencer l'Essai Gratuit de 14 Jours"
         },
         explore: {
           title: "Préférez explorer par vous-même?",
@@ -2088,6 +2110,8 @@ const resources = {
           emailUs: "Nous Écrire",
           callUs: "Nous Appeler",
           visitUs: "Nous Rendre Visite",
+          support: "Support",
+          responseTime: "Nous répondons dans les 24 heures",
           hours: "Heures d'Ouverture",
           hoursDetails: "Lundi - Vendredi: 9h00 - 18h00 HNE\nSamedi: 10h00 - 16h00 HNE\nDimanche: Fermé"
         },

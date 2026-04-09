@@ -204,7 +204,7 @@ const Demo = () => {
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select province" />
+                                <SelectValue placeholder={t("demo.form.provincePlaceholder", "Select province")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -233,7 +233,7 @@ const Demo = () => {
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select CRM" />
+                                <SelectValue placeholder={t("demo.form.crmPlaceholder", "Select CRM")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -264,7 +264,7 @@ const Demo = () => {
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select team size" />
+                                <SelectValue placeholder={t("demo.form.teamSizePlaceholder", "Select team size")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -288,7 +288,7 @@ const Demo = () => {
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select challenge" />
+                                <SelectValue placeholder={t("demo.form.challengePlaceholder", "Select challenge")} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -312,7 +312,7 @@ const Demo = () => {
                       <FormItem>
                         <FormLabel>{t("demo.form.comments", "Comments/Questions")}</FormLabel>
                         <FormControl>
-                          <Textarea rows={4} placeholder="Tell us more about your needs..." {...field} />
+                          <Textarea rows={4} placeholder={t("demo.form.commentsPlaceholder", "Tell us more about your needs...")} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -320,15 +320,15 @@ const Demo = () => {
                   />
 
                   <Button type="submit" className="btn-gradient w-full" disabled={isSubmitting}>
-                    {isSubmitting ? "Submitting..." : "Request Demo"}
+                    {isSubmitting ? t("demo.form.submitting") : t("demo.form.submit")}
                   </Button>
 
                   <p className="text-sm text-muted-foreground text-center">
-                    Or{" "}
+                    { t("demo.form.orStart", "Or") }{" "}
                     <Link to="/signup" className="text-primary font-semibold hover:underline">
                       sign up now
                     </Link>{" "}
-                    to get started immediately
+                    { t("demo.form.rightAway", "to get started immediately") }
                   </p>
                 </form>
               </Form>
@@ -342,7 +342,7 @@ const Demo = () => {
                   <div className="flex gap-4">
                     <MessageSquare className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">Discovery Call (15 min)</h4>
+                      <h4 className="font-semibold mb-1">{ t("demo.expect.discovery", "Discovery Call (15 min)") }</h4>
                       <p className="text-sm text-muted-foreground">
                         We learn about your business, challenges, and goals
                       </p>
@@ -351,7 +351,7 @@ const Demo = () => {
                   <div className="flex gap-4">
                     <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">Live Demo (30 min)</h4>
+                      <h4 className="font-semibold mb-1">{ t("demo.expect.liveDemo", "Live Demo (30 min)") }</h4>
                       <p className="text-sm text-muted-foreground">
                         See Realtor Desk AI in action with examples specific to your market
                       </p>
@@ -360,7 +360,7 @@ const Demo = () => {
                   <div className="flex gap-4">
                     <Clock className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">Custom Onboarding</h4>
+                      <h4 className="font-semibold mb-1">{ t("demo.expect.onboarding", "Custom Onboarding") }</h4>
                       <p className="text-sm text-muted-foreground">
                         Get started with personalized onboarding and support
                       </p>
@@ -373,21 +373,21 @@ const Demo = () => {
                 <h3 className="text-xl font-bold mb-4">{ t("demo.contact.heading", "Contact Information") }</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">Email</p>
+                    <p className="text-sm text-muted-foreground mb-1">{ t("demo.contact.email", "Email") }</p>
                     <a href="mailto:support@realtordesk.ai" className="font-semibold text-primary hover:underline">
                       support@realtordesk.ai
                     </a>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">Address</p>
+                    <p className="text-sm text-muted-foreground mb-1">{ t("demo.contact.address", "Address") }</p>
                     <p className="font-semibold">Edmonton, Alberta, Canada</p>
                   </div>
                 </div>
               </Card>
 
               <Card className="p-6 bg-gradient-to-r from-primary to-secondary text-white">
-                <h3 className="text-xl font-bold mb-2">Prefer to explore on your own?</h3>
-                <p className="mb-4 text-white/90">Start your 14-day free trial - no demo required</p>
+                <h3 className="text-xl font-bold mb-2">{ t("demo.selfServe.heading", "Prefer to explore on your own?") }</h3>
+                <p className="mb-4 text-white/90">{ t("demo.selfServe.sub", "Start your 14-day free trial - no demo required") }</p>
                 <Link to="/signup">
                   <Button variant="secondary" className="w-full" size="lg">
                     Start 14-Day Free Trial
