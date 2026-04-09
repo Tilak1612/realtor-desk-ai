@@ -66,7 +66,7 @@ const Pricing = () => {
             🎉 14 Days Free Trial - Start Today!
           </Badge>
           <Badge variant="default" className="mb-4 animate-fade-in-up bg-primary text-white">
-            🎉 Founding Member Pricing Ends December 31, 2025 - Save $498!
+            🎉 Launch Pricing — Save $498/year vs. Monthly!
           </Badge>
           <h1 className="mb-6 animate-fade-in-up">
             {t('pricing.hero.title')} <span className="gradient-text">{t('pricing.hero.titleGradient')}</span>

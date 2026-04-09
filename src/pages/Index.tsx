@@ -73,7 +73,7 @@ const Index = () => {
       <AudienceSegments />
 
       {/* Live Social Proof Bar */}
-      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4">
+      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto">
         <div className="bg-card rounded-[40px] py-6 px-6 sm:px-12">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm">
             <div className="flex items-center gap-2">
@@ -241,14 +241,14 @@ const Index = () => {
       </AuraSection>
 
       {/* Beta Success Stories */}
-      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4">
+      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto">
         <div className="bg-card rounded-[40px] py-16 px-6 sm:px-12">
           <BetaSuccessStories />
         </div>
       </SpotlightCard>
 
       {/* Demo Booking Section */}
-      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4">
+      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto">
         <div className="bg-card rounded-[40px] py-16 px-6 sm:px-12">
           <DemoBookingSection />
         </div>
@@ -344,7 +344,7 @@ const Index = () => {
       <AuraCTASection />
 
       {/* Beta Program Notice */}
-      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4 mb-8">
+      <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mb-8">
         <div className="bg-secondary rounded-[40px] py-8 px-6 sm:px-12">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-sm font-semibold text-white mb-3">{t('indexPage.betaNotice.title')}</h3>

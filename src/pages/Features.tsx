@@ -209,7 +209,7 @@ const Features = () => {
                   ["Canadian Compliance", "✓ Built-in", "Manual", "Manual", "Manual"],
                   ["Marketing Automation", "✓ AI-generated", "Templates", "Templates", "Templates"],
                   ["Mobile App", "✓ Full-featured", "Limited", "Basic", "✓"],
-                  ["Starting Price", "$99/mo", "$69/mo", "$49/mo", "$149/mo"],
+                  ["Starting Price", "$149/mo", "$69/mo", "$49/mo", "$149/mo"],
                   ["Setup Fee", "$0", "$0", "$0", "$299"],
                   ["Contract", "Month-to-month", "Annual", "Month-to-month", "Annual"],
                   ["ROI", "$8.71 per $1", "$3-4 per $1", "$2-3 per $1", "$4-5 per $1"],
