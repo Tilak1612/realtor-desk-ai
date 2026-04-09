@@ -13,7 +13,19 @@ const resources = {
         resources: "Resources",
         faq: "FAQ",
         bookDemo: "Book Your Free Demo",
-        startClosing: "Start Closing More Deals"
+        startClosing: "Start Closing More Deals",
+        signedOut: "Signed out successfully",
+        searchPlaceholder: "Search contacts, properties, deals...",
+        add: "Add",
+        addContact: "Contact",
+        addProperty: "Property",
+        addDeal: "Deal",
+        addTask: "Task",
+        notifications: "Notifications",
+        viewAllNotifications: "View all notifications",
+        profile: "Profile",
+        settings: "Settings",
+        signOut: "Sign out"
       },
       hero: {
         title: "Close 3X More Deals with AI Automation",
