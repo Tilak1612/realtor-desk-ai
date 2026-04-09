@@ -86,11 +86,7 @@ export const validateRealtorUrl = (url: string): { valid: boolean; error?: strin
   // Single listing URL pattern: /real-estate/{id}/
   const singleListingPattern = /realtor\.ca\/real-estate\/\d+\//;
   if (singleListingPattern.test(trimmedUrl)) {
-    return { 
-      valid: false, 
-      type: 'listing',
-      error: "Single listing URLs are not supported. Please use a search or map URL instead.\n\nExample formats:\n• Map: realtor.ca/map#...\n• Search: realtor.ca/edmonton/real-estate" 
-    };
+    return { valid: true, type: 'listing' };
   }
   
   // Map URL pattern
@@ -325,6 +321,36 @@ export const fetchRealtorListings = async (input: ApifyListingInput): Promise<Li
   }
   
   return [];
+};
+
+// Fetch a single listing by URL (for auto-fill in AddPropertyModal)
+export const fetchSingleListing = async (listingUrl: string): Promise<ListingResult | null> => {
+  const actorId = "scrapemind~realtor-ca-scraper";
+  const data = await callApifyRunner(actorId, {
+    startUrls: [{ url: listingUrl }],
+    maxItems: 1,
+  });
+
+  if (Array.isArray(data) && data.length > 0) {
+    const item = data[0] as Record<string, unknown>;
+    return {
+      address: (item.address as string) || (item.streetAddress as string) || '',
+      price: (item.price as string | number) || (item.listPrice as string | number) || 0,
+      bedrooms: Number(item.bedrooms) || Number(item.beds) || 0,
+      bathrooms: Number(item.bathrooms) || Number(item.baths) || 0,
+      mlsNumber: (item.mlsNumber as string) || (item.mls as string) || '',
+      propertyType: (item.propertyType as string) || (item.type as string) || '',
+      squareFeet: Number(item.squareFeet) || Number(item.sqft) || 0,
+      description: (item.description as string) || '',
+      imageUrl: (item.imageUrl as string) || (item.image as string) || (Array.isArray(item.images) ? (item.images[0] as string) : '') || '',
+      city: (item.city as string) || '',
+      province: (item.province as string) || '',
+      postalCode: (item.postalCode as string) || '',
+      url: listingUrl,
+      _rawData: item,
+    };
+  }
+  return null;
 };
 
 export const fetchRealtorListingsWithTracking = async (

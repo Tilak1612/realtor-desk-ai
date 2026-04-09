@@ -8,8 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Loader2, AlertCircle, Download, CheckCircle } from "lucide-react";
 import { validateField, ValidationErrors } from "./PropertyValidation";
+import { fetchSingleListing, validateRealtorUrl } from "@/lib/apify";
 
 interface AddPropertyModalProps {
   open: boolean;
@@ -34,6 +35,9 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
   const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [importError, setImportError] = useState('');
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [touched, setTouched] = useState<Set<string>>(new Set());
   const [formData, setFormData] = useState({
@@ -95,6 +99,59 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
     setTouched(new Set(fieldsToValidate));
     setErrors(newErrors);
     return isValid;
+  };
+
+  const handleImportFromUrl = async () => {
+    const url = formData.source_url.trim();
+    if (!url) return;
+
+    const validation = validateRealtorUrl(url);
+    if (!validation.valid) {
+      setImportStatus('error');
+      setImportError(validation.error || 'Invalid URL');
+      return;
+    }
+
+    setImporting(true);
+    setImportStatus('idle');
+    setImportError('');
+
+    try {
+      const listing = await fetchSingleListing(url);
+      if (!listing) {
+        setImportStatus('error');
+        setImportError(t('properties.importFailed', "Couldn't import this listing. Please fill details manually."));
+        return;
+      }
+
+      const provCode = PROVINCES.find(p =>
+        p.name.toLowerCase() === (listing.province || '').toLowerCase()
+      )?.code || listing.province || '';
+
+      setFormData(prev => ({
+        ...prev,
+        title: listing.address || prev.title,
+        address: listing.address || prev.address,
+        city: listing.city || prev.city,
+        province: provCode || prev.province,
+        postal_code: listing.postalCode || prev.postal_code,
+        mls_number: listing.mlsNumber || prev.mls_number,
+        price: listing.price ? String(listing.price).replace(/[^0-9.]/g, '') : prev.price,
+        bedrooms: listing.bedrooms ? String(listing.bedrooms) : prev.bedrooms,
+        bathrooms: listing.bathrooms ? String(listing.bathrooms) : prev.bathrooms,
+        square_feet: listing.squareFeet ? String(listing.squareFeet) : prev.square_feet,
+        image_url: listing.imageUrl || prev.image_url,
+        description: listing.description || prev.description,
+        property_type: listing.propertyType?.toLowerCase() || prev.property_type,
+        data_source: 'url_scrape',
+      }));
+      setImportStatus('success');
+    } catch (err: unknown) {
+      setImportStatus('error');
+      setImportError(err instanceof Error ? err.message : t('properties.importError', 'Import failed. Please fill details manually.'));
+    } finally {
+      setImporting(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -204,13 +261,37 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
               {t("app.modals.addProperty.quickAdd")}
             </h3>
             <Label htmlFor="source_url" className="text-sm">{t("app.modals.addProperty.pasteUrl")}</Label>
-            <Input
-              id="source_url"
-              value={formData.source_url}
-              onChange={(e) => handleFieldChange("source_url", e.target.value)}
-              placeholder={t("app.modals.addProperty.urlPlaceholder")}
-              className="mt-2"
-            />
+            <div className="flex gap-2 mt-2">
+              <Input
+                id="source_url"
+                value={formData.source_url}
+                onChange={(e) => { handleFieldChange("source_url", e.target.value); setImportStatus('idle'); }}
+                placeholder={t("app.modals.addProperty.urlPlaceholder")}
+                className="flex-1"
+              />
+              <Button
+                type="button"
+                onClick={handleImportFromUrl}
+                disabled={importing || !formData.source_url.trim()}
+                variant="secondary"
+                className="gap-2"
+              >
+                {importing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+                {importing ? t('properties.fetching', 'Fetching...') : t('properties.import', 'Import')}
+              </Button>
+            </div>
+            {importStatus === 'success' && (
+              <p className="text-green-600 text-xs mt-2 flex items-center gap-1">
+                <CheckCircle className="h-3 w-3" />
+                {t('properties.importSuccess', 'Imported from Realtor.ca — review and save below')}
+              </p>
+            )}
+            {importStatus === 'error' && (
+              <p className="text-destructive text-xs mt-2 flex items-center gap-1">
+                <AlertCircle className="h-3 w-3" />
+                {importError}
+              </p>
+            )}
             <p className="text-xs text-muted-foreground mt-2">
               {t("app.modals.addProperty.urlNote")}
             </p>
