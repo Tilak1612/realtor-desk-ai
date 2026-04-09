@@ -8,8 +8,10 @@ import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { PasswordInput, validatePassword } from "@/components/ui/password-input";
+import { useTranslation } from "react-i18next";
 
 const ResetPassword = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -17,34 +19,32 @@ const ResetPassword = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   useEffect(() => {
-    // Check if the user has a valid recovery session
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === "PASSWORD_RECOVERY") {
-        // User is in password recovery mode — stay on this page
+        // User is in password recovery mode
       } else if (event === "SIGNED_IN") {
-        // Password was successfully reset and session established
-        toast.success("Password reset successful!");
+        toast.success(t('auth.reset.success', 'Password reset successful!'));
         navigate("/today");
       }
     });
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, t]);
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!password || !confirmPassword) {
-      toast.error("Please fill in all fields");
+      toast.error(t('auth.reset.fillAll', 'Please fill in all fields'));
       return;
     }
 
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error(t('auth.reset.noMatch', 'Passwords do not match'));
       return;
     }
 
     if (!validatePassword(password)) {
-      toast.error("Password does not meet all requirements");
+      toast.error(t('auth.reset.requirements', 'Password does not meet all requirements'));
       return;
     }
 
@@ -56,10 +56,10 @@ const ResetPassword = () => {
 
       if (error) throw error;
 
-      toast.success("Password updated successfully!");
+      toast.success(t('auth.reset.updated', 'Password updated successfully!'));
       navigate("/login");
     } catch (error: any) {
-      toast.error(error.message || "Failed to reset password");
+      toast.error(error.message || t('auth.reset.failed', 'Failed to reset password'));
     } finally {
       setLoading(false);
     }
@@ -72,16 +72,16 @@ const ResetPassword = () => {
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold text-center">
-              Set new password
+              {t('auth.reset.title', 'Set new password')}
             </CardTitle>
             <CardDescription className="text-center">
-              Enter your new password below
+              {t('auth.reset.subtitle', 'Enter your new password below')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <form onSubmit={handleResetPassword} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="password">New Password</Label>
+                <Label htmlFor="password">{t('auth.reset.newPassword', 'New Password')}</Label>
                 <PasswordInput
                   id="password"
                   placeholder="••••••••"
@@ -94,7 +94,7 @@ const ResetPassword = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Label htmlFor="confirmPassword">{t('auth.reset.confirmPassword', 'Confirm Password')}</Label>
                 <PasswordInput
                   id="confirmPassword"
                   placeholder="••••••••"
@@ -105,7 +105,7 @@ const ResetPassword = () => {
               </div>
 
               <Button className="w-full" type="submit" disabled={loading || !isPasswordValid}>
-                {loading ? "Resetting..." : "Reset Password"}
+                {loading ? t('auth.reset.resetting', 'Resetting...') : t('auth.reset.resetButton', 'Reset Password')}
               </Button>
             </form>
           </CardContent>

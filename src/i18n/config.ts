@@ -1334,6 +1334,64 @@ const resources = {
           saved: "Calendar settings saved!",
           saveFailed: "Failed to save calendar settings",
           finish: "Finish Setup"
+        },
+        import: {
+          title: "Import Your Contacts",
+          subtitle: "Choose how you'd like to add your contacts",
+          skipContacts: "Skip - I'll add contacts later"
+        },
+        complete: {
+          title: "You're All Set!",
+          welcome: "Welcome to Realtor Desk AI",
+          whatWeSetUp: "What We Set Up",
+          whatsNext: "What's Next?",
+          goDashboard: "Go to Dashboard",
+          watchTutorial: "Watch Tutorial",
+          skipTutorial: "Skip Tutorial",
+          needHelp: "Need help getting started?",
+          contactSupport: "Contact our support team"
+        },
+        saveFailed: "Failed to save progress. Please try again.",
+        welcome: "Welcome to Realtor Desk AI!",
+        completeFailed: "Failed to complete setup. Please try again."
+      },
+      auth: {
+        login: {
+          subtitle: "Sign in to your workspace",
+          orEmail: "Or continue with email",
+          emailAddress: "Email address"
+        },
+        signup: {
+          subtitle: "Start your 14-day free trial",
+          orEmail: "Or register with email"
+        },
+        forgot: {
+          title: "Reset password",
+          subtitle: "Enter your email and we'll send you a reset link",
+          enterEmail: "Please enter your email address",
+          emailSent: "Password reset email sent!",
+          sendFailed: "Failed to send reset email",
+          sending: "Sending...",
+          sendLink: "Send reset link",
+          backToLogin: "Back to sign in",
+          checkEmail: "Check your email",
+          sentTo: "We've sent a password reset link to",
+          linkExpiry: "Click the link in the email to reset your password. The link will expire in 1 hour.",
+          checkSpam: "If you don't see the email, check your spam folder."
+        },
+        reset: {
+          title: "Set new password",
+          subtitle: "Enter your new password below",
+          newPassword: "New Password",
+          confirmPassword: "Confirm Password",
+          success: "Password reset successful!",
+          fillAll: "Please fill in all fields",
+          noMatch: "Passwords do not match",
+          requirements: "Password does not meet all requirements",
+          updated: "Password updated successfully!",
+          failed: "Failed to reset password",
+          resetting: "Resetting...",
+          resetButton: "Reset Password"
         }
       },
       cookie: {
@@ -2687,6 +2745,64 @@ const resources = {
           saved: "Paramètres du calendrier sauvegardés!",
           saveFailed: "Échec de la sauvegarde des paramètres du calendrier",
           finish: "Terminer la configuration"
+        },
+        import: {
+          title: "Importez vos contacts",
+          subtitle: "Choisissez comment ajouter vos contacts",
+          skipContacts: "Passer - J'ajouterai mes contacts plus tard"
+        },
+        complete: {
+          title: "Tout est prêt!",
+          welcome: "Bienvenue sur Realtor Desk AI",
+          whatWeSetUp: "Ce que nous avons configuré",
+          whatsNext: "Et maintenant?",
+          goDashboard: "Aller au tableau de bord",
+          watchTutorial: "Voir le tutoriel",
+          skipTutorial: "Passer le tutoriel",
+          needHelp: "Besoin d'aide pour commencer?",
+          contactSupport: "Contactez notre équipe de support"
+        },
+        saveFailed: "Échec de la sauvegarde. Veuillez réessayer.",
+        welcome: "Bienvenue sur Realtor Desk AI!",
+        completeFailed: "Échec de la configuration. Veuillez réessayer."
+      },
+      auth: {
+        login: {
+          subtitle: "Connectez-vous à votre espace de travail",
+          orEmail: "Ou continuer avec un courriel",
+          emailAddress: "Adresse courriel"
+        },
+        signup: {
+          subtitle: "Commencez votre essai gratuit de 14 jours",
+          orEmail: "Ou inscrivez-vous avec un courriel"
+        },
+        forgot: {
+          title: "Réinitialiser le mot de passe",
+          subtitle: "Entrez votre courriel et nous vous enverrons un lien de réinitialisation",
+          enterEmail: "Veuillez entrer votre adresse courriel",
+          emailSent: "Courriel de réinitialisation envoyé!",
+          sendFailed: "Échec de l'envoi du courriel de réinitialisation",
+          sending: "Envoi...",
+          sendLink: "Envoyer le lien de réinitialisation",
+          backToLogin: "Retour à la connexion",
+          checkEmail: "Vérifiez votre courriel",
+          sentTo: "Nous avons envoyé un lien de réinitialisation à",
+          linkExpiry: "Cliquez sur le lien dans le courriel pour réinitialiser votre mot de passe. Le lien expire dans 1 heure.",
+          checkSpam: "Si vous ne voyez pas le courriel, vérifiez votre dossier de courrier indésirable."
+        },
+        reset: {
+          title: "Nouveau mot de passe",
+          subtitle: "Entrez votre nouveau mot de passe ci-dessous",
+          newPassword: "Nouveau mot de passe",
+          confirmPassword: "Confirmer le mot de passe",
+          success: "Mot de passe réinitialisé avec succès!",
+          fillAll: "Veuillez remplir tous les champs",
+          noMatch: "Les mots de passe ne correspondent pas",
+          requirements: "Le mot de passe ne répond pas à toutes les exigences",
+          updated: "Mot de passe mis à jour avec succès!",
+          failed: "Échec de la réinitialisation du mot de passe",
+          resetting: "Réinitialisation...",
+          resetButton: "Réinitialiser le mot de passe"
         }
       },
       cookie: {

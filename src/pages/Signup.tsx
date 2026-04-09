@@ -153,7 +153,7 @@ const Signup = () => {
     <AuthLayout>
       <AuthCard
         title="RealtorDesk AI"
-        subtitle="Start your 14-day free trial"
+        subtitle={t('auth.signup.subtitle', 'Start your 14-day free trial')}
       >
         <div className="space-y-6">
           {/* OAuth Buttons */}
@@ -189,7 +189,7 @@ const Signup = () => {
               <div className="w-full border-t border-white/10" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-3 bg-gray-800 text-gray-400 font-medium">Or register with email</span>
+              <span className="px-3 bg-gray-800 text-gray-400 font-medium">{t('auth.signup.orEmail', 'Or register with email')}</span>
             </div>
           </div>
 

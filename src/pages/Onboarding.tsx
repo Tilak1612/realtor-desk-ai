@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/utils/analytics";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
@@ -15,6 +16,7 @@ import OnboardingComplete from "@/components/onboarding/OnboardingComplete";
 
 const Onboarding = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(null);
@@ -60,7 +62,7 @@ const Onboarding = () => {
 
     if (error) {
       console.error("Onboarding save failed:", error.message);
-      toast.error("Failed to save progress. Please try again.");
+      toast.error(t('onboarding.saveFailed', 'Failed to save progress. Please try again.'));
       throw error;
     }
 
@@ -103,10 +105,10 @@ const Onboarding = () => {
         // Email failure is non-fatal; user is already onboarded
       });
 
-      toast.success("Welcome to Realtor Desk AI!");
+      toast.success(t('onboarding.welcome', 'Welcome to Realtor Desk AI!'));
       navigate("/dashboard");
     } catch (error: unknown) {
-      toast.error("Failed to complete setup. Please try again.");
+      toast.error(t('onboarding.completeFailed', 'Failed to complete setup. Please try again.'));
     }
   };
 

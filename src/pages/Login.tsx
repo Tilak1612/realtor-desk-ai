@@ -101,7 +101,7 @@ const Login = () => {
     <AuthLayout>
       <AuthCard
         title="RealtorDesk AI"
-        subtitle="Sign in to your workspace"
+        subtitle={t('auth.login.subtitle', 'Sign in to your workspace')}
       >
         <div className="space-y-6">
           {/* OAuth Buttons */}
@@ -137,7 +137,7 @@ const Login = () => {
               <div className="w-full border-t border-white/10" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-3 bg-gray-800 text-gray-400 font-medium">Or continue with email</span>
+              <span className="px-3 bg-gray-800 text-gray-400 font-medium">{t('auth.login.orEmail', 'Or continue with email')}</span>
             </div>
           </div>
 
@@ -146,7 +146,7 @@ const Login = () => {
             {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium text-gray-200 flex items-center gap-2">
-                Email address <span className="text-xs text-red-400">*</span>
+                {t('auth.login.emailAddress', 'Email address')} <span className="text-xs text-red-400">*</span>
               </Label>
               <div className="relative">
                 <Input

@@ -9,8 +9,10 @@ import { toast } from "sonner";
 import { ArrowLeft, Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
@@ -19,7 +21,7 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     if (!email) {
-      toast.error("Please enter your email address");
+      toast.error(t('auth.forgot.enterEmail', 'Please enter your email address'));
       return;
     }
 
@@ -33,9 +35,9 @@ const ForgotPassword = () => {
       if (error) throw error;
 
       setSent(true);
-      toast.success("Password reset email sent!");
+      toast.success(t('auth.forgot.emailSent', 'Password reset email sent!'));
     } catch (error: any) {
-      toast.error(error.message || "Failed to send reset email");
+      toast.error(error.message || t('auth.forgot.sendFailed', 'Failed to send reset email'));
     } finally {
       setLoading(false);
     }
@@ -50,16 +52,16 @@ const ForgotPassword = () => {
             <>
               <CardHeader className="space-y-1">
                 <CardTitle className="text-3xl font-bold text-center">
-                  Reset password
+                  {t('auth.forgot.title', 'Reset password')}
                 </CardTitle>
                 <CardDescription className="text-center">
-                  Enter your email and we'll send you a reset link
+                  {t('auth.forgot.subtitle', "Enter your email and we'll send you a reset link")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <form onSubmit={handleResetPassword} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('app.auth.email', 'Email')}</Label>
                     <Input
                       id="email"
                       type="email"
@@ -71,7 +73,7 @@ const ForgotPassword = () => {
                   </div>
 
                   <Button className="w-full" type="submit" disabled={loading}>
-                    {loading ? "Sending..." : "Send reset link"}
+                    {loading ? t('auth.forgot.sending', 'Sending...') : t('auth.forgot.sendLink', 'Send reset link')}
                   </Button>
                 </form>
 
@@ -81,7 +83,7 @@ const ForgotPassword = () => {
                     className="text-sm text-primary hover:underline inline-flex items-center gap-1"
                   >
                     <ArrowLeft className="w-4 h-4" />
-                    Back to sign in
+                    {t('auth.forgot.backToLogin', 'Back to sign in')}
                   </Link>
                 </div>
               </CardContent>
@@ -92,24 +94,21 @@ const ForgotPassword = () => {
                 <div className="flex justify-center mb-4">
                   <Mail className="w-16 h-16 text-primary" />
                 </div>
-                <CardTitle className="text-3xl font-bold">Check your email</CardTitle>
+                <CardTitle className="text-3xl font-bold">{t('auth.forgot.checkEmail', 'Check your email')}</CardTitle>
                 <CardDescription>
-                  We've sent a password reset link to
+                  {t('auth.forgot.sentTo', "We've sent a password reset link to")}
                 </CardDescription>
                 <p className="text-base font-medium text-foreground">{email}</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4 text-center text-sm text-muted-foreground">
-                  <p>
-                    Click the link in the email to reset your password. The link will
-                    expire in 1 hour.
-                  </p>
-                  <p>If you don't see the email, check your spam folder.</p>
+                  <p>{t('auth.forgot.linkExpiry', 'Click the link in the email to reset your password. The link will expire in 1 hour.')}</p>
+                  <p>{t('auth.forgot.checkSpam', "If you don't see the email, check your spam folder.")}</p>
                 </div>
 
                 <div className="text-center">
                   <Link to="/login" className="text-sm text-primary hover:underline">
-                    Back to sign in
+                    {t('auth.forgot.backToLogin', 'Back to sign in')}
                   </Link>
                 </div>
               </CardContent>

@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Upload, Mail, Calendar } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ImportContactsProps {
   userId: string | null;
@@ -15,6 +16,7 @@ interface ImportContactsProps {
 }
 
 const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [selectedCrm, setSelectedCrm] = useState("");
@@ -81,8 +83,8 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">Import Your Contacts</h2>
-        <p className="text-muted-foreground">Choose how you'd like to add your contacts</p>
+        <h2 className="text-3xl font-bold mb-2">{t('onboarding.import.title', 'Import Your Contacts')}</h2>
+        <p className="text-muted-foreground">{t('onboarding.import.subtitle', "Choose how you'd like to add your contacts")}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -180,10 +182,10 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
 
       <div className="flex gap-4 pt-4">
         <Button type="button" variant="outline" onClick={onBack} className="flex-1">
-          Back
+          {t('app.common.back', 'Back')}
         </Button>
         <Button type="button" variant="ghost" onClick={onSkip} className="flex-1">
-          Skip - I'll add contacts later
+          {t('onboarding.import.skipContacts', "Skip - I'll add contacts later")}
         </Button>
       </div>
     </div>

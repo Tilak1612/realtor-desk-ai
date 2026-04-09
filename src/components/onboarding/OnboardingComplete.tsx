@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Play, ArrowRight } from "lucide-react";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface OnboardingCompleteProps {
   profileData: Record<string, any>;
@@ -11,6 +12,7 @@ interface OnboardingCompleteProps {
 
 const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Trigger confetti animation
@@ -62,9 +64,9 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
               <CheckCircle className="w-12 h-12 text-green-500" />
             </div>
           </div>
-          <CardTitle className="text-4xl font-bold mb-2">You're All Set!</CardTitle>
+          <CardTitle className="text-4xl font-bold mb-2">{t('onboarding.complete.title', "You're All Set!")}</CardTitle>
           <p className="text-lg text-muted-foreground">
-            Welcome to Realtor Desk AI, {profileData.full_name}
+            {t('onboarding.complete.welcome', 'Welcome to Realtor Desk AI')}, {profileData.full_name}
           </p>
         </CardHeader>
         <CardContent className="space-y-6 pt-6">
@@ -76,7 +78,7 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
           {/* Setup Checklist */}
           <Card className="bg-accent/50">
             <CardHeader>
-              <CardTitle className="text-lg">What We Set Up</CardTitle>
+              <CardTitle className="text-lg">{t('onboarding.complete.whatWeSetUp', 'What We Set Up')}</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="space-y-3">
@@ -98,14 +100,14 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
 
           {/* Next Steps */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">What's Next?</h3>
+            <h3 className="font-semibold text-lg">{t('onboarding.complete.whatsNext', "What's Next?")}</h3>
             <div className="grid grid-cols-1 gap-3">
               <Button
                 size="lg"
                 className="w-full justify-between group"
                 onClick={handleGoToDashboard}
               >
-                <span>Go to Dashboard</span>
+                <span>{t('onboarding.complete.goDashboard', 'Go to Dashboard')}</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               
@@ -114,7 +116,7 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
                 variant="outline"
                 className="w-full justify-between group"
               >
-                <span>Watch Tutorial</span>
+                <span>{t('onboarding.complete.watchTutorial', 'Watch Tutorial')}</span>
                 <Play className="w-5 h-5" />
               </Button>
 
@@ -123,16 +125,16 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
                 variant="ghost"
                 onClick={handleGoToDashboard}
               >
-                Skip Tutorial
+                {t('onboarding.complete.skipTutorial', 'Skip Tutorial')}
               </Button>
             </div>
           </div>
 
           <div className="pt-4 border-t">
             <p className="text-sm text-muted-foreground">
-              Need help getting started?{" "}
+              {t('onboarding.complete.needHelp', 'Need help getting started?')}{" "}
               <a href="/contact" className="text-primary hover:underline">
-                Contact our support team
+                {t('onboarding.complete.contactSupport', 'Contact our support team')}
               </a>
             </p>
           </div>
