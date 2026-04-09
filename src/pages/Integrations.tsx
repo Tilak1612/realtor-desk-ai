@@ -168,28 +168,13 @@ const Integrations = () => {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {category.integrations.map((integration, index) => (
-                    <Card 
-                      key={index} 
-                      className="p-4 card-hover flex flex-col items-center text-center group focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                    <Card
+                      key={index}
+                      className="p-4 card-hover flex flex-col items-center text-center group border border-border"
                       tabIndex={0}
                     >
-                      <div className="w-12 h-12 mb-3 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-300">
-                        <img 
-                          src={integration.logo} 
-                          alt={`${integration.name} logo`}
-                          className="max-w-full max-h-full object-contain"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent) {
-                              const fallback = document.createElement('div');
-                              fallback.className = 'w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-bold text-lg';
-                              fallback.textContent = integration.name.charAt(0);
-                              parent.appendChild(fallback);
-                            }
-                          }}
-                        />
+                      <div className="w-12 h-12 mb-3 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
+                        {integration.name.charAt(0)}
                       </div>
                       <h4 className="font-medium text-sm mb-1">{integration.name}</h4>
                       <p className="text-xs text-muted-foreground">{getSubtitle(integration.subtitleKey)}</p>
