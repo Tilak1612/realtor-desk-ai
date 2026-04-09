@@ -11,7 +11,9 @@ interface SegmentCardProps {
   link: string;
 }
 
-const SegmentCard = ({ image, title, description, link }: SegmentCardProps) => (
+const SegmentCard = ({ image, title, description, link }: SegmentCardProps) => {
+  const { t } = useTranslation();
+  return (
   <div className="flex flex-col items-center text-center group">
     {/* Circular Profile Image */}
     <div className="relative mb-6">
