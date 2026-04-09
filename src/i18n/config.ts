@@ -263,7 +263,8 @@ const resources = {
         feature2: "AI-powered lead scoring highlights hot prospects",
         feature3: "Real-time notifications for urgent inquiries",
         feature4: "One-click response templates",
-        feature5: "Performance analytics & ROI tracking"
+        feature5: "Performance analytics & ROI tracking",
+        loadFailed: "Failed to load profile"
       },
       canadian: {
         title: "Built for the Canadian Market",
