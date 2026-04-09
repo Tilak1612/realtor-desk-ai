@@ -126,7 +126,8 @@ export function QuickAreaImportWidget() {
 
     // Check by MLS number first (more reliable)
     if (mlsNumber) {
-      const { data: byMls } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: byMls } = await (supabase as any)
         .from("property_listings")
         .select("id")
         .eq("user_id", userId)

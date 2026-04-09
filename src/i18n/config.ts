@@ -13,7 +13,19 @@ const resources = {
         resources: "Resources",
         faq: "FAQ",
         bookDemo: "Book Your Free Demo",
-        startClosing: "Start Closing More Deals"
+        startClosing: "Start Closing More Deals",
+        signedOut: "Signed out successfully",
+        searchPlaceholder: "Search contacts, properties, deals...",
+        add: "Add",
+        addContact: "Contact",
+        addProperty: "Property",
+        addDeal: "Deal",
+        addTask: "Task",
+        notifications: "Notifications",
+        viewAllNotifications: "View all notifications",
+        profile: "Profile",
+        settings: "Settings",
+        signOut: "Sign out"
       },
       hero: {
         title: "Close 3X More Deals with AI Automation",
@@ -251,7 +263,23 @@ const resources = {
         feature2: "AI-powered lead scoring highlights hot prospects",
         feature3: "Real-time notifications for urgent inquiries",
         feature4: "One-click response templates",
-        feature5: "Performance analytics & ROI tracking"
+        feature5: "Performance analytics & ROI tracking",
+        loadFailed: "Failed to load profile"
+      },
+      ai: {
+        title: "Realtor AI Assistant",
+        subtitle: "Your intelligent real estate CRM assistant",
+        clearChat: "Clear Chat",
+        quickActions: "Quick Actions",
+        welcomeTitle: "Welcome to Realtor AI Assistant",
+        welcomeDesc: "I can help you manage contacts, analyze deals, create tasks, and provide real estate insights. Try one of the quick actions above!",
+        placeholder: "Ask me anything about your CRM, contacts, deals...",
+        actions: {
+          analyzePipeline: "Analyze my pipeline",
+          draftEmail: "Draft follow-up email",
+          createTask: "Create task",
+          marketResearch: "Market research"
+        }
       },
       canadian: {
         title: "Built for the Canadian Market",
@@ -1387,38 +1415,7 @@ const resources = {
           accountManager: "Dedicated account manager"
         }
       },
-      nav: {
-        signedOut: "Signed out successfully",
-        searchPlaceholder: "Search contacts, properties, deals...",
-        add: "Add",
-        addContact: "Contact",
-        addProperty: "Property",
-        addDeal: "Deal",
-        addTask: "Task",
-        notifications: "Notifications",
-        viewAllNotifications: "View all notifications",
-        profile: "Profile",
-        settings: "Settings",
-        signOut: "Sign out"
-      },
-      ai: {
-        title: "Realtor AI Assistant",
-        subtitle: "Your intelligent real estate CRM assistant",
-        clearChat: "Clear Chat",
-        quickActions: "Quick Actions",
-        welcomeTitle: "Welcome to Realtor AI Assistant",
-        welcomeDesc: "I can help you manage contacts, analyze deals, create tasks, and provide real estate insights. Try one of the quick actions above!",
-        placeholder: "Ask me anything about your CRM, contacts, deals...",
-        actions: {
-          analyzePipeline: "Analyze my pipeline",
-          draftEmail: "Draft follow-up email",
-          createTask: "Create task",
-          marketResearch: "Market research"
-        }
-      },
-      dashboard: {
-        loadFailed: "Failed to load profile"
-      },
+      
       onboarding: {
         profile: {
           title: "Let's Set Up Your Profile",
@@ -1546,7 +1543,19 @@ const resources = {
         resources: "Ressources",
         faq: "FAQ",
         bookDemo: "Réserver Votre Démo Gratuite",
-        startClosing: "Commencer à Conclure Plus"
+        startClosing: "Commencer à Conclure Plus",
+        signedOut: "Déconnexion réussie",
+        searchPlaceholder: "Rechercher contacts, propriétés, transactions...",
+        add: "Ajouter",
+        addContact: "Contact",
+        addProperty: "Propriété",
+        addDeal: "Transaction",
+        addTask: "Tâche",
+        notifications: "Notifications",
+        viewAllNotifications: "Voir toutes les notifications",
+        profile: "Profil",
+        settings: "Paramètres",
+        signOut: "Se déconnecter"
       },
       hero: {
         title: "Concluez 3X Plus de Transactions avec l'Automatisation IA",
@@ -1784,7 +1793,23 @@ const resources = {
         feature2: "Le scoring de prospects propulsé par l'IA met en évidence les prospects chauds",
         feature3: "Notifications en temps réel pour les demandes urgentes",
         feature4: "Modèles de réponse en un clic",
-        feature5: "Analyses de performance et suivi du ROI"
+        feature5: "Analyses de performance et suivi du ROI",
+        loadFailed: "Échec du chargement du profil"
+      },
+      ai: {
+        title: "Assistant IA Immobilier",
+        subtitle: "Votre assistant CRM immobilier intelligent",
+        clearChat: "Effacer la conversation",
+        quickActions: "Actions rapides",
+        welcomeTitle: "Bienvenue sur l'assistant IA Immobilier",
+        welcomeDesc: "Je peux vous aider à gérer vos contacts, analyser vos transactions, créer des tâches et fournir des perspectives immobilières. Essayez une des actions rapides ci-dessus!",
+        placeholder: "Posez-moi une question sur votre CRM, contacts, transactions...",
+        actions: {
+          analyzePipeline: "Analyser mon pipeline",
+          draftEmail: "Rédiger un courriel de suivi",
+          createTask: "Créer une tâche",
+          marketResearch: "Recherche de marché"
+        }
       },
       canadian: {
         title: "Conçu pour le Marché Canadien",
@@ -2920,38 +2945,7 @@ const resources = {
           accountManager: "Gestionnaire de compte dédié"
         }
       },
-      nav: {
-        signedOut: "Déconnexion réussie",
-        searchPlaceholder: "Rechercher contacts, propriétés, transactions...",
-        add: "Ajouter",
-        addContact: "Contact",
-        addProperty: "Propriété",
-        addDeal: "Transaction",
-        addTask: "Tâche",
-        notifications: "Notifications",
-        viewAllNotifications: "Voir toutes les notifications",
-        profile: "Profil",
-        settings: "Paramètres",
-        signOut: "Se déconnecter"
-      },
-      ai: {
-        title: "Assistant IA Immobilier",
-        subtitle: "Votre assistant CRM immobilier intelligent",
-        clearChat: "Effacer la conversation",
-        quickActions: "Actions rapides",
-        welcomeTitle: "Bienvenue sur l'assistant IA Immobilier",
-        welcomeDesc: "Je peux vous aider à gérer vos contacts, analyser vos transactions, créer des tâches et fournir des perspectives immobilières. Essayez une des actions rapides ci-dessus!",
-        placeholder: "Posez-moi une question sur votre CRM, contacts, transactions...",
-        actions: {
-          analyzePipeline: "Analyser mon pipeline",
-          draftEmail: "Rédiger un courriel de suivi",
-          createTask: "Créer une tâche",
-          marketResearch: "Recherche de marché"
-        }
-      },
-      dashboard: {
-        loadFailed: "Échec du chargement du profil"
-      },
+      
       onboarding: {
         profile: {
           title: "Configurons votre profil",

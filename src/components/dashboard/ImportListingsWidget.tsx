@@ -164,7 +164,8 @@ export function ImportListingsWidget() {
   const saveSingleListing = async (listing: ListingResult, userId: string): Promise<{ saved: boolean; duplicate: boolean }> => {
     // Check by MLS number first (more reliable)
     if (listing.mlsNumber) {
-      const { data: byMls } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: byMls } = await (supabase as any)
         .from("property_listings")
         .select("id")
         .eq("user_id", userId)

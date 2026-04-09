@@ -22,8 +22,8 @@ export interface Property {
   province: string | null;
   postal_code: string | null;
   property_type: string | null;
-  listing_type: string;
-  status: string;
+  listing_type: string | null;
+  status: string | null;
   price: number | null;
   bedrooms: number | null;
   bathrooms: number | null;
@@ -33,12 +33,13 @@ export interface Property {
   description: string | null;
   image_url: string | null;
   images: unknown;
-  virtual_tour_url: string | null;
+  virtual_tour_url?: string | null;
   features: unknown;
-  mls_number: string | null;
-  days_on_market: number;
-  contact_id: string | null;
-  deal_id: string | null;
+  mls_number?: string | null;
+  days_on_market?: number | null;
+  contact_id?: string | null;
+  deal_id?: string | null;
+  metadata?: unknown;
   created_at: string;
   updated_at: string;
 }
