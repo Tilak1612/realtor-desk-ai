@@ -90,6 +90,10 @@ const resources = {
         }
       },
       pricing: {
+        banner: {
+          trial: "🎉 14 Days Free Trial - Start Today!",
+          launch: "🎉 Launch Pricing — Save $498/year vs. Monthly!"
+        },
         hero: {
           badge: "🇨🇦 Proud Canadian Company",
           title: "Simple, Transparent Pricing for",
@@ -1297,7 +1301,9 @@ const resources = {
         terms: "Terms of Service",
         casl: "CASL Compliance",
         copyright: "© 2025 RealtorDesk.ai. All rights reserved.",
-        madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors"
+        madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors",
+        poweredBy: "Powered by Brainfy AI Inc",
+        cookieSettings: "Cookie Settings"
       },
       trial: {
         daysRemaining: "{{count}} days remaining in your free trial",
@@ -1493,7 +1499,13 @@ const resources = {
         login: {
           subtitle: "Sign in to your workspace",
           orEmail: "Or continue with email",
-          emailAddress: "Email address"
+          emailAddress: "Email address",
+          password: "Password",
+          forgotPassword: "Forgot password?",
+          signInSecurely: "Sign in securely",
+          sslNotice: "Your connection is secured with 256-bit SSL encryption",
+          noAccount: "Don't have an account?",
+          startTrial: "Start your free trial"
         },
         signup: {
           subtitle: "Start your 14-day free trial",
@@ -1635,6 +1647,10 @@ const resources = {
         }
       },
       pricing: {
+        banner: {
+          trial: "🎉 Essai Gratuit de 14 Jours - Commencez Aujourd'hui!",
+          launch: "🎉 Prix de Lancement — Économisez 498 $/an vs. Mensuel!"
+        },
         hero: {
           badge: "🇨🇦 Fière Entreprise Canadienne",
           title: "Tarification Simple et Transparente pour les",
@@ -2842,7 +2858,9 @@ const resources = {
         terms: "Conditions d'Utilisation",
         casl: "Conformité LCAP",
         copyright: "© 2025 RealtorDesk.ai. Tous droits réservés.",
-        madeInCanada: "Fabriqué au Canada 🇨🇦 pour les Agents Immobiliers Canadiens"
+        madeInCanada: "Fabriqué au Canada 🇨🇦 pour les Agents Immobiliers Canadiens",
+        poweredBy: "Propulsé par Brainfy AI Inc",
+        cookieSettings: "Paramètres des Cookies"
       },
       trial: {
         daysRemaining: "{{count}} jours restants dans votre essai gratuit",
@@ -3038,7 +3056,13 @@ const resources = {
         login: {
           subtitle: "Connectez-vous à votre espace de travail",
           orEmail: "Ou continuer avec un courriel",
-          emailAddress: "Adresse courriel"
+          emailAddress: "Adresse courriel",
+          password: "Mot de passe",
+          forgotPassword: "Mot de passe oublié?",
+          signInSecurely: "Connexion sécurisée",
+          sslNotice: "Votre connexion est sécurisée avec un chiffrement SSL 256 bits",
+          noAccount: "Vous n'avez pas de compte?",
+          startTrial: "Commencez votre essai gratuit"
         },
         signup: {
           subtitle: "Commencez votre essai gratuit de 14 jours",

@@ -21,7 +21,7 @@ const Footer = () => {
               {t('footer.tagline')}
             </p>
             <p className="text-xs text-muted-foreground italic mb-4">
-              Powered by Brainfy AI Inc
+              {t('footer.poweredBy', 'Powered by Brainfy AI Inc')}
             </p>
             <div className="flex gap-4">
               <a
@@ -151,7 +151,7 @@ const Footer = () => {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              {t('footer.copyright')} | Powered by Brainfy AI Inc
+              {t('footer.copyright')} | {t('footer.poweredBy', 'Powered by Brainfy AI Inc')}
             </p>
             <div className="flex gap-6 text-sm">
               <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
@@ -167,7 +167,7 @@ const Footer = () => {
                 }} 
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                Cookie Settings
+                {t('footer.cookieSettings', 'Cookie Settings')}
               </button>
               <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                 {t('footer.contact')}

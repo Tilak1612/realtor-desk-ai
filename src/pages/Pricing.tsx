@@ -63,10 +63,10 @@ const Pricing = () => {
             {t('pricing.hero.badge')}
           </Badge>
           <Badge variant="default" className="mb-4 animate-fade-in-up bg-accent text-white">
-            🎉 14 Days Free Trial - Start Today!
+            {t('pricing.banner.trial', '🎉 14 Days Free Trial - Start Today!')}
           </Badge>
           <Badge variant="default" className="mb-4 animate-fade-in-up bg-primary text-white">
-            🎉 Launch Pricing — Save $498/year vs. Monthly!
+            {t('pricing.banner.launch', '🎉 Launch Pricing — Save $498/year vs. Monthly!')}
           </Badge>
           <h1 className="mb-6 animate-fade-in-up">
             {t('pricing.hero.title')} <span className="gradient-text">{t('pricing.hero.titleGradient')}</span>

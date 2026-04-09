@@ -165,7 +165,7 @@ const Login = () => {
             {/* Password */}
             <div className="space-y-2">
               <Label htmlFor="password" className="text-sm font-medium text-gray-200 flex items-center gap-2">
-                Password <span className="text-xs text-red-400">*</span>
+                {t('auth.login.password', 'Password')} <span className="text-xs text-red-400">*</span>
               </Label>
               <div className="relative">
                 <Input
@@ -194,7 +194,7 @@ const Login = () => {
                 to="/forgot-password"
                 className="text-sm text-primary hover:text-primary/80 font-medium transition-colors hover:underline"
               >
-                Forgot password?
+                {t('auth.login.forgotPassword', 'Forgot password?')}
               </Link>
             </div>
 
@@ -204,22 +204,22 @@ const Login = () => {
               disabled={loading}
               className="w-full bg-gradient-to-r from-primary to-purple-600 text-white py-3 px-4 rounded-xl font-medium hover:from-primary/90 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
-              <span>{loading ? t('app.common.loading') : 'Sign in securely'}</span>
+              <span>{loading ? t('app.common.loading') : t('auth.login.signInSecurely', 'Sign in securely')}</span>
               {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
 
             {/* Security Notice */}
             <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-700/50 p-3 rounded-lg border border-white/10">
               <Info className="w-4 h-4 text-primary flex-shrink-0" />
-              <span>Your connection is secured with 256-bit SSL encryption</span>
+              <span>{t('auth.login.sslNotice', 'Your connection is secured with 256-bit SSL encryption')}</span>
             </div>
           </form>
 
           {/* Sign Up Link */}
           <p className="text-center text-sm text-gray-400">
-            Don't have an account?{" "}
+            {t('auth.login.noAccount', "Don't have an account?")}{" "}
             <Link to="/signup" className="text-primary font-medium hover:underline transition-colors">
-              Start your free trial
+              {t('auth.login.startTrial', 'Start your free trial')}
             </Link>
           </p>
         </div>
