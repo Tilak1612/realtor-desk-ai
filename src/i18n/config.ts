@@ -106,7 +106,25 @@ const resources = {
         mobile: {
           title: "Work From Anywhere with Our Mobile App",
           subtitle: "Manage your entire real estate business from your phone. Respond to leads, schedule showings, and close deals on the go.",
-          appStores: "Available on iOS & Android"
+          appStores: "Available on iOS & Android",
+          f1title: "Full CRM Access", f1desc: "View and manage all contacts, leads, and deals from your phone",
+          f2title: "Push Notifications", f2desc: "Get instant alerts for new leads, messages, and deal updates",
+          f3title: "Offline Mode", f3desc: "Access your data even without internet connection",
+          f4title: "Voice Commands", f4desc: "Add notes and create tasks hands-free while driving"
+        },
+        comparison: {
+          title: "How We Compare to Leading CRMs",
+          disclaimer: "* Pricing and features as of October 2025. Contact competitors directly for current information.",
+          feature: "Feature",
+          leadScoring: "Predictive Lead Scoring", advancedAI: "✓ Advanced AI", basic: "Basic", manual: "Manual", limited: "Limited",
+          chatbot: "24/7 AI Chatbot", bilingual: "✓ Bilingual", addon: "Add-on",
+          ddf: "CREA DDF® Integration", comingQ3: "Coming Q3 2026", thirdParty: "Third-party",
+          transactionAI: "Transaction AI", fullAutomation: "✓ Full automation",
+          compliance: "Canadian Compliance", builtIn: "✓ Built-in",
+          marketingAuto: "Marketing Automation", aiGenerated: "✓ AI-generated", templates: "Templates",
+          mobileApp: "Mobile App", fullFeatured: "✓ Full-featured",
+          startingPrice: "Starting Price", setupFee: "Setup Fee",
+          contract: "Contract", monthToMonth: "Month-to-month", annual: "Annual"
         }
       },
       pricing: {
@@ -1839,7 +1857,25 @@ const resources = {
         mobile: {
           title: "Travaillez de N'importe Où avec Notre Application Mobile",
           subtitle: "Gérez toute votre entreprise immobilière depuis votre téléphone. Répondez aux prospects, planifiez des visites et concluez des ventes en déplacement.",
-          appStores: "Disponible sur iOS et Android"
+          appStores: "Disponible sur iOS et Android",
+          f1title: "Accès CRM Complet", f1desc: "Consultez et gérez tous vos contacts, prospects et transactions depuis votre téléphone",
+          f2title: "Notifications Push", f2desc: "Recevez des alertes instantanées pour les nouveaux prospects, messages et mises à jour",
+          f3title: "Mode Hors Ligne", f3desc: "Accédez à vos données même sans connexion internet",
+          f4title: "Commandes Vocales", f4desc: "Ajoutez des notes et créez des tâches en mains libres en conduisant"
+        },
+        comparison: {
+          title: "Comment Nous Comparons aux Principaux CRM",
+          disclaimer: "* Prix et fonctionnalités à partir d'octobre 2025. Contactez les concurrents directement pour les informations actuelles.",
+          feature: "Fonctionnalité",
+          leadScoring: "Score Prédictif de Prospects", advancedAI: "✓ IA Avancée", basic: "Basique", manual: "Manuel", limited: "Limité",
+          chatbot: "Chatbot IA 24/7", bilingual: "✓ Bilingue", addon: "Module complémentaire",
+          ddf: "Intégration CREA DDF®", comingQ3: "Disponible T3 2026", thirdParty: "Tiers",
+          transactionAI: "IA de Transactions", fullAutomation: "✓ Automatisation complète",
+          compliance: "Conformité Canadienne", builtIn: "✓ Intégré",
+          marketingAuto: "Automatisation Marketing", aiGenerated: "✓ Généré par IA", templates: "Modèles",
+          mobileApp: "Application Mobile", fullFeatured: "✓ Complète",
+          startingPrice: "Prix de Départ", setupFee: "Frais d'Installation",
+          contract: "Contrat", monthToMonth: "Mois par mois", annual: "Annuel"
         }
       },
       pricing: {

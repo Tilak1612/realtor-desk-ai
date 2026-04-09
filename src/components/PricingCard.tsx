@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface PricingCardProps {
   name: string;
@@ -30,13 +31,14 @@ const PricingCard = ({
   yearlyPrice,
   trialBadge,
 }: PricingCardProps) => {
+  const { t } = useTranslation();
   return (
     <Card className={`p-8 card-hover relative ${popular ? "border-2 border-primary shadow-xl" : ""}`}>
       {popular && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
           <div className="bg-gradient-to-r from-primary to-secondary text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
             <Star className="w-3 h-3" />
-            Most Popular
+            {t('pricing.plans.team.badge', 'Most Popular')}
           </div>
         </div>
       )}
@@ -55,7 +57,7 @@ const PricingCard = ({
         {discount && (
           <div className="mb-2">
             <span className="inline-block bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-semibold">
-              Save {discount}
+              {discount}
             </span>
           </div>
         )}
@@ -64,7 +66,7 @@ const PricingCard = ({
           {price !== "Custom" ? (
             <>
               <span className="text-5xl font-extrabold text-accent">${price}</span>
-              <span className="text-muted-foreground font-medium">/{billingPeriod}</span>
+              <span className="text-muted-foreground font-medium">/{billingPeriod === 'month' ? t('pricing.plans.agent.period', '/month').replace('/', '') : billingPeriod}</span>
             </>
           ) : (
             <span className="text-5xl font-extrabold text-accent">{price}</span>

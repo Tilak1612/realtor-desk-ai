@@ -193,7 +193,7 @@ const Features = () => {
             <table className="w-full bg-background rounded-lg overflow-hidden shadow-lg">
               <thead className="bg-gradient-to-r from-primary to-secondary text-white">
                 <tr>
-                  <th className="p-4 text-left font-semibold">Feature</th>
+                  <th className="p-4 text-left font-semibold">{t('features.comparison.feature', 'Feature')}</th>
                   <th className="p-4 text-left font-semibold">Realtor Desk AI</th>
                   <th className="p-4 text-left font-semibold">Follow Up Boss</th>
                   <th className="p-4 text-left font-semibold">Wise Agent</th>
@@ -202,16 +202,16 @@ const Features = () => {
               </thead>
               <tbody>
                 {[
-                  ["Predictive Lead Scoring", "✓ Advanced AI", "Basic", "Manual", "Basic"],
-                  ["24/7 AI Chatbot", "✓ Bilingual", "Add-on", "Limited", "Basic"],
-                  ["CREA DDF® Integration", "Coming Q3 2026", "Third-party", "Third-party", "Third-party"],
-                  ["Transaction AI", "✓ Full automation", "✗", "Manual", "Basic"],
-                  ["Canadian Compliance", "✓ Built-in", "Manual", "Manual", "Manual"],
-                  ["Marketing Automation", "✓ AI-generated", "Templates", "Templates", "Templates"],
-                  ["Mobile App", "✓ Full-featured", "Limited", "Basic", "✓"],
-                  ["Starting Price", "$149/mo", "$69/mo", "$49/mo", "$149/mo"],
-                  ["Setup Fee", "$0", "$0", "$0", "$299"],
-                  ["Contract", "Month-to-month", "Annual", "Month-to-month", "Annual"],
+                  [t('features.comparison.leadScoring', 'Predictive Lead Scoring'), t('features.comparison.advancedAI', '✓ Advanced AI'), t('features.comparison.basic', 'Basic'), t('features.comparison.manual', 'Manual'), t('features.comparison.basic', 'Basic')],
+                  [t('features.comparison.chatbot', '24/7 AI Chatbot'), t('features.comparison.bilingual', '✓ Bilingual'), t('features.comparison.addon', 'Add-on'), t('features.comparison.limited', 'Limited'), t('features.comparison.basic', 'Basic')],
+                  [t('features.comparison.ddf', 'CREA DDF® Integration'), t('features.comparison.comingQ3', 'Coming Q3 2026'), t('features.comparison.thirdParty', 'Third-party'), t('features.comparison.thirdParty', 'Third-party'), t('features.comparison.thirdParty', 'Third-party')],
+                  [t('features.comparison.transactionAI', 'Transaction AI'), t('features.comparison.fullAutomation', '✓ Full automation'), "✗", t('features.comparison.manual', 'Manual'), t('features.comparison.basic', 'Basic')],
+                  [t('features.comparison.compliance', 'Canadian Compliance'), t('features.comparison.builtIn', '✓ Built-in'), t('features.comparison.manual', 'Manual'), t('features.comparison.manual', 'Manual'), t('features.comparison.manual', 'Manual')],
+                  [t('features.comparison.marketingAuto', 'Marketing Automation'), t('features.comparison.aiGenerated', '✓ AI-generated'), t('features.comparison.templates', 'Templates'), t('features.comparison.templates', 'Templates'), t('features.comparison.templates', 'Templates')],
+                  [t('features.comparison.mobileApp', 'Mobile App'), t('features.comparison.fullFeatured', '✓ Full-featured'), t('features.comparison.limited', 'Limited'), t('features.comparison.basic', 'Basic'), "✓"],
+                  [t('features.comparison.startingPrice', 'Starting Price'), "$149/mo", "$69/mo", "$49/mo", "$149/mo"],
+                  [t('features.comparison.setupFee', 'Setup Fee'), "$0", "$0", "$0", "$299"],
+                  [t('features.comparison.contract', 'Contract'), t('features.comparison.monthToMonth', 'Month-to-month'), t('features.comparison.annual', 'Annual'), t('features.comparison.monthToMonth', 'Month-to-month'), t('features.comparison.annual', 'Annual')],
                   ["ROI", "$8.71 per $1", "$3-4 per $1", "$2-3 per $1", "$4-5 per $1"],
                 ].map((row, index) => (
                   <tr key={index} className="border-t hover:bg-muted/50 transition-colors">
@@ -245,29 +245,29 @@ const Features = () => {
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold">Full CRM Access</div>
-                    <div className="text-sm text-muted-foreground">View and manage all contacts, leads, and deals from your phone</div>
+                    <div className="font-semibold">{t('features.mobile.f1title', 'Full CRM Access')}</div>
+                    <div className="text-sm text-muted-foreground">{t('features.mobile.f1desc', 'View and manage all contacts, leads, and deals from your phone')}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold">Push Notifications</div>
-                    <div className="text-sm text-muted-foreground">Get instant alerts for new leads, messages, and deal updates</div>
+                    <div className="font-semibold">{t('features.mobile.f2title', 'Push Notifications')}</div>
+                    <div className="text-sm text-muted-foreground">{t('features.mobile.f2desc', 'Get instant alerts for new leads, messages, and deal updates')}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold">Offline Mode</div>
-                    <div className="text-sm text-muted-foreground">Access your data even without internet connection</div>
+                    <div className="font-semibold">{t('features.mobile.f3title', 'Offline Mode')}</div>
+                    <div className="text-sm text-muted-foreground">{t('features.mobile.f3desc', 'Access your data even without internet connection')}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
                   <div>
-                    <div className="font-semibold">Voice Commands</div>
-                    <div className="text-sm text-muted-foreground">Add notes and create tasks hands-free while driving</div>
+                    <div className="font-semibold">{t('features.mobile.f4title', 'Voice Commands')}</div>
+                    <div className="text-sm text-muted-foreground">{t('features.mobile.f4desc', 'Add notes and create tasks hands-free while driving')}</div>
                   </div>
                 </li>
               </ul>
