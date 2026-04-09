@@ -266,6 +266,21 @@ const resources = {
         feature5: "Performance analytics & ROI tracking",
         loadFailed: "Failed to load profile"
       },
+      ai: {
+        title: "Realtor AI Assistant",
+        subtitle: "Your intelligent real estate CRM assistant",
+        clearChat: "Clear Chat",
+        quickActions: "Quick Actions",
+        welcomeTitle: "Welcome to Realtor AI Assistant",
+        welcomeDesc: "I can help you manage contacts, analyze deals, create tasks, and provide real estate insights. Try one of the quick actions above!",
+        placeholder: "Ask me anything about your CRM, contacts, deals...",
+        actions: {
+          analyzePipeline: "Analyze my pipeline",
+          draftEmail: "Draft follow-up email",
+          createTask: "Create task",
+          marketResearch: "Market research"
+        }
+      },
       canadian: {
         title: "Built for the Canadian Market",
         bilingual: "Bilingual Support (EN/FR)",
