@@ -1528,7 +1528,19 @@ const resources = {
         resources: "Ressources",
         faq: "FAQ",
         bookDemo: "Réserver Votre Démo Gratuite",
-        startClosing: "Commencer à Conclure Plus"
+        startClosing: "Commencer à Conclure Plus",
+        signedOut: "Déconnexion réussie",
+        searchPlaceholder: "Rechercher contacts, propriétés, transactions...",
+        add: "Ajouter",
+        addContact: "Contact",
+        addProperty: "Propriété",
+        addDeal: "Transaction",
+        addTask: "Tâche",
+        notifications: "Notifications",
+        viewAllNotifications: "Voir toutes les notifications",
+        profile: "Profil",
+        settings: "Paramètres",
+        signOut: "Se déconnecter"
       },
       hero: {
         title: "Concluez 3X Plus de Transactions avec l'Automatisation IA",
