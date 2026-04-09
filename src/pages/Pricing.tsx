@@ -92,7 +92,7 @@ const Pricing = () => {
               {t('pricing.hero.yearly')}
             </span>
             <Badge variant="secondary" className="text-accent font-semibold">
-              {t('pricing.hero.saveYearly')} + Founding Member Bonus
+              {t('pricing.hero.saveYearly')} + {t('pricing.annual.foundingBonus', 'Founding Member Bonus')}
             </Badge>
           </div>
         </div>
@@ -103,83 +103,83 @@ const Pricing = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             <PricingCard
-              name="AGENT"
+              name={t('pricing.plans.agent.name')}
               price={isYearly ? (pricingData.agent.foundingPrice.toString()) : pricingData.agent.monthly.toString()}
-              description="Perfect for individual agents ready to scale"
+              description={t('pricing.plans.agent.description')}
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? `Save $789 vs monthly ($498 vs regular yearly)` : `Save $${pricingData.agent.savings}/year with annual billing`}
+              discount={isYearly ? `Save $789 vs monthly ($498 vs regular yearly)` : t('pricing.plans.agent.savings')}
               yearlyPrice={isYearly ? pricingData.agent.foundingPrice : undefined}
               features={[
-                "Unlimited contacts & leads",
-                "AI-powered predictive CRM",
-                "24/7 AI chatbot (website, SMS, email)",
-                "ROI tracking & analytics",
-                "Email & SMS automation",
-                "Canadian market intelligence",
-                "Bilingual support (EN/FR)",
-                "Mobile app included",
-                "Free migration assistance",
-                "No setup fees",
-                "Priority support"
+                t('pricing.plans.agent.feature1'),
+                t('pricing.plans.agent.feature2'),
+                t('pricing.plans.agent.feature3'),
+                t('pricing.plans.agent.feature4'),
+                t('pricing.plans.agent.feature5'),
+                t('pricing.plans.agent.feature6'),
+                t('pricing.plans.agent.feature7'),
+                t('pricing.plans.agent.feature8'),
+                t('pricing.plans.agent.feature9'),
+                t('pricing.plans.agent.feature10'),
+                t('pricing.plans.agent.feature11'),
               ]}
-              ctaText="Start 14-Day Free Trial"
+              ctaText={t('pricing.plans.agent.ctaMonthly')}
               ctaLink="/signup"
-              trialBadge="14 Days Free Trial"
+              trialBadge={t('pricing.plans.agent.badge')}
             />
 
             <PricingCard
-              name="TEAM"
+              name={t('pricing.plans.team.name')}
               price={isYearly ? "2,997" : "299"}
-              description="For growing teams of 2-5 agents"
+              description={t('pricing.plans.team.description')}
               billingPeriod={isYearly ? "year" : "month"}
               discount={isYearly ? `Save ${pricingData.team.discount} annually` : undefined}
               yearlyPrice={isYearly ? pricingData.team.yearly : undefined}
               features={[
-                "Everything in Agent tier, plus:",
-                "Team collaboration tools",
-                "Lead distribution & routing",
-                "Team performance dashboard",
-                "Shared pipeline management",
-                "Advanced reporting & analytics",
-                "Priority support",
-                "Dedicated account manager",
-                "Custom training sessions",
-                "API access available",
-                "White-label options"
+                t('pricing.plans.team.feature1'),
+                t('pricing.plans.team.feature2'),
+                t('pricing.plans.team.feature3'),
+                t('pricing.plans.team.feature4'),
+                t('pricing.plans.team.feature5'),
+                t('pricing.plans.team.feature6'),
+                t('pricing.plans.team.feature7'),
+                t('pricing.plans.team.feature8'),
+                t('pricing.plans.team.feature9'),
+                t('pricing.plans.team.feature10'),
+                t('pricing.plans.team.feature11'),
               ]}
               popular
-              ctaText="Start 14-Day Free Trial"
+              ctaText={t('pricing.plans.team.cta')}
               ctaLink="/signup"
-              trialBadge="14 Days Free Trial"
+              trialBadge={t('pricing.plans.team.badge')}
             />
 
             <PricingCard
-              name="BROKERAGE"
-              price="Custom"
-              description="For brokerages with 6+ agents"
+              name={t('pricing.plans.brokerage.name')}
+              price={t('pricing.plans.brokerage.price')}
+              description={t('pricing.plans.brokerage.description')}
               features={[
-                "Everything in Team tier, plus:",
-                "Unlimited agents",
-                "Custom branding & white-label",
-                "Advanced admin controls",
-                "Multi-office management",
-                "Brokerage compliance tools",
-                "Dedicated success manager",
-                "Custom AI model training",
-                "Volume pricing discounts",
-                "Premium 24/7 support"
+                t('pricing.plans.brokerage.feature1'),
+                t('pricing.plans.brokerage.feature2'),
+                t('pricing.plans.brokerage.feature3'),
+                t('pricing.plans.brokerage.feature4'),
+                t('pricing.plans.brokerage.feature5'),
+                t('pricing.plans.brokerage.feature6'),
+                t('pricing.plans.brokerage.feature7'),
+                t('pricing.plans.brokerage.feature8'),
+                t('pricing.plans.brokerage.feature9'),
+                t('pricing.plans.brokerage.feature10'),
               ]}
-              ctaText="Start 14-Day Free Trial"
+              ctaText={t('pricing.plans.brokerage.cta')}
               ctaLink="/demo"
-              trialBadge="14 Days Free Trial"
+              trialBadge={t('pricing.plans.brokerage.badge')}
             />
           </div>
 
           {/* Competitor Comparison Box */}
           <Card className="mt-16 p-8 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 max-w-4xl mx-auto">
             <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-2">Compare with Competitors</h3>
-              <p className="text-muted-foreground">See how much you save with Realtor Desk AI</p>
+              <h3 className="text-2xl font-bold mb-2">{t('pricing.compare.heading')}</h3>
+              <p className="text-muted-foreground">{t('pricing.compare.sub')}</p>
             </div>
             
             <div className="grid gap-4">
@@ -194,7 +194,7 @@ const Pricing = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-xl font-bold text-destructive">$6,987</div>
-                  <div className="text-xs text-muted-foreground">First year</div>
+                  <div className="text-xs text-muted-foreground">{t('pricing.compare.firstYear')}</div>
                 </div>
               </div>
 
@@ -209,7 +209,7 @@ const Pricing = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-xl font-bold text-destructive">$1,788+</div>
-                  <div className="text-xs text-muted-foreground">Per year</div>
+                  <div className="text-xs text-muted-foreground">{t('pricing.compare.perYear')}</div>
                 </div>
               </div>
 
@@ -224,7 +224,7 @@ const Pricing = () => {
                 </div>
                 <div className="text-right">
                   <div className="text-xl font-bold gradient-text">$999</div>
-                  <div className="text-xs text-accent font-semibold">Save thousands!</div>
+                  <div className="text-xs text-accent font-semibold">{t('pricing.compare.saveThousands')}</div>
                 </div>
               </div>
             </div>
@@ -237,13 +237,13 @@ const Pricing = () => {
 
           {/* Feature Comparison Table */}
           <Card className="mt-12 p-8 max-w-6xl mx-auto">
-            <h3 className="text-2xl font-bold mb-6 text-center">Feature Comparison: Why Agents Switch to Realtor Desk AI</h3>
+            <h3 className="text-2xl font-bold mb-6 text-center">{t('pricing.table.heading')}</h3>
             
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b-2">
-                    <th className="text-left py-4 px-4 font-semibold">Feature</th>
+                    <th className="text-left py-4 px-4 font-semibold">{t('pricing.table.featureCol')}</th>
                     <th className="text-center py-4 px-4 font-semibold text-accent">Realtor Desk AI</th>
                     <th className="text-center py-4 px-4 font-semibold text-muted-foreground">BoldTrail</th>
                     <th className="text-center py-4 px-4 font-semibold text-muted-foreground">Lofty</th>
@@ -275,10 +275,10 @@ const Pricing = () => {
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">CREA DDF® Integration <span className="text-xs text-primary font-medium ml-1">(Coming Q3 2026)</span></td>
-                    <td className="text-center py-3 px-4"><span className="text-xs text-primary font-medium">Coming Soon</span></td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">Extra Cost</td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">Limited</td>
+                    <td className="py-3 px-4">CREA DDF® {t('pricing.table.comingQ3')}</td>
+                    <td className="text-center py-3 px-4"><span className="text-xs text-primary font-medium">{t('pricing.table.comingSoon')}</span></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">{t('pricing.table.extraCost')}</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">{t('pricing.table.limited')}</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">Free Migration</td>
@@ -397,54 +397,46 @@ const Pricing = () => {
       {/* Guarantees Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <h2 className="text-center mb-12">Our Guarantees to You</h2>
-          
+          <h2 className="text-center mb-12">{t('pricing.guarantees.heading')}</h2>
+
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-8 text-center">
               <Shield className="w-16 h-16 text-accent mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-3">30-Day Money-Back Guarantee</h3>
-              <p className="text-muted-foreground">
-                Close at least one additional deal in your first 30 days or get a full refund. No questions asked.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t('pricing.guarantees.moneyBack')}</h3>
+              <p className="text-muted-foreground">{t('pricing.guarantees.moneyBackDesc')}</p>
             </Card>
-            
+
             <Card className="p-8 text-center">
               <CheckCircle className="w-16 h-16 text-accent mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-3">No Contracts, Cancel Anytime</h3>
-              <p className="text-muted-foreground">
-                All plans are month-to-month. Cancel anytime with one click. No penalties, no hassles.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t('pricing.guarantees.noContracts')}</h3>
+              <p className="text-muted-foreground">{t('pricing.guarantees.noContractsDesc')}</p>
             </Card>
-            
+
             <Card className="p-8 text-center">
               <Brain className="w-16 h-16 text-accent mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-3">Free Setup & Migration</h3>
-              <p className="text-muted-foreground">
-                We'll migrate your contacts and data from any CRM for free. Plus complimentary onboarding and training.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t('pricing.guarantees.freeSetup')}</h3>
+              <p className="text-muted-foreground">{t('pricing.guarantees.freeSetupDesc')}</p>
             </Card>
           </div>
-          
+
           <Card className="p-12 bg-gradient-to-br from-accent/10 to-accent/5 border-accent/20">
             <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
               <Shield className="w-20 h-20 text-accent flex-shrink-0" />
               <div>
-                <h2 className="mb-4">30-Day Money-Back Guarantee</h2>
-                <p className="text-lg text-muted-foreground mb-4">
-                  If you don't see measurable ROI in 30 days, we'll refund 100%. No questions asked.
-                </p>
+                <h2 className="mb-4">{t('pricing.guarantees.moneyBack')}</h2>
+                <p className="text-lg text-muted-foreground mb-4">{t('pricing.guarantees.moneyBackDesc')}</p>
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm">
                   <Badge variant="secondary" className="gap-1">
                     <Check className="w-3 h-3" />
-                    No contracts
+                    {t('pricing.guarantees.badge1')}
                   </Badge>
                   <Badge variant="secondary" className="gap-1">
                     <Check className="w-3 h-3" />
-                    No setup fees
+                    {t('pricing.guarantees.badge2')}
                   </Badge>
                   <Badge variant="secondary" className="gap-1">
                     <Check className="w-3 h-3" />
-                    Cancel anytime
+                    {t('pricing.guarantees.badge3')}
                   </Badge>
                 </div>
               </div>
@@ -456,12 +448,12 @@ const Pricing = () => {
       {/* FAQ Section */}
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-3xl">
-          <h2 className="text-center mb-12">Frequently Asked Questions</h2>
-          
+          <h2 className="text-center mb-12">{t('pricing.faq.heading')}</h2>
+
           <Accordion type="single" collapsible className="space-y-4">
             <AccordionItem value="item-1" className="bg-background rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                Do I need to sign a long-term contract?
+                {t('pricing.faq.q1')}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 No, all plans are month-to-month with no commitment. Cancel anytime without penalty.
@@ -470,7 +462,7 @@ const Pricing = () => {
 
             <AccordionItem value="item-2" className="bg-background rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                Is CREA DDF® integration included?
+                {t('pricing.faq.q2')}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 Native CREA DDF® integration is currently in development and planned for Q3 2026. It will be included in all plans at no extra cost. In the meantime, you can import listings from Realtor.ca using our built-in import tool.
