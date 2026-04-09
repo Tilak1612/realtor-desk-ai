@@ -36,7 +36,16 @@ const resources = {
         badge1: "CREA Certified",
         badge2: "SOC 2 Compliant",
         badge3: "50+ Beta Users",
-        conversionBadge: "300% Conversion Increase"
+        conversionBadge: "300% Conversion Increase",
+        badge: "14-Day Free Trial",
+        bullet1: "AI responds to leads instantly, 24/7",
+        bullet2: "Canadian MLS data integration",
+        bullet3: "Bilingual EN/FR",
+        testimonial: "\"Captured 3 leads in my first 48 hours I would have lost\"",
+        joinAgents: "Join 50+ Canadian agents",
+        activeAgents: "Active Agents",
+        leads: "Leads",
+        aiActive: "AI Active"
       },
       home: {
         socialProof: {
@@ -1224,6 +1233,7 @@ const resources = {
           canadianMarket: "Canadian Market",
           marketing: "Marketing",
           compliance: "Compliance",
+          sales: "Sales & Leads",
           successStories: "Success Stories",
           comparison: "CRM Comparisons"
         },
@@ -1475,6 +1485,11 @@ const resources = {
         completeFailed: "Failed to complete setup. Please try again."
       },
       auth: {
+        backToWebsite: "Back to realtordesk.ai",
+        protectedSession: "Protected Session",
+        pipedaCompliant: "PIPEDA Compliant",
+        ssl: "256-bit SSL",
+        canadianData: "Canadian Data",
         login: {
           subtitle: "Sign in to your workspace",
           orEmail: "Or continue with email",
@@ -1566,7 +1581,16 @@ const resources = {
         badge1: "Certifié CREA",
         badge2: "Conforme SOC 2",
         badge3: "50+ Utilisateurs Bêta",
-        conversionBadge: "Augmentation de 300% des Conversions"
+        conversionBadge: "Augmentation de 300% des Conversions",
+        badge: "Essai Gratuit de 14 Jours",
+        bullet1: "L'IA répond aux prospects instantanément, 24/7",
+        bullet2: "Intégration des données MLS canadiennes",
+        bullet3: "Bilingue EN/FR",
+        testimonial: "\"3 prospects capturés en 48h que j'aurais perdus\"",
+        joinAgents: "Rejoignez 50+ courtiers canadiens",
+        activeAgents: "Courtiers actifs",
+        leads: "Prospects",
+        aiActive: "IA Active"
       },
       home: {
         socialProof: {
@@ -2754,6 +2778,7 @@ const resources = {
           canadianMarket: "Marché Canadien",
           marketing: "Marketing",
           compliance: "Conformité",
+          sales: "Ventes et Prospects",
           successStories: "Histoires de Succès",
           comparison: "Comparaisons CRM"
         },
@@ -3005,6 +3030,11 @@ const resources = {
         completeFailed: "Échec de la configuration. Veuillez réessayer."
       },
       auth: {
+        backToWebsite: "Retour à realtordesk.ai",
+        protectedSession: "Session Protégée",
+        pipedaCompliant: "Conforme LPRPDE",
+        ssl: "Chiffrement SSL 256 bits",
+        canadianData: "Données Canadiennes",
         login: {
           subtitle: "Connectez-vous à votre espace de travail",
           orEmail: "Ou continuer avec un courriel",

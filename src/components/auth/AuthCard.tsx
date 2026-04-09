@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { ShieldCheck, Lock, Users, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface AuthCardProps {
   children: ReactNode;
@@ -10,13 +11,14 @@ interface AuthCardProps {
 }
 
 const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
+  const { t } = useTranslation();
   return (
     <div className="relative z-10 w-full max-w-md px-6 animate-fade-in">
       {/* Back to Website */}
       <div className="mb-6">
         <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
           <ArrowLeft className="w-3.5 h-3.5" />
-          Back to realtordesk.ai
+          {t('auth.backToWebsite', 'Back to realtordesk.ai')}
         </Link>
       </div>
 
@@ -51,7 +53,7 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
         <div className="flex items-center justify-center gap-2 mt-3">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-500/15 border border-green-500/30 rounded-full text-xs font-medium text-green-400">
             <ShieldCheck className="w-3 h-3" />
-            <span>Protected Session</span>
+            <span>{t('auth.protectedSession', 'Protected Session')}</span>
           </div>
         </div>
       </div>
@@ -76,15 +78,15 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
       >
         <div className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-800/50 transition-all duration-200">
           <ShieldCheck className="w-4 h-4 text-green-400" />
-          <span>PIPEDA Compliant</span>
+          <span>{t('auth.pipedaCompliant', 'PIPEDA Compliant')}</span>
         </div>
         <div className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-800/50 transition-all duration-200">
           <Lock className="w-4 h-4 text-primary" />
-          <span>256-bit SSL</span>
+          <span>{t('auth.ssl', '256-bit SSL')}</span>
         </div>
         <div className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-800/50 transition-all duration-200">
           <Users className="w-4 h-4 text-purple-400" />
-          <span>Canadian Data</span>
+          <span>{t('auth.canadianData', 'Canadian Data')}</span>
         </div>
       </div>
     </div>

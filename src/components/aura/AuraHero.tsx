@@ -43,28 +43,28 @@ const AuraHero = () => {
               <div className="relative mb-8">
                 <div className="absolute inset-0 blur-3xl bg-primary/20 animate-pulse-glow rounded-full scale-150 -z-10"></div>
                 <h1 className="lg:text-6xl leading-[1.05] text-4xl sm:text-5xl tracking-tighter gradient-text-animated relative">
-                  Close More Deals Faster with RealtorDesk
+                  {t('hero.title', 'Close More Deals Faster with RealtorDesk')}
                 </h1>
               </div>
 
               {/* Subtitle */}
               <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-lg font-light">
-                Instant follow-ups, Canadian MLS data integration, and PIPEDA-aware data handling
+                {t('hero.subtitle', 'Instant follow-ups, Canadian MLS data integration, and PIPEDA-aware data handling')}
               </p>
 
               {/* Trust Signals Line */}
               <div className="flex flex-wrap gap-4 mb-10 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  AI responds to leads instantly, 24/7
+                  {t('hero.bullet1', 'AI responds to leads instantly, 24/7')}
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Canadian MLS data integration
+                  {t('hero.bullet2', 'Canadian MLS data integration')}
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  Bilingual EN/FR
+                  {t('hero.bullet3', 'Bilingual EN/FR')}
                 </span>
               </div>
 
@@ -72,20 +72,16 @@ const AuraHero = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/signup">
                   <button className="group flex overflow-hidden uppercase transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_40px_-10px_rgba(234,88,12,0.5)] focus:outline-none text-sm font-bold text-white tracking-widest rounded-full py-4 px-10 relative items-center justify-center">
-                    {/* Animated Border Beam */}
                     <div className="absolute inset-0 -z-20 rounded-full overflow-hidden p-[1px]">
                       <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_300deg,hsl(var(--primary))_360deg)]" style={{ animation: 'beam-spin 3s linear infinite' }}></div>
                       <div className="absolute inset-[1px] rounded-full bg-card"></div>
                     </div>
-
-                    {/* Inner Background */}
                     <div className="-z-10 overflow-hidden bg-card rounded-full absolute top-[2px] right-[2px] bottom-[2px] left-[2px]">
                       <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
                       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-primary/10 blur-2xl rounded-full pointer-events-none transition-colors duration-500 group-hover:bg-primary/30"></div>
                     </div>
-
                     <span className="relative z-10 text-white/90 transition-colors group-hover:text-white">
-                      START YOUR 14-DAY FREE TRIAL
+                      {t('hero.getStarted', 'START YOUR 14-DAY FREE TRIAL')}
                     </span>
                     <ArrowRight className="relative z-10 ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
@@ -94,7 +90,7 @@ const AuraHero = () => {
                 <Link to="/demo">
                   <button className="hover:bg-white/5 transition-all flex text-base font-medium text-muted-foreground bg-white/5 rounded-full py-4 px-8 items-center justify-center relative overflow-hidden group/btn border border-white/10">
                     <span className="text-base font-medium text-foreground/80 tracking-tight relative z-10">
-                      Book Your Free Demo
+                      {t('hero.watchDemo', 'Book Your Free Demo')}
                     </span>
                     <Play className="w-4 h-4 ml-2 opacity-70 relative z-10 group-hover/btn:scale-110 transition-transform" fill="currentColor" />
                   </button>
@@ -109,8 +105,8 @@ const AuraHero = () => {
                   <div className="w-10 h-10 rounded-full border-2 border-card bg-gradient-to-br from-green-500/20 to-green-500/5 flex items-center justify-center text-xs font-bold text-green-400">ML</div>
                 </div>
                 <div className="text-sm">
-                  <p className="text-muted-foreground italic">"Captured 3 leads in my first 48 hours I would have lost"</p>
-                  <p className="text-xs text-muted-foreground mt-1">— Sarah K., Toronto • Join 50+ Canadian agents</p>
+                  <p className="text-muted-foreground italic">{t('hero.testimonial', '"Captured 3 leads in my first 48 hours I would have lost"')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">— Sarah K., Toronto • {t('hero.joinAgents', 'Join 50+ Canadian agents')}</p>
                 </div>
               </div>
             </div>
@@ -118,36 +114,32 @@ const AuraHero = () => {
             {/* Right Column: Professional Hero Image */}
             <div className="relative w-full flex items-center justify-center lg:justify-end">
               <div className="relative w-full max-w-[560px]">
-                {/* Main Image Container */}
                 <div className="relative rounded-[32px] overflow-hidden shadow-2xl border border-white/10">
-                  <img 
-                    src={heroAgentsTablet} 
-                    alt="Professional real estate agents using RealtorDesk on tablet"
+                  <img
+                    src={heroAgentsTablet}
+                    alt={t('hero.imageAlt', 'Professional real estate agents using RealtorDesk on tablet')}
                     className="w-full h-auto object-cover"
                   />
-                  {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent"></div>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"></div>
                 </div>
 
-                {/* Floating Stats Card - Top Right */}
                 <div className="absolute -top-4 -right-4 bg-card/90 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-white/10 hidden sm:block">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
                       <Users className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground">Active Agents</div>
-                      <div className="text-lg font-bold text-white">+999 Leads</div>
+                      <div className="text-xs text-muted-foreground">{t('hero.activeAgents', 'Active Agents')}</div>
+                      <div className="text-lg font-bold text-white">+999 {t('hero.leads', 'Leads')}</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Floating AI Active Badge - Bottom Left */}
                 <div className="absolute -bottom-4 -left-4 bg-card/90 backdrop-blur-xl rounded-2xl py-3 px-4 shadow-xl border border-white/10 hidden sm:block">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <span className="text-sm font-medium text-white">AI Active</span>
+                    <span className="text-sm font-medium text-white">{t('hero.aiActive', 'AI Active')}</span>
                     <span className="text-xs text-muted-foreground">• 24/7</span>
                   </div>
                 </div>
