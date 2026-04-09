@@ -164,12 +164,12 @@ export function ImportListingsWidget() {
   const saveSingleListing = async (listing: ListingResult, userId: string): Promise<{ saved: boolean; duplicate: boolean }> => {
     // Check by MLS number first (more reliable)
     if (listing.mlsNumber) {
-      const { data: byMls } = await supabase
+      const { data: byMls } = await (supabase
         .from("property_listings")
         .select("id")
         .eq("user_id", userId)
         .eq("mls_number", listing.mlsNumber)
-        .limit(1);
+        .limit(1) as any);
       if ((byMls?.length || 0) > 0) return { saved: false, duplicate: true };
     }
 

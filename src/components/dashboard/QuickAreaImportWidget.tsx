@@ -126,12 +126,12 @@ export function QuickAreaImportWidget() {
 
     // Check by MLS number first (more reliable)
     if (mlsNumber) {
-      const { data: byMls } = await supabase
+      const { data: byMls } = await (supabase
         .from("property_listings")
         .select("id")
         .eq("user_id", userId)
         .eq("mls_number", mlsNumber)
-        .limit(1);
+        .limit(1) as any);
       if ((byMls?.length || 0) > 0) return true;
     }
 
