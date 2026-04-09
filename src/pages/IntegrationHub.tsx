@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Search, Plug, Clock, CheckCircle, Bell, Send, ExternalLink } from "lucide-react";
+import ConnectPanel from "@/components/integrations/ConnectPanel";
 
 // ─── Tool Registry ────────────────────────────────────
 
@@ -66,7 +67,10 @@ const IntegrationHub = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | "connected" | "available" | "coming_soon">("all");
   const [connectedSlugs, setConnectedSlugs] = useState<Set<string>>(new Set());
+  const [connectionsMap, setConnectionsMap] = useState<Record<string, any>>({});
   const [interestedSlugs, setInterestedSlugs] = useState<Set<string>>(new Set());
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
   const [requestName, setRequestName] = useState("");
   const [requestUseCase, setRequestUseCase] = useState("");
   const [loading, setLoading] = useState(true);
@@ -81,11 +85,16 @@ const IntegrationHub = () => {
         .from("profiles").select("*").eq("id", session.user.id).single();
       setProfile(profileData);
 
-      // Fetch connected integrations
+      // Fetch connected integrations (full objects for manage panel)
       const { data: connections } = await supabase
-        .from("integration_connections").select("tool_slug")
-        .eq("status", "connected");
-      if (connections) setConnectedSlugs(new Set(connections.map(c => c.tool_slug)));
+        .from("integration_connections").select("*");
+      if (connections) {
+        const active = connections.filter(c => c.status === "connected");
+        setConnectedSlugs(new Set(active.map(c => c.tool_slug)));
+        const map: Record<string, any> = {};
+        connections.forEach(c => { map[c.tool_slug] = c; });
+        setConnectionsMap(map);
+      }
 
       // Fetch interests
       const { data: interests } = await supabase
@@ -96,6 +105,23 @@ const IntegrationHub = () => {
     };
     init();
   }, []);
+
+  const refreshConnections = async () => {
+    const { data: connections } = await supabase
+      .from("integration_connections").select("*");
+    if (connections) {
+      const active = connections.filter(c => c.status === "connected");
+      setConnectedSlugs(new Set(active.map(c => c.tool_slug)));
+      const map: Record<string, any> = {};
+      connections.forEach(c => { map[c.tool_slug] = c; });
+      setConnectionsMap(map);
+    }
+  };
+
+  const openPanel = (tool: Tool) => {
+    setSelectedTool(tool);
+    setPanelOpen(true);
+  };
 
   const handleNotifyMe = async (slug: string) => {
     const { error } = await supabase.from("integration_interest").insert({ user_id: (user as any).id, tool_slug: slug });
@@ -158,10 +184,9 @@ const IntegrationHub = () => {
   const getActionButton = (tool: Tool) => {
     if (connectedSlugs.has(tool.slug)) {
       return (
-        <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="text-xs">{t('integrations.manage', 'Manage')}</Button>
-          <Button size="sm" variant="ghost" className="text-xs text-destructive">{t('integrations.disconnect', 'Disconnect')}</Button>
-        </div>
+        <Button size="sm" variant="outline" className="text-xs" onClick={() => openPanel(tool)}>
+          {t('integrations.manage', 'Manage')}
+        </Button>
       );
     }
     if (tool.status === "coming_soon") {
@@ -170,7 +195,7 @@ const IntegrationHub = () => {
       }
       return <Button size="sm" variant="secondary" className="text-xs" onClick={() => handleNotifyMe(tool.slug)}><Bell className="w-3.5 h-3.5 mr-1" />{t('integrations.notifyMe', 'Notify Me')}</Button>;
     }
-    return <Button size="sm" className="text-xs">{t('integrations.connect', 'Connect')}</Button>;
+    return <Button size="sm" className="text-xs" onClick={() => openPanel(tool)}>{t('integrations.connect', 'Connect')}</Button>;
   };
 
   if (loading) {
@@ -303,6 +328,16 @@ const IntegrationHub = () => {
           </Button>
         </Card>
       </div>
+
+      {/* Connect / Manage Panel */}
+      <ConnectPanel
+        open={panelOpen}
+        onOpenChange={setPanelOpen}
+        tool={selectedTool}
+        connection={selectedTool ? connectionsMap[selectedTool.slug] || null : null}
+        userId={(user as any)?.id || ""}
+        onConnectionChange={refreshConnections}
+      />
     </AppLayout>
   );
 };
