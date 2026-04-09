@@ -2915,38 +2915,7 @@ const resources = {
           accountManager: "Gestionnaire de compte dédié"
         }
       },
-      nav: {
-        signedOut: "Déconnexion réussie",
-        searchPlaceholder: "Rechercher contacts, propriétés, transactions...",
-        add: "Ajouter",
-        addContact: "Contact",
-        addProperty: "Propriété",
-        addDeal: "Transaction",
-        addTask: "Tâche",
-        notifications: "Notifications",
-        viewAllNotifications: "Voir toutes les notifications",
-        profile: "Profil",
-        settings: "Paramètres",
-        signOut: "Se déconnecter"
-      },
-      ai: {
-        title: "Assistant IA Immobilier",
-        subtitle: "Votre assistant CRM immobilier intelligent",
-        clearChat: "Effacer la conversation",
-        quickActions: "Actions rapides",
-        welcomeTitle: "Bienvenue sur l'assistant IA Immobilier",
-        welcomeDesc: "Je peux vous aider à gérer vos contacts, analyser vos transactions, créer des tâches et fournir des perspectives immobilières. Essayez une des actions rapides ci-dessus!",
-        placeholder: "Posez-moi une question sur votre CRM, contacts, transactions...",
-        actions: {
-          analyzePipeline: "Analyser mon pipeline",
-          draftEmail: "Rédiger un courriel de suivi",
-          createTask: "Créer une tâche",
-          marketResearch: "Recherche de marché"
-        }
-      },
-      dashboard: {
-        loadFailed: "Échec du chargement du profil"
-      },
+      
       onboarding: {
         profile: {
           title: "Configurons votre profil",
