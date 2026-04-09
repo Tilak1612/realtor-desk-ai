@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Phone, Calendar, Tag, Clock, TrendingUp } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
+import { fr } from "date-fns/locale";
 
 interface ContactToCall {
   id: string;
@@ -30,7 +31,7 @@ interface WeeklySummary {
 }
 
 const Today = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
@@ -266,7 +267,7 @@ const Today = () => {
             {new Date().getHours() < 12 ? t('today.goodMorning', 'Good morning') : new Date().getHours() < 18 ? t('today.goodAfternoon', 'Good afternoon') : t('today.goodEvening', 'Good evening')}, {profile?.full_name?.split(' ')[0] || t('today.there', 'there')}
           </h1>
           <p className="text-muted-foreground">
-            {format(new Date(), "EEEE, MMMM d, yyyy")}
+            {format(new Date(), "EEEE, MMMM d, yyyy", { locale: i18n.language === 'fr' ? fr : undefined })}
           </p>
         </div>
 
