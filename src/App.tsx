@@ -200,6 +200,7 @@ const RouteAnalytics = () => {
   return null;
 };
 
+// Preview refresh marker: harmless no-op comment to trigger a fresh rebuild.
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
