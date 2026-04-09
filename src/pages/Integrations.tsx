@@ -170,7 +170,7 @@ const Integrations = () => {
                   {category.integrations.map((integration, index) => (
                     <Card
                       key={index}
-                      className="p-4 card-hover flex flex-col items-center text-center group border border-border"
+                      className="p-4 card-hover flex flex-col items-center text-center group bg-zinc-800 border border-zinc-500 rounded-lg"
                       tabIndex={0}
                     >
                       <div className="w-12 h-12 mb-3 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
