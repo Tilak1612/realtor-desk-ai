@@ -78,27 +78,17 @@ const Automations = () => {
   const fetchAutomations = useCallback(async () => {
     const { data, error } = await supabase
       .from("email_automations")
-      .select(`
-        *,
-        automation_steps(count),
-        automation_enrollments(count)
-      `)
+      .select("*")
       .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error fetching automations:", error);
-      toast.error("Failed to load automations");
+      toast.error(t('automations.loadFailed', 'Failed to load automations'));
       return;
     }
 
-    const formattedAutomations = (data || []).map((auto: any) => ({
-      ...auto,
-      steps_count: auto.automation_steps?.[0]?.count || 0,
-      enrollments_count: auto.automation_enrollments?.[0]?.count || 0,
-    }));
-
-    setAutomations(formattedAutomations);
-  }, []);
+    setAutomations(data || []);
+  }, [t]);
 
   const checkAuthAndFetch = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();

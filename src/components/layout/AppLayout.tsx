@@ -14,15 +14,15 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
   const { trialExpired, trialDaysLeft } = useSubscription();
 
   return (
-    <div className="app min-h-screen flex w-full bg-background">
+    <div className="app h-screen flex w-full bg-background overflow-hidden">
       <TrialExpiredModal isOpen={trialExpired} />
       <DashboardSidebar trialDaysLeft={trialDaysLeft} />
-      
-      <div className="flex-1 flex flex-col lg:ml-0">
+
+      <div className="flex-1 flex flex-col min-w-0">
         <DashboardNavbar user={user} profile={profile} />
-        
+
         <main className="flex-1 overflow-y-auto">
-          <div className="p-4 sm:p-6 max-w-7xl mx-auto">
+          <div className="p-4 sm:p-6 max-w-7xl mx-auto pb-12">
             {children}
           </div>
         </main>

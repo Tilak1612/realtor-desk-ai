@@ -71,23 +71,22 @@ const AIAssistant = () => {
           messages: [...messages, userMessage],
           conversationId
         },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
       });
 
       if (error) throw error;
 
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: data.message
-      };
-      setMessages(prev => [...prev, assistantMessage]);
+      if (data?.message) {
+        const assistantMessage: Message = { role: 'assistant', content: data.message };
+        setMessages(prev => [...prev, assistantMessage]);
+      } else if (data?.error) {
+        throw new Error(data.error);
+      }
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const msg = error instanceof Error ? error.message : "Failed to send message";
       toast({
-        title: "Error",
-        description: error.message || "Failed to send message",
+        title: t('ai.errorTitle', 'Error'),
+        description: msg,
         variant: "destructive",
       });
     } finally {
@@ -113,23 +112,22 @@ const AIAssistant = () => {
           messages: [...messages, userMessage],
           conversationId
         },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
       });
 
       if (error) throw error;
 
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: data.message
-      };
-      setMessages(prev => [...prev, assistantMessage]);
+      if (data?.message) {
+        const assistantMessage: Message = { role: 'assistant', content: data.message };
+        setMessages(prev => [...prev, assistantMessage]);
+      } else if (data?.error) {
+        throw new Error(data.error);
+      }
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const msg = error instanceof Error ? error.message : "Failed to send message";
       toast({
-        title: "Error",
-        description: error.message || "Failed to send message",
+        title: t('ai.errorTitle', 'Error'),
+        description: msg,
         variant: "destructive",
       });
     } finally {
