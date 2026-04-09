@@ -133,12 +133,6 @@ const Footer = () => {
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="tel:1-800-732-5867" className="text-muted-foreground hover:text-primary transition-colors">
-                  1-800-REALTOR-AI
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                 <span className="text-muted-foreground">
                   Edmonton, Alberta, Canada

@@ -96,7 +96,7 @@ const Demo = () => {
     } catch (error) {
       toast({
         title: "Unable to Submit Request",
-        description: "There was an error processing your demo request. Please try again or call us at 1-800-REALTOR-AI",
+        description: "There was an error processing your demo request. Please try again or email us at support@realtordesk.ai",
         variant: "destructive",
         duration: 6000,
       });
@@ -376,12 +376,6 @@ const Demo = () => {
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
                     <a href="mailto:support@realtordesk.ai" className="font-semibold text-primary hover:underline">
                       support@realtordesk.ai
-                    </a>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Phone</p>
-                    <a href="tel:1-800-732-5867" className="font-semibold text-primary hover:underline">
-                      1-800-REALTOR-AI
                     </a>
                   </div>
                   <div>

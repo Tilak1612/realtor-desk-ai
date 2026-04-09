@@ -180,7 +180,6 @@ const PrivacyPolicy = () => {
               <ul className="list-none space-y-2 mb-4">
                 <li><strong>General Inquiries:</strong> support@realtordesk.ai</li>
                 <li><strong>Privacy Matters:</strong> privacy@realtordesk.ai</li>
-                <li><strong>Phone:</strong> 1-800-REALTOR-AI (1-800-732-5867)</li>
                 <li><strong>Mailing Address:</strong> Brainfy AI Inc., Edmonton, Alberta, Canada</li>
               </ul>
               <p>

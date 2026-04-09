@@ -124,7 +124,6 @@ const TermsOfService = () => {
               </p>
               <ul className="list-none space-y-2">
                 <li>Email: support@realtordesk.ai</li>
-                <li>Phone: 1-800-REALTOR-AI</li>
                 <li>Address: Edmonton, Alberta, Canada</li>
               </ul>
             </section>

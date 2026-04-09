@@ -117,10 +117,10 @@ const Contact = () => {
               </Card>
 
               <Card className="p-6">
-                <Phone className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-bold mb-2">{t('contact.info.callUs')}</h3>
-                <p className="text-muted-foreground">1-800-REALTOR-AI</p>
-                <p className="text-muted-foreground">(1-800-732-5867)</p>
+                <Mail className="w-8 h-8 text-primary mb-4" />
+                <h3 className="font-bold mb-2">{t('contact.info.support', 'Support')}</h3>
+                <p className="text-muted-foreground">support@realtordesk.ai</p>
+                <p className="text-muted-foreground">{t('contact.info.responseTime', 'We respond within 24 hours')}</p>
               </Card>
 
               <Card className="p-6">
