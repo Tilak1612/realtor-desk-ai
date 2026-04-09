@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,6 +23,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const FeedbackDialog = () => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState("");
   const [comment, setComment] = useState("");
@@ -87,7 +89,7 @@ const FeedbackDialog = () => {
       <DialogTrigger asChild>
         <Button variant="ghost" size="sm" className="text-xs">
           <MessageSquare className="w-4 h-4 mr-1.5" />
-          Give Feedback
+          {t('nav.giveFeedback', 'Give Feedback')}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">

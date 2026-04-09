@@ -157,7 +157,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
               <div className="px-3 py-2 flex items-center gap-2">
                 <div className="flex-1 h-px bg-white/10" />
                 <h3 className="text-[10px] font-semibold text-white/40 uppercase tracking-widest">
-                  {t('sidebar.advanced', 'Advanced')}
+                  {t('app.sidebar.advanced', 'Advanced')}
                 </h3>
               </div>
               {advancedItems.map((item) => (

@@ -15,6 +15,7 @@ const resources = {
         bookDemo: "Book Your Free Demo",
         startClosing: "Start Closing More Deals",
         getStarted: "Get Started",
+        giveFeedback: "Give Feedback",
         signedOut: "Signed out successfully",
         searchPlaceholder: "Search contacts, properties, deals...",
         add: "Add",
@@ -847,6 +848,9 @@ const resources = {
       // Dashboard & App Translations
       app: {
         sidebar: {
+          today: "Today",
+          automations: "Automations",
+          advanced: "Advanced",
           dashboard: "Dashboard",
           contacts: "Contacts",
           properties: "Properties",
@@ -1595,6 +1599,8 @@ const resources = {
         quickActions: "Quick Actions",
         viewContacts: "View All Contacts",
         checkDeals: "Check Deals",
+        noContactsYet: "Add contacts to start making calls",
+        importContacts: "Import Contacts",
         unnamedContact: "Unnamed Contact",
         loadFailed: "Failed to load data",
         reasons: {
@@ -1809,6 +1815,7 @@ const resources = {
         bookDemo: "Réserver Votre Démo Gratuite",
         startClosing: "Commencer à Conclure Plus",
         getStarted: "Commencer",
+        giveFeedback: "Donner un avis",
         signedOut: "Déconnexion réussie",
         searchPlaceholder: "Rechercher contacts, propriétés, transactions...",
         add: "Ajouter",
@@ -2641,6 +2648,9 @@ const resources = {
       // Dashboard & App Translations (French)
       app: {
         sidebar: {
+          today: "Aujourd'hui",
+          automations: "Automatisations",
+          advanced: "Avancé",
           dashboard: "Tableau de Bord",
           contacts: "Contacts",
           properties: "Propriétés",
@@ -3389,6 +3399,8 @@ const resources = {
         quickActions: "Actions rapides",
         viewContacts: "Voir tous les contacts",
         checkDeals: "Vérifier les transactions",
+        noContactsYet: "Ajoutez des contacts pour commencer à appeler",
+        importContacts: "Importer des contacts",
         unnamedContact: "Contact sans nom",
         loadFailed: "Échec du chargement des données",
         reasons: {
