@@ -1400,38 +1400,7 @@ const resources = {
           accountManager: "Dedicated account manager"
         }
       },
-      nav: {
-        signedOut: "Signed out successfully",
-        searchPlaceholder: "Search contacts, properties, deals...",
-        add: "Add",
-        addContact: "Contact",
-        addProperty: "Property",
-        addDeal: "Deal",
-        addTask: "Task",
-        notifications: "Notifications",
-        viewAllNotifications: "View all notifications",
-        profile: "Profile",
-        settings: "Settings",
-        signOut: "Sign out"
-      },
-      ai: {
-        title: "Realtor AI Assistant",
-        subtitle: "Your intelligent real estate CRM assistant",
-        clearChat: "Clear Chat",
-        quickActions: "Quick Actions",
-        welcomeTitle: "Welcome to Realtor AI Assistant",
-        welcomeDesc: "I can help you manage contacts, analyze deals, create tasks, and provide real estate insights. Try one of the quick actions above!",
-        placeholder: "Ask me anything about your CRM, contacts, deals...",
-        actions: {
-          analyzePipeline: "Analyze my pipeline",
-          draftEmail: "Draft follow-up email",
-          createTask: "Create task",
-          marketResearch: "Market research"
-        }
-      },
-      dashboard: {
-        loadFailed: "Failed to load profile"
-      },
+      
       onboarding: {
         profile: {
           title: "Let's Set Up Your Profile",
