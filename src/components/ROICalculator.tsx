@@ -26,8 +26,8 @@ const ROICalculator = () => {
   };
 
   const planPricing = {
-    solo: 119,
-    team: 319
+    solo: 149,
+    team: 299
   };
 
   // Without AI calculations
@@ -141,14 +141,14 @@ const ROICalculator = () => {
               <RadioGroupItem value="solo" id="solo" />
               <Label htmlFor="solo" className="cursor-pointer flex-1 p-3 border rounded-lg hover:bg-accent/5">
                 <div className="font-semibold">{t('roiCalculator.solo')}</div>
-                <div className="text-sm text-muted-foreground">$119/month</div>
+                <div className="text-sm text-muted-foreground">$149/month</div>
               </Label>
             </div>
             <div className="flex items-center space-x-2 flex-1">
               <RadioGroupItem value="team" id="team" />
               <Label htmlFor="team" className="cursor-pointer flex-1 p-3 border rounded-lg hover:bg-accent/5">
                 <div className="font-semibold">{t('roiCalculator.team')}</div>
-                <div className="text-sm text-muted-foreground">$319/month</div>
+                <div className="text-sm text-muted-foreground">$299/month</div>
               </Label>
             </div>
           </RadioGroup>
