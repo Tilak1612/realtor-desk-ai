@@ -71,7 +71,7 @@ const Today = () => {
         await fetchTodayData(session.user.id);
       } catch (error: unknown) {
         console.error("Error:", error);
-        toast.error("Failed to load data");
+        toast.error(t('today.loadFailed', 'Failed to load data'));
       } finally {
         setLoading(false);
       }
@@ -100,41 +100,40 @@ const Today = () => {
         const stage = contact.stage || 'new_lead';
         const tags = contact.tags || [];
 
-        let reason = 'Regular check-in';
+        let reason = t('today.reasons.checkIn', 'Regular check-in');
         let priorityScore = 5;
 
-        // Determine reason to call and priority
         if (!lastContactDate) {
-          reason = 'First contact - new lead';
+          reason = t('today.reasons.firstContact', 'First contact - new lead');
           priorityScore = 10;
         } else if (nextFollowupDate && new Date(nextFollowupDate) < new Date()) {
-          reason = 'Overdue follow-up';
+          reason = t('today.reasons.overdue', 'Overdue follow-up');
           priorityScore = 9;
         } else if (nextFollowupDate && nextFollowupDate === today) {
-          reason = 'Scheduled follow-up today';
+          reason = t('today.reasons.scheduledToday', 'Scheduled follow-up today');
           priorityScore = 8;
         } else if (stage === 'hot_lead' || stage === 'viewing') {
-          reason = 'Hot lead - needs attention';
+          reason = t('today.reasons.hotLead', 'Hot lead - needs attention');
           priorityScore = 9;
         } else if (stage === 'offer' || stage === 'negotiation') {
-          reason = 'Active deal - check status';
+          reason = t('today.reasons.activeDeal', 'Active deal - check status');
           priorityScore = 10;
         } else if (tags.includes('buyer') || tags.includes('seller')) {
-          reason = 'Active prospect - nurture relationship';
+          reason = t('today.reasons.activeProspect', 'Active prospect - nurture relationship');
           priorityScore = 7;
         } else if (lastContactDate) {
           const daysSinceContact = Math.floor(
             (new Date().getTime() - new Date(lastContactDate).getTime()) / (1000 * 60 * 60 * 24)
           );
           if (daysSinceContact > 30) {
-            reason = 'Long overdue - reconnect';
+            reason = t('today.reasons.longOverdue', 'Long overdue - reconnect');
             priorityScore = 6;
           }
         }
 
         return {
           id: contact.id,
-          name: `${contact.first_name || ''} ${contact.last_name || ''}`.trim() || 'Unnamed Contact',
+          name: `${contact.first_name || ''} ${contact.last_name || ''}`.trim() || t('today.unnamedContact', 'Unnamed Contact'),
           phone: contact.phone || '',
           email: contact.email || '',
           tags: tags,
@@ -202,7 +201,7 @@ const Today = () => {
         state: { contactQueue: contactsToCall.map(c => c.id) }
       });
     } else {
-      toast.info("No contacts to call today. Great job staying on top of things!");
+      toast.info(t('today.noCalls', 'No contacts to call today. Great job staying on top of things!'));
     }
   };
 
@@ -216,18 +215,18 @@ const Today = () => {
 
   const getStageLabel = (stage: string) => {
     const stageMap: Record<string, string> = {
-      new_lead: 'New Lead',
-      cold_lead: 'Cold Lead',
-      warm_lead: 'Warm Lead',
-      hot_lead: 'Hot Lead',
-      viewing: 'Viewing',
-      offer: 'Offer',
-      negotiation: 'Negotiation',
-      under_contract: 'Under Contract',
-      closed: 'Closed',
-      lost: 'Lost',
-      past_client: 'Past Client',
-      sphere: 'Sphere',
+      new_lead: t('stages.newLead', 'New Lead'),
+      cold_lead: t('stages.coldLead', 'Cold Lead'),
+      warm_lead: t('stages.warmLead', 'Warm Lead'),
+      hot_lead: t('stages.hotLead', 'Hot Lead'),
+      viewing: t('stages.viewing', 'Viewing'),
+      offer: t('stages.offer', 'Offer'),
+      negotiation: t('stages.negotiation', 'Negotiation'),
+      under_contract: t('stages.underContract', 'Under Contract'),
+      closed: t('stages.closed', 'Closed'),
+      lost: t('stages.lost', 'Lost'),
+      past_client: t('stages.pastClient', 'Past Client'),
+      sphere: t('stages.sphere', 'Sphere'),
     };
     return stageMap[stage] || stage;
   };
@@ -251,7 +250,7 @@ const Today = () => {
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading your day...</p>
+            <p className="text-muted-foreground">{t('today.loading', 'Loading your day...')}</p>
           </div>
         </div>
       </AppLayout>
@@ -264,7 +263,7 @@ const Today = () => {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-foreground mb-2">
-            Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'}, {profile?.full_name?.split(' ')[0] || 'there'}
+            {new Date().getHours() < 12 ? t('today.goodMorning', 'Good morning') : new Date().getHours() < 18 ? t('today.goodAfternoon', 'Good afternoon') : t('today.goodEvening', 'Good evening')}, {profile?.full_name?.split(' ')[0] || t('today.there', 'there')}
           </h1>
           <p className="text-muted-foreground">
             {format(new Date(), "EEEE, MMMM d, yyyy")}
@@ -276,22 +275,22 @@ const Today = () => {
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" />
-              This Week's Activity
+              {t('today.weeklyActivity', "This Week's Activity")}
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary">{weeklySummary.callsLogged}</div>
-                <div className="text-sm text-muted-foreground mt-1">Calls Logged</div>
+                <div className="text-sm text-muted-foreground mt-1">{t('today.callsLogged', 'Calls Logged')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary">{weeklySummary.followUpsScheduled}</div>
-                <div className="text-sm text-muted-foreground mt-1">Follow-ups Scheduled</div>
+                <div className="text-sm text-muted-foreground mt-1">{t('today.followUps', 'Follow-ups Scheduled')}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary">{weeklySummary.dealsMoved}</div>
-                <div className="text-sm text-muted-foreground mt-1">Deals Moved Forward</div>
+                <div className="text-sm text-muted-foreground mt-1">{t('today.dealsMoved', 'Deals Moved Forward')}</div>
               </div>
             </div>
           </CardContent>
@@ -306,11 +305,11 @@ const Today = () => {
             disabled={contactsToCall.length === 0}
           >
             <Phone className="w-6 h-6 mr-3" />
-            Make Today's Calls
+            {t('today.makeCalls', "Make Today's Calls")}
           </Button>
           {contactsToCall.length > 0 && (
             <p className="text-sm text-muted-foreground mt-3">
-              {contactsToCall.length} {contactsToCall.length === 1 ? 'contact' : 'contacts'} ready to call
+              {contactsToCall.length} {contactsToCall.length === 1 ? t('today.contact', 'contact') : t('today.contacts', 'contacts')} {t('today.readyToCall', 'ready to call')}
             </p>
           )}
         </div>
@@ -318,18 +317,18 @@ const Today = () => {
         {/* Contacts to Call Today */}
         <Card>
           <CardHeader>
-            <CardTitle>Who to Talk to Today</CardTitle>
+            <CardTitle>{t('today.whoToTalk', 'Who to Talk to Today')}</CardTitle>
             <CardDescription>
-              Your top priority contacts for today, sorted by urgency
+              {t('today.whoToTalkDesc', 'Your top priority contacts for today, sorted by urgency')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             {contactsToCall.length === 0 ? (
               <div className="text-center py-12">
                 <Phone className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground text-lg mb-2">All caught up!</p>
+                <p className="text-muted-foreground text-lg mb-2">{t('today.allCaughtUp', 'All caught up!')}</p>
                 <p className="text-sm text-muted-foreground">
-                  No urgent follow-ups scheduled for today. Check back tomorrow or review your contact list.
+                  {t('today.noUrgent', 'No urgent follow-ups scheduled for today. Check back tomorrow or review your contact list.')}
                 </p>
               </div>
             ) : (
@@ -402,7 +401,7 @@ const Today = () => {
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Quick Actions</CardTitle>
+            <CardTitle className="text-lg">{t('today.quickActions', 'Quick Actions')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-3">
@@ -412,7 +411,7 @@ const Today = () => {
                 onClick={() => navigate("/contacts")}
               >
                 <Calendar className="w-5 h-5" />
-                <span className="text-sm">View All Contacts</span>
+                <span className="text-sm">{t('today.viewContacts', 'View All Contacts')}</span>
               </Button>
               <Button
                 variant="outline"
@@ -420,7 +419,7 @@ const Today = () => {
                 onClick={() => navigate("/deals")}
               >
                 <TrendingUp className="w-5 h-5" />
-                <span className="text-sm">Check Deals</span>
+                <span className="text-sm">{t('today.checkDeals', 'Check Deals')}</span>
               </Button>
             </div>
           </CardContent>

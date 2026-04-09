@@ -1297,6 +1297,55 @@ const resources = {
           tier: "Current plan: {{tier}}"
         }
       },
+      today: {
+        loading: "Loading your day...",
+        goodMorning: "Good morning",
+        goodAfternoon: "Good afternoon",
+        goodEvening: "Good evening",
+        there: "there",
+        weeklyActivity: "This Week's Activity",
+        callsLogged: "Calls Logged",
+        followUps: "Follow-ups Scheduled",
+        dealsMoved: "Deals Moved Forward",
+        makeCalls: "Make Today's Calls",
+        contact: "contact",
+        contacts: "contacts",
+        readyToCall: "ready to call",
+        whoToTalk: "Who to Talk to Today",
+        whoToTalkDesc: "Your top priority contacts for today, sorted by urgency",
+        allCaughtUp: "All caught up!",
+        noUrgent: "No urgent follow-ups scheduled for today. Check back tomorrow or review your contact list.",
+        noCalls: "No contacts to call today. Great job staying on top of things!",
+        quickActions: "Quick Actions",
+        viewContacts: "View All Contacts",
+        checkDeals: "Check Deals",
+        unnamedContact: "Unnamed Contact",
+        loadFailed: "Failed to load data",
+        reasons: {
+          checkIn: "Regular check-in",
+          firstContact: "First contact - new lead",
+          overdue: "Overdue follow-up",
+          scheduledToday: "Scheduled follow-up today",
+          hotLead: "Hot lead - needs attention",
+          activeDeal: "Active deal - check status",
+          activeProspect: "Active prospect - nurture relationship",
+          longOverdue: "Long overdue - reconnect"
+        }
+      },
+      stages: {
+        newLead: "New Lead",
+        coldLead: "Cold Lead",
+        warmLead: "Warm Lead",
+        hotLead: "Hot Lead",
+        viewing: "Viewing",
+        offer: "Offer",
+        negotiation: "Negotiation",
+        underContract: "Under Contract",
+        closed: "Closed",
+        lost: "Lost",
+        pastClient: "Past Client",
+        sphere: "Sphere"
+      },
       onboarding: {
         profile: {
           title: "Let's Set Up Your Profile",
@@ -2707,6 +2756,55 @@ const resources = {
           endsOn: "Se termine le {{date}}",
           tier: "Plan actuel : {{tier}}"
         }
+      },
+      today: {
+        loading: "Chargement de votre journée...",
+        goodMorning: "Bonjour",
+        goodAfternoon: "Bon après-midi",
+        goodEvening: "Bonsoir",
+        there: "cher courtier",
+        weeklyActivity: "Activité de la semaine",
+        callsLogged: "Appels effectués",
+        followUps: "Suivis planifiés",
+        dealsMoved: "Transactions avancées",
+        makeCalls: "Passer les appels du jour",
+        contact: "contact",
+        contacts: "contacts",
+        readyToCall: "prêt(s) à appeler",
+        whoToTalk: "À qui parler aujourd'hui",
+        whoToTalkDesc: "Vos contacts prioritaires pour aujourd'hui, triés par urgence",
+        allCaughtUp: "Tout est à jour!",
+        noUrgent: "Aucun suivi urgent prévu pour aujourd'hui. Revenez demain ou consultez votre liste de contacts.",
+        noCalls: "Aucun contact à appeler aujourd'hui. Excellent travail!",
+        quickActions: "Actions rapides",
+        viewContacts: "Voir tous les contacts",
+        checkDeals: "Vérifier les transactions",
+        unnamedContact: "Contact sans nom",
+        loadFailed: "Échec du chargement des données",
+        reasons: {
+          checkIn: "Suivi régulier",
+          firstContact: "Premier contact - nouveau prospect",
+          overdue: "Suivi en retard",
+          scheduledToday: "Suivi prévu aujourd'hui",
+          hotLead: "Prospect chaud - attention requise",
+          activeDeal: "Transaction active - vérifier le statut",
+          activeProspect: "Prospect actif - entretenir la relation",
+          longOverdue: "Très en retard - recontacter"
+        }
+      },
+      stages: {
+        newLead: "Nouveau prospect",
+        coldLead: "Prospect froid",
+        warmLead: "Prospect tiède",
+        hotLead: "Prospect chaud",
+        viewing: "Visite",
+        offer: "Offre",
+        negotiation: "Négociation",
+        underContract: "Sous contrat",
+        closed: "Conclu",
+        lost: "Perdu",
+        pastClient: "Ancien client",
+        sphere: "Réseau"
       },
       onboarding: {
         profile: {
