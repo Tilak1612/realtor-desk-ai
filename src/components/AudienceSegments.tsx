@@ -52,7 +52,8 @@ const SegmentCard = ({ image, title, description, link }: SegmentCardProps) => {
       </svg>
     </Link>
   </div>
-);
+  );
+};
 
 const AudienceSegments = () => {
   const { t } = useTranslation();
