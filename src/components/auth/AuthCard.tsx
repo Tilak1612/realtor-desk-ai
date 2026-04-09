@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { ShieldCheck, Lock, Users } from 'lucide-react';
+import { ShieldCheck, Lock, Users, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface AuthCardProps {
   children: ReactNode;
@@ -11,15 +12,24 @@ interface AuthCardProps {
 const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
   return (
     <div className="relative z-10 w-full max-w-md px-6 animate-fade-in">
+      {/* Back to Website */}
+      <div className="mb-6">
+        <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
+          <ArrowLeft className="w-3.5 h-3.5" />
+          Back to realtordesk.ai
+        </Link>
+      </div>
+
       {/* Logo Section */}
       <div className="text-center mb-8">
-        <div 
-          className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl mb-4 shadow-xl relative overflow-hidden"
-          style={{ 
-            boxShadow: '0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.2)',
-            animation: 'float 6s ease-in-out infinite'
-          }}
-        >
+        <Link to="/" className="inline-block">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl mb-4 shadow-xl relative overflow-hidden cursor-pointer hover:scale-105 transition-transform"
+            style={{
+              boxShadow: '0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.2)',
+              animation: 'float 6s ease-in-out infinite'
+            }}
+          >
           {logoIcon || (
             <svg 
               className="w-8 h-8 text-white relative z-10" 
@@ -32,7 +42,8 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
             </svg>
           )}
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-20" />
-        </div>
+          </div>
+        </Link>
         <h1 className="text-2xl font-bold text-white tracking-tight mb-1">{title}</h1>
         <p className="text-sm text-gray-300">{subtitle}</p>
         

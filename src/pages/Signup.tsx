@@ -25,6 +25,7 @@ const Signup = () => {
     password: z.string().refine((val) => validatePassword(val), {
       message: t('app.auth.passwordRequirements.notMet', 'Password does not meet all requirements'),
     }),
+    confirmPassword: z.string(),
     fullName: z.string().min(2, t('app.validation.minLength', { min: 2 })),
     phone: z.string().optional(),
     companyName: z.string().min(2, t('app.validation.minLength', { min: 2 })),
@@ -32,6 +33,9 @@ const Signup = () => {
       message: t('app.validation.required'),
     }),
     marketingConsent: z.boolean().optional(),
+  }).refine((data) => data.password === data.confirmPassword, {
+    message: t('auth.reset.noMatch', 'Passwords do not match'),
+    path: ['confirmPassword'],
   });
 
   type SignupForm = z.infer<typeof signupSchema>;
@@ -231,6 +235,21 @@ const Signup = () => {
               {errors.password && <p className="text-sm text-red-400">{errors.password}</p>}
             </div>
 
+            {/* Confirm Password */}
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-200 flex items-center gap-2">
+                {t('auth.reset.confirmPassword', 'Confirm Password')} <span className="text-xs text-red-400">*</span>
+              </Label>
+              <PasswordInput
+                id="confirmPassword"
+                placeholder="••••••••"
+                value={formData.confirmPassword || ""}
+                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                className="bg-gray-700 border-white/10 text-white placeholder-gray-400 focus:ring-primary focus:bg-gray-600"
+              />
+              {errors.confirmPassword && <p className="text-sm text-red-400">{errors.confirmPassword}</p>}
+            </div>
+
             {/* Full Name */}
             <div className="space-y-2">
               <Label htmlFor="fullName" className="text-sm font-medium text-gray-200 flex items-center gap-2">
@@ -297,11 +316,11 @@ const Signup = () => {
                 />
                 <label htmlFor="privacyConsent" className="text-sm text-gray-300 leading-relaxed cursor-pointer">
                   I agree to the{" "}
-                  <Link to="/privacy-policy" className="text-primary hover:underline">
+                  <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     Privacy Policy
                   </Link>{" "}
                   &{" "}
-                  <Link to="/terms-of-service" className="text-primary hover:underline">
+                  <Link to="/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     Terms of Service
                   </Link>
                   {" "}*
