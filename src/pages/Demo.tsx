@@ -326,7 +326,7 @@ const Demo = () => {
                   <p className="text-sm text-muted-foreground text-center">
                     { t("demo.form.orStart", "Or") }{" "}
                     <Link to="/signup" className="text-primary font-semibold hover:underline">
-                      sign up now
+                      { t("demo.form.getStarted", "sign up now") }
                     </Link>{" "}
                     { t("demo.form.rightAway", "to get started immediately") }
                   </p>
@@ -344,7 +344,7 @@ const Demo = () => {
                     <div>
                       <h4 className="font-semibold mb-1">{ t("demo.expect.discovery", "Discovery Call (15 min)") }</h4>
                       <p className="text-sm text-muted-foreground">
-                        We learn about your business, challenges, and goals
+                        { t("demo.expect.discoveryDesc", "We learn about your business, challenges, and goals") }
                       </p>
                     </div>
                   </div>
@@ -353,7 +353,7 @@ const Demo = () => {
                     <div>
                       <h4 className="font-semibold mb-1">{ t("demo.expect.liveDemo", "Live Demo (30 min)") }</h4>
                       <p className="text-sm text-muted-foreground">
-                        See Realtor Desk AI in action with examples specific to your market
+                        { t("demo.expect.liveDemoDesc", "See Realtor Desk AI in action with examples specific to your market") }
                       </p>
                     </div>
                   </div>
@@ -362,7 +362,7 @@ const Demo = () => {
                     <div>
                       <h4 className="font-semibold mb-1">{ t("demo.expect.onboarding", "Custom Onboarding") }</h4>
                       <p className="text-sm text-muted-foreground">
-                        Get started with personalized onboarding and support
+                        { t("demo.expect.onboardingDesc", "Get started with personalized onboarding and support") }
                       </p>
                     </div>
                   </div>

@@ -275,7 +275,7 @@ const Features = () => {
             <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-12 text-center">
               <MessageSquare className="w-32 h-32 mx-auto mb-6 text-primary" />
               <p className="text-2xl font-bold mb-2">{t('features.mobile.appStores')}</p>
-              <p className="text-muted-foreground">Download from App Store or Google Play</p>
+              <p className="text-muted-foreground">{ t("features.mobile.download", "Download from App Store or Google Play") }</p>
             </div>
           </div>
         </div>

@@ -360,8 +360,8 @@ const Index = () => {
         sectionNumber="08"
         badge={t('faq.title', 'FAQ')}
         badgeIcon={<MessageSquare className="w-4 h-4" />}
-        title="Frequently Asked Questions"
-        subtitle="Get answers to common questions about RealtorDesk AI"
+        title={t("home.faq.title", "Frequently Asked Questions")}
+        subtitle={t("home.faq.subtitle", "Get answers to common questions about RealtorDesk AI")}
       >
         <div className="max-w-3xl mx-auto">
           <div className="space-y-4">
@@ -402,7 +402,7 @@ const Index = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-primary/10 blur-2xl rounded-full pointer-events-none transition-colors duration-500 group-hover:bg-primary/30"></div>
                   </div>
-                  <span className="relative z-10">Contact Support</span>
+                  <span className="relative z-10">{ t("home.faq.contactSupport", "Contact Support") }</span>
                 </button>
               </Link>
             </div>

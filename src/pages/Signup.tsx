@@ -317,11 +317,11 @@ const Signup = () => {
                 <label htmlFor="privacyConsent" className="text-sm text-gray-300 leading-relaxed cursor-pointer">
                   {t('auth.signup.agreeToThe', 'I agree to the')}{" "}
                   <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    Privacy Policy
+                    {t("auth.signup.privacyPolicy", "Privacy Policy")}
                   </Link>{" "}
                   &{" "}
                   <Link to="/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    Terms of Service
+                    {t("auth.signup.termsOfService", "Terms of Service")}
                   </Link>
                   {" "}*
                 </label>

@@ -203,7 +203,7 @@ const Contact = () => {
                       >
                         {t('contact.consent', 'I consent to my information being collected and used as described in the')}{" "}
                         <RouterLink to="/privacy-policy" className="text-primary underline">
-                          Privacy Policy
+                          {t("contact.privacyPolicyLink", "Privacy Policy")}
                         </RouterLink>
                         {" "}*
                       </label>

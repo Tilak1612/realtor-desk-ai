@@ -48,7 +48,19 @@ const resources = {
         leads: "Leads",
         aiActive: "AI Active"
       },
+      roi: {
+        badge: "Calculate Your ROI",
+        title: "See Your Potential Savings",
+        subtitle: "Discover how much time and money you could save with AI automation"
+      },
       home: {
+        faq: {
+          title: "Frequently Asked Questions",
+          subtitle: "Get answers to common questions about RealtorDesk AI",
+          moreQuestions: "Have more questions? We're here to help!",
+          viewAll: "View All FAQs",
+          contactSupport: "Contact Support"
+        },
         audience: {
           agentTitle: "For Agents",
           agentDesc: "To automate your marketing programs, capture and convert more leads into transactions.",
@@ -110,7 +122,8 @@ const resources = {
           f1title: "Full CRM Access", f1desc: "View and manage all contacts, leads, and deals from your phone",
           f2title: "Push Notifications", f2desc: "Get instant alerts for new leads, messages, and deal updates",
           f3title: "Offline Mode", f3desc: "Access your data even without internet connection",
-          f4title: "Voice Commands", f4desc: "Add notes and create tasks hands-free while driving"
+          f4title: "Voice Commands", f4desc: "Add notes and create tasks hands-free while driving",
+          download: "Download from App Store or Google Play"
         },
         comparison: {
           title: "How We Compare to Leading CRMs",
@@ -366,6 +379,7 @@ const resources = {
           placeholder: "Map integration placeholder"
         },
         consent: "I consent to my information being collected and used as described in the",
+        privacyPolicyLink: "Privacy Policy",
         pipedaNote: "Required under PIPEDA - Your data will only be used to respond to your inquiry"
       },
       canadianMarket: {
@@ -1715,6 +1729,8 @@ const resources = {
           subtitle: "Start your 14-day free trial",
           orEmail: "Or register with email",
           agreeToThe: "I agree to the",
+          privacyPolicy: "Privacy Policy",
+          termsOfService: "Terms of Service",
           marketingConsent: "Send me tips & product updates (optional)",
           sslNote: "Your data is stored securely on Canadian servers with 256-bit SSL encryption"
         },
@@ -1812,7 +1828,19 @@ const resources = {
         leads: "Prospects",
         aiActive: "IA Active"
       },
+      roi: {
+        badge: "Calculez Votre ROI",
+        title: "Voyez Vos Économies Potentielles",
+        subtitle: "Découvrez combien de temps et d'argent vous pourriez économiser avec l'automatisation IA"
+      },
       home: {
+        faq: {
+          title: "Questions Fréquemment Posées",
+          subtitle: "Obtenez des réponses aux questions courantes sur RealtorDesk AI",
+          moreQuestions: "Vous avez d'autres questions? Nous sommes là pour vous aider!",
+          viewAll: "Voir Toutes les FAQ",
+          contactSupport: "Contacter le Support"
+        },
         audience: {
           agentTitle: "Pour les Agents",
           agentDesc: "Pour automatiser vos programmes marketing, capturer et convertir plus de prospects en transactions.",
@@ -1874,7 +1902,8 @@ const resources = {
           f1title: "Accès CRM Complet", f1desc: "Consultez et gérez tous vos contacts, prospects et transactions depuis votre téléphone",
           f2title: "Notifications Push", f2desc: "Recevez des alertes instantanées pour les nouveaux prospects, messages et mises à jour",
           f3title: "Mode Hors Ligne", f3desc: "Accédez à vos données même sans connexion internet",
-          f4title: "Commandes Vocales", f4desc: "Ajoutez des notes et créez des tâches en mains libres en conduisant"
+          f4title: "Commandes Vocales", f4desc: "Ajoutez des notes et créez des tâches en mains libres en conduisant",
+          download: "Téléchargez depuis l'App Store ou Google Play"
         },
         comparison: {
           title: "Comment Nous Comparons aux Principaux CRM",
@@ -2130,6 +2159,7 @@ const resources = {
           placeholder: "Placeholder de carte"
         },
         consent: "Je consens à ce que mes informations soient collectées et utilisées comme décrit dans la",
+        privacyPolicyLink: "Politique de Confidentialité",
         pipedaNote: "Requis en vertu de la LPRPDE — Vos données ne seront utilisées que pour répondre à votre demande"
       },
       canadianMarket: {
@@ -3479,6 +3509,8 @@ const resources = {
           subtitle: "Commencez votre essai gratuit de 14 jours",
           orEmail: "Ou inscrivez-vous avec un courriel",
           agreeToThe: "J'accepte la",
+          privacyPolicy: "Politique de Confidentialité",
+          termsOfService: "Conditions d'Utilisation",
           marketingConsent: "Envoyez-moi des conseils et mises à jour produit (facultatif)",
           sslNote: "Vos données sont stockées en toute sécurité sur des serveurs canadiens avec un chiffrement SSL 256 bits"
         },
