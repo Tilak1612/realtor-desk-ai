@@ -1778,7 +1778,8 @@ const resources = {
         feature2: "Le scoring de prospects propulsé par l'IA met en évidence les prospects chauds",
         feature3: "Notifications en temps réel pour les demandes urgentes",
         feature4: "Modèles de réponse en un clic",
-        feature5: "Analyses de performance et suivi du ROI"
+        feature5: "Analyses de performance et suivi du ROI",
+        loadFailed: "Échec du chargement du profil"
       },
       canadian: {
         title: "Conçu pour le Marché Canadien",
