@@ -251,25 +251,25 @@ const Pricing = () => {
                 </thead>
                 <tbody>
                   <tr className="border-b">
-                    <td className="py-3 px-4">Annual Price (Agent)</td>
+                    <td className="py-3 px-4">{ t("pricing.table.annualPrice", "Annual Price (Agent)") }</td>
                     <td className="text-center py-3 px-4 font-bold text-accent">$999</td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$5,988</td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$1,788+</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
-                    <td className="py-3 px-4">Setup Fee</td>
+                    <td className="py-3 px-4">{ t("pricing.table.setupFee", "Setup Fee") }</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$999</td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">Varies</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">{ t("pricing.table.varies") }</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">AI Predictive Lead Scoring</td>
+                    <td className="py-3 px-4">{ t("pricing.table.aiScoring", "AI Predictive Lead Scoring") }</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">Basic</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">{ t("pricing.table.basic") }</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
-                    <td className="py-3 px-4">24/7 Bilingual AI Chatbot</td>
+                    <td className="py-3 px-4">{ t("pricing.table.chatbot", "24/7 Bilingual AI Chatbot") }</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
@@ -281,25 +281,25 @@ const Pricing = () => {
                     <td className="text-center py-3 px-4 text-muted-foreground">{t('pricing.table.limited')}</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
-                    <td className="py-3 px-4">Free Migration</td>
+                    <td className="py-3 px-4">{ t("pricing.table.migration", "Free Migration") }</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$500+</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">Canadian Compliance (RECO, BCFSA)</td>
+                    <td className="py-3 px-4">{ t("pricing.table.compliance", "Canadian Compliance (RECO, BCFSA)") }</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">Partial</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">{ t("pricing.table.partial") }</td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
-                    <td className="py-3 px-4">Mobile App</td>
+                    <td className="py-3 px-4">{ t("pricing.table.mobileApp", "Mobile App") }</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4 font-semibold">Total First Year Cost</td>
+                    <td className="py-3 px-4 font-semibold">{ t("pricing.table.totalCost", "Total First Year Cost") }</td>
                     <td className="text-center py-3 px-4 font-bold text-xl gradient-text">$999</td>
                     <td className="text-center py-3 px-4 font-bold text-destructive">$6,987</td>
                     <td className="text-center py-3 px-4 font-bold text-destructive">$1,788+</td>
@@ -310,33 +310,33 @@ const Pricing = () => {
 
             <div className="mt-6 p-4 bg-accent/10 rounded-lg text-center">
               <p className="text-sm font-semibold">
-                💰 Switching from BoldTrail? <span className="gradient-text">You'll save $5,988 in year one alone!</span>
+                {t('pricing.table.boldtrailSwitch', '💰 Switching from BoldTrail?')} <span className="gradient-text">{t('pricing.table.boldtrailSave', "You'll save $5,988 in year one alone!")}</span>
               </p>
             </div>
           </Card>
 
           {/* Social Proof - Success Stories */}
           <div className="mt-16 max-w-6xl mx-auto">
-            <h3 className="text-2xl font-bold mb-8 text-center">Real Results from Real Agents</h3>
+            <h3 className="text-2xl font-bold mb-8 text-center">{t('pricing.social.heading')}</h3>
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
                 <div className="text-3xl font-bold gradient-text mb-2">$127K</div>
-                <p className="text-sm text-muted-foreground mb-4">Additional GCI in first year</p>
-                <p className="text-xs italic">"Switched from BoldTrail and never looked back. The AI lead scoring is incredible."</p>
+                <p className="text-sm text-muted-foreground mb-4">{t('pricing.social.stat1')}</p>
+                <p className="text-xs italic">{t('pricing.social.quote1', '"Switched from BoldTrail and never looked back. The AI lead scoring is incredible."')}</p>
                 <p className="text-xs font-semibold mt-2">- Sarah M., Toronto</p>
               </Card>
 
               <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
-                <div className="text-3xl font-bold gradient-text mb-2">18 Deals</div>
-                <p className="text-sm text-muted-foreground mb-4">Closed from AI chatbot leads</p>
-                <p className="text-xs italic">"The 24/7 bilingual chatbot captures leads while I sleep. Game changer."</p>
+                <div className="text-3xl font-bold gradient-text mb-2">18 {t('billing.features.deals', 'Deals')}</div>
+                <p className="text-sm text-muted-foreground mb-4">{t('pricing.social.stat2')}</p>
+                <p className="text-xs italic">{t('pricing.social.quote2', '"The 24/7 bilingual chatbot captures leads while I sleep. Game changer."')}</p>
                 <p className="text-xs font-semibold mt-2">- Marc D., Montreal</p>
               </Card>
 
               <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
                 <div className="text-3xl font-bold gradient-text mb-2">15 hrs/wk</div>
-                <p className="text-sm text-muted-foreground mb-4">Time saved on admin tasks</p>
-                <p className="text-xs italic">"Automation handles follow-ups. I focus on closing deals, not data entry."</p>
+                <p className="text-sm text-muted-foreground mb-4">{t('pricing.social.stat3')}</p>
+                <p className="text-xs italic">{t('pricing.social.quote3', '"Automation handles follow-ups. I focus on closing deals, not data entry."')}</p>
                 <p className="text-xs font-semibold mt-2">- Priya S., Vancouver</p>
               </Card>
             </div>
@@ -345,22 +345,22 @@ const Pricing = () => {
           {/* Monthly vs Yearly Savings Highlight */}
           <Card className="mt-12 p-8 bg-gradient-to-r from-primary/5 to-secondary/5 max-w-4xl mx-auto border-2 border-primary/20">
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4">Why Choose Annual Billing?</h3>
+              <h3 className="text-2xl font-bold mb-4">{t('pricing.annual.heading')}</h3>
               <div className="grid md:grid-cols-2 gap-8 mt-6">
                 <div>
-                  <div className="text-sm text-muted-foreground mb-2">Monthly Plan</div>
-                  <div className="text-4xl font-bold text-muted-foreground mb-2">$149<span className="text-lg">/mo</span></div>
-                  <div className="text-sm text-muted-foreground">= $1,788/year</div>
+                  <div className="text-sm text-muted-foreground mb-2">{t('pricing.annual.monthly')}</div>
+                  <div className="text-4xl font-bold text-muted-foreground mb-2">$149<span className="text-lg">{t('pricing.annual.mo')}</span></div>
+                  <div className="text-sm text-muted-foreground">= $1,788/{t('pricing.annual.yr', 'yr').replace('/', '')}</div>
                 </div>
                 <div className="relative">
-                  <Badge className="absolute -top-3 right-0 bg-accent">Best Value</Badge>
-                  <div className="text-sm text-muted-foreground mb-2">Annual Plan (Founding Member)</div>
-                  <div className="text-4xl font-bold gradient-text mb-2">$999<span className="text-lg">/yr</span></div>
-                  <div className="text-sm font-semibold text-accent">Save $789/year!</div>
+                  <Badge className="absolute -top-3 right-0 bg-accent">{t('pricing.annual.bestValue')}</Badge>
+                  <div className="text-sm text-muted-foreground mb-2">{t('pricing.annual.annualPlan')}</div>
+                  <div className="text-4xl font-bold gradient-text mb-2">$999<span className="text-lg">{t('pricing.annual.yr')}</span></div>
+                  <div className="text-sm font-semibold text-accent">{t('pricing.annual.save')}</div>
                 </div>
               </div>
               <p className="mt-6 text-sm text-muted-foreground max-w-2xl mx-auto">
-                Annual billing locks in your Founding Member rate forever. Monthly plans may increase to $149/month after promotion ends.
+                {t('pricing.annual.disclaimer', 'Annual billing locks in your Founding Member rate forever. Monthly plans may increase to $149/month after promotion ends.')}
               </p>
             </div>
           </Card>
@@ -370,25 +370,25 @@ const Pricing = () => {
       {/* Add-Ons Section */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
-          <h2 className="text-center mb-12">Enhance Your Plan with Add-Ons</h2>
-          
+          <h2 className="text-center mb-12">{t('pricing.addons.heading')}</h2>
+
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <Card className="p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">$49/month</div>
-              <h3 className="font-bold mb-2">Virtual Staging AI</h3>
-              <p className="text-sm text-muted-foreground">Unlimited virtual staging for all your listings</p>
+              <div className="text-2xl font-bold gradient-text mb-2">49 $/{t('pricing.annual.mo', '/mo').replace('/', '')}</div>
+              <h3 className="font-bold mb-2">{t('pricing.addons.staging')}</h3>
+              <p className="text-sm text-muted-foreground">{t('pricing.addons.stagingDesc')}</p>
             </Card>
 
             <Card className="p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">$79/month</div>
-              <h3 className="font-bold mb-2">Advanced Market Reports</h3>
-              <p className="text-sm text-muted-foreground">Branded reports with your logo and branding</p>
+              <div className="text-2xl font-bold gradient-text mb-2">79 $/{t('pricing.annual.mo', '/mo').replace('/', '')}</div>
+              <h3 className="font-bold mb-2">{t('pricing.addons.reports')}</h3>
+              <p className="text-sm text-muted-foreground">{t('pricing.addons.reportsDesc')}</p>
             </Card>
 
             <Card className="p-6 text-center">
-              <div className="text-2xl font-bold gradient-text mb-2">$199/month</div>
-              <h3 className="font-bold mb-2">Lead Generation Module</h3>
-              <p className="text-sm text-muted-foreground">Targeted seller/buyer lead identification</p>
+              <div className="text-2xl font-bold gradient-text mb-2">199 $/{t('pricing.annual.mo', '/mo').replace('/', '')}</div>
+              <h3 className="font-bold mb-2">{t('pricing.addons.leads')}</h3>
+              <p className="text-sm text-muted-foreground">{t('pricing.addons.leadsDesc')}</p>
             </Card>
           </div>
         </div>
@@ -471,7 +471,7 @@ const Pricing = () => {
 
             <AccordionItem value="item-3" className="bg-background rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                Can I try before I buy?
+                {t('pricing.faq.q3')}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 Absolutely! Schedule a personalized demo to see all features in action before making your decision.
@@ -480,7 +480,7 @@ const Pricing = () => {
 
             <AccordionItem value="item-4" className="bg-background rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                What if I exceed my contact limit?
+                {t('pricing.faq.q4')}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 We'll notify you when you're approaching your limit, and you can upgrade to the next tier seamlessly without losing any data.
@@ -489,7 +489,7 @@ const Pricing = () => {
 
             <AccordionItem value="item-5" className="bg-background rounded-lg px-6">
               <AccordionTrigger className="text-left font-semibold">
-                Do you offer training?
+                {t('pricing.faq.q5')}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 Yes, free onboarding and training are included with all plans. We'll help you get up and running quickly.

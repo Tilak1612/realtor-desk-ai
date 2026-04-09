@@ -170,19 +170,32 @@ const resources = {
         table: {
           heading: "Feature Comparison: Why Agents Switch to Realtor Desk AI",
           featureCol: "Feature",
+          annualPrice: "Annual Price (Agent)",
+          setupFee: "Setup Fee",
+          aiScoring: "AI Predictive Lead Scoring",
+          chatbot: "24/7 Bilingual AI Chatbot",
+          migration: "Free Migration",
+          compliance: "Canadian Compliance (RECO, BCFSA)",
+          mobileApp: "Mobile App",
+          totalCost: "Total First Year Cost",
           comingQ3: "(Coming Q3 2026)",
           comingSoon: "Coming Soon",
           extraCost: "Extra Cost",
           partial: "Partial",
           basic: "Basic",
           limited: "Limited",
-          varies: "Varies"
+          varies: "Varies",
+          boldtrailSwitch: "💰 Switching from BoldTrail?",
+          boldtrailSave: "You'll save $5,988 in year one alone!"
         },
         social: {
           heading: "Real Results from Real Agents",
           stat1: "Additional GCI in first year",
           stat2: "Closed from AI chatbot leads",
-          stat3: "Time saved on admin tasks"
+          stat3: "Time saved on admin tasks",
+          quote1: "\"Switched from BoldTrail and never looked back. The AI lead scoring is incredible.\"",
+          quote2: "\"The 24/7 bilingual chatbot captures leads while I sleep. Game changer.\"",
+          quote3: "\"Automation handles follow-ups. I focus on closing deals, not data entry.\""
         },
         annual: {
           heading: "Why Choose Annual Billing?",
@@ -190,6 +203,7 @@ const resources = {
           mo: "/mo",
           bestValue: "Best Value",
           annualPlan: "Annual Plan (Founding Member)",
+          disclaimer: "Annual billing locks in your Founding Member rate forever. Monthly plans may increase to $149/month after promotion ends.",
           yr: "/yr",
           save: "Save $789/year!",
           foundingBonus: "Founding Member Bonus"
@@ -1816,19 +1830,32 @@ const resources = {
         table: {
           heading: "Comparaison des Fonctionnalités : Pourquoi les Courtiers Passent à Realtor Desk AI",
           featureCol: "Fonctionnalité",
+          annualPrice: "Prix Annuel (Agent)",
+          setupFee: "Frais d'Installation",
+          aiScoring: "Score Prédictif de Prospects par IA",
+          chatbot: "Chatbot IA Bilingue 24/7",
+          migration: "Migration Gratuite",
+          compliance: "Conformité Canadienne (RECO, BCFSA)",
+          mobileApp: "Application Mobile",
+          totalCost: "Coût Total Première Année",
           comingQ3: "(Disponible T3 2026)",
           comingSoon: "Bientôt disponible",
           extraCost: "Coût supplémentaire",
           partial: "Partielle",
           basic: "De base",
           limited: "Limité",
-          varies: "Variable"
+          varies: "Variable",
+          boldtrailSwitch: "💰 Vous venez de BoldTrail ?",
+          boldtrailSave: "Vous économiserez 5 988 $ dès la première année !"
         },
         social: {
           heading: "Résultats Réels de Courtiers Réels",
           stat1: "GCI supplémentaire la première année",
           stat2: "Transactions conclues via le chatbot IA",
-          stat3: "Temps économisé sur les tâches administratives"
+          stat3: "Temps économisé sur les tâches administratives",
+          quote1: "\"Passé de BoldTrail et je n'ai jamais regardé en arrière. La notation des prospects par IA est incroyable.\"",
+          quote2: "\"Le chatbot bilingue 24/7 capture des prospects pendant que je dors. Un vrai changement.\"",
+          quote3: "\"L'automatisation gère les suivis. Je me concentre sur la conclusion, pas la saisie.\""
         },
         annual: {
           heading: "Pourquoi Choisir la Facturation Annuelle ?",
@@ -1838,7 +1865,8 @@ const resources = {
           annualPlan: "Plan Annuel (Membre Fondateur)",
           yr: "/an",
           save: "Économisez 789 $/an !",
-          foundingBonus: "Bonus Membre Fondateur"
+          foundingBonus: "Bonus Membre Fondateur",
+          disclaimer: "La facturation annuelle bloque votre tarif de Membre Fondateur pour toujours. Les plans mensuels peuvent augmenter à 149 $/mois après la fin de la promotion."
         },
         addons: {
           heading: "Améliorez Votre Plan avec des Modules Complémentaires",
