@@ -110,7 +110,7 @@ const MobileOptimizedFAQ = ({ searchQuery = "" }: MobileOptimizedFAQProps) => {
               {t('faq.title')} <span className="gradient-text">{t('faq.titleGradient')}</span>
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Find answers to common questions about Realtor Desk AI
+              {t('faq.subtitle', 'Find answers to common questions about Realtor Desk AI')}
             </p>
           </div>
         )}

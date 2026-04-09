@@ -484,6 +484,7 @@ const resources = {
       faq: {
         title: "Frequently Asked",
         titleGradient: "Questions",
+        subtitle: "Find answers to common questions about Realtor Desk AI",
         q1: {
           question: "Is Realtor Desk ready for production use?",
           answer: "We're currently in public beta with 50+ active realtors across Canada. The platform is fully functional and stable, but we're actively gathering feedback and adding features. Beta users help shape our roadmap and receive lifetime discounts."
@@ -646,7 +647,7 @@ const resources = {
             quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
             brokerage: "RE/MAX Team Lead",
             stats: {
-              responseTime: "Team response time",
+              responseTime: "We respond within 24 hours",
               leadIncrease: "increase in qualified leads",
               additionalDeals: "additional deals in Q1"
             },
@@ -2235,6 +2236,7 @@ const resources = {
       faq: {
         title: "Questions",
         titleGradient: "Fréquentes",
+        subtitle: "Trouvez des réponses aux questions courantes sur Realtor Desk AI",
         q1: {
           question: "RealtorDesk AI est-il prêt pour une utilisation en production?",
           answer: "Nous sommes actuellement en bêta publique avec plus de 50 agents immobiliers actifs à travers le Canada. La plateforme est entièrement fonctionnelle et stable, mais nous recueillons activement des commentaires et ajoutons des fonctionnalités. Les utilisateurs bêta aident à façonner notre feuille de route et reçoivent des réductions à vie."
@@ -2397,7 +2399,7 @@ const resources = {
             quote: "Notre équipe de 5 agents fonctionne maintenant comme une équipe de 15. Le tableau de bord unifié signifie qu'aucun prospect ne passe entre les mailles du filet, même lorsque nous sommes tous occupés.",
             brokerage: "Chef d'Équipe RE/MAX",
             stats: {
-              responseTime: "Temps de réponse de l'équipe",
+              responseTime: "Nous répondons dans les 24 heures",
               leadIncrease: "d'augmentation des prospects qualifiés",
               additionalDeals: "transactions supplémentaires au T1"
             },
