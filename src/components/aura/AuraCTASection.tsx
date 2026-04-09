@@ -7,7 +7,7 @@ const AuraCTASection = () => {
   const { t } = useTranslation();
 
   return (
-    <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4 mb-8">
+    <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mb-8">
       <div className="relative bg-gradient-to-br from-primary/20 via-card to-card rounded-[40px] py-16 sm:py-24 px-6 sm:px-12 lg:px-16 text-center overflow-hidden">
         {/* Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 blur-[120px] rounded-full pointer-events-none"></div>

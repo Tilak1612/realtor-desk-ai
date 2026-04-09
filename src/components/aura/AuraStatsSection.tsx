@@ -29,7 +29,7 @@ const AuraStatsSection = () => {
   ];
 
   return (
-    <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4">
+    <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto">
       <div className="bg-card rounded-[40px] py-12 sm:py-16 px-6 sm:px-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
           {stats.map((stat, index) => (

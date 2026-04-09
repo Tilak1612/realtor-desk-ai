@@ -26,7 +26,7 @@ const AuraSection = ({
   dark = false,
 }: AuraSectionProps) => {
   return (
-    <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto mt-4">
+    <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto">
       <div
         className={cn(
           "relative overflow-hidden flex flex-col rounded-[40px] py-16 sm:py-20 lg:py-24 px-6 sm:px-12 lg:px-16",
