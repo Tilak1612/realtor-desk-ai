@@ -59,7 +59,7 @@ const Dashboard = () => {
       .eq("user_id", userId);
 
     const { data: propertiesData } = await supabase
-      .from("properties")
+      .from("property_listings")
       .select("price, status")
       .eq("user_id", userId);
 

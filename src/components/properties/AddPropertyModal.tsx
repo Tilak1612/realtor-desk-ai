@@ -115,7 +115,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
-      const { error } = await supabase.from("properties").insert([{
+      const { error } = await supabase.from("property_listings").insert([{
         user_id: user.id,
         title: formData.title,
         address: formData.address,

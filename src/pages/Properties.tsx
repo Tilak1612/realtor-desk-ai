@@ -74,7 +74,7 @@ const Properties = () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from("properties")
+        .from("property_listings")
         .select("*")
         .order("created_at", { ascending: false });
 

@@ -49,7 +49,7 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
       
       const [contactsRes, propertiesRes, dealsRes] = await Promise.all([
         supabase.from("contacts").select("*", { count: "exact", head: true }).eq("user_id", userId),
-        supabase.from("properties").select("*", { count: "exact", head: true }).eq("user_id", userId),
+        supabase.from("property_listings").select("*", { count: "exact", head: true }).eq("user_id", userId),
         supabase.from("deals").select("*", { count: "exact", head: true }).eq("user_id", userId).eq("status", "active"),
       ]);
 

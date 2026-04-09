@@ -35,7 +35,7 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
       path: "/properties",
       checkFn: async () => {
         const { count } = await supabase
-          .from("properties")
+          .from("property_listings")
           .select("*", { count: "exact", head: true })
           .eq("user_id", userId);
         return (count || 0) > 0;

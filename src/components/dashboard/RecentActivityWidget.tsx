@@ -32,7 +32,7 @@ const RecentActivityWidget = ({ userId }: RecentActivityWidgetProps) => {
 
         // Fetch recent properties
         const { data: properties } = await supabase
-          .from("properties")
+          .from("property_listings")
           .select("id, title, created_at")
           .eq("user_id", userId)
           .order("created_at", { ascending: false })

@@ -127,7 +127,7 @@ export function QuickAreaImportWidget() {
     // Check by MLS number first (more reliable)
     if (mlsNumber) {
       const { data: byMls } = await supabase
-        .from("properties")
+        .from("property_listings")
         .select("id")
         .eq("user_id", userId)
         .eq("mls_number", mlsNumber)
@@ -138,7 +138,7 @@ export function QuickAreaImportWidget() {
     // Check by address
     if (address) {
       const { data: byAddress } = await supabase
-        .from("properties")
+        .from("property_listings")
         .select("id")
         .eq("user_id", userId)
         .eq("address", address)
@@ -185,7 +185,7 @@ export function QuickAreaImportWidget() {
           ? parseFloat(listing.price.replace(/[^0-9.]/g, '')) 
           : listing.price;
 
-        const { error } = await supabase.from("properties").insert({
+        const { error } = await supabase.from("property_listings").insert({
           user_id: user.id,
           title: listing.address || "Imported Listing",
           address: listing.address || "",

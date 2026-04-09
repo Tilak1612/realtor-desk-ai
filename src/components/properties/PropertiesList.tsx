@@ -32,7 +32,7 @@ const PropertiesList = ({ properties, loading, onRefresh }: PropertiesListProps)
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this property?")) return;
 
-    const { error } = await supabase.from("properties").delete().eq("id", id);
+    const { error } = await supabase.from("property_listings").delete().eq("id", id);
     
     if (error) {
       toast({
