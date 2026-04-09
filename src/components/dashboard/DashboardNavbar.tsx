@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import FeedbackDialog from "@/components/feedback/FeedbackDialog";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface DashboardNavbarProps {
   user: any;
@@ -88,6 +89,9 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
 
         {/* Right side actions */}
         <div className="flex items-center gap-1 sm:gap-2 ml-auto">
+          {/* Language Switcher */}
+          <LanguageSwitcher />
+
           {/* Feedback Button */}
           <FeedbackDialog />
 
