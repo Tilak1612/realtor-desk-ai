@@ -315,7 +315,7 @@ const Signup = () => {
                   className="mt-1 border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                 />
                 <label htmlFor="privacyConsent" className="text-sm text-gray-300 leading-relaxed cursor-pointer">
-                  I agree to the{" "}
+                  {t('auth.signup.agreeToThe', 'I agree to the')}{" "}
                   <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                     Privacy Policy
                   </Link>{" "}
@@ -336,7 +336,7 @@ const Signup = () => {
                   className="mt-0.5 border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                 />
                 <label htmlFor="marketingConsent" className="text-sm text-gray-300 cursor-pointer">
-                  Send me tips & product updates (optional)
+                  {t('auth.signup.marketingConsent', 'Send me tips & product updates (optional)')}
                 </label>
               </div>
             </div>
@@ -354,7 +354,7 @@ const Signup = () => {
             {/* Security Notice */}
             <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-700/50 p-3 rounded-lg border border-white/10">
               <Info className="w-4 h-4 text-primary flex-shrink-0" />
-              <span>Your data is stored securely on Canadian servers with 256-bit SSL encryption</span>
+              <span>{t('auth.signup.sslNote', 'Your data is stored securely on Canadian servers with 256-bit SSL encryption')}</span>
             </div>
           </form>
 

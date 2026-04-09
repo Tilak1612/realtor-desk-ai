@@ -14,6 +14,7 @@ const resources = {
         faq: "FAQ",
         bookDemo: "Book Your Free Demo",
         startClosing: "Start Closing More Deals",
+        getStarted: "Get Started",
         signedOut: "Signed out successfully",
         searchPlaceholder: "Search contacts, properties, deals...",
         add: "Add",
@@ -309,7 +310,9 @@ const resources = {
         },
         map: {
           placeholder: "Map integration placeholder"
-        }
+        },
+        consent: "I consent to my information being collected and used as described in the",
+        pipedaNote: "Required under PIPEDA - Your data will only be used to respond to your inquiry"
       },
       canadianMarket: {
         hero: {
@@ -518,6 +521,13 @@ const resources = {
         q20: {
           question: "What makes RealtorDesk AI different from traditional CRMs?",
           answer: "Traditional CRMs organize contacts but require YOU to do all the follow-up. RealtorDesk AI actively engages leads 24/7 via chat, email, SMS, and voice—qualifying them and booking appointments while you focus on closings. It's the difference between a filing cabinet and an AI assistant."
+        },
+        cta: {
+          title: "Still Have Questions?",
+          subtitle: "We're here to help! Get in touch with our team or start your free trial today.",
+          contactSupport: "Contact Support",
+          startTrial: "Start Your 14-Day Free Trial",
+          noCreditCard: "No credit card required • Cancel anytime"
         }
       },
         cta: {
@@ -1648,7 +1658,10 @@ const resources = {
         },
         signup: {
           subtitle: "Start your 14-day free trial",
-          orEmail: "Or register with email"
+          orEmail: "Or register with email",
+          agreeToThe: "I agree to the",
+          marketingConsent: "Send me tips & product updates (optional)",
+          sslNote: "Your data is stored securely on Canadian servers with 256-bit SSL encryption"
         },
         forgot: {
           title: "Reset password",
@@ -1710,6 +1723,7 @@ const resources = {
         faq: "FAQ",
         bookDemo: "Réserver Votre Démo Gratuite",
         startClosing: "Commencer à Conclure Plus",
+        getStarted: "Commencer",
         signedOut: "Déconnexion réussie",
         searchPlaceholder: "Rechercher contacts, propriétés, transactions...",
         add: "Ajouter",
@@ -2005,7 +2019,9 @@ const resources = {
         },
         map: {
           placeholder: "Placeholder de carte"
-        }
+        },
+        consent: "Je consens à ce que mes informations soient collectées et utilisées comme décrit dans la",
+        pipedaNote: "Requis en vertu de la LPRPDE — Vos données ne seront utilisées que pour répondre à votre demande"
       },
       canadianMarket: {
         hero: {
@@ -2214,6 +2230,13 @@ const resources = {
         q20: {
           question: "Qu'est-ce qui rend RealtorDesk AI différent des CRM traditionnels?",
           answer: "Les CRM traditionnels organisent les contacts mais nécessitent que VOUS fassiez tout le suivi. RealtorDesk AI engage activement les prospects 24/7 via chat, courriel, SMS et voix—les qualifiant et réservant des rendez-vous pendant que vous vous concentrez sur les clôtures. C'est la différence entre un classeur et un assistant IA."
+        },
+        cta: {
+          title: "Vous Avez Encore des Questions?",
+          subtitle: "Nous sommes là pour vous aider! Contactez notre équipe ou commencez votre essai gratuit aujourd'hui.",
+          contactSupport: "Contacter le Support",
+          startTrial: "Commencer Votre Essai Gratuit de 14 Jours",
+          noCreditCard: "Aucune carte de crédit requise • Annulez à tout moment"
         }
       },
       cta: {
@@ -3344,7 +3367,10 @@ const resources = {
         },
         signup: {
           subtitle: "Commencez votre essai gratuit de 14 jours",
-          orEmail: "Ou inscrivez-vous avec un courriel"
+          orEmail: "Ou inscrivez-vous avec un courriel",
+          agreeToThe: "J'accepte la",
+          marketingConsent: "Envoyez-moi des conseils et mises à jour produit (facultatif)",
+          sslNote: "Vos données sont stockées en toute sécurité sur des serveurs canadiens avec un chiffrement SSL 256 bits"
         },
         forgot: {
           title: "Réinitialiser le mot de passe",

@@ -28,25 +28,25 @@ const FAQ = () => {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
             <h2 className="mb-4 text-2xl sm:text-3xl md:text-4xl font-bold">
-              Still Have Questions?
+              {t('faq.cta.title', 'Still Have Questions?')}
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
-              We're here to help! Get in touch with our team or start your free trial today.
+              {t('faq.cta.subtitle', "We're here to help! Get in touch with our team or start your free trial today.")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Contact Support
+                  {t('faq.cta.contactSupport', 'Contact Support')}
                 </Button>
               </Link>
               <Link to="/signup">
                 <Button size="lg" className="btn-gradient w-full sm:w-auto">
-                  Start Your 14-Day Free Trial
+                  {t('faq.cta.startTrial', 'Start Your 14-Day Free Trial')}
                 </Button>
               </Link>
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground mt-4">
-              No credit card required • Cancel anytime
+              {t('faq.cta.noCreditCard', 'No credit card required • Cancel anytime')}
             </p>
           </div>
         </div>

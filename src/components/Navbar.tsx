@@ -76,7 +76,7 @@ const Navbar = () => {
             <Link to="/demo">
               <Button className="btn-gradient font-semibold text-sm lg:text-base whitespace-nowrap">
                 <span className="hidden lg:inline">{t('nav.startClosing')}</span>
-                <span className="lg:hidden">Get Started</span>
+                <span className="lg:hidden">{t('nav.getStarted', 'Get Started')}</span>
               </Button>
             </Link>
           </div>

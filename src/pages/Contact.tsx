@@ -201,14 +201,14 @@ const Contact = () => {
                         htmlFor="privacyConsent"
                         className="text-sm font-medium leading-relaxed cursor-pointer"
                       >
-                        I consent to my information being collected and used as described in the{" "}
+                        {t('contact.consent', 'I consent to my information being collected and used as described in the')}{" "}
                         <RouterLink to="/privacy-policy" className="text-primary underline">
                           Privacy Policy
                         </RouterLink>
                         {" "}*
                       </label>
                       <p className="text-xs text-muted-foreground">
-                        Required under PIPEDA - Your data will only be used to respond to your inquiry
+                        {t('contact.pipedaNote', 'Required under PIPEDA - Your data will only be used to respond to your inquiry')}
                       </p>
                     </div>
                   </div>
