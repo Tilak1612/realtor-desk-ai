@@ -9,8 +9,10 @@ import { toast } from 'sonner';
 import { Check, Loader2, CreditCard, Calendar, Crown } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import { useSubscription, SUBSCRIPTION_PRODUCTS } from '@/contexts/SubscriptionContext';
+import { useTranslation } from 'react-i18next';
 
 const Billing = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [user, setUser] = useState<any>(null);
@@ -52,7 +54,7 @@ const Billing = () => {
     fetchUserData();
 
     if (searchParams.get('success') === 'true') {
-      toast.success('Subscription activated successfully!');
+      toast.success(t('billing.activated', 'Subscription activated successfully!'));
       trackEvent('checkout_completed');
       refreshSubscription();
       navigate('/billing', { replace: true });
@@ -146,8 +148,8 @@ const Billing = () => {
     <AppLayout user={user} profile={profile}>
       <div className="space-y-6 max-w-4xl">
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold mb-1">Billing & Subscription</h1>
-          <p className="text-sm text-muted-foreground">Manage your subscription and billing details</p>
+          <h1 className="text-2xl md:text-3xl font-semibold mb-1">{t('billing.title', 'Billing & Subscription')}</h1>
+          <p className="text-sm text-muted-foreground">{t('billing.subtitle', 'Manage your subscription and billing details')}</p>
         </div>
 
         {/* Current Status Card */}
@@ -158,10 +160,10 @@ const Billing = () => {
                 <div>
                   <CardTitle className="text-base font-medium flex items-center gap-2">
                     <Crown className="w-4 h-4 text-primary" />
-                    Trial Account
+                    {t('billing.trialAccount', 'Trial Account')}
                   </CardTitle>
                   <CardDescription className="text-xs mt-1">
-                    {getTrialDaysLeft()} days left in your free trial
+                    {getTrialDaysLeft()} {t('billing.daysLeft', 'days left in your free trial')}
                   </CardDescription>
                 </div>
                 <Badge variant="outline" className="text-primary border-primary text-xs">
@@ -171,7 +173,7 @@ const Billing = () => {
             </CardHeader>
             <CardContent>
               <p className="text-xs text-muted-foreground">
-                Upgrade now to unlock unlimited access and continue growing your business with AI-powered CRM.
+                {t('billing.upgradeNow', 'Upgrade now to unlock unlimited access and continue growing your business with AI-powered CRM.')}
               </p>
             </CardContent>
           </Card>
@@ -184,10 +186,10 @@ const Billing = () => {
                 <div>
                   <CardTitle className="text-base font-medium flex items-center gap-2">
                     <Check className="w-4 h-4 text-accent" />
-                    {subscriptionTier === 'agent' ? 'Agent Plan' : 'Team Plan'}
+                    {subscriptionTier === 'agent' ? t('billing.agentPlan', 'Agent Plan') : t('billing.teamPlan', 'Team Plan')}
                   </CardTitle>
                   <CardDescription className="text-xs mt-1">
-                    Your subscription is active
+                    {t('billing.subscriptionActive', 'Your subscription is active')}
                   </CardDescription>
                 </div>
                 <Badge variant="default" className="bg-accent text-xs">
@@ -199,7 +201,7 @@ const Billing = () => {
               <div className="flex items-center gap-2 text-xs">
                 <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
                 <span className="text-muted-foreground">
-                  Next billing date: {subscriptionEnd ? new Date(subscriptionEnd).toLocaleDateString() : 'N/A'}
+                  {t('billing.nextBilling', 'Next billing date')}: {subscriptionEnd ? new Date(subscriptionEnd).toLocaleDateString() : 'N/A'}
                 </span>
               </div>
               <Button 
@@ -211,12 +213,12 @@ const Billing = () => {
                 {portalLoading ? (
                   <>
                     <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
-                    Opening...
+                    {t('billing.opening', 'Opening...')}
                   </>
                 ) : (
                   <>
                     <CreditCard className="w-3.5 h-3.5 mr-1.5" />
-                    Manage Billing
+                    {t('billing.manageBilling', 'Manage Billing')}
                   </>
                 )}
               </Button>
@@ -227,10 +229,10 @@ const Billing = () => {
         {/* Billing Period Toggle */}
         <Card className="p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
           <div className="flex flex-col items-center gap-4">
-            <h3 className="text-base font-medium">Select Billing Period</h3>
+            <h3 className="text-base font-medium">{t('billing.selectPeriod', 'Select Billing Period')}</h3>
             <div className="flex items-center gap-4">
               <span className={`text-sm transition-colors ${!isYearly ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
-                Monthly
+                {t('billing.monthly', 'Monthly')}
               </span>
               <Button
                 variant="outline"
@@ -241,11 +243,11 @@ const Billing = () => {
                 <div className={`absolute w-6 h-6 rounded-full bg-primary transition-transform ${isYearly ? 'translate-x-6' : 'translate-x-0.5'}`} />
               </Button>
               <span className={`text-sm transition-colors ${isYearly ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
-                Yearly
+                {t('billing.yearly', 'Yearly')}
               </span>
               {isYearly && (
                 <Badge variant="secondary" className="text-accent font-semibold text-xs">
-                  Save up to $789/year
+                  {t('billing.saveYearly', 'Save up to $789/year')}
                 </Badge>
               )}
             </div>
@@ -255,31 +257,31 @@ const Billing = () => {
         {/* Plan Comparison */}
         <div>
           <h2 className="text-lg font-semibold mb-4">
-            {subscribed ? 'Available Plans' : 'Choose Your Plan'}
+            {subscribed ? t('billing.availablePlans', 'Available Plans') : t('billing.choosePlan', 'Choose Your Plan')}
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {/* Agent Plan */}
             <Card className={subscriptionTier === 'agent' ? 'border-2 border-accent shadow-lg' : ''}>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base font-medium">Agent Plan</CardTitle>
+                  <CardTitle className="text-base font-medium">{t('billing.agentPlan', 'Agent Plan')}</CardTitle>
                   {subscriptionTier === 'agent' && (
-                    <Badge variant="default" className="bg-accent text-xs">Current</Badge>
+                    <Badge variant="default" className="bg-accent text-xs">{t('billing.current', 'Current')}</Badge>
                   )}
                 </div>
                 <div className="mt-4">
                   <span className="text-3xl font-bold">
                     ${isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearlyPrice : SUBSCRIPTION_PRODUCTS.agent.monthlyPrice}
                   </span>
-                  <span className="text-sm text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
+                  <span className="text-sm text-muted-foreground">/{isYearly ? t('billing.year', 'year') : t('billing.month', 'month')}</span>
                 </div>
                 <CardDescription className="text-xs mt-2">
-                  Perfect for individual agents
+                  {t('billing.agentDesc', 'Perfect for individual agents')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 mb-6">
-                  {['Unlimited contacts & leads', 'AI-powered predictive CRM', '24/7 AI chatbot', 'Email & SMS automation', 'Mobile app included'].map((feature) => (
+                  {[t('billing.features.unlimitedContacts', 'Unlimited contacts & leads'), t('billing.features.aiCrm', 'AI-powered predictive CRM'), t('billing.features.chatbot', '24/7 AI chatbot'), t('billing.features.emailSms', 'Email & SMS automation'), t('billing.features.mobileApp', 'Mobile app included')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>
@@ -298,7 +300,7 @@ const Billing = () => {
                         Loading...
                       </>
                     ) : (
-                      subscribed ? 'Switch to Agent' : 'Upgrade to Agent'
+                      subscribed ? t('billing.switchAgent', 'Switch to Agent') : t('billing.upgradeAgent', 'Upgrade to Agent')
                     )}
                   </Button>
                 )}
@@ -309,26 +311,26 @@ const Billing = () => {
             <Card className={subscriptionTier === 'team' ? 'border-2 border-accent shadow-lg' : 'border-2 border-primary/20'}>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base font-medium">Team Plan</CardTitle>
+                  <CardTitle className="text-base font-medium">{t('billing.teamPlan', 'Team Plan')}</CardTitle>
                   {subscriptionTier === 'team' ? (
-                    <Badge variant="default" className="bg-accent text-xs">Current</Badge>
+                    <Badge variant="default" className="bg-accent text-xs">{t('billing.current', 'Current')}</Badge>
                   ) : (
-                    <Badge variant="secondary" className="text-xs">Most Popular</Badge>
+                    <Badge variant="secondary" className="text-xs">{t('billing.mostPopular', 'Most Popular')}</Badge>
                   )}
                 </div>
                 <div className="mt-4">
                   <span className="text-3xl font-bold">
                     ${isYearly ? SUBSCRIPTION_PRODUCTS.team.yearlyPrice : SUBSCRIPTION_PRODUCTS.team.monthlyPrice}
                   </span>
-                  <span className="text-sm text-muted-foreground">/{isYearly ? 'year' : 'month'}</span>
+                  <span className="text-sm text-muted-foreground">/{isYearly ? t('billing.year', 'year') : t('billing.month', 'month')}</span>
                 </div>
                 <CardDescription className="text-xs mt-2">
-                  For growing teams of 2-5 agents
+                  {t('billing.teamDesc', 'For growing teams of 2-5 agents')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 mb-6">
-                  {['Everything in Agent, plus:', 'Team collaboration tools', 'Lead distribution & routing', 'Advanced reporting', 'Dedicated account manager'].map((feature) => (
+                  {[t('billing.features.everythingAgent', 'Everything in Agent, plus:'), t('billing.features.teamCollab', 'Team collaboration tools'), t('billing.features.leadRouting', 'Lead distribution & routing'), t('billing.features.advReporting', 'Advanced reporting'), t('billing.features.accountManager', 'Dedicated account manager')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>
@@ -347,7 +349,7 @@ const Billing = () => {
                         Loading...
                       </>
                     ) : (
-                      'Upgrade to Team'
+                      t('billing.upgradeTeam', 'Upgrade to Team')
                     )}
                   </Button>
                 )}
