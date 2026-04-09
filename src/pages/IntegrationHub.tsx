@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Search, Plug, Clock, CheckCircle, Bell, Send, ExternalLink } from "lucide-react";
 import ConnectPanel from "@/components/integrations/ConnectPanel";
+import SyncHealthBadge from "@/components/integrations/SyncHealthBadge";
 
 // ─── Tool Registry ────────────────────────────────────
 
@@ -141,6 +142,12 @@ const IntegrationHub = () => {
       setLoading(false);
     };
     init();
+
+    // Auto-refresh connection health every 60 seconds
+    const interval = setInterval(() => {
+      refreshConnections();
+    }, 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const refreshConnections = async () => {
@@ -322,7 +329,7 @@ const IntegrationHub = () => {
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="flex gap-1.5">
+                        <div className="flex gap-1.5 flex-wrap">
                           {getStatusBadge(tool)}
                           {tool.eta && tool.status === "coming_soon" && (
                             <Badge variant="outline" className="text-[10px]">{tool.eta}</Badge>
@@ -330,6 +337,14 @@ const IntegrationHub = () => {
                         </div>
                         {getActionButton(tool)}
                       </div>
+                      {connectedSlugs.has(tool.slug) && connectionsMap[tool.slug] && (
+                        <SyncHealthBadge
+                          lastSyncAt={connectionsMap[tool.slug].last_sync_at}
+                          lastSyncStatus={connectionsMap[tool.slug].last_sync_status}
+                          lastSyncError={connectionsMap[tool.slug].last_sync_error}
+                          onReauthClick={() => openPanel(tool)}
+                        />
+                      )}
                     </CardContent>
                   </Card>
                 ))}

@@ -218,7 +218,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
     try {
       const token = crypto.randomUUID();
 
-      const { error } = await supabase.from("integration_connections").upsert({
+      const { data, error } = await supabase.from("integration_connections").upsert({
         user_id: userId,
         tool_slug: tool.slug,
         status: "connected",
@@ -226,12 +226,18 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
         webhook_token: token,
         connected_account_label: `${tool.name} Webhook`,
         last_sync_status: "pending",
-      }, { onConflict: "user_id,tool_slug" });
+      }, { onConflict: "user_id,tool_slug" }).select().single();
 
       if (error) throw error;
 
+      // Update local connection state so the panel shows the webhook URL
+      // WITHOUT closing the panel (onConnectionChange would re-render parent)
+      if (data) {
+        // Force the parent to refresh data in background, but keep panel open
+        onConnectionChange();
+      }
+
       toast.success(`${tool.name} ${t('integrations.panel.webhookReady', 'webhook URL generated!')}`);
-      onConnectionChange();
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : "Failed to set up webhook");
     } finally {
@@ -404,7 +410,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
             <p className="text-sm text-muted-foreground">{tool.description}</p>
 
             {!connection?.webhook_token ? (
-              <Button onClick={handleWebhookConnect} disabled={loading} className="w-full">
+              <Button type="button" onClick={handleWebhookConnect} disabled={loading} className="w-full">
                 {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
                 {t('integrations.panel.generateWebhook', 'Generate Webhook URL')}
               </Button>
