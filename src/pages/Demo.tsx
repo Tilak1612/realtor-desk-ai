@@ -132,7 +132,7 @@ const Demo = () => {
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Left Column - Form */}
             <Card className="p-8">
-              <h2 className="text-2xl font-bold mb-6">Request a Personalized Demo</h2>
+              <h2 className="text-2xl font-bold mb-6">{t("demo.form.heading", "Request a Personalized Demo")}</h2>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -142,9 +142,9 @@ const Demo = () => {
                       name="fullName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Full Name *</FormLabel>
+                          <FormLabel>{t("demo.form.fullName", "Full Name *")}</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Smith" {...field} />
+                            <Input placeholder={t("demo.form.fullNamePlaceholder", "John Smith")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -155,9 +155,9 @@ const Demo = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address *</FormLabel>
+                          <FormLabel>{t("demo.form.email", "Email Address *")}</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="john@example.com" {...field} />
+                            <Input type="email" placeholder={t("demo.form.emailPlaceholder", "john@example.com")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -171,7 +171,7 @@ const Demo = () => {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number *</FormLabel>
+                          <FormLabel>{t("demo.form.phone", "Phone Number *")}</FormLabel>
                           <FormControl>
                             <Input type="tel" placeholder="(555) 123-4567" {...field} />
                           </FormControl>
@@ -184,9 +184,9 @@ const Demo = () => {
                       name="brokerage"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Brokerage/Company</FormLabel>
+                          <FormLabel>{t("demo.form.brokerage", "Brokerage/Company")}</FormLabel>
                           <FormControl>
-                            <Input placeholder="ABC Realty" {...field} />
+                            <Input placeholder={t("demo.form.brokeragePlaceholder", "ABC Realty")} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -200,7 +200,7 @@ const Demo = () => {
                       name="province"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Province *</FormLabel>
+                          <FormLabel>{t("demo.form.province", "Province *")}</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
@@ -229,7 +229,7 @@ const Demo = () => {
                       name="currentCrm"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Current CRM (if any)</FormLabel>
+                          <FormLabel>{t("demo.form.crm", "Current CRM (if any)")}</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
@@ -260,7 +260,7 @@ const Demo = () => {
                       name="teamSize"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Number of Team Members</FormLabel>
+                          <FormLabel>{t("demo.form.teamSize", "Number of Team Members")}</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
@@ -284,7 +284,7 @@ const Demo = () => {
                       name="biggestChallenge"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Biggest Challenge</FormLabel>
+                          <FormLabel>{t("demo.form.challenge", "Biggest Challenge")}</FormLabel>
                           <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
@@ -310,7 +310,7 @@ const Demo = () => {
                     name="comments"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Comments/Questions</FormLabel>
+                        <FormLabel>{t("demo.form.comments", "Comments/Questions")}</FormLabel>
                         <FormControl>
                           <Textarea rows={4} placeholder="Tell us more about your needs..." {...field} />
                         </FormControl>
@@ -337,7 +337,7 @@ const Demo = () => {
             {/* Right Column - Benefits */}
             <div className="space-y-8">
               <Card className="p-6 bg-gradient-to-br from-primary/5 to-secondary/5">
-                <h3 className="text-xl font-bold mb-4">What to Expect</h3>
+                <h3 className="text-xl font-bold mb-4">{ t("demo.expect.heading", "What to Expect") }</h3>
                 <div className="space-y-4">
                   <div className="flex gap-4">
                     <MessageSquare className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
@@ -370,7 +370,7 @@ const Demo = () => {
               </Card>
 
               <Card className="p-6">
-                <h3 className="text-xl font-bold mb-4">Contact Information</h3>
+                <h3 className="text-xl font-bold mb-4">{ t("demo.contact.heading", "Contact Information") }</h3>
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
