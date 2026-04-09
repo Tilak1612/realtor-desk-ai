@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
 
 const PROPERTY_TYPES = [
   "Residential", "Luxury", "Condos", "Commercial", "Land", "Investment"
@@ -11,7 +12,7 @@ const PROPERTY_TYPES = [
 
 interface BusinessGoalsProps {
   profileData: any;
-  onNext: (data: any) => void;
+  onNext: (data: any) => Promise<void>;
   onBack: () => void;
 }
 
@@ -34,10 +35,16 @@ const BusinessGoals = ({ profileData, onNext, onBack }: BusinessGoalsProps) => {
     setFormData({ ...formData, property_types: updated });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    onNext({ business_preferences: formData });
+    try {
+      await onNext({ business_preferences: formData });
+    } catch {
+      toast.error("Failed to save business goals");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

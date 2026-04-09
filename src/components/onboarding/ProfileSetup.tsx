@@ -22,7 +22,7 @@ const MAJOR_CITIES = [
 
 interface ProfileSetupProps {
   profileData: any;
-  onNext: (data: any) => void;
+  onNext: (data: any) => Promise<void>;
   onSkip: () => void;
   userId: string | null;
 }
@@ -68,10 +68,16 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    onNext(formData);
+    try {
+      await onNext(formData);
+    } catch {
+      toast.error("Failed to save profile");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

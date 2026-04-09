@@ -83,7 +83,7 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
         availability,
         buffer_time: parseInt(bufferTime),
         meeting_types: meetingTypesData,
-      });
+      }, { onConflict: 'user_id' });
 
       if (error) throw error;
       toast.success("Calendar settings saved!");

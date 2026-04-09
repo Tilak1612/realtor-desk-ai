@@ -50,20 +50,21 @@ const Onboarding = () => {
   const saveProgress = async (step: number, data: any) => {
     if (!userId) return;
 
-    try {
-      const { error } = await supabase
-        .from("profiles")
-        .update({
-          ...data,
-          onboarding_step: step,
-        })
-        .eq("id", userId);
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        ...data,
+        onboarding_step: step,
+      })
+      .eq("id", userId);
 
-      if (error) throw error;
-      setProfileData({ ...profileData, ...data });
-    } catch (error: any) {
-      toast.error("Failed to save progress");
+    if (error) {
+      console.error("Onboarding save failed:", error.message);
+      toast.error("Failed to save progress. Please try again.");
+      throw error;
     }
+
+    setProfileData({ ...profileData, ...data });
   };
 
   const handleNext = async (data?: any) => {

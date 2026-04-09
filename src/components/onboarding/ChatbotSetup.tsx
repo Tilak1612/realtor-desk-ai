@@ -21,7 +21,7 @@ const QUALIFICATION_QUESTIONS = [
 interface ChatbotSetupProps {
   profileData: any;
   userId: string | null;
-  onNext: () => void;
+  onNext: () => void | Promise<void>;
   onBack: () => void;
 }
 
@@ -51,7 +51,7 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
       const { error } = await supabase.from("chatbot_settings").upsert({
         user_id: userId,
         ...formData,
-      });
+      }, { onConflict: 'user_id' });
 
       if (error) throw error;
       toast.success("Chatbot configured!");
