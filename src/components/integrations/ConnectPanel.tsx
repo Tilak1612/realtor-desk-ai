@@ -78,9 +78,63 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
   const isSmtp = tool.connectionMethod === "smtp";
   const isOAuth = tool.connectionMethod === "oauth";
 
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "";
   const webhookUrl = connection?.webhook_token
-    ? `https://www.realtordesk.ai/webhooks/${userId}/${tool.slug}/${connection.webhook_token}`
+    ? `${supabaseUrl}/functions/v1/webhook-receiver?user_id=${userId}&tool=${tool.slug}&token=${connection.webhook_token}`
     : null;
+
+  const getOAuthProvider = (slug: string): "google" | "microsoft" => {
+    if (slug.startsWith("google")) return "google";
+    return "microsoft";
+  };
+
+  const handleOAuthConnect = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("oauth-integration-auth", {
+        body: { provider: getOAuthProvider(tool.slug), tool_slug: tool.slug },
+      });
+
+      if (error) throw error;
+      if (data?.error) {
+        toast.error(data.error);
+        setLoading(false);
+        return;
+      }
+
+      // Open popup
+      const popup = window.open(data.authUrl, "oauth_popup", "width=500,height=650,scrollbars=yes,resizable=yes");
+
+      const handleMessage = (event: MessageEvent) => {
+        if (event.data?.type === "OAUTH_SUCCESS") {
+          window.removeEventListener("message", handleMessage);
+          toast.success(`${tool.name} connected as ${event.data.accountLabel}`);
+          onConnectionChange();
+          onOpenChange(false);
+          setLoading(false);
+        }
+        if (event.data?.type === "OAUTH_ERROR") {
+          window.removeEventListener("message", handleMessage);
+          toast.error(`Connection failed: ${event.data.message}`);
+          setLoading(false);
+        }
+      };
+
+      window.addEventListener("message", handleMessage);
+
+      // Check if popup was closed without completing
+      const checkClosed = setInterval(() => {
+        if (popup?.closed) {
+          clearInterval(checkClosed);
+          window.removeEventListener("message", handleMessage);
+          setLoading(false);
+        }
+      }, 1000);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to start OAuth");
+      setLoading(false);
+    }
+  };
 
   const handleCopyWebhookUrl = () => {
     if (webhookUrl) {
@@ -298,8 +352,8 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
             {/* Actions */}
             <div className="space-y-3">
               {isOAuth && (
-                <Button variant="outline" className="w-full text-sm">
-                  <RefreshCw className="w-4 h-4 mr-2" />
+                <Button variant="outline" className="w-full text-sm" onClick={handleOAuthConnect} disabled={loading}>
+                  {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <RefreshCw className="w-4 h-4 mr-2" />}
                   {t('integrations.panel.reAuth', 'Re-authenticate')}
                 </Button>
               )}
@@ -382,6 +436,64 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
                 </div>
               </>
             )}
+          </div>
+        </SheetContent>
+      </Sheet>
+    );
+  }
+
+  // ─── OAUTH CONNECT VIEW ──────────────────────────
+
+  if (isOAuth) {
+    const provider = getOAuthProvider(tool.slug);
+    const providerName = provider === "google" ? "Google" : "Microsoft";
+    const scopeDescriptions = tool.slug.includes("calendar")
+      ? [t('integrations.panel.scopeCalendar', 'Read and write your calendar events'), t('integrations.panel.scopeProfile', 'Access your account email')]
+      : [t('integrations.panel.scopeContacts', 'Read your contacts list'), t('integrations.panel.scopeProfile', 'Access your account email')];
+
+    return (
+      <Sheet open={open} onOpenChange={onOpenChange}>
+        <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+          <SheetHeader>
+            <div className="flex items-center gap-3">
+              <img src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              <SheetTitle>{t('integrations.panel.connect', 'Connect')} {tool.name}</SheetTitle>
+            </div>
+          </SheetHeader>
+
+          <div className="space-y-6 mt-6">
+            <p className="text-sm text-muted-foreground">{tool.description}</p>
+
+            <div className="space-y-3">
+              <p className="text-sm font-medium">{t('integrations.panel.whatWeAccess', "What we'll access:")}</p>
+              {scopeDescriptions.map((scope, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-green-400">
+                  <CheckCircle className="w-4 h-4" />
+                  {scope}
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-sm font-medium">{t('integrations.panel.weWillNever', "We will NEVER:")}</p>
+              <div className="flex items-center gap-2 text-sm text-red-400">
+                <XCircle className="w-4 h-4" />
+                {t('integrations.panel.neverDelete', 'Delete your data without asking')}
+              </div>
+              <div className="flex items-center gap-2 text-sm text-red-400">
+                <XCircle className="w-4 h-4" />
+                {t('integrations.panel.neverShare', 'Share your credentials with anyone')}
+              </div>
+            </div>
+
+            <Button onClick={handleOAuthConnect} disabled={loading} className="w-full" size="lg">
+              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              {t('integrations.panel.connectWith', `Connect with ${providerName}`)}
+            </Button>
+
+            <Button variant="ghost" className="w-full" onClick={() => onOpenChange(false)}>
+              {t('app.common.cancel', 'Cancel')}
+            </Button>
           </div>
         </SheetContent>
       </Sheet>

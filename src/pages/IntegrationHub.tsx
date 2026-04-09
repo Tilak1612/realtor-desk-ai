@@ -58,6 +58,43 @@ const TOOLS: Tool[] = [
 
 const CATEGORIES = [...new Set(TOOLS.map(t => t.category))];
 
+const TOOL_COLORS: Record<string, string> = {
+  salesforce: "#00A1E0", "zoho-crm": "#D32F2F", pipedrive: "#4CAF50",
+  freshsales: "#F57C00", "microsoft-dynamics": "#0078D4", keap: "#2D8C3C",
+  "agile-crm": "#00BCD4", "close-crm": "#333333", nutshell: "#FF9800",
+  zapier: "#FF4A00", make: "#6D3BF5", n8n: "#EA4B71", ifttt: "#33CCFF",
+  twilio: "#F22F46", whatsapp: "#25D366", smtp: "#EA4335",
+  "google-calendar": "#4285F4", "outlook-calendar": "#0078D4",
+  "google-contacts": "#34A853", "microsoft-contacts": "#0078D4",
+  "linkedin-lead-gen": "#0A66C2", "facebook-lead-ads": "#1877F2", centris: "#E31837",
+};
+
+const ToolLogo = ({ tool }: { tool: Tool }) => {
+  const [imgError, setImgError] = useState(false);
+  const color = TOOL_COLORS[tool.slug] || "#ea580c";
+
+  if (imgError) {
+    return (
+      <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+        style={{ backgroundColor: color }}>
+        {tool.name[0]}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden p-1.5">
+      <img
+        src={tool.logoUrl}
+        alt={tool.name}
+        className="w-full h-full object-contain"
+        onError={() => setImgError(true)}
+        loading="lazy"
+      />
+    </div>
+  );
+};
+
 // ─── Component ────────────────────────────────────────
 
 const IntegrationHub = () => {
@@ -277,14 +314,7 @@ const IntegrationHub = () => {
                     <CardContent className="p-0 space-y-3">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
-                            <img
-                              src={tool.logoUrl}
-                              alt={tool.name}
-                              className="w-6 h-6 object-contain"
-                              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                            />
-                          </div>
+                          <ToolLogo tool={tool} />
                           <div>
                             <h3 className="font-medium text-sm">{tool.name}</h3>
                             <p className="text-xs text-muted-foreground">{tool.description}</p>
