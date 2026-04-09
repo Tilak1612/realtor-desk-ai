@@ -8,9 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, AlertCircle, Download, CheckCircle } from "lucide-react";
+import { Loader2, AlertCircle, Search, CheckCircle } from "lucide-react";
 import { validateField, ValidationErrors } from "./PropertyValidation";
-import { fetchSingleListing, validateRealtorUrl } from "@/lib/apify";
 
 interface AddPropertyModalProps {
   open: boolean;
@@ -101,54 +100,65 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
     return isValid;
   };
 
-  const handleImportFromUrl = async () => {
-    const url = formData.source_url.trim();
-    if (!url) return;
-
-    const validation = validateRealtorUrl(url);
-    if (!validation.valid) {
-      setImportStatus('error');
-      setImportError(validation.error || 'Invalid URL');
-      return;
-    }
+  const handlePreviewListing = async () => {
+    const input = formData.source_url.trim();
+    if (!input) return;
 
     setImporting(true);
     setImportStatus('idle');
     setImportError('');
 
     try {
-      const listing = await fetchSingleListing(url);
-      if (!listing) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error("Not authenticated");
+
+      const { data, error } = await supabase.functions.invoke("import-property-from-ddf", {
+        body: { input, mode: "preview" },
+      });
+
+      if (error) {
+        // Try to parse error response
+        const errData = data || {};
+        throw new Error(errData.message || error.message || "Failed to fetch listing");
+      }
+
+      if (!data?.success) {
         setImportStatus('error');
-        setImportError(t('properties.importFailed', "Couldn't import this listing. Please fill details manually."));
+        setImportError(data?.message || t('properties.importFailed', "We couldn't find that listing. Please check and try again."));
         return;
       }
 
-      const provCode = PROVINCES.find(p =>
-        p.name.toLowerCase() === (listing.province || '').toLowerCase()
-      )?.code || listing.province || '';
+      const p = data.property;
+      const provCode = PROVINCES.find(prov =>
+        prov.name.toLowerCase() === (p.province || '').toLowerCase() ||
+        prov.code.toLowerCase() === (p.province || '').toLowerCase()
+      )?.code || p.province || '';
 
       setFormData(prev => ({
         ...prev,
-        title: listing.address || prev.title,
-        address: listing.address || prev.address,
-        city: listing.city || prev.city,
+        title: p.title || p.address || prev.title,
+        address: p.address || prev.address,
+        city: p.city || prev.city,
         province: provCode || prev.province,
-        postal_code: listing.postalCode || prev.postal_code,
-        mls_number: listing.mlsNumber || prev.mls_number,
-        price: listing.price ? String(listing.price).replace(/[^0-9.]/g, '') : prev.price,
-        bedrooms: listing.bedrooms ? String(listing.bedrooms) : prev.bedrooms,
-        bathrooms: listing.bathrooms ? String(listing.bathrooms) : prev.bathrooms,
-        square_feet: listing.squareFeet ? String(listing.squareFeet) : prev.square_feet,
-        image_url: listing.imageUrl || prev.image_url,
-        description: listing.description || prev.description,
-        property_type: listing.propertyType?.toLowerCase() || prev.property_type,
-        data_source: 'url_scrape',
+        postal_code: p.postal_code || prev.postal_code,
+        mls_number: p.mls_number || prev.mls_number,
+        price: p.price ? String(p.price) : prev.price,
+        bedrooms: p.bedrooms ? String(p.bedrooms) : prev.bedrooms,
+        bathrooms: p.bathrooms ? String(p.bathrooms) : prev.bathrooms,
+        square_feet: p.square_feet ? String(p.square_feet) : prev.square_feet,
+        lot_size: p.lot_size ? String(p.lot_size) : prev.lot_size,
+        year_built: p.year_built ? String(p.year_built) : prev.year_built,
+        image_url: p.image_url || prev.image_url,
+        description: p.description || prev.description,
+        property_type: p.property_type || prev.property_type,
+        status: p.status || prev.status,
+        data_source: 'crea_ddf',
       }));
       setImportStatus('success');
     } catch (err: unknown) {
       setImportStatus('error');
-      setImportError(err instanceof Error ? err.message : t('properties.importError', 'Import failed. Please fill details manually.'));
+      const msg = err instanceof Error ? err.message : String(err);
+      setImportError(msg || t('properties.importError', "We couldn't fetch the listing right now. You can still add it manually."));
     } finally {
       setImporting(false);
     }
@@ -258,32 +268,35 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="bg-primary/10 p-4 rounded-lg mb-4">
             <h3 className="font-semibold mb-2 flex items-center gap-2">
-              {t("app.modals.addProperty.quickAdd")}
+              <Search className="h-4 w-4" />
+              {t("properties.ddf.importTitle", "Import from Realtor.ca or MLS Number")}
             </h3>
-            <Label htmlFor="source_url" className="text-sm">{t("app.modals.addProperty.pasteUrl")}</Label>
+            <Label htmlFor="source_url" className="text-sm">
+              {t("properties.ddf.inputLabel", "Paste a Realtor.ca listing URL or enter MLS number")}
+            </Label>
             <div className="flex gap-2 mt-2">
               <Input
                 id="source_url"
                 value={formData.source_url}
                 onChange={(e) => { handleFieldChange("source_url", e.target.value); setImportStatus('idle'); }}
-                placeholder={t("app.modals.addProperty.urlPlaceholder")}
+                placeholder={t("properties.ddf.placeholder", "https://www.realtor.ca/real-estate/... or E1234567")}
                 className="flex-1"
               />
               <Button
                 type="button"
-                onClick={handleImportFromUrl}
+                onClick={handlePreviewListing}
                 disabled={importing || !formData.source_url.trim()}
                 variant="secondary"
                 className="gap-2"
               >
-                {importing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-                {importing ? t('properties.fetching', 'Fetching...') : t('properties.import', 'Import')}
+                {importing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+                {importing ? t('properties.ddf.fetching', 'Looking up...') : t('properties.ddf.preview', 'Preview Listing')}
               </Button>
             </div>
             {importStatus === 'success' && (
               <p className="text-green-600 text-xs mt-2 flex items-center gap-1">
                 <CheckCircle className="h-3 w-3" />
-                {t('properties.importSuccess', 'Imported from Realtor.ca — review and save below')}
+                {t('properties.ddf.previewSuccess', 'Listing found — review the details below and click Save.')}
               </p>
             )}
             {importStatus === 'error' && (
@@ -293,7 +306,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
               </p>
             )}
             <p className="text-xs text-muted-foreground mt-2">
-              {t("app.modals.addProperty.urlNote")}
+              {t("properties.ddf.helperText", "We'll fetch the listing details and let you review before saving.")}
             </p>
           </div>
 
