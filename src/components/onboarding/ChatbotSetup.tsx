@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Bot } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const QUALIFICATION_QUESTIONS = [
   "Budget and pre-approval status",
@@ -26,6 +27,7 @@ interface ChatbotSetupProps {
 }
 
 const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     bot_name: `${profileData.full_name?.split(' ')[0] || 'My'}Bot`,
@@ -54,10 +56,10 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
       }, { onConflict: 'user_id' });
 
       if (error) throw error;
-      toast.success("Chatbot configured!");
+      toast.success(t('onboarding.chatbot.configured', 'Chatbot configured!'));
       onNext();
     } catch (error: unknown) {
-      toast.error("Failed to save chatbot settings");
+      toast.error(t('onboarding.chatbot.saveFailed', 'Failed to save chatbot settings'));
     } finally {
       setLoading(false);
     }
@@ -66,15 +68,15 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">AI Chatbot Setup</h2>
-        <p className="text-muted-foreground">Customize your AI assistant to qualify leads 24/7</p>
+        <h2 className="text-3xl font-bold mb-2">{t('onboarding.chatbot.title', 'AI Chatbot Setup')}</h2>
+        <p className="text-muted-foreground">{t('onboarding.chatbot.subtitle', 'Customize your AI assistant to qualify leads 24/7')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Settings Form */}
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="bot_name">Chatbot Name</Label>
+            <Label htmlFor="bot_name">{t('onboarding.chatbot.botName', 'Chatbot Name')}</Label>
             <Input
               id="bot_name"
               value={formData.bot_name}
@@ -84,7 +86,7 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="greeting_message">Greeting Message</Label>
+            <Label htmlFor="greeting_message">{t('onboarding.chatbot.greeting', 'Greeting Message')}</Label>
             <Textarea
               id="greeting_message"
               value={formData.greeting_message}
@@ -176,10 +178,10 @@ const ChatbotSetup = ({ profileData, userId, onNext, onBack }: ChatbotSetupProps
 
       <div className="flex gap-4 pt-4">
         <Button type="button" variant="outline" onClick={onBack} className="flex-1">
-          Back
+          {t('app.common.back', 'Back')}
         </Button>
         <Button type="submit" className="flex-1" disabled={loading}>
-          {loading ? "Saving..." : "Continue"}
+          {loading ? t('app.common.saving', 'Saving...') : t('app.common.continue', 'Continue')}
         </Button>
       </div>
     </form>

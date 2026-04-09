@@ -4,12 +4,14 @@ import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { X, Cookie, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CookieConsent = () => {
+  const { t } = useTranslation();
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState({
-    necessary: true, // Always true, cannot be disabled
+    necessary: true,
     analytics: false,
     marketing: false,
     functional: false
@@ -56,7 +58,7 @@ const CookieConsent = () => {
   };
 
   const togglePreference = (key: keyof typeof preferences) => {
-    if (key === 'necessary') return; // Cannot disable necessary cookies
+    if (key === 'necessary') return;
     setPreferences(prev => ({
       ...prev,
       [key]: !prev[key]
@@ -71,120 +73,112 @@ const CookieConsent = () => {
         <div className="flex items-start gap-3">
           <Cookie className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 hidden sm:block" />
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-base sm:text-lg mb-2">🍪 Cookie Preferences</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2">{t('cookie.title', '🍪 Cookie Preferences')}</h3>
             <p className="text-xs sm:text-sm text-muted-foreground mb-4">
-              We use cookies to enhance your browsing experience and analyze site traffic. You can customize your cookie preferences or accept all.{" "}
+              {t('cookie.description', 'We use cookies to enhance your browsing experience and analyze site traffic. You can customize your cookie preferences or accept all.')}{" "}
               <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80 transition-colors">
-                Privacy Policy
+                {t('cookie.privacyLink', 'Privacy Policy')}
               </Link>
             </p>
 
             {!showSettings ? (
               <div className="flex flex-wrap gap-2">
-                <Button 
-                  onClick={handleAcceptAll} 
-                  size="sm" 
+                <Button
+                  onClick={handleAcceptAll}
+                  size="sm"
                   className="btn-gradient text-xs sm:text-sm h-9 px-4"
                 >
-                  Accept All Cookies
+                  {t('cookie.acceptAll', 'Accept All Cookies')}
                 </Button>
-                <Button 
-                  onClick={handleRejectAll} 
-                  size="sm" 
-                  variant="outline" 
+                <Button
+                  onClick={handleRejectAll}
+                  size="sm"
+                  variant="outline"
                   className="text-xs sm:text-sm h-9 px-4"
                 >
-                  Necessary Only
+                  {t('cookie.necessaryOnly', 'Necessary Only')}
                 </Button>
-                <Button 
-                  onClick={() => setShowSettings(true)} 
-                  size="sm" 
-                  variant="ghost" 
+                <Button
+                  onClick={() => setShowSettings(true)}
+                  size="sm"
+                  variant="ghost"
                   className="text-xs sm:text-sm h-9 px-4"
                 >
                   <Settings className="w-4 h-4 mr-2" />
-                  Customize
+                  {t('cookie.customize', 'Customize')}
                 </Button>
               </div>
             ) : (
               <div className="space-y-4">
                 <div className="space-y-3">
-                  {/* Necessary Cookies */}
                   <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                     <div className="flex-1">
-                      <h4 className="font-medium text-sm">Necessary Cookies</h4>
+                      <h4 className="font-medium text-sm">{t('cookie.necessary', 'Necessary Cookies')}</h4>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Required for basic site functionality. Cannot be disabled.
+                        {t('cookie.necessaryDesc', 'Required for basic site functionality. Cannot be disabled.')}
                       </p>
                     </div>
-                    <Switch 
-                      checked={true} 
-                      disabled 
-                      aria-label="Necessary cookies (always enabled)"
-                    />
+                    <Switch checked={true} disabled aria-label={t('cookie.necessaryAria', 'Necessary cookies (always enabled)')} />
                   </div>
 
-                  {/* Analytics Cookies */}
                   <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                     <div className="flex-1">
-                      <h4 className="font-medium text-sm">Analytics Cookies</h4>
+                      <h4 className="font-medium text-sm">{t('cookie.analytics', 'Analytics Cookies')}</h4>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Help us understand how visitors interact with our website.
+                        {t('cookie.analyticsDesc', 'Help us understand how visitors interact with our website.')}
                       </p>
                     </div>
-                    <Switch 
-                      checked={preferences.analytics} 
+                    <Switch
+                      checked={preferences.analytics}
                       onCheckedChange={() => togglePreference('analytics')}
-                      aria-label="Toggle analytics cookies"
+                      aria-label={t('cookie.analyticsAria', 'Toggle analytics cookies')}
                     />
                   </div>
 
-                  {/* Marketing Cookies */}
                   <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                     <div className="flex-1">
-                      <h4 className="font-medium text-sm">Marketing Cookies</h4>
+                      <h4 className="font-medium text-sm">{t('cookie.marketing', 'Marketing Cookies')}</h4>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Used to deliver personalized advertisements relevant to you.
+                        {t('cookie.marketingDesc', 'Used to deliver personalized advertisements relevant to you.')}
                       </p>
                     </div>
-                    <Switch 
-                      checked={preferences.marketing} 
+                    <Switch
+                      checked={preferences.marketing}
                       onCheckedChange={() => togglePreference('marketing')}
-                      aria-label="Toggle marketing cookies"
+                      aria-label={t('cookie.marketingAria', 'Toggle marketing cookies')}
                     />
                   </div>
 
-                  {/* Functional Cookies */}
                   <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
                     <div className="flex-1">
-                      <h4 className="font-medium text-sm">Functional Cookies</h4>
+                      <h4 className="font-medium text-sm">{t('cookie.functional', 'Functional Cookies')}</h4>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Enable enhanced functionality like chat widgets and preferences.
+                        {t('cookie.functionalDesc', 'Enable enhanced functionality like chat widgets and preferences.')}
                       </p>
                     </div>
-                    <Switch 
-                      checked={preferences.functional} 
+                    <Switch
+                      checked={preferences.functional}
                       onCheckedChange={() => togglePreference('functional')}
-                      aria-label="Toggle functional cookies"
+                      aria-label={t('cookie.functionalAria', 'Toggle functional cookies')}
                     />
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2 pt-2">
-                  <Button 
-                    onClick={handleSavePreferences} 
-                    size="sm" 
+                  <Button
+                    onClick={handleSavePreferences}
+                    size="sm"
                     className="btn-gradient text-xs sm:text-sm h-9 px-4"
                   >
-                    Save Preferences
+                    {t('cookie.savePreferences', 'Save Preferences')}
                   </Button>
-                  <Button 
-                    onClick={() => setShowSettings(false)} 
-                    size="sm" 
-                    variant="outline" 
+                  <Button
+                    onClick={() => setShowSettings(false)}
+                    size="sm"
+                    variant="outline"
                     className="text-xs sm:text-sm h-9 px-4"
                   >
-                    Back
+                    {t('cookie.back', 'Back')}
                   </Button>
                 </div>
               </div>
@@ -195,7 +189,7 @@ const CookieConsent = () => {
             size="icon"
             onClick={() => setShowBanner(false)}
             className="flex-shrink-0 h-8 w-8"
-            aria-label="Close cookie consent banner"
+            aria-label={t('cookie.closeAria', 'Close cookie consent banner')}
           >
             <X className="w-4 h-4" />
           </Button>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const PROPERTY_TYPES = [
   "Residential", "Luxury", "Condos", "Commercial", "Land", "Investment"
@@ -17,6 +18,7 @@ interface BusinessGoalsProps {
 }
 
 const BusinessGoals = ({ profileData, onNext, onBack }: BusinessGoalsProps) => {
+  const { t } = useTranslation();
   const preferences = profileData.business_preferences || {};
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -41,7 +43,7 @@ const BusinessGoals = ({ profileData, onNext, onBack }: BusinessGoalsProps) => {
     try {
       await onNext({ business_preferences: formData });
     } catch {
-      toast.error("Failed to save business goals");
+      toast.error(t('onboarding.goals.saveFailed', 'Failed to save business goals'));
     } finally {
       setLoading(false);
     }
@@ -50,24 +52,24 @@ const BusinessGoals = ({ profileData, onNext, onBack }: BusinessGoalsProps) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">Your Business Goals</h2>
-        <p className="text-muted-foreground">Help us tailor Realtor Desk AI to your objectives</p>
+        <h2 className="text-3xl font-bold mb-2">{t('onboarding.goals.title', 'Your Business Goals')}</h2>
+        <p className="text-muted-foreground">{t('onboarding.goals.subtitle', 'Help us tailor Realtor Desk AI to your objectives')}</p>
       </div>
 
       <div className="space-y-3">
-        <Label>Your Role *</Label>
+        <Label>{t('onboarding.goals.role', 'Your Role')} *</Label>
         <RadioGroup value={formData.role} onValueChange={(value) => setFormData({ ...formData, role: value })}>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="solo_agent" id="solo_agent" />
-            <Label htmlFor="solo_agent" className="cursor-pointer">Solo Agent</Label>
+            <Label htmlFor="solo_agent" className="cursor-pointer">{t('onboarding.goals.soloAgent', 'Solo Agent')}</Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="team_leader" id="team_leader" />
-            <Label htmlFor="team_leader" className="cursor-pointer">Team Leader</Label>
+            <Label htmlFor="team_leader" className="cursor-pointer">{t('onboarding.goals.teamLeader', 'Team Leader')}</Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="broker_manager" id="broker_manager" />
-            <Label htmlFor="broker_manager" className="cursor-pointer">Broker/Manager</Label>
+            <Label htmlFor="broker_manager" className="cursor-pointer">{t('onboarding.goals.brokerManager', 'Broker/Manager')}</Label>
           </div>
         </RadioGroup>
       </div>
@@ -136,10 +138,10 @@ const BusinessGoals = ({ profileData, onNext, onBack }: BusinessGoalsProps) => {
 
       <div className="flex gap-4 pt-4">
         <Button type="button" variant="outline" onClick={onBack} className="flex-1">
-          Back
+          {t('app.common.back', 'Back')}
         </Button>
         <Button type="submit" className="flex-1" disabled={loading}>
-          {loading ? "Saving..." : "Continue"}
+          {loading ? t('app.common.saving', 'Saving...') : t('app.common.continue', 'Continue')}
         </Button>
       </div>
     </form>

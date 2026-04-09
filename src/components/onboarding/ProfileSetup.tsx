@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CANADIAN_PROVINCES = [
   "Alberta", "British Columbia", "Manitoba", "New Brunswick",
@@ -28,6 +29,7 @@ interface ProfileSetupProps {
 }
 
 const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
@@ -60,9 +62,9 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
         .getPublicUrl(fileName);
 
       setFormData({ ...formData, avatar_url: publicUrl });
-      toast.success("Avatar uploaded!");
+      toast.success(t('onboarding.profile.avatarUploaded', 'Avatar uploaded!'));
     } catch (error: unknown) {
-      toast.error("Failed to upload avatar");
+      toast.error(t('onboarding.profile.avatarFailed', 'Failed to upload avatar'));
     } finally {
       setUploading(false);
     }
@@ -74,7 +76,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
     try {
       await onNext(formData);
     } catch {
-      toast.error("Failed to save profile");
+      toast.error(t('onboarding.profile.saveFailed', 'Failed to save profile'));
     } finally {
       setLoading(false);
     }
@@ -83,8 +85,8 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">Let's Set Up Your Profile</h2>
-        <p className="text-muted-foreground">Tell us about yourself to personalize your experience</p>
+        <h2 className="text-3xl font-bold mb-2">{t('onboarding.profile.title', "Let's Set Up Your Profile")}</h2>
+        <p className="text-muted-foreground">{t('onboarding.profile.subtitle', 'Tell us about yourself to personalize your experience')}</p>
       </div>
 
       {/* Avatar Upload */}
@@ -117,7 +119,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="full_name">Full Name *</Label>
+          <Label htmlFor="full_name">{t('onboarding.profile.fullName', 'Full Name')} *</Label>
           <Input
             id="full_name"
             value={formData.full_name}
@@ -127,7 +129,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="company_name">Company/Brokerage Name *</Label>
+          <Label htmlFor="company_name">{t('onboarding.profile.companyName', 'Company/Brokerage Name')} *</Label>
           <Input
             id="company_name"
             value={formData.company_name}
@@ -137,7 +139,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="license_number">Real Estate License Number</Label>
+          <Label htmlFor="license_number">{t('onboarding.profile.licenseNumber', 'Real Estate License Number')}</Label>
           <Input
             id="license_number"
             value={formData.license_number}
@@ -146,7 +148,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="province">Province *</Label>
+          <Label htmlFor="province">{t('onboarding.profile.province', 'Province')} *</Label>
           <Select value={formData.province} onValueChange={(value) => setFormData({ ...formData, province: value })}>
             <SelectTrigger>
               <SelectValue placeholder="Select province" />
@@ -160,7 +162,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
         </div>
 
         <div className="space-y-2 md:col-span-2">
-          <Label htmlFor="city">City *</Label>
+          <Label htmlFor="city">{t('onboarding.profile.city', 'City')} *</Label>
           <Select value={formData.city} onValueChange={(value) => setFormData({ ...formData, city: value })}>
             <SelectTrigger>
               <SelectValue placeholder="Select city" />
@@ -175,7 +177,7 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
       </div>
 
       <div className="space-y-3">
-        <Label>Primary Language *</Label>
+        <Label>{t('onboarding.profile.primaryLanguage', 'Primary Language')} *</Label>
         <RadioGroup value={formData.primary_language} onValueChange={(value) => setFormData({ ...formData, primary_language: value })}>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="english" id="english" />
@@ -194,10 +196,10 @@ const ProfileSetup = ({ profileData, onNext, onSkip, userId }: ProfileSetupProps
 
       <div className="flex gap-4 pt-4">
         <Button type="submit" className="flex-1" disabled={loading}>
-          {loading ? "Saving..." : "Continue"}
+          {loading ? t('app.common.saving', 'Saving...') : t('app.common.continue', 'Continue')}
         </Button>
         <Button type="button" variant="ghost" onClick={onSkip}>
-          Skip for now
+          {t('app.common.skip', 'Skip for now')}
         </Button>
       </div>
     </form>

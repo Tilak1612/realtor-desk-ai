@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Calendar, Clock } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
@@ -29,6 +30,7 @@ interface CalendarIntegrationProps {
 }
 
 const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProps) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState<any>({
     Monday: { start: "09:00", end: "17:00" },
@@ -86,10 +88,10 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
       }, { onConflict: 'user_id' });
 
       if (error) throw error;
-      toast.success("Calendar settings saved!");
+      toast.success(t('onboarding.calendar.saved', 'Calendar settings saved!'));
       onNext();
     } catch (error: unknown) {
-      toast.error("Failed to save calendar settings");
+      toast.error(t('onboarding.calendar.saveFailed', 'Failed to save calendar settings'));
     } finally {
       setLoading(false);
     }
@@ -98,8 +100,8 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">Calendar Integration</h2>
-        <p className="text-muted-foreground">Connect your calendar and set your availability</p>
+        <h2 className="text-3xl font-bold mb-2">{t('onboarding.calendar.title', 'Calendar Integration')}</h2>
+        <p className="text-muted-foreground">{t('onboarding.calendar.subtitle', 'Connect your calendar and set your availability')}</p>
       </div>
 
       {/* Calendar Connection */}
@@ -226,10 +228,10 @@ const CalendarIntegration = ({ userId, onNext, onBack }: CalendarIntegrationProp
 
       <div className="flex gap-4 pt-4">
         <Button type="button" variant="outline" onClick={onBack} className="flex-1">
-          Back
+          {t('app.common.back', 'Back')}
         </Button>
         <Button type="submit" className="flex-1" disabled={loading}>
-          {loading ? "Saving..." : "Finish Setup"}
+          {loading ? t('app.common.saving', 'Saving...') : t('onboarding.calendar.finish', 'Finish Setup')}
         </Button>
       </div>
     </form>

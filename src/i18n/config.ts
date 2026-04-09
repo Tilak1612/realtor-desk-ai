@@ -788,7 +788,10 @@ const resources = {
           warning: "Warning",
           info: "Info",
           required: "Required",
-          optional: "Optional"
+          optional: "Optional",
+          saving: "Saving...",
+          continue: "Continue",
+          skip: "Skip for now"
         },
         auth: {
           signIn: "Sign In",
@@ -1293,6 +1296,63 @@ const resources = {
           endsOn: "Ends on {{date}}",
           tier: "Current plan: {{tier}}"
         }
+      },
+      onboarding: {
+        profile: {
+          title: "Let's Set Up Your Profile",
+          subtitle: "Tell us about yourself to personalize your experience",
+          fullName: "Full Name",
+          companyName: "Company/Brokerage Name",
+          licenseNumber: "Real Estate License Number",
+          province: "Province",
+          city: "City",
+          primaryLanguage: "Primary Language",
+          avatarUploaded: "Avatar uploaded!",
+          avatarFailed: "Failed to upload avatar",
+          saveFailed: "Failed to save profile"
+        },
+        goals: {
+          title: "Your Business Goals",
+          subtitle: "Help us tailor Realtor Desk AI to your objectives",
+          role: "Your Role",
+          soloAgent: "Solo Agent",
+          teamLeader: "Team Leader",
+          brokerManager: "Broker/Manager",
+          saveFailed: "Failed to save business goals"
+        },
+        chatbot: {
+          title: "AI Chatbot Setup",
+          subtitle: "Customize your AI assistant to qualify leads 24/7",
+          botName: "Chatbot Name",
+          greeting: "Greeting Message",
+          configured: "Chatbot configured!",
+          saveFailed: "Failed to save chatbot settings"
+        },
+        calendar: {
+          title: "Calendar Integration",
+          subtitle: "Connect your calendar and set your availability",
+          saved: "Calendar settings saved!",
+          saveFailed: "Failed to save calendar settings",
+          finish: "Finish Setup"
+        }
+      },
+      cookie: {
+        title: "🍪 Cookie Preferences",
+        description: "We use cookies to enhance your browsing experience and analyze site traffic. You can customize your cookie preferences or accept all.",
+        privacyLink: "Privacy Policy",
+        acceptAll: "Accept All Cookies",
+        necessaryOnly: "Necessary Only",
+        customize: "Customize",
+        necessary: "Necessary Cookies",
+        necessaryDesc: "Required for basic site functionality. Cannot be disabled.",
+        analytics: "Analytics Cookies",
+        analyticsDesc: "Help us understand how visitors interact with our website.",
+        marketing: "Marketing Cookies",
+        marketingDesc: "Used to deliver personalized advertisements relevant to you.",
+        functional: "Functional Cookies",
+        functionalDesc: "Enable enhanced functionality like chat widgets and preferences.",
+        savePreferences: "Save Preferences",
+        back: "Back"
       }
     }
   },
@@ -2081,7 +2141,10 @@ const resources = {
           warning: "Avertissement",
           info: "Info",
           required: "Requis",
-          optional: "Optionnel"
+          optional: "Optionnel",
+          saving: "Sauvegarde...",
+          continue: "Continuer",
+          skip: "Passer pour l'instant"
         },
         auth: {
           signIn: "Se Connecter",
@@ -2586,6 +2649,63 @@ const resources = {
           endsOn: "Se termine le {{date}}",
           tier: "Plan actuel : {{tier}}"
         }
+      },
+      onboarding: {
+        profile: {
+          title: "Configurons votre profil",
+          subtitle: "Parlez-nous de vous pour personnaliser votre expérience",
+          fullName: "Nom complet",
+          companyName: "Nom de l'entreprise/courtage",
+          licenseNumber: "Numéro de permis immobilier",
+          province: "Province",
+          city: "Ville",
+          primaryLanguage: "Langue principale",
+          avatarUploaded: "Photo téléchargée!",
+          avatarFailed: "Échec du téléchargement de la photo",
+          saveFailed: "Échec de la sauvegarde du profil"
+        },
+        goals: {
+          title: "Vos objectifs d'affaires",
+          subtitle: "Aidez-nous à adapter Realtor Desk AI à vos objectifs",
+          role: "Votre rôle",
+          soloAgent: "Courtier individuel",
+          teamLeader: "Chef d'équipe",
+          brokerManager: "Courtier/Gestionnaire",
+          saveFailed: "Échec de la sauvegarde des objectifs"
+        },
+        chatbot: {
+          title: "Configuration du chatbot IA",
+          subtitle: "Personnalisez votre assistant IA pour qualifier les prospects 24/7",
+          botName: "Nom du chatbot",
+          greeting: "Message d'accueil",
+          configured: "Chatbot configuré!",
+          saveFailed: "Échec de la sauvegarde des paramètres du chatbot"
+        },
+        calendar: {
+          title: "Intégration du calendrier",
+          subtitle: "Connectez votre calendrier et définissez vos disponibilités",
+          saved: "Paramètres du calendrier sauvegardés!",
+          saveFailed: "Échec de la sauvegarde des paramètres du calendrier",
+          finish: "Terminer la configuration"
+        }
+      },
+      cookie: {
+        title: "🍪 Préférences de cookies",
+        description: "Nous utilisons des cookies pour améliorer votre expérience de navigation et analyser le trafic du site. Vous pouvez personnaliser vos préférences ou tout accepter.",
+        privacyLink: "Politique de confidentialité",
+        acceptAll: "Accepter tous les cookies",
+        necessaryOnly: "Nécessaires uniquement",
+        customize: "Personnaliser",
+        necessary: "Cookies nécessaires",
+        necessaryDesc: "Requis pour le fonctionnement de base du site. Ne peut pas être désactivé.",
+        analytics: "Cookies analytiques",
+        analyticsDesc: "Nous aident à comprendre comment les visiteurs interagissent avec notre site.",
+        marketing: "Cookies marketing",
+        marketingDesc: "Utilisés pour diffuser des publicités personnalisées pertinentes pour vous.",
+        functional: "Cookies fonctionnels",
+        functionalDesc: "Permettent des fonctionnalités améliorées comme les widgets de chat et les préférences.",
+        savePreferences: "Sauvegarder les préférences",
+        back: "Retour"
       }
     }
   }
