@@ -298,19 +298,30 @@ const Today = () => {
 
         {/* Primary Action */}
         <div className="text-center py-6">
-          <Button 
-            size="lg" 
-            className="h-16 px-12 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
-            onClick={handleMakeTodaysCalls}
-            disabled={contactsToCall.length === 0}
-          >
-            <Phone className="w-6 h-6 mr-3" />
-            {t('today.makeCalls', "Make Today's Calls")}
-          </Button>
-          {contactsToCall.length > 0 && (
-            <p className="text-sm text-muted-foreground mt-3">
-              {contactsToCall.length} {contactsToCall.length === 1 ? t('today.contact', 'contact') : t('today.contacts', 'contacts')} {t('today.readyToCall', 'ready to call')}
-            </p>
+          {contactsToCall.length > 0 ? (
+            <>
+              <Button
+                size="lg"
+                className="h-16 px-12 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                onClick={handleMakeTodaysCalls}
+              >
+                <Phone className="w-6 h-6 mr-3" />
+                {t('today.makeCalls', "Make Today's Calls")}
+              </Button>
+              <p className="text-sm text-muted-foreground mt-3">
+                {contactsToCall.length} {contactsToCall.length === 1 ? t('today.contact', 'contact') : t('today.contacts', 'contacts')} {t('today.readyToCall', 'ready to call')}
+              </p>
+            </>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-muted-foreground">{t('today.noContactsYet', 'Add contacts to start making calls')}</p>
+              <Button
+                variant="outline"
+                onClick={() => navigate("/contacts")}
+              >
+                {t('today.importContacts', 'Import Contacts')}
+              </Button>
+            </div>
           )}
         </div>
 

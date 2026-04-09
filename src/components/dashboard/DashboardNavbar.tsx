@@ -28,7 +28,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const notificationCount = 3;
+  const notificationCount = 0; // TODO: wire to real notifications
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -148,24 +148,10 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             <DropdownMenuContent align="end" className="w-72">
               <DropdownMenuLabel className="text-sm">{t('nav.notifications', 'Notifications')}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <div className="space-y-1 p-1">
-                <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
-                  <p className="text-sm font-medium">New lead: John Smith</p>
-                  <p className="text-xs text-muted-foreground">2 minutes ago</p>
-                </div>
-                <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
-                  <p className="text-sm font-medium">Task due: Follow up with client</p>
-                  <p className="text-xs text-muted-foreground">1 hour ago</p>
-                </div>
-                <div className="p-2 hover:bg-accent rounded-md cursor-pointer">
-                  <p className="text-sm font-medium">Deal closed: $450,000</p>
-                  <p className="text-xs text-muted-foreground">3 hours ago</p>
-                </div>
+              <div className="p-4 text-center">
+                <Bell className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                <p className="text-sm text-muted-foreground">{t('nav.noNotifications', 'No new notifications')}</p>
               </div>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer text-sm">
-                {t('nav.viewAllNotifications', 'View all notifications')}
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

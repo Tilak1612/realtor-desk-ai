@@ -78,6 +78,10 @@ const Automations = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const fetchAutomations = useCallback(async () => {
+    // Ensure auth session is ready before querying (prevents RLS failures)
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+
     const { data, error } = await supabase
       .from("email_automations")
       .select("*")
@@ -85,7 +89,10 @@ const Automations = () => {
 
     if (error) {
       console.error("Error fetching automations:", error);
-      toast.error(t('automations.loadFailed', 'Failed to load automations'));
+      // Only show toast if it's not a permissions error (fresh page load)
+      if (error.code !== "PGRST301") {
+        toast.error(t('automations.loadFailed', 'Failed to load automations'));
+      }
       return;
     }
 

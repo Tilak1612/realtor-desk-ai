@@ -276,13 +276,24 @@ const Settings = () => {
                 {t('app.settings.notifications')}
               </CardTitle>
               <CardDescription className="text-xs">
-                {t('app.settings.notifications')}
+                {t('settings.notifications.desc', 'Manage your email and push notification preferences')}
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <p className="text-xs text-muted-foreground">
-                {t('app.common.loading')}
-              </p>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-medium">{t('settings.notifications.email', 'Email notifications')}</h3>
+                  <p className="text-xs text-muted-foreground">{t('settings.notifications.emailDesc', 'Receive email alerts for new leads and deal updates')}</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">{t('settings.notifications.comingSoon', 'Coming Soon')}</Badge>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-medium">{t('settings.notifications.sms', 'SMS notifications')}</h3>
+                  <p className="text-xs text-muted-foreground">{t('settings.notifications.smsDesc', 'Get text alerts for urgent follow-ups')}</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">{t('settings.notifications.comingSoon', 'Coming Soon')}</Badge>
+              </div>
             </CardContent>
           </Card>
 

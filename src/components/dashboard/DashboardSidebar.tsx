@@ -129,10 +129,10 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-colors text-sm ${
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-150 text-sm ${
                     isActive(item.path)
                       ? "bg-primary text-primary-foreground font-medium"
-                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                      : "text-white/60 hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
@@ -141,9 +141,9 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
                   </span>
                   {typeof item.count === 'number' && item.count > 0 && (
                     <span className={`text-xs px-1.5 py-0.5 rounded ${
-                      isActive(item.path) 
-                        ? "bg-primary-foreground/20 text-primary-foreground" 
-                        : "bg-muted text-muted-foreground"
+                      isActive(item.path)
+                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        : "bg-white/10 text-white/50"
                     }`}>
                       {item.count}
                     </span>
@@ -154,9 +154,10 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
 
             {/* Advanced Section */}
             <div className="space-y-1">
-              <div className="px-3 py-2">
-                <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Advanced
+              <div className="px-3 py-2 flex items-center gap-2">
+                <div className="flex-1 h-px bg-white/10" />
+                <h3 className="text-[10px] font-semibold text-white/40 uppercase tracking-widest">
+                  {t('sidebar.advanced', 'Advanced')}
                 </h3>
               </div>
               {advancedItems.map((item) => (
@@ -164,10 +165,10 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-colors text-sm ${
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-150 text-sm ${
                     isActive(item.path)
                       ? "bg-primary text-primary-foreground font-medium"
-                      : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                      : "text-white/60 hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
@@ -176,9 +177,9 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
                   </span>
                   {typeof item.count === 'number' && item.count > 0 && (
                     <span className={`text-xs px-1.5 py-0.5 rounded ${
-                      isActive(item.path) 
-                        ? "bg-primary-foreground/20 text-primary-foreground" 
-                        : "bg-muted text-muted-foreground"
+                      isActive(item.path)
+                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        : "bg-white/10 text-white/50"
                     }`}>
                       {item.count}
                     </span>
