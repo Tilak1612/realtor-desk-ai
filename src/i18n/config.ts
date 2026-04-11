@@ -116,10 +116,6 @@ const resources = {
           transaction: "Transaction Management",
           marketing: "Marketing Automation"
         },
-        comparison: {
-          title: "How We Compare to Leading CRMs",
-          disclaimer: "* Pricing and features as of October 2025. Contact competitors directly for current information."
-        },
         tab1: "Predictive CRM",
         tab2: "AI Chatbot",
         tab3: "Market Intelligence",
@@ -1915,10 +1911,6 @@ const resources = {
           market: "Intelligence de Marché",
           transaction: "Gestion des Transactions",
           marketing: "Automation Marketing"
-        },
-        comparison: {
-          title: "Comment Nous Comparons aux Principaux CRM",
-          disclaimer: "* Prix et fonctionnalités à partir d'octobre 2025. Contactez les concurrents directement pour les informations actuelles."
         },
         tab1: "CRM Prédictif",
         tab2: "Chatbot IA",
