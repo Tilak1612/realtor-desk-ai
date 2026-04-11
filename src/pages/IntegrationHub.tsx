@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import AppLayout from "@/components/layout/AppLayout";
+import type { IntegrationConnection, IntegrationInterest, IntegrationRequest } from "@/types/integrations";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -59,6 +61,10 @@ const TOOLS: Tool[] = [
 
 const CATEGORIES = [...new Set(TOOLS.map(t => t.category))];
 
+const integrationConnectionsTable = () => (supabase as any).from("integration_connections");
+const integrationInterestTable = () => (supabase as any).from("integration_interest");
+const integrationRequestsTable = () => (supabase as any).from("integration_requests");
+
 const TOOL_COLORS: Record<string, string> = {
   salesforce: "#00A1E0", "zoho-crm": "#D32F2F", pipedrive: "#4CAF50",
   freshsales: "#F57C00", "microsoft-dynamics": "#0078D4", keap: "#2D8C3C",
@@ -100,12 +106,12 @@ const ToolLogo = ({ tool }: { tool: Tool }) => {
 
 const IntegrationHub = () => {
   const { t } = useTranslation();
-  const [user, setUser] = useState<unknown>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<unknown>(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | "connected" | "available" | "coming_soon">("all");
   const [connectedSlugs, setConnectedSlugs] = useState<Set<string>>(new Set());
-  const [connectionsMap, setConnectionsMap] = useState<Record<string, any>>({});
+  const [connectionsMap, setConnectionsMap] = useState<Record<string, IntegrationConnection>>({});
   const [interestedSlugs, setInterestedSlugs] = useState<Set<string>>(new Set());
   const [panelOpen, setPanelOpen] = useState(false);
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
@@ -113,54 +119,82 @@ const IntegrationHub = () => {
   const [requestUseCase, setRequestUseCase] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const applyConnections = (connections: IntegrationConnection[]) => {
+    const activeConnections = connections.filter((connection) => connection.status === "connected");
+    setConnectedSlugs(new Set(activeConnections.map((connection) => connection.tool_slug)));
+    setConnectionsMap(
+      connections.reduce<Record<string, IntegrationConnection>>((map, connection) => {
+        map[connection.tool_slug] = connection;
+        return map;
+      }, {})
+    );
+  };
+
+  const refreshConnections = async () => {
+    const { data, error } = await integrationConnectionsTable().select("*");
+
+    if (error) {
+      console.error("[IntegrationHub] Failed to load connections", error);
+      return;
+    }
+
+    applyConnections((data ?? []) as IntegrationConnection[]);
+  };
+
   useEffect(() => {
+    let isMounted = true;
+
     const init = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
-      setUser(session.user);
-
-      const { data: profileData } = await supabase
-        .from("profiles").select("*").eq("id", session.user.id).single();
-      setProfile(profileData);
-
-      // Fetch connected integrations (full objects for manage panel)
-      const { data: connections } = await supabase
-        .from("integration_connections").select("*");
-      if (connections) {
-        const active = connections.filter(c => c.status === "connected");
-        setConnectedSlugs(new Set(active.map(c => c.tool_slug)));
-        const map: Record<string, any> = {};
-        connections.forEach(c => { map[c.tool_slug] = c; });
-        setConnectionsMap(map);
+      if (!isMounted) return;
+      if (!session) {
+        setLoading(false);
+        return;
       }
 
-      // Fetch interests
-      const { data: interests } = await supabase
-        .from("integration_interest").select("tool_slug");
-      if (interests) setInterestedSlugs(new Set(interests.map(i => i.tool_slug)));
+      setUser(session.user);
+
+      const [
+        { data: profileData },
+        { data: connectionsData, error: connectionsError },
+        { data: interestsData, error: interestsError },
+      ] = await Promise.all([
+        supabase.from("profiles").select("*").eq("id", session.user.id).single(),
+        integrationConnectionsTable().select("*"),
+        integrationInterestTable().select("tool_slug"),
+      ]);
+
+      if (!isMounted) return;
+
+      setProfile(profileData);
+
+      if (connectionsError) {
+        console.error("[IntegrationHub] Failed to load connections", connectionsError);
+      } else {
+        applyConnections((connectionsData ?? []) as IntegrationConnection[]);
+      }
+
+      if (interestsError) {
+        console.error("[IntegrationHub] Failed to load interests", interestsError);
+      } else {
+        setInterestedSlugs(new Set(((interestsData ?? []) as IntegrationInterest[]).map((interest) => interest.tool_slug)));
+      }
 
       setLoading(false);
     };
-    init();
+
+    void init();
 
     // Auto-refresh connection health every 60 seconds
-    const interval = setInterval(() => {
-      refreshConnections();
+    const interval = window.setInterval(() => {
+      void refreshConnections();
     }, 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
 
-  const refreshConnections = async () => {
-    const { data: connections } = await supabase
-      .from("integration_connections").select("*");
-    if (connections) {
-      const active = connections.filter(c => c.status === "connected");
-      setConnectedSlugs(new Set(active.map(c => c.tool_slug)));
-      const map: Record<string, any> = {};
-      connections.forEach(c => { map[c.tool_slug] = c; });
-      setConnectionsMap(map);
-    }
-  };
+    return () => {
+      isMounted = false;
+      window.clearInterval(interval);
+    };
+  }, []);
 
   const openPanel = (tool: Tool) => {
     setSelectedTool(tool);
@@ -168,24 +202,35 @@ const IntegrationHub = () => {
   };
 
   const handleNotifyMe = async (slug: string) => {
-    const { error } = await supabase.from("integration_interest").insert({ user_id: (user as any).id, tool_slug: slug });
+    if (!user) return;
+
+    const { error } = await integrationInterestTable().insert({ user_id: user.id, tool_slug: slug });
+
     if (!error) {
       setInterestedSlugs(prev => new Set([...prev, slug]));
       toast.success(t('integrations.notified', "You'll be notified when this integration launches!"));
+    } else {
+      toast.error(error.message || t('integrations.notifyError', 'Unable to save your notification request'));
     }
   };
 
   const handleRequestIntegration = async () => {
-    if (!requestName.trim()) return;
-    const { error } = await supabase.from("integration_requests").insert({
-      user_id: (user as any).id,
+    if (!requestName.trim() || !user) return;
+
+    const payload: IntegrationRequest = {
+      user_id: user.id,
       tool_name: requestName.trim(),
       use_case: requestUseCase.trim() || null,
-    });
+    };
+
+    const { error } = await integrationRequestsTable().insert(payload);
+
     if (!error) {
       toast.success(t('integrations.requestSubmitted', 'Integration request submitted!'));
       setRequestName("");
       setRequestUseCase("");
+    } else {
+      toast.error(error.message || t('integrations.requestError', 'Unable to submit your request'));
     }
   };
 
@@ -380,7 +425,7 @@ const IntegrationHub = () => {
         onOpenChange={setPanelOpen}
         tool={selectedTool}
         connection={selectedTool ? connectionsMap[selectedTool.slug] || null : null}
-        userId={(user as any)?.id || ""}
+        userId={user?.id || ""}
         onConnectionChange={refreshConnections}
       />
     </AppLayout>

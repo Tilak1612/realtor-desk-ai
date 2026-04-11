@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
+import type { IntegrationConnection } from "@/types/integrations";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,25 +29,11 @@ interface Tool {
   logoUrl: string;
 }
 
-interface Connection {
-  id: string;
-  tool_slug: string;
-  status: string;
-  connected_account_label: string | null;
-  last_sync_at: string | null;
-  last_sync_status: string;
-  last_sync_error: string | null;
-  sync_direction: string;
-  sync_config: Record<string, boolean>;
-  webhook_token: string | null;
-  connection_method: string | null;
-}
-
 interface ConnectPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   tool: Tool | null;
-  connection: Connection | null;
+  connection: IntegrationConnection | null;
   userId: string;
   onConnectionChange: () => void;
 }
@@ -71,6 +58,8 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
   const [smtpEncryption, setSmtpEncryption] = useState("tls");
 
   if (!tool) return null;
+
+  const integrationConnectionsTable = () => (supabase as any).from("integration_connections");
 
   const isConnected = connection?.status === "connected";
   const isWebhook = tool.connectionMethod === "webhook";
@@ -189,7 +178,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
 
       const label = isSmtp ? smtpUser : (apiExtra || `${tool.name} account`);
 
-      const { error } = await supabase.from("integration_connections").upsert({
+      const { error } = await integrationConnectionsTable().upsert({
         user_id: userId,
         tool_slug: tool.slug,
         status: "connected",
@@ -218,7 +207,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
     try {
       const token = crypto.randomUUID();
 
-      const { data, error } = await supabase.from("integration_connections").upsert({
+      const { error } = await integrationConnectionsTable().upsert({
         user_id: userId,
         tool_slug: tool.slug,
         status: "connected",
@@ -226,16 +215,11 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
         webhook_token: token,
         connected_account_label: `${tool.name} Webhook`,
         last_sync_status: "pending",
-      }, { onConflict: "user_id,tool_slug" }).select().single();
+      }, { onConflict: "user_id,tool_slug" });
 
       if (error) throw error;
 
-      // Update local connection state so the panel shows the webhook URL
-      // WITHOUT closing the panel (onConnectionChange would re-render parent)
-      if (data) {
-        // Force the parent to refresh data in background, but keep panel open
-        onConnectionChange();
-      }
+      onConnectionChange();
 
       toast.success(`${tool.name} ${t('integrations.panel.webhookReady', 'webhook URL generated!')}`);
     } catch (err: unknown) {
@@ -248,7 +232,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
   const handleDisconnect = async () => {
     setLoading(true);
     try {
-      const { error } = await supabase.from("integration_connections")
+      const { error } = await integrationConnectionsTable()
         .update({
           status: "disconnected",
           credentials_encrypted: null,
@@ -270,11 +254,18 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
   };
 
   const handleSyncNow = async () => {
-    toast.info(t('integrations.panel.syncTriggered', 'Sync triggered — this may take a moment'));
-    await supabase.from("integration_connections")
-      .update({ last_sync_at: new Date().toISOString(), last_sync_status: "success" })
-      .eq("user_id", userId).eq("tool_slug", tool.slug);
-    onConnectionChange();
+    try {
+      toast.info(t('integrations.panel.syncTriggered', 'Sync triggered — this may take a moment'));
+      const { error } = await integrationConnectionsTable()
+        .update({ last_sync_at: new Date().toISOString(), last_sync_status: "success" })
+        .eq("user_id", userId)
+        .eq("tool_slug", tool.slug);
+
+      if (error) throw error;
+      onConnectionChange();
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to sync");
+    }
   };
 
   const resetForm = () => {
