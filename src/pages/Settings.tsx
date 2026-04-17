@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield } from "lucide-react";
+import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield, Upload } from "lucide-react";
 import MFASetup from "@/components/settings/MFASetup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
@@ -12,6 +16,40 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { Badge } from "@/components/ui/badge";
 import AppLayout from "@/components/layout/AppLayout";
+
+const CANADIAN_PROVINCES = [
+  "Alberta", "British Columbia", "Manitoba", "New Brunswick",
+  "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia",
+  "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"
+];
+
+const MAJOR_CITIES = [
+  "Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton", "Ottawa",
+  "Winnipeg", "Quebec City", "Hamilton", "Kitchener", "London", "Victoria",
+  "Halifax", "Oshawa", "Windsor", "Saskatoon", "Regina", "St. John's"
+];
+
+interface ProfileFormState {
+  full_name: string;
+  company_name: string;
+  license_number: string;
+  phone: string;
+  province: string;
+  city: string;
+  primary_language: string;
+  avatar_url: string;
+}
+
+const EMPTY_PROFILE_FORM: ProfileFormState = {
+  full_name: "",
+  company_name: "",
+  license_number: "",
+  phone: "",
+  province: "",
+  city: "",
+  primary_language: "english",
+  avatar_url: "",
+};
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,10 +67,13 @@ const Settings = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [avatarUploading, setAvatarUploading] = useState(false);
   const [user, setUser] = useState<unknown>(null);
   const [profile, setProfile] = useState<unknown>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [mfaEnabled, setMfaEnabled] = useState(false);
+  const [profileForm, setProfileForm] = useState<ProfileFormState>(EMPTY_PROFILE_FORM);
   const { subscribed, trialDaysLeft, trialExpired, subscriptionTier, trialEndsAt, subscriptionEnd } = useSubscription();
 
   useEffect(() => {
@@ -48,6 +89,19 @@ const Settings = () => {
           .single();
         setProfile(profileData);
 
+        if (profileData) {
+          setProfileForm({
+            full_name: profileData.full_name ?? "",
+            company_name: profileData.company_name ?? "",
+            license_number: profileData.license_number ?? "",
+            phone: profileData.phone ?? "",
+            province: profileData.province ?? "",
+            city: profileData.city ?? "",
+            primary_language: profileData.primary_language ?? "english",
+            avatar_url: profileData.avatar_url ?? "",
+          });
+        }
+
         // Check MFA status
         const { data: factors } = await supabase.auth.mfa.listFactors();
         setMfaEnabled((factors?.totp?.length ?? 0) > 0);
@@ -55,6 +109,82 @@ const Settings = () => {
     };
     fetchData();
   }, []);
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !userId) return;
+
+    setAvatarUploading(true);
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${userId}/${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(fileName);
+
+      setProfileForm((prev) => ({ ...prev, avatar_url: publicUrl }));
+      toast({
+        title: t("app.common.success"),
+        description: t("onboarding.profile.avatarUploaded", "Avatar uploaded!"),
+      });
+    } catch (error: unknown) {
+      toast({
+        title: t("app.common.error"),
+        description: error instanceof Error ? error.message : t("onboarding.profile.avatarFailed", "Failed to upload avatar"),
+        variant: "destructive",
+      });
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
+
+  const handleSaveProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userId) return;
+
+    setProfileSaving(true);
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .update({
+          full_name: profileForm.full_name,
+          company_name: profileForm.company_name,
+          license_number: profileForm.license_number,
+          phone: profileForm.phone,
+          province: profileForm.province,
+          city: profileForm.city,
+          primary_language: profileForm.primary_language,
+          avatar_url: profileForm.avatar_url,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", userId)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setProfile(data);
+      toast({
+        title: t("app.common.success"),
+        description: t("app.settings.profileUpdated", "Profile updated"),
+      });
+    } catch (error: unknown) {
+      toast({
+        title: t("app.common.error"),
+        description: error instanceof Error ? error.message : t("app.notifications.errorOccurred"),
+        variant: "destructive",
+      });
+    } finally {
+      setProfileSaving(false);
+    }
+  };
 
   const handleLogout = async () => {
     setLoading(true);
@@ -150,6 +280,151 @@ const Settings = () => {
         </div>
 
         <div className="space-y-6">
+          {/* Profile Section */}
+          <Card id="profile">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-medium flex items-center gap-2">
+                <User className="w-4 h-4" />
+                {t("app.settings.profile", "Profile")}
+              </CardTitle>
+              <CardDescription className="text-xs">
+                {t("app.settings.profileDesc", "Update your name, brokerage, and contact details")}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSaveProfile} className="space-y-5">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                      {profileForm.avatar_url ? (
+                        <img src={profileForm.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <User className="w-8 h-8 text-primary" />
+                      )}
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleAvatarUpload}
+                      className="absolute inset-0 opacity-0 cursor-pointer"
+                      disabled={avatarUploading}
+                      aria-label={t("onboarding.profile.uploadPhoto", "Upload photo")}
+                    />
+                    {avatarUploading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-background/80 rounded-full text-xs">
+                        {t("app.common.uploading", "Uploading...")}
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {t("app.settings.avatarHint", "Click the avatar to upload a new photo")}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="full_name">{t("onboarding.profile.fullName", "Full Name")}</Label>
+                    <Input
+                      id="full_name"
+                      value={profileForm.full_name}
+                      onChange={(e) => setProfileForm({ ...profileForm, full_name: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="company_name">{t("onboarding.profile.companyName", "Company/Brokerage Name")}</Label>
+                    <Input
+                      id="company_name"
+                      value={profileForm.company_name}
+                      onChange={(e) => setProfileForm({ ...profileForm, company_name: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="license_number">{t("onboarding.profile.licenseNumber", "Real Estate License Number")}</Label>
+                    <Input
+                      id="license_number"
+                      value={profileForm.license_number}
+                      onChange={(e) => setProfileForm({ ...profileForm, license_number: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">{t("app.settings.phone", "Phone")}</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={profileForm.phone}
+                      onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="province">{t("onboarding.profile.province", "Province")}</Label>
+                    <Select
+                      value={profileForm.province}
+                      onValueChange={(value) => setProfileForm({ ...profileForm, province: value })}
+                    >
+                      <SelectTrigger id="province">
+                        <SelectValue placeholder={t("app.settings.selectProvince", "Select province")} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CANADIAN_PROVINCES.map((prov) => (
+                          <SelectItem key={prov} value={prov}>{prov}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="city">{t("onboarding.profile.city", "City")}</Label>
+                    <Select
+                      value={profileForm.city}
+                      onValueChange={(value) => setProfileForm({ ...profileForm, city: value })}
+                    >
+                      <SelectTrigger id="city">
+                        <SelectValue placeholder={t("app.settings.selectCity", "Select city")} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {MAJOR_CITIES.map((city) => (
+                          <SelectItem key={city} value={city}>{city}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label>{t("onboarding.profile.primaryLanguage", "Primary Language")}</Label>
+                  <RadioGroup
+                    value={profileForm.primary_language}
+                    onValueChange={(value) => setProfileForm({ ...profileForm, primary_language: value })}
+                    className="flex flex-wrap gap-4"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="english" id="lang-english" />
+                      <Label htmlFor="lang-english" className="cursor-pointer font-normal">English</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="french" id="lang-french" />
+                      <Label htmlFor="lang-french" className="cursor-pointer font-normal">French</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="both" id="lang-both" />
+                      <Label htmlFor="lang-both" className="cursor-pointer font-normal">Both (Bilingual)</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                <div className="flex justify-end">
+                  <Button type="submit" disabled={profileSaving || avatarUploading}>
+                    {profileSaving ? t("app.common.saving", "Saving...") : t("app.common.save", "Save")}
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+
           {/* Subscription Status Section */}
           <Card className={subscribed ? "border-accent/30 bg-accent/5" : trialExpired ? "border-destructive/30 bg-destructive/5" : "border-primary/30 bg-primary/5"}>
             <CardHeader className="pb-3">

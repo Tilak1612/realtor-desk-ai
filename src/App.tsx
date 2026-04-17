@@ -146,6 +146,7 @@ const SeoDefaults = () => {
     "/market",
     "/automations",
     "/settings",
+    "/profile",
     "/billing",
     "/admin",
     "/call-workflow",
@@ -289,6 +290,7 @@ const App = () => (
           <Route path="/market" element={<ProtectedRoute><Market /></ProtectedRoute>} />
           <Route path="/automations" element={<ProtectedRoute><Automations /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/dashboard/integrations" element={<ProtectedRoute><IntegrationHub /></ProtectedRoute>} />
 
           {/* Comparison Pages */}

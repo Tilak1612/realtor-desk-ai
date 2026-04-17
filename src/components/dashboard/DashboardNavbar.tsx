@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Bell, Search, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare } from "lucide-react";
+import { Bell, Search, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -28,7 +28,55 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const notificationCount = 0; // TODO: wire to real notifications
+
+  useEffect(() => {
+    setAvatarUrl(profile?.avatar_url ?? null);
+  }, [profile?.avatar_url]);
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file || !user?.id) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error(t("nav.avatarInvalidType", "Please select an image file"));
+      return;
+    }
+
+    setAvatarUploading(true);
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(fileName);
+
+      const { error: updateError } = await supabase
+        .from("profiles")
+        .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
+        .eq("id", user.id);
+
+      if (updateError) throw updateError;
+
+      setAvatarUrl(publicUrl);
+      toast.success(t("nav.avatarUpdated", "Profile photo updated"));
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : t("nav.avatarFailed", "Failed to upload photo"));
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -155,16 +203,30 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {/* Hidden avatar file input — triggered from dropdown menu item */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleAvatarUpload}
+          />
+
           {/* User Profile Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+              <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0" disabled={avatarUploading}>
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={profile?.avatar_url} />
+                  <AvatarImage src={avatarUrl ?? undefined} />
                   <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                     {profile?.full_name ? getInitials(profile.full_name) : "U"}
                   </AvatarFallback>
                 </Avatar>
+                {avatarUploading && (
+                  <span className="absolute inset-0 flex items-center justify-center rounded-full bg-background/80">
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  </span>
+                )}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52">
@@ -175,6 +237,18 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => fileInputRef.current?.click()}
+                className="cursor-pointer text-sm"
+                disabled={avatarUploading}
+              >
+                <Camera className="mr-2 h-4 w-4" />
+                {avatarUploading
+                  ? t('nav.uploadingPhoto', 'Uploading...')
+                  : avatarUrl
+                    ? t('nav.changePhoto', 'Change photo')
+                    : t('nav.uploadPhoto', 'Upload photo')}
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer text-sm">
                 <User className="mr-2 h-4 w-4" />
                 {t('nav.profile', 'Profile')}
