@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Upload, Mail, Calendar } from "lucide-react";
+import { Upload, Mail, Calendar, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface ImportContactsProps {
@@ -15,9 +15,17 @@ interface ImportContactsProps {
   onBack: () => void;
 }
 
+type OAuthProvider = "google" | "microsoft";
+
+const PROVIDER_TOOL_SLUG: Record<OAuthProvider, string> = {
+  google: "google-contacts",
+  microsoft: "microsoft-contacts",
+};
+
 const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const [oauthLoading, setOauthLoading] = useState<OAuthProvider | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [selectedCrm, setSelectedCrm] = useState("");
 
@@ -31,21 +39,57 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
     }
   };
 
-  const handleOAuthConnect = async (provider: "google" | "azure") => {
+  const handleOAuthConnect = async (provider: OAuthProvider) => {
+    const toolSlug = PROVIDER_TOOL_SLUG[provider];
+    setOauthLoading(provider);
+
     try {
-      const redirectUrl = `${window.location.origin}/onboarding`;
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider,
-        options: {
-          redirectTo: redirectUrl,
-          scopes: provider === "google" 
-            ? "https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/gmail.readonly"
-            : "Contacts.Read Mail.Read"
-        },
+      const { data, error } = await supabase.functions.invoke("oauth-integration-auth", {
+        body: { provider, tool_slug: toolSlug },
       });
+
       if (error) throw error;
-    } catch (error: unknown) {
-      toast.error(`Failed to connect ${provider}`);
+      if (data?.error) {
+        toast.error(data.error);
+        setOauthLoading(null);
+        return;
+      }
+
+      const popup = window.open(
+        data.authUrl,
+        "oauth_popup",
+        "width=500,height=650,scrollbars=yes,resizable=yes"
+      );
+
+      const handleMessage = (event: MessageEvent) => {
+        if (event.data?.type === "OAUTH_SUCCESS") {
+          window.removeEventListener("message", handleMessage);
+          clearInterval(checkClosed);
+          const providerName = provider === "google" ? "Gmail" : "Outlook";
+          toast.success(`${providerName} connected as ${event.data.accountLabel}`);
+          setOauthLoading(null);
+          onNext();
+        }
+        if (event.data?.type === "OAUTH_ERROR") {
+          window.removeEventListener("message", handleMessage);
+          clearInterval(checkClosed);
+          toast.error(`Connection failed: ${event.data.message}`);
+          setOauthLoading(null);
+        }
+      };
+
+      window.addEventListener("message", handleMessage);
+
+      const checkClosed = setInterval(() => {
+        if (popup?.closed) {
+          clearInterval(checkClosed);
+          window.removeEventListener("message", handleMessage);
+          setOauthLoading(null);
+        }
+      }, 1000);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : `Failed to connect ${provider}`);
+      setOauthLoading(null);
     }
   };
 
@@ -128,7 +172,15 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
             <CardDescription>Connect Google account</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button onClick={() => handleOAuthConnect("google")} variant="outline" className="w-full">
+            <Button
+              onClick={() => handleOAuthConnect("google")}
+              variant="outline"
+              className="w-full"
+              disabled={oauthLoading !== null}
+            >
+              {oauthLoading === "google" ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : null}
               Connect Gmail
             </Button>
           </CardContent>
@@ -144,7 +196,15 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
             <CardDescription>Connect Microsoft account</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button onClick={() => handleOAuthConnect("azure")} variant="outline" className="w-full">
+            <Button
+              onClick={() => handleOAuthConnect("microsoft")}
+              variant="outline"
+              className="w-full"
+              disabled={oauthLoading !== null}
+            >
+              {oauthLoading === "microsoft" ? (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              ) : null}
               Connect Outlook
             </Button>
           </CardContent>
