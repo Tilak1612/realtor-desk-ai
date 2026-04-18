@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, Circle, ArrowRight, Building2, Users, Calendar, Mail, Bot, X, Sparkles } from "lucide-react";
+import { CheckCircle2, Circle, ArrowRight, Building2, Users, Calendar, Mail, X, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -64,20 +64,6 @@ const OnboardingChecklist = ({ userId, onDismiss }: OnboardingChecklistProps) =>
       checkFn: async () => {
         const { count } = await supabase
           .from("tasks")
-          .select("*", { count: "exact", head: true })
-          .eq("user_id", userId);
-        return (count || 0) > 0;
-      },
-    },
-    {
-      id: "try_ai",
-      title: "Try the AI Assistant",
-      description: "Ask a question to get started",
-      icon: Bot,
-      path: "/ai-assistant",
-      checkFn: async () => {
-        const { count } = await supabase
-          .from("ai_conversations")
           .select("*", { count: "exact", head: true })
           .eq("user_id", userId);
         return (count || 0) > 0;
