@@ -2,8 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,6 +25,20 @@ const PageLoader = () => (
     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
   </div>
 );
+
+// Public /integrations page is marketing; authenticated users should land
+// on the in-app Integration Hub instead of seeing the Sign In / Get Started CTA.
+const IntegrationsRoute = () => {
+  const [hasSession, setHasSession] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setHasSession(!!data.session));
+  }, []);
+
+  if (hasSession === null) return <PageLoader />;
+  if (hasSession) return <Navigate to="/dashboard/integrations" replace />;
+  return <Integrations />;
+};
 
 // ─── Lazy-loaded public pages ───
 const Features = lazy(() => import("./pages/Features"));
@@ -257,7 +271,7 @@ const App = () => (
           <Route path="/blog/real-estate-drip-campaign-templates-canada-2025" element={<DripCampaignTemplates />} />
           <Route path="/blog/real-estate-crm-buying-guide" element={<RealEstateCRMBuyingGuide />} />
           <Route path="/blog/best-liondesk-alternative-canadian-realtors" element={<LionDeskAlternative />} />
-          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/integrations" element={<IntegrationsRoute />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
@@ -288,6 +302,7 @@ const App = () => (
           <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
           <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
           <Route path="/market" element={<ProtectedRoute><Market /></ProtectedRoute>} />
+          <Route path="/market-intelligence" element={<Navigate to="/market" replace />} />
           <Route path="/automations" element={<ProtectedRoute><Automations /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
