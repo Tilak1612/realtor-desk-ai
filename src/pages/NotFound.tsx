@@ -1,13 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 
 const NotFound = () => {
   const location = useLocation();
+  const [hasSession, setHasSession] = useState<boolean | null>(null);
 
   useEffect(() => {
     // 404 tracking could be sent to analytics service here
   }, [location.pathname]);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setHasSession(!!data.session));
+  }, []);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
@@ -17,11 +23,20 @@ const NotFound = () => {
         <p className="mb-8 text-muted-foreground max-w-md mx-auto">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <Link to="/">
-          <Button size="lg" className="btn-gradient">
-            Return to Home
-          </Button>
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {hasSession && (
+            <Link to="/dashboard">
+              <Button size="lg" className="btn-gradient">
+                Go to Dashboard
+              </Button>
+            </Link>
+          )}
+          <Link to="/">
+            <Button size="lg" variant={hasSession ? "outline" : "default"} className={hasSession ? "" : "btn-gradient"}>
+              Return to Home
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
