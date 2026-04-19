@@ -96,11 +96,12 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
         setTrialEndsAt(profileData.trial_ends_at);
       }
 
-      const { data, error } = await supabase.functions.invoke('check-subscription', {
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      });
+      // Don't pin session.access_token into an explicit Authorization header.
+      // getSession() returns the cached session, which may be past its 1-hour
+      // expiry — that stale token was what caused ~50% of check-subscription
+      // calls to 401 at the gateway. Let the SDK attach the current token
+      // itself so it benefits from autoRefreshToken.
+      const { data, error } = await supabase.functions.invoke('check-subscription');
 
       // Silently handle errors on public pages
       if (error) {

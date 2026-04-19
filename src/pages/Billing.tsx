@@ -68,11 +68,10 @@ const Billing = () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) throw new Error('Not authenticated');
 
+      // SDK auto-attaches the current access token; don't pin a potentially
+      // stale one from getSession() via explicit Authorization header.
       const { data, error } = await supabase.functions.invoke('create-checkout', {
         body: { priceId },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
       });
 
       if (error) throw error;
@@ -92,11 +91,7 @@ const Billing = () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) throw new Error('Not authenticated');
 
-      const { data, error } = await supabase.functions.invoke('customer-portal', {
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      });
+      const { data, error } = await supabase.functions.invoke('customer-portal');
 
       if (error) throw error;
       if (data.url) {
