@@ -35,7 +35,7 @@ interface EntityCounts {
   deals: number;
 }
 
-const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);

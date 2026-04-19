@@ -40,8 +40,15 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
     return () => clearInterval(interval);
   }, []);
 
-  const trialEndDate = new Date();
-  trialEndDate.setDate(trialEndDate.getDate() + 60);
+  // Prefer the real trial_ends_at from the profile (set by the DB default
+  // on insert). Fall back to +14 days from today if it isn't populated yet.
+  const trialEndDate = profileData.trial_ends_at
+    ? new Date(profileData.trial_ends_at)
+    : (() => {
+        const d = new Date();
+        d.setDate(d.getDate() + 14);
+        return d;
+      })();
 
   const setupItems = [
     { label: "Profile completed", done: !!profileData.full_name },
@@ -71,7 +78,7 @@ const OnboardingComplete = ({ profileData, onComplete }: OnboardingCompleteProps
         </CardHeader>
         <CardContent className="space-y-6 pt-6">
           <p className="text-muted-foreground">
-            Your 60-day free trial is now active and will end on{" "}
+            Your 14-day free trial is now active and will end on{" "}
             <span className="font-semibold">{trialEndDate.toLocaleDateString()}</span>
           </p>
 
