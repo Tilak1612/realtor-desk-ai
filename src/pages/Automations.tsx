@@ -191,7 +191,10 @@ const Automations = () => {
               Create automated email sequences to nurture leads and engage contacts
             </p>
           </div>
-          <Button onClick={() => setIsCreateModalOpen(true)} className="gap-2">
+          <Button
+            onClick={() => toast.info("Email automations are coming soon — the trigger engine is still in development. We'll notify you the moment it's live.")}
+            className="gap-2"
+          >
             <Plus className="w-4 h-4" />
             Create Automation
           </Button>
