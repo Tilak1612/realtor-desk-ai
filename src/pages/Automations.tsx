@@ -88,11 +88,18 @@ const Automations = () => {
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("Error fetching automations:", error);
-      // Only show toast if it's not a permissions error (fresh page load)
-      if (error.code !== "PGRST301") {
+      // PGRST301: RLS denies access (expected on fresh session)
+      // PGRST202/42P01: table doesn't exist yet (feature not provisioned)
+      // Both cases: render the empty state, skip the scary toast + console error.
+      const isExpected =
+        error.code === "PGRST301" ||
+        error.code === "PGRST202" ||
+        error.code === "42P01";
+      if (!isExpected) {
+        console.error("Error fetching automations:", error);
         toast.error(t('automations.loadFailed', 'Failed to load automations'));
       }
+      setAutomations([]);
       return;
     }
 
