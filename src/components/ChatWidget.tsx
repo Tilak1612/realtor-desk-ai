@@ -46,9 +46,6 @@ const ChatWidget = () => {
           messages: [...messages, userMessage],
           conversationId: null
         },
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
       });
 
       if (error) throw error;
