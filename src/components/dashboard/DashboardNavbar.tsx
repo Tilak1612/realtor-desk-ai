@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Bell, Search, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2 } from "lucide-react";
+import { Bell, Search, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -47,6 +47,12 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
       return;
     }
 
+    const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+    if (file.size > MAX_BYTES) {
+      toast.error(t("nav.avatarTooLarge", "Image is too large — max 5 MB"));
+      return;
+    }
+
     setAvatarUploading(true);
     try {
       const fileExt = file.name.split(".").pop();
@@ -73,6 +79,26 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
       toast.success(t("nav.avatarUpdated", "Profile photo updated"));
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : t("nav.avatarFailed", "Failed to upload photo"));
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
+
+  const handleAvatarRemove = async () => {
+    if (!user?.id) return;
+    setAvatarUploading(true);
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ avatar_url: null, updated_at: new Date().toISOString() })
+        .eq("id", user.id);
+
+      if (error) throw error;
+
+      setAvatarUrl(null);
+      toast.success(t("nav.avatarRemoved", "Profile photo removed"));
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : t("nav.avatarRemoveFailed", "Failed to remove photo"));
     } finally {
       setAvatarUploading(false);
     }
@@ -249,6 +275,16 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
                     ? t('nav.changePhoto', 'Change photo')
                     : t('nav.uploadPhoto', 'Upload photo')}
               </DropdownMenuItem>
+              {avatarUrl && (
+                <DropdownMenuItem
+                  onClick={handleAvatarRemove}
+                  className="cursor-pointer text-sm"
+                  disabled={avatarUploading}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  {t('nav.removePhoto', 'Remove photo')}
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer text-sm">
                 <User className="mr-2 h-4 w-4" />
                 {t('nav.profile', 'Profile')}
