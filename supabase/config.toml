@@ -10,7 +10,12 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.check-subscription]
-verify_jwt = true
+# verify_jwt = false — function body validates JWT itself via
+# supabaseClient.auth.getUser(token). Gateway verify_jwt=true was
+# rejecting every POST with 401 (gateway-level, function never ran),
+# likely related to the new publishable key scheme. Keeping the
+# explicit auth.getUser check means no security regression.
+verify_jwt = false
 
 [functions.customer-portal]
 verify_jwt = true
