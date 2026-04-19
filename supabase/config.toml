@@ -61,6 +61,18 @@ verify_jwt = true
 [functions.stripe-webhook-email]
 verify_jwt = false
 
+# OAuth initiation: client calls with user JWT. Function body does its
+# own auth.getUser(token) check. Gateway verify was 401'ing the call
+# same way it did for check-subscription / create-checkout.
+[functions.oauth-integration-auth]
+verify_jwt = false
+
+# OAuth callback: OAuth providers (Google/Microsoft) redirect here
+# without a JWT. Already verify_jwt=false — listing explicitly for
+# clarity.
+[functions.oauth-integration-callback]
+verify_jwt = false
+
 # Cron-invoked functions — pg_cron sends no Authorization header,
 # so gateway must let them through. Both use service role internally.
 [functions.sync-health-check]
