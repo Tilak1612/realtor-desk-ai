@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Bell, Search, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2, Trash2 } from "lucide-react";
+import { Bell, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -27,7 +27,6 @@ interface DashboardNavbarProps {
 const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
   const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -110,13 +109,6 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
     navigate("/");
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      toast.info(`Searching for: ${searchQuery}`);
-    }
-  };
-
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -149,19 +141,11 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
         {/* Spacer for mobile menu button */}
         <div className="w-12 lg:hidden" />
         
-        {/* Search Bar - Hidden on very small screens, visible on sm+ */}
-        <form onSubmit={handleSearch} className="hidden sm:block flex-1 max-w-md">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder={t('nav.searchPlaceholder', 'Search contacts, properties, deals...')}
-              className="pl-9 h-9 text-sm bg-background border-border"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-        </form>
+        {/* Search Bar — hidden until global search is wired up to a real backend.
+            Previously accepted input but did nothing (just toasted the query).
+            To re-enable: wire handleSearch to a Supabase query across contacts/
+            properties/deals and render a results dropdown. */}
+        <div className="flex-1" />
 
         {/* Right side actions */}
         <div className="flex items-center gap-1 sm:gap-2 ml-auto">
@@ -170,11 +154,6 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
 
           {/* Feedback Button */}
           <FeedbackDialog />
-
-          {/* Mobile Search Button */}
-          <Button variant="ghost" size="icon" className="sm:hidden h-8 w-8">
-            <Search className="h-4 w-4" />
-          </Button>
 
           {/* Quick Add Button */}
           <DropdownMenu>
