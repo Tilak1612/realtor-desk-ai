@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Upload, Mail, Calendar, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { parseCsv, mapRowToContact } from "@/lib/csvImport";
 
 interface ImportContactsProps {
   userId: string | null;
@@ -99,23 +100,20 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
     setLoading(true);
     try {
       const text = await uploadedFile.text();
-      const rows = text.split("\n").slice(1); // Skip header
-      const contacts = rows.map(row => {
-        const [firstName, lastName, email, phone] = row.split(",");
-        return {
-          user_id: userId,
-          first_name: firstName?.trim(),
-          last_name: lastName?.trim(),
-          email: email?.trim(),
-          phone: phone?.trim(),
-          source: "csv_import",
-        };
-      }).filter(c => c.email); // Only import rows with email
+      const rows = parseCsv(text);
+      const payloads = rows
+        .map((row) => mapRowToContact(row, userId))
+        .filter((p): p is NonNullable<typeof p> => p !== null);
 
-      const { error } = await supabase.from("contacts").insert(contacts);
+      if (payloads.length === 0) {
+        toast.error("No contacts found. Make sure your CSV has an Email or Name column.");
+        return;
+      }
+
+      const { error } = await supabase.from("contacts").insert(payloads);
       if (error) throw error;
 
-      toast.success(`Imported ${contacts.length} contacts!`);
+      toast.success(`Imported ${payloads.length} contact${payloads.length === 1 ? "" : "s"}!`);
       onNext();
     } catch (error: unknown) {
       toast.error("Failed to import contacts");

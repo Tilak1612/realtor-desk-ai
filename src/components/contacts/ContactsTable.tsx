@@ -204,19 +204,27 @@ const ContactsTable = ({
                   />
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-primary text-primary-foreground">
-                        {contact.first_name?.[0]?.toUpperCase() || "?"}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span 
-                      className="font-medium cursor-pointer hover:text-primary transition-colors"
-                      onClick={() => window.location.href = `/contacts/${contact.id}`}
-                    >
-                      {contact.first_name} {contact.last_name}
-                    </span>
-                  </div>
+                  {(() => {
+                    const fullName = `${contact.first_name ?? ""} ${contact.last_name ?? ""}`.trim();
+                    const emailPrefix = contact.email?.split("@")[0] ?? "";
+                    const displayName = fullName || emailPrefix || "Unknown";
+                    const initial = (contact.first_name?.[0] ?? emailPrefix[0] ?? "?").toUpperCase();
+                    return (
+                      <div className="flex items-center gap-3">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback className="bg-primary text-primary-foreground">
+                            {initial}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span
+                          className="font-medium cursor-pointer hover:text-primary transition-colors"
+                          onClick={() => window.location.href = `/contacts/${contact.id}`}
+                        >
+                          {displayName}
+                        </span>
+                      </div>
+                    );
+                  })()}
                 </TableCell>
                 <TableCell className="hidden md:table-cell text-muted-foreground">{contact.email || "-"}</TableCell>
                 <TableCell className="hidden lg:table-cell text-muted-foreground">{contact.phone || "-"}</TableCell>

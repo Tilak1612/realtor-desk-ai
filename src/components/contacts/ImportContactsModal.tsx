@@ -11,6 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Upload, CheckCircle, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { parseCsv, mapRowToContact } from "@/lib/csvImport";
 
 interface ImportContactsModalProps {
   open: boolean;
@@ -40,24 +41,6 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
     }
   };
 
-  const parseCSV = (text: string): unknown[] => {
-    const lines = text.split("\n");
-    const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
-    const data = [];
-
-    for (let i = 1; i < lines.length; i++) {
-      if (!lines[i].trim()) continue;
-      const values = lines[i].split(",");
-      const row: unknown = {};
-      headers.forEach((header, index) => {
-        row[header] = values[index]?.trim() || "";
-      });
-      data.push(row);
-    }
-
-    return data;
-  };
-
   const handleImport = async () => {
     if (!file) return;
 
@@ -76,43 +59,50 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       }
 
       const text = await file.text();
-      const rows = parseCSV(text);
+      const rows = parseCsv(text);
 
+      // Build all payloads up front; skip rows with no usable identifier.
+      const payloads = rows
+        .map((row) => mapRowToContact(row, session.user.id))
+        .filter((p): p is NonNullable<typeof p> => p !== null);
+
+      if (payloads.length === 0) {
+        toast({
+          title: t("app.modals.importContacts.importFailed"),
+          description: "We couldn't find any contacts in that file. Make sure your CSV has an Email column, or a Name / First Name / Last Name / Full Name column.",
+          variant: "destructive",
+        });
+        setImporting(false);
+        return;
+      }
+
+      // Batch insert in chunks so progress updates and a single bad row
+      // doesn't fail the whole import.
+      const CHUNK = 50;
       let successCount = 0;
       let errorCount = 0;
 
-      for (let i = 0; i < rows.length; i++) {
-        const row: any = rows[i];
-        
-        try {
-          const { error } = await supabase.from("contacts").insert({
-            user_id: session.user.id,
-            first_name: row.firstname || row.first_name || row["first name"] || "",
-            last_name: row.lastname || row.last_name || row["last name"] || "",
-            email: row.email || null,
-            phone: row.phone || row.mobile || null,
-            source: row.source || "Import",
-            tags: row.tags ? row.tags.split(";").map((t: string) => t.trim()) : [],
-            metadata: {},
-          });
+      for (let i = 0; i < payloads.length; i += CHUNK) {
+        const chunk = payloads.slice(i, i + CHUNK);
+        const { error, count } = await supabase
+          .from("contacts")
+          .insert(chunk, { count: "exact" });
 
-          if (error) {
-            errorCount++;
-          } else {
-            successCount++;
-          }
-        } catch {
-          errorCount++;
+        if (error) {
+          errorCount += chunk.length;
+        } else {
+          successCount += count ?? chunk.length;
         }
 
-        setProgress(Math.round(((i + 1) / rows.length) * 100));
+        setProgress(Math.round(Math.min(i + chunk.length, payloads.length) / payloads.length * 100));
       }
 
-      setResult({ success: successCount, errors: errorCount });
+      const skipped = rows.length - payloads.length;
+      setResult({ success: successCount, errors: errorCount + skipped });
 
       toast({
         title: t("app.modals.importContacts.importComplete"),
-        description: `${successCount} ${t("app.modals.importContacts.importSuccess")} ${errorCount} ${t("app.modals.importContacts.errors").toLowerCase()}.`,
+        description: `${successCount} ${t("app.modals.importContacts.importSuccess")} ${errorCount + skipped} ${t("app.modals.importContacts.errors").toLowerCase()}.`,
       });
 
       onSuccess();
@@ -173,11 +163,12 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
               <div className="bg-muted p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">{t("app.modals.importContacts.formatGuide")}</h4>
                 <p className="text-sm text-muted-foreground mb-2">
-                  {t("app.modals.importContacts.formatDescription")}
+                  Headers are detected automatically — any common export works.
+                  We recognize: <strong>First Name / Last Name / Full Name / Email / Phone / Company / Tags / Source</strong> and their common variants.
                 </p>
-                <code className="text-xs bg-background p-2 rounded block">
-                  FirstName, LastName, Email, Phone, Source, Tags
-                </code>
+                <p className="text-xs text-muted-foreground">
+                  Rows without a name or email are skipped. Fields like Company Name we don't store in a dedicated column are kept in the contact's metadata.
+                </p>
               </div>
 
               {/* Progress */}
