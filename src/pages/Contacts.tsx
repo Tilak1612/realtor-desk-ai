@@ -251,16 +251,40 @@ const Contacts = () => {
             selectedCount={selectedContacts.length}
             onClearSelection={() => setSelectedContacts([])}
             onBulkDelete={async () => {
-              const { error } = await supabase
-                .from("contacts")
-                .delete()
-                .in("id", selectedContacts);
-
-              if (!error) {
-                toast({ title: t('app.notifications.contactDeleted') });
-                setSelectedContacts([]);
-                fetchContacts();
+              // PostgREST serializes .in() into ?id=in.(uuid,uuid,...) which
+              // blows past URL length limits (~16KB) around ~350 UUIDs.
+              // Chunk the delete so large selections (1000+) actually work.
+              const CHUNK = 200;
+              let deleted = 0;
+              let failed = 0;
+              for (let i = 0; i < selectedContacts.length; i += CHUNK) {
+                const chunk = selectedContacts.slice(i, i + CHUNK);
+                const { error } = await supabase
+                  .from("contacts")
+                  .delete()
+                  .in("id", chunk);
+                if (error) {
+                  console.error("Bulk delete chunk failed:", error);
+                  failed += chunk.length;
+                } else {
+                  deleted += chunk.length;
+                }
               }
+
+              if (failed === 0) {
+                toast({
+                  title: t('app.notifications.contactDeleted'),
+                  description: `Deleted ${deleted} contact${deleted === 1 ? "" : "s"}.`,
+                });
+              } else {
+                toast({
+                  title: "Partial delete",
+                  description: `Deleted ${deleted}, failed ${failed}. Refreshing…`,
+                  variant: "destructive",
+                });
+              }
+              setSelectedContacts([]);
+              fetchContacts();
             }}
           />
         )}
