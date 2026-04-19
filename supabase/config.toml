@@ -10,7 +10,11 @@ verify_jwt = false
 verify_jwt = true
 
 [functions.create-checkout]
-verify_jwt = true
+# Same gateway-401 pattern as check-subscription. Function body does
+# auth.getUser(token) itself; gateway verify was rejecting publishable-
+# key-scheme tokens. Disabling gateway verify so clicking Upgrade
+# actually reaches the Stripe Checkout call.
+verify_jwt = false
 
 [functions.check-subscription]
 # verify_jwt = false — function body validates JWT itself via
@@ -21,7 +25,8 @@ verify_jwt = true
 verify_jwt = false
 
 [functions.customer-portal]
-verify_jwt = true
+# Same pattern as create-checkout — function validates JWT itself.
+verify_jwt = false
 
 [functions.claude-chat]
 verify_jwt = true
