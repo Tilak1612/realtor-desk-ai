@@ -120,7 +120,7 @@ const Market = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <h1 className="text-2xl md:text-3xl font-semibold">Market Snapshot</h1>
+              <h1 className="text-2xl md:text-3xl font-semibold">Market Intelligence</h1>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs">
                 Beta
               </Badge>
@@ -155,7 +155,7 @@ const Market = () => {
             <div className="flex items-start gap-3">
               <Info className="h-4 w-4 text-primary mt-0.5" />
               <div>
-                <p className="text-sm font-medium">Market Snapshot (Beta)</p>
+                <p className="text-sm font-medium">Market Intelligence (Beta)</p>
                 <p className="text-xs text-muted-foreground">
                   This feature displays sample market data for demonstration. Real MLS/CREA integration with live data is coming soon.
                 </p>
