@@ -68,10 +68,10 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
     { icon: LayoutDashboard, label: t('app.sidebar.today', 'Today'), path: "/today", featured: true },
     { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts", count: counts.contacts },
     { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
-    { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
+    { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
     { icon: Calendar, label: t('app.sidebar.calendar'), path: "/calendar" },
+    { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
     { icon: TrendingUp, label: t('app.sidebar.reports'), path: "/reports" },
-    { icon: Settings, label: t('app.sidebar.settings'), path: "/settings" },
   ];
 
   const advancedItems = [
@@ -79,9 +79,9 @@ const DashboardSidebar = ({ trialDaysLeft = 60 }: DashboardSidebarProps) => {
     { icon: Zap, label: t('app.sidebar.automations', 'Automations'), path: "/automations" },
     { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
     { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
-    { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
-    { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
     { icon: Plug, label: t('app.sidebar.integrations', 'Integrations'), path: "/dashboard/integrations" },
+    { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
+    { icon: Settings, label: t('app.sidebar.settings'), path: "/settings" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
