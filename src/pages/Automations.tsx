@@ -88,11 +88,14 @@ const Automations = () => {
       .order("created_at", { ascending: false });
 
     if (error) {
-      // PGRST301: RLS denies access (expected on fresh session)
-      // PGRST202/42P01: table doesn't exist yet (feature not provisioned)
-      // Both cases: render the empty state, skip the scary toast + console error.
+      // PostgREST returns 404 + code PGRST205 when the table is missing
+      // from the schema cache. PGRST202 is for missing *functions*; I had
+      // the wrong code before. Also tolerating 42P01 (raw PG) and
+      // PGRST301 (RLS denial on fresh session) for defense in depth.
+      // Any of these: render the empty state, skip the scary toast + console error.
       const isExpected =
         error.code === "PGRST301" ||
+        error.code === "PGRST205" ||
         error.code === "PGRST202" ||
         error.code === "42P01";
       if (!isExpected) {
