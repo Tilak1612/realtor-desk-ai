@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Calendar as CalendarIcon, Plus, Clock, MapPin } from "lucide-react";
+import { Calendar as CalendarIcon, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
@@ -34,33 +33,6 @@ const CalendarPage = () => {
 
     checkAuth();
   }, [navigate]);
-
-  const events = [
-    {
-      id: 1,
-      title: "Property Showing - 123 Main St",
-      time: "10:00 AM",
-      duration: "1 hour",
-      location: "123 Main Street, Toronto",
-      type: "showing",
-    },
-    {
-      id: 2,
-      title: "Client Meeting - Sarah Johnson",
-      time: "2:00 PM",
-      duration: "30 mins",
-      location: "Office",
-      type: "meeting",
-    },
-    {
-      id: 3,
-      title: "Open House Prep",
-      time: "4:00 PM",
-      duration: "2 hours",
-      location: "456 Oak Avenue",
-      type: "openhouse",
-    },
-  ];
 
   if (!user || !profile) {
     return (
@@ -96,48 +68,18 @@ const CalendarPage = () => {
               <CardTitle className="text-base font-medium">Today's Schedule</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {events.map((event) => (
-                  <div
-                    key={event.id}
-                    className="flex items-start gap-4 p-4 border rounded-lg hover:bg-accent/50 transition-colors"
-                  >
-                    <div className="flex flex-col items-center justify-center bg-primary/10 rounded-lg p-3 min-w-[80px]">
-                      <Clock className="h-4 w-4 text-primary mb-1" />
-                      <span className="text-xs font-medium">{event.time}</span>
-                      <span className="text-xs text-muted-foreground">{event.duration}</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-sm font-medium">{event.title}</h3>
-                        <Badge
-                          variant={
-                            event.type === "showing"
-                              ? "default"
-                              : event.type === "meeting"
-                              ? "secondary"
-                              : "outline"
-                          }
-                          className="text-xs"
-                        >
-                          {event.type}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <MapPin className="h-3 w-3" />
-                        {event.location}
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="h-7 text-xs">
-                        Edit
-                      </Button>
-                      <Button variant="outline" size="sm" className="h-7 text-xs">
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                  <CalendarIcon className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-sm font-medium mb-1">No events scheduled</h3>
+                <p className="text-xs text-muted-foreground max-w-sm mb-4">
+                  Add showings, meetings, and open houses to see them here.
+                </p>
+                <Button size="sm" className="h-8 text-xs">
+                  <Plus className="mr-1.5 h-3.5 w-3.5" />
+                  Create event
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -153,20 +95,6 @@ const CalendarPage = () => {
                 onSelect={setDate}
                 className="rounded-md border"
               />
-              <div className="mt-4 space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-primary rounded-full"></div>
-                  <span className="text-xs">Showings</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-secondary rounded-full"></div>
-                  <span className="text-xs">Meetings</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-muted rounded-full"></div>
-                  <span className="text-xs">Open Houses</span>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>
