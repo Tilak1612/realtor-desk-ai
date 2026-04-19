@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Mail, Plus, Send, Users, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
+
+const COMING_SOON_MESSAGE = "Email campaigns are coming soon — we'll let you know the moment they're live.";
 
 const Campaigns = () => {
   const navigate = useNavigate();
@@ -54,7 +57,7 @@ const Campaigns = () => {
               Manage and track your email marketing campaigns
             </p>
           </div>
-          <Button size="sm" className="h-8 text-xs">
+          <Button size="sm" className="h-8 text-xs" onClick={() => toast.info(COMING_SOON_MESSAGE)}>
             <Plus className="mr-1.5 h-3.5 w-3.5" />
             New Campaign
           </Button>
@@ -82,7 +85,7 @@ const Campaigns = () => {
               <p className="text-xs text-muted-foreground max-w-sm mb-4">
                 Create your first email campaign to stay in touch with leads and clients.
               </p>
-              <Button size="sm" className="h-8 text-xs">
+              <Button size="sm" className="h-8 text-xs" onClick={() => toast.info(COMING_SOON_MESSAGE)}>
                 <Plus className="mr-1.5 h-3.5 w-3.5" />
                 Create your first campaign
               </Button>

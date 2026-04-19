@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Calendar as CalendarIcon, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import AppLayout from "@/components/layout/AppLayout";
+
+const COMING_SOON_MESSAGE = "Calendar events are coming soon — connect your Google / Outlook calendar from the Integrations page when it's ready.";
 
 const CalendarPage = () => {
   const navigate = useNavigate();
@@ -55,7 +58,7 @@ const CalendarPage = () => {
               Manage your appointments and schedule
             </p>
           </div>
-          <Button size="sm" className="h-8 text-xs">
+          <Button size="sm" className="h-8 text-xs" onClick={() => toast.info(COMING_SOON_MESSAGE)}>
             <Plus className="mr-1.5 h-3.5 w-3.5" />
             New Event
           </Button>
@@ -76,7 +79,7 @@ const CalendarPage = () => {
                 <p className="text-xs text-muted-foreground max-w-sm mb-4">
                   Add showings, meetings, and open houses to see them here.
                 </p>
-                <Button size="sm" className="h-8 text-xs">
+                <Button size="sm" className="h-8 text-xs" onClick={() => toast.info(COMING_SOON_MESSAGE)}>
                   <Plus className="mr-1.5 h-3.5 w-3.5" />
                   Create event
                 </Button>
