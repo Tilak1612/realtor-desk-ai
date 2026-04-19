@@ -1,81 +1,110 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, Calendar, Filter, FileText } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Download, Calendar, Filter, BarChart3 } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
 import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
 import { DollarSign, Users, Briefcase, TrendingUp } from "lucide-react";
+
+interface ReportStats {
+  totalRevenue: number;
+  totalLeads: number;
+  closedDeals: number;
+  activeDeals: number;
+  pipelineByStage: { stage: string; count: number }[];
+}
+
+const EMPTY_STATS: ReportStats = {
+  totalRevenue: 0,
+  totalLeads: 0,
+  closedDeals: 0,
+  activeDeals: 0,
+  pipelineByStage: [],
+};
+
+const formatCurrency = (value: number) => {
+  if (value === 0) return "$0";
+  if (value >= 1_000_000) return `$${(value / 1_000_000).toFixed(2)}M`;
+  if (value >= 1_000) return `$${(value / 1_000).toFixed(1)}K`;
+  return `$${value.toLocaleString("en-CA")}`;
+};
 
 const Reports = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<unknown>(null);
   const [profile, setProfile] = useState<unknown>(null);
+  const [stats, setStats] = useState<ReportStats>(EMPTY_STATS);
+  const [loading, setLoading] = useState(true);
   const [dateRange, setDateRange] = useState("30d");
   const [sourceFilter, setSourceFilter] = useState("all");
-  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const load = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         navigate("/login");
         return;
       }
       setUser(session.user);
+      const userId = session.user.id;
 
       const { data: profileData } = await supabase
         .from("profiles")
         .select("*")
-        .eq("id", session.user.id)
+        .eq("id", userId)
         .single();
-
       setProfile(profileData);
+
+      const [contactsRes, dealsRes] = await Promise.all([
+        supabase.from("contacts").select("*", { count: "exact", head: true }).eq("user_id", userId),
+        supabase.from("deals").select("stage, status, value, listing_price").eq("user_id", userId),
+      ]);
+
+      const deals = dealsRes.data ?? [];
+      const closed = deals.filter((d) => d.status === "won" || d.stage === "closed");
+      const active = deals.filter((d) => d.status !== "won" && d.stage !== "closed");
+      const revenue = closed.reduce(
+        (sum, d) => sum + Number(d.listing_price ?? d.value ?? 0),
+        0
+      );
+
+      const stageCounts = active.reduce<Record<string, number>>((acc, d) => {
+        const key = d.stage ?? "unknown";
+        acc[key] = (acc[key] ?? 0) + 1;
+        return acc;
+      }, {});
+      const pipelineByStage = Object.entries(stageCounts).map(([stage, count]) => ({ stage, count }));
+
+      setStats({
+        totalRevenue: revenue,
+        totalLeads: contactsRes.count ?? 0,
+        closedDeals: closed.length,
+        activeDeals: active.length,
+        pipelineByStage,
+      });
+      setLoading(false);
     };
 
-    checkAuth();
+    load();
   }, [navigate]);
 
-  const monthlyData = [
-    { month: "Jan", leads: 45, deals: 8, revenue: 320000 },
-    { month: "Feb", leads: 52, deals: 10, revenue: 425000 },
-    { month: "Mar", leads: 48, deals: 9, revenue: 380000 },
-    { month: "Apr", leads: 61, deals: 12, revenue: 510000 },
-    { month: "May", leads: 55, deals: 11, revenue: 465000 },
-    { month: "Jun", leads: 58, deals: 13, revenue: 548000 },
-  ];
+  const hasAnyData = useMemo(
+    () => stats.totalLeads > 0 || stats.closedDeals > 0 || stats.activeDeals > 0,
+    [stats]
+  );
 
-  const leadSourceData = [
-    { source: "Website", count: 120, color: "hsl(var(--primary))" },
-    { source: "Referral", count: 85, color: "hsl(var(--secondary))" },
-    { source: "Social Media", count: 67, color: "hsl(var(--accent))" },
-    { source: "Open House", count: 43, color: "hsl(var(--muted))" },
-    { source: "Other", count: 28, color: "hsl(var(--destructive))" },
-  ];
-
-  const conversionData = [
-    { stage: "Leads", count: 343, percentage: 100 },
-    { stage: "Contacted", count: 275, percentage: 80 },
-    { stage: "Qualified", count: 165, percentage: 48 },
-    { stage: "Viewing", count: 98, percentage: 29 },
-    { stage: "Offer", count: 72, percentage: 21 },
-    { stage: "Closed", count: 63, percentage: 18 },
-  ];
-
-  const activityData = [
-    { date: "Mon", calls: 12, emails: 28, meetings: 3 },
-    { date: "Tue", calls: 15, emails: 32, meetings: 5 },
-    { date: "Wed", calls: 8, emails: 24, meetings: 2 },
-    { date: "Thu", calls: 18, emails: 35, meetings: 4 },
-    { date: "Fri", calls: 14, emails: 30, meetings: 6 },
-  ];
+  const conversionRate = useMemo(() => {
+    if (stats.totalLeads === 0) return "—";
+    return `${((stats.closedDeals / stats.totalLeads) * 100).toFixed(1)}%`;
+  }, [stats]);
 
   const getDateRangeLabel = () => {
     switch (dateRange) {
@@ -87,27 +116,29 @@ const Reports = () => {
     }
   };
 
-  const exportToCSV = (data: unknown[], filename: string, headers: string[]) => {
-    const csvContent = [
+  const exportPipelineCSV = () => {
+    if (stats.pipelineByStage.length === 0) {
+      toast({ title: "Nothing to export", description: "No pipeline data yet." });
+      return;
+    }
+    const headers = ["Stage", "Count"];
+    const csv = [
       headers.join(","),
-      ...data.map(row => headers.map(h => row[h.toLowerCase().replace(/ /g, "_")] || row[h.toLowerCase()] || "").join(","))
+      ...stats.pipelineByStage.map((row) => `${row.stage},${row.count}`),
     ].join("\n");
 
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${filename}-${format(new Date(), "yyyy-MM-dd")}.csv`;
+    a.download = `pipeline-${format(new Date(), "yyyy-MM-dd")}.csv`;
     a.click();
     URL.revokeObjectURL(url);
 
-    toast({
-      title: "Export Complete",
-      description: `${filename}.csv downloaded successfully.`,
-    });
+    toast({ title: "Export Complete", description: "pipeline.csv downloaded successfully." });
   };
 
-  if (!user || !profile) {
+  if (!user || !profile || loading) {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
@@ -116,6 +147,19 @@ const Reports = () => {
       </AppLayout>
     );
   }
+
+  const EmptyChartState = ({ message }: { message: string }) => (
+    <div className="flex flex-col items-center justify-center py-12 text-center">
+      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+        <BarChart3 className="h-5 w-5 text-primary" />
+      </div>
+      <p className="text-sm font-medium mb-1">No data yet</p>
+      <p className="text-xs text-muted-foreground max-w-sm mb-4">{message}</p>
+      <Link to="/contacts">
+        <Button size="sm" className="h-8 text-xs">Import contacts</Button>
+      </Link>
+    </div>
+  );
 
   return (
     <AppLayout user={user} profile={profile}>
@@ -158,39 +202,31 @@ const Reports = () => {
           </div>
         </div>
 
-        {/* Stats */}
+        {/* Stats — all real counts, zeros when empty */}
         <div className="grid gap-4 md:grid-cols-4">
           <StatCard
-            title="Total Revenue"
-            value="$2.65M"
-            subtitle="+23% from last period"
+            title="Closed Revenue"
+            value={formatCurrency(stats.totalRevenue)}
+            subtitle="From won deals"
             icon={DollarSign}
-            trend="up"
-            change={23}
           />
           <StatCard
             title="Total Leads"
-            value={343}
-            subtitle="+12% from last period"
+            value={stats.totalLeads}
+            subtitle="Contacts in your CRM"
             icon={Users}
-            trend="up"
-            change={12}
           />
           <StatCard
             title="Closed Deals"
-            value={63}
-            subtitle="+8 from last period"
+            value={stats.closedDeals}
+            subtitle={`${stats.activeDeals} active in pipeline`}
             icon={Briefcase}
-            trend="up"
-            change={15}
           />
           <StatCard
             title="Conversion Rate"
-            value="18.4%"
-            subtitle="+2.1% from last period"
+            value={conversionRate}
+            subtitle={stats.totalLeads > 0 ? "Closed / total leads" : "Requires leads and deals"}
             icon={TrendingUp}
-            trend="up"
-            change={2}
           />
         </div>
 
@@ -209,27 +245,31 @@ const Reports = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-base font-medium">Pipeline Report</CardTitle>
-                    <CardDescription className="text-xs">{getDateRangeLabel()} • Showing deal progression</CardDescription>
+                    <CardDescription className="text-xs">{getDateRangeLabel()} • Active deals by stage</CardDescription>
                   </div>
-                  <Button variant="outline" size="sm" className="h-7 text-xs">
+                  <Button variant="outline" size="sm" className="h-7 text-xs" onClick={exportPipelineCSV}>
                     <Download className="h-3.5 w-3.5 mr-1.5" />
                     CSV
                   </Button>
                 </div>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={conversionData} layout="vertical">
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" />
-                    <YAxis dataKey="stage" type="category" width={80} className="text-xs" />
-                    <Tooltip 
-                      formatter={(value: number) => [value, "Deals"]}
-                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                    />
-                    <Bar dataKey="count" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+                {stats.pipelineByStage.length === 0 ? (
+                  <EmptyChartState message="Pipeline data will appear once you add deals with stages." />
+                ) : (
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={stats.pipelineByStage} layout="vertical">
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis type="number" allowDecimals={false} />
+                      <YAxis dataKey="stage" type="category" width={100} className="text-xs" />
+                      <Tooltip
+                        formatter={(value: number) => [value, "Deals"]}
+                        contentStyle={{ backgroundColor: "hsl(var(--background))", border: "1px solid hsl(var(--border))" }}
+                      />
+                      <Bar dataKey="count" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -237,31 +277,11 @@ const Reports = () => {
           <TabsContent value="activities" className="space-y-4">
             <Card>
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-base font-medium">Activity Report</CardTitle>
-                    <CardDescription className="text-xs">{getDateRangeLabel()} • Calls, emails, and meetings</CardDescription>
-                  </div>
-                  <Button variant="outline" size="sm" className="h-7 text-xs">
-                    <Download className="h-3.5 w-3.5 mr-1.5" />
-                    CSV
-                  </Button>
-                </div>
+                <CardTitle className="text-base font-medium">Activity Report</CardTitle>
+                <CardDescription className="text-xs">{getDateRangeLabel()} • Calls, emails, and meetings</CardDescription>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={activityData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" className="text-xs" />
-                    <YAxis className="text-xs" />
-                    <Tooltip 
-                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                    />
-                    <Bar dataKey="calls" fill="hsl(var(--primary))" name="Calls" />
-                    <Bar dataKey="emails" fill="hsl(var(--secondary))" name="Emails" />
-                    <Bar dataKey="meetings" fill="hsl(var(--accent))" name="Meetings" />
-                  </BarChart>
-                </ResponsiveContainer>
+                <EmptyChartState message="Activity tracking will appear once calls, emails, and meetings are logged." />
               </CardContent>
             </Card>
           </TabsContent>
@@ -269,31 +289,15 @@ const Reports = () => {
           <TabsContent value="conversions" className="space-y-4">
             <Card>
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-base font-medium">Conversion Report</CardTitle>
-                    <CardDescription className="text-xs">{getDateRangeLabel()} • Monthly performance</CardDescription>
-                  </div>
-                  <Button variant="outline" size="sm" className="h-7 text-xs">
-                    <Download className="h-3.5 w-3.5 mr-1.5" />
-                    CSV
-                  </Button>
-                </div>
+                <CardTitle className="text-base font-medium">Conversion Report</CardTitle>
+                <CardDescription className="text-xs">{getDateRangeLabel()} • Monthly performance</CardDescription>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={monthlyData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" className="text-xs" />
-                    <YAxis yAxisId="left" className="text-xs" />
-                    <YAxis yAxisId="right" orientation="right" className="text-xs" />
-                    <Tooltip 
-                      contentStyle={{ backgroundColor: 'hsl(var(--background))', border: '1px solid hsl(var(--border))' }}
-                    />
-                    <Line yAxisId="left" type="monotone" dataKey="leads" stroke="hsl(var(--primary))" strokeWidth={2} name="Leads" />
-                    <Line yAxisId="left" type="monotone" dataKey="deals" stroke="hsl(var(--secondary))" strokeWidth={2} name="Deals" />
-                  </LineChart>
-                </ResponsiveContainer>
+                {hasAnyData ? (
+                  <EmptyChartState message="Historical trend view is coming soon. For now, see the KPI cards above." />
+                ) : (
+                  <EmptyChartState message="Conversion trends will appear once you have leads and closed deals." />
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -301,49 +305,11 @@ const Reports = () => {
           <TabsContent value="sources" className="space-y-4">
             <Card>
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="text-base font-medium">Lead Sources</CardTitle>
-                    <CardDescription className="text-xs">{getDateRangeLabel()} • Where your leads come from</CardDescription>
-                  </div>
-                  <Button variant="outline" size="sm" className="h-7 text-xs">
-                    <Download className="h-3.5 w-3.5 mr-1.5" />
-                    CSV
-                  </Button>
-                </div>
+                <CardTitle className="text-base font-medium">Lead Sources</CardTitle>
+                <CardDescription className="text-xs">{getDateRangeLabel()} • Where your leads come from</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <ResponsiveContainer width="100%" height={250}>
-                    <PieChart>
-                      <Pie
-                        data={leadSourceData}
-                        dataKey="count"
-                        nameKey="source"
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={80}
-                        label={({ source, count }) => `${source}: ${count}`}
-                      >
-                        {leadSourceData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
-                  <div className="space-y-3">
-                    {leadSourceData.map((source) => (
-                      <div key={source.source} className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: source.color }} />
-                          <span className="text-sm">{source.source}</span>
-                        </div>
-                        <span className="text-sm font-medium">{source.count}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <EmptyChartState message="Source breakdown will appear once contacts are tagged with an acquisition source." />
               </CardContent>
             </Card>
           </TabsContent>
