@@ -1,7 +1,10 @@
 project_id = "vxkqwkeqincbxrgglmca"
 
 [functions.send-welcome-email]
-verify_jwt = true
+# Same bug as check-subscription — gateway JWT verification rejects
+# publishable-key-scheme tokens with 401 before the function runs.
+# Function body does auth.getUser(token) itself (equivalent check).
+verify_jwt = false
 
 [functions.calculate-lead-score]
 verify_jwt = true
@@ -51,4 +54,12 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.stripe-webhook-email]
+verify_jwt = false
+
+# Cron-invoked functions — pg_cron sends no Authorization header,
+# so gateway must let them through. Both use service role internally.
+[functions.sync-health-check]
+verify_jwt = false
+
+[functions.lifecycle-cron]
 verify_jwt = false
