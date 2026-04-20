@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import type { Contact } from "@/types/contact";
+import LeadScoreExplainer from "./LeadScoreExplainer";
 
 interface ContactCardProps {
   contact: Contact;
@@ -60,19 +61,23 @@ const ContactCard = ({ contact, onUpdate }: ContactCardProps) => {
           </Avatar>
           <h3 className="font-bold text-lg mb-2">{contact.first_name} {contact.last_name}</h3>
           <div className="flex flex-col items-center gap-2 mb-4">
-            <div className="relative w-20 h-20">
-              <svg className="w-20 h-20 transform -rotate-90">
-                <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="none" className="text-muted" />
-                <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="none"
-                  strokeDasharray={`${2 * Math.PI * 36}`}
-                  strokeDashoffset={`${2 * Math.PI * 36 * (1 - (contact.ai_score || 0) / 100)}`}
-                  className={getScoreColor(contact.ai_score)} strokeLinecap="round" />
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className={`text-2xl font-bold ${getScoreColor(contact.ai_score)}`}>{contact.ai_score || 0}</span>
+            <LeadScoreExplainer contact={contact}>
+              <div className="relative w-20 h-20 cursor-pointer">
+                <svg className="w-20 h-20 transform -rotate-90">
+                  <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="none" className="text-muted" />
+                  <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="none"
+                    strokeDasharray={`${2 * Math.PI * 36}`}
+                    strokeDashoffset={`${2 * Math.PI * 36 * (1 - (contact.ai_score || 0) / 100)}`}
+                    className={getScoreColor(contact.ai_score)} strokeLinecap="round" />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className={`text-2xl font-bold ${getScoreColor(contact.ai_score)}`}>{contact.ai_score || 0}</span>
+                </div>
               </div>
-            </div>
-            <span className="text-sm text-muted-foreground">Lead Score</span>
+            </LeadScoreExplainer>
+            <span className="text-sm text-muted-foreground">
+              {t('contact.leadScore', 'Lead Score')} · <span className="underline cursor-help">{t('contact.whyThisScore', 'why?')}</span>
+            </span>
           </div>
           <Badge variant="outline" className="mb-4">{contact.source || t('contact.unknownSource', 'Unknown Source')}</Badge>
         </div>

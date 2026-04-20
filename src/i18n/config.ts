@@ -1798,6 +1798,16 @@ const resources = {
         savePreferences: "Save Preferences",
         back: "Back"
       },
+      leadScore: {
+        title: "Why this lead scored",
+        openExplainer: "Why this lead scored",
+        emailActivity: "Email activity (last 30 days)",
+        propertyViews: "Property views",
+        daysSinceContact: "Days since last contact",
+        loading: "Loading signals\u2026",
+        noSignals: "No behavioural signals yet. Log calls, emails, and property views to see this panel populate.",
+        manualNotice: "Your score is currently derived from a fixed formula. AI-derived scoring trained on your own conversion history ships Q2 2026."
+      },
       onboarding: {
         heading: "Getting started — 60 minutes, guided",
         subheading: "Five steps to go from empty dashboard to first follow-up call.",
@@ -3647,6 +3657,16 @@ const resources = {
         functionalDesc: "Permettent des fonctionnalités améliorées comme les widgets de chat et les préférences.",
         savePreferences: "Sauvegarder les préférences",
         back: "Retour"
+      },
+      leadScore: {
+        title: "Pourquoi ce score",
+        openExplainer: "Pourquoi ce score",
+        emailActivity: "Activité courriel (30 derniers jours)",
+        propertyViews: "Vues de propriétés",
+        daysSinceContact: "Jours depuis le dernier contact",
+        loading: "Chargement des signaux\u2026",
+        noSignals: "Aucun signal comportemental pour le moment. Consignez des appels, courriels et vues de propriétés pour alimenter ce panneau.",
+        manualNotice: "Votre score est actuellement calculé par une formule fixe. Le scoring dérivé par IA, entraîné sur votre propre historique de conversion, sera livré au T2 2026."
       },
       onboarding: {
         heading: "Démarrage — 60 minutes, guidé",
