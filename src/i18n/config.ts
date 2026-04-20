@@ -1798,6 +1798,33 @@ const resources = {
         savePreferences: "Save Preferences",
         back: "Back"
       },
+      onboarding: {
+        heading: "Getting started — 60 minutes, guided",
+        subheading: "Five steps to go from empty dashboard to first follow-up call.",
+        ack: "Got it",
+        step: {
+          profile: {
+            title: "Complete your profile",
+            desc: "Add your brokerage, license, and contact info."
+          },
+          contact: {
+            title: "Add your first contact",
+            desc: "Import a CSV or add a lead manually."
+          },
+          property: {
+            title: "Add your first property",
+            desc: "Paste a realtor.ca URL or enter details."
+          },
+          widget: {
+            title: "Set up your website widget",
+            desc: "Launches Q3 2026 — see roadmap."
+          },
+          calendar: {
+            title: "Connect Google or Outlook Calendar",
+            desc: "Sync appointments into /today."
+          }
+        }
+      },
       roadmap: {
         badge: "Public roadmap",
         title: "What we are shipping — and what we are not.",
@@ -3620,6 +3647,33 @@ const resources = {
         functionalDesc: "Permettent des fonctionnalités améliorées comme les widgets de chat et les préférences.",
         savePreferences: "Sauvegarder les préférences",
         back: "Retour"
+      },
+      onboarding: {
+        heading: "Démarrage — 60 minutes, guidé",
+        subheading: "Cinq étapes pour passer d'un tableau de bord vide à votre premier appel de suivi.",
+        ack: "Compris",
+        step: {
+          profile: {
+            title: "Complétez votre profil",
+            desc: "Ajoutez votre courtage, permis et coordonnées."
+          },
+          contact: {
+            title: "Ajoutez votre premier contact",
+            desc: "Importez un CSV ou saisissez un prospect manuellement."
+          },
+          property: {
+            title: "Ajoutez votre première propriété",
+            desc: "Collez un lien realtor.ca ou saisissez les détails."
+          },
+          widget: {
+            title: "Configurez votre widget de site web",
+            desc: "Livraison au T3 2026 — voir la feuille de route."
+          },
+          calendar: {
+            title: "Connectez Google ou Outlook Calendar",
+            desc: "Synchronisez vos rendez-vous dans /today."
+          }
+        }
       },
       roadmap: {
         badge: "Feuille de route publique",
