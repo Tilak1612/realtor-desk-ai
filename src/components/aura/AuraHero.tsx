@@ -49,7 +49,7 @@ const AuraHero = () => {
 
               {/* Subtitle */}
               <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-lg font-light">
-                {t('hero.subtitle', 'Instant follow-ups, Canadian MLS data integration, and PIPEDA-aware data handling')}
+                {t('hero.subtitle', 'Instant follow-ups, PIPEDA-aware data handling, and bilingual EN/FR')}
               </p>
 
               {/* Trust Signals Line */}
@@ -60,7 +60,7 @@ const AuraHero = () => {
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
-                  {t('hero.bullet2', 'Canadian MLS data integration')}
+                  {t('hero.bullet2', 'Built for Canadian agents — PIPEDA, CASL, bilingual EN/FR')}
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" />
