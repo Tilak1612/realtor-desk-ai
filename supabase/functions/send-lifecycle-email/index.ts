@@ -1,5 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { buildCaslFooter } from "../_shared/casl-footer.ts";
+import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,7 +18,7 @@ interface EmailTemplate {
   html: string;
 }
 
-function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTemplate | null {
+function getTemplate(eventType: string, data: Record<string, any> = {}, caslFooter = ""): EmailTemplate | null {
   const name = data.name || "there";
 
   const templates: Record<string, EmailTemplate> = {
@@ -34,7 +36,8 @@ function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTe
         </ul>
         <div style="text-align:center;margin:30px 0;">
           <a href="${APP_URL}/onboarding" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Complete Setup →</a>
-        </div>`
+        </div>`,
+        caslFooter
       ),
     },
     trial_ending: {
@@ -53,7 +56,8 @@ function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTe
         <div style="text-align:center;margin:30px 0;">
           <a href="${APP_URL}/billing" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Upgrade Now →</a>
         </div>
-        <p style="font-size:14px;color:#6b7280;">Plans start at just $79 CAD/month.</p>`
+        <p style="font-size:14px;color:#6b7280;">Plans start at $149 CAD/month. Prices include Canadian GST/HST billing at checkout.</p>`,
+        caslFooter
       ),
     },
     payment_success: {
@@ -66,7 +70,8 @@ function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTe
         <div style="text-align:center;margin:30px 0;">
           <a href="${APP_URL}/dashboard" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Go to Dashboard →</a>
         </div>
-        <p style="font-size:14px;color:#6b7280;">View your billing history in <a href="${APP_URL}/billing" style="color:#6366f1;">Settings → Billing</a>.</p>`
+        <p style="font-size:14px;color:#6b7280;">View your billing history in <a href="${APP_URL}/billing" style="color:#6366f1;">Settings → Billing</a>.</p>`,
+        caslFooter
       ),
     },
     payment_failed: {
@@ -78,7 +83,8 @@ function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTe
         <div style="text-align:center;margin:30px 0;">
           <a href="${APP_URL}/billing" style="background:#ef4444;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Update Payment Method →</a>
         </div>
-        <p style="font-size:14px;color:#6b7280;">If you believe this is an error, please contact us at support@realtordesk.ai.</p>`
+        <p style="font-size:14px;color:#6b7280;">If you believe this is an error, please contact us at support@realtordesk.ai.</p>`,
+        caslFooter
       ),
     },
     winback: {
@@ -88,14 +94,15 @@ function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTe
         `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
         <p style="font-size:16px;color:#374151;line-height:1.6;">It's been a while since you've logged into RealtorDesk AI. Here's what's new:</p>
         <ul style="font-size:16px;color:#374151;line-height:2;">
-          <li>🆕 Enhanced AI lead scoring</li>
-          <li>🆕 CREA DDF® integration improvements</li>
+          <li>🆕 Bilingual (EN/FR) CASL-compliant email sequences</li>
+          <li>🆕 Improved lead-score explainer with behavioural signals</li>
           <li>🆕 Faster chatbot response times</li>
         </ul>
         <p style="font-size:16px;color:#374151;line-height:1.6;">Your data is still safe and waiting for you.</p>
         <div style="text-align:center;margin:30px 0;">
           <a href="${APP_URL}/dashboard" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Log Back In →</a>
-        </div>`
+        </div>`,
+        caslFooter
       ),
     },
   };
@@ -103,7 +110,7 @@ function getTemplate(eventType: string, data: Record<string, any> = {}): EmailTe
   return templates[eventType] || null;
 }
 
-function buildEmail(heading: string, content: string): string {
+function buildEmail(heading: string, content: string, caslFooter = ""): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -121,6 +128,7 @@ ${content}
 <tr><td style="background:#f9fafb;padding:20px 30px;text-align:center;">
 <p style="font-size:12px;color:#9ca3af;margin:0;">RealtorDesk AI — Built for Canadian Real Estate Agents</p>
 </td></tr>
+<tr><td>${caslFooter}</td></tr>
 </table>
 </td></tr>
 </table>
@@ -191,7 +199,21 @@ const handler = async (req: Request): Promise<Response> => {
       .single();
 
     const mergedData = { name: profile?.full_name || "there", ...templateData };
-    const template = getTemplate(eventType, mergedData);
+
+    if (await isEmailSuppressed(supabaseAdmin, recipientEmail)) {
+      return new Response(
+        JSON.stringify({ success: true, message: "Recipient has unsubscribed", suppressed: true }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const caslFooter = await buildCaslFooter({
+      recipientEmail,
+      userId,
+      consentBasis: eventType === "winback" ? "implied" : "transactional",
+    });
+
+    const template = getTemplate(eventType, mergedData, caslFooter);
 
     if (!template) {
       return new Response(JSON.stringify({ error: "Template not found" }), {

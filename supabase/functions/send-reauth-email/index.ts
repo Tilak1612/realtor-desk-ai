@@ -1,5 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { buildCaslFooter } from "../_shared/casl-footer.ts";
+import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 const TOOL_NAMES: Record<string, string> = {
   "google-calendar": "Google Calendar",
@@ -44,6 +46,16 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: "Email service not configured" }), { status: 500 });
     }
 
+    if (await isEmailSuppressed(supabase, profile.email)) {
+      return new Response(JSON.stringify({ sent: false, suppressed: true }), { status: 200 });
+    }
+
+    const caslFooter = await buildCaslFooter({
+      recipientEmail: profile.email,
+      userId,
+      consentBasis: "transactional",
+    });
+
     const emailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -54,7 +66,7 @@ serve(async (req) => {
         from: FROM_EMAIL,
         to: [profile.email],
         subject: `Action needed: Re-connect your ${toolName} integration`,
-        html: buildEmailHtml(profile.full_name || profile.email, toolName, reauthUrl),
+        html: buildEmailHtml(profile.full_name || profile.email, toolName, reauthUrl, caslFooter),
       }),
     });
 
@@ -72,7 +84,7 @@ serve(async (req) => {
   }
 });
 
-function buildEmailHtml(name: string, toolName: string, reauthUrl: string): string {
+function buildEmailHtml(name: string, toolName: string, reauthUrl: string, caslFooter = ""): string {
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
@@ -107,6 +119,7 @@ Re-connect ${toolName} →
 RealtorDesk AI — Built for Canadian Real Estate Agents 🇨🇦<br>
 Powered by Brainfy AI Inc · Edmonton, Alberta, Canada
 </p></td></tr>
+<tr><td>${caslFooter}</td></tr>
 </table></td></tr></table>
 </body></html>`;
 }

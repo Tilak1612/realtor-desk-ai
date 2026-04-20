@@ -80,3 +80,7 @@ verify_jwt = false
 
 [functions.lifecycle-cron]
 verify_jwt = false
+
+# Public unsubscribe endpoint — clicked from email footers without a session.
+[functions.process-unsubscribe]
+verify_jwt = false

@@ -1796,6 +1796,20 @@ const resources = {
         functionalDesc: "Enable enhanced functionality like chat widgets and preferences.",
         savePreferences: "Save Preferences",
         back: "Back"
+      },
+      unsubscribe: {
+        title: "Unsubscribe from RealtorDesk AI emails",
+        working: "Processing your request\u2026",
+        success: "You've been unsubscribed. We will not send further emails to",
+        thisAddress: "this address",
+        effectiveImmediate: "Your opt-out is effective immediately per CASL \u00a711.",
+        error: "We couldn't process your unsubscribe request automatically.",
+        fallback: "Please email",
+        fallback2: "with the word 'unsubscribe' in the subject and we'll remove you within 10 business days.",
+        manualPrompt: "Enter the email address you want removed from our list.",
+        cta: "Unsubscribe",
+        casl: "Operated under CASL by Brainfy AI Inc. (RealtorDesk AI).",
+        back: "Back to RealtorDesk AI"
       }
     }
   },
@@ -3592,6 +3606,20 @@ const resources = {
         functionalDesc: "Permettent des fonctionnalités améliorées comme les widgets de chat et les préférences.",
         savePreferences: "Sauvegarder les préférences",
         back: "Retour"
+      },
+      unsubscribe: {
+        title: "Se désabonner des courriels de RealtorDesk AI",
+        working: "Traitement de votre demande\u2026",
+        success: "Vous êtes désabonné. Nous n'enverrons plus de courriels à",
+        thisAddress: "cette adresse",
+        effectiveImmediate: "Votre désinscription prend effet immédiatement conformément à la LCAP §11.",
+        error: "Nous n'avons pas pu traiter votre demande de désabonnement automatiquement.",
+        fallback: "Veuillez écrire à",
+        fallback2: "avec le mot «\u00a0unsubscribe\u00a0» dans l'objet, et nous vous retirerons dans les 10 jours ouvrables.",
+        manualPrompt: "Saisissez l'adresse courriel à retirer de notre liste.",
+        cta: "Se désabonner",
+        casl: "Exploité sous LCAP par Brainfy AI Inc. (RealtorDesk AI).",
+        back: "Retour à RealtorDesk AI"
       }
     }
   }

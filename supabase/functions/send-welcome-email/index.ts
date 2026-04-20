@@ -1,5 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { buildCaslFooter } from "../_shared/casl-footer.ts";
+import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -83,6 +85,19 @@ const handler = async (req: Request): Promise<Response> => {
     const recipientEmail = profile?.email || user.email;
     const fullName = profile?.full_name || "there";
 
+    if (await isEmailSuppressed(supabaseAdmin, recipientEmail)) {
+      return new Response(
+        JSON.stringify({ success: true, message: "Recipient has unsubscribed", suppressed: true }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const caslFooter = await buildCaslFooter({
+      recipientEmail,
+      userId,
+      consentBasis: "transactional",
+    });
+
     // Send via Resend
     const emailRes = await fetch(RESEND_API_URL, {
       method: "POST",
@@ -134,8 +149,8 @@ const handler = async (req: Request): Promise<Response> => {
 </td></tr>
 <tr><td style="background:#f9fafb;padding:20px 30px;text-align:center;">
 <p style="font-size:12px;color:#9ca3af;margin:0;">RealtorDesk AI — Built for Canadian Real Estate Agents</p>
-<p style="font-size:12px;color:#9ca3af;margin:5px 0 0;">Toronto, ON, Canada</p>
 </td></tr>
+<tr><td>${caslFooter}</td></tr>
 </table>
 </td></tr>
 </table>
