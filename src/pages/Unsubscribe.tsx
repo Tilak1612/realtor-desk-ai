@@ -6,42 +6,45 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
-type State = "idle" | "working" | "success" | "error" | "manual";
+type State = "idle" | "verifying" | "success" | "error" | "linkRequested";
 
 /**
  * CASL-compliant unsubscribe page.
- * - Clicked via signed token link from every system email: auto-opts-out immediately.
- * - Fallback: user types their email and submits (source = unsubscribe_link, same suppression row).
- * Either way writes to email_suppressions so every send-* edge function stops mailing that address.
+ *
+ * Two flows:
+ * 1. Arrived via an email footer (has `?token=<signed>`): we call
+ *    process-unsubscribe, which HMAC-verifies the token, enforces a
+ *    30-day expiry, and opts the recipient out immediately.
+ * 2. Arrived without a token (or with only `?email=`): we do NOT
+ *    auto-opt-out — that would let anyone unsubscribe anyone by URL.
+ *    We show a manual form that calls request-unsubscribe-link, which
+ *    emails a signed confirmation link to the address. Response is
+ *    always 200 so we don't leak whether the address is in our DB.
  */
 const Unsubscribe = () => {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const [state, setState] = useState<State>("idle");
   const [email, setEmail] = useState("");
-  const [processedEmail, setProcessedEmail] = useState<string | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [confirmedEmail, setConfirmedEmail] = useState<string | null>(null);
+  const [errorReason, setErrorReason] = useState<string | null>(null);
 
   useEffect(() => {
     const token = params.get("token");
-    const emailParam = params.get("email");
-
-    if (!token && !emailParam) {
-      setState("manual");
-      return;
-    }
+    if (!token) return; // no auto-submit without a signed token
 
     const run = async () => {
-      setState("working");
+      setState("verifying");
       const { data, error } = await supabase.functions.invoke("process-unsubscribe", {
-        body: token ? { token } : { email: emailParam },
+        body: { token },
       });
-      if (error || (data && (data as { error?: string }).error)) {
-        setErrorMsg((data as { error?: string })?.error ?? error?.message ?? "unknown_error");
+      const errKey = (data as { error?: string })?.error;
+      if (error || errKey) {
+        setErrorReason(errKey ?? error?.message ?? "unknown_error");
         setState("error");
         return;
       }
-      setProcessedEmail((data as { email?: string })?.email ?? emailParam ?? null);
+      setConfirmedEmail((data as { email?: string })?.email ?? null);
       setState("success");
     };
     run();
@@ -50,17 +53,13 @@ const Unsubscribe = () => {
   const handleManualSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setState("working");
-    const { data, error } = await supabase.functions.invoke("process-unsubscribe", {
-      body: { email },
+    setState("verifying");
+    await supabase.functions.invoke("request-unsubscribe-link", {
+      body: { email: email.trim().toLowerCase() },
     });
-    if (error || (data && (data as { error?: string }).error)) {
-      setErrorMsg((data as { error?: string })?.error ?? error?.message ?? "unknown_error");
-      setState("error");
-      return;
-    }
-    setProcessedEmail(email);
-    setState("success");
+    // Endpoint is deliberately opaque (always 200) — treat the response as
+    // always successful so we don't leak DB membership to probes.
+    setState("linkRequested");
   };
 
   return (
@@ -72,7 +71,7 @@ const Unsubscribe = () => {
             {t("unsubscribe.title", "Unsubscribe from RealtorDesk AI emails")}
           </h1>
 
-          {state === "working" && (
+          {state === "verifying" && (
             <p className="text-muted-foreground">
               {t("unsubscribe.working", "Processing your request…")}
             </p>
@@ -85,7 +84,7 @@ const Unsubscribe = () => {
                   "unsubscribe.success",
                   "You've been unsubscribed. We will not send further emails to"
                 )}{" "}
-                <strong>{processedEmail ?? t("unsubscribe.thisAddress", "this address")}</strong>.
+                <strong>{confirmedEmail ?? t("unsubscribe.thisAddress", "this address")}</strong>.
               </p>
               <p className="text-sm text-muted-foreground">
                 {t(
@@ -99,59 +98,49 @@ const Unsubscribe = () => {
           {state === "error" && (
             <div className="space-y-3">
               <p className="text-destructive">
-                {t(
-                  "unsubscribe.error",
-                  "We couldn't process your unsubscribe request automatically."
-                )}
+                {errorReason === "expired"
+                  ? t(
+                      "unsubscribe.errorExpired",
+                      "This unsubscribe link has expired. Request a fresh one below."
+                    )
+                  : t(
+                      "unsubscribe.errorInvalid",
+                      "This unsubscribe link is invalid. Request a fresh one below."
+                    )}
               </p>
-              <p className="text-sm text-muted-foreground">
-                {t(
-                  "unsubscribe.fallback",
-                  "Please email"
-                )}{" "}
-                <a
-                  href="mailto:support@realtordesk.ai?subject=Unsubscribe"
-                  className="text-primary underline"
-                >
-                  support@realtordesk.ai
-                </a>{" "}
-                {t(
-                  "unsubscribe.fallback2",
-                  "with the word 'unsubscribe' in the subject and we'll remove you within 10 business days."
-                )}
-              </p>
-              {errorMsg && (
-                <p className="text-xs text-muted-foreground">Reference: {errorMsg}</p>
-              )}
+              <ManualForm
+                email={email}
+                setEmail={setEmail}
+                onSubmit={handleManualSubmit}
+                t={t}
+              />
             </div>
           )}
 
-          {(state === "idle" || state === "manual") && (
-            <form onSubmit={handleManualSubmit} className="space-y-4 text-left">
-              <p className="text-muted-foreground text-sm">
+          {state === "linkRequested" && (
+            <div className="space-y-3">
+              <p className="text-foreground">
                 {t(
-                  "unsubscribe.manualPrompt",
-                  "Enter the email address you want removed from our list."
+                  "unsubscribe.linkSent",
+                  "If this address is on our list, we just sent you a confirmation link. Click it to finish opting out."
                 )}
               </p>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                className="w-full px-4 py-2 border border-border rounded-md bg-background"
-              />
-              <Button type="submit" className="w-full">
-                {t("unsubscribe.cta", "Unsubscribe")}
-              </Button>
               <p className="text-xs text-muted-foreground">
                 {t(
-                  "unsubscribe.casl",
-                  "Operated under CASL by Brainfy AI Inc. (RealtorDesk AI)."
+                  "unsubscribe.linkSentNote",
+                  "Links expire in 30 days. Check your spam folder if you don't see it in a minute."
                 )}
               </p>
-            </form>
+            </div>
+          )}
+
+          {state === "idle" && (
+            <ManualForm
+              email={email}
+              setEmail={setEmail}
+              onSubmit={handleManualSubmit}
+              t={t}
+            />
           )}
 
           <Link to="/" className="inline-block text-sm text-primary hover:underline">
@@ -163,5 +152,37 @@ const Unsubscribe = () => {
     </div>
   );
 };
+
+interface ManualFormProps {
+  email: string;
+  setEmail: (v: string) => void;
+  onSubmit: (e: React.FormEvent) => void;
+  t: (key: string, def?: string) => string;
+}
+
+const ManualForm = ({ email, setEmail, onSubmit, t }: ManualFormProps) => (
+  <form onSubmit={onSubmit} className="space-y-4 text-left">
+    <p className="text-muted-foreground text-sm">
+      {t(
+        "unsubscribe.manualPrompt",
+        "Enter the email address you want removed from our list. We will send you a one-click confirmation link."
+      )}
+    </p>
+    <input
+      type="email"
+      required
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      placeholder="you@example.com"
+      className="w-full px-4 py-2 border border-border rounded-md bg-background"
+    />
+    <Button type="submit" className="w-full">
+      {t("unsubscribe.ctaSendLink", "Send me an unsubscribe link")}
+    </Button>
+    <p className="text-xs text-muted-foreground">
+      {t("unsubscribe.casl", "Operated under CASL by Brainfy AI Inc. (RealtorDesk AI).")}
+    </p>
+  </form>
+);
 
 export default Unsubscribe;

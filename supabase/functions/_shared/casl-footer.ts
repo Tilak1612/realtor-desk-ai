@@ -47,17 +47,21 @@ async function signToken(payload: Record<string, unknown>, secret: string): Prom
 
 export async function buildUnsubscribeUrl(opts: CaslFooterOptions): Promise<string> {
   const secret = Deno.env.get("UNSUBSCRIBE_TOKEN_SECRET");
+  if (!secret) {
+    // Refuse to build a URL without the signing secret. Emailing an
+    // unsigned ?email=<addr> link is a security hole: anyone who sees
+    // the URL format can opt anyone else out. Fail loudly so the send
+    // path aborts before a bad email goes out.
+    throw new Error(
+      "UNSUBSCRIBE_TOKEN_SECRET is not set — cannot build a signed unsubscribe URL. Set it via `supabase secrets set` before sending any CEM."
+    );
+  }
   const payload = {
     e: opts.recipientEmail.toLowerCase(),
     u: opts.userId ?? null,
     c: opts.contactId ?? null,
     t: Math.floor(Date.now() / 1000),
   };
-  if (!secret) {
-    // Fallback: non-signed URL still lets /unsubscribe show the mailto path.
-    const q = new URLSearchParams({ email: payload.e });
-    return `${APP_URL}/unsubscribe?${q.toString()}`;
-  }
   const token = await signToken(payload, secret);
   const q = new URLSearchParams({ token });
   return `${APP_URL}/unsubscribe?${q.toString()}`;

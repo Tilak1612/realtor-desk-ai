@@ -1,6 +1,13 @@
-// Public edge function called by /unsubscribe. Verifies the signed token,
-// writes an email_suppressions row, and returns 200 on success.
-// Runs with verify_jwt=false because users click this link without being signed in.
+// Public edge function called by /unsubscribe after a user clicks the
+// signed link from an email footer. HMAC-verifies the token, applies a
+// 30-day freshness window, and writes an email_suppressions row. Runs
+// with verify_jwt=false because users click this without being signed in.
+//
+// This endpoint ONLY accepts signed tokens. A raw `{email: "..."}`
+// submission is rejected with 400 — otherwise anyone could opt anyone
+// else out by crafting a URL. The "I lost my email" flow lives in the
+// sibling request-unsubscribe-link function, which sends a signed link
+// to the address and always responds 200 so it doesn't leak membership.
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { getAdminClient, suppressEmail } from "../_shared/email-suppression.ts";
@@ -11,6 +18,8 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+const TOKEN_MAX_AGE_SECONDS = 30 * 24 * 60 * 60; // 30 days
+
 function decodeBase64Url(s: string): Uint8Array {
   const pad = s.length % 4 === 0 ? "" : "=".repeat(4 - (s.length % 4));
   const bin = atob(s.replace(/-/g, "+").replace(/_/g, "/") + pad);
@@ -19,10 +28,25 @@ function decodeBase64Url(s: string): Uint8Array {
   return out;
 }
 
-async function verifyToken(token: string, secret: string): Promise<Record<string, unknown> | null> {
+export async function verifyToken(
+  token: string,
+  secret: string,
+  nowSeconds: number = Math.floor(Date.now() / 1000)
+): Promise<
+  | { ok: true; payload: { e: string; u: string | null; c: string | null; t: number } }
+  | { ok: false; reason: "malformed" | "invalid_signature" | "expired" | "invalid_payload" }
+> {
   const parts = token.split(".");
-  if (parts.length !== 2) return null;
+  if (parts.length !== 2) return { ok: false, reason: "malformed" };
   const [bodyB64, sigB64] = parts;
+
+  let sigBytes: Uint8Array;
+  try {
+    sigBytes = decodeBase64Url(sigB64);
+  } catch {
+    return { ok: false, reason: "malformed" };
+  }
+
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(secret),
@@ -33,66 +57,84 @@ async function verifyToken(token: string, secret: string): Promise<Record<string
   const ok = await crypto.subtle.verify(
     "HMAC",
     key,
-    decodeBase64Url(sigB64),
+    sigBytes,
     new TextEncoder().encode(bodyB64)
   );
-  if (!ok) return null;
+  if (!ok) return { ok: false, reason: "invalid_signature" };
+
+  let raw: unknown;
   try {
-    return JSON.parse(new TextDecoder().decode(decodeBase64Url(bodyB64)));
+    raw = JSON.parse(new TextDecoder().decode(decodeBase64Url(bodyB64)));
   } catch {
-    return null;
+    return { ok: false, reason: "malformed" };
   }
+
+  if (!raw || typeof raw !== "object") {
+    return { ok: false, reason: "invalid_payload" };
+  }
+  const p = raw as Record<string, unknown>;
+  if (typeof p.e !== "string" || typeof p.t !== "number") {
+    return { ok: false, reason: "invalid_payload" };
+  }
+  if (nowSeconds - p.t > TOKEN_MAX_AGE_SECONDS) {
+    return { ok: false, reason: "expired" };
+  }
+
+  return {
+    ok: true,
+    payload: {
+      e: p.e,
+      u: typeof p.u === "string" ? p.u : null,
+      c: typeof p.c === "string" ? p.c : null,
+      t: p.t,
+    },
+  };
 }
 
-serve(async (req) => {
+export const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
     const body = await req.json().catch(() => ({}));
     const token = body.token as string | undefined;
-    const emailDirect = body.email as string | undefined;
     const secret = Deno.env.get("UNSUBSCRIBE_TOKEN_SECRET");
 
-    let email: string | null = null;
-    let userId: string | null = null;
-    let contactId: string | null = null;
-
-    if (token && secret) {
-      const payload = await verifyToken(token, secret);
-      if (!payload) {
-        return new Response(JSON.stringify({ error: "invalid_token" }), {
-          status: 400,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        });
-      }
-      email = (payload.e as string) ?? null;
-      userId = (payload.u as string | null) ?? null;
-      contactId = (payload.c as string | null) ?? null;
-    } else if (emailDirect && /^[^@]+@[^@]+\.[^@]+$/.test(emailDirect)) {
-      // Fallback: user manually typed their email on /unsubscribe.
-      // We accept it without a signed token but the source field flags it.
-      email = emailDirect.toLowerCase();
+    if (!secret) {
+      console.error("[UNSUBSCRIBE] UNSUBSCRIBE_TOKEN_SECRET not set");
+      return json({ error: "server_misconfigured" }, 500);
     }
 
-    if (!email) {
-      return new Response(JSON.stringify({ error: "missing_email_or_token" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      });
+    if (!token || typeof token !== "string") {
+      return json({ error: "missing_token" }, 400);
+    }
+
+    const result = await verifyToken(token, secret);
+    if (!result.ok) {
+      return json({ error: result.reason }, 400);
     }
 
     const admin = getAdminClient();
-    await suppressEmail(admin, email, "unsubscribe_link", userId, contactId);
+    await suppressEmail(
+      admin,
+      result.payload.e,
+      "unsubscribe_link",
+      result.payload.u,
+      result.payload.c
+    );
 
-    return new Response(JSON.stringify({ ok: true, email }), {
-      status: 200,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
+    return json({ ok: true, email: result.payload.e }, 200);
   } catch (err) {
     console.error("[UNSUBSCRIBE] error:", err instanceof Error ? err.message : String(err));
-    return new Response(JSON.stringify({ error: "internal_error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
-    });
+    return json({ error: "internal_error" }, 500);
   }
-});
+};
+
+function json(body: unknown, status: number): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json", ...corsHeaders },
+  });
+}
+
+// Don't serve when imported as a module for testing.
+if (import.meta.main) serve(handler);
