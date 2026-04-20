@@ -41,6 +41,7 @@ import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
 import AudienceSegments from "@/components/AudienceSegments";
 import demoShowcase from "@/assets/demo-showcase.jpg";
+import { toast } from "sonner";
 
 const DEMO_VIDEO_URL = "https://app.heygen.com/embeds/4c80de4c5d7a4392b50941050220df54";
 
@@ -154,21 +155,34 @@ const Index = () => {
           <div 
             className="relative aspect-video rounded-[24px] shadow-2xl overflow-hidden mb-8 group cursor-pointer border border-white/10"
             onClick={() => {
-              const consentString = localStorage.getItem("cookie-consent");
-              let canLoadVideo = false;
-              if (consentString) {
-                const consentData = JSON.parse(consentString);
-                if (consentData.analytics || consentData.marketing) {
-                  canLoadVideo = true;
-                }
+              if (!DEMO_VIDEO_URL) {
+                setIsVideoOpen(true);
+                return;
               }
-              if (canLoadVideo && DEMO_VIDEO_URL) {
+              // Cookie-consent gate — HeyGen sets third-party cookies, so we
+              // only load the iframe once the visitor has accepted analytics
+              // or marketing cookies.
+              let canLoadVideo = false;
+              try {
+                const consentString = localStorage.getItem("cookie-consent");
+                if (consentString) {
+                  const consentData = JSON.parse(consentString);
+                  if (consentData.analytics || consentData.marketing) {
+                    canLoadVideo = true;
+                  }
+                }
+              } catch {
+                // Bad JSON in localStorage — treat as no consent.
+              }
+
+              if (canLoadVideo) {
                 setVideoSrc(DEMO_VIDEO_URL);
                 setIsVideoOpen(true);
-              } else if (!DEMO_VIDEO_URL) {
-                setIsVideoOpen(true);
               } else {
-                alert("Please accept marketing or analytics cookies via the banner at the bottom to watch the video.");
+                toast.info("Accept marketing or analytics cookies to watch the demo", {
+                  description: "We use a third-party video host (HeyGen) that sets its own cookies. Accept them via the banner at the bottom of the page, then click play again.",
+                  duration: 7000,
+                });
               }
             }}
           >
