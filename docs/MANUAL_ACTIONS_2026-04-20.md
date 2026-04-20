@@ -28,14 +28,20 @@ Nothing below works until this is run.
 supabase link --project-ref vxkqwkeqincbxrgglmca   # if not already linked
 supabase migration up
 
-# New edge functions + retrofit deploys (PR H)
+# Original edge functions (PR H)
 supabase functions deploy send-welcome-email
 supabase functions deploy send-reauth-email
 supabase functions deploy send-lifecycle-email
 supabase functions deploy process-unsubscribe
+
+# Security + "I lost my email" flow (PR X — 2026-04-20 follow-up)
+supabase functions deploy process-unsubscribe   # re-deploy after PR X
+supabase functions deploy request-unsubscribe-link
 ```
 
-**Acceptance:** `supabase migration list` shows `20260420000000_email_suppressions` and `20260420010000_user_onboarding` applied.
+**Acceptance:**
+- `supabase migration list` shows `20260420000000_email_suppressions` and `20260420010000_user_onboarding` applied.
+- `supabase functions list` shows `process-unsubscribe` AND `request-unsubscribe-link`.
 
 ---
 
@@ -183,6 +189,8 @@ I didn't touch them in this round to keep PR K+L scope-bounded. Flag for follow-
 | 22 | PR G | Why-this-lead-scored explainer | Merged |
 | 23 | PR K+L | BoldTrail pages alignment + sourced comparison | Merged |
 | 25 | sweep | Retired-claim cleanup + onboarding consolidation + CASL preview | Merged |
+| 30 | PR X | Sign-only unsubscribe + manual opt-out email flow (SECURITY) | Merged |
+| 31 | PR Y | FR i18n on /pricing + /roadmap + footer + Setup-Fee clarity | Merged |
 
 ---
 
