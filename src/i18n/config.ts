@@ -153,6 +153,12 @@ const resources = {
       },
       pricing: {
         taxDisclaimer: "Prices are in Canadian dollars (CAD). GST/HST is applied at checkout based on your billing province. Every amount on this page matches what you will see on Stripe's secure checkout.",
+        compare: {
+          boldtrailCost: "$5,988/year + $999 setup fee",
+          loftyCost: "$1,788 – $3,588/year per user",
+          ourCost: "$999/year (Founding Member), $0 setup",
+          saveCallout: "Save up to 85% compared to BoldTrail, 45% vs Lofty"
+        },
         banner: {
           trial: "🎉 14 Days Free Trial - Start Today!",
           launch: "🎉 Launch Pricing — Save $498/year vs. Monthly!"
@@ -172,6 +178,7 @@ const resources = {
             badge: "14 Days Free Trial",
             description: "Perfect for individual agents ready to scale",
             savings: "Save $789/year with annual billing",
+            yearlySavingsDetail: "Save $789 vs monthly ($498 vs regular yearly)",
             period: "/month",
             ctaMonthly: "Start 14-Day Free Trial",
             ctaYearly: "Start 14-Day Free Trial",
@@ -256,6 +263,7 @@ const resources = {
           stat1: "Additional GCI in first year",
           stat2: "Closed from AI chatbot leads",
           stat3: "Time saved on admin tasks",
+          stat3Headline: "15 hrs/wk",
           quote1: "\"Switched from BoldTrail and never looked back. The AI lead scoring is incredible.\"",
           quote2: "\"The 24/7 bilingual chatbot captures leads while I sleep. Game changer.\"",
           quote3: "\"Automation handles follow-ups. I focus on closing deals, not data entry.\""
@@ -1850,6 +1858,71 @@ const resources = {
         title: "What we are shipping — and what we are not.",
         subtitle: "Honesty is a feature. This page lists dated commitments for the capabilities our customers and competitors ask about most. If a date slips, we move it — we don't silently drop it.",
         lastUpdated: "Last updated: 2026-04-20",
+        status: {
+          shipping: "Shipping",
+          shipped: "Shipped",
+          building: "Building",
+          designing: "Designing",
+          roadmapped: "Roadmapped",
+          considering: "Considering"
+        },
+        section: {
+          now: { heading: "Shipping This Sprint (April 2026)" },
+          q2: { heading: "Q2 2026" },
+          q3: { heading: "Q3 2026" },
+          q1_2027: { heading: "Q1 2027 — Teams tier" },
+          not_on: { heading: "Not on the 2026 Roadmap" }
+        },
+        item: {
+          casl_footer: {
+            title: "CASL-compliant email footer + functional unsubscribe",
+            desc: "Every system email we send carries sender ID, physical address, consent basis, and a one-click unsubscribe that actually writes to an opt-out list."
+          },
+          pricing_parity: {
+            title: "Pricing page = Stripe checkout parity",
+            desc: "Every amount on /pricing is derived from the same constant that create-checkout forwards to Stripe, with a CAD label and GST/HST disclaimer."
+          },
+          lead_score_explainer: {
+            title: "Lead score explainer",
+            desc: "Contact detail page surfaces the 3 behavioural signals behind the score instead of showing a number-only."
+          },
+          onboarding_checklist: {
+            title: "Onboarding checklist on /today",
+            desc: "New accounts see a 5-step guided setup (profile, contact, property, website widget link, calendar connect). Persisted to the database, not localStorage."
+          },
+          ai_scoring: {
+            title: "AI-derived lead scoring",
+            desc: "Replace the current manual/formula-based score with a model trained on per-agent conversion history. Web push when a lead heats up (no native app required)."
+          },
+          trigger_campaigns: {
+            title: "Trigger-based email sequences",
+            desc: "Wire /campaigns and /automations to a real sequence runner. New-lead, went-cold, birthday, listing-anniversary triggers. Pause-on-reply detection. All templates ship bilingual with the CASL footer."
+          },
+          idx_sites: {
+            title: "Public agent websites + behavioural lead capture (CREA DDF)",
+            desc: "realtordesk.ai-hosted agent sites backed by the CREA DDF feed. Behavioural widgets feed lead scores in real time. Free with all paid tiers."
+          },
+          teams_tier: {
+            title: "Teams tier launch",
+            desc: "Multi-agent accountability dashboard, manager views, and daily-vitals rollups. Until this ships, RealtorDesk AI is built for solo agents and boutique teams (≤5)."
+          },
+          social_promotion: {
+            title: "One-click social promotion",
+            desc: "Reconsidered for Q1 2027 at the earliest. Today, you can share the public listing page to socials manually."
+          },
+          native_mobile: {
+            title: "Native mobile app",
+            desc: "We support mobile via web push + a Capacitor-wrapped PWA. A native iOS/Android app is not planned for 2026."
+          },
+          commissions: {
+            title: "Commissions / BackOffice module",
+            desc: "Out of scope. This would be a separate product surface, not an add-on to the CRM."
+          },
+          recruiting: {
+            title: "Agent recruitment tooling",
+            desc: "Out of scope. We are building for working agents, not brokerages recruiting agents."
+          }
+        },
         footer: {
           title: "See something missing or want to vote on priority?",
           body: "Email product@realtordesk.ai or open an item in the in-app feedback panel. Items with customer signal get prioritized before internal asks.",
@@ -2024,6 +2097,12 @@ const resources = {
       },
       pricing: {
         taxDisclaimer: "Les prix sont en dollars canadiens (CAD). La TPS/TVH est appliquée au paiement selon votre province de facturation. Chaque montant affiché ici correspond exactement à ce que vous verrez sur la page de paiement sécurisée Stripe.",
+        compare: {
+          boldtrailCost: "5\u00a0988\u00a0$/an + frais d'installation de 999\u00a0$",
+          loftyCost: "1\u00a0788\u00a0$ à 3\u00a0588\u00a0$/an par utilisateur",
+          ourCost: "999\u00a0$/an (Membre Fondateur), 0\u00a0$ d'installation",
+          saveCallout: "Économisez jusqu'à 85\u00a0% par rapport à BoldTrail, 45\u00a0% vs Lofty"
+        },
         banner: {
           trial: "🎉 Essai Gratuit de 14 Jours - Commencez Aujourd'hui!",
           launch: "🎉 Prix de Lancement — Économisez 498 $/an vs. Mensuel!"
@@ -2042,7 +2121,8 @@ const resources = {
             name: "AGENT",
             badge: "14 Jours d'Essai Gratuit",
             description: "Idéal pour les courtiers individuels prêts à se développer",
-            savings: "Économisez 291 $/an avec la facturation annuelle",
+            savings: "Économisez 789 $/an avec la facturation annuelle",
+            yearlySavingsDetail: "Économisez 789\u00a0$ vs mensuel (498\u00a0$ vs annuel standard)",
             period: "/mois",
             ctaMonthly: "Commencer l'Essai Gratuit de 14 Jours",
             ctaYearly: "Commencer l'Essai Gratuit de 14 Jours",
@@ -2127,6 +2207,7 @@ const resources = {
           stat1: "GCI supplémentaire la première année",
           stat2: "Transactions conclues via le chatbot IA",
           stat3: "Temps économisé sur les tâches administratives",
+          stat3Headline: "15\u00a0h/sem",
           quote1: "\"Passé de BoldTrail et je n'ai jamais regardé en arrière. La notation des prospects par IA est incroyable.\"",
           quote2: "\"Le chatbot bilingue 24/7 capture des prospects pendant que je dors. Un vrai changement.\"",
           quote3: "\"L'automatisation gère les suivis. Je me concentre sur la conclusion, pas la saisie.\""
@@ -3390,8 +3471,8 @@ const resources = {
         integrations: "Intégrations",
         roadmap: "Feuille de Route",
         status: "Page de Statut",
-        blogs: "Blogs",
-        blog: "Blog",
+        blogs: "Blogues",
+        blog: "Blogue",
         helpCenter: "Centre d'Aide",
         apiDocs: "Documentation API",
         videoTutorials: "Tutoriels Vidéo",
@@ -3721,6 +3802,71 @@ const resources = {
         title: "Ce que nous livrons — et ce que nous ne livrons pas.",
         subtitle: "L'honnêteté est une fonctionnalité. Cette page liste nos engagements datés sur les capacités que nos clients et concurrents demandent le plus. Si une date glisse, nous la déplaçons — nous ne l'abandonnons pas en silence.",
         lastUpdated: "Dernière mise à jour : 2026-04-20",
+        status: {
+          shipping: "En livraison",
+          shipped: "Livré",
+          building: "En construction",
+          designing: "En conception",
+          roadmapped: "Planifié",
+          considering: "À l'étude"
+        },
+        section: {
+          now: { heading: "Livraisons du sprint en cours (avril 2026)" },
+          q2: { heading: "T2 2026" },
+          q3: { heading: "T3 2026" },
+          q1_2027: { heading: "T1 2027 — palier Équipes" },
+          not_on: { heading: "Hors feuille de route 2026" }
+        },
+        item: {
+          casl_footer: {
+            title: "Pied de courriel conforme à la LCAP + désabonnement fonctionnel",
+            desc: "Chaque courriel système envoyé contient l'identification de l'expéditeur, l'adresse physique, la base de consentement et un désabonnement en un clic qui écrit réellement dans une liste d'exclusion."
+          },
+          pricing_parity: {
+            title: "Page de tarifs alignée sur le paiement Stripe",
+            desc: "Chaque montant sur /pricing est dérivé de la même constante que la fonction create-checkout transmet à Stripe, avec une étiquette CAD et une mention TPS/TVH."
+          },
+          lead_score_explainer: {
+            title: "Explication du score des prospects",
+            desc: "La page de détail du contact expose les 3 signaux comportementaux derrière le score au lieu d'afficher un simple chiffre."
+          },
+          onboarding_checklist: {
+            title: "Liste d'intégration sur /today",
+            desc: "Les nouveaux comptes voient une configuration guidée en 5 étapes (profil, contact, propriété, widget de site, connexion du calendrier). Persistée en base de données, pas en localStorage."
+          },
+          ai_scoring: {
+            title: "Scoring de prospects dérivé par IA",
+            desc: "Remplace le score manuel actuel par un modèle entraîné sur votre historique de conversion. Notification web quand un prospect chauffe (aucune application native requise)."
+          },
+          trigger_campaigns: {
+            title: "Séquences de courriels déclenchées",
+            desc: "Connecte /campaigns et /automations à un véritable moteur de séquences. Déclencheurs : nouveau prospect, refroidi, anniversaire, anniversaire d'inscription. Détection de réponse pour mise en pause. Tous les modèles sont bilingues et incluent le pied LCAP."
+          },
+          idx_sites: {
+            title: "Sites publics d'agents + capture comportementale (CREA DDF)",
+            desc: "Sites d'agent hébergés sur realtordesk.ai, alimentés par le flux CREA DDF. Les widgets comportementaux alimentent les scores en temps réel. Inclus avec tous les paliers payants."
+          },
+          teams_tier: {
+            title: "Lancement du palier Équipes",
+            desc: "Tableau de bord multi-agents, vues gestionnaire, agrégats de vitaux quotidiens. Jusqu'à cette livraison, RealtorDesk AI est conçu pour l'agent solo ou la petite équipe (≤5)."
+          },
+          social_promotion: {
+            title: "Promotion sociale en un clic",
+            desc: "Reconsidéré au T1 2027 au plus tôt. Aujourd'hui, vous pouvez partager la page publique de la propriété manuellement."
+          },
+          native_mobile: {
+            title: "Application mobile native",
+            desc: "Nous prenons en charge le mobile via notifications web + PWA encapsulée par Capacitor. Une application iOS/Android native n'est pas prévue pour 2026."
+          },
+          commissions: {
+            title: "Module Commissions / BackOffice",
+            desc: "Hors champ. Cela constituerait une surface produit distincte, pas un module additionnel du CRM."
+          },
+          recruiting: {
+            title: "Outils de recrutement d'agents",
+            desc: "Hors champ. Nous construisons pour les agents actifs, pas pour les courtiers qui recrutent des agents."
+          }
+        },
         footer: {
           title: "Vous voyez quelque chose qui manque ou voulez voter sur les priorités\u00a0?",
           body: "Écrivez à product@realtordesk.ai ou ouvrez une demande dans le panneau de rétroaction de l'application. Les éléments avec un signal client sont priorisés avant les demandes internes.",
