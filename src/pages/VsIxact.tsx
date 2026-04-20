@@ -53,7 +53,7 @@ const VsIxact = () => {
             
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
-              <div className="text-3xl font-bold gradient-text mb-1">$699/year</div>
+              <div className="text-3xl font-bold gradient-text mb-1">$999/year</div>
               <div className="text-xs text-accent font-semibold">+$243 for AI superpowers</div>
             </Card>
           </div>
@@ -176,7 +176,7 @@ const VsIxact = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Annual Cost", rdai: "$699", ixact: "$456" },
+                  { feature: "Annual Cost", rdai: "$999", ixact: "$456" },
                   { feature: "Predictive Lead Scoring", rdai: true, ixact: false },
                   { feature: "24/7 AI Chatbot", rdai: true, ixact: false },
                   { feature: "Market Intelligence", rdai: true, ixact: false },
@@ -226,9 +226,9 @@ const VsIxact = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
               <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Only $20 More/Month</h3>
+              <h3 className="font-bold mb-2">Only ~$45 More/Month</h3>
               <p className="text-sm text-muted-foreground">
-                $699/year vs IXACT's $456. Coffee money for AI that closes deals.
+                $999/year vs IXACT's $456. About a coffee a week for AI, bilingual EN/FR, and CASL-compliant email.
               </p>
             </Card>
 

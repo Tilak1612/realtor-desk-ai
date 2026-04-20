@@ -174,7 +174,7 @@ const VsLofty = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Starting Price", rdai: "$699/year", lofty: "$1,188+/year" },
+                  { feature: "Starting Price", rdai: "$999/year", lofty: "$1,188+/year" },
                   { feature: "Transparent Pricing", rdai: true, lofty: false },
                   { feature: "Predictive Lead Scoring", rdai: true, lofty: false },
                   { feature: "AI Learns & Adapts", rdai: true, lofty: false },
@@ -219,7 +219,7 @@ const VsLofty = () => {
           <Brain className="w-16 h-16 text-accent mx-auto mb-6" />
           <h2 className="mb-6">Upgrade to True AI-Powered Intelligence</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            See why 200+ agents left Lofty for Realtor Desk in 2024
+            See why Canadian agents are choosing RealtorDesk AI over Lofty
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -243,7 +243,7 @@ const VsLofty = () => {
               <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
               <h3 className="font-bold mb-2">Transparent Pricing</h3>
               <p className="text-sm text-muted-foreground">
-                $699/year, all-inclusive. No surprise charges. Ever.
+                $999/year, all-inclusive. No surprise charges. Ever.
               </p>
             </Card>
           </div>
