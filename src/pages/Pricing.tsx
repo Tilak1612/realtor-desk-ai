@@ -117,7 +117,7 @@ const Pricing = () => {
               price={isYearly ? (pricingData.agent.foundingPrice.toString()) : pricingData.agent.monthly.toString()}
               description={t('pricing.plans.agent.description')}
               billingPeriod={isYearly ? "year" : "month"}
-              discount={isYearly ? `Save $789 vs monthly ($498 vs regular yearly)` : t('pricing.plans.agent.savings')}
+              discount={isYearly ? t('pricing.plans.agent.yearlySavingsDetail', 'Save $789 vs monthly ($498 vs regular yearly)') : t('pricing.plans.agent.savings')}
               yearlyPrice={isYearly ? pricingData.agent.foundingPrice : undefined}
               features={[
                 t('pricing.plans.agent.feature1'),
@@ -207,7 +207,7 @@ const Pricing = () => {
                   <X className="w-5 h-5 text-destructive flex-shrink-0" />
                   <div>
                     <div className="font-semibold">BoldTrail</div>
-                    <div className="text-sm text-muted-foreground">$5,988/year + $999 setup fee</div>
+                    <div className="text-sm text-muted-foreground">{t('pricing.compare.boldtrailCost', '$5,988/year + $999 setup fee')}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -222,7 +222,7 @@ const Pricing = () => {
                   <X className="w-5 h-5 text-destructive flex-shrink-0" />
                   <div>
                     <div className="font-semibold">Lofty</div>
-                    <div className="text-sm text-muted-foreground">$1,788 - $3,588/year per user</div>
+                    <div className="text-sm text-muted-foreground">{t('pricing.compare.loftyCost', '$1,788 – $3,588/year per user')}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -237,7 +237,7 @@ const Pricing = () => {
                   <Check className="w-5 h-5 text-accent flex-shrink-0" />
                   <div>
                     <div className="font-semibold text-accent">Realtor Desk AI</div>
-                    <div className="text-sm text-muted-foreground">$999/year (Founding Member), $0 setup</div>
+                    <div className="text-sm text-muted-foreground">{t('pricing.compare.ourCost', '$999/year (Founding Member), $0 setup')}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -249,7 +249,9 @@ const Pricing = () => {
 
             <div className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <TrendingDown className="w-4 h-4 text-accent" />
-              <span>Save up to <span className="font-bold text-accent">85%</span> compared to BoldTrail, <span className="font-bold text-accent">45%</span> vs Lofty</span>
+              <span className="text-center">
+                {t('pricing.compare.saveCallout', 'Save up to 85% compared to BoldTrail, 45% vs Lofty')}
+              </span>
             </div>
           </Card>
 
@@ -276,7 +278,7 @@ const Pricing = () => {
                   </tr>
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">{ t("pricing.table.setupFee", "Setup Fee") }</td>
-                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-accent mx-auto" /></td>
+                    <td className="text-center py-3 px-4 font-bold text-accent">$0</td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$999</td>
                     <td className="text-center py-3 px-4 text-muted-foreground">{ t("pricing.table.varies") }</td>
                   </tr>
@@ -352,7 +354,7 @@ const Pricing = () => {
               </Card>
 
               <Card className="p-6 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
-                <div className="text-3xl font-bold gradient-text mb-2">15 hrs/wk</div>
+                <div className="text-3xl font-bold gradient-text mb-2">{t('pricing.social.stat3Headline', '15 hrs/wk')}</div>
                 <p className="text-sm text-muted-foreground mb-4">{t('pricing.social.stat3')}</p>
                 <p className="text-xs italic">{t('pricing.social.quote3', '"Automation handles follow-ups. I focus on closing deals, not data entry."')}</p>
                 <p className="text-xs font-semibold mt-2">- Priya S., Vancouver</p>
