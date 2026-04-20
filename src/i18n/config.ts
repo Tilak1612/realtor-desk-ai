@@ -1798,6 +1798,18 @@ const resources = {
         savePreferences: "Save Preferences",
         back: "Back"
       },
+      roadmap: {
+        badge: "Public roadmap",
+        title: "What we are shipping — and what we are not.",
+        subtitle: "Honesty is a feature. This page lists dated commitments for the capabilities our customers and competitors ask about most. If a date slips, we move it — we don't silently drop it.",
+        lastUpdated: "Last updated: 2026-04-20",
+        footer: {
+          title: "See something missing or want to vote on priority?",
+          body: "Email product@realtordesk.ai or open an item in the in-app feedback panel. Items with customer signal get prioritized before internal asks.",
+          viewPricing: "View pricing",
+          viewFeatures: "What ships today"
+        }
+      },
       unsubscribe: {
         title: "Unsubscribe from RealtorDesk AI emails",
         working: "Processing your request\u2026",
@@ -3608,6 +3620,18 @@ const resources = {
         functionalDesc: "Permettent des fonctionnalités améliorées comme les widgets de chat et les préférences.",
         savePreferences: "Sauvegarder les préférences",
         back: "Retour"
+      },
+      roadmap: {
+        badge: "Feuille de route publique",
+        title: "Ce que nous livrons — et ce que nous ne livrons pas.",
+        subtitle: "L'honnêteté est une fonctionnalité. Cette page liste nos engagements datés sur les capacités que nos clients et concurrents demandent le plus. Si une date glisse, nous la déplaçons — nous ne l'abandonnons pas en silence.",
+        lastUpdated: "Dernière mise à jour : 2026-04-20",
+        footer: {
+          title: "Vous voyez quelque chose qui manque ou voulez voter sur les priorités\u00a0?",
+          body: "Écrivez à product@realtordesk.ai ou ouvrez une demande dans le panneau de rétroaction de l'application. Les éléments avec un signal client sont priorisés avant les demandes internes.",
+          viewPricing: "Voir la tarification",
+          viewFeatures: "Ce qui est livré aujourd'hui"
+        }
       },
       unsubscribe: {
         title: "Se désabonner des courriels de RealtorDesk AI",

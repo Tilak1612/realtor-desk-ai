@@ -46,6 +46,7 @@ const Pricing = lazy(() => import("./pages/Pricing"));
 const CanadianMarket = lazy(() => import("./pages/CanadianMarket"));
 const Demo = lazy(() => import("./pages/Demo"));
 const Resources = lazy(() => import("./pages/Resources"));
+const Roadmap = lazy(() => import("./pages/Roadmap"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const Integrations = lazy(() => import("./pages/Integrations"));
 const FAQ = lazy(() => import("./pages/FAQ"));
@@ -237,6 +238,7 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/blog/ai-transformation" element={<AITransformation />} />
           <Route path="/blog/crea-ddf" element={<CreaDDF />} />
           <Route path="/blog/compliance" element={<Compliance />} />
