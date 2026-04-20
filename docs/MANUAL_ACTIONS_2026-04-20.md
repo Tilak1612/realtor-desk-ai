@@ -152,9 +152,22 @@ I didn't touch them in this round to keep PR K+L scope-bounded. Flag for follow-
 
 ## 9. Known regressions I fixed while in-range (no action needed, just FYI)
 
+### During the 8 branded PRs
 - `send-lifecycle-email` said **"$79 CAD/month"** → updated to `$149 CAD/month` (PR #14 retired $79).
 - `send-lifecycle-email` said **"CREA DDF® integration improvements"** in the winback template → replaced with a generic honest message (PR #14 retired the "CREA DDF live" claim).
 - `/vs/boldtrail` and `/switch-from-boldtrail` had `$699` (prior price) and `200+ agents` (PR #14 retired) — corrected.
+
+### During the follow-up sweep (PR #25)
+- `/vs/lofty`, `/vs/ixact`, `/switch-from-lofty`, `/switch-from-ixact` all had `$699/year` — corrected to `$999/year`.
+- `/vs/lofty` and `/switch-from-lofty` had **"200+ agents left/switched"** headlines — rewrote to a neutral "Canadian agents are choosing RealtorDesk AI" framing.
+- `LeadGenerationStrategies` blog said **"800+ Canadian agents"** → corrected to `50+` (matches the canonical stat on Hero + /pricing).
+- `SwitchFromIxact` had **"6-8 extra deals per year"** claim in SEO meta — unfounded, rewritten.
+- `SwitchFromIxact` & `VsIxact` had **"Only $20/month more"** — mathematically stale after the $699→$999 fix; recomputed to **"~$45/month more"**.
+
+### Structural cleanup
+- **Removed** the old 4-step `OnboardingChecklist.tsx` (localStorage-backed) — now superseded everywhere by the new DB-backed `TodayOnboardingChecklist` from PR F.
+- `/features` hero now links to `/roadmap` (brief's discovery requirement).
+- `/pipeda-compliance` now shows a live in-page **preview of the exact CASL footer** — removes the "trust us, we comply" dead end for prospects.
 
 ---
 
@@ -169,6 +182,7 @@ I didn't touch them in this round to keep PR K+L scope-bounded. Flag for follow-
 | 21 | PR F | 5-step onboarding checklist on /today | Merged |
 | 22 | PR G | Why-this-lead-scored explainer | Merged |
 | 23 | PR K+L | BoldTrail pages alignment + sourced comparison | Merged |
+| 25 | sweep | Retired-claim cleanup + onboarding consolidation + CASL preview | Merged |
 
 ---
 
