@@ -16,6 +16,7 @@ interface PricingCardProps {
   discount?: string;
   yearlyPrice?: number;
   trialBadge?: string;
+  currencyCode?: string;
 }
 
 const PricingCard = ({
@@ -30,6 +31,7 @@ const PricingCard = ({
   discount,
   yearlyPrice,
   trialBadge,
+  currencyCode = "CAD",
 }: PricingCardProps) => {
   const { t } = useTranslation();
   return (
@@ -66,16 +68,18 @@ const PricingCard = ({
           {price !== "Custom" ? (
             <>
               <span className="text-5xl font-extrabold text-accent">${price}</span>
-              <span className="text-muted-foreground font-medium">/{billingPeriod === 'month' ? t('pricing.plans.agent.period', '/month').replace('/', '') : billingPeriod}</span>
+              <span className="text-muted-foreground font-medium">
+                {" "}{currencyCode}/{billingPeriod === 'month' ? t('pricing.plans.agent.period', '/month').replace('/', '') : billingPeriod}
+              </span>
             </>
           ) : (
             <span className="text-5xl font-extrabold text-accent">{price}</span>
           )}
         </div>
-        
+
         {yearlyPrice && (
           <p className="text-sm text-muted-foreground mt-2">
-            Billed ${Math.round(yearlyPrice)} annually
+            Billed ${Math.round(yearlyPrice)} {currencyCode} annually
           </p>
         )}
       </div>

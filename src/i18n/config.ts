@@ -152,6 +152,7 @@ const resources = {
         }
       },
       pricing: {
+        taxDisclaimer: "Prices are in Canadian dollars (CAD). GST/HST is applied at checkout based on your billing province. Every amount on this page matches what you will see on Stripe's secure checkout.",
         banner: {
           trial: "🎉 14 Days Free Trial - Start Today!",
           launch: "🎉 Launch Pricing — Save $498/year vs. Monthly!"
@@ -1962,6 +1963,7 @@ const resources = {
         }
       },
       pricing: {
+        taxDisclaimer: "Les prix sont en dollars canadiens (CAD). La TPS/TVH est appliquée au paiement selon votre province de facturation. Chaque montant affiché ici correspond exactement à ce que vous verrez sur la page de paiement sécurisée Stripe.",
         banner: {
           trial: "🎉 Essai Gratuit de 14 Jours - Commencez Aujourd'hui!",
           launch: "🎉 Prix de Lancement — Économisez 498 $/an vs. Mensuel!"

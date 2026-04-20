@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Shield, CheckCircle, Brain, Check, X, TrendingDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "@/utils/analytics";
+import { SUBSCRIPTION_PRODUCTS } from "@/contexts/SubscriptionContext";
 
 const Pricing = () => {
   const { t } = useTranslation();
@@ -20,24 +21,33 @@ const Pricing = () => {
     trackEvent("view_pricing", {});
   }, []);
 
+  // Canonical source: the exact amounts Stripe charges at checkout.
+  // Keep this in lock-step with SUBSCRIPTION_PRODUCTS — the create-checkout edge
+  // function forwards these price IDs to Stripe, so any mismatch here shows up
+  // at checkout.stripe.com. Do NOT hand-type the numbers below; derive them.
+  const AGENT_MONTHLY = SUBSCRIPTION_PRODUCTS.agent.monthlyPrice;    // 149 CAD
+  const AGENT_YEARLY  = SUBSCRIPTION_PRODUCTS.agent.yearlyPrice;     // 999 CAD (Founding)
+  const TEAM_MONTHLY  = SUBSCRIPTION_PRODUCTS.team.monthlyPrice;     // 299 CAD
+  const TEAM_YEARLY   = SUBSCRIPTION_PRODUCTS.team.yearlyPrice;      // 2997 CAD
+
   const pricingData = {
     agent: {
-      monthly: 149,
+      monthly: AGENT_MONTHLY,
       yearly: 1497,
-      yearlyTotal: 149 * 12, // $1,788
-      savings: 291, // Regular yearly saves $291 vs monthly
-      foundingPrice: 999,
-      foundingSavings: 789, // Founding price saves $789 vs paying monthly ($1,788 - $999)
-      foundingVsYearly: 498, // Founding price saves $498 vs regular yearly ($1,497 - $999)
+      yearlyTotal: AGENT_MONTHLY * 12,
+      savings: 291,
+      foundingPrice: AGENT_YEARLY,
+      foundingSavings: AGENT_MONTHLY * 12 - AGENT_YEARLY,
+      foundingVsYearly: 1497 - AGENT_YEARLY,
       discount: "$291"
     },
     team: {
-      monthly: 299,
-      yearly: 2997,
-      yearlyTotal: 299 * 12, // $3,588
-      perAgent: 600, // $2,997 / 5 agents
-      savings: 591, // $3,588 - $2,997 = $591
-      discount: "$591"
+      monthly: TEAM_MONTHLY,
+      yearly: TEAM_YEARLY,
+      yearlyTotal: TEAM_MONTHLY * 12,
+      perAgent: Math.round(TEAM_YEARLY / 5),
+      savings: TEAM_MONTHLY * 12 - TEAM_YEARLY,
+      discount: `$${TEAM_MONTHLY * 12 - TEAM_YEARLY}`
     }
   };
 
@@ -129,7 +139,7 @@ const Pricing = () => {
 
             <PricingCard
               name={t('pricing.plans.team.name')}
-              price={isYearly ? "2,997" : "299"}
+              price={isYearly ? pricingData.team.yearly.toLocaleString("en-CA") : pricingData.team.monthly.toString()}
               description={t('pricing.plans.team.description')}
               billingPeriod={isYearly ? "year" : "month"}
               discount={isYearly ? `Save ${pricingData.team.discount} annually` : undefined}
@@ -174,6 +184,14 @@ const Pricing = () => {
               trialBadge={t('pricing.plans.brokerage.badge')}
             />
           </div>
+
+          {/* CAD + tax disclaimer — required to match Stripe checkout. */}
+          <p className="text-sm text-muted-foreground text-center mt-8 max-w-3xl mx-auto">
+            {t(
+              'pricing.taxDisclaimer',
+              'Prices are in Canadian dollars (CAD). GST/HST is applied at checkout based on your billing province. Every amount on this page matches what you will see on Stripe’s secure checkout.'
+            )}
+          </p>
 
           {/* Competitor Comparison Box */}
           <Card className="mt-16 p-8 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20 max-w-4xl mx-auto">
