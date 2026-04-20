@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Brain, MessageSquare, TrendingUp, FileCheck, Megaphone } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Features = () => {
   const { t } = useTranslation();
@@ -139,6 +140,16 @@ const Features = () => {
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
             {t('features.hero.subtitle')}
+          </p>
+          <p className="text-sm text-muted-foreground mt-4">
+            {t(
+              'features.hero.roadmapLink',
+              "Wondering what's planned vs shipping? See our"
+            )}{" "}
+            <Link to="/roadmap" className="text-primary underline">
+              {t('features.hero.roadmapCta', 'public roadmap')}
+            </Link>
+            .
           </p>
         </div>
       </section>

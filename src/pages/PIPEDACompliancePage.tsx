@@ -297,6 +297,53 @@ const PIPEDACompliance = () => {
         </div>
       </section>
 
+      {/* CASL email footer preview — what every system email actually carries. */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-custom max-w-3xl">
+          <div className="text-center mb-8">
+            <Badge variant="secondary" className="mb-3">CASL §6(2)</Badge>
+            <h2 className="mb-3">What every email we send actually carries</h2>
+            <p className="text-muted-foreground">
+              Sender identification. Physical mailing address. A consent-basis
+              line. A functional one-click unsubscribe. Here is the exact footer
+              that ships with every system email — welcome, re-auth, trial,
+              payment, winback — no exceptions.
+            </p>
+          </div>
+
+          <Card className="bg-background border border-border">
+            <div className="border-b border-border px-5 py-3 text-xs text-muted-foreground">
+              Subject: Welcome to RealtorDesk AI — Your 14-Day Trial Starts Now!<br />
+              From: RealtorDesk AI &lt;support@realtordesk.ai&gt;
+            </div>
+            <div className="p-5 text-xs text-muted-foreground italic">
+              [… full email body with your welcome message …]
+            </div>
+            <div className="border-t border-border bg-muted/50 px-5 py-4 text-[11px] leading-relaxed">
+              <p className="text-muted-foreground mb-1">
+                Sent by: <strong className="text-foreground">RealtorDesk AI</strong> (Brainfy AI Inc.), Edmonton, Alberta, Canada.
+              </p>
+              <p className="text-muted-foreground mb-1">
+                Contact: <span className="underline">support@realtordesk.ai</span> · <span className="underline">realtordesk.ai</span>
+              </p>
+              <p className="text-muted-foreground mb-1">
+                This is a transactional message related to your RealtorDesk AI account.
+              </p>
+              <p className="text-muted-foreground">
+                <span className="underline">Unsubscribe from these emails</span>
+              </p>
+            </div>
+          </Card>
+
+          <p className="text-sm text-muted-foreground mt-6 text-center">
+            The unsubscribe link is HMAC-signed and opts the recipient out
+            immediately. No "reply with the word unsubscribe" — the button
+            writes the suppression to the database and every future send
+            checks that list before hitting Resend.
+          </p>
+        </div>
+      </section>
+
       {/* PIPEDA Compliance Checklist */}
       <section className="section-padding">
         <div className="container-custom">

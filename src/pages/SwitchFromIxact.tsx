@@ -14,7 +14,7 @@ const SwitchFromIxact = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from IXACT | Upgrade to AI CRM"
-        description="For just $20/month more than IXACT, get AI that closes 6-8 extra deals per year with free migration."
+        description="Moving from IXACT to RealtorDesk AI: free migration, bilingual EN/FR, CASL-compliant email, AI lead scoring. $999/year Founding Member tier."
         keywords="switch from IXACT, IXACT migration, IXACT alternative, AI CRM for Canadian realtors"
         canonicalUrl="https://www.realtordesk.ai/switch-from-ixact"
         structuredData={[
@@ -32,7 +32,7 @@ const SwitchFromIxact = () => {
           <Badge variant="secondary" className="mb-4">Upgrade to AI</Badge>
           <h1 className="mb-6">Love IXACT's Price? <span className="gradient-text">You'll Love AI Even More.</span></h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            For just $20/month more ($699/year vs IXACT's $456/year), get AI that closes 6-8 extra deals per year. Try free for 14 days.
+            For ~$45/month more ($999/year vs IXACT's $456/year) you get AI scoring, bilingual EN/FR, and CASL-compliant email. 14-day free trial.
           </p>
           <Link to="/signup"><Button size="lg" className="btn-gradient">Start 14-Day Free Trial</Button></Link>
         </div>

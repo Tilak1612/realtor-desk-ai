@@ -629,7 +629,7 @@ const LeadGenerationStrategies = () => {
             <Card className="p-8 mb-8 bg-gradient-to-br from-primary/10 to-secondary/10">
               <h3 className="text-2xl font-bold mb-4 text-center">Ready to 3x Your Lead Generation?</h3>
               <p className="text-center text-muted-foreground mb-6">
-                Join 800+ Canadian agents using RealtorDesk AI to generate more leads and close more deals.
+                Join 50+ Canadian agents using RealtorDesk AI to generate more leads and close more deals.
               </p>
               <div className="flex justify-center gap-4">
                 <Link to="/pricing">

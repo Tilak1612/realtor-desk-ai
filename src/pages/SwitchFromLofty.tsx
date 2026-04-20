@@ -246,7 +246,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-8 border-accent">
               <Badge className="mb-4 bg-accent">Realtor Desk</Badge>
-              <div className="text-3xl font-bold gradient-text mb-4">$699/year</div>
+              <div className="text-3xl font-bold gradient-text mb-4">$999/year</div>
               <ul className="space-y-2 mb-6">
                 <li className="text-sm">✓ All features included</li>
                 <li className="text-sm">✓ No call/text charges</li>
@@ -262,7 +262,7 @@ const SwitchFromLofty = () => {
             <p className="font-semibold mb-2">What You Actually Pay:</p>
             <p className="text-sm text-muted-foreground">
               Lofty: $1,188-3,600/year + unpredictable charges<br/>
-              Realtor Desk: <span className="text-accent font-semibold">$699/year, period.</span>
+              Realtor Desk: <span className="text-accent font-semibold">$999/year, period.</span>
             </p>
           </Card>
         </div>
@@ -271,7 +271,7 @@ const SwitchFromLofty = () => {
       {/* Success Stories */}
       <section className="section-padding">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Why 200+ Agents Left Lofty</h2>
+          <h2 className="text-center mb-12">Why Canadian agents choose RealtorDesk AI over Lofty</h2>
           
           <div className="space-y-6">
             <Card className="p-6">
@@ -301,7 +301,7 @@ const SwitchFromLofty = () => {
                 <div className="flex-1">
                   <p className="italic mb-3">
                     "My Lofty bill kept growing. $99 turned into $250+/month. Realtor Desk is 
-                    $699/year with EVERYTHING included. I'm saving thousands."
+                    $999/year with EVERYTHING included. I'm saving thousands."
                   </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Laura K.</span>

@@ -10,7 +10,7 @@ import TasksWidget from "@/components/dashboard/TasksWidget";
 import DealsWidget from "@/components/dashboard/DealsWidget";
 import MarketWidget from "@/components/dashboard/MarketWidget";
 import TrialBanner from "@/components/dashboard/TrialBanner";
-import OnboardingChecklist from "@/components/dashboard/OnboardingChecklist";
+import TodayOnboardingChecklist from "@/components/dashboard/TodayOnboardingChecklist";
 import TodayFocusWidget from "@/components/dashboard/TodayFocusWidget";
 import RecentActivityWidget from "@/components/dashboard/RecentActivityWidget";
 import RevenueBreakdownWidget from "@/components/dashboard/RevenueBreakdownWidget";
@@ -306,10 +306,8 @@ const Dashboard = () => {
               commissionRate={revenueData.commissionRate}
             />
 
-            {/* Onboarding (for new users) */}
-            {user && (hotLeads.length === 0 || todayTasks.length === 0) && (
-              <OnboardingChecklist userId={user.id} />
-            )}
+            {/* Onboarding checklist (auto-hides on dismiss or once all 5 steps complete). */}
+            {user?.id && <TodayOnboardingChecklist userId={user.id} />}
 
             {/* Market Widget */}
             <MarketWidget defaultCity={profile?.city} />
