@@ -15,6 +15,10 @@ dist-ssr
 # Temporary / scratch files — never commit binaries or scratch work
 src/temp/
 
+# Supabase CLI scratch — version pins it rewrites on every `supabase` invocation
+supabase/.temp/
+supabase/.branches/
+
 # Environment variables (never commit secrets)
 .env
 .env.local
