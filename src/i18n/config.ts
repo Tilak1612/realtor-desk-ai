@@ -1866,6 +1866,13 @@ const resources = {
           roadmapped: "Roadmapped",
           considering: "Considering"
         },
+        quarter: {
+          apr_2026: "Apr 2026",
+          q2_2026: "Q2 2026",
+          q3_2026: "Q3 2026",
+          q1_2027: "Q1 2027",
+          tbd: "—"
+        },
         section: {
           now: { heading: "Shipping This Sprint (April 2026)" },
           q2: { heading: "Q2 2026" },
@@ -3809,6 +3816,13 @@ const resources = {
           designing: "En conception",
           roadmapped: "Planifié",
           considering: "À l'étude"
+        },
+        quarter: {
+          apr_2026: "Avr 2026",
+          q2_2026: "T2 2026",
+          q3_2026: "T3 2026",
+          q1_2027: "T1 2027",
+          tbd: "—"
         },
         section: {
           now: { heading: "Livraisons du sprint en cours (avril 2026)" },

@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 type Status = "shipping" | "building" | "designing" | "roadmapped" | "considering" | "shipped";
 type SectionId = "now" | "q2" | "q3" | "q1_2027" | "not_on";
+type QuarterKey = "apr_2026" | "q2_2026" | "q3_2026" | "q1_2027" | "tbd";
 type ItemId =
   | "casl_footer"
   | "pricing_parity"
@@ -28,7 +29,7 @@ type ItemId =
 
 interface RoadmapItem {
   id: ItemId;
-  quarter: string;
+  quarterKey: QuarterKey;
   status: Status;
 }
 
@@ -36,36 +37,36 @@ const SECTIONS: { id: SectionId; items: RoadmapItem[] }[] = [
   {
     id: "now",
     items: [
-      { id: "casl_footer", quarter: "Apr 2026", status: "shipping" },
-      { id: "pricing_parity", quarter: "Apr 2026", status: "shipping" },
-      { id: "lead_score_explainer", quarter: "Apr 2026", status: "shipping" },
-      { id: "onboarding_checklist", quarter: "Apr 2026", status: "shipping" },
+      { id: "casl_footer", quarterKey: "apr_2026", status: "shipping" },
+      { id: "pricing_parity", quarterKey: "apr_2026", status: "shipping" },
+      { id: "lead_score_explainer", quarterKey: "apr_2026", status: "shipping" },
+      { id: "onboarding_checklist", quarterKey: "apr_2026", status: "shipping" },
     ],
   },
   {
     id: "q2",
     items: [
-      { id: "ai_scoring", quarter: "Q2 2026", status: "designing" },
-      { id: "trigger_campaigns", quarter: "Q2 2026", status: "designing" },
+      { id: "ai_scoring", quarterKey: "q2_2026", status: "designing" },
+      { id: "trigger_campaigns", quarterKey: "q2_2026", status: "designing" },
     ],
   },
   {
     id: "q3",
-    items: [{ id: "idx_sites", quarter: "Q3 2026", status: "building" }],
+    items: [{ id: "idx_sites", quarterKey: "q3_2026", status: "building" }],
   },
   {
     id: "q1_2027",
     items: [
-      { id: "teams_tier", quarter: "Q1 2027", status: "roadmapped" },
-      { id: "social_promotion", quarter: "Q1 2027", status: "considering" },
+      { id: "teams_tier", quarterKey: "q1_2027", status: "roadmapped" },
+      { id: "social_promotion", quarterKey: "q1_2027", status: "considering" },
     ],
   },
   {
     id: "not_on",
     items: [
-      { id: "native_mobile", quarter: "—", status: "considering" },
-      { id: "commissions", quarter: "—", status: "considering" },
-      { id: "recruiting", quarter: "—", status: "considering" },
+      { id: "native_mobile", quarterKey: "tbd", status: "considering" },
+      { id: "commissions", quarterKey: "tbd", status: "considering" },
+      { id: "recruiting", quarterKey: "tbd", status: "considering" },
     ],
   },
 ];
@@ -114,7 +115,7 @@ const Roadmap = () => {
                           {t(`roadmap.item.${item.id}.title`)}
                         </CardTitle>
                         <div className="flex items-center gap-2 flex-shrink-0">
-                          <Badge variant="outline">{item.quarter}</Badge>
+                          <Badge variant="outline">{t(`roadmap.quarter.${item.quarterKey}`)}</Badge>
                           <Badge variant={STATUS_VARIANT[item.status]}>
                             {t(`roadmap.status.${item.status}`)}
                           </Badge>
