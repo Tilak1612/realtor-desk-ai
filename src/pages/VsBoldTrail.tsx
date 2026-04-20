@@ -167,7 +167,7 @@ const VsBoldTrail = () => {
               <Check className="w-8 h-8 text-accent mb-3" />
               <h3 className="font-bold mb-2">Built for Canadian Market</h3>
               <p className="text-sm text-muted-foreground">
-                Toronto, Vancouver, Calgary market intelligence. Bilingual EN/FR. CREA DDF® integration. PIPEDA compliant.
+                Toronto, Vancouver, Calgary market intelligence. Bilingual EN/FR. PIPEDA compliant. CREA DDF® integration coming Q3 2026.
               </p>
             </Card>
 
@@ -206,7 +206,7 @@ const VsBoldTrail = () => {
                   { feature: "Bilingual Support (EN/FR)", rdai: true, boldtrail: false },
                   { feature: "Support Response Time", rdai: "30 min", boldtrail: "3-5 days" },
                   { feature: "Reliability", rdai: "Enterprise-grade", boldtrail: "No published SLA" },
-                  { feature: "CREA DDF® Integration", rdai: true, boldtrail: true },
+                  { feature: "CREA DDF® Integration", rdai: "Q3 2026", boldtrail: true },
                   { feature: "Email Automation", rdai: true, boldtrail: true },
                   { feature: "Mobile App", rdai: true, boldtrail: true },
                   { feature: "Transaction Management", rdai: true, boldtrail: true },

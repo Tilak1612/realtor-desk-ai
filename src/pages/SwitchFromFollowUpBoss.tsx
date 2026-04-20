@@ -13,7 +13,7 @@ const SwitchFromFollowUpBoss = () => {
     { feature: "Pricing Currency", rdai: "CAD — no surprises", fub: "USD — 35%+ premium for Canadians" },
     { feature: "Built for Canadian Agents", rdai: "✓ Purpose-built", fub: "✗ US-focused" },
     { feature: "Bilingual EN/FR", rdai: "✓ Full support", fub: "✗ English only" },
-    { feature: "Canadian MLS Integration", rdai: "✓ Included", fub: "✗ Requires 3rd-party IDX" },
+    { feature: "Canadian MLS Integration (CREA DDF)", rdai: "Coming Q3 2026", fub: "✗ Requires 3rd-party IDX" },
     { feature: "PIPEDA-Aware Design", rdai: "✓ Built-in", fub: "✗ US compliance" },
     { feature: "AI Chatbot", rdai: "✓ Claude-powered, 24/7", fub: "✗ Requires Structurely ($499/mo)" },
     { feature: "AI Lead Scoring", rdai: "✓ Included", fub: "✗ Basic tagging only" },
@@ -27,7 +27,7 @@ const SwitchFromFollowUpBoss = () => {
   const faqs = [
     {
       q: "How does RealtorDesk AI compare to Follow Up Boss for Canadian agents?",
-      a: "Follow Up Boss is a strong CRM but built for the US market. It charges USD, requires expensive add-ons for AI chatbots (Structurely ~$499/mo), and has no native Canadian MLS integration or PIPEDA-aware data handling. RealtorDesk AI includes all of this at $149 CAD/month."
+      a: "Follow Up Boss is a strong CRM but built for the US market. It charges USD, requires expensive add-ons for AI chatbots (Structurely ~$499/mo), and lacks PIPEDA-aware data handling. RealtorDesk AI includes the AI chatbot and PIPEDA-aware design at $149 CAD/month, with CREA DDF® (Canadian MLS) integration planned for Q3 2026."
     },
     {
       q: "Can I import my Follow Up Boss data?",
@@ -35,7 +35,7 @@ const SwitchFromFollowUpBoss = () => {
     },
     {
       q: "I have 200+ integrations set up in Follow Up Boss. Will I lose those?",
-      a: "Follow Up Boss's 200+ integrations are its biggest strength. RealtorDesk AI focuses on deep native integrations for Canadian agents rather than breadth. We cover the integrations that matter most: Twilio, Google Calendar, email automation, and Canadian MLS data. We're adding more every quarter."
+      a: "Follow Up Boss's 200+ integrations are its biggest strength. RealtorDesk AI focuses on deep native integrations for Canadian agents rather than breadth. We cover the integrations that matter most today — Twilio, Google Calendar, email automation — and CREA DDF® (Canadian MLS) is planned for Q3 2026. We're adding more every quarter."
     },
     {
       q: "Does RealtorDesk AI work for teams?",
@@ -51,7 +51,7 @@ const SwitchFromFollowUpBoss = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from Follow Up Boss | Canadian Real Estate CRM Alternative"
-        description="Switch from Follow Up Boss to RealtorDesk AI. Save on USD pricing, get a built-in AI chatbot, Canadian MLS integration, and PIPEDA-aware design — at $149 CAD/month. Free migration."
+        description="Switch from Follow Up Boss to RealtorDesk AI. Save on USD pricing, get a built-in AI chatbot and PIPEDA-aware design — at $149 CAD/month. CREA DDF® integration coming Q3 2026. Free migration."
         keywords="Follow Up Boss alternative Canada, switch from Follow Up Boss, Follow Up Boss vs RealtorDesk AI, Canadian real estate CRM, best CRM for Canadian realtors"
         canonicalUrl="https://www.realtordesk.ai/switch-from-follow-up-boss"
         structuredData={[
@@ -59,7 +59,7 @@ const SwitchFromFollowUpBoss = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Switch from Follow Up Boss to RealtorDesk AI",
-            "description": "Canadian real estate agents switching from Follow Up Boss to RealtorDesk AI save on USD pricing and gain built-in AI chatbot, bilingual support, and Canadian MLS integration.",
+            "description": "Canadian real estate agents switching from Follow Up Boss to RealtorDesk AI save on USD pricing and gain built-in AI chatbot and bilingual support. CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap.",
             "url": "https://www.realtordesk.ai/switch-from-follow-up-boss"
           }
         ]}
@@ -114,8 +114,8 @@ const SwitchFromFollowUpBoss = () => {
             </Card>
             <Card className="p-6 border-primary/20">
               <Zap className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">Canadian MLS Integration</h3>
-              <p className="text-sm text-muted-foreground">Import Canadian property data directly into your CRM. No third-party IDX provider required.</p>
+              <h3 className="font-bold mb-2">Canadian MLS Integration (Q3 2026)</h3>
+              <p className="text-sm text-muted-foreground">CREA DDF® integration is on the Q3 2026 roadmap. In the meantime, import listings from Realtor.ca via the built-in importer.</p>
             </Card>
             <Card className="p-6 border-primary/20">
               <Shield className="w-10 h-10 text-primary mb-4" />

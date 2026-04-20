@@ -19,7 +19,7 @@ const SwitchFromLionDesk = () => {
     },
     {
       q: "How does RealtorDesk AI compare to LionDesk on price?",
-      a: "LionDesk was $39/month USD. RealtorDesk AI starts at $149 CAD/month — which includes far more AI capability, Canadian MLS integration, bilingual support, and a platform purpose-built for Canadian agents."
+      a: "LionDesk was $39/month USD. RealtorDesk AI starts at $149 CAD/month — which includes far more AI capability, bilingual support, and a platform purpose-built for Canadian agents. CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap."
     },
     {
       q: "Will I lose my automation sequences when I switch?",
@@ -27,7 +27,7 @@ const SwitchFromLionDesk = () => {
     },
     {
       q: "Is RealtorDesk AI suitable for Canadian agents?",
-      a: "Yes — it's built exclusively for Canadian agents. Canadian MLS data integration, bilingual EN/FR support, PIPEDA-aware data handling, and Canadian market intelligence are core features, not add-ons."
+      a: "Yes — it's built exclusively for Canadian agents. Bilingual EN/FR support, PIPEDA-aware data handling, and Canadian market intelligence are core features today; CREA DDF® (Canadian MLS) integration is planned for Q3 2026."
     },
     {
       q: "How long does onboarding take?",
@@ -40,7 +40,7 @@ const SwitchFromLionDesk = () => {
     { feature: "Still Available After Sept 2025", rdai: "✓ Yes", liondesk: "✗ No — shutting down" },
     { feature: "Built for Canadian Agents", rdai: "✓ Purpose-built", liondesk: "✗ US-focused" },
     { feature: "Bilingual EN/FR", rdai: "✓ Full support", liondesk: "✗ English only" },
-    { feature: "Canadian MLS Integration", rdai: "✓ Included", liondesk: "✗ None" },
+    { feature: "Canadian MLS Integration (CREA DDF)", rdai: "Coming Q3 2026", liondesk: "✗ None" },
     { feature: "PIPEDA-Aware Design", rdai: "✓ Built-in", liondesk: "✗ US compliance" },
     { feature: "AI Lead Scoring", rdai: "✓ Advanced", liondesk: "✓ Basic" },
     { feature: "24/7 AI Chatbot", rdai: "✓ Claude-powered", liondesk: "✓ Basic bot" },
@@ -56,7 +56,7 @@ const SwitchFromLionDesk = () => {
     <div className="min-h-screen">
       <SEO
         title="LionDesk Shutting Down? Switch to RealtorDesk AI | Best LionDesk Alternative Canada"
-        description="LionDesk is shutting down in September 2025. Switch to RealtorDesk AI — Canada's AI-powered real estate CRM with free migration, bilingual support, and Canadian MLS integration. Start your 14-day free trial today."
+        description="LionDesk is shutting down in September 2025. Switch to RealtorDesk AI — Canada's AI-powered real estate CRM with free migration, bilingual support, and CREA DDF® integration on the Q3 2026 roadmap. Start your 14-day free trial today."
         keywords="LionDesk shutting down, LionDesk alternative Canada, switch from LionDesk, LionDesk migration, best CRM for Canadian realtors, LionDesk replacement"
         canonicalUrl="https://www.realtordesk.ai/switch-from-liondesk"
         structuredData={[
@@ -120,7 +120,7 @@ const SwitchFromLionDesk = () => {
             <Card className="p-6 text-center border-primary/20">
               <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-bold mb-2">Built for Canada</h3>
-              <p className="text-muted-foreground">Bilingual EN/FR, Canadian MLS data, PIPEDA-aware design, and CAD pricing. Not a US platform retrofitted for Canada.</p>
+              <p className="text-muted-foreground">Bilingual EN/FR, PIPEDA-aware design, and CAD pricing. Not a US platform retrofitted for Canada. CREA DDF® (Canadian MLS) integration coming Q3 2026.</p>
             </Card>
             <Card className="p-6 text-center border-primary/20">
               <Brain className="w-12 h-12 text-primary mx-auto mb-4" />

@@ -23,7 +23,7 @@ const LionDeskAlternative = () => {
       pros: [
         "Purpose-built for Canadian agents — CAD pricing, bilingual EN/FR",
         "Claude-powered AI chatbot included (no expensive add-ons)",
-        "Canadian MLS data integration",
+        "CREA DDF® (Canadian MLS) integration on the Q3 2026 roadmap",
         "PIPEDA-aware design and FINTRAC record-keeping support",
         "Free migration from LionDesk",
         "AI lead scoring, deal pipeline, task management all in one",
@@ -182,7 +182,7 @@ const LionDeskAlternative = () => {
             <Card className="p-6 bg-primary/5 border-primary/20 mb-8">
               <h3 className="font-bold text-lg mb-2">TL;DR — Quick Recommendation</h3>
               <p className="text-muted-foreground">
-                For most Canadian agents, <strong>RealtorDesk AI</strong> is the best LionDesk replacement. It's purpose-built for Canada, includes a Claude-powered AI chatbot (something LionDesk never had), offers Canadian MLS integration, bilingual support, CAD pricing, and free migration. <Link to="/switch-from-liondesk" className="text-primary underline">Start your free 14-day trial here.</Link>
+                For most Canadian agents, <strong>RealtorDesk AI</strong> is the best LionDesk replacement. It's purpose-built for Canada, includes a Claude-powered AI chatbot (something LionDesk never had), and offers bilingual support, CAD pricing, and free migration. CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap. <Link to="/switch-from-liondesk" className="text-primary underline">Start your free 14-day trial here.</Link>
               </p>
             </Card>
           </div>

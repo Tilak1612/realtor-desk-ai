@@ -125,7 +125,7 @@ const IxactAlternatives = () => {
 
               <h4 className="text-lg font-semibold mt-4 mb-2">What It Is</h4>
               <p>
-                AI-first CRM built specifically for Canadian real estate. Purpose-built for PIPEDA/CASL compliance with native CREA DDF integration and bilingual support.
+                AI-first CRM built specifically for Canadian real estate. Purpose-built for PIPEDA/CASL compliance and bilingual support. CREA DDF® integration is on the Q3 2026 roadmap.
               </p>
 
               <h4 className="text-lg font-semibold mt-4 mb-2">Key Features</h4>
@@ -133,7 +133,7 @@ const IxactAlternatives = () => {
                 <li>Sub-3-second AI lead response (24/7)</li>
                 <li>GPT-powered conversational chatbot & voice AI</li>
                 <li>PIPEDA/CASL compliance built-in</li>
-                <li>Full CREA DDF integration (all Canadian MLS boards)</li>
+                <li>CREA DDF® integration coming Q3 2026 (all Canadian MLS boards)</li>
                 <li>Native bilingual support (English/French)</li>
                 <li>Predictive lead scoring</li>
                 <li>Automated appointment booking</li>

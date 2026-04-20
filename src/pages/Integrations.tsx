@@ -98,7 +98,7 @@ const Integrations = () => {
     <div className="min-h-screen">
       <SEO
         title="Real Estate CRM Integrations | RealtorDesk AI"
-        description="Integrate RealtorDesk AI with virtual tour platforms, real estate website builders, video marketing tools, and top CRMs. CREA DDF® native."
+        description="Integrate RealtorDesk AI via Zapier, Make, and n8n (5,000+ apps). Direct connectors for Salesforce, Zoho, Pipedrive on the roadmap. CREA DDF® coming Q3 2026."
         keywords="real estate crm integrations, virtual tour platforms, real estate website builders, real estate video marketing tools, CREA DDF integration"
       />
       <Navbar />

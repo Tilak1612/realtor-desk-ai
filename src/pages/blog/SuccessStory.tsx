@@ -120,7 +120,7 @@ const SuccessStory = () => {
             <ol>
               <li>Imported her 842 contacts from her old CRM</li>
               <li>Connected her email and phone</li>
-              <li>Set up her CREA DDF® integration</li>
+              <li>Connected her Realtor.ca listing imports</li>
               <li>Configured her AI chatbot and voice agent</li>
               <li>Customized automated email sequences</li>
             </ol>
@@ -225,7 +225,7 @@ const SuccessStory = () => {
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
               <h3 className="text-2xl font-bold mb-4">Ready to Write Your Own Success Story?</h3>
               <p className="mb-6">
-                Join Sarah and 2,000+ other Canadian agents transforming their businesses with AI. Book a personalized demo and see what's possible.
+                Join Sarah and our growing Canadian beta community transforming their businesses with AI. Book a personalized demo and see what's possible.
               </p>
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">

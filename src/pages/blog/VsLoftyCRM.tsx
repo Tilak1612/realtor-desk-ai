@@ -269,8 +269,8 @@ const VsLoftyCRM = () => {
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
                   <div>
-                    <p className="font-semibold">CREA DDF Integration</p>
-                    <p className="text-sm text-gray-600">Canadian listings</p>
+                    <p className="font-semibold">CREA DDF (Q3 2026)</p>
+                    <p className="text-sm text-gray-600">Canadian listings on the roadmap</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

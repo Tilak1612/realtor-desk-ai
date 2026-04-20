@@ -415,7 +415,7 @@ const AIChatbotGuide = () => {
                       <li>✓ Built-in with CRM</li>
                       <li>✓ PIPEDA/CASL compliant</li>
                       <li>✓ Bilingual (English/French)</li>
-                      <li>✓ CREA DDF integration</li>
+                      <li>✓ CREA DDF (Q3 2026)</li>
                       <li>✓ Setup: 15 minutes</li>
                     </ul>
                   </div>
@@ -802,7 +802,7 @@ const AIChatbotGuide = () => {
                     <li>• AI handles repetitive tasks (response, qualification, booking)</li>
                     <li>• Humans handle relationships, showings, negotiations, closings</li>
                     <li>• AI makes agents MORE valuable by freeing up time</li>
-                    <li>• Agents with AI close 2-3x more deals (AI is a tool, not a replacement)</li>
+                    <li>• Agents with AI close meaningfully more deals (AI is a tool, not a replacement)</li>
                   </ul>
                 </div>
               </Card>
@@ -905,10 +905,10 @@ const AIChatbotGuide = () => {
                   <li>✓ Humans respond in 15-30 minutes; AI responds in 2-3 seconds</li>
                   <li>✓ AI qualifies leads automatically, saving 3-5 hours/day</li>
                   <li>✓ Bilingual AI solves Quebec market challenge</li>
-                  <li>✓ ROI: 3,692-15,218%</li>
+                  <li>✓ Strong ROI for AI chatbots</li>
                   <li>✓ Setup: 3-4 hours</li>
                   <li>✓ Cost: $149-299/month</li>
-                  <li>✓ Result: 2-3x more deals closed</li>
+                  <li>✓ Result: meaningfully more deals closed</li>
                 </ul>
                 <p className="text-xl font-bold text-primary pt-4">
                   The question isn't "Should I get an AI chatbot?"

@@ -89,8 +89,8 @@ const AIvsTraditionalCRM = () => {
                 <div className="text-sm text-muted-foreground">Conversion Increase</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">9,543%</div>
-                <div className="text-sm text-muted-foreground">ROI</div>
+                <div className="text-3xl font-bold text-primary">Strong</div>
+                <div className="text-sm text-muted-foreground">ROI for AI CRM</div>
               </div>
             </div>
           </Card>
@@ -499,7 +499,7 @@ const AIvsTraditionalCRM = () => {
               <div className="mt-6">
                 <div className="text-sm">Investment: $3,588</div>
                 <div className="text-sm">Return: $342,372</div>
-                <div className="text-3xl font-bold mt-2">ROI: 9,543%</div>
+                <div className="text-3xl font-bold mt-2">Strong ROI for AI CRM</div>
               </div>
             </div>
 
@@ -587,7 +587,7 @@ const AIvsTraditionalCRM = () => {
                   <li>✅ Higher conversion (4.1%)</li>
                   <li>✅ Saves 25-30 hours/week</li>
                   <li>✅ Scales infinitely</li>
-                  <li>✅ 9,543% ROI</li>
+                  <li>✅ Strong ROI for AI CRM</li>
                 </ul>
               </Card>
             </div>

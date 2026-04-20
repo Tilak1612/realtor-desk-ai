@@ -92,7 +92,7 @@ const VsKvCore = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>CREA DDF native integration</span>
+                    <span>CREA DDF® integration (coming Q3 2026)</span>
                   </li>
                 </ul>
               </div>
@@ -138,7 +138,7 @@ const VsKvCore = () => {
               RealtorDesk AI is Canada's first AI-native CRM built specifically for Canadian real estate professionals. Unlike traditional CRMs that bolt on automation as an afterthought, RealtorDesk AI was designed from the ground up to leverage GPT-powered conversational AI for instant lead response and qualification.
             </p>
             <p>
-              With sub-3-second response times, PIPEDA-native compliance, and full CREA DDF integration, RealtorDesk AI addresses the unique needs of Canadian agents while delivering cutting-edge AI capabilities.
+              With sub-3-second response times, PIPEDA-native compliance, and CREA DDF® integration coming Q3 2026, RealtorDesk AI addresses the unique needs of Canadian agents while delivering cutting-edge AI capabilities.
             </p>
 
             <h2>Feature-by-Feature Comparison</h2>
@@ -195,7 +195,7 @@ const VsKvCore = () => {
               <strong>kvCORE:</strong> Limited Canadian MLS support. Integration often requires custom development and ongoing maintenance. Not all Canadian boards are supported.
             </p>
             <p>
-              <strong>RealtorDesk AI:</strong> Full CREA DDF integration out of the box. Automatic property import, synchronized updates, and compliance with CREA data standards. Works with all Canadian MLS boards.
+              <strong>RealtorDesk AI:</strong> CREA DDF® integration is planned for Q3 2026; today you can import listings from Realtor.ca via the built-in importer. The full CREA DDF pipeline — automatic property import, synchronized updates, and compliance with CREA data standards across all Canadian MLS boards — is on the roadmap.
             </p>
 
             <h2>Pricing Comparison: What You Actually Pay</h2>

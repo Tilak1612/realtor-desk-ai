@@ -100,7 +100,7 @@ const VsWiseAgent = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Native CREA DDF® integration included</span>
+                  <span className="text-sm">CREA DDF® integration coming Q3 2026</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
@@ -193,7 +193,7 @@ const VsWiseAgent = () => {
                   { feature: "24/7 AI Chatbot", rdai: true, wise: "Basic" },
                   { feature: "Canadian Market Data", rdai: true, wise: false },
                   { feature: "Bilingual (EN/FR)", rdai: true, wise: false },
-                  { feature: "CREA DDF® Integration", rdai: "Native", wise: "Limited" },
+                  { feature: "CREA DDF® Integration", rdai: "Q3 2026", wise: "Limited" },
                   { feature: "Provincial Insights", rdai: true, wise: false },
                   { feature: "Support Timezone", rdai: "Canadian", wise: "US" },
                   { feature: "Pricing Currency", rdai: "CAD", wise: "USD" },

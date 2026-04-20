@@ -15,12 +15,12 @@ const VsLofty = () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Lofty vs RealtorDesk AI Comparison",
-    "description": "Compare Lofty with RealtorDesk AI for Canadian real estate agents. See pricing, features, CREA DDF® integration, and why agents save 85% with RealtorDesk AI.",
+    "description": "Compare Lofty with RealtorDesk AI for Canadian real estate agents. See pricing, features, CREA DDF® integration on the roadmap, and why agents save 85% with RealtorDesk AI.",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "$700+ USD/mo with setup fees, US-focused"},
-        {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "$149 CAD/mo, CREA DDF® native, PIPEDA compliant, bilingual"}
+        {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "$149 CAD/mo, PIPEDA compliant, bilingual, CREA DDF® coming Q3 2026"}
       ]
     }
   };
@@ -29,7 +29,7 @@ const VsLofty = () => {
     <div className="min-h-screen">
       <SEO 
         title="Lofty Alternative for Canadian Agents | RealtorDesk AI vs Lofty"
-        description="Why Canadian real estate agents choose RealtorDesk AI over Lofty: Save 85% ($149 vs $700/mo), CREA DDF® native, PIPEDA compliant, bilingual. No setup fees. 14-day free trial."
+        description="Why Canadian real estate agents choose RealtorDesk AI over Lofty: Save 85% ($149 vs $700/mo), PIPEDA compliant, bilingual, CREA DDF® coming Q3 2026. No setup fees. 14-day free trial."
         keywords="Lofty alternative, Lofty CRM alternative Canada, real estate CRM cheaper than Lofty, best CRM for Canadian realtors, CREA DDF integration, PIPEDA compliant CRM"
         structuredData={[comparisonSchema]}
       />
@@ -45,7 +45,7 @@ const VsLofty = () => {
             Why Canadian Agents Choose <span className="gradient-text">RealtorDesk AI</span> Over Lofty
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Save 85% with CREA DDF® native integration, PIPEDA compliance, bilingual support, and true AI-powered automation built for the Canadian market.
+            Save 85% with PIPEDA compliance, bilingual support, true AI-powered automation built for the Canadian market, and CREA DDF® integration coming Q3 2026.
           </p>
         </div>
       </section>

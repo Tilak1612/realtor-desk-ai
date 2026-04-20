@@ -108,7 +108,7 @@ const RealEstateCRMBuyingGuide = () => {
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>• Instant lead response (3-47 seconds)</li>
-                <li>• 300% increase in qualified appointments</li>
+                <li>• 30% lift in qualified appointments (conservative estimate)</li>
                 <li>• 10-15 hours/week saved on admin</li>
                 <li>• 25-40% higher conversion rates</li>
                 <li>• Better client experience = more referrals</li>
@@ -414,7 +414,7 @@ const RealEstateCRMBuyingGuide = () => {
             <Card className="p-6">
               <h3 className="font-bold mb-2">Best for Canadian Solo Agents:</h3>
               <p className="text-lg mb-2"><strong>RealtorDesk AI</strong> - $149 CAD/mo</p>
-              <p className="text-sm text-muted-foreground">AI-powered, CREA DDF® native, PIPEDA compliant, setup in 20 minutes</p>
+              <p className="text-sm text-muted-foreground">AI-powered, PIPEDA compliant, setup in 20 minutes. CREA DDF® integration coming Q3 2026.</p>
             </Card>
 
             <Card className="p-6">
@@ -442,7 +442,7 @@ const RealEstateCRMBuyingGuide = () => {
                 Ready to Choose the Right CRM?
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Try RealtorDesk AI risk-free for 14 days. Built specifically for Canadian real estate agents with AI, CREA DDF®, and PIPEDA compliance included.
+                Try RealtorDesk AI risk-free for 14 days. Built specifically for Canadian real estate agents with AI and PIPEDA compliance today; CREA DDF® integration coming Q3 2026.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/signup">
@@ -464,7 +464,7 @@ const RealEstateCRMBuyingGuide = () => {
 
           <div className="border-t pt-8 mt-12">
             <p className="text-sm text-muted-foreground">
-              <strong>About the Author:</strong> This guide was created by the RealtorDesk AI team after analyzing 20+ real estate CRMs and interviewing 500+ Canadian agents about their CRM experiences. Last updated January 2026.
+              <strong>About the Author:</strong> This guide was created by the RealtorDesk AI team after analyzing 20+ real estate CRMs and interviewing dozens of Canadian agents about their CRM experiences. Last updated January 2026.
             </p>
           </div>
         </div>
