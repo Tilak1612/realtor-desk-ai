@@ -277,16 +277,16 @@ const PIPEDACompliance = () => {
                     <Shield className="w-6 h-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">6. Security Audits & Certifications</h3>
+                    <h3 className="text-xl font-bold mb-2">6. Security Practices</h3>
                     <p className="text-muted-foreground mb-3">
-                      RealtorDesk AI undergoes annual third-party security audits and maintains SOC 2 Type II certification to verify our PIPEDA compliance measures.
+                      RealtorDesk AI is designed around PIPEDA principles and industry security best practices. Formal third-party audits and SOC 2 certification are planned as we exit beta.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Independent verification of security practices</li>
-                        <li>• Detailed compliance reports available on request</li>
-                        <li>• Broker-friendly for due diligence reviews</li>
+                        <li>• Encryption at rest and in transit by default</li>
+                        <li>• Consent tracking and data-export flows built in</li>
+                        <li>• Transparent public beta — certifications shared as they're earned</li>
                       </ul>
                     </div>
                   </div>

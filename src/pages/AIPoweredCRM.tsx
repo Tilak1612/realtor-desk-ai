@@ -126,7 +126,7 @@ const AIPoweredCRM = () => {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Validated across 500+ Canadian agents and 50,000+ transactions
+                  Validated across our Canadian beta community
                 </p>
               </Card>
             </div>
@@ -590,7 +590,7 @@ const AIPoweredCRM = () => {
           </Link>
 
           <p className="text-sm text-muted-foreground mt-6">
-            * Based on data from 500+ Canadian agents using Realtor Desk AI
+            * Based on beta participant data from Realtor Desk AI
           </p>
         </div>
       </section>

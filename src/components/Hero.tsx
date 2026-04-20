@@ -57,7 +57,7 @@ const Hero = () => {
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-300 max-w-3xl mx-auto">
-            Instant follow-ups, Canadian MLS data integration, and PIPEDA-aware data handling
+            Instant follow-ups, PIPEDA-aware data handling, and bilingual EN/FR
           </p>
 
           {/* Trust Signals Line */}
@@ -68,7 +68,7 @@ const Hero = () => {
             </span>
             <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="w-4 h-4 text-primary" />
-              Canadian MLS data integration
+              Built for Canadian agents — PIPEDA, CASL, bilingual
             </span>
             <span className="flex items-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="w-4 h-4 text-primary" />

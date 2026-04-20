@@ -744,7 +744,7 @@ const CanadianMarket = () => {
         <div className="container-custom text-center">
           <h2 className="mb-6 text-white">Experience the Canadian Advantage</h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Join 2,000+ Canadian agents who chose the platform built for their market
+            Join the Canadian agents building their business on a platform made for this market
           </p>
           <Link to="/demo">
             <Button size="lg" variant="secondary" className="text-lg">

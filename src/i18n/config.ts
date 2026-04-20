@@ -31,17 +31,17 @@ const resources = {
       },
       hero: {
         title: "Close 3X More Deals with AI Automation",
-        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with CREA DDF® integration and full bilingual support.",
+        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book Your Free Demo",
         trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
-        badge1: "CREA Certified",
-        badge2: "SOC 2 Compliant",
+        badge1: "PIPEDA-Aware Design",
+        badge2: "Bilingual EN/FR",
         badge3: "50+ Beta Users",
-        conversionBadge: "300% Conversion Increase",
+        conversionBadge: "Conservative 30% Conversion Lift",
         badge: "14-Day Free Trial",
         bullet1: "AI responds to leads instantly, 24/7",
-        bullet2: "Canadian MLS data integration",
+        bullet2: "Built for Canadian agents — PIPEDA, CASL, bilingual EN/FR",
         bullet3: "Bilingual EN/FR",
         testimonial: "\"Captured 3 leads in my first 48 hours I would have lost\"",
         joinAgents: "Join 50+ Canadian agents",
@@ -170,7 +170,7 @@ const resources = {
             name: "AGENT",
             badge: "14 Days Free Trial",
             description: "Perfect for individual agents ready to scale",
-            savings: "Save $291/year with annual billing",
+            savings: "Save $789/year with annual billing",
             period: "/month",
             ctaMonthly: "Start 14-Day Free Trial",
             ctaYearly: "Start 14-Day Free Trial",
@@ -373,7 +373,7 @@ const resources = {
           support: "Support",
           responseTime: "We respond within 24 hours",
           hours: "Business Hours",
-          hoursDetails: "Monday - Friday: 9:00 AM - 6:00 PM EST\nSaturday: 10:00 AM - 4:00 PM EST\nSunday: Closed"
+          hoursDetails: "Monday - Friday: 9:00 AM - 6:00 PM MT\nSaturday: 10:00 AM - 4:00 PM MT\nSunday: Closed"
         },
         form: {
           title: "Send Us a Message",
@@ -564,7 +564,7 @@ const resources = {
         },
         q11: {
           question: "Which CRMs do you integrate with?",
-          answer: "We currently integrate with Follow Up Boss, Brivity, LionDesk, and RealtyJuggler - the most popular CRMs among Canadian agents."
+          answer: "Today: native Zapier, Make, and n8n — which cover 5,000+ apps including Follow Up Boss, Brivity, HubSpot, and Salesforce via Zapier. Direct connectors for Salesforce, Zoho CRM, Pipedrive, Freshsales, and Microsoft Dynamics are on the roadmap. You can also bulk-import any CRM via CSV."
         },
         q12: {
           question: "Can I customize the AI's responses?",
@@ -612,13 +612,13 @@ const resources = {
       },
         cta: {
         title: "Ready to Never Miss a Lead Again?",
-        subtitle: "Join 500+ Canadian realtors using AI to close more deals",
+        subtitle: "Join our growing Canadian beta community using AI to close more deals",
         button: "Start Your 14-Day Free Trial",
         note: "14 Days Free • No credit card required • Cancel anytime"
       },
       mobileCTA: {
         title: "Start Your 14-Day Free Trial",
-        subtitle: "Join 500+ Canadian Realtors"
+        subtitle: "Join Our Canadian Beta Community"
       },
       trustTransparency: {
         badge: "Trust & Transparency",
@@ -639,7 +639,7 @@ const resources = {
         security: {
           title: "Security First",
           desc: "Enterprise-grade data protection",
-          description: "SOC 2 compliant architecture, PIPEDA-ready data handling, and enterprise-grade security from day one."
+          description: "Security-first architecture, PIPEDA-aware data handling, and enterprise-grade encryption from day one."
         },
         canadian: {
           title: "Canadian Built",
@@ -684,7 +684,7 @@ const resources = {
             quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
             brokerage: "RE/MAX Team Lead",
             stats: {
-              responseTime: "We respond within 24 hours",
+              responseTime: "avg AI response time",
               leadIncrease: "increase in qualified leads",
               additionalDeals: "additional deals in Q1"
             },
@@ -767,11 +767,11 @@ const resources = {
           limitedSpots: "Limited Beta Spots Available"
         },
         credibility: {
-          soc2Title: "SOC 2 Compliant",
-          soc2Desc: "Enterprise-grade security and data protection",
-          pipedaTitle: "PIPEDA Compliant",
-          pipedaDesc: "Full Canadian privacy law compliance",
-          creaTitle: "CREA Certified",
+          soc2Title: "Security-First Architecture",
+          soc2Desc: "Enterprise-grade encryption and data protection",
+          pipedaTitle: "PIPEDA-Aware Design",
+          pipedaDesc: "Built around Canadian privacy principles",
+          creaTitle: "CREA DDF® Integration",
           creaDesc: "Official CREA DDF® integration partner"
         },
         problemStatement: {
@@ -815,7 +815,7 @@ const resources = {
           api2: "Webhooks:",
           api2Desc: "Real-time events (new lead, deal closed, task overdue)",
           api3: "CRM Sync:",
-          api3Desc: "Pre-built connectors for Brivity, Follow Up Boss, Salesforce, HubSpot",
+          api3Desc: "Native Zapier, Make, and n8n. Direct connectors for Salesforce, Zoho, Pipedrive on the roadmap.",
           api4: "Calendar Integration:",
           api4Desc: "2-way sync with Google/Outlook. Auto-create Zoom links",
           api5: "Email Platforms:",
@@ -830,7 +830,7 @@ const resources = {
           perf4: "Support (Enterprise)"
         },
         finalCTA: {
-          title: "Join 500+ Canadian Agents Growing Their Business with AI",
+          title: "Join 50+ Canadian Agents Growing Their Business with AI",
           subtitle: "Start closing more deals with AI-powered automation today",
           startTrial: "Start Your 14-Day Free Trial",
           bookDemo: "Book Your Free Demo",
@@ -1341,7 +1341,7 @@ const resources = {
             time: "5 minutes",
             description: "Link your CRM, email, website, and phone system with simple one-click integrations.",
             details: [
-              "Connect existing CRM (Follow Up Boss, Brivity, etc.)",
+              "Connect existing CRM via Zapier/Make or CSV import",
               "Link Gmail or Outlook email",
               "Add website widget code snippet",
               "Import existing contacts (CSV or direct sync)"
@@ -1417,7 +1417,7 @@ const resources = {
           freeOnboarding: "🎓 Free Onboarding",
           freeOnboardingDesc: "Personalized setup assistance",
           avgSetupTime: "Average setup time: 22 minutes",
-          basedOn: "(based on 500+ agent onboardings)"
+          basedOn: "(based on our beta onboarding sessions)"
         }
       },
       integrationsPage: {
@@ -1503,7 +1503,7 @@ const resources = {
         readMore: "Read More",
         newsletter: {
           title: "Get Weekly Insights Delivered to Your Inbox",
-          subtitle: "Join 2,000+ Canadian realtors receiving actionable AI and real estate tips every week",
+          subtitle: "Actionable AI and real estate tips for Canadian agents, delivered weekly",
           placeholder: "Enter your email",
           subscribe: "Subscribe",
           noSpam: "No spam. Unsubscribe anytime. Privacy policy."
@@ -1827,17 +1827,17 @@ const resources = {
       },
       hero: {
         title: "Concluez 3X Plus de Transactions avec l'Automatisation IA",
-        subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec intégration CREA DDF® et support bilingue complet.",
+        subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réserver Votre Démo Gratuite",
         trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment",
-        badge1: "Certifié CREA",
-        badge2: "Conforme SOC 2",
+        badge1: "Conforme PIPEDA par Conception",
+        badge2: "Bilingue EN/FR",
         badge3: "50+ Utilisateurs Bêta",
-        conversionBadge: "Augmentation de 300% des Conversions",
+        conversionBadge: "Hausse de Conversion de 30% (Conservatrice)",
         badge: "Essai Gratuit de 14 Jours",
         bullet1: "L'IA répond aux prospects instantanément, 24/7",
-        bullet2: "Intégration des données MLS canadiennes",
+        bullet2: "Conçu pour les courtiers canadiens — LPRPDE, LCAP, bilingue EN/FR",
         bullet3: "Bilingue EN/FR",
         testimonial: "\"3 prospects capturés en 48h que j'aurais perdus\"",
         joinAgents: "Rejoignez 50+ courtiers canadiens",
@@ -2169,7 +2169,7 @@ const resources = {
           support: "Support",
           responseTime: "Nous répondons dans les 24 heures",
           hours: "Heures d'Ouverture",
-          hoursDetails: "Lundi - Vendredi: 9h00 - 18h00 HNE\nSamedi: 10h00 - 16h00 HNE\nDimanche: Fermé"
+          hoursDetails: "Lundi - Vendredi: 9h00 - 18h00 HR\nSamedi: 10h00 - 16h00 HR\nDimanche: Fermé"
         },
         form: {
           title: "Envoyez-Nous un Message",
@@ -2340,7 +2340,7 @@ const resources = {
         },
         q6: {
           question: "Quelles certifications avez-vous réellement?",
-          answer: "Nous sommes construits sur une infrastructure conforme SOC 2 Type II et suivons les exigences de la LPRPDE. Notre intégration CREA DDF® est compatible avec les flux de données officiels. Alors que nous quittons la bêta, nous compléterons des audits tiers formels et afficherons des badges de certification."
+          answer: "RealtorDesk AI est conçu autour des principes de la LPRPDE et des meilleures pratiques de sécurité. Nous sommes honnêtes : nous n'avons pas encore de certification SOC 2 formelle ni de badge CREA DDF® — ces étapes sont prévues à mesure que nous sortons de la bêta. Ce qui est actif aujourd'hui : chiffrement, suivi du consentement et exportation des données. Nous publierons les certifications dès qu'elles seront obtenues."
         },
         q7: {
           question: "L'IA sonne-t-elle robotique?",
@@ -2360,7 +2360,7 @@ const resources = {
         },
         q11: {
           question: "Avec quels CRM vous intégrez-vous?",
-          answer: "Nous nous intégrons actuellement avec Follow Up Boss, Brivity, LionDesk et RealtyJuggler - les CRM les plus populaires parmi les agents canadiens."
+          answer: "Aujourd'hui : Zapier, Make et n8n natifs — qui couvrent plus de 5 000 applications dont Follow Up Boss, Brivity, HubSpot et Salesforce via Zapier. Les connecteurs directs Salesforce, Zoho CRM, Pipedrive, Freshsales et Microsoft Dynamics sont prévus. Vous pouvez aussi importer en masse depuis n'importe quel CRM par CSV."
         },
         q12: {
           question: "Puis-je personnaliser les réponses de l'IA?",
@@ -2408,13 +2408,13 @@ const resources = {
       },
       cta: {
         title: "Prêt à Ne Plus Jamais Manquer un Prospect?",
-        subtitle: "Rejoignez 500+ agents immobiliers canadiens utilisant l'IA pour conclure plus de ventes",
+        subtitle: "Rejoignez notre communauté bêta canadienne utilisant l'IA pour conclure plus de ventes",
         button: "Commencez Votre Essai Gratuit de 14 Jours",
         note: "Aucune carte de crédit requise • Configuration en 20 minutes • Annulez à tout moment"
       },
       mobileCTA: {
         title: "Commencez Votre Essai Gratuit de 14 Jours",
-        subtitle: "Rejoignez 500+ Agents Canadiens"
+        subtitle: "Rejoignez Notre Communauté Bêta Canadienne"
       },
       trustTransparency: {
         badge: "Confiance et Transparence",
@@ -2435,7 +2435,7 @@ const resources = {
         security: {
           title: "La Sécurité d'Abord",
           desc: "Protection des données de niveau entreprise",
-          description: "Architecture conforme SOC 2, gestion des données prête pour LPRPDE et sécurité de niveau entreprise dès le premier jour."
+          description: "Architecture axée sur la sécurité, traitement des données conforme à la LPRPDE et chiffrement de niveau entreprise dès le premier jour."
         },
         canadian: {
           title: "Conçu au Canada",
@@ -2480,7 +2480,7 @@ const resources = {
             quote: "Notre équipe de 5 agents fonctionne maintenant comme une équipe de 15. Le tableau de bord unifié signifie qu'aucun prospect ne passe entre les mailles du filet, même lorsque nous sommes tous occupés.",
             brokerage: "Chef d'Équipe RE/MAX",
             stats: {
-              responseTime: "Nous répondons dans les 24 heures",
+              responseTime: "temps de réponse moyen de l'IA",
               leadIncrease: "d'augmentation des prospects qualifiés",
               additionalDeals: "transactions supplémentaires au T1"
             },
@@ -2563,12 +2563,12 @@ const resources = {
           limitedSpots: "Places Bêta Limitées"
         },
         credibility: {
-          soc2Title: "Conforme SOC 2",
-          soc2Desc: "Sécurité et protection des données de niveau entreprise",
-          pipedaTitle: "Conforme PIPEDA",
-          pipedaDesc: "Conformité totale aux lois canadiennes sur la vie privée",
-          creaTitle: "Certifié CREA",
-          creaDesc: "Partenaire officiel d'intégration CREA DDF®"
+          soc2Title: "Architecture Axée Sécurité",
+          soc2Desc: "Chiffrement et protection des données de niveau entreprise",
+          pipedaTitle: "Conforme PIPEDA par Conception",
+          pipedaDesc: "Construit autour des principes canadiens de confidentialité",
+          creaTitle: "Intégration CREA DDF®",
+          creaDesc: "Intégration CREA DDF® prévue pour Q3 2026"
         },
         problemStatement: {
           title: "Les Coûts Cachés de la Technologie Immobilière Désuète",
@@ -2611,7 +2611,7 @@ const resources = {
           api2: "Webhooks:",
           api2Desc: "Événements en temps réel (nouveau prospect, offre conclue, tâche en retard)",
           api3: "Synchronisation CRM:",
-          api3Desc: "Connecteurs pré-construits pour Brivity, Follow Up Boss, Salesforce, HubSpot",
+          api3Desc: "Zapier, Make et n8n natifs. Connecteurs directs Salesforce, Zoho, Pipedrive prévus.",
           api4: "Intégration Calendrier:",
           api4Desc: "Synchronisation bidirectionnelle avec Google/Outlook. Création auto de liens Zoom",
           api5: "Plateformes Email:",
@@ -2626,7 +2626,7 @@ const resources = {
           perf4: "Support (Entreprise)"
         },
         finalCTA: {
-          title: "Rejoignez 500+ Agents Canadiens Qui Développent Leur Entreprise avec l'IA",
+          title: "Rejoignez 50+ Agents Canadiens Qui Développent Leur Entreprise avec l'IA",
           subtitle: "Commencez à conclure plus de ventes avec l'automation propulsée par l'IA aujourd'hui",
           startTrial: "Commencez Votre Essai Gratuit de 14 Jours",
           bookDemo: "Réservez Votre Démo Gratuite",
@@ -3137,7 +3137,7 @@ const resources = {
             time: "5 minutes",
             description: "Liez votre CRM, courriel, site web et système téléphonique avec des intégrations en un clic.",
             details: [
-              "Connectez votre CRM existant (Follow Up Boss, Brivity, etc.)",
+              "Connectez votre CRM existant via Zapier/Make ou import CSV",
               "Liez Gmail ou Outlook",
               "Ajoutez le code widget à votre site",
               "Importez vos contacts existants (CSV ou sync directe)"
@@ -3213,7 +3213,7 @@ const resources = {
           freeOnboarding: "🎓 Intégration Gratuite",
           freeOnboardingDesc: "Assistance personnalisée à la configuration",
           avgSetupTime: "Temps de configuration moyen : 22 minutes",
-          basedOn: "(basé sur 500+ intégrations d'agents)"
+          basedOn: "(basé sur nos sessions d'intégration bêta)"
         }
       },
       integrationsPage: {
