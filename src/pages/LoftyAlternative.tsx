@@ -25,7 +25,7 @@ const LoftyAlternative = () => {
         "name": "Does RealtorDesk AI work with CREA DDF® like Lofty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, RealtorDesk AI has native CREA DDF® integration built specifically for Canadian agents. Unlike Lofty which is US-focused, RealtorDesk AI is designed from the ground up for the Canadian real estate market."
+          "text": "CREA DDF® integration is on the Q3 2026 roadmap for RealtorDesk AI. Unlike Lofty which is US-focused, RealtorDesk AI is designed from the ground up for the Canadian real estate market."
         }
       },
       {
@@ -41,7 +41,7 @@ const LoftyAlternative = () => {
         "name": "Does RealtorDesk AI have the same features as Lofty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus Canadian MLS data integration, PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon) that Lofty doesn't offer."
+          "text": "Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon). CREA DDF® (Canadian MLS) integration is planned for Q3 2026."
         }
       }
     ]
@@ -77,7 +77,7 @@ const LoftyAlternative = () => {
     <div className="min-h-screen">
       <SEO 
         title="Lofty CRM Alternative for Canadian Agents in 2026"
-        description="Best Lofty alternative for Canadian real estate agents. RealtorDesk AI offers CREA DDF®, PIPEDA compliance, AI voice agent, and bilingual support at $149 CAD/mo vs Lofty's $700+ USD/mo. Save 85%. Free migration."
+        description="Best Lofty alternative for Canadian real estate agents. RealtorDesk AI offers PIPEDA compliance, AI voice agent, bilingual support, and CREA DDF® integration (coming Q3 2026) at $149 CAD/mo vs Lofty's $700+ USD/mo. Save 85%. Free migration."
         keywords="Lofty alternative, Lofty CRM alternative Canada, cheaper than Lofty, best real estate CRM Canada, CREA DDF CRM, PIPEDA compliant CRM, Lofty vs RealtorDesk, switch from Lofty"
         canonicalUrl="https://www.realtordesk.ai/lofty-alternative"
         structuredData={[comparisonFAQSchema, comparisonTableSchema]}
@@ -96,7 +96,7 @@ const LoftyAlternative = () => {
               <span className="gradient-text">Built for Canadian Agents</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Get CREA DDF® integration, PIPEDA compliance, AI voice agent, and bilingual support at <strong>$149 CAD/month</strong> vs Lofty's <strong>$700+ USD/month</strong>. No setup fees. Free migration.
+              Get PIPEDA compliance, AI voice agent, bilingual support, and CREA DDF® integration (coming Q3 2026) at <strong>$149 CAD/month</strong> vs Lofty's <strong>$700+ USD/month</strong>. No setup fees. Free migration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="group">
@@ -197,8 +197,8 @@ const LoftyAlternative = () => {
                     <td className="py-4 px-4 font-semibold" colSpan={3}>Canadian Market Features</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">CREA DDF® Native Integration</td>
-                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
+                    <td className="py-3 px-4">CREA DDF® Integration</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Coming Q3 2026</td>
                     <td className="text-center py-3 px-4 text-muted-foreground">❌ US-focused</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -297,7 +297,7 @@ const LoftyAlternative = () => {
                 <Shield className="w-10 h-10 mb-4 text-primary" />
                 <h3 className="text-xl font-bold mb-2">Built for Canada</h3>
                 <p className="text-muted-foreground">
-                  Lofty is designed for the US market. RealtorDesk AI is built specifically for Canadian agents with CREA DDF®, PIPEDA compliance, bilingual support, and Canadian data hosting.
+                  Lofty is designed for the US market. RealtorDesk AI is built specifically for Canadian agents with PIPEDA compliance, bilingual support, Canadian data hosting, and CREA DDF® integration coming Q3 2026.
                 </p>
               </Card>
               <Card className="p-6">
@@ -339,9 +339,9 @@ const LoftyAlternative = () => {
                 </p>
               </Card>
               <Card className="p-6">
-                <h3 className="text-lg font-bold mb-2">Does RealtorDesk AI work with CREA DDF® like Lofty?</h3>
+                <h3 className="text-lg font-bold mb-2">Will RealtorDesk AI work with CREA DDF® like Lofty?</h3>
                 <p className="text-muted-foreground">
-                  Yes, RealtorDesk AI has native CREA DDF® integration built specifically for Canadian agents. Unlike Lofty which is US-focused, RealtorDesk AI is designed from the ground up for the Canadian real estate market.
+                  CREA DDF® integration is on the Q3 2026 roadmap for RealtorDesk AI. Unlike Lofty which is US-focused, RealtorDesk AI is designed from the ground up for the Canadian real estate market.
                 </p>
               </Card>
               <Card className="p-6">
@@ -353,7 +353,7 @@ const LoftyAlternative = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Does RealtorDesk AI have the same features as Lofty?</h3>
                 <p className="text-muted-foreground">
-                  Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus Canadian MLS data integration, PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon) that Lofty doesn't offer.
+                  Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon). CREA DDF® (Canadian MLS) integration is planned for Q3 2026.
                 </p>
               </Card>
               <Card className="p-6">

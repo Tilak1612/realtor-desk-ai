@@ -34,8 +34,8 @@ const CanadianMarket = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Canadian Real Estate CRM | Built for CREA DDF and PIPEDA"
-        description="RealtorDesk AI is built for Canadian agents with CREA DDF® integration, bilingual support, and PIPEDA-compliant data handling across provinces."
+        title="Canadian Real Estate CRM | Built for Canada with PIPEDA in mind"
+        description="RealtorDesk AI is built for Canadian agents with bilingual support and PIPEDA-compliant data handling across provinces. CREA DDF® integration is on the Q3 2026 roadmap."
         keywords="canadian real estate crm, CREA DDF, PIPEDA compliant crm, bilingual real estate crm, canadian realtors"
       />
       <Navbar />
@@ -125,14 +125,14 @@ const CanadianMarket = () => {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <MapPin className="w-8 h-8 text-primary" />
-                    <h3 className="text-2xl font-bold">Native CREA DDF® Integration</h3>
+                    <h3 className="text-2xl font-bold">CREA DDF® Integration (Coming Q3 2026)</h3>
                   </div>
                   <p className="text-muted-foreground mb-4 leading-relaxed">
-                    Access 65% of Canadian listings nationally, plus seamless integration with regional systems (ITSO, Pillar 9, TREB) for complete coverage.
+                    CREA DDF® integration is on the Q3 2026 roadmap, with planned access to 65% of Canadian listings nationally plus regional systems (ITSO, Pillar 9, TREB). Today you can import listings from Realtor.ca via the built-in importer.
                   </p>
                   <div className="flex items-center gap-2 text-accent font-semibold">
                     <CheckCircle className="w-5 h-5" />
-                    No more manual MLS searches or data re-entry
+                    Planned: goodbye to manual MLS searches and data re-entry
                   </div>
                 </div>
                 <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6 text-center">

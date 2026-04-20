@@ -204,7 +204,7 @@ const VsFollowUpBoss = () => {
               <strong>Follow Up Boss:</strong> 300+ integrations with various platforms—mostly US-focused tools. Impressive breadth.
             </p>
             <p>
-              <strong>RealtorDesk AI:</strong> 30+ integrations prioritizing Canadian tools: CREA DDF, RateSpy, BrokerBay, Canadian mortgage calculators, and local MLS systems.
+              <strong>RealtorDesk AI:</strong> 30+ integrations prioritizing Canadian tools: RateSpy, BrokerBay, Canadian mortgage calculators, and more. CREA DDF® / local MLS integration is on the Q3 2026 roadmap.
             </p>
             <p>
               <strong>The question:</strong> Do you need 300 integrations, or do you need the right 30?

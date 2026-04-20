@@ -76,7 +76,7 @@ const VsIxact = () => {
 
             <Card className="p-6 text-center">
               <TrendingUp className="w-12 h-12 text-accent mx-auto mb-4" />
-              <h3 className="font-bold mb-2">Close 3X More Deals</h3>
+              <h3 className="font-bold mb-2">Close Meaningfully More Deals</h3>
               <p className="text-sm text-muted-foreground">
                 AI identifies your hottest leads. Focus on sellers ready to list, not cold contacts
               </p>

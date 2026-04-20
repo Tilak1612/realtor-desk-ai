@@ -310,7 +310,7 @@ const AIAutomationSlowerMarket = () => {
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
               <h3 className="text-2xl font-bold mb-4">Ready to See AI Automation in Action?</h3>
               <p className="mb-6">
-                Book a free demo of RealtorDesk AI—Canada's first AI-native CRM built specifically for Canadian Realtors. See firsthand how sub-3-second response times, automated follow-ups, and CREA DDF integration can help you close more deals faster.
+                Book a free demo of RealtorDesk AI—Canada's first AI-native CRM built specifically for Canadian Realtors. See firsthand how sub-3-second response times and automated follow-ups can help you close more deals faster. CREA DDF® integration is on the Q3 2026 roadmap.
               </p>
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">

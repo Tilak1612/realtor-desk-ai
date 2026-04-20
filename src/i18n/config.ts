@@ -90,7 +90,7 @@ const resources = {
           usingNow: "using now",
           demos: "demos",
           bookedThisWeek: "booked this week",
-          joinAgents: "Join agents closing 3X more deals"
+          joinAgents: "Join agents closing meaningfully more deals"
         },
         credibility: {
           title: "Trusted & Secure"
@@ -572,15 +572,15 @@ const resources = {
         },
         q13: {
           question: "How does RealtorDesk AI compare to Follow Up Boss?",
-          answer: "RealtorDesk AI offers AI-powered instant lead response (under 3 seconds), native CREA DDF® integration, and bilingual support starting at $149/mo CAD. Follow Up Boss requires manual follow-up, lacks AI features, and costs $49-$99 USD/user/month without Canadian-specific features."
+          answer: "RealtorDesk AI offers AI-powered instant lead response (under 3 seconds) and bilingual support starting at $149/mo CAD, with CREA DDF® integration on the Q3 2026 roadmap. Follow Up Boss requires manual follow-up, lacks AI features, and costs $49-$99 USD/user/month without Canadian-specific features."
         },
         q14: {
           question: "Does RealtorDesk AI work with CREA DDF®?",
-          answer: "Yes! RealtorDesk AI has native CREA DDF® integration built specifically for Canadian agents. Sync MLS listings automatically, match buyers to properties in real-time, and manage listing data directly within the CRM—no third-party tools needed."
+          answer: "CREA DDF® integration is on the Q3 2026 roadmap for RealtorDesk AI. When it launches, you'll be able to sync MLS listings automatically, match buyers to properties in real-time, and manage listing data directly within the CRM. In the meantime, you can import listings from Realtor.ca via the built-in importer."
         },
         q15: {
           question: "What's the average ROI for agents using RealtorDesk AI?",
-          answer: "Based on our beta user data, agents see an average 3X increase in lead conversion due to sub-3-second response times. With an average agent closing 12-18 deals per year, adding just 2-3 extra deals from better follow-up pays for the CRM 10X over."
+          answer: "Based on our beta user data, agents see a meaningful lift in lead conversion due to sub-3-second response times. With an average agent closing 12-18 deals per year, adding just 2-3 extra deals from better follow-up pays for the CRM many times over."
         },
         q16: {
           question: "Can RealtorDesk AI handle phone calls?",
@@ -1255,7 +1255,7 @@ const resources = {
             quickAdd: "🚀 Quick Add from MLS Listing URL",
             pasteUrl: "Paste Listing URL (Coming Soon: Auto-fill from CREA DDF)",
             urlPlaceholder: "https://realtor.ca/listing/...",
-            urlNote: "Phase 1: We'll scrape basic info. Phase 2: Full CREA DDF integration coming Q1 2026.",
+            urlNote: "Phase 1: We'll scrape basic info. Phase 2: CREA DDF integration is planned for Q3 2026.",
             propertyTitle: "Property Title",
             titlePlaceholder: "Beautiful 3BR Family Home",
             address: "Address",
@@ -1886,7 +1886,7 @@ const resources = {
           usingNow: "l'utilisent maintenant",
           demos: "démos",
           bookedThisWeek: "réservées cette semaine",
-          joinAgents: "Rejoignez les agents qui concluent 3X plus"
+          joinAgents: "Rejoignez les agents qui concluent significativement plus de transactions"
         },
         credibility: {
           title: "Approuvé et Sécurisé"
@@ -2368,15 +2368,15 @@ const resources = {
         },
         q13: {
           question: "Comment RealtorDesk AI se compare-t-il à Follow Up Boss?",
-          answer: "RealtorDesk AI offre une réponse instantanée aux prospects par IA (moins de 3 secondes), une intégration native CREA DDF® et un support bilingue à partir de 149$/mois CAD. Follow Up Boss nécessite un suivi manuel, manque de fonctionnalités IA et coûte 49-99$ USD/utilisateur/mois sans fonctionnalités spécifiques au Canada."
+          answer: "RealtorDesk AI offre une réponse instantanée aux prospects par IA (moins de 3 secondes) et un support bilingue à partir de 149$/mois CAD, avec l'intégration CREA DDF® prévue pour le 3e trimestre 2026. Follow Up Boss nécessite un suivi manuel, manque de fonctionnalités IA et coûte 49-99$ USD/utilisateur/mois sans fonctionnalités spécifiques au Canada."
         },
         q14: {
           question: "RealtorDesk AI fonctionne-t-il avec CREA DDF®?",
-          answer: "Oui! RealtorDesk AI a une intégration native CREA DDF® conçue spécifiquement pour les agents canadiens. Synchronisez les inscriptions MLS automatiquement, jumelez les acheteurs aux propriétés en temps réel et gérez les données d'inscription directement dans le CRM—aucun outil tiers requis."
+          answer: "L'intégration CREA DDF® est prévue pour le 3e trimestre 2026 pour RealtorDesk AI. Lors du lancement, vous pourrez synchroniser les inscriptions MLS automatiquement, jumeler les acheteurs aux propriétés en temps réel et gérer les données d'inscription directement dans le CRM. En attendant, vous pouvez importer les inscriptions de Realtor.ca via l'outil d'importation intégré."
         },
         q15: {
           question: "Quel est le ROI moyen pour les agents utilisant RealtorDesk AI?",
-          answer: "Selon les données de nos utilisateurs bêta, les agents voient une augmentation moyenne de 3X de la conversion des prospects grâce à des temps de réponse inférieurs à 3 secondes. Avec un agent moyen concluant 12-18 transactions par an, ajouter seulement 2-3 transactions supplémentaires grâce à un meilleur suivi paie le CRM 10X."
+          answer: "Selon les données de nos utilisateurs bêta, les agents voient une augmentation significative de la conversion des prospects grâce à des temps de réponse inférieurs à 3 secondes. Avec un agent moyen concluant 12-18 transactions par an, ajouter seulement 2-3 transactions supplémentaires grâce à un meilleur suivi paie le CRM plusieurs fois."
         },
         q16: {
           question: "RealtorDesk AI peut-il gérer les appels téléphoniques?",

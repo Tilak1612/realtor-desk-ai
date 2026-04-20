@@ -74,7 +74,7 @@ const BestCRMCanada2025 = () => {
           <Card className="p-6 mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
             <h3 className="text-lg font-bold mb-3">Key Finding</h3>
             <p className="text-base mb-0">
-              After testing 23 CRMs and interviewing 150 Canadian agents, we found that 73% of agents use the wrong CRM—one built for US markets without PIPEDA compliance, French support, or CREA DDF integration. This comprehensive guide reveals the top 10 CRMs specifically evaluated for Canadian real estate professionals.
+              After testing 23 CRMs and interviewing dozens of Canadian agents, we found that many agents use the wrong CRM—one built for US markets without PIPEDA compliance, French support, or CREA DDF integration. This comprehensive guide reveals the top 10 CRMs specifically evaluated for Canadian real estate professionals.
             </p>
           </Card>
 
@@ -134,7 +134,7 @@ const BestCRMCanada2025 = () => {
                     <li>✅ Purpose-built for Canadian market</li>
                     <li>✅ Sub-3-second AI lead response (fastest tested)</li>
                     <li>✅ Native PIPEDA/CASL compliance</li>
-                    <li>✅ CREA DDF integration included</li>
+                    <li>✅ CREA DDF integration (coming Q3 2026)</li>
                     <li>✅ Bilingual AI for Quebec markets</li>
                     <li>✅ Transparent pricing ($149-299 CAD)</li>
                   </ul>

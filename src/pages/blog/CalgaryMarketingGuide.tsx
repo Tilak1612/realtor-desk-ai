@@ -794,7 +794,7 @@ const CalgaryMarketingGuide = () => {
               <ul className="space-y-2 mb-8 text-lg">
                 <li>✓ Capture Calgary leads 24/7 (even at -30°C)</li>
                 <li>✓ Respond in 2.7 seconds</li>
-                <li>✓ CREA DDF integration for Calgary MLS</li>
+                <li>✓ CREA DDF integration for Calgary MLS (coming Q3 2026)</li>
                 <li>✓ Winter lead nurturing automation</li>
                 <li>✓ Video script generation</li>
               </ul>

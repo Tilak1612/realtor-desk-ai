@@ -7,7 +7,7 @@ export const organizationSchema = {
   "legalName": "Brainfy AI Inc.",
   "url": "https://www.realtordesk.ai",
   "logo": "https://www.realtordesk.ai/logo.png",
-  "description": "AI-first real estate CRM built for Canadian agents with CREA DDF® integration, PIPEDA compliance, and bilingual support.",
+  "description": "AI-first real estate CRM built for Canadian agents with PIPEDA compliance, bilingual support, and CREA DDF® integration on the roadmap.",
   "foundingDate": "2024",
   "address": {
     "@type": "PostalAddress",
@@ -33,7 +33,7 @@ export const softwareApplicationSchema = {
   "name": "RealtorDesk AI",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web, iOS, Android",
-  "description": "AI-powered real estate CRM with 24/7 chatbot, lead scoring, CREA DDF® integration, and automated follow-ups for Canadian agents.",
+  "description": "AI-powered real estate CRM with 24/7 chatbot, lead scoring, and automated follow-ups for Canadian agents. CREA DDF® integration is on the roadmap.",
   "offers": {
     "@type": "AggregateOffer",
     "lowPrice": "149.00",
@@ -65,7 +65,7 @@ export const softwareApplicationSchema = {
   "featureList": [
     "AI Chatbot (24/7)",
     "AI Voice Agent",
-    "CREA DDF® Integration",
+    "CREA DDF® Integration (coming Q3 2026)",
     "Predictive Lead Scoring",
     "Email & SMS Automation",
     "WhatsApp Messaging",
@@ -121,7 +121,7 @@ export const homepageFAQSchema = {
       "name": "Does RealtorDesk AI integrate with CREA DDF®?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "RealtorDesk AI integrates with Canadian MLS property data, allowing you to import listings, match buyers to properties, and manage listing information directly within the CRM."
+        "text": "CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap for RealtorDesk AI. Today you can import listings from Realtor.ca via the built-in importer and manage listing information directly within the CRM."
       }
     },
     {

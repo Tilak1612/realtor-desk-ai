@@ -11,7 +11,7 @@ const VoiceAIGuide = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals"
-        description="Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close 3x more deals."
+        description="Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close meaningfully more deals."
         keywords="voice AI for real estate, AI lead follow-up, real estate voice assistant, Canadian real estate automation"
         article
         publishedTime="2026-01-01"
@@ -23,7 +23,7 @@ const VoiceAIGuide = () => {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals",
-            "description": "Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close 3x more deals.",
+            "description": "Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close meaningfully more deals.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2026-01-01",
@@ -41,7 +41,7 @@ const VoiceAIGuide = () => {
               Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. See how Canadian agents use AI to follow up instantly and close 3x more deals.
+              Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. See how Canadian agents use AI to follow up instantly and close meaningfully more deals.
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-500">
               <span>📅 Updated: January 2026</span>
@@ -784,7 +784,7 @@ const VoiceAIGuide = () => {
                     <td className="p-3 font-bold">13</td>
                     <td className="p-3 font-bold">2.3</td>
                     <td className="p-3 font-bold text-green-600">$27,600</td>
-                    <td className="p-3 font-bold text-primary">9,131%</td>
+                    <td className="p-3 font-bold text-primary">Strong</td>
                   </tr>
                 </tbody>
               </table>
@@ -796,7 +796,7 @@ const VoiceAIGuide = () => {
                 <p>• <strong>7.5x cheaper</strong> than ISA</p>
                 <p>• Contacts <strong>98%</strong> of leads (vs 85%)</p>
                 <p>• Generates <strong>18% more</strong> appointments</p>
-                <p className="text-4xl font-bold pt-4">ROI: 9,131%</p>
+                <p className="text-4xl font-bold pt-4">Strong ROI for voice AI</p>
               </div>
             </Card>
           </section>
@@ -983,7 +983,7 @@ const VoiceAIGuide = () => {
                   <li>✓ Sounds indistinguishable from human in 75-80% of calls</li>
                   <li>✓ Books appointments 24/7, even while you sleep</li>
                   <li>✓ Bilingual capability solves Quebec market challenge</li>
-                  <li>✓ ROI: 9,131%</li>
+                  <li>✓ Strong ROI for voice AI</li>
                   <li>✓ Canadian-compliant (DNCL, PIPEDA, call recording laws)</li>
                 </ul>
                 <p className="text-xl font-bold text-primary pt-4">

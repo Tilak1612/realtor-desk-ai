@@ -131,7 +131,7 @@ const AITransformation = () => {
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
               <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Real Estate Business?</h3>
               <p className="mb-6">
-                Join over 2,000 Canadian realtors who are already using AI to close more deals and save 15+ hours per week.
+                Join our growing Canadian beta community using AI to close more deals and save 15+ hours per week.
               </p>
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">

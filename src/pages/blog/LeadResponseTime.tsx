@@ -337,8 +337,8 @@ const LeadResponseTime = () => {
                   RealtorDesk makes sure that's always you.
                 </h3>
                 <p className="text-white/85 mb-6">
-                  AI-native CRM for Canadian real estate agents — CREA DDF integration,
-                  PIPEDA compliance, 24/7 AI follow-up, bilingual support.
+                  AI-native CRM for Canadian real estate agents — PIPEDA compliance,
+                  24/7 AI follow-up, bilingual support, and CREA DDF® integration on the Q3 2026 roadmap.
                   Starting at $149/month CAD.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">

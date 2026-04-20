@@ -206,7 +206,7 @@ const BoomTownAlternative = () => {
                   <li>• Sub-3-second AI lead response</li>
                   <li>• Voice AI for phone calls</li>
                   <li>• PIPEDA/CASL compliance automation</li>
-                  <li>• CREA DDF integration</li>
+                  <li>• CREA DDF (Q3 2026)</li>
                   <li>• Bilingual AI (English/French)</li>
                   <li>• Predictive lead scoring</li>
                 </ul>

@@ -45,11 +45,11 @@ const Pricing = () => {
     <div className="min-h-screen">
       <SEO 
         title="Real Estate CRM Pricing - From $149/mo | RealtorDesk AI"
-        description="RealtorDesk AI pricing: $149/mo Starter, $299/mo Pro, $599/mo Teams. Save 85% vs Lofty ($700/mo). No setup fees, 14-day free trial. CREA DDF® native, PIPEDA compliant."
+        description="RealtorDesk AI pricing: Agent $149/mo, Team $299/mo, Brokerage custom. No setup fees, 14-day free trial. PIPEDA-aware design. CREA DDF® integration on the Q3 2026 roadmap."
         keywords="real estate CRM pricing, CRM for real estate agents cost, Lofty alternative pricing, best CRM for real estate agents Canada, affordable real estate CRM"
         structuredData={[
           pricingPageFAQSchema,
-          productSchema("Starter", 149, "AI-powered real estate CRM for individual agents with CREA DDF® integration"),
+          productSchema("Starter", 149, "AI-powered real estate CRM for individual Canadian agents — bilingual EN/FR, PIPEDA-aware, CREA DDF® on Q3 2026 roadmap"),
           productSchema("Professional", 299, "Advanced CRM with AI voice agent and SMS automation for growing agents"),
           productSchema("Teams", 599, "Enterprise CRM with unlimited users and custom AI training")
         ]}

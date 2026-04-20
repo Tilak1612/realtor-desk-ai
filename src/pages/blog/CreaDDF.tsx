@@ -98,7 +98,7 @@ const CreaDDF = () => {
 
             <h2>How DDF® Integration Works</h2>
             <p>
-              Modern platforms like RealtorDesk AI connect directly to the CREA DDF® feed, pulling listing data in real-time. This means:
+              Modern platforms connect directly to the CREA DDF® feed, pulling listing data in real-time. (RealtorDesk AI's CREA DDF® integration is on the Q3 2026 roadmap.) When available, this means:
             </p>
             <ol>
               <li><strong>Automatic Sync:</strong> New listings appear in your system within minutes of being posted to MLS®</li>
@@ -158,14 +158,14 @@ const CreaDDF = () => {
 
             <h2>Getting Started</h2>
             <p>
-              To access CREA DDF® through RealtorDesk AI:
+              CREA DDF® integration in RealtorDesk AI is planned for Q3 2026. When it launches, the setup flow will be:
             </p>
             <ol>
               <li>Verify your CREA membership and local board standing</li>
               <li>Complete the DDF® authorization process</li>
               <li>Connect your account through our secure integration</li>
               <li>Configure your preferences and filters</li>
-              <li>Start accessing national MLS® data immediately</li>
+              <li>Access national MLS® data directly inside your CRM</li>
             </ol>
 
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
