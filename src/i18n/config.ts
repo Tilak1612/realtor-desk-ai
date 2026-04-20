@@ -1798,6 +1798,16 @@ const resources = {
         savePreferences: "Save Preferences",
         back: "Back"
       },
+      boldtrail: {
+        compare: {
+          heading: "Four rows. Not forty.",
+          sub: "We do not compare on feature breadth. BoldTrail has 400,000+ agents on their platform; we have fewer than a hundred. These are the four axes where we can defend the claim, each sourced from BoldTrail's own help center, pricing signals, or public reviews."
+        },
+        betterWhen: {
+          heading: "When BoldTrail is the better choice",
+          body: "If you run a large brokerage in the United States, need BackOffice commission splits, or require deep integration with US-specific MLS systems that our CREA DDF work does not yet cover, BoldTrail is the more mature choice today. We are built for the independent Canadian agent or boutique team \u2014 we are smaller, more focused, and will remain so for the foreseeable future. Pick the tool that fits, not the longer feature list."
+        }
+      },
       leadScore: {
         title: "Why this lead scored",
         openExplainer: "Why this lead scored",
@@ -3657,6 +3667,16 @@ const resources = {
         functionalDesc: "Permettent des fonctionnalités améliorées comme les widgets de chat et les préférences.",
         savePreferences: "Sauvegarder les préférences",
         back: "Retour"
+      },
+      boldtrail: {
+        compare: {
+          heading: "Quatre lignes. Pas quarante.",
+          sub: "Nous ne nous comparons pas sur l'étendue des fonctionnalités. BoldTrail compte plus de 400\u00a0000 agents; nous en avons moins d'une centaine. Voici les quatre axes que nous pouvons défendre, chacun sourcé du centre d'aide de BoldTrail, de signaux tarifaires ou d'avis publics."
+        },
+        betterWhen: {
+          heading: "Quand BoldTrail est le meilleur choix",
+          body: "Si vous dirigez un grand courtage aux États-Unis, avez besoin de BackOffice pour les partages de commissions, ou d'une intégration profonde avec des systèmes MLS propres aux États-Unis que notre travail CREA DDF ne couvre pas encore, BoldTrail est aujourd'hui l'option plus mature. Nous sommes bâtis pour l'agent canadien indépendant ou la petite équipe — nous sommes plus petits, plus ciblés, et le resterons dans un avenir prévisible. Choisissez l'outil qui convient, pas la liste la plus longue."
+        }
       },
       leadScore: {
         title: "Pourquoi ce score",

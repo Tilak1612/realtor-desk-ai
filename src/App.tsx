@@ -312,6 +312,8 @@ const App = () => (
 
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />
+          {/* Alias per 2026-04-20 brief PR K — /compare/boldtrail renders the same page. */}
+          <Route path="/compare/boldtrail" element={<VsBoldTrail />} />
           <Route path="/vs/lofty" element={<VsLofty />} />
           <Route path="/vs/ixact" element={<VsIxact />} />
           <Route path="/vs/wise-agent" element={<VsWiseAgent />} />

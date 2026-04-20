@@ -14,7 +14,7 @@ const SwitchFromBoldTrail = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from BoldTrail | Free Migration to RealtorDesk AI"
-        description="Join 200+ agents who switched from BoldTrail to RealtorDesk AI and saved $6,288/year with better AI and Canadian features."
+        description="Free migration and CSV import if you're moving from BoldTrail to RealtorDesk AI — CASL-compliant emails, EN/FR, $999/yr Founding Member tier."
         keywords="switch from BoldTrail, BoldTrail migration, BoldTrail alternative Canada, RealtorDesk AI"
         canonicalUrl="https://www.realtordesk.ai/switch-from-boldtrail"
         structuredData={[
@@ -38,7 +38,7 @@ const SwitchFromBoldTrail = () => {
             Frustrated with <span className="gradient-text">BoldTrail?</span> You're Not Alone.
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Join 200+ agents who switched to Realtor Desk in 2024 and saved $6,288/year 
+            Canadian agents are choosing RealtorDesk AI over BoldTrail — $999/yr on the Founding Member tier vs BoldTrail's $6,987 first-year cost 
             while getting better AI, faster support, and Canadian features BoldTrail lacks.
           </p>
           
@@ -53,8 +53,8 @@ const SwitchFromBoldTrail = () => {
             
             <Card className="p-4 border-accent">
               <div className="text-sm text-muted-foreground mb-1">Switch to</div>
-              <div className="text-2xl font-bold gradient-text">$699/year</div>
-              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $6,288!</div>
+              <div className="text-2xl font-bold gradient-text">$999/year</div>
+              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $5,988!</div>
             </Card>
           </div>
 
@@ -164,7 +164,7 @@ const SwitchFromBoldTrail = () => {
               <div className="text-lg font-bold mb-2">Step 5</div>
               <h3 className="font-semibold mb-2">You're Live!</h3>
               <p className="text-sm text-muted-foreground">
-                Up and running in 48 hours, saving $6,288/year
+                Up and running in 48 hours, saving $5,988/year
               </p>
             </Card>
           </div>
@@ -271,7 +271,7 @@ const SwitchFromBoldTrail = () => {
           </div>
 
           <p className="text-sm text-muted-foreground">
-            200+ agents switched from BoldTrail in 2024. Join them and save $6,288/year.
+            Switch from BoldTrail today. Save $5,988 in year one versus their $6,987 first-year total.
           </p>
         </div>
       </section>
