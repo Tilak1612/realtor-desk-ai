@@ -100,6 +100,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/roadmap" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('footer.roadmap', 'Product Roadmap')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.integrations')}
                 </Link>
