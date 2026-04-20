@@ -84,3 +84,8 @@ verify_jwt = false
 # Public unsubscribe endpoint — clicked from email footers without a session.
 [functions.process-unsubscribe]
 verify_jwt = false
+
+# Public "I lost my email, email me an opt-out link" endpoint.
+# Always returns 200 so it can't be used to probe DB membership.
+[functions.request-unsubscribe-link]
+verify_jwt = false
