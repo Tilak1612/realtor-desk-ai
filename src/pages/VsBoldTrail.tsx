@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Check, X, TrendingDown, Shield, Clock, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
+import BoldTrailComparisonTable from "@/components/BoldTrailComparisonTable";
 
 const VsBoldTrail = () => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const VsBoldTrail = () => {
     <div className="min-h-screen">
       <SEO
         title="BoldTrail Alternative | RealtorDesk AI vs BoldTrail"
-        description="Looking for a BoldTrail alternative? RealtorDesk AI helps Canadian agents save $6,288 in year one with AI lead generation and faster support."
+        description="Looking for a BoldTrail alternative? RealtorDesk AI helps Canadian agents save $5,988 in year one with AI lead generation and faster support."
         keywords="BoldTrail alternative, RealtorDesk AI vs BoldTrail, Canadian real estate CRM, AI CRM for realtors"
         canonicalUrl="https://www.realtordesk.ai/vs/boldtrail"
         structuredData={[
@@ -28,7 +29,7 @@ const VsBoldTrail = () => {
               "@type": "ItemList",
               "itemListElement": [
                 { "@type": "ListItem", "position": 1, "name": "BoldTrail", "description": "$6,987 first year with $999 setup fee" },
-                { "@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "$699/year, $0 setup, AI-powered lead generation" }
+                { "@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "$999/year, $0 setup, AI-powered lead generation" }
               ]
             }
           }
@@ -43,10 +44,10 @@ const VsBoldTrail = () => {
             Best CRM for Real Estate Agents Comparison
           </Badge>
           <h1 className="mb-6">
-            Best BoldTrail Alternative: <span className="gradient-text">Realtor Desk</span> - Save $6,288
+            Best BoldTrail Alternative: <span className="gradient-text">Realtor Desk</span> - Save $5,988 first year
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            The best CRM for real estate agents with AI lead generation software. Save $6,288 vs BoldTrail while getting faster support and Canadian-focused features.
+            The best CRM for real estate agents with AI lead generation software. Save $5,988 first year vs BoldTrail while getting faster support and Canadian-focused features.
           </p>
           
           {/* Cost Comparison */}
@@ -61,12 +62,14 @@ const VsBoldTrail = () => {
             
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
-              <div className="text-3xl font-bold gradient-text mb-1">$699</div>
-              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $6,288 {t('comparison.firstYear')}</div>
+              <div className="text-3xl font-bold gradient-text mb-1">$999</div>
+              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $5,988 {t('comparison.firstYear')}</div>
             </Card>
           </div>
         </div>
       </section>
+
+      <BoldTrailComparisonTable />
 
       {/* Common Complaints Section */}
       <section className="section-padding">
@@ -149,9 +152,9 @@ const VsBoldTrail = () => {
 
             <Card className="p-6 border-accent/20">
               <Check className="w-8 h-8 text-accent mb-3" />
-              <h3 className="font-bold mb-2">$699/Year, Zero Setup Fees</h3>
+              <h3 className="font-bold mb-2">$999/Year, Zero Setup Fees</h3>
               <p className="text-sm text-muted-foreground">
-                All-inclusive pricing. No hidden costs, no surprise charges. Save $6,288 vs BoldTrail.
+                All-inclusive pricing. No hidden costs, no surprise charges. Save $5,988 first year vs BoldTrail.
               </p>
             </Card>
 
@@ -198,7 +201,7 @@ const VsBoldTrail = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Annual Cost", rdai: "$699", boldtrail: "$5,988" },
+                  { feature: "Annual Cost", rdai: "$999", boldtrail: "$5,988" },
                   { feature: "Setup Fee", rdai: "$0", boldtrail: "$999" },
                   { feature: "Predictive Lead Scoring", rdai: true, boldtrail: false },
                   { feature: "24/7 AI Chatbot", rdai: true, boldtrail: false },
@@ -243,7 +246,7 @@ const VsBoldTrail = () => {
         <div className="container-custom max-w-4xl text-center">
           <h2 className="mb-6">We Make Switching Easy</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Join 200+ agents who switched from BoldTrail to Realtor Desk in 2024
+            Join early-access Canadian agents who chose RealtorDesk AI over BoldTrail
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
