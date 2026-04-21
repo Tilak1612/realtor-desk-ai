@@ -1,0 +1,403 @@
+import { useMemo, useState } from "react";
+import { AppShell } from "@/components/rd/layout/AppShell";
+import {
+  RDButton,
+  RDBadge,
+  RDAvatar,
+  IconSparkles,
+  IconSearch,
+  IconPhone,
+  IconCalendar,
+} from "@/components/rd";
+import { MOCK_LEADS, MOCK_CONVERSATIONS } from "@/data/rd";
+import type { ConversationMessage, Lead } from "@/types/rd";
+import { cn } from "@/lib/utils";
+
+// /app/inbox — conversations list + active thread per rd-app-extra.jsx
+// Artboard_Inbox. Mock-only for now. Composer/send action hooks come in
+// the backend wiring phase.
+
+type FilterKey = "all" | "unread" | "ai" | "mine";
+
+export default function Inbox() {
+  const leadsWithConversations = useMemo(() => {
+    return MOCK_LEADS.filter((l) => MOCK_CONVERSATIONS[l.id]?.length);
+  }, []);
+
+  const [activeId, setActiveId] = useState<string>(
+    leadsWithConversations[0]?.id ?? MOCK_LEADS[0]?.id ?? ""
+  );
+  const [filter, setFilter] = useState<FilterKey>("all");
+  const [query, setQuery] = useState("");
+
+  const threads = useMemo(() => {
+    let items = MOCK_LEADS;
+    if (filter === "ai") items = items.filter((l) => l.aiHandling);
+    if (filter === "mine") items = items.filter((l) => !l.aiHandling);
+    // "unread" proxy: leads that have conversations (non-empty) — real wiring swaps in a flag.
+    if (filter === "unread") items = items.filter((l) => (MOCK_CONVERSATIONS[l.id] ?? []).length > 0);
+    if (query.trim()) {
+      const q = query.trim().toLowerCase();
+      items = items.filter((l) => l.name.toLowerCase().includes(q));
+    }
+    return items;
+  }, [filter, query]);
+
+  const activeLead = MOCK_LEADS.find((l) => l.id === activeId);
+  const activeThread = activeId ? MOCK_CONVERSATIONS[activeId] ?? [] : [];
+
+  return (
+    <AppShell>
+      <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] h-full overflow-hidden">
+        <ThreadList
+          threads={threads}
+          activeId={activeId}
+          onSelect={setActiveId}
+          filter={filter}
+          onFilter={setFilter}
+          query={query}
+          onQuery={setQuery}
+        />
+        <ActivePane lead={activeLead} messages={activeThread} />
+      </div>
+    </AppShell>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
+
+function ThreadList({
+  threads,
+  activeId,
+  onSelect,
+  filter,
+  onFilter,
+  query,
+  onQuery,
+}: {
+  threads: Lead[];
+  activeId: string;
+  onSelect: (id: string) => void;
+  filter: FilterKey;
+  onFilter: (f: FilterKey) => void;
+  query: string;
+  onQuery: (q: string) => void;
+}) {
+  const unreadCount = 6; // static proxy until wiring
+  return (
+    <div className="flex flex-col border-r border-rd-line bg-white overflow-hidden min-h-0">
+      <div className="px-5 py-4 border-b border-rd-line">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-lg font-semibold">Conversations</h2>
+          <RDBadge tone="terra" size="sm">
+            {unreadCount} unread
+          </RDBadge>
+        </div>
+        <div className="flex items-center gap-2 bg-rd-ink-50 border border-rd-line rounded-rd-sm px-3 py-1.5 text-rd-ink-500">
+          <IconSearch />
+          <input
+            type="text"
+            placeholder="Search conversations…"
+            value={query}
+            onChange={(e) => onQuery(e.target.value)}
+            className="flex-1 bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400"
+          />
+        </div>
+        <div className="flex gap-1.5 mt-3">
+          {(["all", "unread", "ai", "mine"] as const).map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => onFilter(f)}
+              className={cn(
+                "px-2.5 py-1 text-[11px] font-semibold rounded-rd-pill border capitalize transition-colors",
+                filter === f
+                  ? "bg-rd-navy-800 text-white border-rd-navy-800"
+                  : "bg-transparent text-rd-ink-600 border-rd-line"
+              )}
+            >
+              {f === "ai" ? "AI" : f}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto">
+        {threads.length === 0 && (
+          <div className="p-6 text-center text-sm text-rd-ink-500">No conversations match.</div>
+        )}
+        {threads.map((lead) => (
+          <ThreadRow
+            key={lead.id}
+            lead={lead}
+            active={lead.id === activeId}
+            onSelect={() => onSelect(lead.id)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ThreadRow({
+  lead,
+  active,
+  onSelect,
+}: {
+  lead: Lead;
+  active: boolean;
+  onSelect: () => void;
+}) {
+  const last = (MOCK_CONVERSATIONS[lead.id] ?? []).slice(-1)[0];
+  const preview = last?.body ?? "No messages yet.";
+  const timeLabel = last ? new Date(last.sentAt).toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" }) : lead.lastActivity;
+  const hasUnread = !active && last?.author === "lead";
+
+  const stageLabel = lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold";
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className={cn(
+        "w-full text-left px-5 py-3.5 border-b border-rd-line flex gap-3 transition-colors",
+        active ? "bg-rd-navy-100 border-l-[3px] border-l-rd-navy-800" : "border-l-[3px] border-l-transparent",
+        hasUnread && !active && "bg-rd-paper-2"
+      )}
+    >
+      <div className="relative flex-shrink-0">
+        <RDAvatar name={lead.name} size={38} />
+        {lead.aiHandling && (
+          <div
+            title="AI handling"
+            className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-rd-terra-600 text-white border-2 border-white rounded-full flex items-center justify-center"
+          >
+            <IconSparkles className="w-[8px] h-[8px]" />
+          </div>
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex justify-between items-baseline mb-0.5 gap-2">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className={cn("text-[13px] truncate", hasUnread ? "font-bold" : "font-semibold")}>
+              {lead.name}
+            </span>
+            <span
+              className={cn(
+                "text-[9px] font-bold tracking-[0.06em] rounded-[3px] px-1 py-[1px] flex-shrink-0",
+                lead.language === "FR"
+                  ? "bg-rd-terra-100 text-rd-terra-800"
+                  : "bg-rd-navy-100 text-rd-navy-800"
+              )}
+            >
+              {lead.language}
+            </span>
+          </div>
+          <span className="text-[10px] text-rd-ink-500 font-semibold flex-shrink-0">{timeLabel}</span>
+        </div>
+        <div
+          className={cn(
+            "text-xs leading-[1.4] truncate",
+            hasUnread ? "text-rd-ink-800" : "text-rd-ink-500"
+          )}
+        >
+          {preview}
+        </div>
+        <div className="flex items-center gap-1.5 mt-1.5">
+          <span
+            className={cn(
+              "text-[9px] font-bold tracking-[0.04em] rounded-[3px] px-1.5 py-[1px]",
+              stageLabel === "Hot" && "bg-rd-terra-100 text-rd-terra-800",
+              stageLabel === "Warm" && "bg-rd-navy-100 text-rd-navy-800",
+              stageLabel === "Cold" && "bg-rd-ink-100 text-rd-ink-700"
+            )}
+          >
+            {stageLabel} · {lead.score}
+          </span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
+
+function ActivePane({ lead, messages }: { lead: Lead | undefined; messages: ConversationMessage[] }) {
+  if (!lead) {
+    return (
+      <div className="flex items-center justify-center h-full bg-rd-paper-2 text-rd-ink-500 text-sm">
+        Select a conversation from the left.
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col overflow-hidden bg-rd-paper-2 min-h-0">
+      {/* Active header */}
+      <div className="px-7 py-3.5 border-b border-rd-line bg-white flex items-center gap-3.5 flex-wrap">
+        <RDAvatar name={lead.name} size={40} />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[15px] font-semibold">{lead.name}</span>
+            <RDBadge
+              tone={lead.score >= 80 ? "terra" : lead.score >= 60 ? "navy" : "neutral"}
+              size="sm"
+            >
+              {lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold"} · {lead.score}
+            </RDBadge>
+            <span className="text-[11px] text-rd-ink-500">· {lead.listing}</span>
+          </div>
+          <div className="text-[11px] text-rd-ink-500 mt-0.5 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-rd-success" />
+            Active · {lead.aiHandling ? "Desk AI replying" : "Manual handling"}
+          </div>
+        </div>
+        <div className="flex gap-1.5">
+          <IconActionBtn aria-label="Call">
+            <IconPhone />
+          </IconActionBtn>
+          <IconActionBtn aria-label="Book showing">
+            <IconCalendar />
+          </IconActionBtn>
+          <RDButton variant="terra" size="sm" icon={<IconSparkles />}>
+            Take over
+          </RDButton>
+        </div>
+      </div>
+
+      {/* Thread */}
+      <div className="flex-1 overflow-y-auto px-7 py-6 flex flex-col gap-3.5">
+        {messages.length === 0 && (
+          <div className="text-center text-sm text-rd-ink-500 py-10">
+            No messages yet. When a lead replies to a drip or sends a chat, it appears here.
+          </div>
+        )}
+        {messages.map((m, i) => (
+          <MsgBubble key={m.id} message={m} flag={i === messages.length - 1 && m.author === "lead"} />
+        ))}
+      </div>
+
+      {/* Suggested reply + composer */}
+      <div className="px-7 py-3.5 border-t border-rd-line bg-white">
+        <div className="bg-rd-terra-100 border border-rd-terra-200 rounded-[10px] px-3.5 py-2.5 mb-3 flex items-center gap-2.5 text-xs">
+          <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
+          <span className="text-rd-terra-900 flex-1">
+            <strong className="font-semibold">Suggested reply:</strong> "Hi {lead.name.split(" ")[0]}
+            — Sarah here. I'm free today between 2–4 PM PST. Does a quick call at 2:30 work?"
+          </span>
+          <button
+            type="button"
+            className="text-[11px] font-bold bg-rd-terra-600 text-white px-2.5 py-1 rounded-rd-sm"
+          >
+            Use
+          </button>
+        </div>
+        <div className="border border-rd-line rounded-[12px] px-3.5 py-2.5">
+          <div className="text-[13px] text-rd-ink-400 min-h-[36px]">
+            Reply as Sarah (AI will pause)…
+          </div>
+          <div className="flex items-center justify-between pt-2">
+            <div className="flex gap-4 text-xs text-rd-ink-600">
+              <button type="button" className="inline-flex items-center gap-1.5 font-semibold">
+                <IconSparkles className="w-3 h-3" />
+                Draft with AI
+              </button>
+              <button type="button" className="font-semibold">
+                Attach listing
+              </button>
+            </div>
+            <RDButton variant="primary" size="sm">
+              Send
+            </RDButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function IconActionBtn({ children, ...rest }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      type="button"
+      className="w-8 h-8 border border-rd-line bg-white rounded-rd-sm flex items-center justify-center text-rd-ink-600 hover:bg-rd-ink-50"
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}
+
+function MsgBubble({ message, flag }: { message: ConversationMessage; flag: boolean }) {
+  const { author, authorName, body, sentAt, language } = message;
+  const time = new Date(sentAt).toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" });
+
+  if (author === "system") {
+    return (
+      <div className="text-center text-[11px] text-rd-ink-500 italic py-1">
+        {message.systemNote ?? body}
+      </div>
+    );
+  }
+
+  const isSelf = author === "agent" || author === "ai";
+  const isAI = author === "ai";
+
+  return (
+    <div className={cn("flex gap-2.5 items-start", isSelf ? "flex-row-reverse" : "flex-row")}>
+      {!isSelf ? (
+        <RDAvatar name={authorName} size={28} />
+      ) : (
+        <div
+          className={cn(
+            "w-7 h-7 rounded-full text-white flex items-center justify-center flex-shrink-0",
+            isAI ? "bg-rd-terra-600" : "bg-rd-navy-800"
+          )}
+        >
+          {isAI ? <IconSparkles /> : authorName.charAt(0).toUpperCase()}
+        </div>
+      )}
+      <div className="max-w-[72%]">
+        <div
+          className={cn(
+            "flex items-center gap-2 mb-1 text-[11px] text-rd-ink-500",
+            isSelf ? "flex-row-reverse" : "flex-row"
+          )}
+        >
+          <span className="font-semibold text-rd-ink-700">
+            {isAI ? "Desk AI" : isSelf ? "You" : authorName}
+          </span>
+          {language && (
+            <span
+              className={cn(
+                "text-[9px] font-bold tracking-[0.06em] rounded-[3px] px-1 py-[1px]",
+                language === "FR"
+                  ? "bg-rd-terra-100 text-rd-terra-800"
+                  : "bg-rd-navy-100 text-rd-navy-800"
+              )}
+            >
+              {language}
+            </span>
+          )}
+          <span>{time}</span>
+        </div>
+        <div
+          className={cn(
+            "px-3.5 py-2.5 text-[13.5px] leading-[1.5]",
+            !isSelf && "bg-white text-rd-ink-900 border border-rd-line rounded-[4px_14px_14px_14px]",
+            isSelf && isAI && "bg-rd-terra-600 text-white rounded-[14px_4px_14px_14px]",
+            isSelf && !isAI && "bg-rd-navy-800 text-white rounded-[14px_4px_14px_14px]",
+            flag && "ring-4 ring-rd-terra-200"
+          )}
+        >
+          {body}
+        </div>
+        {flag && (
+          <div className="text-right text-[10px] text-rd-terra-700 font-bold mt-1 tracking-[0.04em]">
+            ⚑ FLAGGED FOR YOU
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

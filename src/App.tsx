@@ -28,6 +28,11 @@ const RDAppDashboard = lazy(() => import("./pages/rd/app/Dashboard"));
 const RDAppLeads = lazy(() => import("./pages/rd/app/Leads"));
 const RDAppLeadDetail = lazy(() => import("./pages/rd/app/LeadDetail"));
 const RDAppPipeline = lazy(() => import("./pages/rd/app/Pipeline"));
+const RDAppInbox = lazy(() => import("./pages/rd/app/Inbox"));
+const RDAppAutomation = lazy(() => import("./pages/rd/app/Automation"));
+const RDAppReports = lazy(() => import("./pages/rd/app/Reports"));
+// Phase 4 replaces the legacy /onboarding route with the 5-step redesign.
+const RDOnboarding = lazy(() => import("./pages/rd/Onboarding"));
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
@@ -311,7 +316,12 @@ const App = () => (
           <Route path="/app/leads" element={<ProtectedRoute><RDAppLeads /></ProtectedRoute>} />
           <Route path="/app/leads/:id" element={<ProtectedRoute><RDAppLeadDetail /></ProtectedRoute>} />
           <Route path="/app/pipeline" element={<ProtectedRoute><RDAppPipeline /></ProtectedRoute>} />
-          <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+          <Route path="/app/inbox" element={<ProtectedRoute><RDAppInbox /></ProtectedRoute>} />
+          <Route path="/app/automation" element={<ProtectedRoute><RDAppAutomation /></ProtectedRoute>} />
+          <Route path="/app/reports" element={<ProtectedRoute><RDAppReports /></ProtectedRoute>} />
+          {/* Phase 4 redesign: /onboarding now renders the 5-step flow.
+              Legacy Onboarding.tsx is left in the tree for reference. */}
+          <Route path="/onboarding" element={<ProtectedRoute><RDOnboarding /></ProtectedRoute>} />
           <Route path="/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
           <Route path="/contacts/:id" element={<ProtectedRoute><ContactDetail /></ProtectedRoute>} />
           <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
