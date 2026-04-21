@@ -112,7 +112,7 @@ const Unsubscribe = () => {
                 email={email}
                 setEmail={setEmail}
                 onSubmit={handleManualSubmit}
-                t={t}
+                t={tWrap(t)}
               />
             </div>
           )}
@@ -139,7 +139,7 @@ const Unsubscribe = () => {
               email={email}
               setEmail={setEmail}
               onSubmit={handleManualSubmit}
-              t={t}
+              t={tWrap(t)}
             />
           )}
 
