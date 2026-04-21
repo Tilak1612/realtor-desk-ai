@@ -652,10 +652,10 @@ const Settings = () => {
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
                 <Lock className="w-4 h-4" />
-                {t('app.settings.security')}
+                {t("settings.twoFactor.title", "Two-Factor Authentication (2FA)")}
               </CardTitle>
               <CardDescription className="text-xs">
-                Protect your account with two-factor authentication
+                {t("settings.twoFactor.subtitle", "Protect your account with two-factor authentication")}
               </CardDescription>
             </CardHeader>
             <CardContent>

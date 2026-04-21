@@ -27,7 +27,11 @@ const resources = {
         viewAllNotifications: "View all notifications",
         profile: "Profile",
         settings: "Settings",
-        signOut: "Sign out"
+        signOut: "Sign out",
+        uploadPhoto: "Upload photo",
+        changePhoto: "Change photo",
+        removePhoto: "Remove photo",
+        uploadingPhoto: "Uploading..."
       },
       hero: {
         title: "Close More Deals with AI Built for Canadian Realtors",
@@ -923,7 +927,28 @@ const resources = {
           selected: "selected",
           deleteSelected: "Delete Selected",
           addTags: "Add Tags",
-          sendEmail: "Send Email"
+          sendEmail: "Send Email",
+          startCallSession: "Start Call Session",
+          viewTable: "Table",
+          viewCards: "Cards",
+          filters: {
+            searchPlaceholder: "Search by name, email, or phone...",
+            leadScore: "Lead Score",
+            coldRange: "Cold (0-49)",
+            warmRange: "Warm (50-79)",
+            hotRange: "Hot (80+)",
+            hotLeads: "Hot Leads",
+            warmLeads: "Warm Leads",
+            coldLeads: "Cold Leads",
+            clearAll: "Clear All Filters",
+            searchChip: "Search",
+            scoreChip: "Score"
+          },
+          empty: {
+            title: "No contacts yet",
+            importCta: "Import contacts",
+            refresh: "Refresh"
+          }
         },
         deals: {
           title: "Deals",
@@ -1024,7 +1049,15 @@ const resources = {
           title: "Settings",
           profile: "Profile",
           account: "Account",
-          notifications: "Notifications",
+          notifications: {
+            label: "Notifications",
+            desc: "Manage your email and push notification preferences",
+            email: "Email notifications",
+            emailDesc: "Receive email alerts for new leads and deal updates",
+            sms: "SMS notifications",
+            smsDesc: "Get text alerts for urgent follow-ups",
+            comingSoon: "Coming Soon"
+          },
           integrations: "Integrations",
           billing: "Billing",
           security: "Security",
@@ -1038,7 +1071,17 @@ const resources = {
           province: "Province",
           city: "City",
           save: "Save Changes",
-          cancel: "Cancel"
+          cancel: "Cancel",
+          twoFactor: {
+            title: "Two-Factor Authentication (2FA)",
+            subtitle: "Protect your account with two-factor authentication",
+            helper: "Add an extra layer of security with an authenticator app.",
+            enable: "Enable 2FA"
+          },
+          profileMenu: {
+            changePhoto: "Change photo",
+            removePhoto: "Remove photo"
+          }
         },
         common: {
           loading: "Loading...",
@@ -1158,6 +1201,11 @@ const resources = {
             success: "Contact added successfully",
             contactAdded: "has been added to your contacts",
             errorAdding: "Error adding contact",
+            validation: {
+              firstNameRequired: "First name is required",
+              lastNameRequired: "Last name is required",
+              invalidEmail: "Please enter a valid email address"
+            },
             sources: {
               website: "Website",
               referral: "Referral",
@@ -1731,7 +1779,32 @@ const resources = {
         },
         saveFailed: "Failed to save progress. Please try again.",
         welcome: "Welcome to Realtor Desk AI!",
-        completeFailed: "Failed to complete setup. Please try again."
+        completeFailed: "Failed to complete setup. Please try again.",
+        heading: "Getting started — 60 minutes, guided",
+        subheading: "Five steps to go from empty dashboard to first follow-up call.",
+        ack: "Got it",
+        step: {
+          profile: {
+            title: "Complete your profile",
+            desc: "Add your brokerage, license, and contact info."
+          },
+          contact: {
+            title: "Add your first contact",
+            desc: "Import a CSV or add a lead manually."
+          },
+          property: {
+            title: "Add your first property",
+            desc: "Paste a realtor.ca URL or enter details."
+          },
+          widget: {
+            title: "Set up your website widget",
+            desc: "Launches Q3 2026 — see roadmap."
+          },
+          calendar: {
+            title: "Connect Google or Outlook Calendar",
+            desc: "Sync appointments into /today."
+          }
+        }
       },
       auth: {
         backToWebsite: "Back to realtordesk.ai",
@@ -2288,7 +2361,11 @@ const resources = {
         viewAllNotifications: "Voir toutes les notifications",
         profile: "Profil",
         settings: "Paramètres",
-        signOut: "Se déconnecter"
+        signOut: "Se déconnecter",
+        uploadPhoto: "Téléverser une photo",
+        changePhoto: "Changer la photo",
+        removePhoto: "Retirer la photo",
+        uploadingPhoto: "Téléversement…"
       },
       hero: {
         title: "Concluez Plus de Transactions avec une IA Conçue pour les Courtiers Canadiens",
@@ -3184,7 +3261,28 @@ const resources = {
           selected: "sélectionné(s)",
           deleteSelected: "Supprimer la Sélection",
           addTags: "Ajouter des Étiquettes",
-          sendEmail: "Envoyer un Courriel"
+          sendEmail: "Envoyer un Courriel",
+          startCallSession: "Démarrer une session d'appels",
+          viewTable: "Tableau",
+          viewCards: "Cartes",
+          filters: {
+            searchPlaceholder: "Rechercher par nom, courriel ou téléphone…",
+            leadScore: "Score du prospect",
+            coldRange: "Froid (0-49)",
+            warmRange: "Tiède (50-79)",
+            hotRange: "Chaud (80+)",
+            hotLeads: "Prospects chauds",
+            warmLeads: "Prospects tièdes",
+            coldLeads: "Prospects froids",
+            clearAll: "Effacer tous les filtres",
+            searchChip: "Recherche",
+            scoreChip: "Score"
+          },
+          empty: {
+            title: "Aucun contact pour l'instant",
+            importCta: "Importer des contacts",
+            refresh: "Actualiser"
+          }
         },
         deals: {
           title: "Transactions",
@@ -3285,21 +3383,39 @@ const resources = {
           title: "Paramètres",
           profile: "Profil",
           account: "Compte",
-          notifications: "Notifications",
+          notifications: {
+            label: "Notifications",
+            desc: "Gérez vos préférences de notifications par courriel et par message poussé.",
+            email: "Notifications par courriel",
+            emailDesc: "Recevez des alertes par courriel pour les nouveaux prospects et les mises à jour de transactions.",
+            sms: "Notifications SMS",
+            smsDesc: "Recevez des alertes texto pour les suivis urgents.",
+            comingSoon: "Bientôt disponible"
+          },
           integrations: "Intégrations",
           billing: "Facturation",
           security: "Sécurité",
           language: "Langue",
-          timezone: "Fuseau Horaire",
-          fullName: "Nom Complet",
-          emailAddress: "Adresse Courriel",
-          phoneNumber: "Numéro de Téléphone",
-          company: "Entreprise/Courtage",
-          licenseNumber: "Numéro de Permis",
+          timezone: "Fuseau horaire",
+          fullName: "Nom complet",
+          emailAddress: "Adresse courriel",
+          phoneNumber: "Numéro de téléphone",
+          company: "Nom de l'agence / du courtage immobilier",
+          licenseNumber: "Numéro de permis",
           province: "Province",
           city: "Ville",
-          save: "Enregistrer",
-          cancel: "Annuler"
+          save: "Enregistrer les modifications",
+          cancel: "Annuler",
+          twoFactor: {
+            title: "Authentification à deux facteurs (A2F)",
+            subtitle: "Protégez votre compte avec l'authentification à deux facteurs.",
+            helper: "Ajoutez une couche de sécurité supplémentaire avec une application d'authentification.",
+            enable: "Activer l'A2F"
+          },
+          profileMenu: {
+            changePhoto: "Changer la photo",
+            removePhoto: "Retirer la photo"
+          }
         },
         common: {
           loading: "Chargement...",
@@ -3419,6 +3535,11 @@ const resources = {
             success: "Contact ajouté avec succès",
             contactAdded: "a été ajouté à vos contacts",
             errorAdding: "Erreur lors de l'ajout du contact",
+            validation: {
+              firstNameRequired: "Le prénom est obligatoire.",
+              lastNameRequired: "Le nom de famille est obligatoire.",
+              invalidEmail: "Veuillez saisir une adresse courriel valide."
+            },
             sources: {
               website: "Site Web",
               referral: "Référence",
@@ -3992,7 +4113,32 @@ const resources = {
         },
         saveFailed: "Échec de la sauvegarde. Veuillez réessayer.",
         welcome: "Bienvenue sur Realtor Desk AI!",
-        completeFailed: "Échec de la configuration. Veuillez réessayer."
+        completeFailed: "Échec de la configuration. Veuillez réessayer.",
+        heading: "Mise en route — 60 minutes, guidée",
+        subheading: "Cinq étapes pour passer d'un tableau de bord vide à votre premier rappel.",
+        ack: "Compris",
+        step: {
+          profile: {
+            title: "Compléter votre profil",
+            desc: "Ajoutez votre agence, votre numéro de permis et vos coordonnées."
+          },
+          contact: {
+            title: "Ajouter votre premier contact",
+            desc: "Importez un fichier CSV ou ajoutez un prospect manuellement."
+          },
+          property: {
+            title: "Ajouter votre première propriété",
+            desc: "Collez un lien realtor.ca ou saisissez les détails."
+          },
+          widget: {
+            title: "Configurer votre widget Web",
+            desc: "Disponible au T3 2026 — voir la feuille de route."
+          },
+          calendar: {
+            title: "Connecter Google ou Outlook Calendar",
+            desc: "Synchronisez vos rendez-vous dans /today."
+          }
+        }
       },
       auth: {
         backToWebsite: "Retour à realtordesk.ai",

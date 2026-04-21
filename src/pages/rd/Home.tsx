@@ -151,8 +151,9 @@ function HeroProduct() {
         </div>
       </div>
 
-      {/* Floating KPI */}
-      <div className="absolute -bottom-6 -left-9 bg-white border border-rd-line rounded-rd-lg px-5 py-4 shadow-rd-md flex items-center gap-3.5">
+      {/* Floating KPI — hidden under 640px so the `-left-9` offset can't
+          push past the viewport edge and trigger a horizontal scroll. */}
+      <div className="hidden sm:flex absolute -bottom-6 -left-9 bg-white border border-rd-line rounded-rd-lg px-5 py-4 shadow-rd-md items-center gap-3.5">
         <div className="w-2 h-2 bg-rd-success rounded-full" />
         <div>
           <div className="text-[11px] text-rd-ink-500 uppercase tracking-[0.06em] font-semibold">
