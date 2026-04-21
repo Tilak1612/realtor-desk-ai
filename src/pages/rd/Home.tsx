@@ -51,7 +51,7 @@ function HeroSection() {
             <IconSparkle />
             Now in public beta · 14-day free trial
           </RDBadge>
-          <h1 className="text-[44px] sm:text-[56px] lg:text-[76px] font-semibold tracking-[-0.025em] leading-[1.02] text-rd-ink-900">
+          <h1 className="text-[34px] sm:text-[48px] md:text-[56px] lg:text-[76px] font-semibold tracking-[-0.025em] leading-[1.02] text-rd-ink-900 break-words">
             Close more deals.{" "}
             <span className="font-rd-serif italic font-normal text-rd-navy-800">Calmly.</span>
           </h1>

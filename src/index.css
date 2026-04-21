@@ -204,7 +204,14 @@
   }
 
   img { @apply max-w-full h-auto; }
-  html, body { @apply overflow-x-hidden; }
+  /* Defensive: clip any rogue absolute-positioned decoration or wide child
+     from triggering horizontal scroll on narrow viewports. The `!important`
+     overrides any local `overflow-x: visible` that a shadcn primitive might
+     set on body during a scrollbar-lock cycle. */
+  html, body {
+    @apply overflow-x-hidden;
+    max-width: 100vw;
+  }
 
   ::selection {
     @apply bg-primary/20 text-primary;
