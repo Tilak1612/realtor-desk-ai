@@ -127,13 +127,22 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['Instrument Serif', 'Georgia', 'serif'],
       },
       fontSize: {
+        // Audit-mandated marketing scale
+        'h1-display': ['56px', { lineHeight: '60px', letterSpacing: '-0.02em', fontWeight: '600' }],
+        'h1': ['48px', { lineHeight: '52px', letterSpacing: '-0.02em', fontWeight: '600' }],
+        'h2': ['36px', { lineHeight: '40px', letterSpacing: '-0.015em', fontWeight: '600' }],
+        'h3': ['24px', { lineHeight: '30px', fontWeight: '600' }],
+        'body-lg': ['18px', { lineHeight: '28px' }],
+        'body': ['16px', { lineHeight: '26px' }],
+        'caption': ['13px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' }],
+        // App scale (kept)
         'display-1': ['30px', { lineHeight: '36px', fontWeight: '600' }],
         'heading-1': ['24px', { lineHeight: '32px', fontWeight: '600' }],
         'heading-2': ['20px', { lineHeight: '28px', fontWeight: '600' }],
         'heading-3': ['18px', { lineHeight: '24px', fontWeight: '600' }],
-        'body': ['16px', { lineHeight: '24px', fontWeight: '400' }],
         'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
         'label': ['13px', { lineHeight: '18px', fontWeight: '500' }],
         'meta': ['12px', { lineHeight: '16px', fontWeight: '400' }],
