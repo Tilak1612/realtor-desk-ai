@@ -20,6 +20,13 @@ interface MarketingHeaderProps {
   /** Override the default link list. */
   links?: { label: string; to: string }[];
   className?: string;
+  /**
+   * Render the EN/FR pill. Defaults to false for marketing routes because
+   * the landing/pricing/compare pages are still EN-only — showing a toggle
+   * that flips labels nowhere is worse than not showing one at all. Flip
+   * to true once a /fr counterpart ships.
+   */
+  showLanguageToggle?: boolean;
 }
 
 const DEFAULT_LINKS = [
@@ -34,6 +41,7 @@ export function MarketingHeader({
   tone = "paper",
   links = DEFAULT_LINKS,
   className,
+  showLanguageToggle = false,
 }: MarketingHeaderProps) {
   const dark = tone === "dark";
   const location = useLocation();
@@ -81,43 +89,45 @@ export function MarketingHeader({
       </div>
 
       <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-        <div
-          className="hidden sm:flex text-xs font-semibold gap-1"
-          role="group"
-          aria-label="Language"
-        >
-          <button
-            type="button"
-            onClick={() => setLang("en")}
-            aria-pressed={activeLang === "en"}
-            className={cn(
-              "cursor-pointer transition-opacity",
-              activeLang === "en"
-                ? dark
-                  ? "text-white"
-                  : "text-rd-ink-900"
-                : "opacity-50 hover:opacity-90"
-            )}
+        {showLanguageToggle && (
+          <div
+            className="hidden sm:flex text-xs font-semibold gap-1"
+            role="group"
+            aria-label="Language"
           >
-            EN
-          </button>
-          <span className="opacity-50">/</span>
-          <button
-            type="button"
-            onClick={() => setLang("fr")}
-            aria-pressed={activeLang === "fr"}
-            className={cn(
-              "cursor-pointer transition-opacity",
-              activeLang === "fr"
-                ? dark
-                  ? "text-white"
-                  : "text-rd-ink-900"
-                : "opacity-50 hover:opacity-90"
-            )}
-          >
-            FR
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              aria-pressed={activeLang === "en"}
+              className={cn(
+                "cursor-pointer transition-opacity",
+                activeLang === "en"
+                  ? dark
+                    ? "text-white"
+                    : "text-rd-ink-900"
+                  : "opacity-50 hover:opacity-90"
+              )}
+            >
+              EN
+            </button>
+            <span className="opacity-50">/</span>
+            <button
+              type="button"
+              onClick={() => setLang("fr")}
+              aria-pressed={activeLang === "fr"}
+              className={cn(
+                "cursor-pointer transition-opacity",
+                activeLang === "fr"
+                  ? dark
+                    ? "text-white"
+                    : "text-rd-ink-900"
+                  : "opacity-50 hover:opacity-90"
+              )}
+            >
+              FR
+            </button>
+          </div>
+        )}
         <Link to="/login" className="hidden sm:block">
           <RDButton variant={dark ? "light" : "ghost"} size="sm">
             Sign in
@@ -180,30 +190,34 @@ export function MarketingHeader({
             </Link>
           ))}
           <div className="flex items-center gap-3 pt-3 border-t border-current/10 mt-2">
-            <button
-              type="button"
-              onClick={() => setLang("en")}
-              aria-pressed={activeLang === "en"}
-              className={cn(
-                "text-xs font-semibold",
-                activeLang === "en" ? "opacity-100" : "opacity-50"
-              )}
-            >
-              EN
-            </button>
-            <span className="opacity-30 text-xs">/</span>
-            <button
-              type="button"
-              onClick={() => setLang("fr")}
-              aria-pressed={activeLang === "fr"}
-              className={cn(
-                "text-xs font-semibold",
-                activeLang === "fr" ? "opacity-100" : "opacity-50"
-              )}
-            >
-              FR
-            </button>
-            <Link to="/login" onClick={() => setMobileOpen(false)} className="ml-auto">
+            {showLanguageToggle && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setLang("en")}
+                  aria-pressed={activeLang === "en"}
+                  className={cn(
+                    "text-xs font-semibold",
+                    activeLang === "en" ? "opacity-100" : "opacity-50"
+                  )}
+                >
+                  EN
+                </button>
+                <span className="opacity-30 text-xs">/</span>
+                <button
+                  type="button"
+                  onClick={() => setLang("fr")}
+                  aria-pressed={activeLang === "fr"}
+                  className={cn(
+                    "text-xs font-semibold",
+                    activeLang === "fr" ? "opacity-100" : "opacity-50"
+                  )}
+                >
+                  FR
+                </button>
+              </>
+            )}
+            <Link to="/login" onClick={() => setMobileOpen(false)} className={showLanguageToggle ? "ml-auto" : "ml-auto"}>
               <RDButton variant={dark ? "light" : "ghost"} size="sm">
                 Sign in
               </RDButton>

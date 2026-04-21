@@ -1076,11 +1076,36 @@ const resources = {
             title: "Two-Factor Authentication (2FA)",
             subtitle: "Protect your account with two-factor authentication",
             helper: "Add an extra layer of security with an authenticator app.",
-            enable: "Enable 2FA"
+            enable: "Enable 2FA",
+            disable: "Disable 2FA",
+            verify: "Verify",
+            activeBody: "Your account is protected with TOTP-based 2FA.",
+            inactiveBody: "Add an extra layer of security with an authenticator app.",
+            setupHeading: "Set up Two-Factor Authentication",
+            setupHelp: "Scan this QR code with your authenticator app (Google Authenticator, Authy, or 1Password), then enter the 6-digit code below.",
+            qrAlt: "TOTP QR Code",
+            disableConfirmTitle: "Disable Two-Factor Authentication?",
+            disableConfirmBody: "This will make your account less secure. You can re-enable it at any time.",
+            enabledToastTitle: "2FA Enabled",
+            enabledToastDesc: "Two-factor authentication is now active on your account.",
+            disabledToastTitle: "2FA Disabled",
+            disabledToastDesc: "Two-factor authentication has been removed.",
+            enrollFailed: "Failed to start MFA enrollment",
+            verifyFailed: "Verification failed",
+            disableFailed: "Failed to disable 2FA",
+            noFactor: "No 2FA factor found"
           },
           profileMenu: {
             changePhoto: "Change photo",
             removePhoto: "Remove photo"
+          },
+          dataRights: {
+            exportTitle: "Export my data",
+            exportDesc: "Download everything we store about you as a JSON file (PIPEDA access right).",
+            deleteTitle: "Delete my account",
+            deleteDesc: "Erase your profile and all associated data (PIPEDA right to erasure). Processed within 30 days.",
+            confirmTitle: "Delete your account?",
+            confirmBody: "This is a PIPEDA right-to-erasure request. We'll confirm by email and fully erase your data within 30 days. Undo is not available once processed."
           }
         },
         common: {
@@ -3410,11 +3435,36 @@ const resources = {
             title: "Authentification à deux facteurs (A2F)",
             subtitle: "Protégez votre compte avec l'authentification à deux facteurs.",
             helper: "Ajoutez une couche de sécurité supplémentaire avec une application d'authentification.",
-            enable: "Activer l'A2F"
+            enable: "Activer l'A2F",
+            disable: "Désactiver l'A2F",
+            verify: "Vérifier",
+            activeBody: "Votre compte est protégé par l'A2F basée sur TOTP.",
+            inactiveBody: "Ajoutez une couche de sécurité supplémentaire avec une application d'authentification.",
+            setupHeading: "Configurer l'authentification à deux facteurs",
+            setupHelp: "Balayez ce code QR avec votre application d'authentification (Google Authenticator, Authy ou 1Password), puis saisissez le code à 6 chiffres ci-dessous.",
+            qrAlt: "Code QR TOTP",
+            disableConfirmTitle: "Désactiver l'authentification à deux facteurs ?",
+            disableConfirmBody: "Cela rendra votre compte moins sécurisé. Vous pouvez la réactiver à tout moment.",
+            enabledToastTitle: "A2F activée",
+            enabledToastDesc: "L'authentification à deux facteurs est maintenant active sur votre compte.",
+            disabledToastTitle: "A2F désactivée",
+            disabledToastDesc: "L'authentification à deux facteurs a été retirée.",
+            enrollFailed: "Échec du démarrage de l'inscription A2F",
+            verifyFailed: "La vérification a échoué",
+            disableFailed: "Échec de la désactivation de l'A2F",
+            noFactor: "Aucun facteur A2F trouvé"
           },
           profileMenu: {
             changePhoto: "Changer la photo",
             removePhoto: "Retirer la photo"
+          },
+          dataRights: {
+            exportTitle: "Exporter mes données",
+            exportDesc: "Téléchargez au format JSON toutes les informations que nous conservons à votre sujet (droit d'accès LPRPDE).",
+            deleteTitle: "Supprimer mon compte",
+            deleteDesc: "Effacez votre profil et toutes les données associées (droit à l'effacement LPRPDE). Traité en moins de 30 jours.",
+            confirmTitle: "Supprimer votre compte ?",
+            confirmBody: "Il s'agit d'une demande d'effacement en vertu de la LPRPDE. Nous confirmerons par courriel et effacerons entièrement vos données en moins de 30 jours. Le retrait n'est pas réversible."
           }
         },
         common: {
