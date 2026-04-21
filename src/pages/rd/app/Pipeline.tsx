@@ -95,9 +95,14 @@ export default function Pipeline() {
         <div className="flex flex-wrap justify-between items-end gap-4 mb-5">
           <div>
             <div className="text-xs text-rd-ink-500 font-semibold">
-              Total pipeline · {formatCad(totalValue)} · {totalCount} leads
+              {t("rd.pipelinePage.totalPipeline", "Total pipeline · {{value}} · {{count}} leads", {
+                value: formatCad(totalValue),
+                count: totalCount,
+              })}
               {!isLive && !loading && (
-                <span className="ml-2 text-rd-terra-700">· sample data</span>
+                <span className="ml-2 text-rd-terra-700">
+                  · {t("rd.common.sampleData", "sample data")}
+                </span>
               )}
             </div>
             <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
@@ -107,10 +112,10 @@ export default function Pipeline() {
           <div className="flex gap-2">
             <ViewToggle view={view} onChange={setView} />
             <RDButton variant="outline" size="sm" icon={<IconFilter />}>
-              All agents
+              {t("rd.actions.allAgents", "All agents")}
             </RDButton>
             <RDButton variant="primary" size="sm" icon={<IconPlus />}>
-              Add lead
+              {t("rd.actions.addLead", "Add lead")}
             </RDButton>
           </div>
         </div>
@@ -134,7 +139,7 @@ export default function Pipeline() {
                   <KanbanColumn
                     key={stageId}
                     stageId={stageId}
-                    label={meta.label}
+                    label={t(`rd.stages.${stageId}`, meta.label)}
                     toneClass={meta.toneClass}
                     count={rollup.count}
                     valueCad={rollup.valueCad}
@@ -153,19 +158,20 @@ export default function Pipeline() {
         {view === "list" && (
           <div className="flex-1 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm overflow-hidden">
             <div className="px-5 py-4 text-sm text-rd-ink-500">
-              List view lives at{" "}
+              {t(
+                "rd.pipelinePage.listViewLives",
+                "List view lives at /app/leads — this toggle exists for parity with the design; it links rather than duplicating the table."
+              )}{" "}
               <Link to="/app/leads" className="text-rd-navy-800 underline">
                 /app/leads
-              </Link>{" "}
-              — this toggle exists for parity with the design; it links rather than duplicating the
-              table.
+              </Link>
             </div>
           </div>
         )}
 
         {view === "forecast" && (
           <div className="flex-1 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm flex items-center justify-center text-sm text-rd-ink-500">
-            Forecast view ships in the Reports phase.
+            {t("rd.pipelinePage.forecastShips", "Forecast view ships in the Reports phase.")}
           </div>
         )}
       </div>
@@ -176,22 +182,27 @@ export default function Pipeline() {
 /* ────────────────────────────────────────────────────────── */
 
 function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode) => void }) {
-  const items: ViewMode[] = ["kanban", "list", "forecast"];
+  const { t } = useTranslation();
+  const items: { value: ViewMode; label: string }[] = [
+    { value: "kanban", label: t("rd.pipelinePage.viewKanban", "Kanban") },
+    { value: "list", label: t("rd.pipelinePage.viewList", "List") },
+    { value: "forecast", label: t("rd.pipelinePage.viewForecast", "Forecast") },
+  ];
   return (
     <div className="flex p-[3px] bg-white border border-rd-line rounded-rd-sm">
-      {items.map((v) => (
+      {items.map((item) => (
         <button
-          key={v}
+          key={item.value}
           type="button"
-          onClick={() => onChange(v)}
+          onClick={() => onChange(item.value)}
           className={cn(
-            "px-3 py-[5px] text-xs font-semibold capitalize rounded-[5px] transition-colors",
-            view === v
+            "px-3 py-[5px] text-xs font-semibold rounded-[5px] transition-colors",
+            view === item.value
               ? "bg-rd-navy-800 text-white"
               : "bg-transparent text-rd-ink-600 hover:text-rd-ink-900"
           )}
         >
-          {v}
+          {item.label}
         </button>
       ))}
     </div>
@@ -217,6 +228,7 @@ function KanbanColumn({
   leads: Lead[];
   isLive: boolean;
 }) {
+  const { t } = useTranslation();
   const { setNodeRef, isOver } = useDroppable({ id: stageId, disabled: !isLive });
   return (
     <div
@@ -245,7 +257,7 @@ function KanbanColumn({
           className="border-[1.5px] border-dashed border-rd-line-strong bg-transparent rounded-rd-sm py-2.5 text-xs text-rd-ink-500 flex items-center justify-center gap-1.5 font-medium hover:text-rd-ink-700 hover:border-rd-ink-400"
         >
           <IconPlus />
-          Add lead
+          {t("rd.actions.addLead", "Add lead")}
         </button>
       </div>
     </div>

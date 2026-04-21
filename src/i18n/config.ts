@@ -1989,6 +1989,160 @@ const resources = {
           pipeline: { title: "Pipeline" },
           automation: { title: "Automation" },
           reports: { title: "Reports" }
+        },
+        stages: {
+          new: "New",
+          contacted: "Contacted",
+          qualified: "Qualified",
+          showing: "Showing",
+          offer: "Offer",
+          won: "Won",
+          lost: "Lost"
+        },
+        bands: { hot: "Hot", warm: "Warm", cold: "Cold" },
+        actions: {
+          addLead: "Add lead",
+          filter: "Filter",
+          import: "Import",
+          sort: "Sort",
+          scoreHighToLow: "Score · high to low",
+          allAgents: "All agents",
+          newSequence: "New sequence",
+          templates: "Templates",
+          editFlow: "Edit flow",
+          preview: "Preview",
+          call: "Call",
+          bookShowing: "Book showing",
+          takeOver: "Take over",
+          draftWithAi: "Draft with AI",
+          attachListing: "Attach listing",
+          send: "Send",
+          sending: "Sending…",
+          use: "Use",
+          exportCsv: "Export CSV",
+          share: "Share",
+          backToLeads: "Back to leads",
+          openActivityLog: "Open activity log",
+          openPipeline: "Open pipeline"
+        },
+        tabs: {
+          leads: {
+            all: "All",
+            hot: "Hot",
+            warm: "Warm",
+            cold: "Cold",
+            aiHandled: "AI-handled",
+            needsReply: "Needs reply"
+          },
+          automation: { all: "All", active: "Active", draft: "Draft" },
+          inbox: { all: "All", unread: "Unread", ai: "AI", flagged: "Flagged", mine: "Mine" }
+        },
+        common: {
+          sampleData: "sample data",
+          sampleLeads: "sample leads",
+          sampleLead: "sample lead",
+          loading: "loading…",
+          live: "Live",
+          selectAll: "Select all",
+          active: "Active",
+          draft: "Draft",
+          noResultsMatch: "No results match this filter.",
+          noConversationsMatch: "No conversations match.",
+          noSequencesMatch: "No sequences match this filter.",
+          noMessagesYet: "No messages yet.",
+          unreadCount: "{{count}} unread"
+        },
+        columns: {
+          leads: {
+            lead: "Lead",
+            listing: "Listing",
+            source: "Source",
+            aiScore: "AI score",
+            stage: "Stage",
+            lastActivity: "Last activity"
+          },
+          reports: {
+            source: "Source",
+            spend: "Spend",
+            leads: "Leads",
+            closed: "Closed",
+            roi: "ROI"
+          }
+        },
+        kpi: {
+          activeLeads: "Active leads",
+          showingsBooked: "Showings booked",
+          pipelineValue: "Pipeline value",
+          avgResponseTime: "Avg response time",
+          dealsClosed: "Deals closed",
+          leadToShowing: "Lead → Showing",
+          revenueAttributed: "Revenue attributed"
+        },
+        sections: {
+          today: "Today",
+          pipelineSnapshot: "Pipeline snapshot",
+          leadSources30d: "Lead sources · 30d",
+          compliance: "Compliance",
+          deskAiActivity: "Desk AI activity",
+          responseTimeTrend: "Response time trend",
+          aiVsAgent21d: "AI vs. Agent · last 21 days",
+          pipelineConversion: "Pipeline conversion",
+          stageFunnel: "Stage funnel",
+          sourceRoi: "Source ROI",
+          revenuePerLeadSource: "Revenue per lead source",
+          agentLeaderboard: "Agent leaderboard",
+          thisMonth: "This month",
+          buyingProfile: "Buying profile",
+          viewedListings: "Viewed listings",
+          timeline: "Timeline",
+          contact: "Contact",
+          aiLeadScore: "AI lead score"
+        },
+        inbox: {
+          searchConversations: "Search conversations…",
+          selectConversation: "Select a conversation from the left.",
+          emptyThread: "No messages yet. When a lead replies to a drip or sends a chat, it appears here.",
+          suggestedReply: "Suggested reply:",
+          composerPlaceholderEn: "Type a message to the lead…",
+          composerPlaceholderFr: "Écrire un message au client potentiel…",
+          deskAiReplying: "Desk AI replying",
+          manualHandling: "Manual handling"
+        },
+        pipelinePage: {
+          totalPipeline: "Total pipeline · {{value}} · {{count}} leads",
+          listViewLives: "List view lives at /app/leads — this toggle exists for parity with the design; it links rather than duplicating the table.",
+          forecastShips: "Forecast view ships in the Reports phase.",
+          viewKanban: "Kanban",
+          viewList: "List",
+          viewForecast: "Forecast"
+        },
+        reportsPage: {
+          aiAvg: "AI · {{label}} avg",
+          agentManual: "Agent · manual timing (not yet tracked)",
+          noSourcesYet: "No sources yet"
+        },
+        funnel: {
+          leadsCaptured: "Leads captured",
+          showingBooked: "Showing booked",
+          closedWon: "Closed won"
+        },
+        automationPage: {
+          allSequences: "All sequences",
+          stepFlow: "{{count}}-step flow",
+          sent: "{{count}} sent",
+          replied: "{{count}} replied",
+          rate: "{{pct}}% rate",
+          caslRequired: "CASL consent required",
+          notYetRun: "Not yet run",
+          selectSequence: "Select a sequence to preview.",
+          pauseSequence: "Pause sequence",
+          activateSequence: "Activate sequence",
+          triggers: {
+            newLead: "New lead",
+            wentCold: "Went cold",
+            showing: "Showing",
+            consent: "Consent"
+          }
         }
       }
     }
@@ -3979,6 +4133,160 @@ const resources = {
           pipeline: { title: "Pipeline" },
           automation: { title: "Automatisation" },
           reports: { title: "Rapports" }
+        },
+        stages: {
+          new: "Nouveau",
+          contacted: "Contacté",
+          qualified: "Qualifié",
+          showing: "Visite",
+          offer: "Offre",
+          won: "Conclu",
+          lost: "Perdu"
+        },
+        bands: { hot: "Chaud", warm: "Tiède", cold: "Froid" },
+        actions: {
+          addLead: "Ajouter un client",
+          filter: "Filtrer",
+          import: "Importer",
+          sort: "Trier",
+          scoreHighToLow: "Score · du plus élevé",
+          allAgents: "Tous les agents",
+          newSequence: "Nouvelle séquence",
+          templates: "Modèles",
+          editFlow: "Modifier le flux",
+          preview: "Aperçu",
+          call: "Appeler",
+          bookShowing: "Planifier une visite",
+          takeOver: "Reprendre",
+          draftWithAi: "Rédiger avec l'IA",
+          attachListing: "Joindre une inscription",
+          send: "Envoyer",
+          sending: "Envoi…",
+          use: "Utiliser",
+          exportCsv: "Exporter CSV",
+          share: "Partager",
+          backToLeads: "Retour aux clients",
+          openActivityLog: "Ouvrir le journal d'activité",
+          openPipeline: "Ouvrir le pipeline"
+        },
+        tabs: {
+          leads: {
+            all: "Tous",
+            hot: "Chauds",
+            warm: "Tièdes",
+            cold: "Froids",
+            aiHandled: "Gérés par l'IA",
+            needsReply: "À répondre"
+          },
+          automation: { all: "Toutes", active: "Actives", draft: "Brouillons" },
+          inbox: { all: "Toutes", unread: "Non lues", ai: "IA", flagged: "Signalées", mine: "Mes conv." }
+        },
+        common: {
+          sampleData: "données d'exemple",
+          sampleLeads: "clients d'exemple",
+          sampleLead: "client d'exemple",
+          loading: "chargement…",
+          live: "En direct",
+          selectAll: "Tout sélectionner",
+          active: "Actif",
+          draft: "Brouillon",
+          noResultsMatch: "Aucun résultat ne correspond à ce filtre.",
+          noConversationsMatch: "Aucune conversation ne correspond.",
+          noSequencesMatch: "Aucune séquence ne correspond à ce filtre.",
+          noMessagesYet: "Aucun message pour l'instant.",
+          unreadCount: "{{count}} non lu·e·s"
+        },
+        columns: {
+          leads: {
+            lead: "Client",
+            listing: "Inscription",
+            source: "Source",
+            aiScore: "Score IA",
+            stage: "Étape",
+            lastActivity: "Dernière activité"
+          },
+          reports: {
+            source: "Source",
+            spend: "Dépense",
+            leads: "Clients",
+            closed: "Conclus",
+            roi: "RSI"
+          }
+        },
+        kpi: {
+          activeLeads: "Clients actifs",
+          showingsBooked: "Visites réservées",
+          pipelineValue: "Valeur du pipeline",
+          avgResponseTime: "Temps de réponse moyen",
+          dealsClosed: "Transactions conclues",
+          leadToShowing: "Client → Visite",
+          revenueAttributed: "Revenu attribué"
+        },
+        sections: {
+          today: "Aujourd'hui",
+          pipelineSnapshot: "Aperçu du pipeline",
+          leadSources30d: "Sources de clients · 30 j",
+          compliance: "Conformité",
+          deskAiActivity: "Activité IA Desk",
+          responseTimeTrend: "Tendance du temps de réponse",
+          aiVsAgent21d: "IA vs agent · 21 derniers jours",
+          pipelineConversion: "Conversion du pipeline",
+          stageFunnel: "Entonnoir par étape",
+          sourceRoi: "RSI par source",
+          revenuePerLeadSource: "Revenu par source de client",
+          agentLeaderboard: "Classement des agents",
+          thisMonth: "Ce mois-ci",
+          buyingProfile: "Profil d'achat",
+          viewedListings: "Inscriptions consultées",
+          timeline: "Chronologie",
+          contact: "Contact",
+          aiLeadScore: "Score IA du client"
+        },
+        inbox: {
+          searchConversations: "Rechercher des conversations…",
+          selectConversation: "Sélectionnez une conversation à gauche.",
+          emptyThread: "Aucun message pour l'instant. Lorsqu'un client répond à une séquence ou écrit en clavardage, le message apparaît ici.",
+          suggestedReply: "Réponse suggérée :",
+          composerPlaceholderEn: "Écrire un message au client…",
+          composerPlaceholderFr: "Écrire un message au client potentiel…",
+          deskAiReplying: "IA Desk répond",
+          manualHandling: "Gestion manuelle"
+        },
+        pipelinePage: {
+          totalPipeline: "Pipeline total · {{value}} · {{count}} clients",
+          listViewLives: "La vue liste se trouve sur /app/leads — cette bascule existe par parité avec la maquette ; elle redirige plutôt que de dupliquer le tableau.",
+          forecastShips: "La vue prévisionnelle arrive avec la phase Rapports.",
+          viewKanban: "Kanban",
+          viewList: "Liste",
+          viewForecast: "Prévision"
+        },
+        reportsPage: {
+          aiAvg: "IA · {{label}} moy.",
+          agentManual: "Agent · délai manuel (non suivi)",
+          noSourcesYet: "Aucune source pour l'instant"
+        },
+        funnel: {
+          leadsCaptured: "Clients captés",
+          showingBooked: "Visite réservée",
+          closedWon: "Conclu gagné"
+        },
+        automationPage: {
+          allSequences: "Toutes les séquences",
+          stepFlow: "Flux de {{count}} étape·s",
+          sent: "{{count}} envoyés",
+          replied: "{{count}} réponses",
+          rate: "Taux {{pct}} %",
+          caslRequired: "Consentement LCAP requis",
+          notYetRun: "Jamais exécutée",
+          selectSequence: "Sélectionnez une séquence pour l'aperçu.",
+          pauseSequence: "Mettre en pause",
+          activateSequence: "Activer la séquence",
+          triggers: {
+            newLead: "Nouveau client",
+            wentCold: "Devenu froid",
+            showing: "Visite",
+            consent: "Consentement"
+          }
         }
       }
     }

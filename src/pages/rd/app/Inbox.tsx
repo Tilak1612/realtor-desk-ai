@@ -123,41 +123,53 @@ function ThreadList({
             {t("rd.pages.inbox.title", "Conversations")}
           </h2>
           <RDBadge tone="terra" size="sm">
-            {unreadCount} unread
+            {t("rd.common.unreadCount", "{{count}} unread", { count: unreadCount })}
           </RDBadge>
         </div>
         <div className="flex items-center gap-2 bg-rd-ink-50 border border-rd-line rounded-rd-sm px-3 py-1.5 text-rd-ink-500">
           <IconSearch />
           <input
             type="text"
-            placeholder="Search conversations…"
+            placeholder={t("rd.inbox.searchConversations", "Search conversations…")}
             value={query}
             onChange={(e) => onQuery(e.target.value)}
             className="flex-1 bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400"
           />
         </div>
         <div className="flex gap-1.5 mt-3">
-          {(["all", "unread", "ai", "mine"] as const).map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => onFilter(f)}
-              className={cn(
-                "px-2.5 py-1 text-[11px] font-semibold rounded-rd-pill border capitalize transition-colors",
-                filter === f
-                  ? "bg-rd-navy-800 text-white border-rd-navy-800"
-                  : "bg-transparent text-rd-ink-600 border-rd-line"
-              )}
-            >
-              {f === "ai" ? "AI" : f}
-            </button>
-          ))}
+          {(["all", "unread", "ai", "mine"] as const).map((f) => {
+            const label =
+              f === "all"
+                ? t("rd.tabs.inbox.all", "All")
+                : f === "unread"
+                ? t("rd.tabs.inbox.unread", "Unread")
+                : f === "ai"
+                ? t("rd.tabs.inbox.ai", "AI")
+                : t("rd.tabs.inbox.mine", "Mine");
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => onFilter(f)}
+                className={cn(
+                  "px-2.5 py-1 text-[11px] font-semibold rounded-rd-pill border transition-colors",
+                  filter === f
+                    ? "bg-rd-navy-800 text-white border-rd-navy-800"
+                    : "bg-transparent text-rd-ink-600 border-rd-line"
+                )}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto">
         {threads.length === 0 && (
-          <div className="p-6 text-center text-sm text-rd-ink-500">No conversations match.</div>
+          <div className="p-6 text-center text-sm text-rd-ink-500">
+            {t("rd.common.noConversationsMatch", "No conversations match.")}
+          </div>
         )}
         {threads.map((lead) => (
           <ThreadRow
@@ -259,6 +271,7 @@ function ThreadRow({
 /* ────────────────────────────────────────────────────────── */
 
 function ActivePane({ lead }: { lead: Lead | undefined }) {
+  const { t } = useTranslation();
   const { messages: liveMessages } = useConversation(lead?.id);
   const mockMessages = lead ? MOCK_CONVERSATIONS[lead.id] ?? [] : [];
   const messages: ConversationMessage[] =
@@ -281,7 +294,7 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
   if (!lead) {
     return (
       <div className="flex items-center justify-center h-full bg-rd-paper-2 text-rd-ink-500 text-sm">
-        Select a conversation from the left.
+        {t("rd.inbox.selectConversation", "Select a conversation from the left.")}
       </div>
     );
   }
@@ -304,18 +317,21 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
           </div>
           <div className="text-[11px] text-rd-ink-500 mt-0.5 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-rd-success" />
-            Active · {lead.aiHandling ? "Desk AI replying" : "Manual handling"}
+            {t("rd.common.active", "Active")} ·{" "}
+            {lead.aiHandling
+              ? t("rd.inbox.deskAiReplying", "Desk AI replying")
+              : t("rd.inbox.manualHandling", "Manual handling")}
           </div>
         </div>
         <div className="flex gap-1.5">
-          <IconActionBtn aria-label="Call">
+          <IconActionBtn aria-label={t("rd.actions.call", "Call")}>
             <IconPhone />
           </IconActionBtn>
-          <IconActionBtn aria-label="Book showing">
+          <IconActionBtn aria-label={t("rd.actions.bookShowing", "Book showing")}>
             <IconCalendar />
           </IconActionBtn>
           <RDButton variant="terra" size="sm" icon={<IconSparkles />}>
-            Take over
+            {t("rd.actions.takeOver", "Take over")}
           </RDButton>
         </div>
       </div>
@@ -324,7 +340,10 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
       <div className="flex-1 overflow-y-auto px-7 py-6 flex flex-col gap-3.5">
         {messages.length === 0 && (
           <div className="text-center text-sm text-rd-ink-500 py-10">
-            No messages yet. When a lead replies to a drip or sends a chat, it appears here.
+            {t(
+              "rd.inbox.emptyThread",
+              "No messages yet. When a lead replies to a drip or sends a chat, it appears here."
+            )}
           </div>
         )}
         {messages.map((m, i) => (
@@ -337,14 +356,16 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
         <div className="bg-rd-terra-100 border border-rd-terra-200 rounded-[10px] px-3.5 py-2.5 mb-3 flex items-center gap-2.5 text-xs">
           <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
           <span className="text-rd-terra-900 flex-1">
-            <strong className="font-semibold">Suggested reply:</strong> "Hi {lead.name.split(" ")[0]}
-            — Sarah here. I'm free today between 2–4 PM PST. Does a quick call at 2:30 work?"
+            <strong className="font-semibold">
+              {t("rd.inbox.suggestedReply", "Suggested reply:")}
+            </strong>{" "}
+            "Hi {lead.name.split(" ")[0]} — Sarah here. I'm free today between 2–4 PM PST. Does a quick call at 2:30 work?"
           </span>
           <button
             type="button"
             className="text-[11px] font-bold bg-rd-terra-600 text-white px-2.5 py-1 rounded-rd-sm"
           >
-            Use
+            {t("rd.actions.use", "Use")}
           </button>
         </div>
         <div className="border border-rd-line rounded-[12px] px-3.5 py-2.5">
@@ -357,9 +378,11 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
                 handleSend();
               }
             }}
-            placeholder={`Reply as you (AI will pause). ${
-              lead.language === "FR" ? "Répondre en français." : ""
-            }`}
+            placeholder={
+              lead.language === "FR"
+                ? t("rd.inbox.composerPlaceholderFr", "Écrire un message au client potentiel…")
+                : t("rd.inbox.composerPlaceholderEn", "Type a message to the lead…")
+            }
             rows={2}
             className="w-full bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400 resize-none min-h-[36px]"
           />
@@ -370,10 +393,10 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
             <div className="flex gap-4 text-xs text-rd-ink-600">
               <button type="button" className="inline-flex items-center gap-1.5 font-semibold">
                 <IconSparkles className="w-3 h-3" />
-                Draft with AI
+                {t("rd.actions.draftWithAi", "Draft with AI")}
               </button>
               <button type="button" className="font-semibold">
-                Attach listing
+                {t("rd.actions.attachListing", "Attach listing")}
               </button>
             </div>
             <RDButton
@@ -382,7 +405,9 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
               onClick={handleSend}
               disabled={!canSend}
             >
-              {send.isPending ? "Sending…" : "Send"}
+              {send.isPending
+                ? t("rd.actions.sending", "Sending…")
+                : t("rd.actions.send", "Send")}
             </RDButton>
           </div>
         </div>

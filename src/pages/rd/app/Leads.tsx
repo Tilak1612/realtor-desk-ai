@@ -78,13 +78,13 @@ export default function Leads() {
           </div>
           <div className="flex gap-2">
             <RDButton variant="outline" size="sm" icon={<IconFilter />}>
-              Filter
+              {t("rd.actions.filter", "Filter")}
             </RDButton>
             <RDButton variant="outline" size="sm">
-              Import
+              {t("rd.actions.import", "Import")}
             </RDButton>
             <RDButton variant="primary" size="sm" icon={<IconPlus />}>
-              Add lead
+              {t("rd.actions.addLead", "Add lead")}
             </RDButton>
           </div>
         </div>
@@ -97,11 +97,7 @@ export default function Leads() {
           <div className="mb-4 px-4 py-2.5 bg-rd-terra-50 border border-rd-terra-200 rounded-rd-sm text-[12px] text-rd-terra-900 flex items-center gap-2">
             <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
             <span>
-              Showing <strong>sample leads</strong> — import your own via{" "}
-              <Link to="/app/leads" className="underline font-semibold">
-                CSV
-              </Link>{" "}
-              or add one with the button above to replace these.
+              <strong>{t("rd.common.sampleLeads", "sample leads")}</strong>
             </span>
           </div>
         )}
@@ -112,23 +108,23 @@ export default function Leads() {
             value={tab}
             onValueChange={(v) => setTab(v as TabKey)}
             items={[
-              { value: "all", label: "All" },
-              { value: "hot", label: "Hot", count: counts.hot },
-              { value: "warm", label: "Warm", count: counts.warm },
-              { value: "cold", label: "Cold", count: counts.cold },
-              { value: "ai", label: "AI-handled", count: counts.ai },
-              { value: "needs_reply", label: "Needs reply", count: counts.needsReply },
+              { value: "all", label: t("rd.tabs.leads.all", "All") },
+              { value: "hot", label: t("rd.tabs.leads.hot", "Hot"), count: counts.hot },
+              { value: "warm", label: t("rd.tabs.leads.warm", "Warm"), count: counts.warm },
+              { value: "cold", label: t("rd.tabs.leads.cold", "Cold"), count: counts.cold },
+              { value: "ai", label: t("rd.tabs.leads.aiHandled", "AI-handled"), count: counts.ai },
+              { value: "needs_reply", label: t("rd.tabs.leads.needsReply", "Needs reply"), count: counts.needsReply },
             ]}
           />
           <div className="flex items-center gap-2 pb-2 text-xs">
             <span className="text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-500">
-              Sort
+              {t("rd.actions.sort", "Sort")}
             </span>
             <button
               type="button"
               className="px-2.5 py-1 text-xs border border-rd-line rounded-rd-sm bg-white"
             >
-              Score · high to low
+              {t("rd.actions.scoreHighToLow", "Score · high to low")}
             </button>
           </div>
         </div>
@@ -139,13 +135,13 @@ export default function Leads() {
             style={GRID_STYLE}
             className="px-5 py-3 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-500 items-center"
           >
-            <input type="checkbox" aria-label="Select all" />
-            <div>Lead</div>
-            <div>Listing</div>
-            <div>Source</div>
-            <div>AI score</div>
-            <div>Stage</div>
-            <div>Last activity</div>
+            <input type="checkbox" aria-label={t("rd.common.selectAll", "Select all")} />
+            <div>{t("rd.columns.leads.lead", "Lead")}</div>
+            <div>{t("rd.columns.leads.listing", "Listing")}</div>
+            <div>{t("rd.columns.leads.source", "Source")}</div>
+            <div>{t("rd.columns.leads.aiScore", "AI score")}</div>
+            <div>{t("rd.columns.leads.stage", "Stage")}</div>
+            <div>{t("rd.columns.leads.lastActivity", "Last activity")}</div>
             <div />
           </div>
           {rows.map((l, i) => (
@@ -288,6 +284,7 @@ const STAGE_META: Record<PipelineStage, { bg: string; fg: string; dot: string; l
 };
 
 function StageBadge({ stage }: { stage: PipelineStage }) {
+  const { t } = useTranslation();
   const s = STAGE_META[stage];
   return (
     <span
@@ -298,7 +295,7 @@ function StageBadge({ stage }: { stage: PipelineStage }) {
       )}
     >
       <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
-      {s.label}
+      {t(`rd.stages.${stage}`, s.label)}
     </span>
   );
 }
