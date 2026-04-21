@@ -16,7 +16,7 @@ const AuraCTASection = () => {
           {/* Badge */}
           <div className="aura-badge mb-8 mx-auto w-fit">
             <Sparkles className="w-4 h-4" />
-            {t('indexPage.finalCTA.badge', 'Founding-member pricing')}
+            {t('indexPage.finalCTA.badge', 'Limited Beta Spots')}
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl tracking-tighter text-white mb-6 leading-[1.1]">

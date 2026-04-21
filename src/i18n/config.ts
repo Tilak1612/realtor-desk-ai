@@ -30,17 +30,16 @@ const resources = {
         signOut: "Sign out"
       },
       hero: {
-        title: "A Canadian CRM that answers every lead —",
-        titleGradient: "in English or French — in under two minutes.",
-        subtitle: "RealtorDesk AI is the AI-powered CRM built for Canadian real estate. CASL-compliant email, PIPEDA-aware data, bilingual chatbot on day one. CREA DDF integration on the roadmap for Q3 2026.",
+        title: "Close 3X More Deals with AI Automation",
+        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book Your Free Demo",
         trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
         badge1: "PIPEDA-Aware Design",
         badge2: "Bilingual EN/FR",
         badge3: "50+ Beta Users",
-        conversionBadge: "Founding-member pricing",
-        badge: "Public beta · Founding-member pricing",
+        conversionBadge: "Conservative 30% Conversion Lift",
+        badge: "14-Day Free Trial",
         bullet1: "AI responds to leads instantly, 24/7",
         bullet2: "Built for Canadian agents — PIPEDA, CASL, bilingual EN/FR",
         bullet3: "Bilingual EN/FR",
@@ -659,16 +658,16 @@ const resources = {
         disclaimer: "Realtor Desk is currently in beta. All performance metrics are based on pilot program results. Individual outcomes may vary."
       },
       betaCommunity: {
-        title: "Join our public beta community",
-        participants: "50+ beta participants",
-        limitedSpots: "Founding-member pricing",
-        resultsTitle: "Real results from our beta community",
+        title: "Join Our Growing Beta Community",
+        participants: "50+ Beta Participants",
+        limitedSpots: "Limited Beta Spots Available",
+        resultsTitle: "Real Results from Our Beta Community",
         resultsSubtitle: "Canadian realtors are already seeing measurable results. Here's what early adopters are experiencing:",
         testimonialDisclaimer: "*Testimonials represent individual experiences from our pilot program. Results vary and are not guaranteed. Average results may differ.",
-        ctaTitle: "Ready to join our public beta?",
-        ctaSubtitle: "Founding-member pricing for everyone who signs up during the public beta. Help us shape the Canadian real estate AI roadmap.",
-        ctaButton: "Start 14-day free trial",
-        ctaNote: "Founding members keep their rate for life and get priority on new features.",
+        ctaTitle: "Ready to Join Our Beta Program?",
+        ctaSubtitle: "Limited spots available. Be part of shaping the future of real estate AI in Canada.",
+        ctaButton: "Apply for Beta Access",
+        ctaNote: "Beta participants get lifetime discounts and priority feature access",
         testimonials: {
           sarah: {
             quote: "I was skeptical about AI, but after the first week, I had 3 showings booked while I was sleeping. The voice agent sounds natural and captures all the details I need.",
@@ -1535,12 +1534,8 @@ const resources = {
         videoTutorials: "Video Tutorials",
         caseStudies: "Case Studies",
         webinars: "Webinars",
-        resources: "Resources",
-        trust: "Trust & legal",
-        security: "Security & PIPEDA",
-        unsubscribe: "Unsubscribe",
         company: "Company",
-        about: "About",
+        about: "About Us",
         contact: "Contact",
         careers: "Careers",
         privacy: "Privacy Policy",
@@ -1858,40 +1853,6 @@ const resources = {
           }
         }
       },
-      about: {
-        badge: "Who we are",
-        title: "Built in Canada. Built on honesty.",
-        subtitle: "RealtorDesk AI is the CRM we wished existed when we watched Canadian agents lose leads to American-built software that didn't know what CASL was.",
-        founder: {
-          name: "Tilak Raj",
-          role: "Founder, Brainfy AI Inc.",
-          p1: "I started Brainfy AI Inc. to build software for businesses that US-based SaaS treats as an afterthought. RealtorDesk AI is the first of those products. Canadian real estate agents navigate PIPEDA, CASL, provincial regulators (RECO, BCFSA, OACIQ), and bilingual markets — and then are sold American CRMs that don't ship with a CASL-compliant email footer, much less a bilingual chatbot.",
-          p2: "We're in public beta. That means you pay Founding-Member pricing while we ship against your feedback, you see our public roadmap, and you can cancel any time. We'd rather tell you what doesn't work yet than claim things that aren't true."
-        },
-        company: {
-          title: "Brainfy AI Inc.",
-          hqLabel: "Headquarters:",
-          hq: "Edmonton, Alberta, Canada",
-          foundedLabel: "Founded:",
-          founded: "2025",
-          stageLabel: "Stage:",
-          stage: "Public beta — founding members from across Canada",
-          contactLabel: "Contact:"
-        },
-        principles: {
-          title: "Four things we will not do",
-          p1Title: "Claim certifications we don't have.",
-          p1: "We're not SOC 2 certified today — that's on the roadmap for Q1 2027. We do not put badges for standards we haven't actually passed.",
-          p2Title: "Fabricate customer counts.",
-          p2: "We have 50+ active beta users. When we hit 500, we'll say 500. We don't round up.",
-          p3Title: "Oversell AI outcomes.",
-          p3: "Our AI answers leads 24/7 and scores them. It does not close deals for you. Anyone promising '3x more deals' is selling you a vibe, not software.",
-          p4Title: "Lock you in.",
-          p4: "Month-to-month billing, full data export, 30-day money-back on annual. If RealtorDesk AI isn't working for you, we'll help you leave."
-        },
-        ctaRoadmap: "See the public roadmap",
-        ctaTrial: "Start your 14-day free trial"
-      },
       roadmap: {
         badge: "Public roadmap",
         title: "What we are shipping — and what we are not.",
@@ -2020,17 +1981,16 @@ const resources = {
         signOut: "Se déconnecter"
       },
       hero: {
-        title: "Un CRM canadien qui répond à chaque prospect —",
-        titleGradient: "en français ou en anglais — en moins de deux minutes.",
-        subtitle: "RealtorDesk AI est le CRM propulsé par l'IA conçu pour l'immobilier canadien. Courriels conformes à la LCAP, données respectueuses de la LPRPDE, chatbot bilingue dès le premier jour. Intégration CREA DDF prévue pour le T3 2026.",
+        title: "Concluez 3X Plus de Transactions avec l'Automatisation IA",
+        subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réserver Votre Démo Gratuite",
         trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment",
         badge1: "Conforme PIPEDA par Conception",
         badge2: "Bilingue EN/FR",
         badge3: "50+ Utilisateurs Bêta",
-        conversionBadge: "Tarif Membre Fondateur",
-        badge: "Bêta publique · Tarif Membre Fondateur",
+        conversionBadge: "Hausse de Conversion de 30% (Conservatrice)",
+        badge: "Essai Gratuit de 14 Jours",
         bullet1: "L'IA répond aux prospects instantanément, 24/7",
         bullet2: "Conçu pour les courtiers canadiens — LPRPDE, LCAP, bilingue EN/FR",
         bullet3: "Bilingue EN/FR",
@@ -2649,16 +2609,16 @@ const resources = {
         disclaimer: "RealtorDesk AI est actuellement en version bêta. Toutes les métriques de performance sont basées sur les résultats du programme pilote. Les résultats individuels peuvent varier."
       },
       betaCommunity: {
-        title: "Rejoignez notre bêta publique",
-        participants: "50+ participants bêta",
-        limitedSpots: "Tarif Membre Fondateur",
-        resultsTitle: "Résultats réels de notre communauté bêta",
+        title: "Rejoignez Notre Communauté Bêta en Croissance",
+        participants: "50+ Participants Bêta",
+        limitedSpots: "Places Bêta Limitées",
+        resultsTitle: "Résultats Réels de Notre Communauté Bêta",
         resultsSubtitle: "Les agents immobiliers canadiens constatent déjà des résultats mesurables. Voici ce que vivent les premiers adopteurs :",
         testimonialDisclaimer: "*Les témoignages représentent des expériences individuelles de notre programme pilote. Les résultats varient et ne sont pas garantis. Les résultats moyens peuvent différer.",
-        ctaTitle: "Prêt à rejoindre notre bêta publique\u00a0?",
-        ctaSubtitle: "Tarif Membre Fondateur pour toute personne qui s'inscrit pendant la bêta publique. Aidez-nous à façonner la feuille de route canadienne de l'IA immobilière.",
-        ctaButton: "Commencer l'essai gratuit de 14 jours",
-        ctaNote: "Les Membres Fondateurs conservent leur tarif à vie et obtiennent la priorité sur les nouvelles fonctionnalités.",
+        ctaTitle: "Prêt à Rejoindre Notre Programme Bêta?",
+        ctaSubtitle: "Places limitées disponibles. Participez à façonner l'avenir de l'IA immobilière au Canada.",
+        ctaButton: "Postuler pour l'Accès Bêta",
+        ctaNote: "Les participants bêta bénéficient de réductions à vie et d'un accès prioritaire aux fonctionnalités",
         testimonials: {
           sarah: {
             quote: "J'étais sceptique à propos de l'IA, mais après la première semaine, j'avais 3 visites réservées pendant que je dormais. L'agent vocal semble naturel et capture tous les détails dont j'ai besoin.",
@@ -3525,10 +3485,6 @@ const resources = {
         videoTutorials: "Tutoriels Vidéo",
         caseStudies: "Études de Cas",
         webinars: "Webinaires",
-        resources: "Ressources",
-        trust: "Confiance et mentions légales",
-        security: "Sécurité et LPRPDE",
-        unsubscribe: "Se désabonner",
         company: "Entreprise",
         about: "À Propos",
         contact: "Contact",
@@ -3847,40 +3803,6 @@ const resources = {
             desc: "Synchronisez vos rendez-vous dans /today."
           }
         }
-      },
-      about: {
-        badge: "Qui nous sommes",
-        title: "Bâti au Canada. Bâti sur l'honnêteté.",
-        subtitle: "RealtorDesk AI est le CRM que nous souhaitions voir exister en observant des agents canadiens perdre des prospects à cause de logiciels américains qui ignoraient ce qu'est la LCAP.",
-        founder: {
-          name: "Tilak Raj",
-          role: "Fondateur, Brainfy AI Inc.",
-          p1: "J'ai fondé Brainfy AI Inc. pour bâtir des logiciels destinés aux entreprises que les SaaS américains traitent comme une considération secondaire. RealtorDesk AI est le premier de ces produits. Les agents immobiliers canadiens composent avec la LPRPDE, la LCAP, les régulateurs provinciaux (RECO, BCFSA, OACIQ) et des marchés bilingues — et se voient vendre des CRM américains qui n'incluent même pas un pied de courriel conforme à la LCAP, encore moins un chatbot bilingue.",
-          p2: "Nous sommes en bêta publique. Vous payez le tarif Membre Fondateur pendant que nous livrons en fonction de vos retours, vous consultez notre feuille de route publique et vous pouvez annuler à tout moment. Nous préférons vous dire ce qui ne fonctionne pas encore plutôt que prétendre des choses fausses."
-        },
-        company: {
-          title: "Brainfy AI Inc.",
-          hqLabel: "Siège social\u00a0:",
-          hq: "Edmonton, Alberta, Canada",
-          foundedLabel: "Fondée\u00a0:",
-          founded: "2025",
-          stageLabel: "Étape\u00a0:",
-          stage: "Bêta publique — des Membres Fondateurs partout au Canada",
-          contactLabel: "Contact\u00a0:"
-        },
-        principles: {
-          title: "Quatre choses que nous ne ferons pas",
-          p1Title: "Prétendre des certifications que nous n'avons pas.",
-          p1: "Nous ne sommes pas certifiés SOC 2 aujourd'hui — c'est prévu pour le T1 2027. Nous n'affichons pas d'écussons pour des normes que nous n'avons pas réellement obtenues.",
-          p2Title: "Inventer des comptes clients.",
-          p2: "Nous avons plus de 50 utilisateurs bêta actifs. Quand nous atteindrons 500, nous dirons 500. Nous n'arrondissons pas vers le haut.",
-          p3Title: "Survendre les résultats de l'IA.",
-          p3: "Notre IA répond aux prospects 24/7 et les évalue. Elle ne conclut pas de transactions à votre place. Quiconque promet «\u00a03x plus de transactions\u00a0» vous vend une ambiance, pas un logiciel.",
-          p4Title: "Vous verrouiller.",
-          p4: "Facturation mensuelle, exportation complète des données, remboursement 30 jours sur l'annuel. Si RealtorDesk AI ne fonctionne pas pour vous, nous vous aiderons à partir."
-        },
-        ctaRoadmap: "Voir la feuille de route publique",
-        ctaTrial: "Commencer votre essai gratuit de 14 jours"
       },
       roadmap: {
         badge: "Feuille de route publique",
