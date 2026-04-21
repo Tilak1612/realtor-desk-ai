@@ -378,11 +378,7 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
                 handleSend();
               }
             }}
-            placeholder={
-              lead.language === "FR"
-                ? t("rd.inbox.composerPlaceholderFr", "Écrire un message au client potentiel…")
-                : t("rd.inbox.composerPlaceholderEn", "Type a message to the lead…")
-            }
+            placeholder={t("rd.inbox.composerPlaceholder", "Type a message to the lead…")}
             rows={2}
             className="w-full bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400 resize-none min-h-[36px]"
           />
