@@ -14,7 +14,14 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CookieConsent from "./components/CookieConsent";
 
 // Critical path — eagerly loaded (landing, auth, 404)
-import Index from "./pages/Index";
+// Phase 2 redesign: new marketing pages live under src/pages/rd/.
+// These replace Index/Features/Pricing/VsBoldTrail at their routes while
+// the legacy files are left in the tree for reference; they will be
+// deleted in a post-launch cleanup pass. See feat/rd-redesign-phase-2-marketing.
+import RDHome from "./pages/rd/Home";
+import RDFeatures from "./pages/rd/Features";
+import RDPricing from "./pages/rd/Pricing";
+import RDCompareBoldtrail from "./pages/rd/CompareBoldtrail";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
@@ -231,9 +238,9 @@ const App = () => (
           <SubscriptionProvider>
           <Suspense fallback={<PageLoader />}>
           <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/" element={<RDHome />} />
+          <Route path="/features" element={<RDFeatures />} />
+          <Route path="/pricing" element={<RDPricing />} />
           <Route path="/canadian-market" element={<CanadianMarket />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
@@ -312,8 +319,9 @@ const App = () => (
 
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />
-          {/* Alias per 2026-04-20 brief PR K — /compare/boldtrail renders the same page. */}
-          <Route path="/compare/boldtrail" element={<VsBoldTrail />} />
+          {/* Phase 2 redesign: /compare/boldtrail uses the new comparison page.
+              /vs/boldtrail continues to render the legacy VsBoldTrail page for SEO. */}
+          <Route path="/compare/boldtrail" element={<RDCompareBoldtrail />} />
           <Route path="/vs/lofty" element={<VsLofty />} />
           <Route path="/vs/ixact" element={<VsIxact />} />
           <Route path="/vs/wise-agent" element={<VsWiseAgent />} />
