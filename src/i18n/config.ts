@@ -30,7 +30,7 @@ const resources = {
         signOut: "Sign out"
       },
       hero: {
-        title: "Close 3X More Deals with AI Automation",
+        title: "Close More Deals with AI Built for Canadian Realtors",
         subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book Your Free Demo",
@@ -1981,7 +1981,7 @@ const resources = {
         signOut: "Se déconnecter"
       },
       hero: {
-        title: "Concluez 3X Plus de Transactions avec l'Automatisation IA",
+        title: "Concluez Plus de Transactions avec une IA Conçue pour les Courtiers Canadiens",
         subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réserver Votre Démo Gratuite",
