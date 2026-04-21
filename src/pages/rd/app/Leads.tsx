@@ -16,8 +16,14 @@ import { RDTabs } from "@/components/rd/Tabs";
 import { MOCK_LEADS } from "@/data/rd";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { useLeads } from "@/hooks/rd/useLeads";
 
 // /app/leads — Leads table per rd-app.jsx Artboard_Leads.
+//
+// Data source: `useLeads()` queries public.contacts scoped to the
+// signed-in user via RLS. If the account has no rows yet, we fall back
+// to MOCK_LEADS so the UI stays legible — an inline banner above the
+// table says so, so fixtures are never mistaken for real data.
 
 const LEADS_GRID = "24px 2fr 1.4fr 1fr 1.4fr 1fr 1.2fr 100px";
 const GRID_STYLE = { display: "grid", gridTemplateColumns: LEADS_GRID };
@@ -26,22 +32,28 @@ type TabKey = "all" | "hot" | "warm" | "cold" | "ai" | "needs_reply";
 
 export default function Leads() {
   const [tab, setTab] = useState<TabKey>("all");
+  const { leads: liveLeads, loading, error } = useLeads();
+
+  // Derive whether we're rendering real or fixture data. Real wins whenever
+  // the current user has at least one contact.
+  const isLive = !loading && !error && liveLeads.length > 0;
+  const source: Lead[] = isLive ? liveLeads : MOCK_LEADS;
 
   const counts = useMemo(() => {
-    const hot = MOCK_LEADS.filter((l) => l.score >= 80).length;
-    const warm = MOCK_LEADS.filter((l) => l.score >= 60 && l.score < 80).length;
-    const cold = MOCK_LEADS.filter((l) => l.score < 60).length;
-    const ai = MOCK_LEADS.filter((l) => l.aiHandling).length;
+    const hot = source.filter((l) => l.score >= 80).length;
+    const warm = source.filter((l) => l.score >= 60 && l.score < 80).length;
+    const cold = source.filter((l) => l.score < 60).length;
+    const ai = source.filter((l) => l.aiHandling).length;
     return { hot, warm, cold, ai, needsReply: 6 };
-  }, []);
+  }, [source]);
 
   const rows = useMemo(() => {
-    if (tab === "hot") return MOCK_LEADS.filter((l) => l.score >= 80);
-    if (tab === "warm") return MOCK_LEADS.filter((l) => l.score >= 60 && l.score < 80);
-    if (tab === "cold") return MOCK_LEADS.filter((l) => l.score < 60);
-    if (tab === "ai") return MOCK_LEADS.filter((l) => l.aiHandling);
-    return MOCK_LEADS;
-  }, [tab]);
+    if (tab === "hot") return source.filter((l) => l.score >= 80);
+    if (tab === "warm") return source.filter((l) => l.score >= 60 && l.score < 80);
+    if (tab === "cold") return source.filter((l) => l.score < 60);
+    if (tab === "ai") return source.filter((l) => l.aiHandling);
+    return source;
+  }, [tab, source]);
 
   return (
     <AppShell>
@@ -50,7 +62,13 @@ export default function Leads() {
         <div className="flex flex-wrap justify-between items-end gap-4 mb-5">
           <div>
             <div className="text-xs text-rd-ink-500 font-semibold tracking-[0.02em]">
-              {MOCK_LEADS.length} total · {counts.needsReply} new this week
+              {source.length} total · {counts.needsReply} new this week
+              {loading && <span className="ml-2 text-rd-ink-400">· loading…</span>}
+              {error && (
+                <span className="ml-2 text-rd-danger">
+                  · {error.message}
+                </span>
+              )}
             </div>
             <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Leads</h1>
           </div>
@@ -66,6 +84,23 @@ export default function Leads() {
             </RDButton>
           </div>
         </div>
+
+        {/* Fixture banner — when the signed-in user has zero contacts we
+            render MOCK_LEADS so the UI is still legible in demos. Once any
+            row is imported via CSV or the Add-lead flow, this banner
+            disappears automatically and the table shows real data. */}
+        {!isLive && !loading && (
+          <div className="mb-4 px-4 py-2.5 bg-rd-terra-50 border border-rd-terra-200 rounded-rd-sm text-[12px] text-rd-terra-900 flex items-center gap-2">
+            <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
+            <span>
+              Showing <strong>sample leads</strong> — import your own via{" "}
+              <Link to="/app/leads" className="underline font-semibold">
+                CSV
+              </Link>{" "}
+              or add one with the button above to replace these.
+            </span>
+          </div>
+        )}
 
         {/* Tabs + sort */}
         <div className="flex items-center justify-between mb-4">
