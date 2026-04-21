@@ -230,7 +230,7 @@ const resources = {
             feature10: "Premium 24/7 support"
           }
         },
-        compare: {
+        compareTable: {
           heading: "Compare with Competitors",
           sub: "See how much you save with Realtor Desk AI",
           firstYear: "First year",
@@ -2181,7 +2181,7 @@ const resources = {
             feature10: "Support premium 24/7"
           }
         },
-        compare: {
+        compareTable: {
           heading: "Comparer avec les Concurrents",
           sub: "Voyez combien vous économisez avec Realtor Desk AI",
           firstYear: "Première année",
