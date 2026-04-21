@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -83,13 +84,20 @@ function extractFirstName(raw: string | null): string {
 /* ────────────────────────────────────────────────────────── */
 
 function Greeting({ firstName }: { firstName: string }) {
-  const today = new Date().toLocaleDateString("en-CA", {
+  const { t, i18n } = useTranslation();
+  const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
+  const today = new Date().toLocaleDateString(isFr ? "fr-CA" : "en-CA", {
     weekday: "long",
     month: "long",
     day: "numeric",
   });
   const hour = new Date().getHours();
-  const salute = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+  const salute =
+    hour < 12
+      ? t("rd.pages.dashboard.saluteMorning", "Good morning")
+      : hour < 18
+      ? t("rd.pages.dashboard.saluteAfternoon", "Good afternoon")
+      : t("rd.pages.dashboard.saluteEvening", "Good evening");
   return (
     <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
       <div>
@@ -99,7 +107,7 @@ function Greeting({ firstName }: { firstName: string }) {
         <h1 className="text-[28px] lg:text-[32px] font-semibold tracking-[-0.02em] mt-1">
           {salute}, {firstName}.{" "}
           <span className="font-rd-serif italic font-normal text-rd-ink-500">
-            Desk worked overnight.
+            {t("rd.pages.dashboard.subhead", "Desk worked overnight.")}
           </span>
         </h1>
       </div>

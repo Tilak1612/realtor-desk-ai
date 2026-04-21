@@ -1951,6 +1951,45 @@ const resources = {
         ctaSendLink: "Send me an unsubscribe link",
         casl: "Operated under CASL by Brainfy AI Inc. (RealtorDesk AI).",
         back: "Back to RealtorDesk AI"
+      },
+      rd: {
+        sidebar: {
+          workspaceTier: "Team plan",
+          collapse: "Collapse sidebar",
+          nav: {
+            dashboard: "Dashboard",
+            leads: "Leads",
+            conversations: "Conversations",
+            pipeline: "Pipeline",
+            automation: "Automation",
+            reports: "Reports",
+            settings: "Settings"
+          },
+          desk: {
+            title: "Desk AI · on duty",
+            summary: "Answered {{count}} leads this week. Avg response {{response}}."
+          }
+        },
+        topnav: {
+          search: "Search leads, listings, conversations…",
+          live: "Live",
+          notifications: "Notifications",
+          language: "Language"
+        },
+        pages: {
+          dashboard: {
+            title: "Dashboard",
+            saluteMorning: "Good morning",
+            saluteAfternoon: "Good afternoon",
+            saluteEvening: "Good evening",
+            subhead: "Desk worked overnight."
+          },
+          leads: { title: "Leads" },
+          inbox: { title: "Conversations" },
+          pipeline: { title: "Pipeline" },
+          automation: { title: "Automation" },
+          reports: { title: "Reports" }
+        }
       }
     }
   },
@@ -3902,6 +3941,45 @@ const resources = {
         ctaSendLink: "M'envoyer un lien de désabonnement",
         casl: "Exploité sous LCAP par Brainfy AI Inc. (RealtorDesk AI).",
         back: "Retour à RealtorDesk AI"
+      },
+      rd: {
+        sidebar: {
+          workspaceTier: "Forfait Équipe",
+          collapse: "Réduire la barre latérale",
+          nav: {
+            dashboard: "Tableau de bord",
+            leads: "Clients potentiels",
+            conversations: "Conversations",
+            pipeline: "Pipeline",
+            automation: "Automatisation",
+            reports: "Rapports",
+            settings: "Paramètres"
+          },
+          desk: {
+            title: "IA Desk · de garde",
+            summary: "{{count}} clients répondus cette semaine. Réponse moyenne {{response}}."
+          }
+        },
+        topnav: {
+          search: "Rechercher clients, inscriptions, conversations…",
+          live: "En direct",
+          notifications: "Notifications",
+          language: "Langue"
+        },
+        pages: {
+          dashboard: {
+            title: "Tableau de bord",
+            saluteMorning: "Bonjour",
+            saluteAfternoon: "Bon après-midi",
+            saluteEvening: "Bonsoir",
+            subhead: "IA Desk a travaillé pendant la nuit."
+          },
+          leads: { title: "Clients potentiels" },
+          inbox: { title: "Conversations" },
+          pipeline: { title: "Pipeline" },
+          automation: { title: "Automatisation" },
+          reports: { title: "Rapports" }
+        }
       }
     }
   }

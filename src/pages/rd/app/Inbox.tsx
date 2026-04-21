@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -108,6 +109,7 @@ function ThreadList({
   onQuery: (q: string) => void;
   latestByLead: Record<string, ConversationMessage>;
 }) {
+  const { t } = useTranslation();
   // Unread = most recent message in a thread was authored by the lead.
   const unreadCount = threads.filter((l) => {
     const last = latestByLead[l.id] ?? MOCK_CONVERSATIONS[l.id]?.slice(-1)[0];
@@ -117,7 +119,9 @@ function ThreadList({
     <div className="flex flex-col border-r border-rd-line bg-white overflow-hidden min-h-0">
       <div className="px-5 py-4 border-b border-rd-line">
         <div className="flex justify-between items-center mb-3">
-          <h2 className="text-lg font-semibold">Conversations</h2>
+          <h2 className="text-lg font-semibold">
+            {t("rd.pages.inbox.title", "Conversations")}
+          </h2>
           <RDBadge tone="terra" size="sm">
             {unreadCount} unread
           </RDBadge>
