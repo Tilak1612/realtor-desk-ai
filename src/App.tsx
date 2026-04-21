@@ -59,8 +59,8 @@ const IntegrationsRoute = () => {
 };
 
 // ─── Lazy-loaded public pages ───
-const Features = lazy(() => import("./pages/Features"));
-const Pricing = lazy(() => import("./pages/Pricing"));
+// Features + Pricing now render via Phase 2 RD* imports above; the legacy
+// page files were deleted in chore/rd-redesign-legacy-cleanup.
 const CanadianMarket = lazy(() => import("./pages/CanadianMarket"));
 const Demo = lazy(() => import("./pages/Demo"));
 const Resources = lazy(() => import("./pages/Resources"));
@@ -136,7 +136,8 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Today = lazy(() => import("./pages/Today"));
 const CallWorkflow = lazy(() => import("./pages/CallWorkflow"));
-const Onboarding = lazy(() => import("./pages/Onboarding"));
+// /onboarding now renders the Phase 4 RDOnboarding (5-step flow).
+// The legacy Onboarding page file was deleted in the cleanup pass.
 const Contacts = lazy(() => import("./pages/Contacts"));
 const ContactDetail = lazy(() => import("./pages/ContactDetail"));
 const Billing = lazy(() => import("./pages/Billing"));
