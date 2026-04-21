@@ -13,27 +13,39 @@ import {
 import { MOCK_AUTOMATIONS } from "@/data/rd";
 import type { AutomationSequence, AutomationStep } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { useAutomations, useToggleAutomation } from "@/hooks/rd/useAutomations";
 
 // /app/automation — Sequences list + editor per rd-app-extra.jsx
-// Artboard_Automation. The live list is driven by MOCK_AUTOMATIONS; the
-// right pane previews the currently-selected sequence as a vertical flow.
+// Artboard_Automation.
+//
+// Data: useAutomations() pulls automation_sequences + joined steps for
+// the signed-in user. Falls back to MOCK_AUTOMATIONS when the account
+// has nothing yet so the page stays demo-legible. Toggle-switch is
+// wired to useToggleAutomation() — only the on/off mutation is live
+// this PR; the full step editor ships in a follow-up.
 
 type ListFilter = "all" | "active" | "draft";
 
 export default function Automation() {
-  const [selectedId, setSelectedId] = useState<string>(MOCK_AUTOMATIONS[0]?.id ?? "");
+  const { sequences: liveSequences, loading } = useAutomations();
+  const isLive = !loading && liveSequences.length > 0;
+  const sequences = isLive ? liveSequences : MOCK_AUTOMATIONS;
+
+  const [selectedId, setSelectedId] = useState<string>(sequences[0]?.id ?? "");
   const [filter, setFilter] = useState<ListFilter>("all");
 
-  const filtered = MOCK_AUTOMATIONS.filter((s) => {
+  const filtered = sequences.filter((s) => {
     if (filter === "active") return s.active;
     if (filter === "draft") return !s.active;
     return true;
   });
 
-  const selected = MOCK_AUTOMATIONS.find((s) => s.id === selectedId);
+  const effectiveSelectedId =
+    sequences.find((s) => s.id === selectedId) ? selectedId : sequences[0]?.id ?? "";
+  const selected = sequences.find((s) => s.id === effectiveSelectedId);
 
-  const totalEnrolled = MOCK_AUTOMATIONS.reduce((sum, s) => sum + s.stats30d.sent, 0);
-  const totalReplied = MOCK_AUTOMATIONS.reduce((sum, s) => sum + s.stats30d.replied, 0);
+  const totalEnrolled = sequences.reduce((sum, s) => sum + s.stats30d.sent, 0);
+  const totalReplied = sequences.reduce((sum, s) => sum + s.stats30d.replied, 0);
 
   return (
     <AppShell>
@@ -42,8 +54,11 @@ export default function Automation() {
         <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
           <div>
             <div className="text-xs text-rd-ink-500 font-semibold">
-              {MOCK_AUTOMATIONS.length} sequences · {totalEnrolled} leads enrolled · {totalReplied}{" "}
+              {sequences.length} sequences · {totalEnrolled} leads enrolled · {totalReplied}{" "}
               conversions this month
+              {!isLive && !loading && (
+                <span className="ml-2 text-rd-terra-700">· sample data</span>
+              )}
             </div>
             <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Automation</h1>
           </div>
@@ -61,12 +76,13 @@ export default function Automation() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
           <SequenceList
             sequences={filtered}
-            selectedId={selectedId}
+            selectedId={effectiveSelectedId}
             onSelect={setSelectedId}
             filter={filter}
             onFilter={setFilter}
-            activeCount={MOCK_AUTOMATIONS.filter((s) => s.active).length}
-            draftCount={MOCK_AUTOMATIONS.filter((s) => !s.active).length}
+            activeCount={sequences.filter((s) => s.active).length}
+            draftCount={sequences.filter((s) => !s.active).length}
+            canMutate={isLive}
           />
           <SequencePreview sequence={selected} />
         </div>
@@ -85,6 +101,7 @@ function SequenceList({
   onFilter,
   activeCount,
   draftCount,
+  canMutate,
 }: {
   sequences: AutomationSequence[];
   selectedId: string;
@@ -93,6 +110,7 @@ function SequenceList({
   onFilter: (f: ListFilter) => void;
   activeCount: number;
   draftCount: number;
+  canMutate: boolean;
 }) {
   return (
     <RDCard padding={0} className="overflow-hidden">
@@ -124,6 +142,7 @@ function SequenceList({
           selected={s.id === selectedId}
           isLast={i === sequences.length - 1}
           onClick={() => onSelect(s.id)}
+          canMutate={canMutate}
         />
       ))}
     </RDCard>
@@ -160,14 +179,22 @@ function SequenceRow({
   selected,
   isLast,
   onClick,
+  canMutate,
 }: {
   sequence: AutomationSequence;
   selected: boolean;
   isLast: boolean;
   onClick: () => void;
+  canMutate: boolean;
 }) {
   const { sent, replied } = sequence.stats30d;
   const convRate = sent > 0 ? Math.round((replied / sent) * 100) : 0;
+  const toggle = useToggleAutomation();
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!canMutate) return;
+    toggle.mutate({ id: sequence.id, active: !sequence.active });
+  };
   return (
     <button
       type="button"
@@ -214,7 +241,15 @@ function SequenceRow({
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <ToggleSwitch on={sequence.active} />
+        <div
+          role="button"
+          aria-label={sequence.active ? "Pause sequence" : "Activate sequence"}
+          aria-disabled={!canMutate}
+          onClick={handleToggle}
+          className={canMutate ? "cursor-pointer" : "cursor-not-allowed opacity-60"}
+        >
+          <ToggleSwitch on={sequence.active} />
+        </div>
         <span className="w-7 h-7 border border-rd-line bg-white rounded-rd-sm flex items-center justify-center text-rd-ink-500">
           <IconChevron />
         </span>
