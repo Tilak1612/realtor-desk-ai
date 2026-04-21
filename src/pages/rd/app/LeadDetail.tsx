@@ -11,17 +11,37 @@ import {
   IconHome,
   IconArrow,
 } from "@/components/rd";
-import { findLead, findConversation } from "@/data/rd";
+import { findLead as findMockLead, findConversation } from "@/data/rd";
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { useLead } from "@/hooks/rd/useLeads";
 
 // /app/leads/:id — Lead detail per rd-app.jsx Artboard_LeadDetail.
 // Two-column layout: conversation on the left, lead sidebar on the right.
+//
+// Data sources:
+//   - Lead  : useLead(id) queries live contacts via useLeads cache;
+//             falls back to findMockLead(id) when the user has no data
+//             or the ID corresponds to one of our demo fixtures.
+//   - Thread: findConversation(id) — mock-only for Phase B. The real
+//             conversation store lands in wiring Phase C (a new table
+//             or projection over contact_activities) so we don't
+//             silently render misleading empty threads on live leads.
 
 export default function LeadDetail() {
   const { id } = useParams<{ id: string }>();
-  const lead = id ? findLead(id) : undefined;
+  const { lead: liveLead, loading } = useLead(id);
+  const lead: Lead | undefined = liveLead ?? (id ? findMockLead(id) : undefined);
   const messages = id ? findConversation(id) : [];
+  const usingMock = !!liveLead === false && !!lead; // lead resolved via fixture
+
+  if (loading && !lead) {
+    return (
+      <AppShell>
+        <div className="p-10 text-center text-sm text-rd-ink-500">Loading lead…</div>
+      </AppShell>
+    );
+  }
 
   if (!lead) {
     return (
@@ -44,6 +64,18 @@ export default function LeadDetail() {
 
   return (
     <AppShell>
+      {usingMock && (
+        <div className="px-7 py-2 bg-rd-terra-50 border-b border-rd-terra-200 text-[12px] text-rd-terra-900 flex items-center gap-2">
+          <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
+          <span>
+            Viewing <strong>sample lead</strong> from the demo dataset. Import real leads from{" "}
+            <Link to="/app/leads" className="underline font-semibold">
+              /app/leads
+            </Link>{" "}
+            to replace these.
+          </span>
+        </div>
+      )}
       <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] h-full overflow-hidden">
         <ConversationPane lead={lead} messages={messages} />
         <LeadSidebar lead={lead} />

@@ -11,10 +11,13 @@ import {
 import { MOCK_LEADS, PIPELINE_STAGES } from "@/data/rd";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { useLeads } from "@/hooks/rd/useLeads";
 
 // /app/pipeline — Pipeline kanban per rd-app.jsx Artboard_Pipeline.
-// Visual-only today; drag-drop + DB mutations land in the backend
-// wiring phase ("pipeline updates" in the agreed order).
+// Rollups + cards come from useLeads() — the same live source as the
+// leads table, so anywhere a stage is updated flows through both views
+// once mutations land. Still no drag-drop (visual-only); stage mutation
+// UX ships in a later rung.
 
 type ViewMode = "kanban" | "list" | "forecast";
 
@@ -25,6 +28,9 @@ const COLUMNS: PipelineStage[] = ["new", "contacted", "qualified", "showing", "o
 
 export default function Pipeline() {
   const [view, setView] = useState<ViewMode>("kanban");
+  const { leads: liveLeads, loading } = useLeads();
+  const isLive = !loading && liveLeads.length > 0;
+  const source: Lead[] = isLive ? liveLeads : MOCK_LEADS;
 
   // Roll totals up by stage.
   const snapshot = useMemo(() => {
@@ -37,15 +43,15 @@ export default function Pipeline() {
       won: { count: 0, valueCad: 0 },
       lost: { count: 0, valueCad: 0 },
     };
-    for (const lead of MOCK_LEADS) {
+    for (const lead of source) {
       byStage[lead.stage].count += 1;
       byStage[lead.stage].valueCad += lead.budgetCad ?? 0;
     }
     return byStage;
-  }, []);
+  }, [source]);
 
   const totalValue = Object.values(snapshot).reduce((a, b) => a + b.valueCad, 0);
-  const totalCount = MOCK_LEADS.length;
+  const totalCount = source.length;
 
   return (
     <AppShell>
@@ -55,6 +61,9 @@ export default function Pipeline() {
           <div>
             <div className="text-xs text-rd-ink-500 font-semibold">
               Total pipeline · {formatCad(totalValue)} · {totalCount} leads
+              {!isLive && !loading && (
+                <span className="ml-2 text-rd-terra-700">· sample data</span>
+              )}
             </div>
             <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Pipeline</h1>
           </div>
@@ -75,7 +84,7 @@ export default function Pipeline() {
             {COLUMNS.map((stageId) => {
               const meta = PIPELINE_STAGES.find((s) => s.id === stageId)!;
               const rollup = snapshot[stageId];
-              const leadsIn = MOCK_LEADS.filter((l) => l.stage === stageId);
+              const leadsIn = source.filter((l) => l.stage === stageId);
               return (
                 <KanbanColumn
                   key={stageId}
