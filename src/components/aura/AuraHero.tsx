@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
-import { Zap, Play, Star, ArrowRight, CheckCircle, Bot, MessageSquare, Mail, Users } from "lucide-react";
+import { Zap, Play, ArrowRight, CheckCircle } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
 import heroAgentsTablet from "@/assets/hero-agents-tablet.jpg";
 
@@ -43,7 +43,8 @@ const AuraHero = () => {
               <div className="relative mb-8">
                 <div className="absolute inset-0 blur-3xl bg-primary/20 animate-pulse-glow rounded-full scale-150 -z-10"></div>
                 <h1 className="lg:text-6xl leading-[1.05] text-4xl sm:text-5xl tracking-tighter gradient-text-animated relative">
-                  {t('hero.title', 'Close More Deals Faster with RealtorDesk')}
+                  {t('hero.title', 'A Canadian CRM that answers every lead —')}{' '}
+                  {t('hero.titleGradient', 'in English or French — in under two minutes.')}
                 </h1>
               </div>
 
@@ -124,25 +125,9 @@ const AuraHero = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"></div>
                 </div>
 
-                <div className="absolute -top-4 -right-4 bg-card/90 backdrop-blur-xl rounded-2xl p-4 shadow-xl border border-white/10 hidden sm:block">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Users className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground">{t('hero.activeAgents', 'Active Agents')}</div>
-                      <div className="text-lg font-bold text-white">+999 {t('hero.leads', 'Leads')}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute -bottom-4 -left-4 bg-card/90 backdrop-blur-xl rounded-2xl py-3 px-4 shadow-xl border border-white/10 hidden sm:block">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <span className="text-sm font-medium text-white">{t('hero.aiActive', 'AI Active')}</span>
-                    <span className="text-xs text-muted-foreground">• 24/7</span>
-                  </div>
-                </div>
+                {/* Ambient "+999 Leads" and "AI Active" floating cards removed — read as fake
+                    dashboard chrome per the 2026-04-20 UX audit. Replace with a real product
+                    screenshot once the Jordan Tremblay demo seed has been run. */}
               </div>
             </div>
           </main>
