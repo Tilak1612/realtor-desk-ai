@@ -22,6 +22,12 @@ import RDHome from "./pages/rd/Home";
 import RDFeatures from "./pages/rd/Features";
 import RDPricing from "./pages/rd/Pricing";
 import RDCompareBoldtrail from "./pages/rd/CompareBoldtrail";
+// Phase 3 redesign: product surfaces under /app/*. Lazy-loaded so the
+// paper-bg shell doesn't bloat the marketing bundle.
+const RDAppDashboard = lazy(() => import("./pages/rd/app/Dashboard"));
+const RDAppLeads = lazy(() => import("./pages/rd/app/Leads"));
+const RDAppLeadDetail = lazy(() => import("./pages/rd/app/LeadDetail"));
+const RDAppPipeline = lazy(() => import("./pages/rd/app/Pipeline"));
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
@@ -299,6 +305,12 @@ const App = () => (
           <Route path="/today" element={<ProtectedRoute><Today /></ProtectedRoute>} />
           <Route path="/call-workflow/:contactId" element={<ProtectedRoute><CallWorkflow /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          {/* Phase 3 redesign: /app/* product surfaces. Behind ProtectedRoute
+              so the agent must be signed in, consistent with /dashboard. */}
+          <Route path="/app" element={<ProtectedRoute><RDAppDashboard /></ProtectedRoute>} />
+          <Route path="/app/leads" element={<ProtectedRoute><RDAppLeads /></ProtectedRoute>} />
+          <Route path="/app/leads/:id" element={<ProtectedRoute><RDAppLeadDetail /></ProtectedRoute>} />
+          <Route path="/app/pipeline" element={<ProtectedRoute><RDAppPipeline /></ProtectedRoute>} />
           <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
           <Route path="/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
           <Route path="/contacts/:id" element={<ProtectedRoute><ContactDetail /></ProtectedRoute>} />

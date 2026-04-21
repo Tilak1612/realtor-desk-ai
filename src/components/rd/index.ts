@@ -27,6 +27,7 @@ export {
   gridRow,
 } from "./Table";
 export { RDStatCard } from "./StatCard";
+export { Spark } from "./Spark";
 export { RDSectionHeader } from "./SectionHeader";
 export { RDConversationBubble } from "./ConversationBubble";
 export { RDPipelineCard } from "./PipelineCard";
