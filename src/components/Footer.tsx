@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import logo from "@/assets/realtor-desk-icon.png";
 
@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-muted border-t">
       <div className="container-custom py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4 group">
@@ -83,11 +83,6 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.integrations')}
-                </Link>
-              </li>
-              <li>
                 <Link to="/demo" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('nav.bookDemo')}
                 </Link>
@@ -95,31 +90,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Blogs */}
           <div>
-            <h3 className="font-semibold mb-4">{t('footer.company', 'Company')}</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.about', 'About')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.careers')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.contact')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="font-semibold mb-4">{t('footer.resources', 'Resources')}</h3>
+            <h3 className="font-semibold mb-4">{t('footer.blogs', 'Blogs')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/resources" className="text-muted-foreground hover:text-primary transition-colors">
@@ -132,40 +105,23 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('footer.integrations')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('nav.faq')}
                 </Link>
               </li>
               <li>
+                <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t('footer.careers')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.helpCenter')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Trust */}
-          <div>
-            <h3 className="font-semibold mb-4">{t('footer.trust', 'Trust & legal')}</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/security" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.security', 'Security & PIPEDA')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.privacy')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.terms')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/unsubscribe" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t('footer.unsubscribe', 'Unsubscribe')}
                 </Link>
               </li>
             </ul>
@@ -186,6 +142,11 @@ const Footer = () => {
                 <span className="text-muted-foreground">
                   Edmonton, Alberta, Canada
                 </span>
+              </li>
+              <li>
+                <Link to="/contact" className="text-primary hover:text-primary/80 transition-colors font-medium">
+                  {t('footer.contact')} →
+                </Link>
               </li>
             </ul>
           </div>

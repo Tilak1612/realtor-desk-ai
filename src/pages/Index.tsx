@@ -39,6 +39,7 @@ import SpotlightCard from "@/components/aura/SpotlightCard";
 
 import BetaSuccessStories from "@/components/BetaSuccessStories";
 import DemoBookingSection from "@/components/DemoBookingSection";
+import AudienceSegments from "@/components/AudienceSegments";
 import demoShowcase from "@/assets/demo-showcase.jpg";
 import { toast } from "sonner";
 
@@ -69,9 +70,8 @@ const Index = () => {
       {/* Hero Section */}
       <AuraHero />
 
-      {/* "For Agents / Teams / Brokers" block removed per 2026-04-20 UX audit —
-          the "Learn more" links on each role card point nowhere useful today.
-          Reinstate once /for-solo-agents, /for-teams, /for-brokerages ship. */}
+      {/* Audience Segments - For Agents, Teams, Brokers */}
+      <AudienceSegments />
 
       {/* Live Social Proof Bar */}
       <SpotlightCard className="mx-4 sm:mx-6 max-w-7xl xl:mx-auto">
