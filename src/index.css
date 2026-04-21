@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Phase 1 redesign tokens. Namespaced under --rd-* so they live alongside
+   the legacy shadcn --* vars below without collision. Imported here so
+   every route picks them up automatically. */
+@import "./styles/rd-tokens.css";
+
 /*
  * RealtorDesk AI — Design System
  *

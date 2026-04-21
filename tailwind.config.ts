@@ -124,10 +124,81 @@ export default {
             foreground: "hsl(var(--status-lost-foreground))",
           },
         },
+        // ── Redesign palette (Phase 1 — 2026-04 rebrand) ────────────
+        // Mirrors src/styles/rd-tokens.css so classes like
+        // bg-rd-navy-800 / text-rd-terra-600 / border-rd-line compile.
+        rd: {
+          // Ink / neutrals
+          "ink-950": "#0A0E14",
+          "ink-900": "#111418",
+          "ink-800": "#1B2028",
+          "ink-700": "#2A2F38",
+          "ink-600": "#4A5260",
+          "ink-500": "#6B7280",
+          "ink-400": "#9AA1AD",
+          "ink-300": "#C8CDD5",
+          "ink-200": "#E5E7EB",
+          "ink-100": "#EEEFF1",
+          "ink-50":  "#F5F5F2",
+          // Paper surfaces
+          paper: "#FAFAF7",
+          "paper-2": "#F4F3EE",
+          card: "#FFFFFF",
+          line: "#E3E4E0",
+          "line-strong": "#C8CAC2",
+          // Navy (brand primary)
+          "navy-950": "#050C17",
+          "navy-900": "#081826",
+          "navy-800": "#0B2540",
+          "navy-700": "#133656",
+          "navy-600": "#1F4A72",
+          "navy-500": "#2E6291",
+          "navy-400": "#5A89B3",
+          "navy-300": "#93B2CE",
+          "navy-200": "#C9D8E6",
+          "navy-100": "#E4ECF3",
+          "navy-50":  "#F1F5F9",
+          // Terracotta (accent)
+          "terra-900": "#7A2E14",
+          "terra-800": "#9F4222",
+          "terra-700": "#BE552F",
+          "terra-600": "#D7714E",
+          "terra-500": "#E08B6C",
+          "terra-400": "#EBAA93",
+          "terra-300": "#F2C8B9",
+          "terra-200": "#F8E0D5",
+          "terra-100": "#FBEEE7",
+          "terra-50":  "#FDF7F3",
+          // Semantic
+          success: "#1F7A4D",
+          "success-bg": "#E4F3EB",
+          warning: "#B88A2E",
+          "warning-bg": "#FAF0D7",
+          danger: "#B32B2B",
+          "danger-bg": "#FAE2E2",
+          info: "#1F4A72",
+          "info-bg": "#E4ECF3",
+          // Lead score
+          "score-hot":  "#D7714E",
+          "score-warm": "#D9A441",
+          "score-cool": "#5A89B3",
+          "score-cold": "#9AA1AD",
+        },
+      },
+      boxShadow: {
+        "rd-sm":   "0 1px 2px rgba(11,37,64,0.06), 0 1px 1px rgba(11,37,64,0.04)",
+        "rd-md":   "0 2px 4px rgba(11,37,64,0.05), 0 8px 24px -8px rgba(11,37,64,0.10)",
+        "rd-lg":   "0 12px 28px -12px rgba(11,37,64,0.18), 0 40px 80px -40px rgba(11,37,64,0.20)",
+        "rd-ring": "0 0 0 1px #E3E4E0",
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         serif: ['Instrument Serif', 'Georgia', 'serif'],
+        // Redesign (Phase 1). Alias the CSS-var pipeline from rd-tokens.css so
+        // components can use `font-rd-sans | font-rd-serif | font-rd-mono`.
+        'rd-sans': ['var(--rd-font-sans)'],
+        'rd-serif': ['var(--rd-font-serif)'],
+        'rd-mono': ['var(--rd-font-mono)'],
       },
       fontSize: {
         // Audit-mandated marketing scale
@@ -151,6 +222,14 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        // Redesign radii (Phase 1). Keyed with rd- prefix to avoid clobbering
+        // the shadcn lg/md/sm chain above.
+        "rd-xs": "4px",
+        "rd-sm": "6px",
+        "rd-md": "10px",
+        "rd-lg": "14px",
+        "rd-xl": "20px",
+        "rd-pill": "999px",
       },
       keyframes: {
         "accordion-down": {
