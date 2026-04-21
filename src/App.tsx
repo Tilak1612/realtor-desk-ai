@@ -52,6 +52,7 @@ const Integrations = lazy(() => import("./pages/Integrations"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Careers = lazy(() => import("./pages/Careers"));
 const PIPEDACompliancePage = lazy(() => import("./pages/PIPEDACompliancePage"));
+const About = lazy(() => import("./pages/About"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -277,6 +278,10 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
+          {/* /security is the preferred URL (enterprise buyers look here first).
+              /pipeda-compliance stays as a live alias so existing links and SEO don't break. */}
+          <Route path="/security" element={<PIPEDACompliancePage />} />
+          <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
