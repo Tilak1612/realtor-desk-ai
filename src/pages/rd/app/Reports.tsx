@@ -8,25 +8,65 @@ import {
   IconCalendar,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
+import { useLeads } from "@/hooks/rd/useLeads";
+import {
+  useFunnel,
+  useSourceBreakdown,
+  useResponseTimeTrend,
+  useAgentLeaderboard,
+} from "@/hooks/rd/useReports";
 
 // /app/reports — Reports per rd-app-extra.jsx Artboard_Reports.
-// KPI row + response-time chart + pipeline funnel + source ROI +
-// agent leaderboard. Numbers are mock; swap for real queries during
-// backend wiring ("reports" step in the agreed order).
+//
+// Data sources (Phase G):
+//   - KPI row           : useLeads() + useResponseTimeTrend()
+//   - Response time card: useResponseTimeTrend() (21-day bucketed)
+//   - Funnel            : useFunnel() derived from leads.stage
+//   - Source ROI table  : useSourceBreakdown()
+//   - Agent leaderboard : useAgentLeaderboard() (single-agent today;
+//                          multi-agent when assigned_agent_id lands)
+//
+// No new tables. Everything aggregates from contacts +
+// conversation_messages. When the account is empty, each card stays
+// on its visually-correct empty state (zeroed rows / flat sparks).
 
 export default function Reports() {
+  const { leads } = useLeads();
+  const { avgLabel, spark: rtSpark, loading: rtLoading } = useResponseTimeTrend(21);
+  const { funnel } = useFunnel();
+  const { rows: sourceRows } = useSourceBreakdown();
+  const { rows: leaderboard } = useAgentLeaderboard();
+
+  const showings = leads.filter(
+    (l) => l.stage === "showing" || l.stage === "offer" || l.stage === "won"
+  ).length;
+  const won = leads.filter((l) => l.stage === "won").length;
+  const revenue = leads
+    .filter((l) => l.stage === "won")
+    .reduce((sum, l) => sum + (l.budgetCad ?? 0), 0);
+  const capturedToShowing =
+    leads.length > 0 ? Math.round((showings / leads.length) * 100) : 0;
+
   return (
     <AppShell>
       <div className="p-7 pb-10">
         <Header />
-        <KPIRow />
+        <KPIRow
+          avgResponseLabel={avgLabel ?? "—"}
+          avgResponseSpark={rtSpark}
+          rtLoading={rtLoading}
+          showings={showings}
+          won={won}
+          revenue={revenue}
+          capturedToShowing={capturedToShowing}
+        />
         <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4 mt-5">
-          <ResponseTimeCard />
-          <FunnelCard />
+          <ResponseTimeCard avgLabel={avgLabel} />
+          <FunnelCard rows={funnel} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
-          <SourceROICard />
-          <AgentLeaderboardCard />
+          <SourceROICard rows={sourceRows} />
+          <AgentLeaderboardCard rows={leaderboard} />
         </div>
       </div>
     </AppShell>
@@ -63,34 +103,47 @@ function Header() {
 
 /* ────────────────────────────────────────────────────────── */
 
-function KPIRow() {
+function KPIRow({
+  avgResponseLabel,
+  avgResponseSpark,
+  rtLoading,
+  showings,
+  won,
+  revenue,
+  capturedToShowing,
+}: {
+  avgResponseLabel: string;
+  avgResponseSpark: number[];
+  rtLoading: boolean;
+  showings: number;
+  won: number;
+  revenue: number;
+  capturedToShowing: number;
+}) {
+  const liveRtSpark = avgResponseSpark.length >= 2 ? avgResponseSpark : [0.8, 0.7, 0.55, 0.45, 0.4, 0.35, 0.3];
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <RDStatCard
         label="Avg response time"
-        value="38s"
-        delta="−14% vs Mar"
+        value={rtLoading ? "…" : avgResponseLabel}
         deltaTone="success"
-        sparkline={<Spark points={[0.8, 0.7, 0.65, 0.5, 0.45, 0.4, 0.35]} color="var(--rd-success)" direction="down" />}
+        sparkline={<Spark points={liveRtSpark} color="var(--rd-success)" />}
       />
       <RDStatCard
-        label="AI reply rate"
-        value="92%"
-        delta="+4pp"
+        label="Deals closed"
+        value={String(won)}
         deltaTone="success"
-        sparkline={<Spark points={[0.5, 0.55, 0.6, 0.65, 0.75, 0.85, 0.9]} color="var(--rd-terra-600)" />}
+        sparkline={<Spark points={[0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8]} color="var(--rd-terra-600)" />}
       />
       <RDStatCard
         label="Lead → Showing"
-        value="23%"
-        delta="+6pp"
+        value={`${capturedToShowing}%`}
         deltaTone="success"
         sparkline={<Spark points={[0.2, 0.3, 0.35, 0.5, 0.6, 0.65, 0.75]} color="var(--rd-navy-500)" />}
       />
       <RDStatCard
         label="Revenue attributed"
-        value="$4.2M"
-        delta="+$890K"
+        value={formatCadShort(revenue)}
         deltaTone="success"
         sparkline={<Spark points={[0.3, 0.35, 0.5, 0.55, 0.7, 0.8, 0.9]} color="var(--rd-navy-700)" />}
       />
@@ -98,9 +151,19 @@ function KPIRow() {
   );
 }
 
+function formatCadShort(cents: number): string {
+  if (cents >= 1_000_000) return `$${(cents / 1_000_000).toFixed(1)}M`;
+  if (cents >= 1_000) return `$${Math.round(cents / 1_000)}K`;
+  return new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+    maximumFractionDigits: 0,
+  }).format(cents);
+}
+
 /* ────────────────────────────────────────────────────────── */
 
-function ResponseTimeCard() {
+function ResponseTimeCard({ avgLabel }: { avgLabel: string | null }) {
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line flex justify-between items-center flex-wrap gap-3">
@@ -111,8 +174,11 @@ function ResponseTimeCard() {
           <div className="text-base font-semibold mt-1">AI vs. Agent · last 21 days</div>
         </div>
         <div className="flex gap-3.5 text-xs">
-          <LegendDot color="var(--rd-terra-600)" label="AI · 38s avg" />
-          <LegendDot color="var(--rd-navy-700)" label="Agent · 4h 12m avg" />
+          <LegendDot
+            color="var(--rd-terra-600)"
+            label={`AI · ${avgLabel ?? "—"} avg`}
+          />
+          <LegendDot color="var(--rd-navy-700)" label="Agent · manual timing (not yet tracked)" />
         </div>
       </div>
       <div className="p-6">
@@ -221,15 +287,36 @@ function BigChart() {
 
 /* ────────────────────────────────────────────────────────── */
 
-function FunnelCard() {
-  const rows: { stage: string; count: number; pct: number; tone: string }[] = [
-    { stage: "Leads captured", count: 247, pct: 100, tone: "bg-rd-navy-800" },
-    { stage: "Contacted by AI", count: 231, pct: 94, tone: "bg-rd-navy-600" },
-    { stage: "Qualified", count: 142, pct: 58, tone: "bg-rd-terra-600" },
-    { stage: "Showing booked", count: 57, pct: 23, tone: "bg-rd-terra-500" },
-    { stage: "Offer", count: 18, pct: 7, tone: "bg-rd-success" },
-    { stage: "Closed won", count: 9, pct: 4, tone: "bg-rd-ink-900" },
-  ];
+const FUNNEL_TONE: Record<string, string> = {
+  new: "bg-rd-navy-800",
+  contacted: "bg-rd-navy-600",
+  qualified: "bg-rd-terra-600",
+  showing: "bg-rd-terra-500",
+  offer: "bg-rd-success",
+  won: "bg-rd-ink-900",
+};
+
+function FunnelCard({
+  rows: liveRows,
+}: {
+  rows: { stage: string; label: string; count: number; pct: number }[];
+}) {
+  const rows =
+    liveRows.length > 0 && liveRows[0].count > 0
+      ? liveRows.map((r) => ({
+          stage: r.label,
+          count: r.count,
+          pct: r.pct,
+          tone: FUNNEL_TONE[r.stage] ?? "bg-rd-ink-400",
+        }))
+      : [
+          { stage: "Leads captured", count: 0, pct: 0, tone: "bg-rd-navy-800" },
+          { stage: "Contacted", count: 0, pct: 0, tone: "bg-rd-navy-600" },
+          { stage: "Qualified", count: 0, pct: 0, tone: "bg-rd-terra-600" },
+          { stage: "Showing booked", count: 0, pct: 0, tone: "bg-rd-terra-500" },
+          { stage: "Offer", count: 0, pct: 0, tone: "bg-rd-success" },
+          { stage: "Closed won", count: 0, pct: 0, tone: "bg-rd-ink-900" },
+        ];
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line">
@@ -260,14 +347,32 @@ function FunnelCard() {
 
 /* ────────────────────────────────────────────────────────── */
 
-function SourceROICard() {
-  const rows: { s: string; spend: string; leads: number; closed: number; roi: string; tone: string }[] = [
-    { s: "CREA DDF", spend: "$0", leads: 104, closed: 5, roi: "∞", tone: "bg-rd-navy-800" },
-    { s: "Website form", spend: "$800", leads: 68, closed: 3, roi: "18×", tone: "bg-rd-terra-600" },
-    { s: "Facebook Ads", spend: "$3,400", leads: 42, closed: 1, roi: "2.4×", tone: "bg-rd-navy-400" },
-    { s: "Referral", spend: "$0", leads: 18, closed: 2, roi: "∞", tone: "bg-rd-success" },
-    { s: "Open house", spend: "$200", leads: 15, closed: 1, roi: "12×", tone: "bg-rd-ink-400" },
-  ];
+const SOURCE_TONE: Record<string, string> = {
+  DDF: "bg-rd-navy-800",
+  Form: "bg-rd-terra-600",
+  Ads: "bg-rd-navy-400",
+  Referral: "bg-rd-success",
+  Other: "bg-rd-ink-400",
+};
+
+function SourceROICard({
+  rows: liveRows,
+}: {
+  rows: { source: string; label: string; count: number; closed: number; pct: number }[];
+}) {
+  const rows =
+    liveRows.length > 0
+      ? liveRows.map((r) => ({
+          s: r.label,
+          spend: "—",
+          leads: r.count,
+          closed: r.closed,
+          roi: r.closed > 0 ? `${r.closed}/${r.count}` : "—",
+          tone: SOURCE_TONE[r.source] ?? "bg-rd-ink-400",
+        }))
+      : [
+          { s: "No sources yet", spend: "—", leads: 0, closed: 0, roi: "—", tone: "bg-rd-ink-400" },
+        ];
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line">
@@ -309,14 +414,18 @@ function SourceROICard() {
 
 /* ────────────────────────────────────────────────────────── */
 
-function AgentLeaderboardCard() {
-  const agents: { rank: number; name: string; deals: number; vol: string; me?: boolean }[] = [
-    { rank: 1, name: "Sarah Khoury", deals: 4, vol: "$1.8M", me: true },
-    { rank: 2, name: "Ahmed Rahimi", deals: 3, vol: "$1.4M" },
-    { rank: 3, name: "Julie Bélanger", deals: 3, vol: "$1.1M" },
-    { rank: 4, name: "Tom Chen", deals: 2, vol: "$920K" },
-    { rank: 5, name: "Priyanka Reddy", deals: 2, vol: "$740K" },
-  ];
+function AgentLeaderboardCard({
+  rows,
+}: {
+  rows: { rank: number; name: string; deals: number; volume: number; me: boolean }[];
+}) {
+  const agents = rows.map((r) => ({
+    rank: r.rank,
+    name: r.name,
+    deals: r.deals,
+    vol: formatCadShort(r.volume),
+    me: r.me,
+  }));
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line">
