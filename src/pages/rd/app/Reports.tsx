@@ -95,10 +95,10 @@ function Header() {
           April 2026
         </button>
         <RDButton variant="outline" size="sm">
-          Export CSV
+          {t("rd.actions.exportCsv", "Export CSV")}
         </RDButton>
         <RDButton variant="primary" size="sm">
-          Share
+          {t("rd.actions.share", "Share")}
         </RDButton>
       </div>
     </div>
@@ -124,29 +124,30 @@ function KPIRow({
   revenue: number;
   capturedToShowing: number;
 }) {
+  const { t } = useTranslation();
   const liveRtSpark = avgResponseSpark.length >= 2 ? avgResponseSpark : [0.8, 0.7, 0.55, 0.45, 0.4, 0.35, 0.3];
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <RDStatCard
-        label="Avg response time"
+        label={t("rd.kpi.avgResponseTime", "Avg response time")}
         value={rtLoading ? "…" : avgResponseLabel}
         deltaTone="success"
         sparkline={<Spark points={liveRtSpark} color="var(--rd-success)" />}
       />
       <RDStatCard
-        label="Deals closed"
+        label={t("rd.kpi.dealsClosed", "Deals closed")}
         value={String(won)}
         deltaTone="success"
         sparkline={<Spark points={[0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8]} color="var(--rd-terra-600)" />}
       />
       <RDStatCard
-        label="Lead → Showing"
+        label={t("rd.kpi.leadToShowing", "Lead → Showing")}
         value={`${capturedToShowing}%`}
         deltaTone="success"
         sparkline={<Spark points={[0.2, 0.3, 0.35, 0.5, 0.6, 0.65, 0.75]} color="var(--rd-navy-500)" />}
       />
       <RDStatCard
-        label="Revenue attributed"
+        label={t("rd.kpi.revenueAttributed", "Revenue attributed")}
         value={formatCadShort(revenue)}
         deltaTone="success"
         sparkline={<Spark points={[0.3, 0.35, 0.5, 0.55, 0.7, 0.8, 0.9]} color="var(--rd-navy-700)" />}
@@ -168,21 +169,30 @@ function formatCadShort(cents: number): string {
 /* ────────────────────────────────────────────────────────── */
 
 function ResponseTimeCard({ avgLabel }: { avgLabel: string | null }) {
+  const { t } = useTranslation();
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line flex justify-between items-center flex-wrap gap-3">
         <div>
           <div className="text-[11px] font-bold text-rd-ink-500 uppercase tracking-[0.06em]">
-            Response time trend
+            {t("rd.sections.responseTimeTrend", "Response time trend")}
           </div>
-          <div className="text-base font-semibold mt-1">AI vs. Agent · last 21 days</div>
+          <div className="text-base font-semibold mt-1">
+            {t("rd.sections.aiVsAgent21d", "AI vs. Agent · last 21 days")}
+          </div>
         </div>
         <div className="flex gap-3.5 text-xs">
           <LegendDot
             color="var(--rd-terra-600)"
-            label={`AI · ${avgLabel ?? "—"} avg`}
+            label={t("rd.reportsPage.aiAvg", "AI · {{label}} avg", { label: avgLabel ?? "—" })}
           />
-          <LegendDot color="var(--rd-navy-700)" label="Agent · manual timing (not yet tracked)" />
+          <LegendDot
+            color="var(--rd-navy-700)"
+            label={t(
+              "rd.reportsPage.agentManual",
+              "Agent · manual timing (not yet tracked)"
+            )}
+          />
         </div>
       </div>
       <div className="p-6">
@@ -305,6 +315,7 @@ function FunnelCard({
 }: {
   rows: { stage: string; label: string; count: number; pct: number }[];
 }) {
+  const { t } = useTranslation();
   const rows =
     liveRows.length > 0 && liveRows[0].count > 0
       ? liveRows.map((r) => ({
@@ -314,20 +325,22 @@ function FunnelCard({
           tone: FUNNEL_TONE[r.stage] ?? "bg-rd-ink-400",
         }))
       : [
-          { stage: "Leads captured", count: 0, pct: 0, tone: "bg-rd-navy-800" },
-          { stage: "Contacted", count: 0, pct: 0, tone: "bg-rd-navy-600" },
-          { stage: "Qualified", count: 0, pct: 0, tone: "bg-rd-terra-600" },
-          { stage: "Showing booked", count: 0, pct: 0, tone: "bg-rd-terra-500" },
-          { stage: "Offer", count: 0, pct: 0, tone: "bg-rd-success" },
-          { stage: "Closed won", count: 0, pct: 0, tone: "bg-rd-ink-900" },
+          { stage: t("rd.funnel.leadsCaptured", "Leads captured"), count: 0, pct: 0, tone: "bg-rd-navy-800" },
+          { stage: t("rd.stages.contacted", "Contacted"), count: 0, pct: 0, tone: "bg-rd-navy-600" },
+          { stage: t("rd.stages.qualified", "Qualified"), count: 0, pct: 0, tone: "bg-rd-terra-600" },
+          { stage: t("rd.funnel.showingBooked", "Showing booked"), count: 0, pct: 0, tone: "bg-rd-terra-500" },
+          { stage: t("rd.stages.offer", "Offer"), count: 0, pct: 0, tone: "bg-rd-success" },
+          { stage: t("rd.funnel.closedWon", "Closed won"), count: 0, pct: 0, tone: "bg-rd-ink-900" },
         ];
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line">
         <div className="text-[11px] font-bold text-rd-ink-500 uppercase tracking-[0.06em]">
-          Pipeline conversion
+          {t("rd.sections.pipelineConversion", "Pipeline conversion")}
         </div>
-        <div className="text-base font-semibold mt-1">Stage funnel</div>
+        <div className="text-base font-semibold mt-1">
+          {t("rd.sections.stageFunnel", "Stage funnel")}
+        </div>
       </div>
       <div className="p-5 flex flex-col gap-2.5">
         {rows.map((r) => (
@@ -364,6 +377,7 @@ function SourceROICard({
 }: {
   rows: { source: string; label: string; count: number; closed: number; pct: number }[];
 }) {
+  const { t } = useTranslation();
   const rows =
     liveRows.length > 0
       ? liveRows.map((r) => ({
@@ -375,23 +389,32 @@ function SourceROICard({
           tone: SOURCE_TONE[r.source] ?? "bg-rd-ink-400",
         }))
       : [
-          { s: "No sources yet", spend: "—", leads: 0, closed: 0, roi: "—", tone: "bg-rd-ink-400" },
+          {
+            s: t("rd.reportsPage.noSourcesYet", "No sources yet"),
+            spend: "—",
+            leads: 0,
+            closed: 0,
+            roi: "—",
+            tone: "bg-rd-ink-400",
+          },
         ];
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line">
         <div className="text-[11px] font-bold text-rd-ink-500 uppercase tracking-[0.06em]">
-          Source ROI
+          {t("rd.sections.sourceRoi", "Source ROI")}
         </div>
-        <div className="text-base font-semibold mt-1">Revenue per lead source</div>
+        <div className="text-base font-semibold mt-1">
+          {t("rd.sections.revenuePerLeadSource", "Revenue per lead source")}
+        </div>
       </div>
       <div>
         <div className="grid grid-cols-[1.4fr_1fr_0.8fr_0.8fr_0.8fr] px-6 py-2.5 bg-rd-ink-50 text-[10px] font-bold uppercase tracking-[0.06em] text-rd-ink-500 border-b border-rd-line">
-          <div>Source</div>
-          <div>Spend</div>
-          <div>Leads</div>
-          <div>Closed</div>
-          <div>ROI</div>
+          <div>{t("rd.columns.reports.source", "Source")}</div>
+          <div>{t("rd.columns.reports.spend", "Spend")}</div>
+          <div>{t("rd.columns.reports.leads", "Leads")}</div>
+          <div>{t("rd.columns.reports.closed", "Closed")}</div>
+          <div>{t("rd.columns.reports.roi", "ROI")}</div>
         </div>
         {rows.map((r, i) => (
           <div
@@ -423,6 +446,7 @@ function AgentLeaderboardCard({
 }: {
   rows: { rank: number; name: string; deals: number; volume: number; me: boolean }[];
 }) {
+  const { t } = useTranslation();
   const agents = rows.map((r) => ({
     rank: r.rank,
     name: r.name,
@@ -434,9 +458,11 @@ function AgentLeaderboardCard({
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-4 border-b border-rd-line">
         <div className="text-[11px] font-bold text-rd-ink-500 uppercase tracking-[0.06em]">
-          Agent leaderboard
+          {t("rd.sections.agentLeaderboard", "Agent leaderboard")}
         </div>
-        <div className="text-base font-semibold mt-1">This month</div>
+        <div className="text-base font-semibold mt-1">
+          {t("rd.sections.thisMonth", "This month")}
+        </div>
       </div>
       <div className="py-3.5">
         {agents.map((a, i) => (

@@ -59,7 +59,9 @@ export default function Automation() {
               {sequences.length} sequences · {totalEnrolled} leads enrolled · {totalReplied}{" "}
               conversions this month
               {!isLive && !loading && (
-                <span className="ml-2 text-rd-terra-700">· sample data</span>
+                <span className="ml-2 text-rd-terra-700">
+                  · {t("rd.common.sampleData", "sample data")}
+                </span>
               )}
             </div>
             <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
@@ -68,10 +70,10 @@ export default function Automation() {
           </div>
           <div className="flex gap-2">
             <RDButton variant="outline" size="sm">
-              Templates
+              {t("rd.actions.templates", "Templates")}
             </RDButton>
             <RDButton variant="primary" size="sm" icon={<IconPlus />}>
-              New sequence
+              {t("rd.actions.newSequence", "New sequence")}
             </RDButton>
           </div>
         </div>
@@ -116,26 +118,29 @@ function SequenceList({
   draftCount: number;
   canMutate: boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-5 py-3.5 border-b border-rd-line flex justify-between items-center bg-rd-ink-50 flex-wrap gap-3">
-        <h3 className="text-sm font-semibold">All sequences</h3>
+        <h3 className="text-sm font-semibold">
+          {t("rd.automationPage.allSequences", "All sequences")}
+        </h3>
         <div className="flex gap-1.5">
           <FilterChip active={filter === "all"} onClick={() => onFilter("all")}>
-            All
+            {t("rd.tabs.automation.all", "All")}
           </FilterChip>
           <FilterChip active={filter === "active"} onClick={() => onFilter("active")}>
-            Active · {activeCount}
+            {t("rd.tabs.automation.active", "Active")} · {activeCount}
           </FilterChip>
           <FilterChip active={filter === "draft"} onClick={() => onFilter("draft")}>
-            Draft · {draftCount}
+            {t("rd.tabs.automation.draft", "Draft")} · {draftCount}
           </FilterChip>
         </div>
       </div>
 
       {sequences.length === 0 && (
         <div className="px-5 py-8 text-center text-sm text-rd-ink-500">
-          No sequences match this filter.
+          {t("rd.common.noSequencesMatch", "No sequences match this filter.")}
         </div>
       )}
 
