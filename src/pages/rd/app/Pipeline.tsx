@@ -1,5 +1,16 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useDraggable,
+  useDroppable,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  type DragStartEvent,
+} from "@dnd-kit/core";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -12,18 +23,15 @@ import { MOCK_LEADS, PIPELINE_STAGES } from "@/data/rd";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
+import { useUpdateLeadStage } from "@/hooks/rd/useUpdateLeadStage";
 
-// /app/pipeline — Pipeline kanban per rd-app.jsx Artboard_Pipeline.
-// Rollups + cards come from useLeads() — the same live source as the
-// leads table, so anywhere a stage is updated flows through both views
-// once mutations land. Still no drag-drop (visual-only); stage mutation
-// UX ships in a later rung.
+// /app/pipeline — Kanban per rd-app.jsx Artboard_Pipeline, now with
+// @dnd-kit drag-drop wired to useUpdateLeadStage. Drags are only armed
+// when the user has live data; fixtures stay read-only so sample data
+// can't trigger writes.
 
 type ViewMode = "kanban" | "list" | "forecast";
 
-// Columns to render. The Pipeline artboard shows 5 working stages —
-// "won" stands in for Closed won, "lost" stays off the kanban to keep
-// the grid sized at 5 columns.
 const COLUMNS: PipelineStage[] = ["new", "contacted", "qualified", "showing", "offer"];
 
 export default function Pipeline() {
@@ -32,7 +40,15 @@ export default function Pipeline() {
   const isLive = !loading && liveLeads.length > 0;
   const source: Lead[] = isLive ? liveLeads : MOCK_LEADS;
 
-  // Roll totals up by stage.
+  const updateStage = useUpdateLeadStage();
+  const [activeLead, setActiveLead] = useState<Lead | null>(null);
+
+  // distance:5 lets a pointerdown-then-click navigate to the lead detail
+  // without arming a drag — only ≥5px of movement starts the drag cycle.
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
+  );
+
   const snapshot = useMemo(() => {
     const byStage: Record<PipelineStage, { count: number; valueCad: number }> = {
       new: { count: 0, valueCad: 0 },
@@ -52,6 +68,23 @@ export default function Pipeline() {
 
   const totalValue = Object.values(snapshot).reduce((a, b) => a + b.valueCad, 0);
   const totalCount = source.length;
+
+  function handleDragStart(e: DragStartEvent) {
+    const lead = source.find((l) => l.id === String(e.active.id));
+    if (lead) setActiveLead(lead);
+  }
+
+  function handleDragEnd(e: DragEndEvent) {
+    setActiveLead(null);
+    const { active, over } = e;
+    if (!over || !isLive) return;
+    const leadId = String(active.id);
+    const toStage = String(over.id) as PipelineStage;
+    if (!COLUMNS.includes(toStage)) return;
+    const current = source.find((l) => l.id === leadId);
+    if (!current || current.stage === toStage) return;
+    updateStage.mutate({ leadId, toStage });
+  }
 
   return (
     <AppShell>
@@ -79,25 +112,38 @@ export default function Pipeline() {
         </div>
 
         {view === "kanban" && (
-          <div className="flex-1 grid gap-3.5 min-h-0 overflow-x-auto pb-2"
-               style={{ gridTemplateColumns: `repeat(${COLUMNS.length}, minmax(240px, 1fr))` }}>
-            {COLUMNS.map((stageId) => {
-              const meta = PIPELINE_STAGES.find((s) => s.id === stageId)!;
-              const rollup = snapshot[stageId];
-              const leadsIn = source.filter((l) => l.stage === stageId);
-              return (
-                <KanbanColumn
-                  key={stageId}
-                  stageId={stageId}
-                  label={meta.label}
-                  toneClass={meta.toneClass}
-                  count={rollup.count}
-                  valueCad={rollup.valueCad}
-                  leads={leadsIn}
-                />
-              );
-            })}
-          </div>
+          <DndContext
+            sensors={sensors}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragCancel={() => setActiveLead(null)}
+          >
+            <div
+              className="flex-1 grid gap-3.5 min-h-0 overflow-x-auto pb-2"
+              style={{ gridTemplateColumns: `repeat(${COLUMNS.length}, minmax(240px, 1fr))` }}
+            >
+              {COLUMNS.map((stageId) => {
+                const meta = PIPELINE_STAGES.find((s) => s.id === stageId)!;
+                const rollup = snapshot[stageId];
+                const leadsIn = source.filter((l) => l.stage === stageId);
+                return (
+                  <KanbanColumn
+                    key={stageId}
+                    stageId={stageId}
+                    label={meta.label}
+                    toneClass={meta.toneClass}
+                    count={rollup.count}
+                    valueCad={rollup.valueCad}
+                    leads={leadsIn}
+                    isLive={isLive}
+                  />
+                );
+              })}
+            </div>
+            <DragOverlay>
+              {activeLead ? <CardBody lead={activeLead} dragging /> : null}
+            </DragOverlay>
+          </DndContext>
         )}
 
         {view === "list" && (
@@ -157,6 +203,7 @@ function KanbanColumn({
   count,
   valueCad,
   leads,
+  isLive,
 }: {
   stageId: PipelineStage;
   label: string;
@@ -164,9 +211,17 @@ function KanbanColumn({
   count: number;
   valueCad: number;
   leads: Lead[];
+  isLive: boolean;
 }) {
+  const { setNodeRef, isOver } = useDroppable({ id: stageId, disabled: !isLive });
   return (
-    <div className="flex flex-col bg-rd-ink-50 border border-rd-line rounded-[12px] p-2.5 overflow-hidden min-w-0">
+    <div
+      ref={setNodeRef}
+      className={cn(
+        "flex flex-col bg-rd-ink-50 border border-rd-line rounded-[12px] p-2.5 overflow-hidden min-w-0 transition-colors",
+        isOver && "border-rd-terra-500 bg-rd-terra-50/40"
+      )}
+    >
       <div className="px-1.5 pt-1.5 pb-3 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <span className={cn("w-2 h-2 rounded-full", toneClass)} />
@@ -179,7 +234,7 @@ function KanbanColumn({
       </div>
       <div className="flex flex-col gap-2 overflow-y-auto flex-1" data-stage={stageId}>
         {leads.map((l) => (
-          <KanbanCard key={l.id} lead={l} />
+          <KanbanCard key={l.id} lead={l} isLive={isLive} />
         ))}
         <button
           type="button"
@@ -193,7 +248,48 @@ function KanbanColumn({
   );
 }
 
-function KanbanCard({ lead }: { lead: Lead }) {
+function KanbanCard({ lead, isLive }: { lead: Lead; isLive: boolean }) {
+  const navigate = useNavigate();
+  const { setNodeRef, listeners, attributes, isDragging } = useDraggable({
+    id: lead.id,
+    disabled: !isLive,
+  });
+
+  // Fixtures stay as plain links — no drag, no write path.
+  if (!isLive) {
+    return (
+      <Link
+        to={`/app/leads/${lead.id}`}
+        className="block bg-white border border-rd-line rounded-rd-sm p-3 hover:shadow-rd-sm transition-shadow"
+      >
+        <CardBody lead={lead} />
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
+      role="button"
+      tabIndex={0}
+      onClick={() => navigate(`/app/leads/${lead.id}`)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") navigate(`/app/leads/${lead.id}`);
+      }}
+      className={cn(
+        "block bg-white border border-rd-line rounded-rd-sm p-3 hover:shadow-rd-sm transition-shadow",
+        "cursor-grab active:cursor-grabbing touch-none select-none",
+        isDragging && "opacity-40"
+      )}
+    >
+      <CardBody lead={lead} />
+    </div>
+  );
+}
+
+function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
   const band: "Hot" | "Warm" | "Cold" =
     lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold";
   const tagTone = {
@@ -202,9 +298,11 @@ function KanbanCard({ lead }: { lead: Lead }) {
     Cold: "bg-rd-ink-100 text-rd-ink-600",
   }[band];
   return (
-    <Link
-      to={`/app/leads/${lead.id}`}
-      className="block bg-white border border-rd-line rounded-rd-sm p-3 hover:shadow-rd-sm transition-shadow"
+    <div
+      className={cn(
+        dragging &&
+          "bg-white border border-rd-line rounded-rd-sm p-3 shadow-rd-md rotate-[1.5deg] w-[240px]"
+      )}
     >
       <div className="flex justify-between items-start mb-1.5 gap-2">
         <div className="text-[13px] font-semibold leading-tight flex items-center gap-1.5 min-w-0">
@@ -244,7 +342,7 @@ function KanbanCard({ lead }: { lead: Lead }) {
           </span>
         )}
       </div>
-    </Link>
+    </div>
   );
 }
 
