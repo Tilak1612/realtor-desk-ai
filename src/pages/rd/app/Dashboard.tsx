@@ -17,9 +17,10 @@ import {
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
 import { MOCK_DASHBOARD_METRICS } from "@/data/rd";
-import type { ReportMetric } from "@/types/rd";
-import { useLeads } from "@/hooks/rd/useLeads";
+import type { ActivityItem, ReportMetric } from "@/types/rd";
+import { useLeads, useLead } from "@/hooks/rd/useLeads";
 import { useSession } from "@/hooks/rd/useSession";
+import { useActivityFeed, useLeadsPerDay } from "@/hooks/rd/useDashboardFeed";
 
 // /app — Dashboard page per rd-app.jsx Artboard_Dashboard.
 //
@@ -35,15 +36,25 @@ import { useSession } from "@/hooks/rd/useSession";
 export default function Dashboard() {
   const { user } = useSession();
   const { leads: liveLeads, loading: leadsLoading } = useLeads();
+  const { points: leadsSpark, loading: sparkLoading } = useLeadsPerDay(7);
+  const { activity, loading: activityLoading } = useActivityFeed();
   const firstName = extractFirstName(user?.user_metadata?.full_name ?? user?.email ?? null);
 
   return (
     <AppShell agentName={fullNameFromUser(user) ?? "Your desk"}>
       <div className="p-7 pb-10">
         <Greeting firstName={firstName} />
-        <KPIRow liveLeads={liveLeads} loading={leadsLoading} />
+        <KPIRow
+          liveLeads={liveLeads}
+          loading={leadsLoading}
+          liveLeadsSpark={sparkLoading ? undefined : leadsSpark}
+        />
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4 mt-5">
-          <AIActivityCard />
+          <AIActivityCard
+            liveActivity={activity}
+            loading={activityLoading}
+            leadsById={Object.fromEntries(liveLeads.map((l) => [l.id, l]))}
+          />
           <TodayCard />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
@@ -107,9 +118,11 @@ function Greeting({ firstName }: { firstName: string }) {
 function KPIRow({
   liveLeads,
   loading,
+  liveLeadsSpark,
 }: {
   liveLeads: ReturnType<typeof useLeads>["leads"];
   loading: boolean;
+  liveLeadsSpark?: number[];
 }) {
   const SPARK_COLOURS: Record<string, string> = {
     leads_this_week: "var(--rd-navy-500)",
@@ -133,7 +146,11 @@ function KPIRow({
         value: String(leadsCount),
         delta: undefined,
         deltaTone: "success",
-        spark: MOCK_DASHBOARD_METRICS[0]?.spark,
+        // Prefer the live 7-day bucket when we have it, otherwise keep the
+        // mock curve so the tile never renders flat-empty during loading.
+        spark: liveLeadsSpark && liveLeadsSpark.length > 0
+          ? liveLeadsSpark
+          : MOCK_DASHBOARD_METRICS[0]?.spark,
       },
       // Response-time stays mock — needs a conversations timeseries.
       MOCK_DASHBOARD_METRICS[1],
@@ -152,7 +169,7 @@ function KPIRow({
         spark: MOCK_DASHBOARD_METRICS[3]?.spark,
       },
     ];
-  }, [liveLeads, loading]);
+  }, [liveLeads, loading, liveLeadsSpark]);
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -246,8 +263,24 @@ const AI_EVENTS: AIEventRow[] = [
   },
 ];
 
-function AIActivityCard() {
+function AIActivityCard({
+  liveActivity,
+  loading,
+  leadsById,
+}: {
+  liveActivity: ActivityItem[];
+  loading: boolean;
+  leadsById: Record<string, ReturnType<typeof useLeads>["leads"][number]>;
+}) {
   const [filter, setFilter] = useState<"all" | "responses" | "showings">("all");
+  const isLive = liveActivity.length > 0;
+
+  const filteredLive = liveActivity.filter((a) => {
+    if (filter === "responses") return a.kind === "ai_reply";
+    if (filter === "showings") return a.kind === "ai_booked_showing";
+    return true;
+  });
+
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-5 border-b border-rd-line flex items-center justify-between flex-wrap gap-3">
@@ -280,18 +313,101 @@ function AIActivityCard() {
         </div>
       </div>
       <div className="py-2">
-        {AI_EVENTS.map((e, i) => (
-          <AIEvent key={i} {...e} />
-        ))}
+        {loading && (
+          <div className="px-6 py-8 text-center text-sm text-rd-ink-500">Loading activity…</div>
+        )}
+        {!loading && isLive &&
+          filteredLive.slice(0, 6).map((a) => (
+            <AIEventLive
+              key={a.id}
+              activity={a}
+              leadName={a.leadId ? leadsById[a.leadId]?.name : undefined}
+            />
+          ))}
+        {!loading && isLive && filteredLive.length === 0 && (
+          <div className="px-6 py-8 text-center text-sm text-rd-ink-500">
+            No events match this filter.
+          </div>
+        )}
+        {!loading && !isLive &&
+          AI_EVENTS.map((e, i) => <AIEvent key={i} {...e} />)}
       </div>
       <div className="px-6 py-3 border-t border-rd-line bg-rd-ink-50 flex items-center justify-between">
-        <span className="text-xs text-rd-ink-600">12 more events since midnight</span>
+        <span className="text-xs text-rd-ink-600">
+          {isLive
+            ? `${liveActivity.length} events in the last 25`
+            : "Showing sample activity feed"}
+        </span>
         <RDButton variant="ghost" size="sm" trailingIcon={<IconArrow />}>
           Open activity log
         </RDButton>
       </div>
     </RDCard>
   );
+}
+
+/** Live-feed renderer — shares AIEvent's grid layout but takes a
+ *  normalized ActivityItem + optional joined lead name. */
+function AIEventLive({
+  activity,
+  leadName,
+}: {
+  activity: ActivityItem;
+  leadName?: string;
+}) {
+  const time = formatEventTime(activity.at);
+  const who = leadName ?? activity.actor;
+  const action = ACTION_VERB[activity.kind];
+  return (
+    <div className="grid grid-cols-[60px_24px_1fr_auto] gap-3.5 px-6 py-3 items-start">
+      <div className="text-[11px] text-rd-ink-500 font-semibold tabular-nums tracking-[0.03em] pt-0.5">
+        {time}
+      </div>
+      <div className="flex flex-col items-center pt-1.5">
+        <div className="w-2 h-2 rounded-full bg-rd-terra-600" />
+      </div>
+      <div>
+        <div className="text-[13px]">
+          <span className="font-semibold">{who}</span>
+          <span className="text-rd-ink-500"> {action} </span>
+          <span className="font-medium">{activity.summary}</span>
+          {activity.language === "FR" && (
+            <span className="ml-2 text-[10px] font-bold tracking-[0.08em] bg-rd-terra-100 text-rd-terra-800 rounded-[4px] px-1.5 py-[1px]">
+              FR
+            </span>
+          )}
+        </div>
+        {activity.detail && (
+          <div className="text-xs text-rd-ink-500 mt-0.5 leading-[1.5]">{activity.detail}</div>
+        )}
+      </div>
+      <div />
+    </div>
+  );
+}
+
+const ACTION_VERB: Record<ActivityItem["kind"], string> = {
+  ai_reply: "replied to",
+  ai_booked_showing: "booked showing for",
+  lead_viewed_listing: "viewed",
+  agent_called: "called",
+  agent_note: "noted",
+  stage_changed: "moved to",
+  consent_captured: "consented on",
+  automation_step: "automation step on",
+};
+
+function formatEventTime(iso: string): string {
+  const d = new Date(iso);
+  const today = new Date();
+  if (
+    d.getFullYear() === today.getFullYear() &&
+    d.getMonth() === today.getMonth() &&
+    d.getDate() === today.getDate()
+  ) {
+    return d.toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" });
+  }
+  return d.toLocaleDateString("en-CA", { month: "short", day: "numeric" });
 }
 
 function AIEvent({ time, who, action, subject, detail, lang, badge }: AIEventRow) {
