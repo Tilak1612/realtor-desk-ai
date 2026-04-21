@@ -12,39 +12,61 @@ import {
 import { MOCK_LEADS, MOCK_CONVERSATIONS } from "@/data/rd";
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { useLeads } from "@/hooks/rd/useLeads";
+import {
+  useConversation,
+  useInboxThreads,
+  useSendMessage,
+} from "@/hooks/rd/useConversation";
 
 // /app/inbox — conversations list + active thread per rd-app-extra.jsx
-// Artboard_Inbox. Mock-only for now. Composer/send action hooks come in
-// the backend wiring phase.
+// Artboard_Inbox.
+//
+// Data sources (Phase D):
+//   - Lead list   : useLeads() (from Phase A); falls back to MOCK_LEADS
+//                   while the user has no contacts so the page is still
+//                   legible during onboarding.
+//   - Latest msg  : useInboxThreads() returns a map leadId → last message,
+//                   used to drive preview + unread state; falls back to
+//                   MOCK_CONVERSATIONS when no live messages exist.
+//   - Active pane : useConversation(activeId) for the full thread.
+//   - Composer    : useSendMessage() posts an agent-authored row.
 
 type FilterKey = "all" | "unread" | "ai" | "mine";
 
 export default function Inbox() {
-  const leadsWithConversations = useMemo(() => {
-    return MOCK_LEADS.filter((l) => MOCK_CONVERSATIONS[l.id]?.length);
-  }, []);
+  const { leads: liveLeads, loading: leadsLoading } = useLeads();
+  const { latestByLead } = useInboxThreads();
+  const leadSource: Lead[] = !leadsLoading && liveLeads.length > 0 ? liveLeads : MOCK_LEADS;
+
+  const threadsWithConversations = useMemo(() => {
+    return leadSource.filter((l) => latestByLead[l.id] || MOCK_CONVERSATIONS[l.id]?.length);
+  }, [leadSource, latestByLead]);
 
   const [activeId, setActiveId] = useState<string>(
-    leadsWithConversations[0]?.id ?? MOCK_LEADS[0]?.id ?? ""
+    threadsWithConversations[0]?.id ?? leadSource[0]?.id ?? ""
   );
   const [filter, setFilter] = useState<FilterKey>("all");
   const [query, setQuery] = useState("");
 
   const threads = useMemo(() => {
-    let items = MOCK_LEADS;
+    let items = leadSource;
     if (filter === "ai") items = items.filter((l) => l.aiHandling);
     if (filter === "mine") items = items.filter((l) => !l.aiHandling);
-    // "unread" proxy: leads that have conversations (non-empty) — real wiring swaps in a flag.
-    if (filter === "unread") items = items.filter((l) => (MOCK_CONVERSATIONS[l.id] ?? []).length > 0);
+    if (filter === "unread") {
+      items = items.filter((l) => {
+        const last = latestByLead[l.id] ?? MOCK_CONVERSATIONS[l.id]?.slice(-1)[0];
+        return last?.author === "lead";
+      });
+    }
     if (query.trim()) {
       const q = query.trim().toLowerCase();
       items = items.filter((l) => l.name.toLowerCase().includes(q));
     }
     return items;
-  }, [filter, query]);
+  }, [filter, query, leadSource, latestByLead]);
 
-  const activeLead = MOCK_LEADS.find((l) => l.id === activeId);
-  const activeThread = activeId ? MOCK_CONVERSATIONS[activeId] ?? [] : [];
+  const activeLead = leadSource.find((l) => l.id === activeId);
 
   return (
     <AppShell>
@@ -57,8 +79,9 @@ export default function Inbox() {
           onFilter={setFilter}
           query={query}
           onQuery={setQuery}
+          latestByLead={latestByLead}
         />
-        <ActivePane lead={activeLead} messages={activeThread} />
+        <ActivePane lead={activeLead} />
       </div>
     </AppShell>
   );
@@ -74,6 +97,7 @@ function ThreadList({
   onFilter,
   query,
   onQuery,
+  latestByLead,
 }: {
   threads: Lead[];
   activeId: string;
@@ -82,8 +106,13 @@ function ThreadList({
   onFilter: (f: FilterKey) => void;
   query: string;
   onQuery: (q: string) => void;
+  latestByLead: Record<string, ConversationMessage>;
 }) {
-  const unreadCount = 6; // static proxy until wiring
+  // Unread = most recent message in a thread was authored by the lead.
+  const unreadCount = threads.filter((l) => {
+    const last = latestByLead[l.id] ?? MOCK_CONVERSATIONS[l.id]?.slice(-1)[0];
+    return last?.author === "lead" && l.id !== activeId;
+  }).length;
   return (
     <div className="flex flex-col border-r border-rd-line bg-white overflow-hidden min-h-0">
       <div className="px-5 py-4 border-b border-rd-line">
@@ -132,6 +161,7 @@ function ThreadList({
             lead={lead}
             active={lead.id === activeId}
             onSelect={() => onSelect(lead.id)}
+            lastMessage={latestByLead[lead.id]}
           />
         ))}
       </div>
@@ -143,12 +173,14 @@ function ThreadRow({
   lead,
   active,
   onSelect,
+  lastMessage,
 }: {
   lead: Lead;
   active: boolean;
   onSelect: () => void;
+  lastMessage: ConversationMessage | undefined;
 }) {
-  const last = (MOCK_CONVERSATIONS[lead.id] ?? []).slice(-1)[0];
+  const last = lastMessage ?? MOCK_CONVERSATIONS[lead.id]?.slice(-1)[0];
   const preview = last?.body ?? "No messages yet.";
   const timeLabel = last ? new Date(last.sentAt).toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" }) : lead.lastActivity;
   const hasUnread = !active && last?.author === "lead";
@@ -222,7 +254,26 @@ function ThreadRow({
 
 /* ────────────────────────────────────────────────────────── */
 
-function ActivePane({ lead, messages }: { lead: Lead | undefined; messages: ConversationMessage[] }) {
+function ActivePane({ lead }: { lead: Lead | undefined }) {
+  const { messages: liveMessages } = useConversation(lead?.id);
+  const mockMessages = lead ? MOCK_CONVERSATIONS[lead.id] ?? [] : [];
+  const messages: ConversationMessage[] =
+    liveMessages.length > 0 ? liveMessages : mockMessages;
+
+  const send = useSendMessage();
+  const [draft, setDraft] = useState("");
+  const canSend = !!lead && draft.trim().length > 0 && !send.isPending;
+
+  const handleSend = () => {
+    if (!lead) return;
+    const body = draft.trim();
+    if (!body) return;
+    send.mutate(
+      { leadId: lead.id, body, language: lead.language },
+      { onSuccess: () => setDraft("") }
+    );
+  };
+
   if (!lead) {
     return (
       <div className="flex items-center justify-center h-full bg-rd-paper-2 text-rd-ink-500 text-sm">
@@ -293,9 +344,24 @@ function ActivePane({ lead, messages }: { lead: Lead | undefined; messages: Conv
           </button>
         </div>
         <div className="border border-rd-line rounded-[12px] px-3.5 py-2.5">
-          <div className="text-[13px] text-rd-ink-400 min-h-[36px]">
-            Reply as Sarah (AI will pause)…
-          </div>
+          <textarea
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && canSend) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            placeholder={`Reply as you (AI will pause). ${
+              lead.language === "FR" ? "Répondre en français." : ""
+            }`}
+            rows={2}
+            className="w-full bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400 resize-none min-h-[36px]"
+          />
+          {send.error && (
+            <div className="text-[11px] text-rd-danger">{send.error.message}</div>
+          )}
           <div className="flex items-center justify-between pt-2">
             <div className="flex gap-4 text-xs text-rd-ink-600">
               <button type="button" className="inline-flex items-center gap-1.5 font-semibold">
@@ -306,8 +372,13 @@ function ActivePane({ lead, messages }: { lead: Lead | undefined; messages: Conv
                 Attach listing
               </button>
             </div>
-            <RDButton variant="primary" size="sm">
-              Send
+            <RDButton
+              variant="primary"
+              size="sm"
+              onClick={handleSend}
+              disabled={!canSend}
+            >
+              {send.isPending ? "Sending…" : "Send"}
             </RDButton>
           </div>
         </div>
