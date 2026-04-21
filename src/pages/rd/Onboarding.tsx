@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useOnboardingWizard } from "@/hooks/rd/useOnboardingWizard";
 import { RDWordmark } from "@/components/rd/Logo";
 import {
   RDButton,
@@ -37,21 +38,37 @@ const STEPS: { id: OnboardingStepId; label: string }[] = [
 ];
 
 export default function Onboarding() {
-  const [stepIndex, setStepIndex] = useState(0); // 0-based
-  const currentStepId = STEPS[stepIndex].id;
   const navigate = useNavigate();
+  const { state, loading, saving, advance: persistAdvance } = useOnboardingWizard();
+  const stepIndex = STEPS.findIndex((s) => s.id === state.currentStep);
+  const safeIndex = stepIndex === -1 ? 0 : stepIndex;
+  const currentStepId = STEPS[safeIndex].id;
 
   const advance = () => {
-    if (stepIndex < STEPS.length - 1) {
-      setStepIndex(stepIndex + 1);
+    if (safeIndex < STEPS.length - 1) {
+      persistAdvance(STEPS[safeIndex + 1].id);
     } else {
+      // Final step — mark go_live as completed and route into the app.
+      persistAdvance("go_live");
       navigate("/app");
     }
   };
-  const back = () => setStepIndex(Math.max(0, stepIndex - 1));
+  const back = () => {
+    if (safeIndex > 0) {
+      persistAdvance(STEPS[safeIndex - 1].id);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="rd-reset h-screen bg-rd-paper flex items-center justify-center text-sm text-rd-ink-500">
+        Loading your onboarding…
+      </div>
+    );
+  }
 
   return (
-    <OnbShell stepIndex={stepIndex}>
+    <OnbShell stepIndex={safeIndex} saving={saving}>
       <StepSwitch id={currentStepId} onBack={back} onContinue={advance} />
     </OnbShell>
   );
@@ -59,7 +76,15 @@ export default function Onboarding() {
 
 /* ────────────────────────────────────────────────────────── */
 
-function OnbShell({ children, stepIndex }: { children: React.ReactNode; stepIndex: number }) {
+function OnbShell({
+  children,
+  stepIndex,
+  saving,
+}: {
+  children: React.ReactNode;
+  stepIndex: number;
+  saving?: boolean;
+}) {
   return (
     <div className="rd-reset h-screen grid grid-cols-1 lg:grid-cols-[280px_1fr_380px] bg-rd-paper text-rd-ink-900 overflow-hidden">
       {/* Progress rail */}
@@ -102,6 +127,9 @@ function OnbShell({ children, stepIndex }: { children: React.ReactNode; stepInde
         </div>
         <div className="mt-auto text-xs text-white/55 leading-[1.5]">
           Typical setup takes 5 minutes. Your data is hosted in Canada from the second you sign up.
+          {saving && (
+            <span className="block mt-3 text-[11px] text-rd-terra-300">Saving your progress…</span>
+          )}
         </div>
       </aside>
 
