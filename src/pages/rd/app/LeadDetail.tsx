@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
@@ -15,6 +16,7 @@ import { findLead as findMockLead, findConversation } from "@/data/rd";
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/hooks/rd/useLeads";
+import { useConversation, useSendMessage } from "@/hooks/rd/useConversation";
 
 // /app/leads/:id — Lead detail per rd-app.jsx Artboard_LeadDetail.
 // Two-column layout: conversation on the left, lead sidebar on the right.
@@ -23,17 +25,24 @@ import { useLead } from "@/hooks/rd/useLeads";
 //   - Lead  : useLead(id) queries live contacts via useLeads cache;
 //             falls back to findMockLead(id) when the user has no data
 //             or the ID corresponds to one of our demo fixtures.
-//   - Thread: findConversation(id) — mock-only for Phase B. The real
-//             conversation store lands in wiring Phase C (a new table
-//             or projection over contact_activities) so we don't
-//             silently render misleading empty threads on live leads.
+//   - Thread: useConversation(id) queries conversation_messages scoped
+//             to the signed-in user. Falls back to the mock fixture only
+//             when the user has zero live messages — so demo IDs still
+//             render a thread but a live lead with an empty inbox reads
+//             as an actual empty inbox, not a staged conversation.
+//   - Send  : useSendMessage() inserts an agent-authored message on
+//             composer submit. Composer UI still shells the flow; wiring
+//             the Send button is in this PR.
 
 export default function LeadDetail() {
   const { id } = useParams<{ id: string }>();
   const { lead: liveLead, loading } = useLead(id);
   const lead: Lead | undefined = liveLead ?? (id ? findMockLead(id) : undefined);
-  const messages = id ? findConversation(id) : [];
+  const { messages: liveMessages } = useConversation(id);
+  const mockMessages = id ? findConversation(id) : [];
   const usingMock = !!liveLead === false && !!lead; // lead resolved via fixture
+  const messages: ConversationMessage[] =
+    liveMessages.length > 0 ? liveMessages : usingMock ? mockMessages : [];
 
   if (loading && !lead) {
     return (
@@ -87,6 +96,20 @@ export default function LeadDetail() {
 /* ────────────────────────────────────────────────────────── */
 
 function ConversationPane({ lead, messages }: { lead: Lead; messages: ConversationMessage[] }) {
+  const send = useSendMessage();
+  const [draft, setDraft] = useState("");
+  const canSend = draft.trim().length > 0 && !send.isPending;
+
+  const handleSend = () => {
+    const body = draft.trim();
+    if (!body) return;
+    send.mutate(
+      { leadId: lead.id, body, language: lead.language },
+      {
+        onSuccess: () => setDraft(""),
+      }
+    );
+  };
   return (
     <div className="flex flex-col border-r border-rd-line overflow-hidden min-h-0">
       {/* Breadcrumb + header */}
@@ -160,9 +183,24 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
       {/* Composer */}
       <div className="px-7 py-3.5 border-t border-rd-line bg-white">
         <div className="border border-rd-line rounded-[12px] px-3.5 py-2.5 flex flex-col gap-2">
-          <div className="text-[13px] text-rd-ink-400 min-h-[36px]">
-            Reply as Sarah (AI will pause)…
-          </div>
+          <textarea
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && canSend) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            placeholder={`Reply as you (AI will pause). ${
+              lead.language === "FR" ? "Répondre en français." : ""
+            }`}
+            rows={2}
+            className="w-full bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400 resize-none min-h-[36px]"
+          />
+          {send.error && (
+            <div className="text-[11px] text-rd-danger">{send.error.message}</div>
+          )}
           <div className="flex items-center justify-between">
             <div className="flex gap-4 text-xs text-rd-ink-500">
               <SuggestionBtn>
@@ -172,8 +210,13 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
               <SuggestionBtn>Attach listing</SuggestionBtn>
               <SuggestionBtn>Template ▾</SuggestionBtn>
             </div>
-            <RDButton variant="primary" size="sm">
-              Send
+            <RDButton
+              variant="primary"
+              size="sm"
+              onClick={handleSend}
+              disabled={!canSend}
+            >
+              {send.isPending ? "Sending…" : "Send"}
             </RDButton>
           </div>
         </div>
