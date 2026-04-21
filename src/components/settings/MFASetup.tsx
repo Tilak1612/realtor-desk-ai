@@ -45,11 +45,14 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
       setQrCode(data.totp.qr_code);
       setFactorId(data.id);
     } catch (error: unknown) {
-      const msg =
-        error instanceof Error
-          ? error.message
-          : t("app.settings.twoFactor.enrollFailed", "Failed to start MFA enrollment");
-      toast({ title: t("common.error", "Error"), description: msg, variant: "destructive" });
+      // Log the raw backend message for debugging, but show users a
+      // translated one so the toast isn't half-English in FR.
+      console.error("[MFA] enroll failed:", error);
+      toast({
+        title: t("app.common.error", "Error"),
+        description: t("app.settings.twoFactor.enrollFailed", "Failed to start MFA enrollment"),
+        variant: "destructive",
+      });
       setEnrolling(false);
     } finally {
       setLoading(false);
@@ -87,11 +90,15 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
       setVerifyCode("");
       onStatusChange();
     } catch (error: unknown) {
-      const msg =
-        error instanceof Error
-          ? error.message
-          : t("app.settings.twoFactor.verifyFailed", "Verification failed");
-      toast({ title: t("common.error", "Error"), description: msg, variant: "destructive" });
+      console.error("[MFA] verify failed:", error);
+      toast({
+        title: t("app.common.error", "Error"),
+        description: t(
+          "app.settings.twoFactor.invalidCode",
+          "Invalid TOTP code. Try again."
+        ),
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -123,11 +130,12 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
       });
       onStatusChange();
     } catch (error: unknown) {
-      const msg =
-        error instanceof Error
-          ? error.message
-          : t("app.settings.twoFactor.disableFailed", "Failed to disable 2FA");
-      toast({ title: t("common.error", "Error"), description: msg, variant: "destructive" });
+      console.error("[MFA] unenroll failed:", error);
+      toast({
+        title: t("app.common.error", "Error"),
+        description: t("app.settings.twoFactor.disableFailed", "Failed to disable 2FA"),
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -173,7 +181,7 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
             setQrCode(null);
           }}
         >
-          {t("common.cancel", "Cancel")}
+          {t("app.common.cancel", "Cancel")}
         </Button>
       </div>
     );
@@ -225,7 +233,7 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>{t("common.cancel", "Cancel")}</AlertDialogCancel>
+              <AlertDialogCancel>{t("app.common.cancel", "Cancel")}</AlertDialogCancel>
               <AlertDialogAction
                 onClick={handleUnenroll}
                 className="bg-destructive text-destructive-foreground"

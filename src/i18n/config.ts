@@ -1092,6 +1092,7 @@ const resources = {
             disabledToastDesc: "Two-factor authentication has been removed.",
             enrollFailed: "Failed to start MFA enrollment",
             verifyFailed: "Verification failed",
+            invalidCode: "Invalid TOTP code. Try again.",
             disableFailed: "Failed to disable 2FA",
             noFactor: "No 2FA factor found"
           },
@@ -3451,6 +3452,7 @@ const resources = {
             disabledToastDesc: "L'authentification à deux facteurs a été retirée.",
             enrollFailed: "Échec du démarrage de l'inscription A2F",
             verifyFailed: "La vérification a échoué",
+            invalidCode: "Code TOTP invalide. Réessayez.",
             disableFailed: "Échec de la désactivation de l'A2F",
             noFactor: "Aucun facteur A2F trouvé"
           },

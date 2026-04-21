@@ -44,10 +44,10 @@ export default function Home() {
  * ────────────────────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="px-8 md:px-14 pt-[100px] pb-10 relative overflow-hidden">
+    <section className="px-4 sm:px-8 md:px-14 pt-[100px] pb-10 relative overflow-hidden">
       <div className="mx-auto max-w-[1200px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-16 items-center">
         <div>
-          <RDBadge tone="terra" size="sm" className="mb-6">
+          <RDBadge tone="terra" size="sm" className="mb-6 flex-wrap max-w-full">
             <IconSparkle />
             Now in public beta · 14-day free trial
           </RDBadge>
@@ -184,7 +184,7 @@ function KV({ k, v }: { k: string; v: string }) {
 function TrustStrip() {
   const logos = ["CREA DDF®", "Stripe", "OpenAI", "Twilio", "Supabase", "RECO"];
   return (
-    <section className="px-8 md:px-14 py-8 border-y border-rd-line bg-white">
+    <section className="px-4 sm:px-8 md:px-14 py-8 border-y border-rd-line bg-white">
       <div className="mx-auto max-w-[1200px] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-rd-ink-500">
           Built with · integrated for
@@ -204,7 +204,7 @@ function TrustStrip() {
  * ────────────────────────────────────────────────────────── */
 function FeatureGrid() {
   return (
-    <section className="px-8 md:px-14 py-24 lg:py-[120px]">
+    <section className="px-4 sm:px-8 md:px-14 py-24 lg:py-[120px]">
       <div className="mx-auto max-w-[1200px]">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
@@ -307,7 +307,7 @@ function Feature({
  * ────────────────────────────────────────────────────────── */
 function PipelinePreview() {
   return (
-    <section className="px-8 md:px-14 py-[100px] bg-rd-ink-900 text-white relative overflow-hidden">
+    <section className="px-4 sm:px-8 md:px-14 py-[100px] bg-rd-ink-900 text-white relative overflow-hidden">
       <div
         className="absolute top-0 right-0 w-[600px] h-[600px] opacity-50 pointer-events-none"
         style={{
@@ -431,7 +431,7 @@ function CompareStrip() {
   ];
 
   return (
-    <section className="px-8 md:px-14 py-[100px] bg-white">
+    <section className="px-4 sm:px-8 md:px-14 py-[100px] bg-white">
       <div className="mx-auto max-w-[1200px] text-center">
         <Eyebrow>The BoldTrail alternative</Eyebrow>
         <h2 className="mt-2.5 text-[32px] md:text-[44px] font-semibold tracking-[-0.02em] leading-[1.1] max-w-[820px] mx-auto">
@@ -497,7 +497,7 @@ function CompareStrip() {
  * ────────────────────────────────────────────────────────── */
 function TestimonialAndCTA() {
   return (
-    <section className="px-8 md:px-14 pt-[100px] pb-[120px]">
+    <section className="px-4 sm:px-8 md:px-14 pt-[100px] pb-[120px]">
       <div className="mx-auto max-w-[1200px] grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-stretch">
         {/* Testimonial */}
         <div className="bg-white border border-rd-line rounded-rd-xl p-10 md:p-12 relative">
