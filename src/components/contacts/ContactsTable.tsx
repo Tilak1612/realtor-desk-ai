@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Contact } from "@/pages/Contacts";
 import {
   Table,
@@ -43,6 +45,7 @@ const ContactsTable = ({
   onSelectionChange,
   onRefresh,
 }: ContactsTableProps) => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [sortField, setSortField] = useState<SortField>("created_at");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
@@ -137,8 +140,19 @@ const ContactsTable = ({
   if (contacts.length === 0) {
     return (
       <div className="border rounded-lg bg-card p-12 text-center">
-        <p className="text-muted-foreground mb-4">No contacts found</p>
-        <Button onClick={onRefresh}>Refresh</Button>
+        <p className="text-muted-foreground mb-4">
+          {t("app.contacts.empty.title", "No contacts yet")}
+        </p>
+        <div className="flex gap-2 justify-center">
+          <Button asChild>
+            <Link to="/contacts/import">
+              {t("app.contacts.empty.importCta", "Import contacts")}
+            </Link>
+          </Button>
+          <Button variant="outline" onClick={onRefresh}>
+            {t("app.contacts.empty.refresh", "Refresh")}
+          </Button>
+        </div>
       </div>
     );
   }

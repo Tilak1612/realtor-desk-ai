@@ -214,7 +214,7 @@ const Contacts = () => {
               onClick={handleStartCallSession}
             >
               <Phone className="h-3.5 w-3.5 mr-1.5" />
-              Start Call Session
+              {t("app.contacts.startCallSession", "Start Call Session")}
             </Button>
             <Button
               variant="outline"
@@ -295,11 +295,11 @@ const Contacts = () => {
             <TabsList className="h-8">
               <TabsTrigger value="table" className="text-xs h-7 px-3">
                 <List className="h-3.5 w-3.5 mr-1.5" />
-                Table
+                {t("app.contacts.viewTable", "Table")}
               </TabsTrigger>
               <TabsTrigger value="cards" className="text-xs h-7 px-3">
                 <LayoutGrid className="h-3.5 w-3.5 mr-1.5" />
-                Cards
+                {t("app.contacts.viewCards", "Cards")}
               </TabsTrigger>
             </TabsList>
           </div>

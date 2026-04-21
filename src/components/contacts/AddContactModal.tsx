@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useTranslation } from "react-i18next";
+import { useTranslation, type TFunction } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -32,18 +32,35 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/utils/analytics";
 
-const formSchema = z.object({
-  first_name: z.string().min(1, "First name is required").max(100),
-  last_name: z.string().min(1, "Last name is required").max(100),
-  email: z.string().email("Invalid email").optional().or(z.literal("")),
-  phone: z.string().optional(),
-  source: z.string().optional(),
-  tags: z.string().optional(),
-  notes: z.string().optional(),
-  preferred_language: z.string().optional(),
-  consent_given: z.boolean().default(false),
-  consent_source: z.string().optional(),
-});
+// Schema factory so validation messages track the active i18n locale.
+// react-hook-form + zod runs validation synchronously, so we rebuild the
+// schema via useMemo whenever the translation function identity changes.
+const makeFormSchema = (t: TFunction) =>
+  z.object({
+    first_name: z
+      .string()
+      .min(1, t("app.modals.addContact.validation.firstNameRequired", "First name is required"))
+      .max(100),
+    last_name: z
+      .string()
+      .min(1, t("app.modals.addContact.validation.lastNameRequired", "Last name is required"))
+      .max(100),
+    email: z
+      .string()
+      .email(t("app.modals.addContact.validation.invalidEmail", "Please enter a valid email address"))
+      .optional()
+      .or(z.literal("")),
+    phone: z.string().optional(),
+    source: z.string().optional(),
+    tags: z.string().optional(),
+    notes: z.string().optional(),
+    preferred_language: z.string().optional(),
+    consent_given: z.boolean().default(false),
+    consent_source: z.string().optional(),
+  });
+
+type FormSchema = ReturnType<typeof makeFormSchema>;
+type FormValues = z.infer<FormSchema>;
 
 interface AddContactModalProps {
   open: boolean;
@@ -56,7 +73,9 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const formSchema = useMemo(() => makeFormSchema(t), [t]);
+
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       first_name: "",
@@ -72,7 +91,7 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: FormValues) => {
     try {
       setLoading(true);
 
