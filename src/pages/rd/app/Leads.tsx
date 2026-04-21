@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -31,6 +32,7 @@ const GRID_STYLE = { display: "grid", gridTemplateColumns: LEADS_GRID };
 type TabKey = "all" | "hot" | "warm" | "cold" | "ai" | "needs_reply";
 
 export default function Leads() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<TabKey>("all");
   const { leads: liveLeads, loading, error } = useLeads();
 
@@ -70,7 +72,9 @@ export default function Leads() {
                 </span>
               )}
             </div>
-            <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Leads</h1>
+            <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
+              {t("rd.pages.leads.title", "Leads")}
+            </h1>
           </div>
           <div className="flex gap-2">
             <RDButton variant="outline" size="sm" icon={<IconFilter />}>

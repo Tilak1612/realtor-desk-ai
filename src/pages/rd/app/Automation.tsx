@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -27,6 +28,7 @@ import { useAutomations, useToggleAutomation } from "@/hooks/rd/useAutomations";
 type ListFilter = "all" | "active" | "draft";
 
 export default function Automation() {
+  const { t } = useTranslation();
   const { sequences: liveSequences, loading } = useAutomations();
   const isLive = !loading && liveSequences.length > 0;
   const sequences = isLive ? liveSequences : MOCK_AUTOMATIONS;
@@ -60,7 +62,9 @@ export default function Automation() {
                 <span className="ml-2 text-rd-terra-700">· sample data</span>
               )}
             </div>
-            <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Automation</h1>
+            <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
+              {t("rd.pages.automation.title", "Automation")}
+            </h1>
           </div>
           <div className="flex gap-2">
             <RDButton variant="outline" size="sm">

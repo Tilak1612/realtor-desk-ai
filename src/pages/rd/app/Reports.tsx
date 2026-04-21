@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -76,11 +77,14 @@ export default function Reports() {
 /* ────────────────────────────────────────────────────────── */
 
 function Header() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
       <div>
         <div className="text-xs text-rd-ink-500 font-semibold">Apr 1 – Apr 21, 2026 · 21 days</div>
-        <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Reports</h1>
+        <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
+          {t("rd.pages.reports.title", "Reports")}
+        </h1>
       </div>
       <div className="flex gap-2">
         <button

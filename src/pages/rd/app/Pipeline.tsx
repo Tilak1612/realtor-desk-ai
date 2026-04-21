@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   DndContext,
   DragOverlay,
@@ -35,6 +36,7 @@ type ViewMode = "kanban" | "list" | "forecast";
 const COLUMNS: PipelineStage[] = ["new", "contacted", "qualified", "showing", "offer"];
 
 export default function Pipeline() {
+  const { t } = useTranslation();
   const [view, setView] = useState<ViewMode>("kanban");
   const { leads: liveLeads, loading } = useLeads();
   const isLive = !loading && liveLeads.length > 0;
@@ -98,7 +100,9 @@ export default function Pipeline() {
                 <span className="ml-2 text-rd-terra-700">· sample data</span>
               )}
             </div>
-            <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">Pipeline</h1>
+            <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
+              {t("rd.pages.pipeline.title", "Pipeline")}
+            </h1>
           </div>
           <div className="flex gap-2">
             <ViewToggle view={view} onChange={setView} />
