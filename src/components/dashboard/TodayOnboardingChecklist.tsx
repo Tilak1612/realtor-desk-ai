@@ -80,14 +80,15 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
         checkCompleted: async () => {
           const { data } = await supabase
             .from("profiles")
-            .select("brokerage_name, phone, full_name")
+            .select("company_name, phone, full_name")
             .eq("id", userId)
             .maybeSingle();
+          const p = data as { company_name?: string | null; phone?: string | null; full_name?: string | null } | null;
           return {
             done:
-              !!data?.full_name &&
-              !!data?.phone &&
-              !!data?.brokerage_name,
+              !!p?.full_name &&
+              !!p?.phone &&
+              !!p?.company_name,
           };
         },
       },
@@ -161,7 +162,7 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
     let cancelled = false;
     const run = async () => {
       setLoading(true);
-      const { data: onboarding } = await supabase
+      const { data: onboarding } = await (supabase as any)
         .from("user_onboarding")
         .select("*")
         .eq("user_id", userId)
@@ -210,7 +211,7 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
       if (results.first_property && !rowVal.step_first_property_at) updates.step_first_property_at = new Date().toISOString();
       if (results.calendar && !rowVal.step_calendar_connected_at) updates.step_calendar_connected_at = new Date().toISOString();
       if (Object.keys(updates).length > 0) {
-        await supabase
+        await (supabase as any)
           .from("user_onboarding")
           .upsert({ user_id: userId, ...rowVal, ...updates }, { onConflict: "user_id" });
       }
@@ -224,7 +225,7 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
   const dismiss = async () => {
     const next = { ...(row ?? { user_id: userId }), dismissed_at: new Date().toISOString() };
     setRow(next as OnboardingRow);
-    await supabase
+    await (supabase as any)
       .from("user_onboarding")
       .upsert(next, { onConflict: "user_id" });
   };
@@ -234,7 +235,7 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
     const next = { ...(row ?? { user_id: userId }), step_website_widget_ack_at: now };
     setRow(next as OnboardingRow);
     setDerived({ ...derived, website_widget: true });
-    await supabase
+    await (supabase as any)
       .from("user_onboarding")
       .upsert(next, { onConflict: "user_id" });
   };

@@ -230,7 +230,7 @@ const resources = {
             feature10: "Premium 24/7 support"
           }
         },
-        compare: {
+        compareTable: {
           heading: "Compare with Competitors",
           sub: "See how much you save with Realtor Desk AI",
           firstYear: "First year",
@@ -1826,7 +1826,7 @@ const resources = {
         noSignals: "No behavioural signals yet. Log calls, emails, and property views to see this panel populate.",
         manualNotice: "Your score is currently derived from a fixed formula. AI-derived scoring trained on your own conversion history ships Q2 2026."
       },
-      onboarding: {
+      onboardingChecklist: {
         heading: "Getting started — 60 minutes, guided",
         subheading: "Five steps to go from empty dashboard to first follow-up call.",
         ack: "Got it",
@@ -2181,7 +2181,7 @@ const resources = {
             feature10: "Support premium 24/7"
           }
         },
-        compare: {
+        compareTable: {
           heading: "Comparer avec les Concurrents",
           sub: "Voyez combien vous économisez avec Realtor Desk AI",
           firstYear: "Première année",
@@ -3777,7 +3777,7 @@ const resources = {
         noSignals: "Aucun signal comportemental pour le moment. Consignez des appels, courriels et vues de propriétés pour alimenter ce panneau.",
         manualNotice: "Votre score est actuellement calculé par une formule fixe. Le scoring dérivé par IA, entraîné sur votre propre historique de conversion, sera livré au T2 2026."
       },
-      onboarding: {
+      onboardingChecklist: {
         heading: "Démarrage — 60 minutes, guidé",
         subheading: "Cinq étapes pour passer d'un tableau de bord vide à votre premier appel de suivi.",
         ack: "Compris",

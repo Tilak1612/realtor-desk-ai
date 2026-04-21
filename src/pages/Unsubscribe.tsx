@@ -112,7 +112,7 @@ const Unsubscribe = () => {
                 email={email}
                 setEmail={setEmail}
                 onSubmit={handleManualSubmit}
-                t={t}
+                t={tWrap(t)}
               />
             </div>
           )}
@@ -139,7 +139,7 @@ const Unsubscribe = () => {
               email={email}
               setEmail={setEmail}
               onSubmit={handleManualSubmit}
-              t={t}
+              t={tWrap(t)}
             />
           )}
 
@@ -159,6 +159,10 @@ interface ManualFormProps {
   onSubmit: (e: React.FormEvent) => void;
   t: (key: string, def?: string) => string;
 }
+
+// Wrapper to satisfy our simple t signature against i18next's TFunction overloads.
+const tWrap = (tFn: ReturnType<typeof useTranslation>["t"]) =>
+  (key: string, def?: string): string => (def !== undefined ? (tFn as any)(key, def) : (tFn as any)(key));
 
 const ManualForm = ({ email, setEmail, onSubmit, t }: ManualFormProps) => (
   <form onSubmit={onSubmit} className="space-y-4 text-left">
