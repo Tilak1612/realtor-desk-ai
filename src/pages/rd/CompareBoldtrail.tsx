@@ -39,7 +39,8 @@ const SECTIONS: { section: string; items: CompareItem[] }[] = [
   {
     section: "Cost",
     items: [
-      { f: "Starting price", bt: "USD $499 setup + $99/mo", rd: "CAD $59/mo, no setup" },
+      { f: "Starting price", bt: "USD $499 setup + $99/mo", rd: "CAD $149/mo, no setup" },
+      { f: "Annual plan (single agent)", bt: "USD $1,188/yr", rd: "CAD $999/yr — save $789" },
       { f: "Per-user cost after 5", bt: "USD $49", rd: "CAD $15" },
       { f: "Onboarding fee", bt: "USD $499", rd: "Included" },
     ],

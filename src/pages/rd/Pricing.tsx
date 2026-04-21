@@ -8,20 +8,26 @@ import { RDButton, RDBadge, IconArrow, IconCheck } from "@/components/rd";
 import { cn } from "@/lib/utils";
 
 // /pricing — Pricing page per rd-marketing.jsx Artboard_Pricing.
-// Billing toggle is client-side only; all prices mirror the design.
-// Note: these are DESIGN-bundle prices ($59 / $149 / Custom), not the
-// current Stripe price IDs ($149 / $999 / $299 / $2,997). Backend
-// wiring in the later phase will reconcile the two sources of truth
-// with Tilak before launch.
+// Prices are the canonical Stripe numbers (Option B per product decision).
+// Each plan carries both monthly + yearly amounts matching the live
+// Stripe price IDs; the BillingToggle swaps between them. When backend
+// wiring lands, the checkout buttons forward the corresponding priceId
+// to the create-checkout edge function.
 
 type BillingCycle = "monthly" | "annual";
 
 interface Plan {
   name: string;
   tag: string;
-  /** Monthly price; "Custom" = talk-to-sales tier. */
-  price: number | "Custom";
-  priceCad: string;
+  /** Monthly amount in CAD, or "Custom" for the talk-to-sales tier. */
+  priceMonthly: number | "Custom";
+  /** Yearly amount in CAD, or "Custom". Used when the billing toggle is Annual. */
+  priceYearly: number | "Custom";
+  /** Savings label shown under annual price, e.g. "Save $789/yr vs monthly". */
+  annualSavingsLabel?: string;
+  /** Stripe price IDs so backend wiring can forward the right one.
+   *  Kept in sync with src/contexts/SubscriptionContext.tsx SUBSCRIPTION_PRODUCTS. */
+  stripe?: { monthly: string; yearly: string };
   desc: string;
   cta: { label: string; variant: "primary" | "terra" | "outline" };
   features: string[];
@@ -32,8 +38,13 @@ const PLANS: Plan[] = [
   {
     name: "Solo",
     tag: "For the single agent",
-    price: 59,
-    priceCad: "CAD · per month",
+    priceMonthly: 149,
+    priceYearly: 999,
+    annualSavingsLabel: "Save $789 vs monthly",
+    stripe: {
+      monthly: "price_1SXpyiS23MQcIdnrAphs809v",
+      yearly: "price_1SXpzKS23MQcIdnrfH2rHhow",
+    },
     desc: "Everything you need to stop losing leads at 2 a.m.",
     cta: { label: "Start free trial", variant: "outline" },
     features: [
@@ -48,8 +59,13 @@ const PLANS: Plan[] = [
   {
     name: "Team",
     tag: "For 2–10 agents",
-    price: 149,
-    priceCad: "CAD · per month",
+    priceMonthly: 299,
+    priceYearly: 2997,
+    annualSavingsLabel: "Save $591 vs monthly",
+    stripe: {
+      monthly: "price_1SXpz0S23MQcIdnrrD0UGqa5",
+      yearly: "price_1SXpzZS23MQcIdnrVVyUShLT",
+    },
     desc: "Shared pipeline, round-robin routing, team reports.",
     cta: { label: "Start free trial", variant: "terra" },
     features: [
@@ -65,8 +81,8 @@ const PLANS: Plan[] = [
   {
     name: "Brokerage",
     tag: "For 10+ agents",
-    price: "Custom",
-    priceCad: "Annual, CAD",
+    priceMonthly: "Custom",
+    priceYearly: "Custom",
     desc: "Multi-tenant, SSO, dedicated CSM, FINTRAC tooling.",
     cta: { label: "Talk to sales", variant: "primary" },
     features: [
@@ -124,7 +140,7 @@ export default function Pricing() {
 
       {/* Hero */}
       <section className="px-8 md:px-14 pt-20 pb-10 text-center">
-        <Eyebrow className="mx-auto">Pricing in CAD · billed monthly</Eyebrow>
+        <Eyebrow className="mx-auto">Pricing in CAD</Eyebrow>
         <h1 className="mt-3.5 text-[44px] md:text-[64px] font-semibold tracking-[-0.025em] leading-[1.05]">
           One price. <span className="font-rd-serif italic font-normal">Every</span> feature.
         </h1>
@@ -192,19 +208,24 @@ function BillingToggle({
           cycle === "annual" ? "bg-rd-navy-800 text-white" : "bg-transparent text-rd-ink-600"
         )}
       >
-        Annual · save 20%
+        Annual · save up to $789/yr
       </button>
     </div>
   );
 }
 
 function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
-  const displayPrice =
-    typeof plan.price === "number"
-      ? cycle === "annual"
-        ? Math.round(plan.price * 0.8) // 20% off annual
-        : plan.price
-      : plan.price;
+  const displayPrice = cycle === "annual" ? plan.priceYearly : plan.priceMonthly;
+  const unitLabel = cycle === "annual" ? "/yr" : "/mo";
+  // Show the per-month breakdown under the yearly number for the Solo plan so
+  // the annual saving is legible at a glance. Tiny rounding note matters less
+  // than keeping the big number clearly the annual amount.
+  const perMonthWhenYearly =
+    cycle === "annual" && typeof plan.priceYearly === "number"
+      ? `CAD · $${(plan.priceYearly / 12).toLocaleString("en-CA", {
+          maximumFractionDigits: 0,
+        })}/mo effective`
+      : "CAD · billed " + (cycle === "annual" ? "yearly" : "monthly");
 
   const featured = !!plan.featured;
   return (
@@ -234,11 +255,13 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
 
       <div className="flex items-baseline gap-1.5 mt-6">
         <span className="text-[52px] font-semibold tracking-[-0.025em]">
-          {typeof displayPrice === "number" ? `$${displayPrice}` : displayPrice}
+          {typeof displayPrice === "number"
+            ? `$${displayPrice.toLocaleString("en-CA")}`
+            : displayPrice}
         </span>
         {typeof displayPrice === "number" && (
           <span className={cn("text-sm", featured ? "text-white/60" : "text-rd-ink-500")}>
-            /mo
+            {unitLabel}
           </span>
         )}
       </div>
@@ -248,8 +271,19 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
           featured ? "text-white/50" : "text-rd-ink-500"
         )}
       >
-        {plan.priceCad}
+        {typeof displayPrice === "number" ? perMonthWhenYearly : "Annual · CAD"}
       </div>
+
+      {cycle === "annual" && plan.annualSavingsLabel && (
+        <div
+          className={cn(
+            "text-xs mt-2 font-semibold",
+            featured ? "text-rd-terra-400" : "text-rd-success"
+          )}
+        >
+          {plan.annualSavingsLabel}
+        </div>
+      )}
 
       <p className={cn("text-sm mt-4 leading-[1.5]", featured ? "text-white/70" : "text-rd-ink-600")}>
         {plan.desc}
