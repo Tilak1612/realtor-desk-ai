@@ -1,0 +1,130 @@
+/* RealtorDesk AI — redesign tokens (Phase 1).
+ *
+ * Source of truth: /tmp/rd-design/realtordesk-ai-redesign/project/tokens.css
+ * These live under a dedicated file so the new `rd-*` namespace does not
+ * collide with the existing shadcn/ui --* theme variables. Components that
+ * belong to the redesign import from here; legacy components keep the old
+ * theme until we migrate them in later phases.
+ */
+
+:root {
+  /* ── Ink / neutrals ─────────────────────────────────────── */
+  --rd-ink-950: #0A0E14;
+  --rd-ink-900: #111418;
+  --rd-ink-800: #1B2028;
+  --rd-ink-700: #2A2F38;
+  --rd-ink-600: #4A5260;
+  --rd-ink-500: #6B7280;
+  --rd-ink-400: #9AA1AD;
+  --rd-ink-300: #C8CDD5;
+  --rd-ink-200: #E5E7EB;
+  --rd-ink-100: #EEEFF1;
+  --rd-ink-50:  #F5F5F2;
+
+  /* ── Paper / surfaces ──────────────────────────────────── */
+  --rd-paper: #FAFAF7;
+  --rd-paper-2: #F4F3EE;
+  --rd-card: #FFFFFF;
+  --rd-line: #E3E4E0;
+  --rd-line-strong: #C8CAC2;
+
+  /* ── Brand (navy) ──────────────────────────────────────── */
+  --rd-navy-950: #050C17;
+  --rd-navy-900: #081826;
+  --rd-navy-800: #0B2540;
+  --rd-navy-700: #133656;
+  --rd-navy-600: #1F4A72;
+  --rd-navy-500: #2E6291;
+  --rd-navy-400: #5A89B3;
+  --rd-navy-300: #93B2CE;
+  --rd-navy-200: #C9D8E6;
+  --rd-navy-100: #E4ECF3;
+  --rd-navy-50:  #F1F5F9;
+
+  /* ── Accent (terracotta) ───────────────────────────────── */
+  --rd-terra-900: #7A2E14;
+  --rd-terra-800: #9F4222;
+  --rd-terra-700: #BE552F;
+  --rd-terra-600: #D7714E;
+  --rd-terra-500: #E08B6C;
+  --rd-terra-400: #EBAA93;
+  --rd-terra-300: #F2C8B9;
+  --rd-terra-200: #F8E0D5;
+  --rd-terra-100: #FBEEE7;
+  --rd-terra-50:  #FDF7F3;
+
+  /* ── Semantic ──────────────────────────────────────────── */
+  --rd-success:    #1F7A4D;
+  --rd-success-bg: #E4F3EB;
+  --rd-warning:    #B88A2E;
+  --rd-warning-bg: #FAF0D7;
+  --rd-danger:     #B32B2B;
+  --rd-danger-bg:  #FAE2E2;
+  --rd-info:       #1F4A72;
+  --rd-info-bg:    #E4ECF3;
+
+  /* Lead score gradient */
+  --rd-score-hot:  #D7714E;
+  --rd-score-warm: #D9A441;
+  --rd-score-cool: #5A89B3;
+  --rd-score-cold: #9AA1AD;
+
+  /* ── Radius ────────────────────────────────────────────── */
+  --rd-r-xs: 4px;
+  --rd-r-sm: 6px;
+  --rd-r-md: 10px;
+  --rd-r-lg: 14px;
+  --rd-r-xl: 20px;
+  --rd-r-pill: 999px;
+
+  /* ── Shadow ────────────────────────────────────────────── */
+  --rd-sh-sm: 0 1px 2px rgba(11, 37, 64, 0.06), 0 1px 1px rgba(11, 37, 64, 0.04);
+  --rd-sh-md: 0 2px 4px rgba(11, 37, 64, 0.05), 0 8px 24px -8px rgba(11, 37, 64, 0.10);
+  --rd-sh-lg: 0 12px 28px -12px rgba(11, 37, 64, 0.18), 0 40px 80px -40px rgba(11, 37, 64, 0.20);
+  --rd-sh-ring: 0 0 0 1px var(--rd-line);
+
+  /* ── Type ──────────────────────────────────────────────── */
+  --rd-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --rd-font-serif: "Instrument Serif", "Georgia", serif;
+  --rd-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ── Scoped reset helper used by redesigned surfaces ──────── *
+ * Wrap any redesign tree in `<div class="rd-reset">…</div>` to
+ * opt into the new visual vocabulary without disturbing legacy
+ * page styles.
+ */
+.rd-reset,
+.rd-reset *,
+.rd-reset *::before,
+.rd-reset *::after {
+  box-sizing: border-box;
+}
+
+.rd-reset {
+  font-family: var(--rd-font-sans);
+  color: var(--rd-ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.rd-reset h1,
+.rd-reset h2,
+.rd-reset h3,
+.rd-reset h4,
+.rd-reset h5,
+.rd-reset h6,
+.rd-reset p {
+  margin: 0;
+}
+
+.rd-reset button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.rd-reset img {
+  display: block;
+  max-width: 100%;
+}

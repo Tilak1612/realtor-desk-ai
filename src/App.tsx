@@ -14,7 +14,25 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CookieConsent from "./components/CookieConsent";
 
 // Critical path — eagerly loaded (landing, auth, 404)
-import Index from "./pages/Index";
+// Phase 2 redesign: new marketing pages live under src/pages/rd/.
+// These replace Index/Features/Pricing/VsBoldTrail at their routes while
+// the legacy files are left in the tree for reference; they will be
+// deleted in a post-launch cleanup pass. See feat/rd-redesign-phase-2-marketing.
+import RDHome from "./pages/rd/Home";
+import RDFeatures from "./pages/rd/Features";
+import RDPricing from "./pages/rd/Pricing";
+import RDCompareBoldtrail from "./pages/rd/CompareBoldtrail";
+// Phase 3 redesign: product surfaces under /app/*. Lazy-loaded so the
+// paper-bg shell doesn't bloat the marketing bundle.
+const RDAppDashboard = lazy(() => import("./pages/rd/app/Dashboard"));
+const RDAppLeads = lazy(() => import("./pages/rd/app/Leads"));
+const RDAppLeadDetail = lazy(() => import("./pages/rd/app/LeadDetail"));
+const RDAppPipeline = lazy(() => import("./pages/rd/app/Pipeline"));
+const RDAppInbox = lazy(() => import("./pages/rd/app/Inbox"));
+const RDAppAutomation = lazy(() => import("./pages/rd/app/Automation"));
+const RDAppReports = lazy(() => import("./pages/rd/app/Reports"));
+// Phase 4 replaces the legacy /onboarding route with the 5-step redesign.
+const RDOnboarding = lazy(() => import("./pages/rd/Onboarding"));
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
@@ -231,9 +249,9 @@ const App = () => (
           <SubscriptionProvider>
           <Suspense fallback={<PageLoader />}>
           <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/" element={<RDHome />} />
+          <Route path="/features" element={<RDFeatures />} />
+          <Route path="/pricing" element={<RDPricing />} />
           <Route path="/canadian-market" element={<CanadianMarket />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
@@ -292,7 +310,18 @@ const App = () => (
           <Route path="/today" element={<ProtectedRoute><Today /></ProtectedRoute>} />
           <Route path="/call-workflow/:contactId" element={<ProtectedRoute><CallWorkflow /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+          {/* Phase 3 redesign: /app/* product surfaces. Behind ProtectedRoute
+              so the agent must be signed in, consistent with /dashboard. */}
+          <Route path="/app" element={<ProtectedRoute><RDAppDashboard /></ProtectedRoute>} />
+          <Route path="/app/leads" element={<ProtectedRoute><RDAppLeads /></ProtectedRoute>} />
+          <Route path="/app/leads/:id" element={<ProtectedRoute><RDAppLeadDetail /></ProtectedRoute>} />
+          <Route path="/app/pipeline" element={<ProtectedRoute><RDAppPipeline /></ProtectedRoute>} />
+          <Route path="/app/inbox" element={<ProtectedRoute><RDAppInbox /></ProtectedRoute>} />
+          <Route path="/app/automation" element={<ProtectedRoute><RDAppAutomation /></ProtectedRoute>} />
+          <Route path="/app/reports" element={<ProtectedRoute><RDAppReports /></ProtectedRoute>} />
+          {/* Phase 4 redesign: /onboarding now renders the 5-step flow.
+              Legacy Onboarding.tsx is left in the tree for reference. */}
+          <Route path="/onboarding" element={<ProtectedRoute><RDOnboarding /></ProtectedRoute>} />
           <Route path="/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
           <Route path="/contacts/:id" element={<ProtectedRoute><ContactDetail /></ProtectedRoute>} />
           <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
@@ -312,8 +341,9 @@ const App = () => (
 
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />
-          {/* Alias per 2026-04-20 brief PR K — /compare/boldtrail renders the same page. */}
-          <Route path="/compare/boldtrail" element={<VsBoldTrail />} />
+          {/* Phase 2 redesign: /compare/boldtrail uses the new comparison page.
+              /vs/boldtrail continues to render the legacy VsBoldTrail page for SEO. */}
+          <Route path="/compare/boldtrail" element={<RDCompareBoldtrail />} />
           <Route path="/vs/lofty" element={<VsLofty />} />
           <Route path="/vs/ixact" element={<VsIxact />} />
           <Route path="/vs/wise-agent" element={<VsWiseAgent />} />
