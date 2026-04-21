@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
@@ -17,17 +17,31 @@ import {
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
 import { MOCK_DASHBOARD_METRICS } from "@/data/rd";
+import type { ReportMetric } from "@/types/rd";
+import { useLeads } from "@/hooks/rd/useLeads";
+import { useSession } from "@/hooks/rd/useSession";
 
 // /app — Dashboard page per rd-app.jsx Artboard_Dashboard.
-// Mock data drives every surface for Phase 3; backend wiring swaps the
-// MOCK_* imports for real Supabase hooks in a later phase.
+//
+// Data source mix (Phase B):
+//   - Greeting   : signed-in user's profile full name (from auth).
+//   - KPI row    : derives live counts from useLeads() when the user
+//                  has data; sparklines stay on the MOCK_* series until
+//                  we wire real timeseries queries (trivial additional
+//                  rung, not blocking the dashboard-alive milestone).
+//   - AI activity, Today, Pipeline/Sources/Compliance cards: static
+//                  previews until their dedicated backend rungs land.
 
 export default function Dashboard() {
+  const { user } = useSession();
+  const { leads: liveLeads, loading: leadsLoading } = useLeads();
+  const firstName = extractFirstName(user?.user_metadata?.full_name ?? user?.email ?? null);
+
   return (
-    <AppShell>
+    <AppShell agentName={fullNameFromUser(user) ?? "Your desk"}>
       <div className="p-7 pb-10">
-        <Greeting />
-        <KPIRow />
+        <Greeting firstName={firstName} />
+        <KPIRow liveLeads={liveLeads} loading={leadsLoading} />
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-4 mt-5">
           <AIActivityCard />
           <TodayCard />
@@ -42,14 +56,29 @@ export default function Dashboard() {
   );
 }
 
+function fullNameFromUser(user: ReturnType<typeof useSession>["user"]): string | null {
+  if (!user) return null;
+  const meta = user.user_metadata as Record<string, unknown> | undefined;
+  const full = typeof meta?.full_name === "string" ? meta.full_name : null;
+  return full ?? user.email ?? null;
+}
+
+function extractFirstName(raw: string | null): string {
+  if (!raw) return "there";
+  const [first] = raw.split(/\s+|@/);
+  return first || "there";
+}
+
 /* ────────────────────────────────────────────────────────── */
 
-function Greeting() {
+function Greeting({ firstName }: { firstName: string }) {
   const today = new Date().toLocaleDateString("en-CA", {
     weekday: "long",
     month: "long",
     day: "numeric",
   });
+  const hour = new Date().getHours();
+  const salute = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
   return (
     <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
       <div>
@@ -57,7 +86,7 @@ function Greeting() {
           {today}
         </div>
         <h1 className="text-[28px] lg:text-[32px] font-semibold tracking-[-0.02em] mt-1">
-          Good morning, Sarah.{" "}
+          {salute}, {firstName}.{" "}
           <span className="font-rd-serif italic font-normal text-rd-ink-500">
             Desk worked overnight.
           </span>
@@ -75,16 +104,59 @@ function Greeting() {
   );
 }
 
-function KPIRow() {
+function KPIRow({
+  liveLeads,
+  loading,
+}: {
+  liveLeads: ReturnType<typeof useLeads>["leads"];
+  loading: boolean;
+}) {
   const SPARK_COLOURS: Record<string, string> = {
     leads_this_week: "var(--rd-navy-500)",
     response_time_avg: "var(--rd-success)",
     showings_booked: "var(--rd-terra-600)",
     pipeline_value: "var(--rd-navy-500)",
   };
+
+  const metrics: ReportMetric[] = useMemo(() => {
+    if (loading || liveLeads.length === 0) return MOCK_DASHBOARD_METRICS;
+
+    // Live rollups. Sparklines remain mock until a timeseries query lands.
+    const leadsCount = liveLeads.length;
+    const hotOrShowing = liveLeads.filter((l) => l.stage === "showing").length;
+    const pipelineValue = liveLeads.reduce((sum, l) => sum + (l.budgetCad ?? 0), 0);
+
+    return [
+      {
+        key: "leads_this_week",
+        label: "Active leads",
+        value: String(leadsCount),
+        delta: undefined,
+        deltaTone: "success",
+        spark: MOCK_DASHBOARD_METRICS[0]?.spark,
+      },
+      // Response-time stays mock — needs a conversations timeseries.
+      MOCK_DASHBOARD_METRICS[1],
+      {
+        key: "showings_booked",
+        label: "Showings booked",
+        value: String(hotOrShowing),
+        deltaTone: "success",
+        spark: MOCK_DASHBOARD_METRICS[2]?.spark,
+      },
+      {
+        key: "pipeline_value",
+        label: "Pipeline value",
+        value: formatCadShort(pipelineValue),
+        deltaTone: "success",
+        spark: MOCK_DASHBOARD_METRICS[3]?.spark,
+      },
+    ];
+  }, [liveLeads, loading]);
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      {MOCK_DASHBOARD_METRICS.map((m) => (
+      {metrics.map((m) => (
         <RDStatCard
           key={m.key}
           label={m.label}
@@ -104,6 +176,16 @@ function KPIRow() {
       ))}
     </div>
   );
+}
+
+function formatCadShort(cents: number): string {
+  if (cents >= 1_000_000) return `$${(cents / 1_000_000).toFixed(1)}M`;
+  if (cents >= 1_000) return `$${Math.round(cents / 1_000)}K`;
+  return new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+    maximumFractionDigits: 0,
+  }).format(cents);
 }
 
 /* ────────────────────────────────────────────────────────── */
