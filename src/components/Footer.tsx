@@ -156,7 +156,7 @@ const Footer = () => {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              {t('footer.copyright')} | {t('footer.poweredBy', 'Powered by Brainfy AI Inc')}
+              {t('footer.copyright')}
             </p>
             <div className="flex gap-6 text-sm">
               <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">

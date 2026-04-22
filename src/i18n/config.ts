@@ -12,7 +12,7 @@ const resources = {
         canadianMarket: "Canadian Market",
         resources: "Resources",
         faq: "FAQ",
-        bookDemo: "Book Your Free Demo",
+        bookDemo: "Book your free demo",
         startClosing: "Start Closing More Deals",
         getStarted: "Get Started",
         giveFeedback: "Give Feedback",
@@ -37,7 +37,7 @@ const resources = {
         title: "Close More Deals with AI Built for Canadian Realtors",
         subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
         getStarted: "Start Your 14-Day Free Trial",
-        watchDemo: "Book Your Free Demo",
+        watchDemo: "Book your free demo",
         trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
         badge1: "PIPEDA-Aware Design",
         badge2: "Bilingual EN/FR",
@@ -103,7 +103,7 @@ const resources = {
           title: "See Realtor Desk in Action",
           description: "Watch how AI can transform your real estate business in just 2 minutes",
           watchDemo: "Watch 2-Minute Product Demo",
-          bookDemo: "Book Live Demo",
+          bookDemo: "Book a live demo",
           exploreFeatures: "Explore All Features"
         }
       },
@@ -846,7 +846,7 @@ const resources = {
           title: "Join 50+ Canadian Agents Growing Their Business with AI",
           subtitle: "Start closing more deals with AI-powered automation today",
           startTrial: "Start Your 14-Day Free Trial",
-          bookDemo: "Book Your Free Demo",
+          bookDemo: "Book your free demo",
           note: "⚡ 14 Days Free Trial • No credit card required • Cancel anytime"
         },
         betaNotice: {
@@ -1541,13 +1541,13 @@ const resources = {
           pricing: "View Pricing"
         },
         buttons: {
-          bookDemo: "Book Your Free Demo",
+          bookDemo: "Book your free demo",
           viewFeatures: "View All Features"
         }
       },
       resourcesPage: {
         categories: {
-          all: "All Articles",
+          all: "All articles",
           aiTech: "AI & Technology",
           canadianMarket: "Canadian Market",
           marketing: "Marketing",
@@ -1556,6 +1556,7 @@ const resources = {
           successStories: "Success Stories",
           comparison: "CRM Comparisons"
         },
+        allArticlesHeading: "All articles",
         articles: {
           aiTransformation: {
             title: "How AI Is Transforming Canadian Real Estate in 2025",
@@ -1602,8 +1603,8 @@ const resources = {
         integrations: "Integrations",
         roadmap: "Roadmap",
         status: "Status Page",
-        blogs: "Blogs",
-        blog: "Blog",
+        blogs: "Articles",
+        blog: "Articles",
         helpCenter: "Help Center",
         apiDocs: "API Docs",
         videoTutorials: "Video Tutorials",
@@ -2374,7 +2375,7 @@ const resources = {
         canadianMarket: "Marché Canadien",
         resources: "Ressources",
         faq: "FAQ",
-        bookDemo: "Réserver Votre Démo Gratuite",
+        bookDemo: "Réservez votre démo gratuite",
         startClosing: "Commencer à Conclure Plus",
         getStarted: "Commencer",
         giveFeedback: "Donner un avis",
@@ -2399,7 +2400,7 @@ const resources = {
         title: "Concluez Plus de Transactions avec une IA Conçue pour les Courtiers Canadiens",
         subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
-        watchDemo: "Réserver Votre Démo Gratuite",
+        watchDemo: "Réservez votre démo gratuite",
         trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment",
         badge1: "Conforme PIPEDA par Conception",
         badge2: "Bilingue EN/FR",
@@ -2465,7 +2466,7 @@ const resources = {
           title: "Voyez Realtor Desk AI en Action",
           description: "Découvrez comment l'IA peut transformer votre entreprise immobilière en seulement 2 minutes",
           watchDemo: "Regarder la Démo Produit de 2 Minutes",
-          bookDemo: "Réserver une Démo en Direct",
+          bookDemo: "Réservez une démo en direct",
           exploreFeatures: "Explorer Toutes les Fonctionnalités"
         }
       },
@@ -3208,7 +3209,7 @@ const resources = {
           title: "Rejoignez 50+ Agents Canadiens Qui Développent Leur Entreprise avec l'IA",
           subtitle: "Commencez à conclure plus de ventes avec l'automation propulsée par l'IA aujourd'hui",
           startTrial: "Commencez Votre Essai Gratuit de 14 Jours",
-          bookDemo: "Réservez Votre Démo Gratuite",
+          bookDemo: "Réservez votre démo gratuite",
           note: "⚡ 14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment"
         },
         betaNotice: {
@@ -3903,21 +3904,22 @@ const resources = {
           pricing: "Voir les Tarifs"
         },
         buttons: {
-          bookDemo: "Réserver Votre Démo Gratuite",
+          bookDemo: "Réservez votre démo gratuite",
           viewFeatures: "Voir Toutes les Fonctionnalités"
         }
       },
       resourcesPage: {
         categories: {
-          all: "Tous les Articles",
-          aiTech: "IA et Technologie",
-          canadianMarket: "Marché Canadien",
+          all: "Tous les articles",
+          aiTech: "IA et technologie",
+          canadianMarket: "Marché canadien",
           marketing: "Marketing",
           compliance: "Conformité",
-          sales: "Ventes et Prospects",
-          successStories: "Histoires de Succès",
+          sales: "Ventes et prospects",
+          successStories: "Histoires de succès",
           comparison: "Comparaisons CRM"
         },
+        allArticlesHeading: "Tous les articles",
         articles: {
           aiTransformation: {
             title: "Comment l'IA Transforme l'Immobilier Canadien en 2025",
@@ -3964,8 +3966,8 @@ const resources = {
         integrations: "Intégrations",
         roadmap: "Feuille de route",
         status: "Page de statut",
-        blogs: "Ressources",
-        blog: "Ressources",
+        blogs: "Articles",
+        blog: "Articles",
         helpCenter: "Centre d'aide",
         apiDocs: "Documentation API",
         videoTutorials: "Tutoriels vidéo",
@@ -4742,5 +4744,16 @@ i18n
       useSuspense: false
     }
   });
+
+// Keep <html lang> in sync with the active locale so screen readers
+// pronounce text correctly, Lighthouse a11y passes, and Google reads
+// hreflang signals right. Runs on init and on every language change.
+function syncHtmlLang(lng: string | undefined) {
+  if (typeof document === "undefined") return;
+  const normalized = (lng || "en").toLowerCase().startsWith("fr") ? "fr-CA" : "en-CA";
+  document.documentElement.lang = normalized;
+}
+syncHtmlLang(i18n.language);
+i18n.on("languageChanged", syncHtmlLang);
 
 export default i18n;
