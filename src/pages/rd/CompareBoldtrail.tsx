@@ -70,7 +70,7 @@ export default function CompareBoldtrail() {
       {/* Hero */}
       <section className="px-8 md:px-14 pt-20 pb-10">
         <div className="mx-auto max-w-[1100px] text-center">
-          <Eyebrow className="mx-auto">RealtorDesk AI vs BoldTrail</Eyebrow>
+          <Eyebrow className="mx-auto">Realtor Desk vs BoldTrail</Eyebrow>
           <h1 className="mt-3.5 text-[40px] md:text-[56px] lg:text-[64px] font-semibold tracking-[-0.025em] leading-[1.05]">
             One's built for the US.{" "}
             <span className="font-rd-serif italic font-normal text-rd-navy-800">
@@ -95,7 +95,7 @@ export default function CompareBoldtrail() {
             variant="muted"
           />
           <CompareHeroCard
-            name="RealtorDesk AI"
+            name="Realtor Desk"
             tagline="The Canadian-first alternative"
             stats={RD_STATS}
             variant="navy"
@@ -109,7 +109,7 @@ export default function CompareBoldtrail() {
           <div className="grid grid-cols-[1.8fr_1fr_1fr] px-7 py-5 bg-rd-ink-50 border-b border-rd-line text-xs font-bold uppercase tracking-[0.08em] text-rd-ink-500">
             <div />
             <div className="text-center">BoldTrail</div>
-            <div className="text-center text-rd-navy-800">RealtorDesk AI</div>
+            <div className="text-center text-rd-navy-800">Realtor Desk</div>
           </div>
           {SECTIONS.map((sec) => (
             <Fragment key={sec.section}>

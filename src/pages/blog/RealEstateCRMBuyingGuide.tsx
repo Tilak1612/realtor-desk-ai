@@ -23,7 +23,7 @@ const RealEstateCRMBuyingGuide = () => {
       "name": "RealtorDesk AI",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.realtordesk.ai/realtor-desk-icon.png"
+        "url": "https://www.realtordesk.ai/favicon-512x512.png"
       }
     },
     "datePublished": "2026-01-29",

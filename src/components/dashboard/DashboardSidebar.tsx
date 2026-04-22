@@ -23,7 +23,7 @@ import {
   Zap,
   Plug,
 } from "lucide-react";
-import logo from "@/assets/realtor-desk-icon.png";
+import { RDMark } from "@/components/rd/Logo";
 
 interface DashboardSidebarProps {
   trialDaysLeft?: number;
@@ -117,8 +117,8 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
           className="flex items-center gap-2.5 h-14 px-4 border-b border-border hover:bg-accent/50 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          <img src={logo} alt="RealtorDesk AI" className="h-7 w-auto" />
-          <span className="text-sm font-semibold text-foreground">RealtorDesk AI</span>
+          <RDMark size={28} />
+          <span className="text-sm font-semibold text-foreground">Realtor Desk</span>
         </Link>
 
         {/* Navigation */}

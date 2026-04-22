@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import logo from "@/assets/realtor-desk-icon.png";
+import { RDMark } from "@/components/rd/Logo";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -38,9 +38,10 @@ const Navbar = () => {
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 gap-2 sm:gap-4">
-          {/* Logo - Mobile Optimized */}
-          <Link to="/" className="flex items-center gap-2 group shrink-0">
-            <img src={logo} alt="Realtor Desk" className="h-9 w-9 object-contain" />
+          {/* Logo - unified RDMark across marketing chrome. Replaces the
+              legacy orange-tile PNG that used to ship via the bundler. */}
+          <Link to="/" className="flex items-center gap-2 group shrink-0" aria-label="Realtor Desk">
+            <RDMark size={36} />
             <span className="text-xl font-bold text-foreground group-hover:text-accent transition-colors whitespace-nowrap">
               Realtor Desk
             </span>
