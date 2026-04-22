@@ -71,41 +71,121 @@ describe("TopNav", () => {
 });
 
 describe("MarketingHeader mobile drawer", () => {
-  // Round-12 preview review surfaced that the drawer inherited the parent
-  // nav's backdrop-blur + semi-transparent bg, rendering translucent over
-  // the hero. The fix is four structural properties on the drawer element.
-  // This test locks all four so any accidental className refactor fails CI.
+  // Round-14 mobile-overlap root-cause rewrite. The old dropdown was
+  // `position: absolute` under the nav — no backdrop, no scroll lock,
+  // hero H1 leaked through. The rewrite uses a Radix Dialog modal,
+  // which gives us portal rendering, focus trap, scroll lock, Escape
+  // close, and aria-modal. These assertions lock the modal contract
+  // so any accidental regression to a dropdown pattern fails CI.
 
-  it("opens on hamburger click with opaque bg, z-50, no backdrop-filter, and a shadow", async () => {
-    const user = userEvent.setup();
+  it("sticky header sits at z-40 with opaque bg (WCAG contrast)", () => {
     const { container } = renderWithProviders(<MarketingHeader />);
+    const header = container.querySelector("header");
+    expect(header, "MarketingHeader should render a <header> landmark").toBeTruthy();
+    if (!header) return;
 
-    // Drawer is conditionally rendered — click the hamburger first.
+    const cls = header.className;
+    expect(cls).toMatch(/\bsticky\b/);
+    expect(cls).toMatch(/\btop-0\b/);
+    expect(cls).toMatch(/\bz-40\b/);
+    // 95% opacity is the WCAG AA contrast floor for the hero ink on the
+    // translucent header. Before this PR it was bg-white/70 which was
+    // flagged for contrast.
+    expect(cls).toMatch(/bg-white\/95|bg-rd-navy-800\/95/);
+  });
+
+  it("opens a portal-rendered modal drawer with role=dialog + labelling", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MarketingHeader />);
+
     const hamburger = screen.getByRole("button", { name: "Open menu" });
     await user.click(hamburger);
 
-    // Match the drawer's own className signature: it's the only div that
-    // carries both `md:hidden` and `absolute top-full`. Querying
-    // container directly avoids relying on Tailwind class-selector
-    // syntax that trips up the `closest()` matcher in JSDOM.
-    const drawer = Array.from(container.querySelectorAll("div")).find((el) =>
-      el.className.includes("md:hidden") &&
-      el.className.includes("absolute") &&
-      el.className.includes("top-full")
-    ) as HTMLElement | undefined;
-    expect(drawer, "drawer container should be present after opening").toBeTruthy();
-    if (!drawer) return;
+    // Radix Dialog renders role="dialog" on the Content element and
+    // portals it out of the header subtree. Radix v1.1 enforces
+    // modality via `hideOthers` (inert background) + FocusScope
+    // instead of the aria-modal attribute, so we don't assert it.
+    const dialog = await screen.findByRole("dialog");
+    expect(dialog).toBeTruthy();
+    // Dialog.Title + Dialog.Description wire up aria labelling
+    // automatically.
+    expect(dialog.getAttribute("aria-labelledby")).toBeTruthy();
+    expect(dialog.getAttribute("aria-describedby")).toBeTruthy();
+    // data-state="open" is Radix's canonical open marker — used by the
+    // enter/exit animation classes.
+    expect(dialog.getAttribute("data-state")).toBe("open");
+    // Content MUST be portaled outside the <header> subtree so stacking
+    // contexts and overflow:hidden ancestors can't clip it.
+    const header = document.querySelector("header");
+    expect(header?.contains(dialog)).toBe(false);
+  });
 
-    const cls = drawer.className;
-    // Z-index high enough to clear any hero decoration.
-    expect(cls).toMatch(/\bz-50\b/);
-    // Elevation + edge separation from the hero beneath.
-    expect(cls).toMatch(/shadow-rd-lg/);
-    expect(cls).toMatch(/border-b/);
-    // Opaque background — paper tone default.
-    expect(cls).toMatch(/\bbg-white\b/);
-    // Inline style overrides the parent's backdrop-filter so translucency
-    // from the nav bar doesn't bleed through onto the drawer.
-    expect(drawer.style.backdropFilter).toBe("none");
+  it("drawer content sits at z-70, fixed inset-y-0 right-0, full-viewport height", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MarketingHeader />);
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+
+    const dialog = await screen.findByRole("dialog");
+    const cls = dialog.className;
+    expect(cls).toMatch(/\bfixed\b/);
+    expect(cls).toMatch(/\binset-y-0\b/);
+    expect(cls).toMatch(/\bright-0\b/);
+    expect(cls).toMatch(/\bh-full\b/);
+    expect(cls).toMatch(/z-\[70\]/);
+    // Panel must be opaque — no translucent bleed-through.
+    expect(cls).toMatch(/\bbg-white\b|\bbg-rd-navy-800\b/);
+  });
+
+  it("renders a dedicated backdrop at z-60 beneath the drawer", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MarketingHeader />);
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+
+    // Radix marks the overlay with data-state="open". It must sit at
+    // z-60 — above the z-40 header, below the z-70 content.
+    const overlay = document.querySelector(
+      '[data-state="open"][aria-hidden="true"], [data-state="open"].fixed.inset-0'
+    ) as HTMLElement | null;
+    // Fallback: any element with both fixed + inset-0 + z-[60] classes.
+    const overlayByClass = Array.from(document.querySelectorAll<HTMLElement>("div")).find(
+      (el) =>
+        el.className.includes("fixed") &&
+        el.className.includes("inset-0") &&
+        el.className.includes("z-[60]")
+    );
+    const found = overlay ?? overlayByClass;
+    expect(found, "drawer should render a backdrop element").toBeTruthy();
+    if (!found) return;
+    expect(found.className).toMatch(/z-\[60\]/);
+  });
+
+  it("exposes the full 8-item toolbar (5 nav links + EN/FR + Sign in + Start free trial)", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MarketingHeader />);
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+
+    // Nav links rendered inside the drawer.
+    await screen.findByRole("link", { name: "Features" });
+    expect(screen.getAllByRole("link", { name: "How it works" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Pricing" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Compare" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Resources" }).length).toBeGreaterThan(0);
+    // EN/FR toggle is inside the drawer in addition to the (hidden-on-mobile) bar.
+    expect(screen.getAllByRole("button", { name: "EN" }).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole("button", { name: "FR" }).length).toBeGreaterThanOrEqual(1);
+    // CTAs — there are two of each (hidden desktop + visible mobile drawer).
+    expect(screen.getAllByRole("button", { name: "Sign in" }).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole("button", { name: "Start free trial" }).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("closes when Escape is pressed", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<MarketingHeader />);
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+
+    await screen.findByRole("dialog");
+    await user.keyboard("{Escape}");
+    // Radix unmounts the content on close.
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 });
