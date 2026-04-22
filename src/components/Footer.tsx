@@ -12,9 +12,9 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4 group">
-              <img src={logo} alt="Realtor Desk" className="h-9 w-9 object-contain" />
+              <img src={logo} alt="RealtorDesk AI" className="h-9 w-9 object-contain" />
               <span className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">
-                Realtor Desk
+                RealtorDesk AI
               </span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
@@ -90,9 +90,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Blogs */}
+          {/* Resources */}
           <div>
-            <h3 className="font-semibold mb-4">{t('footer.blogs', 'Blogs')}</h3>
+            <h3 className="font-semibold mb-4">{t('footer.resourcesHeading', 'Resources')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/resources" className="text-muted-foreground hover:text-primary transition-colors">
