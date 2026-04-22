@@ -105,20 +105,23 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar — dark navy surface (bg-primary = hsl(211 73% 14%)).
+          Nav links already use text-white/* so the container matches
+          their contrast model. Before this PR the container was bg-card
+          (white), making every link invisible (white-on-white). */}
       <aside
-        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-card border-r border-border flex flex-col transition-transform duration-300 ease-in-out z-40 ${
+        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-primary text-white border-r border-white/10 flex flex-col transition-transform duration-300 ease-in-out z-40 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Logo */}
         <Link
           to="/today"
-          className="flex items-center gap-2.5 h-14 px-4 border-b border-border hover:bg-accent/50 transition-colors"
+          className="flex items-center gap-2.5 h-14 px-4 border-b border-white/10 hover:bg-white/5 transition-colors"
           onClick={() => setIsOpen(false)}
         >
-          <RDMark size={28} />
-          <span className="text-sm font-semibold text-foreground">Realtor Desk</span>
+          <RDMark size={28} tone="paper" />
+          <span className="text-sm font-semibold text-white">Realtor Desk</span>
         </Link>
 
         {/* Navigation */}
@@ -133,7 +136,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
                   onClick={() => setIsOpen(false)}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-150 text-sm ${
                     isActive(item.path)
-                      ? "bg-primary text-primary-foreground font-medium"
+                      ? "bg-white/10 text-white font-medium"
                       : "text-white/60 hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -144,7 +147,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
                   {typeof item.count === 'number' && item.count > 0 && (
                     <span className={`text-xs px-1.5 py-0.5 rounded ${
                       isActive(item.path)
-                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        ? "bg-white/20 text-white"
                         : "bg-white/10 text-white/50"
                     }`}>
                       {item.count}
@@ -158,7 +161,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
             <div className="space-y-1">
               <div className="px-3 py-2 flex items-center gap-2">
                 <div className="flex-1 h-px bg-white/10" />
-                <h3 className="text-[10px] font-semibold text-white/40 uppercase tracking-widest">
+                <h3 className="text-[10px] font-semibold text-white/50 uppercase tracking-widest">
                   {t('app.sidebar.advanced', 'Advanced')}
                 </h3>
               </div>
@@ -169,7 +172,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
                   onClick={() => setIsOpen(false)}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-150 text-sm ${
                     isActive(item.path)
-                      ? "bg-primary text-primary-foreground font-medium"
+                      ? "bg-white/10 text-white font-medium"
                       : "text-white/60 hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -180,7 +183,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
                   {typeof item.count === 'number' && item.count > 0 && (
                     <span className={`text-xs px-1.5 py-0.5 rounded ${
                       isActive(item.path)
-                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        ? "bg-white/20 text-white"
                         : "bg-white/10 text-white/50"
                     }`}>
                       {item.count}
@@ -194,19 +197,22 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
 
         {/* Upgrade Badge */}
         {trialDaysLeft > 0 && (
-          <div className="p-3 border-t border-border">
-            <div className="bg-accent/50 p-3 rounded-lg space-y-2">
+          <div className="p-3 border-t border-white/10">
+            <div className="bg-white/5 p-3 rounded-lg space-y-2">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <Badge variant="secondary" className="text-xs font-medium">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Badge className="text-xs font-medium bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20">
                   {t('app.sidebar.trialActive')}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground">
-                <span className="font-semibold text-foreground">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
+              <p className="text-xs text-white/65">
+                <span className="font-semibold text-white">{trialDaysLeft}</span> {t('app.sidebar.daysLeft')}
               </p>
               <Link to="/billing">
-                <Button className="w-full h-8 text-xs" size="sm">
+                <Button
+                  className="w-full h-8 text-xs bg-white text-primary hover:bg-white/90 font-semibold"
+                  size="sm"
+                >
                   {t('app.sidebar.upgradeNow')}
                 </Button>
               </Link>

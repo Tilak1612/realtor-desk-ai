@@ -136,7 +136,11 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   };
 
   return (
-    <header className="sticky top-0 z-30 h-14 border-b border-border bg-card">
+    // Dark navy header to match the sidebar (both at bg-primary). Ghost
+    // buttons inside inherit text-white via the root `text-white` class —
+    // the default shadcn ghost variant has no fixed text color, so it
+    // inherits from its parent chain.
+    <header className="sticky top-0 z-30 h-14 border-b border-white/10 bg-primary text-white">
       <div className="flex h-14 items-center justify-between px-4 lg:px-6">
         {/* Spacer for mobile menu button */}
         <div className="w-12 lg:hidden" />
@@ -155,10 +159,13 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
           {/* Feedback Button */}
           <FeedbackDialog />
 
-          {/* Quick Add Button */}
+          {/* Quick Add Button — inverted to pop on the navy header. */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" className="h-8 gap-1.5 text-sm">
+              <Button
+                size="sm"
+                className="h-8 gap-1.5 text-sm bg-white text-primary hover:bg-white/90 font-semibold"
+              >
                 <Plus className="h-4 w-4" />
                 <span className="hidden sm:inline">{t('nav.add', 'Add')}</span>
               </Button>
@@ -223,7 +230,9 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
               <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0" disabled={avatarUploading}>
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={avatarUrl ?? undefined} />
-                  <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                  {/* Fallback must pop against the navy header — bg-primary
+                      here would render navy-on-navy. */}
+                  <AvatarFallback className="bg-white/15 text-white text-xs">
                     {profile?.full_name ? getInitials(profile.full_name) : "U"}
                   </AvatarFallback>
                 </Avatar>
