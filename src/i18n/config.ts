@@ -1585,11 +1585,12 @@ const resources = {
         readTime: "min read",
         readMore: "Read More",
         newsletter: {
-          title: "Get Weekly Insights Delivered to Your Inbox",
+          title: "Get weekly insights delivered to your inbox",
           subtitle: "Actionable AI and real estate tips for Canadian agents, delivered weekly",
           placeholder: "Enter your email",
           subscribe: "Subscribe",
-          noSpam: "No spam. Unsubscribe anytime. Privacy policy."
+          noSpam: "No spam. Unsubscribe anytime. Privacy policy.",
+          consent: "I agree to receive marketing emails from RealtorDesk AI (you can unsubscribe at any time)."
         }
       },
       footer: {
@@ -1615,10 +1616,11 @@ const resources = {
         privacy: "Privacy Policy",
         terms: "Terms of Service",
         casl: "CASL Compliance",
-        copyright: "© 2025 RealtorDesk.ai. All rights reserved.",
+        copyright: "© 2026 RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB",
         madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors",
         poweredBy: "Powered by Brainfy AI Inc",
-        cookieSettings: "Cookie Settings"
+        cookieSettings: "Cookie Settings",
+        resourcesHeading: "Resources"
       },
       trial: {
         daysRemaining: "{{count}} days remaining in your free trial",
@@ -2775,9 +2777,9 @@ const resources = {
       },
       resources: {
         hero: {
-          title: "Centre d'",
-          titleGradient: "Intelligence Immobilière",
-          subtitle: "Guides, conseils et perspectives pour les professionnels de l'immobilier canadiens"
+          title: "Centre",
+          titleGradient: "d'Intelligence Immobilière",
+          subtitle: "Guides, conseils et analyses pour les professionnels de l'immobilier canadiens"
         }
       },
       integrations: {
@@ -3943,42 +3945,44 @@ const resources = {
           }
         },
         readTime: "min de lecture",
-        readMore: "Lire la Suite",
+        readMore: "Lire la suite",
         newsletter: {
-          title: "Recevez des Insights Hebdomadaires dans Votre Boîte de Réception",
+          title: "Recevez des analyses hebdomadaires dans votre boîte de réception",
           subtitle: "Rejoignez 2 000+ agents immobiliers canadiens qui reçoivent des conseils pratiques sur l'IA et l'immobilier chaque semaine",
           placeholder: "Entrez votre courriel",
           subscribe: "S'abonner",
-          noSpam: "Pas de spam. Désabonnez-vous à tout moment. Politique de confidentialité."
+          noSpam: "Pas de spam. Désabonnez-vous à tout moment. Politique de confidentialité.",
+          consent: "J'accepte de recevoir des courriels marketing de RealtorDesk AI (vous pouvez vous désabonner à tout moment)."
         }
       },
       footer: {
-        tagline: "Succès Immobilier Propulsé par l'IA",
+        tagline: "Succès immobilier propulsé par l'IA",
         product: "Produit",
         features: "Fonctionnalités",
         pricing: "Tarification",
-        howItWorks: "Comment Ça Marche",
+        howItWorks: "Comment ça marche",
         integrations: "Intégrations",
-        roadmap: "Feuille de Route",
-        status: "Page de Statut",
-        blogs: "Blogues",
-        blog: "Blogue",
-        helpCenter: "Centre d'Aide",
+        roadmap: "Feuille de route",
+        status: "Page de statut",
+        blogs: "Ressources",
+        blog: "Ressources",
+        helpCenter: "Centre d'aide",
         apiDocs: "Documentation API",
-        videoTutorials: "Tutoriels Vidéo",
-        caseStudies: "Études de Cas",
+        videoTutorials: "Tutoriels vidéo",
+        caseStudies: "Études de cas",
         webinars: "Webinaires",
         company: "Entreprise",
-        about: "À Propos",
+        about: "À propos",
         contact: "Contact",
         careers: "Carrières",
-        privacy: "Politique de Confidentialité",
-        terms: "Conditions d'Utilisation",
+        privacy: "Politique de confidentialité",
+        terms: "Conditions d'utilisation",
         casl: "Conformité LCAP",
-        copyright: "© 2025 RealtorDesk.ai. Tous droits réservés.",
-        madeInCanada: "Fabriqué au Canada 🇨🇦 pour les Agents Immobiliers Canadiens",
+        copyright: "© 2026 RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB",
+        madeInCanada: "Fabriqué au Canada 🇨🇦 pour les agents immobiliers canadiens",
         poweredBy: "Propulsé par Brainfy AI Inc",
-        cookieSettings: "Paramètres des Cookies"
+        cookieSettings: "Paramètres des cookies",
+        resourcesHeading: "Ressources"
       },
       trial: {
         daysRemaining: "{{count}} jours restants dans votre essai gratuit",

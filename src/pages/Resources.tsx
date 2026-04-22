@@ -43,8 +43,10 @@ import blogOpenHouse from "@/assets/blog-open-house-digital.jpg";
 import blogDripCampaign from "@/assets/blog-drip-campaign-templates.jpg";
 
 const Resources = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [newsletterConsent, setNewsletterConsent] = useState(false);
+  const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
   
   const articles = [
     {
@@ -378,6 +380,15 @@ const Resources = () => {
     "resourcesPage.categories.successStories"
   ];
 
+  // Under FR chrome, only surface articles whose title + excerpt actually
+  // have FR translations (useTranslation: true). Showing English-body
+  // articles under French category labels was the Round-4 audit's
+  // bilingual-integrity catastrophe — better to hide a card than to
+  // break the "available in FR" promise 25 times in a single scroll.
+  const visibleArticles = isFr
+    ? articles.filter((a) => a.useTranslation)
+    : articles;
+
   return (
     <div className="min-h-screen">
       <SEO
@@ -431,7 +442,7 @@ const Resources = () => {
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {articles.map((article, index) => (
+                {visibleArticles.map((article, index) => (
                   <Card key={index} className="overflow-hidden card-hover">
                     <img 
                       src={article.image} 
@@ -473,7 +484,7 @@ const Resources = () => {
           ) : (
             // Show specific category
             categoryKeys.slice(1).map((categoryKey) => {
-              const categoryArticles = articles.filter(article => article.categoryKey === categoryKey);
+              const categoryArticles = visibleArticles.filter(article => article.categoryKey === categoryKey);
               
               if (categoryArticles.length === 0) return null;
 
@@ -542,15 +553,34 @@ const Resources = () => {
             {t('resourcesPage.newsletter.subtitle')}
           </p>
           
-          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-            <Input
-              type="email"
-              placeholder={t('resourcesPage.newsletter.placeholder')}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:bg-white/20"
-            />
-            <Button type="submit" variant="secondary" size="lg" className="whitespace-nowrap">
-              {t('resourcesPage.newsletter.subscribe')}
-            </Button>
+          <form className="max-w-xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Input
+                type="email"
+                placeholder={t('resourcesPage.newsletter.placeholder')}
+                required
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:bg-white/20"
+              />
+              <Button
+                type="submit"
+                variant="secondary"
+                size="lg"
+                className="whitespace-nowrap"
+                disabled={!newsletterConsent}
+              >
+                {t('resourcesPage.newsletter.subscribe')}
+              </Button>
+            </div>
+            <label className="mt-4 flex items-start gap-2 text-left text-sm text-white/85 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={newsletterConsent}
+                onChange={(e) => setNewsletterConsent(e.target.checked)}
+                required
+                className="mt-0.5 flex-shrink-0 accent-white"
+              />
+              <span>{t('resourcesPage.newsletter.consent')}</span>
+            </label>
           </form>
 
           <p className="text-sm text-white/70 mt-4">
