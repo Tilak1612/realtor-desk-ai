@@ -98,7 +98,7 @@ const EditTaskModal = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskModa
           <DialogTitle>Edit Task</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form noValidate onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label htmlFor="title">Task Title *</Label>
             <Input

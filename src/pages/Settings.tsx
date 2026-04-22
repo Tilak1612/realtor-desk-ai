@@ -320,7 +320,7 @@ const Settings = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSaveProfile} className="space-y-5">
+              <form noValidate onSubmit={handleSaveProfile} className="space-y-5">
                 <div className="flex items-center gap-4">
                   <div className="relative">
                     <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
@@ -558,7 +558,7 @@ const Settings = () => {
                 {t('app.settings.account')}
               </CardTitle>
               <CardDescription className="text-xs">
-                {t('app.settings.account')}
+                {t('app.settings.accountDesc', 'Manage your session and account access')}
               </CardDescription>
             </CardHeader>
             <CardContent>

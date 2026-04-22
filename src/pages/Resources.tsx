@@ -553,7 +553,7 @@ const Resources = () => {
             {t('resourcesPage.newsletter.subtitle')}
           </p>
           
-          <form className="max-w-xl mx-auto">
+          <form noValidate className="max-w-xl mx-auto">
             <div className="flex flex-col sm:flex-row gap-4">
               <Input
                 type="email"

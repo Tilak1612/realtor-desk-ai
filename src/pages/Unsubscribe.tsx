@@ -165,7 +165,7 @@ const tWrap = (tFn: ReturnType<typeof useTranslation>["t"]) =>
   (key: string, def?: string): string => (def !== undefined ? (tFn as any)(key, def) : (tFn as any)(key));
 
 const ManualForm = ({ email, setEmail, onSubmit, t }: ManualFormProps) => (
-  <form onSubmit={onSubmit} className="space-y-4 text-left">
+  <form noValidate onSubmit={onSubmit} className="space-y-4 text-left">
     <p className="text-muted-foreground text-sm">
       {t(
         "unsubscribe.manualPrompt",

@@ -116,7 +116,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
           </DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form noValidate onSubmit={handleSubmit} className="space-y-4">
           {type === "won" ? (
             <>
               <div>

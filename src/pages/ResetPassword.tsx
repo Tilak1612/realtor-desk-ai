@@ -79,7 +79,7 @@ const ResetPassword = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <form onSubmit={handleResetPassword} className="space-y-4">
+            <form noValidate onSubmit={handleResetPassword} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="password">{t('auth.reset.newPassword', 'New Password')}</Label>
                 <PasswordInput

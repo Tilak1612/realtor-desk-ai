@@ -135,7 +135,7 @@ const Demo = () => {
               <h2 className="text-2xl font-bold mb-6">{t("demo.form.heading", "Request a Personalized Demo")}</h2>
               
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}

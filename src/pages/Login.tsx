@@ -142,7 +142,7 @@ const Login = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form noValidate onSubmit={handleLogin} className="space-y-5">
             {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium text-gray-200 flex items-center gap-2">
