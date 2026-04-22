@@ -59,7 +59,7 @@ const ForgotPassword = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <form onSubmit={handleResetPassword} className="space-y-4">
+                <form noValidate onSubmit={handleResetPassword} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">{t('app.auth.email', 'Email')}</Label>
                     <Input

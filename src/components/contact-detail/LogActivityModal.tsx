@@ -68,7 +68,7 @@ const LogActivityModal = ({ contactId, open, onOpenChange, onSuccess }: LogActiv
       <DialogContent className="max-w-2xl">
         <DialogHeader><DialogTitle>Log Activity</DialogTitle></DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField control={form.control} name="activity_type" render={({ field }) => (
               <FormItem><FormLabel>Activity Type</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>

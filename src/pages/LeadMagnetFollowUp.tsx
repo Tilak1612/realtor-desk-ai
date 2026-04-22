@@ -228,7 +228,7 @@ const OptInForm = ({
   onWebsiteChange,
   onSubmit,
 }: OptInFormProps) => (
-  <form onSubmit={onSubmit} className="space-y-5">
+  <form noValidate onSubmit={onSubmit} className="space-y-5">
     {/* Honeypot — hidden from real users, bots fill it, edge function rejects non-empty */}
     <input
       type="text"

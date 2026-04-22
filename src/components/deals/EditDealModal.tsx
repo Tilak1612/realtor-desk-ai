@@ -110,7 +110,7 @@ const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModa
           <DialogTitle>Edit Transaction</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form noValidate onSubmit={handleSubmit} className="space-y-4">
           {/* Title */}
           <div>
             <Label htmlFor="title">Transaction Title *</Label>

@@ -265,7 +265,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
           <DialogTitle>{t("app.modals.addProperty.title")}</DialogTitle>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form noValidate onSubmit={handleSubmit} className="space-y-6">
           <div className="bg-primary/10 p-4 rounded-lg mb-4">
             <h3 className="font-semibold mb-2 flex items-center gap-2">
               <Search className="h-4 w-4" />

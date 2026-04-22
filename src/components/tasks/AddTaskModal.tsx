@@ -196,7 +196,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
           </Button>
         )}
 
-        <form onSubmit={(e) => handleSubmit(e, addAnother)} className="space-y-4">
+        <form noValidate onSubmit={(e) => handleSubmit(e, addAnother)} className="space-y-4">
           <div>
             <Label htmlFor="title">{t("app.modals.addTask.taskTitle")} *</Label>
             <Input

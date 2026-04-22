@@ -140,7 +140,7 @@ const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) =>
           <DialogTitle>{t("app.modals.addDeal.title")}</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form noValidate onSubmit={handleSubmit} className="space-y-4">
           {/* Contact Selection */}
           <div>
             <Label htmlFor="contact">{t("app.modals.addDeal.contact")} *</Label>
