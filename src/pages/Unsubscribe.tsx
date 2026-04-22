@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -64,6 +65,14 @@ const Unsubscribe = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Transactional page with one-time tokens in the URL — must never
+          be indexed. robots.txt blocks the path, this meta is the second
+          layer for crawlers that ignore robots or follow inbound links. */}
+      <SEO
+        title="Unsubscribe | RealtorDesk AI"
+        description="Unsubscribe from RealtorDesk AI emails."
+        noindex
+      />
       <Navbar />
       <main className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="max-w-md w-full text-center space-y-6">

@@ -24,6 +24,9 @@ Disallow: /login
 Disallow: /verify-email
 Disallow: /forgot-password
 Disallow: /reset-password
+# CASL-required transactional page — link reachable from email footers
+# but must not be indexed (contains one-time tokens).
+Disallow: /unsubscribe
 
 # Key crawlers
 User-agent: Googlebot
