@@ -204,13 +204,21 @@ const Properties = () => {
         <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "grid" | "list")}>
           <div className="flex justify-end mb-4">
             <TabsList className="h-8">
-              <TabsTrigger value="grid" className="text-xs h-7 px-3">
+              <TabsTrigger
+                value="grid"
+                className="text-xs h-7 px-3"
+                aria-label={t("app.properties.view.grid", "Grid")}
+              >
                 <LayoutGrid className="h-3.5 w-3.5 mr-1.5" />
-                Grid
+                {t("app.properties.view.grid", "Grid")}
               </TabsTrigger>
-              <TabsTrigger value="list" className="text-xs h-7 px-3">
+              <TabsTrigger
+                value="list"
+                className="text-xs h-7 px-3"
+                aria-label={t("app.properties.view.list", "List")}
+              >
                 <List className="h-3.5 w-3.5 mr-1.5" />
-                List
+                {t("app.properties.view.list", "List")}
               </TabsTrigger>
             </TabsList>
           </div>
