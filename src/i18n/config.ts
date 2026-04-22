@@ -1050,6 +1050,10 @@ const resources = {
           title: "Settings",
           profile: "Profile",
           profileDesc: "Update your name, brokerage, and contact details",
+          avatarHint: "Click the avatar to upload a new photo",
+          phone: "Phone",
+          selectProvince: "Select province",
+          selectCity: "Select city",
           account: "Account",
           notifications: {
             label: "Notifications",
@@ -1403,6 +1407,16 @@ const resources = {
           }
         },
         tasks: {
+          title: "Tasks",
+          addTask: "Add task",
+          allTasks: "All",
+          today: "Today",
+          upcoming: "This week",
+          overdue: "Overdue",
+          empty: {
+            title: "No tasks yet",
+            body: "Create your first task to get started."
+          },
           stats: {
             dueToday: "Due today",
             overdue: "Overdue",
@@ -1447,6 +1461,11 @@ const resources = {
           }
         },
         properties: {
+          title: "Properties",
+          addProperty: "Add property",
+          active: "active",
+          pending: "pending",
+          sold: "sold",
           searchPlaceholder: "Search by address, MLS#, city…",
           priceOnRequest: "Price on request",
           beds: {
@@ -1919,7 +1938,7 @@ const resources = {
           },
           calendar: {
             title: "Connect Google or Outlook Calendar",
-            desc: "Sync appointments into /today."
+            desc: "Sync appointments into your dashboard."
           }
         }
       },
@@ -2039,7 +2058,7 @@ const resources = {
           },
           calendar: {
             title: "Connect Google or Outlook Calendar",
-            desc: "Sync appointments into /today."
+            desc: "Sync appointments into your dashboard."
           }
         }
       },
@@ -3501,6 +3520,10 @@ const resources = {
           title: "Paramètres",
           profile: "Profil",
           profileDesc: "Mettez à jour votre nom, votre courtage et vos coordonnées",
+          avatarHint: "Cliquez sur l'avatar pour téléverser une nouvelle photo",
+          phone: "Téléphone",
+          selectProvince: "Sélectionner une province",
+          selectCity: "Sélectionner une ville",
           account: "Compte",
           notifications: {
             label: "Notifications",
@@ -3854,6 +3877,16 @@ const resources = {
           }
         },
         tasks: {
+          title: "Tâches",
+          addTask: "Ajouter une tâche",
+          allTasks: "Toutes",
+          today: "Aujourd'hui",
+          upcoming: "Cette semaine",
+          overdue: "En retard",
+          empty: {
+            title: "Aucune tâche pour l'instant",
+            body: "Créez votre première tâche pour commencer."
+          },
           stats: {
             dueToday: "À faire aujourd'hui",
             overdue: "En retard",
@@ -3898,6 +3931,11 @@ const resources = {
           }
         },
         properties: {
+          title: "Propriétés",
+          addProperty: "Ajouter une propriété",
+          active: "active",
+          pending: "en attente",
+          sold: "vendue",
           searchPlaceholder: "Rechercher par adresse, MLS#, ville…",
           priceOnRequest: "Prix sur demande",
           beds: {
@@ -4256,8 +4294,8 @@ const resources = {
         trialBadge: "Essai",
         daysLeft: "jours restants dans votre essai gratuit",
         upgradeNow: "Passez à un forfait payant pour un accès illimité et continuez à développer votre entreprise avec un CRM propulsé par l'IA.",
-        agentPlan: "Forfait Courtier",
-        teamPlan: "Forfait Équipe",
+        agentPlan: "Forfait courtier",
+        teamPlan: "Forfait équipe",
         subscriptionActive: "Votre abonnement est actif",
         nextBilling: "Prochaine date de facturation",
         opening: "Ouverture...",
@@ -4267,7 +4305,7 @@ const resources = {
         yearly: "Annuel",
         year: "an",
         month: "mois",
-        saveYearly: "Économisez jusqu'à 789$/an",
+        saveYearly: "Économisez jusqu'à 789 $/an",
         availablePlans: "Forfaits disponibles",
         choosePlan: "Choisissez votre forfait",
         current: "Actuel",
@@ -4370,7 +4408,7 @@ const resources = {
           },
           calendar: {
             title: "Connecter votre agenda Google ou Outlook",
-            desc: "Synchronisez vos rendez-vous dans /today."
+            desc: "Synchronisez vos rendez-vous dans votre tableau de bord."
           }
         }
       },
@@ -4490,7 +4528,7 @@ const resources = {
           },
           calendar: {
             title: "Connectez Google ou Outlook Calendar",
-            desc: "Synchronisez vos rendez-vous dans /today."
+            desc: "Synchronisez vos rendez-vous dans votre tableau de bord."
           }
         }
       },

@@ -11,8 +11,19 @@ import AppLayout from '@/components/layout/AppLayout';
 import { useSubscription, SUBSCRIPTION_PRODUCTS } from '@/contexts/SubscriptionContext';
 import { useTranslation } from 'react-i18next';
 
+// Locale-aware plan price formatter. Canadian English: "$149/mo".
+// Canadian French: "149 $/mois" — number, NBSP, $, no decimal when whole.
+function formatPlanPrice(amount: number, lang: string | undefined): string {
+  const locale = (lang || "en").toLowerCase().startsWith("fr") ? "fr-CA" : "en-CA";
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: "CAD",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
 const Billing = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [user, setUser] = useState<any>(null);
@@ -266,7 +277,10 @@ const Billing = () => {
                 </div>
                 <div className="mt-4">
                   <span className="text-3xl font-bold">
-                    ${isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearlyPrice : SUBSCRIPTION_PRODUCTS.agent.monthlyPrice}
+                    {formatPlanPrice(
+                      isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearlyPrice : SUBSCRIPTION_PRODUCTS.agent.monthlyPrice,
+                      i18n.language
+                    )}
                   </span>
                   <span className="text-sm text-muted-foreground">/{isYearly ? t('billing.year', 'year') : t('billing.month', 'month')}</span>
                 </div>
@@ -315,7 +329,10 @@ const Billing = () => {
                 </div>
                 <div className="mt-4">
                   <span className="text-3xl font-bold">
-                    ${isYearly ? SUBSCRIPTION_PRODUCTS.team.yearlyPrice : SUBSCRIPTION_PRODUCTS.team.monthlyPrice}
+                    {formatPlanPrice(
+                      isYearly ? SUBSCRIPTION_PRODUCTS.team.yearlyPrice : SUBSCRIPTION_PRODUCTS.team.monthlyPrice,
+                      i18n.language
+                    )}
                   </span>
                   <span className="text-sm text-muted-foreground">/{isYearly ? t('billing.year', 'year') : t('billing.month', 'month')}</span>
                 </div>

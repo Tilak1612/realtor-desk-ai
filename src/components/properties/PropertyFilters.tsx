@@ -143,7 +143,9 @@ const PropertyFilters = ({ filters, onFiltersChange }: PropertyFiltersProps) => 
         {/* Price Range */}
         <div className="space-y-3">
           <Label className="text-sm font-semibold">
-            {t("app.properties.filters.priceRange", "Price range")}: {fmtShort(filters.priceRange[0])} – {fmtShort(filters.priceRange[1])}
+            {t("app.properties.filters.priceRange", "Price range")}
+            {/* Canadian French typography: non-breaking space before colon. EN uses plain colon. */}
+            {isFr ? " :" : ":"} {fmtShort(filters.priceRange[0])} – {fmtShort(filters.priceRange[1])}
           </Label>
           <Slider
             min={0}
