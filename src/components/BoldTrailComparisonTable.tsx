@@ -73,7 +73,7 @@ const BoldTrailComparisonTable = () => {
               <tr className="text-left">
                 <th className="px-4 py-3 font-medium w-1/3">&nbsp;</th>
                 <th className="px-4 py-3 font-medium">BoldTrail</th>
-                <th className="px-4 py-3 font-medium">RealtorDesk AI</th>
+                <th className="px-4 py-3 font-medium">Realtor Desk</th>
               </tr>
             </thead>
             <tbody>

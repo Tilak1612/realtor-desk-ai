@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logo from "@/assets/realtor-desk-icon.png";
+import { RDMark } from "@/components/rd/Logo";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -11,8 +11,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div>
-            <Link to="/" className="flex items-center gap-2 mb-4 group">
-              <img src={logo} alt="Realtor Desk" className="h-9 w-9 object-contain" />
+            <Link to="/" className="flex items-center gap-2 mb-4 group" aria-label="Realtor Desk">
+              <RDMark size={36} />
               <span className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">
                 Realtor Desk
               </span>
