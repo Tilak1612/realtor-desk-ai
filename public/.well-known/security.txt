@@ -1,0 +1,6 @@
+Contact: mailto:support@realtordesk.ai
+Contact: https://www.realtordesk.ai/contact
+Expires: 2027-04-21T00:00:00.000Z
+Preferred-Languages: en, fr
+Canonical: https://www.realtordesk.ai/.well-known/security.txt
+Policy: https://www.realtordesk.ai/privacy-policy

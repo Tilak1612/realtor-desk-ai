@@ -217,6 +217,20 @@
     max-width: 100vw;
   }
 
+  /* iOS safe-area padding — pairs with viewport-fit=cover in index.html so
+     content isn't swallowed by the notch or home indicator. Any sticky
+     bottom CTA or nav that needs safe-area padding should add the
+     `has-safe-bottom` class. */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left:  max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+    .has-safe-bottom {
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    }
+  }
+
   ::selection {
     @apply bg-primary/20 text-primary;
   }
