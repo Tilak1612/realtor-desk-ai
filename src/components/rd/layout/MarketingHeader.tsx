@@ -21,10 +21,22 @@ interface MarketingHeaderProps {
   links?: { label: string; to: string }[];
   className?: string;
   /**
-   * Render the EN/FR pill. Defaults to false for marketing routes because
-   * the landing/pricing/compare pages are still EN-only — showing a toggle
-   * that flips labels nowhere is worse than not showing one at all. Flip
-   * to true once a /fr counterpart ships.
+   * Render the EN/FR pill.
+   *
+   * Defaults to true. Sweep 2 had this default to false because the
+   * marketing pages are still mostly EN-only; the thinking was that a
+   * toggle flipping nothing was worse than no toggle. Round 6 surfaced
+   * the flaw: users can set i18n=fr on /resources (which IS translated)
+   * and then navigate to /, /pricing, etc. where the pill was hidden —
+   * landing them stuck in a FR session with EN-only content and no
+   * visible way to undo. Showing the pill restores user agency even on
+   * EN-only routes. It reflects the persisted preference and lets them
+   * click back to EN, which is what a FR user on a currently-EN page
+   * actually needs.
+   *
+   * Full FR keying of landing + pricing (round-6 R-18 Path A) is a
+   * separate product decision on scope; this prop just guarantees the
+   * control is always reachable in the meantime.
    */
   showLanguageToggle?: boolean;
 }
@@ -41,7 +53,7 @@ export function MarketingHeader({
   tone = "paper",
   links = DEFAULT_LINKS,
   className,
-  showLanguageToggle = false,
+  showLanguageToggle = true,
 }: MarketingHeaderProps) {
   const dark = tone === "dark";
   const location = useLocation();
