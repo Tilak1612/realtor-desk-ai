@@ -1054,6 +1054,12 @@ const resources = {
           phone: "Phone",
           selectProvince: "Select province",
           selectCity: "Select city",
+          endsOn: "Ends on",
+          language: {
+            english: "English",
+            french: "French",
+            both: "Bilingual"
+          },
           account: "Account",
           notifications: {
             label: "Notifications",
@@ -1414,7 +1420,7 @@ const resources = {
           upcoming: "This week",
           overdue: "Overdue",
           empty: {
-            title: "No tasks yet",
+            title: "No tasks yet.",
             body: "Create your first task to get started."
           },
           stats: {
@@ -1466,6 +1472,10 @@ const resources = {
           active: "active",
           pending: "pending",
           sold: "sold",
+          view: {
+            grid: "Grid",
+            list: "List"
+          },
           searchPlaceholder: "Search by address, MLS#, city…",
           priceOnRequest: "Price on request",
           beds: {
@@ -3524,6 +3534,12 @@ const resources = {
           phone: "Téléphone",
           selectProvince: "Sélectionner une province",
           selectCity: "Sélectionner une ville",
+          endsOn: "Se termine le",
+          language: {
+            english: "Anglais",
+            french: "Français",
+            both: "Bilingue"
+          },
           account: "Compte",
           notifications: {
             label: "Notifications",
@@ -3884,7 +3900,7 @@ const resources = {
           upcoming: "Cette semaine",
           overdue: "En retard",
           empty: {
-            title: "Aucune tâche pour l'instant",
+            title: "Aucune tâche pour l'instant.",
             body: "Créez votre première tâche pour commencer."
           },
           stats: {
@@ -3936,6 +3952,10 @@ const resources = {
           active: "active",
           pending: "en attente",
           sold: "vendue",
+          view: {
+            grid: "Grille",
+            list: "Liste"
+          },
           searchPlaceholder: "Rechercher par adresse, MLS#, ville…",
           priceOnRequest: "Prix sur demande",
           beds: {
@@ -4312,16 +4332,16 @@ const resources = {
         mostPopular: "Le plus populaire",
         agentDesc: "Parfait pour les courtiers individuels",
         teamDesc: "Pour les équipes de 2 à 5 courtiers",
-        switchAgent: "Passer au forfait Courtier",
-        upgradeAgent: "Passer au forfait Courtier",
-        upgradeTeam: "Passer au forfait Équipe",
+        switchAgent: "Passer au forfait courtier",
+        upgradeAgent: "Passer au forfait courtier",
+        upgradeTeam: "Passer au forfait équipe",
         features: {
           unlimitedContacts: "Contacts et prospects illimités",
           aiCrm: "CRM prédictif propulsé par l'IA",
           chatbot: "Chatbot IA 24/7",
           emailSms: "Automatisation courriel et SMS",
           mobileApp: "Application mobile incluse",
-          everythingAgent: "Tout le forfait Courtier, plus :",
+          everythingAgent: "Tout le forfait courtier, plus :",
           teamCollab: "Outils de collaboration d'équipe",
           leadRouting: "Distribution et routage des prospects",
           advReporting: "Rapports avancés",

@@ -42,6 +42,14 @@ const PROVINCE_FR: Record<string, string> = {
   Yukon: "Yukon",
 };
 
+// Canadian cities with FR accents that differ from EN spelling. Cities
+// that spell identically across locales (Toronto, Ottawa, Calgary,
+// etc.) don't need entries — the lookup falls through to the EN string.
+const CITY_FR: Record<string, string> = {
+  Montreal: "Montréal",
+  "Quebec City": "Québec",
+};
+
 const MAJOR_CITIES = [
   "Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton", "Ottawa",
   "Winnipeg", "Quebec City", "Hamilton", "Kitchener", "London", "Victoria",
@@ -409,7 +417,9 @@ const Settings = () => {
                       </SelectTrigger>
                       <SelectContent>
                         {MAJOR_CITIES.map((city) => (
-                          <SelectItem key={city} value={city}>{city}</SelectItem>
+                          <SelectItem key={city} value={city}>
+                            {isFr ? CITY_FR[city] ?? city : city}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -425,15 +435,21 @@ const Settings = () => {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="english" id="lang-english" />
-                      <Label htmlFor="lang-english" className="cursor-pointer font-normal">English</Label>
+                      <Label htmlFor="lang-english" className="cursor-pointer font-normal">
+                        {t("app.settings.language.english", "English")}
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="french" id="lang-french" />
-                      <Label htmlFor="lang-french" className="cursor-pointer font-normal">French</Label>
+                      <Label htmlFor="lang-french" className="cursor-pointer font-normal">
+                        {t("app.settings.language.french", "French")}
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="both" id="lang-both" />
-                      <Label htmlFor="lang-both" className="cursor-pointer font-normal">Both (Bilingual)</Label>
+                      <Label htmlFor="lang-both" className="cursor-pointer font-normal">
+                        {t("app.settings.language.both", "Bilingual")}
+                      </Label>
                     </div>
                   </RadioGroup>
                 </div>
@@ -472,7 +488,8 @@ const Settings = () => {
                       </Badge>
                       {subscriptionEnd && (
                         <p className="text-xs text-muted-foreground">
-                          Ends on {new Date(subscriptionEnd).toLocaleDateString()}
+                          {t("app.settings.endsOn", "Ends on")}{" "}
+                          {new Date(subscriptionEnd).toLocaleDateString(isFr ? "fr-CA" : "en-CA")}
                         </p>
                       )}
                     </>
@@ -488,11 +505,12 @@ const Settings = () => {
                   ) : (
                     <>
                       <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs">
-                        {trialDaysLeft} days left in trial
+                        {trialDaysLeft} {t("app.sidebar.daysLeft", "days left in your trial")}
                       </Badge>
                       {trialEndsAt && (
                         <p className="text-xs text-muted-foreground">
-                          Ends on {new Date(trialEndsAt).toLocaleDateString()}
+                          {t("app.settings.endsOn", "Ends on")}{" "}
+                          {new Date(trialEndsAt).toLocaleDateString(isFr ? "fr-CA" : "en-CA")}
                         </p>
                       )}
                     </>
