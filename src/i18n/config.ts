@@ -1049,6 +1049,7 @@ const resources = {
         settings: {
           title: "Settings",
           profile: "Profile",
+          profileDesc: "Update your name, brokerage, and contact details",
           account: "Account",
           notifications: {
             label: "Notifications",
@@ -1400,6 +1401,85 @@ const resources = {
             notAuthenticated: "Not authenticated",
             pleaseLogin: "Please log in to import contacts"
           }
+        },
+        tasks: {
+          stats: {
+            dueToday: "Due today",
+            overdue: "Overdue",
+            completedToday: "Completed today",
+            thisWeek: "This week"
+          }
+        },
+        campaigns: {
+          title: "Email campaigns",
+          subtitle: "Manage and track your email marketing campaigns",
+          newCampaign: "New campaign",
+          recent: "Recent campaigns",
+          comingSoon: "Email campaigns are coming soon — we'll let you know the moment they're live.",
+          stats: {
+            total: "Total campaigns",
+            sent: "Emails sent",
+            openRate: "Avg. open rate",
+            clickRate: "Click rate",
+            startSending: "Start sending to see metrics",
+            requiresSent: "Requires sent campaigns"
+          },
+          empty: {
+            title: "No campaigns yet",
+            body: "Create your first email campaign to stay in touch with leads and clients.",
+            cta: "Create your first campaign"
+          }
+        },
+        automations: {
+          title: "Email automations",
+          subtitle: "Create automated email sequences to nurture leads and engage contacts",
+          create: "Create automation",
+          comingSoon: "Email automations are coming soon — the trigger engine is still in development. We'll notify you the moment it's live.",
+          stats: {
+            total: "Total automations",
+            active: "Active",
+            enrolled: "Contacts enrolled"
+          },
+          empty: {
+            title: "No automations yet",
+            body: "Create your first automation to start engaging contacts automatically",
+            cta: "Create your first automation"
+          }
+        },
+        properties: {
+          searchPlaceholder: "Search by address, MLS#, city…",
+          priceOnRequest: "Price on request",
+          beds: {
+            label: "Bedrooms",
+            any: "Any beds",
+            plus: "{{n}}+ beds"
+          },
+          filters: {
+            status: "Status",
+            propertyType: "Property type",
+            priceRange: "Price range"
+          },
+          status: {
+            active: "Active",
+            pending: "Pending",
+            sold: "Sold",
+            comingSoon: "Coming soon",
+            offMarket: "Off market"
+          },
+          types: {
+            house: "House",
+            condo: "Condo",
+            townhouse: "Townhouse",
+            land: "Land",
+            commercial: "Commercial"
+          },
+          empty: {
+            title: "No properties yet",
+            body: "Add your first property to start tracking listings, managing showings, and closing deals faster.",
+            importMls: "Import from MLS",
+            addManual: "Add property manually",
+            tip: "💡 Tip: You can also import properties from Realtor.ca search URLs"
+          }
         }
       },
       howItWorks: {
@@ -1722,6 +1802,7 @@ const resources = {
         subtitle: "Manage your subscription and billing details",
         activated: "Subscription activated successfully!",
         trialAccount: "Trial Account",
+        trialBadge: "Trial",
         daysLeft: "days left in your free trial",
         upgradeNow: "Upgrade now to unlock unlimited access and continue growing your business with AI-powered CRM.",
         agentPlan: "Agent Plan",
@@ -2878,7 +2959,7 @@ const resources = {
         loadFailed: "Échec du chargement du profil"
       },
       ai: {
-        title: "Assistant IA Immobilier",
+        title: "Assistant IA immobilier",
         subtitle: "Votre assistant CRM immobilier intelligent",
         clearChat: "Effacer la conversation",
         quickActions: "Actions rapides",
@@ -3419,6 +3500,7 @@ const resources = {
         settings: {
           title: "Paramètres",
           profile: "Profil",
+          profileDesc: "Mettez à jour votre nom, votre courtage et vos coordonnées",
           account: "Compte",
           notifications: {
             label: "Notifications",
@@ -3770,6 +3852,85 @@ const resources = {
             notAuthenticated: "Non authentifié",
             pleaseLogin: "Veuillez vous connecter pour importer des contacts"
           }
+        },
+        tasks: {
+          stats: {
+            dueToday: "À faire aujourd'hui",
+            overdue: "En retard",
+            completedToday: "Complétées aujourd'hui",
+            thisWeek: "Cette semaine"
+          }
+        },
+        campaigns: {
+          title: "Campagnes courriel",
+          subtitle: "Gérez et suivez vos campagnes de marketing par courriel",
+          newCampaign: "Nouvelle campagne",
+          recent: "Campagnes récentes",
+          comingSoon: "Les campagnes courriel arrivent bientôt — nous vous informerons dès qu'elles seront en ligne.",
+          stats: {
+            total: "Total de campagnes",
+            sent: "Courriels envoyés",
+            openRate: "Taux d'ouverture moyen",
+            clickRate: "Taux de clics",
+            startSending: "Lancez des envois pour voir les indicateurs",
+            requiresSent: "Nécessite des campagnes envoyées"
+          },
+          empty: {
+            title: "Aucune campagne pour l'instant",
+            body: "Créez votre première campagne courriel pour rester en contact avec vos prospects et clients.",
+            cta: "Créer votre première campagne"
+          }
+        },
+        automations: {
+          title: "Automatisations courriel",
+          subtitle: "Créez des séquences courriel automatisées pour entretenir vos prospects et engager vos contacts",
+          create: "Créer une automatisation",
+          comingSoon: "Les automatisations courriel arrivent bientôt — le moteur de déclenchement est en cours de développement. Nous vous informerons dès qu'il sera en ligne.",
+          stats: {
+            total: "Total d'automatisations",
+            active: "Actives",
+            enrolled: "Contacts inscrits"
+          },
+          empty: {
+            title: "Aucune automatisation pour l'instant",
+            body: "Créez votre première automatisation pour commencer à engager vos contacts automatiquement",
+            cta: "Créer votre première automatisation"
+          }
+        },
+        properties: {
+          searchPlaceholder: "Rechercher par adresse, MLS#, ville…",
+          priceOnRequest: "Prix sur demande",
+          beds: {
+            label: "Chambres",
+            any: "Tout nombre de chambres",
+            plus: "{{n}}+ chambres"
+          },
+          filters: {
+            status: "Statut",
+            propertyType: "Type de propriété",
+            priceRange: "Fourchette de prix"
+          },
+          status: {
+            active: "Active",
+            pending: "En attente",
+            sold: "Vendue",
+            comingSoon: "Bientôt sur le marché",
+            offMarket: "Hors marché"
+          },
+          types: {
+            house: "Maison",
+            condo: "Condo",
+            townhouse: "Maison de ville",
+            land: "Terrain",
+            commercial: "Commercial"
+          },
+          empty: {
+            title: "Aucune propriété pour l'instant",
+            body: "Ajoutez votre première propriété pour suivre vos inscriptions, gérer les visites et conclure plus vite.",
+            importMls: "Importer depuis MLS",
+            addManual: "Ajouter une propriété manuellement",
+            tip: "💡 Astuce : vous pouvez aussi importer des propriétés à partir des liens de recherche Realtor.ca"
+          }
         }
       },
       howItWorks: {
@@ -4092,6 +4253,7 @@ const resources = {
         subtitle: "Gérez votre abonnement et vos informations de facturation",
         activated: "Abonnement activé avec succès!",
         trialAccount: "Compte d'essai",
+        trialBadge: "Essai",
         daysLeft: "jours restants dans votre essai gratuit",
         upgradeNow: "Passez à un forfait payant pour un accès illimité et continuez à développer votre entreprise avec un CRM propulsé par l'IA.",
         agentPlan: "Forfait Courtier",
@@ -4207,7 +4369,7 @@ const resources = {
             desc: "Disponible au T3 2026 — voir la feuille de route."
           },
           calendar: {
-            title: "Connecter Google ou Outlook Calendar",
+            title: "Connecter votre agenda Google ou Outlook",
             desc: "Synchronisez vos rendez-vous dans /today."
           }
         }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { AlertCircle, CheckCircle2, Calendar, Clock } from "lucide-react";
@@ -10,6 +11,7 @@ interface TasksStatsProps {
 }
 
 const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) => {
+  const { t } = useTranslation();
   const [stats, setStats] = useState({
     dueToday: 0,
     overdue: 0,
@@ -80,7 +82,7 @@ const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) =
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Due Today</p>
+              <p className="text-sm text-muted-foreground">{t("app.tasks.stats.dueToday", "Due today")}</p>
               <p className="text-2xl font-bold">{stats.dueToday}</p>
             </div>
             <Calendar className="h-8 w-8 text-primary opacity-80" />
@@ -92,7 +94,7 @@ const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) =
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Overdue</p>
+              <p className="text-sm text-muted-foreground">{t("app.tasks.stats.overdue", "Overdue")}</p>
               <p className={`text-2xl font-bold ${stats.overdue > 0 ? "text-destructive" : ""}`}>
                 {stats.overdue}
               </p>
@@ -106,7 +108,7 @@ const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) =
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Completed Today</p>
+              <p className="text-sm text-muted-foreground">{t("app.tasks.stats.completedToday", "Completed today")}</p>
               <p className="text-2xl font-bold">{stats.completedToday}</p>
             </div>
             <CheckCircle2 className="h-8 w-8 text-primary opacity-80" />
@@ -118,7 +120,7 @@ const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) =
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">This Week</p>
+              <p className="text-sm text-muted-foreground">{t("app.tasks.stats.thisWeek", "This week")}</p>
               <p className="text-2xl font-bold">{stats.thisWeek}</p>
             </div>
             <Clock className="h-8 w-8 text-primary opacity-80" />
