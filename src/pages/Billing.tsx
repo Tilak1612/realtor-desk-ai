@@ -162,7 +162,7 @@ const Billing = () => {
                   </CardDescription>
                 </div>
                 <Badge variant="outline" className="text-primary border-primary text-xs">
-                  Trial
+                  {t("billing.trialBadge", "Trial")}
                 </Badge>
               </div>
             </CardHeader>

@@ -189,17 +189,29 @@ const Automations = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Email Automations</h1>
+            <h1 className="text-2xl font-bold text-foreground">
+              {t("app.automations.title", "Email automations")}
+            </h1>
             <p className="text-muted-foreground">
-              Create automated email sequences to nurture leads and engage contacts
+              {t(
+                "app.automations.subtitle",
+                "Create automated email sequences to nurture leads and engage contacts"
+              )}
             </p>
           </div>
           <Button
-            onClick={() => toast.info("Email automations are coming soon — the trigger engine is still in development. We'll notify you the moment it's live.")}
+            onClick={() =>
+              toast.info(
+                t(
+                  "app.automations.comingSoon",
+                  "Email automations are coming soon — the trigger engine is still in development. We'll notify you the moment it's live."
+                )
+              )
+            }
             className="gap-2"
           >
             <Plus className="w-4 h-4" />
-            Create Automation
+            {t("app.automations.create", "Create automation")}
           </Button>
         </div>
 
@@ -213,7 +225,7 @@ const Automations = () => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold">{stats.total}</p>
-                  <p className="text-sm text-muted-foreground">Total Automations</p>
+                  <p className="text-sm text-muted-foreground">{t("app.automations.stats.total", "Total automations")}</p>
                 </div>
               </div>
             </CardContent>
@@ -226,7 +238,7 @@ const Automations = () => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold">{stats.active}</p>
-                  <p className="text-sm text-muted-foreground">Active</p>
+                  <p className="text-sm text-muted-foreground">{t("app.automations.stats.active", "Active")}</p>
                 </div>
               </div>
             </CardContent>
@@ -239,7 +251,7 @@ const Automations = () => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold">{stats.totalEnrollments}</p>
-                  <p className="text-sm text-muted-foreground">Contacts Enrolled</p>
+                  <p className="text-sm text-muted-foreground">{t("app.automations.stats.enrolled", "Contacts enrolled")}</p>
                 </div>
               </div>
             </CardContent>
@@ -255,14 +267,17 @@ const Automations = () => {
                   <Mail className="w-8 h-8 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold">No automations yet</h3>
+                  <h3 className="text-lg font-semibold">{t("app.automations.empty.title", "No automations yet")}</h3>
                   <p className="text-muted-foreground">
-                    Create your first automation to start engaging contacts automatically
+                    {t(
+                      "app.automations.empty.body",
+                      "Create your first automation to start engaging contacts automatically"
+                    )}
                   </p>
                 </div>
                 <Button onClick={() => setIsCreateModalOpen(true)} className="gap-2">
                   <Plus className="w-4 h-4" />
-                  Create Your First Automation
+                  {t("app.automations.empty.cta", "Create your first automation")}
                 </Button>
               </div>
             </CardContent>

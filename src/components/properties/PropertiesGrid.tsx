@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,12 +18,16 @@ interface PropertiesGridProps {
 }
 
 const PropertiesGrid = ({ properties, loading, onRefresh }: PropertiesGridProps) => {
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
 
   const formatPrice = (price: number | null) => {
-    if (!price) return "Price on Request";
-    return new Intl.NumberFormat("en-CA", {
+    if (!price) return t("app.properties.priceOnRequest", "Price on request");
+    // Canadian French: space thousands separator, $ after, comma decimal.
+    // Canadian English: $ before, comma thousands.
+    const locale = i18n.language.startsWith("fr") ? "fr-CA" : "en-CA";
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: "CAD",
       maximumFractionDigits: 0,
@@ -71,22 +76,28 @@ const PropertiesGrid = ({ properties, loading, onRefresh }: PropertiesGridProps)
           <div className="p-4 bg-primary/10 rounded-full w-fit mx-auto mb-4">
             <Home className="h-10 w-10 text-primary" />
           </div>
-          <h3 className="text-xl font-semibold mb-2">No properties yet</h3>
+          <h3 className="text-xl font-semibold mb-2">{t("app.properties.empty.title", "No properties yet")}</h3>
           <p className="text-muted-foreground mb-6">
-            Add your first property to start tracking listings, managing showings, and closing deals faster.
+            {t(
+              "app.properties.empty.body",
+              "Add your first property to start tracking listings, managing showings, and closing deals faster."
+            )}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button onClick={onRefresh} variant="outline" size="sm">
               <MapPin className="h-4 w-4 mr-2" />
-              Import from MLS
+              {t("app.properties.empty.importMls", "Import from MLS")}
             </Button>
             <Button size="sm" onClick={() => window.dispatchEvent(new CustomEvent('open-add-property-modal'))}>
               <Plus className="h-4 w-4 mr-2" />
-              Add Property Manually
+              {t("app.properties.empty.addManual", "Add property manually")}
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-4">
-            💡 Tip: You can also import properties from Realtor.ca search URLs
+            {t(
+              "app.properties.empty.tip",
+              "💡 Tip: You can also import properties from Realtor.ca search URLs"
+            )}
           </p>
         </div>
       </Card>
