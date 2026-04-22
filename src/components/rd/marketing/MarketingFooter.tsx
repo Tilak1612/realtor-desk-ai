@@ -19,7 +19,7 @@ interface MarketingFooterProps {
 export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
   return (
     <footer
-      className={`bg-white px-8 md:px-14 py-14 ${topBorder ? "border-t border-rd-line" : ""}`}
+      className={`bg-white px-4 sm:px-8 md:px-14 py-14 ${topBorder ? "border-t border-rd-line" : ""}`}
     >
       <div className="mx-auto max-w-[1200px] grid grid-cols-2 md:grid-cols-5 gap-10 text-rd-ink-700">
         <div className="col-span-2 md:col-span-1.5" style={{ gridColumn: "span 2 / span 2" }}>
