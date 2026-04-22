@@ -156,7 +156,7 @@ const Signup = () => {
   return (
     <AuthLayout>
       <AuthCard
-        title="Realtor Desk AI"
+        title="Realtor Desk"
         subtitle={t('auth.signup.subtitle', 'Start your 14-day free trial')}
       >
         <div className="space-y-6">

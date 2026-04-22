@@ -100,7 +100,7 @@ const Login = () => {
   return (
     <AuthLayout>
       <AuthCard
-        title="Realtor Desk AI"
+        title="Realtor Desk"
         subtitle={t('auth.login.subtitle', 'Sign in to your workspace')}
       >
         <div className="space-y-6">

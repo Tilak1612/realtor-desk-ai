@@ -68,9 +68,7 @@ export function Sidebar({
     <aside className="h-full w-[240px] flex-shrink-0 bg-rd-navy-800 text-white px-3.5 py-5 flex flex-col gap-1">
       {/* Brand + collapse chevron */}
       <div className="flex items-center justify-between px-2.5 pb-4">
-        {/* In-app chrome keeps the AI suffix; marketing surfaces use the
-            plain "Realtor Desk" wordmark per the 2026-04 revision. */}
-        <RDWordmark size={16} tone="paper" showAI />
+        <RDWordmark size={16} tone="paper" />
         <button
           type="button"
           aria-label={t("rd.sidebar.collapse", "Collapse sidebar")}
