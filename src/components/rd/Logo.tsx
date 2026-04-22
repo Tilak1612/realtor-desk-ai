@@ -44,24 +44,17 @@ export function RDMark({ size = 28, tone = "navy", className, style }: RDMarkPro
 interface RDWordmarkProps {
   size?: number;
   tone?: Tone;
-  showAI?: boolean;
   className?: string;
   style?: CSSProperties;
 }
 
-export function RDWordmark({
-  size = 20,
-  tone = "navy",
-  // Default to "Realtor Desk" (two words, no AI suffix) per the 2026-04
-  // wordmark revision. Passing showAI={true} explicitly restores the
-  // product lockup — retained so in-app chrome that wants the full
-  // AI-suffix treatment can opt in.
-  showAI = false,
-  className,
-  style,
-}: RDWordmarkProps) {
+// Unified brand wordmark — always "Realtor Desk" (no AI suffix).
+// Per the 2026-04 brand decision, the logo lockup is one brand everywhere:
+// marketing, auth, and in-app dashboard all read the same. Product-feature
+// copy ("Desk AI · Live", "24/7 AI chatbot") is separate — don't conflate
+// product-feature language with the logo wordmark.
+export function RDWordmark({ size = 20, tone = "navy", className, style }: RDWordmarkProps) {
   const fill = tone === "paper" ? "#FFFFFF" : "var(--rd-navy-800)";
-  const accent = tone === "paper" ? "var(--rd-terra-400)" : "var(--rd-terra-600)";
   return (
     <span
       className={className}
@@ -79,10 +72,7 @@ export function RDWordmark({
       }}
     >
       <RDMark size={size * 1.35} tone={tone} />
-      <span style={{ display: "inline-flex", gap: "0.32em", alignItems: "baseline" }}>
-        <span>Realtor Desk</span>
-        {showAI && <span style={{ color: accent, fontWeight: 600 }}>AI</span>}
-      </span>
+      <span>Realtor Desk</span>
     </span>
   );
 }

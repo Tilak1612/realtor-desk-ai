@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { ShieldCheck, Lock, Users, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { RDMark } from '@/components/rd/Logo';
 
 interface AuthCardProps {
   children: ReactNode;
@@ -22,29 +23,17 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
         </Link>
       </div>
 
-      {/* Logo Section */}
+      {/* Logo Section — unified brand lockup per 2026-04 revision. The
+          previous purple-gradient lightning-bolt tile was generic;
+          replaced with the real RDMark (navy house-R + terra accent)
+          so auth surfaces read as the same brand as marketing. */}
       <div className="text-center mb-8">
-        <Link to="/" className="inline-block">
-          <div
-            className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl mb-4 shadow-xl relative overflow-hidden cursor-pointer hover:scale-105 transition-transform"
-            style={{
-              boxShadow: '0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.2)',
-              animation: 'float 6s ease-in-out infinite'
-            }}
-          >
-          {logoIcon || (
-            <svg 
-              className="w-8 h-8 text-white relative z-10" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
-            >
-              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
-            </svg>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-20" />
-          </div>
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center mb-4 cursor-pointer hover:scale-105 transition-transform"
+          aria-label="Realtor Desk"
+        >
+          {logoIcon || <RDMark size={56} tone="paper" />}
         </Link>
         <h1 className="text-2xl font-bold text-white tracking-tight mb-1">{title}</h1>
         <p className="text-sm text-gray-300">{subtitle}</p>
