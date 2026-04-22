@@ -436,7 +436,7 @@ const Resources = () => {
             <div className="mb-16">
               <div className="mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                  All Articles
+                  {t("resourcesPage.allArticlesHeading", "All articles")}
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
               </div>
