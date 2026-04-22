@@ -1747,7 +1747,7 @@ const resources = {
         privacy: "Privacy Policy",
         terms: "Terms of Service",
         casl: "CASL Compliance",
-        copyright: "© 2026 RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB",
+        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Edmonton, AB",
         madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors",
         poweredBy: "Powered by Brainfy AI Inc",
         cookieSettings: "Cookie Settings",
@@ -4244,7 +4244,7 @@ const resources = {
         privacy: "Politique de confidentialité",
         terms: "Conditions d'utilisation",
         casl: "Conformité LCAP",
-        copyright: "© 2026 RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB",
+        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Edmonton, AB",
         madeInCanada: "Fabriqué au Canada 🇨🇦 pour les agents immobiliers canadiens",
         poweredBy: "Propulsé par Brainfy AI Inc",
         cookieSettings: "Paramètres des cookies",
@@ -5013,6 +5013,17 @@ i18n
     },
     react: {
       useSuspense: false
+    },
+    detection: {
+      // Order matters — querystring first so `/?lang=fr` wins over any
+      // stale localStorage or browser-locale choice on first paint. This
+      // is what fixes the R-18a `?lang=fr` first-paint regression: before
+      // this config, the URL param was only read by a React useEffect
+      // that fired after Hero's first render, so Hero latched EN.
+      order: ['querystring', 'localStorage', 'navigator', 'htmlTag'],
+      // Honor the public spec — ?lang= not the library default ?lng=.
+      lookupQuerystring: 'lang',
+      caches: ['localStorage'],
     }
   });
 

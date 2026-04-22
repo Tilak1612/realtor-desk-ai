@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { RDWordmark } from "../Logo";
@@ -47,24 +47,15 @@ export function MarketingHeader({
   const dark = tone === "dark";
   const location = useLocation();
   const { i18n } = useTranslation();
-  const [searchParams] = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // `?lang=fr` / `?lang=en` in the URL is honored by LanguageDetector
+  // at init-time (see src/i18n/config.ts `detection.lookupQuerystring`),
+  // so first-paint matches the URL without any React-side dance.
   const activeLang = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
   const setLang = (next: "en" | "fr") => {
     if (next !== activeLang) void i18n.changeLanguage(next);
   };
-
-  // Honor `?lang=fr` / `?lang=en` on marketing routes so language-specific
-  // pages are shareable + indexable by Google. First-visit browser-locale
-  // detection is already handled by i18next-browser-languagedetector;
-  // localStorage persistence ditto. This hook is just the URL-param bridge.
-  useEffect(() => {
-    const qs = searchParams.get("lang");
-    if (qs === "fr" && activeLang !== "fr") void i18n.changeLanguage("fr");
-    else if (qs === "en" && activeLang !== "en") void i18n.changeLanguage("en");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
 
   return (
     <nav
@@ -182,11 +173,16 @@ export function MarketingHeader({
         </button>
       </div>
 
-      {/* Mobile drawer — absolute-positioned so it doesn't reflow the bar. */}
+      {/* Mobile drawer — absolute-positioned so it doesn't reflow the bar.
+          Explicit backdrop-filter:none + z-50 + shadow because the parent
+          nav has backdrop-blur-md and a semi-transparent bg; without the
+          override the drawer inherited both and rendered translucent over
+          the hero (round-12 review bug #4). */}
       {mobileOpen && (
         <div
+          style={{ backdropFilter: "none", WebkitBackdropFilter: "none" }}
           className={cn(
-            "md:hidden absolute top-full inset-x-0 flex flex-col gap-1 px-6 py-4 border-b z-40",
+            "md:hidden absolute top-full inset-x-0 flex flex-col gap-1 px-6 py-4 border-b z-50 shadow-rd-lg",
             dark
               ? "bg-rd-navy-800 border-white/10 text-white"
               : "bg-white border-rd-line text-rd-ink-900"
