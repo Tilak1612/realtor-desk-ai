@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TaskItem from "./TaskItem";
@@ -40,6 +41,7 @@ interface TasksListProps {
 }
 
 const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTaskSelection, onTaskUpdated }: TasksListProps) => {
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -187,7 +189,8 @@ const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTask
       {tasks.length === 0 && (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            No tasks found. Create your first task to get started!
+            {t("app.tasks.empty.title", "No tasks yet")}{" "}
+            {t("app.tasks.empty.body", "Create your first task to get started.")}
           </CardContent>
         </Card>
       )}

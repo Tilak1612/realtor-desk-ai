@@ -17,11 +17,30 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 import { Badge } from "@/components/ui/badge";
 import AppLayout from "@/components/layout/AppLayout";
 
+// Canonical DB value is the English name (so existing records don't
+// need a migration); the FR label is a locale-scoped lookup. Official
+// federally-recognized French names per the TBS Canadian Style Guide.
 const CANADIAN_PROVINCES = [
   "Alberta", "British Columbia", "Manitoba", "New Brunswick",
   "Newfoundland and Labrador", "Northwest Territories", "Nova Scotia",
   "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"
 ];
+
+const PROVINCE_FR: Record<string, string> = {
+  Alberta: "Alberta",
+  "British Columbia": "Colombie-Britannique",
+  Manitoba: "Manitoba",
+  "New Brunswick": "Nouveau-Brunswick",
+  "Newfoundland and Labrador": "Terre-Neuve-et-Labrador",
+  "Northwest Territories": "Territoires du Nord-Ouest",
+  "Nova Scotia": "Nouvelle-Écosse",
+  Nunavut: "Nunavut",
+  Ontario: "Ontario",
+  "Prince Edward Island": "Île-du-Prince-Édouard",
+  Quebec: "Québec",
+  Saskatchewan: "Saskatchewan",
+  Yukon: "Yukon",
+};
 
 const MAJOR_CITIES = [
   "Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton", "Ottawa",
@@ -63,7 +82,8 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const Settings = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -370,7 +390,9 @@ const Settings = () => {
                       </SelectTrigger>
                       <SelectContent>
                         {CANADIAN_PROVINCES.map((prov) => (
-                          <SelectItem key={prov} value={prov}>{prov}</SelectItem>
+                          <SelectItem key={prov} value={prov}>
+                            {isFr ? PROVINCE_FR[prov] ?? prov : prov}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
