@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
 import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
@@ -43,46 +44,48 @@ export default function Home() {
  * HERO
  * ────────────────────────────────────────────────────────── */
 function HeroSection() {
+  const { t } = useTranslation();
   return (
     <section className="px-4 sm:px-8 md:px-14 pt-[100px] pb-10 relative overflow-hidden">
       <div className="mx-auto max-w-[1200px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-16 items-center">
         <div>
           <RDBadge tone="terra" size="sm" className="mb-6 flex-wrap max-w-full">
             <IconSparkle />
-            Now in public beta · 14-day free trial
+            {t("landing.hero.badge")}
           </RDBadge>
           <h1 className="text-[34px] sm:text-[48px] md:text-[56px] lg:text-[76px] font-semibold tracking-[-0.025em] leading-[1.02] text-rd-ink-900 break-words">
-            Close more deals.{" "}
-            <span className="font-rd-serif italic font-normal text-rd-navy-800">Calmly.</span>
+            {t("landing.hero.headline1")}{" "}
+            <span className="font-rd-serif italic font-normal text-rd-navy-800">
+              {t("landing.hero.headline2")}
+            </span>
           </h1>
           <p className="text-lg lg:text-[20px] leading-[1.55] text-rd-ink-600 mt-6 max-w-[520px]">
-            RealtorDesk AI answers every lead the instant they land — in French or English,
-            on-brand, PIPEDA-aware. You show up to a shortlist, not a fire drill.
+            {t("landing.hero.subtitle")}
           </p>
           <div className="flex flex-wrap gap-3 mt-9">
             <Link to="/signup">
               <RDButton variant="primary" size="lg" trailingIcon={<IconArrow />}>
-                Start 14-day free trial
+                {t("landing.hero.ctaPrimary")}
               </RDButton>
             </Link>
             <Link to="/demo">
               <RDButton variant="outline" size="lg">
-                Book a 15-min demo
+                {t("landing.hero.ctaSecondary")}
               </RDButton>
             </Link>
           </div>
           <div className="flex flex-wrap items-center gap-4 md:gap-[18px] mt-8 text-[13px] text-rd-ink-500">
             <span className="inline-flex items-center gap-1.5">
               <IconCheck className="text-rd-success" />
-              No credit card
+              {t("landing.hero.trustNoCard")}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <IconCheck className="text-rd-success" />
-              5-min setup
+              {t("landing.hero.trustSetup")}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <IconCheck className="text-rd-success" />
-              CREA DDF ready
+              {t("landing.hero.trustDdf")}
             </span>
           </div>
         </div>
@@ -447,7 +450,7 @@ function CompareStrip() {
           </div>
           <div className="text-center text-rd-navy-800 text-sm normal-case tracking-normal font-bold flex items-center gap-2 justify-center">
             <RDMark size={18} />
-            RealtorDesk AI
+            Realtor Desk
           </div>
         </div>
         {rows.map((r, i) => (

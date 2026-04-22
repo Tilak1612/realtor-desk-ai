@@ -52,7 +52,11 @@ interface RDWordmarkProps {
 export function RDWordmark({
   size = 20,
   tone = "navy",
-  showAI = true,
+  // Default to "Realtor Desk" (two words, no AI suffix) per the 2026-04
+  // wordmark revision. Passing showAI={true} explicitly restores the
+  // product lockup — retained so in-app chrome that wants the full
+  // AI-suffix treatment can opt in.
+  showAI = false,
   className,
   style,
 }: RDWordmarkProps) {
@@ -76,7 +80,7 @@ export function RDWordmark({
     >
       <RDMark size={size * 1.35} tone={tone} />
       <span style={{ display: "inline-flex", gap: "0.32em", alignItems: "baseline" }}>
-        <span>RealtorDesk</span>
+        <span>Realtor Desk</span>
         {showAI && <span style={{ color: accent, fontWeight: 600 }}>AI</span>}
       </span>
     </span>

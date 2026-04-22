@@ -40,9 +40,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 lg:h-20 gap-2 sm:gap-4">
           {/* Logo - Mobile Optimized */}
           <Link to="/" className="flex items-center gap-2 group shrink-0">
-            <img src={logo} alt="RealtorDesk AI" className="h-9 w-9 object-contain" />
+            <img src={logo} alt="Realtor Desk" className="h-9 w-9 object-contain" />
             <span className="text-xl font-bold text-foreground group-hover:text-accent transition-colors whitespace-nowrap">
-              RealtorDesk AI
+              Realtor Desk
             </span>
           </Link>
 

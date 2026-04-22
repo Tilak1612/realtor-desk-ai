@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { RDWordmark } from "../Logo";
@@ -21,19 +21,11 @@ interface MarketingHeaderProps {
   links?: { label: string; to: string }[];
   className?: string;
   /**
-   * Render the EN/FR pill.
-   *
-   * Defaults to false. Round-7 audit clarified that MarketingHeader is
-   * only mounted on /, /pricing, /features, /compare/* — the un-keyed
-   * marketing pages. The keyed pages (/resources, /how-it-works) use
-   * the legacy Navbar component with its own working picker. So hiding
-   * the pill here IS the round-7 R-18c recommendation: don't promise
-   * FR where the page can't deliver. The user-trap from sweep 7
-   * (coming in with i18n=fr from /resources) is handled by the fact
-   * that /resources + /how-it-works both expose their own picker, so
-   * the user can always get back to EN by going through a keyed page.
-   * Once R-18a/b ships (full FR keying of landing/pricing), flip this
-   * to true.
+   * Render the EN/FR pill. Defaults to true now that landing-surface
+   * keying (R-18a) is underway — the toggle flips i18n.language, which
+   * swaps copy on any surface that reads through `t()`. Surfaces that
+   * aren't yet keyed fall through to their EN literal and get keyed in
+   * follow-up PRs.
    */
   showLanguageToggle?: boolean;
 }
@@ -50,17 +42,29 @@ export function MarketingHeader({
   tone = "paper",
   links = DEFAULT_LINKS,
   className,
-  showLanguageToggle = false,
+  showLanguageToggle = true,
 }: MarketingHeaderProps) {
   const dark = tone === "dark";
   const location = useLocation();
   const { i18n } = useTranslation();
+  const [searchParams] = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const activeLang = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
   const setLang = (next: "en" | "fr") => {
     if (next !== activeLang) void i18n.changeLanguage(next);
   };
+
+  // Honor `?lang=fr` / `?lang=en` on marketing routes so language-specific
+  // pages are shareable + indexable by Google. First-visit browser-locale
+  // detection is already handled by i18next-browser-languagedetector;
+  // localStorage persistence ditto. This hook is just the URL-param bridge.
+  useEffect(() => {
+    const qs = searchParams.get("lang");
+    if (qs === "fr" && activeLang !== "fr") void i18n.changeLanguage("fr");
+    else if (qs === "en" && activeLang !== "en") void i18n.changeLanguage("en");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   return (
     <nav
