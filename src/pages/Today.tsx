@@ -268,7 +268,10 @@ const Today = () => {
             {new Date().getHours() < 12 ? t('today.goodMorning', 'Good morning') : new Date().getHours() < 18 ? t('today.goodAfternoon', 'Good afternoon') : t('today.goodEvening', 'Good evening')}, {profile?.full_name?.split(' ')[0] || t('today.there', 'there')}
           </h1>
           <p className="text-muted-foreground">
-            {format(new Date(), "EEEE, MMMM d, yyyy", { locale: i18n.language === 'fr' ? fr : undefined })}
+            {/* PPPP gives date-fns's locale-aware long date: EN → "Tuesday,
+                April 21st, 2026", FR → "mardi 21 avril 2026" (no commas,
+                day-month order — the Canadian-French convention). */}
+            {format(new Date(), "PPPP", { locale: i18n.language === 'fr' ? fr : undefined })}
           </p>
         </div>
 

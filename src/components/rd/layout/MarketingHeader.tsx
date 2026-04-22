@@ -23,20 +23,17 @@ interface MarketingHeaderProps {
   /**
    * Render the EN/FR pill.
    *
-   * Defaults to true. Sweep 2 had this default to false because the
-   * marketing pages are still mostly EN-only; the thinking was that a
-   * toggle flipping nothing was worse than no toggle. Round 6 surfaced
-   * the flaw: users can set i18n=fr on /resources (which IS translated)
-   * and then navigate to /, /pricing, etc. where the pill was hidden —
-   * landing them stuck in a FR session with EN-only content and no
-   * visible way to undo. Showing the pill restores user agency even on
-   * EN-only routes. It reflects the persisted preference and lets them
-   * click back to EN, which is what a FR user on a currently-EN page
-   * actually needs.
-   *
-   * Full FR keying of landing + pricing (round-6 R-18 Path A) is a
-   * separate product decision on scope; this prop just guarantees the
-   * control is always reachable in the meantime.
+   * Defaults to false. Round-7 audit clarified that MarketingHeader is
+   * only mounted on /, /pricing, /features, /compare/* — the un-keyed
+   * marketing pages. The keyed pages (/resources, /how-it-works) use
+   * the legacy Navbar component with its own working picker. So hiding
+   * the pill here IS the round-7 R-18c recommendation: don't promise
+   * FR where the page can't deliver. The user-trap from sweep 7
+   * (coming in with i18n=fr from /resources) is handled by the fact
+   * that /resources + /how-it-works both expose their own picker, so
+   * the user can always get back to EN by going through a keyed page.
+   * Once R-18a/b ships (full FR keying of landing/pricing), flip this
+   * to true.
    */
   showLanguageToggle?: boolean;
 }
@@ -53,7 +50,7 @@ export function MarketingHeader({
   tone = "paper",
   links = DEFAULT_LINKS,
   className,
-  showLanguageToggle = true,
+  showLanguageToggle = false,
 }: MarketingHeaderProps) {
   const dark = tone === "dark";
   const location = useLocation();

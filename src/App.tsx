@@ -305,6 +305,10 @@ const App = () => (
           {/* Auth Pages */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          {/* Common URL aliases — bookmarks and external links land here */}
+          <Route path="/sign-in" element={<Navigate to="/login" replace />} />
+          <Route path="/signin" element={<Navigate to="/login" replace />} />
+          <Route path="/sign-up" element={<Navigate to="/signup" replace />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

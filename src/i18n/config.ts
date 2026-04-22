@@ -870,11 +870,12 @@ const resources = {
           calendar: "Calendar",
           reports: "Reports",
           market: "Market Intelligence",
+          integrations: "Integrations",
           billing: "Billing",
           settings: "Settings",
-          trialActive: "Trial Active",
+          trialActive: "Trial active",
           daysLeft: "days left in your trial",
-          upgradeNow: "Upgrade Now"
+          upgradeNow: "Upgrade"
         },
         navbar: {
           search: "Search contacts, deals, tasks...",
@@ -1623,6 +1624,12 @@ const resources = {
         cookieSettings: "Cookie Settings",
         resourcesHeading: "Resources"
       },
+      notFound: {
+        heading: "Oops! Page not found",
+        body: "The page you're looking for doesn't exist or has been moved.",
+        goDashboard: "Go to dashboard",
+        goHome: "Return to home"
+      },
       trial: {
         daysRemaining: "{{count}} days remaining in your free trial",
         oneDay: "1 day remaining in your free trial",
@@ -1650,10 +1657,10 @@ const resources = {
           prioritySupport: "Priority support"
         },
         status: {
-          title: "Subscription Status",
-          trialActive: "Trial Active",
-          trialExpired: "Trial Expired",
-          subscribed: "Active Subscription",
+          title: "Subscription status",
+          trialActive: "Trial active",
+          trialExpired: "Trial expired",
+          subscribed: "Active subscription",
           daysLeft: "{{count}} days left in trial",
           endsOn: "Ends on {{date}}",
           tier: "Current plan: {{tier}}"
@@ -2479,8 +2486,8 @@ const resources = {
         tabs: {
           crm: "CRM Prédictif",
           chatbot: "Chatbot IA",
-          market: "Intelligence de Marché",
-          transaction: "Gestion des Transactions",
+          market: "Intelligence de marché",
+          transaction: "Gestion des transactions",
           marketing: "Automation Marketing"
         },
         tab1: "CRM Prédictif",
@@ -3223,7 +3230,7 @@ const resources = {
           today: "Aujourd'hui",
           automations: "Automatisations",
           advanced: "Avancé",
-          dashboard: "Tableau de Bord",
+          dashboard: "Tableau de bord",
           contacts: "Contacts",
           properties: "Propriétés",
           deals: "Transactions",
@@ -3232,18 +3239,19 @@ const resources = {
           campaigns: "Campagnes",
           calendar: "Calendrier",
           reports: "Rapports",
-          market: "Intelligence de Marché",
+          market: "Intelligence de marché",
+          integrations: "Intégrations",
           billing: "Facturation",
           settings: "Paramètres",
-          trialActive: "Essai Actif",
+          trialActive: "Essai actif",
           daysLeft: "jours restants dans votre essai",
-          upgradeNow: "Mettre à Niveau"
+          upgradeNow: "Mettre à niveau"
         },
         navbar: {
           search: "Rechercher contacts, transactions, tâches...",
           notifications: "Notifications",
           profile: "Profil",
-          signOut: "Se Déconnecter",
+          signOut: "Se déconnecter",
           help: "Aide"
         },
         dashboard: {
@@ -3766,8 +3774,8 @@ const resources = {
       },
       howItWorks: {
         hero: {
-          title: "Soyez Opérationnel en",
-          titleGradient: "20 Minutes",
+          title: "Soyez opérationnel en",
+          titleGradient: "20 minutes",
           subtitle: "De l'inscription à la capture de prospects en moins de temps qu'il n'en faut pour se rendre à une visite. Aucune compétence technique requise."
         },
         steps: {
@@ -3986,6 +3994,12 @@ const resources = {
         cookieSettings: "Paramètres des cookies",
         resourcesHeading: "Ressources"
       },
+      notFound: {
+        heading: "Oups ! Page introuvable",
+        body: "La page que vous recherchez n'existe pas ou a été déplacée.",
+        goDashboard: "Aller au tableau de bord",
+        goHome: "Retour à l'accueil"
+      },
       trial: {
         daysRemaining: "{{count}} jours restants dans votre essai gratuit",
         oneDay: "1 jour restant dans votre essai gratuit",
@@ -4013,10 +4027,10 @@ const resources = {
           prioritySupport: "Support prioritaire"
         },
         status: {
-          title: "Statut de l'Abonnement",
-          trialActive: "Essai Actif",
-          trialExpired: "Essai Expiré",
-          subscribed: "Abonnement Actif",
+          title: "Statut de l'abonnement",
+          trialActive: "Essai actif",
+          trialExpired: "Essai expiré",
+          subscribed: "Abonnement actif",
           daysLeft: "{{count}} jours restants dans l'essai",
           endsOn: "Se termine le {{date}}",
           tier: "Plan actuel : {{tier}}"
