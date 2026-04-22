@@ -420,6 +420,25 @@ const resources = {
           subtitle: "Guides, tips, and insights for Canadian real estate professionals"
         }
       },
+      // Landing-page i18n scaffold (R-18a Path A, authorized 2026-04-21).
+      // EN values are canonical. FR values below are first-draft from the
+      // initial scaffold commit — product will deliver approved FR copy
+      // to drop in place. Every `landing.*` key used in a component MUST
+      // exist in both locales (enforced by the shape parity test at
+      // src/i18n/__tests__/shape.test.ts).
+      landing: {
+        hero: {
+          badge: "Now in public beta · 14-day free trial",
+          headline1: "Close more deals.",
+          headline2: "Calmly.",
+          subtitle: "Realtor Desk answers every lead the instant they land — in French or English, on-brand, PIPEDA-aware. You show up to a shortlist, not a fire drill.",
+          ctaPrimary: "Start 14-day free trial",
+          ctaSecondary: "Book a 15-min demo",
+          trustNoCard: "No credit card",
+          trustSetup: "5-min setup",
+          trustDdf: "CREA DDF ready"
+        }
+      },
       integrations: {
         hero: {
           title: "Connect Your Entire",
@@ -1728,7 +1747,7 @@ const resources = {
         privacy: "Privacy Policy",
         terms: "Terms of Service",
         casl: "CASL Compliance",
-        copyright: "© 2026 RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB",
+        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Edmonton, AB",
         madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors",
         poweredBy: "Powered by Brainfy AI Inc",
         cookieSettings: "Cookie Settings",
@@ -2899,6 +2918,22 @@ const resources = {
           title: "Centre",
           titleGradient: "d'Intelligence Immobilière",
           subtitle: "Guides, conseils et analyses pour les professionnels de l'immobilier canadiens"
+        }
+      },
+      // First-draft FR copy — product to replace with approved translations.
+      // Keep the exact same key shape as en.landing so the parity test
+      // stays green and drop-in replacement is trivial.
+      landing: {
+        hero: {
+          badge: "Maintenant en bêta publique · Essai gratuit de 14 jours",
+          headline1: "Concluez plus de transactions.",
+          headline2: "Sans stress.",
+          subtitle: "Realtor Desk répond à chaque client potentiel dès son arrivée — en français ou en anglais, dans votre voix, conforme à la LPRPDE. Vous arrivez à une liste courte, pas à un branle-bas de combat.",
+          ctaPrimary: "Essai gratuit de 14 jours",
+          ctaSecondary: "Réserver une démo de 15 min",
+          trustNoCard: "Sans carte de crédit",
+          trustSetup: "Installation en 5 min",
+          trustDdf: "Compatible DDF de l'ACI"
         }
       },
       integrations: {
@@ -4209,7 +4244,7 @@ const resources = {
         privacy: "Politique de confidentialité",
         terms: "Conditions d'utilisation",
         casl: "Conformité LCAP",
-        copyright: "© 2026 RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB",
+        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Edmonton, AB",
         madeInCanada: "Fabriqué au Canada 🇨🇦 pour les agents immobiliers canadiens",
         poweredBy: "Propulsé par Brainfy AI Inc",
         cookieSettings: "Paramètres des cookies",
@@ -4978,6 +5013,17 @@ i18n
     },
     react: {
       useSuspense: false
+    },
+    detection: {
+      // Order matters — querystring first so `/?lang=fr` wins over any
+      // stale localStorage or browser-locale choice on first paint. This
+      // is what fixes the R-18a `?lang=fr` first-paint regression: before
+      // this config, the URL param was only read by a React useEffect
+      // that fired after Hero's first render, so Hero latched EN.
+      order: ['querystring', 'localStorage', 'navigator', 'htmlTag'],
+      // Honor the public spec — ?lang= not the library default ?lng=.
+      lookupQuerystring: 'lang',
+      caches: ['localStorage'],
     }
   });
 

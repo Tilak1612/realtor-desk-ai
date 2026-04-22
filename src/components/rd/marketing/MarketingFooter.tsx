@@ -75,7 +75,7 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
       </div>
 
       <div className="mx-auto max-w-[1200px] mt-10 pt-6 border-t border-rd-line flex flex-col md:flex-row md:justify-between gap-3 text-[12px] text-rd-ink-500">
-        <div>© {new Date().getFullYear()} RealtorDesk AI · Brainfy AI Inc. · Edmonton, AB</div>
+        <div>© {new Date().getFullYear()} Realtor Desk · Brainfy AI Inc. · Edmonton, AB</div>
         <div className="flex gap-6">
           <Link to="/privacy-policy" className="hover:text-rd-ink-900">Privacy</Link>
           <Link to="/terms-of-service" className="hover:text-rd-ink-900">Terms</Link>

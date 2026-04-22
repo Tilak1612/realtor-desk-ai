@@ -21,19 +21,11 @@ interface MarketingHeaderProps {
   links?: { label: string; to: string }[];
   className?: string;
   /**
-   * Render the EN/FR pill.
-   *
-   * Defaults to false. Round-7 audit clarified that MarketingHeader is
-   * only mounted on /, /pricing, /features, /compare/* — the un-keyed
-   * marketing pages. The keyed pages (/resources, /how-it-works) use
-   * the legacy Navbar component with its own working picker. So hiding
-   * the pill here IS the round-7 R-18c recommendation: don't promise
-   * FR where the page can't deliver. The user-trap from sweep 7
-   * (coming in with i18n=fr from /resources) is handled by the fact
-   * that /resources + /how-it-works both expose their own picker, so
-   * the user can always get back to EN by going through a keyed page.
-   * Once R-18a/b ships (full FR keying of landing/pricing), flip this
-   * to true.
+   * Render the EN/FR pill. Defaults to true now that landing-surface
+   * keying (R-18a) is underway — the toggle flips i18n.language, which
+   * swaps copy on any surface that reads through `t()`. Surfaces that
+   * aren't yet keyed fall through to their EN literal and get keyed in
+   * follow-up PRs.
    */
   showLanguageToggle?: boolean;
 }
@@ -50,13 +42,16 @@ export function MarketingHeader({
   tone = "paper",
   links = DEFAULT_LINKS,
   className,
-  showLanguageToggle = false,
+  showLanguageToggle = true,
 }: MarketingHeaderProps) {
   const dark = tone === "dark";
   const location = useLocation();
   const { i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // `?lang=fr` / `?lang=en` in the URL is honored by LanguageDetector
+  // at init-time (see src/i18n/config.ts `detection.lookupQuerystring`),
+  // so first-paint matches the URL without any React-side dance.
   const activeLang = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
   const setLang = (next: "en" | "fr") => {
     if (next !== activeLang) void i18n.changeLanguage(next);
@@ -178,11 +173,16 @@ export function MarketingHeader({
         </button>
       </div>
 
-      {/* Mobile drawer — absolute-positioned so it doesn't reflow the bar. */}
+      {/* Mobile drawer — absolute-positioned so it doesn't reflow the bar.
+          Explicit backdrop-filter:none + z-50 + shadow because the parent
+          nav has backdrop-blur-md and a semi-transparent bg; without the
+          override the drawer inherited both and rendered translucent over
+          the hero (round-12 review bug #4). */}
       {mobileOpen && (
         <div
+          style={{ backdropFilter: "none", WebkitBackdropFilter: "none" }}
           className={cn(
-            "md:hidden absolute top-full inset-x-0 flex flex-col gap-1 px-6 py-4 border-b z-40",
+            "md:hidden absolute top-full inset-x-0 flex flex-col gap-1 px-6 py-4 border-b z-50 shadow-rd-lg",
             dark
               ? "bg-rd-navy-800 border-white/10 text-white"
               : "bg-white border-rd-line text-rd-ink-900"
