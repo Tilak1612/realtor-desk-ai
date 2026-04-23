@@ -103,6 +103,7 @@ const Login = () => {
       <SEO
         title={t("pageSeo.loginTitle")}
         description={t("pageSeo.loginDesc")}
+        noindex
       />
       <AuthCard
         title="Realtor Desk"

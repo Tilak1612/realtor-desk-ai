@@ -12,31 +12,40 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Best CRM for Real Estate Agents | AI-Powered Lead Generation | RealtorDesk AI</title>
-    <meta name="description" content="Best CRM for real estate agents with AI-powered lead generation software. 24/7 AI chatbot, virtual tour integration, email automation. CREA DDF® native. Start 14-day free trial." />
-    <meta name="keywords" content="best CRM for real estate agents, real estate lead generation software, AI tools for Realtors, real estate CRM Canada, real estate website builders, virtual tour platforms for real estate, real estate video marketing tools, Realtor commission calculator, top real estate agents, homes for sale, properties for sale, real estate agent software, commercial real estate CRM, BoldTrail alternative, Lofty alternative, kvCORE alternative, Follow Up Boss alternative, real estate automation, CREA DDF integration, bilingual real estate AI, PIPEDA compliant CRM" />
-    <meta name="author" content="Realtor Desk - Powered by Brainfy AI Inc" />
-    <link rel="canonical" href="https://www.realtordesk.ai/" />
+
+    <!-- Default title + description. Per-route values are emitted by the
+         <SEO /> component (React Helmet) at render time. Keep these
+         generic (no superlatives, no unverifiable "Best"/"top-rated"
+         claims — 2026-04-23 audit: Competition Act s.74.01 risk). -->
+    <title>Realtor Desk — The Canadian real estate CRM, powered by AI</title>
+    <meta name="description" content="Realtor Desk is an AI-powered CRM built for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware. CREA DDF® integration on the roadmap for Q3 2026." />
+    <meta name="author" content="Realtor Desk — Powered by Brainfy AI Inc" />
+
+    <!-- Canonical + hreflang are emitted per-page by <SEO />. The static
+         index.html canonical (removed in this audit round) pointed every
+         route at the homepage, which told crawlers to treat /pricing,
+         /features, etc. as duplicates. Not replacing with a static value;
+         Helmet's runtime canonical is correct for JS-rendering crawlers,
+         and a missing canonical is better than a wrong one for the rest. -->
+
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-    <!-- hreflang: self-referencing + x-default for now. When a dedicated
-         /fr/* route ships, point fr-CA at that path instead of the ?lang=fr
-         query-string form so Google can index the FR page independently. -->
-    <link rel="alternate" hreflang="en-CA" href="https://www.realtordesk.ai/" />
-    <link rel="alternate" hreflang="fr-CA" href="https://www.realtordesk.ai/?lang=fr" />
-    <link rel="alternate" hreflang="x-default" href="https://www.realtordesk.ai/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Best CRM for Real Estate Agents | AI-Powered Lead Generation | RealtorDesk AI" />
-    <meta property="og:description" content="Top-rated AI CRM for Realtors. 24/7 chatbot, predictive lead scoring, virtual tour integration, email automation. Save 85% vs BoldTrail. 14-day free trial." />
+    <!-- Default Open Graph. Per-route OG title/description come from
+         <SEO /> at render time. Keep the static defaults honest (no
+         "Save 85% vs BoldTrail" savings claim — Competition Act
+         s.74.01(1)(b) requires adequate testing and real market price
+         evidence for savings representations). -->
+    <meta property="og:title" content="Realtor Desk — The Canadian real estate CRM, powered by AI" />
+    <meta property="og:description" content="AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware, CAD pricing. 14-day free trial." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://www.realtordesk.ai/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="RealtorDesk AI" />
+    <meta property="og:site_name" content="Realtor Desk" />
     <meta property="og:locale" content="en_CA" />
     <meta property="og:locale:alternate" content="fr_CA" />
 
@@ -44,16 +53,23 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Realtor_desk_AI" />
     <meta name="twitter:creator" content="@Realtor_desk_AI" />
-    <meta name="twitter:title" content="Best CRM for Real Estate Agents | AI-Powered Lead Generation | RealtorDesk AI" />
-    <meta name="twitter:description" content="AI-powered real estate CRM with 24/7 chatbot, lead scoring, virtual tours. Save thousands vs competitors. 14-day free trial." />
+    <meta name="twitter:title" content="Realtor Desk — The Canadian real estate CRM, powered by AI" />
+    <meta name="twitter:description" content="AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware. 14-day free trial." />
     <meta name="twitter:image" content="https://www.realtordesk.ai/og-image.png" />
-    
+
     <!-- Additional SEO Meta -->
-    <meta name="theme-color" content="#0B2540" />
-    <meta name="geo.region" content="CA" />
-    <meta name="geo.placename" content="Canada" />
-    
-    <!-- Google tag (gtag.js) -->
+    <meta name="theme-color" content="#0B2540" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+    <meta name="geo.region" content="CA-AB" />
+    <meta name="geo.placename" content="Edmonton, Alberta, Canada" />
+
+    <!-- Google tag (gtag.js). Loads on every page regardless of consent.
+         2026-04-23 audit flagged this as a Law 25 / PIPEDA consent
+         violation — fix tracked in a follow-up PR that introduces a
+         proper CMP with Google Consent Mode v2 (default analytics_storage
+         denied, granted only after opt-in). This snippet stays in
+         place until that CMP lands; removing it would break the
+         existing analytics dashboard without solving the consent issue. -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-95T79D2KJ7"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -67,19 +83,23 @@
       }
     </script>
 
-    <!-- Structured Data - Organization -->
+    <!-- Structured Data — Organization. Kept minimal and factual.
+         alternateName normalized to the two legitimate variants (brand
+         wordmark is unified to "Realtor Desk" per PRs #71–#73). -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "RealtorDesk AI",
-      "alternateName": ["RealtorDesk", "Realtor Desk", "Brainfy AI Inc"],
+      "name": "Realtor Desk",
+      "alternateName": ["RealtorDesk", "Brainfy AI Inc"],
       "url": "https://www.realtordesk.ai",
       "logo": "https://www.realtordesk.ai/og-image.png",
-      "description": "Best CRM for real estate agents with AI-powered lead generation software, 24/7 chatbot, and virtual tour integration",
+      "description": "AI-powered CRM built for Canadian real estate agents.",
       "foundingDate": "2024",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Edmonton",
+        "addressRegion": "AB",
         "addressCountry": "CA"
       },
       "sameAs": [
@@ -96,30 +116,37 @@
     }
     </script>
 
-    <!-- Structured Data - LocalBusiness -->
+    <!-- Structured Data — LocalBusiness.
+         - GPS fixed to Edmonton (was Toronto 43.6532,-79.3832 —
+           factually wrong per 2026-04-23 audit).
+         - priceRange removed. Pricing is canonical on the Product
+           schema below (AggregateOffer). Three schemas with three
+           different prices ($79-$299 vs $149-$299 vs $0-trial)
+           broke Google's price parsing. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "RealtorDesk AI",
-      "description": "AI-powered CRM for Canadian real estate agents with 24/7 chatbot, lead scoring, CREA DDF integration, and PIPEDA compliance.",
+      "name": "Realtor Desk",
+      "description": "AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware.",
       "url": "https://www.realtordesk.ai",
       "logo": "https://www.realtordesk.ai/og-image.png",
       "image": "https://www.realtordesk.ai/og-image.png",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Edmonton",
+        "addressRegion": "AB",
         "addressCountry": "CA"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "43.6532",
-        "longitude": "-79.3832"
+        "latitude": "53.5461",
+        "longitude": "-113.4938"
       },
       "areaServed": {
         "@type": "Country",
         "name": "Canada"
       },
-      "priceRange": "$79-$299 CAD/month",
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
@@ -129,68 +156,39 @@
     }
     </script>
 
+    <!-- Structured Data — SoftwareApplication.
+         "CREA DDF integrated" (false — roadmap Q3 2026) removed per
+         Competition Act s.74.01 risk. Price reflects trial; paid tier
+         pricing lives in the Product AggregateOffer below. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "RealtorDesk AI",
+      "name": "Realtor Desk",
       "url": "https://www.realtordesk.ai",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "AI-powered CRM platform for Canadian real estate agents. CREA DDF integrated, bilingual EN/FR, PIPEDA compliant.",
+      "description": "AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware. CREA DDF® integration on the roadmap for Q3 2026.",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "CAD",
-        "description": "14-day free trial"
+        "description": "14-day free trial, no credit card"
       }
     }
     </script>
 
-    <!-- Structured Data - FAQPage -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "What is the best CRM for real estate agents?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Realtor Desk is the best CRM for real estate agents, offering AI-powered lead scoring, 24/7 chatbot, virtual tour integration, and native CREA DDF® integration. It's built specifically for Canadian realtors with bilingual support and PIPEDA compliance."
-        }
-      }, {
-        "@type": "Question",
-        "name": "How does Realtor Desk compare to BoldTrail and Lofty?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Realtor Desk saves you up to 85% compared to BoldTrail ($999/year vs $6,987 first year) while offering superior AI tools, faster support (30 min vs days), and Canadian-specific features like CREA DDF integration and bilingual support that competitors lack."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Does Realtor Desk integrate with virtual tour platforms?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Virtual tour integrations (Matterport, iGuide, and similar) are on the product roadmap. Today, you can embed virtual tour links in property records and email campaigns."
-        }
-      }, {
-        "@type": "Question",
-        "name": "Is Realtor Desk compliant with Canadian privacy laws?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, Realtor Desk is fully PIPEDA compliant with Canadian data residency and supports provincial regulatory requirements including RECO, BCFSA, and Quebec-specific compliance."
-        }
-      }]
-    }
-    </script>
-
-    <!-- Structured Data - Product Comparison -->
+    <!-- Structured Data — Product (pricing canonical surface).
+         aggregateRating (4.9 / 127 reviews) removed — pre-launch
+         product with zero verifiable reviews violated Google's
+         structured data spam policies and Competition Act s.74.01
+         (Amp Me precedent: $1.5M penalty for fabricated reviews). -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Product",
-      "name": "Realtor Desk Real Estate CRM",
-      "description": "Best CRM for real estate agents with AI lead generation software",
+      "name": "Realtor Desk",
+      "description": "AI-powered CRM for Canadian real estate agents.",
       "brand": {
         "@type": "Brand",
         "name": "Realtor Desk"
@@ -202,27 +200,32 @@
         "highPrice": "299",
         "priceCurrency": "CAD",
         "offerCount": "3"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "127"
       }
     }
     </script>
+
+    <!-- FAQPage structured data: moved to the /faq route (emitted by
+         that page's <SEO /> component). Previous placement in
+         index.html attached FAQ schema to every URL including
+         /pricing, /contact, /privacy-policy — violates Google's
+         FAQPage requirement that schema only appear on pages which
+         actually display that FAQ content to users. -->
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- Static fallback for JS-disabled clients and primitive crawlers.
-         Kept intentionally EN-only — this is an SEO/a11y fallback, not a
-         bilingual rendering target. Pricing values removed so stale
-         numbers can't drift from the Stripe-backed /pricing page. Brand
-         wordmark updated to "Realtor Desk" (PRs #71–#73). -->
+    <!-- Static fallback for JS-disabled clients and primitive crawlers
+         (GPTBot, ClaudeBot, PerplexityBot, Bingbot — none execute JS).
+         Bilingual so FR-only crawlers get useful indexable content.
+         Link text is descriptive (not a bare URL — WCAG 2.4.4). -->
     <noscript>
       <h1>Realtor Desk — the Canadian real estate CRM</h1>
-      <p>Realtor Desk is an AI-powered CRM built for Canadian real estate agents. 24/7 bilingual (EN/FR) AI responses, predictive lead scoring, CASL-compliant email automation, and PIPEDA-native data handling. CREA DDF® on the roadmap for Q3 2026.</p>
-      <p>Start your 14-day free trial at <a href="https://www.realtordesk.ai/signup">realtordesk.ai/signup</a></p>
+      <p>Realtor Desk is an AI-powered CRM built for Canadian real estate agents. 24/7 bilingual (EN/FR) AI responses, predictive lead scoring, CASL-compliant email automation, and PIPEDA-native data handling. CREA DDF® integration on the roadmap for Q3 2026.</p>
+      <p><a href="https://www.realtordesk.ai/signup">Start your 14-day free trial</a> · <a href="https://www.realtordesk.ai/pricing">View pricing</a> · <a href="https://www.realtordesk.ai/features">Explore features</a></p>
+      <hr />
+      <h2 lang="fr-CA">Realtor Desk — le CRM immobilier canadien</h2>
+      <p lang="fr-CA">Realtor Desk est un CRM propulsé par l'IA conçu pour les courtiers immobiliers canadiens. Réponses IA bilingues (FR/EN) 24/7, notation prédictive des prospects, automatisation de courriels conforme LCAP et hébergement conforme LPRPDE. Intégration SDD® de l'ACI sur la feuille de route pour le T3 2026.</p>
+      <p lang="fr-CA"><a href="https://www.realtordesk.ai/signup?lang=fr">Commencez votre essai gratuit de 14 jours</a> · <a href="https://www.realtordesk.ai/pricing?lang=fr">Voir les tarifs</a> · <a href="https://www.realtordesk.ai/features?lang=fr">Explorer les fonctionnalités</a></p>
     </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
