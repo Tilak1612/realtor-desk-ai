@@ -46,10 +46,10 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
           title={t("marketingFooter.colCompare")}
           items={[
             { label: t("marketingFooter.itemVsBoldtrail"), to: "/compare/boldtrail" },
-            { label: t("marketingFooter.itemVsFub"), to: "/switch-from-followupboss" },
+            { label: t("marketingFooter.itemVsFub"), to: "/switch-from-follow-up-boss" },
             { label: t("marketingFooter.itemVsLofty"), to: "/switch-from-lofty" },
             { label: t("marketingFooter.itemVsIxact"), to: "/switch-from-ixact" },
-            { label: t("marketingFooter.itemVsWiseAgent"), to: "/switch-from-wiseagent" },
+            { label: t("marketingFooter.itemVsWiseAgent"), to: "/switch-from-wise-agent" },
           ]}
         />
         <FooterCol

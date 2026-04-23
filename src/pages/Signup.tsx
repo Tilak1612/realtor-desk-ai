@@ -14,6 +14,7 @@ import AuthCard from "@/components/auth/AuthCard";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { PasswordStrengthMeter } from "@/components/ui/password-strength-meter";
 import { trackEvent } from "@/utils/analytics";
+import { SEO } from "@/components/SEO";
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -46,14 +47,8 @@ const Signup = () => {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof SignupForm, string>>>({});
 
-  // SEO: Update document title and meta for signup page
-  if (typeof document !== 'undefined') {
-    document.title = "Start 14-Day Free Trial | Best CRM for Real Estate Agents | RealtorDesk AI";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 'Start your 14-day free trial of the best CRM for real estate agents. AI lead generation software, 24/7 chatbot, virtual tour integration. No credit card required.');
-    }
-  }
+  // SEO is handled by <SEO /> in JSX below so <title>/<meta> update on
+  // locale change (previously hardcoded EN via document.title side-effect).
 
   const validateForm = () => {
     try {
@@ -155,6 +150,10 @@ const Signup = () => {
 
   return (
     <AuthLayout>
+      <SEO
+        title={t("pageSeo.signupTitle")}
+        description={t("pageSeo.signupDesc")}
+      />
       <AuthCard
         title="Realtor Desk"
         subtitle={t('auth.signup.subtitle', 'Start your 14-day free trial')}

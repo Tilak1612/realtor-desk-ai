@@ -65,8 +65,8 @@ const HowItWorks = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="How RealtorDesk AI Works | Setup in 20 Minutes"
-        description="Get started with RealtorDesk AI in about 20 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration."
+        title={t("pageSeo.howItWorksTitle")}
+        description={t("pageSeo.howItWorksDesc")}
         keywords="real estate crm setup, ai crm onboarding, realtor crm implementation, real estate lead generation software setup"
       />
       <Navbar />

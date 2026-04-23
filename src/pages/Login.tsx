@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Mail, Lock, ArrowRight, Info, Eye, EyeOff } from "lucide-react";
 import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
+import { SEO } from "@/components/SEO";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -99,6 +100,10 @@ const Login = () => {
 
   return (
     <AuthLayout>
+      <SEO
+        title={t("pageSeo.loginTitle")}
+        description={t("pageSeo.loginDesc")}
+      />
       <AuthCard
         title="Realtor Desk"
         subtitle={t('auth.login.subtitle', 'Sign in to your workspace')}

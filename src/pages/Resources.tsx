@@ -392,8 +392,8 @@ const Resources = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Resources | Guides for Canadian Real Estate Agents"
-        description="Expert guides on AI tools, lead generation, compliance, and marketing for Canadian real estate agents using RealtorDesk AI."
+        title={t("pageSeo.resourcesTitle")}
+        description={t("pageSeo.resourcesDesc")}
         keywords="real estate crm resources, canadian real estate marketing guides, realtor ai tools guide, real estate lead generation strategies"
       />
       <Navbar />
