@@ -1,13 +1,15 @@
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
-        title="Privacy Policy | RealtorDesk AI"
-        description="Read RealtorDesk AI's privacy policy covering data collection, storage, security, and your rights under Canadian law."
+        title={t('pageSeo.privacyTitle')}
+        description={t('pageSeo.privacyDesc')}
         keywords="privacy policy, PIPEDA, Canadian data privacy, RealtorDesk AI"
         canonicalUrl="https://www.realtordesk.ai/privacy-policy"
       />

@@ -85,8 +85,8 @@ const Roadmap = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Product Roadmap | RealtorDesk AI"
-        description="Honest, dated commitments for what RealtorDesk AI ships and when. IDX, AI scoring, campaigns, teams tier, and what is explicitly not on the roadmap."
+        title={t('pageSeo.roadmapTitle')}
+        description={t('pageSeo.roadmapDesc')}
       />
       <Navbar />
 

@@ -148,8 +148,9 @@ const LionDeskAlternative = () => {
       <article className="pt-32 pb-20">
         <div className="container-custom max-w-4xl">
 
-          {/* Breadcrumb */}
-          <Link to="/blog" className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 text-sm">
+          {/* Breadcrumb — /resources is the canonical blog index; the
+              /blog path is a redirect stub (vercel.json). */}
+          <Link to="/resources" className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 text-sm">
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
           </Link>

@@ -750,7 +750,23 @@ const resources = {
         loginTitle: "Sign in — Realtor Desk",
         loginDesc: "Sign in to your Realtor Desk workspace. Canadian-hosted, PIPEDA-aware, bilingual EN/FR.",
         signupTitle: "Start your 14-day free trial — Realtor Desk",
-        signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, CREA DDF-ready, CAD pricing. No credit card required."
+        signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, CREA DDF-ready, CAD pricing. No credit card required.",
+        integrationsTitle: "Integrations — Realtor Desk",
+        integrationsDesc: "Integrate Realtor Desk via Zapier, Make, and n8n (5,000+ apps). Native connectors on the roadmap. CREA DDF® coming Q3 2026.",
+        roadmapTitle: "Product Roadmap — Realtor Desk",
+        roadmapDesc: "See what's shipping next. Voice AI, CREA DDF, Centris sync, and more on the Realtor Desk roadmap for 2026.",
+        contactTitle: "Contact — Realtor Desk",
+        contactDesc: "Get in touch with the Realtor Desk team. Canadian support, bilingual EN/FR, average reply in under 24 hours.",
+        faqTitle: "FAQ — Realtor Desk",
+        faqDesc: "Answers to common questions about Realtor Desk: pricing in CAD, PIPEDA/CASL compliance, CREA DDF, bilingual support, cancellation.",
+        unsubscribeTitle: "Unsubscribe — Realtor Desk",
+        unsubscribeDesc: "Manage your Realtor Desk email preferences or unsubscribe. CASL-compliant one-click opt-out.",
+        careersTitle: "Careers — Realtor Desk",
+        careersDesc: "Build the future of Canadian real estate with Realtor Desk. Remote-friendly roles across engineering, customer success, and growth.",
+        privacyTitle: "Privacy Policy — Realtor Desk",
+        privacyDesc: "Realtor Desk's privacy policy. Canadian-hosted data, PIPEDA-native, explicit consent tracking, revocable at any time.",
+        termsTitle: "Terms of Service — Realtor Desk",
+        termsDesc: "Realtor Desk's terms of service, including billing, cancellation, acceptable use, and Canadian jurisdiction."
       },
       integrations: {
         hero: {
@@ -1952,9 +1968,14 @@ const resources = {
           viaZapier: "Via Zapier Connection",
           realTimeSync: "Real-Time Sync"
         },
+        badges: {
+          nativeIntegration: "Native integration",
+          comingSoon: "Coming Soon",
+          viaZapierMake: "Via Zapier/Make"
+        },
         partners: {
           title: "Our Integration Partners",
-          subtitle: "Connect with {count}+ industry-leading tools and platforms"
+          subtitle: "Connect with {{count}}+ industry-leading tools and platforms"
         },
         categories: {
           crmPlatforms: "CRM Platforms",
@@ -3136,9 +3157,9 @@ const resources = {
         form: {
           heading: "Demander une Démo Personnalisée",
           title: "Demander une Démo Personnalisée",
-          fullName: "Nom Complet *",
+          fullName: "Nom complet *",
           fullNamePlaceholder: "Jean Dupont",
-          email: "Adresse Courriel *",
+          email: "Adresse courriel *",
           emailPlaceholder: "jean@exemple.com",
           phone: "Numéro de Téléphone *",
           brokerage: "Courtage/Entreprise",
@@ -3199,12 +3220,12 @@ const resources = {
           support: "Support",
           responseTime: "Nous répondons dans les 24 heures",
           hours: "Heures d'Ouverture",
-          hoursDetails: "Lundi - Vendredi: 9h00 - 18h00 HR\nSamedi: 10h00 - 16h00 HR\nDimanche: Fermé"
+          hoursDetails: "Lundi - Vendredi : 9 h à 18 h HE\nSamedi : 10 h à 16 h HE\nDimanche : Fermé"
         },
         form: {
           title: "Envoyez-Nous un Message",
-          name: "Nom Complet *",
-          email: "E-mail *",
+          name: "Nom complet *",
+          email: "Courriel *",
           phone: "Téléphone",
           message: "Message *",
           submit: "Envoyer le Message",
@@ -3435,7 +3456,7 @@ const resources = {
         customAnnualLabel: "Annuel · CAD",
         perMoEffective: "CAD · {{amount}} $/mois effectif",
         featEveryIn: "Tout ce qui est dans {{plan}}, plus —",
-        featSoloDesk: "Agent IA, 500 messages/mois",
+        featSoloDesk: "Desk IA, 500 messages/mois",
         featSoloBilingual: "Bilingue FR · EN",
         featSoloDdf1: "Flux SDD® de l'ACI (1 chambre)",
         featSoloScoring: "Notation de prospects + pipeline",
@@ -3454,7 +3475,7 @@ const resources = {
         matrixSecAi: "IA et automatisation",
         matrixSecIntegrations: "Intégrations",
         matrixSecCompliance: "Conformité · Canada",
-        matrixRowDeskMsgs: "Agent IA (messages/mois)",
+        matrixRowDeskMsgs: "Desk IA (messages/mois)",
         matrixRowBilingual: "Bilingue FR · EN",
         matrixRowVoice: "Entraînement de la voix personnalisée",
         matrixRowScoring: "Notation IA des prospects",
@@ -3501,7 +3522,7 @@ const resources = {
       },
       featuresRd: {
         seoTitle: "Fonctionnalités — Realtor Desk",
-        seoDesc: "Agent IA bilingue 24/7, pipeline priorisé, données conformes LPRPDE, automatisations courriel conformes LCAP, synchronisation SDD de l'ACI. L'ensemble de fonctionnalités que les courtiers canadiens utilisent réellement.",
+        seoDesc: "Desk IA bilingue 24/7, pipeline priorisé, données conformes LPRPDE, automatisations courriel conformes LCAP, synchronisation SDD de l'ACI. L'ensemble de fonctionnalités que les courtiers canadiens utilisent réellement.",
         badge: "Ce que fait Desk",
         heroH1Pre: "Un bureau qui gère la",
         heroH1Italic1: "nuit",
@@ -3560,7 +3581,23 @@ const resources = {
         loginTitle: "Se connecter — Realtor Desk",
         loginDesc: "Connectez-vous à votre espace de travail Realtor Desk. Hébergé au Canada, conforme LPRPDE, bilingue FR/EN.",
         signupTitle: "Commencez votre essai gratuit de 14 jours — Realtor Desk",
-        signupDesc: "Commencez votre essai gratuit de 14 jours de Realtor Desk. Réponse IA aux prospects, agent 24/7, compatible SDD de l'ACI, tarifs en CAD. Sans carte de crédit."
+        signupDesc: "Commencez votre essai gratuit de 14 jours de Realtor Desk. Réponse IA aux prospects, agent 24/7, compatible SDD de l'ACI, tarifs en CAD. Sans carte de crédit.",
+        integrationsTitle: "Intégrations — Realtor Desk",
+        integrationsDesc: "Intégrez Realtor Desk via Zapier, Make et n8n (5 000+ applications). Connecteurs natifs sur la feuille de route. SDD de l'ACI prévu pour le T3 2026.",
+        roadmapTitle: "Feuille de route du produit — Realtor Desk",
+        roadmapDesc: "Découvrez ce qui arrive. IA vocale, SDD de l'ACI, synchronisation Centris et plus encore sur la feuille de route Realtor Desk 2026.",
+        contactTitle: "Contact — Realtor Desk",
+        contactDesc: "Contactez l'équipe Realtor Desk. Soutien canadien, bilingue FR/EN, réponse moyenne en moins de 24 heures.",
+        faqTitle: "Foire aux questions — Realtor Desk",
+        faqDesc: "Réponses aux questions fréquentes sur Realtor Desk : tarifs en CAD, conformité LPRPDE/LCAP, SDD de l'ACI, soutien bilingue, annulation.",
+        unsubscribeTitle: "Se désabonner — Realtor Desk",
+        unsubscribeDesc: "Gérez vos préférences de courriel Realtor Desk ou désabonnez-vous. Retrait en un clic conforme à la LCAP.",
+        careersTitle: "Carrières — Realtor Desk",
+        careersDesc: "Bâtissez l'avenir de l'immobilier canadien avec Realtor Desk. Postes à distance en ingénierie, succès client et croissance.",
+        privacyTitle: "Politique de confidentialité — Realtor Desk",
+        privacyDesc: "Politique de confidentialité de Realtor Desk. Données hébergées au Canada, conforme LPRPDE, suivi du consentement explicite, révocable à tout moment.",
+        termsTitle: "Conditions d'utilisation — Realtor Desk",
+        termsDesc: "Conditions d'utilisation de Realtor Desk : facturation, annulation, utilisation acceptable et juridiction canadienne."
       },
       integrations: {
         hero: {
@@ -3888,8 +3925,8 @@ const resources = {
         bookYourDemo: "Réservez Votre Démo",
         nameLabel: "Nom *",
         namePlaceholder: "Votre nom complet",
-        emailLabel: "E-mail *",
-        emailPlaceholder: "votre.email@exemple.com",
+        emailLabel: "Courriel *",
+        emailPlaceholder: "votre.courriel@exemple.com",
         phoneLabel: "Téléphone *",
         phonePlaceholder: "(555) 123-4567",
         brokerageLabel: "Courtage *",
@@ -4762,9 +4799,14 @@ const resources = {
           viaZapier: "Via Connexion Zapier",
           realTimeSync: "Synchronisation en Temps Réel"
         },
+        badges: {
+          nativeIntegration: "Intégration native",
+          comingSoon: "Bientôt disponible",
+          viaZapierMake: "Via Zapier/Make"
+        },
         partners: {
           title: "Nos Partenaires d'Intégration",
-          subtitle: "Connectez-vous à {count}+ outils et plateformes de premier plan"
+          subtitle: "Connectez-vous à {{count}}+ outils et plateformes de premier plan"
         },
         categories: {
           crmPlatforms: "Plateformes CRM",
@@ -5328,7 +5370,7 @@ const resources = {
             settings: "Paramètres"
           },
           desk: {
-            title: "IA Desk · de garde",
+            title: "Desk IA · de garde",
             summary: "{{count}} clients répondus cette semaine. Réponse moyenne {{response}}."
           }
         },
@@ -5344,7 +5386,7 @@ const resources = {
             saluteMorning: "Bonjour",
             saluteAfternoon: "Bon après-midi",
             saluteEvening: "Bonsoir",
-            subhead: "IA Desk a travaillé pendant la nuit."
+            subhead: "Desk IA a travaillé pendant la nuit."
           },
           leads: { title: "Clients potentiels" },
           inbox: { title: "Conversations" },
@@ -5445,7 +5487,7 @@ const resources = {
           pipelineSnapshot: "Aperçu du pipeline",
           leadSources30d: "Sources de clients · 30 j",
           compliance: "Conformité",
-          deskAiActivity: "Activité IA Desk",
+          deskAiActivity: "Activité Desk IA",
           responseTimeTrend: "Tendance du temps de réponse",
           aiVsAgent21d: "IA vs agent · 21 derniers jours",
           pipelineConversion: "Conversion du pipeline",
@@ -5466,7 +5508,7 @@ const resources = {
           emptyThread: "Aucun message pour l'instant. Lorsqu'un client répond à une séquence ou écrit en clavardage, le message apparaît ici.",
           suggestedReply: "Réponse suggérée :",
           composerPlaceholder: "Écrire un message au client…",
-          deskAiReplying: "IA Desk répond",
+          deskAiReplying: "Desk IA répond",
           manualHandling: "Gestion manuelle"
         },
         pipelinePage: {
@@ -5525,7 +5567,7 @@ const resources = {
             title: "Parlez-nous de votre bureau.",
             subtitle: "Nous utilisons ces informations pour adapter les modèles, choisir une langue par défaut et faire en sorte que l'IA vous ressemble.",
             helperLanguageTitle: "Détection de la langue",
-            helperLanguageBody: "IA Desk détecte automatiquement la langue de chaque client. Vous choisissez la valeur par défaut si le message est trop court.",
+            helperLanguageBody: "Desk IA détecte automatiquement la langue de chaque client. Vous choisissez la valeur par défaut si le message est trop court.",
             helperTemplatesTitle: "Modèles par courtier",
             helperTemplatesBody: "Nous préchargeons des clauses conformes RECO/OACIQ selon votre province.",
             firstName: "Prénom",
@@ -5540,7 +5582,7 @@ const resources = {
           },
           ddf: {
             title: "Connectez votre flux DDF® de l'ACI.",
-            subtitle: "IA Desk surveille le DDF de votre chambre pour que les nouvelles demandes, changements de prix et bascules de statut apparaissent instantanément.",
+            subtitle: "Desk IA surveille le DDF de votre chambre pour que les nouvelles demandes, changements de prix et bascules de statut apparaissent instantanément.",
             helperReadOnlyTitle: "Lecture seule et ciblée",
             helperReadOnlyBody: "Nous ne lisons que les inscriptions liées à votre n° RECO/OACIQ. Aucune donnée partagée du courtier ne quitte votre poste.",
             helperSyncTitle: "Synchronisation en moins de 60 s",
@@ -5559,12 +5601,12 @@ const resources = {
             skip: "Passer pour l'instant"
           },
           voice: {
-            title: "Donnez votre voix à IA Desk.",
-            subtitle: "Choisissez un ton. Collez un échantillon de votre écriture réelle. IA Desk répondra aux clients avec votre voix — et non celle d'un robot générique.",
+            title: "Donnez votre voix à Desk IA.",
+            subtitle: "Choisissez un ton. Collez un échantillon de votre écriture réelle. Desk IA répondra aux clients avec votre voix — et non celle d'un robot générique.",
             helperBetterTitle: "Elle s'améliore chaque jour",
-            helperBetterBody: "Chaque fois que vous modifiez une ébauche, IA Desk apprend. Après une semaine, 90 % des agents approuvent les ébauches sans retouche.",
+            helperBetterBody: "Chaque fois que vous modifiez une ébauche, Desk IA apprend. Après une semaine, 90 % des agents approuvent les ébauches sans retouche.",
             helperBilingualTitle: "Bilingue par conception",
-            helperBilingualBody: "Entraînez une fois — IA Desk adapte votre ton en français et en anglais automatiquement.",
+            helperBilingualBody: "Entraînez une fois — Desk IA adapte votre ton en français et en anglais automatiquement.",
             toneLabel: "Ton",
             toneWarmLabel: "Chaleureux et conversationnel",
             toneWarmDesc: "Convivial, utilise les prénoms. Par défaut.",
@@ -5573,20 +5615,20 @@ const resources = {
             toneDirectLabel: "Direct et bref",
             toneDirectDesc: "Pour investisseurs, commercial.",
             pasteLabel: "Collez un courriel ou message récent (facultatif, 50 mots et plus)",
-            previewLabel: "Aperçu IA Desk —",
+            previewLabel: "Aperçu Desk IA —",
             previewText: "Bonjour Priya — petite nouvelle, une inscription à Oakville vient de paraître ce matin et correspond à votre liste. Voulez-vous passer demain avant les offres ?",
             back: "Retour",
             continueBtn: "Continuer"
           },
           live: {
-            titleLead: "IA Desk est",
+            titleLead: "Desk IA est",
             titleAccent: "de garde",
             subtitle: "Vous êtes en ligne. Le prochain client — jour ou nuit, anglais ou français — recevra une réponse instantanée dans votre voix.",
             helperPingsTitle: "Comment nous vous alertons",
             helperPingsBody: "Notifications push sur mobile. Résumé courriel à 9 h. SMS uniquement pour les clients chauds (score ≥ 80).",
             helperCustomizeTitle: "Personnalisable à tout moment",
-            helperCustomizeBody: "Espace → Paramètres IA Desk. Mettre l'IA en pause par client, par inscription ou par plage horaire.",
-            deskLabel: "IA Desk",
+            helperCustomizeBody: "Espace → Paramètres Desk IA. Mettre l'IA en pause par client, par inscription ou par plage horaire.",
+            deskLabel: "Desk IA",
             liveBadge: "En direct",
             listeningNote: "À l'écoute sur TRREB · EN + FR · Ton chaleureux",
             kpiListings: "Inscriptions synchro.",

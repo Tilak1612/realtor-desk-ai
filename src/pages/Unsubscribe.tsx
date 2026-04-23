@@ -69,8 +69,8 @@ const Unsubscribe = () => {
           be indexed. robots.txt blocks the path, this meta is the second
           layer for crawlers that ignore robots or follow inbound links. */}
       <SEO
-        title="Unsubscribe | RealtorDesk AI"
-        description="Unsubscribe from RealtorDesk AI emails."
+        title={t('pageSeo.unsubscribeTitle')}
+        description={t('pageSeo.unsubscribeDesc')}
         noindex
       />
       <Navbar />
