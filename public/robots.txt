@@ -19,8 +19,11 @@ Disallow: /calendar
 Disallow: /reports
 Disallow: /market
 Disallow: /automations
-Disallow: /signup
-Disallow: /login
+# /signup and /login intentionally NOT disallowed: they were the only
+# CTAs reachable from the noscript fallback and the main-nav, and blocking
+# them broke internal link flow for Googlebot (2026-04-23 audit). Both
+# pages now emit <meta robots="noindex,follow"> via <SEO noindex> so they
+# can be crawled (link equity passes through) but don't appear in SERPs.
 Disallow: /verify-email
 Disallow: /forgot-password
 Disallow: /reset-password
