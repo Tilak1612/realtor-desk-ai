@@ -14,8 +14,8 @@ const FAQ = () => {
 
   return <div className="min-h-screen">
       <SEO
-        title="FAQ | RealtorDesk AI"
-        description="Frequently asked questions about RealtorDesk AI, including AI lead generation, virtual tour integrations, pricing, and switching from other CRMs."
+        title={t('pageSeo.faqTitle')}
+        description={t('pageSeo.faqDesc')}
         keywords="real estate crm faq, realtor crm questions, ai real estate crm, real estate lead generation software"
       />
       <Navbar />

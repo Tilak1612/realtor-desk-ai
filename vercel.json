@@ -1,7 +1,10 @@
 {
   "redirects": [
     { "source": "/vs-lofty", "destination": "/lofty-alternative", "permanent": true },
-    { "source": "/lofty", "destination": "/lofty-alternative", "permanent": true }
+    { "source": "/lofty", "destination": "/lofty-alternative", "permanent": true },
+    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/terms", "destination": "/terms-of-service", "permanent": true },
+    { "source": "/blog", "destination": "/resources", "permanent": true }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }

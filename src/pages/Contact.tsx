@@ -86,8 +86,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Contact RealtorDesk AI | Canadian Support"
-        description="Contact RealtorDesk AI for CRM support, AI lead generation questions, and Canadian real estate compliance help."
+        title={t('pageSeo.contactTitle')}
+        description={t('pageSeo.contactDesc')}
         keywords="real estate crm support, realtor desk contact, crm help for realtors"
       />
       <Navbar />
@@ -223,14 +223,15 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Map Section (Placeholder) */}
+      {/* Location banner — simple text card; a proper Maps embed is a
+          separate tracking issue. Previous "Map integration placeholder"
+          dev string was shipping to users (2026-04 audit). */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
           <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg flex items-center justify-center">
             <div className="text-center">
               <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-              <p className="text-muted-foreground">Map integration placeholder</p>
-              <p className="text-sm text-muted-foreground">Edmonton, Alberta, Canada</p>
+              <p className="text-base font-semibold text-foreground">Edmonton, Alberta, Canada</p>
             </div>
           </div>
         </div>

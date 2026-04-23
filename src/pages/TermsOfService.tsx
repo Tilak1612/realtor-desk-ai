@@ -1,13 +1,15 @@
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 
 const TermsOfService = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
-        title="Terms of Service | RealtorDesk AI"
-        description="Review the Terms of Service for using RealtorDesk AI, including subscriptions, data ownership, and compliance obligations."
+        title={t('pageSeo.termsTitle')}
+        description={t('pageSeo.termsDesc')}
         keywords="terms of service, RealtorDesk AI terms, Canadian real estate CRM terms"
         canonicalUrl="https://www.realtordesk.ai/terms-of-service"
       />

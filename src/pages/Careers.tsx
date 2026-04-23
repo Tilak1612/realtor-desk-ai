@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -344,6 +345,7 @@ const sanitizeFileBaseName = (fileName: string) =>
     .slice(0, 60);
 
 const Careers = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
@@ -484,8 +486,8 @@ const Careers = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Careers | RealtorDesk AI"
-        description="Build the future of Canadian real estate with RealtorDesk.ai. Explore open roles and apply through our unified careers application form."
+        title={t('pageSeo.careersTitle')}
+        description={t('pageSeo.careersDesc')}
         keywords="RealtorDesk careers, Canadian real estate SaaS jobs, AI startup jobs Canada, proptech careers"
       />
       <Navbar />

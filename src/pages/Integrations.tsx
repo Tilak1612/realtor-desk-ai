@@ -89,16 +89,16 @@ const Integrations = () => {
   const totalIntegrations = categories.reduce((acc, cat) => acc + cat.integrations.length, 0);
 
   const getSubtitle = (key: string) => {
-    if (key === 'native') return t('integrations.hero.subtitle').includes('seamlessly') ? 'Native integration' : 'Intégration native';
-    if (key === 'comingSoon') return 'Coming Soon';
-    return 'Via Zapier/Make';
+    if (key === 'native') return t('integrationsPage.badges.nativeIntegration');
+    if (key === 'comingSoon') return t('integrationsPage.badges.comingSoon');
+    return t('integrationsPage.badges.viaZapierMake');
   };
 
   return (
     <div className="min-h-screen">
       <SEO
-        title="Real Estate CRM Integrations | RealtorDesk AI"
-        description="Integrate RealtorDesk AI via Zapier, Make, and n8n (5,000+ apps). Direct connectors for Salesforce, Zoho, Pipedrive on the roadmap. CREA DDF® coming Q3 2026."
+        title={t('pageSeo.integrationsTitle')}
+        description={t('pageSeo.integrationsDesc')}
         keywords="real estate crm integrations, virtual tour platforms, real estate website builders, real estate video marketing tools, CREA DDF integration"
       />
       <Navbar />
