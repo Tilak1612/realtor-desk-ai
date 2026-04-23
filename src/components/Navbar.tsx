@@ -47,11 +47,17 @@ const Navbar = () => {
     return () => mql.removeEventListener("change", onChange);
   }, []);
 
+  // Labels route through marketingHeader.* so this legacy navbar matches
+  // the rd MarketingHeader chrome (Tarifs, not Tarification; Fonctionnement,
+  // not "Comment ça marche"). Two navbars existed while the rd redesign
+  // rolled out — this keeps the terminology consistent until the remaining
+  // pages (/how-it-works, /resources) migrate to MarketingLayout.
   const navLinks = [
-    { name: t('nav.features'), path: "/features" },
-    { name: t('footer.howItWorks'), path: "/how-it-works" },
-    { name: t('nav.pricing'), path: "/pricing" },
-    { name: t('nav.integrations'), path: "/integrations" },
+    { name: t('marketingHeader.navFeatures'), path: "/features" },
+    { name: t('marketingHeader.navHowItWorks'), path: "/how-it-works" },
+    { name: t('marketingHeader.navPricing'), path: "/pricing" },
+    { name: t('marketingHeader.navCompare'), path: "/compare/boldtrail" },
+    { name: t('marketingHeader.navResources'), path: "/resources" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
