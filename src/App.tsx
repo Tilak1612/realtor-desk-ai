@@ -12,6 +12,7 @@ import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CookieConsent from "./components/CookieConsent";
+import { SkipToContent } from "./components/SkipToContent";
 
 // Critical path — eagerly loaded (landing, auth, 404)
 // Phase 2 redesign: new marketing pages live under src/pages/rd/.
@@ -244,11 +245,16 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <SkipToContent />
           <ScrollToTop />
           <SeoDefaults />
           <RouteAnalytics />
           <SubscriptionProvider>
           <Suspense fallback={<PageLoader />}>
+          {/* Focus target for the skip link above. tabIndex=-1 makes it
+              programmatically focusable without being in the Tab order.
+              Every route renders inside this container. */}
+          <div id="main-content" tabIndex={-1} className="outline-none">
           <Routes>
           <Route path="/" element={<RDHome />} />
           <Route path="/features" element={<RDFeatures />} />
@@ -371,6 +377,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
           </Routes>
+          </div>
           </Suspense>
           </SubscriptionProvider>
           <CookieConsent />

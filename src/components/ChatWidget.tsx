@@ -106,8 +106,17 @@ const ChatWidget = () => {
 
           {/* Chat Body */}
           <div className="flex flex-col h-96 bg-background">
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            {/* Messages — role="log" + aria-live="polite" so screen
+                readers announce new AI replies without the user having
+                to navigate back to the container (WCAG 4.1.3). */}
+            <div
+              role="log"
+              aria-live="polite"
+              aria-atomic="false"
+              aria-relevant="additions text"
+              aria-label="Chat conversation"
+              className="flex-1 overflow-y-auto p-4 space-y-3"
+            >
               {messages.length === 0 ? (
                 <div className="p-3 bg-muted rounded-lg">
                   <p className="text-sm">

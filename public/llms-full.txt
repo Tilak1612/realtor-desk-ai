@@ -1,0 +1,138 @@
+# Realtor Desk — Full content export for LLMs
+
+> Plain-text snapshot of the Realtor Desk public site, intended for citation by LLM-based search engines (ChatGPT Search, Perplexity, Claude, Gemini, etc.). Authoritative version of each section lives at the URL given in brackets. Last reviewed: 2026-04-23.
+
+---
+
+## Who we are
+
+Realtor Desk is an AI-powered CRM built by **Brainfy AI Inc.** (Edmonton, Alberta, Canada) for **licensed Canadian real estate agents, teams, and brokerages**. Public beta as of 2026-04.
+
+The product is priced in **Canadian dollars**, hosted in Canada, and designed around Canadian regulatory obligations — PIPEDA, CASL, Quebec Law 25, FINTRAC, plus the four provincial regulators (OACIQ in Quebec, RECO in Ontario, RECA in Alberta, RECBC in British Columbia).
+
+Canonical brand: **Realtor Desk** (two words). "Realtor®" is a registered trademark of the Canadian Real Estate Association (CREA); **Realtor Desk is not affiliated with or endorsed by CREA**.
+
+---
+
+## Core product
+
+[https://www.realtordesk.ai/features]
+
+Realtor Desk's feature set centres on five capabilities:
+
+1. **24/7 bilingual AI chatbot.** Responds to inbound leads instantly in French or English. Language is auto-detected from the lead's first message. Books showings into the agent's Google or Outlook calendar. Average reply time under 45 seconds in beta testing.
+
+2. **Priority pipeline, not an inbox.** Kanban view with AI-suggested next-best-action per lead. 0–100 lead score with plain-English reasoning (intent, urgency, budget fit, timeline). Deals that don't move for 14 days auto-flag as stale.
+
+3. **Built for Canada.** Canadian-hosted data. Consent timestamped on every lead intake (PIPEDA requirement). CASL-compliant email footer inserted automatically. Quebec bilingual disclosures and FINTRAC verifications tracked per deal.
+
+4. **Email automations.** Drip sequences with CASL consent gating. Auto-pauses on unsubscribe. Templates written for Canadian markets — Toronto pre-construction, Calgary first-time buyers, Montreal relocations.
+
+5. **Integrations.** Zapier, Make, and n8n for the long tail (5,000+ apps). Native integrations on roadmap: CREA DDF (Q3 2026), Centris Quebec MLS, WhatsApp Cloud API, LinkedIn Lead Gen Forms, Facebook Lead Ads.
+
+Supporting capabilities (included in all tiers): showing calendar, team routing, roles & permissions, immutable activity/audit log, reporting (response time, source ROI, stage conversion, agent leaderboard — CAD throughout).
+
+---
+
+## Pricing
+
+[https://www.realtordesk.ai/pricing]
+
+All prices in **Canadian dollars**. GST/HST applied at checkout based on the billing province.
+
+**Solo** — for single agents. CAD $149/month or CAD $999/year (annual saves ~$789 versus monthly). Includes: 500 AI messages/month, 1 CREA DDF board (when available), bilingual EN/FR, lead scoring, CASL email drip, 1 user seat.
+
+**Team** — for 2–10 agents. CAD $299/month or CAD $2,997/year. Everything in Solo plus: unlimited AI messages, unlimited DDF boards, round-robin routing, team reports and leaderboard, 5 users included ($15/user after).
+
+**Brokerage** — for 10+ agents. Custom annual contract. Everything in Team plus: SAML SSO + Azure AD, FINTRAC and provincial regulator workflows, custom DDF mappings, dedicated Canadian CSM, 99.95% uptime SLA.
+
+**Trial:** 14 days, no credit card. Full feature access.
+
+---
+
+## Competitive positioning
+
+[https://www.realtordesk.ai/compare/boldtrail]
+
+| Capability | BoldTrail | Realtor Desk |
+|---|---|---|
+| Data hosting | US-only | Canadian |
+| Bilingual EN/FR | Paid add-on | Built-in |
+| CASL email auto-footers | Manual templates | Automatic |
+| CREA DDF integration | 3rd-party plugin | Native (Q3 2026) |
+| Pricing | USD plus ~20% premium | CAD |
+| AI lead response time | 2–3 minutes | Under 45 seconds |
+| Bilingual AI out of the box | No | Yes |
+| Starting price | USD $499 setup + $99/mo | CAD $149/mo, no setup fee |
+| Onboarding fee | USD $499 | Included |
+
+Other Canadian alternatives tracked on the site: Follow Up Boss (Zillow-owned — Canadian agents have raised data-conflict concerns), Lofty (formerly Chime — US-first, no bilingual, no Canadian compliance), IXACT Contact (Canadian-founded, no conversational AI, no CREA DDF), Wise Agent (US-centric, minimal AI), LionDesk.
+
+---
+
+## Canadian compliance
+
+**PIPEDA** (Personal Information Protection and Electronic Documents Act). Realtor Desk stores all Canadian customer data in Canadian data centres, captures explicit consent at first touch, logs consent timestamps, and supports revocation.
+
+**CASL** (Canada's Anti-Spam Legislation). Every outbound email from Realtor Desk includes an automatic CASL-compliant footer with one-click unsubscribe. Drip sequences auto-pause on unsubscribe — no manual cleanup required.
+
+**Quebec Law 25** (Act respecting the protection of personal information in the private sector). Realtor Desk supports the Quebec-specific consent model, right-to-access, and right-to-rectification workflows.
+
+**FINTRAC** (Financial Transactions and Reports Analysis Centre of Canada). Brokerage-tier subscribers get per-deal FINTRAC verification tracking.
+
+**Provincial regulators.** Realtor Desk's compliance posture is designed to align with each provincial regulator's record-keeping requirements: OACIQ (Quebec), RECO (Ontario), RECA (Alberta), RECBC (British Columbia). Brokers remain responsible for their own provincial compliance; the CRM provides the record, not the license.
+
+Trademark disclaimer: Realtor Desk is not affiliated with or endorsed by CREA. "REALTOR®" is a registered trademark of the Canadian Real Estate Association.
+
+---
+
+## How it works
+
+[https://www.realtordesk.ai/how-it-works]
+
+Five-step setup, approximately 20 minutes end-to-end:
+
+1. **Sign up.** Email + password or SSO (Google, Microsoft).
+2. **Connect your tools.** Calendar (Google or Outlook), email, and the relevant DDF board (when the CREA DDF integration launches in Q3 2026).
+3. **Train the AI.** Paste a sample of your real writing. Realtor Desk learns your voice and adapts it to both English and French automatically.
+4. **Customize.** Choose a default language per client, set do-not-contact hours, configure round-robin rules if you're on the Team tier.
+5. **Go live.** Your AI colleague starts answering inbound leads within 15 minutes of DDF connection.
+
+---
+
+## Bilingual support (FR-CA)
+
+Every public-site surface ships in both English and Canadian French. Language switch is via the EN/FR toggle in the header or a `?lang=fr` query parameter. Canonical French typography is followed: 24-hour time (`19 h`, not `7 p.m.`), narrow no-break space before `%` and unit symbols (`32 s`, `20 %`, `1,4 M$ CA`), decimal comma (`1,4` not `1.4`), sentence case for section headings. Regulatory acronyms translate: PIPEDA → LPRPDE, CASL → LCAP, FINTRAC → CANAFE, CREA DDF → SDD de l'ACI.
+
+The in-product AI responds to each lead in the language the lead wrote in — even if the agent's UI is set to the other language. A bilingual AI response in under 45 seconds is the core product differentiator.
+
+---
+
+## Roadmap
+
+[https://www.realtordesk.ai/roadmap]
+
+Dated commitments for public-beta features not yet shipped:
+
+- **CREA DDF integration** — Q3 2026. Live MLS listings, 15-minute refresh, pulled from your board. Requires formal CREA partnership.
+- **Centris Quebec MLS sync** — follows CREA DDF.
+- **Voice AI** — Q3 2026, in beta now.
+- **LinkedIn Lead Gen Forms, Facebook Lead Ads, WhatsApp Cloud API** — pending each platform's business-app review.
+- **Microsoft Entra + SAML SSO enforcement** — available on Brokerage tier now.
+
+Explicitly **not** on the roadmap (things some competitors offer that we will not build): automated postcards, cold-lead phone dialers, Zillow-style lead resale, behavioural tracking of website visitors beyond the opt-in widget.
+
+---
+
+## Support + contact
+
+Email: support@realtordesk.ai
+Location: Edmonton, Alberta, Canada
+Languages: English and Canadian French
+Average reply time: under 24 hours
+
+---
+
+## About
+
+Realtor Desk is built by Brainfy AI Inc., a Canadian company incorporated in Alberta. The product is in public beta as of 2026-04. Pricing, features, and roadmap commitments may evolve — the versioned source of truth for each commitment is the corresponding page on `https://www.realtordesk.ai`.
