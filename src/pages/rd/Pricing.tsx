@@ -1,192 +1,152 @@
-import { useState } from "react";
-import { Fragment } from "react";
+import { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
 import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
 import { RDButton, RDBadge, IconArrow, IconCheck } from "@/components/rd";
 import { cn } from "@/lib/utils";
+import { normalizeLocale, type SupportedLocale } from "@/lib/i18n/format";
 
 // /pricing — Pricing page per rd-marketing.jsx Artboard_Pricing.
 // Prices are the canonical Stripe numbers (Option B per product decision).
-// Each plan carries both monthly + yearly amounts matching the live
-// Stripe price IDs; the BillingToggle swaps between them. When backend
-// wiring lands, the checkout buttons forward the corresponding priceId
-// to the create-checkout edge function.
+// Stripe price IDs + numeric amounts live in this file; all copy flows
+// through the `pricingRd.*` i18n namespace so the FR toggle swaps the
+// entire page (previously 100% hardcoded EN per 2026-04 audit).
 
 type BillingCycle = "monthly" | "annual";
+type TFn = (key: string, opts?: Record<string, unknown>) => string;
 
-interface Plan {
-  name: string;
-  tag: string;
-  /** Monthly amount in CAD, or "Custom" for the talk-to-sales tier. */
-  priceMonthly: number | "Custom";
-  /** Yearly amount in CAD, or "Custom". Used when the billing toggle is Annual. */
-  priceYearly: number | "Custom";
-  /** Savings label shown under annual price, e.g. "Save $789/yr vs monthly". */
-  annualSavingsLabel?: string;
-  /** Stripe price IDs so backend wiring can forward the right one.
-   *  Kept in sync with src/contexts/SubscriptionContext.tsx SUBSCRIPTION_PRODUCTS. */
+interface PlanData {
+  /** Stable id, used for t() lookups and Stripe routing. */
+  id: "solo" | "team" | "brokerage";
+  priceMonthly: number | "custom";
+  priceYearly: number | "custom";
   stripe?: { monthly: string; yearly: string };
-  desc: string;
-  cta: { label: string; variant: "primary" | "terra" | "outline" };
-  features: string[];
+  cta: "start" | "talkSales";
+  ctaVariant: "primary" | "terra" | "outline";
+  featureKeys: string[];
   featured?: boolean;
 }
 
-const PLANS: Plan[] = [
+const PLANS: PlanData[] = [
   {
-    name: "Solo",
-    tag: "For the single agent",
+    id: "solo",
     priceMonthly: 149,
     priceYearly: 999,
-    annualSavingsLabel: "Save $789 vs monthly",
     stripe: {
       monthly: "price_1SXpyiS23MQcIdnrAphs809v",
       yearly: "price_1SXpzKS23MQcIdnrfH2rHhow",
     },
-    desc: "Everything you need to stop losing leads at 2 a.m.",
-    cta: { label: "Start free trial", variant: "outline" },
-    features: [
-      "Desk AI chatbot, 500 msgs/mo",
-      "Bilingual EN · FR",
-      "CREA DDF® feed (1 board)",
-      "Lead scoring + pipeline",
-      "CASL-compliant email drip",
-      "1 user",
+    cta: "start",
+    ctaVariant: "outline",
+    featureKeys: [
+      "pricingRd.featSoloDesk",
+      "pricingRd.featSoloBilingual",
+      "pricingRd.featSoloDdf1",
+      "pricingRd.featSoloScoring",
+      "pricingRd.featSoloCasl",
+      "pricingRd.featSoloUser",
     ],
   },
   {
-    name: "Team",
-    tag: "For 2–10 agents",
+    id: "team",
     priceMonthly: 299,
     priceYearly: 2997,
-    annualSavingsLabel: "Save $591 vs monthly",
     stripe: {
       monthly: "price_1SXpz0S23MQcIdnrrD0UGqa5",
       yearly: "price_1SXpzZS23MQcIdnrVVyUShLT",
     },
-    desc: "Shared pipeline, round-robin routing, team reports.",
-    cta: { label: "Start free trial", variant: "terra" },
-    features: [
-      "Everything in Solo, plus —",
-      "Unlimited AI messages",
-      "CREA DDF® feed (unlimited)",
-      "Round-robin lead routing",
-      "Team reports & leaderboard",
-      "5 users, $15 each after",
+    cta: "start",
+    ctaVariant: "terra",
+    featureKeys: [
+      "__team_every", // sentinel resolved to "Everything in Solo, plus —" via t(planFor=solo)
+      "pricingRd.featTeamAiUnl",
+      "pricingRd.featTeamDdfUnl",
+      "pricingRd.featTeamRouting",
+      "pricingRd.featTeamReports",
+      "pricingRd.featTeamSeats",
     ],
     featured: true,
   },
   {
-    name: "Brokerage",
-    tag: "For 10+ agents",
-    priceMonthly: "Custom",
-    priceYearly: "Custom",
-    desc: "Multi-tenant, SSO, dedicated CSM, FINTRAC tooling.",
-    cta: { label: "Talk to sales", variant: "primary" },
-    features: [
-      "Everything in Team, plus —",
-      "SAML SSO + Azure AD",
-      "FINTRAC & RECO workflows",
-      "Custom DDF mappings",
-      "Dedicated Canadian CSM",
-      "99.95% uptime SLA",
-    ],
-  },
-];
-
-const MATRIX: {
-  label: string;
-  rows: { f: string; solo: boolean | string; team: boolean | string; bk: boolean | string }[];
-}[] = [
-  {
-    label: "AI & automation",
-    rows: [
-      { f: "Desk AI chatbot (msgs/mo)", solo: "500", team: "Unlimited", bk: "Unlimited" },
-      { f: "Bilingual EN · FR", solo: true, team: true, bk: true },
-      { f: "Custom voice training", solo: false, team: true, bk: true },
-      { f: "AI lead scoring", solo: true, team: true, bk: true },
-    ],
-  },
-  {
-    label: "Integrations",
-    rows: [
-      { f: "CREA DDF® boards", solo: "1", team: "Unlimited", bk: "Unlimited + custom" },
-      { f: "Stripe / Twilio / Resend", solo: true, team: true, bk: true },
-      { f: "SAML SSO", solo: false, team: false, bk: true },
-    ],
-  },
-  {
-    label: "Compliance · Canada",
-    rows: [
-      { f: "PIPEDA hosting (Canada)", solo: true, team: true, bk: true },
-      { f: "CASL email auto-footer", solo: true, team: true, bk: true },
-      { f: "FINTRAC workflows", solo: false, team: false, bk: true },
+    id: "brokerage",
+    priceMonthly: "custom",
+    priceYearly: "custom",
+    cta: "talkSales",
+    ctaVariant: "primary",
+    featureKeys: [
+      "__brokerage_every", // sentinel
+      "pricingRd.featBrokerageSso",
+      "pricingRd.featBrokerageCompliance",
+      "pricingRd.featBrokerageDdfCustom",
+      "pricingRd.featBrokerageCsm",
+      "pricingRd.featBrokerageSla",
     ],
   },
 ];
 
 export default function Pricing() {
+  const { t, i18n } = useTranslation();
   const [cycle, setCycle] = useState<BillingCycle>("monthly");
+  const locale = normalizeLocale(i18n.language);
 
   return (
     <MarketingLayout>
       <SEO
-        title="Pricing — RealtorDesk AI"
-        description="One price. Every feature. Bilingual, PIPEDA-native, CREA DDF-ready. CAD pricing, 14-day trial, no credit card."
+        title={t("pricingRd.seoTitle")}
+        description={t("pricingRd.seoDesc")}
         canonicalUrl="https://www.realtordesk.ai/pricing"
       />
 
       {/* Hero */}
       <section className="px-8 md:px-14 pt-20 pb-10 text-center">
-        <Eyebrow className="mx-auto">Pricing in CAD</Eyebrow>
+        <Eyebrow className="mx-auto">{t("pricingRd.eyebrow")}</Eyebrow>
         <h1 className="mt-3.5 text-[44px] md:text-[64px] font-semibold tracking-[-0.025em] leading-[1.05]">
-          One price. <span className="font-rd-serif italic font-normal">Every</span> feature.
+          {t("pricingRd.heading1")}{" "}
+          <span className="font-rd-serif italic font-normal">{t("pricingRd.heading2")}</span>{" "}
+          {t("pricingRd.heading3")}
         </h1>
         <p className="text-lg text-rd-ink-600 max-w-[600px] mx-auto mt-5 leading-[1.55]">
-          No AI quotas on Team or Brokerage. No "growth" tier that hides the integrations. 14-day
-          trial, no credit card.
+          {t("pricingRd.subtitle")}
         </p>
-        <BillingToggle cycle={cycle} onChange={setCycle} />
+        <BillingToggle cycle={cycle} onChange={setCycle} t={t} />
       </section>
 
       {/* Plans */}
       <section className="px-8 md:px-14 pb-14">
         <div className="mx-auto max-w-[1200px] grid grid-cols-1 md:grid-cols-3 gap-5">
           {PLANS.map((p) => (
-            <PricingPlan key={p.name} plan={p} cycle={cycle} />
+            <PricingPlan key={p.id} plan={p} cycle={cycle} t={t} locale={locale} />
           ))}
         </div>
       </section>
 
-      {/* Tax / parity disclaimer */}
       <p className="px-8 md:px-14 text-center text-[13px] text-rd-ink-500 max-w-[900px] mx-auto pb-16">
-        Prices shown in CAD. GST/HST applied at checkout based on your billing province. The
-        amount on this page matches what you will see on Stripe's secure checkout.
+        {t("pricingRd.taxNote")}
       </p>
 
       {/* Feature matrix */}
       <section className="px-8 md:px-14 py-[100px] bg-white border-t border-rd-line">
         <div className="mx-auto max-w-[1100px]">
           <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] text-center mb-10">
-            Compare every feature
+            {t("pricingRd.compareHeading")}
           </h2>
-          <FeatureMatrix />
+          <FeatureMatrix t={t} />
         </div>
       </section>
     </MarketingLayout>
   );
 }
 
-/* ────────────────────────────────────────────────────────── */
-
 function BillingToggle({
   cycle,
   onChange,
+  t,
 }: {
   cycle: BillingCycle;
   onChange: (v: BillingCycle) => void;
+  t: TFn;
 }) {
   return (
     <div className="inline-flex mt-9 p-1 bg-white border border-rd-line rounded-rd-pill">
@@ -198,7 +158,7 @@ function BillingToggle({
           cycle === "monthly" ? "bg-rd-navy-800 text-white" : "bg-transparent text-rd-ink-600"
         )}
       >
-        Monthly
+        {t("pricingRd.toggleMonthly")}
       </button>
       <button
         type="button"
@@ -208,26 +168,60 @@ function BillingToggle({
           cycle === "annual" ? "bg-rd-navy-800 text-white" : "bg-transparent text-rd-ink-600"
         )}
       >
-        Annual · save up to $789/yr
+        {t("pricingRd.toggleAnnual")}
       </button>
     </div>
   );
 }
 
-function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
+/**
+ * Render a monetary amount inline. Keeps the existing large-font split
+ * (big number + tiny unit label) while respecting FR decimal comma +
+ * `$` after the number.
+ */
+function renderPrice(amount: number, locale: SupportedLocale): string {
+  if (locale === "fr-CA") {
+    return amount.toLocaleString("fr-CA", { maximumFractionDigits: 0 }) + " $";
+  }
+  return "$" + amount.toLocaleString("en-CA", { maximumFractionDigits: 0 });
+}
+
+function PricingPlan({
+  plan,
+  cycle,
+  t,
+  locale,
+}: {
+  plan: PlanData;
+  cycle: BillingCycle;
+  t: TFn;
+  locale: SupportedLocale;
+}) {
+  const name = t(`pricingRd.plan${cap(plan.id)}Name`);
+  const tag = t(`pricingRd.plan${cap(plan.id)}Tag`);
+  const desc = t(`pricingRd.plan${cap(plan.id)}Desc`);
+  const savingsLabel =
+    plan.id === "solo" || plan.id === "team"
+      ? t(`pricingRd.plan${cap(plan.id)}Savings`)
+      : undefined;
+
   const displayPrice = cycle === "annual" ? plan.priceYearly : plan.priceMonthly;
-  const unitLabel = cycle === "annual" ? "/yr" : "/mo";
-  // Show the per-month breakdown under the yearly number for the Solo plan so
-  // the annual saving is legible at a glance. Tiny rounding note matters less
-  // than keeping the big number clearly the annual amount.
+  const unitLabel = cycle === "annual" ? t("pricingRd.unitYr") : t("pricingRd.unitMo");
+
   const perMonthWhenYearly =
     cycle === "annual" && typeof plan.priceYearly === "number"
-      ? `CAD · $${(plan.priceYearly / 12).toLocaleString("en-CA", {
-          maximumFractionDigits: 0,
-        })}/mo effective`
-      : "CAD · billed " + (cycle === "annual" ? "yearly" : "monthly");
+      ? t("pricingRd.perMoEffective", {
+          amount: Math.round(plan.priceYearly / 12).toLocaleString(
+            locale === "fr-CA" ? "fr-CA" : "en-CA",
+            { maximumFractionDigits: 0 },
+          ),
+        })
+      : cycle === "annual"
+        ? t("pricingRd.billedYearly")
+        : t("pricingRd.billedMonthly");
 
   const featured = !!plan.featured;
+
   return (
     <div
       className={cn(
@@ -239,7 +233,7 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
     >
       {featured && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <RDBadge tone="terra">Most agents pick this</RDBadge>
+          <RDBadge tone="terra">{t("pricingRd.featuredTag")}</RDBadge>
         </div>
       )}
 
@@ -249,15 +243,15 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
           featured ? "text-rd-terra-400" : "text-rd-terra-700"
         )}
       >
-        {plan.tag}
+        {tag}
       </div>
-      <h3 className="text-[28px] font-semibold tracking-[-0.01em] mt-1.5">{plan.name}</h3>
+      <h3 className="text-[28px] font-semibold tracking-[-0.01em] mt-1.5">{name}</h3>
 
       <div className="flex items-baseline gap-1.5 mt-6">
         <span className="text-[52px] font-semibold tracking-[-0.025em]">
           {typeof displayPrice === "number"
-            ? `$${displayPrice.toLocaleString("en-CA")}`
-            : displayPrice}
+            ? renderPrice(displayPrice, locale)
+            : t("pricingRd.customLabel")}
         </span>
         {typeof displayPrice === "number" && (
           <span className={cn("text-sm", featured ? "text-white/60" : "text-rd-ink-500")}>
@@ -271,36 +265,45 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
           featured ? "text-white/50" : "text-rd-ink-500"
         )}
       >
-        {typeof displayPrice === "number" ? perMonthWhenYearly : "Annual · CAD"}
+        {typeof displayPrice === "number" ? perMonthWhenYearly : t("pricingRd.customAnnualLabel")}
       </div>
 
-      {cycle === "annual" && plan.annualSavingsLabel && (
+      {cycle === "annual" && savingsLabel && (
         <div
           className={cn(
             "text-xs mt-2 font-semibold",
             featured ? "text-rd-terra-400" : "text-rd-success"
           )}
         >
-          {plan.annualSavingsLabel}
+          {savingsLabel}
         </div>
       )}
 
       <p className={cn("text-sm mt-4 leading-[1.5]", featured ? "text-white/70" : "text-rd-ink-600")}>
-        {plan.desc}
+        {desc}
       </p>
 
-      <Link to={plan.cta.label === "Talk to sales" ? "/demo" : "/signup"} className="block mt-6">
-        <RDButton variant={plan.cta.variant} size="lg" trailingIcon={<IconArrow />} full>
-          {plan.cta.label}
+      <Link
+        to={plan.cta === "talkSales" ? "/demo" : "/signup"}
+        className="block mt-6"
+      >
+        <RDButton variant={plan.ctaVariant} size="lg" trailingIcon={<IconArrow />} full>
+          {plan.cta === "talkSales" ? t("pricingRd.ctaTalkSales") : t("pricingRd.ctaStart")}
         </RDButton>
       </Link>
 
       <ul className="mt-7 flex flex-col gap-3">
-        {plan.features.map((f) => {
-          const isHead = f.startsWith("Everything");
+        {plan.featureKeys.map((fk) => {
+          const label =
+            fk === "__team_every"
+              ? t("pricingRd.featEveryIn", { plan: t("pricingRd.planSoloName") })
+              : fk === "__brokerage_every"
+                ? t("pricingRd.featEveryIn", { plan: t("pricingRd.planTeamName") })
+                : t(fk);
+          const isHead = fk.startsWith("__");
           return (
             <li
-              key={f}
+              key={fk}
               className={cn(
                 "text-[13px] flex items-start gap-2.5",
                 featured ? "text-white/85" : "text-rd-ink-700",
@@ -315,7 +318,7 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
                   )}
                 />
               )}
-              <span>{f}</span>
+              <span>{label}</span>
             </li>
           );
         })}
@@ -324,31 +327,70 @@ function PricingPlan({ plan, cycle }: { plan: Plan; cycle: BillingCycle }) {
   );
 }
 
-function FeatureMatrix() {
+function cap(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+interface MatrixRow {
+  labelKey: string;
+  solo: boolean | string;
+  team: boolean | string;
+  bk: boolean | string;
+}
+
+function FeatureMatrix({ t }: { t: TFn }) {
+  const sections: { labelKey: string; rows: MatrixRow[] }[] = [
+    {
+      labelKey: "pricingRd.matrixSecAi",
+      rows: [
+        { labelKey: "pricingRd.matrixRowDeskMsgs", solo: "500", team: t("pricingRd.matrixValUnl"), bk: t("pricingRd.matrixValUnl") },
+        { labelKey: "pricingRd.matrixRowBilingual", solo: true, team: true, bk: true },
+        { labelKey: "pricingRd.matrixRowVoice", solo: false, team: true, bk: true },
+        { labelKey: "pricingRd.matrixRowScoring", solo: true, team: true, bk: true },
+      ],
+    },
+    {
+      labelKey: "pricingRd.matrixSecIntegrations",
+      rows: [
+        { labelKey: "pricingRd.matrixRowDdfBoards", solo: "1", team: t("pricingRd.matrixValUnl"), bk: t("pricingRd.matrixValUnlCustom") },
+        { labelKey: "pricingRd.matrixRowStack", solo: true, team: true, bk: true },
+        { labelKey: "pricingRd.matrixRowSso", solo: false, team: false, bk: true },
+      ],
+    },
+    {
+      labelKey: "pricingRd.matrixSecCompliance",
+      rows: [
+        { labelKey: "pricingRd.matrixRowPipeda", solo: true, team: true, bk: true },
+        { labelKey: "pricingRd.matrixRowCasl", solo: true, team: true, bk: true },
+        { labelKey: "pricingRd.matrixRowFintrac", solo: false, team: false, bk: true },
+      ],
+    },
+  ];
+
   return (
     <div className="bg-white border border-rd-line rounded-rd-lg overflow-hidden">
       <div className="grid grid-cols-[2fr_1fr_1fr_1fr] px-6 py-[18px] bg-rd-ink-50 border-b border-rd-line text-xs font-bold uppercase tracking-[0.06em] text-rd-ink-600">
         <div />
-        <div className="text-center">Solo</div>
-        <div className="text-center text-rd-navy-800">Team</div>
-        <div className="text-center">Brokerage</div>
+        <div className="text-center">{t("pricingRd.colSolo")}</div>
+        <div className="text-center text-rd-navy-800">{t("pricingRd.colTeam")}</div>
+        <div className="text-center">{t("pricingRd.colBrokerage")}</div>
       </div>
-      {MATRIX.map((section, si) => (
-        <Fragment key={section.label}>
+      {sections.map((section, si) => (
+        <Fragment key={section.labelKey}>
           <div
             className={cn(
               "px-6 py-3 bg-rd-ink-50 text-[11px] font-bold uppercase tracking-[0.08em] text-rd-ink-500",
               si === 0 ? "" : "border-t border-rd-line"
             )}
           >
-            {section.label}
+            {t(section.labelKey)}
           </div>
           {section.rows.map((r) => (
             <div
-              key={r.f}
+              key={r.labelKey}
               className="grid grid-cols-[2fr_1fr_1fr_1fr] px-6 py-4 border-t border-rd-line items-center text-sm"
             >
-              <div className="text-rd-ink-900 font-medium">{r.f}</div>
+              <div className="text-rd-ink-900 font-medium">{t(r.labelKey)}</div>
               <Cell v={r.solo} />
               <Cell v={r.team} featured />
               <Cell v={r.bk} />

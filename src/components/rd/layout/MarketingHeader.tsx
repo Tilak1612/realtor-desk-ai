@@ -22,31 +22,45 @@ type Tone = "paper" | "dark";
 
 interface MarketingHeaderProps {
   tone?: Tone;
-  links?: { label: string; to: string }[];
+  /** Override the nav links. Pass {labelKey, to} to resolve through t(), or
+   *  {label, to} for literal strings. If omitted, DEFAULT_LINK_KEYS is used. */
+  links?: ({ label: string; to: string } | { labelKey: string; to: string })[];
   className?: string;
   showLanguageToggle?: boolean;
 }
 
-const DEFAULT_LINKS = [
-  { label: "Features", to: "/features" },
-  { label: "How it works", to: "/how-it-works" },
-  { label: "Pricing", to: "/pricing" },
-  { label: "Compare", to: "/compare/boldtrail" },
-  { label: "Resources", to: "/resources" },
+// Link targets are static; labels resolve through t() at render time so
+// the FR toggle swaps them without a page reload. Keys live in the
+// `marketingHeader.nav*` namespace.
+const DEFAULT_LINK_KEYS: { labelKey: string; to: string }[] = [
+  { labelKey: "marketingHeader.navFeatures", to: "/features" },
+  { labelKey: "marketingHeader.navHowItWorks", to: "/how-it-works" },
+  { labelKey: "marketingHeader.navPricing", to: "/pricing" },
+  { labelKey: "marketingHeader.navCompare", to: "/compare/boldtrail" },
+  { labelKey: "marketingHeader.navResources", to: "/resources" },
 ];
 
 const MD_BREAKPOINT = 768;
 
 export function MarketingHeader({
   tone = "paper",
-  links = DEFAULT_LINKS,
+  links,
   className,
   showLanguageToggle = true,
 }: MarketingHeaderProps) {
   const dark = tone === "dark";
   const location = useLocation();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Resolve nav links: either caller-provided (with label or labelKey) or
+  // the defaults keyed through t(). Produces a uniform {label, to} shape
+  // for the render paths below.
+  const resolvedLinks: { label: string; to: string }[] = (
+    links ?? DEFAULT_LINK_KEYS
+  ).map((l) =>
+    "labelKey" in l ? { label: t(l.labelKey), to: l.to } : l,
+  );
 
   const activeLang = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
   const setLang = (next: "en" | "fr") => {
@@ -92,15 +106,19 @@ export function MarketingHeader({
           <RDWordmark size={20} tone={dark ? "paper" : "navy"} />
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => {
+        {/* Desktop nav — gap-6 default, widens to gap-8 at lg. FR labels
+            run ~130% of EN length (e.g. "Fonctionnalités" vs "Features"),
+            so the tighter default gap + whitespace-nowrap on each link
+            prevents wrapping on the 768–1023px md range. */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          {resolvedLinks.map((l) => {
             const active = location.pathname === l.to;
             return (
               <Link
                 key={l.to}
                 to={l.to}
                 className={cn(
-                  "text-sm font-medium transition-opacity",
+                  "text-sm font-medium transition-opacity whitespace-nowrap",
                   active ? "opacity-100" : "opacity-80 hover:opacity-100"
                 )}
               >
@@ -115,7 +133,7 @@ export function MarketingHeader({
             <div
               className="hidden sm:flex text-xs font-semibold gap-1"
               role="group"
-              aria-label="Language"
+              aria-label={t("marketingHeader.langAriaLabel")}
             >
               <button
                 type="button"
@@ -152,12 +170,12 @@ export function MarketingHeader({
           )}
           <Link to="/login" className="hidden sm:block">
             <RDButton variant={dark ? "light" : "ghost"} size="sm">
-              Sign in
+              {t("marketingHeader.ctaSignIn")}
             </RDButton>
           </Link>
           <Link to="/signup" className="hidden sm:block">
             <RDButton variant={dark ? "terra" : "primary"} size="sm">
-              Start free trial
+              {t("marketingHeader.ctaStartFreeTrial")}
             </RDButton>
           </Link>
 
@@ -165,7 +183,7 @@ export function MarketingHeader({
             <Dialog.Trigger asChild>
               <button
                 type="button"
-                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-label={mobileOpen ? t("marketingHeader.closeMenu") : t("marketingHeader.openMenu")}
                 className={cn(
                   "md:hidden w-11 h-11 flex items-center justify-center rounded-md border",
                   dark
@@ -193,9 +211,9 @@ export function MarketingHeader({
                     : "bg-white text-rd-ink-900 border-l border-rd-line"
                 )}
               >
-                <Dialog.Title className="sr-only">Realtor Desk navigation</Dialog.Title>
+                <Dialog.Title className="sr-only">{t("marketingHeader.drawerTitle")}</Dialog.Title>
                 <Dialog.Description className="sr-only">
-                  Main navigation menu
+                  {t("marketingHeader.drawerNavLabel")}
                 </Dialog.Description>
 
                 <div className={cn(
@@ -212,7 +230,7 @@ export function MarketingHeader({
                   <Dialog.Close asChild>
                     <button
                       type="button"
-                      aria-label="Close menu"
+                      aria-label={t("marketingHeader.closeMenu")}
                       className={cn(
                         "w-11 h-11 flex items-center justify-center rounded-md border",
                         dark
@@ -227,7 +245,7 @@ export function MarketingHeader({
 
                 <nav className="flex-1 overflow-y-auto px-6 py-4">
                   <ul className="flex flex-col">
-                    {links.map((l) => {
+                    {resolvedLinks.map((l) => {
                       const active = location.pathname === l.to;
                       return (
                         <li key={l.to}>
@@ -253,7 +271,7 @@ export function MarketingHeader({
                         dark ? "border-white/10" : "border-rd-line"
                       )}
                       role="group"
-                      aria-label="Language"
+                      aria-label={t("marketingHeader.langAriaLabel")}
                     >
                       <button
                         type="button"
@@ -299,12 +317,12 @@ export function MarketingHeader({
                 )}>
                   <Link to="/login" className="w-full">
                     <RDButton variant={dark ? "light" : "ghost"} size="lg" className="w-full min-h-[44px]">
-                      Sign in
+                      {t("marketingHeader.ctaSignIn")}
                     </RDButton>
                   </Link>
                   <Link to="/signup" className="w-full">
                     <RDButton variant={dark ? "terra" : "primary"} size="lg" className="w-full min-h-[44px]">
-                      Start free trial
+                      {t("marketingHeader.ctaStartFreeTrial")}
                     </RDButton>
                   </Link>
                 </div>

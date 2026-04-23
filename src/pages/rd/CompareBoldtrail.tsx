@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
 import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
@@ -7,9 +8,8 @@ import { RDButton, IconArrow } from "@/components/rd";
 import { cn } from "@/lib/utils";
 
 // /compare/boldtrail — Compare page per rd-marketing.jsx Artboard_Compare.
-// Static content — matches the design's comparison table sourced from
-// BoldTrail's own help center + G2 signals (see PR #23 for source
-// citations if a reader wants to drill in).
+// Static content backed by the `compareBoldtrail.*` i18n namespace so
+// the whole table (not just the hero) swaps on FR toggle.
 
 interface CompareItem {
   f: string;
@@ -17,70 +17,71 @@ interface CompareItem {
   rd: string;
 }
 
-const SECTIONS: { section: string; items: CompareItem[] }[] = [
-  {
-    section: "Canadian fit",
-    items: [
-      { f: "Canadian-hosted data (PIPEDA)", bt: "✕ US-only", rd: "✓ Canadian data centers" },
-      { f: "Bilingual EN · FR", bt: "Add-on, $$", rd: "✓ Built in" },
-      { f: "CASL email auto-footers", bt: "Manual template", rd: "✓ Automatic" },
-      { f: "CREA DDF® integration", bt: "3rd-party plugin", rd: "✓ Native" },
-      { f: "CAD pricing", bt: "USD + ~20% premium", rd: "✓ Pure CAD" },
-    ],
-  },
-  {
-    section: "AI & speed",
-    items: [
-      { f: "AI lead response time", bt: "2–3 min", rd: "< 45s" },
-      { f: "Bilingual AI out of the box", bt: "✕", rd: "✓" },
-      { f: "Voice AI coming 2026", bt: "Unknown", rd: "Q3 2026, in beta now" },
-    ],
-  },
-  {
-    section: "Cost",
-    items: [
-      { f: "Starting price", bt: "USD $499 setup + $99/mo", rd: "CAD $149/mo, no setup" },
-      { f: "Annual plan (single agent)", bt: "USD $1,188/yr", rd: "CAD $999/yr — save $789" },
-      { f: "Per-user cost after 5", bt: "USD $49", rd: "CAD $15" },
-      { f: "Onboarding fee", bt: "USD $499", rd: "Included" },
-    ],
-  },
-];
-
-const BT_STATS: [string, string][] = [
-  ["2008", "Founded"],
-  ["KW", "Parent co."],
-  ["USD", "Pricing"],
-];
-const RD_STATS: [string, string][] = [
-  ["2025", "Launched"],
-  ["YEG", "HQ"],
-  ["CAD", "Pricing"],
-];
-
 export default function CompareBoldtrail() {
+  const { t } = useTranslation();
+
+  const SECTIONS: { section: string; items: CompareItem[] }[] = [
+    {
+      section: t("compareBoldtrail.secCanadianFit"),
+      items: [
+        { f: t("compareBoldtrail.fCanadianHosted"), bt: t("compareBoldtrail.vThemUsOnly"), rd: t("compareBoldtrail.vUsCanadianCenters") },
+        { f: t("compareBoldtrail.fBilingual"), bt: t("compareBoldtrail.vThemAddonCost"), rd: t("compareBoldtrail.vUsBuiltIn") },
+        { f: t("compareBoldtrail.fCaslFooters"), bt: t("compareBoldtrail.vThemManualTemplate"), rd: t("compareBoldtrail.vUsAutomatic") },
+        { f: t("compareBoldtrail.fDdfIntegration"), bt: t("compareBoldtrail.vThemThirdParty"), rd: t("compareBoldtrail.vUsNative") },
+        { f: t("compareBoldtrail.fCadPricing"), bt: t("compareBoldtrail.vThemUsdPremium"), rd: t("compareBoldtrail.vUsPureCad") },
+      ],
+    },
+    {
+      section: t("compareBoldtrail.secAiSpeed"),
+      items: [
+        { f: t("compareBoldtrail.fAiResponseTime"), bt: t("compareBoldtrail.vThemMinutes"), rd: t("compareBoldtrail.vUsFast") },
+        { f: t("compareBoldtrail.fBilingualAiOob"), bt: t("compareBoldtrail.vNo"), rd: t("compareBoldtrail.vYes") },
+        { f: t("compareBoldtrail.fVoiceAi2026"), bt: t("compareBoldtrail.vThemUnknown"), rd: t("compareBoldtrail.vUsQ3Beta") },
+      ],
+    },
+    {
+      section: t("compareBoldtrail.secCost"),
+      items: [
+        { f: t("compareBoldtrail.fStartingPrice"), bt: t("compareBoldtrail.vThemPriceSetup"), rd: t("compareBoldtrail.vUsPriceNoSetup") },
+        { f: t("compareBoldtrail.fAnnualSingle"), bt: t("compareBoldtrail.vThemAnnual"), rd: t("compareBoldtrail.vUsAnnualSave") },
+        { f: t("compareBoldtrail.fPerUserAfter5"), bt: t("compareBoldtrail.vThemPerUser"), rd: t("compareBoldtrail.vUsPerUser") },
+        { f: t("compareBoldtrail.fOnboardingFee"), bt: t("compareBoldtrail.vThemOnboardingFee"), rd: t("compareBoldtrail.vUsIncluded") },
+      ],
+    },
+  ];
+
+  const BT_STATS: [string, string][] = [
+    ["2008", t("compareBoldtrail.statFounded")],
+    ["KW", t("compareBoldtrail.statParent")],
+    ["USD", t("compareBoldtrail.statPricing")],
+  ];
+  const RD_STATS: [string, string][] = [
+    ["2025", t("compareBoldtrail.statLaunched")],
+    ["YEG", t("compareBoldtrail.statHq")],
+    ["CAD", t("compareBoldtrail.statPricing")],
+  ];
+
   return (
     <MarketingLayout>
       <SEO
-        title="RealtorDesk AI vs BoldTrail — the Canadian-first alternative"
-        description="BoldTrail is a great platform — for KW agents in Dallas. If you're selling pre-construction in Mississauga or condos in Le Plateau, here's how we compare."
+        title={t("compareBoldtrail.seoTitle")}
+        description={t("compareBoldtrail.seoDesc")}
         canonicalUrl="https://www.realtordesk.ai/compare/boldtrail"
       />
 
       {/* Hero */}
       <section className="px-8 md:px-14 pt-20 pb-10">
         <div className="mx-auto max-w-[1100px] text-center">
-          <Eyebrow className="mx-auto">Realtor Desk vs BoldTrail</Eyebrow>
+          <Eyebrow className="mx-auto">{t("compareBoldtrail.eyebrow")}</Eyebrow>
           <h1 className="mt-3.5 text-[40px] md:text-[56px] lg:text-[64px] font-semibold tracking-[-0.025em] leading-[1.05]">
-            One's built for the US.{" "}
+            {t("compareBoldtrail.headline1")}{" "}
             <span className="font-rd-serif italic font-normal text-rd-navy-800">
-              One's built for you
+              {t("compareBoldtrail.headline2")}
             </span>
             .
           </h1>
           <p className="text-lg text-rd-ink-600 max-w-[680px] mx-auto mt-5 leading-[1.55]">
-            BoldTrail is a great platform — for Keller Williams agents in Dallas. If you're
-            selling pre-construction in Mississauga or condos in Le Plateau, a few things change.
+            {t("compareBoldtrail.subtitle")}
           </p>
         </div>
       </section>
@@ -90,13 +91,13 @@ export default function CompareBoldtrail() {
         <div className="mx-auto max-w-[1100px] grid grid-cols-1 md:grid-cols-2 gap-5">
           <CompareHeroCard
             name="BoldTrail"
-            tagline="The US market leader"
+            tagline={t("compareBoldtrail.heroCardThemTag")}
             stats={BT_STATS}
             variant="muted"
           />
           <CompareHeroCard
             name="Realtor Desk"
-            tagline="The Canadian-first alternative"
+            tagline={t("compareBoldtrail.heroCardUsTag")}
             stats={RD_STATS}
             variant="navy"
           />
@@ -135,21 +136,20 @@ export default function CompareBoldtrail() {
       <section className="px-8 md:px-14 py-20">
         <div className="mx-auto max-w-[900px] bg-rd-navy-800 rounded-rd-xl p-12 md:p-14 text-center text-white">
           <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] leading-[1.15]">
-            Ready to trade USD for a product that speaks your market?
+            {t("compareBoldtrail.closingHeadline")}
           </h2>
           <p className="text-base text-white/70 mt-3.5 leading-[1.55]">
-            Import your BoldTrail leads in one click. 14-day trial. We'll match your remaining
-            annual contract.
+            {t("compareBoldtrail.closingBody")}
           </p>
           <div className="inline-flex flex-wrap gap-3 mt-8 justify-center">
             <Link to="/signup">
               <RDButton variant="terra" size="lg" trailingIcon={<IconArrow />}>
-                Start your switch
+                {t("compareBoldtrail.closingCtaPrimary")}
               </RDButton>
             </Link>
             <Link to="/contact">
               <RDButton variant="light" size="lg">
-                Talk to a Canadian
+                {t("compareBoldtrail.closingCtaSecondary")}
               </RDButton>
             </Link>
           </div>

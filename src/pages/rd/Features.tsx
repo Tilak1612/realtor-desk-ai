@@ -35,7 +35,7 @@ const PILLARS: Pillar[] = [
   },
   {
     cat: "Built for Canada",
-    title: "PIPEDA-native. CASL-aware. RECO-ready.",
+    title: "PIPEDA-native. CASL-aware. Provincially-ready.",
     body:
       "Canadian data stays in Canadian data centres. Consent is captured at first touch, logged, and revocable. Quebec disclosures and FINTRAC verifications tracked per deal.",
     tags: ["AWS ca-central-1", "PIPEDA consent log", "Quebec bilingual disclosures"],

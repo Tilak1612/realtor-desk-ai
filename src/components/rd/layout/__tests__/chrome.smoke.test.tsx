@@ -77,6 +77,14 @@ describe("MarketingHeader mobile drawer", () => {
   // which gives us portal rendering, focus trap, scroll lock, Escape
   // close, and aria-modal. These assertions lock the modal contract
   // so any accidental regression to a dropdown pattern fails CI.
+  //
+  // Reset language to EN before each case — the TopNav suite above
+  // flips i18n to FR and the language persists across describes.
+  beforeEach(async () => {
+    await act(async () => {
+      await (await import("@/i18n/config")).default.changeLanguage("en");
+    });
+  });
 
   it("sticky header sits at z-40 with opaque bg (WCAG contrast)", () => {
     const { container } = renderWithProviders(<MarketingHeader />);
@@ -164,8 +172,10 @@ describe("MarketingHeader mobile drawer", () => {
     renderWithProviders(<MarketingHeader />);
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
-    // Nav links rendered inside the drawer.
-    await screen.findByRole("link", { name: "Features" });
+    // Nav links rendered inside the drawer. Desktop nav is also mounted
+    // (hidden via md:hidden but still in the DOM), so there can be ≥1.
+    const featuresLinks = await screen.findAllByRole("link", { name: "Features" });
+    expect(featuresLinks.length).toBeGreaterThan(0);
     expect(screen.getAllByRole("link", { name: "How it works" }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("link", { name: "Pricing" }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("link", { name: "Compare" }).length).toBeGreaterThan(0);
