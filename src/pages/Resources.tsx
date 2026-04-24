@@ -410,6 +410,25 @@ const Resources = () => {
         </div>
       </section>
 
+      {/* FR-only disclosure: the catalogue filter hides the articles
+          that don't yet have FR translations. Surfacing the count +
+          an EN link keeps the promise honest (2026-04-23 audit). */}
+      {isFr && articles.length > visibleArticles.length && (
+        <section className="py-4 bg-accent/20 border-b border-accent/40">
+          <div className="container-custom flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-sm">
+            <p className="text-muted-foreground">
+              {t("resourcesDisclosure.frOnlyBody", { hidden: articles.length - visibleArticles.length })}
+            </p>
+            <a
+              href="/resources?lang=en"
+              className="font-semibold text-primary hover:underline whitespace-nowrap"
+            >
+              {t("resourcesDisclosure.viewEnCta")} →
+            </a>
+          </div>
+        </section>
+      )}
+
       {/* Category Filter - Sticky */}
       <section className="py-8 border-b sticky top-20 z-40 bg-background/95 backdrop-blur-md">
         <div className="container-custom">
