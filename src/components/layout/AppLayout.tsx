@@ -21,7 +21,13 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
       <div className="flex-1 flex flex-col min-w-0">
         <DashboardNavbar user={user} profile={profile} />
 
-        <main className="flex-1 overflow-y-auto">
+        {/* overflow-x-hidden is a safety net against child elements that
+            escape their container on narrow phones (Round 3 audit flagged
+            documentElement.scrollWidth > clientWidth on /today at 420px).
+            Page-level fixes address the specific overflowing elements;
+            this prevents the entire viewport from scrolling sideways when
+            any future regression slips one past. */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">
           <div className="p-4 sm:p-6 max-w-7xl mx-auto pb-12">
             {children}
           </div>
