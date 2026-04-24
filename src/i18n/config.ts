@@ -509,9 +509,9 @@ const resources = {
           seeFull: "See the full comparison"
         },
         testimonial: {
-          quote: "I closed a $1.4M listing on day three because Realtor Desk answered the lead at 11:42 p.m. in French. I called her back at 9 a.m. with the whole transcript. That's the product.",
-          author: "Sarah Khoury",
-          role: "Broker · Royal LePage Toronto"
+          quote: "Customer story coming soon.",
+          author: "",
+          role: ""
         },
         closingCta: {
           title: "Start your 14-day trial.",
@@ -3455,9 +3455,9 @@ const resources = {
           seeFull: "Voir la comparaison complète"
         },
         testimonial: {
-          quote: "J'ai conclu une transaction de 1,4 M$ CA dès le troisième jour parce que Realtor Desk a répondu au prospect à 23 h 42 en français. Je l'ai rappelée à 9 h avec toute la transcription. C'est ça, le produit.",
-          author: "Sarah Khoury",
-          role: "Courtière · Royal LePage Toronto"
+          quote: "Histoire client à venir.",
+          author: "",
+          role: ""
         },
         closingCta: {
           title: "Commencez votre essai de 14 jours.",
