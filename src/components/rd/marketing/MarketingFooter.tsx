@@ -20,8 +20,11 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
     <footer
       className={`bg-white px-4 sm:px-8 md:px-14 py-14 ${topBorder ? "border-t border-rd-line" : ""}`}
     >
-      <div className="mx-auto max-w-[1200px] grid grid-cols-2 md:grid-cols-5 gap-10 text-rd-ink-700">
-        <div className="col-span-2 md:col-span-1.5" style={{ gridColumn: "span 2 / span 2" }}>
+      {/* 6-col grid on md+ so Brand(span 2) + Product + Compare + Canada + Company
+          = 6 slots fit in one row. Was grid-cols-5, which forced Company
+          to wrap onto a second row with 3 columns stranded above (2026-04-24 audit). */}
+      <div className="mx-auto max-w-[1200px] grid grid-cols-2 md:grid-cols-6 gap-10 text-rd-ink-700">
+        <div className="col-span-2 md:col-span-2">
           <RDWordmark size={18} />
           <p className="mt-3.5 text-[13px] text-rd-ink-500 leading-[1.55] max-w-[280px]">
             {t("marketingFooter.tagline")}

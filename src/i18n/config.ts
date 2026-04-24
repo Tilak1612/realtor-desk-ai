@@ -2365,7 +2365,8 @@ const resources = {
         goDashboard: "Go to dashboard",
         goHome: "Return to home",
         seoTitle: "Page not found — Realtor Desk",
-        seoDesc: "The page you're looking for doesn't exist or has been moved."
+        seoDesc: "The page you're looking for doesn't exist or has been moved.",
+        tryInstead: "Try one of these instead:"
       },
       trial: {
         daysRemaining: "{{count}} days remaining in your free trial",
@@ -5470,7 +5471,8 @@ const resources = {
         goDashboard: "Aller au tableau de bord",
         goHome: "Retour à l'accueil",
         seoTitle: "Page introuvable — Realtor Desk",
-        seoDesc: "La page que vous recherchez n'existe pas ou a été déplacée."
+        seoDesc: "La page que vous recherchez n'existe pas ou a été déplacée.",
+        tryInstead: "Essayez plutôt :"
       },
       trial: {
         daysRemaining: "{{count}} jours restants dans votre essai gratuit",
