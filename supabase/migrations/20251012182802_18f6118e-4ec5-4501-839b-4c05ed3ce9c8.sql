@@ -4,6 +4,14 @@ VALUES ('avatars', 'avatars', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Storage policies for avatars
+-- DROP IF EXISTS guards so this migration is replayable against the
+-- shared storage plane (Supabase preview branches share storage.* with
+-- the parent project — policy rows persist across branch resets).
+DROP POLICY IF EXISTS "Users can upload own avatar" ON storage.objects;
+DROP POLICY IF EXISTS "Users can update own avatar" ON storage.objects;
+DROP POLICY IF EXISTS "Users can delete own avatar" ON storage.objects;
+DROP POLICY IF EXISTS "Avatars are publicly accessible" ON storage.objects;
+
 CREATE POLICY "Users can upload own avatar"
 ON storage.objects FOR INSERT
 WITH CHECK (

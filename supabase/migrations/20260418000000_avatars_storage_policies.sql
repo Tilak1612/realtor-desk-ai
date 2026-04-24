@@ -11,6 +11,14 @@
 -- So `(storage.foldername(name))[1]` is the user's UUID. Authenticated
 -- users may only write objects under their own UUID folder.
 
+-- DROP IF EXISTS guards so this migration is replayable against the
+-- shared storage plane (Supabase preview branches share storage.* with
+-- the parent project — policy rows persist across branch resets).
+drop policy if exists "avatars_insert_own" on storage.objects;
+drop policy if exists "avatars_update_own" on storage.objects;
+drop policy if exists "avatars_delete_own" on storage.objects;
+drop policy if exists "avatars_select_public" on storage.objects;
+
 -- Upload: authenticated users can write only into their own folder
 create policy "avatars_insert_own"
   on storage.objects for insert
