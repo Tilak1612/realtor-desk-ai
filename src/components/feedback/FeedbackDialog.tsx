@@ -87,9 +87,19 @@ const FeedbackDialog = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="sm" className="text-xs">
-          <MessageSquare className="w-4 h-4 mr-1.5" />
-          {t('nav.giveFeedback', 'Give Feedback')}
+        {/* Label is hidden on mobile — the icon-only trigger keeps the
+            dashboard top bar from overflowing on 420px phones where
+            LanguageSwitcher + Feedback + Add + Bell + Avatar all compete
+            for the right-side row. aria-label preserves screen-reader
+            access. */}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-xs"
+          aria-label={t('nav.giveFeedback', 'Give Feedback')}
+        >
+          <MessageSquare className="w-4 h-4 sm:mr-1.5" />
+          <span className="hidden sm:inline">{t('nav.giveFeedback', 'Give Feedback')}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">

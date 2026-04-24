@@ -286,7 +286,11 @@ const Today = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-3 gap-4">
+            {/* Stack on phone so "Follow-ups Scheduled" + "Deals Moved Forward"
+                don't wrap to 3 lines each and collide at column boundaries at
+                ~115px column widths (420px viewport). Grid returns to 3
+                columns at sm (640px) where there's room. */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary">{weeklySummary.callsLogged}</div>
                 <div className="text-sm text-muted-foreground mt-1">{t('today.callsLogged', 'Calls Logged')}</div>
@@ -307,12 +311,16 @@ const Today = () => {
         <div className="text-center py-6">
           {contactsToCall.length > 0 ? (
             <>
+              {/* w-full sm:w-auto + whitespace-normal stops the CTA from
+                  clipping past the right edge on narrow phones. Button's
+                  default whitespace-nowrap kept "Make Today's Calls" on one
+                  line wider than the 420px viewport minus card padding. */}
               <Button
                 size="lg"
-                className="h-16 px-12 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                className="h-16 w-full sm:w-auto max-w-full px-8 sm:px-12 text-lg font-semibold shadow-lg hover:shadow-xl transition-all whitespace-normal"
                 onClick={handleMakeTodaysCalls}
               >
-                <Phone className="w-6 h-6 mr-3" />
+                <Phone className="w-6 h-6 mr-3 flex-shrink-0" />
                 {t('today.makeCalls', "Make Today's Calls")}
               </Button>
               <p className="text-sm text-muted-foreground mt-3">
