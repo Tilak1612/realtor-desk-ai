@@ -70,6 +70,9 @@ const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const Integrations = lazy(() => import("./pages/Integrations"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Careers = lazy(() => import("./pages/Careers"));
+const Partners = lazy(() => import("./pages/Partners"));
+const PartnersApply = lazy(() => import("./pages/PartnersApply"));
+const PartnersTerms = lazy(() => import("./pages/PartnersTerms"));
 const PIPEDACompliancePage = lazy(() => import("./pages/PIPEDACompliancePage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
@@ -301,6 +304,9 @@ const App = () => (
           <Route path="/integrations" element={<IntegrationsRoute />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/partners" element={<Partners />} />
+          <Route path="/partners/apply" element={<PartnersApply />} />
+          <Route path="/partners/terms" element={<PartnersTerms />} />
           <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />

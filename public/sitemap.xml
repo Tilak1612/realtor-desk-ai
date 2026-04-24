@@ -71,6 +71,24 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://www.realtordesk.ai/partners</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.realtordesk.ai/partners/apply</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.realtordesk.ai/partners/terms</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://www.realtordesk.ai/resources</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
