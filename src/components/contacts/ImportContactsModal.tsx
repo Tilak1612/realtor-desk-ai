@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -129,6 +130,9 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("app.modals.importContacts.title")}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.importContacts", "Import multiple contacts from a CSV file")}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">

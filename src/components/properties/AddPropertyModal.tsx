@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -263,6 +263,9 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t("app.modals.addProperty.title")}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.addProperty", "Add a new property listing")}
+          </DialogDescription>
         </DialogHeader>
         
         <form noValidate onSubmit={handleSubmit} className="space-y-6">

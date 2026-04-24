@@ -193,7 +193,12 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative h-8 w-8">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative h-8 w-8"
+                aria-label={t('a11y.notifications', 'Notifications')}
+              >
                 <Bell className="h-4 w-4" />
                 {notificationCount > 0 && (
                   <Badge
@@ -227,7 +232,12 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
           {/* User Profile Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0" disabled={avatarUploading}>
+              <Button
+                variant="ghost"
+                className="relative h-8 w-8 rounded-full p-0"
+                disabled={avatarUploading}
+                aria-label={t('a11y.accountMenu', 'Account menu')}
+              >
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={avatarUrl ?? undefined} />
                   {/* Fallback must pop against the navy header — bg-primary

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useTranslation } from "react-i18next";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +23,7 @@ interface WinLossModalProps {
 }
 
 const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModalProps) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     closeDate: new Date(),
@@ -114,6 +116,9 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
           <DialogTitle>
             {type === "won" ? "Mark Transaction as Sold 🎉" : "Mark Transaction as Withdrawn"}
           </DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.winLoss", "Mark this deal as won or lost and capture outcome details")}
+          </DialogDescription>
         </DialogHeader>
 
         <form noValidate onSubmit={handleSubmit} className="space-y-4">
