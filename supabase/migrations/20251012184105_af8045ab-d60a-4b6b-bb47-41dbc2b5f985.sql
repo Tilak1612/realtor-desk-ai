@@ -163,7 +163,12 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES ('contact-documents', 'contact-documents', false)
 ON CONFLICT (id) DO NOTHING;
 
--- Storage policies for contact documents
+-- Storage policies for contact documents — DROP IF EXISTS so this
+-- migration can replay against the shared storage plane on preview-branch reset.
+DROP POLICY IF EXISTS "Users can upload own contact documents" ON storage.objects;
+DROP POLICY IF EXISTS "Users can view own contact documents" ON storage.objects;
+DROP POLICY IF EXISTS "Users can delete own contact documents" ON storage.objects;
+
 CREATE POLICY "Users can upload own contact documents"
   ON storage.objects FOR INSERT
   WITH CHECK (
