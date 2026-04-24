@@ -192,7 +192,7 @@ const Billing = () => {
                 <div>
                   <CardTitle className="text-base font-medium flex items-center gap-2">
                     <Check className="w-4 h-4 text-accent" />
-                    {subscriptionTier === 'agent' ? t('billing.agentPlan', 'Agent Plan') : t('billing.teamPlan', 'Team Plan')}
+                    {subscriptionTier === 'agent' ? t('billing.agentPlan', 'Solo plan') : t('billing.teamPlan', 'Team plan')}
                   </CardTitle>
                   <CardDescription className="text-xs mt-1">
                     {t('billing.subscriptionActive', 'Your subscription is active')}
@@ -265,12 +265,12 @@ const Billing = () => {
           <h2 className="text-lg font-semibold mb-4">
             {subscribed ? t('billing.availablePlans', 'Available Plans') : t('billing.choosePlan', 'Choose Your Plan')}
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Agent Plan */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Solo plan */}
             <Card className={subscriptionTier === 'agent' ? 'border-2 border-accent shadow-lg' : ''}>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base font-medium">{t('billing.agentPlan', 'Agent Plan')}</CardTitle>
+                  <CardTitle className="text-base font-medium">{t('billing.agentPlan', 'Solo plan')}</CardTitle>
                   {subscriptionTier === 'agent' && (
                     <Badge variant="default" className="bg-accent text-xs">{t('billing.current', 'Current')}</Badge>
                   )}
@@ -285,7 +285,7 @@ const Billing = () => {
                   <span className="text-sm text-muted-foreground">/{isYearly ? t('billing.year', 'year') : t('billing.month', 'month')}</span>
                 </div>
                 <CardDescription className="text-xs mt-2">
-                  {t('billing.agentDesc', 'Perfect for individual agents')}
+                  {t('billing.agentDesc', 'For the single agent')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -298,7 +298,7 @@ const Billing = () => {
                   ))}
                 </ul>
                 {subscriptionTier !== 'agent' && (
-                  <Button 
+                  <Button
                     onClick={() => handleCheckout(isYearly ? SUBSCRIPTION_PRODUCTS.agent.yearly_price_id : SUBSCRIPTION_PRODUCTS.agent.monthly_price_id)}
                     disabled={checkoutLoading !== null}
                     className="w-full h-8 text-xs"
@@ -309,22 +309,22 @@ const Billing = () => {
                         Loading...
                       </>
                     ) : (
-                      subscribed ? t('billing.switchAgent', 'Switch to Agent') : t('billing.upgradeAgent', 'Upgrade to Agent')
+                      subscribed ? t('billing.switchAgent', 'Switch to Solo plan') : t('billing.upgradeAgent', 'Upgrade to Solo plan')
                     )}
                   </Button>
                 )}
               </CardContent>
             </Card>
 
-            {/* Team Plan */}
+            {/* Team plan */}
             <Card className={subscriptionTier === 'team' ? 'border-2 border-accent shadow-lg' : 'border-2 border-primary/20'}>
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base font-medium">{t('billing.teamPlan', 'Team Plan')}</CardTitle>
+                  <CardTitle className="text-base font-medium">{t('billing.teamPlan', 'Team plan')}</CardTitle>
                   {subscriptionTier === 'team' ? (
                     <Badge variant="default" className="bg-accent text-xs">{t('billing.current', 'Current')}</Badge>
                   ) : (
-                    <Badge variant="secondary" className="text-xs">{t('billing.mostPopular', 'Most Popular')}</Badge>
+                    <Badge variant="secondary" className="text-xs">{t('billing.mostPopular', 'Most popular')}</Badge>
                   )}
                 </div>
                 <div className="mt-4">
@@ -337,12 +337,12 @@ const Billing = () => {
                   <span className="text-sm text-muted-foreground">/{isYearly ? t('billing.year', 'year') : t('billing.month', 'month')}</span>
                 </div>
                 <CardDescription className="text-xs mt-2">
-                  {t('billing.teamDesc', 'For growing teams of 2-5 agents')}
+                  {t('billing.teamDesc', 'For 2–10 agents')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 mb-6">
-                  {[t('billing.features.everythingAgent', 'Everything in Agent, plus:'), t('billing.features.teamCollab', 'Team collaboration tools'), t('billing.features.leadRouting', 'Lead distribution & routing'), t('billing.features.advReporting', 'Advanced reporting'), t('billing.features.accountManager', 'Dedicated account manager')].map((feature) => (
+                  {[t('billing.features.everythingAgent', 'Everything in Solo, plus:'), t('billing.features.teamCollab', 'Team collaboration tools'), t('billing.features.leadRouting', 'Lead distribution & routing'), t('billing.features.advReporting', 'Advanced reporting'), t('billing.features.accountManager', 'Dedicated account manager')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>
@@ -350,7 +350,7 @@ const Billing = () => {
                   ))}
                 </ul>
                 {subscriptionTier !== 'team' && (
-                  <Button 
+                  <Button
                     onClick={() => handleCheckout(isYearly ? SUBSCRIPTION_PRODUCTS.team.yearly_price_id : SUBSCRIPTION_PRODUCTS.team.monthly_price_id)}
                     disabled={checkoutLoading !== null}
                     className="w-full h-8 text-xs"
@@ -361,10 +361,37 @@ const Billing = () => {
                         Loading...
                       </>
                     ) : (
-                      t('billing.upgradeTeam', 'Upgrade to Team')
+                      t('billing.upgradeTeam', 'Upgrade to Team plan')
                     )}
                   </Button>
                 )}
+              </CardContent>
+            </Card>
+
+            {/* Brokerage plan — static entry; pricing handled by sales. Keeps
+                /billing aligned with /pricing's three-tier structure so users
+                upgrading past Team don't hit a dead end. */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-medium">{t('billing.brokeragePlan', 'Brokerage plan')}</CardTitle>
+                <div className="mt-4">
+                  <span className="text-3xl font-bold">{t('billing.customPrice', 'Custom')}</span>
+                </div>
+                <CardDescription className="text-xs mt-2">
+                  {t('billing.brokerageDesc', 'For 10+ agents')}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-xs text-muted-foreground mb-6">
+                  {t('billing.brokerageBlurb', 'SSO, dedicated CSM, custom FINTRAC tooling, and SLA.')}
+                </p>
+                <Button
+                  onClick={() => navigate('/contact')}
+                  variant="outline"
+                  className="w-full h-8 text-xs"
+                >
+                  {t('billing.contactSales', 'Contact sales')}
+                </Button>
               </CardContent>
             </Card>
           </div>

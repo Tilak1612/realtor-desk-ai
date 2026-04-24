@@ -484,7 +484,11 @@ const Settings = () => {
                   {subscribed ? (
                     <>
                       <Badge variant="default" className="bg-accent text-accent-foreground text-xs">
-                        {subscriptionTier === 'agent' ? 'Agent Plan' : subscriptionTier === 'team' ? 'Team Plan' : 'Subscribed'}
+                        {subscriptionTier === 'agent'
+                          ? t('billing.agentPlan', 'Solo plan')
+                          : subscriptionTier === 'team'
+                            ? t('billing.teamPlan', 'Team plan')
+                            : t('billing.subscribed', 'Subscribed')}
                       </Badge>
                       {subscriptionEnd && (
                         <p className="text-xs text-muted-foreground">

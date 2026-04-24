@@ -24,7 +24,7 @@ export const SUBSCRIPTION_PRODUCTS = {
     yearly_price_id: 'price_1SXpzKS23MQcIdnrfH2rHhow',
     monthly_product_id: 'prod_TUpecsjMV6TaBw',
     yearly_product_id: 'prod_TUpevCKNFOGwCq',
-    name: 'Agent Plan',
+    name: 'Solo Plan',
     yearlyPrice: 999,
     monthlyPrice: 149,
   },
