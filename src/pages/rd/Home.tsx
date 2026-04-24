@@ -526,20 +526,33 @@ function CompareStrip({ t, locale }: { t: TFn; locale: "en-CA" | "fr-CA" }) {
  * TESTIMONIAL + CTA
  * ────────────────────────────────────────────────────────── */
 function TestimonialAndCTA({ t }: { t: TFn }) {
+  // Only render the testimonial block when a real attribution exists
+  // (landing.testimonial.author is non-empty). Until then the CTA
+  // card takes the full width — avoids broadcasting "zero customer
+  // references" with a placeholder card (2026-04-24 audit).
+  const hasAttributedTestimonial = Boolean(t("landing.testimonial.author"));
+
   return (
     <section className="px-4 sm:px-8 md:px-14 pt-[100px] pb-[120px]">
-      <div className="mx-auto max-w-[1200px] grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-stretch">
-        {/* Testimonial — attribution block (avatar + name + role) removed
-            pending a real verified customer quote. Open since round-1 of
-            the launch-readiness audit: pre-launch product should not ship
-            attributed quotes that can't be verified. Placeholder string
-            lives in landing.testimonial.quote. */}
-        <div className="bg-white border border-rd-line rounded-rd-xl p-10 md:p-12 relative">
-          <div className="text-[72px] leading-none text-rd-terra-600 font-rd-serif">"</div>
-          <p className="text-[20px] md:text-[22px] leading-[1.45] text-rd-ink-900 font-medium -mt-5">
-            {t("landing.testimonial.quote")}
-          </p>
-        </div>
+      <div
+        className={`mx-auto max-w-[1200px] grid grid-cols-1 ${
+          hasAttributedTestimonial ? "lg:grid-cols-[1.2fr_1fr]" : ""
+        } gap-12 items-stretch`}
+      >
+        {hasAttributedTestimonial && (
+          <div className="bg-white border border-rd-line rounded-rd-xl p-10 md:p-12 relative">
+            <div className="text-[72px] leading-none text-rd-terra-600 font-rd-serif">"</div>
+            <p className="text-[20px] md:text-[22px] leading-[1.45] text-rd-ink-900 font-medium -mt-5">
+              {t("landing.testimonial.quote")}
+            </p>
+            <div className="flex items-center gap-3 mt-8">
+              <div>
+                <div className="font-semibold text-sm">{t("landing.testimonial.author")}</div>
+                <div className="text-[13px] text-rd-ink-500">{t("landing.testimonial.role")}</div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* CTA */}
         <div className="bg-rd-navy-800 rounded-rd-xl p-10 md:p-12 text-white flex flex-col justify-between gap-8">
