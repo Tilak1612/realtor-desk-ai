@@ -69,6 +69,7 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
           title={t("marketingFooter.colCompany")}
           items={[
             { label: t("marketingFooter.itemBlog"), to: "/resources" },
+            { label: t("marketingHeader.navPartners"), to: "/partners" },
             { label: t("marketingFooter.itemCareers"), to: "/careers" },
             { label: t("marketingFooter.itemContact"), to: "/contact" },
             { label: t("marketingFooter.itemPrivacy"), to: "/privacy-policy" },
