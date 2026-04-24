@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 
 const NotFound = () => {
@@ -19,6 +20,18 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
+      {/* noindex so Googlebot doesn't SERP-list the 404 component body
+          when it lands on a soft-404 route (e.g. /partners, /affiliate/*).
+          The SPA returns HTTP 200 for every unknown route until SSR lands;
+          meta robots is the only signal we can give crawlers today. */}
+      <SEO
+        title={t("notFound.seoTitle", "Page not found — Realtor Desk")}
+        description={t(
+          "notFound.seoDesc",
+          "The page you're looking for doesn't exist or has been moved.",
+        )}
+        noindex
+      />
       <div className="text-center">
         <h1 className="mb-4 text-6xl font-bold gradient-text">404</h1>
         <p className="mb-6 text-2xl text-muted-foreground">

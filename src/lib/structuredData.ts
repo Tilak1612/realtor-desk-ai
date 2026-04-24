@@ -3,7 +3,7 @@
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "RealtorDesk AI",
+  "name": "Realtor Desk",
   "legalName": "Brainfy AI Inc.",
   "url": "https://www.realtordesk.ai",
   "logo": "https://www.realtordesk.ai/logo.png",
@@ -30,7 +30,7 @@ export const organizationSchema = {
 export const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "RealtorDesk AI",
+  "name": "Realtor Desk",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web, iOS, Android",
   "description": "AI-powered real estate CRM with 24/7 chatbot, lead scoring, and automated follow-ups for Canadian agents. CREA DDF® integration is on the roadmap.",
@@ -78,7 +78,7 @@ export const softwareApplicationSchema = {
 export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "RealtorDesk AI",
+  "name": "Realtor Desk",
   "image": "https://www.realtordesk.ai/logo.png",
   "url": "https://www.realtordesk.ai",
   "telephone": "+1-XXX-XXX-XXXX",
@@ -110,42 +110,42 @@ export const homepageFAQSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Is RealtorDesk AI PIPEDA compliant?",
+      "name": "Is Realtor Desk PIPEDA compliant?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "RealtorDesk AI is designed with PIPEDA principles — encryption at rest and in transit, consent management, automated compliance logging, and Canadian-optimized infrastructure. We follow PIPEDA's 10 fair information principles in our data practices."
+        "text": "Realtor Desk is designed with PIPEDA principles — encryption at rest and in transit, consent management, automated compliance logging, and Canadian-optimized infrastructure. We follow PIPEDA's 10 fair information principles in our data practices."
       }
     },
     {
       "@type": "Question",
-      "name": "Does RealtorDesk AI integrate with CREA DDF®?",
+      "name": "Does Realtor Desk integrate with CREA DDF®?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap for RealtorDesk AI. Today you can import listings from Realtor.ca via the built-in importer and manage listing information directly within the CRM."
+        "text": "CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap for Realtor Desk. Today you can import listings from Realtor.ca via the built-in importer and manage listing information directly within the CRM."
       }
     },
     {
       "@type": "Question",
-      "name": "How much does RealtorDesk AI cost compared to Lofty?",
+      "name": "How much does Realtor Desk cost compared to Lofty?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "RealtorDesk AI starts at $149 CAD/month with no setup fees, while Lofty starts at $700+ USD/month with setup fees of $499-$1,499. RealtorDesk AI saves Canadian agents 85% compared to US-based alternatives."
+        "text": "Realtor Desk starts at CAD $149/month with no setup fees. Lofty publishes starting tiers at USD $700+/month plus setup fees on its public pricing page. Actual savings depend on tier selected and the current CAD/USD exchange rate; see /pricing for Realtor Desk pricing."
       }
     },
     {
       "@type": "Question",
-      "name": "Does RealtorDesk AI support French/bilingual features?",
+      "name": "Does Realtor Desk support French/bilingual features?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, RealtorDesk AI offers full bilingual support with English and French interfaces, bilingual AI chatbot responses, and Quebec market-ready features for serving French-speaking clients."
+        "text": "Yes, Realtor Desk offers full bilingual support with English and French interfaces, bilingual AI chatbot responses, and Quebec market-ready features for serving French-speaking clients."
       }
     },
     {
       "@type": "Question",
-      "name": "What AI features does RealtorDesk AI include?",
+      "name": "What AI features does Realtor Desk include?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "RealtorDesk AI includes a 24/7 AI chatbot, predictive lead scoring, automated follow-ups, smart email/SMS sequences, and custom AI training for your specific needs. AI voice agent and WhatsApp integration are coming soon."
+        "text": "Realtor Desk includes a 24/7 AI chatbot, predictive lead scoring, automated follow-ups, smart email/SMS sequences, and custom AI training for your specific needs. AI voice agent and WhatsApp integration are coming soon."
       }
     }
   ]
@@ -160,7 +160,7 @@ export const pricingPageFAQSchema = {
       "name": "Is there a free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, RealtorDesk AI offers a 14-day free trial with no credit card required. You get full access to all features during the trial period."
+        "text": "Yes, Realtor Desk offers a 14-day free trial with no credit card required. You get full access to all features during the trial period."
       }
     },
     {
@@ -168,7 +168,7 @@ export const pricingPageFAQSchema = {
       "name": "Are there setup fees?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, RealtorDesk AI has zero setup fees on all plans. Unlike competitors like Lofty ($499-$1,499) and Follow Up Boss ($199), you can start immediately without upfront costs."
+        "text": "No, Realtor Desk has zero setup fees on all plans. Unlike competitors like Lofty ($499-$1,499) and Follow Up Boss ($199), you can start immediately without upfront costs."
       }
     },
     {
@@ -176,7 +176,7 @@ export const pricingPageFAQSchema = {
       "name": "Can I cancel anytime?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, all RealtorDesk AI plans are month-to-month with no long-term contracts. You can cancel anytime from your billing settings."
+        "text": "Yes, all Realtor Desk plans are month-to-month with no long-term contracts. You can cancel anytime from your billing settings."
       }
     },
     {
@@ -193,11 +193,11 @@ export const pricingPageFAQSchema = {
 export const productSchema = (planName: string, price: number, description: string) => ({
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": `RealtorDesk AI - ${planName} Plan`,
+  "name": `Realtor Desk - ${planName} Plan`,
   "description": description,
   "brand": {
     "@type": "Brand",
-    "name": "RealtorDesk AI"
+    "name": "Realtor Desk"
   },
   "offers": {
     "@type": "Offer",
@@ -244,7 +244,7 @@ export const articleSchema = (
   },
   "publisher": {
     "@type": "Organization",
-    "name": "RealtorDesk AI",
+    "name": "Realtor Desk",
     "logo": {
       "@type": "ImageObject",
       "url": "https://www.realtordesk.ai/logo.png"

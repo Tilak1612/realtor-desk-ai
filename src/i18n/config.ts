@@ -382,7 +382,8 @@ const resources = {
         info: {
           emailUs: "Email Us",
           callUs: "Call Us",
-          visitUs: "Visit Us",
+          visitUs: "Our HQ",
+          noWalkIn: "Mailing address only — no walk-in office.",
           support: "Support",
           responseTime: "We respond within 24 hours",
           hours: "Business Hours",
@@ -2206,7 +2207,9 @@ const resources = {
         heading: "Oops! Page not found",
         body: "The page you're looking for doesn't exist or has been moved.",
         goDashboard: "Go to dashboard",
-        goHome: "Return to home"
+        goHome: "Return to home",
+        seoTitle: "Page not found — Realtor Desk",
+        seoDesc: "The page you're looking for doesn't exist or has been moved."
       },
       trial: {
         daysRemaining: "{{count}} days remaining in your free trial",
@@ -2626,7 +2629,7 @@ const resources = {
         }
       },
       unsubscribe: {
-        title: "Unsubscribe from RealtorDesk AI emails",
+        title: "Unsubscribe from Realtor Desk emails",
         working: "Processing your request\u2026",
         success: "You've been unsubscribed. We will not send further emails to",
         thisAddress: "this address",
@@ -2637,8 +2640,8 @@ const resources = {
         linkSentNote: "Links expire in 30 days. Check your spam folder if you don't see it in a minute.",
         manualPrompt: "Enter the email address you want removed from our list. We will send you a one-click confirmation link.",
         ctaSendLink: "Send me an unsubscribe link",
-        casl: "Operated under CASL by Brainfy AI Inc. (RealtorDesk AI).",
-        back: "Back to RealtorDesk AI"
+        casl: "Operated under CASL by Brainfy AI Inc. (Realtor Desk).",
+        back: "Back to Realtor Desk"
       },
       rd: {
         sidebar: {
@@ -3331,7 +3334,8 @@ const resources = {
         info: {
           emailUs: "Nous Écrire",
           callUs: "Nous Appeler",
-          visitUs: "Nous Rendre Visite",
+          visitUs: "Notre siège",
+          noWalkIn: "Adresse postale uniquement — aucun bureau pour visite.",
           support: "Support",
           responseTime: "Nous répondons dans les 24 heures",
           hours: "Heures d'Ouverture",
@@ -5152,7 +5156,9 @@ const resources = {
         heading: "Oups ! Page introuvable",
         body: "La page que vous recherchez n'existe pas ou a été déplacée.",
         goDashboard: "Aller au tableau de bord",
-        goHome: "Retour à l'accueil"
+        goHome: "Retour à l'accueil",
+        seoTitle: "Page introuvable — Realtor Desk",
+        seoDesc: "La page que vous recherchez n'existe pas ou a été déplacée."
       },
       trial: {
         daysRemaining: "{{count}} jours restants dans votre essai gratuit",
@@ -5572,7 +5578,7 @@ const resources = {
         }
       },
       unsubscribe: {
-        title: "Se désabonner des courriels de RealtorDesk AI",
+        title: "Se désabonner des courriels de Realtor Desk",
         working: "Traitement de votre demande\u2026",
         success: "Vous êtes désabonné. Nous n'enverrons plus de courriels à",
         thisAddress: "cette adresse",
@@ -5583,8 +5589,8 @@ const resources = {
         linkSentNote: "Les liens expirent dans 30 jours. Vérifiez votre dossier «\u00a0pourriels\u00a0» si vous ne le voyez pas d'ici une minute.",
         manualPrompt: "Saisissez l'adresse courriel à retirer de notre liste. Nous vous enverrons un lien de confirmation en un clic.",
         ctaSendLink: "M'envoyer un lien de désabonnement",
-        casl: "Exploité sous LCAP par Brainfy AI Inc. (RealtorDesk AI).",
-        back: "Retour à RealtorDesk AI"
+        casl: "Exploité sous LCAP par Brainfy AI Inc. (Realtor Desk).",
+        back: "Retour à Realtor Desk"
       },
       rd: {
         sidebar: {

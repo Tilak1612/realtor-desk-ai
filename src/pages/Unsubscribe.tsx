@@ -77,7 +77,7 @@ const Unsubscribe = () => {
       <main className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="max-w-md w-full text-center space-y-6">
           <h1 className="text-2xl font-bold">
-            {t("unsubscribe.title", "Unsubscribe from RealtorDesk AI emails")}
+            {t("unsubscribe.title", "Unsubscribe from Realtor Desk emails")}
           </h1>
 
           {state === "verifying" && (
@@ -153,7 +153,7 @@ const Unsubscribe = () => {
           )}
 
           <Link to="/" className="inline-block text-sm text-primary hover:underline">
-            ← {t("unsubscribe.back", "Back to RealtorDesk AI")}
+            ← {t("unsubscribe.back", "Back to Realtor Desk")}
           </Link>
         </div>
       </main>
@@ -193,7 +193,7 @@ const ManualForm = ({ email, setEmail, onSubmit, t }: ManualFormProps) => (
       {t("unsubscribe.ctaSendLink", "Send me an unsubscribe link")}
     </Button>
     <p className="text-xs text-muted-foreground">
-      {t("unsubscribe.casl", "Operated under CASL by Brainfy AI Inc. (RealtorDesk AI).")}
+      {t("unsubscribe.casl", "Operated under CASL by Brainfy AI Inc. (Realtor Desk).")}
     </p>
   </form>
 );
