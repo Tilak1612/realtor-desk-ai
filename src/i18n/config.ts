@@ -1040,6 +1040,26 @@ const resources = {
         frOnlyBody: "Some guides are currently English-only while we translate them. {{hidden}} additional articles are available in the English catalogue.",
         viewEnCta: "View the full English catalogue"
       },
+      a11y: {
+        notifications: "Notifications",
+        accountMenu: "Account menu",
+        changeLanguage: "Change language",
+        rowActions: "Actions for {{name}}",
+        closeDialog: "Close",
+        dialogDescription: {
+          addContact: "Add a new contact to your CRM",
+          editContact: "Update contact details",
+          logActivity: "Log a call, meeting, email, or note for this contact",
+          importContacts: "Import multiple contacts from a CSV file",
+          addDeal: "Create a new deal in your pipeline",
+          editDeal: "Update deal details",
+          winLoss: "Mark this deal as won or lost and capture outcome details",
+          addTask: "Create a new task or reminder",
+          editTask: "Update task details",
+          addProperty: "Add a new property listing",
+          propertyDetail: "View and edit property details"
+        }
+      },
       integrations: {
         hero: {
           title: "Connect Your Entire",
@@ -4145,6 +4165,26 @@ const resources = {
       resourcesDisclosure: {
         frOnlyBody: "Certains guides ne sont disponibles qu'en anglais pour le moment, le temps qu'on les traduise. {{hidden}} autres articles sont accessibles dans le catalogue anglais.",
         viewEnCta: "Voir le catalogue anglais complet"
+      },
+      a11y: {
+        notifications: "Notifications",
+        accountMenu: "Menu du compte",
+        changeLanguage: "Changer la langue",
+        rowActions: "Actions pour {{name}}",
+        closeDialog: "Fermer",
+        dialogDescription: {
+          addContact: "Ajouter un nouveau contact à votre CRM",
+          editContact: "Mettre à jour les coordonnées du contact",
+          logActivity: "Consigner un appel, une rencontre, un courriel ou une note pour ce contact",
+          importContacts: "Importer plusieurs contacts à partir d'un fichier CSV",
+          addDeal: "Créer une nouvelle transaction dans votre pipeline",
+          editDeal: "Mettre à jour les détails de la transaction",
+          winLoss: "Marquer cette transaction comme gagnée ou perdue et consigner les détails",
+          addTask: "Créer une nouvelle tâche ou un rappel",
+          editTask: "Mettre à jour les détails de la tâche",
+          addProperty: "Ajouter une nouvelle inscription",
+          propertyDetail: "Voir et modifier les détails de la propriété"
+        }
       },
       integrations: {
         hero: {

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
@@ -29,6 +30,7 @@ interface EditContactModalProps {
 }
 
 const EditContactModal = ({ contact, open, onOpenChange, onSuccess }: EditContactModalProps) => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -66,7 +68,12 @@ const EditContactModal = ({ contact, open, onOpenChange, onSuccess }: EditContac
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader><DialogTitle>Edit Contact</DialogTitle></DialogHeader>
+        <DialogHeader>
+          <DialogTitle>Edit Contact</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.editContact", "Update contact details")}
+          </DialogDescription>
+        </DialogHeader>
         <Form {...form}>
           <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useTranslation } from "react-i18next";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +23,7 @@ interface EditDealModalProps {
 }
 
 const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModalProps) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -108,6 +110,9 @@ const EditDealModal = ({ deal, open, onOpenChange, onDealUpdated }: EditDealModa
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
         <DialogHeader>
           <DialogTitle>Edit Transaction</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.editDeal", "Update deal details")}
+          </DialogDescription>
         </DialogHeader>
 
         <form noValidate onSubmit={handleSubmit} className="space-y-4">

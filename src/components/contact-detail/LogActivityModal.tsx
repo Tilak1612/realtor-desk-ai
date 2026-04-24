@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,7 @@ interface LogActivityModalProps {
 }
 
 const LogActivityModal = ({ contactId, open, onOpenChange, onSuccess }: LogActivityModalProps) => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -66,7 +68,12 @@ const LogActivityModal = ({ contactId, open, onOpenChange, onSuccess }: LogActiv
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
-        <DialogHeader><DialogTitle>Log Activity</DialogTitle></DialogHeader>
+        <DialogHeader>
+          <DialogTitle>Log Activity</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.logActivity", "Log a call, meeting, email, or note for this contact")}
+          </DialogDescription>
+        </DialogHeader>
         <Form {...form}>
           <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField control={form.control} name="activity_type" render={({ field }) => (

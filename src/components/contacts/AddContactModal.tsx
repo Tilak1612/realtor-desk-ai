@@ -6,6 +6,7 @@ import { useTranslation, type TFunction } from "react-i18next";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogFooter,
@@ -160,6 +161,9 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t("app.modals.addContact.title")}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {t("a11y.dialogDescription.addContact", "Add a new contact to your CRM")}
+          </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>

@@ -1,4 +1,5 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useTranslation } from "react-i18next";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -13,6 +14,7 @@ interface PropertyDetailModalProps {
 }
 
 const PropertyDetailModal = ({ property, open, onOpenChange, onUpdate }: PropertyDetailModalProps) => {
+  const { t } = useTranslation();
   const formatPrice = (price: number | null) => {
     if (!price) return "Price on Request";
     return new Intl.NumberFormat("en-CA", {
@@ -44,6 +46,9 @@ const PropertyDetailModal = ({ property, open, onOpenChange, onUpdate }: Propert
           <div className="flex items-start justify-between">
             <div className="space-y-2">
               <DialogTitle className="text-2xl">{property.title}</DialogTitle>
+              <DialogDescription className="sr-only">
+                {t("a11y.dialogDescription.propertyDetail", "View and edit property details")}
+              </DialogDescription>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
                 <span>
