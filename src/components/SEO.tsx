@@ -40,17 +40,24 @@ export const SEO = ({
   const locale = normalizeLocale(i18n.language);
 
   const siteUrl = 'https://www.realtordesk.ai';
-  const currentUrl = canonicalUrl || `${siteUrl}${location.pathname}`;
 
-  // hreflang alternates. We expose `?lang=en` and `?lang=fr` variants
-  // of whatever the current canonical resolves to. i18next's language
-  // detector already reads `?lang=*` at first paint so these are stable
-  // entry points for search engines.
-  const pathOnly = canonicalUrl
-    ? new URL(canonicalUrl).pathname + new URL(canonicalUrl).search
-    : location.pathname + location.search;
-  const altEn = `${siteUrl}${pathOnly}${pathOnly.includes('?') ? '&' : '?'}lang=en`;
-  const altFr = `${siteUrl}${pathOnly}${pathOnly.includes('?') ? '&' : '?'}lang=fr`;
+  // Canonical must reflect the CURRENT locale, not collapse FR into EN.
+  // 2026-04-24 audit: `/?lang=fr` was self-canonicalling to `/` (the EN URL),
+  // telling Google the FR variant was a duplicate. Now fr-CA pages emit
+  // canonical with `?lang=fr` preserved; en-CA pages emit the bare path
+  // (EN is the default, no lang param needed).
+  const basePath = canonicalUrl
+    ? new URL(canonicalUrl).pathname
+    : location.pathname;
+  const canonicalQuery = locale === 'fr-CA' ? '?lang=fr' : '';
+  const currentUrl = canonicalUrl
+    ? canonicalUrl
+    : `${siteUrl}${basePath}${canonicalQuery}`;
+
+  // hreflang alternates — both variants always point at the stable
+  // ?lang=* entry points so Google can index them as distinct URLs.
+  const altEn = `${siteUrl}${basePath}?lang=en`;
+  const altFr = `${siteUrl}${basePath}?lang=fr`;
 
   // Title already lives in the locale-specific page copy, so don't
   // double-append the brand. If the caller passed a generic non-brand

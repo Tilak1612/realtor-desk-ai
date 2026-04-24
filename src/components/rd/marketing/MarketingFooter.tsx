@@ -56,7 +56,11 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
           title={t("marketingFooter.colCanada")}
           items={[
             { label: t("marketingFooter.itemPipeda"), to: "/pipeda-compliance" },
-            { label: t("marketingFooter.itemCasl"), to: "/pipeda-compliance" },
+            // CASL now points at the real CASL-compliance resource
+            // article rather than the PIPEDA page (2026-04-24 audit:
+            // CASL ≠ PIPEDA, pointing one at the other misleads users
+            // who are actively trying to verify our CASL posture).
+            { label: t("marketingFooter.itemCasl"), to: "/resources/casl-compliance-real-estate-email-marketing-canada" },
             { label: t("marketingFooter.itemFintrac"), to: "/fintrac-compliance" },
             { label: t("marketingFooter.itemCreaDdf"), to: "/canadian-market" },
           ]}
@@ -73,11 +77,14 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
         />
       </div>
 
+      {/* Bottom bar: Privacy + Terms were previously duplicated here
+          and in the Company column. 2026-04-24 audit flagged the dup.
+          Kept only Unsubscribe in the bottom bar — it's the CASL-
+          required single-click reachable-from-footer link; Privacy +
+          Terms stay in the Company column. */}
       <div className="mx-auto max-w-[1200px] mt-10 pt-6 border-t border-rd-line flex flex-col md:flex-row md:justify-between gap-3 text-[12px] text-rd-ink-500">
         <div>{t("marketingFooter.copyright", { year: new Date().getFullYear() })}</div>
         <div className="flex gap-6">
-          <Link to="/privacy-policy" className="hover:text-rd-ink-900">{t("marketingFooter.itemPrivacy")}</Link>
-          <Link to="/terms-of-service" className="hover:text-rd-ink-900">{t("marketingFooter.itemTerms")}</Link>
           <Link to="/unsubscribe" className="hover:text-rd-ink-900">{t("marketingFooter.itemUnsubscribe")}</Link>
           <span>EN · FR</span>
         </div>

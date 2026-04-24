@@ -116,45 +116,13 @@
     }
     </script>
 
-    <!-- Structured Data — LocalBusiness.
-         - GPS fixed to Edmonton (was Toronto 43.6532,-79.3832 —
-           factually wrong per 2026-04-23 audit).
-         - priceRange removed. Pricing is canonical on the Product
-           schema below (AggregateOffer). Three schemas with three
-           different prices ($79-$299 vs $149-$299 vs $0-trial)
-           broke Google's price parsing. -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Realtor Desk",
-      "description": "AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware.",
-      "url": "https://www.realtordesk.ai",
-      "logo": "https://www.realtordesk.ai/og-image.png",
-      "image": "https://www.realtordesk.ai/og-image.png",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Edmonton",
-        "addressRegion": "AB",
-        "addressCountry": "CA"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "53.5461",
-        "longitude": "-113.4938"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Canada"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "09:00",
-        "closes": "17:00"
-      }
-    }
-    </script>
+    <!-- LocalBusiness schema removed entirely. Realtor Desk is a SaaS
+         with no walk-in office; LocalBusiness + geo + openingHours
+         schema implied one. Organization schema above is the correct
+         surface for a SaaS company; SoftwareApplication + Product
+         schemas below carry the pricing signal. 2026-04-24 audit
+         caught this — PR #80 fixed the Toronto GPS but left the
+         LocalBusiness block (and its walk-in-hours implication) live. -->
 
     <!-- Structured Data — SoftwareApplication.
          "CREA DDF integrated" (false — roadmap Q3 2026) removed per

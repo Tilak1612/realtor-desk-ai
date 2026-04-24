@@ -207,7 +207,9 @@ const Signup = () => {
               <div className="relative">
                 <Input
                   id="email"
+                  name="email"
                   type="email"
+                  autoComplete="username"
                   placeholder="your@email.com"
                   value={formData.email || ""}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -225,6 +227,8 @@ const Signup = () => {
               </Label>
               <PasswordInput
                 id="password"
+                name="password"
+                autoComplete="new-password"
                 placeholder="••••••••"
                 value={formData.password || ""}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -242,6 +246,8 @@ const Signup = () => {
               </Label>
               <PasswordInput
                 id="confirmPassword"
+                name="confirmPassword"
+                autoComplete="new-password"
                 placeholder="••••••••"
                 value={formData.confirmPassword || ""}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
@@ -258,6 +264,8 @@ const Signup = () => {
               <div className="relative">
                 <Input
                   id="fullName"
+                  name="fullName"
+                  autoComplete="name"
                   placeholder="John Doe"
                   value={formData.fullName || ""}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -290,6 +298,8 @@ const Signup = () => {
               <div className="relative">
                 <Input
                   id="companyName"
+                  name="companyName"
+                  autoComplete="organization"
                   placeholder="Your Brokerage"
                   value={formData.companyName || ""}
                   onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}

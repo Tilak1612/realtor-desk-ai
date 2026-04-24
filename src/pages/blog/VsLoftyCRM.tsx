@@ -10,22 +10,22 @@ const VsLoftyCRM = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="Lofty CRM vs RealtorDesk AI: Why Simplicity Beats Feature Bloat"
-        description="Compare Lofty CRM (Chime) vs RealtorDesk AI for Canadian agents. Pricing, automation, and why simplicity wins in 2025."
-        keywords="Lofty CRM vs RealtorDesk AI, Lofty CRM alternative, Chime CRM comparison, Canadian real estate CRM"
+        title="Lofty CRM vs Realtor Desk: Why Simplicity Beats Feature Bloat"
+        description="Compare Lofty CRM (Chime) vs Realtor Desk for Canadian agents. Pricing, automation, and why simplicity wins in 2025."
+        keywords="Lofty CRM vs Realtor Desk, Lofty CRM alternative, Chime CRM comparison, Canadian real estate CRM"
         article
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/vs-lofty-crm"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Lofty CRM vs RealtorDesk AI: Why Simplicity Beats Feature Bloat for Canadian Agents",
-            "description": "Compare Lofty CRM (Chime) vs RealtorDesk AI for Canadian agents. Pricing, automation, and why simplicity wins in 2025.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "headline": "Lofty CRM vs Realtor Desk: Why Simplicity Beats Feature Bloat for Canadian Agents",
+            "description": "Compare Lofty CRM (Chime) vs Realtor Desk for Canadian agents. Pricing, automation, and why simplicity wins in 2025.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
             "dateModified": "2025-01-01"
           }

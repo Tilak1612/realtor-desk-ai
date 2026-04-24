@@ -2,6 +2,31 @@
 
 > This file defines domain-specific skills that Claude Code agents can use when working in this repo.
 
+## Global Rule: Bilingual (EN + FR-CA) Always
+
+**Every addition to this project MUST ship in both English and French (Canadian French / FR-CA).** This is non-negotiable — RECO Ontario and OACIQ Quebec compliance depend on it, and FR-CA is a first-class language in this product, not an afterthought.
+
+This applies to:
+- UI copy (buttons, labels, tooltips, empty states, error messages, toasts)
+- Page content (landing pages, dashboards, marketing pages, legal pages)
+- Email templates (transactional + drip campaigns via Resend)
+- Meta tags, OG images, structured data, and SEO content
+- Notifications (in-app, push, SMS)
+- Chatbot prompts and AI-generated responses where user-facing
+- Form validation messages (zod schemas → i18next keys)
+- PDF exports, receipts, and generated documents
+
+**How to apply**:
+1. Add new strings to `i18next` locale files — never hardcode user-facing text
+2. Provide both `en` and `fr` keys in the same PR — no "FR to follow later"
+3. Use the [Bilingual Glossary](../../.claude/projects/-Users-tilakraj-realtor-desk-ai-realtor-desk-ai/memory/bilingual_glossary.md) for authoritative term translations (RECO=ON, OACIQ=QC, PIPEDA=LPRPDE, CASL=LCAP)
+4. For generated content (emails, AI responses), the generator must accept a `locale` parameter and branch on it
+5. If a translation is uncertain, flag it for review rather than shipping English-only
+
+**What counts as "shipped bilingual"**: both locales render without `[missing translation]` fallbacks, and FR-CA copy reads naturally to a native speaker (not machine-translated English).
+
+---
+
 ## Base Skills
 
 ### 1. Frontend Component Builder

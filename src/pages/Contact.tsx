@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -123,19 +123,18 @@ const Contact = () => {
                 <p className="text-muted-foreground">{t('contact.info.responseTime', 'We respond within 24 hours')}</p>
               </Card>
 
+              {/* HQ card — "Visit us" + walk-in hours were implying a
+                  walk-in office that doesn't exist. 2026-04-24 audit.
+                  Replaced with HQ + mailing label. Hours card removed;
+                  response time is already shown on the Support card. */}
               <Card className="p-6">
                 <MapPin className="w-8 h-8 text-primary mb-4" />
                 <h3 className="font-bold mb-2">{t('contact.info.visitUs')}</h3>
                 <p className="text-muted-foreground">
                   Edmonton, Alberta, Canada
                 </p>
-              </Card>
-
-              <Card className="p-6">
-                <Clock className="w-8 h-8 text-primary mb-4" />
-                <h3 className="font-bold mb-2">{t('contact.info.hours')}</h3>
-                <p className="text-muted-foreground whitespace-pre-line">
-                  {t('contact.info.hoursDetails')}
+                <p className="text-xs text-muted-foreground mt-2">
+                  {t('contact.info.noWalkIn', 'Mailing address only — no walk-in office.')}
                 </p>
               </Card>
             </div>
