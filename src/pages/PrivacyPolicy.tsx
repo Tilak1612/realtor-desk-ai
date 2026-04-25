@@ -86,9 +86,16 @@ const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">4. Information Sharing</h2>
               <p>
-                We do not sell, trade, or rent your personal information to third parties. We may share your 
-                information only with service providers who assist us in operating our platform, conducting 
+                We do not sell, trade, or rent your personal information to third parties. We may share your
+                information only with service providers who assist us in operating our platform, conducting
                 our business, or serving our users.
+              </p>
+              <p className="mt-4">
+                <strong>Optional community:</strong> We host an optional user community on Discord, Inc.
+                Discord is a third-party service operated outside Canada. By joining the community you
+                accept Discord's terms of service and privacy policy. We do not push any Realtor Desk
+                user data (email, contact records, deal details) into Discord — joining is opt-in and
+                you control your Discord account independently of your Realtor Desk account.
               </p>
             </section>
 

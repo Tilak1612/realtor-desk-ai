@@ -27,6 +27,7 @@ const resources = {
         viewAllNotifications: "View all notifications",
         profile: "Profile",
         settings: "Settings",
+        community: "Community",
         signOut: "Sign out",
         uploadPhoto: "Upload photo",
         changePhoto: "Change photo",
@@ -684,6 +685,7 @@ const resources = {
         itemFintrac: "FINTRAC",
         itemCreaDdf: "CREA DDF",
         itemBlog: "Blog",
+        itemCommunity: "Community",
         itemCareers: "Careers",
         itemContact: "Contact",
         itemPrivacy: "Privacy",
@@ -1059,6 +1061,44 @@ const resources = {
           addProperty: "Add a new property listing",
           propertyDetail: "View and edit property details"
         }
+      },
+      communityBanner: {
+        heading: "We just launched the Realtor Desk Community",
+        body: "Chat with other Canadian agents, share tips, and shape what we build next.",
+        cta: "Join community",
+        dismiss: "Dismiss community banner"
+      },
+      communityLaunch: {
+        seoTitle: "Introducing the Realtor Desk Community — Realtor Desk",
+        seoDesc: "We just launched a community space where Canadian real estate agents using Realtor Desk can share tips, ask questions, and shape the product.",
+        backToResources: "Back to Resources",
+        tag: "Product update",
+        publishDate: "April 24, 2026",
+        readTime: "3 min read",
+        h1: "Introducing the Realtor Desk Community",
+        lede: "A space for Canadian agents using Realtor Desk to share tips, ask questions, and shape what we build next.",
+        sec1Heading: "Why we're doing this",
+        sec1P1: "Realtor Desk users keep messaging us about the same problems — figuring out which CRM stages map to RECO's lead-handling rules, what \"reasonable\" response time means in practice, how other agents are wiring AI follow-ups without sounding like a bot. The answers are usually short. The path to those answers is currently \"email support and wait,\" which doesn't scale and isn't where you want to live.",
+        sec1P2: "A community fixes both problems. You get a faster answer from people who've already been through it. We hear what's actually breaking in the field. And the conversations stick around for the next agent who hits the same wall.",
+        sec2Heading: "What's inside",
+        sec2Intro: "We've set up a Discord server (free to join, mobile-native, no second password to remember) with a small set of channels:",
+        sec2Item1: "Tips & Tricks — power-user knowledge sharing. Drip-campaign templates that actually work, FINTRAC document checklists, what \"best contact time\" field people are populating with.",
+        sec2Item2: "Feature Requests — what should we build next? React-vote on threads, we read every one.",
+        sec2Item3: "Canadian Market Talk — RECO/OACIQ/RECA/RECBC chatter, provincial regulation updates, the open-house circuit by city.",
+        sec2Item4: "AI & Automation — how realtors are actually using the AI features. What works, what falls flat, prompts that surprise you.",
+        sec2Item5: "Bugs & Support — for discussion of issues. (Actual support tickets still go through in-app — that's how we track and respond.)",
+        sec3Heading: "Ground rules",
+        sec3P1: "Four things, kept short:",
+        sec3Item1: "Be respectful. No harassment, no slurs.",
+        sec3Item2: "No selling, no recruiting, no MLM links.",
+        sec3Item3: "No client PII. If you're discussing a real situation, anonymize it.",
+        sec3Item4: "English or French — both welcome, neither required to translate.",
+        sec4Heading: "How to join",
+        sec4P1: "Free to join, no Realtor Desk subscription required. Click the button below or find the link in your account menu inside the app.",
+        sec4P2: "We're staffing the channels actively for the first 30 days — staff replies within 12 hours, no question is too small. After that we expect the regulars to do most of the answering, with us nudging conversations and dropping product updates in the announcements channel.",
+        ctaHeading: "Ready to join?",
+        ctaBody: "Free to join. Bring your curiosity and one tip from your last deal.",
+        ctaButton: "Join the community"
       },
       integrations: {
         hero: {
@@ -2314,6 +2354,10 @@ const resources = {
         },
         allArticlesHeading: "All articles",
         articles: {
+          communityLaunch: {
+            title: "Introducing the Realtor Desk Community",
+            excerpt: "We just launched a community space where Canadian agents using Realtor Desk can share tips, ask questions, and shape what we build next."
+          },
           aiTransformation: {
             title: "How AI Is Transforming Canadian Real Estate in 2025",
             excerpt: "Discover the latest AI innovations revolutionizing how Canadian realtors work, from predictive analytics to automated transaction management."
@@ -3162,6 +3206,7 @@ const resources = {
         viewAllNotifications: "Voir toutes les notifications",
         profile: "Profil",
         settings: "Paramètres",
+        community: "Communauté",
         signOut: "Se déconnecter",
         uploadPhoto: "Téléverser une photo",
         changePhoto: "Changer la photo",
@@ -3816,6 +3861,7 @@ const resources = {
         itemFintrac: "CANAFE",
         itemCreaDdf: "SDD de l'ACI",
         itemBlog: "Blogue",
+        itemCommunity: "Communauté",
         itemCareers: "Carrières",
         itemContact: "Contact",
         itemPrivacy: "Confidentialité",
@@ -4191,6 +4237,44 @@ const resources = {
           addProperty: "Ajouter une nouvelle inscription",
           propertyDetail: "Voir et modifier les détails de la propriété"
         }
+      },
+      communityBanner: {
+        heading: "Nous lançons la Communauté Realtor Desk",
+        body: "Échangez avec d'autres courtiers canadiens, partagez des conseils et influencez ce qu'on construit ensuite.",
+        cta: "Rejoindre",
+        dismiss: "Fermer la bannière de la communauté"
+      },
+      communityLaunch: {
+        seoTitle: "Lancement de la Communauté Realtor Desk — Realtor Desk",
+        seoDesc: "Nous lançons un espace communautaire pour les courtiers immobiliers canadiens utilisant Realtor Desk — pour partager des conseils, poser des questions et influencer le produit.",
+        backToResources: "Retour aux ressources",
+        tag: "Mise à jour produit",
+        publishDate: "24 avril 2026",
+        readTime: "3 min de lecture",
+        h1: "Lancement de la Communauté Realtor Desk",
+        lede: "Un espace pour les courtiers canadiens qui utilisent Realtor Desk afin de partager des conseils, poser des questions et influencer ce qu'on construit ensuite.",
+        sec1Heading: "Pourquoi on lance ceci",
+        sec1P1: "Nos utilisateurs nous écrivent constamment au sujet des mêmes questions — quelles étapes du CRM correspondent aux règles de gestion des prospects de RECO, ce que veut dire « délai raisonnable » de réponse en pratique, comment d'autres courtiers configurent leurs suivis IA sans avoir l'air d'un robot. Les réponses sont en général courtes. Le chemin vers ces réponses est présentement « envoyer un courriel au soutien et attendre », ce qui ne scale pas et n'est pas l'endroit où vous voulez vivre.",
+        sec1P2: "Une communauté règle les deux problèmes. Vous obtenez une réponse plus rapide de gens qui sont déjà passés par là. Nous entendons ce qui brise réellement sur le terrain. Et les conversations restent disponibles pour le prochain courtier qui frappe le même mur.",
+        sec2Heading: "Ce qu'on y trouve",
+        sec2Intro: "On a mis en place un serveur Discord (gratuit, conçu pour mobile, pas de second mot de passe à retenir) avec un petit ensemble de canaux :",
+        sec2Item1: "Trucs et astuces — partage de savoir entre utilisateurs avancés. Modèles de campagnes goutte-à-goutte qui fonctionnent, listes de contrôle CANAFE, le champ « meilleur moment de contact » que les gens utilisent vraiment.",
+        sec2Item2: "Demandes de fonctionnalité — qu'est-ce qu'on devrait construire ensuite ? Vote par réaction sur chaque sujet, on lit tout.",
+        sec2Item3: "Marché canadien — discussions OACIQ/RECO/RECA/RECBC, mises à jour réglementaires provinciales, circuit des visites libres par ville.",
+        sec2Item4: "IA et automatisation — comment les courtiers utilisent réellement les fonctionnalités IA. Ce qui fonctionne, ce qui tombe à plat, les prompts qui surprennent.",
+        sec2Item5: "Bogues et soutien — pour discuter de problèmes. (Les vrais billets de soutien passent toujours par l'application — c'est comme ça qu'on les suit et qu'on répond.)",
+        sec3Heading: "Règles de base",
+        sec3P1: "Quatre choses, en bref :",
+        sec3Item1: "Soyez respectueux. Pas de harcèlement, pas d'insultes.",
+        sec3Item2: "Pas de vente, pas de recrutement, pas de liens MLM.",
+        sec3Item3: "Pas de renseignements personnels de clients. Si vous discutez d'une situation réelle, anonymisez-la.",
+        sec3Item4: "Anglais ou français — les deux sont les bienvenus, ni l'un ni l'autre n'est obligé de traduire.",
+        sec4Heading: "Comment se joindre",
+        sec4P1: "Gratuit, aucun abonnement Realtor Desk requis. Cliquez sur le bouton ci-dessous ou trouvez le lien dans le menu de votre compte à l'intérieur de l'application.",
+        sec4P2: "On anime activement les canaux pendant les 30 premiers jours — l'équipe répond dans les 12 heures, aucune question n'est trop petite. Ensuite, on s'attend à ce que les habitués fassent la plupart des réponses, pendant qu'on oriente les conversations et publie les mises à jour produit dans le canal des annonces.",
+        ctaHeading: "Prêt à vous joindre ?",
+        ctaBody: "Gratuit. Apportez votre curiosité et un truc de votre dernière transaction.",
+        ctaButton: "Rejoindre la communauté"
       },
       integrations: {
         hero: {
@@ -5446,6 +5530,10 @@ const resources = {
         },
         allArticlesHeading: "Tous les articles",
         articles: {
+          communityLaunch: {
+            title: "Lancement de la Communauté Realtor Desk",
+            excerpt: "Nous lançons un espace communautaire où les courtiers canadiens qui utilisent Realtor Desk peuvent partager des conseils, poser des questions et influencer ce qu'on construit ensuite."
+          },
           aiTransformation: {
             title: "Comment l'IA Transforme l'Immobilier Canadien en 2025",
             excerpt: "Découvrez les dernières innovations IA qui révolutionnent le travail des agents immobiliers canadiens, de l'analyse prédictive à la gestion automatisée des transactions."

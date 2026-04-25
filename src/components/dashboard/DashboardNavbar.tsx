@@ -11,13 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Bell, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2, Trash2 } from "lucide-react";
+import { Bell, User, Settings, LogOut, Plus, Building2, Briefcase, CheckSquare, Camera, Loader2, Trash2, MessageCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import FeedbackDialog from "@/components/feedback/FeedbackDialog";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
 
 interface DashboardNavbarProps {
   user: any;
@@ -291,6 +292,18 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
                 <Settings className="mr-2 h-4 w-4" />
                 {t('nav.settings', 'Settings')}
               </DropdownMenuItem>
+              {isCommunityEnabled() && (
+                <DropdownMenuItem asChild className="cursor-pointer text-sm">
+                  <a
+                    href={COMMUNITY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    {t('nav.community', 'Community')}
+                  </a>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-sm text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
