@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { RDMark } from "@/components/rd/Logo";
+import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -119,6 +120,18 @@ const Footer = () => {
                   {t('marketingHeader.navPartners')}
                 </Link>
               </li>
+              {isCommunityEnabled() && (
+                <li>
+                  <a
+                    href={COMMUNITY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {t('marketingFooter.itemCommunity')}
+                  </a>
+                </li>
+              )}
               <li>
                 <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('footer.careers')}
