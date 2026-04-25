@@ -84,6 +84,7 @@ const LoftyAlternative = lazy(() => import("./pages/LoftyAlternative"));
 
 // ─── Lazy-loaded blog pages ───
 const AITransformation = lazy(() => import("./pages/blog/AITransformation"));
+const CommunityLaunch = lazy(() => import("./pages/blog/CommunityLaunch"));
 const CreaDDF = lazy(() => import("./pages/blog/CreaDDF"));
 const Compliance = lazy(() => import("./pages/blog/Compliance"));
 const LeadConversion = lazy(() => import("./pages/blog/LeadConversion"));
@@ -268,6 +269,7 @@ const App = () => (
           <Route path="/resources" element={<Resources />} />
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/blog/ai-transformation" element={<AITransformation />} />
+          <Route path="/blog/community-launch" element={<CommunityLaunch />} />
           <Route path="/blog/crea-ddf" element={<CreaDDF />} />
           <Route path="/blog/compliance" element={<Compliance />} />
           <Route path="/blog/lead-conversion" element={<LeadConversion />} />

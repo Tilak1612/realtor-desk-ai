@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import AppLayout from "@/components/layout/AppLayout";
+import CommunityBanner from "@/components/dashboard/CommunityBanner";
 import TodayOnboardingChecklist from "@/components/dashboard/TodayOnboardingChecklist";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -274,6 +275,8 @@ const Today = () => {
             {format(new Date(), "PPPP", { locale: i18n.language === 'fr' ? fr : undefined })}
           </p>
         </div>
+
+        <CommunityBanner />
 
         {user?.id && <TodayOnboardingChecklist userId={user.id} />}
 

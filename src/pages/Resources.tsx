@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin, Shield } from "lucide-react";
+import { BookOpen, TrendingUp, FileText, Award, Home, Cpu, Clock, Database, MapPin, Shield, MessageCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
@@ -49,6 +49,16 @@ const Resources = () => {
   const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
   
   const articles = [
+    {
+      categoryKey: "resourcesPage.categories.successStories",
+      icon: MessageCircle,
+      titleKey: "resourcesPage.articles.communityLaunch.title",
+      excerptKey: "resourcesPage.articles.communityLaunch.excerpt",
+      readTime: 3,
+      image: blogSuccess,
+      link: "/blog/community-launch",
+      useTranslation: true,
+    },
     {
       categoryKey: "resourcesPage.categories.sales",
       icon: TrendingUp,

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { RDWordmark } from "../Logo";
 import { IconMaple } from "../icons";
+import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
 
 // Shared footer for every /redesign marketing page. Five columns of
 // links, wordmark + tagline on the left, "Made in Canada" strip,
@@ -16,6 +17,22 @@ interface MarketingFooterProps {
 
 export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
   const { t } = useTranslation();
+
+  // Community link surfaces only when VITE_COMMUNITY_URL is configured.
+  // Slotted into the Company column between Blog and Careers since
+  // "Community" is brand-adjacent rather than product or compliance.
+  const companyItems = [
+    { label: t("marketingFooter.itemBlog"), to: "/resources" },
+    { label: t("marketingHeader.navPartners"), to: "/partners" },
+    ...(isCommunityEnabled()
+      ? [{ label: t("marketingFooter.itemCommunity"), to: COMMUNITY_URL, external: true }]
+      : []),
+    { label: t("marketingFooter.itemCareers"), to: "/careers" },
+    { label: t("marketingFooter.itemContact"), to: "/contact" },
+    { label: t("marketingFooter.itemPrivacy"), to: "/privacy-policy" },
+    { label: t("marketingFooter.itemTerms"), to: "/terms-of-service" },
+  ];
+
   return (
     <footer
       className={`bg-white px-4 sm:px-8 md:px-14 py-14 ${topBorder ? "border-t border-rd-line" : ""}`}
@@ -70,14 +87,7 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
         />
         <FooterCol
           title={t("marketingFooter.colCompany")}
-          items={[
-            { label: t("marketingFooter.itemBlog"), to: "/resources" },
-            { label: t("marketingHeader.navPartners"), to: "/partners" },
-            { label: t("marketingFooter.itemCareers"), to: "/careers" },
-            { label: t("marketingFooter.itemContact"), to: "/contact" },
-            { label: t("marketingFooter.itemPrivacy"), to: "/privacy-policy" },
-            { label: t("marketingFooter.itemTerms"), to: "/terms-of-service" },
-          ]}
+          items={companyItems}
         />
       </div>
 
@@ -102,7 +112,7 @@ function FooterCol({
   items,
 }: {
   title: string;
-  items: { label: string; to: string }[];
+  items: { label: string; to: string; external?: boolean }[];
 }) {
   return (
     <div>
@@ -112,9 +122,20 @@ function FooterCol({
       <ul className="flex flex-col gap-2.5">
         {items.map((i) => (
           <li key={i.label}>
-            <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900">
-              {i.label}
-            </Link>
+            {i.external ? (
+              <a
+                href={i.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900"
+              >
+                {i.label}
+              </a>
+            ) : (
+              <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900">
+                {i.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
