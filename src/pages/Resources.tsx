@@ -41,6 +41,7 @@ import blogAICRMGuide from "@/assets/blog-ai-crm-guide.jpg";
 import blogLeadGeneration from "@/assets/blog-lead-generation-strategies.jpg";
 import blogOpenHouse from "@/assets/blog-open-house-digital.jpg";
 import blogDripCampaign from "@/assets/blog-drip-campaign-templates.jpg";
+import blogDatabaseReactivation from "@/assets/blog-database-reactivation.jpg";
 
 const Resources = () => {
   const { t, i18n } = useTranslation();
@@ -58,6 +59,16 @@ const Resources = () => {
       image: blogSuccess,
       link: "/blog/community-launch",
       useTranslation: true,
+    },
+    {
+      categoryKey: "resourcesPage.categories.sales",
+      icon: Database,
+      title: "Real Estate Database Reactivation: The Canadian Agent's Guide to Repeat & Referral Business",
+      excerpt: "Your next three deals are already in your phone. Learn how to reactivate dormant past clients into repeat and referral business — the CASL-aware way for Canadian agents.",
+      readTime: 11,
+      image: blogDatabaseReactivation,
+      link: "/real-estate-database-reactivation-canada",
+      useTranslation: false,
     },
     {
       categoryKey: "resourcesPage.categories.sales",

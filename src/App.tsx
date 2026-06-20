@@ -117,6 +117,7 @@ const OpenHouseDigitalSignIn = lazy(() => import("./pages/blog/OpenHouseDigitalS
 const DripCampaignTemplates = lazy(() => import("./pages/blog/DripCampaignTemplates"));
 const RealEstateCRMBuyingGuide = lazy(() => import("./pages/blog/RealEstateCRMBuyingGuide"));
 const LionDeskAlternative = lazy(() => import("./pages/blog/LionDeskAlternative"));
+const DatabaseReactivation = lazy(() => import("./pages/blog/DatabaseReactivation"));
 
 // ─── Lazy-loaded comparison & migration pages ───
 const VsBoldTrail = lazy(() => import("./pages/VsBoldTrail"));
@@ -303,6 +304,7 @@ const App = () => (
           <Route path="/blog/real-estate-drip-campaign-templates-canada-2025" element={<DripCampaignTemplates />} />
           <Route path="/blog/real-estate-crm-buying-guide" element={<RealEstateCRMBuyingGuide />} />
           <Route path="/blog/best-liondesk-alternative-canadian-realtors" element={<LionDeskAlternative />} />
+          <Route path="/real-estate-database-reactivation-canada" element={<DatabaseReactivation />} />
           <Route path="/integrations" element={<IntegrationsRoute />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/careers" element={<Careers />} />

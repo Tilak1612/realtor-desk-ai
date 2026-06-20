@@ -70,6 +70,7 @@ const routes = [
   '/resources/calgary-real-estate-marketing-strategies',
   '/resources/casl-compliance-real-estate-email-marketing-canada',
   '/resources/cost-of-missed-real-estate-leads-canada',
+  '/real-estate-database-reactivation-canada',
 ];
 
 const distDir = path.join(__dirname, '../dist');

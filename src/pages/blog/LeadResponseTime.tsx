@@ -196,6 +196,15 @@ const LeadResponseTime = () => {
                 hours in your day. Your fastest competitors aren't necessarily checking their
                 phones more often than you — they have systems running when they aren't.
               </p>
+              <p>
+                The same systems thinking applies to the leads you already have. If new-lead speed
+                is one half of the equation, reconnecting with past clients is the other — see our
+                guide to{" "}
+                <Link to="/real-estate-database-reactivation-canada">
+                  real estate database reactivation for Canadian agents
+                </Link>
+                .
+              </p>
 
               {/* Inline lead magnet CTA */}
               <div className="not-prose my-10 rounded-xl border border-primary/20 bg-primary/5 p-6">
