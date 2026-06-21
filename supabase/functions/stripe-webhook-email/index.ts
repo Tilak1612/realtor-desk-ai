@@ -27,6 +27,10 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const stripe = new Stripe(stripeSecretKey, { apiVersion: "2025-08-27.basil" });
+    // Deno's edge runtime has no synchronous Node crypto, so Stripe's sync
+    // constructEvent throws ("SubtleCryptoProvider cannot be used in a
+    // synchronous context"). Use the async variant with a SubtleCrypto provider.
+    const cryptoProvider = Stripe.createSubtleCryptoProvider();
     const body = await req.text();
     let event: Stripe.Event;
 
@@ -46,7 +50,13 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
     try {
-      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+      event = await stripe.webhooks.constructEventAsync(
+        body,
+        signature,
+        webhookSecret,
+        undefined,
+        cryptoProvider,
+      );
     } catch (err) {
       console.error("Webhook signature verification failed:", err instanceof Error ? err.message : String(err));
       return new Response(JSON.stringify({ error: "Invalid signature" }), {
