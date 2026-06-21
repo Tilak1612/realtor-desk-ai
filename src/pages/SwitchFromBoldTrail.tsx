@@ -13,7 +13,7 @@ const SwitchFromBoldTrail = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Switch from BoldTrail | Free Migration to RealtorDesk AI"
+        title="Switch from BoldTrail | Free Migration to Realtor Desk"
         description="Free migration and CSV import if you're moving from BoldTrail to RealtorDesk AI — CASL-compliant emails, EN/FR, $999/yr Founding Member tier."
         keywords="switch from BoldTrail, BoldTrail migration, BoldTrail alternative Canada, RealtorDesk AI"
         canonicalUrl="https://www.realtordesk.ai/switch-from-boldtrail"

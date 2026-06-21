@@ -146,8 +146,9 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium mb-2">{t('contact.form.name')}</label>
+                      <label htmlFor="contact-name" className="block text-sm font-medium mb-2">{t('contact.form.name')}</label>
                       <Input
+                        id="contact-name"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -155,8 +156,9 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">{t('contact.form.email')}</label>
+                      <label htmlFor="contact-email" className="block text-sm font-medium mb-2">{t('contact.form.email')}</label>
                       <Input
+                        id="contact-email"
                         required
                         type="email"
                         value={formData.email}
@@ -167,8 +169,9 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">{t('contact.form.phone')}</label>
+                    <label htmlFor="contact-phone" className="block text-sm font-medium mb-2">{t('contact.form.phone')}</label>
                     <Input
+                      id="contact-phone"
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       placeholder="(416) 555-0123"
@@ -176,8 +179,9 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">{t('contact.form.message')}</label>
+                    <label htmlFor="contact-message" className="block text-sm font-medium mb-2">{t('contact.form.message')}</label>
                     <Textarea
+                      id="contact-message"
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
