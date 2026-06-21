@@ -28,7 +28,7 @@ const VsLofty = () => {
   return (
     <div className="min-h-screen">
       <SEO 
-        title="Lofty Alternative for Canadian Agents | RealtorDesk AI vs Lofty"
+        title="Lofty Alternative for Canadian Agents | Realtor Desk vs Lofty"
         description="Why Canadian real estate agents choose RealtorDesk AI over Lofty: Save 85% ($149 vs $700/mo), PIPEDA compliant, bilingual, CREA DDF® coming Q3 2026. No setup fees. 14-day free trial."
         keywords="Lofty alternative, Lofty CRM alternative Canada, real estate CRM cheaper than Lofty, best CRM for Canadian realtors, CREA DDF integration, PIPEDA compliant CRM"
         structuredData={[comparisonSchema]}
