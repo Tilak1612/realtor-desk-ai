@@ -20,9 +20,11 @@ import { SkipToContent } from "./components/SkipToContent";
 // the legacy files are left in the tree for reference; they will be
 // deleted in a post-launch cleanup pass. See feat/rd-redesign-phase-2-marketing.
 import RDHome from "./pages/rd/Home";
-import RDFeatures from "./pages/rd/Features";
-import RDPricing from "./pages/rd/Pricing";
-import RDCompareBoldtrail from "./pages/rd/CompareBoldtrail";
+// Lazy-loaded: these are separate routes, so keeping them out of the initial
+// bundle shrinks the landing-page payload. RDHome (/) stays eager.
+const RDFeatures = lazy(() => import("./pages/rd/Features"));
+const RDPricing = lazy(() => import("./pages/rd/Pricing"));
+const RDCompareBoldtrail = lazy(() => import("./pages/rd/CompareBoldtrail"));
 // Phase 3 redesign: product surfaces under /app/*. Lazy-loaded so the
 // paper-bg shell doesn't bloat the marketing bundle.
 const RDAppDashboard = lazy(() => import("./pages/rd/app/Dashboard"));
