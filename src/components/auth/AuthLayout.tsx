@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import MatrixRain from './MatrixRain';
+import { loadFrench } from '@/i18n/config';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -15,7 +16,9 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
   const { i18n } = useTranslation();
   const active = (i18n.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
   const setLang = (next: 'en' | 'fr') => {
-    if (next !== active) void i18n.changeLanguage(next);
+    if (next === active) return;
+    if (next === 'fr') void loadFrench().then(() => i18n.changeLanguage(next));
+    else void i18n.changeLanguage(next);
   };
 
   return (

@@ -5,6 +5,7 @@ import { renderWithProviders } from "@/test/render";
 import { Sidebar } from "../Sidebar";
 import { TopNav } from "../TopNav";
 import { MarketingHeader } from "../MarketingHeader";
+import { loadFrench } from "@/i18n/config";
 
 // Redesign chrome smoke: guards Phase I bilingual wiring. If a t() key
 // is ever renamed without updating the fallback, or if the EN/FR toggle
@@ -30,6 +31,8 @@ describe("Sidebar", () => {
   it("flips to French nav labels when i18n language is fr", async () => {
     const { i18n } = renderWithProviders(<Sidebar />);
     await act(async () => {
+      // FR is lazy-loaded; callers (the EN/FR toggle) preload it before switching.
+      await loadFrench();
       await i18n.changeLanguage("fr");
     });
     expect(screen.getByText("Tableau de bord")).toBeInTheDocument();

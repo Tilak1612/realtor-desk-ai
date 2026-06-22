@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
 import i18n from "@/i18n/config";
+// FR is lazy-loaded at runtime (separate chunk, only fetched for FR users),
+// so it is not in the resource store synchronously. Import the bundle
+// directly so this parity guard still validates en/fr at build time.
+import { fr as frBundle } from "@/i18n/fr";
 
 // Guard against the two i18n failure modes that bit us during the redesign:
 //   1. A key is added to en but not fr (or vice-versa), so FR users see
@@ -18,7 +22,9 @@ function resources() {
     { translation: Record<string, JsonNode> }
   >;
   const en = store.en?.translation;
-  const fr = store.fr?.translation;
+  // Prefer the runtime store if FR happens to be loaded; otherwise fall back
+  // to the directly-imported lazy bundle (the normal case in tests/CI).
+  const fr = store.fr?.translation ?? frBundle.translation;
   if (!en || !fr) {
     throw new Error("Expected both en and fr translation resources to be loaded.");
   }

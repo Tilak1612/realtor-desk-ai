@@ -4,6 +4,7 @@ import { RDBadge } from "../Badge";
 import { RDAvatar } from "../Avatar";
 import { IconBell, IconDot, IconSearch } from "../icons";
 import { cn } from "@/lib/utils";
+import { loadFrench } from "@/i18n/config";
 
 // Product topbar (AppShell topbar in rd-app.jsx). Command search, a live
 // status pill, EN/FR toggle (now wired to i18n.changeLanguage), bell
@@ -21,7 +22,9 @@ export function TopNav({ agent, hasUnread = true, isLive = true }: TopNavProps) 
   const active = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
 
   function setLang(next: "en" | "fr") {
-    if (next !== active) void i18n.changeLanguage(next);
+    if (next === active) return;
+    if (next === "fr") void loadFrench().then(() => i18n.changeLanguage(next));
+    else void i18n.changeLanguage(next);
   }
 
   return (
