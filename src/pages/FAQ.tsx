@@ -14,6 +14,7 @@ const FAQ = () => {
 
   return <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/faq"
         title={t('pageSeo.faqTitle')}
         description={t('pageSeo.faqDesc')}
         keywords="real estate crm faq, realtor crm questions, ai real estate crm, real estate lead generation software"

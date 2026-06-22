@@ -85,6 +85,7 @@ const Roadmap = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/roadmap"
         title={t('pageSeo.roadmapTitle')}
         description={t('pageSeo.roadmapDesc')}
       />

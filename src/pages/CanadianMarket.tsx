@@ -34,6 +34,7 @@ const CanadianMarket = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/canadian-market"
         title="Canadian Real Estate CRM | Built for Canada with PIPEDA in mind"
         description="RealtorDesk AI is built for Canadian agents with bilingual support and PIPEDA-compliant data handling across provinces. CREA DDF® integration is on the Q3 2026 roadmap."
         keywords="canadian real estate crm, CREA DDF, PIPEDA compliant crm, bilingual real estate crm, canadian realtors"
