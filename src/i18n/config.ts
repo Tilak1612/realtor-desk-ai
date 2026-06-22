@@ -3225,7 +3225,7 @@ i18n.on("languageChanged", syncHtmlLang);
 // the EN-default majority. Trade-off: a FR-detected first paint briefly shows
 // EN fallback until the chunk loads (re-introduces the R-18a ?lang=fr nuance).
 // Gated behind owner approval — see PR. EN remains inline for instant paint.
-async function loadFrench() {
+export async function loadFrench() {
   if (i18n.hasResourceBundle("fr", "translation")) return;
   const mod = await import("./fr");
   i18n.addResourceBundle("fr", "translation", mod.fr.translation, true, true);

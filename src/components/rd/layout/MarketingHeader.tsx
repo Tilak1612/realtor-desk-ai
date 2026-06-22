@@ -7,6 +7,7 @@ import { Globe, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { RDWordmark } from "../Logo";
 import { RDButton } from "../Button";
+import { loadFrench } from "@/i18n/config";
 
 // The single public-site header. Sits on paper (light) or dark sections;
 // pass `tone="dark"` for the latter. This component is rendered directly
@@ -62,7 +63,9 @@ export function MarketingHeader({
 
   const activeLang = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
   const setLang = (next: "en" | "fr") => {
-    if (next !== activeLang) void i18n.changeLanguage(next);
+    if (next === activeLang) return;
+    if (next === "fr") void loadFrench().then(() => i18n.changeLanguage(next));
+    else void i18n.changeLanguage(next);
   };
 
   useEffect(() => {

@@ -7,11 +7,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { loadFrench } from '@/i18n/config';
 
 const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation();
 
-  const changeLanguage = (lng: string) => {
+  const changeLanguage = async (lng: string) => {
+    // FR is lazy-loaded; fetch the chunk before switching so the UI doesn't
+    // flash EN fallback labels on toggle.
+    if (lng.toLowerCase().startsWith('fr')) await loadFrench();
     i18n.changeLanguage(lng);
     // Store preference in localStorage for persistence
     localStorage.setItem('preferred-language', lng);
