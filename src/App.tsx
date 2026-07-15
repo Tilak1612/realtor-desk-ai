@@ -125,6 +125,8 @@ const VsLofty = lazy(() => import("./pages/VsLofty"));
 const VsIxact = lazy(() => import("./pages/VsIxact"));
 const VsWiseAgent = lazy(() => import("./pages/VsWiseAgent"));
 const AIPoweredCRM = lazy(() => import("./pages/AIPoweredCRM"));
+const VsHubspot = lazy(() => import("./pages/compare/VsHubspot"));
+const VsSalesforce = lazy(() => import("./pages/compare/VsSalesforce"));
 const SwitchFromBoldTrail = lazy(() => import("./pages/SwitchFromBoldTrail"));
 const SwitchFromLofty = lazy(() => import("./pages/SwitchFromLofty"));
 const SwitchFromIxact = lazy(() => import("./pages/SwitchFromIxact"));
@@ -374,6 +376,8 @@ const App = () => (
 
           {/* AI Features */}
           <Route path="/features/ai-powered-crm" element={<AIPoweredCRM />} />
+          <Route path="/realtor-desk-vs-hubspot" element={<VsHubspot />} />
+          <Route path="/realtor-desk-vs-salesforce" element={<VsSalesforce />} />
 
           {/* Migration Pages */}
           <Route path="/switch-from-boldtrail" element={<SwitchFromBoldTrail />} />
