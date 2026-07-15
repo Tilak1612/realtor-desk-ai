@@ -125,6 +125,7 @@ const VsLofty = lazy(() => import("./pages/VsLofty"));
 const VsIxact = lazy(() => import("./pages/VsIxact"));
 const VsWiseAgent = lazy(() => import("./pages/VsWiseAgent"));
 const AIPoweredCRM = lazy(() => import("./pages/AIPoweredCRM"));
+const CrmOntario = lazy(() => import("./pages/CrmOntario"));
 const SwitchFromBoldTrail = lazy(() => import("./pages/SwitchFromBoldTrail"));
 const SwitchFromLofty = lazy(() => import("./pages/SwitchFromLofty"));
 const SwitchFromIxact = lazy(() => import("./pages/SwitchFromIxact"));
@@ -374,6 +375,7 @@ const App = () => (
 
           {/* AI Features */}
           <Route path="/features/ai-powered-crm" element={<AIPoweredCRM />} />
+          <Route path="/real-estate-crm-ontario" element={<CrmOntario />} />
 
           {/* Migration Pages */}
           <Route path="/switch-from-boldtrail" element={<SwitchFromBoldTrail />} />
