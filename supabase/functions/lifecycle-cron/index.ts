@@ -27,6 +27,18 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Length-independent comparison so the shared secret can't be recovered by
+// timing the response.
+const timingSafeEqual = (a: string, b: string): boolean => {
+  const enc = new TextEncoder();
+  const ab = enc.encode(a);
+  const bb = enc.encode(b);
+  let diff = ab.length ^ bb.length;
+  const max = Math.max(ab.length, bb.length);
+  for (let i = 0; i < max; i++) diff |= (ab[i] ?? 0) ^ (bb[i] ?? 0);
+  return diff === 0;
+};
+
 const logStep = (step: string, details?: Record<string, unknown>) => {
   const detailsStr = details ? ` - ${JSON.stringify(details)}` : "";
   console.log(`[LIFECYCLE-CRON] ${step}${detailsStr}`);
@@ -191,6 +203,25 @@ function getTrialEndingTemplate(name: string, lang: string, daysLeft: number): E
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // This endpoint sends email to real users and runs with the service-role key,
+  // so it must not be publicly triggerable. verify_jwt is false (the scheduler
+  // has no user JWT), so authentication is a shared secret handled here.
+  // Fails CLOSED: if CRON_SECRET is unset the function refuses to run rather
+  // than leaving an unauthenticated mass-email endpoint exposed.
+  const cronSecret = Deno.env.get("CRON_SECRET");
+  if (!cronSecret) {
+    console.error("[LIFECYCLE-CRON] CRON_SECRET not configured — refusing to run");
+    return new Response(JSON.stringify({ error: "Not configured" }), {
+      status: 503, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+  if (!timingSafeEqual(req.headers.get("x-cron-secret") ?? "", cronSecret)) {
+    console.warn("[LIFECYCLE-CRON] Rejected request with missing/invalid cron secret");
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 
   try {
