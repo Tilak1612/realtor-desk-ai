@@ -89,3 +89,9 @@ verify_jwt = false
 # Always returns 200 so it can't be used to probe DB membership.
 [functions.request-unsubscribe-link]
 verify_jwt = false
+
+[functions.site-assistant]
+# Public marketing-site assistant: visitors are anonymous, so the gateway must
+# not require a JWT. The handler is hardened instead (prompt/history caps,
+# per-IP rate limit, max_tokens cap, pre-model handoff, deterministic fallback).
+verify_jwt = false
