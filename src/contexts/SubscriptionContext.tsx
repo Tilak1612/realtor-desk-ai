@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { STRIPE_PRICES, STRIPE_PRODUCTS } from "@/config/stripe";
 import { supabase } from '@/integrations/supabase/client';
 import { trackEvent } from '@/utils/analytics';
 
@@ -20,19 +21,19 @@ const SubscriptionContext = createContext<SubscriptionContextType | undefined>(u
 
 export const SUBSCRIPTION_PRODUCTS = {
   agent: {
-    monthly_price_id: 'price_1SXpyiS23MQcIdnrAphs809v',
-    yearly_price_id: 'price_1SXpzKS23MQcIdnrfH2rHhow',
-    monthly_product_id: 'prod_TUpecsjMV6TaBw',
-    yearly_product_id: 'prod_TUpevCKNFOGwCq',
+    monthly_price_id: STRIPE_PRICES.solo.monthly,
+    yearly_price_id: STRIPE_PRICES.solo.yearly,
+    monthly_product_id: STRIPE_PRODUCTS.solo,
+    yearly_product_id: STRIPE_PRODUCTS.solo,
     name: 'Solo Plan',
     yearlyPrice: 999,
     monthlyPrice: 149,
   },
   team: {
-    monthly_price_id: 'price_1SXpz0S23MQcIdnrrD0UGqa5',
-    yearly_price_id: 'price_1SXpzZS23MQcIdnrVVyUShLT',
-    monthly_product_id: 'prod_TUpeTIPjzjd64Z',
-    yearly_product_id: 'prod_TUpeobzrNh5RNk',
+    monthly_price_id: STRIPE_PRICES.team.monthly,
+    yearly_price_id: STRIPE_PRICES.team.yearly,
+    monthly_product_id: STRIPE_PRODUCTS.team,
+    yearly_product_id: STRIPE_PRODUCTS.team,
     name: 'Team Plan',
     yearlyPrice: 2997,
     monthlyPrice: 299,

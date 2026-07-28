@@ -7,13 +7,19 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Valid price IDs whitelist - keep in sync with SubscriptionContext.tsx
-const VALID_PRICE_IDS: Set<string> = new Set([
-  "price_1SXpyiS23MQcIdnrAphs809v", // Agent - Monthly
-  "price_1SXpzKS23MQcIdnrfH2rHhow", // Agent - Yearly
-  "price_1SXpz0S23MQcIdnrrD0UGqa5", // Team - Monthly
-  "price_1SXpzZS23MQcIdnrVVyUShLT", // Team - Yearly
-]);
+// Price-ID allowlist, sourced from environment so test↔live is a config change
+// rather than a deploy. Mirrors src/config/stripe.ts on the frontend.
+//
+// This allowlist is the control that stops a caller substituting an arbitrary
+// (e.g. $0) price into checkout, so it must never end up empty-but-permissive.
+const VALID_PRICE_IDS: Set<string> = new Set(
+  [
+    Deno.env.get("STRIPE_PRICE_SOLO_MONTHLY"),
+    Deno.env.get("STRIPE_PRICE_SOLO_YEARLY"),
+    Deno.env.get("STRIPE_PRICE_TEAM_MONTHLY"),
+    Deno.env.get("STRIPE_PRICE_TEAM_YEARLY"),
+  ].filter((v): v is string => typeof v === "string" && v.length > 0),
+);
 
 // Free-trial length. Card is collected at checkout and charged automatically
 // when the trial ends. If this changes, the marketing copy must change with it
@@ -85,8 +91,21 @@ serve(async (req) => {
       );
     }
 
-    // If whitelist is configured, validate against it
-    if (VALID_PRICE_IDS.size > 0 && !VALID_PRICE_IDS.has(priceId)) {
+    // Fail CLOSED. The previous `size > 0 &&` guard meant an unconfigured
+    // allowlist silently accepted ANY price ID — with the IDs now coming from
+    // env, a missing secret would have turned that into a price-tampering hole.
+    if (VALID_PRICE_IDS.size === 0) {
+      console.error("[CREATE-CHECKOUT] No STRIPE_PRICE_* configured — refusing checkout");
+      return new Response(
+        JSON.stringify({ error: "Billing is not configured" }),
+        {
+          status: 503,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    if (!VALID_PRICE_IDS.has(priceId)) {
       console.warn("Price ID not in whitelist:", priceId);
       return new Response(
         JSON.stringify({ error: "Invalid price ID" }),
