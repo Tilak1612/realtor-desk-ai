@@ -110,7 +110,7 @@ const LoftyAlternative = () => {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              ✓ No credit card required &nbsp;•&nbsp; ✓ Free data migration &nbsp;•&nbsp; ✓ Cancel anytime
+              ✓ Cancel anytime before you're charged &nbsp;•&nbsp; ✓ Free data migration &nbsp;•&nbsp; ✓ Cancel anytime
             </p>
           </div>
         </div>
@@ -373,7 +373,7 @@ const LoftyAlternative = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-6">Ready to Save 85% and Get More Features?</h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join hundreds of Canadian agents who switched from Lofty to RealtorDesk AI. Start your free 14-day trial today—no credit card required.
+              Join hundreds of Canadian agents who switched from Lofty to RealtorDesk AI. Start your free 14-day trial today—cancel anytime before you're charged.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="group">

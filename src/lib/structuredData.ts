@@ -160,7 +160,7 @@ export const pricingPageFAQSchema = {
       "name": "Is there a free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, Realtor Desk offers a 14-day free trial with no credit card required. You get full access to all features during the trial period."
+        "text": "Yes, Realtor Desk offers a 14-day free trial. A payment method is required to start, and you won't be charged until the trial ends — cancel any time before then. You get full access to all features during the trial."
       }
     },
     {

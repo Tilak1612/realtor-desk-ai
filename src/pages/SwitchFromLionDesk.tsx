@@ -98,7 +98,7 @@ const SwitchFromLionDesk = () => {
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-muted-foreground">No credit card required · Free data migration · Setup in under 24 hours</p>
+          <p className="text-sm text-muted-foreground">Cancel anytime before you're charged · Free data migration · Setup in under 24 hours</p>
         </div>
       </section>
 
@@ -190,7 +190,7 @@ const SwitchFromLionDesk = () => {
                 <span className="text-2xl font-bold text-primary">1</span>
               </div>
               <h3 className="font-bold mb-2">Start Your Free Trial</h3>
-              <p className="text-muted-foreground text-sm">Sign up in 2 minutes. No credit card required. Your 14-day free trial starts immediately.</p>
+              <p className="text-muted-foreground text-sm">Sign up in 2 minutes. A card is required to start; you're not charged until the trial ends. Your 14-day free trial starts immediately.</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -236,7 +236,7 @@ const SwitchFromLionDesk = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup">
               <Button size="lg" className="btn-gradient text-lg px-10">
-                Start Free Trial — No Credit Card
+                Start Free Trial — Cancel anytime
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>

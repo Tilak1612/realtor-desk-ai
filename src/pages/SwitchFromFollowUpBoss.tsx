@@ -92,7 +92,7 @@ const SwitchFromFollowUpBoss = () => {
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-muted-foreground">Free migration · No credit card · Setup in 24 hours</p>
+          <p className="text-sm text-muted-foreground">Free migration · Cancel anytime · Setup in 24 hours</p>
         </div>
       </section>
 

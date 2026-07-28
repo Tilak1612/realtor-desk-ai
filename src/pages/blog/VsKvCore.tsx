@@ -214,7 +214,7 @@ const VsKvCore = () => {
               <li><strong>Team Plan:</strong> $299 CAD/month (up to 5 agents)</li>
               <li><strong>Brokerage:</strong> Custom pricing (typically $1,200-2,500/month)</li>
               <li><strong>No hidden fees:</strong> No setup fees, no per-user charges, no surprise add-ons</li>
-              <li><strong>14-day free trial:</strong> No credit card required</li>
+              <li><strong>14-day free trial:</strong> Cancel anytime before you're charged</li>
               <li><strong>Total first-year cost (solo agent):</strong> $1,788 CAD</li>
             </ul>
 
@@ -452,7 +452,7 @@ const VsKvCore = () => {
             <div className="cta-section">
               <h2>Ready to Experience the Difference?</h2>
               <p>
-                See why Canadian agents are switching to AI-first CRMs. Try RealtorDesk AI free for 14 days—no credit card required.
+                See why Canadian agents are switching to AI-first CRMs. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
               </p>
               <div className="flex gap-4 flex-wrap justify-center">
                 <Link to="/demo">

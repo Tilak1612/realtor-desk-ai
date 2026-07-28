@@ -15,6 +15,12 @@ const VALID_PRICE_IDS: Set<string> = new Set([
   "price_1SXpzZS23MQcIdnrVVyUShLT", // Team - Yearly
 ]);
 
+// Free-trial length. Card is collected at checkout and charged automatically
+// when the trial ends. If this changes, the marketing copy must change with it
+// — "14-day free trial" appears across the site, i18n (EN/FR), JSON-LD
+// structured data, and the site-assistant corpus.
+const TRIAL_PERIOD_DAYS = 14;
+
 // Validate price ID format (Stripe price IDs start with "price_")
 const isValidPriceIdFormat = (priceId: string): boolean => {
   return typeof priceId === "string" && 
@@ -159,6 +165,28 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
+      // 14-day free trial with the card collected up front: Stripe stores the
+      // payment method during checkout and charges automatically when the trial
+      // ends. Set here rather than on the Price so the term is version-
+      // controlled and identical across every plan.
+      subscription_data: {
+        trial_period_days: TRIAL_PERIOD_DAYS,
+      },
+      // Explicit for intent: in subscription mode Stripe already collects a
+      // payment method by default, but "always" makes it impossible to silently
+      // become a no-card trial if this block is edited later.
+      payment_method_collection: "always",
+      // Surfaces "You won't be charged until <date>" + the recurring amount on
+      // the Stripe-hosted page, which is the disclosure a paid-after-trial
+      // subscription needs.
+      custom_text: {
+        submit: {
+          message:
+            `Your ${TRIAL_PERIOD_DAYS}-day free trial starts today. ` +
+            `We'll charge your card automatically when it ends unless you cancel before then. ` +
+            `You can cancel any time from Billing.`,
+        },
+      },
       success_url: `${origin}/billing?success=true`,
       cancel_url: `${origin}/billing`,
     });

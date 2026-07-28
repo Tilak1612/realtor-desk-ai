@@ -457,7 +457,7 @@ const RealEstateCRMBuyingGuide = () => {
                 </Link>
               </div>
               <p className="text-sm text-muted-foreground mt-4">
-                No credit card required • Setup in 20 minutes • Cancel anytime
+                Cancel anytime before you're charged • Setup in 20 minutes • Cancel anytime
               </p>
             </div>
           </Card>

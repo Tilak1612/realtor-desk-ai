@@ -800,7 +800,7 @@ const VsPropertybase = () => {
           <section className="text-center py-12">
             <h2 className="text-3xl font-bold mb-4">Choose Agile Over Enterprise Complexity</h2>
             <p className="text-xl text-gray-600 mb-8">
-              Try RealtorDesk AI free for 14 days. No credit card required.
+              Try RealtorDesk AI free for 14 days. A card is required to start; you're not charged until the trial ends.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8">

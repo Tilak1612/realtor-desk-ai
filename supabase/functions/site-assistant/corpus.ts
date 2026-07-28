@@ -103,7 +103,7 @@ export function corpus(): string {
   );
 
   return [
-    "PRICING (CAD, 14-day free trial, no credit card required to start):",
+    "PRICING (CAD, 14-day free trial, a card is required to start and is charged automatically when the trial ends unless cancelled):",
     ...PRICING.map(priceLine),
     "",
     "AVAILABLE TODAY:",
