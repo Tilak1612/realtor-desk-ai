@@ -12,6 +12,7 @@ import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CookieConsent from "./components/CookieConsent";
+import SiteAssistant from "./components/marketing/SiteAssistant";
 import { SkipToContent } from "./components/SkipToContent";
 
 // Critical path — eagerly loaded (landing, auth, 404)
@@ -391,6 +392,7 @@ const App = () => (
           </Suspense>
           </SubscriptionProvider>
           <CookieConsent />
+          <SiteAssistant />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
