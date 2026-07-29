@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import { useOnboardingWizard } from "@/hooks/rd/useOnboardingWizard";
+import { useSession } from "@/hooks/rd/useSession";
 import { RDWordmark } from "@/components/rd/Logo";
 import {
   RDButton,
@@ -24,9 +26,10 @@ import {
 import { cn } from "@/lib/utils";
 import type { OnboardingStepId } from "@/types/rd";
 
-// /onboarding — Five-step signup flow per rd-onboarding.jsx. Step state
-// is local-only for Phase 4; backend wiring hydrates/persists to the
-// user_onboarding table in a later phase.
+// /onboarding — Five-step signup flow per rd-onboarding.jsx. State
+// hydrates from and persists to user_onboarding.wizard_state via
+// useOnboardingWizard; finishing also flips profiles.onboarding_completed,
+// which is the flag every route guard reads.
 //
 // Steps: 1 Welcome · 2 Profile · 3 Connect DDF · 4 AI voice · 5 Go live
 
@@ -58,27 +61,52 @@ const STEP_LABEL_DEFAULT: Record<OnboardingStepId, string> = {
 export default function Onboarding() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { state, loading, saving, advance: persistAdvance } = useOnboardingWizard();
+  const { user, loading: sessionLoading } = useSession();
+  const {
+    state,
+    loading,
+    saving,
+    advance: persistAdvance,
+    complete,
+    completing,
+  } = useOnboardingWizard();
   const stepIndex = STEP_IDS.indexOf(state.currentStep);
-  const safeIndex = stepIndex === -1 ? 0 : stepIndex;
+  const rawIndex = stepIndex === -1 ? 0 : stepIndex;
+  // Step 1 is a signup form (work email + create a password). An already
+  // authenticated user landing here was being asked to create a second
+  // account, so skip straight to Profile for them.
+  const isAuthed = !!user;
+  const safeIndex = isAuthed && rawIndex === 0 ? 1 : rawIndex;
   const currentStepId = STEP_IDS[safeIndex];
 
   const advance = () => {
     if (safeIndex < STEP_IDS.length - 1) {
       persistAdvance(STEP_IDS[safeIndex + 1]);
-    } else {
-      // Final step — mark go_live as completed and route into the app.
-      persistAdvance("go_live");
-      navigate("/app");
+      return;
     }
+    // Final step. Await the completion write before navigating — the guard
+    // on /app reads profiles.onboarding_completed, and racing it sends the
+    // user straight back here.
+    complete()
+      .then(() => navigate("/app"))
+      .catch(() => {
+        toast.error(
+          t(
+            "rd.onboarding.completeFailed",
+            "We couldn't finish setting up your account. Please try again.",
+          ),
+        );
+      });
   };
+  // Authed users never see step 0, so Back must stop at Profile for them.
+  const minIndex = isAuthed ? 1 : 0;
   const back = () => {
-    if (safeIndex > 0) {
+    if (safeIndex > minIndex) {
       persistAdvance(STEP_IDS[safeIndex - 1]);
     }
   };
 
-  if (loading) {
+  if (loading || sessionLoading) {
     return (
       <div className="rd-reset h-screen bg-rd-paper flex items-center justify-center text-sm text-rd-ink-500">
         {t("rd.onboarding.loading", "Loading your onboarding…")}
@@ -87,8 +115,8 @@ export default function Onboarding() {
   }
 
   return (
-    <OnbShell stepIndex={safeIndex} saving={saving}>
-      <StepSwitch id={currentStepId} onBack={back} onContinue={advance} />
+    <OnbShell stepIndex={safeIndex} saving={saving || completing}>
+      <StepSwitch id={currentStepId} onBack={back} onContinue={advance} busy={completing} />
     </OnbShell>
   );
 }
@@ -174,10 +202,12 @@ function StepSwitch({
   id,
   onBack,
   onContinue,
+  busy,
 }: {
   id: OnboardingStepId;
   onBack: () => void;
   onContinue: () => void;
+  busy: boolean;
 }) {
   switch (id) {
     case "welcome":
@@ -189,7 +219,7 @@ function StepSwitch({
     case "ai_voice":
       return <StepVoice onBack={onBack} onContinue={onContinue} />;
     case "go_live":
-      return <StepLive />;
+      return <StepLive onContinue={onContinue} busy={busy} />;
   }
 }
 
@@ -689,7 +719,7 @@ function StepVoice({ onBack, onContinue }: { onBack: () => void; onContinue: () 
 
 /* ────────────────────────────────────────────────────────── */
 
-function StepLive() {
+function StepLive({ onContinue, busy }: { onContinue: () => void; busy: boolean }) {
   const { t } = useTranslation();
   return (
     <StepScaffold
@@ -786,11 +816,17 @@ function StepLive() {
       </div>
 
       <div className="flex flex-wrap gap-2.5 mt-7">
-        <Link to="/app">
-          <RDButton variant="primary" size="lg" trailingIcon={<IconArrow />}>
-            {t("rd.onboarding.live.takeToDashboard", "Take me to the dashboard")}
-          </RDButton>
-        </Link>
+        <RDButton
+          variant="primary"
+          size="lg"
+          trailingIcon={<IconArrow />}
+          onClick={onContinue}
+          disabled={busy}
+        >
+          {busy
+            ? t("rd.onboarding.live.finishing", "Finishing setup…")
+            : t("rd.onboarding.live.takeToDashboard", "Take me to the dashboard")}
+        </RDButton>
         <RDButton variant="ghost" size="lg">
           {t("rd.onboarding.live.tour", "Watch the 2-min tour")}
         </RDButton>

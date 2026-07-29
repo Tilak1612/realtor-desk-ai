@@ -26,6 +26,13 @@ interface UseOnboardingWizardResult {
   patch: (partial: Partial<OnboardingState>) => void;
   /** Force-save the current state. Rarely needed; advance/patch already save. */
   save: () => void;
+  /**
+   * Finish onboarding: stamp go_live complete AND flip
+   * profiles.onboarding_completed. Resolves once the flag is written, so the
+   * caller can navigate without racing the guards that read it.
+   */
+  complete: () => Promise<void>;
+  completing: boolean;
 }
 
 const TABLE = "user_onboarding";
@@ -116,6 +123,46 @@ export function useOnboardingWizard(): UseOnboardingWizardResult {
 
   const save = useCallback(() => persist(effective), [effective, persist]);
 
+  // Finishing the wizard has to write TWO places: the wizard blob (so the
+  // steps read as done) and profiles.onboarding_completed (the flag every
+  // route guard actually reads). Only the first was ever written, so users
+  // completed onboarding and were redirected straight back into it — an
+  // unbreakable loop. The flag write is awaited rather than fired alongside
+  // the navigate, otherwise the guard on the destination can read a stale
+  // false and bounce the user back.
+  const completeMutation = useMutation({
+    mutationFn: async () => {
+      if (!userId) throw new Error("Not signed in.");
+      const nowIso = new Date().toISOString();
+      const next: OnboardingState = {
+        ...effective,
+        completed: { ...effective.completed, go_live: effective.completed.go_live ?? nowIso },
+        currentStep: "go_live",
+      };
+
+      const { error: wizardError } = await supabase
+        .from(TABLE)
+        .upsert({ user_id: userId, wizard_state: next }, { onConflict: "user_id" });
+      if (wizardError) throw new Error(wizardError.message);
+
+      const { error: flagError } = await supabase
+        .from("profiles")
+        .update({ onboarding_completed: true })
+        .eq("id", userId);
+      if (flagError) throw new Error(flagError.message);
+
+      setLocalState(next);
+      return next;
+    },
+    onSuccess: (next) => {
+      if (next) qc.setQueryData(["rd.onboarding", userId], next);
+    },
+  });
+
+  const complete = useCallback(async () => {
+    await completeMutation.mutateAsync();
+  }, [completeMutation]);
+
   return {
     state: effective,
     loading: sessionLoading || query.isLoading,
@@ -123,5 +170,7 @@ export function useOnboardingWizard(): UseOnboardingWizardResult {
     advance,
     patch,
     save,
+    complete,
+    completing: completeMutation.isPending,
   };
 }
