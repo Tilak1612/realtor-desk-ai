@@ -16,6 +16,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { Badge } from "@/components/ui/badge";
 import AppLayout from "@/components/layout/AppLayout";
+import { AppShell } from "@/components/rd/layout/AppShell";
 
 // Canonical DB value is the English name (so existing records don't
 // need a migration); the FR label is a locale-scoped lookup. Official
@@ -89,7 +90,35 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-const Settings = () => {
+// The app has two shells: the legacy AppLayout (Today/Contacts/Deals/Tasks)
+// and the newer AppShell used by every /app/* route. Settings was only ever
+// wired into the legacy one, so reaching it from /app dropped the user into
+// different chrome. Rather than duplicate the page, it renders whichever
+// shell its route asks for.
+//
+// Module scope on purpose: defining this inside Settings would give it a new
+// identity every render and remount the whole form, wiping in-progress edits.
+function SettingsChrome({
+  appChrome,
+  user,
+  profile,
+  children,
+}: {
+  appChrome: boolean;
+  user?: unknown;
+  profile?: unknown;
+  children: React.ReactNode;
+}) {
+  if (appChrome) return <AppShell>{children}</AppShell>;
+  return <AppLayout user={user} profile={profile}>{children}</AppLayout>;
+}
+
+interface SettingsProps {
+  /** Render inside the /app shell instead of the legacy dashboard chrome. */
+  appChrome?: boolean;
+}
+
+const Settings = ({ appChrome = false }: SettingsProps) => {
   const { t, i18n } = useTranslation();
   const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
   const navigate = useNavigate();
@@ -298,7 +327,7 @@ const Settings = () => {
   };
 
   return (
-    <AppLayout user={user} profile={profile}>
+    <SettingsChrome appChrome={appChrome} user={user} profile={profile}>
       <div className="max-w-3xl space-y-6">
         <div>
           <h1 className="text-2xl md:text-3xl font-semibold mb-1">{t('app.settings.title')}</h1>
@@ -729,7 +758,7 @@ const Settings = () => {
           </Card>
         </div>
       </div>
-    </AppLayout>
+    </SettingsChrome>
   );
 };
 

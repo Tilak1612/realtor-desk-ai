@@ -87,7 +87,7 @@ describe("useUpdateLeadStage", () => {
     expect(cached.find((l) => l.id === "lead-b")?.stage).toBe("contacted");
     // Supabase update was called with the new stage.
     expect(updateSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ status: "qualified" })
+      expect.objectContaining({ stage: "qualified" })
     );
   });
 

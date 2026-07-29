@@ -18,8 +18,7 @@ export interface ContactRow {
   email: string;
   phone: string | null;
   ai_score: number | null;
-  lead_score: number | null;
-  status: string | null;
+  stage: string | null;
   source: string | null;
   preferred_language: string | null;
   last_contact_date: string | null;
@@ -38,8 +37,8 @@ export function mapContactToLead(row: ContactRow): Lead {
     source: normalizeSource(row.source),
     listing: asString(meta.listing) ?? "New lead",
     city: asString(meta.city),
-    stage: normalizeStage(row.status),
-    score: row.ai_score ?? row.lead_score ?? 0,
+    stage: normalizeStage(row.stage),
+    score: row.ai_score ?? 0,
     lastActivity: formatLastActivity(row.last_contact_date),
     aiHandling: meta.aiHandling === true,
     aiNextBest: asString(meta.aiNextBest),
