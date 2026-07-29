@@ -26,7 +26,7 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    const stripe = new Stripe(stripeSecretKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeSecretKey, { apiVersion: "2023-10-16" });
     // Deno's edge runtime has no synchronous Node crypto, so Stripe's sync
     // constructEvent throws ("SubtleCryptoProvider cannot be used in a
     // synchronous context"). Use the async variant with a SubtleCrypto provider.
@@ -113,6 +113,101 @@ const handler = async (req: Request): Promise<Response> => {
       if (fnError) {
         console.error("Error calling send-lifecycle-email:", fnError);
       }
+    }
+
+
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const customerEmail = session.customer_email || (session.customer_details?.email ?? null);
+
+      if (!customerEmail) {
+        console.log("No customer email on checkout session, skipping");
+        return new Response(JSON.stringify({ received: true }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+
+      const { data: profile } = await supabaseAdmin
+        .from("profiles")
+        .select("id, full_name")
+        .eq("email", customerEmail)
+        .single();
+
+      const firstName = profile?.full_name?.split(" ")[0] || "";
+
+      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
+        body: {
+          eventType: "realtordesk_onboarding_welcome",
+          userId: profile?.id || null,
+          recipientEmail: customerEmail,
+          data: { firstName },
+        },
+      });
+
+      if (fnError) console.error("Error calling send-lifecycle-email:", fnError);
+
+    } else if (event.type === "customer.subscription.updated") {
+      const subscription = event.data.object as Stripe.Subscription;
+      const customer = await stripe.customers.retrieve(subscription.customer as string) as Stripe.Customer;
+      const customerEmail = customer.email;
+
+      if (!customerEmail) {
+        return new Response(JSON.stringify({ received: true }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+
+      const { data: profile } = await supabaseAdmin
+        .from("profiles")
+        .select("id, full_name")
+        .eq("email", customerEmail)
+        .single();
+
+      const firstName = profile?.full_name?.split(" ")[0] || "";
+      const trialEnd = subscription.trial_end
+        ? new Date(subscription.trial_end * 1000).toLocaleDateString("en-CA")
+        : null;
+
+      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
+        body: {
+          eventType: "realtordesk_onboarding_trialnudge",
+          userId: profile?.id || null,
+          recipientEmail: customerEmail,
+          data: { firstName, trial_end_date: trialEnd },
+        },
+      });
+
+      if (fnError) console.error("Error calling send-lifecycle-email:", fnError);
+
+    } else if (event.type === "customer.subscription.deleted") {
+      const subscription = event.data.object as Stripe.Subscription;
+      const customer = await stripe.customers.retrieve(subscription.customer as string) as Stripe.Customer;
+      const customerEmail = customer.email;
+
+      if (!customerEmail) {
+        return new Response(JSON.stringify({ received: true }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+
+      const { data: profile } = await supabaseAdmin
+        .from("profiles")
+        .select("id, full_name")
+        .eq("email", customerEmail)
+        .single();
+
+      const firstName = profile?.full_name?.split(" ")[0] || "";
+
+      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
+        body: {
+          eventType: "realtordesk_subscription_cancelled",
+          userId: profile?.id || null,
+          recipientEmail: customerEmail,
+          data: { firstName },
+        },
+      });
+
+      if (fnError) console.error("Error calling send-lifecycle-email:", fnError);
     }
 
     return new Response(JSON.stringify({ received: true }), {
