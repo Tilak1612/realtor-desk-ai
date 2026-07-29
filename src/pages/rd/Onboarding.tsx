@@ -87,8 +87,11 @@ export default function Onboarding() {
     // Final step. Await the completion write before navigating — the guard
     // on /app reads profiles.onboarding_completed, and racing it sends the
     // user straight back here.
+    // Straight into checkout, not /app. Access is gated on holding a Stripe
+    // subscription, so routing to /app would bounce the user to /billing
+    // anyway -- as a redirect that reads like a wall rather than a step.
     complete()
-      .then(() => navigate("/app"))
+      .then(() => navigate("/billing?required=1"))
       .catch(() => {
         toast.error(
           t(
