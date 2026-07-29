@@ -38,7 +38,10 @@ const Login = () => {
     checkUser();
   }, [navigate]);
 
-  const handleOAuthSignIn = async (provider: "google" | "azure") => {
+  // Azure/Microsoft is NOT enabled on the Supabase project, so the button
+// that called this only ever produced a Supabase error page. Re-add it
+// here and in the UI together once the provider is actually enabled.
+  const handleOAuthSignIn = async (provider: "google") => {
     try {
       // Redirect to /today so ProtectedRoute + Today.tsx handle the
       // onboarding_completed check — avoids stranding users on the landing page.
@@ -124,16 +127,6 @@ const Login = () => {
                 <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               </svg>
               <span className="ml-2 text-sm font-medium text-gray-200 group-hover:text-white transition-colors">Google</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleOAuthSignIn("azure")}
-              className="flex items-center justify-center px-4 py-3 border border-white/10 rounded-xl hover:bg-gray-700 transition-all duration-200 hover:border-white/20 hover:-translate-y-0.5 hover:shadow-md group"
-            >
-              <svg className="w-5 h-5 text-gray-200 group-hover:text-blue-400 transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.4 24H0l9.1-16.2L3.5 0h8.2l8.2 24z"/>
-              </svg>
-              <span className="ml-2 text-sm font-medium text-gray-200 group-hover:text-white transition-colors">Microsoft</span>
             </button>
           </div>
 

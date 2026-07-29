@@ -406,9 +406,6 @@ function StepWelcome({ onContinue }: { onContinue: () => void }) {
         <RDButton variant="light" size="md">
           {t("rd.onboarding.welcome.google", "Google")}
         </RDButton>
-        <RDButton variant="light" size="md">
-          {t("rd.onboarding.welcome.microsoft", "Microsoft 365")}
-        </RDButton>
       </div>
     </StepScaffold>
   );
