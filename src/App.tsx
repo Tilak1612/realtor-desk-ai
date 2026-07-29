@@ -11,6 +11,7 @@ import { trackEvent, trackPageView } from "@/utils/analytics";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
+import RequireBilling from "./components/RequireBilling";
 import CookieConsent from "./components/CookieConsent";
 import SiteAssistant from "./components/marketing/SiteAssistant";
 import { SkipToContent } from "./components/SkipToContent";
@@ -330,18 +331,21 @@ const App = () => (
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/today" element={<ProtectedRoute><Today /></ProtectedRoute>} />
+          <Route path="/today" element={<ProtectedRoute><RequireBilling><Today /></RequireBilling></ProtectedRoute>} />
           <Route path="/call-workflow/:contactId" element={<ProtectedRoute><CallWorkflow /></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><RequireBilling><Dashboard /></RequireBilling></ProtectedRoute>} />
           {/* Phase 3 redesign: /app/* product surfaces. Behind ProtectedRoute
               so the agent must be signed in, consistent with /dashboard. */}
-          <Route path="/app" element={<ProtectedRoute><RDAppDashboard /></ProtectedRoute>} />
-          <Route path="/app/leads" element={<ProtectedRoute><RDAppLeads /></ProtectedRoute>} />
-          <Route path="/app/leads/:id" element={<ProtectedRoute><RDAppLeadDetail /></ProtectedRoute>} />
-          <Route path="/app/pipeline" element={<ProtectedRoute><RDAppPipeline /></ProtectedRoute>} />
-          <Route path="/app/inbox" element={<ProtectedRoute><RDAppInbox /></ProtectedRoute>} />
-          <Route path="/app/automation" element={<ProtectedRoute><RDAppAutomation /></ProtectedRoute>} />
-          <Route path="/app/reports" element={<ProtectedRoute><RDAppReports /></ProtectedRoute>} />
+          <Route path="/app" element={<ProtectedRoute><RequireBilling><RDAppDashboard /></RequireBilling></ProtectedRoute>} />
+          <Route path="/app/leads" element={<ProtectedRoute><RequireBilling><RDAppLeads /></RequireBilling></ProtectedRoute>} />
+          <Route path="/app/leads/:id" element={<ProtectedRoute><RequireBilling><RDAppLeadDetail /></RequireBilling></ProtectedRoute>} />
+          <Route path="/app/pipeline" element={<ProtectedRoute><RequireBilling><RDAppPipeline /></RequireBilling></ProtectedRoute>} />
+          <Route path="/app/inbox" element={<ProtectedRoute><RequireBilling><RDAppInbox /></RequireBilling></ProtectedRoute>} />
+          <Route path="/app/automation" element={<ProtectedRoute><RequireBilling><RDAppAutomation /></RequireBilling></ProtectedRoute>} />
+          <Route path="/app/reports" element={<ProtectedRoute><RequireBilling><RDAppReports /></RequireBilling></ProtectedRoute>} />
+          {/* Settings is deliberately NOT behind RequireBilling: a user who
+              has not paid must still be able to manage their account and
+              sign out. Same for the in-app 404. */}
           <Route path="/app/settings" element={<ProtectedRoute><Settings appChrome /></ProtectedRoute>} />
           {/* Any other /app/* path is a signed-in user hitting a missing app
               route. Falling through to the public catch-all rendered the
@@ -350,25 +354,25 @@ const App = () => (
           {/* Phase 4 redesign: /onboarding now renders the 5-step flow.
               Legacy Onboarding.tsx is left in the tree for reference. */}
           <Route path="/onboarding" element={<ProtectedRoute><RDOnboarding /></ProtectedRoute>} />
-          <Route path="/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
+          <Route path="/contacts" element={<ProtectedRoute><RequireBilling><Contacts /></RequireBilling></ProtectedRoute>} />
           <Route path="/contacts/:id" element={<ProtectedRoute><ContactDetail /></ProtectedRoute>} />
           <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
           <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
-          <Route path="/deals" element={<ProtectedRoute><Deals /></ProtectedRoute>} />
-          <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
-          <Route path="/ai-assistant" element={<ProtectedRoute><AIAssistant /></ProtectedRoute>} />
-          <Route path="/campaigns" element={<ProtectedRoute><Campaigns /></ProtectedRoute>} />
-          <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
-          <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
-          <Route path="/market" element={<ProtectedRoute><Market /></ProtectedRoute>} />
+          <Route path="/deals" element={<ProtectedRoute><RequireBilling><Deals /></RequireBilling></ProtectedRoute>} />
+          <Route path="/tasks" element={<ProtectedRoute><RequireBilling><Tasks /></RequireBilling></ProtectedRoute>} />
+          <Route path="/ai-assistant" element={<ProtectedRoute><RequireBilling><AIAssistant /></RequireBilling></ProtectedRoute>} />
+          <Route path="/campaigns" element={<ProtectedRoute><RequireBilling><Campaigns /></RequireBilling></ProtectedRoute>} />
+          <Route path="/calendar" element={<ProtectedRoute><RequireBilling><CalendarPage /></RequireBilling></ProtectedRoute>} />
+          <Route path="/reports" element={<ProtectedRoute><RequireBilling><Reports /></RequireBilling></ProtectedRoute>} />
+          <Route path="/market" element={<ProtectedRoute><RequireBilling><Market /></RequireBilling></ProtectedRoute>} />
           <Route path="/market-intelligence" element={<Navigate to="/market" replace />} />
-          <Route path="/automations" element={<ProtectedRoute><Automations /></ProtectedRoute>} />
+          <Route path="/automations" element={<ProtectedRoute><RequireBilling><Automations /></RequireBilling></ProtectedRoute>} />
           {/* Settings lives in the /app shell now. The legacy top-level path
               redirects so old links (and the legacy dashboard nav) don't strand
               users in the retired chrome. */}
           <Route path="/settings" element={<Navigate to="/app/settings" replace />} />
           <Route path="/profile" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-          <Route path="/dashboard/integrations" element={<ProtectedRoute><IntegrationHub /></ProtectedRoute>} />
+          <Route path="/dashboard/integrations" element={<ProtectedRoute><RequireBilling><IntegrationHub /></RequireBilling></ProtectedRoute>} />
 
           {/* Comparison Pages */}
           <Route path="/vs/boldtrail" element={<VsBoldTrail />} />
