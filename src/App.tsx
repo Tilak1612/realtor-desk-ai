@@ -27,6 +27,7 @@ import RDCompareBoldtrail from "./pages/rd/CompareBoldtrail";
 // Phase 3 redesign: product surfaces under /app/*. Lazy-loaded so the
 // paper-bg shell doesn't bloat the marketing bundle.
 const RDAppDashboard = lazy(() => import("./pages/rd/app/Dashboard"));
+const AppNotFound = lazy(() => import("./pages/rd/app/NotFound"));
 const RDAppLeads = lazy(() => import("./pages/rd/app/Leads"));
 const RDAppLeadDetail = lazy(() => import("./pages/rd/app/LeadDetail"));
 const RDAppPipeline = lazy(() => import("./pages/rd/app/Pipeline"));
@@ -341,6 +342,11 @@ const App = () => (
           <Route path="/app/inbox" element={<ProtectedRoute><RDAppInbox /></ProtectedRoute>} />
           <Route path="/app/automation" element={<ProtectedRoute><RDAppAutomation /></ProtectedRoute>} />
           <Route path="/app/reports" element={<ProtectedRoute><RDAppReports /></ProtectedRoute>} />
+          <Route path="/app/settings" element={<ProtectedRoute><Settings appChrome /></ProtectedRoute>} />
+          {/* Any other /app/* path is a signed-in user hitting a missing app
+              route. Falling through to the public catch-all rendered the
+              marketing 404 with a "Sign in" header, which reads as a logout. */}
+          <Route path="/app/*" element={<ProtectedRoute><AppNotFound /></ProtectedRoute>} />
           {/* Phase 4 redesign: /onboarding now renders the 5-step flow.
               Legacy Onboarding.tsx is left in the tree for reference. */}
           <Route path="/onboarding" element={<ProtectedRoute><RDOnboarding /></ProtectedRoute>} />
@@ -357,7 +363,10 @@ const App = () => (
           <Route path="/market" element={<ProtectedRoute><Market /></ProtectedRoute>} />
           <Route path="/market-intelligence" element={<Navigate to="/market" replace />} />
           <Route path="/automations" element={<ProtectedRoute><Automations /></ProtectedRoute>} />
-          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          {/* Settings lives in the /app shell now. The legacy top-level path
+              redirects so old links (and the legacy dashboard nav) don't strand
+              users in the retired chrome. */}
+          <Route path="/settings" element={<Navigate to="/app/settings" replace />} />
           <Route path="/profile" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/dashboard/integrations" element={<ProtectedRoute><IntegrationHub /></ProtectedRoute>} />
 

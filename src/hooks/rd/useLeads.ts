@@ -13,7 +13,7 @@ import { useSession } from "./useSession";
 // findLead(id) on the returned array; /app/pipeline groups by stage.
 
 const LEADS_COLUMNS =
-  "id, first_name, last_name, email, phone, ai_score, lead_score, status, source, preferred_language, last_contact_date, consent_date, metadata";
+  "id, first_name, last_name, email, phone, ai_score, stage, source, preferred_language, last_contact_date, consent_date, metadata";
 
 interface UseLeadsResult {
   leads: Lead[];

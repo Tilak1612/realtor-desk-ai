@@ -4,8 +4,9 @@ import { useSession } from "./useSession";
 import type { PipelineStage } from "@/types/rd";
 
 // Mutation: move a lead to a new pipeline stage.
-// Writes to public.contacts.status (our canonical column; lead_score
-// sometimes holds the same info but status is the contract). Updates
+// Writes to public.contacts.stage -- the actual column. This previously
+// wrote to .status, which does not exist on the table, so every stage move
+// failed. Updates
 // updated_at so the leaderboard/reports aggregations pick up the
 // freshness. Optimistically patches the useLeads cache so the kanban
 // card lands in the new column instantly; on failure the cache is
@@ -26,7 +27,7 @@ export function useUpdateLeadStage() {
       if (!userId) throw new Error("Not signed in.");
       const { error } = await supabase
         .from("contacts")
-        .update({ status: toStage, updated_at: new Date().toISOString() })
+        .update({ stage: toStage, updated_at: new Date().toISOString() })
         .eq("id", leadId)
         .eq("user_id", userId);
       if (error) throw new Error(error.message);
