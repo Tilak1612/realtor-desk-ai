@@ -2669,7 +2669,7 @@ const resources = {
           startTrial: "Start your free trial"
         },
         signup: {
-          subtitle: "Start your 14-day free trial",
+          subtitle: "Start your 14-day free trial. A card is required to begin; cancel anytime before it ends.",
           orEmail: "Or register with email",
           agreeToThe: "I agree to the",
           privacyPolicy: "Privacy Policy",
@@ -5845,7 +5845,7 @@ const resources = {
           startTrial: "Commencez votre essai gratuit"
         },
         signup: {
-          subtitle: "Commencez votre essai gratuit de 14 jours",
+          subtitle: "Commencez votre essai gratuit de 14 jours. Une carte est requise pour commencer; annulez à tout moment avant la fin.",
           orEmail: "Ou inscrivez-vous avec un courriel",
           agreeToThe: "J'accepte la",
           privacyPolicy: "Politique de Confidentialité",

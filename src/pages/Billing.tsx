@@ -185,14 +185,25 @@ const Billing = () => {
                 <div>
                   <CardTitle className="text-base font-medium flex items-center gap-2">
                     <Crown className="w-4 h-4 text-primary" />
-                    {t('billing.trialAccount', 'Trial Account')}
+                    {profile?.trial_ends_at
+                      ? t('billing.trialAccount', 'Trial Account')
+                      : t('billing.noPlanTitle', 'No active plan')}
                   </CardTitle>
                   <CardDescription className="text-xs mt-1">
-                    {getTrialDaysLeft()} {t('billing.daysLeft', 'days left in your free trial')}
+                    {/* The trial is owned by Stripe now and only starts at
+                        checkout, so a user who has not subscribed has no trial
+                        window at all. Deriving from trial_ends_at printed
+                        "0 days left in your free trial" — which reads as an
+                        expired trial rather than one not yet started. */}
+                    {profile?.trial_ends_at
+                      ? `${getTrialDaysLeft()} ${t('billing.daysLeft', 'days left in your free trial')}`
+                      : t('billing.trialStartsAtCheckout', 'Your 14-day free trial starts when you choose a plan below.')}
                   </CardDescription>
                 </div>
                 <Badge variant="outline" className="text-primary border-primary text-xs">
-                  {t("billing.trialBadge", "Trial")}
+                  {profile?.trial_ends_at
+                    ? t("billing.trialBadge", "Trial")
+                    : t("billing.noPlanBadge", "No plan")}
                 </Badge>
               </div>
             </CardHeader>
