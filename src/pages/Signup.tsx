@@ -160,7 +160,7 @@ const Signup = () => {
       />
       <AuthCard
         title="Realtor Desk"
-        subtitle={t('auth.signup.subtitle', 'Start your 14-day free trial')}
+        subtitle={t('auth.signup.subtitle', 'Start your 14-day free trial. A card is required to begin; cancel anytime before it ends.')}
       >
         <div className="space-y-6">
           {/* OAuth Buttons */}
