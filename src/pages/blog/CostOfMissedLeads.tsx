@@ -797,7 +797,7 @@ const CostOfMissedLeads = () => {
                   <Link to="/pricing">See Pricing</Link>
                 </Button>
               </div>
-              <p className="text-sm mt-4">No credit card required • Set up in 3 hours • Cancel anytime</p>
+              <p className="text-sm mt-4">Cancel anytime before you're charged • Set up in 3 hours • Cancel anytime</p>
             </Card>
           </section>
 

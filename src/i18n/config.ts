@@ -39,7 +39,7 @@ const resources = {
         subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book your free demo",
-        trustLine: "14 Days Free Trial • No credit card required • Cancel anytime",
+        trustLine: "14-Day Free Trial • Cancel anytime before you're charged",
         badge1: "PIPEDA-Aware Design",
         badge2: "Bilingual EN/FR",
         badge3: "50+ Beta Users",
@@ -436,7 +436,7 @@ const resources = {
           subtitle: "Realtor Desk answers every lead the instant they land — in French or English, on-brand, PIPEDA-aware. You show up to a shortlist, not a fire drill.",
           ctaPrimary: "Start 14-day free trial",
           ctaSecondary: "Book a 15-min demo",
-          trustNoCard: "No credit card",
+          trustNoCard: "Cancel anytime",
           trustSetup: "5-min setup",
           trustDdf: "CREA DDF ready"
         },
@@ -517,7 +517,7 @@ const resources = {
         },
         closingCta: {
           title: "Start your 14-day trial.",
-          body: "No credit card. Full access. Import one lead, send one bilingual reply — then decide.",
+          body: "Full access for 14 days. Import one lead, send one bilingual reply — then decide.",
           cta: "Claim your desk"
         }
       },
@@ -596,12 +596,12 @@ const resources = {
       },
       pricingRd: {
         seoTitle: "Pricing — Realtor Desk",
-        seoDesc: "One price. Every feature. Bilingual, PIPEDA-native, CREA DDF-ready. CAD pricing, 14-day trial, no credit card.",
+        seoDesc: "One price. Every feature. Bilingual, PIPEDA-native, CREA DDF-ready. CAD pricing, 14-day free trial.",
         eyebrow: "Pricing in CAD",
         heading1: "One price.",
         heading2: "Every",
         heading3: "feature.",
-        subtitle: "No AI quotas on Team or Brokerage. No \"growth\" tier that hides the integrations. 14-day trial, no credit card.",
+        subtitle: "No AI quotas on Team or Brokerage. No \"growth\" tier that hides the integrations. 14-day free trial.",
         toggleMonthly: "Monthly",
         toggleAnnual: "Annual · save up to $789/yr",
         taxNote: "Prices shown in CAD. GST/HST applied at checkout based on your billing province. The amount on this page matches what you will see on Stripe's secure checkout.",
@@ -741,7 +741,7 @@ const resources = {
         capReportingTitle: "Reporting",
         capReportingBody: "Response time, source ROI, stage conversion, agent leaderboard. CAD throughout.",
         ctaH1Pre: "Free for 14 days.",
-        ctaH1Italic: "No card.",
+        ctaH1Italic: "Cancel anytime.",
         ctaBody: "Connect your DDF feed, answer a few questions about your brokerage, and Desk is answering leads within 15 minutes.",
         ctaPrimary: "Start free trial",
         ctaSecondary: "Book a demo"
@@ -754,7 +754,7 @@ const resources = {
         loginTitle: "Sign in — Realtor Desk",
         loginDesc: "Sign in to your Realtor Desk workspace. Canadian-hosted, PIPEDA-aware, bilingual EN/FR.",
         signupTitle: "Start your 14-day free trial — Realtor Desk",
-        signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, CREA DDF-ready, CAD pricing. No credit card required.",
+        signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, CREA DDF-ready, CAD pricing. A card is required to start; you're not charged until the trial ends.",
         integrationsTitle: "Integrations — Realtor Desk",
         integrationsDesc: "Integrate Realtor Desk via Zapier, Make, and n8n (5,000+ apps). Native connectors on the roadmap. CREA DDF® coming Q3 2026.",
         roadmapTitle: "Product Roadmap — Realtor Desk",
@@ -1300,14 +1300,14 @@ const resources = {
           subtitle: "We're here to help! Get in touch with our team or start your free trial today.",
           contactSupport: "Contact Support",
           startTrial: "Start Your 14-Day Free Trial",
-          noCreditCard: "No credit card required • Cancel anytime"
+          noCreditCard: "Cancel anytime before you're charged"
         }
       },
         cta: {
         title: "Ready to Never Miss a Lead Again?",
         subtitle: "Join our growing Canadian beta community using AI to close more deals",
         button: "Start Your 14-Day Free Trial",
-        note: "14 Days Free • No credit card required • Cancel anytime"
+        note: "14 Days Free • Cancel anytime before you're charged"
       },
       mobileCTA: {
         title: "Start Your 14-Day Free Trial",
@@ -1527,7 +1527,7 @@ const resources = {
           subtitle: "Start closing more deals with AI-powered automation today",
           startTrial: "Start Your 14-Day Free Trial",
           bookDemo: "Book your free demo",
-          note: "⚡ 14 Days Free Trial • No credit card required • Cancel anytime"
+          note: "⚡ 14-Day Free Trial • Cancel anytime before you're charged"
         },
         betaNotice: {
           title: "Beta Program Notice",
@@ -2202,7 +2202,7 @@ const resources = {
           signUp: {
             title: "Sign Up",
             time: "2 minutes",
-            description: "Create your account and choose your plan. No credit card required for 14-day trial.",
+            description: "Create your account and choose your plan. A card is required to start; you're not charged until the 14-day trial ends.",
             details: [
               "Enter your name, email, and brokerage info",
               "Choose your subscription tier",
@@ -3218,7 +3218,7 @@ const resources = {
         subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réservez votre démo gratuite",
-        trustLine: "14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment",
+        trustLine: "14 Jours Gratuits • Annulez à tout moment",
         badge1: "Conforme PIPEDA par Conception",
         badge2: "Bilingue EN/FR",
         badge3: "50+ Utilisateurs Bêta",
@@ -3612,7 +3612,7 @@ const resources = {
           subtitle: "Realtor Desk répond à chaque client potentiel dès son arrivée — en français ou en anglais, dans votre voix, conforme à la LPRPDE. Vous arrivez à une liste courte, pas à un branle-bas de combat.",
           ctaPrimary: "Essai gratuit de 14 jours",
           ctaSecondary: "Réserver une démo de 15 min",
-          trustNoCard: "Sans carte de crédit",
+          trustNoCard: "Annulez à tout moment",
           trustSetup: "Installation en 5 min",
           trustDdf: "Compatible DDF de l'ACI"
         },
@@ -3693,7 +3693,7 @@ const resources = {
         },
         closingCta: {
           title: "Commencez votre essai de 14 jours.",
-          body: "Sans carte de crédit. Accès complet. Importez un prospect, envoyez une réponse bilingue — puis décidez.",
+          body: "Accès complet pendant 14 jours. Importez un prospect, envoyez une réponse bilingue — puis décidez.",
           cta: "Réservez votre poste"
         }
       },
@@ -3772,12 +3772,12 @@ const resources = {
       },
       pricingRd: {
         seoTitle: "Tarifs — Realtor Desk",
-        seoDesc: "Un seul prix. Toutes les fonctionnalités. Bilingue, conforme LPRPDE, compatible SDD de l'ACI. Tarifs en CAD, essai de 14 jours, sans carte de crédit.",
+        seoDesc: "Un seul prix. Toutes les fonctionnalités. Bilingue, conforme LPRPDE, compatible SDD de l'ACI. Tarifs en CAD, essai de 14 jours, annulez avant la fin de l'essai.",
         eyebrow: "Tarifs en CAD",
         heading1: "Un seul prix.",
         heading2: "Toutes",
         heading3: "les fonctionnalités.",
-        subtitle: "Pas de quotas d'IA sur Équipe ou Agence. Pas de forfait « croissance » qui cache les intégrations. Essai de 14 jours, sans carte de crédit.",
+        subtitle: "Pas de quotas d'IA sur Équipe ou Agence. Pas de forfait « croissance » qui cache les intégrations. Essai de 14 jours, annulez avant la fin de l'essai.",
         toggleMonthly: "Mensuel",
         toggleAnnual: "Annuel · économisez jusqu'à 789 $/an",
         taxNote: "Prix affichés en CAD. TPS/TVH ajoutée au paiement selon votre province de facturation. Le montant sur cette page correspond à celui affiché sur la page de paiement sécurisée de Stripe.",
@@ -3917,7 +3917,7 @@ const resources = {
         capReportingTitle: "Rapports",
         capReportingBody: "Temps de réponse, ROI par source, conversion par étape, classement des courtiers. En CAD partout.",
         ctaH1Pre: "Gratuit pendant 14 jours.",
-        ctaH1Italic: "Sans carte.",
+        ctaH1Italic: "Annulez à tout moment.",
         ctaBody: "Connectez votre flux SDD, répondez à quelques questions sur votre agence, et Desk répond aux prospects en 15 minutes.",
         ctaPrimary: "Essai gratuit",
         ctaSecondary: "Réserver une démo"
@@ -3930,7 +3930,7 @@ const resources = {
         loginTitle: "Se connecter — Realtor Desk",
         loginDesc: "Connectez-vous à votre espace de travail Realtor Desk. Hébergé au Canada, conforme LPRPDE, bilingue FR/EN.",
         signupTitle: "Commencez votre essai gratuit de 14 jours — Realtor Desk",
-        signupDesc: "Commencez votre essai gratuit de 14 jours de Realtor Desk. Réponse IA aux prospects, agent 24/7, compatible SDD de l'ACI, tarifs en CAD. Sans carte de crédit.",
+        signupDesc: "Commencez votre essai gratuit de 14 jours de Realtor Desk. Réponse IA aux prospects, agent 24/7, compatible SDD de l'ACI, tarifs en CAD. Annulez avant la fin de l'essai.",
         integrationsTitle: "Intégrations — Realtor Desk",
         integrationsDesc: "Intégrez Realtor Desk via Zapier, Make et n8n (5 000+ applications). Connecteurs natifs sur la feuille de route. SDD de l'ACI prévu pour le T3 2026.",
         roadmapTitle: "Feuille de route du produit — Realtor Desk",
@@ -4476,14 +4476,14 @@ const resources = {
           subtitle: "Nous sommes là pour vous aider! Contactez notre équipe ou commencez votre essai gratuit aujourd'hui.",
           contactSupport: "Contacter le Support",
           startTrial: "Commencer Votre Essai Gratuit de 14 Jours",
-          noCreditCard: "Aucune carte de crédit requise • Annulez à tout moment"
+          noCreditCard: "Annulez avant la fin de l'essai requise • Annulez à tout moment"
         }
       },
       cta: {
         title: "Prêt à Ne Plus Jamais Manquer un Prospect?",
         subtitle: "Rejoignez notre communauté bêta canadienne utilisant l'IA pour conclure plus de ventes",
         button: "Commencez Votre Essai Gratuit de 14 Jours",
-        note: "Aucune carte de crédit requise • Configuration en 20 minutes • Annulez à tout moment"
+        note: "Annulez avant la fin de l'essai requise • Configuration en 20 minutes • Annulez à tout moment"
       },
       mobileCTA: {
         title: "Commencez Votre Essai Gratuit de 14 Jours",
@@ -4703,7 +4703,7 @@ const resources = {
           subtitle: "Commencez à conclure plus de ventes avec l'automation propulsée par l'IA aujourd'hui",
           startTrial: "Commencez Votre Essai Gratuit de 14 Jours",
           bookDemo: "Réservez votre démo gratuite",
-          note: "⚡ 14 Jours Gratuits • Aucune carte de crédit • Annulez à tout moment"
+          note: "⚡ 14 Jours Gratuits • Annulez à tout moment"
         },
         betaNotice: {
           title: "Avis sur le Programme Bêta",
@@ -5378,7 +5378,7 @@ const resources = {
           signUp: {
             title: "Inscription",
             time: "2 minutes",
-            description: "Créez votre compte et choisissez votre forfait. Aucune carte de crédit requise pour l'essai de 14 jours.",
+            description: "Créez votre compte et choisissez votre forfait. Annulez avant la fin de l'essai requise pour l'essai de 14 jours.",
             details: [
               "Entrez votre nom, courriel et info courtage",
               "Choisissez votre niveau d'abonnement",

@@ -340,7 +340,7 @@ const LionDeskAlternative = () => {
                 Start Free Migration <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <p className="text-sm text-muted-foreground mt-4">No credit card required · Free migration · 14-day free trial</p>
+            <p className="text-sm text-muted-foreground mt-4">Cancel anytime before you're charged · Free migration · 14-day free trial</p>
           </Card>
         </div>
       </article>

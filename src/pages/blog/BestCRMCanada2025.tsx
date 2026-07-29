@@ -535,7 +535,7 @@ const BestCRMCanada2025 = () => {
               <li>✅ AI gives you competitive advantage</li>
               <li>✅ Fastest lead response tested (2.7 seconds)</li>
               <li>✅ Transparent pricing ($149-299 CAD/month)</li>
-              <li>✅ 14-day free trial, no credit card required</li>
+              <li>✅ 14-day free trial, cancel anytime before you're charged</li>
             </ul>
 
             <p className="text-sm text-muted-foreground mt-4">
@@ -551,7 +551,7 @@ const BestCRMCanada2025 = () => {
             <div className="cta-section">
               <h2>Ready to Choose Your CRM?</h2>
               <p>
-                Start with Canada's #1 rated AI-powered CRM. Try RealtorDesk AI free for 14 days—no credit card required.
+                Start with Canada's #1 rated AI-powered CRM. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
               </p>
               <div className="flex gap-4 flex-wrap justify-center">
                 <Link to="/demo">

@@ -603,7 +603,7 @@ const IxactAlternatives = () => {
             <div className="cta-section">
               <h2>Ready to Experience 2025 Technology?</h2>
               <p>
-                See how AI-first CRMs outperform legacy platforms. Try RealtorDesk AI free for 14 days—no credit card required.
+                See how AI-first CRMs outperform legacy platforms. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
               </p>
               <div className="flex gap-4 flex-wrap justify-center">
                 <Link to="/demo">

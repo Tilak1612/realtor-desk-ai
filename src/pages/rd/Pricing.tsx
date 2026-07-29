@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import { STRIPE_PRICES } from "@/config/stripe";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
@@ -35,8 +36,8 @@ const PLANS: PlanData[] = [
     priceMonthly: 149,
     priceYearly: 999,
     stripe: {
-      monthly: "price_1SXpyiS23MQcIdnrAphs809v",
-      yearly: "price_1SXpzKS23MQcIdnrfH2rHhow",
+      monthly: STRIPE_PRICES.solo.monthly,
+      yearly: STRIPE_PRICES.solo.yearly,
     },
     cta: "start",
     ctaVariant: "outline",
@@ -54,8 +55,8 @@ const PLANS: PlanData[] = [
     priceMonthly: 299,
     priceYearly: 2997,
     stripe: {
-      monthly: "price_1SXpz0S23MQcIdnrrD0UGqa5",
-      yearly: "price_1SXpzZS23MQcIdnrVVyUShLT",
+      monthly: STRIPE_PRICES.team.monthly,
+      yearly: STRIPE_PRICES.team.yearly,
     },
     cta: "start",
     ctaVariant: "terra",

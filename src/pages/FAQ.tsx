@@ -46,7 +46,7 @@ const FAQ = () => {
               </Link>
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground mt-4">
-              {t('faq.cta.noCreditCard', 'No credit card required • Cancel anytime')}
+              {t('faq.cta.noCreditCard', 'Cancel anytime before you are charged')}
             </p>
           </div>
         </div>

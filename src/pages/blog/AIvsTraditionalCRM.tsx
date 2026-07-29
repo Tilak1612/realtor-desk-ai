@@ -631,7 +631,7 @@ const AIvsTraditionalCRM = () => {
             <div className="cta-section">
               <h2>Ready to Experience AI CRM?</h2>
               <p>
-                See the difference yourself. Try RealtorDesk AI free for 14 days—no credit card required. If you don't see improved response times and lead engagement, simply don't continue.
+                See the difference yourself. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged. If you don't see improved response times and lead engagement, simply don't continue.
               </p>
               <div className="flex gap-4 flex-wrap justify-center mb-4">
                 <Link to="/demo">

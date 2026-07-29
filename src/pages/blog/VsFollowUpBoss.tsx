@@ -270,7 +270,7 @@ const VsFollowUpBoss = () => {
               <li><strong>Everything included:</strong> AI chatbot, voice AI, SMS, email, all features</li>
               <li><strong>No per-user charges</strong></li>
               <li><strong>No hidden fees or add-ons</strong></li>
-              <li><strong>14-day free trial, no credit card required</strong></li>
+              <li><strong>14-day free trial, cancel anytime before you're charged</strong></li>
             </ul>
             <p>
               <strong>First-year cost for team of 5:</strong>
