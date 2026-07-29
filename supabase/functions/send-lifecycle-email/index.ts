@@ -41,12 +41,13 @@ function getTemplate(eventType: string, data: Record<string, any> = {}, caslFoot
       ),
     },
     trial_ending: {
-      subject: `Your RealtorDesk AI Trial Ends in ${data.days_remaining || 3} Days`,
+      subject: `Your RealtorDesk AI trial ends in ${data.days_remaining || 3} days — card will be charged`,
       html: buildEmail(
         "Your Trial Is Almost Over ⏰",
         `<p style="font-size:16px;color:#374151;line-height:1.6;">Hi ${name},</p>
-        <p style="font-size:16px;color:#374151;line-height:1.6;">Your 14-day free trial of RealtorDesk AI ends in <strong>${data.days_remaining || 3} days</strong>.</p>
-        <p style="font-size:16px;color:#374151;line-height:1.6;">Don't lose access to:</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">Your 14-day free trial of RealtorDesk AI ends in <strong>${data.days_remaining || 3} days</strong>${data.trial_end_date ? ` (${data.trial_end_date})` : ""}.</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;"><strong>Your card will be charged ${data.amount || "your plan price"} automatically when the trial ends.</strong> No action is needed to continue. If you would rather not be billed, cancel from Billing before that date and you will not be charged.</p>
+        <p style="font-size:16px;color:#374151;line-height:1.6;">What you keep:</p>
         <ul style="font-size:16px;color:#374151;line-height:2;">
           <li>🤖 AI-powered lead scoring</li>
           <li>💬 24/7 chatbot lead capture</li>
@@ -54,9 +55,9 @@ function getTemplate(eventType: string, data: Record<string, any> = {}, caslFoot
           <li>🏠 Property management tools</li>
         </ul>
         <div style="text-align:center;margin:30px 0;">
-          <a href="${APP_URL}/billing" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Upgrade Now →</a>
+          <a href="${APP_URL}/billing" style="background:#6366f1;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block;">Manage or cancel your plan →</a>
         </div>
-        <p style="font-size:14px;color:#6b7280;">Plans start at $149 CAD/month. Prices include Canadian GST/HST billing at checkout.</p>`,
+        <p style="font-size:14px;color:#6b7280;">Plans start at $149 CAD/month. Canadian GST/HST is applied at checkout.</p>`,
         caslFooter
       ),
     },

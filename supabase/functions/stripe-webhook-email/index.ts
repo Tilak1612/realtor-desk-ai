@@ -116,6 +116,68 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
 
+    // Stripe fires this 3 days before trial_end. Without it, a card-required
+    // trial charges the customer with no warning at all -- the single most
+    // complaint- and chargeback-generating gap in a trial-to-paid model.
+    if (event.type === "customer.subscription.trial_will_end") {
+      const subscription = event.data.object as Stripe.Subscription;
+
+      // The subscription payload carries a customer id, not an email.
+      let customerEmail: string | null = null;
+      try {
+        const customer = await stripe.customers.retrieve(subscription.customer as string);
+        if (customer && !("deleted" in customer && customer.deleted)) {
+          customerEmail = (customer as Stripe.Customer).email;
+        }
+      } catch (err) {
+        console.error("trial_will_end: could not retrieve customer:", err instanceof Error ? err.message : String(err));
+      }
+
+      if (!customerEmail) {
+        console.log("trial_will_end: no customer email, skipping");
+        return new Response(JSON.stringify({ received: true }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+
+      const { data: profile } = await supabaseAdmin
+        .from("profiles")
+        .select("id, full_name")
+        .eq("email", customerEmail)
+        .single();
+
+      const trialEndMs = subscription.trial_end ? subscription.trial_end * 1000 : null;
+      const daysRemaining = trialEndMs
+        ? Math.max(0, Math.ceil((trialEndMs - Date.now()) / 86_400_000))
+        : 3;
+      const trialEndDate = trialEndMs
+        ? new Date(trialEndMs).toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" })
+        : "";
+
+      // State the actual amount. "You will be charged your plan price" is not
+      // an adequate disclosure when the card is already on file.
+      const price = subscription.items.data[0]?.price;
+      const amount = price?.unit_amount
+        ? `$${(price.unit_amount / 100).toFixed(2)} ${(price.currency || "cad").toUpperCase()}`
+        : "";
+
+      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
+        body: {
+          eventType: "trial_ending",
+          userId: profile?.id || null,
+          recipientEmail: customerEmail,
+          data: {
+            firstName: profile?.full_name?.split(" ")[0] || "",
+            days_remaining: daysRemaining,
+            trial_end_date: trialEndDate,
+            amount,
+          },
+        },
+      });
+
+      if (fnError) console.error("trial_will_end: send-lifecycle-email failed:", fnError);
+    }
+
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
       const customerEmail = session.customer_email || (session.customer_details?.email ?? null);
