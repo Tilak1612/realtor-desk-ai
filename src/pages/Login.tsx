@@ -28,7 +28,7 @@ const Login = () => {
           .eq("id", session.user.id)
           .single();
 
-        if (profile?.onboarding_completed) {
+        if (profile?.onboarding_completed !== false) {
           navigate("/today");
         } else {
           navigate("/onboarding");
@@ -79,7 +79,7 @@ const Login = () => {
           .eq("id", data.user.id)
           .single();
 
-        if (profile?.onboarding_completed) {
+        if (profile?.onboarding_completed !== false) {
           navigate("/today");
         } else {
           navigate("/onboarding");

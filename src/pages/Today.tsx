@@ -65,7 +65,10 @@ const Today = () => {
 
         if (error) throw error;
 
-        if (!profileData?.onboarding_completed) {
+        // Fail OPEN: only redirect when we positively know onboarding is
+        // incomplete. Treating an error or a missing row as "not onboarded"
+        // locked users out whenever the profiles read hiccuped.
+        if (profileData && profileData.onboarding_completed === false) {
           navigate("/onboarding");
           return;
         }
