@@ -741,7 +741,7 @@ const resources = {
         capReportingTitle: "Reporting",
         capReportingBody: "Response time, source ROI, stage conversion, agent leaderboard. CAD throughout.",
         ctaH1Pre: "Free for 14 days.",
-        ctaH1Italic: "No card.",
+        ctaH1Italic: "Cancel anytime.",
         ctaBody: "Connect your DDF feed, answer a few questions about your brokerage, and Desk is answering leads within 15 minutes.",
         ctaPrimary: "Start free trial",
         ctaSecondary: "Book a demo"
@@ -3917,7 +3917,7 @@ const resources = {
         capReportingTitle: "Rapports",
         capReportingBody: "Temps de réponse, ROI par source, conversion par étape, classement des courtiers. En CAD partout.",
         ctaH1Pre: "Gratuit pendant 14 jours.",
-        ctaH1Italic: "Sans carte.",
+        ctaH1Italic: "Annulez à tout moment.",
         ctaBody: "Connectez votre flux SDD, répondez à quelques questions sur votre agence, et Desk répond aux prospects en 15 minutes.",
         ctaPrimary: "Essai gratuit",
         ctaSecondary: "Réserver une démo"
