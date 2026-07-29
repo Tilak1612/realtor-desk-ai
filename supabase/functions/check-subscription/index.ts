@@ -48,35 +48,57 @@ serve(async (req) => {
       return json({ subscribed: false });
     }
 
+    // status:"all" on purpose. Trials are created by Checkout with
+    // trial_period_days, so a user who has just handed over a card sits in
+    // "trialing", NOT "active". Filtering to active alone reported those
+    // users as unsubscribed — which, now that app access is gated on this
+    // response, would have locked out exactly the people who just paid.
     const subs = await stripe.subscriptions.list({
       customer: customers.data[0].id,
-      status: "active",
-      limit: 1,
+      status: "all",
+      limit: 10,
     });
 
-    const hasActiveSub = subs.data.length > 0;
+    // "Entitled" = we hold a payment method and the subscription has not
+    // lapsed. past_due keeps access during Stripe's retry window rather than
+    // cutting a paying customer off on a single failed charge.
+    const ENTITLED = new Set(["trialing", "active", "past_due"]);
+    const sub = subs.data.find((s) => ENTITLED.has(s.status)) ?? null;
+    const hasSub = sub !== null;
+
     let productId: string | null = null;
     let priceId: string | null = null;
     let subscriptionEnd: string | null = null;
+    let trialEnd: string | null = null;
 
-    if (hasActiveSub) {
-      const s = subs.data[0];
-      subscriptionEnd = new Date(s.current_period_end * 1000).toISOString();
-      productId = s.items.data[0].price.product as string;
-      priceId = s.items.data[0].price.id;
+    if (sub) {
+      subscriptionEnd = new Date(sub.current_period_end * 1000).toISOString();
+      trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
+      productId = sub.items.data[0].price.product as string;
+      priceId = sub.items.data[0].price.id;
     }
 
-    const AGENT = new Set(["prod_TUpecsjMV6TaBw", "prod_TUpevCKNFOGwCq"]);
-    const TEAM = new Set(["prod_TUpeTIPjzjd64Z", "prod_TUpeobzrNh5RNk"]);
-    const tier = AGENT.has(productId ?? "") ? "agent" : TEAM.has(productId ?? "") ? "team" : null;
+    // Product IDs come from env so test/live catalogues don't need a deploy.
+    const SOLO = Deno.env.get("STRIPE_PRODUCT_SOLO") ?? "";
+    const TEAM = Deno.env.get("STRIPE_PRODUCT_TEAM") ?? "";
+    const tier =
+      productId && productId === SOLO ? "agent" :
+      productId && productId === TEAM ? "team" : null;
+
+    // The DB enum has no "trialing" member, so a carded trial is stored as
+    // "trial". Entitlement is carried by the `subscribed` field below, not by
+    // this column — a bare no-card signup is also "trial" here.
     const update: Record<string, string> = {
-      subscription_status: hasActiveSub ? "active" : "trial",
+      subscription_status: sub && sub.status === "active" ? "active" : "trial",
     };
     if (tier) update.subscription_tier = tier;
     await sb.from("profiles").update(update).eq("id", user.id);
 
     return json({
-      subscribed: hasActiveSub,
+      subscribed: hasSub,
+      status: sub?.status ?? null,
+      trial_end: trialEnd,
+      cancel_at_period_end: sub?.cancel_at_period_end ?? false,
       product_id: productId,
       price_id: priceId,
       subscription_end: subscriptionEnd,

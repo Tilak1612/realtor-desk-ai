@@ -158,6 +158,25 @@ const Billing = () => {
           <p className="text-sm text-muted-foreground">{t('billing.subtitle', 'Manage your subscription and billing details')}</p>
         </div>
 
+        {/* Sent here by RequireBilling. Without this the redirect is silent and
+            reads as a bug — the user asked for the dashboard and got Billing. */}
+        {searchParams.get('required') === '1' && !subscribed && (
+          <Card className="border-2 border-primary/30 bg-primary/5">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <CreditCard className="h-5 w-5" />
+                {t('billing.required.title', 'Choose a plan to start your free trial')}
+              </CardTitle>
+              <CardDescription>
+                {t(
+                  'billing.required.body',
+                  "We'll ask for a card to start your 14-day free trial. You won't be charged today — billing begins when the trial ends, and you can cancel any time before then from this page.",
+                )}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        )}
+
         {/* Current Status Card */}
         {!subscribed && (
           <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
