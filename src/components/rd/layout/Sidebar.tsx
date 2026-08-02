@@ -58,10 +58,14 @@ export function Sidebar({
     { label: t("rd.sidebar.nav.settings", "Settings"), to: "/app/settings", icon: <IconCog /> },
   ];
 
+  // No fabricated tenant here. AppShell supplies the real profile; if it is
+  // still loading we show a neutral placeholder rather than someone else's
+  // brokerage, which is what "Royal LePage · Sarah K." used to render for
+  // every single user.
   const resolvedWorkspace = workspace ?? {
-    name: "Royal LePage · Sarah K.",
-    tier: t("rd.sidebar.workspaceTier", "Team plan"),
-    mark: "RL",
+    name: t("rd.sidebar.workspaceFallback", "Your workspace"),
+    tier: "",
+    mark: "—",
   };
 
   return (
@@ -80,7 +84,7 @@ export function Sidebar({
 
       {/* Workspace card */}
       <div className="mx-1 mb-4 p-2.5 bg-white/[0.06] border border-white/10 rounded-rd-md flex items-center gap-2.5">
-        <div className="w-[26px] h-[26px] rounded-[7px] bg-rd-terra-600 text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">
+        <div className="w-[26px] h-[26px] rounded-[7px] bg-rd-terra-700 text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">
           {resolvedWorkspace.mark}
         </div>
         <div className="flex-1 min-w-0">
@@ -117,7 +121,7 @@ export function Sidebar({
                 <span
                   className={cn(
                     "text-[10px] font-bold px-1.5 py-[2px] rounded-[10px]",
-                    active ? "bg-rd-terra-600 text-white" : "bg-white/10 text-white/80"
+                    active ? "bg-rd-terra-700 text-white" : "bg-white/10 text-white/80"
                   )}
                 >
                   {item.count}

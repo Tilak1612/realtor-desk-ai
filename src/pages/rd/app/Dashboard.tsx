@@ -573,7 +573,7 @@ function ComplianceCard() {
     { label: "CASL consent on file", done: 234, total: 247 },
     { label: "PIPEDA data requests", done: 2, total: 2 },
     { label: "FINTRAC verifications", done: 9, total: 9 },
-    { label: "RECO Quebec disclosures", done: 12, total: 14, warning: true },
+    { label: "RECO disclosures", done: 12, total: 14, warning: true },
   ];
   return (
     <RDCard padding={0} className="overflow-hidden">

@@ -60,7 +60,7 @@ export function RDSectionHeader({
               <span
                 className={cn(
                   "font-rd-serif italic font-normal",
-                  dark ? "text-rd-terra-400" : "text-rd-terra-600"
+                  dark ? "text-rd-terra-400" : "text-rd-terra-700"
                 )}
               >
                 {accent}

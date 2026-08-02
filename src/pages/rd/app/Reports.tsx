@@ -190,7 +190,7 @@ function ResponseTimeCard({ avgLabel }: { avgLabel: string | null }) {
             color="var(--rd-navy-700)"
             label={t(
               "rd.reportsPage.agentManual",
-              "Agent · manual timing (not yet tracked)"
+              "Agent (manual)"
             )}
           />
         </div>
@@ -476,7 +476,7 @@ function AgentLeaderboardCard({
             <div
               className={cn(
                 "font-rd-serif italic text-base font-normal",
-                i === 0 ? "text-rd-terra-600" : "text-rd-ink-500"
+                i === 0 ? "text-rd-terra-700" : "text-rd-ink-500"
               )}
             >
               {a.rank}
