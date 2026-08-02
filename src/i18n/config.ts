@@ -3027,15 +3027,15 @@ const resources = {
         },
         pipelinePage: {
           totalPipeline: "Total pipeline · {{value}} · {{count}} leads",
-          listViewLives: "List view lives at /app/leads — this toggle exists for parity with the design; it links rather than duplicating the table.",
-          forecastShips: "Forecast view ships in the Reports phase.",
+          listViewLives: "Opens the full lead list.",
+          forecastShips: "Forecast is not available yet.",
           viewKanban: "Kanban",
           viewList: "List",
           viewForecast: "Forecast"
         },
         reportsPage: {
           aiAvg: "AI · {{label}} avg",
-          agentManual: "Agent · manual timing (not yet tracked)",
+          agentManual: "Agent (manual)",
           noSourcesYet: "No sources yet"
         },
         funnel: {
@@ -6203,15 +6203,15 @@ const resources = {
         },
         pipelinePage: {
           totalPipeline: "Pipeline total · {{value}} · {{count}} clients",
-          listViewLives: "La vue liste se trouve sur /app/leads — cette bascule existe par parité avec la maquette ; elle redirige plutôt que de dupliquer le tableau.",
-          forecastShips: "La vue prévisionnelle arrive avec la phase Rapports.",
+          listViewLives: "Ouvre la liste complète des prospects.",
+          forecastShips: "La vue prévisionnelle n'est pas encore disponible.",
           viewKanban: "Kanban",
           viewList: "Liste",
           viewForecast: "Prévision"
         },
         reportsPage: {
           aiAvg: "IA · {{label}} moy.",
-          agentManual: "Agent · délai manuel (non suivi)",
+          agentManual: "Agent (manuel)",
           noSourcesYet: "Aucune source pour l'instant"
         },
         funnel: {

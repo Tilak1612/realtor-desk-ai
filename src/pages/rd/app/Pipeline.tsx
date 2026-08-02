@@ -160,7 +160,7 @@ export default function Pipeline() {
             <div className="px-5 py-4 text-sm text-rd-ink-500">
               {t(
                 "rd.pipelinePage.listViewLives",
-                "List view lives at /app/leads — this toggle exists for parity with the design; it links rather than duplicating the table."
+                "Opens the full lead list."
               )}{" "}
               <Link to="/app/leads" className="text-rd-navy-800 underline">
                 /app/leads
@@ -171,7 +171,7 @@ export default function Pipeline() {
 
         {view === "forecast" && (
           <div className="flex-1 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm flex items-center justify-center text-sm text-rd-ink-500">
-            {t("rd.pipelinePage.forecastShips", "Forecast view ships in the Reports phase.")}
+            {t("rd.pipelinePage.forecastShips", "Forecast is not available yet.")}
           </div>
         )}
       </div>
@@ -352,7 +352,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
           {lead.lastActivity}
         </span>
         {lead.aiHandling && (
-          <span className="text-rd-terra-600 flex items-center gap-1 font-semibold flex-shrink-0">
+          <span className="text-rd-terra-700 flex items-center gap-1 font-semibold flex-shrink-0">
             <IconSparkles className="w-2.5 h-2.5" />
             AI
           </span>

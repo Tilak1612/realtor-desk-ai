@@ -187,7 +187,7 @@ const CanadianMarket = () => {
                     <h3 className="text-2xl font-bold">Provincial Compliance Engine</h3>
                   </div>
                   <p className="text-muted-foreground mb-4 leading-relaxed">
-                    Automatic compliance with RECO (Ontario), BCFSA (BC), RECA (Alberta), AMF (Quebec) and all other provincial regulations.
+                    Automatic compliance with RECO (Ontario), BCFSA (BC), RECA (Alberta), OACIQ (Quebec) and all other provincial regulations.
                   </p>
                   <ul className="space-y-2 mb-4">
                     <li className="flex items-start gap-2">
@@ -211,7 +211,7 @@ const CanadianMarket = () => {
                 <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6">
                   <h4 className="font-bold mb-3 text-center">Supported Provinces:</h4>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    {["Ontario (RECO)", "BC (BCFSA)", "Alberta (RECA)", "Quebec (AMF)", "Manitoba", "Saskatchewan", "Nova Scotia", "New Brunswick"].map((province) => (
+                    {["Ontario (RECO)", "BC (BCFSA)", "Alberta (RECA)", "Quebec (OACIQ)", "Manitoba", "Saskatchewan", "Nova Scotia", "New Brunswick"].map((province) => (
                       <div key={province} className="flex items-center gap-1">
                         <CheckCircle className="w-3 h-3 text-accent" />
                         <span>{province}</span>

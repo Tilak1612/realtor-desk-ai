@@ -104,16 +104,27 @@ const MobileOptimizedFAQ = ({ searchQuery = "" }: MobileOptimizedFAQProps) => {
   return (
     <section className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 bg-muted">
       <div className="container-custom px-4 sm:px-6 lg:px-8 max-w-4xl">
-        {!searchQuery && (
-          <div className="text-center mb-6 sm:mb-8 md:mb-12 animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {t('faq.title')} <span className="gradient-text">{t('faq.titleGradient')}</span>
-            </h2>
+        {/* The page's h1. It used to be an h2 sitting inside the !searchQuery
+            guard, so /faq had no h1 at all — and none whatsoever once you
+            typed in the search box. The heading is now always rendered
+            (visually hidden while searching, so the results stay at the top
+            of the viewport) and only the subtitle is conditional. */}
+        <div
+          className={
+            searchQuery
+              ? "sr-only"
+              : "text-center mb-6 sm:mb-8 md:mb-12 animate-fade-in-up"
+          }
+        >
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            {t('faq.title')} <span className="gradient-text">{t('faq.titleGradient')}</span>
+          </h1>
+          {!searchQuery && (
             <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               {t('faq.subtitle', 'Find answers to common questions about Realtor Desk AI')}
             </p>
-          </div>
-        )}
+          )}
+        </div>
         
         {filteredFaqs.length === 0 ? (
           <div className="text-center py-8 sm:py-12">

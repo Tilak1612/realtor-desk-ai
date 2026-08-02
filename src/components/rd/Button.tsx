@@ -32,7 +32,7 @@ const VARIANTS: Record<Variant, string> = {
   primary:
     "bg-rd-navy-800 text-white border-rd-navy-800 hover:bg-rd-navy-900 hover:border-rd-navy-900",
   terra:
-    "bg-rd-terra-600 text-white border-rd-terra-600 hover:bg-rd-terra-700 hover:border-rd-terra-700",
+    "bg-rd-terra-700 text-white border-rd-terra-700 hover:bg-rd-terra-800 hover:border-rd-terra-800",
   outline:
     "bg-transparent text-rd-navy-800 border-rd-ink-300 hover:border-rd-ink-500",
   ghost:

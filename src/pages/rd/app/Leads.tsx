@@ -207,7 +207,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
       </div>
       <div className="flex items-center gap-1.5 text-rd-ink-600 text-xs">
         {lead.aiHandling && (
-          <span title="AI-handled" className="text-rd-terra-600">
+          <span title="AI-handled" className="text-rd-terra-700">
             <IconSparkles className="w-3 h-3" />
           </span>
         )}
