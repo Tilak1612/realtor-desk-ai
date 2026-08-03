@@ -65,6 +65,7 @@ const HowItWorks = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/how-it-works"
         title={t("pageSeo.howItWorksTitle")}
         description={t("pageSeo.howItWorksDesc")}
         keywords="real estate crm setup, ai crm onboarding, realtor crm implementation, real estate lead generation software setup"

@@ -97,6 +97,7 @@ const Integrations = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/integrations"
         title={t('pageSeo.integrationsTitle')}
         description={t('pageSeo.integrationsDesc')}
         keywords="real estate crm integrations, virtual tour platforms, real estate website builders, real estate video marketing tools, CREA DDF integration"

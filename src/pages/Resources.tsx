@@ -413,6 +413,7 @@ const Resources = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/resources"
         title={t("pageSeo.resourcesTitle")}
         description={t("pageSeo.resourcesDesc")}
         keywords="real estate crm resources, canadian real estate marketing guides, realtor ai tools guide, real estate lead generation strategies"

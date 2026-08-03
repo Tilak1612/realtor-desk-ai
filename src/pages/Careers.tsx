@@ -314,6 +314,7 @@ const Careers = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/careers"
         title={t("pageSeo.careersTitle")}
         description={t("pageSeo.careersDesc")}
         keywords="RealtorDesk careers, Canadian real estate SaaS jobs, AI startup jobs Canada, proptech careers"
