@@ -193,6 +193,18 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Auth gate: this is a service endpoint (service-role email sweep). It must
+  // never be anonymously triggerable. Require a matching CRON_SECRET bearer
+  // token — the scheduler sends `Authorization: Bearer $CRON_SECRET`. Fails
+  // closed if CRON_SECRET is unset. Mirrors crea-ddf-sync.
+  const cronSecret = Deno.env.get("CRON_SECRET");
+  const authToken = req.headers.get("Authorization")?.replace("Bearer ", "");
+  if (!cronSecret || authToken !== cronSecret) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   try {
     logStep("Cron started");
 

@@ -16,6 +16,17 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Auth gate: service-role health check that reads integration credentials and
+  // mutates connection status. Must not be anonymously triggerable. Require a
+  // matching CRON_SECRET bearer token (scheduler sends it). Fails closed.
+  const cronSecret = Deno.env.get("CRON_SECRET");
+  const authToken = req.headers.get("Authorization")?.replace("Bearer ", "");
+  if (!cronSecret || authToken !== cronSecret) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+  }
+
   const supabase = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
