@@ -38,12 +38,22 @@ interface SidebarProps {
     leadsThisWeek: number;
     avgResponse: string;
   };
+  /** Mobile drawer open state. Ignored at lg+, where the rail is static. */
+  open?: boolean;
+  /** Called when the drawer should close (backdrop, close button, nav click). */
+  onClose?: () => void;
 }
 
 export function Sidebar({
   workspace,
   items,
-  deskStatus = { leadsThisWeek: 47, avgResponse: "38s" },
+  // No default. This used to fall back to "Answered 47 leads this week.
+  // Avg response 38s." for every user regardless of their actual activity --
+  // invented numbers presented as the user's own performance. When there is
+  // nothing real to show, the panel is omitted.
+  deskStatus,
+  open = false,
+  onClose,
 }: SidebarProps) {
   const location = useLocation();
   const { t } = useTranslation();
@@ -69,14 +79,29 @@ export function Sidebar({
   };
 
   return (
-    <aside className="h-full w-[240px] flex-shrink-0 bg-rd-navy-800 text-white px-3.5 py-5 flex flex-col gap-1">
+    <aside
+      id="rd-app-nav"
+      aria-hidden={!open ? undefined : undefined}
+      className={cn(
+        "w-[240px] flex-shrink-0 bg-rd-navy-800 text-white px-3.5 py-5 flex flex-col gap-1",
+        // Below lg the rail is an overlay drawer. It used to be a static
+        // 240px column at every width, which left ~135px of content on a
+        // 375px phone -- no mobile layout at all.
+        "fixed inset-y-0 left-0 z-50 overflow-y-auto",
+        "motion-safe:transition-transform motion-safe:duration-200 ease-out",
+        open ? "translate-x-0" : "-translate-x-full",
+        "lg:static lg:h-full lg:translate-x-0 lg:z-auto",
+      )}
+    >
       {/* Brand + collapse chevron */}
       <div className="flex items-center justify-between px-2.5 pb-4">
         <RDWordmark size={16} tone="paper" />
         <button
           type="button"
-          aria-label={t("rd.sidebar.collapse", "Collapse sidebar")}
-          className="w-[22px] h-[22px] rounded-md bg-white/10 flex items-center justify-center text-white/60 hover:bg-white/15"
+          onClick={onClose}
+          aria-label={t("rd.sidebar.close", "Close navigation")}
+          aria-controls="rd-app-nav"
+          className="w-[22px] h-[22px] rounded-md bg-white/10 flex items-center justify-center text-white/60 hover:bg-white/15 lg:hidden"
         >
           <IconChevron />
         </button>
@@ -106,6 +131,7 @@ export function Sidebar({
             <Link
               key={item.to}
               to={item.to}
+              onClick={onClose}
               className={cn(
                 "flex items-center gap-2.5 px-3 py-[9px] rounded-md text-[13px] font-medium transition-colors",
                 active
@@ -132,7 +158,8 @@ export function Sidebar({
         })}
       </nav>
 
-      {/* Desk AI status */}
+      {/* Desk AI status — only when real figures are supplied. */}
+      {deskStatus && (
       <div className="mt-auto p-3 bg-white/[0.04] border border-white/[0.06] rounded-rd-md">
         <div className="flex items-center gap-2 mb-2">
           <IconSparkles className="text-rd-terra-400 w-3 h-3" />
@@ -147,6 +174,7 @@ export function Sidebar({
           })}
         </div>
       </div>
+      )}
     </aside>
   );
 }
