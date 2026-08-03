@@ -477,3 +477,25 @@
 ::-webkit-scrollbar { width: 6px; background: transparent; }
 ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* Global reduced-motion guard.
+ *
+ * prefers-reduced-motion was previously respected in exactly two places in
+ * the codebase, so most transitions and the marketing scroll/fade animations
+ * played regardless of the OS setting. That is a WCAG 2.3.3 issue and a
+ * vestibular-safety one.
+ *
+ * Animations are reduced to a single frame rather than removed outright:
+ * setting duration to 0 would make animation-fill-mode:forwards states never
+ * apply, which would leave elements that animate in stuck at opacity 0.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

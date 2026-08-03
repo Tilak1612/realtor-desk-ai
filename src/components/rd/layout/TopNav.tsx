@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { RDInput } from "../Input";
 import { RDBadge } from "../Badge";
 import { RDAvatar } from "../Avatar";
-import { IconBell, IconDot, IconSearch } from "../icons";
+import { IconBell, IconDot, IconSearch, IconMenu } from "../icons";
 import { cn } from "@/lib/utils";
 
 // Product topbar (AppShell topbar in rd-app.jsx). Command search, a live
@@ -12,11 +12,13 @@ import { cn } from "@/lib/utils";
 interface TopNavProps {
   agent: { name: string };
   hasUnread?: boolean;
+  /** Opens the mobile nav drawer. Only rendered below lg. */
+  onMenuClick?: () => void;
   /** Visual state only — true means the AI side is online. */
   isLive?: boolean;
 }
 
-export function TopNav({ agent, hasUnread = true, isLive = true }: TopNavProps) {
+export function TopNav({ agent, hasUnread = true, isLive = true, onMenuClick }: TopNavProps) {
   const { t, i18n } = useTranslation();
   const active = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
 
@@ -25,20 +27,31 @@ export function TopNav({ agent, hasUnread = true, isLive = true }: TopNavProps) 
   }
 
   return (
-    <div className="flex items-center gap-4 px-7 py-3.5 border-b border-rd-line bg-white">
+    <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-7 py-3.5 border-b border-rd-line bg-white">
+      {/* Drawer toggle — the only way into navigation below lg. */}
+      <button
+        type="button"
+        onClick={onMenuClick}
+        aria-label={t("rd.topnav.openNav", "Open navigation")}
+        aria-controls="rd-app-nav"
+        className="lg:hidden -ml-1 w-9 h-9 rounded-md flex items-center justify-center text-rd-ink-600 hover:bg-rd-ink-100 flex-shrink-0"
+      >
+        <IconMenu />
+      </button>
+
       {/* Command search */}
-      <div className="flex-1 max-w-[420px]">
+      <div className="flex-1 max-w-[420px] min-w-0">
         <RDInput
           variant="inset"
           placeholder={t("rd.topnav.search", "Search leads, listings, conversations…")}
           leading={<IconSearch />}
-          trailing={<span className="text-[11px] text-rd-ink-400 font-rd-mono">⌘K</span>}
+          trailing={<span className="hidden sm:inline text-[11px] text-rd-ink-500 font-rd-mono">⌘K</span>}
         />
       </div>
 
       <div className="ml-auto flex items-center gap-3.5">
         {isLive && (
-          <RDBadge tone="success" size="sm">
+          <RDBadge tone="success" size="sm" className="hidden sm:inline-flex">
             <IconDot />
             {t("rd.topnav.live", "Live")}
           </RDBadge>
