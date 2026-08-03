@@ -13,7 +13,7 @@ const VsIxact = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="IXACT Contact vs RealtorDesk AI | Upgrade to AI"
+        title="IXACT Contact vs Realtor Desk | Upgrade to AI"
         description="Upgrade from IXACT to AI-powered intelligence without breaking your budget. See pricing, features, and why Canadian agents switch."
         keywords="IXACT Contact vs RealtorDesk AI, IXACT alternative, Canadian real estate CRM comparison, AI CRM for realtors"
         canonicalUrl="https://www.realtordesk.ai/vs/ixact"
