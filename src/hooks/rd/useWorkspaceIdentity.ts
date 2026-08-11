@@ -19,6 +19,8 @@ import { useSession } from "./useSession";
 export interface WorkspaceIdentity {
   /** Display name for the avatar + greeting. Empty string if unknown. */
   agentName: string;
+  /** Sales-demo account: full access without a Stripe subscription. */
+  isDemo: boolean;
   workspace: { name: string; tier: string; mark: string };
   loading: boolean;
 }
@@ -47,7 +49,7 @@ export function useWorkspaceIdentity(): WorkspaceIdentity {
       if (!userId) return null;
       const { data, error } = await supabase
         .from("profiles")
-        .select("full_name, company_name, subscription_tier")
+        .select("full_name, company_name, subscription_tier, is_demo")
         .eq("id", userId)
         .maybeSingle();
       if (error) throw new Error(error.message);
@@ -68,6 +70,7 @@ export function useWorkspaceIdentity(): WorkspaceIdentity {
 
   return {
     agentName,
+    isDemo: data?.is_demo === true,
     workspace: {
       name: company || agentName || "Your workspace",
       tier: TIER_LABEL[data?.subscription_tier ?? ""] ?? "Trial",
