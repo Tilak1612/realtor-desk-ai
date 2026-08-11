@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { useWorkspaceIdentity } from "@/hooks/rd/useWorkspaceIdentity";
 
 // Card-at-signup gate.
 //
@@ -17,12 +18,18 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 // It is NOT true for the bare DB trial, which is the whole point.
 export default function RequireBilling({ children }: { children: JSX.Element }) {
   const { subscribed, loading } = useSubscription();
+  // Sales-demo accounts get full access without a Stripe subscription.
+  // profiles.is_demo is writable only by the service_role — a BEFORE UPDATE
+  // trigger reverts it for everyone else — because the "Users can update own
+  // profile" RLS policy has no WITH CHECK clause, so without that guard any
+  // signed-in user could flip this on themselves and skip billing entirely.
+  const { isDemo, loading: identityLoading } = useWorkspaceIdentity();
   const location = useLocation();
 
   // Never redirect while the check is in flight. check-subscription soft-fails
   // to { subscribed: false } on transient errors, so bouncing early would kick
   // paying customers out to checkout on a blip.
-  if (loading) {
+  if (loading || identityLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
@@ -30,7 +37,7 @@ export default function RequireBilling({ children }: { children: JSX.Element }) 
     );
   }
 
-  if (!subscribed) {
+  if (!subscribed && !isDemo) {
     // `from` lets Billing send the user back where they were headed once
     // checkout completes.
     return <Navigate to="/billing?required=1" replace state={{ from: location.pathname }} />;
