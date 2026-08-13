@@ -18,6 +18,7 @@ import { MOCK_LEADS } from "@/data/rd";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
+import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 
 // /app/leads — Leads table per rd-app.jsx Artboard_Leads.
 //
@@ -34,6 +35,7 @@ type TabKey = "all" | "hot" | "warm" | "cold" | "ai" | "needs_reply";
 export default function Leads() {
   const { t } = useTranslation();
   const [tab, setTab] = useState<TabKey>("all");
+  const [addOpen, setAddOpen] = useState(false);
   const { leads: liveLeads, loading, error } = useLeads();
 
   // Derive whether we're rendering real or fixture data. Real wins whenever
@@ -59,6 +61,7 @@ export default function Leads() {
 
   return (
     <AppShell>
+      <AddLeadDialog open={addOpen} onClose={() => setAddOpen(false)} />
       <div className="px-7 py-6 pb-10">
         {/* Header */}
         <div className="flex flex-wrap justify-between items-end gap-4 mb-5">
@@ -83,7 +86,12 @@ export default function Leads() {
             <RDButton variant="outline" size="sm">
               {t("rd.actions.import", "Import")}
             </RDButton>
-            <RDButton variant="primary" size="sm" icon={<IconPlus />}>
+            <RDButton
+              variant="primary"
+              size="sm"
+              icon={<IconPlus />}
+              onClick={() => setAddOpen(true)}
+            >
               {t("rd.actions.addLead", "Add lead")}
             </RDButton>
           </div>

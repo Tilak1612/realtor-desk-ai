@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
+import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 import {
   RDButton,
   RDBadge,
@@ -84,6 +85,7 @@ function extractFirstName(raw: string | null): string {
 /* ────────────────────────────────────────────────────────── */
 
 function Greeting({ firstName }: { firstName: string }) {
+  const [addOpen, setAddOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
   const today = new Date().toLocaleDateString(isFr ? "fr-CA" : "en-CA", {
@@ -115,9 +117,15 @@ function Greeting({ firstName }: { firstName: string }) {
         <RDButton variant="outline" size="sm" icon={<IconCalendar />}>
           This week
         </RDButton>
-        <RDButton variant="primary" size="sm" icon={<IconPlus />}>
+        <RDButton
+          variant="primary"
+          size="sm"
+          icon={<IconPlus />}
+          onClick={() => setAddOpen(true)}
+        >
           New lead
         </RDButton>
+        <AddLeadDialog open={addOpen} onClose={() => setAddOpen(false)} />
       </div>
     </div>
   );
