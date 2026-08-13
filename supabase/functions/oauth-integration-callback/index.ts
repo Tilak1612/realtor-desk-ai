@@ -140,6 +140,26 @@ serve(async (req) => {
   }
 });
 
+// Target origin for postMessage — the app that opened this popup. Prevents the
+// OAuth result (and account label) leaking to an arbitrary window.opener origin.
+const APP_ORIGIN = "https://www.realtordesk.ai";
+
+// Safe JS-string literal: JSON.stringify handles quotes/backslashes; the </ and
+// U+2028/2029 escapes prevent breaking out of the inline <script>. Attacker-
+// influenceable values (accountLabel from the OAuth provider) flow through here.
+function jsLiteral(v: string): string {
+  return JSON.stringify(String(v ?? ""))
+    .replace(/</g, "\\u003c")
+    .replace(/ /g, "\\u2028")
+    .replace(/ /g, "\\u2029");
+}
+// HTML-escape for values interpolated into markup (not script).
+function htmlEscape(v: string): string {
+  return String(v ?? "").replace(/[&<>"']/g, (c) => (
+    { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string
+  ));
+}
+
 function popupSuccessHTML(toolSlug: string, accountLabel: string): string {
   return `<!DOCTYPE html><html><head><title>Connected</title></head><body style="background:#0a0a0a;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0">
 <div style="text-align:center">
@@ -148,7 +168,7 @@ function popupSuccessHTML(toolSlug: string, accountLabel: string): string {
   <p style="color:#999">You can close this window.</p>
 </div>
 <script>
-  window.opener?.postMessage({ type: 'OAUTH_SUCCESS', toolSlug: '${toolSlug}', accountLabel: '${accountLabel}' }, '*');
+  window.opener?.postMessage({ type: 'OAUTH_SUCCESS', toolSlug: ${jsLiteral(toolSlug)}, accountLabel: ${jsLiteral(accountLabel)} }, ${jsLiteral(APP_ORIGIN)});
   setTimeout(() => window.close(), 2000);
 </script></body></html>`;
 }
@@ -158,11 +178,11 @@ function popupErrorHTML(message: string): string {
 <div style="text-align:center">
   <div style="font-size:48px;margin-bottom:16px">❌</div>
   <h2>Connection Failed</h2>
-  <p style="color:#999">${message}</p>
+  <p style="color:#999">${htmlEscape(message)}</p>
   <p style="color:#666;font-size:12px;margin-top:16px">You can close this window and try again.</p>
 </div>
 <script>
-  window.opener?.postMessage({ type: 'OAUTH_ERROR', message: '${message}' }, '*');
+  window.opener?.postMessage({ type: 'OAUTH_ERROR', message: ${jsLiteral(message)} }, ${jsLiteral(APP_ORIGIN)});
   setTimeout(() => window.close(), 5000);
 </script></body></html>`;
 }
