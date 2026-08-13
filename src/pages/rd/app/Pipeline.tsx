@@ -13,6 +13,7 @@ import {
   type DragStartEvent,
 } from "@dnd-kit/core";
 import { AppShell } from "@/components/rd/layout/AppShell";
+import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 import {
   RDButton,
   RDAvatar,
@@ -44,6 +45,7 @@ export default function Pipeline() {
 
   const updateStage = useUpdateLeadStage();
   const [activeLead, setActiveLead] = useState<Lead | null>(null);
+  const [addOpen, setAddOpen] = useState(false);
 
   // distance:5 lets a pointerdown-then-click navigate to the lead detail
   // without arming a drag — only ≥5px of movement starts the drag cycle.
@@ -90,6 +92,7 @@ export default function Pipeline() {
 
   return (
     <AppShell>
+      <AddLeadDialog open={addOpen} onClose={() => setAddOpen(false)} />
       <div className="p-7 pb-10 h-full flex flex-col">
         {/* Header */}
         <div className="flex flex-wrap justify-between items-end gap-4 mb-5">
@@ -114,7 +117,12 @@ export default function Pipeline() {
             <RDButton variant="outline" size="sm" icon={<IconFilter />}>
               {t("rd.actions.allAgents", "All agents")}
             </RDButton>
-            <RDButton variant="primary" size="sm" icon={<IconPlus />}>
+            <RDButton
+              variant="primary"
+              size="sm"
+              icon={<IconPlus />}
+              onClick={() => setAddOpen(true)}
+            >
               {t("rd.actions.addLead", "Add lead")}
             </RDButton>
           </div>
@@ -145,6 +153,7 @@ export default function Pipeline() {
                     valueCad={rollup.valueCad}
                     leads={leadsIn}
                     isLive={isLive}
+                    onAddLead={() => setAddOpen(true)}
                   />
                 );
               })}
@@ -219,6 +228,7 @@ function KanbanColumn({
   valueCad,
   leads,
   isLive,
+  onAddLead,
 }: {
   stageId: PipelineStage;
   label: string;
@@ -227,6 +237,7 @@ function KanbanColumn({
   valueCad: number;
   leads: Lead[];
   isLive: boolean;
+  onAddLead: () => void;
 }) {
   const { t } = useTranslation();
   const { setNodeRef, isOver } = useDroppable({ id: stageId, disabled: !isLive });
@@ -254,6 +265,7 @@ function KanbanColumn({
         ))}
         <button
           type="button"
+          onClick={onAddLead}
           className="border-[1.5px] border-dashed border-rd-line-strong bg-transparent rounded-rd-sm py-2.5 text-xs text-rd-ink-500 flex items-center justify-center gap-1.5 font-medium hover:text-rd-ink-700 hover:border-rd-ink-400"
         >
           <IconPlus />
