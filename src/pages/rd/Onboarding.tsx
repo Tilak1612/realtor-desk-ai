@@ -811,7 +811,7 @@ function StepLive({ onContinue, busy }: { onContinue: () => void; busy: boolean 
         <NextStepCard
           icon={<IconGlobe />}
           title={t("rd.onboarding.live.nextTeamTitle", "Invite your team")}
-          desc={t("rd.onboarding.live.nextTeamDesc", "5 seats on Team plan. $15 each after.")}
+          desc={t("rd.onboarding.live.nextTeamDesc", "5 seats included on the Team plan.")}
         />
       </div>
 

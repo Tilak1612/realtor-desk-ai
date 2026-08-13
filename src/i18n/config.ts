@@ -638,7 +638,7 @@ const resources = {
         featTeamDdfUnl: "CREA DDF® feed (unlimited)",
         featTeamRouting: "Round-robin lead routing",
         featTeamReports: "Team reports & leaderboard",
-        featTeamSeats: "5 users, $15 each after",
+        featTeamSeats: "5 users included",
         featBrokerageSso: "SAML SSO + Azure AD",
         featBrokerageCompliance: "FINTRAC & provincial regulator workflows",
         featBrokerageDdfCustom: "Custom DDF mappings",
@@ -3156,7 +3156,7 @@ const resources = {
             nextWidgetTitle: "Add your website widget",
             nextWidgetDesc: "One script tag. Bilingual chat bubble.",
             nextTeamTitle: "Invite your team",
-            nextTeamDesc: "5 seats on Team plan. $15 each after.",
+            nextTeamDesc: "5 seats included on the Team plan.",
             takeToDashboard: "Take me to the dashboard",
             tour: "Watch the 2-min tour"
           }
@@ -3814,7 +3814,7 @@ const resources = {
         featTeamDdfUnl: "Flux SDD® de l'ACI (illimité)",
         featTeamRouting: "Distribution round-robin des prospects",
         featTeamReports: "Rapports d'équipe et classement",
-        featTeamSeats: "5 utilisateurs, 15 $ par utilisateur supplémentaire",
+        featTeamSeats: "5 utilisateurs inclus",
         featBrokerageSso: "SAML SSO + Azure AD",
         featBrokerageCompliance: "Flux CANAFE et régulateurs provinciaux",
         featBrokerageDdfCustom: "Mappages SDD personnalisés",
@@ -6332,7 +6332,7 @@ const resources = {
             nextWidgetTitle: "Ajouter le widget du site",
             nextWidgetDesc: "Une seule balise script. Bulle de clavardage bilingue.",
             nextTeamTitle: "Inviter votre équipe",
-            nextTeamDesc: "5 sièges inclus avec le forfait Équipe. 15 $ chacun ensuite.",
+            nextTeamDesc: "5 sièges inclus avec le forfait Équipe.",
             takeToDashboard: "Aller au tableau de bord",
             tour: "Visionner la visite de 2 min"
           }
