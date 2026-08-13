@@ -279,7 +279,11 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
 
   const send = useSendMessage();
   const [draft, setDraft] = useState("");
-  const canSend = !!lead && draft.trim().length > 0 && !send.isPending;
+  // CASL: no recorded consent means no outbound message, full stop. The
+  // product markets CASL compliance; until now the badge existed but the
+  // composer sent regardless — a compliance claim with no enforcement.
+  const hasConsent = !!lead?.caslConsentAt;
+  const canSend = !!lead && hasConsent && draft.trim().length > 0 && !send.isPending;
 
   const handleSend = () => {
     if (!lead) return;
@@ -351,23 +355,37 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
         ))}
       </div>
 
-      {/* Suggested reply + composer */}
+      {/* Next-best action + composer */}
       <div className="px-7 py-3.5 border-t border-rd-line bg-white">
-        <div className="bg-rd-terra-100 border border-rd-terra-200 rounded-[10px] px-3.5 py-2.5 mb-3 flex items-center gap-2.5 text-xs">
-          <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
-          <span className="text-rd-terra-900 flex-1">
-            <strong className="font-semibold">
-              {t("rd.inbox.suggestedReply", "Suggested reply:")}
-            </strong>{" "}
-            "Hi {lead.name.split(" ")[0]} — Sarah here. I'm free today between 2–4 PM PST. Does a quick call at 2:30 work?"
-          </span>
-          <button
-            type="button"
-            className="text-[11px] font-bold bg-rd-terra-600 text-white px-2.5 py-1 rounded-rd-sm"
+        {/* Derived from the lead's own record (metadata.aiNextBest), not a
+            canned script. The previous version quoted a fabricated reply —
+            signed "Sarah", offering "2–4 PM PST" to Montréal leads, in
+            English regardless of the lead's language — with a dead Use
+            button. A wrong suggestion presented confidently is worse than
+            none, so when there is no real next-best action the panel is
+            simply absent. */}
+        {lead.aiNextBest && (
+          <div className="bg-rd-terra-100 border border-rd-terra-200 rounded-[10px] px-3.5 py-2.5 mb-3 flex items-center gap-2.5 text-xs">
+            <IconSparkles className="text-rd-terra-700 flex-shrink-0" />
+            <span className="text-rd-terra-900 flex-1">
+              <strong className="font-semibold">
+                {t("rd.inbox.nextBest", "Next best action:")}
+              </strong>{" "}
+              {lead.aiNextBest}
+            </span>
+          </div>
+        )}
+        {!hasConsent && (
+          <div
+            role="alert"
+            className="bg-rd-danger-bg border border-rd-danger/30 rounded-[10px] px-3.5 py-2.5 mb-3 text-xs text-rd-danger font-medium"
           >
-            {t("rd.actions.use", "Use")}
-          </button>
-        </div>
+            {t(
+              "rd.inbox.caslBlocked",
+              "No CASL consent is recorded for this contact, so messages can't be sent. Record consent on the lead before contacting them.",
+            )}
+          </div>
+        )}
         <div className="border border-rd-line rounded-[12px] px-3.5 py-2.5">
           <textarea
             value={draft}
@@ -386,15 +404,9 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
             <div className="text-[11px] text-rd-danger">{send.error.message}</div>
           )}
           <div className="flex items-center justify-between pt-2">
-            <div className="flex gap-4 text-xs text-rd-ink-600">
-              <button type="button" className="inline-flex items-center gap-1.5 font-semibold">
-                <IconSparkles className="w-3 h-3" />
-                {t("rd.actions.draftWithAi", "Draft with AI")}
-              </button>
-              <button type="button" className="font-semibold">
-                {t("rd.actions.attachListing", "Attach listing")}
-              </button>
-            </div>
+            {/* "Draft with AI" and "Attach listing" were dead buttons —
+                removed until the features exist. */}
+            <div />
             <RDButton
               variant="primary"
               size="sm"

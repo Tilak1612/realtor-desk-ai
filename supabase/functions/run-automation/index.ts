@@ -200,7 +200,7 @@ const handler = async (req: Request): Promise<Response> => {
               .join("");
 
             const emailResult = await resend.emails.send({
-              from: "Realtor Desk <noreply@resend.dev>",
+              from: Deno.env.get("EMAIL_FROM") ?? "RealtorDesk AI <support@realtordesk.ai>",
               to: [contact.email],
               subject,
               html: `
