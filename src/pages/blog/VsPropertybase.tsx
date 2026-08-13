@@ -10,7 +10,7 @@ const VsPropertybase = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="Propertybase vs RealtorDesk AI: Enterprise vs Agile for Canadian Teams"
+        title="Propertybase vs Realtor Desk: Enterprise vs Agile for Canadian Teams"
         description="Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams."
         keywords="Propertybase vs RealtorDesk AI, Canadian real estate CRM comparison, Salesforce real estate CRM alternative"
         article

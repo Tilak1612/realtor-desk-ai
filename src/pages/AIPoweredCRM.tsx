@@ -25,7 +25,7 @@ const AIPoweredCRM = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="AI-Powered CRM for Real Estate | RealtorDesk AI"
+        title="AI-Powered CRM for Real Estate | Realtor Desk"
         description="Real AI for Canadian agents with predictive lead scoring, market intelligence, and 24/7 automation."
         keywords="AI powered CRM, real estate AI CRM, predictive lead scoring, Canadian real estate CRM"
         canonicalUrl="https://www.realtordesk.ai/features/ai-powered-crm"

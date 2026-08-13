@@ -15,7 +15,7 @@ const VsKvCore = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?"
+        title="Realtor Desk vs kvCORE: Which CRM Wins for Canadian Agents in 2025?"
         description="Compare RealtorDesk AI vs kvCORE for Canadian agents. Pricing, features, PIPEDA compliance, and why many switch to AI-first platforms."
         keywords="RealtorDesk AI vs kvCORE, kvCORE alternative Canada, Canadian real estate CRM comparison, PIPEDA compliant CRM"
         article

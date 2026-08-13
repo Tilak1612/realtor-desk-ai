@@ -15,7 +15,7 @@ const VsFollowUpBoss = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="RealtorDesk AI vs Follow Up Boss: Speed vs Features for Canadian Real Estate"
+        title="Realtor Desk vs Follow Up Boss: Speed vs Features for Canadian Real Estate"
         description="Follow Up Boss alternative comparison for Canadian agents. AI automation, PIPEDA compliance, bilingual support, and transparent pricing."
         keywords="Follow Up Boss alternative, RealtorDesk AI vs Follow Up Boss, Canadian real estate CRM comparison, PIPEDA compliant CRM"
         article
