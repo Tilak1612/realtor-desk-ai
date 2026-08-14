@@ -128,6 +128,9 @@ const VsLofty = lazy(() => import("./pages/VsLofty"));
 const VsIxact = lazy(() => import("./pages/VsIxact"));
 const VsWiseAgent = lazy(() => import("./pages/VsWiseAgent"));
 const AIPoweredCRM = lazy(() => import("./pages/AIPoweredCRM"));
+const BcCrm = lazy(() => import("./pages/province/BcCrm"));
+const AlbertaCrm = lazy(() => import("./pages/province/AlbertaCrm"));
+const QuebecCrm = lazy(() => import("./pages/province/QuebecCrm"));
 const SwitchFromBoldTrail = lazy(() => import("./pages/SwitchFromBoldTrail"));
 const SwitchFromLofty = lazy(() => import("./pages/SwitchFromLofty"));
 const SwitchFromIxact = lazy(() => import("./pages/SwitchFromIxact"));
@@ -388,6 +391,9 @@ const App = () => (
 
           {/* AI Features */}
           <Route path="/features/ai-powered-crm" element={<AIPoweredCRM />} />
+          <Route path="/real-estate-crm-british-columbia" element={<BcCrm />} />
+          <Route path="/real-estate-crm-alberta" element={<AlbertaCrm />} />
+          <Route path="/real-estate-crm-quebec" element={<QuebecCrm />} />
 
           {/* Migration Pages */}
           <Route path="/switch-from-boldtrail" element={<SwitchFromBoldTrail />} />
