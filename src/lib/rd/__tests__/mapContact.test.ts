@@ -11,8 +11,7 @@ const base: ContactRow = {
   email: "john@doe.com",
   phone: "416-555-0123",
   ai_score: null,
-  lead_score: null,
-  status: null,
+  stage: null,
   source: null,
   preferred_language: null,
   last_contact_date: null,
@@ -45,17 +44,18 @@ describe("mapContactToLead", () => {
   });
 
   it("normalizes stage, defaulting unknown/space-laden values to new", () => {
-    const stage = (s: string | null) => mapContactToLead({ ...base, status: s }).stage;
+    const stage = (s: string | null) => mapContactToLead({ ...base, stage: s }).stage;
     expect(stage("qualified")).toBe("qualified");
     expect(stage("Showing")).toBe("showing");
     expect(stage("in progress")).toBe("new"); // not in allowed set
     expect(stage(null)).toBe("new");
   });
 
-  it("prefers ai_score, falls back to lead_score, then 0", () => {
-    expect(mapContactToLead({ ...base, ai_score: 88, lead_score: 50 }).score).toBe(88);
-    expect(mapContactToLead({ ...base, ai_score: null, lead_score: 50 }).score).toBe(50);
-    expect(mapContactToLead({ ...base, ai_score: null, lead_score: null }).score).toBe(0);
+  it("uses ai_score, defaulting null to 0", () => {
+    // lead_score is gone: it never existed on public.contacts. Selecting it
+    // was the 400 that made the whole CRM serve demo data (fixed in #117).
+    expect(mapContactToLead({ ...base, ai_score: 88 }).score).toBe(88);
+    expect(mapContactToLead({ ...base, ai_score: null }).score).toBe(0);
   });
 
   it("pulls redesign fields from metadata with sensible defaults", () => {
