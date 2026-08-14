@@ -37,6 +37,7 @@ import { useActivityFeed, useLeadsPerDay } from "@/hooks/rd/useDashboardFeed";
 
 export default function Dashboard() {
   const { user } = useSession();
+  const { t } = useTranslation();
   const { leads: liveLeads, loading: leadsLoading } = useLeads();
   const { points: leadsSpark, loading: sparkLoading } = useLeadsPerDay(7);
   const { activity, loading: activityLoading } = useActivityFeed();
@@ -46,6 +47,18 @@ export default function Dashboard() {
     <AppShell agentName={fullNameFromUser(user) ?? "Your desk"}>
       <div className="p-7 pb-10">
         <Greeting firstName={firstName} />
+        {/* Same fixture banner as Leads/Inbox. The dashboard fell back to
+            MOCK figures for empty accounts with no indication — the one
+            page that boasted "38s avg response" while Reports showed real
+            zeros. If fixtures render, say so. */}
+        {!leadsLoading && liveLeads.length === 0 && (
+          <div className="mb-4 px-4 py-2.5 bg-rd-terra-50 border border-rd-terra-200 rounded-rd-sm text-[12px] text-rd-terra-900 flex items-center gap-2">
+            <IconSparkles className="text-rd-terra-700 flex-shrink-0" />
+            <span>
+              {t("rd.common.sampleDashboard", "Showing sample data — add your first lead and this dashboard switches to your real numbers.")}
+            </span>
+          </div>
+        )}
         <KPIRow
           liveLeads={liveLeads}
           loading={leadsLoading}
