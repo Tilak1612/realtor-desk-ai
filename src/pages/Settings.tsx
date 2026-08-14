@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield, Upload } from "lucide-react";
 import MFASetup from "@/components/settings/MFASetup";
+import ChangePassword, { useHasPasswordAuth } from "@/components/settings/ChangePassword";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -130,6 +131,8 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
   const [profile, setProfile] = useState<unknown>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [mfaEnabled, setMfaEnabled] = useState(false);
+  // null while resolving; false = OAuth-only account (no password to change).
+  const hasPasswordAuth = useHasPasswordAuth();
   const [profileForm, setProfileForm] = useState<ProfileFormState>(EMPTY_PROFILE_FORM);
   const { subscribed, trialDaysLeft, trialExpired, subscriptionTier, trialEndsAt, subscriptionEnd } = useSubscription();
 
@@ -736,6 +739,25 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
           </Card>
 
           {/* Privacy & Security — 2FA */}
+          {/* Password change — hidden for OAuth-only accounts, which have no
+              password to change; showing the form would only ever fail. */}
+          {hasPasswordAuth && (
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-medium flex items-center gap-2">
+                  <Lock className="w-4 h-4" />
+                  {t("app.settings.password.title", "Password")}
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  {t("app.settings.password.subtitle", "Change the password you sign in with")}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChangePassword />
+              </CardContent>
+            </Card>
+          )}
+
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
