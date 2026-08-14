@@ -83,6 +83,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const LeadMagnetFollowUp = lazy(() => import("./pages/LeadMagnetFollowUp"));
 const FintracCompliance = lazy(() => import("./pages/FintracCompliance"));
+const RoiCalculator = lazy(() => import("./pages/RoiCalculator"));
 const LoftyAlternative = lazy(() => import("./pages/LoftyAlternative"));
 
 // ─── Lazy-loaded blog pages ───
@@ -318,6 +319,7 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/roi-calculator" element={<RoiCalculator />} />
           <Route path="/unsubscribe" element={<Unsubscribe />} />
           <Route path="/admin/demo-requests" element={<AdminDemoRequests />} />
 
