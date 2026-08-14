@@ -72,7 +72,7 @@ const LeadConversion = () => {
             </p>
           </header>
 
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Predictive analytics dashboard"
             className="w-full rounded-lg mb-8 shadow-lg"

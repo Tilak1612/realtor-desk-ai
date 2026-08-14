@@ -76,7 +76,7 @@ const OpenHouseDigitalSignIn = () => {
 
           {/* Featured Image */}
           <div className="mb-12">
-            <img 
+            <img loading="lazy" decoding="async" 
               src={blogImage} 
               alt="Modern digital tablet for open house sign-in"
               className="w-full rounded-2xl shadow-xl"

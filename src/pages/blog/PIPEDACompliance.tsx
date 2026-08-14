@@ -61,7 +61,7 @@ const PIPEDACompliance = () => {
               </p>
             </header>
 
-            <img 
+            <img loading="lazy" decoding="async" 
               src={blogCompliance} 
               alt="Data privacy documents and laptop illustrating PIPEDA compliance for Realtors" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"

@@ -61,7 +61,7 @@ const TorontoVsVancouver = () => {
               </p>
             </header>
 
-            <img 
+            <img loading="lazy" decoding="async" 
               src={blogTorontoVancouver} 
               alt="Toronto skyline view used for comparing Toronto and Vancouver real estate markets" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"

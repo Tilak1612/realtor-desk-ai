@@ -290,7 +290,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
         <SheetContent className="w-full sm:max-w-md overflow-y-auto">
           <SheetHeader>
             <div className="flex items-center gap-3">
-              <img src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              <img loading="lazy" decoding="async" src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
               <div>
                 <SheetTitle>{tool.name}</SheetTitle>
                 <Badge className="bg-green-500/20 text-green-400 text-xs mt-1">
@@ -392,7 +392,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
         <SheetContent className="w-full sm:max-w-md overflow-y-auto">
           <SheetHeader>
             <div className="flex items-center gap-3">
-              <img src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              <img loading="lazy" decoding="async" src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
               <SheetTitle>{t('integrations.panel.connect', 'Connect')} {tool.name}</SheetTitle>
             </div>
           </SheetHeader>
@@ -453,7 +453,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
         <SheetContent className="w-full sm:max-w-md overflow-y-auto">
           <SheetHeader>
             <div className="flex items-center gap-3">
-              <img src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+              <img loading="lazy" decoding="async" src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
               <SheetTitle>{t('integrations.panel.connect', 'Connect')} {tool.name}</SheetTitle>
             </div>
           </SheetHeader>
@@ -504,7 +504,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
       <SheetContent className="w-full sm:max-w-md overflow-y-auto">
         <SheetHeader>
           <div className="flex items-center gap-3">
-            <img src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+            <img loading="lazy" decoding="async" src={tool.logoUrl} alt={tool.name} className="w-8 h-8 rounded" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             <SheetTitle>{t('integrations.panel.connect', 'Connect')} {tool.name}</SheetTitle>
           </div>
         </SheetHeader>

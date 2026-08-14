@@ -72,7 +72,7 @@ const CreaDDF = () => {
             </p>
           </header>
 
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="CREA DDF integration visualization"
             className="w-full rounded-lg mb-8 shadow-lg"

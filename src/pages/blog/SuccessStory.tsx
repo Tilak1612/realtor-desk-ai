@@ -72,7 +72,7 @@ const SuccessStory = () => {
             </p>
           </header>
 
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Toronto skyline success story"
             className="w-full rounded-lg mb-8 shadow-lg"
