@@ -72,7 +72,7 @@ const EdmontonMarket2025 = () => {
 
       {/* Featured Image */}
       <section className="container-custom -mt-8 mb-12">
-        <img 
+        <img loading="lazy" decoding="async" 
           src={blogImage} 
           alt="Edmonton Alberta skyline with river valley"
           className="w-full max-w-4xl rounded-2xl shadow-xl"

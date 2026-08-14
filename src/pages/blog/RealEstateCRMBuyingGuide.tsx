@@ -61,7 +61,7 @@ const RealEstateCRMBuyingGuide = () => {
             <span>CRM Strategy</span>
           </div>
 
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Real Estate CRM Selection Guide"
             className="w-full h-[400px] object-cover rounded-xl mb-8"

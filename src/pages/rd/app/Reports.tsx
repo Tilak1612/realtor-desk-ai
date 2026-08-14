@@ -77,23 +77,31 @@ export default function Reports() {
 /* ────────────────────────────────────────────────────────── */
 
 function Header() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  // Month-to-date, from the clock. This header used to be hardcoded to
+  // "Apr 1 – Apr 21, 2026" with a dead month-picker button — stale dates on
+  // a reports page read as stale data.
+  const now = new Date();
+  const locale = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr-CA" : "en-CA";
+  const monthLabel = now.toLocaleDateString(locale, { month: "long", year: "numeric" });
+  const start = new Date(now.getFullYear(), now.getMonth(), 1);
+  const fmt = (d: Date) => d.toLocaleDateString(locale, { month: "short", day: "numeric" });
+  const range = `${fmt(start)} – ${fmt(now)}, ${now.getFullYear()} · ${now.getDate()} ${t("rd.pages.reports.days", "days")}`;
   return (
     <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
       <div>
-        <div className="text-xs text-rd-ink-500 font-semibold">Apr 1 – Apr 21, 2026 · 21 days</div>
+        <div className="text-xs text-rd-ink-500 font-semibold">{range}</div>
         <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
           {t("rd.pages.reports.title", "Reports")}
         </h1>
       </div>
       <div className="flex gap-2">
-        <button
-          type="button"
-          className="px-3 py-1.5 text-xs font-semibold border border-rd-line bg-white rounded-rd-sm flex items-center gap-1.5"
-        >
+        {/* Static label, not a button: the old month "picker" was a dead
+            button promising a feature that does not exist. */}
+        <span className="px-3 py-1.5 text-xs font-semibold border border-rd-line bg-white rounded-rd-sm flex items-center gap-1.5 text-rd-ink-700">
           <IconCalendar />
-          April 2026
-        </button>
+          {monthLabel}
+        </span>
         <RDButton variant="outline" size="sm">
           {t("rd.actions.exportCsv", "Export CSV")}
         </RDButton>
@@ -280,7 +288,7 @@ function BigChart() {
           textAnchor="middle"
           fontFamily="Inter"
         >
-          Apr {i + 1}
+          {new Date().toLocaleDateString("en-CA", { month: "short" })} {i + 1}
         </text>
       ))}
       <text x="4" y="44" fontSize="10" fill="var(--rd-ink-500)" fontFamily="Inter">

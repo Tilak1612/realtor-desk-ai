@@ -155,7 +155,7 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
           )}
         </p>
         <div className="flex justify-center p-4 bg-white rounded-lg">
-          <img src={qrCode} alt={t("app.settings.twoFactor.qrAlt", "TOTP QR Code")} className="w-48 h-48" />
+          <img loading="lazy" decoding="async" src={qrCode} alt={t("app.settings.twoFactor.qrAlt", "TOTP QR Code")} className="w-48 h-48" />
         </div>
         <div className="flex gap-2">
           <Input

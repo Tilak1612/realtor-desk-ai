@@ -485,7 +485,7 @@ const Resources = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {visibleArticles.map((article, index) => (
                   <Card key={index} className="overflow-hidden card-hover">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src={article.image} 
                       alt={article.useTranslation ? t(article.titleKey!) : article.title}
                       className="w-full h-48 object-cover"
@@ -543,7 +543,7 @@ const Resources = () => {
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     {categoryArticles.map((article, index) => (
                       <Card key={index} className="overflow-hidden card-hover">
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           src={article.image} 
                           alt={article.useTranslation ? t(article.titleKey!) : article.title}
                           className="w-full h-48 object-cover"

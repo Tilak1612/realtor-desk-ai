@@ -61,7 +61,7 @@ const AICRMGuide = () => {
               </p>
             </header>
 
-            <img 
+            <img loading="lazy" decoding="async" 
               src={blogAICRM} 
               alt="Canadian Realtor reviewing analytics on an AI-powered CRM dashboard" 
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"

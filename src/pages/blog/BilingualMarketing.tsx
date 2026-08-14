@@ -72,7 +72,7 @@ const BilingualMarketing = () => {
             </p>
           </header>
 
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Bilingual real estate marketing materials"
             className="w-full rounded-lg mb-8 shadow-lg"

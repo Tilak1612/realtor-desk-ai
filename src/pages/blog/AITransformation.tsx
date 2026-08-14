@@ -75,7 +75,7 @@ const AITransformation = () => {
           </header>
 
           {/* Featured Image */}
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="AI technology transforming real estate"
             className="w-full rounded-lg mb-8 shadow-lg"

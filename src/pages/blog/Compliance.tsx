@@ -72,7 +72,7 @@ const Compliance = () => {
             </p>
           </header>
 
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Provincial compliance documentation"
             className="w-full rounded-lg mb-8 shadow-lg"

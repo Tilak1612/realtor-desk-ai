@@ -76,7 +76,7 @@ const LeadGenerationStrategies = () => {
 
           {/* Featured Image */}
           <div className="mb-12">
-            <img 
+            <img loading="lazy" decoding="async" 
               src={blogImage} 
               alt="Real estate agents discussing lead generation strategies"
               className="w-full rounded-2xl shadow-xl"

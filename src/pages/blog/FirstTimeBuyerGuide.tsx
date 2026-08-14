@@ -72,7 +72,7 @@ const FirstTimeBuyerGuide = () => {
 
       {/* Featured Image */}
       <section className="container-custom -mt-8 mb-12">
-        <img 
+        <img loading="lazy" decoding="async" 
           src={blogImage} 
           alt="First-time home buyers with keys to new home"
           className="w-full max-w-4xl rounded-2xl shadow-xl"

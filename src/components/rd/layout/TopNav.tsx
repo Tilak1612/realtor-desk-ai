@@ -45,7 +45,6 @@ export function TopNav({ agent, hasUnread = true, isLive = true, onMenuClick }: 
           variant="inset"
           placeholder={t("rd.topnav.search", "Search leads, listings, conversations…")}
           leading={<IconSearch />}
-          trailing={<span className="hidden sm:inline text-[11px] text-rd-ink-500 font-rd-mono">⌘K</span>}
         />
       </div>
 

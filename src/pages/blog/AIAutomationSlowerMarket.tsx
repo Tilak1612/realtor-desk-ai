@@ -76,7 +76,7 @@ const AIAutomationSlowerMarket = () => {
           </header>
 
           {/* Featured Image */}
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Canadian Realtor using AI automation dashboard on laptop showing CRM interface"
             className="w-full rounded-lg mb-8 shadow-lg"

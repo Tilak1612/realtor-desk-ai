@@ -357,7 +357,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                   <div className="relative">
                     <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                       {profileForm.avatar_url ? (
-                        <img src={profileForm.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                        <img loading="lazy" decoding="async" src={profileForm.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
                       ) : (
                         <User className="w-8 h-8 text-primary" />
                       )}

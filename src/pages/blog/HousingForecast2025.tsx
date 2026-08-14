@@ -76,7 +76,7 @@ const HousingForecast2025 = () => {
           </header>
 
           {/* Featured Image */}
-          <img 
+          <img loading="lazy" decoding="async" 
             src={blogImage} 
             alt="Canadian housing market data visualization showing price trends across Toronto, Vancouver, Calgary, and Montreal"
             className="w-full rounded-lg mb-8 shadow-lg"

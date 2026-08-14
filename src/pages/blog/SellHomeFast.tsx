@@ -72,7 +72,7 @@ const SellHomeFast = () => {
 
       {/* Featured Image */}
       <section className="container-custom -mt-8 mb-12">
-        <img 
+        <img loading="lazy" decoding="async" 
           src={blogImage} 
           alt="Sold home with professional staging"
           className="w-full max-w-4xl rounded-2xl shadow-xl"
