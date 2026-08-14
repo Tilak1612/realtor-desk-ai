@@ -86,6 +86,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       <SEO
+        canonicalUrl="https://www.realtordesk.ai/contact"
         title={t('pageSeo.contactTitle')}
         description={t('pageSeo.contactDesc')}
         keywords="real estate crm support, realtor desk contact, crm help for realtors"
