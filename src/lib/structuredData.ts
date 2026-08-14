@@ -45,13 +45,9 @@ export const softwareApplicationSchema = {
     },
     "availability": "https://schema.org/InStock"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "127",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
+  // aggregateRating removed — no real on-page reviews exist yet. A static
+  // rating is a Google rich-results policy violation + Competition Act
+  // s.74.01 risk. Matches the pre-launch removal already done in index.html.
   "provider": {
     "@type": "Organization",
     "name": "Brainfy AI Inc.",
@@ -206,12 +202,8 @@ export const productSchema = (planName: string, price: number, description: stri
     "availability": "https://schema.org/InStock",
     "url": "https://www.realtordesk.ai/pricing",
     "priceValidUntil": "2026-12-31"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "127"
   }
+  // aggregateRating removed — no real reviews yet (see note above).
 });
 
 export const breadcrumbSchema = (items: { name: string; url: string }[]) => ({
