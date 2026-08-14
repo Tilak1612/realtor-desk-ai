@@ -30,12 +30,14 @@ import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 const LEADS_GRID = "24px 2fr 1.4fr 1fr 1.4fr 1fr 1.2fr 100px";
 const GRID_STYLE = { display: "grid", gridTemplateColumns: LEADS_GRID };
 
-type TabKey = "all" | "hot" | "warm" | "cold" | "ai" | "needs_reply";
+type TabKey = "all" | "hot" | "warm" | "cold" | "ai";
 
 export default function Leads() {
   const { t } = useTranslation();
   const [tab, setTab] = useState<TabKey>("all");
   const [addOpen, setAddOpen] = useState(false);
+  const [sortDesc, setSortDesc] = useState(true);
+  const [page, setPage] = useState(0);
   const { leads: liveLeads, loading, error } = useLeads();
 
   // Derive whether we're rendering real or fixture data. Real wins whenever
@@ -48,16 +50,24 @@ export default function Leads() {
     const warm = source.filter((l) => l.score >= 60 && l.score < 80).length;
     const cold = source.filter((l) => l.score < 60).length;
     const ai = source.filter((l) => l.aiHandling).length;
-    return { hot, warm, cold, ai, needsReply: 6 };
+    return { hot, warm, cold, ai };
   }, [source]);
 
   const rows = useMemo(() => {
-    if (tab === "hot") return source.filter((l) => l.score >= 80);
-    if (tab === "warm") return source.filter((l) => l.score >= 60 && l.score < 80);
-    if (tab === "cold") return source.filter((l) => l.score < 60);
-    if (tab === "ai") return source.filter((l) => l.aiHandling);
-    return source;
-  }, [tab, source]);
+    let items = source;
+    if (tab === "hot") items = source.filter((l) => l.score >= 80);
+    else if (tab === "warm") items = source.filter((l) => l.score >= 60 && l.score < 80);
+    else if (tab === "cold") items = source.filter((l) => l.score < 60);
+    else if (tab === "ai") items = source.filter((l) => l.aiHandling);
+    return [...items].sort((a, b) => (sortDesc ? b.score - a.score : a.score - b.score));
+  }, [tab, source, sortDesc]);
+
+  // Real pagination. The footer used to read "Showing 1–9 of 247" with a
+  // dead 28-page pager — both numbers invented.
+  const PAGE_SIZE = 25;
+  const pageCount = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const safePage = Math.min(page, pageCount - 1);
+  const pageRows = rows.slice(safePage * PAGE_SIZE, (safePage + 1) * PAGE_SIZE);
 
   return (
     <AppShell>
@@ -67,7 +77,7 @@ export default function Leads() {
         <div className="flex flex-wrap justify-between items-end gap-4 mb-5">
           <div>
             <div className="text-xs text-rd-ink-500 font-semibold tracking-[0.02em]">
-              {source.length} total · {counts.needsReply} new this week
+              {source.length} total · {counts.hot} hot
               {loading && <span className="ml-2 text-rd-ink-400">· loading…</span>}
               {error && (
                 <span className="ml-2 text-rd-danger">
@@ -121,7 +131,6 @@ export default function Leads() {
               { value: "warm", label: t("rd.tabs.leads.warm", "Warm"), count: counts.warm },
               { value: "cold", label: t("rd.tabs.leads.cold", "Cold"), count: counts.cold },
               { value: "ai", label: t("rd.tabs.leads.aiHandled", "AI-handled"), count: counts.ai },
-              { value: "needs_reply", label: t("rd.tabs.leads.needsReply", "Needs reply"), count: counts.needsReply },
             ]}
           />
           <div className="flex items-center gap-2 pb-2 text-xs">
@@ -130,9 +139,13 @@ export default function Leads() {
             </span>
             <button
               type="button"
-              className="px-2.5 py-1 text-xs border border-rd-line rounded-rd-sm bg-white"
+              onClick={() => setSortDesc((d) => !d)}
+              aria-pressed={!sortDesc}
+              className="px-2.5 py-1 text-xs border border-rd-line rounded-rd-sm bg-white hover:border-rd-ink-400 cursor-pointer"
             >
-              {t("rd.actions.scoreHighToLow", "Score · high to low")}
+              {sortDesc
+                ? t("rd.actions.scoreHighToLow", "Score · high to low")
+                : t("rd.actions.scoreLowToHigh", "Score · low to high")}
             </button>
           </div>
         </div>
@@ -152,15 +165,22 @@ export default function Leads() {
             <div>{t("rd.columns.leads.lastActivity", "Last activity")}</div>
             <div />
           </div>
-          {rows.map((l, i) => (
-            <LeadRow key={l.id} lead={l} isLast={i === rows.length - 1} />
+          {pageRows.map((l, i) => (
+            <LeadRow key={l.id} lead={l} isLast={i === pageRows.length - 1} />
           ))}
         </div>
 
-        {/* Pagination (static — wiring later) */}
         <div className="mt-3 flex justify-between items-center text-xs text-rd-ink-500">
-          <span>Showing 1–{rows.length} of 247</span>
-          <Pagination />
+          <span>
+            {t("rd.leads.showing", "Showing {{from}}–{{to}} of {{total}}", {
+              from: rows.length === 0 ? 0 : safePage * PAGE_SIZE + 1,
+              to: Math.min((safePage + 1) * PAGE_SIZE, rows.length),
+              total: rows.length,
+            })}
+          </span>
+          {pageCount > 1 && (
+            <Pagination page={safePage} pageCount={pageCount} onPage={setPage} />
+          )}
         </div>
       </div>
     </AppShell>
@@ -308,22 +328,51 @@ function StageBadge({ stage }: { stage: PipelineStage }) {
   );
 }
 
-function Pagination() {
-  const pages = ["‹", "1", "2", "3", "4", "…", "28", "›"];
+function Pagination({
+  page,
+  pageCount,
+  onPage,
+}: {
+  page: number;
+  pageCount: number;
+  onPage: (p: number) => void;
+}) {
+  // Replaces a decorative pager hardcoded to 28 pages of a fictional 247
+  // leads. Renders only real pages and actually navigates.
   return (
     <div className="flex gap-1">
-      {pages.map((p, i) => (
+      <button
+        type="button"
+        onClick={() => onPage(Math.max(0, page - 1))}
+        disabled={page === 0}
+        aria-label="Previous page"
+        className="px-2.5 py-1.5 text-xs font-semibold border border-rd-line rounded-rd-sm min-w-[28px] bg-white text-rd-ink-700 disabled:opacity-40 cursor-pointer disabled:cursor-default"
+      >
+        ‹
+      </button>
+      {Array.from({ length: pageCount }, (_, i) => (
         <button
           key={i}
           type="button"
+          onClick={() => onPage(i)}
+          aria-current={i === page ? "page" : undefined}
           className={cn(
-            "px-2.5 py-1.5 text-xs font-semibold border border-rd-line rounded-rd-sm min-w-[28px]",
-            i === 1 ? "bg-rd-navy-800 text-white border-rd-navy-800" : "bg-white text-rd-ink-700"
+            "px-2.5 py-1.5 text-xs font-semibold border border-rd-line rounded-rd-sm min-w-[28px] cursor-pointer",
+            i === page ? "bg-rd-navy-800 text-white border-rd-navy-800" : "bg-white text-rd-ink-700"
           )}
         >
-          {p}
+          {i + 1}
         </button>
       ))}
+      <button
+        type="button"
+        onClick={() => onPage(Math.min(pageCount - 1, page + 1))}
+        disabled={page >= pageCount - 1}
+        aria-label="Next page"
+        className="px-2.5 py-1.5 text-xs font-semibold border border-rd-line rounded-rd-sm min-w-[28px] bg-white text-rd-ink-700 disabled:opacity-40 cursor-pointer disabled:cursor-default"
+      >
+        ›
+      </button>
     </div>
   );
 }
