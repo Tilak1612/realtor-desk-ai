@@ -19,6 +19,18 @@ const json = (body: unknown, status = 200) =>
 // stale between auto-refresh cycles. Real infra errors still 500.
 const unsubscribed = (reason: string) => json({ subscribed: false, reason });
 
+// Stripe epoch seconds -> ISO string, or null. NEVER throws.
+//
+// This helper exists because `new Date(undefined * 1000).toISOString()` throws
+// RangeError("Invalid time value"), which took down the whole function and, via
+// the client's error branch, logged out every entitled user. A missing or
+// malformed timestamp is cosmetic; it must never cost someone their access.
+const toIso = (seconds: unknown): string | null => {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds)) return null;
+  const d = new Date(seconds * 1000);
+  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+};
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: cors });
 
@@ -51,7 +63,7 @@ serve(async (req) => {
     // status:"all" on purpose. Trials are created by Checkout with
     // trial_period_days, so a user who has just handed over a card sits in
     // "trialing", NOT "active". Filtering to active alone reported those
-    // users as unsubscribed — which, now that app access is gated on this
+    // users as unsubscribed -- which, now that app access is gated on this
     // response, would have locked out exactly the people who just paid.
     const subs = await stripe.subscriptions.list({
       customer: customers.data[0].id,
@@ -72,10 +84,19 @@ serve(async (req) => {
     let trialEnd: string | null = null;
 
     if (sub) {
-      subscriptionEnd = new Date(sub.current_period_end * 1000).toISOString();
-      trialEnd = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null;
-      productId = sub.items.data[0].price.product as string;
-      priceId = sub.items.data[0].price.id;
+      // API version 2025-08-27.basil moved current_period_start/end OFF the
+      // Subscription object and ONTO each subscription item. Reading it from
+      // the subscription yields undefined on Basil and later. Read the item
+      // first, fall back to the legacy field so a pre-Basil pin still works.
+      const item = sub.items.data[0];
+      const periodEnd =
+        (item as unknown as { current_period_end?: number })?.current_period_end ??
+        (sub as unknown as { current_period_end?: number }).current_period_end;
+
+      subscriptionEnd = toIso(periodEnd);
+      trialEnd = toIso(sub.trial_end);
+      productId = (item?.price?.product as string) ?? null;
+      priceId = item?.price?.id ?? null;
     }
 
     // Product IDs come from env so test/live catalogues don't need a deploy.
@@ -87,12 +108,18 @@ serve(async (req) => {
 
     // The DB enum has no "trialing" member, so a carded trial is stored as
     // "trial". Entitlement is carried by the `subscribed` field below, not by
-    // this column — a bare no-card signup is also "trial" here.
-    const update: Record<string, string> = {
-      subscription_status: sub && sub.status === "active" ? "active" : "trial",
-    };
-    if (tier) update.subscription_tier = tier;
-    await sb.from("profiles").update(update).eq("id", user.id);
+    // this column -- a bare no-card signup is also "trial" here.
+    //
+    // Best-effort: a failed profile write must not deny an entitled user.
+    try {
+      const update: Record<string, string> = {
+        subscription_status: sub && sub.status === "active" ? "active" : "trial",
+      };
+      if (tier) update.subscription_tier = tier;
+      await sb.from("profiles").update(update).eq("id", user.id);
+    } catch (e) {
+      console.error("[CHECK-SUBSCRIPTION] profile update failed (non-fatal):", e);
+    }
 
     return json({
       subscribed: hasSub,
