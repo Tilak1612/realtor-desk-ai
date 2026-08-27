@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 // Public marketing-site assistant widget. Answers are rendered as PLAIN TEXT
 // (whitespace-pre-line) — the endpoint strips markdown, so no parser is needed.
@@ -12,6 +13,12 @@ const MAX_HISTORY = 8;
 type Turn = { role: "user" | "assistant"; content: string };
 
 const SiteAssistant = () => {
+  // Suppressed on the auth routes. The bubble is fixed bottom-right and sat
+  // directly on top of the Phone field at 390px; a support widget that covers
+  // the signup form costs more than it helps.
+  const { pathname } = useLocation();
+  const hiddenOnRoute = ["/signup", "/login", "/verify-email"].includes(pathname);
+
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -71,7 +78,9 @@ const SiteAssistant = () => {
   };
 
   if (!open) {
-    return (
+    if (hiddenOnRoute) return null;
+
+  return (
       <button
         onClick={() => setOpen(true)}
         aria-label="Ask Desk AI about Realtor Desk"

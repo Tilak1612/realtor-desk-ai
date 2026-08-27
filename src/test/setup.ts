@@ -26,3 +26,28 @@ if (typeof window !== "undefined" && !window.matchMedia) {
 afterEach(() => {
   cleanup();
 });
+
+// jsdom implements neither ResizeObserver nor matchMedia. Radix primitives and
+// any prefers-reduced-motion check hit both, so a page-level render throws
+// before a single assertion runs. Polyfilled here rather than per-test so the
+// whole suite can render real pages.
+if (typeof globalThis.ResizeObserver === "undefined") {
+  globalThis.ResizeObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as unknown as typeof ResizeObserver;
+}
+
+if (typeof window !== "undefined" && !window.matchMedia) {
+  window.matchMedia = ((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  })) as unknown as typeof window.matchMedia;
+}

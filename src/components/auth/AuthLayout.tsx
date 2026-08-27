@@ -4,6 +4,12 @@ import MatrixRain from './MatrixRain';
 
 interface AuthLayoutProps {
   children: ReactNode;
+  /**
+   * Optional value column shown to the LEFT of `children` at >=1024px.
+   * Below lg it is not rendered at all: on a phone the form must come first,
+   * and a duplicated pitch above it just pushes the CTA off-screen.
+   */
+  aside?: ReactNode;
 }
 
 // Auth shell used by /login and /signup. Hosts the background layers
@@ -11,7 +17,7 @@ interface AuthLayoutProps {
 // landing directly on the auth routes isn't trapped in whatever locale
 // the cookie last set (2026-04 audit finding).
 
-const AuthLayout = ({ children }: AuthLayoutProps) => {
+const AuthLayout = ({ children, aside }: AuthLayoutProps) => {
   const { i18n } = useTranslation();
   const active = (i18n.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
   const setLang = (next: 'en' | 'fr') => {
@@ -19,13 +25,15 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center antialiased relative bg-gray-950 overflow-hidden">
+    <div data-auth-shell className="min-h-screen flex items-center justify-center antialiased relative bg-gray-950 overflow-hidden">
       {/* Matrix Rain Animation */}
       <MatrixRain />
 
-      {/* Background Pattern */}
+      {/* Background Pattern. Dimmed when a value column sits on top of it —
+          body text over a moving backdrop has to clear 4.5:1 against the
+          darkest frame, not the average one. */}
       <div
-        className="absolute inset-0 opacity-40"
+        className={aside ? "absolute inset-0 opacity-70" : "absolute inset-0 opacity-40"}
         style={{
           background: 'radial-gradient(ellipse at center, hsl(220 20% 20%), hsl(220 20% 10%), hsl(220 20% 5%))'
         }}
@@ -68,14 +76,31 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
         </button>
       </div>
 
-      {/* Content */}
-      {children}
+      {/* Content. Single centered card when there is no aside (login, reset);
+          two columns from lg up when there is. */}
+      {aside ? (
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:py-20">
+          {/* Order matters: the card is FIRST in the DOM so keyboard and
+              screen-reader users reach the form before the marketing copy,
+              and lg:order flips it visually on desktop. */}
+          <div className="order-1 w-full lg:order-2 lg:w-auto lg:flex-shrink-0">{children}</div>
+          <div className="order-2 hidden lg:order-1 lg:block lg:flex-1">{aside}</div>
+        </div>
+      ) : (
+        children
+      )}
 
       {/* Floating Animation Keyframes */}
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          /* Vestibular safety: freeze the float and hide the animated rain
+             canvas entirely rather than letting it run at speed. */
+          [data-auth-shell] * { animation: none !important; }
+          [data-auth-shell] canvas { display: none !important; }
         }
       `}</style>
     </div>

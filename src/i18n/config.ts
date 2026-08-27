@@ -2669,12 +2669,51 @@ const resources = {
           startTrial: "Start your free trial"
         },
         signup: {
-          subtitle: "Start your 14-day free trial. A card is required to begin; cancel anytime before it ends.",
+          subtitle: "Start your {{days}}-day free trial. A card is required; cancel anytime before it ends and you are not charged.",
           orEmail: "Or register with email",
+          continueGoogle: "Continue with Google",
+          optionalGroup: "Optional — you can add these later",
+          ph: {
+            name: "Jane Tremblay",
+            email: "you@brokerage.ca",
+            phone: "(604) 555-0123",
+            company: "Your brokerage"
+          },
+          cta: {
+            default: "Start my {{days}}-day free trial",
+            loading: "Creating your account…"
+          },
+          status: {
+            creating: "Creating your account…",
+            invalid: "Please fix the errors below and try again.",
+            failed: "We could not create your account. {{message}}"
+          },
+          billing: {
+            today: "You are not charged today.",
+            next: "On the next step you choose a plan and enter a card through Stripe-hosted checkout. Your {{days}}-day free trial starts then.",
+            after: "Plans start at {{amount}}/month {{currency}}. If you started your trial today, your first charge would be {{date}}. Cancel any time before then from Billing and you pay nothing."
+          },
+          aside: {
+            headline: "The Canadian real estate CRM that works your leads for you.",
+            sub: "Desk answers new enquiries, keeps follow-up moving, and shows you the pipeline — in English and French.",
+            b1: "Capture leads from your CREA DDF feed, website forms, and ads in one inbox.",
+            b2: "Automated follow-up sequences that keep working after you close the laptop.",
+            b3: "A contact and deal pipeline built for showings, offers, and closings.",
+            b4: "AI drafts replies in your lead's language so nobody waits hours for an answer.",
+            r1: "{{days}}-day free trial",
+            r2: "No charge today",
+            r3: "Cancel before day {{days}}",
+            r4: "About 2 minutes to set up",
+            trustTitle: "Your data",
+            t1: "PIPEDA-compliant handling, with consent recorded at signup.",
+            t2: "Stored on Canadian servers.",
+            t3: "256-bit SSL in transit and encrypted at rest.",
+            t4: "Your workspace is isolated — no other account can read your data."
+          },
           agreeToThe: "I agree to the",
           privacyPolicy: "Privacy Policy",
           termsOfService: "Terms of Service",
-          marketingConsent: "Send me tips & product updates (optional)",
+          marketingConsent: "Email me product updates and Canadian real estate tips. You can unsubscribe anytime.",
           sslNote: "Your data is stored securely on Canadian servers with 256-bit SSL encryption"
         },
         forgot: {
@@ -5845,12 +5884,51 @@ const resources = {
           startTrial: "Commencez votre essai gratuit"
         },
         signup: {
-          subtitle: "Commencez votre essai gratuit de 14 jours. Une carte est requise pour commencer; annulez à tout moment avant la fin.",
+          subtitle: "Commencez votre essai gratuit de {{days}} jours. Une carte est requise; annulez à tout moment avant la fin et rien ne vous sera facturé.",
           orEmail: "Ou inscrivez-vous avec un courriel",
+          continueGoogle: "Continuer avec Google",
+          optionalGroup: "Facultatif — vous pourrez les ajouter plus tard",
+          ph: {
+            name: "Jeanne Tremblay",
+            email: "vous@agence.ca",
+            phone: "(514) 555-0123",
+            company: "Votre agence"
+          },
+          cta: {
+            default: "Commencer mon essai gratuit de {{days}} jours",
+            loading: "Création de votre compte…"
+          },
+          status: {
+            creating: "Création de votre compte…",
+            invalid: "Veuillez corriger les erreurs ci-dessous et réessayer.",
+            failed: "Nous n'avons pas pu créer votre compte. {{message}}"
+          },
+          billing: {
+            today: "Rien ne vous est facturé aujourd'hui.",
+            next: "À l'étape suivante, vous choisissez un forfait et entrez une carte via le paiement hébergé par Stripe. Votre essai gratuit de {{days}} jours commence à ce moment.",
+            after: "Les forfaits débutent à {{amount}}/mois {{currency}}. Si vous commenciez votre essai aujourd'hui, votre premier paiement serait le {{date}}. Annulez avant cette date dans Facturation et vous ne payez rien."
+          },
+          aside: {
+            headline: "Le CRM immobilier canadien qui travaille vos prospects pour vous.",
+            sub: "Desk répond aux nouvelles demandes, relance vos prospects et vous montre le pipeline — en français et en anglais.",
+            b1: "Captez les prospects de votre flux SDD de l'ACI, de vos formulaires web et de vos publicités dans une seule boîte de réception.",
+            b2: "Des séquences de relance automatisées qui continuent de travailler après la fermeture du portable.",
+            b3: "Un pipeline de contacts et de transactions conçu pour les visites, les offres et les clôtures.",
+            b4: "L'IA rédige les réponses dans la langue du prospect pour que personne n'attende des heures.",
+            r1: "Essai gratuit de {{days}} jours",
+            r2: "Aucuns frais aujourd'hui",
+            r3: "Annulez avant le jour {{days}}",
+            r4: "Environ 2 minutes de configuration",
+            trustTitle: "Vos données",
+            t1: "Traitement conforme à la LPRPDE, avec consentement enregistré à l'inscription.",
+            t2: "Hébergées sur des serveurs canadiens.",
+            t3: "SSL 256 bits en transit et chiffrement au repos.",
+            t4: "Votre espace de travail est isolé — aucun autre compte ne peut lire vos données."
+          },
           agreeToThe: "J'accepte la",
           privacyPolicy: "Politique de Confidentialité",
           termsOfService: "Conditions d'Utilisation",
-          marketingConsent: "Envoyez-moi des conseils et mises à jour produit (facultatif)",
+          marketingConsent: "Envoyez-moi par courriel des nouveautés produit et des conseils en immobilier canadien. Vous pouvez vous désabonner à tout moment.",
           sslNote: "Vos données sont stockées en toute sécurité sur des serveurs canadiens avec un chiffrement SSL 256 bits"
         },
         forgot: {
