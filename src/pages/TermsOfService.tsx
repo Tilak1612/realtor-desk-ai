@@ -2,9 +2,10 @@ import { useTranslation } from "react-i18next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { TERMS_VERSION, formatLegalDate } from "@/config/legal";
 
 const TermsOfService = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
@@ -20,7 +21,7 @@ const TermsOfService = () => {
           <h1 className="mb-8">Terms of Service</h1>
           
           <div className="prose prose-lg max-w-none space-y-6 text-muted-foreground">
-            <p className="text-sm text-muted-foreground">Last updated: {new Date().toLocaleDateString()}</p>
+            <p className="text-sm text-muted-foreground">Last updated: {formatLegalDate(TERMS_VERSION, i18n.language)}</p>
 
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">1. Acceptance of Terms</h2>

@@ -2668,6 +2668,7 @@ const resources = {
           noAccount: "Don't have an account?",
           startTrial: "Start your free trial"
         },
+        consentNotice: "By continuing, you agree to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
         signup: {
           subtitle: "Start your {{days}}-day free trial. A card is required; cancel anytime before it ends and you are not charged.",
           orEmail: "Or register with email",
@@ -5883,6 +5884,7 @@ const resources = {
           noAccount: "Vous n'avez pas de compte?",
           startTrial: "Commencez votre essai gratuit"
         },
+        consentNotice: "En continuant, vous acceptez nos <terms>Conditions d'utilisation</terms> et notre <privacy>Politique de confidentialité</privacy>.",
         signup: {
           subtitle: "Commencez votre essai gratuit de {{days}} jours. Une carte est requise; annulez à tout moment avant la fin et rien ne vous sera facturé.",
           orEmail: "Ou inscrivez-vous avec un courriel",

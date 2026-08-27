@@ -18,6 +18,8 @@ import { SEO } from "@/components/SEO";
 import SignupAside from "@/components/auth/SignupAside";
 import BillingDisclosure from "@/components/auth/BillingDisclosure";
 import { TRIAL_PERIOD_DAYS } from "@/config/billing";
+import ContinueConsentNotice from "@/components/auth/ContinueConsentNotice";
+import { buildConsentRecord } from "@/config/legal";
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -35,16 +37,17 @@ const Signup = () => {
     // required field for data we get anyway one screen later.
     phone: z.string().optional(),
     companyName: z.string().optional(),
-    privacyConsent: z.boolean().refine((val) => val === true, {
-      message: t('app.validation.required'),
-    }),
+    // Terms acceptance is now the inline "By continuing..." notice under the
+    // CTA (sign-in-wrap), recorded via buildConsentRecord() rather than a tick
+    // box. marketingConsent stays an explicit, unchecked opt-in: CASL requires
+    // express consent for commercial electronic messages and passive
+    // "by continuing" consent does not satisfy it.
     marketingConsent: z.boolean().optional(),
   });
 
   type SignupForm = z.infer<typeof signupSchema>;
 
   const [formData, setFormData] = useState<Partial<SignupForm>>({
-    privacyConsent: false,
     marketingConsent: false,
   });
   const [errors, setErrors] = useState<Partial<Record<keyof SignupForm, string>>>({});
@@ -122,6 +125,9 @@ const Signup = () => {
             full_name: formData.fullName,
             phone: formData.phone,
             company_name: formData.companyName,
+            // Audit trail for the inline consent notice: which versions of the
+            // Terms and Privacy Policy were live at acceptance, and when.
+            ...buildConsentRecord(formData.marketingConsent === true),
           },
         },
       });
@@ -342,41 +348,9 @@ const Signup = () => {
               </div>
             </fieldset>
 
-            {/* PIPEDA Consent */}
+            {/* Marketing consent — separate, unchecked, purpose-specific.
+                Terms acceptance is the inline notice under the CTA. */}
             <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3">
-                <Checkbox
-                  id="privacyConsent"
-                  checked={formData.privacyConsent || false}
-                  onCheckedChange={(checked) => {
-                    setFormData({ ...formData, privacyConsent: checked as boolean });
-                    if (checked) {
-                      setErrors({ ...errors, privacyConsent: undefined });
-                    }
-                  }}
-                  className="mt-1 border-white/30 data-[state=checked]:bg-violet-500 data-[state=checked]:border-violet-500 focus-visible:ring-violet-300"
-                />
-                {/* The asterisk is nested inside the final link's line box so
-                    it can never wrap onto a line of its own, which is what the
-                    trailing {" "}* used to do. Link colour moved off
-                    text-primary (#0B2540 navy on a #1F2937 card = 1.06:1). */}
-                <label htmlFor="privacyConsent" className="text-sm text-gray-200 leading-relaxed cursor-pointer">
-                  {t('auth.signup.agreeToThe', 'I agree to the')}{" "}
-                  <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-violet-300 underline underline-offset-2 hover:text-violet-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300">
-                    {t("auth.signup.privacyPolicy", "Privacy Policy")}
-                  </Link>{" "}
-                  &{" "}
-                  <span className="whitespace-nowrap">
-                    <Link to="/terms-of-service" target="_blank" rel="noopener noreferrer" className="text-violet-300 underline underline-offset-2 hover:text-violet-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300">
-                      {t("auth.signup.termsOfService", "Terms of Service")}
-                    </Link>
-                    <span aria-hidden="true" className="text-red-300">&nbsp;*</span>
-                  </span>
-                  <span className="sr-only">{t('app.validation.requiredField', '(required)')}</span>
-                </label>
-              </div>
-              <div className="ml-8"><FieldError id="privacyConsent-error" message={errors.privacyConsent} /></div>
-
               <div className="flex items-start gap-3">
                 <Checkbox
                   id="marketingConsent"
@@ -420,6 +394,8 @@ const Signup = () => {
                 </>
               )}
             </button>
+
+            <ContinueConsentNotice />
 
             {/* Every figure derived, none hardcoded in markup. */}
             <BillingDisclosure />
