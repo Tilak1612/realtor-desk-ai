@@ -253,18 +253,21 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
     }
   };
 
+  // This button used to be a pure DB write: it stamped last_sync_status
+  // "success" and called nothing. A user looking at a red "Sync error" badge
+  // could click Sync Now and watch it turn green with no sync attempted.
+  // It now runs the real health check and reports whatever that returns.
   const handleSyncNow = async () => {
     try {
-      toast.info(t('integrations.panel.syncTriggered', 'Sync triggered — this may take a moment'));
-      const { error } = await integrationConnectionsTable()
-        .update({ last_sync_at: new Date().toISOString(), last_sync_status: "success" })
-        .eq("user_id", userId)
-        .eq("tool_slug", tool.slug);
-
+      toast.info(t('integrations.panel.syncTriggered', 'Checking connection…'));
+      const { error } = await supabase.functions.invoke("sync-health-check", {
+        body: { tool_slug: tool.slug },
+      });
       if (error) throw error;
       onConnectionChange();
+      toast.success(t('integrations.panel.syncChecked', 'Connection checked'));
     } catch (err: unknown) {
-      toast.error(err instanceof Error ? err.message : "Failed to sync");
+      toast.error(err instanceof Error ? err.message : "Failed to check connection");
     }
   };
 
