@@ -17,6 +17,8 @@ import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/hooks/rd/useLeads";
 import { useConversation, useSendMessage } from "@/hooks/rd/useConversation";
+import { useLeadScoreDetail } from "@/hooks/rd/useLeadScoreDetail";
+import { useTranslation } from "react-i18next";
 
 // /app/leads/:id — Lead detail per rd-app.jsx Artboard_LeadDetail.
 // Two-column layout: conversation on the left, lead sidebar on the right.
@@ -347,6 +349,8 @@ function Msg({ message }: { message: ConversationMessage }) {
 /* ────────────────────────────────────────────────────────── */
 
 function LeadSidebar({ lead }: { lead: Lead }) {
+  const { t } = useTranslation();
+  const { detail: scoreDetail } = useLeadScoreDetail(lead.id);
   return (
     <div className="overflow-y-auto px-7 py-6 bg-white">
       {/* Header */}
@@ -371,12 +375,31 @@ function LeadSidebar({ lead }: { lead: Lead }) {
             / 100 · {lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold"}
           </div>
         </div>
-        <div className="mt-3.5 grid grid-cols-2 gap-2.5 text-xs">
-          <ScoreCrit label="Intent" pct={Math.min(100, lead.score + 3)} />
-          <ScoreCrit label="Urgency" pct={Math.max(40, lead.score - 4)} />
-          <ScoreCrit label="Budget fit" pct={lead.score} />
-          <ScoreCrit label="Timeline" pct={Math.min(100, lead.score - 2)} />
-        </div>
+        {/* Real weighted factors from calculate-lead-score. These four bars
+            used to be derived from the score itself (Intent = score + 3,
+            Urgency = score - 4, Budget fit = score) -- the same number drawn
+            four times, explaining nothing. */}
+        {scoreDetail?.factors ? (
+          <>
+            <div className="mt-3.5 grid grid-cols-2 gap-2.5 text-xs">
+              <ScoreCrit label={t("rd.score.engagement", "Engagement")} pct={scoreDetail.factors.engagement} />
+              <ScoreCrit label={t("rd.score.behavior", "Behaviour")} pct={scoreDetail.factors.behavior} />
+              <ScoreCrit label={t("rd.score.budget", "Budget match")} pct={scoreDetail.factors.budget_match} />
+              <ScoreCrit label={t("rd.score.timeline", "Timeline")} pct={scoreDetail.factors.timeline} />
+            </div>
+            {scoreDetail.predictionConfidence !== null && (
+              <p className="mt-3 text-[11px] text-white/60">
+                {t("rd.score.confidence", "Confidence {{pct}}% — lower when engagement or budget data is missing.", {
+                  pct: Math.round(scoreDetail.predictionConfidence * 100),
+                })}
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="mt-3.5 text-[11px] text-white/60">
+            {t("rd.score.notScored", "Not scored yet. A score appears once this lead has engagement data to weigh.")}
+          </p>
+        )}
       </div>
 
       {/* Contact */}
