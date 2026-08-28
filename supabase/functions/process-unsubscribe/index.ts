@@ -18,7 +18,10 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-const TOKEN_MAX_AGE_SECONDS = 30 * 24 * 60 * 60; // 30 days
+// CASL s.11(2): the unsubscribe mechanism must stay valid for at least 60
+// days after the message is sent. This was 30, which expired the link while
+// the statutory obligation was still running.
+const TOKEN_MAX_AGE_SECONDS = 60 * 24 * 60 * 60; // 60 days
 
 function decodeBase64Url(s: string): Uint8Array {
   const pad = s.length % 4 === 0 ? "" : "=".repeat(4 - (s.length % 4));

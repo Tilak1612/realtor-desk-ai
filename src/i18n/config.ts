@@ -1662,70 +1662,6 @@ const resources = {
           avgDealSize: "Avg Deal Size",
           winRate: "Win Rate"
         },
-        tasks: {
-          title: "Tasks",
-          addTask: "Add Task",
-          searchPlaceholder: "Search tasks...",
-          allTasks: "All Tasks",
-          today: "Today",
-          upcoming: "Upcoming",
-          overdue: "Overdue",
-          completed: "Completed",
-          noTasks: "No tasks found",
-          addFirst: "Add your first task to get started",
-          taskName: "Task Name",
-          dueDate: "Due Date",
-          dueTime: "Due Time",
-          priority: "Priority",
-          priorities: {
-            low: "Low",
-            medium: "Medium",
-            high: "High",
-            urgent: "Urgent"
-          },
-          status: "Status",
-          statuses: {
-            pending: "Pending",
-            inProgress: "In Progress",
-            completed: "Completed",
-            cancelled: "Cancelled"
-          },
-          relatedTo: "Related To",
-          description: "Description",
-          markComplete: "Mark Complete",
-          markIncomplete: "Mark Incomplete"
-        },
-        properties: {
-          title: "Properties",
-          addProperty: "Add Property",
-          searchPlaceholder: "Search properties...",
-          allProperties: "All Properties",
-          active: "Active",
-          pending: "Pending",
-          sold: "Sold",
-          noProperties: "No properties found",
-          addFirst: "Add your first property to get started",
-          propertyTitle: "Title",
-          address: "Address",
-          city: "City",
-          province: "Province",
-          postalCode: "Postal Code",
-          price: "Price",
-          type: "Type",
-          bedrooms: "Bedrooms",
-          bathrooms: "Bathrooms",
-          squareFeet: "Square Feet",
-          yearBuilt: "Year Built",
-          mlsNumber: "MLS Number",
-          listingType: "Listing Type",
-          types: {
-            house: "House",
-            condo: "Condo",
-            townhouse: "Townhouse",
-            land: "Land",
-            commercial: "Commercial"
-          }
-        },
         settings: {
           title: "Settings",
           profile: "Profile",
@@ -2109,7 +2045,32 @@ const resources = {
             overdue: "Overdue",
             completedToday: "Completed today",
             thisWeek: "This week"
-          }
+          },
+          searchPlaceholder: "Search tasks...",
+          completed: "Completed",
+          noTasks: "No tasks found",
+          addFirst: "Add your first task to get started",
+          taskName: "Task Name",
+          dueDate: "Due Date",
+          dueTime: "Due Time",
+          priority: "Priority",
+          priorities: {
+            low: "Low",
+            medium: "Medium",
+            high: "High",
+            urgent: "Urgent"
+          },
+          status: "Status",
+          statuses: {
+            pending: "Pending",
+            inProgress: "In Progress",
+            completed: "Completed",
+            cancelled: "Cancelled"
+          },
+          relatedTo: "Related To",
+          description: "Description",
+          markComplete: "Mark Complete",
+          markIncomplete: "Mark Incomplete"
         },
         campaigns: {
           title: "Email campaigns",
@@ -2189,7 +2150,23 @@ const resources = {
             importMls: "Import from MLS",
             addManual: "Add property manually",
             tip: "💡 Tip: You can also import properties from Realtor.ca search URLs"
-          }
+          },
+          allProperties: "All Properties",
+          noProperties: "No properties found",
+          addFirst: "Add your first property to get started",
+          propertyTitle: "Title",
+          address: "Address",
+          city: "City",
+          province: "Province",
+          postalCode: "Postal Code",
+          price: "Price",
+          type: "Type",
+          bedrooms: "Bedrooms",
+          bathrooms: "Bathrooms",
+          squareFeet: "Square Feet",
+          yearBuilt: "Year Built",
+          mlsNumber: "MLS Number",
+          listingType: "Listing Type",
         }
       },
       howItWorks: {
@@ -4878,70 +4855,6 @@ const resources = {
           avgDealSize: "Taille Moyenne",
           winRate: "Taux de Réussite"
         },
-        tasks: {
-          title: "Tâches",
-          addTask: "Ajouter une Tâche",
-          searchPlaceholder: "Rechercher des tâches...",
-          allTasks: "Toutes les Tâches",
-          today: "Aujourd'hui",
-          upcoming: "À Venir",
-          overdue: "En Retard",
-          completed: "Terminées",
-          noTasks: "Aucune tâche trouvée",
-          addFirst: "Ajoutez votre première tâche pour commencer",
-          taskName: "Nom de la Tâche",
-          dueDate: "Date d'Échéance",
-          dueTime: "Heure d'Échéance",
-          priority: "Priorité",
-          priorities: {
-            low: "Basse",
-            medium: "Moyenne",
-            high: "Haute",
-            urgent: "Urgente"
-          },
-          status: "Statut",
-          statuses: {
-            pending: "En Attente",
-            inProgress: "En Cours",
-            completed: "Terminée",
-            cancelled: "Annulée"
-          },
-          relatedTo: "Lié à",
-          description: "Description",
-          markComplete: "Marquer Terminée",
-          markIncomplete: "Marquer Incomplète"
-        },
-        properties: {
-          title: "Propriétés",
-          addProperty: "Ajouter une Propriété",
-          searchPlaceholder: "Rechercher des propriétés...",
-          allProperties: "Toutes les Propriétés",
-          active: "Actives",
-          pending: "En Attente",
-          sold: "Vendues",
-          noProperties: "Aucune propriété trouvée",
-          addFirst: "Ajoutez votre première propriété pour commencer",
-          propertyTitle: "Titre",
-          address: "Adresse",
-          city: "Ville",
-          province: "Province",
-          postalCode: "Code Postal",
-          price: "Prix",
-          type: "Type",
-          bedrooms: "Chambres",
-          bathrooms: "Salles de Bain",
-          squareFeet: "Pieds Carrés",
-          yearBuilt: "Année de Construction",
-          mlsNumber: "Numéro MLS",
-          listingType: "Type d'Inscription",
-          types: {
-            house: "Maison",
-            condo: "Condo",
-            townhouse: "Maison de Ville",
-            land: "Terrain",
-            commercial: "Commercial"
-          }
-        },
         settings: {
           title: "Paramètres",
           profile: "Profil",
@@ -5325,7 +5238,32 @@ const resources = {
             overdue: "En retard",
             completedToday: "Complétées aujourd'hui",
             thisWeek: "Cette semaine"
-          }
+          },
+          searchPlaceholder: "Rechercher des tâches...",
+          completed: "Terminées",
+          noTasks: "Aucune tâche trouvée",
+          addFirst: "Ajoutez votre première tâche pour commencer",
+          taskName: "Nom de la Tâche",
+          dueDate: "Date d'Échéance",
+          dueTime: "Heure d'Échéance",
+          priority: "Priorité",
+          priorities: {
+            low: "Basse",
+            medium: "Moyenne",
+            high: "Haute",
+            urgent: "Urgente"
+          },
+          status: "Statut",
+          statuses: {
+            pending: "En Attente",
+            inProgress: "En Cours",
+            completed: "Terminée",
+            cancelled: "Annulée"
+          },
+          relatedTo: "Lié à",
+          description: "Description",
+          markComplete: "Marquer Terminée",
+          markIncomplete: "Marquer Incomplète"
         },
         campaigns: {
           title: "Campagnes courriel",
@@ -5405,7 +5343,23 @@ const resources = {
             importMls: "Importer depuis MLS",
             addManual: "Ajouter une propriété manuellement",
             tip: "💡 Astuce : vous pouvez aussi importer des propriétés à partir des liens de recherche Realtor.ca"
-          }
+          },
+          allProperties: "Toutes les Propriétés",
+          noProperties: "Aucune propriété trouvée",
+          addFirst: "Ajoutez votre première propriété pour commencer",
+          propertyTitle: "Titre",
+          address: "Adresse",
+          city: "Ville",
+          province: "Province",
+          postalCode: "Code Postal",
+          price: "Prix",
+          type: "Type",
+          bedrooms: "Chambres",
+          bathrooms: "Salles de Bain",
+          squareFeet: "Pieds Carrés",
+          yearBuilt: "Année de Construction",
+          mlsNumber: "Numéro MLS",
+          listingType: "Type d'Inscription",
         }
       },
       howItWorks: {

@@ -23,6 +23,7 @@ export interface ContactRow {
   preferred_language: string | null;
   last_contact_date: string | null;
   consent_date: string | null;
+  next_followup_date?: string | null;
   metadata?: unknown;
 }
 
@@ -43,6 +44,7 @@ export function mapContactToLead(row: ContactRow): Lead {
     aiHandling: meta.aiHandling === true,
     aiNextBest: asString(meta.aiNextBest),
     budgetCad: typeof meta.budgetCad === "number" ? meta.budgetCad : undefined,
+    nextFollowupDate: row.next_followup_date ?? null,
     caslConsentAt: row.consent_date ?? undefined,
     assignedAgentId: asString(meta.assignedAgentId) ?? null,
   };

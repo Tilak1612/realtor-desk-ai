@@ -6,6 +6,14 @@ import { trackEvent } from '@/utils/analytics';
 
 interface SubscriptionContextType {
   subscribed: boolean;
+  /**
+   * True when the last check could not determine subscription state (network
+   * error, gateway 5xx, Stripe down). Distinct from `subscribed === false`,
+   * which means we asked and the answer was no. Guards must not evict on
+   * "unknown" -- doing so logs paying customers out to the billing wall on
+   * any transient blip.
+   */
+  subscriptionUnknown: boolean;
   productId: string | null;
   priceId: string | null;
   subscriptionEnd: string | null;
@@ -42,6 +50,7 @@ export const SUBSCRIPTION_PRODUCTS = {
 
 export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [subscribed, setSubscribed] = useState(false);
+  const [subscriptionUnknown, setSubscriptionUnknown] = useState(false);
   const [productId, setProductId] = useState<string | null>(null);
   const [priceId, setPriceId] = useState<string | null>(null);
   const [subscriptionEnd, setSubscriptionEnd] = useState<string | null>(null);
@@ -78,6 +87,7 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
       // Skip subscription check on public pages when not logged in
       if (!session) {
         setSubscribed(false);
+        setSubscriptionUnknown(false); // no session is a definite answer
         setProductId(null);
         setPriceId(null);
         setSubscriptionEnd(null);
@@ -106,16 +116,19 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
       // Silently handle errors on public pages
       if (error) {
+        // Transient failure: we do not know. Leave `subscribed` at its last
+        // known value and flag the uncertainty so RequireBilling holds instead
+        // of redirecting. Previously this set subscribed=false, which meant a
+        // single 5xx from Stripe or the gateway bounced every paying customer
+        // to /billing.
         console.warn('Subscription check failed:', error);
-        setSubscribed(false);
-        setProductId(null);
-        setPriceId(null);
-        setSubscriptionEnd(null);
+        setSubscriptionUnknown(true);
         setLoading(false);
         return;
       }
 
-      const newSubscribed = data.subscribed || false;
+      const newSubscribed = data?.subscribed || false;
+      setSubscriptionUnknown(false); // got a definitive answer
       if (prevSubscribedRef.current !== null && prevSubscribedRef.current !== newSubscribed) {
         trackEvent('subscription_status_changed', {
           subscribed: newSubscribed,
@@ -128,11 +141,9 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
       setPriceId(data.price_id || null);
       setSubscriptionEnd(data.subscription_end || null);
     } catch (error) {
+      // Same reasoning as the `error` branch above: unknown, not "no".
       console.warn('Subscription check error:', error);
-      setSubscribed(false);
-      setProductId(null);
-      setPriceId(null);
-      setSubscriptionEnd(null);
+      setSubscriptionUnknown(true);
     } finally {
       setLoading(false);
     }
@@ -178,6 +189,7 @@ export const SubscriptionProvider: React.FC<{ children: React.ReactNode }> = ({ 
     <SubscriptionContext.Provider
       value={{
         subscribed,
+        subscriptionUnknown,
         productId,
         priceId,
         subscriptionEnd,

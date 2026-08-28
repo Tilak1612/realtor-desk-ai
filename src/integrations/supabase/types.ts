@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.17"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       adoption_events: {
@@ -84,6 +109,44 @@ export type Database = {
             columns: ["contact_id"]
             isOneToOne: true
             referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      apify_usage: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          import_history_id: string | null
+          records_fetched: number
+          request_date: string
+          user_id: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          import_history_id?: string | null
+          records_fetched?: number
+          request_date?: string
+          user_id: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          import_history_id?: string | null
+          records_fetched?: number
+          request_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apify_usage_import_history_id_fkey"
+            columns: ["import_history_id"]
+            isOneToOne: false
+            referencedRelation: "import_history"
             referencedColumns: ["id"]
           },
         ]
@@ -1757,6 +1820,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_apify_rate_limit: {
+        Args: { checking_user_id: string; max_daily_imports?: number }
+        Returns: boolean
+      }
+      check_concurrent_import: {
+        Args: { checking_user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1910,6 +1981,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       activity_type: [

@@ -52,6 +52,8 @@ export interface Lead {
   temperature?: LeadScoreBand;
   /** Budget hint rendered on the lead detail page. */
   budgetCad?: number;
+  /** contacts.next_followup_date — drives the dashboard "Follow-ups due" card. */
+  nextFollowupDate?: string | null;
   /** CASL consent timestamp. Absent = not yet collected. */
   caslConsentAt?: string;
   /** Assigned agent id; null when AI-only. */
