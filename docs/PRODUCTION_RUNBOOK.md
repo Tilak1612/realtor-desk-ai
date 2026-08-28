@@ -369,3 +369,18 @@ Two ways out, either is sufficient:
 
 Once mail flows, self-service password reset and signup verification work with
 no code change — every path up to the send is already built and tested.
+
+### Alternatives that were checked and ruled out
+
+So you do not retrace this:
+
+| Option | Result |
+|---|---|
+| **Resend, another domain on the account** | Untestable. The key returns the same "domain not verified" error for a `from` on a domain that does not exist, so the message says nothing about which domains exist or their state. |
+| **Brevo** | Dead end. A `BREVO_API_KEY` is set in Vercel and the key is valid, but (a) the account IP-allowlists API calls so it cannot be used from anywhere not on that list, and (b) the domain is only *ownership*-verified — `brevo-code` TXT is present but `mail._domainkey` and `brevo._domainkey` are **empty**, so Brevo cannot authenticate mail from this domain. Setting it up would mean adding DKIM from scratch. |
+| **Supabase built-in sender** | Works without any domain verification and would restore self-service reset immediately, but sends from a `supabase.io` address with weaker deliverability, and Supabase documents it as development-grade with a low hourly cap. Deliberately not adopted. |
+| **Apex SPF** | There is **no SPF record on `realtordesk.ai` itself** — only on `send.realtordesk.ai`. Fine while all mail goes through the Resend subdomain; worth adding if you ever send from the apex. |
+
+**Resend is the closest to working by a wide margin** — it is the only provider
+with DKIM, SPF and a return-path MX all correctly in place. Nothing else needs
+building; the send is refused purely on key scope / domain verification state.
