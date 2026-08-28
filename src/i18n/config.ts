@@ -2602,7 +2602,7 @@ const resources = {
         saveFailed: "Failed to save progress. Please try again.",
         welcome: "Welcome to Realtor Desk AI!",
         completeFailed: "Failed to complete setup. Please try again.",
-        heading: "Getting started — 60 minutes, guided",
+        heading: "Getting started — about 10 minutes, guided",
         subheading: "Five steps to go from empty dashboard to first follow-up call.",
         ack: "Got it",
         step: {
@@ -2762,7 +2762,7 @@ const resources = {
         manualNotice: "Your score is currently derived from a fixed formula. AI-derived scoring trained on your own conversion history ships Q2 2026."
       },
       onboardingChecklist: {
-        heading: "Getting started — 60 minutes, guided",
+        heading: "Getting started — about 10 minutes, guided",
         subheading: "Five steps to go from empty dashboard to first follow-up call.",
         ack: "Got it",
         step: {
@@ -5795,7 +5795,7 @@ const resources = {
         saveFailed: "Échec de la sauvegarde. Veuillez réessayer.",
         welcome: "Bienvenue sur Realtor Desk AI!",
         completeFailed: "Échec de la configuration. Veuillez réessayer.",
-        heading: "Mise en route — 60 minutes, guidée",
+        heading: "Mise en route — environ 10 minutes, guidée",
         subheading: "Cinq étapes pour passer d'un tableau de bord vide à votre premier rappel.",
         ack: "Compris",
         step: {
@@ -5955,7 +5955,7 @@ const resources = {
         manualNotice: "Votre score est actuellement calculé par une formule fixe. Le scoring dérivé par IA, entraîné sur votre propre historique de conversion, sera livré au T2 2026."
       },
       onboardingChecklist: {
-        heading: "Démarrage — 60 minutes, guidé",
+        heading: "Démarrage — environ 10 minutes, guidé",
         subheading: "Cinq étapes pour passer d'un tableau de bord vide à votre premier appel de suivi.",
         ack: "Compris",
         step: {
