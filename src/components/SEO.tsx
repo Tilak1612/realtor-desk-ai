@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { normalizeLocale } from '@/lib/i18n/format';
@@ -72,61 +72,98 @@ export const SEO = ({
   const ogLocaleAlt = locale === 'fr-CA' ? 'en_CA' : 'fr_CA';
   const htmlLang = locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
 
-  return (
-    <Helmet htmlAttributes={{ lang: htmlLang }}>
-      {/* Basic Meta Tags */}
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
-      <link rel="canonical" href={currentUrl} />
+  // react-helmet-async 2.0.5 is inert under React 19 — verified in production:
+  // every page carried the homepage <title> and description, and there were
+  // ZERO [data-rh] managed tags in the document. So per-page SEO was not
+  // "duplicated", it simply never applied anywhere on the site.
+  //
+  // Rather than swap in another library, write the tags directly. This
+  // upserts by selector so there is exactly one of each — React 19's native
+  // metadata hoisting would instead ADD a second <meta name="description">
+  // alongside the static one already in index.html.
+  useEffect(() => {
+    document.title = fullTitle;
+    document.documentElement.lang = htmlLang;
 
-      {/* hreflang alternates */}
-      <link rel="alternate" hrefLang="en-CA" href={altEn} />
-      <link rel="alternate" hrefLang="fr-CA" href={altFr} />
-      <link rel="alternate" hrefLang="x-default" href={altEn} />
+    const upsertMeta = (attr: "name" | "property", key: string, content: string) => {
+      let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
 
-      {/* Robots */}
-      {noindex ? (
-        <meta name="robots" content="noindex, nofollow" />
-      ) : (
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-      )}
+    const upsertLink = (rel: string, href: string, hreflang?: string) => {
+      const sel = hreflang
+        ? `link[rel="${rel}"][hreflang="${hreflang}"]`
+        : `link[rel="${rel}"]:not([hreflang])`;
+      let el = document.head.querySelector<HTMLLinkElement>(sel);
+      if (!el) {
+        el = document.createElement("link");
+        el.setAttribute("rel", rel);
+        if (hreflang) el.setAttribute("hreflang", hreflang);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("href", href);
+    };
 
-      {/* Open Graph */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={article ? 'article' : 'website'} />
-      <meta property="og:url" content={currentUrl} />
-      <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content="Realtor Desk" />
-      <meta property="og:locale" content={ogLocale} />
-      <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    upsertMeta("name", "description", description);
+    if (keywords) upsertMeta("name", "keywords", keywords);
+    upsertMeta(
+      "name",
+      "robots",
+      noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    );
 
-      {/* Article Meta */}
-      {article && publishedTime && (
-        <meta property="article:published_time" content={publishedTime} />
-      )}
-      {article && modifiedTime && (
-        <meta property="article:modified_time" content={modifiedTime} />
-      )}
-      {article && author && (
-        <meta property="article:author" content={author} />
-      )}
+    upsertMeta("property", "og:title", fullTitle);
+    upsertMeta("property", "og:description", description);
+    upsertMeta("property", "og:type", article ? "article" : "website");
+    upsertMeta("property", "og:url", currentUrl);
+    upsertMeta("property", "og:image", image);
+    upsertMeta("property", "og:image:width", "1200");
+    upsertMeta("property", "og:image:height", "630");
+    upsertMeta("property", "og:site_name", "Realtor Desk");
+    upsertMeta("property", "og:locale", ogLocale);
+    upsertMeta("property", "og:locale:alternate", ogLocaleAlt);
 
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+    if (article && publishedTime) upsertMeta("property", "article:published_time", publishedTime);
+    if (article && modifiedTime) upsertMeta("property", "article:modified_time", modifiedTime);
+    if (article && author) upsertMeta("property", "article:author", author);
 
-      {/* Structured Data */}
-      {structuredData.length > 0 && structuredData.map((schema, index) => (
-        <script key={index} type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
-      ))}
-    </Helmet>
-  );
+    upsertMeta("name", "twitter:card", "summary_large_image");
+    upsertMeta("name", "twitter:title", fullTitle);
+    upsertMeta("name", "twitter:description", description);
+    upsertMeta("name", "twitter:image", image);
+
+    upsertLink("canonical", currentUrl);
+    upsertLink("alternate", altEn, "en-CA");
+    upsertLink("alternate", altFr, "fr-CA");
+    upsertLink("alternate", altEn, "x-default");
+
+    // Page-scoped JSON-LD. Tagged so it can be cleared on unmount without
+    // touching the static blocks index.html ships.
+    const tag = "data-seo-jsonld";
+    document.head.querySelectorAll(`script[${tag}]`).forEach((n) => n.remove());
+    structuredData.forEach((schema) => {
+      const el = document.createElement("script");
+      el.setAttribute("type", "application/ld+json");
+      el.setAttribute(tag, "");
+      el.textContent = JSON.stringify(schema);
+      document.head.appendChild(el);
+    });
+
+    return () => {
+      document.head.querySelectorAll(`script[${tag}]`).forEach((n) => n.remove());
+    };
+  }, [
+    fullTitle, description, keywords, noindex, article, currentUrl, image,
+    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, publishedTime, modifiedTime,
+    author, structuredData,
+  ]);
+
+  return null;
 };

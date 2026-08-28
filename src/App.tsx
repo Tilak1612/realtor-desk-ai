@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate, useParams } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent, trackPageView } from "@/utils/analytics";
@@ -206,13 +205,29 @@ const SeoDefaults = () => {
     location.pathname === prefix || location.pathname.startsWith(`${prefix}/`)
   );
 
-  return (
-    <Helmet>
-      <link rel="canonical" href={canonicalUrl} />
-      <meta property="og:url" content={canonicalUrl} />
-      {shouldNoindex && <meta name="robots" content="noindex, nofollow" />}
-    </Helmet>
-  );
+  // Same react-helmet-async / React 19 problem as SEO.tsx: this rendered
+  // nothing, so authenticated routes were never actually marked noindex
+  // despite the prefix list below saying they should be.
+  useEffect(() => {
+    const upsert = (sel: string, make: () => HTMLElement, apply: (el: HTMLElement) => void) => {
+      let el = document.head.querySelector<HTMLElement>(sel);
+      if (!el) { el = make(); document.head.appendChild(el); }
+      apply(el);
+    };
+    upsert('link[rel="canonical"]:not([hreflang])',
+      () => Object.assign(document.createElement("link"), { rel: "canonical" }),
+      (el) => el.setAttribute("href", canonicalUrl));
+    upsert('meta[property="og:url"]',
+      () => { const m = document.createElement("meta"); m.setAttribute("property", "og:url"); return m; },
+      (el) => el.setAttribute("content", canonicalUrl));
+    if (shouldNoindex) {
+      upsert('meta[name="robots"]',
+        () => { const m = document.createElement("meta"); m.setAttribute("name", "robots"); return m; },
+        (el) => el.setAttribute("content", "noindex, nofollow"));
+    }
+  }, [canonicalUrl, shouldNoindex]);
+
+  return null;
 };
 
 const RouteAnalytics = () => {
