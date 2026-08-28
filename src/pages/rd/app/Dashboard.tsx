@@ -125,9 +125,8 @@ function Greeting({ firstName }: { firstName: string }) {
         </h1>
       </div>
       <div className="flex flex-wrap gap-2.5">
-        <RDButton variant="outline" size="sm" icon={<IconCalendar />}>
-          This week
-        </RDButton>
+        {/* "This week" removed: a range picker with no handler and no state.
+            The KPIs it appeared to filter are all-time. */}
         <RDButton
           variant="primary"
           size="sm"
@@ -333,9 +332,8 @@ function AIActivityCard({
             ? `${liveActivity.length} events in the last 25`
             : "No activity recorded yet"}
         </span>
-        <RDButton variant="ghost" size="sm" trailingIcon={<IconArrow />}>
-          Open activity log
-        </RDButton>
+        {/* "Open activity log" removed: no handler, and no activity-log route
+            exists to open. */}
       </div>
     </RDCard>
   );

@@ -1,10 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { RDInput } from "../Input";
 import { RDBadge } from "../Badge";
 import { RDAvatar } from "../Avatar";
-import { IconBell, IconDot, IconSearch, IconMenu } from "../icons";
+import { IconDot, IconMenu } from "../icons";
 import { cn } from "@/lib/utils";
 
 // Product topbar (AppShell topbar in rd-app.jsx). Command search, a live
@@ -20,7 +19,6 @@ import { cn } from "@/lib/utils";
 
 interface TopNavProps {
   agent: { name: string };
-  hasUnread?: boolean;
   /** Opens the mobile nav drawer. Only rendered below lg. */
   onMenuClick?: () => void;
   /** Visual state only — true means the AI side is online. */
@@ -31,7 +29,7 @@ interface TopNavProps {
 // either, so every page rendered a green "Live" pill and a red unread dot
 // permanently -- for a notification system that does not exist. Defaulting
 // to false means the indicators only ever appear if something real sets them.
-export function TopNav({ agent, hasUnread = false, isLive = false, onMenuClick }: TopNavProps) {
+export function TopNav({ agent, isLive = false, onMenuClick }: TopNavProps) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const active = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
@@ -53,14 +51,12 @@ export function TopNav({ agent, hasUnread = false, isLive = false, onMenuClick }
         <IconMenu />
       </button>
 
-      {/* Command search */}
-      <div className="flex-1 max-w-[420px] min-w-0">
-        <RDInput
-          variant="inset"
-          placeholder={t("rd.topnav.search", "Search leads, listings, conversations…")}
-          leading={<IconSearch />}
-        />
-      </div>
+      {/* Command search removed. It was the most prominent control in the
+          product and had no value, no onChange and no handler — typing into it
+          did nothing at all. A decorative search box on a CRM is worse than no
+          search box, because it is the first thing an agent reaches for.
+          Restore it with a real query implementation, not before. */}
+      <div className="flex-1 min-w-0" />
 
       <div className="ml-auto flex items-center gap-3.5">
         {isLive && (
@@ -98,16 +94,9 @@ export function TopNav({ agent, hasUnread = false, isLive = false, onMenuClick }
             FR
           </button>
         </div>
-        <button
-          type="button"
-          className="relative w-[30px] h-[30px] bg-rd-ink-50 rounded-rd-sm flex items-center justify-center text-rd-ink-600 hover:bg-rd-ink-100"
-          aria-label={t("rd.topnav.notifications", "Notifications")}
-        >
-          <IconBell />
-          {hasUnread && (
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-rd-terra-600 rounded-full" />
-          )}
-        </button>
+        {/* Notification bell removed: it had no onClick, and there is no
+            notification system behind it (see AppShell). It rendered as a live
+            control that silently did nothing. */}
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <button
