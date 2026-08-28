@@ -27,7 +27,7 @@ export function AppShell({
   sidebarItems,
   agentName,
   workspace,
-  hasUnread = true,
+  hasUnread = false, // no notification system exists; don't show a permanent dot
 }: AppShellProps) {
   // Identity comes from the signed-in profile. Props still win so a caller
   // (or a story/test) can override, but there is no fabricated default.

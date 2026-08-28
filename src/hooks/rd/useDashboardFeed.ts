@@ -38,7 +38,7 @@ export function useActivityFeed() {
           .order("created_at", { ascending: false })
           .limit(ACTIVITY_LIMIT),
         supabase
-          .from("conversation_messages" as never)
+          .from("conversation_messages")
           .select("id, lead_id, author, author_name, body, language, sent_at")
           .eq("user_id", userId)
           .in("author", ["ai", "agent"])

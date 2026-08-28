@@ -151,6 +151,131 @@ export type Database = {
           },
         ]
       }
+      automation_enrollments: {
+        Row: {
+          completed_at: string | null
+          contact_id: string
+          current_step: number
+          enrolled_at: string
+          id: string
+          sequence_id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          contact_id: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          sequence_id: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          contact_id?: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          sequence_id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_enrollments_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_enrollments_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "automation_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_sequence_steps: {
+        Row: {
+          created_at: string
+          hours: number | null
+          id: string
+          kind: string
+          label: string
+          position: number
+          sequence_id: string
+          template_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          hours?: number | null
+          id?: string
+          kind: string
+          label: string
+          position: number
+          sequence_id: string
+          template_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          hours?: number | null
+          id?: string
+          kind?: string
+          label?: string
+          position?: number
+          sequence_id?: string
+          template_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_sequence_steps_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "automation_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_sequences: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          last_run_at: string | null
+          name: string
+          stats_30d: Json
+          trigger: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          last_run_at?: string | null
+          name: string
+          stats_30d?: Json
+          trigger: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          last_run_at?: string | null
+          name?: string
+          stats_30d?: Json
+          trigger?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       automation_steps: {
         Row: {
           action_config: Json
@@ -524,6 +649,56 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversation_messages: {
+        Row: {
+          author: string
+          author_name: string | null
+          body: string
+          channel: string
+          created_at: string
+          id: string
+          language: string
+          lead_id: string
+          sent_at: string
+          system_note: string | null
+          user_id: string
+        }
+        Insert: {
+          author: string
+          author_name?: string | null
+          body: string
+          channel?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lead_id: string
+          sent_at?: string
+          system_note?: string | null
+          user_id: string
+        }
+        Update: {
+          author?: string
+          author_name?: string | null
+          body?: string
+          channel?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lead_id?: string
+          sent_at?: string
+          system_note?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_messages_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
         ]

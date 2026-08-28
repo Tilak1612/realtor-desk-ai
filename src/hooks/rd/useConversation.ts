@@ -36,7 +36,7 @@ export function useConversation(leadId: string | undefined) {
     queryFn: async () => {
       if (!userId || !leadId) return [];
       const { data, error } = await supabase
-        .from("conversation_messages" as never)
+        .from("conversation_messages")
         .select(COLS)
         .eq("user_id", userId)
         .eq("lead_id", leadId)
@@ -68,7 +68,7 @@ export function useInboxThreads() {
     queryFn: async () => {
       if (!userId) return {};
       const { data, error } = await supabase
-        .from("conversation_messages" as never)
+        .from("conversation_messages")
         .select(COLS)
         .eq("user_id", userId)
         .order("sent_at", { ascending: false })
@@ -121,8 +121,8 @@ export function useSendMessage() {
         { userId, leadId: input.leadId }
       );
       const { error } = await supabase
-        .from("conversation_messages" as never)
-        .insert(insert as never);
+        .from("conversation_messages")
+        .insert(insert);
       if (error) throw new Error(error.message);
     },
     onSuccess: (_res, variables) => {

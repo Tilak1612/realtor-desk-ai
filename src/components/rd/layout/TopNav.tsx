@@ -18,7 +18,11 @@ interface TopNavProps {
   isLive?: boolean;
 }
 
-export function TopNav({ agent, hasUnread = true, isLive = true, onMenuClick }: TopNavProps) {
+// hasUnread and isLive both defaulted to TRUE and no caller ever passed
+// either, so every page rendered a green "Live" pill and a red unread dot
+// permanently -- for a notification system that does not exist. Defaulting
+// to false means the indicators only ever appear if something real sets them.
+export function TopNav({ agent, hasUnread = false, isLive = false, onMenuClick }: TopNavProps) {
   const { t, i18n } = useTranslation();
   const active = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
 

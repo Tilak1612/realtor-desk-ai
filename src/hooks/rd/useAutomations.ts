@@ -44,7 +44,7 @@ export function useAutomations() {
       // "ordered steps nested under sequences" in one PostgREST call
       // cleanly without a view; two-round-trip is fine at this scale.
       const seqRes = await supabase
-        .from("automation_sequences" as never)
+        .from("automation_sequences")
         .select("id, name, trigger, active, last_run_at, stats_30d")
         .eq("user_id", userId)
         .order("updated_at", { ascending: false });
@@ -55,7 +55,7 @@ export function useAutomations() {
 
       const ids = sequences.map((s) => s.id);
       const stepsRes = await supabase
-        .from("automation_steps" as never)
+        .from("automation_sequence_steps")
         .select("id, sequence_id, position, kind, label, hours, template_id")
         .in("sequence_id", ids)
         .order("position", { ascending: true });
@@ -104,8 +104,8 @@ export function useToggleAutomation() {
     mutationFn: async ({ id, active }: { id: string; active: boolean }) => {
       if (!userId) throw new Error("Not signed in.");
       const { error } = await supabase
-        .from("automation_sequences" as never)
-        .update({ active, updated_at: new Date().toISOString() } as never)
+        .from("automation_sequences")
+        .update({ active, updated_at: new Date().toISOString() })
         .eq("id", id)
         .eq("user_id", userId);
       if (error) throw new Error(error.message);

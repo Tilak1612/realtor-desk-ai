@@ -2917,7 +2917,7 @@ const resources = {
             saluteMorning: "Good morning",
             saluteAfternoon: "Good afternoon",
             saluteEvening: "Good evening",
-            subhead: "Desk worked overnight."
+            subhead: "Here's where things stand."
           },
           leads: { title: "Leads" },
           inbox: { title: "Conversations" },
@@ -6110,7 +6110,7 @@ const resources = {
             saluteMorning: "Bonjour",
             saluteAfternoon: "Bon après-midi",
             saluteEvening: "Bonsoir",
-            subhead: "Desk IA a travaillé pendant la nuit."
+            subhead: "Voici où en sont les choses."
           },
           leads: { title: "Clients potentiels" },
           inbox: { title: "Conversations" },

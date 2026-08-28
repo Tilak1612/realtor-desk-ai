@@ -120,7 +120,7 @@ function Greeting({ firstName }: { firstName: string }) {
         <h1 className="text-[28px] lg:text-[32px] font-semibold tracking-[-0.02em] mt-1">
           {salute}, {firstName}.{" "}
           <span className="font-rd-serif italic font-normal text-rd-ink-500">
-            {t("rd.pages.dashboard.subhead", "Desk worked overnight.")}
+            {t("rd.pages.dashboard.subhead", "Here's where things stand.")}
           </span>
         </h1>
       </div>
@@ -505,7 +505,7 @@ function PipelineSnapshotCard({ leads, loading }: { leads: Lead[]; loading: bool
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-5 border-b border-rd-line flex items-center justify-between">
-        <h3 className="text-sm font-semibold">Pipeline snapshot</h3>
+        <h3 className="text-sm font-semibold">Pipeline snapshot · active stages</h3>
         {/* Only badge a total when a budget is actually recorded; otherwise the
             figure would read $0 next to real leads and look like a bug. */}
         {total > 0 && (
