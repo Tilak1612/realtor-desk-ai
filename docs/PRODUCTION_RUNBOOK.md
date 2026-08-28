@@ -302,3 +302,49 @@ Verified: the baseline builds from an empty schema to **43 tables, 97 policies,
 - `npm run typecheck` — the previous `npx tsc --noEmit` was a **no-op**, because
   the root `tsconfig.json` is `{"files": [], "references": [...]}`, so CI had
   never actually typechecked anything
+
+## 13. Recovering a locked-out user (no email required)
+
+While the Resend sending domain is unverified, `/forgot-password` sends
+nothing — a user who forgets their password has no way back in on their own.
+This is the manual path. It keeps working after the domain is verified and is
+the normal way to help someone whose mail is bouncing or filtered.
+
+```bash
+SUPABASE_SERVICE_ROLE_KEY=<key> ./scripts/recovery-link.sh user@example.com
+```
+
+Send the link to the user over a channel you trust — the phone number on their
+account, not a shared channel or a ticket. It logs them straight in and lands
+them on `/reset-password`.
+
+`signup` generates a confirmation link instead; `magiclink` a one-time sign-in.
+
+**Verified end to end (2026-08-28)** on a throwaway account, then removed:
+
+| Step | Result |
+|---|---|
+| Generate link for a user with a forgotten password | link issued |
+| Follow it | redirects to `/reset-password` with a live session |
+| Set a new password | accepted |
+| Old password | rejected |
+| New password | signs in |
+
+**Treat the link like a password.** It is single-use and time-limited, but
+anyone holding it can take over the account until it is used or expires. The
+service role key bypasses RLS entirely — never commit it.
+
+### The permanent fix
+Verify `realtordesk.ai` in Resend. All three DNS records are already correct
+(DKIM at `resend._domainkey`, SPF on `send.`, return-path MX on `send.`), so
+it is the dashboard's Verify button, not a DNS change. Confirmed on the exact
+SMTP path Supabase auth uses:
+
+```
+SMTP AUTH: ok
+SEND REJECTED: The associated domain with your API key is not verified.
+```
+
+If Verify does not clear it, the error's other branch applies — the API key is
+scoped to an unverified domain, and a full-access key fixes it instead. Once
+mail flows, self-service password reset works with no code change.
