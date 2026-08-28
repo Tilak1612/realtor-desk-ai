@@ -143,6 +143,31 @@ bunx vitest run
 
 ---
 
+## 7a. Deploys do not always reach production automatically
+
+**Observed 2026-08-14.** After merging to `main`, a production deployment
+appeared and was aliased to `www.realtordesk.ai`, but it served a bundle built
+from *older* source — its build step showed `0ms`, i.e. cached output was
+re-promoted rather than rebuilt from the new commit. The merged fix was live in
+git and absent from the site.
+
+**Always verify the served bundle after a merge**, don't trust "Ready":
+
+```bash
+# what the site actually serves
+B=$(curl -s "https://www.realtordesk.ai/?cb=$(date +%s)" -H 'Cache-Control: no-cache' \
+     | grep -oE '/assets/index-[A-Za-z0-9_-]+\.js' | head -1)
+curl -s "https://www.realtordesk.ai$B" | grep -c "<a string your change introduced>"
+```
+
+If the change is missing, force a build from the current checkout:
+
+```bash
+vercel deploy --prod --yes     # note: `vercel --prod` alone prints help, it does not deploy
+```
+
+---
+
 ## 8. Known limitations
 
 - **16 pre-existing typecheck errors** remain, concentrated in `src/lib/apify.ts`,
