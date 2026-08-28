@@ -64,6 +64,19 @@ export function useCreateLead() {
         .single();
 
       if (error) throw new Error(error.message);
+
+      // Score the lead immediately. calculate-lead-score is a real rule-based
+      // scorer that writes ai_lead_scores AND contacts.ai_score -- it was just
+      // never invoked outside the legacy contact page, which is why every new
+      // lead rendered a score of 0 on /app/leads and ai_lead_scores was empty.
+      //
+      // Deliberately non-blocking: a scoring failure must not fail lead
+      // creation. An unscored lead is recoverable; a lost lead is not.
+      void supabase.functions
+        .invoke("calculate-lead-score", { body: { contact_id: data.id } })
+        .then(() => qc.invalidateQueries({ queryKey: ["rd.leads", userId] }))
+        .catch((e) => console.warn("[useCreateLead] scoring failed (non-fatal):", e));
+
       return data;
     },
     onSuccess: () => {
