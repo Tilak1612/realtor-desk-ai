@@ -2706,7 +2706,9 @@ const resources = {
           checkEmail: "Check your email",
           sentTo: "We've sent a password reset link to",
           linkExpiry: "Click the link in the email to reset your password. The link will expire in 1 hour.",
-          checkSpam: "If you don't see the email, check your spam folder."
+          checkSpam: "If you don't see the email, check your spam folder.",
+          stillNothing: "Still nothing after a few minutes? Email",
+          stillNothingTail: "and we will get you back in.",
         },
         reset: {
           title: "Set new password",
@@ -5899,7 +5901,9 @@ const resources = {
           checkEmail: "Vérifiez votre courriel",
           sentTo: "Nous avons envoyé un lien de réinitialisation à",
           linkExpiry: "Cliquez sur le lien dans le courriel pour réinitialiser votre mot de passe. Le lien expire dans 1 heure.",
-          checkSpam: "Si vous ne voyez pas le courriel, vérifiez votre dossier de courrier indésirable."
+          checkSpam: "Si vous ne voyez pas le courriel, vérifiez votre dossier de courrier indésirable.",
+          stillNothing: "Toujours rien après quelques minutes ? Écrivez à",
+          stillNothingTail: "et nous vous aiderons à vous reconnecter.",
         },
         reset: {
           title: "Nouveau mot de passe",
