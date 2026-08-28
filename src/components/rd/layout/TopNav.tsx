@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { supabase } from "@/integrations/supabase/client";
 import { RDInput } from "../Input";
 import { RDBadge } from "../Badge";
 import { RDAvatar } from "../Avatar";
@@ -147,6 +146,11 @@ export function TopNav({ agent, hasUnread = false, isLive = false, onMenuClick }
               <DropdownMenu.Separator className="h-px bg-rd-line my-1" />
               <DropdownMenu.Item
                 onSelect={async () => {
+                  // Imported lazily: a module-level import would drag the
+                  // Supabase client into this layout component's module graph,
+                  // which then throws "supabaseUrl is required" anywhere the
+                  // env is absent — including the component tests in CI.
+                  const { supabase } = await import("@/integrations/supabase/client");
                   await supabase.auth.signOut();
                   navigate("/login", { replace: true });
                 }}
