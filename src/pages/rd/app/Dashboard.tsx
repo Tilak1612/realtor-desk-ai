@@ -351,7 +351,11 @@ function AIEventLive({
   leadName?: string;
 }) {
   const time = formatEventTime(activity.at);
-  const who = leadName ?? activity.actor;
+  // An AI reply is performed BY Desk AI and directed AT the lead. Crediting the
+  // lead as the actor (the previous behaviour) inverted the sentence.
+  const isAi = activity.kind === "ai_reply";
+  const who = isAi ? activity.actor : leadName ?? activity.actor;
+  const object = isAi ? leadName ?? "a lead" : activity.summary;
   const action = ACTION_VERB[activity.kind];
   return (
     <div className="grid grid-cols-[60px_24px_1fr_auto] gap-3.5 px-6 py-3 items-start">
@@ -365,7 +369,7 @@ function AIEventLive({
         <div className="text-[13px]">
           <span className="font-semibold">{who}</span>
           <span className="text-rd-ink-500"> {action} </span>
-          <span className="font-medium">{activity.summary}</span>
+          <span className="font-medium">{object}</span>
           {activity.language === "FR" && (
             <span className="ml-2 text-[10px] font-bold tracking-[0.08em] bg-rd-terra-100 text-rd-terra-800 rounded-[4px] px-1.5 py-[1px]">
               FR
