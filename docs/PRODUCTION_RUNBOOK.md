@@ -345,6 +345,27 @@ SMTP AUTH: ok
 SEND REJECTED: The associated domain with your API key is not verified.
 ```
 
-If Verify does not clear it, the error's other branch applies — the API key is
-scoped to an unverified domain, and a full-access key fixes it instead. Once
-mail flows, self-service password reset works with no code change.
+**Diagnosis, precisely.** The rejection is about the API key's own scope, not
+the sender address. A `from` of a domain that does not exist at all returns the
+identical message, so the error says nothing about which domains are in the
+account:
+
+```
+from: totally-made-up-domain-xyz.example  -> not verified
+from: realtordesk.ai                      -> not verified   (same message)
+```
+
+The current `RESEND_API_KEY` is a **sending-only key scoped to a single
+domain**, and that domain is not verified. It also cannot list domains
+(`GET /domains` returns `restricted_api_key`), so the account state cannot be
+inspected from the API.
+
+Two ways out, either is sufficient:
+1. Verify the domain the key is bound to, in the Resend dashboard. The DNS is
+   already correct, so this is the Verify button.
+2. Issue a **full-access** Resend API key (or one bound to a domain that is
+   already verified) and set it as the `RESEND_API_KEY` secret in Supabase and
+   the `RESEND_API_KEY` env var in Vercel.
+
+Once mail flows, self-service password reset and signup verification work with
+no code change — every path up to the send is already built and tested.
