@@ -691,6 +691,7 @@ const resources = {
         itemPrivacy: "Privacy",
         itemTerms: "Terms",
         itemUnsubscribe: "Unsubscribe",
+        itemCookieSettings: "Cookie settings",
         copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
       },
       featuresRd: {
@@ -3884,6 +3885,7 @@ const resources = {
         itemPrivacy: "Confidentialité",
         itemTerms: "Conditions",
         itemUnsubscribe: "Se désabonner",
+        itemCookieSettings: "Paramètres des témoins",
         copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
       },
       featuresRd: {
