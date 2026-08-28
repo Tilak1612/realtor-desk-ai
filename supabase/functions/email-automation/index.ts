@@ -248,15 +248,55 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Log sent email
+    // ACTUALLY SEND. This block previously wrote email_log with status "sent"
+    // and logged "Email sent successfully" without dispatching anything --
+    // the template was rendered and then thrown away. Every campaign this
+    // function "sent" was recorded as delivered and never left the building.
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    if (!resendApiKey) {
+      console.error("[EMAIL-AUTOMATION] RESEND_API_KEY not configured");
+      return new Response(
+        JSON.stringify({ success: false, error: "Email service not configured" }),
+        { status: 503, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const sendRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: Deno.env.get("EMAIL_FROM") ?? "RealtorDesk AI <support@realtordesk.ai>",
+        to: [contact.email],
+        subject: template.subject,
+        html: template.html,
+      }),
+    });
+
+    if (!sendRes.ok) {
+      const detail = await sendRes.text();
+      console.error("[EMAIL-AUTOMATION] Resend rejected the send:", sendRes.status, detail);
+      // Record the failure honestly rather than logging it as sent.
+      await supabase.from("email_log").insert({
+        contact_id: contactId,
+        type,
+        sent_at: new Date().toISOString(),
+        status: "failed",
+      });
+      return new Response(
+        JSON.stringify({ success: false, error: "Email delivery failed" }),
+        { status: 502, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     await supabase.from("email_log").insert({
       contact_id: contactId,
       type,
       sent_at: new Date().toISOString(),
       status: "sent",
     });
-
-    console.log("Email sent successfully");
 
     return new Response(
       JSON.stringify({
