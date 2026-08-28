@@ -62,18 +62,25 @@ const convRow: ConversationFeedRow = {
 };
 
 describe("mapConversationActivity", () => {
-  it("marks AI authors as ai_reply with a 'Replied to' summary", () => {
+  // The feed renders "{who} {verb} {summary}", so summary is the OBJECT of the
+  // verb, not a sentence. It used to hold "Replied to <author_name>" — where
+  // author_name on an AI row is "Desk AI" — which rendered as
+  // "Bruno Delgado replied to Replied to Desk AI": the lead credited with the
+  // AI's action, and the AI replying to itself. Conversation rows now leave it
+  // empty so the renderer substitutes the lead name it resolves.
+  it("marks AI authors as ai_reply and leaves the object to the renderer", () => {
     const a = mapConversationActivity(convRow);
     expect(a.id).toBe("msg:m1");
     expect(a.kind).toBe("ai_reply");
-    expect(a.summary).toBe("Replied to Jane Buyer");
+    expect(a.summary).toBe("");
+    expect(a.actor).toBe("Jane Buyer");
     expect(a.language).toBe("FR");
   });
 
   it("marks non-AI authors as agent_note", () => {
     const a = mapConversationActivity({ ...convRow, author: "agent", author_name: "Sam Agent", language: null });
     expect(a.kind).toBe("agent_note");
-    expect(a.summary).toBe("Sam Agent — message sent");
+    expect(a.summary).toBe("");
     expect(a.language).toBe("EN");
   });
 
