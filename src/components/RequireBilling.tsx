@@ -17,7 +17,7 @@ import { useWorkspaceIdentity } from "@/hooks/rd/useWorkspaceIdentity";
 // `subscribed` is true for trialing/active/past_due — see check-subscription.
 // It is NOT true for the bare DB trial, which is the whole point.
 export default function RequireBilling({ children }: { children: JSX.Element }) {
-  const { subscribed, loading } = useSubscription();
+  const { subscribed, subscriptionUnknown, loading } = useSubscription();
   // Sales-demo accounts get full access without a Stripe subscription.
   // profiles.is_demo is writable only by the service_role — a BEFORE UPDATE
   // trigger reverts it for everyone else — because the "Users can update own
@@ -35,6 +35,15 @@ export default function RequireBilling({ children }: { children: JSX.Element }) 
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
       </div>
     );
+  }
+
+  // Never evict on an indeterminate answer. `subscriptionUnknown` means the
+  // check itself failed (network, gateway 5xx, Stripe outage) rather than
+  // returning "not subscribed". Failing open here is correct: the worst case
+  // is a lapsed user keeps access until the next successful check, versus
+  // locking out every paying customer during an outage.
+  if (subscriptionUnknown && !isDemo) {
+    return children;
   }
 
   if (!subscribed && !isDemo) {

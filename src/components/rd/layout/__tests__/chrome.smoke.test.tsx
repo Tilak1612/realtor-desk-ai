@@ -46,17 +46,30 @@ describe("TopNav", () => {
     });
   });
 
-  it("renders the live pill and search placeholder", () => {
+  it("renders the search placeholder", () => {
     renderWithProviders(<TopNav agent={{ name: "Sarah K." }} />);
-    expect(screen.getByText("Live")).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText("Search leads, listings, conversations…")
     ).toBeInTheDocument();
   });
 
+  // The "Live" pill and the unread dot used to default to ON and no caller
+  // ever passed either, so every page showed a green Live badge and a red
+  // notification dot for a notification system that does not exist. They now
+  // default OFF and only appear when something real sets them.
+  it("does not claim Live or unread unless told to", () => {
+    renderWithProviders(<TopNav agent={{ name: "Sarah K." }} />);
+    expect(screen.queryByText("Live")).not.toBeInTheDocument();
+  });
+
+  it("renders the live pill when isLive is passed", () => {
+    renderWithProviders(<TopNav agent={{ name: "Sarah K." }} isLive />);
+    expect(screen.getByText("Live")).toBeInTheDocument();
+  });
+
   it("EN/FR toggle is wired to i18n.changeLanguage", async () => {
     const user = userEvent.setup();
-    const { i18n } = renderWithProviders(<TopNav agent={{ name: "Sarah K." }} />);
+    const { i18n } = renderWithProviders(<TopNav agent={{ name: "Sarah K." }} isLive />);
     expect(i18n.language).toBe("en");
 
     await user.click(screen.getByRole("button", { name: "FR" }));

@@ -183,3 +183,85 @@ vercel deploy --prod --yes     # note: `vercel --prod` alone prints help, it doe
 - **Lead scoring produces nothing** — `ai_lead_scores` is empty.
 - **`sms_consent` does not exist**, so SMS has no consent ledger. CASL treats SMS
   as a commercial electronic message; do not send marketing SMS until it does.
+
+---
+
+## 9. Inbound webhook (Zapier / Make / n8n)
+
+`webhook-receiver` turns an inbound payload into a contact. It previously
+parsed the payload, logged its byte length, discarded it, and returned 200 —
+so the sending platform recorded success and never retried.
+
+**URL**: `POST /functions/v1/webhook-receiver?user_id=<uid>&tool=<slug>&token=<webhook_token>`
+The token comes from `integration_connections.webhook_token` for that user+tool.
+
+Field mapping is case- and separator-insensitive and walks up to 3 levels of
+nesting, so `First Name`, `first_name` and `firstName` all match:
+
+| Contact field | Accepted keys |
+|---|---|
+| email | email, emailAddress, email1, contactEmail, from |
+| phone | phone, phoneNumber, mobile, telephone, cell |
+| name  | name, fullName, contactName, or firstName + lastName |
+
+Behaviour:
+- Raw payload is written to `webhook_events` **before** any parsing, so a
+  payload we fail to interpret is still recoverable.
+- Deduped on email — a Zap that fires twice updates rather than duplicating,
+  and only fills blank fields so curated data is never overwritten.
+- No email **and** no phone → recorded as `ignored` (this is what an empty
+  "test" ping from the Zap editor looks like).
+- Malformed email → 400. Persistence failure → 503/500 so the sender retries.
+- **No CASL consent is implied.** Inbound leads land with `consent_given =
+  false`; the agent must record consent on the lead before messaging.
+
+Check what arrived:
+```sql
+select received_at, processing_status, processing_error, payload
+from webhook_events where user_id = '<uid>' order by received_at desc limit 20;
+```
+
+## 10. Integration health
+
+`sync-health-check` now performs a real authenticated call to the provider
+(Google Calendar/People, Microsoft Graph) and reports three states:
+
+| Result | Meaning | Effect |
+|---|---|---|
+| healthy | provider returned 2xx | stamps `last_sync_at` + `success` |
+| unhealthy | provider returned 401/403 | stamps `error`, triggers re-auth email (24h dedup) |
+| unknown | no key, undecryptable blob, no token, 5xx, timeout | **leaves status untouched** |
+
+"unknown" deliberately asserts nothing — the previous stub returned `true`
+unconditionally, which is why the error branch was unreachable and
+`send-reauth-email` had never fired. Because "unknown" does not refresh
+`last_sync_at`, the badge ages from green to yellow on its own rather than
+holding a stale green.
+
+Two callers: pg_cron (sends `CRON_SECRET`, sweeps everything) and the
+"Sync Now" button (user JWT, scoped to that user's own connections).
+`ENCRYPTION_KEY` must be set for tokens to be decryptable; without it every
+result is "unknown" rather than a false "healthy".
+
+## 11. Verified end-to-end (2026-08-28)
+
+Run against production, all probe data removed afterwards:
+
+| Journey | Result |
+|---|---|
+| Signup → profile row auto-created → login | pass |
+| Billing gate returns `subscribed:false` for a new account | pass |
+| Lead creation | pass |
+| Record CASL consent + source | pass |
+| Send message → read thread back | pass |
+| Cross-tenant read of another user's contacts | 0 rows |
+| Forged insert as another user | 403 |
+| Stripe checkout, all 4 price IDs | live `cs_live_` sessions |
+| Lead scoring | 17/100, confidence 0.12 |
+| Webhook: lead created / deduped / empty ping / bad token / bad email | pass / pass / ignored / 401 / 400 |
+| Health check: invalid token / undecryptable blob | error / unknown, **0 healthy** |
+
+**Known limitation:** signup currently auto-confirms
+(`mailer_autoconfirm: true`) because no verified Resend sending domain is
+installed. Verify the domain, add the key, then set it back to `false` so
+new users get a real verification email.

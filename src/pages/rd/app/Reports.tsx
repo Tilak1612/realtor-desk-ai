@@ -133,32 +133,30 @@ function KPIRow({
   capturedToShowing: number;
 }) {
   const { t } = useTranslation();
-  const liveRtSpark = avgResponseSpark.length >= 2 ? avgResponseSpark : [0.8, 0.7, 0.55, 0.45, 0.4, 0.35, 0.3];
+  // A sparkline with no series renders nothing, not a curve. Each of these
+  // four tiles previously drew a smooth rising line from a hardcoded array --
+  // so a brand-new account saw $0 revenue under a steeply climbing revenue
+  // curve, and "-" avg response under an improving green one.
+  const liveRtSpark = avgResponseSpark.length >= 2 ? avgResponseSpark : null;
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <RDStatCard
         label={t("rd.kpi.avgResponseTime", "Avg response time")}
         value={rtLoading ? "…" : avgResponseLabel}
-        deltaTone="success"
-        sparkline={<Spark points={liveRtSpark} color="var(--rd-success)" />}
+        sparkline={liveRtSpark ? <Spark points={liveRtSpark} color="var(--rd-success)" /> : undefined}
       />
       <RDStatCard
         label={t("rd.kpi.dealsClosed", "Deals closed")}
         value={String(won)}
-        deltaTone="success"
-        sparkline={<Spark points={[0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8]} color="var(--rd-terra-600)" />}
       />
       <RDStatCard
         label={t("rd.kpi.leadToShowing", "Lead → Showing")}
         value={`${capturedToShowing}%`}
-        deltaTone="success"
-        sparkline={<Spark points={[0.2, 0.3, 0.35, 0.5, 0.6, 0.65, 0.75]} color="var(--rd-navy-500)" />}
       />
       <RDStatCard
         label={t("rd.kpi.revenueAttributed", "Revenue attributed")}
         value={formatCadShort(revenue)}
         deltaTone="success"
-        sparkline={<Spark points={[0.3, 0.35, 0.5, 0.55, 0.7, 0.8, 0.9]} color="var(--rd-navy-700)" />}
       />
     </div>
   );
@@ -185,23 +183,20 @@ function ResponseTimeCard({ avgLabel }: { avgLabel: string | null }) {
           <div className="text-[11px] font-bold text-rd-ink-500 uppercase tracking-[0.06em]">
             {t("rd.sections.responseTimeTrend", "Response time trend")}
           </div>
+          {/* The "AI vs. Agent - last 21 days" subtitle and the two legend
+              dots described a comparison the chart never actually plotted and
+              that no query can produce today. The legend also printed the live
+              average next to the fabricated AI line, which is what made the
+              synthetic curve read as measured. */}
           <div className="text-base font-semibold mt-1">
-            {t("rd.sections.aiVsAgent21d", "AI vs. Agent · last 21 days")}
+            {t("rd.sections.avgFirstReply", "Average first reply")}
           </div>
         </div>
-        <div className="flex gap-3.5 text-xs">
-          <LegendDot
-            color="var(--rd-terra-600)"
-            label={t("rd.reportsPage.aiAvg", "AI · {{label}} avg", { label: avgLabel ?? "—" })}
-          />
-          <LegendDot
-            color="var(--rd-navy-700)"
-            label={t(
-              "rd.reportsPage.agentManual",
-              "Agent (manual)"
-            )}
-          />
-        </div>
+        {avgLabel && (
+          <div className="text-xs text-rd-ink-600">
+            {t("rd.reportsPage.currentAvg", "Current average: {{label}}", { label: avgLabel })}
+          </div>
+        )}
       </div>
       <div className="p-6">
         <BigChart />
@@ -210,100 +205,27 @@ function ResponseTimeCard({ avgLabel }: { avgLabel: string | null }) {
   );
 }
 
-function LegendDot({ color, label }: { color: string; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 text-rd-ink-600">
-      <span className="w-2 h-2 rounded-full" style={{ background: color }} />
-      {label}
-    </span>
-  );
-}
 
-/** Deterministic 21-day 2-line chart — AI flat at ~30s, agent volatile. */
+// BigChart removed. It synthesised both traces --
+//   ai:    170 + Math.sin(i * 0.9) * 6
+//   agent: 60 + Math.sin(i * 0.4) * 20 + Math.cos(i * 0.7) * 15
+// -- rendered them as a filled 21-day area chart with a hand-labelled
+// "6h / 4h / 2h / 1m" y-axis, and printed the LIVE average in the legend
+// beside the fabricated line. That presented the company's core sales claim
+// ("AI replies in ~30s, agents take hours") to the customer as their own
+// audited history. There is no data behind it: conversation_messages does not
+// exist in production, so nothing can compute an AI-vs-agent split today.
 function BigChart() {
-  const w = 820;
-  const h = 200;
-  const days = 21;
-  const xStep = w / (days - 1);
-
-  // Deterministic synthesised traces so the chart renders the same every mount.
-  const aiPts = Array.from({ length: days }, (_, i) => {
-    const y = 170 + Math.sin(i * 0.9) * 6;
-    return [i * xStep, y] as const;
-  });
-  const agentPts = Array.from({ length: days }, (_, i) => {
-    const base = 60 + Math.sin(i * 0.4) * 20 + Math.cos(i * 0.7) * 15;
-    return [i * xStep, base] as const;
-  });
-
-  const toPath = (pts: readonly (readonly [number, number])[]) =>
-    pts.map((p, i) => (i === 0 ? "M" : "L") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
-  const area = (pts: readonly (readonly [number, number])[]) =>
-    `${toPath(pts)} L${w},${h} L0,${h} Z`;
-
+  const { t } = useTranslation();
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} width="100%" height={h}>
-      {[0, 1, 2, 3].map((i) => (
-        <line
-          key={i}
-          x1="0"
-          y1={40 + i * 40}
-          x2={w}
-          y2={40 + i * 40}
-          stroke="var(--rd-line)"
-          strokeWidth="1"
-          strokeDasharray="2 4"
-        />
-      ))}
-      <path d={area(agentPts)} fill="var(--rd-navy-100)" opacity="0.6" />
-      <path
-        d={toPath(agentPts)}
-        fill="none"
-        stroke="var(--rd-navy-700)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d={toPath(aiPts)}
-        fill="none"
-        stroke="var(--rd-terra-600)"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {aiPts.map(
-        (p, i) =>
-          i % 4 === 0 && (
-            <circle key={`a${i}`} cx={p[0]} cy={p[1]} r="3" fill="var(--rd-terra-600)" />
-          )
-      )}
-      {[0, 5, 10, 15, 20].map((i) => (
-        <text
-          key={i}
-          x={i * xStep}
-          y={h - 4}
-          fontSize="10"
-          fill="var(--rd-ink-500)"
-          textAnchor="middle"
-          fontFamily="Inter"
-        >
-          {new Date().toLocaleDateString("en-CA", { month: "short" })} {i + 1}
-        </text>
-      ))}
-      <text x="4" y="44" fontSize="10" fill="var(--rd-ink-500)" fontFamily="Inter">
-        6h
-      </text>
-      <text x="4" y="84" fontSize="10" fill="var(--rd-ink-500)" fontFamily="Inter">
-        4h
-      </text>
-      <text x="4" y="124" fontSize="10" fill="var(--rd-ink-500)" fontFamily="Inter">
-        2h
-      </text>
-      <text x="4" y="164" fontSize="10" fill="var(--rd-ink-500)" fontFamily="Inter">
-        1m
-      </text>
-    </svg>
+    <div className="py-12 text-center">
+      <p className="text-sm text-rd-ink-500">
+        {t(
+          "rd.reportsPage.trendUnavailable",
+          "Response time trend isn't available yet. It appears once there are enough replies to compare."
+        )}
+      </p>
+    </div>
   );
 }
 

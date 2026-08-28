@@ -24,7 +24,7 @@ import {
   IconPlus,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
-import type { OnboardingStepId } from "@/types/rd";
+import type { OnboardingState, OnboardingStepId } from "@/types/rd";
 
 // /onboarding — Five-step signup flow per rd-onboarding.jsx. State
 // hydrates from and persists to user_onboarding.wizard_state via
@@ -67,6 +67,7 @@ export default function Onboarding() {
     loading,
     saving,
     advance: persistAdvance,
+    patch,
     complete,
     completing,
   } = useOnboardingWizard();
@@ -119,7 +120,17 @@ export default function Onboarding() {
 
   return (
     <OnbShell stepIndex={safeIndex} saving={saving || completing}>
-      <StepSwitch id={currentStepId} onBack={back} onContinue={advance} busy={completing} />
+      <StepSwitch
+        id={currentStepId}
+        onBack={back}
+        onContinue={advance}
+        busy={completing}
+        savedProfile={state.profile}
+        signupName={
+          (user?.user_metadata?.full_name as string | undefined) ?? ""
+        }
+        onSaveProfile={(profile) => patch({ profile })}
+      />
     </OnbShell>
   );
 }
@@ -206,17 +217,31 @@ function StepSwitch({
   onBack,
   onContinue,
   busy,
+  savedProfile,
+  signupName,
+  onSaveProfile,
 }: {
   id: OnboardingStepId;
   onBack: () => void;
   onContinue: () => void;
   busy: boolean;
+  savedProfile: OnboardingState["profile"];
+  signupName: string;
+  onSaveProfile: (p: NonNullable<OnboardingState["profile"]>) => void;
 }) {
   switch (id) {
     case "welcome":
       return <StepWelcome onContinue={onContinue} />;
     case "profile":
-      return <StepProfile onBack={onBack} onContinue={onContinue} />;
+      return (
+        <StepProfile
+          onBack={onBack}
+          onContinue={onContinue}
+          saved={savedProfile}
+          signupName={signupName}
+          onSave={onSaveProfile}
+        />
+      );
     case "connect_ddf":
       return <StepDDF onBack={onBack} onContinue={onContinue} />;
     case "ai_voice":
@@ -416,14 +441,41 @@ function StepWelcome({ onContinue }: { onContinue: () => void }) {
 
 /* ────────────────────────────────────────────────────────── */
 
-function StepProfile({ onBack, onContinue }: { onBack: () => void; onContinue: () => void }) {
+// These fields used to be prefilled with a fabricated identity -- "Sarah",
+// "Khoury", "Royal LePage Signature Realty" and, worst of all, a made-up RECO
+// registration number "RE-889-2201-TOR". A real user who pressed Continue
+// without editing them persisted a fictional registrant's details into their
+// own profile, inside a product whose whole pitch is regulatory compliance.
+//
+// They now seed from what we actually know (the name given at signup, and any
+// previously saved answers) and are otherwise empty.
+function StepProfile({
+  onBack,
+  onContinue,
+  saved,
+  signupName,
+  onSave,
+}: {
+  onBack: () => void;
+  onContinue: () => void;
+  saved: OnboardingState["profile"];
+  signupName: string;
+  onSave: (p: NonNullable<OnboardingState["profile"]>) => void;
+}) {
   const { t } = useTranslation();
-  const [first, setFirst] = useState("Sarah");
-  const [last, setLast] = useState("Khoury");
-  const [brokerage, setBrokerage] = useState("Royal LePage Signature Realty");
-  const [province, setProvince] = useState("Ontario");
-  const [language, setLanguage] = useState("English · EN");
-  const [registration, setRegistration] = useState("RE-889-2201-TOR");
+  const savedFirst = saved?.fullName?.split(/\s+/)[0] ?? "";
+  const savedLast = saved?.fullName?.split(/\s+/).slice(1).join(" ") ?? "";
+  const fallbackFirst = signupName.split(/\s+/)[0] ?? "";
+  const fallbackLast = signupName.split(/\s+/).slice(1).join(" ");
+
+  const [first, setFirst] = useState(savedFirst || fallbackFirst);
+  const [last, setLast] = useState(savedLast || fallbackLast);
+  const [brokerage, setBrokerage] = useState(saved?.brokerage ?? "");
+  const [province, setProvince] = useState(saved?.province ?? "");
+  const [language, setLanguage] = useState(
+    saved?.preferredLanguage === "FR" ? "Français · FR" : "English · EN"
+  );
+  const [registration, setRegistration] = useState(saved?.licenseNumber ?? "");
 
   return (
     <StepScaffold
@@ -483,7 +535,25 @@ function StepProfile({ onBack, onContinue }: { onBack: () => void; onContinue: (
         <RDButton variant="outline" size="lg" onClick={onBack}>
           {t("rd.onboarding.profile.back", "Back")}
         </RDButton>
-        <RDButton variant="primary" size="lg" trailingIcon={<IconArrow />} onClick={onContinue}>
+        <RDButton
+          variant="primary"
+          size="lg"
+          trailingIcon={<IconArrow />}
+          onClick={() => {
+            // Persist before advancing. Previously every field in this step was
+            // local useState that was discarded on unmount -- only currentStep
+            // and completed ever reached the database, so the wizard collected
+            // answers and threw them away.
+            onSave({
+              fullName: [first, last].filter(Boolean).join(" ").trim(),
+              brokerage,
+              province,
+              licenseNumber: registration || undefined,
+              preferredLanguage: language.includes("FR") ? "FR" : "EN",
+            });
+            onContinue();
+          }}
+        >
           {t("rd.onboarding.profile.continueBtn", "Continue")}
         </RDButton>
       </div>
@@ -526,28 +596,37 @@ function StepDDF({ onBack, onContinue }: { onBack: () => void; onContinue: () =>
         </>
       }
     >
+      {/* This card used to render a fabricated connected feed: a green
+          "Connected" badge, "Toronto Regional Real Estate Board", "Matched
+          from your RECO # · 247 active listings", 247 listings / 89 new / <60s
+          sync -- entirely static markup with no query behind it. Every new
+          user was shown a DDF feed they had not connected, for a data source
+          that has produced zero rows in production. */}
       <div className="bg-white border border-rd-line rounded-[14px] p-6 mb-3.5">
         <div className="flex items-center gap-3.5 mb-4">
-          <div className="w-11 h-11 bg-rd-terra-600 text-white rounded-rd-md flex items-center justify-center font-bold">
+          <div className="w-11 h-11 bg-rd-ink-200 text-rd-ink-600 rounded-rd-md flex items-center justify-center font-bold">
             DDF
           </div>
           <div>
             <div className="text-[15px] font-semibold">
-              {t("rd.onboarding.ddf.boardName", "Toronto Regional Real Estate Board")}
+              {t("rd.onboarding.ddf.notConnectedTitle", "No DDF feed connected yet")}
             </div>
             <div className="text-xs text-rd-ink-500">
-              {t("rd.onboarding.ddf.boardMeta", "Matched from your RECO # · 247 active listings")}
+              {t(
+                "rd.onboarding.ddf.notConnectedMeta",
+                "Authorize RealtorDesk on member.realtor.ca, then connect your board here."
+              )}
             </div>
           </div>
-          <RDBadge tone="success" size="sm" className="ml-auto">
-            <IconCheck />
-            {t("rd.onboarding.ddf.connectedBadge", "Connected")}
+          <RDBadge tone="ghost" size="sm" className="ml-auto">
+            {t("rd.onboarding.ddf.notConnectedBadge", "Not connected")}
           </RDBadge>
         </div>
-        <div className="border-t border-rd-line pt-3.5 grid grid-cols-3 gap-3 text-xs">
-          <MiniStat k="247" v={t("rd.onboarding.ddf.statListings", "Listings")} />
-          <MiniStat k="89" v={t("rd.onboarding.ddf.statNewLast30d", "New last 30d")} />
-          <MiniStat k="< 60s" v={t("rd.onboarding.ddf.statSyncCadence", "Sync cadence")} />
+        <div className="border-t border-rd-line pt-3.5 text-xs text-rd-ink-500">
+          {t(
+            "rd.onboarding.ddf.skipNote",
+            "You can skip this and connect a feed later from Settings — it is not required to start using the CRM."
+          )}
         </div>
       </div>
 
@@ -780,14 +859,17 @@ function StepLive({ onContinue, busy }: { onContinue: () => void; busy: boolean 
               </RDBadge>
             </div>
             <div className="text-xs text-white/60 mt-0.5">
-              {t("rd.onboarding.live.listeningNote", "Listening on TRREB · EN + FR · Warm tone")}
+              {/* Was "Listening on TRREB", asserting a board connection the
+                  user has not made. */}
+              {t("rd.onboarding.live.listeningNote", "Ready · EN + FR")}
             </div>
           </div>
         </div>
         <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-4 pt-5 border-t border-white/10">
-          <LiveKpi k="247" v={t("rd.onboarding.live.kpiListings", "Listings synced")} />
+          {/* "247 listings synced" and "< 45s response SLA" were literals shown
+              to an account that had synced nothing and measured nothing. The two
+              remaining tiles state capabilities, not fabricated measurements. */}
           <LiveKpi k="EN · FR" v={t("rd.onboarding.live.kpiLanguages", "Languages")} />
-          <LiveKpi k="< 45s" v={t("rd.onboarding.live.kpiSla", "Response SLA")} />
           <LiveKpi k="24/7" v={t("rd.onboarding.live.kpiAlwaysOn", "Always on")} />
         </div>
       </div>

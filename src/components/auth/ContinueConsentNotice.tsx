@@ -9,7 +9,7 @@ import { LEGAL_ROUTES } from "@/config/legal";
 // repeatedly refused to enforce terms buried in a footer or rendered in low
 // contrast. So: placed directly under the submit button, at the same reading
 // size as the rest of the form, with links that are underlined and colour-
-// distinct (violet-300 measures 7.95:1 on the card, well past AA).
+// distinct. Links are rd-navy-700 on white, which measures well past AA.
 //
 // Signup additionally records WHAT was agreed and WHEN — see
 // buildConsentRecord() — because an inline notice with no acceptance trail is
@@ -25,13 +25,13 @@ import { LEGAL_ROUTES } from "@/config/legal";
 // force an unnatural sentence.
 
 const linkClass =
-  "text-violet-300 underline underline-offset-2 hover:text-violet-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300";
+  "text-rd-navy-700 underline underline-offset-2 hover:text-rd-navy-800 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-500";
 
 export function ContinueConsentNotice({ className = "" }: { className?: string }) {
   const { t } = useTranslation();
 
   return (
-    <p className={`text-center text-xs leading-relaxed text-gray-300 ${className}`}>
+    <p className={`text-center text-xs leading-relaxed text-rd-ink-600 ${className}`}>
       <Trans
         i18nKey="auth.consentNotice"
         t={t}

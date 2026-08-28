@@ -635,22 +635,25 @@ export const getImportHistory = async (userId: string, limit = 10) => {
   return data || [];
 };
 
-// Get Apify usage stats for a user
+// Get import usage stats for a user (today).
+// This previously queried an `apify_usage` table that does not exist in the
+// database, so every call errored and the stats were permanently 0/0.
+// import_history is the table the import flow actually writes to.
 export const getApifyUsageStats = async (userId: string) => {
   const { data, error } = await supabase
-    .from('apify_usage')
-    .select('*')
+    .from('import_history')
+    .select('saved_records')
     .eq('user_id', userId)
-    .gte('request_date', new Date().toISOString().split('T')[0])
+    .gte('created_at', new Date().toISOString().split('T')[0])
     .order('created_at', { ascending: false });
-  
+
   if (error) {
     console.error('Failed to get usage stats:', error);
     return { todayImports: 0, totalRecords: 0 };
   }
-  
+
   return {
     todayImports: data?.length || 0,
-    totalRecords: data?.reduce((sum, r) => sum + (r.records_fetched || 0), 0) || 0,
+    totalRecords: data?.reduce((sum, r) => sum + (r.saved_records || 0), 0) || 0,
   };
 };

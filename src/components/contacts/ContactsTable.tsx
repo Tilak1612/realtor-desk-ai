@@ -257,7 +257,7 @@ const ContactsTable = ({
                       <Button
                         variant="ghost"
                         size="icon"
-                        aria-label={t('a11y.rowActions', { name: contact.name, defaultValue: 'Actions for {{name}}' })}
+                        aria-label={t('a11y.rowActions', { name: [contact.first_name, contact.last_name].filter(Boolean).join(' ').trim() || contact.email, defaultValue: 'Actions for {{name}}' })}
                       >
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>

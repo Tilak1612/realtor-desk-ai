@@ -13,7 +13,17 @@ import { useSession } from "./useSession";
 // findLead(id) on the returned array; /app/pipeline groups by stage.
 
 const LEADS_COLUMNS =
-  "id, first_name, last_name, email, phone, ai_score, stage, source, preferred_language, last_contact_date, consent_date, metadata";
+  "id, first_name, last_name, email, phone, ai_score, stage, source, preferred_language, last_contact_date, consent_date, next_followup_date, metadata";
+
+// Newest first. This used to be ORDER BY ai_score DESC with the same 250 cap --
+// and since contacts.ai_score defaults to 0 and no create path sets it, every
+// newly created lead sorted to the very bottom. On a book of 30 contacts a new
+// lead was already off page 1; past 250 contacts it was never fetched at all,
+// by this hook or by Leads/Pipeline/Inbox/Reports which all read it.
+// created_at DESC makes the cap behave predictably: the most recent 250 are
+// always present, so a lead can never be created and then be invisible.
+const LEADS_ORDER_COLUMN = "created_at";
+const LEADS_FETCH_LIMIT = 250;
 
 interface UseLeadsResult {
   leads: Lead[];
@@ -33,8 +43,8 @@ export function useLeads(): UseLeadsResult {
         .from("contacts")
         .select(LEADS_COLUMNS)
         .eq("user_id", userId)
-        .order("ai_score", { ascending: false, nullsFirst: false })
-        .limit(250);
+        .order(LEADS_ORDER_COLUMN, { ascending: false })
+        .limit(LEADS_FETCH_LIMIT);
       if (error) throw new Error(error.message);
       return (data as ContactRow[]).map(mapContactToLead);
     },

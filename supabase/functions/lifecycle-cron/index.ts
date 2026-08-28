@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 import { isEmailSuppressed } from "../_shared/email-suppression.ts";
+import { buildCaslFooter } from "../_shared/casl-footer.ts";
 
 /**
  * Lifecycle Cron — Automated User Retention Engine
@@ -310,6 +311,40 @@ serve(async (req) => {
         continue;
       }
 
+      // CASL s.6(2) footer. These templates carry pricing and a "Subscribe Now"
+      // CTA, which makes them Commercial Electronic Messages -- but the only
+      // footer buildEmail() renders is the tagline "Built for Canadian Real
+      // Estate Agents". No sender identification, no physical mailing address,
+      // no unsubscribe mechanism. This cron runs daily, so that was a recurring
+      // violation rather than a latent one.
+      //
+      // Injected here rather than inside buildEmail() because the footer needs
+      // the recipient (to sign a per-recipient unsubscribe token) and is async,
+      // and buildEmail() is a sync function with six call sites.
+      let htmlWithFooter: string;
+      try {
+        const footer = await buildCaslFooter({
+          recipientEmail: user.email,
+          userId: user.id,
+          consentBasis: "implied", // existing business relationship: they signed up
+          locale: lang === "fr" ? "fr" : "en",
+        });
+        htmlWithFooter = template.html.includes("</body>")
+          ? template.html.replace("</body>", `${footer}</body>`)
+          : template.html + footer;
+      } catch (footerErr) {
+        // buildCaslFooter throws when UNSUBSCRIBE_TOKEN_SECRET is unset. Fail
+        // CLOSED: a CEM with no working opt-out is exactly the violation this
+        // code exists to prevent, so skip the send rather than ship it bare.
+        logStep("CASL footer unavailable, refusing send", {
+          userId: user.id,
+          event: eventType,
+          error: footerErr instanceof Error ? footerErr.message : String(footerErr),
+        });
+        results.errors++;
+        continue;
+      }
+
       // Send via Resend
       try {
         const emailRes = await fetch(RESEND_API_URL, {
@@ -322,7 +357,7 @@ serve(async (req) => {
             from: FROM_EMAIL,
             to: [user.email],
             subject: template.subject,
-            html: template.html,
+            html: htmlWithFooter,
           }),
         });
 

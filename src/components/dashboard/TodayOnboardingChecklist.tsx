@@ -146,11 +146,16 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
         defaultDesc: "Sync appointments into /today.",
         href: "/integrations",
         checkCompleted: async () => {
+          // This counted rows in `integrations`, which nothing in src/ ever
+          // writes. The only path that connects a calendar --
+          // oauth-integration-callback -- upserts into integration_connections.
+          // So step 5 could never complete: completedCount capped at 4/5 and
+          // the checklist never retired.
           const { count } = await supabase
-            .from("integrations")
+            .from("integration_connections")
             .select("*", { count: "exact", head: true })
             .eq("user_id", userId)
-            .in("provider", ["google-calendar", "outlook-calendar", "google", "microsoft"]);
+            .in("tool_slug", ["google-calendar", "outlook-calendar"]);
           return { done: (count ?? 0) > 0 };
         },
       },
@@ -256,7 +261,10 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
             <CardTitle className="text-base font-medium">
-              {t("onboarding.heading", "Getting started — 60 minutes, guided")}
+              {/* Said "60 minutes" while marketing says ~20 and the actual
+                  required work is three profile fields, one contact, one
+                  property, one acknowledgement and a calendar connect. */}
+              {t("onboarding.heading", "Getting started — about 10 minutes, guided")}
             </CardTitle>
             <Badge variant="secondary" className="ml-2 text-xs">
               {completedCount}/{steps.length}

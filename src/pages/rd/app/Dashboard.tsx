@@ -18,7 +18,7 @@ import {
   IconShield,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
-import type { ActivityItem, ReportMetric } from "@/types/rd";
+import type { ActivityItem, Lead, PipelineStage, ReportMetric } from "@/types/rd";
 import { useLeads, useLead } from "@/hooks/rd/useLeads";
 import { useSession } from "@/hooks/rd/useSession";
 import { useActivityFeed, useLeadsPerDay } from "@/hooks/rd/useDashboardFeed";
@@ -69,11 +69,11 @@ export default function Dashboard() {
             loading={activityLoading}
             leadsById={Object.fromEntries(liveLeads.map((l) => [l.id, l]))}
           />
-          <TodayCard />
+          <TodayCard leads={liveLeads} loading={leadsLoading} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
-          <PipelineSnapshotCard />
-          <LeadSourcesCard />
+          <PipelineSnapshotCard leads={liveLeads} loading={leadsLoading} />
+          <LeadSourcesCard leads={liveLeads} loading={leadsLoading} />
         </div>
       </div>
     </AppShell>
@@ -120,7 +120,7 @@ function Greeting({ firstName }: { firstName: string }) {
         <h1 className="text-[28px] lg:text-[32px] font-semibold tracking-[-0.02em] mt-1">
           {salute}, {firstName}.{" "}
           <span className="font-rd-serif italic font-normal text-rd-ink-500">
-            {t("rd.pages.dashboard.subhead", "Desk worked overnight.")}
+            {t("rd.pages.dashboard.subhead", "Here's where things stand.")}
           </span>
         </h1>
       </div>
@@ -246,49 +246,11 @@ interface AIEventRow {
   badge: ActivityBadge;
 }
 
-const AI_EVENTS: AIEventRow[] = [
-  {
-    time: "7:52 AM",
-    who: "Émilie Tremblay",
-    action: "asked about",
-    subject: "Le Plateau · $680K",
-    detail: "Booked showing tonight 7pm. Replied in French. Pre-approval mentioned.",
-    lang: "FR",
-    badge: { tone: "terra", label: "Hot · 92" },
-  },
-  {
-    time: "6:14 AM",
-    who: "Hassan Ahmed",
-    action: "requested",
-    subject: "Mississauga 3BR detached",
-    detail: "Sent 3 similar listings within 10-min radius. Asked about school catchment.",
-    badge: { tone: "navy", label: "Warm · 74" },
-  },
-  {
-    time: "3:08 AM",
-    who: "Chen Wei",
-    action: "replied to drip on",
-    subject: "Richmond BC townhomes",
-    detail: "Confirmed budget up to $1.1M CAD. Flagged for your follow-up call.",
-    badge: { tone: "terra", label: "Hot · 88" },
-  },
-  {
-    time: "1:42 AM",
-    who: "Anonymous visitor",
-    action: "inquired via form",
-    subject: "34 Dovercourt Rd",
-    detail: "Didn't leave phone. AI offered call-back slot. No response yet.",
-    badge: { tone: "neutral", label: "Cold · 31" },
-  },
-  {
-    time: "12:11 AM",
-    who: "Olivia Kenner",
-    action: "asked price on",
-    subject: "Leslieville semi",
-    detail: "AI shared last comparable sale ($1.34M, 22 Queen E). Scheduled follow-up Thursday.",
-    badge: { tone: "navy", label: "Warm · 68" },
-  },
-];
+// AI_EVENTS removed. Five fabricated events (Emilie Tremblay, Hassan Ahmed,
+// Chen Wei, an "Anonymous visitor", Olivia Kenner) rendered whenever the live
+// activity feed was empty -- independently of whether the account had leads --
+// under a green "Live" badge, disclosed only by a grey footer line. An account
+// with one real contact saw five named strangers presented as its own activity.
 
 function AIActivityCard({
   liveActivity,
@@ -316,10 +278,13 @@ function AIActivityCard({
             <IconSparkles />
           </div>
           <h3 className="text-base font-semibold">Desk AI activity</h3>
-          <RDBadge tone="success" size="sm">
-            <IconDot />
-            Live
-          </RDBadge>
+          {/* Only claim "Live" when we are actually rendering live rows. */}
+          {isLive && (
+            <RDBadge tone="success" size="sm">
+              <IconDot />
+              Live
+            </RDBadge>
+          )}
         </div>
         <div className="flex gap-1.5">
           {(["all", "responses", "showings"] as const).map((f) => (
@@ -356,14 +321,17 @@ function AIActivityCard({
             No events match this filter.
           </div>
         )}
-        {!loading && !isLive &&
-          AI_EVENTS.map((e, i) => <AIEvent key={i} {...e} />)}
+        {!loading && !isLive && (
+          <div className="px-6 py-8 text-center text-sm text-rd-ink-500">
+            No AI activity yet. Once Desk AI replies to a lead, it shows up here.
+          </div>
+        )}
       </div>
       <div className="px-6 py-3 border-t border-rd-line bg-rd-ink-50 flex items-center justify-between">
         <span className="text-xs text-rd-ink-600">
           {isLive
             ? `${liveActivity.length} events in the last 25`
-            : "Showing sample activity feed"}
+            : "No activity recorded yet"}
         </span>
         <RDButton variant="ghost" size="sm" trailingIcon={<IconArrow />}>
           Open activity log
@@ -437,152 +405,207 @@ function formatEventTime(iso: string): string {
   return d.toLocaleDateString("en-CA", { month: "short", day: "numeric" });
 }
 
-function AIEvent({ time, who, action, subject, detail, lang, badge }: AIEventRow) {
+// AIEvent renderer removed with AI_EVENTS -- nothing renders fixtures now.
+
+/* ────────────────────────────────────────────────────────── */
+
+// The three cards below were fully hardcoded: five named appointments, a
+// $4.8M pipeline that contradicted the live "Pipeline value" KPI on the same
+// screen, and a lead-source breakdown implying a DDF feed that has produced
+// zero rows. They now derive from the same liveLeads the KPI row uses, and
+// render an honest empty state when there is nothing to show.
+
+function CardEmpty({ message, ctaLabel, ctaHref }: { message: string; ctaLabel?: string; ctaHref?: string }) {
   return (
-    <div className="grid grid-cols-[60px_24px_1fr_auto] gap-3.5 px-6 py-3 items-start">
-      <div className="text-[11px] text-rd-ink-500 font-semibold tabular-nums tracking-[0.03em] pt-0.5">
-        {time}
-      </div>
-      <div className="flex flex-col items-center pt-1.5">
-        <div className="w-2 h-2 rounded-full bg-rd-terra-600" />
-      </div>
-      <div>
-        <div className="text-[13px]">
-          <span className="font-semibold">{who}</span>
-          <span className="text-rd-ink-500"> {action} </span>
-          <span className="font-medium">{subject}</span>
-          {lang && (
-            <span className="ml-2 text-[10px] font-bold tracking-[0.08em] bg-rd-terra-100 text-rd-terra-800 rounded-[4px] px-1.5 py-[1px]">
-              {lang}
-            </span>
-          )}
-        </div>
-        <div className="text-xs text-rd-ink-500 mt-0.5 leading-[1.5]">{detail}</div>
-      </div>
-      <RDBadge tone={badge.tone} size="sm">
-        {badge.label}
-      </RDBadge>
+    <div className="px-6 py-8 text-center">
+      <p className="text-[13px] text-rd-ink-500">{message}</p>
+      {ctaLabel && ctaHref && (
+        <Link
+          to={ctaHref}
+          className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-rd-navy-800 hover:underline"
+        >
+          {ctaLabel} <IconArrow />
+        </Link>
+      )}
     </div>
   );
 }
 
-/* ────────────────────────────────────────────────────────── */
+/** Follow-ups the user actually owes today, from contacts.next_followup_date. */
+function TodayCard({ leads, loading }: { leads: Lead[]; loading: boolean }) {
+  const due = useMemo(() => {
+    const todayEnd = new Date();
+    todayEnd.setHours(23, 59, 59, 999);
+    return leads
+      .filter((l) => l.nextFollowupDate && new Date(l.nextFollowupDate) <= todayEnd)
+      .sort((a, b) => (a.nextFollowupDate! < b.nextFollowupDate! ? -1 : 1))
+      .slice(0, 6);
+  }, [leads]);
 
-const TODAY_ITEMS: { time: string; kind: string; title: string; note: string; tone: "terra" | "navy" | "neutral" }[] = [
-  { time: "9:30 AM", kind: "Call", title: "Priya Shah", note: "Pre-approval walkthrough", tone: "terra" },
-  { time: "11:00 AM", kind: "Showing", title: "34 Dovercourt Rd", note: "with Olivia Kenner", tone: "navy" },
-  { time: "1:15 PM", kind: "Team", title: "Weekly stand-up", note: "Zoom · 30 min", tone: "neutral" },
-  { time: "4:00 PM", kind: "Showing", title: "Le Plateau condo", note: "with Émilie Tremblay · FR", tone: "terra" },
-  { time: "7:00 PM", kind: "Open house", title: "22 Westwood Pl.", note: "Oakville · 2 co-hosts", tone: "navy" },
-];
-
-function TodayCard() {
-  const TONE: Record<string, string> = {
-    terra: "border-rd-terra-600 text-rd-terra-700",
-    navy: "border-rd-navy-500 text-rd-navy-700",
-    neutral: "border-rd-ink-400 text-rd-ink-600",
-  };
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-5 border-b border-rd-line flex items-center justify-between">
-        <h3 className="text-base font-semibold">Today</h3>
-        <IconChevron className="text-rd-ink-500" />
+        <h3 className="text-base font-semibold">Follow-ups due</h3>
       </div>
-      <div className="px-6 py-4 flex flex-col gap-3.5">
-        {TODAY_ITEMS.map((t, i) => (
-          <div key={i} className="grid grid-cols-[56px_1fr] gap-3 items-start">
-            <div className="text-[11px] font-bold text-rd-ink-500 tabular-nums pt-1">{t.time}</div>
-            <div className={`border-l-2 pl-3 ${TONE[t.tone].split(" ")[0]}`}>
-              <span
-                className={`text-[10px] font-bold uppercase tracking-[0.06em] ${
-                  TONE[t.tone].split(" ")[1]
-                }`}
-              >
-                {t.kind}
+      {loading ? (
+        <div className="px-6 py-8 text-[13px] text-rd-ink-500">Loading…</div>
+      ) : due.length === 0 ? (
+        <CardEmpty
+          message="Nothing due today. Set a follow-up date on a lead and it appears here."
+          ctaLabel="Open leads"
+          ctaHref="/app/leads"
+        />
+      ) : (
+        <div className="px-6 py-4 flex flex-col gap-3.5">
+          {due.map((l) => (
+            <Link
+              key={l.id}
+              to={`/app/leads/${l.id}`}
+              className="border-l-2 border-rd-terra-600 pl-3 block hover:bg-rd-ink-50 rounded-r-rd-sm"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-[0.06em] text-rd-terra-700">
+                {l.stage}
               </span>
-              <div className="text-[13px] font-semibold mt-0.5">{t.title}</div>
-              <div className="text-xs text-rd-ink-500 mt-0.5">{t.note}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </RDCard>
-  );
-}
-
-/* ────────────────────────────────────────────────────────── */
-
-function PipelineSnapshotCard() {
-  const stages: { label: string; count: number; value: string; tone: string }[] = [
-    { label: "New leads", count: 24, value: "$1.2M", tone: "bg-rd-terra-600" },
-    { label: "Contacted", count: 18, value: "$1.8M", tone: "bg-rd-navy-500" },
-    { label: "Showing booked", count: 9, value: "$1.1M", tone: "bg-rd-navy-700" },
-    { label: "Offer", count: 3, value: "$0.7M", tone: "bg-rd-success" },
-  ];
-  return (
-    <RDCard padding={0} className="overflow-hidden">
-      <div className="px-6 py-5 border-b border-rd-line flex items-center justify-between">
-        <h3 className="text-sm font-semibold">Pipeline snapshot</h3>
-        <RDBadge tone="ghost" size="sm">
-          $4.8M
-        </RDBadge>
-      </div>
-      <div className="p-5">
-        <div className="flex h-2.5 rounded-[5px] overflow-hidden bg-rd-ink-100">
-          <div className="bg-rd-terra-600 w-[30%]" />
-          <div className="bg-rd-navy-500 w-[35%]" />
-          <div className="bg-rd-navy-700 w-[22%]" />
-          <div className="bg-rd-success w-[13%]" />
-        </div>
-        <div className="flex flex-col gap-2.5 mt-4">
-          {stages.map((s) => (
-            <div key={s.label} className="flex items-center gap-2.5 text-[13px]">
-              <span className={`w-2 h-2 rounded-full ${s.tone}`} />
-              <span className="flex-1">{s.label}</span>
-              <span className="text-rd-ink-500 text-xs">{s.count}</span>
-              <span className="font-semibold tabular-nums">{s.value}</span>
-            </div>
+              <div className="text-[13px] font-semibold mt-0.5">{l.name}</div>
+              <div className="text-xs text-rd-ink-500 mt-0.5">
+                Due {new Date(l.nextFollowupDate!).toLocaleDateString()}
+              </div>
+            </Link>
           ))}
         </div>
-        <Link
-          to="/app/pipeline"
-          className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-rd-navy-800 hover:underline"
-        >
-          Open pipeline <IconArrow />
-        </Link>
-      </div>
+      )}
     </RDCard>
   );
 }
 
-function LeadSourcesCard() {
-  const sources: { label: string; pct: number; count: number; tone: string }[] = [
-    { label: "CREA DDF", pct: 42, count: 63, tone: "bg-rd-navy-800" },
-    { label: "Website form", pct: 28, count: 42, tone: "bg-rd-terra-600" },
-    { label: "Facebook Ads", pct: 14, count: 21, tone: "bg-rd-navy-400" },
-    { label: "Referral", pct: 10, count: 15, tone: "bg-rd-success" },
-    { label: "Open house", pct: 6, count: 9, tone: "bg-rd-ink-400" },
-  ];
+/* ────────────────────────────────────────────────────────── */
+
+const SNAPSHOT_STAGES: { key: PipelineStage; label: string; tone: string }[] = [
+  { key: "new", label: "New leads", tone: "bg-rd-terra-600" },
+  { key: "contacted", label: "Contacted", tone: "bg-rd-navy-500" },
+  { key: "showing", label: "Showing booked", tone: "bg-rd-navy-700" },
+  { key: "offer", label: "Offer", tone: "bg-rd-success" },
+];
+
+function PipelineSnapshotCard({ leads, loading }: { leads: Lead[]; loading: boolean }) {
+  const { rows, total, anyValue } = useMemo(() => {
+    const rows = SNAPSHOT_STAGES.map((s) => {
+      const inStage = leads.filter((l) => l.stage === s.key);
+      return {
+        ...s,
+        count: inStage.length,
+        value: inStage.reduce((sum, l) => sum + (l.budgetCad ?? 0), 0),
+      };
+    });
+    const total = rows.reduce((sum, r) => sum + r.value, 0);
+    const counted = rows.reduce((sum, r) => sum + r.count, 0);
+    return { rows, total, anyValue: counted > 0 };
+  }, [leads]);
+
+  return (
+    <RDCard padding={0} className="overflow-hidden">
+      <div className="px-6 py-5 border-b border-rd-line flex items-center justify-between">
+        <h3 className="text-sm font-semibold">Pipeline snapshot · active stages</h3>
+        {/* Only badge a total when a budget is actually recorded; otherwise the
+            figure would read $0 next to real leads and look like a bug. */}
+        {total > 0 && (
+          <RDBadge tone="ghost" size="sm">
+            {formatCadShort(total)}
+          </RDBadge>
+        )}
+      </div>
+      {loading ? (
+        <div className="px-6 py-8 text-[13px] text-rd-ink-500">Loading…</div>
+      ) : !anyValue ? (
+        <CardEmpty message="No leads in the pipeline yet." ctaLabel="Open pipeline" ctaHref="/app/pipeline" />
+      ) : (
+        <div className="p-5">
+          <div className="flex h-2.5 rounded-[5px] overflow-hidden bg-rd-ink-100">
+            {rows.map((r) => {
+              const totalCount = rows.reduce((sum, x) => sum + x.count, 0);
+              const pct = totalCount > 0 ? (r.count / totalCount) * 100 : 0;
+              return pct > 0 ? (
+                <div key={r.key} className={r.tone} style={{ width: `${pct}%` }} />
+              ) : null;
+            })}
+          </div>
+          <div className="flex flex-col gap-2.5 mt-4">
+            {rows.map((r) => (
+              <div key={r.key} className="flex items-center gap-2.5 text-[13px]">
+                <span className={`w-2 h-2 rounded-full ${r.tone}`} />
+                <span className="flex-1">{r.label}</span>
+                <span className="text-rd-ink-500 text-xs">{r.count}</span>
+                <span className="font-semibold tabular-nums">
+                  {r.value > 0 ? formatCadShort(r.value) : "—"}
+                </span>
+              </div>
+            ))}
+          </div>
+          <Link
+            to="/app/pipeline"
+            className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-rd-navy-800 hover:underline"
+          >
+            Open pipeline <IconArrow />
+          </Link>
+        </div>
+      )}
+    </RDCard>
+  );
+}
+
+const SOURCE_TONES = [
+  "bg-rd-navy-800",
+  "bg-rd-terra-600",
+  "bg-rd-navy-400",
+  "bg-rd-success",
+  "bg-rd-ink-400",
+];
+
+function LeadSourcesCard({ leads, loading }: { leads: Lead[]; loading: boolean }) {
+  const sources = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const l of leads) {
+      const key = l.source || "Other";
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    const total = leads.length;
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([label, count], i) => ({
+        label,
+        count,
+        pct: total > 0 ? Math.round((count / total) * 100) : 0,
+        tone: SOURCE_TONES[i % SOURCE_TONES.length],
+      }));
+  }, [leads]);
+
   return (
     <RDCard padding={0} className="overflow-hidden">
       <div className="px-6 py-5 border-b border-rd-line">
-        <h3 className="text-sm font-semibold">Lead sources · 30d</h3>
+        <h3 className="text-sm font-semibold">Lead sources</h3>
       </div>
-      <div className="p-5 flex flex-col gap-3">
-        {sources.map((s) => (
-          <div key={s.label} className="text-[13px]">
-            <div className="flex justify-between mb-1.5">
-              <span>{s.label}</span>
-              <span className="text-rd-ink-500">
-                <span className="text-rd-ink-900 font-semibold mr-1">{s.count}</span>· {s.pct}%
-              </span>
+      {loading ? (
+        <div className="px-6 py-8 text-[13px] text-rd-ink-500">Loading…</div>
+      ) : sources.length === 0 ? (
+        <CardEmpty message="No leads yet, so there are no sources to break down." ctaLabel="Add a lead" ctaHref="/app/leads" />
+      ) : (
+        <div className="p-5 flex flex-col gap-3">
+          {sources.map((s) => (
+            <div key={s.label} className="text-[13px]">
+              <div className="flex justify-between mb-1.5">
+                <span>{s.label}</span>
+                <span className="text-rd-ink-500">
+                  <span className="text-rd-ink-900 font-semibold mr-1">{s.count}</span>· {s.pct}%
+                </span>
+              </div>
+              <div className="h-1.5 bg-rd-ink-100 rounded-[3px] overflow-hidden">
+                <div className={`h-full ${s.tone}`} style={{ width: `${s.pct}%` }} />
+              </div>
             </div>
-            <div className="h-1.5 bg-rd-ink-100 rounded-[3px] overflow-hidden">
-              <div className={`h-full ${s.tone}`} style={{ width: `${s.pct}%` }} />
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </RDCard>
   );
 }

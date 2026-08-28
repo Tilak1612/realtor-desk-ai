@@ -60,7 +60,20 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    let query = supabase
+    // The select() below embeds a related table, which already produces a
+    // PostgrestFilterBuilder generic near tsc's instantiation limit -- one more
+    // .eq() on it triggers TS2589 ("excessively deep"). Applying the filters
+    // through a minimal structural interface keeps the generic from being
+    // re-instantiated per branch. Runtime behaviour is identical: these are the
+    // same builder methods, called in the same order.
+    interface Filterable {
+      eq(column: string, value: unknown): Filterable;
+      neq(column: string, value: unknown): Filterable;
+      gte(column: string, value: unknown): Filterable;
+      lte(column: string, value: unknown): Filterable;
+    }
+
+    const baseQuery = supabase
       .from("deals")
       .select(`
         *,
@@ -72,22 +85,28 @@ const DealsKanban = ({ filter, refreshTrigger }: DealsKanbanProps) => {
       `)
       .eq("user_id", user.id);
 
+    let filtered = baseQuery as unknown as Filterable;
+
     if (filter === "active") {
-      query = query.eq("status", "active").neq("stage", "sold").neq("stage", "withdrawn");
+      filtered = filtered.eq("status", "active").neq("stage", "sold").neq("stage", "withdrawn");
     } else if (filter === "sold") {
-      query = query.eq("stage", "sold");
+      filtered = filtered.eq("stage", "sold");
     } else if (filter === "withdrawn") {
-      query = query.eq("stage", "withdrawn");
+      filtered = filtered.eq("stage", "withdrawn");
     } else if (filter === "buyer") {
-      query = query.eq("client_type", "buyer");
+      filtered = filtered.eq("client_type", "buyer");
     } else if (filter === "seller") {
-      query = query.eq("client_type", "seller");
+      filtered = filtered.eq("client_type", "seller");
     } else if (filter === "closing_this_month") {
       const now = new Date();
       const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
       const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-      query = query.gte("closing_date", startOfMonth.toISOString()).lte("closing_date", endOfMonth.toISOString());
+      filtered = filtered
+        .gte("closing_date", startOfMonth.toISOString())
+        .lte("closing_date", endOfMonth.toISOString());
     }
+
+    const query = filtered as unknown as typeof baseQuery;
 
     const { data, error } = await query.order("created_at", { ascending: false });
 

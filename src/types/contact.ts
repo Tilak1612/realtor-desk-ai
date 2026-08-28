@@ -7,10 +7,16 @@ export interface Contact {
   email: string;
   phone: string | null;
   source: string | null;
-  status: string | null;
+  // The column is `stage`, not `status`. This interface previously declared
+  // `status` and `lead_score`, neither of which exists on the contacts table --
+  // so every cast from a real query row was a lie and any read would have been
+  // undefined. Nothing read them; they are removed rather than mapped.
+  stage: string | null;
   tags: string[] | null;
   ai_score: number | null;
-  lead_score: number | null;
+  casl_consent: boolean | null;
+  next_followup_date: string | null;
+  notes: string | null;
   best_contact_time: string | null;
   last_contact_date: string | null;
   preferred_language: string | null;

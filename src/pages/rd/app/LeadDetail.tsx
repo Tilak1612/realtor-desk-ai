@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { useLead } from "@/hooks/rd/useLeads";
 import { useConversation, useSendMessage } from "@/hooks/rd/useConversation";
 import { useLeadScoreDetail } from "@/hooks/rd/useLeadScoreDetail";
+import { useRecordConsent, type ConsentSource } from "@/hooks/rd/useRecordConsent";
 import { useTranslation } from "react-i18next";
 
 // /app/leads/:id — Lead detail per rd-app.jsx Artboard_LeadDetail.
@@ -417,15 +418,7 @@ function LeadSidebar({ lead }: { lead: Lead }) {
         />
         <KVRow
           k="Consent"
-          v={
-            lead.caslConsentAt ? (
-              <span className="text-rd-success inline-flex items-center gap-1">
-                <IconCheck /> CASL on file · {formatShort(lead.caslConsentAt)}
-              </span>
-            ) : (
-              <span className="text-rd-ink-500">Not captured yet</span>
-            )
-          }
+          v={<ConsentControl leadId={lead.id} consentAt={lead.caslConsentAt} />}
         />
       </Section>
 
@@ -542,4 +535,112 @@ function formatCad(cents: number): string {
     currency: "CAD",
     maximumFractionDigits: 0,
   }).format(cents);
+}
+
+/* ────────────────────────────────────────────────────────── */
+
+const CONSENT_SOURCES: { value: ConsentSource; label: string }[] = [
+  { value: "verbal", label: "Verbal (phone or in person)" },
+  { value: "written", label: "Written (email or signed)" },
+  { value: "web_form", label: "Web form" },
+  { value: "existing_relationship", label: "Existing business relationship" },
+  { value: "referral", label: "Referral" },
+];
+
+/**
+ * Read-and-write CASL consent on a lead.
+ *
+ * Previously this was static text reading "Not captured yet" with no control
+ * anywhere in the product to change it. Combined with the Inbox send gate --
+ * which correctly refuses to message a contact without consent -- that made
+ * every contact created without the signup checkbox, and every CSV-imported
+ * contact, permanently unmessageable.
+ */
+function ConsentControl({ leadId, consentAt }: { leadId: string; consentAt?: string }) {
+  const [open, setOpen] = useState(false);
+  const [source, setSource] = useState<ConsentSource>("verbal");
+  const record = useRecordConsent();
+
+  if (consentAt && !open) {
+    return (
+      <span className="inline-flex items-center gap-2 flex-wrap">
+        <span className="text-rd-success inline-flex items-center gap-1">
+          <IconCheck /> CASL on file · {formatShort(consentAt)}
+        </span>
+        <button
+          type="button"
+          onClick={() => record.mutate({ contactId: leadId, granted: false })}
+          disabled={record.isPending}
+          className="text-[11px] font-semibold text-rd-ink-500 hover:text-rd-ink-900 underline disabled:opacity-50"
+        >
+          {record.isPending ? "Saving…" : "Withdraw"}
+        </button>
+      </span>
+    );
+  }
+
+  if (!open) {
+    return (
+      <span className="inline-flex items-center gap-2 flex-wrap">
+        <span className="text-rd-ink-500">Not captured yet</span>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="text-[11px] font-semibold text-rd-navy-800 hover:underline"
+        >
+          Record consent
+        </button>
+      </span>
+    );
+  }
+
+  return (
+    <span className="inline-flex flex-col gap-2 w-full">
+      <label className="text-[11px] font-semibold text-rd-ink-600">
+        How was consent obtained?
+        <select
+          value={source}
+          onChange={(e) => setSource(e.target.value as ConsentSource)}
+          className="mt-1 block w-full border border-rd-line rounded-rd-sm px-2 py-1.5 text-[13px] font-normal"
+        >
+          {CONSENT_SOURCES.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </label>
+      <span className="text-[11px] text-rd-ink-500">
+        Only record consent the contact actually gave you — under CASL you carry
+        the onus of proving it.
+      </span>
+      {record.isError && (
+        <span className="text-[11px] text-rd-danger">
+          {record.error instanceof Error ? record.error.message : "Could not save consent."}
+        </span>
+      )}
+      <span className="flex gap-2">
+        <button
+          type="button"
+          disabled={record.isPending}
+          onClick={() =>
+            record.mutate(
+              { contactId: leadId, granted: true, source },
+              { onSuccess: () => setOpen(false) }
+            )
+          }
+          className="px-3 py-1.5 text-[12px] font-semibold rounded-rd-sm bg-rd-navy-800 text-white disabled:opacity-50"
+        >
+          {record.isPending ? "Saving…" : "Save consent"}
+        </button>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="px-3 py-1.5 text-[12px] font-semibold rounded-rd-sm border border-rd-line"
+        >
+          Cancel
+        </button>
+      </span>
+    </span>
+  );
 }

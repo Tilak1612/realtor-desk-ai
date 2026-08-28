@@ -248,18 +248,26 @@ const CallWorkflow = () => {
 
       // Log call outcome as activity
       if (callOutcome) {
-        try {
-          // Use existing activities table with proper activity_type
-          await supabase.from("activities").insert({
+        // The table is contact_activities (there is no "activities" table), and
+        // the column is activity_date, not start_date. The old call also relied
+        // on try/catch, but supabase-js returns { error } rather than throwing --
+        // so this write failed silently and no call outcome ever reached the
+        // contact timeline. Surfaced to the user now, but non-blocking: the
+        // contact update above already succeeded.
+        const { error: activityError } = await supabase
+          .from("contact_activities")
+          .insert({
             user_id: user.id,
+            contact_id: contact.id,
             activity_type: "call_made",
             title: `Call with ${contact.first_name} ${contact.last_name || ''}`,
             description: `Outcome: ${callOutcome}${callNotes ? '\n\n' + callNotes : ''}`,
-            start_date: new Date().toISOString(),
-            contact_id: contact.id,
           });
-        } catch (activityError) {
+        if (activityError) {
           console.error("Error logging activity:", activityError);
+          toast.error("Call saved, but the timeline entry failed", {
+            description: activityError.message,
+          });
         }
 
         // Log adoption event

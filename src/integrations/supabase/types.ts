@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.17"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       adoption_events: {
@@ -87,6 +112,169 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      apify_usage: {
+        Row: {
+          actor_id: string
+          created_at: string
+          id: string
+          import_history_id: string | null
+          records_fetched: number
+          request_date: string
+          user_id: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          id?: string
+          import_history_id?: string | null
+          records_fetched?: number
+          request_date?: string
+          user_id: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          id?: string
+          import_history_id?: string | null
+          records_fetched?: number
+          request_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apify_usage_import_history_id_fkey"
+            columns: ["import_history_id"]
+            isOneToOne: false
+            referencedRelation: "import_history"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_enrollments: {
+        Row: {
+          completed_at: string | null
+          contact_id: string
+          current_step: number
+          enrolled_at: string
+          id: string
+          sequence_id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          contact_id: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          sequence_id: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          contact_id?: string
+          current_step?: number
+          enrolled_at?: string
+          id?: string
+          sequence_id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_enrollments_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "automation_enrollments_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "automation_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_sequence_steps: {
+        Row: {
+          created_at: string
+          hours: number | null
+          id: string
+          kind: string
+          label: string
+          position: number
+          sequence_id: string
+          template_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          hours?: number | null
+          id?: string
+          kind: string
+          label: string
+          position: number
+          sequence_id: string
+          template_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          hours?: number | null
+          id?: string
+          kind?: string
+          label?: string
+          position?: number
+          sequence_id?: string
+          template_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_sequence_steps_sequence_id_fkey"
+            columns: ["sequence_id"]
+            isOneToOne: false
+            referencedRelation: "automation_sequences"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      automation_sequences: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          last_run_at: string | null
+          name: string
+          stats_30d: Json
+          trigger: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          last_run_at?: string | null
+          name: string
+          stats_30d?: Json
+          trigger: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          last_run_at?: string | null
+          name?: string
+          stats_30d?: Json
+          trigger?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       automation_steps: {
         Row: {
@@ -461,6 +649,56 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversation_messages: {
+        Row: {
+          author: string
+          author_name: string | null
+          body: string
+          channel: string
+          created_at: string
+          id: string
+          language: string
+          lead_id: string
+          sent_at: string
+          system_note: string | null
+          user_id: string
+        }
+        Insert: {
+          author: string
+          author_name?: string | null
+          body: string
+          channel?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lead_id: string
+          sent_at?: string
+          system_note?: string | null
+          user_id: string
+        }
+        Update: {
+          author?: string
+          author_name?: string | null
+          body?: string
+          channel?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lead_id?: string
+          sent_at?: string
+          system_note?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_messages_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
         ]
@@ -1757,6 +1995,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_apify_rate_limit: {
+        Args: { checking_user_id: string; max_daily_imports?: number }
+        Returns: boolean
+      }
+      check_concurrent_import: {
+        Args: { checking_user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1910,6 +2156,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       activity_type: [
