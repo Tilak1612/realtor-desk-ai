@@ -384,3 +384,29 @@ So you do not retrace this:
 **Resend is the closest to working by a wide margin** — it is the only provider
 with DKIM, SPF and a return-path MX all correctly in place. Nothing else needs
 building; the send is refused purely on key scope / domain verification state.
+
+### Switching sender, either direction
+
+`scripts/auth-email-mode.sh` makes the choice cheap and reversible:
+
+```bash
+SUPABASE_ACCESS_TOKEN=<token> ./scripts/auth-email-mode.sh status
+SUPABASE_ACCESS_TOKEN=<token> ./scripts/auth-email-mode.sh supabase   # stopgap
+SUPABASE_ACCESS_TOKEN=<token> SMTP_USER=resend SMTP_PASS=<key> \
+  ./scripts/auth-email-mode.sh resend                                 # once verified
+```
+
+`supabase` drops the custom SMTP so Supabase's own mailer sends, and turns
+`mailer_autoconfirm` off in the same call — **self-service password reset and
+signup verification start working immediately, with no domain verification.**
+The cost is a `supabase.io` sender, weaker deliverability, and a sender
+Supabase documents as development-grade. Sensible as a stopgap at current
+volume; not a permanent answer.
+
+`resend` restores Resend SMTP once the domain is verified or a full-access key
+is installed.
+
+**Never turn `mailer_autoconfirm` off while sends are failing** — that strands
+every new signup at an unconfirmed account they cannot clear, which is worse
+than no email. Both paths above set it together with a working sender, and
+`status` shows which state you are in.
