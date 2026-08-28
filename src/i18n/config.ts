@@ -3011,7 +3011,7 @@ const resources = {
           avgResponseTime: "Avg response time",
           dealsClosed: "Deals closed",
           leadToShowing: "Lead → Showing",
-          revenueAttributed: "Revenue attributed"
+          revenueAttributed: "Closed-won value"
         },
         sections: {
           today: "Today",
@@ -6204,7 +6204,7 @@ const resources = {
           avgResponseTime: "Temps de réponse moyen",
           dealsClosed: "Transactions conclues",
           leadToShowing: "Client → Visite",
-          revenueAttributed: "Revenu attribué"
+          revenueAttributed: "Valeur des dossiers conclus"
         },
         sections: {
           today: "Aujourd'hui",

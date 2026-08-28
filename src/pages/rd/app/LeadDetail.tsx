@@ -370,12 +370,20 @@ function LeadSidebar({ lead }: { lead: Lead }) {
         <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-rd-terra-400">
           AI lead score
         </div>
-        <div className="flex items-baseline gap-2.5 mt-1.5">
-          <div className="text-[48px] font-bold tracking-[-0.02em]">{lead.score}</div>
-          <div className="text-xs text-white/60">
-            / 100 · {lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold"}
+        {/* The number used to render unconditionally from contacts.ai_score,
+            which defaults to 0 and is only written once calculate-lead-score
+            has run. So a lead with no score record showed "41 / 100 · Cold" in
+            48px type directly above "Not scored yet" — and every lead created
+            before scoring existed, or imported, showed that forever. The score
+            is now shown only when there is a scoring record behind it. */}
+        {scoreDetail?.factors && (
+          <div className="flex items-baseline gap-2.5 mt-1.5">
+            <div className="text-[48px] font-bold tracking-[-0.02em]">{lead.score}</div>
+            <div className="text-xs text-white/60">
+              / 100 · {lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold"}
+            </div>
           </div>
-        </div>
+        )}
         {/* Real weighted factors from calculate-lead-score. These four bars
             used to be derived from the score itself (Intent = score + 3,
             Urgency = score - 4, Budget fit = score) -- the same number drawn
@@ -433,10 +441,15 @@ function LeadSidebar({ lead }: { lead: Lead }) {
         {lead.aiNextBest && <KVRow k="AI next step" v={lead.aiNextBest} />}
       </Section>
 
-      {/* Viewed listings */}
-      <Section title="Viewed listings">
-        <ListingCard addr={lead.listing} meta="Primary interest" />
-      </Section>
+      {/* "Viewed listings" only appears when there is a listing to show. It
+          previously rendered the literal "New lead" under the heading
+          "Primary interest" for every lead in the system, since nothing writes
+          metadata.listing. */}
+      {lead.listing && (
+        <Section title="Viewed listings">
+          <ListingCard addr={lead.listing} meta="Primary interest" />
+        </Section>
+      )}
 
       {/* Timeline */}
       <Section title="Timeline">

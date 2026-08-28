@@ -160,8 +160,14 @@ export function useResponseTimeTrend(days: number = 21) {
         }
       }
 
+      // A single reply pair is not an average. With three seeded messages a
+      // minute apart this reported "Avg response time 1m" as the agent's own
+      // performance, directly above a panel saying the trend was not available
+      // yet. Below a real sample the honest answer is "not enough data", which
+      // the UI already renders as an em dash.
+      const MIN_REPLIES_FOR_AVERAGE = 5;
       const avgSeconds =
-        allDeltas.length > 0
+        allDeltas.length >= MIN_REPLIES_FOR_AVERAGE
           ? allDeltas.reduce((a, b) => a + b, 0) / allDeltas.length
           : null;
 

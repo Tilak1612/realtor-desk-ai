@@ -62,7 +62,9 @@ export function RDPipelineCard({ lead, className, onClick }: RDPipelineCardProps
               {lead.language}
             </span>
           </div>
-          <div className="text-[11px] text-rd-ink-500 truncate">{lead.listing}</div>
+          {lead.listing && (
+            <div className="text-[11px] text-rd-ink-500 truncate">{lead.listing}</div>
+          )}
         </div>
         {lead.aiHandling && (
           <RDBadge tone="terra" size="sm">

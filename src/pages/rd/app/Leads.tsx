@@ -222,7 +222,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
           <div className="text-[11px] text-rd-ink-500 truncate">{lead.email}</div>
         </div>
       </div>
-      <div className="text-rd-ink-700 truncate">{lead.listing}</div>
+      <div className="text-rd-ink-700 truncate">{lead.listing ?? <span className="text-rd-ink-400">—</span>}</div>
       <div>
         <span className="text-[11px] px-2 py-[2px] bg-rd-ink-100 text-rd-ink-700 rounded-[4px] font-semibold">
           {lead.source}
