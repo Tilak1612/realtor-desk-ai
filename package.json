@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "gen:favicons": "node scripts/generate-favicons.mjs"
+    "gen:favicons": "node scripts/generate-favicons.mjs",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

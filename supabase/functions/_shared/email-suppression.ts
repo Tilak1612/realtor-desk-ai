@@ -17,8 +17,16 @@ export async function isEmailSuppressed(
     .eq("email", normalized)
     .limit(1);
   if (error) {
-    console.error("[SUPPRESSION] check failed:", error.message);
-    return false; // fail-open on infra error; do not silently drop emails
+    // FAIL CLOSED. This previously returned false ("not suppressed") on any
+    // error, and the table it queries did not exist -- so every call errored
+    // and every unsubscribed contact kept receiving mail.
+    //
+    // Under CASL the sender bears the onus of proving consent, so the safe
+    // default when we cannot determine consent state is to NOT send. A
+    // withheld email is recoverable; an email to someone who withdrew consent
+    // is a violation carrying up to $1M (individual) / $10M (business).
+    console.error("[SUPPRESSION] check failed, refusing to send:", error.message);
+    return true;
   }
   return (data?.length ?? 0) > 0;
 }

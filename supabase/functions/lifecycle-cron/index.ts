@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 /**
  * Lifecycle Cron — Automated User Retention Engine
@@ -294,6 +295,17 @@ serve(async (req) => {
         .limit(1);
 
       if (existing && existing.length > 0) {
+        results.skipped++;
+        continue;
+      }
+
+      // CASL gate. Lifecycle mail is commercial electronic messaging once it
+      // goes beyond the transactional welcome, and this path had NO consent
+      // check at all -- a user who unsubscribed still received the full
+      // sequence. Checked immediately before dispatch so a withdrawal made
+      // mid-sequence takes effect on the very next send.
+      if (await isEmailSuppressed(supabase, user.email)) {
+        logStep("Suppressed recipient, refusing send", { userId: user.id, event: eventType });
         results.skipped++;
         continue;
       }

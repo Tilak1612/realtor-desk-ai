@@ -14,7 +14,7 @@ import {
   IconPlus,
 } from "@/components/rd";
 import { RDTabs } from "@/components/rd/Tabs";
-import { MOCK_LEADS } from "@/data/rd";
+import { DataError, EmptyLeads } from "@/components/rd/DataState";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
@@ -42,8 +42,10 @@ export default function Leads() {
 
   // Derive whether we're rendering real or fixture data. Real wins whenever
   // the current user has at least one contact.
-  const isLive = !loading && !error && liveLeads.length > 0;
-  const source: Lead[] = isLive ? liveLeads : MOCK_LEADS;
+  // Never substitute fixtures. This used to fall back to MOCK_LEADS whenever
+  // the query returned nothing OR errored -- so a schema/RLS fault rendered
+  // convincing fake leads while a real lead sat invisible behind the error.
+  const source: Lead[] = liveLeads;
 
   const counts = useMemo(() => {
     const hot = source.filter((l) => l.score >= 80).length;
@@ -107,18 +109,7 @@ export default function Leads() {
           </div>
         </div>
 
-        {/* Fixture banner — when the signed-in user has zero contacts we
-            render MOCK_LEADS so the UI is still legible in demos. Once any
-            row is imported via CSV or the Add-lead flow, this banner
-            disappears automatically and the table shows real data. */}
-        {!isLive && !loading && (
-          <div className="mb-4 px-4 py-2.5 bg-rd-terra-50 border border-rd-terra-200 rounded-rd-sm text-[12px] text-rd-terra-900 flex items-center gap-2">
-            <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
-            <span>
-              <strong>{t("rd.common.sampleLeads", "sample leads")}</strong>
-            </span>
-          </div>
-        )}
+        {error && <div className="mb-4"><DataError message={error.message} /></div>}
 
         {/* Tabs + sort */}
         <div className="flex items-center justify-between mb-4">
@@ -150,7 +141,10 @@ export default function Leads() {
           </div>
         </div>
 
-        {/* Table */}
+        {/* Table. A genuine zero-state replaces the old fixture fallback. */}
+        {!loading && !error && source.length === 0 ? (
+          <EmptyLeads onAdd={() => setAddOpen(true)} />
+        ) : (
         <div className="bg-white border border-rd-line rounded-rd-lg overflow-hidden shadow-rd-sm">
           <div
             style={GRID_STYLE}
@@ -170,6 +164,9 @@ export default function Leads() {
           ))}
         </div>
 
+        )}
+
+        {source.length > 0 && (
         <div className="mt-3 flex justify-between items-center text-xs text-rd-ink-500">
           <span>
             {t("rd.leads.showing", "Showing {{from}}–{{to}} of {{total}}", {
@@ -182,6 +179,7 @@ export default function Leads() {
             <Pagination page={safePage} pageCount={pageCount} onPage={setPage} />
           )}
         </div>
+        )}
       </div>
     </AppShell>
   );

@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -154,6 +155,17 @@ const handler = async (req: Request): Promise<Response> => {
           status: 404,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         }
+      );
+    }
+
+    // CASL gate. Refuse before scheduling, not just before sending: an
+    // enrolment created now would fire later against a contact who has
+    // already withdrawn consent. This path had no consent check at all.
+    if (!contact.email || (await isEmailSuppressed(supabase, contact.email))) {
+      console.log("[EMAIL-AUTOMATION] suppressed or missing recipient, refusing");
+      return new Response(
+        JSON.stringify({ success: false, suppressed: true, message: "Recipient has withdrawn consent" }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 

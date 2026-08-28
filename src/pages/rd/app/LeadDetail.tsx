@@ -12,7 +12,7 @@ import {
   IconHome,
   IconArrow,
 } from "@/components/rd";
-import { findLead as findMockLead, findConversation } from "@/data/rd";
+
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/hooks/rd/useLeads";
@@ -37,12 +37,11 @@ import { useConversation, useSendMessage } from "@/hooks/rd/useConversation";
 export default function LeadDetail() {
   const { id } = useParams<{ id: string }>();
   const { lead: liveLead, loading } = useLead(id);
-  const lead: Lead | undefined = liveLead ?? (id ? findMockLead(id) : undefined);
+  // Live-only. Resolving an unknown :id against fixtures meant a URL for a
+  // lead that does not exist rendered a convincing fake record.
+  const lead: Lead | undefined = liveLead;
   const { messages: liveMessages } = useConversation(id);
-  const mockMessages = id ? findConversation(id) : [];
-  const usingMock = !!liveLead === false && !!lead; // lead resolved via fixture
-  const messages: ConversationMessage[] =
-    liveMessages.length > 0 ? liveMessages : usingMock ? mockMessages : [];
+  const messages: ConversationMessage[] = liveMessages;
 
   if (loading && !lead) {
     return (
@@ -73,18 +72,6 @@ export default function LeadDetail() {
 
   return (
     <AppShell>
-      {usingMock && (
-        <div className="px-7 py-2 bg-rd-terra-50 border-b border-rd-terra-200 text-[12px] text-rd-terra-900 flex items-center gap-2">
-          <IconSparkles className="text-rd-terra-600 flex-shrink-0" />
-          <span>
-            Viewing <strong>sample lead</strong> from the demo dataset. Import real leads from{" "}
-            <Link to="/app/leads" className="underline font-semibold">
-              /app/leads
-            </Link>{" "}
-            to replace these.
-          </span>
-        </div>
-      )}
       <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] h-full overflow-hidden">
         <ConversationPane lead={lead} messages={messages} />
         <LeadSidebar lead={lead} />

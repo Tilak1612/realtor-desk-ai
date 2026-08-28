@@ -10,7 +10,7 @@ import {
   IconPhone,
   IconCalendar,
 } from "@/components/rd";
-import { MOCK_LEADS, MOCK_CONVERSATIONS } from "@/data/rd";
+
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
@@ -38,10 +38,11 @@ type FilterKey = "all" | "unread" | "ai" | "mine";
 export default function Inbox() {
   const { leads: liveLeads, loading: leadsLoading } = useLeads();
   const { latestByLead } = useInboxThreads();
-  const leadSource: Lead[] = !leadsLoading && liveLeads.length > 0 ? liveLeads : MOCK_LEADS;
+  // Live-only: a fabricated conversation is worse than an empty inbox.
+  const leadSource: Lead[] = liveLeads;
 
   const threadsWithConversations = useMemo(() => {
-    return leadSource.filter((l) => latestByLead[l.id] || MOCK_CONVERSATIONS[l.id]?.length);
+    return leadSource.filter((l) => latestByLead[l.id]);
   }, [leadSource, latestByLead]);
 
   const [activeId, setActiveId] = useState<string>(
@@ -56,7 +57,7 @@ export default function Inbox() {
     if (filter === "mine") items = items.filter((l) => !l.aiHandling);
     if (filter === "unread") {
       items = items.filter((l) => {
-        const last = latestByLead[l.id] ?? MOCK_CONVERSATIONS[l.id]?.slice(-1)[0];
+        const last = latestByLead[l.id];
         return last?.author === "lead";
       });
     }
@@ -112,7 +113,7 @@ function ThreadList({
   const { t } = useTranslation();
   // Unread = most recent message in a thread was authored by the lead.
   const unreadCount = threads.filter((l) => {
-    const last = latestByLead[l.id] ?? MOCK_CONVERSATIONS[l.id]?.slice(-1)[0];
+    const last = latestByLead[l.id];
     return last?.author === "lead" && l.id !== activeId;
   }).length;
   return (
@@ -196,7 +197,7 @@ function ThreadRow({
   onSelect: () => void;
   lastMessage: ConversationMessage | undefined;
 }) {
-  const last = lastMessage ?? MOCK_CONVERSATIONS[lead.id]?.slice(-1)[0];
+  const last = lastMessage;
   const preview = last?.body ?? "No messages yet.";
   const timeLabel = last ? new Date(last.sentAt).toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" }) : lead.lastActivity;
   const hasUnread = !active && last?.author === "lead";
@@ -273,9 +274,8 @@ function ThreadRow({
 function ActivePane({ lead }: { lead: Lead | undefined }) {
   const { t } = useTranslation();
   const { messages: liveMessages } = useConversation(lead?.id);
-  const mockMessages = lead ? MOCK_CONVERSATIONS[lead.id] ?? [] : [];
-  const messages: ConversationMessage[] =
-    liveMessages.length > 0 ? liveMessages : mockMessages;
+
+  const messages: ConversationMessage[] = liveMessages;
 
   const send = useSendMessage();
   const [draft, setDraft] = useState("");
