@@ -18,7 +18,6 @@ import {
   IconShield,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
-import { MOCK_DASHBOARD_METRICS } from "@/data/rd";
 import type { ActivityItem, ReportMetric } from "@/types/rd";
 import { useLeads, useLead } from "@/hooks/rd/useLeads";
 import { useSession } from "@/hooks/rd/useSession";
@@ -75,7 +74,6 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
           <PipelineSnapshotCard />
           <LeadSourcesCard />
-          <ComplianceCard />
         </div>
       </div>
     </AppShell>
@@ -153,6 +151,7 @@ function KPIRow({
   loading: boolean;
   liveLeadsSpark?: number[];
 }) {
+  const { t } = useTranslation();
   const SPARK_COLOURS: Record<string, string> = {
     leads_this_week: "var(--rd-navy-500)",
     response_time_avg: "var(--rd-success)",
@@ -161,44 +160,43 @@ function KPIRow({
   };
 
   const metrics: ReportMetric[] = useMemo(() => {
-    if (loading || liveLeads.length === 0) return MOCK_DASHBOARD_METRICS;
-
-    // Live rollups. Sparklines remain mock until a timeseries query lands.
+    // No fixture fallback. This used to return MOCK_DASHBOARD_METRICS whole
+    // when the account was empty and -- worse -- kept returning the mock
+    // response-time tile ("Avg response 38s, -14%") INSIDE the live branch,
+    // so a paying agent with real leads saw a fabricated number presented as
+    // their own performance. That number also appeared to corroborate the
+    // public "replies within 15 minutes" claim.
+    //
+    // Zero is a legitimate answer; invented is not. Sparklines render only
+    // from a real series, and the response-time tile is gone until a
+    // conversations timeseries exists to compute it honestly.
     const leadsCount = liveLeads.length;
-    const hotOrShowing = liveLeads.filter((l) => l.stage === "showing").length;
+    const showings = liveLeads.filter((l) => l.stage === "showing").length;
     const pipelineValue = liveLeads.reduce((sum, l) => sum + (l.budgetCad ?? 0), 0);
+    const hasSpark = !!liveLeadsSpark && liveLeadsSpark.length > 0;
 
     return [
       {
         key: "leads_this_week",
-        label: "Active leads",
+        label: t("rd.kpi.activeLeads", "Active leads"),
         value: String(leadsCount),
-        delta: undefined,
         deltaTone: "success",
-        // Prefer the live 7-day bucket when we have it, otherwise keep the
-        // mock curve so the tile never renders flat-empty during loading.
-        spark: liveLeadsSpark && liveLeadsSpark.length > 0
-          ? liveLeadsSpark
-          : MOCK_DASHBOARD_METRICS[0]?.spark,
+        spark: hasSpark ? liveLeadsSpark : undefined,
       },
-      // Response-time stays mock — needs a conversations timeseries.
-      MOCK_DASHBOARD_METRICS[1],
       {
         key: "showings_booked",
-        label: "Showings booked",
-        value: String(hotOrShowing),
+        label: t("rd.kpi.showingsBooked", "Showings booked"),
+        value: String(showings),
         deltaTone: "success",
-        spark: MOCK_DASHBOARD_METRICS[2]?.spark,
       },
       {
         key: "pipeline_value",
-        label: "Pipeline value",
+        label: t("rd.kpi.pipelineValue", "Pipeline value"),
         value: formatCadShort(pipelineValue),
         deltaTone: "success",
-        spark: MOCK_DASHBOARD_METRICS[3]?.spark,
       },
     ];
-  }, [liveLeads, loading, liveLeadsSpark]);
+  }, [liveLeads, liveLeadsSpark, t]);
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -589,45 +587,14 @@ function LeadSourcesCard() {
   );
 }
 
-function ComplianceCard() {
-  const rows: { label: string; done: number; total: number; warning?: boolean }[] = [
-    { label: "CASL consent on file", done: 234, total: 247 },
-    { label: "PIPEDA data requests", done: 2, total: 2 },
-    { label: "FINTRAC verifications", done: 9, total: 9 },
-    { label: "RECO disclosures", done: 12, total: 14, warning: true },
-  ];
-  return (
-    <RDCard padding={0} className="overflow-hidden">
-      <div className="px-6 py-5 border-b border-rd-line flex items-center justify-between">
-        <h3 className="text-sm font-semibold">Compliance</h3>
-        <IconShield className="text-rd-success" />
-      </div>
-      <div className="p-5 flex flex-col gap-3.5">
-        {rows.map((r) => {
-          const pct = (r.done / r.total) * 100;
-          return (
-            <div key={r.label}>
-              <div className="flex justify-between text-[13px] mb-1.5">
-                <span>{r.label}</span>
-                <span
-                  className={cn(
-                    "font-semibold",
-                    r.warning ? "text-rd-warning" : "text-rd-success"
-                  )}
-                >
-                  {r.done}/{r.total}
-                </span>
-              </div>
-              <div className="h-1 bg-rd-ink-100 rounded-[2px] overflow-hidden">
-                <div
-                  className={cn("h-full", r.warning ? "bg-rd-warning" : "bg-rd-success")}
-                  style={{ width: `${pct}%` }}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </RDCard>
-  );
-}
+// ComplianceCard removed 2026-08-14.
+//
+// It rendered three hardcoded counters -- "PIPEDA data requests 2/2",
+// "FINTRAC verifications 9/9", "RECO disclosures 12/14" -- with NO backing
+// tables. A schema sweep for fintrac/disclosure/consent/dsar/audit returned
+// nothing at all. On a product sold on Canadian compliance, fabricated
+// compliance counters are the highest-credibility-risk element on the page.
+//
+// It comes back when the data exists: FINTRAC records (ID type/number/
+// issuing jurisdiction, entity 30-day deadline, 5-year retention), a
+// disclosure log (RECO/OACIQ/BCFSA), and a DSAR workflow.

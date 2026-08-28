@@ -11,7 +11,7 @@ import {
   IconCalendar,
   IconChevron,
 } from "@/components/rd";
-import { MOCK_AUTOMATIONS } from "@/data/rd";
+import { EmptyGeneric } from "@/components/rd/DataState";
 import type { AutomationSequence, AutomationStep } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useAutomations, useToggleAutomation } from "@/hooks/rd/useAutomations";
@@ -31,7 +31,10 @@ export default function Automation() {
   const { t } = useTranslation();
   const { sequences: liveSequences, loading } = useAutomations();
   const isLive = !loading && liveSequences.length > 0;
-  const sequences = isLive ? liveSequences : MOCK_AUTOMATIONS;
+  // NB: with fixtures removed, "sample data" can no longer render — kept as a
+  // guard on mutation only.
+  // Live-only: a fabricated sequence implies automation is running when it is not.
+  const sequences = liveSequences;
 
   const [selectedId, setSelectedId] = useState<string>(sequences[0]?.id ?? "");
   const [filter, setFilter] = useState<ListFilter>("all");
@@ -58,11 +61,6 @@ export default function Automation() {
             <div className="text-xs text-rd-ink-500 font-semibold">
               {sequences.length} sequences · {totalEnrolled} leads enrolled · {totalReplied}{" "}
               conversions this month
-              {!isLive && !loading && (
-                <span className="ml-2 text-rd-terra-700">
-                  · {t("rd.common.sampleData", "sample data")}
-                </span>
-              )}
             </div>
             <h1 className="text-[28px] font-semibold tracking-[-0.02em] mt-0.5">
               {t("rd.pages.automation.title", "Automation")}

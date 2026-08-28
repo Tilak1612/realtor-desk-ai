@@ -332,7 +332,7 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/today" element={<ProtectedRoute><RequireBilling><Today /></RequireBilling></ProtectedRoute>} />
-          <Route path="/call-workflow/:contactId" element={<ProtectedRoute><CallWorkflow /></ProtectedRoute>} />
+          <Route path="/call-workflow/:contactId" element={<ProtectedRoute><RequireBilling><CallWorkflow /></RequireBilling></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><RequireBilling><Dashboard /></RequireBilling></ProtectedRoute>} />
           {/* Phase 3 redesign: /app/* product surfaces. Behind ProtectedRoute
               so the agent must be signed in, consistent with /dashboard. */}
@@ -355,8 +355,8 @@ const App = () => (
               Legacy Onboarding.tsx is left in the tree for reference. */}
           <Route path="/onboarding" element={<ProtectedRoute><RDOnboarding /></ProtectedRoute>} />
           <Route path="/contacts" element={<ProtectedRoute><RequireBilling><Contacts /></RequireBilling></ProtectedRoute>} />
-          <Route path="/contacts/:id" element={<ProtectedRoute><ContactDetail /></ProtectedRoute>} />
-          <Route path="/properties" element={<ProtectedRoute><Properties /></ProtectedRoute>} />
+          <Route path="/contacts/:id" element={<ProtectedRoute><RequireBilling><ContactDetail /></RequireBilling></ProtectedRoute>} />
+          <Route path="/properties" element={<ProtectedRoute><RequireBilling><Properties /></RequireBilling></ProtectedRoute>} />
           <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
           <Route path="/deals" element={<ProtectedRoute><RequireBilling><Deals /></RequireBilling></ProtectedRoute>} />
           <Route path="/tasks" element={<ProtectedRoute><RequireBilling><Tasks /></RequireBilling></ProtectedRoute>} />

@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { Resend } from "https://esm.sh/resend@2.0.0";
+import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -193,6 +194,19 @@ const handler = async (req: Request): Promise<Response> => {
       try {
         switch (step.action_type) {
           case "send_email": {
+            // CASL gate. Automation is commercial electronic messaging, so a
+            // withdrawn or unknown consent state must stop the send. This
+            // path previously had NO consent check of any kind: a contact who
+            // had unsubscribed would still be enrolled and mailed.
+            if (!contact.email) {
+              console.log("[RUN-AUTOMATION] no email on contact, skipping send");
+              break;
+            }
+            if (await isEmailSuppressed(supabase, contact.email)) {
+              console.log("[RUN-AUTOMATION] suppressed recipient, refusing send");
+              executionStatus = "skipped_suppressed";
+              break;
+            }
             const subject = replaceVariables(step.action_config.subject || "No Subject", contact);
             const bodyHtml = replaceVariables(step.action_config.body || "", contact)
               .split("\n")

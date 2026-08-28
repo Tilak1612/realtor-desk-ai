@@ -21,7 +21,8 @@ import {
   IconFilter,
   IconSparkles,
 } from "@/components/rd";
-import { MOCK_LEADS, PIPELINE_STAGES } from "@/data/rd";
+import { PIPELINE_STAGES } from "@/data/rd";
+import { DataError } from "@/components/rd/DataState";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
@@ -39,9 +40,11 @@ const COLUMNS: PipelineStage[] = ["new", "contacted", "qualified", "showing", "o
 export default function Pipeline() {
   const { t } = useTranslation();
   const [view, setView] = useState<ViewMode>("kanban");
-  const { leads: liveLeads, loading } = useLeads();
-  const isLive = !loading && liveLeads.length > 0;
-  const source: Lead[] = isLive ? liveLeads : MOCK_LEADS;
+  const { leads: liveLeads, loading, error } = useLeads();
+  // Live-only. Fixtures previously stood in on empty AND on error, which
+  // meant a failed query showed a full, fake pipeline.
+  const source: Lead[] = liveLeads;
+  const isLive = !loading && !error;
 
   const updateStage = useUpdateLeadStage();
   const [activeLead, setActiveLead] = useState<Lead | null>(null);
