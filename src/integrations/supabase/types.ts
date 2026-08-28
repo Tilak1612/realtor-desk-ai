@@ -1460,6 +1460,56 @@ export type Database = {
         }
         Relationships: []
       }
+      sms_consent: {
+        Row: {
+          consent_source: string | null
+          consent_type: string
+          contact_id: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          opted_in: boolean
+          opted_in_at: string | null
+          opted_out_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          consent_source?: string | null
+          consent_type?: string
+          contact_id: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          opted_in?: boolean
+          opted_in_at?: string | null
+          opted_out_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          consent_source?: string | null
+          consent_type?: string
+          contact_id?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          opted_in?: boolean
+          opted_in_at?: string | null
+          opted_out_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sms_consent_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: true
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           completed_at: string | null
