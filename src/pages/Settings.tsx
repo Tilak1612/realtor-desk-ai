@@ -567,7 +567,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
                 <Globe className="w-4 h-4" />
-                {t('app.settings.language')}
+                {t('app.settings.languageLabel', 'Language')}
               </CardTitle>
               <CardDescription className="text-xs">
                 {t('canadian.bilingual')}
@@ -576,7 +576,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
             <CardContent>
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-medium">{t('app.settings.language')}</h3>
+                  <h3 className="text-sm font-medium">{t('app.settings.languageLabel', 'Language')}</h3>
                   <p className="text-xs text-muted-foreground">
                     English / Français
                   </p>

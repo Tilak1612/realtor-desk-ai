@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 import { useSession } from "./useSession";
 import type { OnboardingState, OnboardingStepId } from "@/types/rd";
 import { DEFAULT_ONBOARDING_STATE } from "@/data/rd";
@@ -57,7 +58,7 @@ export function useOnboardingWizard(): UseOnboardingWizardResult {
         if (error.code === "PGRST116") return DEFAULT_ONBOARDING_STATE;
         throw new Error(error.message);
       }
-      const saved = (data?.wizard_state ?? null) as OnboardingState | null;
+      const saved = (data?.wizard_state ?? null) as unknown as OnboardingState | null;
       return saved ?? DEFAULT_ONBOARDING_STATE;
     },
     enabled: !!userId,
@@ -80,7 +81,7 @@ export function useOnboardingWizard(): UseOnboardingWizardResult {
       const { error } = await supabase
         .from(TABLE)
         .upsert(
-          { user_id: userId, wizard_state: next },
+          { user_id: userId, wizard_state: next as unknown as Json },
           { onConflict: "user_id" }
         );
       if (error) throw new Error(error.message);
@@ -142,7 +143,7 @@ export function useOnboardingWizard(): UseOnboardingWizardResult {
 
       const { error: wizardError } = await supabase
         .from(TABLE)
-        .upsert({ user_id: userId, wizard_state: next }, { onConflict: "user_id" });
+        .upsert({ user_id: userId, wizard_state: next as unknown as Json }, { onConflict: "user_id" });
       if (wizardError) throw new Error(wizardError.message);
 
       const { error: flagError } = await supabase

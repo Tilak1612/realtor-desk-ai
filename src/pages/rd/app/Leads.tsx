@@ -22,10 +22,11 @@ import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 
 // /app/leads — Leads table per rd-app.jsx Artboard_Leads.
 //
-// Data source: `useLeads()` queries public.contacts scoped to the
-// signed-in user via RLS. If the account has no rows yet, we fall back
-// to MOCK_LEADS so the UI stays legible — an inline banner above the
-// table says so, so fixtures are never mistaken for real data.
+// Data source: `useLeads()` queries public.contacts scoped to the signed-in
+// user via RLS. There is no fixture fallback: an empty account renders a real
+// zero-state and a failed query renders an error. Substituting fixtures on
+// error was how a real lead could be accepted and then sit invisible behind a
+// screen that looked healthy and full.
 
 const LEADS_GRID = "24px 2fr 1.4fr 1fr 1.4fr 1fr 1.2fr 100px";
 const GRID_STYLE = { display: "grid", gridTemplateColumns: LEADS_GRID };

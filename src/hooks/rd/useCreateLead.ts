@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { Json } from "@/integrations/supabase/types";
 import { useSession } from "./useSession";
 import type { PipelineStage } from "@/types/rd";
 
@@ -37,7 +38,9 @@ export function useCreateLead() {
     mutationFn: async (input: NewLeadInput) => {
       if (!userId) throw new Error("Not signed in.");
 
-      const metadata: Record<string, unknown> = {};
+      // Json, not Record<string, unknown>: only the former is assignable to a
+      // jsonb column, so this is the shape the compiler can actually check.
+      const metadata: Record<string, Json> = {};
       if (input.city) metadata.city = input.city;
       if (input.budgetCad) metadata.budgetCad = input.budgetCad;
 

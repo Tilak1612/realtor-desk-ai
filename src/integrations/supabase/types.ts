@@ -10,141 +10,30 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "13.0.5"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
-      activities: {
+      adoption_events: {
         Row: {
-          activity_type: string
-          address: string | null
-          all_day: boolean | null
-          contact_id: string | null
           created_at: string | null
-          deal_id: string | null
-          description: string | null
-          end_date: string | null
+          event_type: string
           id: string
-          is_recurring: boolean | null
-          lead_id: string | null
-          location: string | null
           metadata: Json | null
-          property_id: string | null
-          recurrence_rule: string | null
-          reminder_minutes: number | null
-          start_date: string
-          status: Database["public"]["Enums"]["activity_status"] | null
-          title: string
-          updated_at: string | null
           user_id: string
         }
         Insert: {
-          activity_type: string
-          address?: string | null
-          all_day?: boolean | null
-          contact_id?: string | null
           created_at?: string | null
-          deal_id?: string | null
-          description?: string | null
-          end_date?: string | null
+          event_type: string
           id?: string
-          is_recurring?: boolean | null
-          lead_id?: string | null
-          location?: string | null
           metadata?: Json | null
-          property_id?: string | null
-          recurrence_rule?: string | null
-          reminder_minutes?: number | null
-          start_date: string
-          status?: Database["public"]["Enums"]["activity_status"] | null
-          title: string
-          updated_at?: string | null
           user_id: string
         }
         Update: {
-          activity_type?: string
-          address?: string | null
-          all_day?: boolean | null
-          contact_id?: string | null
           created_at?: string | null
-          deal_id?: string | null
-          description?: string | null
-          end_date?: string | null
+          event_type?: string
           id?: string
-          is_recurring?: boolean | null
-          lead_id?: string | null
-          location?: string | null
           metadata?: Json | null
-          property_id?: string | null
-          recurrence_rule?: string | null
-          reminder_minutes?: number | null
-          start_date?: string
-          status?: Database["public"]["Enums"]["activity_status"] | null
-          title?: string
-          updated_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "activities_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "activities_deal_id_fkey"
-            columns: ["deal_id"]
-            isOneToOne: false
-            referencedRelation: "deals"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "activities_lead_id_fkey"
-            columns: ["lead_id"]
-            isOneToOne: false
-            referencedRelation: "leads"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "activities_property_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "activities_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      ai_conversations: {
-        Row: {
-          created_at: string
-          id: string
-          messages: Json
-          title: string | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          messages?: Json
-          title?: string | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          messages?: Json
-          title?: string | null
-          updated_at?: string
           user_id?: string
         }
         Relationships: []
@@ -171,7 +60,7 @@ export type Database = {
           id?: string
           insights?: string | null
           optimal_contact_time?: string | null
-          prediction_confidence: number
+          prediction_confidence?: number
           recommended_actions?: string[]
           score: number
           updated_at?: string
@@ -199,169 +88,13 @@ export type Database = {
           },
         ]
       }
-      apify_usage: {
-        Row: {
-          actor_id: string
-          created_at: string
-          credits_used: number | null
-          id: string
-          import_history_id: string | null
-          records_fetched: number | null
-          request_date: string
-          user_id: string
-        }
-        Insert: {
-          actor_id: string
-          created_at?: string
-          credits_used?: number | null
-          id?: string
-          import_history_id?: string | null
-          records_fetched?: number | null
-          request_date?: string
-          user_id: string
-        }
-        Update: {
-          actor_id?: string
-          created_at?: string
-          credits_used?: number | null
-          id?: string
-          import_history_id?: string | null
-          records_fetched?: number | null
-          request_date?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "apify_usage_import_history_id_fkey"
-            columns: ["import_history_id"]
-            isOneToOne: false
-            referencedRelation: "import_history"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "apify_usage_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      automation_enrollments: {
-        Row: {
-          automation_id: string
-          completed_at: string | null
-          contact_id: string
-          current_step: number
-          enrolled_at: string
-          id: string
-          metadata: Json | null
-          next_action_at: string | null
-          status: string
-        }
-        Insert: {
-          automation_id: string
-          completed_at?: string | null
-          contact_id: string
-          current_step?: number
-          enrolled_at?: string
-          id?: string
-          metadata?: Json | null
-          next_action_at?: string | null
-          status?: string
-        }
-        Update: {
-          automation_id?: string
-          completed_at?: string | null
-          contact_id?: string
-          current_step?: number
-          enrolled_at?: string
-          id?: string
-          metadata?: Json | null
-          next_action_at?: string | null
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "automation_enrollments_automation_id_fkey"
-            columns: ["automation_id"]
-            isOneToOne: false
-            referencedRelation: "email_automations"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "automation_enrollments_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      automation_logs: {
-        Row: {
-          action_type: string
-          automation_id: string
-          enrollment_id: string
-          error_message: string | null
-          executed_at: string
-          id: string
-          metadata: Json | null
-          status: string
-          step_id: string | null
-        }
-        Insert: {
-          action_type: string
-          automation_id: string
-          enrollment_id: string
-          error_message?: string | null
-          executed_at?: string
-          id?: string
-          metadata?: Json | null
-          status: string
-          step_id?: string | null
-        }
-        Update: {
-          action_type?: string
-          automation_id?: string
-          enrollment_id?: string
-          error_message?: string | null
-          executed_at?: string
-          id?: string
-          metadata?: Json | null
-          status?: string
-          step_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "automation_logs_automation_id_fkey"
-            columns: ["automation_id"]
-            isOneToOne: false
-            referencedRelation: "email_automations"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "automation_logs_enrollment_id_fkey"
-            columns: ["enrollment_id"]
-            isOneToOne: false
-            referencedRelation: "automation_enrollments"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "automation_logs_step_id_fkey"
-            columns: ["step_id"]
-            isOneToOne: false
-            referencedRelation: "automation_steps"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       automation_steps: {
         Row: {
           action_config: Json
           action_type: string
           automation_id: string
           created_at: string
+          delay_days: number
           id: string
           step_order: number
         }
@@ -370,6 +103,7 @@ export type Database = {
           action_type: string
           automation_id: string
           created_at?: string
+          delay_days?: number
           id?: string
           step_order: number
         }
@@ -378,6 +112,7 @@ export type Database = {
           action_type?: string
           automation_id?: string
           created_at?: string
+          delay_days?: number
           id?: string
           step_order?: number
         }
@@ -387,59 +122,6 @@ export type Database = {
             columns: ["automation_id"]
             isOneToOne: false
             referencedRelation: "email_automations"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      automation_workflows: {
-        Row: {
-          actions: Json | null
-          created_at: string | null
-          description: string | null
-          execution_count: number | null
-          id: string
-          is_active: boolean | null
-          last_executed_at: string | null
-          name: string
-          trigger_config: Json | null
-          trigger_type: string
-          updated_at: string | null
-          user_id: string
-        }
-        Insert: {
-          actions?: Json | null
-          created_at?: string | null
-          description?: string | null
-          execution_count?: number | null
-          id?: string
-          is_active?: boolean | null
-          last_executed_at?: string | null
-          name: string
-          trigger_config?: Json | null
-          trigger_type: string
-          updated_at?: string | null
-          user_id: string
-        }
-        Update: {
-          actions?: Json | null
-          created_at?: string | null
-          description?: string | null
-          execution_count?: number | null
-          id?: string
-          is_active?: boolean | null
-          last_executed_at?: string | null
-          name?: string
-          trigger_config?: Json | null
-          trigger_type?: string
-          updated_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "automation_workflows_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -495,7 +177,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          bot_name: string
+          bot_name?: string
           created_at?: string | null
           greeting_message?: string | null
           handoff_rules?: string | null
@@ -528,6 +210,7 @@ export type Database = {
       }
       contact_activities: {
         Row: {
+          activity_date: string
           activity_type: Database["public"]["Enums"]["activity_type"]
           contact_id: string
           created_at: string
@@ -539,6 +222,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          activity_date?: string
           activity_type: Database["public"]["Enums"]["activity_type"]
           contact_id: string
           created_at?: string
@@ -550,6 +234,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          activity_date?: string
           activity_type?: Database["public"]["Enums"]["activity_type"]
           contact_id?: string
           created_at?: string
@@ -652,33 +337,42 @@ export type Database = {
       contact_submissions: {
         Row: {
           created_at: string
+          description: string | null
+          duration: string | null
           email: string
           id: string
           message: string
           name: string
           phone: string | null
-          status: string | null
-          updated_at: string
+          status: string
+          title: string | null
+          variant: string | null
         }
         Insert: {
           created_at?: string
+          description?: string | null
+          duration?: string | null
           email: string
           id?: string
           message: string
           name: string
           phone?: string | null
-          status?: string | null
-          updated_at?: string
+          status?: string
+          title?: string | null
+          variant?: string | null
         }
         Update: {
           created_at?: string
+          description?: string | null
+          duration?: string | null
           email?: string
           id?: string
           message?: string
           name?: string
           phone?: string | null
-          status?: string | null
-          updated_at?: string
+          status?: string
+          title?: string | null
+          variant?: string | null
         }
         Relationships: []
       }
@@ -686,74 +380,80 @@ export type Database = {
         Row: {
           ai_score: number | null
           best_contact_time: string | null
+          casl_consent: boolean | null
           consent_date: string | null
           consent_given: boolean | null
           consent_source: string | null
           created_at: string | null
-          email: string
-          first_name: string
+          email: string | null
+          first_name: string | null
           id: string
           last_contact_date: string | null
           last_name: string | null
-          lead_score: number | null
           metadata: Json | null
+          next_followup_date: string | null
+          notes: string | null
           phone: string | null
           preferred_language: string | null
           source: string | null
-          status: string | null
+          stage: string | null
           tags: string[] | null
           unsubscribe_date: string | null
           unsubscribed: boolean | null
           updated_at: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           ai_score?: number | null
           best_contact_time?: string | null
+          casl_consent?: boolean | null
           consent_date?: string | null
           consent_given?: boolean | null
           consent_source?: string | null
           created_at?: string | null
-          email: string
-          first_name: string
+          email?: string | null
+          first_name?: string | null
           id?: string
           last_contact_date?: string | null
           last_name?: string | null
-          lead_score?: number | null
           metadata?: Json | null
+          next_followup_date?: string | null
+          notes?: string | null
           phone?: string | null
           preferred_language?: string | null
           source?: string | null
-          status?: string | null
+          stage?: string | null
           tags?: string[] | null
           unsubscribe_date?: string | null
           unsubscribed?: boolean | null
           updated_at?: string | null
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           ai_score?: number | null
           best_contact_time?: string | null
+          casl_consent?: boolean | null
           consent_date?: string | null
           consent_given?: boolean | null
           consent_source?: string | null
           created_at?: string | null
-          email?: string
-          first_name?: string
+          email?: string | null
+          first_name?: string | null
           id?: string
           last_contact_date?: string | null
           last_name?: string | null
-          lead_score?: number | null
           metadata?: Json | null
+          next_followup_date?: string | null
+          notes?: string | null
           phone?: string | null
           preferred_language?: string | null
           source?: string | null
-          status?: string | null
+          stage?: string | null
           tags?: string[] | null
           unsubscribe_date?: string | null
           unsubscribed?: boolean | null
           updated_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -765,9 +465,140 @@ export type Database = {
           },
         ]
       }
+      ddf_properties: {
+        Row: {
+          bathrooms: number | null
+          bedrooms: number | null
+          board: string | null
+          city: string | null
+          created_at: string
+          description: string | null
+          id: string
+          latitude: number | null
+          listed_at: string | null
+          listing_agent_name: string | null
+          listing_agent_phone: string | null
+          listing_brokerage: string | null
+          listing_type: string | null
+          longitude: number | null
+          lot_size_sqft: number | null
+          mls_number: string
+          photo_urls: string[] | null
+          postal_code: string | null
+          price: number | null
+          property_type: string | null
+          province: string | null
+          raw_payload: Json | null
+          source: string
+          square_feet: number | null
+          status: string | null
+          street_address: string | null
+          synced_at: string
+          updated_at: string
+          virtual_tour_url: string | null
+          year_built: number | null
+        }
+        Insert: {
+          bathrooms?: number | null
+          bedrooms?: number | null
+          board?: string | null
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          latitude?: number | null
+          listed_at?: string | null
+          listing_agent_name?: string | null
+          listing_agent_phone?: string | null
+          listing_brokerage?: string | null
+          listing_type?: string | null
+          longitude?: number | null
+          lot_size_sqft?: number | null
+          mls_number: string
+          photo_urls?: string[] | null
+          postal_code?: string | null
+          price?: number | null
+          property_type?: string | null
+          province?: string | null
+          raw_payload?: Json | null
+          source?: string
+          square_feet?: number | null
+          status?: string | null
+          street_address?: string | null
+          synced_at?: string
+          updated_at?: string
+          virtual_tour_url?: string | null
+          year_built?: number | null
+        }
+        Update: {
+          bathrooms?: number | null
+          bedrooms?: number | null
+          board?: string | null
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          latitude?: number | null
+          listed_at?: string | null
+          listing_agent_name?: string | null
+          listing_agent_phone?: string | null
+          listing_brokerage?: string | null
+          listing_type?: string | null
+          longitude?: number | null
+          lot_size_sqft?: number | null
+          mls_number?: string
+          photo_urls?: string[] | null
+          postal_code?: string | null
+          price?: number | null
+          property_type?: string | null
+          province?: string | null
+          raw_payload?: Json | null
+          source?: string
+          square_feet?: number | null
+          status?: string | null
+          street_address?: string | null
+          synced_at?: string
+          updated_at?: string
+          virtual_tour_url?: string | null
+          year_built?: number | null
+        }
+        Relationships: []
+      }
+      ddf_sync_log: {
+        Row: {
+          completed_at: string | null
+          error_details: Json | null
+          id: string
+          listings_errors: number | null
+          listings_fetched: number | null
+          listings_upserted: number | null
+          started_at: string
+          status: string
+        }
+        Insert: {
+          completed_at?: string | null
+          error_details?: Json | null
+          id?: string
+          listings_errors?: number | null
+          listings_fetched?: number | null
+          listings_upserted?: number | null
+          started_at?: string
+          status?: string
+        }
+        Update: {
+          completed_at?: string | null
+          error_details?: Json | null
+          id?: string
+          listings_errors?: number | null
+          listings_fetched?: number | null
+          listings_upserted?: number | null
+          started_at?: string
+          status?: string
+        }
+        Relationships: []
+      }
       deals: {
         Row: {
-          client_type: string | null
           closing_date: string | null
           commission_percentage: number | null
           contact_id: string | null
@@ -776,11 +607,8 @@ export type Database = {
           id: string
           listing_price: number | null
           metadata: Json | null
-          mls_number: string | null
           notes: string | null
           probability: number | null
-          property_address: string | null
-          property_type: string | null
           stage: string
           status: string | null
           title: string
@@ -789,7 +617,6 @@ export type Database = {
           value: number | null
         }
         Insert: {
-          client_type?: string | null
           closing_date?: string | null
           commission_percentage?: number | null
           contact_id?: string | null
@@ -798,11 +625,8 @@ export type Database = {
           id?: string
           listing_price?: number | null
           metadata?: Json | null
-          mls_number?: string | null
           notes?: string | null
           probability?: number | null
-          property_address?: string | null
-          property_type?: string | null
           stage?: string
           status?: string | null
           title: string
@@ -811,7 +635,6 @@ export type Database = {
           value?: number | null
         }
         Update: {
-          client_type?: string | null
           closing_date?: string | null
           commission_percentage?: number | null
           contact_id?: string | null
@@ -820,11 +643,8 @@ export type Database = {
           id?: string
           listing_price?: number | null
           metadata?: Json | null
-          mls_number?: string | null
           notes?: string | null
           probability?: number | null
-          property_address?: string | null
-          property_type?: string | null
           stage?: string
           status?: string | null
           title?: string
@@ -854,119 +674,45 @@ export type Database = {
           biggest_challenge: string | null
           brokerage: string | null
           comments: string | null
-          created_at: string | null
+          created_at: string
           current_crm: string | null
           email: string
           full_name: string
           id: string
-          phone: string
-          province: string
-          status: string | null
+          phone: string | null
+          province: string | null
+          status: string
           team_size: string | null
-          updated_at: string | null
         }
         Insert: {
           biggest_challenge?: string | null
           brokerage?: string | null
           comments?: string | null
-          created_at?: string | null
+          created_at?: string
           current_crm?: string | null
           email: string
           full_name: string
           id?: string
-          phone: string
-          province: string
-          status?: string | null
+          phone?: string | null
+          province?: string | null
+          status?: string
           team_size?: string | null
-          updated_at?: string | null
         }
         Update: {
           biggest_challenge?: string | null
           brokerage?: string | null
           comments?: string | null
-          created_at?: string | null
+          created_at?: string
           current_crm?: string | null
           email?: string
           full_name?: string
           id?: string
-          phone?: string
-          province?: string
-          status?: string | null
+          phone?: string | null
+          province?: string | null
+          status?: string
           team_size?: string | null
-          updated_at?: string | null
         }
         Relationships: []
-      }
-      documents: {
-        Row: {
-          category: string | null
-          contact_id: string | null
-          created_at: string | null
-          deal_id: string | null
-          file_name: string
-          file_path: string
-          file_size: number
-          file_type: string
-          id: string
-          property_id: string | null
-          user_id: string
-        }
-        Insert: {
-          category?: string | null
-          contact_id?: string | null
-          created_at?: string | null
-          deal_id?: string | null
-          file_name: string
-          file_path: string
-          file_size: number
-          file_type: string
-          id?: string
-          property_id?: string | null
-          user_id: string
-        }
-        Update: {
-          category?: string | null
-          contact_id?: string | null
-          created_at?: string | null
-          deal_id?: string | null
-          file_name?: string
-          file_path?: string
-          file_size?: number
-          file_type?: string
-          id?: string
-          property_id?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "documents_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "documents_deal_id_fkey"
-            columns: ["deal_id"]
-            isOneToOne: false
-            referencedRelation: "deals"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "documents_property_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "documents_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       email_automations: {
         Row: {
@@ -975,7 +721,6 @@ export type Database = {
           id: string
           name: string
           status: string
-          trigger_config: Json | null
           trigger_type: string
           updated_at: string
           user_id: string
@@ -986,7 +731,6 @@ export type Database = {
           id?: string
           name: string
           status?: string
-          trigger_config?: Json | null
           trigger_type: string
           updated_at?: string
           user_id: string
@@ -997,113 +741,33 @@ export type Database = {
           id?: string
           name?: string
           status?: string
-          trigger_config?: Json | null
           trigger_type?: string
           updated_at?: string
           user_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "email_automations_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      email_campaigns: {
-        Row: {
-          content: string | null
-          created_at: string | null
-          emails_bounced: number | null
-          emails_clicked: number | null
-          emails_opened: number | null
-          emails_sent: number | null
-          id: string
-          metadata: Json | null
-          name: string
-          recipient_count: number | null
-          scheduled_at: string | null
-          segment_filters: Json | null
-          sent_at: string | null
-          status: Database["public"]["Enums"]["campaign_status"] | null
-          subject: string
-          template_id: string | null
-          updated_at: string | null
-          user_id: string
-        }
-        Insert: {
-          content?: string | null
-          created_at?: string | null
-          emails_bounced?: number | null
-          emails_clicked?: number | null
-          emails_opened?: number | null
-          emails_sent?: number | null
-          id?: string
-          metadata?: Json | null
-          name: string
-          recipient_count?: number | null
-          scheduled_at?: string | null
-          segment_filters?: Json | null
-          sent_at?: string | null
-          status?: Database["public"]["Enums"]["campaign_status"] | null
-          subject: string
-          template_id?: string | null
-          updated_at?: string | null
-          user_id: string
-        }
-        Update: {
-          content?: string | null
-          created_at?: string | null
-          emails_bounced?: number | null
-          emails_clicked?: number | null
-          emails_opened?: number | null
-          emails_sent?: number | null
-          id?: string
-          metadata?: Json | null
-          name?: string
-          recipient_count?: number | null
-          scheduled_at?: string | null
-          segment_filters?: Json | null
-          sent_at?: string | null
-          status?: Database["public"]["Enums"]["campaign_status"] | null
-          subject?: string
-          template_id?: string | null
-          updated_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "email_campaigns_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       email_captures: {
         Row: {
           created_at: string
           email: string
           id: string
-          source: string | null
-          status: string | null
+          source: string
+          status: string
         }
         Insert: {
           created_at?: string
           email: string
           id?: string
-          source?: string | null
-          status?: string | null
+          source: string
+          status?: string
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
-          source?: string | null
-          status?: string | null
+          source?: string
+          status?: string
         }
         Relationships: []
       }
@@ -1161,49 +825,34 @@ export type Database = {
         }
         Relationships: []
       }
-      email_templates: {
+      email_suppressions: {
         Row: {
-          category: string | null
-          content: string
-          created_at: string | null
-          id: string
-          is_default: boolean | null
-          name: string
-          subject: string
-          updated_at: string | null
-          usage_count: number | null
-          user_id: string
+          contact_id: string | null
+          created_at: string
+          email: string
+          source: string
+          user_id: string | null
         }
         Insert: {
-          category?: string | null
-          content: string
-          created_at?: string | null
-          id?: string
-          is_default?: boolean | null
-          name: string
-          subject: string
-          updated_at?: string | null
-          usage_count?: number | null
-          user_id: string
+          contact_id?: string | null
+          created_at?: string
+          email: string
+          source: string
+          user_id?: string | null
         }
         Update: {
-          category?: string | null
-          content?: string
-          created_at?: string | null
-          id?: string
-          is_default?: boolean | null
-          name?: string
-          subject?: string
-          updated_at?: string | null
-          usage_count?: number | null
-          user_id?: string
+          contact_id?: string | null
+          created_at?: string
+          email?: string
+          source?: string
+          user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "email_templates_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "email_suppressions_contact_id_fkey"
+            columns: ["contact_id"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "contacts"
             referencedColumns: ["id"]
           },
         ]
@@ -1266,7 +915,6 @@ export type Database = {
       }
       import_history: {
         Row: {
-          completed_at: string | null
           created_at: string
           duplicate_records: number | null
           error_message: string | null
@@ -1277,13 +925,12 @@ export type Database = {
           raw_payload: Json | null
           saved_records: number | null
           source_url: string
-          started_at: string | null
           status: string
           total_records: number | null
+          updated_at: string
           user_id: string
         }
         Insert: {
-          completed_at?: string | null
           created_at?: string
           duplicate_records?: number | null
           error_message?: string | null
@@ -1294,13 +941,12 @@ export type Database = {
           raw_payload?: Json | null
           saved_records?: number | null
           source_url: string
-          started_at?: string | null
           status?: string
           total_records?: number | null
+          updated_at?: string
           user_id: string
         }
         Update: {
-          completed_at?: string | null
           created_at?: string
           duplicate_records?: number | null
           error_message?: string | null
@@ -1311,14 +957,135 @@ export type Database = {
           raw_payload?: Json | null
           saved_records?: number | null
           source_url?: string
-          started_at?: string | null
           status?: string
           total_records?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      integration_connections: {
+        Row: {
+          connected_account_label: string | null
+          connection_method: string | null
+          created_at: string
+          credentials_encrypted: string | null
+          id: string
+          last_reauth_email_sent_at: string | null
+          last_sync_at: string | null
+          last_sync_error: string | null
+          last_sync_status: string | null
+          status: string
+          sync_config: Json | null
+          sync_count_total: number | null
+          sync_direction: string | null
+          tool_slug: string
+          updated_at: string
+          user_id: string
+          webhook_token: string | null
+        }
+        Insert: {
+          connected_account_label?: string | null
+          connection_method?: string | null
+          created_at?: string
+          credentials_encrypted?: string | null
+          id?: string
+          last_reauth_email_sent_at?: string | null
+          last_sync_at?: string | null
+          last_sync_error?: string | null
+          last_sync_status?: string | null
+          status?: string
+          sync_config?: Json | null
+          sync_count_total?: number | null
+          sync_direction?: string | null
+          tool_slug: string
+          updated_at?: string
+          user_id: string
+          webhook_token?: string | null
+        }
+        Update: {
+          connected_account_label?: string | null
+          connection_method?: string | null
+          created_at?: string
+          credentials_encrypted?: string | null
+          id?: string
+          last_reauth_email_sent_at?: string | null
+          last_sync_at?: string | null
+          last_sync_error?: string | null
+          last_sync_status?: string | null
+          status?: string
+          sync_config?: Json | null
+          sync_count_total?: number | null
+          sync_direction?: string | null
+          tool_slug?: string
+          updated_at?: string
+          user_id?: string
+          webhook_token?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "integration_connections_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      integration_interest: {
+        Row: {
+          created_at: string
+          id: string
+          tool_slug: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          tool_slug: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          tool_slug?: string
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "import_history_user_id_fkey"
+            foreignKeyName: "integration_interest_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      integration_requests: {
+        Row: {
+          created_at: string
+          id: string
+          tool_name: string
+          use_case: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          tool_name: string
+          use_case?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          tool_name?: string
+          use_case?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "integration_requests_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -1373,228 +1140,50 @@ export type Database = {
           },
         ]
       }
-      lead_scores: {
+      lead_magnet_requests: {
         Row: {
-          calculated_at: string
-          communication_score: number | null
-          contact_id: string
           created_at: string
-          demographics_score: number | null
-          engagement_score: number | null
+          email: string
           id: string
-          property_match_score: number | null
-          quality: string
-          recency_score: number | null
-          score: number
         }
         Insert: {
-          calculated_at?: string
-          communication_score?: number | null
-          contact_id: string
           created_at?: string
-          demographics_score?: number | null
-          engagement_score?: number | null
+          email: string
           id?: string
-          property_match_score?: number | null
-          quality: string
-          recency_score?: number | null
-          score: number
         }
         Update: {
-          calculated_at?: string
-          communication_score?: number | null
-          contact_id?: string
           created_at?: string
-          demographics_score?: number | null
-          engagement_score?: number | null
+          email?: string
           id?: string
-          property_match_score?: number | null
-          quality?: string
-          recency_score?: number | null
-          score?: number
         }
         Relationships: []
       }
-      leads: {
+      oauth_state_store: {
         Row: {
-          assigned_to: string | null
-          budget_max: number | null
-          budget_min: number | null
-          converted_at: string | null
-          converted_to_contact_id: string | null
           created_at: string | null
-          email: string | null
-          first_name: string | null
+          expires_at: string
           id: string
-          last_contacted_at: string | null
-          last_name: string | null
-          looking_to: string | null
-          metadata: Json | null
-          notes: string | null
-          phone: string | null
-          preferred_locations: string[] | null
-          property_type_interest: string[] | null
-          quality: string | null
-          score: number | null
-          source: Database["public"]["Enums"]["lead_source"] | null
-          status: Database["public"]["Enums"]["lead_status"] | null
-          tags: string[] | null
-          timeline: string | null
-          updated_at: string | null
+          state: string
+          tool_slug: string
           user_id: string
         }
         Insert: {
-          assigned_to?: string | null
-          budget_max?: number | null
-          budget_min?: number | null
-          converted_at?: string | null
-          converted_to_contact_id?: string | null
           created_at?: string | null
-          email?: string | null
-          first_name?: string | null
+          expires_at: string
           id?: string
-          last_contacted_at?: string | null
-          last_name?: string | null
-          looking_to?: string | null
-          metadata?: Json | null
-          notes?: string | null
-          phone?: string | null
-          preferred_locations?: string[] | null
-          property_type_interest?: string[] | null
-          quality?: string | null
-          score?: number | null
-          source?: Database["public"]["Enums"]["lead_source"] | null
-          status?: Database["public"]["Enums"]["lead_status"] | null
-          tags?: string[] | null
-          timeline?: string | null
-          updated_at?: string | null
+          state: string
+          tool_slug: string
           user_id: string
         }
         Update: {
-          assigned_to?: string | null
-          budget_max?: number | null
-          budget_min?: number | null
-          converted_at?: string | null
-          converted_to_contact_id?: string | null
           created_at?: string | null
-          email?: string | null
-          first_name?: string | null
+          expires_at?: string
           id?: string
-          last_contacted_at?: string | null
-          last_name?: string | null
-          looking_to?: string | null
-          metadata?: Json | null
-          notes?: string | null
-          phone?: string | null
-          preferred_locations?: string[] | null
-          property_type_interest?: string[] | null
-          quality?: string | null
-          score?: number | null
-          source?: Database["public"]["Enums"]["lead_source"] | null
-          status?: Database["public"]["Enums"]["lead_status"] | null
-          tags?: string[] | null
-          timeline?: string | null
-          updated_at?: string | null
+          state?: string
+          tool_slug?: string
           user_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "leads_assigned_to_fkey"
-            columns: ["assigned_to"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "leads_converted_to_contact_id_fkey"
-            columns: ["converted_to_contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "leads_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      notes: {
-        Row: {
-          contact_id: string | null
-          content: string
-          created_at: string | null
-          deal_id: string | null
-          id: string
-          is_pinned: boolean | null
-          lead_id: string | null
-          property_id: string | null
-          updated_at: string | null
-          user_id: string
-        }
-        Insert: {
-          contact_id?: string | null
-          content: string
-          created_at?: string | null
-          deal_id?: string | null
-          id?: string
-          is_pinned?: boolean | null
-          lead_id?: string | null
-          property_id?: string | null
-          updated_at?: string | null
-          user_id: string
-        }
-        Update: {
-          contact_id?: string | null
-          content?: string
-          created_at?: string | null
-          deal_id?: string | null
-          id?: string
-          is_pinned?: boolean | null
-          lead_id?: string | null
-          property_id?: string | null
-          updated_at?: string | null
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "notes_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "notes_deal_id_fkey"
-            columns: ["deal_id"]
-            isOneToOne: false
-            referencedRelation: "deals"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "notes_lead_id_fkey"
-            columns: ["lead_id"]
-            isOneToOne: false
-            referencedRelation: "leads"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "notes_property_id_fkey"
-            columns: ["property_id"]
-            isOneToOne: false
-            referencedRelation: "properties"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "notes_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -1604,18 +1193,17 @@ export type Database = {
           company_name: string | null
           created_at: string | null
           email: string
+          first_contact_added_at: string | null
           full_name: string
           id: string
-          is_qa_account: boolean | null
-          license_expiry: string | null
+          is_demo: boolean
           license_number: string | null
           onboarding_completed: boolean | null
           onboarding_step: number | null
           phone: string | null
+          preferred_language: string
           primary_language: string | null
           province: string | null
-          province_code: string | null
-          regulatory_body: string | null
           role: string | null
           subscription_status:
             | Database["public"]["Enums"]["subscription_status"]
@@ -1623,7 +1211,6 @@ export type Database = {
           subscription_tier:
             | Database["public"]["Enums"]["subscription_tier"]
             | null
-          timezone: string | null
           trial_ends_at: string | null
           updated_at: string | null
         }
@@ -1634,18 +1221,17 @@ export type Database = {
           company_name?: string | null
           created_at?: string | null
           email: string
+          first_contact_added_at?: string | null
           full_name: string
           id: string
-          is_qa_account?: boolean | null
-          license_expiry?: string | null
+          is_demo?: boolean
           license_number?: string | null
           onboarding_completed?: boolean | null
           onboarding_step?: number | null
           phone?: string | null
+          preferred_language?: string
           primary_language?: string | null
           province?: string | null
-          province_code?: string | null
-          regulatory_body?: string | null
           role?: string | null
           subscription_status?:
             | Database["public"]["Enums"]["subscription_status"]
@@ -1653,7 +1239,6 @@ export type Database = {
           subscription_tier?:
             | Database["public"]["Enums"]["subscription_tier"]
             | null
-          timezone?: string | null
           trial_ends_at?: string | null
           updated_at?: string | null
         }
@@ -1664,18 +1249,17 @@ export type Database = {
           company_name?: string | null
           created_at?: string | null
           email?: string
+          first_contact_added_at?: string | null
           full_name?: string
           id?: string
-          is_qa_account?: boolean | null
-          license_expiry?: string | null
+          is_demo?: boolean
           license_number?: string | null
           onboarding_completed?: boolean | null
           onboarding_step?: number | null
           phone?: string | null
+          preferred_language?: string
           primary_language?: string | null
           province?: string | null
-          province_code?: string | null
-          regulatory_body?: string | null
           role?: string | null
           subscription_status?:
             | Database["public"]["Enums"]["subscription_status"]
@@ -1683,135 +1267,10 @@ export type Database = {
           subscription_tier?:
             | Database["public"]["Enums"]["subscription_tier"]
             | null
-          timezone?: string | null
           trial_ends_at?: string | null
           updated_at?: string | null
         }
         Relationships: []
-      }
-      properties: {
-        Row: {
-          address: string
-          bathrooms: number | null
-          bedrooms: number | null
-          city: string | null
-          contact_id: string | null
-          created_at: string | null
-          data_source: string | null
-          days_on_market: number | null
-          deal_id: string | null
-          description: string | null
-          features: Json | null
-          id: string
-          image_url: string | null
-          images: Json | null
-          last_synced_at: string | null
-          listing_type: string | null
-          lot_size: number | null
-          metadata: Json | null
-          mls_number: string | null
-          postal_code: string | null
-          price: number | null
-          property_type: string | null
-          province: string | null
-          source_url: string | null
-          square_feet: number | null
-          status: Database["public"]["Enums"]["property_status"] | null
-          title: string
-          updated_at: string | null
-          user_id: string
-          virtual_tour_url: string | null
-          year_built: number | null
-        }
-        Insert: {
-          address: string
-          bathrooms?: number | null
-          bedrooms?: number | null
-          city?: string | null
-          contact_id?: string | null
-          created_at?: string | null
-          data_source?: string | null
-          days_on_market?: number | null
-          deal_id?: string | null
-          description?: string | null
-          features?: Json | null
-          id?: string
-          image_url?: string | null
-          images?: Json | null
-          last_synced_at?: string | null
-          listing_type?: string | null
-          lot_size?: number | null
-          metadata?: Json | null
-          mls_number?: string | null
-          postal_code?: string | null
-          price?: number | null
-          property_type?: string | null
-          province?: string | null
-          source_url?: string | null
-          square_feet?: number | null
-          status?: Database["public"]["Enums"]["property_status"] | null
-          title: string
-          updated_at?: string | null
-          user_id: string
-          virtual_tour_url?: string | null
-          year_built?: number | null
-        }
-        Update: {
-          address?: string
-          bathrooms?: number | null
-          bedrooms?: number | null
-          city?: string | null
-          contact_id?: string | null
-          created_at?: string | null
-          data_source?: string | null
-          days_on_market?: number | null
-          deal_id?: string | null
-          description?: string | null
-          features?: Json | null
-          id?: string
-          image_url?: string | null
-          images?: Json | null
-          last_synced_at?: string | null
-          listing_type?: string | null
-          lot_size?: number | null
-          metadata?: Json | null
-          mls_number?: string | null
-          postal_code?: string | null
-          price?: number | null
-          property_type?: string | null
-          province?: string | null
-          source_url?: string | null
-          square_feet?: number | null
-          status?: Database["public"]["Enums"]["property_status"] | null
-          title?: string
-          updated_at?: string | null
-          user_id?: string
-          virtual_tour_url?: string | null
-          year_built?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "properties_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "properties_deal_id_fkey"
-            columns: ["deal_id"]
-            isOneToOne: false
-            referencedRelation: "deals"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "properties_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       property_interests: {
         Row: {
@@ -1872,7 +1331,10 @@ export type Database = {
           bathrooms: number | null
           bedrooms: number | null
           city: string | null
+          country: string | null
           created_at: string
+          currency: string | null
+          data_source: string | null
           description: string | null
           features: Json | null
           id: string
@@ -1881,12 +1343,19 @@ export type Database = {
           listing_type: string | null
           lot_size: number | null
           metadata: Json | null
+          mls_number: string | null
+          photos_json: Json | null
           postal_code: string | null
           price: number | null
           property_type: string | null
           province: string | null
+          raw_source_payload: Json | null
+          realtor_ca_url: string | null
+          source: string | null
+          source_listing_id: string | null
           square_feet: number | null
           status: string | null
+          street: string | null
           title: string
           updated_at: string
           user_id: string
@@ -1897,7 +1366,10 @@ export type Database = {
           bathrooms?: number | null
           bedrooms?: number | null
           city?: string | null
+          country?: string | null
           created_at?: string
+          currency?: string | null
+          data_source?: string | null
           description?: string | null
           features?: Json | null
           id?: string
@@ -1906,12 +1378,19 @@ export type Database = {
           listing_type?: string | null
           lot_size?: number | null
           metadata?: Json | null
+          mls_number?: string | null
+          photos_json?: Json | null
           postal_code?: string | null
           price?: number | null
           property_type?: string | null
           province?: string | null
+          raw_source_payload?: Json | null
+          realtor_ca_url?: string | null
+          source?: string | null
+          source_listing_id?: string | null
           square_feet?: number | null
           status?: string | null
+          street?: string | null
           title: string
           updated_at?: string
           user_id: string
@@ -1922,7 +1401,10 @@ export type Database = {
           bathrooms?: number | null
           bedrooms?: number | null
           city?: string | null
+          country?: string | null
           created_at?: string
+          currency?: string | null
+          data_source?: string | null
           description?: string | null
           features?: Json | null
           id?: string
@@ -1931,12 +1413,19 @@ export type Database = {
           listing_type?: string | null
           lot_size?: number | null
           metadata?: Json | null
+          mls_number?: string | null
+          photos_json?: Json | null
           postal_code?: string | null
           price?: number | null
           property_type?: string | null
           province?: string | null
+          raw_source_payload?: Json | null
+          realtor_ca_url?: string | null
+          source?: string | null
+          source_listing_id?: string | null
           square_feet?: number | null
           status?: string | null
+          street?: string | null
           title?: string
           updated_at?: string
           user_id?: string
@@ -1950,7 +1439,6 @@ export type Database = {
           created_at: string
           id: string
           scheduled_for: string
-          sent_at: string | null
           status: string
           type: string
         }
@@ -1959,7 +1447,6 @@ export type Database = {
           created_at?: string
           id?: string
           scheduled_for: string
-          sent_at?: string | null
           status?: string
           type: string
         }
@@ -1968,172 +1455,10 @@ export type Database = {
           created_at?: string
           id?: string
           scheduled_for?: string
-          sent_at?: string | null
           status?: string
           type?: string
         }
         Relationships: []
-      }
-      sms_consent: {
-        Row: {
-          consent_source: string | null
-          contact_id: string
-          created_at: string
-          id: string
-          opted_in: boolean
-          opted_in_at: string | null
-          opted_out_at: string | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          consent_source?: string | null
-          contact_id: string
-          created_at?: string
-          id?: string
-          opted_in?: boolean
-          opted_in_at?: string | null
-          opted_out_at?: string | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          consent_source?: string | null
-          contact_id?: string
-          created_at?: string
-          id?: string
-          opted_in?: boolean
-          opted_in_at?: string | null
-          opted_out_at?: string | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "sms_consent_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "sms_consent_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      sms_messages: {
-        Row: {
-          contact_id: string | null
-          created_at: string
-          delivered_at: string | null
-          direction: string
-          error_message: string | null
-          from_phone: string | null
-          id: string
-          message: string
-          sent_at: string | null
-          status: string
-          to_phone: string
-          twilio_sid: string | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          contact_id?: string | null
-          created_at?: string
-          delivered_at?: string | null
-          direction?: string
-          error_message?: string | null
-          from_phone?: string | null
-          id?: string
-          message: string
-          sent_at?: string | null
-          status?: string
-          to_phone: string
-          twilio_sid?: string | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          contact_id?: string | null
-          created_at?: string
-          delivered_at?: string | null
-          direction?: string
-          error_message?: string | null
-          from_phone?: string | null
-          id?: string
-          message?: string
-          sent_at?: string | null
-          status?: string
-          to_phone?: string
-          twilio_sid?: string | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "sms_messages_contact_id_fkey"
-            columns: ["contact_id"]
-            isOneToOne: false
-            referencedRelation: "contacts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "sms_messages_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      sms_templates: {
-        Row: {
-          category: string | null
-          created_at: string
-          id: string
-          message: string
-          name: string
-          updated_at: string
-          usage_count: number | null
-          user_id: string
-          variables: string[] | null
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string
-          id?: string
-          message: string
-          name: string
-          updated_at?: string
-          usage_count?: number | null
-          user_id: string
-          variables?: string[] | null
-        }
-        Update: {
-          category?: string | null
-          created_at?: string
-          id?: string
-          message?: string
-          name?: string
-          updated_at?: string
-          usage_count?: number | null
-          user_id?: string
-          variables?: string[] | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "sms_templates_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       tasks: {
         Row: {
@@ -2249,6 +1574,78 @@ export type Database = {
           },
         ]
       }
+      user_feedback: {
+        Row: {
+          comment: string | null
+          created_at: string | null
+          feedback_type: string | null
+          id: string
+          metadata: Json | null
+          page_url: string | null
+          user_id: string
+          was_helpful: boolean | null
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string | null
+          feedback_type?: string | null
+          id?: string
+          metadata?: Json | null
+          page_url?: string | null
+          user_id: string
+          was_helpful?: boolean | null
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string | null
+          feedback_type?: string | null
+          id?: string
+          metadata?: Json | null
+          page_url?: string | null
+          user_id?: string
+          was_helpful?: boolean | null
+        }
+        Relationships: []
+      }
+      user_onboarding: {
+        Row: {
+          created_at: string
+          dismissed_at: string | null
+          step_calendar_connected_at: string | null
+          step_first_contact_at: string | null
+          step_first_property_at: string | null
+          step_profile_at: string | null
+          step_website_widget_ack_at: string | null
+          updated_at: string
+          user_id: string
+          wizard_state: Json | null
+        }
+        Insert: {
+          created_at?: string
+          dismissed_at?: string | null
+          step_calendar_connected_at?: string | null
+          step_first_contact_at?: string | null
+          step_first_property_at?: string | null
+          step_profile_at?: string | null
+          step_website_widget_ack_at?: string | null
+          updated_at?: string
+          user_id: string
+          wizard_state?: Json | null
+        }
+        Update: {
+          created_at?: string
+          dismissed_at?: string | null
+          step_calendar_connected_at?: string | null
+          step_first_contact_at?: string | null
+          step_first_property_at?: string | null
+          step_profile_at?: string | null
+          step_website_widget_ack_at?: string | null
+          updated_at?: string
+          user_id?: string
+          wizard_state?: Json | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -2270,23 +1667,46 @@ export type Database = {
         }
         Relationships: []
       }
+      webhook_events: {
+        Row: {
+          connection_id: string | null
+          id: string
+          payload: Json | null
+          received_at: string | null
+          tool_slug: string
+          user_id: string
+        }
+        Insert: {
+          connection_id?: string | null
+          id?: string
+          payload?: Json | null
+          received_at?: string | null
+          tool_slug: string
+          user_id: string
+        }
+        Update: {
+          connection_id?: string | null
+          id?: string
+          payload?: Json | null
+          received_at?: string | null
+          tool_slug?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webhook_events_connection_id_fkey"
+            columns: ["connection_id"]
+            isOneToOne: false
+            referencedRelation: "integration_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      check_apify_rate_limit: {
-        Args: { checking_user_id: string; max_daily_imports?: number }
-        Returns: boolean
-      }
-      check_concurrent_import: {
-        Args: { checking_user_id: string }
-        Returns: boolean
-      }
-      check_contact_exists: {
-        Args: { checking_user_id: string; contact_id: string }
-        Returns: boolean
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -2297,7 +1717,6 @@ export type Database = {
       is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
-      activity_status: "scheduled" | "completed" | "cancelled" | "rescheduled"
       activity_type:
         | "email_sent"
         | "email_received"
@@ -2314,29 +1733,6 @@ export type Database = {
         | "deal_created"
         | "deal_updated"
       app_role: "admin" | "user"
-      campaign_status: "draft" | "scheduled" | "active" | "paused" | "completed"
-      lead_source:
-        | "website"
-        | "referral"
-        | "open_house"
-        | "social_media"
-        | "zillow"
-        | "realtor_com"
-        | "cold_call"
-        | "email_campaign"
-        | "other"
-      lead_status:
-        | "new"
-        | "contacted"
-        | "qualified"
-        | "unqualified"
-        | "converted"
-      property_status:
-        | "active"
-        | "pending"
-        | "sold"
-        | "coming_soon"
-        | "off_market"
       subscription_status: "trial" | "active" | "cancelled" | "expired"
       subscription_tier: "agent" | "team" | "brokerage"
     }
@@ -2466,7 +1862,6 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      activity_status: ["scheduled", "completed", "cancelled", "rescheduled"],
       activity_type: [
         "email_sent",
         "email_received",
@@ -2484,32 +1879,6 @@ export const Constants = {
         "deal_updated",
       ],
       app_role: ["admin", "user"],
-      campaign_status: ["draft", "scheduled", "active", "paused", "completed"],
-      lead_source: [
-        "website",
-        "referral",
-        "open_house",
-        "social_media",
-        "zillow",
-        "realtor_com",
-        "cold_call",
-        "email_campaign",
-        "other",
-      ],
-      lead_status: [
-        "new",
-        "contacted",
-        "qualified",
-        "unqualified",
-        "converted",
-      ],
-      property_status: [
-        "active",
-        "pending",
-        "sold",
-        "coming_soon",
-        "off_market",
-      ],
       subscription_status: ["trial", "active", "cancelled", "expired"],
       subscription_tier: ["agent", "team", "brokerage"],
     },
