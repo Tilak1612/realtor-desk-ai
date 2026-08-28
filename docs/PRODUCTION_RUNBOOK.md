@@ -265,3 +265,40 @@ Run against production, all probe data removed afterwards:
 (`mailer_autoconfirm: true`) because no verified Resend sending domain is
 installed. Verify the domain, add the key, then set it back to `false` so
 new users get a real verification email.
+
+## 12. Database schema
+
+The migration set is **one generated baseline**,
+`supabase/migrations/00000000000000_baseline_production_schema.sql`, produced
+from the live database by `scripts/generate-schema-baseline.sh`.
+
+```bash
+SUPABASE_ACCESS_TOKEN=<token> ./scripts/generate-schema-baseline.sh
+```
+
+It is read-only against production and rewrites the baseline in place. Commit
+the diff. Do not hand-write migrations — CI fails if more than one `.sql` file
+appears in `supabase/migrations/`.
+
+**Why it was rebuilt (2026-08-28).** The previous 52 files created 64 tables
+against production's 43; two of them could not replay on a clean database
+(`automation_steps` and `contact_activities` are each created twice with
+incompatible shapes, and the follow-on index references columns that do not
+exist); and replaying the set would have *introduced* two RLS holes production
+did not have — an `email_log` INSERT policy and a `scheduled_emails` FOR ALL
+policy, both named for the service role but with no `TO` clause, so both
+applied to `PUBLIC`. The `scheduled_emails` one used `USING (true)`, which
+would have let any authenticated user read and delete other tenants' rows.
+Meanwhile production carried objects in no migration at all, notably
+`profiles.is_demo` and `trg_guard_profile_privileged_columns`.
+
+Verified: the baseline builds from an empty schema to **43 tables, 97 policies,
+106 indexes, 7 functions** — exact parity with production.
+
+### CI guards
+- exactly one applied migration
+- every `CREATE POLICY` names its roles (no `TO` clause ⇒ applies to `PUBLIC`)
+- every table a constraint references is created in the same file
+- `npm run typecheck` — the previous `npx tsc --noEmit` was a **no-op**, because
+  the root `tsconfig.json` is `{"files": [], "references": [...]}`, so CI had
+  never actually typechecked anything

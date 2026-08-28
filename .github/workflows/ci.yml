@@ -26,11 +26,64 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # `npx tsc --noEmit` was a NO-OP: the root tsconfig.json is
+      # {"files": [], "references": [...]}, so tsc resolved zero files and
+      # exited 0 no matter what. CI had never actually typechecked. The
+      # `typecheck` script targets tsconfig.app.json, which is the real one.
       - name: Typecheck
-        run: npx tsc --noEmit
+        run: npm run typecheck
 
       - name: Test
         run: npm test
 
       - name: Build
         run: npm run build
+
+  schema:
+    name: schema drift
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # The migration set is a single generated baseline. This guards the two
+      # ways it used to rot:
+      #   1. Someone hand-edits migrations again and they drift from production.
+      #   2. A policy is added without a TO clause, so it silently applies to
+      #      PUBLIC -- the exact defect that put an `email_log` INSERT policy
+      #      and a `scheduled_emails` FOR ALL policy in front of every user.
+      - name: Exactly one applied migration (the generated baseline)
+        run: |
+          count=$(find supabase/migrations -maxdepth 1 -name '*.sql' | wc -l)
+          if [ "$count" -ne 1 ]; then
+            echo "Expected exactly 1 migration, found $count."
+            echo "Schema changes go through scripts/generate-schema-baseline.sh,"
+            echo "not hand-written files. Archive lives in _archive/."
+            find supabase/migrations -maxdepth 1 -name '*.sql'
+            exit 1
+          fi
+
+      - name: No policy may omit its TO clause
+        run: |
+          # Every CREATE POLICY in the baseline must name its roles. A policy
+          # without TO defaults to PUBLIC, which is how the two holes appeared.
+          if grep -n 'CREATE POLICY' supabase/migrations/*.sql | grep -v ' TO '; then
+            echo "Above policies have no TO clause and therefore apply to PUBLIC."
+            exit 1
+          fi
+          echo "All policies scope their roles."
+
+      - name: Baseline must actually build from empty
+        run: |
+          # Structural check that does not need a database: every table
+          # referenced by a constraint must be created in the same file.
+          python3 - <<'EOF'
+          import re, sys, glob
+          sql = open(glob.glob('supabase/migrations/*.sql')[0]).read()
+          created = set(re.findall(r'CREATE TABLE IF NOT EXISTS public\.(\w+)', sql))
+          referenced = set(re.findall(r'ALTER TABLE public\.(\w+) ADD CONSTRAINT', sql))
+          missing = referenced - created
+          if missing:
+              sys.exit(f"Constraints reference tables the baseline never creates: {sorted(missing)}")
+          print(f"{len(created)} tables created, all constraint targets present.")
+          EOF
