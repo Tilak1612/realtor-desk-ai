@@ -437,7 +437,7 @@ const resources = {
           ctaPrimary: "Start 14-day free trial",
           ctaSecondary: "Book a 15-min demo",
           trustNoCard: "Cancel anytime",
-          trustSetup: "5-min setup",
+          trustSetup: "~10-min setup",
           trustDdf: "CREA DDF ready"
         },
         heroProduct: {
@@ -747,8 +747,8 @@ const resources = {
         ctaSecondary: "Book a demo"
       },
       pageSeo: {
-        howItWorksTitle: "How Realtor Desk Works | Setup in 20 Minutes",
-        howItWorksDesc: "Get started with Realtor Desk in about 20 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration.",
+        howItWorksTitle: "How Realtor Desk Works | Setup in 10 Minutes",
+        howItWorksDesc: "Get started with Realtor Desk in about 10 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration.",
         resourcesTitle: "Resources | Guides for Canadian Real Estate Agents",
         resourcesDesc: "Expert guides on AI tools, lead generation, compliance, and marketing for Canadian real estate agents using Realtor Desk.",
         loginTitle: "Sign in — Realtor Desk",
@@ -1245,7 +1245,7 @@ const resources = {
         },
         q8: {
           question: "How long does setup take?",
-          answer: "Most agents are fully operational within 20 minutes. Our setup wizard guides you through connecting your tools, training the AI on your listings, and customizing responses."
+          answer: "Most agents are set up in about 10 minutes: your profile, a first contact, a first listing, and connecting your calendar. The setup wizard walks you through each step, and you can come back to any of them later."
         },
         q9: {
           question: "What if the AI can't answer a question?",
@@ -2172,7 +2172,7 @@ const resources = {
       howItWorks: {
         hero: {
           title: "Get Up and Running in",
-          titleGradient: "20 Minutes",
+          titleGradient: "10 Minutes",
           subtitle: "From signup to capturing leads in less time than it takes to drive to a showing. No technical skills required."
         },
         steps: {
@@ -3630,7 +3630,7 @@ const resources = {
           ctaPrimary: "Essai gratuit de 14 jours",
           ctaSecondary: "Réserver une démo de 15 min",
           trustNoCard: "Annulez à tout moment",
-          trustSetup: "Installation en 5 min",
+          trustSetup: "Installation en ~10 min",
           trustDdf: "Compatible DDF de l'ACI"
         },
         heroProduct: {
@@ -3940,8 +3940,8 @@ const resources = {
         ctaSecondary: "Réserver une démo"
       },
       pageSeo: {
-        howItWorksTitle: "Fonctionnement de Realtor Desk | Installation en 20 minutes",
-        howItWorksDesc: "Commencez avec Realtor Desk en environ 20 minutes. Configuration CRM simple, outils IA pour courtiers, configuration de génération de prospects, et intégration de visites virtuelles.",
+        howItWorksTitle: "Fonctionnement de Realtor Desk | Installation en 10 minutes",
+        howItWorksDesc: "Commencez avec Realtor Desk en environ 10 minutes. Configuration CRM simple, outils IA pour courtiers, configuration de génération de prospects, et intégration de visites virtuelles.",
         resourcesTitle: "Ressources | Guides pour courtiers immobiliers canadiens",
         resourcesDesc: "Guides d'experts sur les outils IA, la génération de prospects, la conformité et le marketing pour les courtiers immobiliers canadiens qui utilisent Realtor Desk.",
         loginTitle: "Se connecter — Realtor Desk",
@@ -4438,7 +4438,7 @@ const resources = {
         },
         q8: {
           question: "Combien de temps prend la configuration?",
-          answer: "La plupart des agents sont pleinement opérationnels en 20 minutes. Notre assistant de configuration vous guide dans la connexion de vos outils, la formation de l'IA sur vos annonces et la personnalisation des réponses."
+          answer: "La plupart des agents sont configurés en environ 10 minutes : votre profil, un premier contact, une première fiche et la connexion de votre calendrier. L'assistant vous guide à chaque étape, et vous pouvez y revenir plus tard."
         },
         q9: {
           question: "Que se passe-t-il si l'IA ne peut pas répondre à une question?",
@@ -4500,7 +4500,7 @@ const resources = {
         title: "Prêt à Ne Plus Jamais Manquer un Prospect?",
         subtitle: "Rejoignez notre communauté bêta canadienne utilisant l'IA pour conclure plus de ventes",
         button: "Commencez Votre Essai Gratuit de 14 Jours",
-        note: "Annulez avant la fin de l'essai requise • Configuration en 20 minutes • Annulez à tout moment"
+        note: "Carte requise • Configuration en environ 10 minutes • Annulez avant le 14e jour et ne payez rien"
       },
       mobileCTA: {
         title: "Commencez Votre Essai Gratuit de 14 Jours",
@@ -5365,7 +5365,7 @@ const resources = {
       howItWorks: {
         hero: {
           title: "Soyez opérationnel en",
-          titleGradient: "20 minutes",
+          titleGradient: "10 minutes",
           subtitle: "De l'inscription à la capture de prospects en moins de temps qu'il n'en faut pour se rendre à une visite. Aucune compétence technique requise."
         },
         steps: {

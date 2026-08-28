@@ -103,7 +103,7 @@ const FintracCompliance = () => {
             Canadian Regulatory Compliance
           </Badge>
           <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
-            FINTRAC Compliance<br />
+            FINTRAC Compliance{" "}<br />
             <span className="gradient-text">for Canadian Realtors</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
