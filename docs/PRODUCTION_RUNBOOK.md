@@ -302,3 +302,29 @@ Verified: the baseline builds from an empty schema to **43 tables, 97 policies,
 - `npm run typecheck` — the previous `npx tsc --noEmit` was a **no-op**, because
   the root `tsconfig.json` is `{"files": [], "references": [...]}`, so CI had
   never actually typechecked anything
+
+## 14. Sales tax at checkout
+
+`create-checkout` now sets `automatic_tax: { enabled: true }` with
+`billing_address_collection: "required"`, so Stripe Tax computes the correct
+provincial mix — GST only in AB, HST in ON/NB/NL/NS/PE, GST + QST in QC,
+GST + PST in BC/SK/MB.
+
+**Why this was a real problem.** `/pricing` stated *"GST/HST is applied at
+checkout based on your billing province"* while `automatic_tax` was never
+enabled. Stripe therefore calculated **no tax at all**: every sale was
+effectively tax-inclusive against a liability the company still owes the CRA
+and Revenu Québec, and the on-page statement was untrue.
+
+**Verified before enabling**, so live checkout was never at risk: a throwaway
+`taxprobe` function — identical to `create-checkout` but with tax on — was
+deployed, used to confirm Stripe Tax is registered on the account, then
+deleted. Only then was the real function changed. All four live price IDs were
+re-tested afterwards and still create sessions.
+
+`customer_update: { address: "auto" }` is set whenever an existing Stripe
+customer is passed; Stripe refuses an `automatic_tax` session without it.
+
+If a session ever starts failing with a tax error, check that the Stripe Tax
+registration is still active — do not simply remove `automatic_tax`, or the
+under-collection returns silently.

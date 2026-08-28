@@ -157,7 +157,7 @@ const resources = {
         }
       },
       pricing: {
-        taxDisclaimer: "Prices are in Canadian dollars (CAD). GST/HST is applied at checkout based on your billing province. Every amount on this page matches what you will see on Stripe's secure checkout.",
+        taxDisclaimer: "Prices are in Canadian dollars (CAD). Sales tax — GST/HST, plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province. Every amount on this page matches what you will see on Stripe's secure checkout, before tax.",
         compare: {
           boldtrailCost: "$5,988/year + $999 setup fee",
           loftyCost: "$1,788 – $3,588/year per user",
@@ -604,7 +604,7 @@ const resources = {
         subtitle: "No AI quotas on Team or Brokerage. No \"growth\" tier that hides the integrations. 14-day free trial.",
         toggleMonthly: "Monthly",
         toggleAnnual: "Annual · save up to $789/yr",
-        taxNote: "Prices shown in CAD. GST/HST applied at checkout based on your billing province. The amount on this page matches what you will see on Stripe's secure checkout.",
+        taxNote: "Prices shown in CAD, before tax. GST/HST — plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province.",
         compareHeading: "Compare every feature",
         planSoloName: "Solo",
         planSoloTag: "For the single agent",
@@ -3353,7 +3353,7 @@ const resources = {
         }
       },
       pricing: {
-        taxDisclaimer: "Les prix sont en dollars canadiens (CAD). La TPS/TVH est appliquée au paiement selon votre province de facturation. Chaque montant affiché ici correspond exactement à ce que vous verrez sur la page de paiement sécurisée Stripe.",
+        taxDisclaimer: "Les prix sont en dollars canadiens (CAD). Les taxes de vente — TPS/TVH, plus la TVQ au Québec ou la TVP là où elle s'applique — sont calculées au paiement selon votre province de facturation. Chaque montant affiché ici correspond à ce que vous verrez sur la page de paiement sécurisée Stripe, avant taxes.",
         compare: {
           boldtrailCost: "5\u00a0988\u00a0$/an + frais d'installation de 999\u00a0$",
           loftyCost: "1\u00a0788\u00a0$ à 3\u00a0588\u00a0$/an par utilisateur",
@@ -3797,7 +3797,7 @@ const resources = {
         subtitle: "Pas de quotas d'IA sur Équipe ou Agence. Pas de forfait « croissance » qui cache les intégrations. Essai de 14 jours, annulez avant la fin de l'essai.",
         toggleMonthly: "Mensuel",
         toggleAnnual: "Annuel · économisez jusqu'à 789 $/an",
-        taxNote: "Prix affichés en CAD. TPS/TVH ajoutée au paiement selon votre province de facturation. Le montant sur cette page correspond à celui affiché sur la page de paiement sécurisée de Stripe.",
+        taxNote: "Prix affichés en CAD, avant taxes. La TPS/TVH — plus la TVQ au Québec ou la TVP là où elle s'applique — est calculée au paiement selon votre province de facturation.",
         compareHeading: "Comparer chaque fonctionnalité",
         planSoloName: "Solo",
         planSoloTag: "Pour l'agent autonome",
