@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import MatrixRain from './MatrixRain';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -12,10 +11,18 @@ interface AuthLayoutProps {
   aside?: ReactNode;
 }
 
-// Auth shell used by /login and /signup. Hosts the background layers
-// and a persistent EN/FR toggle in the top-right so a Quebec visitor
-// landing directly on the auth routes isn't trapped in whatever locale
-// the cookie last set (2026-04 audit finding).
+// Auth shell used by /login and /signup.
+//
+// Theme: this used to be a near-black `bg-gray-950` shell with an animated
+// MatrixRain canvas and green "hacker" accents, which read as a different
+// product from the marketing site a visitor had just come from. The public
+// pages are warm paper, deep navy and terracotta with an Instrument Serif
+// accent, so the auth surfaces now use the same rd-* tokens. Signing up
+// should feel like the same company as the page that sold you.
+//
+// Retained from the previous version: the persistent EN/FR toggle (a Quebec
+// visitor landing directly on /signup must not be trapped in whatever locale
+// the cookie last set), the form-first DOM order, and reduced-motion safety.
 
 const AuthLayout = ({ children, aside }: AuthLayoutProps) => {
   const { i18n } = useTranslation();
@@ -25,51 +32,70 @@ const AuthLayout = ({ children, aside }: AuthLayoutProps) => {
   };
 
   return (
-    <div data-auth-shell className="min-h-screen flex items-center justify-center antialiased relative bg-gray-950 overflow-hidden">
-      {/* Matrix Rain Animation */}
-      <MatrixRain />
-
-      {/* Background Pattern. Dimmed when a value column sits on top of it —
-          body text over a moving backdrop has to clear 4.5:1 against the
-          darkest frame, not the average one. */}
+    <div
+      data-auth-shell
+      className="min-h-screen flex items-center justify-center antialiased relative bg-rd-paper overflow-hidden"
+    >
+      {/* Soft navy wash from the top, mirroring the marketing hero's calm
+          gradient. Kept very low contrast so form text clears 4.5:1 easily. */}
       <div
-        className={aside ? "absolute inset-0 opacity-70" : "absolute inset-0 opacity-40"}
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, hsl(220 20% 20%), hsl(220 20% 10%), hsl(220 20% 5%))'
+          background:
+            'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(11,37,64,0.07), transparent 70%)',
         }}
       />
 
-      {/* Dot Pattern */}
+      {/* Faint dot grid — same device as the marketing background, in ink
+          rather than white so it reads on paper. */}
       <div
-        className="absolute inset-0"
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230B2540' fill-opacity='0.035'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* Language toggle — top-right, above the card stacking context */}
+      {/* Warm terracotta bloom in the lower corner — the marketing accent. */}
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-32 -right-32 w-[520px] h-[520px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(215,113,78,0.10), transparent 65%)',
+        }}
+      />
+
+      {/* Language toggle — top-right, above the card stacking context. */}
       <div
         role="group"
         aria-label="Language / Langue"
-        className="absolute top-4 right-4 z-20 flex items-center gap-1 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm px-2 py-1 text-xs font-semibold text-white/80"
+        className="absolute top-4 right-4 z-20 flex items-center gap-1 rounded-full border border-rd-line bg-white/90 backdrop-blur-sm px-2 py-1 text-xs font-semibold text-rd-ink-600 shadow-sm"
       >
         <button
           type="button"
           onClick={() => setLang('en')}
           aria-pressed={active === 'en'}
           className={`min-w-[28px] min-h-[28px] px-2 rounded-full transition-colors ${
-            active === 'en' ? 'bg-white/15 text-white' : 'hover:bg-white/10'
+            active === 'en'
+              ? 'bg-rd-navy-800 text-white'
+              : 'hover:bg-rd-ink-100 text-rd-ink-600'
           }`}
         >
           EN
         </button>
-        <span className="opacity-40">/</span>
+        <span className="text-rd-ink-300" aria-hidden="true">
+          /
+        </span>
         <button
           type="button"
           onClick={() => setLang('fr')}
           aria-pressed={active === 'fr'}
           className={`min-w-[28px] min-h-[28px] px-2 rounded-full transition-colors ${
-            active === 'fr' ? 'bg-white/15 text-white' : 'hover:bg-white/10'
+            active === 'fr'
+              ? 'bg-rd-navy-800 text-white'
+              : 'hover:bg-rd-ink-100 text-rd-ink-600'
           }`}
         >
           FR
@@ -90,17 +116,9 @@ const AuthLayout = ({ children, aside }: AuthLayoutProps) => {
         children
       )}
 
-      {/* Floating Animation Keyframes */}
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
         @media (prefers-reduced-motion: reduce) {
-          /* Vestibular safety: freeze the float and hide the animated rain
-             canvas entirely rather than letting it run at speed. */
           [data-auth-shell] * { animation: none !important; }
-          [data-auth-shell] canvas { display: none !important; }
         }
       `}</style>
     </div>
