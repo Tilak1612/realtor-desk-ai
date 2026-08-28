@@ -3,17 +3,7 @@ import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { RDWordmark } from "../Logo";
-import {
-  IconHome,
-  IconLead,
-  IconMail,
-  IconPipeline,
-  IconCalendar,
-  IconPie,
-  IconCog,
-  IconChevron,
-  IconSparkles,
-} from "../icons";
+import { IconBolt, IconCalendar, IconCheck, IconChevron, IconCog, IconGlobe, IconHome, IconLead, IconMail, IconPie, IconPipeline, IconSparkles } from "../icons";
 
 // Sidebar for /app/*. Matches rd-app.jsx AppShell sidebar — navy surface,
 // workspace card, active route highlight with terra accent on the icon,
@@ -65,6 +55,17 @@ export function Sidebar({
     { label: t("rd.sidebar.nav.pipeline", "Pipeline"), to: "/app/pipeline", icon: <IconPipeline /> },
     { label: t("rd.sidebar.nav.automation", "Automation"), to: "/app/automation", icon: <IconCalendar /> },
     { label: t("rd.sidebar.nav.reports", "Reports"), to: "/app/reports", icon: <IconPie /> },
+    // Surfaces that exist only in the legacy shell. They are listed here so
+    // there is ONE navigation: before this they were reachable only from a
+    // second sidebar the /app shell never rendered, which made them orphans
+    // for anyone living in /app. Their chrome is still the legacy AppLayout —
+    // consolidating that is follow-up work, but the routes are no longer lost.
+    { label: t("rd.sidebar.nav.tasks", "Tasks"), to: "/tasks", icon: <IconCheck /> },
+    { label: t("rd.sidebar.nav.calendar", "Calendar"), to: "/calendar", icon: <IconCalendar /> },
+    { label: t("rd.sidebar.nav.properties", "Properties"), to: "/properties", icon: <IconHome /> },
+    { label: t("rd.sidebar.nav.campaigns", "Campaigns"), to: "/campaigns", icon: <IconMail /> },
+    { label: t("rd.sidebar.nav.market", "Market"), to: "/market", icon: <IconGlobe /> },
+    { label: t("rd.sidebar.nav.integrations", "Integrations"), to: "/dashboard/integrations", icon: <IconBolt /> },
     { label: t("rd.sidebar.nav.settings", "Settings"), to: "/app/settings", icon: <IconCog /> },
   ];
 

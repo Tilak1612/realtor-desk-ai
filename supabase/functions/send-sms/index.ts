@@ -97,18 +97,41 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Check SMS consent
-    const { data: consent } = await supabase
+    // CASL consent gate for SMS. FAILS CLOSED.
+    //
+    // This block previously read a table that did not exist, so `consent` was
+    // always null, the guard `if (consent && ...)` was always falsy, and every
+    // SMS sent regardless of consent state. CASL treats SMS as a commercial
+    // electronic message with the same rules as email and puts the onus of
+    // proving consent on the sender, so the absence of a record must mean
+    // "do not send", never "send anyway".
+    const { data: consent, error: consentError } = await supabase
       .from("sms_consent")
-      .select("*")
+      .select("opted_in, opted_out_at, consent_type, expires_at")
       .eq("contact_id", contactId)
       .eq("user_id", user.id)
-      .single();
+      .maybeSingle();
 
-    if (consent && consent.opted_out_at && !consent.opted_in) {
+    if (consentError) {
+      console.error("[SEND-SMS] consent lookup failed, refusing to send:", consentError.message);
       return new Response(
-        JSON.stringify({ error: "Contact has opted out of SMS" }),
-        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        JSON.stringify({ error: "Could not verify SMS consent" }),
+        { status: 503, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const optedOut = !!consent?.opted_out_at;
+    // Implied consent lapses (2 years purchase/lease/contract, 6 months
+    // inquiry); express consent does not, and carries a null expires_at.
+    const expired = !!consent?.expires_at && new Date(consent.expires_at) < new Date();
+
+    if (!consent || !consent.opted_in || optedOut || expired) {
+      return new Response(
+        JSON.stringify({
+          error: "No valid SMS consent on file for this contact",
+          reason: !consent ? "no_record" : optedOut ? "opted_out" : expired ? "consent_expired" : "not_opted_in",
+        }),
+        { status: 403, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 

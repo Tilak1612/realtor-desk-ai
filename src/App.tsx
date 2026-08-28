@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate, useParams } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -40,6 +40,14 @@ const RDOnboarding = lazy(() => import("./pages/rd/Onboarding"));
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
+
+
+// Redirect that carries the route param across. <Navigate to="/app/leads/:id">
+// would navigate to the literal string ":id".
+const RedirectWithId = ({ to }: { to: string }) => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`${to}/${id ?? ""}`} replace />;
+};
 
 // Route-level loading spinner
 const PageLoader = () => (
@@ -331,9 +339,9 @@ const App = () => (
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/today" element={<ProtectedRoute><RequireBilling><Today /></RequireBilling></ProtectedRoute>} />
+          <Route path="/today" element={<Navigate to="/app" replace />} />
           <Route path="/call-workflow/:contactId" element={<ProtectedRoute><RequireBilling><CallWorkflow /></RequireBilling></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><RequireBilling><Dashboard /></RequireBilling></ProtectedRoute>} />
+          <Route path="/dashboard" element={<Navigate to="/app" replace />} />
           {/* Phase 3 redesign: /app/* product surfaces. Behind ProtectedRoute
               so the agent must be signed in, consistent with /dashboard. */}
           <Route path="/app" element={<ProtectedRoute><RequireBilling><RDAppDashboard /></RequireBilling></ProtectedRoute>} />
@@ -354,19 +362,19 @@ const App = () => (
           {/* Phase 4 redesign: /onboarding now renders the 5-step flow.
               Legacy Onboarding.tsx is left in the tree for reference. */}
           <Route path="/onboarding" element={<ProtectedRoute><RDOnboarding /></ProtectedRoute>} />
-          <Route path="/contacts" element={<ProtectedRoute><RequireBilling><Contacts /></RequireBilling></ProtectedRoute>} />
-          <Route path="/contacts/:id" element={<ProtectedRoute><RequireBilling><ContactDetail /></RequireBilling></ProtectedRoute>} />
+          <Route path="/contacts" element={<Navigate to="/app/leads" replace />} />
+          <Route path="/contacts/:id" element={<RedirectWithId to="/app/leads" />} />
           <Route path="/properties" element={<ProtectedRoute><RequireBilling><Properties /></RequireBilling></ProtectedRoute>} />
           <Route path="/billing" element={<ProtectedRoute><Billing /></ProtectedRoute>} />
-          <Route path="/deals" element={<ProtectedRoute><RequireBilling><Deals /></RequireBilling></ProtectedRoute>} />
+          <Route path="/deals" element={<Navigate to="/app/pipeline" replace />} />
           <Route path="/tasks" element={<ProtectedRoute><RequireBilling><Tasks /></RequireBilling></ProtectedRoute>} />
           <Route path="/ai-assistant" element={<ProtectedRoute><RequireBilling><AIAssistant /></RequireBilling></ProtectedRoute>} />
           <Route path="/campaigns" element={<ProtectedRoute><RequireBilling><Campaigns /></RequireBilling></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><RequireBilling><CalendarPage /></RequireBilling></ProtectedRoute>} />
-          <Route path="/reports" element={<ProtectedRoute><RequireBilling><Reports /></RequireBilling></ProtectedRoute>} />
+          <Route path="/reports" element={<Navigate to="/app/reports" replace />} />
           <Route path="/market" element={<ProtectedRoute><RequireBilling><Market /></RequireBilling></ProtectedRoute>} />
           <Route path="/market-intelligence" element={<Navigate to="/market" replace />} />
-          <Route path="/automations" element={<ProtectedRoute><RequireBilling><Automations /></RequireBilling></ProtectedRoute>} />
+          <Route path="/automations" element={<Navigate to="/app/automation" replace />} />
           {/* Settings lives in the /app shell now. The legacy top-level path
               redirects so old links (and the legacy dashboard nav) don't strand
               users in the retired chrome. */}
