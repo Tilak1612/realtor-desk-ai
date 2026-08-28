@@ -52,27 +52,44 @@ const DealsList = ({ filter, refreshTrigger }: DealsListProps) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    let query = supabase
+    // Same TS2589 shape as DealsKanban: the embedded contacts() select puts
+    // the builder generic at tsc's instantiation limit, so applying filters
+    // through a minimal structural interface keeps it from re-instantiating
+    // per branch. Same methods, same order, same runtime behaviour.
+    interface Filterable {
+      eq(column: string, value: unknown): Filterable;
+      neq(column: string, value: unknown): Filterable;
+      gte(column: string, value: unknown): Filterable;
+      lte(column: string, value: unknown): Filterable;
+    }
+
+    const baseQuery = supabase
       .from("deals")
       .select(`*, contacts (first_name, last_name)`)
       .eq("user_id", user.id);
 
+    let filtered = baseQuery as unknown as Filterable;
+
     if (filter === "active") {
-      query = query.eq("status", "active").neq("stage", "sold").neq("stage", "withdrawn");
+      filtered = filtered.eq("status", "active").neq("stage", "sold").neq("stage", "withdrawn");
     } else if (filter === "sold") {
-      query = query.eq("stage", "sold");
+      filtered = filtered.eq("stage", "sold");
     } else if (filter === "withdrawn") {
-      query = query.eq("stage", "withdrawn");
+      filtered = filtered.eq("stage", "withdrawn");
     } else if (filter === "buyer") {
-      query = query.eq("client_type", "buyer");
+      filtered = filtered.eq("client_type", "buyer");
     } else if (filter === "seller") {
-      query = query.eq("client_type", "seller");
+      filtered = filtered.eq("client_type", "seller");
     } else if (filter === "closing_this_month") {
       const now = new Date();
       const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
       const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-      query = query.gte("closing_date", startOfMonth.toISOString()).lte("closing_date", endOfMonth.toISOString());
+      filtered = filtered
+        .gte("closing_date", startOfMonth.toISOString())
+        .lte("closing_date", endOfMonth.toISOString());
     }
+
+    const query = filtered as unknown as typeof baseQuery;
 
     const { data } = await query.order("created_at", { ascending: false });
     setDeals(data || []);
