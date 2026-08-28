@@ -14,7 +14,7 @@ interface AuthCardProps {
 const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
   const { t } = useTranslation();
   return (
-    <div className="relative z-10 w-full max-w-md px-6 animate-fade-in">
+    <div className="relative z-10 w-full max-w-md px-6 lg:px-0 animate-fade-in">
       {/* Back to Website */}
       <div className="mb-6">
         <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
@@ -70,7 +70,7 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
           <span>{t('auth.pipedaCompliant', 'PIPEDA Compliant')}</span>
         </div>
         <div className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-800/50 transition-all duration-200">
-          <Lock className="w-4 h-4 text-primary" />
+          <Lock className="w-4 h-4 text-violet-300" />
           <span>{t('auth.ssl', '256-bit SSL')}</span>
         </div>
         <div className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-800/50 transition-all duration-200">

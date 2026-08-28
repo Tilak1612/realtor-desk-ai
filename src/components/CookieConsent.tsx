@@ -3,11 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { X, Cookie, Settings } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const CookieConsent = () => {
   const { t } = useTranslation();
+  // Slim bar on the auth routes: the padded max-w-3xl panel covered the lower
+  // half of the signup form on first desktop load.
+  const { pathname } = useLocation();
+  const isCompact = ["/signup", "/login", "/verify-email"].includes(pathname);
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState({
@@ -68,8 +72,10 @@ const CookieConsent = () => {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 animate-slide-up">
-      <Card className="max-w-3xl mx-auto p-4 sm:p-6 shadow-lg border-2 bg-background">
+    <div className={`fixed bottom-0 left-0 right-0 z-50 animate-slide-up ${isCompact ? "p-0" : "p-3 sm:p-4"}`}>
+      <Card className={isCompact
+        ? "mx-auto max-w-none rounded-none border-x-0 border-b-0 border-t bg-background px-4 py-2.5 shadow-lg"
+        : "max-w-3xl mx-auto p-4 sm:p-6 shadow-lg border-2 bg-background"}>
         <div className="flex items-start gap-3">
           <Cookie className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 hidden sm:block" />
           <div className="flex-1 min-w-0">
