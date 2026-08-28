@@ -13,13 +13,13 @@ const FintracCompliance = () => {
       icon: Users,
       title: "Client Identification",
       description: "FINTRAC requires realtors to verify the identity of every client before entering into a business relationship — including buyers, sellers, and landlords.",
-      how: "RealtorDesk AI stores client identity records directly on the contact profile. Document upload and identity verification notes are captured and timestamped for audit purposes."
+      how: "You can attach documents and timestamped notes to any contact profile, which gives you somewhere to keep your identity records. RealtorDesk does not yet capture structured identity fields (document type, number, issuing jurisdiction) or verify identity for you — that stays your process."
     },
     {
       icon: FileText,
       title: "Business Relationship Records",
       description: "You must keep records of business relationships including client information forms, source of funds declarations, and politically exposed person (PEP) checks.",
-      how: "RealtorDesk AI contact profiles include fields for source of funds, PEP status, and relationship type. All records are retained with creation timestamps."
+      how: "Contact records are retained with creation timestamps and support free-text notes and tags. Dedicated fields for source of funds, PEP status and relationship type are not implemented yet — record these in notes for now."
     },
     {
       icon: Clock,
@@ -37,13 +37,13 @@ const FintracCompliance = () => {
       icon: Shield,
       title: "Compliance Program",
       description: "Every realtor subject to FINTRAC must have a written compliance program — policies, procedures, risk assessment, and training records.",
-      how: "RealtorDesk AI provides the record-keeping infrastructure for your compliance program. Combined with your brokerage's written policies, you have a complete audit trail."
+      how: "RealtorDesk stores contacts, deals, notes and documents with timestamps, which forms part of your record-keeping. Your brokerage's written policies and procedures remain the compliance program itself."
     },
     {
       icon: BookOpen,
       title: "Ongoing Training Documentation",
       description: "Your compliance program must include documented training for you and any employees or contractors who conduct real estate transactions.",
-      how: "RealtorDesk AI provides in-app compliance reminders and resources. Training records can be stored in the Notes section of your compliance contacts."
+      how: "Training records can be stored as notes on a contact. RealtorDesk does not currently send compliance reminders — set those in your own calendar."
     },
   ];
 
