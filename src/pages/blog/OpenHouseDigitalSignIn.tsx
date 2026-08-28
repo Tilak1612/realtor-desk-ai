@@ -409,19 +409,12 @@ const OpenHouseDigitalSignIn = () => {
               </div>
             </Card>
 
-            <h2>Real Agent Success Stories</h2>
-
-            <Card className="p-6 mb-6 border-l-4 border-l-green-500 bg-green-50 dark:bg-green-950/20">
-              <p className="font-semibold mb-2">Sarah Chen, Vancouver BC</p>
-              <p className="italic mb-3">"I switched from paper to RealtorDesk AI's digital sign-in 8 months ago. My open house lead capture went from 3-4 usable contacts per event to 9-12. More importantly, the instant follow-up means I'm booking appointments with 15-20% of visitors now vs. 5% before. That's an extra 2-3 deals per quarter just from open houses."</p>
-              <p className="text-sm text-muted-foreground">Increased conversion by 3x, added $60,000+ in annual commissions</p>
-            </Card>
-
-            <Card className="p-6 mb-6 border-l-4 border-l-green-500 bg-green-50 dark:bg-green-950/20">
-              <p className="font-semibold mb-2">Marc Tremblay, Montreal QC</p>
-              <p className="italic mb-3">"Les feuilles papier ne fonctionnaient pas—people gave fake numbers constantly. With digital sign-in, I validate phone/email in real-time, so I know the leads are real. The automated bilingual follow-up (English/French) is perfect for Montreal market."</p>
-              <p className="text-sm text-muted-foreground">87% contact capture rate vs. 28% with paper</p>
-            </Card>
+            {/* "Real Agent Success Stories" removed: two fabricated testimonials
+                with invented names, cities, conversion rates and a "$60,000+ in
+                annual commissions" figure. The same invented name appeared on
+                another page as "Sarah Chen, RE/MAX Toronto" — different city,
+                different brokerage — which is how the fabrication surfaced.
+                No real customer outcomes exist to publish yet. */}
 
             <h2>ROI Analysis: Is Digital Worth It?</h2>
 
