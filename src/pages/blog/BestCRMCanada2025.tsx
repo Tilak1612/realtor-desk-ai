@@ -198,11 +198,6 @@ const BestCRMCanada2025 = () => {
                 </p>
               </div>
 
-              <blockquote className="border-l-4 border-primary pl-4 italic mb-4">
-                "I tested 5 CRMs before choosing RealtorDesk AI. The AI responded to my test lead in 3 seconds while others took me 10 minutes to notice. My conversion rate went from 7% to 15% in 60 days."
-                <footer className="text-sm mt-2 not-italic">— Sarah L., Toronto Agent</footer>
-              </blockquote>
-
               <div className="flex gap-3">
                 <Link to="/demo" className="flex-1">
                   <Button size="lg" className="btn-gradient w-full">

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CtaLink } from "@/components/rd/marketing/CtaLink";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
@@ -143,16 +144,23 @@ export default function Features() {
           {t("featuresRd.ctaBody")}
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link to="/signup">
-            <RDButton variant="terra" size="lg" trailingIcon={<IconArrow />}>
+          <CtaLink
+            to="/signup"
+            location="features_footer"
+            variant="terra"
+            size="lg"
+            trailingIcon={<IconArrow />}
+          >
               {t("featuresRd.ctaPrimary")}
-            </RDButton>
-          </Link>
-          <Link to="/demo">
-            <RDButton variant="outline" size="lg">
+          </CtaLink>
+          <CtaLink
+            to="/demo"
+            location="features_footer"
+            variant="outline"
+            size="lg"
+          >
               {t("featuresRd.ctaSecondary")}
-            </RDButton>
-          </Link>
+          </CtaLink>
         </div>
       </section>
     </MarketingLayout>

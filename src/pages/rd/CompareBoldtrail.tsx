@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { CtaLink } from "@/components/rd/marketing/CtaLink";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
@@ -142,16 +143,23 @@ export default function CompareBoldtrail() {
             {t("compareBoldtrail.closingBody")}
           </p>
           <div className="inline-flex flex-wrap gap-3 mt-8 justify-center">
-            <Link to="/signup">
-              <RDButton variant="terra" size="lg" trailingIcon={<IconArrow />}>
+            <CtaLink
+              to="/signup"
+              location="compare_boldtrail"
+              variant="terra"
+              size="lg"
+              trailingIcon={<IconArrow />}
+            >
                 {t("compareBoldtrail.closingCtaPrimary")}
-              </RDButton>
-            </Link>
-            <Link to="/contact">
-              <RDButton variant="light" size="lg">
+            </CtaLink>
+            <CtaLink
+              to="/contact"
+              location="compare_boldtrail_secondary"
+              variant="light"
+              size="lg"
+            >
                 {t("compareBoldtrail.closingCtaSecondary")}
-              </RDButton>
-            </Link>
+            </CtaLink>
           </div>
         </div>
       </section>

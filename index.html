@@ -63,20 +63,53 @@
     <meta name="geo.region" content="CA-AB" />
     <meta name="geo.placename" content="Edmonton, Alberta, Canada" />
 
-    <!-- Google tag (gtag.js). Loads on every page regardless of consent.
-         2026-04-23 audit flagged this as a Law 25 / PIPEDA consent
-         violation — fix tracked in a follow-up PR that introduces a
-         proper CMP with Google Consent Mode v2 (default analytics_storage
-         denied, granted only after opt-in). This snippet stays in
-         place until that CMP lands; removing it would break the
-         existing analytics dashboard without solving the consent issue. -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-95T79D2KJ7"></script>
+    <!-- Google tag (gtag.js) with Consent Mode v2.
+         This used to load and fire a page_view before any consent decision,
+         with no consent commands in dataLayer at all — on a product whose
+         positioning is PIPEDA and Quebec Law 25 competence, and while
+         /privacy-policy claimed users had "full control ... through our cookie
+         consent banner". They did not.
+
+         The consent defaults MUST be pushed before the gtag loader runs, so
+         they are inline and synchronous above it. Everything storage-related
+         starts denied; CookieConsent.tsx sends a `consent update` only after
+         an explicit opt-in. `wait_for_update` gives that update a window to
+         arrive before any tag decides to fire. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'denied',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+
+      // Re-apply a previously stored decision on repeat visits, before any
+      // tag fires, so a returning visitor who accepted is not re-denied and
+      // one who declined is never silently upgraded.
+      try {
+        var stored = JSON.parse(localStorage.getItem('cookie-consent') || 'null');
+        if (stored) {
+          gtag('consent', 'update', {
+            ad_storage: stored.marketing ? 'granted' : 'denied',
+            ad_user_data: stored.marketing ? 'granted' : 'denied',
+            ad_personalization: stored.marketing ? 'granted' : 'denied',
+            analytics_storage: stored.analytics ? 'granted' : 'denied',
+            functionality_storage: stored.functional ? 'granted' : 'denied',
+            personalization_storage: stored.functional ? 'granted' : 'denied'
+          });
+        }
+      } catch (e) { /* malformed value: stay denied */ }
+
       gtag('js', new Date());
       gtag('config', 'G-95T79D2KJ7', { send_page_view: false });
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-95T79D2KJ7"></script>
     <script>
       if (window.location.hostname === 'localhost') {
         window.gtag('set', { debug_mode: true });
@@ -138,10 +171,13 @@
       "operatingSystem": "Web",
       "description": "AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware. CREA DDF® integration on the roadmap for Q3 2026.",
       "offers": {
-        "@type": "Offer",
-        "price": "0",
+        "@type": "AggregateOffer",
         "priceCurrency": "CAD",
-        "description": "14-day free trial, no credit card"
+        "lowPrice": "149.00",
+        "highPrice": "299.00",
+        "offerCount": "2",
+        "availability": "https://schema.org/InStock",
+        "description": "14-day free trial. A payment method is required to start; you are not charged until the trial ends."
       }
     }
     </script>

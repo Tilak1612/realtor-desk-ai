@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate, useParams } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent, trackPageView } from "@/utils/analytics";
@@ -100,7 +99,6 @@ const CreaDDF = lazy(() => import("./pages/blog/CreaDDF"));
 const Compliance = lazy(() => import("./pages/blog/Compliance"));
 const LeadConversion = lazy(() => import("./pages/blog/LeadConversion"));
 const BilingualMarketing = lazy(() => import("./pages/blog/BilingualMarketing"));
-const SuccessStory = lazy(() => import("./pages/blog/SuccessStory"));
 const HousingForecast2025 = lazy(() => import("./pages/blog/HousingForecast2025"));
 const AIAutomationSlowerMarket = lazy(() => import("./pages/blog/AIAutomationSlowerMarket"));
 const LeadResponseTime = lazy(() => import("./pages/blog/LeadResponseTime"));
@@ -206,13 +204,29 @@ const SeoDefaults = () => {
     location.pathname === prefix || location.pathname.startsWith(`${prefix}/`)
   );
 
-  return (
-    <Helmet>
-      <link rel="canonical" href={canonicalUrl} />
-      <meta property="og:url" content={canonicalUrl} />
-      {shouldNoindex && <meta name="robots" content="noindex, nofollow" />}
-    </Helmet>
-  );
+  // Same react-helmet-async / React 19 problem as SEO.tsx: this rendered
+  // nothing, so authenticated routes were never actually marked noindex
+  // despite the prefix list below saying they should be.
+  useEffect(() => {
+    const upsert = (sel: string, make: () => HTMLElement, apply: (el: HTMLElement) => void) => {
+      let el = document.head.querySelector<HTMLElement>(sel);
+      if (!el) { el = make(); document.head.appendChild(el); }
+      apply(el);
+    };
+    upsert('link[rel="canonical"]:not([hreflang])',
+      () => Object.assign(document.createElement("link"), { rel: "canonical" }),
+      (el) => el.setAttribute("href", canonicalUrl));
+    upsert('meta[property="og:url"]',
+      () => { const m = document.createElement("meta"); m.setAttribute("property", "og:url"); return m; },
+      (el) => el.setAttribute("content", canonicalUrl));
+    if (shouldNoindex) {
+      upsert('meta[name="robots"]',
+        () => { const m = document.createElement("meta"); m.setAttribute("name", "robots"); return m; },
+        (el) => el.setAttribute("content", "noindex, nofollow"));
+    }
+  }, [canonicalUrl, shouldNoindex]);
+
+  return null;
 };
 
 const RouteAnalytics = () => {
@@ -286,7 +300,11 @@ const App = () => (
           <Route path="/blog/compliance" element={<Compliance />} />
           <Route path="/blog/lead-conversion" element={<LeadConversion />} />
           <Route path="/blog/bilingual-marketing" element={<BilingualMarketing />} />
-          <Route path="/blog/success-story" element={<SuccessStory />} />
+          {/* /blog/success-story was a fabricated case study — a named agent at
+              a named real brokerage, with invented quotes and metrics, carrying
+              Article JSON-LD. Removed rather than corrected; redirected because
+              the URL is in the sitemap and indexed. */}
+          <Route path="/blog/success-story" element={<Navigate to="/resources" replace />} />
           <Route path="/canada-housing-market-forecast-2025-2026" element={<HousingForecast2025 />} />
           <Route path="/canadian-realtors-thrive-slower-market-ai-automation" element={<AIAutomationSlowerMarket />} />
           <Route path="/lead-response-time-canadian-realtors" element={<LeadResponseTime />} />
