@@ -437,3 +437,44 @@ customer is passed; Stripe refuses an `automatic_tax` session without it.
 If a session ever starts failing with a tax error, check that the Stripe Tax
 registration is still active — do not simply remove `automatic_tax`, or the
 under-collection returns silently.
+
+## 15. Demo accounts (one per plan tier)
+
+Password for all three: `RealtorDeskDemo2026!`
+
+| Login | Plan chip | Agent | Brokerage | Leads |
+|---|---|---|---|---|
+| `demo.solo@realtordesk.ai` | Solo plan | Alex Morgan | Morgan & Co. Realty (AB) | 9 |
+| `demo.team@realtordesk.ai` | Team plan | Priya Raman | Raman Group Realty (ON) | 14 |
+| `demo.brokerage@realtordesk.ai` | Brokerage plan | Daniel Okafor | Northline Brokerage (BC) | 18 |
+
+The original `demo@realtordesk.ai` / `RealtorDeskDemo2026` still works and is
+unchanged.
+
+**How they bypass billing.** Each has `profiles.is_demo = true`, which
+`RequireBilling` honours without a Stripe subscription. That column is
+protected by `trg_guard_profile_privileged_columns` and can only be set with
+the **service_role key through PostgREST** — the management API SQL editor runs
+as `postgres`, where `auth.role()` is null, so the trigger reverts the write.
+That is the correct behaviour and the reason a plain SQL update appears to
+silently do nothing.
+
+**What actually differs between the three.** Be straight with clients about
+this: today the tier changes the workspace plan chip and the Billing page
+card, and nothing else. There is no per-tier feature gating in the product —
+no team model, no seat limits, no locked features. The Billing page derives
+its tier from the Stripe product id, not from `profiles.subscription_tier`, so
+on a demo account (no Stripe subscription) it will read as trial regardless of
+the chip.
+
+**Seeded data.** 9/14/18 contacts with mixed stages, sources, scores, consent
+state and follow-up dates, plus three seeded conversations each so the Inbox
+and activity feed are populated. All seeded contacts use `@example.com`, which
+is IANA-reserved and can never reach a real inbox, and carry
+`metadata.demo = true`.
+
+Remove a demo account with:
+```sql
+delete from auth.users where email = 'demo.solo@realtordesk.ai';
+```
+The contacts, messages and profile cascade with it.
