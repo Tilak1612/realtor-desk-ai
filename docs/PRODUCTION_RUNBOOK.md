@@ -320,36 +320,69 @@ is **no longer accurate** and should not be relied on.
 So the account lifecycle is **not** blocked. What remains is a deliverability
 risk, not a functional one.
 
-### The real gap: SPF is missing
+### Outstanding: two registrar records (Namecheap)
 
-DNS for `realtordesk.ai` today:
+DNS for `realtordesk.ai` is served by `dns1/dns2.registrar-servers.com` —
+Namecheap BasicDNS, not Vercel — so these cannot be applied from the codebase
+or from the Vercel project. They need the Namecheap account.
+
+**1. The apex domain does not resolve at all.**
+
+```
+dig +short A realtordesk.ai      -> (nothing)
+curl https://realtordesk.ai      -> no response
+curl https://www.realtordesk.ai  -> 200
+```
+
+Only `www` has a record (`CNAME -> …vercel-dns-017.com`). Anyone who types the
+bare domain, or follows a link written without `www`, reaches nothing. No code
+in this repo emits a bare-domain URL — every link, canonical and email template
+already uses `www` — so this is purely a DNS gap, but it costs any traffic that
+arrives by word of mouth, business card or citation.
+
+Fix at Namecheap: add an `ALIAS`/`A` record on `@` pointing at Vercel per the
+target shown in the Vercel dashboard for this project, or a URL-redirect record
+sending `@` to `https://www.realtordesk.ai`.
+
+**2. SPF is missing; DMARC points at the wrong provider.**
 
 | Record | State |
 |---|---|
-| `resend._domainkey` (DKIM) | **Published** — Resend signing is set up |
-| SPF (`TXT` on the apex) | **MISSING** — no SPF record exists |
-| DMARC | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` — points at **Brevo**, a provider no longer in the path |
-| MX | **None** — the domain cannot receive replies or bounces |
+| `resend._domainkey` (DKIM) | Published — Resend signing is set up for the domain |
+| SPF (`TXT` on `@`) | **Missing entirely** |
+| DMARC | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` — reports going to Brevo, which is not in the sending path |
+| MX | None — the domain cannot receive replies or bounces |
 
-With DKIM alone and `p=none`, mail generally delivers but is materially more
-likely to be spam-foldered, and DMARC aggregate reports are going to a vendor
-that is not sending your mail.
+**Scope this correctly before acting.** I could not read the project's auth
+SMTP settings (the management token was not recoverable in this session), so I
+do not know whether Supabase Auth sends password-reset mail through custom SMTP
+on `realtordesk.ai` or through Supabase's own built-in sender:
 
-**Add at the registrar (Namecheap).** These are the only outstanding items and
-they cannot be applied from the codebase:
+- **If custom SMTP on `realtordesk.ai`** — the missing SPF degrades
+  password-reset and confirmation deliverability, and this is urgent.
+- **If Supabase's built-in sender** — auth mail leaves on Supabase's domain
+  with their own SPF/DKIM, so the gap does **not** affect password reset. It
+  still affects everything the edge functions send through Resend
+  (`lifecycle-cron`, `send-welcome-email`, the CASL footer paths), which is
+  reason enough to fix it.
+
+Check which, in Dashboard → Project Settings → Authentication → SMTP Settings.
+
+Records to add once confirmed:
 
 ```
-TXT   @                 v=spf1 include:amazonses.com ~all
-TXT   _dmarc            v=DMARC1; p=none; rua=mailto:dmarc@realtordesk.ai; fo=1
+TXT   @         v=spf1 include:amazonses.com ~all
+TXT   _dmarc    v=DMARC1; p=none; rua=mailto:dmarc@realtordesk.ai; fo=1
 ```
 
-Confirm the SPF `include:` against Resend's dashboard for your region before
-publishing — Resend documents the exact value per sending region, and guessing
-it is worse than having no SPF. Move DMARC to `p=quarantine` only after a few
-weeks of clean aggregate reports.
+Confirm the SPF `include:` against Resend's dashboard for your sending region
+before publishing — Resend documents the exact value, and a wrong SPF record is
+worse than none. Move DMARC to `p=quarantine` only after a few weeks of clean
+aggregate reports.
 
-Verify afterwards with:
+Verify with:
 
 ```bash
+dig +short A realtordesk.ai            # should return a record
 dig +short TXT realtordesk.ai | grep spf
 ```
