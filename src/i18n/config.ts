@@ -39,7 +39,7 @@ const resources = {
         subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book your free demo",
-        trustLine: "14-Day Free Trial • Cancel anytime before you're charged",
+        trustLine: "14-day free trial • A card is required to start • Cancel before day 14 and you are not charged",
         badge1: "PIPEDA-Aware Design",
         badge2: "Bilingual EN/FR",
         badge3: "50+ Beta Users",
@@ -157,7 +157,7 @@ const resources = {
         }
       },
       pricing: {
-        taxDisclaimer: "Prices are in Canadian dollars (CAD). GST/HST is applied at checkout based on your billing province. Every amount on this page matches what you will see on Stripe's secure checkout.",
+        taxDisclaimer: "Prices are in Canadian dollars (CAD). Sales tax — GST/HST, plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province. Every amount on this page matches what you will see on Stripe's secure checkout, before tax.",
         compare: {
           boldtrailCost: "$5,988/year + $999 setup fee",
           loftyCost: "$1,788 – $3,588/year per user",
@@ -436,9 +436,9 @@ const resources = {
           subtitle: "Realtor Desk answers every lead the instant they land — in French or English, on-brand, PIPEDA-aware. You show up to a shortlist, not a fire drill.",
           ctaPrimary: "Start 14-day free trial",
           ctaSecondary: "Book a 15-min demo",
-          trustNoCard: "Cancel anytime",
-          trustSetup: "5-min setup",
-          trustDdf: "CREA DDF ready"
+          trustNoCard: "Card required · cancel before day 14 and pay nothing",
+          trustSetup: "~10-min setup",
+          trustDdf: "Realtor.ca import today"
         },
         heroProduct: {
           deskLive: "Desk AI · Live",
@@ -498,7 +498,7 @@ const resources = {
           rowHosting: "Canadian hosting (PIPEDA)",
           rowBilingual: "Bilingual EN/FR out of the box",
           rowCasl: "CASL-compliant email",
-          rowDdf: "CREA DDF® native integration",
+          rowDdf: "CREA DDF® native integration (Q3 2026)",
           rowCad: "CAD pricing",
           rowTtfr: "Time to first AI response",
           valAddon: "Add-on",
@@ -553,15 +553,15 @@ const resources = {
         fCadPricing: "CAD pricing",
         vThemUsdPremium: "USD + ~20% premium",
         vUsPureCad: "✓ Pure CAD",
-        fAiResponseTime: "AI lead response time",
-        vThemMinutes: "2–3 min",
-        vUsFast: "< 45s",
+        fAiResponseTime: "Bilingual reply without an add-on",
+        vThemMinutes: "Add-on required",
+        vUsFast: "✓ Included",
         fBilingualAiOob: "Bilingual AI out of the box",
         vNo: "✕",
         vYes: "✓",
-        fVoiceAi2026: "Voice AI coming 2026",
+        fVoiceAi2026: "Inbound voice AI",
         vThemUnknown: "Unknown",
-        vUsQ3Beta: "Q3 2026, in beta now",
+        vUsQ3Beta: "Not on the 2026 roadmap",
         fStartingPrice: "Starting price",
         vThemPriceSetup: "USD $499 setup + $99/mo",
         vUsPriceNoSetup: "CAD $149/mo, no setup",
@@ -596,7 +596,7 @@ const resources = {
       },
       pricingRd: {
         seoTitle: "Pricing — Realtor Desk",
-        seoDesc: "One price. Every feature. Bilingual, PIPEDA-native, CREA DDF-ready. CAD pricing, 14-day free trial.",
+        seoDesc: "One price. Bilingual, PIPEDA-native, Realtor.ca import today with native CREA DDF® on the Q3 2026 roadmap. CAD pricing, 14-day free trial; a card is required to start.",
         eyebrow: "Pricing in CAD",
         heading1: "One price.",
         heading2: "Every",
@@ -604,7 +604,7 @@ const resources = {
         subtitle: "No AI quotas on Team or Brokerage. No \"growth\" tier that hides the integrations. 14-day free trial.",
         toggleMonthly: "Monthly",
         toggleAnnual: "Annual · save up to $789/yr",
-        taxNote: "Prices shown in CAD. GST/HST applied at checkout based on your billing province. The amount on this page matches what you will see on Stripe's secure checkout.",
+        taxNote: "Prices shown in CAD, before tax. GST/HST — plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province.",
         compareHeading: "Compare every feature",
         planSoloName: "Solo",
         planSoloTag: "For the single agent",
@@ -630,18 +630,18 @@ const resources = {
         featEveryIn: "Everything in {{plan}}, plus —",
         featSoloDesk: "Desk AI chatbot, 500 msgs/mo",
         featSoloBilingual: "Bilingual EN · FR",
-        featSoloDdf1: "CREA DDF® feed (1 board)",
+        featSoloDdf1: "Realtor.ca listing import (native CREA DDF® feed — Q3 2026)",
         featSoloScoring: "Lead scoring + pipeline",
         featSoloCasl: "CASL-compliant email drip",
         featSoloUser: "1 user",
         featTeamAiUnl: "Unlimited AI messages",
-        featTeamDdfUnl: "CREA DDF® feed (unlimited)",
+        featTeamDdfUnl: "CREA DDF® feed, unlimited boards (Q3 2026)",
         featTeamRouting: "Round-robin lead routing",
         featTeamReports: "Team reports & leaderboard",
         featTeamSeats: "5 users included",
         featBrokerageSso: "SAML SSO + Azure AD",
         featBrokerageCompliance: "FINTRAC & provincial regulator workflows",
-        featBrokerageDdfCustom: "Custom DDF mappings",
+        featBrokerageDdfCustom: "Custom DDF mappings (Q3 2026)",
         featBrokerageCsm: "Dedicated Canadian CSM",
         featBrokerageSla: "99.95% uptime SLA",
         matrixSecAi: "AI & automation",
@@ -651,7 +651,7 @@ const resources = {
         matrixRowBilingual: "Bilingual EN · FR",
         matrixRowVoice: "Custom voice training",
         matrixRowScoring: "AI lead scoring",
-        matrixRowDdfBoards: "CREA DDF® boards",
+        matrixRowDdfBoards: "CREA DDF® boards (Q3 2026)",
         matrixRowStack: "Stripe / Twilio / Resend",
         matrixRowSso: "SAML SSO",
         matrixRowPipeda: "PIPEDA hosting (Canada)",
@@ -691,11 +691,12 @@ const resources = {
         itemPrivacy: "Privacy",
         itemTerms: "Terms",
         itemUnsubscribe: "Unsubscribe",
+        itemCookieSettings: "Cookie settings",
         copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
       },
       featuresRd: {
         seoTitle: "Features — Realtor Desk",
-        seoDesc: "24/7 bilingual AI chatbot, priority pipeline, PIPEDA-native data, CASL-compliant email automations, CREA DDF sync. The feature set Canadian realtors actually use.",
+        seoDesc: "24/7 bilingual AI chatbot, priority pipeline, PIPEDA-native data, CASL-compliant email automations, and Realtor.ca import — with native CREA DDF sync on the Q3 2026 roadmap.",
         badge: "What Desk does",
         heroH1Pre: "One desk that handles the",
         heroH1Italic1: "overnight",
@@ -747,14 +748,14 @@ const resources = {
         ctaSecondary: "Book a demo"
       },
       pageSeo: {
-        howItWorksTitle: "How Realtor Desk Works | Setup in 20 Minutes",
-        howItWorksDesc: "Get started with Realtor Desk in about 20 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration.",
+        howItWorksTitle: "How Realtor Desk Works | Setup in 10 Minutes",
+        howItWorksDesc: "Get started with Realtor Desk in about 10 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration.",
         resourcesTitle: "Resources | Guides for Canadian Real Estate Agents",
         resourcesDesc: "Expert guides on AI tools, lead generation, compliance, and marketing for Canadian real estate agents using Realtor Desk.",
         loginTitle: "Sign in — Realtor Desk",
         loginDesc: "Sign in to your Realtor Desk workspace. Canadian-hosted, PIPEDA-aware, bilingual EN/FR.",
         signupTitle: "Start your 14-day free trial — Realtor Desk",
-        signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, CREA DDF-ready, CAD pricing. A card is required to start; you're not charged until the trial ends.",
+        signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, Realtor.ca import, CAD pricing. A card is required to start; you're not charged until the trial ends.",
         integrationsTitle: "Integrations — Realtor Desk",
         integrationsDesc: "Integrate Realtor Desk via Zapier, Make, and n8n (5,000+ apps). Native connectors on the roadmap. CREA DDF® coming Q3 2026.",
         roadmapTitle: "Product Roadmap — Realtor Desk",
@@ -1232,8 +1233,8 @@ const resources = {
           answer: "We offer a 30-day money-back guarantee. If you're not satisfied for any reason, we'll refund you in full. During beta, we also offer unlimited support to ensure your success."
         },
         q5: {
-          question: "Are the '300% conversion increase' claims real?",
-          answer: "This metric comes from our pilot program participants who saw an average 300% improvement in lead response time, which correlated with increased conversions. Individual results vary based on market, lead quality, and how you use the platform. We're tracking metrics as we scale."
+          question: "Do you publish conversion statistics?",
+          answer: "No. We are in public beta and we do not have a defensible sample yet, so we would rather show you your own numbers during the trial than quote a multiple we cannot substantiate. Conversion depends on your market and your follow-up."
         },
         q6: {
           question: "What certifications do you actually have?",
@@ -1245,7 +1246,7 @@ const resources = {
         },
         q8: {
           question: "How long does setup take?",
-          answer: "Most agents are fully operational within 20 minutes. Our setup wizard guides you through connecting your tools, training the AI on your listings, and customizing responses."
+          answer: "Most agents are set up in about 10 minutes: your profile, a first contact, a first listing, and connecting your calendar. The setup wizard walks you through each step, and you can come back to any of them later."
         },
         q9: {
           question: "What if the AI can't answer a question?",
@@ -1277,7 +1278,7 @@ const resources = {
         },
         q16: {
           question: "Can RealtorDesk AI handle phone calls?",
-          answer: "Yes! Our AI Voice Agent can handle inbound phone calls 24/7, answer questions about listings, qualify leads, and book appointments directly into your calendar—all with a natural Canadian accent in English or French."
+          answer: "Not yet. Desk handles chat, web forms and email today, and drafts SMS replies for you to send. An inbound AI voice agent is something we are exploring — it is not on the 2026 roadmap, and we would rather tell you that than sell it to you."
         },
         q17: {
           question: "Is RealtorDesk AI suitable for real estate teams?",
@@ -2172,7 +2173,7 @@ const resources = {
       howItWorks: {
         hero: {
           title: "Get Up and Running in",
-          titleGradient: "20 Minutes",
+          titleGradient: "10 Minutes",
           subtitle: "From signup to capturing leads in less time than it takes to drive to a showing. No technical skills required."
         },
         steps: {
@@ -2356,8 +2357,8 @@ const resources = {
             excerpt: "Master the art of true bilingual marketing for Canadian markets. It's not just about translation - it's about cultural communication."
           },
           successStory: {
-            title: "How Sarah Chen Closed 14 Extra Deals in Q1 with AI",
-            excerpt: "A Toronto agent's journey from traditional CRM to AI-powered success. Real numbers, real results, real transformation."
+            title: "",
+            excerpt: ""
           }
         },
         readTime: "min read",
@@ -2708,7 +2709,9 @@ const resources = {
           checkEmail: "Check your email",
           sentTo: "We've sent a password reset link to",
           linkExpiry: "Click the link in the email to reset your password. The link will expire in 1 hour.",
-          checkSpam: "If you don't see the email, check your spam folder."
+          checkSpam: "If you don't see the email, check your spam folder.",
+          stillNothing: "Still nothing after a few minutes? Email",
+          stillNothingTail: "and we will get you back in.",
         },
         reset: {
           title: "Set new password",
@@ -2910,6 +2913,10 @@ const resources = {
         topnav: {
           search: "Search leads, listings, conversations…",
           live: "Live",
+          account: "Account menu",
+          settings: "Settings",
+          billing: "Plan & billing",
+          signOut: "Sign out",
           notifications: "Notifications",
           language: "Language"
         },
@@ -3013,7 +3020,7 @@ const resources = {
           avgResponseTime: "Avg response time",
           dealsClosed: "Deals closed",
           leadToShowing: "Lead → Showing",
-          revenueAttributed: "Revenue attributed"
+          revenueAttributed: "Closed-won value"
         },
         sections: {
           today: "Today",
@@ -3237,7 +3244,7 @@ const resources = {
         subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réservez votre démo gratuite",
-        trustLine: "14 Jours Gratuits • Annulez à tout moment",
+        trustLine: "Essai gratuit de 14 jours • Une carte est requise pour commencer • Annulez avant le 14e jour et rien ne vous est prélevé",
         badge1: "Conforme PIPEDA par Conception",
         badge2: "Bilingue EN/FR",
         badge3: "50+ Utilisateurs Bêta",
@@ -3355,7 +3362,7 @@ const resources = {
         }
       },
       pricing: {
-        taxDisclaimer: "Les prix sont en dollars canadiens (CAD). La TPS/TVH est appliquée au paiement selon votre province de facturation. Chaque montant affiché ici correspond exactement à ce que vous verrez sur la page de paiement sécurisée Stripe.",
+        taxDisclaimer: "Les prix sont en dollars canadiens (CAD). Les taxes de vente — TPS/TVH, plus la TVQ au Québec ou la TVP là où elle s'applique — sont calculées au paiement selon votre province de facturation. Chaque montant affiché ici correspond à ce que vous verrez sur la page de paiement sécurisée Stripe, avant taxes.",
         compare: {
           boldtrailCost: "5\u00a0988\u00a0$/an + frais d'installation de 999\u00a0$",
           loftyCost: "1\u00a0788\u00a0$ à 3\u00a0588\u00a0$/an par utilisateur",
@@ -3631,9 +3638,9 @@ const resources = {
           subtitle: "Realtor Desk répond à chaque client potentiel dès son arrivée — en français ou en anglais, dans votre voix, conforme à la LPRPDE. Vous arrivez à une liste courte, pas à un branle-bas de combat.",
           ctaPrimary: "Essai gratuit de 14 jours",
           ctaSecondary: "Réserver une démo de 15 min",
-          trustNoCard: "Annulez à tout moment",
-          trustSetup: "Installation en 5 min",
-          trustDdf: "Compatible DDF de l'ACI"
+          trustNoCard: "Carte requise · annulez avant le 14e jour et ne payez rien",
+          trustSetup: "Installation en ~10 min",
+          trustDdf: "Import Realtor.ca dès aujourd'hui"
         },
         heroProduct: {
           deskLive: "Desk IA · En direct",
@@ -3693,7 +3700,7 @@ const resources = {
           rowHosting: "Hébergement canadien (LPRPDE)",
           rowBilingual: "Bilingue FR/EN dès le départ",
           rowCasl: "Courriel conforme à la LCAP",
-          rowDdf: "Intégration native du SDD® de l'ACI",
+          rowDdf: "Intégration native du SDD® de l'ACI (T3 2026)",
           rowCad: "Tarifs en CAD",
           rowTtfr: "Délai jusqu'à la première réponse de l'IA",
           valAddon: "Module additionnel",
@@ -3748,15 +3755,15 @@ const resources = {
         fCadPricing: "Tarifs en CAD",
         vThemUsdPremium: "USD + ~20 % de prime",
         vUsPureCad: "✓ CAD seulement",
-        fAiResponseTime: "Délai de réponse IA aux prospects",
-        vThemMinutes: "2 à 3 min",
-        vUsFast: "< 45 s",
+        fAiResponseTime: "Réponse bilingue sans module complémentaire",
+        vThemMinutes: "Module complémentaire requis",
+        vUsFast: "✓ Inclus",
         fBilingualAiOob: "IA bilingue dès le départ",
         vNo: "✕",
         vYes: "✓",
-        fVoiceAi2026: "IA vocale en 2026",
+        fVoiceAi2026: "IA vocale entrante",
         vThemUnknown: "Inconnu",
-        vUsQ3Beta: "T3 2026, en bêta maintenant",
+        vUsQ3Beta: "Pas à la feuille de route 2026",
         fStartingPrice: "Prix de départ",
         vThemPriceSetup: "USD 499 $ d'installation + 99 $/mois",
         vUsPriceNoSetup: "CAD 149 $/mois, sans frais d'installation",
@@ -3799,7 +3806,7 @@ const resources = {
         subtitle: "Pas de quotas d'IA sur Équipe ou Agence. Pas de forfait « croissance » qui cache les intégrations. Essai de 14 jours, annulez avant la fin de l'essai.",
         toggleMonthly: "Mensuel",
         toggleAnnual: "Annuel · économisez jusqu'à 789 $/an",
-        taxNote: "Prix affichés en CAD. TPS/TVH ajoutée au paiement selon votre province de facturation. Le montant sur cette page correspond à celui affiché sur la page de paiement sécurisée de Stripe.",
+        taxNote: "Prix affichés en CAD, avant taxes. La TPS/TVH — plus la TVQ au Québec ou la TVP là où elle s'applique — est calculée au paiement selon votre province de facturation.",
         compareHeading: "Comparer chaque fonctionnalité",
         planSoloName: "Solo",
         planSoloTag: "Pour l'agent autonome",
@@ -3825,18 +3832,18 @@ const resources = {
         featEveryIn: "Tout ce qui est dans {{plan}}, plus —",
         featSoloDesk: "Desk IA, 500 messages/mois",
         featSoloBilingual: "Bilingue FR · EN",
-        featSoloDdf1: "Flux SDD® de l'ACI (1 chambre)",
+        featSoloDdf1: "Import de fiches Realtor.ca (flux SDD® de l'ACI natif — T3 2026)",
         featSoloScoring: "Notation de prospects + pipeline",
         featSoloCasl: "Relances par courriel conformes LCAP",
         featSoloUser: "1 utilisateur",
         featTeamAiUnl: "Messages IA illimités",
-        featTeamDdfUnl: "Flux SDD® de l'ACI (illimité)",
+        featTeamDdfUnl: "Flux SDD® de l'ACI, chambres illimitées (T3 2026)",
         featTeamRouting: "Distribution round-robin des prospects",
         featTeamReports: "Rapports d'équipe et classement",
         featTeamSeats: "5 utilisateurs inclus",
         featBrokerageSso: "SAML SSO + Azure AD",
         featBrokerageCompliance: "Flux CANAFE et régulateurs provinciaux",
-        featBrokerageDdfCustom: "Mappages SDD personnalisés",
+        featBrokerageDdfCustom: "Mappages SDD personnalisés (T3 2026)",
         featBrokerageCsm: "Gestion de compte canadienne dédiée",
         featBrokerageSla: "Disponibilité garantie 99,95 %",
         matrixSecAi: "IA et automatisation",
@@ -3846,7 +3853,7 @@ const resources = {
         matrixRowBilingual: "Bilingue FR · EN",
         matrixRowVoice: "Entraînement de la voix personnalisée",
         matrixRowScoring: "Notation IA des prospects",
-        matrixRowDdfBoards: "Chambres SDD® de l'ACI",
+        matrixRowDdfBoards: "Chambres SDD® de l'ACI (T3 2026)",
         matrixRowStack: "Stripe / Twilio / Resend",
         matrixRowSso: "SAML SSO",
         matrixRowPipeda: "Hébergement LPRPDE (Canada)",
@@ -3886,6 +3893,7 @@ const resources = {
         itemPrivacy: "Confidentialité",
         itemTerms: "Conditions",
         itemUnsubscribe: "Se désabonner",
+        itemCookieSettings: "Paramètres des témoins",
         copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
       },
       featuresRd: {
@@ -3942,8 +3950,8 @@ const resources = {
         ctaSecondary: "Réserver une démo"
       },
       pageSeo: {
-        howItWorksTitle: "Fonctionnement de Realtor Desk | Installation en 20 minutes",
-        howItWorksDesc: "Commencez avec Realtor Desk en environ 20 minutes. Configuration CRM simple, outils IA pour courtiers, configuration de génération de prospects, et intégration de visites virtuelles.",
+        howItWorksTitle: "Fonctionnement de Realtor Desk | Installation en 10 minutes",
+        howItWorksDesc: "Commencez avec Realtor Desk en environ 10 minutes. Configuration CRM simple, outils IA pour courtiers, configuration de génération de prospects, et intégration de visites virtuelles.",
         resourcesTitle: "Ressources | Guides pour courtiers immobiliers canadiens",
         resourcesDesc: "Guides d'experts sur les outils IA, la génération de prospects, la conformité et le marketing pour les courtiers immobiliers canadiens qui utilisent Realtor Desk.",
         loginTitle: "Se connecter — Realtor Desk",
@@ -4427,8 +4435,8 @@ const resources = {
           answer: "Nous offrons une garantie de remboursement de 30 jours. Si vous n'êtes pas satisfait pour quelque raison que ce soit, nous vous rembourserons intégralement. Pendant la bêta, nous offrons également un support illimité pour assurer votre succès."
         },
         q5: {
-          question: "Les affirmations d'augmentation de conversion de 300% sont-elles réelles?",
-          answer: "Cette métrique provient de nos participants au programme pilote qui ont constaté une amélioration moyenne de 300% du temps de réponse aux prospects, ce qui est corrélé avec une augmentation des conversions. Les résultats individuels varient en fonction du marché, de la qualité des prospects et de la façon dont vous utilisez la plateforme. Nous suivons les métriques à mesure que nous nous développons."
+          question: "Publiez-vous des statistiques de conversion ?",
+          answer: "Non. Nous sommes en bêta publique et nous n'avons pas encore d'échantillon défendable ; nous préférons vous montrer vos propres chiffres pendant l'essai plutôt que de citer un multiple que nous ne pouvons pas justifier. La conversion dépend de votre marché et de votre suivi."
         },
         q6: {
           question: "Quelles certifications avez-vous réellement?",
@@ -4440,7 +4448,7 @@ const resources = {
         },
         q8: {
           question: "Combien de temps prend la configuration?",
-          answer: "La plupart des agents sont pleinement opérationnels en 20 minutes. Notre assistant de configuration vous guide dans la connexion de vos outils, la formation de l'IA sur vos annonces et la personnalisation des réponses."
+          answer: "La plupart des agents sont configurés en environ 10 minutes : votre profil, un premier contact, une première fiche et la connexion de votre calendrier. L'assistant vous guide à chaque étape, et vous pouvez y revenir plus tard."
         },
         q9: {
           question: "Que se passe-t-il si l'IA ne peut pas répondre à une question?",
@@ -4472,7 +4480,7 @@ const resources = {
         },
         q16: {
           question: "RealtorDesk AI peut-il gérer les appels téléphoniques?",
-          answer: "Oui! Notre Agent Vocal IA peut gérer les appels téléphoniques entrants 24/7, répondre aux questions sur les inscriptions, qualifier les prospects et réserver des rendez-vous directement dans votre calendrier—le tout avec un accent canadien naturel en anglais ou en français."
+          answer: "Pas encore. Desk gère aujourd'hui le clavardage, les formulaires web et le courriel, et rédige des réponses SMS que vous envoyez. Un agent vocal IA entrant est à l'étude — il ne figure pas à la feuille de route 2026, et nous préférons vous le dire plutôt que de vous le vendre."
         },
         q17: {
           question: "RealtorDesk AI convient-il aux équipes immobilières?",
@@ -4502,7 +4510,7 @@ const resources = {
         title: "Prêt à Ne Plus Jamais Manquer un Prospect?",
         subtitle: "Rejoignez notre communauté bêta canadienne utilisant l'IA pour conclure plus de ventes",
         button: "Commencez Votre Essai Gratuit de 14 Jours",
-        note: "Annulez avant la fin de l'essai requise • Configuration en 20 minutes • Annulez à tout moment"
+        note: "Carte requise • Configuration en environ 10 minutes • Annulez avant le 14e jour et ne payez rien"
       },
       mobileCTA: {
         title: "Commencez Votre Essai Gratuit de 14 Jours",
@@ -5367,7 +5375,7 @@ const resources = {
       howItWorks: {
         hero: {
           title: "Soyez opérationnel en",
-          titleGradient: "20 minutes",
+          titleGradient: "10 minutes",
           subtitle: "De l'inscription à la capture de prospects en moins de temps qu'il n'en faut pour se rendre à une visite. Aucune compétence technique requise."
         },
         steps: {
@@ -5551,8 +5559,8 @@ const resources = {
             excerpt: "Maîtrisez l'art du vrai marketing bilingue pour les marchés canadiens. Ce n'est pas juste de la traduction - c'est de la communication culturelle."
           },
           successStory: {
-            title: "Comment Sarah Chen a Conclu 14 Transactions de Plus au T1 avec l'IA",
-            excerpt: "Le parcours d'une agente de Toronto du CRM traditionnel au succès propulsé par l'IA. Vrais chiffres, vrais résultats, vraie transformation."
+            title: "",
+            excerpt: ""
           }
         },
         readTime: "min de lecture",
@@ -5903,7 +5911,9 @@ const resources = {
           checkEmail: "Vérifiez votre courriel",
           sentTo: "Nous avons envoyé un lien de réinitialisation à",
           linkExpiry: "Cliquez sur le lien dans le courriel pour réinitialiser votre mot de passe. Le lien expire dans 1 heure.",
-          checkSpam: "Si vous ne voyez pas le courriel, vérifiez votre dossier de courrier indésirable."
+          checkSpam: "Si vous ne voyez pas le courriel, vérifiez votre dossier de courrier indésirable.",
+          stillNothing: "Toujours rien après quelques minutes ? Écrivez à",
+          stillNothingTail: "et nous vous aiderons à vous reconnecter.",
         },
         reset: {
           title: "Nouveau mot de passe",
@@ -6105,6 +6115,10 @@ const resources = {
         topnav: {
           search: "Rechercher clients, inscriptions, conversations…",
           live: "En direct",
+          account: "Menu du compte",
+          settings: "Paramètres",
+          billing: "Forfait et facturation",
+          signOut: "Se déconnecter",
           notifications: "Notifications",
           language: "Langue"
         },
@@ -6208,7 +6222,7 @@ const resources = {
           avgResponseTime: "Temps de réponse moyen",
           dealsClosed: "Transactions conclues",
           leadToShowing: "Client → Visite",
-          revenueAttributed: "Revenu attribué"
+          revenueAttributed: "Valeur des dossiers conclus"
         },
         sections: {
           today: "Aujourd'hui",

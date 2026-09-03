@@ -361,7 +361,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
         </span>
       </div>
       <div className="text-[11px] text-rd-ink-600 mb-2 leading-[1.35] line-clamp-2">
-        {lead.listing}
+        {lead.listing ?? ""}
       </div>
       <div className="flex justify-between items-center text-[10px] text-rd-ink-500 gap-2">
         <span className="flex items-center gap-1 truncate">

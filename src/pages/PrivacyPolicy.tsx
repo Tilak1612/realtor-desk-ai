@@ -116,7 +116,10 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Cookies and Tracking</h2>
               <p className="mb-4">
                 We use cookies and similar tracking technologies to enhance your experience and understand how 
-                you use our platform. You have full control over cookie preferences through our cookie consent banner.
+                you use our platform. Analytics and marketing cookies stay switched
+                off until you opt in — nothing is sent to Google Analytics before
+                you accept. You can change or withdraw that choice at any time via
+                "Cookie settings" in the footer of any page.
               </p>
               <p className="mb-4"><strong>Types of Cookies We Use:</strong></p>
               <ul className="list-disc pl-6 space-y-2 mb-4">

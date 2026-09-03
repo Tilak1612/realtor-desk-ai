@@ -956,7 +956,10 @@ const VoiceAIGuide = () => {
               <Card className="p-6">
                 <h3 className="font-bold mb-2">Does Voice AI work in Quebec (French)?</h3>
                 <p className="text-gray-700">
-                  Yes! RealtorDesk AI Voice AI is fully bilingual. Detects language automatically and conducts entire conversation in French if needed.
+                  Voice AI as a category is capable of this. To be clear about our own
+                  product: RealtorDesk does not ship an inbound voice agent today and it
+                  is not on the 2026 roadmap. Desk handles chat, web forms and email
+                  bilingually, and drafts SMS replies for you to send.
                 </p>
               </Card>
 
