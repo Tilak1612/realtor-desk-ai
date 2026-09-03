@@ -100,7 +100,6 @@ const CreaDDF = lazy(() => import("./pages/blog/CreaDDF"));
 const Compliance = lazy(() => import("./pages/blog/Compliance"));
 const LeadConversion = lazy(() => import("./pages/blog/LeadConversion"));
 const BilingualMarketing = lazy(() => import("./pages/blog/BilingualMarketing"));
-const SuccessStory = lazy(() => import("./pages/blog/SuccessStory"));
 const HousingForecast2025 = lazy(() => import("./pages/blog/HousingForecast2025"));
 const AIAutomationSlowerMarket = lazy(() => import("./pages/blog/AIAutomationSlowerMarket"));
 const LeadResponseTime = lazy(() => import("./pages/blog/LeadResponseTime"));
@@ -286,7 +285,11 @@ const App = () => (
           <Route path="/blog/compliance" element={<Compliance />} />
           <Route path="/blog/lead-conversion" element={<LeadConversion />} />
           <Route path="/blog/bilingual-marketing" element={<BilingualMarketing />} />
-          <Route path="/blog/success-story" element={<SuccessStory />} />
+          {/* /blog/success-story was a fabricated case study — a named agent at
+              a named real brokerage, with invented quotes and metrics, carrying
+              Article JSON-LD. Removed rather than corrected; redirected because
+              the URL is in the sitemap and indexed. */}
+          <Route path="/blog/success-story" element={<Navigate to="/resources" replace />} />
           <Route path="/canada-housing-market-forecast-2025-2026" element={<HousingForecast2025 />} />
           <Route path="/canadian-realtors-thrive-slower-market-ai-automation" element={<AIAutomationSlowerMarket />} />
           <Route path="/lead-response-time-canadian-realtors" element={<LeadResponseTime />} />

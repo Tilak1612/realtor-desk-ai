@@ -380,16 +380,6 @@ const Resources = () => {
       link: "/blog/bilingual-marketing",
       useTranslation: true,
     },
-    {
-      categoryKey: "resourcesPage.categories.successStories",
-      icon: Award,
-      titleKey: "resourcesPage.articles.successStory.title",
-      excerptKey: "resourcesPage.articles.successStory.excerpt",
-      readTime: 6,
-      image: blogSuccess,
-      link: "/blog/success-story",
-      useTranslation: true,
-    },
   ];
 
   const categoryKeys = [
