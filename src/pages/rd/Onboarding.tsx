@@ -890,11 +890,11 @@ function StepLive({ onContinue, busy }: { onContinue: () => void; busy: boolean 
           title={t("rd.onboarding.live.nextWidgetTitle", "Add your website widget")}
           desc={t("rd.onboarding.live.nextWidgetDesc", "One script tag. Bilingual chat bubble.")}
         />
-        <NextStepCard
-          icon={<IconGlobe />}
-          title={t("rd.onboarding.live.nextTeamTitle", "Invite your team")}
-          desc={t("rd.onboarding.live.nextTeamDesc", "5 seats included on the Team plan.")}
-        />
+        {/* "Invite your team · 5 seats included" removed. NextStepCard is a
+            plain div with no link and no handler, so it instructed a new
+            subscriber to do something the product cannot do — there is no
+            team, seat, member or invitation table in production, and RLS
+            (auth.uid() = user_id) prevents two agents sharing a lead anyway. */}
       </div>
 
       <div className="flex flex-wrap gap-2.5 mt-7">

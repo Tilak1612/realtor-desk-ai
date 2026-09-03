@@ -117,9 +117,11 @@ export default function Pipeline() {
           </div>
           <div className="flex gap-2">
             <ViewToggle view={view} onChange={setView} />
-            <RDButton variant="outline" size="sm" icon={<IconFilter />}>
-              {t("rd.actions.allAgents", "All agents")}
-            </RDButton>
+            {/* "All agents" removed. It had no handler, and it filtered a
+                dimension the schema cannot express — there is no assigned-agent
+                column and no team/member/seat model anywhere in production. It
+                was the one place the interface acknowledged more than one
+                agent, on a product that cannot have one. */}
             <RDButton
               variant="primary"
               size="sm"

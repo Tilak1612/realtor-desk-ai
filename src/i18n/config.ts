@@ -2427,6 +2427,8 @@ const resources = {
         subscribeYearly: "Subscribe Yearly",
         includesFeatures: "All plans include:",
         guarantee: "30-day money-back guarantee • Cancel anytime",
+        exportData: "Export my data",
+        signOut: "Sign out",
         feature: {
           unlimitedContacts: "Unlimited contacts & leads",
           aiLeadScoring: "AI-powered lead scoring",
@@ -5620,6 +5622,8 @@ const resources = {
         subscribeYearly: "S'Abonner Annuellement",
         includesFeatures: "Tous les plans incluent :",
         guarantee: "Garantie de remboursement de 30 jours • Annulez à tout moment",
+        exportData: "Exporter mes données",
+        signOut: "Se déconnecter",
         feature: {
           unlimitedContacts: "Contacts et prospects illimités",
           aiLeadScoring: "Score de prospects propulsé par l'IA",
