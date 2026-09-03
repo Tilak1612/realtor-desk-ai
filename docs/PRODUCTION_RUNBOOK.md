@@ -305,10 +305,11 @@ Verified: the baseline builds from an empty schema to **43 tables, 97 policies,
 
 ## 13. Recovering a locked-out user (no email required)
 
-While the Resend sending domain is unverified, `/forgot-password` sends
-nothing — a user who forgets their password has no way back in on their own.
-This is the manual path. It keeps working after the domain is verified and is
-the normal way to help someone whose mail is bouncing or filtered.
+**Correction (2026-09-03):** the premise this section was written under no
+longer holds. `/forgot-password` **does** send — custom SMTP is configured and
+accepting mail, verified in §17. Keep this manual path anyway: it is the normal
+way to help someone whose mail is bouncing, filtered, or going to an address
+they can no longer reach.
 
 ```bash
 SUPABASE_SERVICE_ROLE_KEY=<key> ./scripts/recovery-link.sh user@example.com
@@ -410,3 +411,29 @@ is installed.
 every new signup at an unconfirmed account they cannot clear, which is worse
 than no email. Both paths above set it together with a working sender, and
 `status` shows which state you are in.
+
+## 14. Sales tax at checkout
+
+`create-checkout` now sets `automatic_tax: { enabled: true }` with
+`billing_address_collection: "required"`, so Stripe Tax computes the correct
+provincial mix — GST only in AB, HST in ON/NB/NL/NS/PE, GST + QST in QC,
+GST + PST in BC/SK/MB.
+
+**Why this was a real problem.** `/pricing` stated *"GST/HST is applied at
+checkout based on your billing province"* while `automatic_tax` was never
+enabled. Stripe therefore calculated **no tax at all**: every sale was
+effectively tax-inclusive against a liability the company still owes the CRA
+and Revenu Québec, and the on-page statement was untrue.
+
+**Verified before enabling**, so live checkout was never at risk: a throwaway
+`taxprobe` function — identical to `create-checkout` but with tax on — was
+deployed, used to confirm Stripe Tax is registered on the account, then
+deleted. Only then was the real function changed. All four live price IDs were
+re-tested afterwards and still create sessions.
+
+`customer_update: { address: "auto" }` is set whenever an existing Stripe
+customer is passed; Stripe refuses an `automatic_tax` session without it.
+
+If a session ever starts failing with a tax error, check that the Stripe Tax
+registration is still active — do not simply remove `automatic_tax`, or the
+under-collection returns silently.
