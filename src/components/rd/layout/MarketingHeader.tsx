@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { CtaLink } from "@/components/rd/marketing/CtaLink";
 import { useTranslation } from "react-i18next";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
@@ -181,16 +182,24 @@ export function MarketingHeader({
                 </DropdownMenu.Portal>
               </DropdownMenu.Root>
             )}
-            <Link to="/login" className="hidden sm:block">
-              <RDButton variant={dark ? "light" : "outline"} size="sm">
-                {t("marketingHeader.ctaSignIn")}
-              </RDButton>
-            </Link>
-            <Link to="/signup" className="hidden sm:block">
-              <RDButton variant={dark ? "terra" : "primary"} size="sm">
-                {t("marketingHeader.ctaStartFreeTrial")}
-              </RDButton>
-            </Link>
+            <CtaLink
+              to="/login"
+              location="header"
+              variant={dark ? "light" : "outline"}
+              size="sm"
+              className="hidden sm:inline-flex"
+            >
+              {t("marketingHeader.ctaSignIn")}
+            </CtaLink>
+            <CtaLink
+              to="/signup"
+              location="header"
+              variant={dark ? "terra" : "primary"}
+              size="sm"
+              className="hidden sm:inline-flex"
+            >
+              {t("marketingHeader.ctaStartFreeTrial")}
+            </CtaLink>
 
             <Dialog.Root open={mobileOpen} onOpenChange={setMobileOpen}>
               <Dialog.Trigger asChild>
