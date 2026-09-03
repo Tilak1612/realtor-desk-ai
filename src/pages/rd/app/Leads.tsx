@@ -93,12 +93,8 @@ export default function Leads() {
             </h1>
           </div>
           <div className="flex gap-2">
-            <RDButton variant="outline" size="sm" icon={<IconFilter />}>
-              {t("rd.actions.filter", "Filter")}
-            </RDButton>
-            <RDButton variant="outline" size="sm">
-              {t("rd.actions.import", "Import")}
-            </RDButton>
+            {/* Filter removed: no handler and no filter UI behind it. */}
+            {/* Import removed: no import flow is reachable from the /app shell. */}
             <RDButton
               variant="primary"
               size="sm"

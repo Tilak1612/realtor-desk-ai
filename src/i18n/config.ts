@@ -2911,6 +2911,10 @@ const resources = {
         topnav: {
           search: "Search leads, listings, conversations…",
           live: "Live",
+          account: "Account menu",
+          settings: "Settings",
+          billing: "Plan & billing",
+          signOut: "Sign out",
           notifications: "Notifications",
           language: "Language"
         },
@@ -6107,6 +6111,10 @@ const resources = {
         topnav: {
           search: "Rechercher clients, inscriptions, conversations…",
           live: "En direct",
+          account: "Menu du compte",
+          settings: "Paramètres",
+          billing: "Forfait et facturation",
+          signOut: "Se déconnecter",
           notifications: "Notifications",
           language: "Langue"
         },

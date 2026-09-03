@@ -19,7 +19,6 @@ interface AppShellProps {
   agentName?: string;
   /** Workspace metadata for the sidebar card. */
   workspace?: { name: string; tier: string; mark: string };
-  hasUnread?: boolean;
 }
 
 export function AppShell({
@@ -27,7 +26,6 @@ export function AppShell({
   sidebarItems,
   agentName,
   workspace,
-  hasUnread = false, // no notification system exists; don't show a permanent dot
 }: AppShellProps) {
   // Identity comes from the signed-in profile. Props still win so a caller
   // (or a story/test) can override, but there is no fabricated default.
@@ -86,7 +84,6 @@ export function AppShell({
       <main className="flex-1 flex flex-col overflow-hidden min-w-0">
         <TopNav
           agent={{ name: resolvedAgent }}
-          hasUnread={hasUnread}
           onMenuClick={() => setNavOpen(true)}
         />
         <div className="flex-1 overflow-y-auto overflow-x-hidden">{children}</div>
