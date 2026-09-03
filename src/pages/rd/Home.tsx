@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CtaLink } from "@/components/rd/marketing/CtaLink";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
@@ -82,16 +83,23 @@ function HeroSection({ t }: { t: TFn }) {
             {t("landing.hero.subtitle")}
           </p>
           <div className="flex flex-wrap gap-3 mt-9">
-            <Link to="/signup">
-              <RDButton variant="primary" size="lg" trailingIcon={<IconArrow />}>
+            <CtaLink
+              to="/signup"
+              location="hero"
+              variant="primary"
+              size="lg"
+              trailingIcon={<IconArrow />}
+            >
                 {t("landing.hero.ctaPrimary")}
-              </RDButton>
-            </Link>
-            <Link to="/demo">
-              <RDButton variant="outline" size="lg">
+            </CtaLink>
+            <CtaLink
+              to="/demo"
+              location="hero"
+              variant="outline"
+              size="lg"
+            >
                 {t("landing.hero.ctaSecondary")}
-              </RDButton>
-            </Link>
+            </CtaLink>
           </div>
           <div className="flex flex-wrap items-center gap-4 md:gap-[18px] mt-8 text-[13px] text-rd-ink-500">
             <span className="inline-flex items-center gap-1.5">
@@ -352,16 +360,23 @@ function PipelinePreview({ t }: { t: TFn }) {
             {t("landing.pipelinePreview.body")}
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
-            <Link to="/signup">
-              <RDButton variant="terra" trailingIcon={<IconArrow />}>
+            <CtaLink
+              to="/signup"
+              location="pipeline_preview"
+              variant="terra"
+              size="lg"
+              trailingIcon={<IconArrow />}
+            >
                 {t("landing.pipelinePreview.ctaPrimary")}
-              </RDButton>
-            </Link>
-            <Link to="/demo">
-              <RDButton variant="ghost" className="text-white hover:bg-white/10">
+            </CtaLink>
+            <CtaLink
+              to="/demo"
+              location="pipeline_preview"
+              variant="ghost"
+              size="lg"
+            >
                 {t("landing.pipelinePreview.ctaSecondary")}
-              </RDButton>
-            </Link>
+            </CtaLink>
           </div>
         </div>
         <MiniPipeline t={t} />
@@ -512,11 +527,15 @@ function CompareStrip({ t, locale }: { t: TFn; locale: "en-CA" | "fr-CA" }) {
       </div>
 
       <div className="text-center mt-8">
-        <Link to="/compare/boldtrail">
-          <RDButton variant="outline" trailingIcon={<IconArrow />}>
+        <CtaLink
+          to="/compare/boldtrail"
+          location="home_compare_link"
+          variant="outline"
+          size="md"
+          trailingIcon={<IconArrow />}
+        >
             {t("landing.compareStrip.seeFull")}
-          </RDButton>
-        </Link>
+        </CtaLink>
       </div>
     </section>
   );
@@ -564,11 +583,15 @@ function TestimonialAndCTA({ t }: { t: TFn }) {
               {t("landing.closingCta.body")}
             </p>
           </div>
-          <Link to="/signup">
-            <RDButton variant="terra" size="lg" trailingIcon={<IconArrow />}>
+          <CtaLink
+            to="/signup"
+            location="closing"
+            variant="terra"
+            size="lg"
+            trailingIcon={<IconArrow />}
+          >
               {t("landing.closingCta.cta")}
-            </RDButton>
-          </Link>
+          </CtaLink>
         </div>
       </div>
     </section>

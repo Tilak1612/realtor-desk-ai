@@ -45,6 +45,30 @@ const VARIANTS: Record<Variant, string> = {
     "bg-white text-rd-navy-800 border-rd-ink-200 hover:bg-rd-ink-50",
 };
 
+/** Shared class recipe so <CtaLink> can render an anchor that is visually
+ *  identical to RDButton without duplicating tokens. */
+export function rdButtonClasses(
+  variant: Variant = "primary",
+  size: Size = "md",
+  full?: boolean,
+  className?: string
+) {
+  return cn(
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap",
+    "font-rd-sans font-semibold leading-tight",
+    "rounded-rd-pill border transition-[background-color,border-color,color] duration-150",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-400 focus-visible:ring-offset-2",
+    "disabled:pointer-events-none disabled:opacity-60",
+    SIZES[size],
+    VARIANTS[variant],
+    full && "w-full",
+    className
+  );
+}
+
+export type RDButtonVariant = Variant;
+export type RDButtonSize = Size;
+
 export const RDButton = forwardRef<HTMLButtonElement, RDButtonProps>(
   (
     { variant = "primary", size = "md", icon, trailingIcon, full, className, children, ...rest },

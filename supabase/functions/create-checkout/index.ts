@@ -184,6 +184,22 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
+      // Stripe Tax. /pricing states "GST/HST is applied at checkout based on
+      // your billing province" — but automatic_tax was never enabled, so
+      // Stripe calculated none and every sale was effectively tax-inclusive
+      // against a liability the company still owes. Verified before enabling:
+      // a probe session with automatic_tax on was accepted, so Stripe Tax is
+      // registered on this account.
+      //
+      // billing_address_collection is required for this to work: Stripe needs
+      // the province to pick the right rate (GST-only in AB, HST in ON, GST +
+      // QST in QC, GST + PST in BC/SK/MB).
+      automatic_tax: { enabled: true },
+      billing_address_collection: "required",
+      // Mandatory whenever automatic_tax runs against an existing customer —
+      // without it Stripe refuses the session because it may not persist the
+      // address it just used to compute the tax.
+      customer_update: customerId ? { address: "auto" } : undefined,
       // 14-day free trial with the card collected up front: Stripe stores the
       // payment method during checkout and charges automatically when the trial
       // ends. Set here rather than on the Price so the term is version-
