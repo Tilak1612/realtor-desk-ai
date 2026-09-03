@@ -302,3 +302,54 @@ Verified: the baseline builds from an empty schema to **43 tables, 97 policies,
 - `npm run typecheck` — the previous `npx tsc --noEmit` was a **no-op**, because
   the root `tsconfig.json` is `{"files": [], "references": [...]}`, so CI had
   never actually typechecked anything
+
+
+## 17. Account lifecycle — verified state as of 2026-09-03
+
+Re-tested end to end against production rather than assumed. An earlier note in
+this repo said the signup/verify/login/reset journey was blocked by email. That
+is **no longer accurate** and should not be relied on.
+
+| Step | State | How it was verified |
+|---|---|---|
+| Signup | **Works, no email required** | `mailer_autoconfirm` is on: signup returns an `access_token` and stamps `email_confirmed_at` immediately |
+| Login after signup | **Works** | A brand-new account signed in on the next request |
+| Password reset — mechanism | **Works end to end** | Recovery token issued, redeemed at `/verify`, new password set, new password logs in, old password correctly rejected |
+| Password reset — send path | **Live** | Four rapid `/recover` calls returned `over_email_send_rate_limit`. That limiter only engages when mail is actually being dispatched; a dead sender errors instead |
+
+So the account lifecycle is **not** blocked. What remains is a deliverability
+risk, not a functional one.
+
+### The real gap: SPF is missing
+
+DNS for `realtordesk.ai` today:
+
+| Record | State |
+|---|---|
+| `resend._domainkey` (DKIM) | **Published** — Resend signing is set up |
+| SPF (`TXT` on the apex) | **MISSING** — no SPF record exists |
+| DMARC | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` — points at **Brevo**, a provider no longer in the path |
+| MX | **None** — the domain cannot receive replies or bounces |
+
+With DKIM alone and `p=none`, mail generally delivers but is materially more
+likely to be spam-foldered, and DMARC aggregate reports are going to a vendor
+that is not sending your mail.
+
+**Add at the registrar (Namecheap).** These are the only outstanding items and
+they cannot be applied from the codebase:
+
+```
+TXT   @                 v=spf1 include:amazonses.com ~all
+TXT   _dmarc            v=DMARC1; p=none; rua=mailto:dmarc@realtordesk.ai; fo=1
+```
+
+Confirm the SPF `include:` against Resend's dashboard for your region before
+publishing — Resend documents the exact value per sending region, and guessing
+it is worse than having no SPF. Move DMARC to `p=quarantine` only after a few
+weeks of clean aggregate reports.
+
+Verify afterwards with:
+
+```bash
+dig +short TXT realtordesk.ai | grep spf
+```
