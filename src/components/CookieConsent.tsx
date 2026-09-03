@@ -6,6 +6,43 @@ import { X, Cookie, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+
+type ConsentChoice = {
+  necessary: boolean;
+  analytics: boolean;
+  marketing: boolean;
+  functional: boolean;
+  timestamp: string;
+};
+
+// Persist the choice AND tell Google about it. Storing to localStorage alone
+// was the bug: the banner recorded a decision that nothing acted on, so
+// analytics ran regardless and /privacy-policy's "full control" claim was
+// untrue. index.html sets every storage type to denied before gtag loads;
+// this is the only thing that lifts that.
+function applyConsent(choice: Omit<ConsentChoice, "timestamp">) {
+  const consent: ConsentChoice = { ...choice, timestamp: new Date().toISOString() };
+  localStorage.setItem("cookie-consent", JSON.stringify(consent));
+
+  window.gtag?.("consent", "update", {
+    ad_storage: choice.marketing ? "granted" : "denied",
+    ad_user_data: choice.marketing ? "granted" : "denied",
+    ad_personalization: choice.marketing ? "granted" : "denied",
+    analytics_storage: choice.analytics ? "granted" : "denied",
+    functionality_storage: choice.functional ? "granted" : "denied",
+    personalization_storage: choice.functional ? "granted" : "denied",
+  });
+
+  // Only now is a pageview lawful for this visitor. config was set with
+  // send_page_view:false precisely so nothing fired before this point.
+  if (choice.analytics) {
+    window.gtag?.("event", "page_view", {
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }
+}
+
 const CookieConsent = () => {
   const { t } = useTranslation();
   // Slim bar on the auth routes: the padded max-w-3xl panel covered the lower
@@ -29,35 +66,17 @@ const CookieConsent = () => {
   }, []);
 
   const handleAcceptAll = () => {
-    const consent = {
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      functional: true,
-      timestamp: new Date().toISOString()
-    };
-    localStorage.setItem("cookie-consent", JSON.stringify(consent));
+    applyConsent({ necessary: true, analytics: true, marketing: true, functional: true });
     setShowBanner(false);
   };
 
   const handleRejectAll = () => {
-    const consent = {
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      functional: false,
-      timestamp: new Date().toISOString()
-    };
-    localStorage.setItem("cookie-consent", JSON.stringify(consent));
+    applyConsent({ necessary: true, analytics: false, marketing: false, functional: false });
     setShowBanner(false);
   };
 
   const handleSavePreferences = () => {
-    const consent = {
-      ...preferences,
-      timestamp: new Date().toISOString()
-    };
-    localStorage.setItem("cookie-consent", JSON.stringify(consent));
+    applyConsent(preferences);
     setShowBanner(false);
   };
 

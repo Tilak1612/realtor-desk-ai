@@ -303,6 +303,115 @@ Verified: the baseline builds from an empty schema to **43 tables, 97 policies,
   the root `tsconfig.json` is `{"files": [], "references": [...]}`, so CI had
   never actually typechecked anything
 
+## 13. Recovering a locked-out user (no email required)
+
+**Correction (2026-09-03):** the premise this section was written under no
+longer holds. `/forgot-password` **does** send — custom SMTP is configured and
+accepting mail, verified in §17. Keep this manual path anyway: it is the normal
+way to help someone whose mail is bouncing, filtered, or going to an address
+they can no longer reach.
+
+```bash
+SUPABASE_SERVICE_ROLE_KEY=<key> ./scripts/recovery-link.sh user@example.com
+```
+
+Send the link to the user over a channel you trust — the phone number on their
+account, not a shared channel or a ticket. It logs them straight in and lands
+them on `/reset-password`.
+
+`signup` generates a confirmation link instead; `magiclink` a one-time sign-in.
+
+**Verified end to end (2026-08-28)** on a throwaway account, then removed:
+
+| Step | Result |
+|---|---|
+| Generate link for a user with a forgotten password | link issued |
+| Follow it | redirects to `/reset-password` with a live session |
+| Set a new password | accepted |
+| Old password | rejected |
+| New password | signs in |
+
+**Treat the link like a password.** It is single-use and time-limited, but
+anyone holding it can take over the account until it is used or expires. The
+service role key bypasses RLS entirely — never commit it.
+
+### The permanent fix
+Verify `realtordesk.ai` in Resend. All three DNS records are already correct
+(DKIM at `resend._domainkey`, SPF on `send.`, return-path MX on `send.`), so
+it is the dashboard's Verify button, not a DNS change. Confirmed on the exact
+SMTP path Supabase auth uses:
+
+```
+SMTP AUTH: ok
+SEND REJECTED: The associated domain with your API key is not verified.
+```
+
+**Diagnosis, precisely.** The rejection is about the API key's own scope, not
+the sender address. A `from` of a domain that does not exist at all returns the
+identical message, so the error says nothing about which domains are in the
+account:
+
+```
+from: totally-made-up-domain-xyz.example  -> not verified
+from: realtordesk.ai                      -> not verified   (same message)
+```
+
+The current `RESEND_API_KEY` is a **sending-only key scoped to a single
+domain**, and that domain is not verified. It also cannot list domains
+(`GET /domains` returns `restricted_api_key`), so the account state cannot be
+inspected from the API.
+
+Two ways out, either is sufficient:
+1. Verify the domain the key is bound to, in the Resend dashboard. The DNS is
+   already correct, so this is the Verify button.
+2. Issue a **full-access** Resend API key (or one bound to a domain that is
+   already verified) and set it as the `RESEND_API_KEY` secret in Supabase and
+   the `RESEND_API_KEY` env var in Vercel.
+
+Once mail flows, self-service password reset and signup verification work with
+no code change — every path up to the send is already built and tested.
+
+### Alternatives that were checked and ruled out
+
+So you do not retrace this:
+
+| Option | Result |
+|---|---|
+| **Resend, another domain on the account** | Untestable. The key returns the same "domain not verified" error for a `from` on a domain that does not exist, so the message says nothing about which domains exist or their state. |
+| **Brevo** | Dead end. A `BREVO_API_KEY` is set in Vercel and the key is valid, but (a) the account IP-allowlists API calls so it cannot be used from anywhere not on that list, and (b) the domain is only *ownership*-verified — `brevo-code` TXT is present but `mail._domainkey` and `brevo._domainkey` are **empty**, so Brevo cannot authenticate mail from this domain. Setting it up would mean adding DKIM from scratch. |
+| **Supabase built-in sender** | Works without any domain verification and would restore self-service reset immediately, but sends from a `supabase.io` address with weaker deliverability, and Supabase documents it as development-grade with a low hourly cap. Deliberately not adopted. |
+| **Apex SPF** | There is **no SPF record on `realtordesk.ai` itself** — only on `send.realtordesk.ai`. Fine while all mail goes through the Resend subdomain; worth adding if you ever send from the apex. |
+
+**Resend is the closest to working by a wide margin** — it is the only provider
+with DKIM, SPF and a return-path MX all correctly in place. Nothing else needs
+building; the send is refused purely on key scope / domain verification state.
+
+### Switching sender, either direction
+
+`scripts/auth-email-mode.sh` makes the choice cheap and reversible:
+
+```bash
+SUPABASE_ACCESS_TOKEN=<token> ./scripts/auth-email-mode.sh status
+SUPABASE_ACCESS_TOKEN=<token> ./scripts/auth-email-mode.sh supabase   # stopgap
+SUPABASE_ACCESS_TOKEN=<token> SMTP_USER=resend SMTP_PASS=<key> \
+  ./scripts/auth-email-mode.sh resend                                 # once verified
+```
+
+`supabase` drops the custom SMTP so Supabase's own mailer sends, and turns
+`mailer_autoconfirm` off in the same call — **self-service password reset and
+signup verification start working immediately, with no domain verification.**
+The cost is a `supabase.io` sender, weaker deliverability, and a sender
+Supabase documents as development-grade. Sensible as a stopgap at current
+volume; not a permanent answer.
+
+`resend` restores Resend SMTP once the domain is verified or a full-access key
+is installed.
+
+**Never turn `mailer_autoconfirm` off while sends are failing** — that strands
+every new signup at an unconfirmed account they cannot clear, which is worse
+than no email. Both paths above set it together with a working sender, and
+`status` shows which state you are in.
+
 ## 14. Sales tax at checkout
 
 `create-checkout` now sets `automatic_tax: { enabled: true }` with
