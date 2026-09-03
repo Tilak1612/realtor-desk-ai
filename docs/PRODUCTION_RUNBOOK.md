@@ -515,4 +515,98 @@ UPDATE public.profiles SET trial_ends_at = created_at + interval '14 days'
 WHERE created_at < '2026-08-01' AND NOT is_demo;
 ALTER TABLE public.profiles ENABLE TRIGGER trg_guard_profile_privileged_columns;
 COMMIT;
+
+
+## 17. Account lifecycle — verified state as of 2026-09-03
+
+Re-tested end to end against production rather than assumed. An earlier note in
+this repo said the signup/verify/login/reset journey was blocked by email. That
+is **no longer accurate** and should not be relied on.
+
+| Step | State | How it was verified |
+|---|---|---|
+| Signup | **Works, no email required** | `mailer_autoconfirm` is on: signup returns an `access_token` and stamps `email_confirmed_at` immediately |
+| Login after signup | **Works** | A brand-new account signed in on the next request |
+| Password reset — mechanism | **Works end to end** | Recovery token issued, redeemed at `/verify`, new password set, new password logs in, old password correctly rejected |
+| Password reset — send path | **Live** | Four rapid `/recover` calls returned `over_email_send_rate_limit`. That limiter only engages when mail is actually being dispatched; a dead sender errors instead |
+
+So the account lifecycle is **not** blocked. What remains is a deliverability
+risk, not a functional one.
+
+### Outstanding: two registrar records (Namecheap)
+
+DNS for `realtordesk.ai` is served by `dns1/dns2.registrar-servers.com` —
+Namecheap BasicDNS, not Vercel — so these cannot be applied from the codebase
+or from the Vercel project. They need the Namecheap account.
+
+**1. The apex domain does not resolve at all.**
+
+```
+dig +short A realtordesk.ai      -> (nothing)
+curl https://realtordesk.ai      -> no response
+curl https://www.realtordesk.ai  -> 200
+```
+
+Only `www` has a record (`CNAME -> …vercel-dns-017.com`). Anyone who types the
+bare domain, or follows a link written without `www`, reaches nothing. No code
+in this repo emits a bare-domain URL — every link, canonical and email template
+already uses `www` — so this is purely a DNS gap, but it costs any traffic that
+arrives by word of mouth, business card or citation.
+
+Fix at Namecheap: add an `ALIAS`/`A` record on `@` pointing at Vercel per the
+target shown in the Vercel dashboard for this project, or a URL-redirect record
+sending `@` to `https://www.realtordesk.ai`.
+
+**2. SPF is missing; DMARC points at the wrong provider.**
+
+| Record | State |
+|---|---|
+| `resend._domainkey` (DKIM) | Published — Resend signing is set up for the domain |
+| SPF (`TXT` on `@`) | **Missing entirely** |
+| DMARC | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` — reports going to Brevo, which is not in the sending path |
+| MX | None — the domain cannot receive replies or bounces |
+
+**Custom SMTP is configured and accepting mail.** Determined empirically on
+2026-09-03 rather than read from config (the management token was not
+recoverable this session):
+
+- Four password-reset requests to four **distinct** addresses went out in ~8
+  seconds, all `200`. Supabase's built-in sender caps at roughly 2/hour and
+  would have rejected the third and fourth.
+- All four auth-log entries record `level: info` with an **empty `error`
+  field** and durations of 357–523 ms — real SMTP round-trips that were
+  accepted.
+- That log stream does surface failures when they happen: the deliberate
+  rate-limit probes appear as `level: warning` with
+  `error_code: over_email_send_rate_limit`, and a bad login appears as
+  `400: Invalid login credentials`. Silence on the sends is therefore
+  meaningful, not an absence of logging.
+
+So password-reset mail **is being dispatched successfully**. The remaining
+risk is **inbox placement, not delivery** — with DKIM but no SPF, and DMARC
+`p=none`, messages are more likely to be spam-foldered. That is worth fixing
+but it does not block account recovery.
+
+One caveat on the limit of this evidence: it proves Supabase handed the
+message to the SMTP relay without error. It does not prove the message landed
+in a human inbox — only sending a reset to a mailbox you control will prove
+that, and it is worth doing once as a final check.
+
+Records to add once confirmed:
+
+```
+TXT   @         v=spf1 include:amazonses.com ~all
+TXT   _dmarc    v=DMARC1; p=none; rua=mailto:dmarc@realtordesk.ai; fo=1
+```
+
+Confirm the SPF `include:` against Resend's dashboard for your sending region
+before publishing — Resend documents the exact value, and a wrong SPF record is
+worse than none. Move DMARC to `p=quarantine` only after a few weeks of clean
+aggregate reports.
+
+Verify with:
+
+```bash
+dig +short A realtordesk.ai            # should return a record
+dig +short TXT realtordesk.ai | grep spf
 ```
