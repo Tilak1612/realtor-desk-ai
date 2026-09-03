@@ -28,8 +28,26 @@ import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 // error was how a real lead could be accepted and then sit invisible behind a
 // screen that looked healthy and full.
 
+// Eight fixed tracks. At 390px the usable width is ~279px, of which 124px is
+// the two fixed tracks alone — so the lead's NAME and EMAIL were pushed out of
+// view. And because the wrapper is overflow-hidden (and AppShell is
+// overflow-x-hidden), they were clipped and unreachable rather than
+// scrollable: each row showed an avatar, a source chip and a score, with no
+// way to tell which lead was which. On the primary working screen of a CRM.
+//
+// The grid is now applied from `lg` up only; below that each row renders as a
+// card that leads with the name and email.
 const LEADS_GRID = "24px 2fr 1.4fr 1fr 1.4fr 1fr 1.2fr 100px";
-const GRID_STYLE = { display: "grid", gridTemplateColumns: LEADS_GRID };
+/** Applied to the row wrapper: card below lg, grid at lg and up. */
+const ROW_RESPONSIVE = "block lg:grid";
+/**
+ * Column template WITHOUT `display`. The original GRID_STYLE set
+ * `display: "grid"` inline, and an inline style beats a Tailwind class — so
+ * `block lg:grid` was silently overridden and the row stayed an 8-track grid
+ * at every width. Caught only by looking at it at 390px. Let the class own
+ * `display`; gridTemplateColumns is inert while display is not grid.
+ */
+const GRID_COLS_ONLY = { gridTemplateColumns: LEADS_GRID };
 
 type TabKey = "all" | "hot" | "warm" | "cold" | "ai";
 
@@ -144,8 +162,8 @@ export default function Leads() {
         ) : (
         <div className="bg-white border border-rd-line rounded-rd-lg overflow-hidden shadow-rd-sm">
           <div
-            style={GRID_STYLE}
-            className="px-5 py-3 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-500 items-center"
+            style={GRID_COLS_ONLY}
+            className="hidden lg:grid px-5 py-3 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-500 items-center"
           >
             <input type="checkbox" aria-label={t("rd.common.selectAll", "Select all")} />
             <div>{t("rd.columns.leads.lead", "Lead")}</div>
@@ -188,8 +206,9 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
   return (
     <Link
       to={`/app/leads/${lead.id}`}
-      style={GRID_STYLE}
+      style={GRID_COLS_ONLY}
       className={cn(
+        ROW_RESPONSIVE,
         "px-5 py-3.5 items-center text-[13px] hover:bg-rd-ink-50 transition-colors",
         !isLast && "border-b border-rd-line"
       )}
@@ -198,6 +217,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
         type="checkbox"
         aria-label={`Select ${lead.name}`}
         onClick={(e) => e.stopPropagation()}
+        className="hidden lg:block"
       />
       <div className="flex items-center gap-2.5 min-w-0">
         <RDAvatar name={lead.name} size={30} />
@@ -218,17 +238,39 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
           <div className="text-[11px] text-rd-ink-500 truncate">{lead.email}</div>
         </div>
       </div>
-      <div className="text-rd-ink-700 truncate">{lead.listing ?? <span className="text-rd-ink-400">—</span>}</div>
-      <div>
+      {/* Below lg these five cells wrap into a single meta line under the
+          name; at lg they are separate grid columns again. */}
+      <div className="hidden lg:block text-rd-ink-700 truncate">
+        {lead.listing ?? <span className="text-rd-ink-400">—</span>}
+      </div>
+      <div className="mt-2 flex flex-wrap items-center gap-2 lg:mt-0 lg:block">
         <span className="text-[11px] px-2 py-[2px] bg-rd-ink-100 text-rd-ink-700 rounded-[4px] font-semibold">
           {lead.source}
         </span>
+        {/* Score, stage and last activity ride along in the mobile meta line.
+            At lg they are hidden here and render in their own columns below. */}
+        <span className="lg:hidden">
+          <RDScore value={lead.score} />
+        </span>
+        <span className="lg:hidden">
+          <StageBadge stage={lead.stage} />
+        </span>
+        <span className="lg:hidden text-rd-ink-600 text-xs inline-flex items-center gap-1.5">
+          {lead.aiHandling && (
+            <span title="AI-handled" className="text-rd-terra-700">
+              <IconSparkles className="w-3 h-3" />
+            </span>
+          )}
+          {lead.lastActivity}
+        </span>
       </div>
-      <RDScore value={lead.score} />
-      <div>
+      <div className="hidden lg:block">
+        <RDScore value={lead.score} />
+      </div>
+      <div className="hidden lg:block">
         <StageBadge stage={lead.stage} />
       </div>
-      <div className="flex items-center gap-1.5 text-rd-ink-600 text-xs">
+      <div className="hidden lg:flex items-center gap-1.5 text-rd-ink-600 text-xs">
         {lead.aiHandling && (
           <span title="AI-handled" className="text-rd-terra-700">
             <IconSparkles className="w-3 h-3" />
@@ -236,7 +278,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
         )}
         {lead.lastActivity}
       </div>
-      <div className="flex justify-end gap-1">
+      <div className="hidden lg:flex justify-end gap-1">
         <IconBtn aria-label="Email">
           <IconMail />
         </IconBtn>
