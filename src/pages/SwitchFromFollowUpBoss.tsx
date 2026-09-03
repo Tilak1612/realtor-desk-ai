@@ -39,7 +39,7 @@ const SwitchFromFollowUpBoss = () => {
     },
     {
       q: "Does RealtorDesk AI work for teams?",
-      a: "Yes. Our Team plan at $299 CAD/month includes lead distribution, team performance dashboards, shared pipelines, and dedicated account management — all in CAD."
+      a: "Not yet. Realtor Desk today is built for a single agent per account — every lead, conversation and task belongs to one login. Shared pipelines, lead distribution and team reporting are roadmap work, not something we can sell you now. If you need multiple agents working one book today, Follow Up Boss will serve you better and we would rather say so."
     },
     {
       q: "Is the AI chatbot really included, or is it an add-on?",

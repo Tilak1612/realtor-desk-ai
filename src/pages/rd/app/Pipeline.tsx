@@ -117,9 +117,11 @@ export default function Pipeline() {
           </div>
           <div className="flex gap-2">
             <ViewToggle view={view} onChange={setView} />
-            <RDButton variant="outline" size="sm" icon={<IconFilter />}>
-              {t("rd.actions.allAgents", "All agents")}
-            </RDButton>
+            {/* "All agents" removed. It had no handler, and it filtered a
+                dimension the schema cannot express — there is no assigned-agent
+                column and no team/member/seat model anywhere in production. It
+                was the one place the interface acknowledged more than one
+                agent, on a product that cannot have one. */}
             <RDButton
               variant="primary"
               size="sm"
@@ -359,7 +361,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
         </span>
       </div>
       <div className="text-[11px] text-rd-ink-600 mb-2 leading-[1.35] line-clamp-2">
-        {lead.listing}
+        {lead.listing ?? ""}
       </div>
       <div className="flex justify-between items-center text-[10px] text-rd-ink-500 gap-2">
         <span className="flex items-center gap-1 truncate">

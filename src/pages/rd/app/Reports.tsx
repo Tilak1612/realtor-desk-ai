@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { toCsv, downloadCsv, datedFilename } from "@/lib/rd/csv";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
   RDButton,
@@ -45,13 +46,29 @@ export default function Reports() {
   const revenue = leads
     .filter((l) => l.stage === "won")
     .reduce((sum, l) => sum + (l.budgetCad ?? 0), 0);
+  // Export what the page shows: the funnel and the source breakdown. Escaping
+  // and BOM are handled in lib/rd/csv so an accented French name or a contact
+  // called "Smith, Jr." cannot shift the columns.
+  const handleExport = () => {
+    const rows: unknown[][] = [];
+    rows.push(["Funnel stage", "Leads"]);
+    funnel.forEach((f) => rows.push([f.stage, f.count]));
+    rows.push([]);
+    rows.push(["Lead source", "Leads", "Closed won"]);
+    sourceRows.forEach((r) => rows.push([r.source, r.count, r.closed]));
+    downloadCsv(
+      datedFilename("realtordesk-report"),
+      toCsv(["RealtorDesk report", new Date().toISOString().slice(0, 10)], rows)
+    );
+  };
+
   const capturedToShowing =
     leads.length > 0 ? Math.round((showings / leads.length) * 100) : 0;
 
   return (
     <AppShell>
       <div className="p-7 pb-10">
-        <Header />
+        <Header onExport={handleExport} />
         <KPIRow
           avgResponseLabel={avgLabel ?? "—"}
           avgResponseSpark={rtSpark}
@@ -67,7 +84,11 @@ export default function Reports() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
           <SourceROICard rows={sourceRows} />
-          <AgentLeaderboardCard rows={leaderboard} />
+          {/* Agent leaderboard hidden. useAgentLeaderboard builds a literal
+              single-element array from the signed-in user — its own comment
+              says so — so it renders "rank 1 of 1 · YOU" and can never contain
+              a colleague. Restore it when there is a real ownership model and
+              more than one agent to rank. */}
         </div>
       </div>
     </AppShell>
@@ -76,7 +97,7 @@ export default function Reports() {
 
 /* ────────────────────────────────────────────────────────── */
 
-function Header() {
+function Header({ onExport }: { onExport: () => void }) {
   const { t, i18n } = useTranslation();
   // Month-to-date, from the clock. This header used to be hardcoded to
   // "Apr 1 – Apr 21, 2026" with a dead month-picker button — stale dates on
@@ -102,11 +123,11 @@ function Header() {
           <IconCalendar />
           {monthLabel}
         </span>
-        <RDButton variant="outline" size="sm">
+        {/* Export now does something. "Share" is removed — there is no sharing
+            mechanism behind it, and a primary-styled button that does nothing
+            is the most misleading control on the page. */}
+        <RDButton variant="outline" size="sm" onClick={onExport}>
           {t("rd.actions.exportCsv", "Export CSV")}
-        </RDButton>
-        <RDButton variant="primary" size="sm">
-          {t("rd.actions.share", "Share")}
         </RDButton>
       </div>
     </div>

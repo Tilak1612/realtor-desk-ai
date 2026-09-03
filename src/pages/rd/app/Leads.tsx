@@ -93,12 +93,8 @@ export default function Leads() {
             </h1>
           </div>
           <div className="flex gap-2">
-            <RDButton variant="outline" size="sm" icon={<IconFilter />}>
-              {t("rd.actions.filter", "Filter")}
-            </RDButton>
-            <RDButton variant="outline" size="sm">
-              {t("rd.actions.import", "Import")}
-            </RDButton>
+            {/* Filter removed: no handler and no filter UI behind it. */}
+            {/* Import removed: no import flow is reachable from the /app shell. */}
             <RDButton
               variant="primary"
               size="sm"
@@ -222,7 +218,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
           <div className="text-[11px] text-rd-ink-500 truncate">{lead.email}</div>
         </div>
       </div>
-      <div className="text-rd-ink-700 truncate">{lead.listing}</div>
+      <div className="text-rd-ink-700 truncate">{lead.listing ?? <span className="text-rd-ink-400">—</span>}</div>
       <div>
         <span className="text-[11px] px-2 py-[2px] bg-rd-ink-100 text-rd-ink-700 rounded-[4px] font-semibold">
           {lead.source}

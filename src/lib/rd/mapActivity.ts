@@ -46,10 +46,10 @@ export function mapConversationActivity(row: ConversationFeedRow): ActivityItem 
     kind,
     at: row.sent_at,
     actor: row.author_name,
-    summary:
-      row.author === "ai"
-        ? `Replied to ${row.author_name}`
-        : `${row.author_name} — message sent`,
+    // `summary` is the OBJECT of the verb the feed renders, not a sentence.
+    // Left empty for conversation rows so the renderer can substitute the lead
+    // name it resolves from the joined leads map.
+    summary: "",
     detail: truncate(row.body, 140),
     leadId: row.lead_id,
     language: row.language?.toLowerCase() === "fr" ? "FR" : "EN",

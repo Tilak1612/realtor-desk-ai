@@ -46,11 +46,24 @@ describe("TopNav", () => {
     });
   });
 
-  it("renders the search placeholder", () => {
+  // The command search box and the notification bell were removed: neither
+  // had a handler, so both rendered as live controls that silently did
+  // nothing. These assert they stay gone until something real backs them.
+  it("does not render a search box it cannot serve", () => {
     renderWithProviders(<TopNav agent={{ name: "Sarah K." }} />);
     expect(
-      screen.getByPlaceholderText("Search leads, listings, conversations…")
-    ).toBeInTheDocument();
+      screen.queryByPlaceholderText(/Search leads, listings, conversations/)
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not render a notification bell with no notification system", () => {
+    renderWithProviders(<TopNav agent={{ name: "Sarah K." }} />);
+    expect(screen.queryByLabelText("Notifications")).not.toBeInTheDocument();
+  });
+
+  it("exposes an account menu, which is the only way to sign out of /app", () => {
+    renderWithProviders(<TopNav agent={{ name: "Sarah K." }} />);
+    expect(screen.getByLabelText("Account menu")).toBeInTheDocument();
   });
 
   // The "Live" pill and the unread dot used to default to ON and no caller
@@ -77,9 +90,6 @@ describe("TopNav", () => {
 
     // French strings should now be rendered.
     expect(screen.getByText("En direct")).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText("Rechercher clients, inscriptions, conversations…")
-    ).toBeInTheDocument();
   });
 });
 

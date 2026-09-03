@@ -37,7 +37,7 @@ export const softwareApplicationSchema = {
   "offers": {
     "@type": "AggregateOffer",
     "lowPrice": "149.00",
-    "highPrice": "599.00",
+    "highPrice": "299.00",
     "priceCurrency": "CAD",
     "priceSpecification": {
       "@type": "UnitPriceSpecification",
@@ -89,7 +89,7 @@ export const localBusinessSchema = {
     "latitude": "53.5461",
     "longitude": "-113.4938"
   },
-  "priceRange": "$149 - $599 CAD/month",
+  "priceRange": "$149 - $299 CAD/month",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",

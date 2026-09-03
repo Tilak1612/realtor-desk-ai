@@ -104,6 +104,21 @@ const ForgotPassword = () => {
                 <div className="space-y-4 text-center text-sm text-muted-foreground">
                   <p>{t('auth.forgot.linkExpiry', 'Click the link in the email to reset your password. The link will expire in 1 hour.')}</p>
                   <p>{t('auth.forgot.checkSpam', "If you don't see the email, check your spam folder.")}</p>
+                  {/* Without this, a user whose reset mail never arrives has no
+                      next step and simply loses the account. Support can issue a
+                      recovery link directly (scripts/recovery-link.sh), so give
+                      them a way to ask. Worth keeping permanently: mail gets
+                      filtered, bounced and mistyped regardless of provider. */}
+                  <p>
+                    {t('auth.forgot.stillNothing', "Still nothing after a few minutes? Email")}{' '}
+                    <a
+                      href="mailto:support@realtordesk.ai?subject=Password%20reset%20help"
+                      className="text-rd-navy-700 font-semibold underline underline-offset-2 hover:text-rd-navy-800"
+                    >
+                      support@realtordesk.ai
+                    </a>{' '}
+                    {t('auth.forgot.stillNothingTail', 'and we will get you back in.')}
+                  </p>
                 </div>
 
                 <div className="text-center">

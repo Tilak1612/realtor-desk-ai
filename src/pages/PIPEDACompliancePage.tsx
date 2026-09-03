@@ -67,7 +67,7 @@ const PIPEDACompliance = () => {
               PIPEDA-Aware Design
             </Badge>
             <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
-              <span className="gradient-text">Built with PIPEDA</span><br />
+              <span className="gradient-text">Built with PIPEDA</span>{" "}<br />
               Principles for Canadian Agents
             </h1>
             <p className="text-xl text-muted-foreground mb-8">

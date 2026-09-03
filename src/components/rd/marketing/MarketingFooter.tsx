@@ -100,6 +100,21 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
         <div>{t("marketingFooter.copyright", { year: new Date().getFullYear() })}</div>
         <div className="flex gap-6">
           <Link to="/unsubscribe" className="hover:text-rd-ink-900">{t("marketingFooter.itemUnsubscribe")}</Link>
+          {/* A consent decision has to be changeable, not just collectable.
+              This control existed only in the legacy footer, so on the whole
+              marketing shell there was no way to revisit it — while
+              /privacy-policy claimed "full control ... through our cookie
+              consent banner". Clearing the stored choice re-shows the banner. */}
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.removeItem("cookie-consent");
+              window.location.reload();
+            }}
+            className="hover:text-rd-ink-900 underline-offset-2 hover:underline"
+          >
+            {t("marketingFooter.itemCookieSettings", "Cookie settings")}
+          </button>
           <span>EN · FR</span>
         </div>
       </div>

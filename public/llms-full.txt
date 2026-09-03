@@ -46,7 +46,7 @@ All prices in **Canadian dollars**. GST/HST applied at checkout based on the bil
 
 **Brokerage** — for 10+ agents. Custom annual contract. Everything in Team plus: SAML SSO + Azure AD, FINTRAC and provincial regulator workflows, custom DDF mappings, dedicated Canadian CSM, 99.95% uptime SLA.
 
-**Trial:** 14 days, no credit card. Full feature access.
+**Trial:** 14 days. A payment method is required to start; you are not charged until the trial ends, and cancelling before then costs nothing. Full feature access.
 
 ---
 
@@ -116,7 +116,7 @@ Dated commitments for public-beta features not yet shipped:
 
 - **CREA DDF integration** — Q3 2026. Live MLS listings, 15-minute refresh, pulled from your board. Requires formal CREA partnership.
 - **Centris Quebec MLS sync** — follows CREA DDF.
-- **Voice AI** — Q3 2026, in beta now.
+- **Voice AI** — not shipped and not on the 2026 roadmap.
 - **LinkedIn Lead Gen Forms, Facebook Lead Ads, WhatsApp Cloud API** — pending each platform's business-app review.
 - **Microsoft Entra + SAML SSO enforcement** — available on Brokerage tier now.
 
