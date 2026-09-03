@@ -353,20 +353,31 @@ sending `@` to `https://www.realtordesk.ai`.
 | DMARC | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` — reports going to Brevo, which is not in the sending path |
 | MX | None — the domain cannot receive replies or bounces |
 
-**Scope this correctly before acting.** I could not read the project's auth
-SMTP settings (the management token was not recoverable in this session), so I
-do not know whether Supabase Auth sends password-reset mail through custom SMTP
-on `realtordesk.ai` or through Supabase's own built-in sender:
+**Custom SMTP is configured and accepting mail.** Determined empirically on
+2026-09-03 rather than read from config (the management token was not
+recoverable this session):
 
-- **If custom SMTP on `realtordesk.ai`** — the missing SPF degrades
-  password-reset and confirmation deliverability, and this is urgent.
-- **If Supabase's built-in sender** — auth mail leaves on Supabase's domain
-  with their own SPF/DKIM, so the gap does **not** affect password reset. It
-  still affects everything the edge functions send through Resend
-  (`lifecycle-cron`, `send-welcome-email`, the CASL footer paths), which is
-  reason enough to fix it.
+- Four password-reset requests to four **distinct** addresses went out in ~8
+  seconds, all `200`. Supabase's built-in sender caps at roughly 2/hour and
+  would have rejected the third and fourth.
+- All four auth-log entries record `level: info` with an **empty `error`
+  field** and durations of 357–523 ms — real SMTP round-trips that were
+  accepted.
+- That log stream does surface failures when they happen: the deliberate
+  rate-limit probes appear as `level: warning` with
+  `error_code: over_email_send_rate_limit`, and a bad login appears as
+  `400: Invalid login credentials`. Silence on the sends is therefore
+  meaningful, not an absence of logging.
 
-Check which, in Dashboard → Project Settings → Authentication → SMTP Settings.
+So password-reset mail **is being dispatched successfully**. The remaining
+risk is **inbox placement, not delivery** — with DKIM but no SPF, and DMARC
+`p=none`, messages are more likely to be spam-foldered. That is worth fixing
+but it does not block account recovery.
+
+One caveat on the limit of this evidence: it proves Supabase handed the
+message to the SMTP relay without error. It does not prove the message landed
+in a human inbox — only sending a reset to a mailbox you control will prove
+that, and it is worth doing once as a final check.
 
 Records to add once confirmed:
 
