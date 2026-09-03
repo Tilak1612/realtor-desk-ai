@@ -22,6 +22,7 @@ import {
   IconSparkles,
 } from "@/components/rd";
 import { PIPELINE_STAGES } from "@/data/rd";
+import { openLeads, openPipelineValue } from "@/lib/rd/pipeline";
 import { DataError } from "@/components/rd/DataState";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
@@ -73,8 +74,11 @@ export default function Pipeline() {
     return byStage;
   }, [source]);
 
-  const totalValue = Object.values(snapshot).reduce((a, b) => a + b.valueCad, 0);
-  const totalCount = source.length;
+  // Open pipeline only, matching the dashboard KPI and snapshot card. This
+  // used to sum every stage including won and lost, producing a third figure
+  // for the same book -- $11,020,000 here against $11.0M and $9.8M on /app.
+  const totalValue = openPipelineValue(source);
+  const totalCount = openLeads(source).length;
 
   function handleDragStart(e: DragStartEvent) {
     const lead = source.find((l) => l.id === String(e.active.id));

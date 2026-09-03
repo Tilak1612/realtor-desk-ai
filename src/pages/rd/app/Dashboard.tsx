@@ -18,6 +18,7 @@ import {
   IconShield,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
+import { openLeads, openPipelineValue, openPipelineByStage } from "@/lib/rd/pipeline";
 import type { ActivityItem, Lead, PipelineStage, ReportMetric } from "@/types/rd";
 import { useLeads, useLead } from "@/hooks/rd/useLeads";
 import { useSession } from "@/hooks/rd/useSession";
@@ -169,9 +170,12 @@ function KPIRow({
     // Zero is a legitimate answer; invented is not. Sparklines render only
     // from a real series, and the response-time tile is gone until a
     // conversations timeseries exists to compute it honestly.
-    const leadsCount = liveLeads.length;
+    // Open pipeline only — a won or lost lead is not "active", and won money
+    // is not pipeline. See lib/rd/pipeline for why this is shared rather than
+    // recomputed per surface.
+    const leadsCount = openLeads(liveLeads).length;
     const showings = liveLeads.filter((l) => l.stage === "showing").length;
-    const pipelineValue = liveLeads.reduce((sum, l) => sum + (l.budgetCad ?? 0), 0);
+    const pipelineValue = openPipelineValue(liveLeads);
     const hasSpark = !!liveLeadsSpark && liveLeadsSpark.length > 0;
 
     return [
@@ -482,23 +486,29 @@ function TodayCard({ leads, loading }: { leads: Lead[]; loading: boolean }) {
 
 /* ────────────────────────────────────────────────────────── */
 
-const SNAPSHOT_STAGES: { key: PipelineStage; label: string; tone: string }[] = [
-  { key: "new", label: "New leads", tone: "bg-rd-terra-600" },
-  { key: "contacted", label: "Contacted", tone: "bg-rd-navy-500" },
-  { key: "showing", label: "Showing booked", tone: "bg-rd-navy-700" },
-  { key: "offer", label: "Offer", tone: "bg-rd-success" },
-];
+// Labels and colours for the open stages. The stage LIST itself comes from
+// OPEN_STAGES so this card can never silently omit one again — it previously
+// skipped `qualified`, hiding those leads and their budget from a card sitting
+// directly under a KPI that counted them.
+const STAGE_META: Record<PipelineStage, { label: string; tone: string }> = {
+  new: { label: "New leads", tone: "bg-rd-terra-600" },
+  contacted: { label: "Contacted", tone: "bg-rd-navy-500" },
+  qualified: { label: "Qualified", tone: "bg-rd-terra-500" },
+  showing: { label: "Showing booked", tone: "bg-rd-navy-700" },
+  offer: { label: "Offer", tone: "bg-rd-success" },
+  won: { label: "Won", tone: "bg-rd-ink-900" },
+  lost: { label: "Lost", tone: "bg-rd-ink-400" },
+};
 
 function PipelineSnapshotCard({ leads, loading }: { leads: Lead[]; loading: boolean }) {
   const { rows, total, anyValue } = useMemo(() => {
-    const rows = SNAPSHOT_STAGES.map((s) => {
-      const inStage = leads.filter((l) => l.stage === s.key);
-      return {
-        ...s,
-        count: inStage.length,
-        value: inStage.reduce((sum, l) => sum + (l.budgetCad ?? 0), 0),
-      };
-    });
+    const rows = openPipelineByStage(leads).map((r) => ({
+      key: r.stage,
+      label: STAGE_META[r.stage].label,
+      tone: STAGE_META[r.stage].tone,
+      count: r.count,
+      value: r.valueCad,
+    }));
     const total = rows.reduce((sum, r) => sum + r.value, 0);
     const counted = rows.reduce((sum, r) => sum + r.count, 0);
     return { rows, total, anyValue: counted > 0 };
