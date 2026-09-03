@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AlertTriangle, Check, Crown, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -60,9 +60,8 @@ const TrialExpiredModal = ({ isOpen }: TrialExpiredModalProps) => {
   return (
     <Dialog open={isOpen} modal>
       <DialogContent 
-        className="sm:max-w-2xl [&>button]:hidden"
+        className="sm:max-w-2xl"
         onPointerDownOutside={(e) => e.preventDefault()}
-        onEscapeKeyDown={(e) => e.preventDefault()}
       >
         <DialogHeader className="text-center">
           <div className="mx-auto mb-4 p-3 rounded-full bg-destructive/10 w-fit">
@@ -139,6 +138,32 @@ const TrialExpiredModal = ({ isOpen }: TrialExpiredModalProps) => {
         <p className="text-center text-sm text-muted-foreground mt-4">
           {t('trial.guarantee', '30-day money-back guarantee • Cancel anytime')}
         </p>
+
+        {/* An expired trial is not a reason to trap someone in a dialog with
+            their own data behind it. The close button was hidden and both
+            Escape and outside-click were prevented, with no export path — so
+            a user whose trial lapsed could neither leave nor retrieve the
+            contacts they entered. Under PIPEDA they retain the right to their
+            personal information regardless of subscription state. */}
+        <div className="mt-6 pt-4 border-t flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+          <Link
+            to="/app/settings"
+            className="text-muted-foreground underline hover:text-foreground"
+          >
+            {t('trial.exportData', 'Export my data')}
+          </Link>
+          <button
+            type="button"
+            onClick={async () => {
+              const { supabase } = await import('@/integrations/supabase/client');
+              await supabase.auth.signOut();
+              navigate('/login', { replace: true });
+            }}
+            className="text-muted-foreground underline hover:text-foreground"
+          >
+            {t('trial.signOut', 'Sign out')}
+          </button>
+        </div>
       </DialogContent>
     </Dialog>
   );

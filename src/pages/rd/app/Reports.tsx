@@ -84,7 +84,11 @@ export default function Reports() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
           <SourceROICard rows={sourceRows} />
-          <AgentLeaderboardCard rows={leaderboard} />
+          {/* Agent leaderboard hidden. useAgentLeaderboard builds a literal
+              single-element array from the signed-in user — its own comment
+              says so — so it renders "rank 1 of 1 · YOU" and can never contain
+              a colleague. Restore it when there is a real ownership model and
+              more than one agent to rank. */}
         </div>
       </div>
     </AppShell>

@@ -478,3 +478,41 @@ Remove a demo account with:
 delete from auth.users where email = 'demo.solo@realtordesk.ai';
 ```
 The contacts, messages and profile cascade with it.
+
+## 16. Trial backfill — a recorded decision
+
+On 2026-08-28 `profiles.trial_ends_at` had no column default and all 15 rows
+were NULL, so every account read "0 days left in your trial". The default was
+restored and the NULL rows backfilled to `now() + 14 days`.
+
+**Why from `now()` and not `created_at`.** These accounts were never given a
+working trial clock, so dating from signup would have silently expired people
+who had not yet had a trial at all. Six of them signed up between April and
+July and are dormant.
+
+**What it does and does not do.** `trial_ends_at` does **not** gate access —
+`RequireBilling` gates on `subscribed` (a real Stripe subscription) or
+`is_demo`. The column only drives the countdown display and `trialExpired`.
+So the backfill granted nobody access they did not already have.
+
+**The consequence that did matter.** Before the backfill `trialEndsAt` was
+NULL, so `trialExpired` was permanently false and `TrialExpiredModal` had
+never fired for anyone. After it, every non-subscribed profile flips to
+expired on **2026-09-11**, all at once. That modal had its close button
+hidden and both Escape and outside-click prevented, with no data-export path —
+so it would have trapped users with their own contacts behind it. It is now
+escapable and carries "Export my data" and "Sign out" links; under PIPEDA a
+lapsed user keeps the right to their personal information.
+
+If you would rather those six dormant accounts stay expired instead of
+holding a fresh trial, this reverses it (the guard trigger protects the
+column, so it needs the same disable/enable dance):
+
+```sql
+BEGIN;
+ALTER TABLE public.profiles DISABLE TRIGGER trg_guard_profile_privileged_columns;
+UPDATE public.profiles SET trial_ends_at = created_at + interval '14 days'
+WHERE created_at < '2026-08-01' AND NOT is_demo;
+ALTER TABLE public.profiles ENABLE TRIGGER trg_guard_profile_privileged_columns;
+COMMIT;
+```
