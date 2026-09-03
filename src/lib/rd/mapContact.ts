@@ -36,7 +36,13 @@ export function mapContactToLead(row: ContactRow): Lead {
     phone: row.phone ?? "",
     language: normalizeLanguage(row.preferred_language),
     source: normalizeSource(row.source),
-    listing: asString(meta.listing) ?? "New lead",
+    // Nothing in the product writes metadata.listing — the add-lead form has no
+    // listing field and no importer sets one. The old fallback was the literal
+    // string "New lead", which is also a stage name, so every row in the Leads
+    // table, every Kanban card and the "Viewed listings / Primary interest"
+    // panel read as data rather than as absence. Undefined lets each surface
+    // render its own empty state.
+    listing: asString(meta.listing),
     city: asString(meta.city),
     stage: normalizeStage(row.stage),
     score: row.ai_score ?? 0,

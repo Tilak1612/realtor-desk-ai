@@ -317,7 +317,9 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
             >
               {lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold"} · {lead.score}
             </RDBadge>
-            <span className="text-[11px] text-rd-ink-500">· {lead.listing}</span>
+            {lead.listing && (
+              <span className="text-[11px] text-rd-ink-500">· {lead.listing}</span>
+            )}
           </div>
           <div className="text-[11px] text-rd-ink-500 mt-0.5 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-rd-success" />

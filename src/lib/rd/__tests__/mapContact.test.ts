@@ -82,7 +82,10 @@ describe("mapContactToLead", () => {
 
   it("applies defaults when metadata is empty", () => {
     const lead = mapContactToLead({ ...base });
-    expect(lead.listing).toBe("New lead");
+    // Nothing in the product writes metadata.listing, so the mapper must not
+    // invent one. It used to fall back to the literal "New lead" — which is
+    // also a stage name — making every row read as data rather than absence.
+    expect(lead.listing).toBeUndefined();
     expect(lead.aiHandling).toBe(false);
     expect(lead.budgetCad).toBeUndefined();
     expect(lead.assignedAgentId).toBeNull();
