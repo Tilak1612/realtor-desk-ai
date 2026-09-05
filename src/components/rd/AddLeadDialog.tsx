@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { RDButton } from "./Button";
@@ -52,6 +52,74 @@ export function AddLeadDialog({ open, onClose }: AddLeadDialogProps) {
   const [budget, setBudget] = useState("");
   const [consent, setConsent] = useState(false);
   const [fieldError, setFieldError] = useState<string | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
+  const wasOpen = useRef(false);
+
+  // Captured during render, deliberately. React applies the first-name field's
+  // autoFocus during commit, and useEffect runs after that -- so reading
+  // document.activeElement from the effect returns the input itself, and
+  // refocusing it on unmount targets a node that has just been removed, which
+  // drops focus to <body>. A test caught exactly that. Reading here, before
+  // the DOM is touched, gets the element that actually opened the dialog.
+  if (open && !wasOpen.current) {
+    openerRef.current = document.activeElement as HTMLElement | null;
+  }
+  wasOpen.current = open;
+
+  /**
+   * Modal keyboard contract.
+   *
+   * This dialog declared role="dialog" and aria-modal="true" but implemented
+   * none of what those promise: Escape did nothing, Tab walked straight out
+   * into the page behind it, and closing dropped focus to the top of the
+   * document. Claiming aria-modal while focus can leave is worse than not
+   * claiming it — assistive tech tells the user the rest of the page is inert
+   * while the keyboard says otherwise.
+   *
+   * Also locks body scroll, so the page behind does not scroll under the
+   * dialog on a trackpad or a phone.
+   */
+  useEffect(() => {
+    if (!open) return;
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+
+    const FOCUSABLE =
+      'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const nodes = dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
+      if (!nodes || nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+
+      // Wrap at both ends so focus cannot escape the dialog.
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = overflow;
+      // Return focus to whatever opened the dialog, not the top of the page.
+      openerRef.current?.focus?.();
+    };
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -105,6 +173,7 @@ export function AddLeadDialog({ open, onClose }: AddLeadDialogProps) {
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
