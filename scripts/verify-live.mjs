@@ -16,6 +16,8 @@
  * Exits non-zero if any check fails, so it can gate a deploy.
  */
 import { chromium } from "playwright-core";
+import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 
 const BASE = process.argv[2] ?? process.env.RD_BASE_URL ?? "https://www.realtordesk.ai";
 const CHROME =
@@ -299,6 +301,45 @@ try {
     record("video is not served below 1024px", onMobile === 0, `${onMobile} <video> at 390px`);
     await page.setViewportSize({ width: 1440, height: 900 });
   }
+
+  /* ── 5e. accessibility, in a browser that actually paints ───────────────── */
+  //
+  // The unit-test axe run has color-contrast DISABLED, because jsdom has no
+  // layout and no paint -- every contrast result there would be a guess. That
+  // means contrast has never been checked anywhere. Here it can be, because
+  // this browser renders.
+  const require = createRequire(import.meta.url);
+  const AXE = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
+
+  const A11Y_PAGES = ["/", "/pricing", "/signup"];
+  const a11yFindings = [];
+
+  for (const route of A11Y_PAGES) {
+    const ap = await ctx.newPage();
+    await ap.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+    await ap.waitForTimeout(900);
+    await ap.addScriptTag({ content: AXE });
+    const res = await ap.evaluate(async () => {
+      // Serious and critical only. Minor and moderate on a real marketing
+      // page are a backlog, not a deploy gate, and gating on them trains
+      // people to skip the check.
+      const r = await window.axe.run(document, {
+        resultTypes: ["violations"],
+        runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"] },
+      });
+      return r.violations
+        .filter((v) => v.impact === "serious" || v.impact === "critical")
+        .map((v) => `${v.id}(${v.impact}, ${v.nodes.length})`);
+    });
+    if (res.length) a11yFindings.push(`${route}: ${res.join(", ")}`);
+    await ap.close();
+  }
+
+  record(
+    "no serious or critical axe violations",
+    a11yFindings.length === 0,
+    a11yFindings.join(" | ") || `${A11Y_PAGES.length} pages clean, contrast included`
+  );
 
   /* ── 6. no horizontal overflow at any target width ──────────────────────── */
   const widths = [320, 375, 390, 430, 768, 1024, 1440, 1920];

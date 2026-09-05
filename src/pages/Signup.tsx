@@ -327,7 +327,7 @@ const Signup = () => {
                 Neither field blocks submission; both are collected again in
                 onboarding if left blank. */}
             <fieldset className="space-y-3 rounded-xl border border-rd-line bg-rd-paper-2 p-3.5">
-              <legend className="px-1 text-xs font-semibold uppercase tracking-[0.08em] text-rd-ink-500">
+              <legend className="px-1 text-xs font-semibold uppercase tracking-[0.08em] text-rd-ink-600">
                 {t('auth.signup.optionalGroup', 'Optional — you can add these later')}
               </legend>
 

@@ -168,7 +168,10 @@ function HeroProduct({ t }: { t: TFn }) {
             <div className="w-8 h-8 bg-rd-terra-600 rounded-full flex items-center justify-center flex-shrink-0">
               <IconSparkles />
             </div>
-            <div className="bg-rd-terra-600 text-white rounded-[14px_4px_14px_14px] px-3.5 py-3 text-[13px] leading-[1.5] max-w-[85%]">
+            {/* terra-700, not terra-600. White on #D7714E is 3.30:1 at 13px, below
+                  the 4.5:1 WCAG AA threshold; on #BE552F it is 4.64:1. The accent
+                  reads the same at a glance and the message is now legible. */}
+              <div className="bg-rd-terra-700 text-white rounded-[14px_4px_14px_14px] px-3.5 py-3 text-[13px] leading-[1.5] max-w-[85%]">
               {t("landing.heroProduct.aiReply")}
             </div>
           </div>
@@ -240,7 +243,7 @@ function TrustStrip({ t }: { t: TFn }) {
           {logos.map((l) => (
             <li
               key={l}
-              className="text-rd-ink-600/70 transition-colors duration-150 hover:text-rd-ink-900"
+              className="text-rd-ink-600 transition-colors duration-150 hover:text-rd-ink-900"
             >
               {l}
             </li>

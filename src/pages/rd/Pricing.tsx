@@ -250,7 +250,7 @@ function PricingPlan({
       <div
         className={cn(
           "text-[11px] font-bold uppercase tracking-[0.08em]",
-          featured ? "text-rd-terra-400" : "text-rd-terra-700"
+          featured ? "text-rd-terra-400" : "text-rd-terra-800"
         )}
       >
         {tag}
