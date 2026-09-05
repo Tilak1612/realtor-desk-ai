@@ -46,8 +46,8 @@ const resources = {
         trustLine: "14-day free trial • A card is required to start • Cancel before day 14 and you are not charged",
         badge1: "PIPEDA-Aware Design",
         badge2: "Bilingual EN/FR",
-        badge3: "50+ Beta Users",
-        conversionBadge: "Conservative 30% Conversion Lift",
+        badge3: "Now in public beta",
+        conversionBadge: "Estimate with your own numbers",
         badge: "14-Day Free Trial",
         bullet1: "AI responds to leads instantly, 24/7",
         bullet2: "Built for Canadian agents — PIPEDA, CASL, bilingual EN/FR",
@@ -130,11 +130,11 @@ const resources = {
         tab3: "Market Intelligence",
         tab4: "Transaction Management",
         tab5: "Marketing Automation",
-        crm: { h1: "Multi-Dimensional Lead Scoring", p1: "AI analyzes engagement signals including property searches, email opens, social activity, mortgage indicators, and life events to rank your leads", sub1: "Focus on your hottest leads and close more deals", h2: "Conversational Intelligence", p2: "Real-time sentiment analysis across email, text, and chat with urgency detection and automated response suggestions", sub2: "45% more relevant responses, 60% fewer deals falling through", h3: "Automated Data Enrichment", p3: "Autonomous contact profile building from public records, social media, and behavior tracking", sub3: "Dramatically reduce manual data entry with automated profile building" },
+        crm: { h1: "Multi-Dimensional Lead Scoring", p1: "AI analyzes engagement signals including property searches, email opens, social activity, mortgage indicators, and life events to rank your leads", sub1: "Focus on your hottest leads and close more deals", h2: "Conversational Intelligence", p2: "Real-time sentiment analysis across email, text, and chat with urgency detection and automated response suggestions", sub2: "Replies drafted in your own phrasing, with the deal's context attached", h3: "Automated Data Enrichment", p3: "Autonomous contact profile building from public records, social media, and behavior tracking", sub3: "Dramatically reduce manual data entry with automated profile building" },
         chatbot: { h1: "24/7 Multilingual Engagement", p1: "Intelligent conversations in English and French, handles property inquiries, qualifies leads, schedules showings", sub1: "Maximize after-hours lead capture with AI that never sleeps", h2: "Smart Qualification System", p2: "AI conducts natural conversations to assess buyer readiness, budget, timeline, and preferences", sub2: "Only qualified leads reach your calendar", h3: "Seamless Human Handoff", p3: "AI knows when to transfer to human agent with complete conversation context", sub3: "Never lose a hot lead to automation" },
         market: { h1: "AI-Powered Property Insights (Coming Soon)", p1: "AI-assisted property analysis using local market trends, comparable sales, and neighbourhood data to support your CMA process", sub1: "Faster, data-backed CMAs for your clients", h2: "Off-Market Opportunity Detection", p2: "AI predicts which homeowners are likely to sell 3-6 months before listing", sub2: "Get exclusive listings before competitors", h3: "Real-Time Market Reports", p3: "Automated comparative market analysis with absorption rates, days-on-market trends, price-per-sqft evolution", sub3: "Position yourself as the local market expert" },
-        transaction: { h1: "Intelligent Timeline Prediction", p1: "AI forecasts closing dates based on transaction type, parties involved, and historical performance", sub1: "Designed to accelerate your closing timeline with fewer missed steps", h2: "Automated Vendor Coordination", p2: "Smart scheduling of inspectors, appraisers, lawyers with availability optimization", sub2: "75% fewer missed deadlines", h3: "Risk Detection Engine", p3: "Predictive alerts for financing issues, inspection problems, and buyer/seller cold feet", sub3: "Deal fall-through reduced from 12% to 4%" },
-        marketing: { h1: "AI Content Generation", p1: "Automated creation of property descriptions, social posts, email campaigns, and neighborhood guides", sub1: "85% less time on marketing content", h2: "Intelligent Distribution", p2: "AI determines optimal posting times, channels, and audience segments for each piece of content", sub2: "150% increase in engagement rates", h3: "Performance Analytics", p3: "ROI tracking by content type, platform, and campaign with improvement recommendations", sub3: "45% reduction in cost per lead" },
+        transaction: { h1: "Intelligent Timeline Prediction", p1: "AI forecasts closing dates based on transaction type, parties involved, and historical performance", sub1: "Designed to accelerate your closing timeline with fewer missed steps", h2: "Automated Vendor Coordination", p2: "Smart scheduling of inspectors, appraisers, lawyers with availability optimization", sub2: "Deadlines and follow-ups tracked in one place", h3: "Risk Detection Engine", p3: "Predictive alerts for financing issues, inspection problems, and buyer/seller cold feet", sub3: "See every deal's next step in one pipeline view" },
+        marketing: { h1: "AI Content Generation", p1: "Automated creation of property descriptions, social posts, email campaigns, and neighborhood guides", sub1: "Draft listing copy and social posts from the listing itself", h2: "Intelligent Distribution", p2: "AI determines optimal posting times, channels, and audience segments for each piece of content", sub2: "Schedule posts across your channels from one place", h3: "Performance Analytics", p3: "ROI tracking by content type, platform, and campaign with improvement recommendations", sub3: "See which sources actually produce your closings" },
         mobile: {
           title: "Work From Anywhere with Our Mobile App",
           subtitle: "Manage your entire real estate business from your phone. Respond to leads, schedule showings, and close deals on the go.",
@@ -1222,7 +1222,7 @@ const resources = {
         subtitle: "Find answers to common questions about Realtor Desk AI",
         q1: {
           question: "Is Realtor Desk ready for production use?",
-          answer: "We're currently in public beta with 50+ active realtors across Canada. The platform is fully functional and stable, but we're actively gathering feedback and adding features. Beta users help shape our roadmap and receive lifetime discounts."
+          answer: "Realtor Desk is in public beta. The platform is fully functional and stable, and we are actively gathering feedback and adding features. We are early enough that we do not quote a user count -- we would rather you judge it on a 14-day trial with your own leads. Beta users help shape the roadmap and keep their beta pricing for life."
         },
         q2: {
           question: "What does 'beta' mean for me?",
@@ -1278,7 +1278,7 @@ const resources = {
         },
         q15: {
           question: "What's the average ROI for agents using RealtorDesk AI?",
-          answer: "Based on our beta user data, agents see a meaningful lift in lead conversion due to sub-3-second response times. With an average agent closing 12-18 deals per year, adding just 2-3 extra deals from better follow-up pays for the CRM many times over."
+          answer: "We do not publish an average. We are in public beta and do not have a defensible sample, so any ROI figure we quoted would be a guess dressed up as data. The arithmetic that matters is yours: your commission per deal against the subscription cost. The trial runs 14 days so you can measure it on your own pipeline."
         },
         q16: {
           question: "Can RealtorDesk AI handle phone calls?",
@@ -1348,7 +1348,7 @@ const resources = {
       },
       betaCommunity: {
         title: "Join Our Growing Beta Community",
-        participants: "50+ Beta Participants",
+        participants: "Now in public beta",
         limitedSpots: "Limited Beta Spots Available",
         resultsTitle: "Real Results from Our Beta Community",
         resultsSubtitle: "Canadian realtors are already seeing measurable results. Here's what early adopters are experiencing:",
@@ -1357,38 +1357,6 @@ const resources = {
         ctaSubtitle: "Limited spots available. Be part of shaping the future of real estate AI in Canada.",
         ctaButton: "Apply for Beta Access",
         ctaNote: "Beta participants get lifetime discounts and priority feature access",
-        testimonials: {
-          sarah: {
-            quote: "I was skeptical about AI, but after the first week, I had 3 showings booked while I was sleeping. The voice agent sounds natural and captures all the details I need.",
-            brokerage: "Independent Agent",
-            stats: {
-              leads: "leads captured in first month",
-              showings: "showings booked automatically",
-              deals: "deals closed"
-            },
-            badge: "Beta Participant Since Nov 2024"
-          },
-          marc: {
-            quote: "The seamless English/French switching is perfect for Montreal. My AI handles both languages naturally, which has opened up my market significantly.",
-            brokerage: "Century 21",
-            stats: {
-              increase: "increase in francophone leads",
-              response: "of inquiries answered <2 minutes",
-              saved: "hours/week saved"
-            },
-            badge: "Beta Participant Since Dec 2024"
-          },
-          jennifer: {
-            quote: "Our team of 5 agents now operates like a team of 15. The unified dashboard means no lead falls through the cracks, even when we're all busy.",
-            brokerage: "RE/MAX Team Lead",
-            stats: {
-              responseTime: "avg AI response time",
-              leadIncrease: "increase in qualified leads",
-              additionalDeals: "additional deals in Q1"
-            },
-            badge: "Beta Participant Since Jan 2025"
-          }
-        }
       },
       aiActive: "AI ACTIVE",
       roiCalculator: {
@@ -1411,7 +1379,7 @@ const resources = {
         netGain: "Net Gain:",
         roi: "ROI:",
         disclaimer1: "Conservative estimate based on improved response time and 24/7 availability.",
-        disclaimer2: "*Assumes 30% conversion improvement, lower than pilot program average.",
+        disclaimer2: "*An assumption you can change, not a measured result. We have no published conversion data.",
         ctaButton: "See this ROI for yourself—Start Free Trial"
       },
       demoBooking: {
@@ -1484,7 +1452,7 @@ const resources = {
           title: "Meet Your AI-Powered Real Estate Operating System",
           subtitle: "Transform how you work with intelligent automation designed specifically for Canadian realtors",
           feature1Title: "Predictive Lead Scoring",
-          feature1Desc: "AI analyzes 40+ signals to identify hot leads 3-6 months early. Converts 18% vs industry 5%. Built on 500,000+ Canadian transactions",
+          feature1Desc: "AI weighs engagement, timeline and qualification signals to surface the leads worth calling first",
           feature2Title: "24/7 Bilingual AI Chatbot",
           feature2Desc: "Captures leads in EN/FR, qualifies buyers, schedules showings, answers 200+ property questions. Never miss a 2 AM inquiry again",
           feature3Title: "Smart Transaction Coordinator",
@@ -3150,7 +3118,7 @@ const resources = {
             title: "Give Desk AI your voice.",
             subtitle: "Pick a tone. Paste a sample of how you actually write. Desk AI will answer leads in your voice — not a generic chatbot.",
             helperBetterTitle: "It gets better daily",
-            helperBetterBody: "Every time you edit an AI draft, Desk learns. After week one, 90% of agents approve drafts without changes.",
+            helperBetterBody: "Every time you edit an AI draft, Desk learns your phrasing and applies it to the next one.",
             helperBilingualTitle: "Bilingual by design",
             helperBilingualBody: "Train once — Desk adapts your tone across French and English automatically.",
             toneLabel: "Tone",
@@ -3258,7 +3226,7 @@ const resources = {
         badge1: "Conforme PIPEDA par Conception",
         badge2: "Bilingue EN/FR",
         badge3: "50+ Utilisateurs Bêta",
-        conversionBadge: "Hausse de Conversion de 30% (Conservatrice)",
+        conversionBadge: "Estimez avec vos propres chiffres",
         badge: "Essai Gratuit de 14 Jours",
         bullet1: "L'IA répond aux prospects instantanément, 24/7",
         bullet2: "Conçu pour les courtiers canadiens — LPRPDE, LCAP, bilingue EN/FR",
@@ -3341,11 +3309,11 @@ const resources = {
         tab3: "Intelligence du Marché",
         tab4: "Gestion des Transactions",
         tab5: "Automatisation Marketing",
-        crm: { h1: "Score Multi-Dimensionnel de Prospects", p1: "L'IA analyse les signaux d'engagement — recherches de propriétés, ouvertures de courriels, activité sociale, indicateurs hypothécaires — pour classer vos prospects", sub1: "Concentrez-vous sur vos meilleurs prospects et concluez plus de transactions", h2: "Intelligence Conversationnelle", p2: "Analyse de sentiment en temps réel par courriel, SMS et chat, avec détection d'urgence et suggestions de réponses automatisées", sub2: "45% de réponses plus pertinentes, 60% moins de transactions perdues", h3: "Enrichissement Automatisé des Données", p3: "Construction autonome de profils de contacts à partir des registres publics, des réseaux sociaux et du suivi comportemental", sub3: "Réduisez radicalement la saisie manuelle avec la création automatique de profils" },
+        crm: { h1: "Score Multi-Dimensionnel de Prospects", p1: "L'IA analyse les signaux d'engagement — recherches de propriétés, ouvertures de courriels, activité sociale, indicateurs hypothécaires — pour classer vos prospects", sub1: "Concentrez-vous sur vos meilleurs prospects et concluez plus de transactions", h2: "Intelligence Conversationnelle", p2: "Analyse de sentiment en temps réel par courriel, SMS et chat, avec détection d'urgence et suggestions de réponses automatisées", sub2: "Des réponses rédigées dans votre style, avec le contexte de la transaction", h3: "Enrichissement Automatisé des Données", p3: "Construction autonome de profils de contacts à partir des registres publics, des réseaux sociaux et du suivi comportemental", sub3: "Réduisez radicalement la saisie manuelle avec la création automatique de profils" },
         chatbot: { h1: "Engagement Multilingue 24/7", p1: "Conversations intelligentes en anglais et français, gère les demandes immobilières, qualifie les prospects, planifie les visites", sub1: "Maximisez la capture de prospects hors heures avec une IA qui ne dort jamais", h2: "Système de Qualification Intelligent", p2: "L'IA mène des conversations naturelles pour évaluer la préparation, le budget, le calendrier et les préférences de l'acheteur", sub2: "Seuls les prospects qualifiés atteignent votre agenda", h3: "Transfert Transparent vers un Humain", p3: "L'IA sait quand transférer vers un agent humain avec le contexte complet de la conversation", sub3: "Ne perdez jamais un prospect chaud à l'automatisation" },
         market: { h1: "Analyses de Propriétés Propulsées par l'IA (Bientôt)", p1: "Analyse de propriétés assistée par IA utilisant les tendances du marché local, les ventes comparables et les données de quartier", sub1: "Des ACM plus rapides, basées sur les données, pour vos clients", h2: "Détection d'Opportunités Hors-Marché", p2: "L'IA prédit quels propriétaires sont susceptibles de vendre 3 à 6 mois avant la mise en vente", sub2: "Obtenez des inscriptions exclusives avant vos concurrents", h3: "Rapports de Marché en Temps Réel", p3: "Analyse comparative de marché automatisée avec taux d'absorption, tendances des jours sur le marché, évolution du prix au pied carré", sub3: "Positionnez-vous comme l'expert du marché local" },
-        transaction: { h1: "Prédiction Intelligente des Délais", p1: "L'IA prévoit les dates de clôture selon le type de transaction, les parties impliquées et les performances historiques", sub1: "Conçu pour accélérer vos délais de clôture avec moins d'étapes manquées", h2: "Coordination Automatisée des Fournisseurs", p2: "Planification intelligente des inspecteurs, évaluateurs et avocats avec optimisation des disponibilités", sub2: "75% moins de délais manqués", h3: "Moteur de Détection des Risques", p3: "Alertes prédictives pour problèmes de financement, d'inspection et hésitations acheteur/vendeur", sub3: "Taux d'échec des transactions réduit de 12% à 4%" },
-        marketing: { h1: "Génération de Contenu par IA", p1: "Création automatisée de descriptions de propriétés, publications sociales, campagnes courriel et guides de quartier", sub1: "85% moins de temps sur le contenu marketing", h2: "Distribution Intelligente", p2: "L'IA détermine les horaires de publication optimaux, les canaux et segments d'audience pour chaque contenu", sub2: "150% d'augmentation des taux d'engagement", h3: "Analyses de Performance", p3: "Suivi du ROI par type de contenu, plateforme et campagne avec recommandations d'amélioration", sub3: "45% de réduction du coût par prospect" },
+        transaction: { h1: "Prédiction Intelligente des Délais", p1: "L'IA prévoit les dates de clôture selon le type de transaction, les parties impliquées et les performances historiques", sub1: "Conçu pour accélérer vos délais de clôture avec moins d'étapes manquées", h2: "Coordination Automatisée des Fournisseurs", p2: "Planification intelligente des inspecteurs, évaluateurs et avocats avec optimisation des disponibilités", sub2: "Échéances et relances suivies au même endroit", h3: "Moteur de Détection des Risques", p3: "Alertes prédictives pour problèmes de financement, d'inspection et hésitations acheteur/vendeur", sub3: "Voyez la prochaine étape de chaque transaction dans une seule vue" },
+        marketing: { h1: "Génération de Contenu par IA", p1: "Création automatisée de descriptions de propriétés, publications sociales, campagnes courriel et guides de quartier", sub1: "Rédigez fiches et publications à partir de l'inscription elle-même", h2: "Distribution Intelligente", p2: "L'IA détermine les horaires de publication optimaux, les canaux et segments d'audience pour chaque contenu", sub2: "Planifiez vos publications sur vos canaux depuis un seul endroit", h3: "Analyses de Performance", p3: "Suivi du ROI par type de contenu, plateforme et campagne avec recommandations d'amélioration", sub3: "Voyez quelles sources produisent réellement vos transactions" },
         mobile: {
           title: "Travaillez de N'importe Où avec Notre Application Mobile",
           subtitle: "Gérez toute votre entreprise immobilière depuis votre téléphone. Répondez aux prospects, planifiez des visites et concluez des ventes en déplacement.",
@@ -4430,7 +4398,7 @@ const resources = {
         subtitle: "Trouvez des réponses aux questions courantes sur Realtor Desk AI",
         q1: {
           question: "RealtorDesk AI est-il prêt pour une utilisation en production?",
-          answer: "Nous sommes actuellement en bêta publique avec plus de 50 agents immobiliers actifs à travers le Canada. La plateforme est entièrement fonctionnelle et stable, mais nous recueillons activement des commentaires et ajoutons des fonctionnalités. Les utilisateurs bêta aident à façonner notre feuille de route et reçoivent des réductions à vie."
+          answer: "Realtor Desk est en bêta publique. La plateforme est entièrement fonctionnelle et stable, et nous continuons d'ajouter des fonctionnalités en tenant compte de vos commentaires. Nous sommes encore trop tôt pour citer un nombre d'utilisateurs -- nous préférons que vous en jugiez pendant un essai de 14 jours avec vos propres prospects. Les utilisateurs bêta influencent la feuille de route et conservent leur tarif bêta à vie."
         },
         q2: {
           question: "Que signifie 'bêta' pour moi?",
@@ -4486,7 +4454,7 @@ const resources = {
         },
         q15: {
           question: "Quel est le ROI moyen pour les agents utilisant RealtorDesk AI?",
-          answer: "Selon les données de nos utilisateurs bêta, les agents voient une augmentation significative de la conversion des prospects grâce à des temps de réponse inférieurs à 3 secondes. Avec un agent moyen concluant 12-18 transactions par an, ajouter seulement 2-3 transactions supplémentaires grâce à un meilleur suivi paie le CRM plusieurs fois."
+          answer: "Nous ne publions pas de moyenne. Nous sommes en bêta publique et nous n'avons pas d'échantillon défendable : tout chiffre de rendement que nous citerions serait une supposition déguisée en données. Le calcul qui compte est le vôtre : votre commission par transaction par rapport au coût de l'abonnement. L'essai dure 14 jours, de quoi le mesurer sur votre propre portefeuille."
         },
         q16: {
           question: "RealtorDesk AI peut-il gérer les appels téléphoniques?",
@@ -4565,38 +4533,6 @@ const resources = {
         ctaSubtitle: "Places limitées disponibles. Participez à façonner l'avenir de l'IA immobilière au Canada.",
         ctaButton: "Postuler pour l'Accès Bêta",
         ctaNote: "Les participants bêta bénéficient de réductions à vie et d'un accès prioritaire aux fonctionnalités",
-        testimonials: {
-          sarah: {
-            quote: "J'étais sceptique à propos de l'IA, mais après la première semaine, j'avais 3 visites réservées pendant que je dormais. L'agent vocal semble naturel et capture tous les détails dont j'ai besoin.",
-            brokerage: "Agent Indépendant",
-            stats: {
-              leads: "prospects capturés le premier mois",
-              showings: "visites réservées automatiquement",
-              deals: "transactions conclues"
-            },
-            badge: "Participant Bêta Depuis Nov 2024"
-          },
-          marc: {
-            quote: "Le basculement transparent entre l'anglais et le français est parfait pour Montréal. Mon IA gère les deux langues naturellement, ce qui a considérablement élargi mon marché.",
-            brokerage: "Century 21",
-            stats: {
-              increase: "d'augmentation des prospects francophones",
-              response: "des demandes répondues en <2 minutes",
-              saved: "heures/semaine économisées"
-            },
-            badge: "Participant Bêta Depuis Déc 2024"
-          },
-          jennifer: {
-            quote: "Notre équipe de 5 agents fonctionne maintenant comme une équipe de 15. Le tableau de bord unifié signifie qu'aucun prospect ne passe entre les mailles du filet, même lorsque nous sommes tous occupés.",
-            brokerage: "Chef d'Équipe RE/MAX",
-            stats: {
-              responseTime: "temps de réponse moyen de l'IA",
-              leadIncrease: "d'augmentation des prospects qualifiés",
-              additionalDeals: "transactions supplémentaires au T1"
-            },
-            badge: "Participant Bêta Depuis Jan 2025"
-          }
-        }
       },
       aiActive: "IA ACTIVE",
       roiCalculator: {
@@ -4619,7 +4555,7 @@ const resources = {
         netGain: "Gain Net:",
         roi: "ROI:",
         disclaimer1: "Estimation conservatrice basée sur l'amélioration du temps de réponse et la disponibilité 24/7.",
-        disclaimer2: "*Suppose une amélioration de conversion de 30%, inférieure à la moyenne du programme pilote.",
+        disclaimer2: "*Une hypothèse que vous pouvez modifier, et non un résultat mesuré. Nous ne publions aucune donnée de conversion.",
         ctaButton: "Voyez ce ROI par vous-même—Commencer l'Essai Gratuit"
       },
       demoBooking: {
@@ -4692,7 +4628,7 @@ const resources = {
           title: "Rencontrez Votre Système d'Exploitation Immobilier Propulsé par l'IA",
           subtitle: "Transformez votre façon de travailler avec l'automation intelligente conçue spécifiquement pour les agents immobiliers canadiens",
           feature1Title: "Score de Prospects Prédictif",
-          feature1Desc: "L'IA analyse plus de 40 signaux pour identifier les prospects chauds 3 à 6 mois à l'avance. Convertit 18% vs 5% de l'industrie. Basé sur 500 000+ transactions canadiennes",
+          feature1Desc: "L'IA pondère les signaux d'engagement, d'échéance et de qualification pour faire ressortir les prospects à rappeler en priorité",
           feature2Title: "Chatbot IA Bilingue 24/7",
           feature2Desc: "Capture les prospects en EN/FR, qualifie les acheteurs, planifie les visites, répond à plus de 200 questions sur les propriétés. Ne manquez plus jamais une demande à 2h du matin",
           feature3Title: "Coordinateur de Transactions Intelligent",
@@ -6358,7 +6294,7 @@ const resources = {
             title: "Donnez votre voix à Desk IA.",
             subtitle: "Choisissez un ton. Collez un échantillon de votre écriture réelle. Desk IA répondra aux clients avec votre voix — et non celle d'un robot générique.",
             helperBetterTitle: "Elle s'améliore chaque jour",
-            helperBetterBody: "Chaque fois que vous modifiez une ébauche, Desk IA apprend. Après une semaine, 90 % des agents approuvent les ébauches sans retouche.",
+            helperBetterBody: "Chaque fois que vous modifiez une ébauche, Desk IA apprend votre style et l'applique à la suivante.",
             helperBilingualTitle: "Bilingue par conception",
             helperBilingualBody: "Entraînez une fois — Desk IA adapte votre ton en français et en anglais automatiquement.",
             toneLabel: "Ton",
