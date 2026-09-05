@@ -13,7 +13,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "gen:favicons": "node scripts/generate-favicons.mjs",
-    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
+    "capture:screenshots": "node scripts/capture-screenshots.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "verify:live": "node scripts/verify-live.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
