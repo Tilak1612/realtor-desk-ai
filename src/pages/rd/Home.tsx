@@ -19,7 +19,8 @@ import {
   IconLead,
   IconBolt,
 } from "@/components/rd";
-import { normalizeLocale, formatPercent, formatSeconds } from "@/lib/i18n/format";
+import { normalizeLocale } from "@/lib/i18n/format";
+import { Reveal } from "@/components/motion/Reveal";
 
 // /  — Home page per rd-marketing.jsx Artboard_Home.
 //
@@ -49,12 +50,15 @@ export default function Home() {
         canonicalUrl="https://www.realtordesk.ai/"
       />
 
+      {/* The hero is deliberately NOT wrapped. It is the LCP region; delaying
+          it behind an observer would trade the page's most important paint for
+          a decoration. Everything below the fold reveals on scroll. */}
       <HeroSection t={t} />
-      <TrustStrip t={t} />
-      <FeatureGrid t={t} />
-      <PipelinePreview t={t} />
-      <CompareStrip t={t} locale={locale} />
-      <TestimonialAndCTA t={t} />
+      <Reveal><TrustStrip t={t} /></Reveal>
+      <Reveal><FeatureGrid t={t} /></Reveal>
+      <Reveal><PipelinePreview t={t} /></Reveal>
+      <Reveal><CompareStrip t={t} locale={locale} /></Reveal>
+      <Reveal><TestimonialAndCTA t={t} /></Reveal>
     </MarketingLayout>
   );
 }
@@ -65,9 +69,15 @@ type TFn = (key: string) => string;
  * HERO
  * ────────────────────────────────────────────────────────── */
 function HeroSection({ t }: { t: TFn }) {
+  // Top padding was a flat 100px at every width. At 390px that put the badge
+  // ~112px below a ~84px header, so the H1 started around 470px down an 844px
+  // viewport and pushed the primary CTA to the fold edge with the product card
+  // entirely below it. 100px is right on desktop, where the header is
+  // proportionally smaller and the grid is two columns; it is not right on a
+  // phone.
   return (
-    <section className="px-4 sm:px-8 md:px-14 pt-[100px] pb-10 relative overflow-hidden">
-      <div className="mx-auto max-w-[1200px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-16 items-center">
+    <section className="px-4 sm:px-8 md:px-14 pt-10 sm:pt-16 md:pt-[100px] pb-10 relative overflow-hidden">
+      <div className="mx-auto max-w-[1200px] grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-16 items-center">
         <div>
           <RDBadge tone="terra" size="sm" className="mb-6 flex-wrap max-w-full">
             <IconSparkle />
@@ -181,19 +191,20 @@ function HeroProduct({ t }: { t: TFn }) {
         </div>
       </div>
 
-      {/* Floating KPI */}
-      <div className="hidden sm:flex absolute -bottom-6 -left-9 bg-white border border-rd-line rounded-rd-lg px-5 py-4 shadow-rd-md items-center gap-3.5">
-        <div className="w-2 h-2 bg-rd-success rounded-full" />
-        <div>
-          <div className="text-[11px] text-rd-ink-500 uppercase tracking-[0.06em] font-semibold">
-            {t("landing.heroProduct.avgResponseLabel")}
-          </div>
-          <div className="text-[22px] font-bold tracking-[-0.01em]">
-            {formatSeconds(32, locale)}{" "}
-            <span className="text-[13px] text-rd-success font-semibold">{formatPercent(-96, locale)}</span>
-          </div>
-        </div>
-      </div>
+      {/* The floating KPI that stood here read "AVG RESPONSE TIME - 32s -96%"
+          beside a green pulse dot, above the fold, framed as live telemetry.
+          Both numbers were hardcoded literals: formatSeconds(32) and
+          formatPercent(-96).
+
+          A -96% figure is a comparative improvement claim, which needs a
+          baseline to be measured against. Production has recorded zero deals
+          and zero tasks, so no such baseline has ever existed. It was the most
+          prominent instance of exactly what PR #171 removed from the copy, and
+          it survived because the substantiation guard only scanned
+          i18n/config.ts, not component literals. That guard now covers both.
+
+          Deliberately not replaced with a softer metric. The hero gains its
+          depth from the device composition instead. */}
     </div>
   );
 }

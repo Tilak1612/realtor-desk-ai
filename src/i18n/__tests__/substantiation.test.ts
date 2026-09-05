@@ -5,6 +5,22 @@ import { join } from "node:path";
 const config = readFileSync(join(process.cwd(), "src/i18n/config.ts"), "utf8");
 
 /**
+ * The homepage hero rendered a hardcoded "AVG RESPONSE TIME - 32s -96%" for
+ * the entire life of the cleanup in PR #171, because this file only ever read
+ * i18n/config.ts. Numbers presented as measurements do not have to live in a
+ * translation string -- that one was `formatSeconds(32, locale)` in TSX.
+ */
+const MARKETING_COMPONENTS = [
+  "src/pages/rd/Home.tsx",
+  "src/pages/rd/Pricing.tsx",
+  "src/pages/rd/Features.tsx",
+];
+const components = MARKETING_COMPONENTS.map((f) => ({
+  file: f,
+  src: readFileSync(join(process.cwd(), f), "utf8"),
+}));
+
+/**
  * Guards against re-introducing performance claims the product cannot support.
  *
  * Context, measured against production on 2026-09-05: 15 auth users (several
@@ -52,6 +68,23 @@ describe("marketing copy makes no claim the data cannot support", () => {
       `src/i18n/config.ts asserts ${hit?.[0]} -- ${why}. See this file's header.`
     ).toBeNull();
   });
+
+  it.each(MARKETING_COMPONENTS)(
+    "%s states no metric as a measured result",
+    (file) => {
+      const src = components.find((c) => c.file === file)!.src;
+      // Strip comments first: the removal of the hero KPI is documented in
+      // prose that necessarily quotes the numbers it removed.
+      const code = src
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/(^|[^:])\/\/.*$/gm, "$1");
+
+      // A percentage or duration passed straight to a formatter is a figure
+      // asserted in code rather than derived from data.
+      expect(code).not.toMatch(/formatPercent\(\s*-?\d/);
+      expect(code).not.toMatch(/formatSeconds\(\s*\d/);
+    }
+  );
 
   it("keeps the honest answer that the others contradicted", () => {
     // The correct position, already written. If this disappears, the cleanup

@@ -536,3 +536,57 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ────────────────────────────────────────────────────────────────
+ * Scroll-reveal vocabulary
+ *
+ * Paired with useReveal(). The element is fully visible by default and the
+ * hidden state is only applied once the hook has confirmed it can reveal --
+ * so a JavaScript failure, a missing IntersectionObserver, or a
+ * reduced-motion preference all leave the content on screen rather than
+ * blanking it. Never invert these.
+ *
+ * Transform and opacity only: both composite on the GPU, so this stays smooth
+ * on a mid-range phone. No width/height/top/left animation anywhere.
+ * ──────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .rd-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rd-reveal-hidden {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  .rd-reveal-shown {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 480ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 480ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  /* Stagger children of a revealed group. Capped at six: past that the last
+     item waits almost half a second after the first, which reads as the page
+     being slow rather than as choreography. */
+  .rd-stagger > * { transition-delay: 0ms; }
+  .rd-reveal-shown.rd-stagger > *:nth-child(2) { transition-delay: 60ms; }
+  .rd-reveal-shown.rd-stagger > *:nth-child(3) { transition-delay: 120ms; }
+  .rd-reveal-shown.rd-stagger > *:nth-child(4) { transition-delay: 180ms; }
+  .rd-reveal-shown.rd-stagger > *:nth-child(5) { transition-delay: 240ms; }
+  .rd-reveal-shown.rd-stagger > *:nth-child(n + 6) { transition-delay: 300ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Belt and braces. useReveal already refuses to hide anything when this is
+     set, but the media query is the thing a future edit is most likely to
+     regress, and the cost of asserting it twice is nil. */
+  .rd-reveal-hidden,
+  .rd-reveal-shown {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
