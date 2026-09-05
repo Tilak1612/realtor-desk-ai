@@ -50,3 +50,18 @@ describe("DeviceFrame", () => {
     expect(screen?.contains(container.querySelector("img"))).toBe(true);
   });
 });
+
+describe("DeviceFrame verification hook", () => {
+  it("marks itself so live verification can find the screenshot", () => {
+    // verify-live.mjs locates product screenshots by this attribute rather
+    // than by filename. If it disappears, the live check silently reports
+    // SKIP forever instead of failing -- which is how coverage vanishes.
+    const { container } = render(
+      <DeviceFrame variant="laptop">{shot}</DeviceFrame>
+    );
+    const frame = container.querySelector("[data-device-frame]");
+    expect(frame).toBeTruthy();
+    expect(frame?.getAttribute("data-device-frame")).toBe("laptop");
+    expect(frame?.querySelector("img")).toBeTruthy();
+  });
+});

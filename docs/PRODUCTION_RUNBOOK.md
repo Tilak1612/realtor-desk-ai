@@ -776,3 +776,37 @@ turns a green run red for no reason and trains people to ignore the check.
 
 Drives the system Chrome via playwright-core — no browser download.
 Override with `CHROME_PATH`.
+
+## 22. The two checks that are waiting on assets
+
+`verify-live.mjs` reports SKIP, not PASS, for anything that does not exist
+yet. A skip is printed loudly, counted separately, and listed again in the
+summary — because the usual way verification coverage disappears is a skip
+nobody notices.
+
+Two are currently skipped:
+
+| Check | Waiting on |
+|---|---|
+| product screenshots in device frames | `scripts/capture-screenshots.mjs` — section 20 |
+| hero video is poster-backed and decorative | Higgsfield asset generation (needs `/mcp` OAuth) |
+
+**They become real checks with no edit required.** The screenshot check
+finds images by the `data-device-frame` attribute `<DeviceFrame>` sets —
+structural, not a filename pattern, so a rename cannot silently disable it.
+The moment a framed screenshot renders, the check asserts it is AVIF, has
+explicit dimensions, carries meaningful alt text, and is not broken.
+
+The video check asserts poster, `muted`, `playsinline`, `aria-hidden`, a
+WebM source, and that no `<video>` is served at 390px. A decorative
+background video with no poster shows a black rectangle until the first
+frame decodes, and without `muted` + `playsinline` iOS refuses to autoplay
+it at all.
+
+Sequence once you have both:
+
+```bash
+RD_DEMO_EMAIL='...' RD_DEMO_PASSWORD='...' node scripts/capture-screenshots.mjs
+node scripts/optimize-images.mjs
+node scripts/verify-live.mjs
+```

@@ -28,6 +28,20 @@ const record = (name, pass, detail) => {
   console.log(`${pass ? "  PASS" : "  FAIL"}  ${name}${detail ? ` — ${detail}` : ""}`);
 };
 
+/**
+ * For assets that do not exist yet.
+ *
+ * A skip is NOT a pass. It is printed loudly, counted separately and listed
+ * again in the summary, because the usual way verification coverage
+ * disappears is a skip that nobody notices. These turn into real PASS/FAIL
+ * the moment the asset lands -- no edit required.
+ */
+const skipped = [];
+const skip = (name, why) => {
+  skipped.push({ name, why });
+  console.log(`  SKIP  ${name} — ${why}`);
+};
+
 const browser = await chromium.launch({ executablePath: CHROME, headless: true });
 
 try {
@@ -191,6 +205,69 @@ try {
   );
   await auth.close();
 
+  /* ── 5c. product screenshots, once they exist ───────────────────────────── */
+  const shot = await page.evaluate(() => {
+    // Structural, not a filename guess. A rename must not be able to
+    // silently disable this check.
+    const inFrame = [...document.images].filter((i) => i.closest("[data-device-frame]"));
+    return inFrame.map((i) => ({
+      src: i.currentSrc.split("/").pop(),
+      fmt: (i.currentSrc.match(/\.(avif|webp|jpe?g|png)/i) || [])[1]?.toLowerCase(),
+      hasDims: !!(i.getAttribute("width") && i.getAttribute("height")),
+      alt: (i.alt || "").length,
+      broken: i.complete && i.naturalWidth === 0,
+      natural: `${i.naturalWidth}x${i.naturalHeight}`,
+    }));
+  });
+  if (shot.length === 0) {
+    skip(
+      "product screenshots in device frames",
+      "none on the page yet — run scripts/capture-screenshots.mjs (runbook 20)"
+    );
+  } else {
+    const bad = shot.filter((i) => i.broken || !i.hasDims || i.alt < 10 || i.fmt !== "avif");
+    record(
+      "product screenshots in device frames",
+      bad.length === 0,
+      `${shot.length} found; ${bad.length ? JSON.stringify(bad[0]) : "all avif, sized, alt-texted, unbroken"}`
+    );
+  }
+
+  /* ── 5d. video, once it exists ──────────────────────────────────────────── */
+  const video = await page.evaluate(() => {
+    return [...document.querySelectorAll("video")].map((v) => ({
+      poster: !!v.getAttribute("poster"),
+      muted: v.muted,
+      playsInline: v.hasAttribute("playsinline"),
+      loop: v.loop,
+      preload: v.getAttribute("preload"),
+      hidden: v.getAttribute("aria-hidden") === "true",
+      sources: [...v.querySelectorAll("source")].map((sr) => sr.type),
+    }));
+  });
+  if (video.length === 0) {
+    skip("hero video is poster-backed and decorative", "no <video> on the page yet — Higgsfield assets not generated");
+  } else {
+    // A decorative background video with no poster shows a black rectangle
+    // until the first frame decodes, and without muted+playsinline iOS
+    // refuses to autoplay it at all.
+    const bad = video.filter(
+      (v) => !v.poster || !v.muted || !v.playsInline || !v.hidden || !v.sources.includes("video/webm")
+    );
+    record(
+      "hero video is poster-backed and decorative",
+      bad.length === 0,
+      `${video.length} found; ${bad.length ? JSON.stringify(bad[0]) : "poster, muted, playsinline, aria-hidden, webm"}`
+    );
+
+    // And it must not be shipped to a phone.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(500);
+    const onMobile = await page.evaluate(() => document.querySelectorAll("video").length);
+    record("video is not served below 1024px", onMobile === 0, `${onMobile} <video> at 390px`);
+    await page.setViewportSize({ width: 1440, height: 900 });
+  }
+
   /* ── 6. no horizontal overflow at any target width ──────────────────────── */
   const widths = [320, 375, 390, 430, 768, 1024, 1440, 1920];
   const overflow = [];
@@ -215,4 +292,13 @@ try {
 
 const failed = results.filter((r) => !r.pass);
 console.log(`\n${results.length - failed.length}/${results.length} checks passed`);
+
+if (skipped.length) {
+  console.log(`\n${skipped.length} check(s) skipped — the asset does not exist yet:`);
+  for (const s of skipped) console.log(`  - ${s.name}: ${s.why}`);
+  console.log(
+    "\nThese become real checks automatically once the assets land. Nothing to edit."
+  );
+}
+
 process.exit(failed.length === 0 ? 0 : 1);
