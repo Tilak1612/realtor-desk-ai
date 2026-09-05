@@ -1,11 +1,26 @@
+/* Phase 1 redesign tokens. Namespaced under --rd-* so they live alongside
+   the legacy shadcn --* vars below without collision.
+ *
+ * THIS MUST STAY ABOVE THE @tailwind DIRECTIVES. CSS requires @import to
+ * precede every other statement, and it sat below them. The build said so on
+ * every run --
+ *
+ *   [vite:css] @import must precede all other statements
+ *
+ * -- and the consequence was that ALL 62 --rd-* custom properties were
+ * dropped from the production bundle. Not one reached dist.
+ *
+ * The site still looked correct because tailwind.config.ts maps the rd-*
+ * colour names to literal hex, so utilities like `bg-rd-navy-800` compile to
+ * rgb() and never touch a variable. Only code reading `var(--rd-*)` broke,
+ * silently: the lead-score colours in Score.tsx, the sparkline stroke in
+ * Spark.tsx, and 21 other inline styles were all resolving to nothing in
+ * production. */
+@import "./styles/rd-tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Phase 1 redesign tokens. Namespaced under --rd-* so they live alongside
-   the legacy shadcn --* vars below without collision. Imported here so
-   every route picks them up automatically. */
-@import "./styles/rd-tokens.css";
 
 /*
  * RealtorDesk AI — Design System

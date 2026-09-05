@@ -85,6 +85,30 @@ describe("motion and hover CSS contract", () => {
     expect(liftBlock).not.toMatch(/border-color|background-color/);
   });
 
+  it("keeps @import above the @tailwind directives", () => {
+    // CSS requires @import to precede every other statement. When it sat below
+    // the @tailwind directives, vite warned on every build and silently
+    // dropped ALL 62 --rd-* custom properties from the production bundle.
+    //
+    // Nothing looked broken, because tailwind.config.ts maps the rd-* colour
+    // names to literal hex -- so `bg-rd-navy-800` compiles to rgb() and never
+    // reads a variable. Only `var(--rd-*)` consumers failed: the lead-score
+    // colours, the sparkline stroke, and 21 other inline styles were
+    // resolving to nothing in production for as long as this file was ordered
+    // that way.
+    // Scanned on the comment-stripped copy: the explanation above quotes both
+    // directive names, and on `raw` the comment's "@tailwind" appears before
+    // the real @import statement, so the guard failed on a correct file.
+    const importAt = css.indexOf("@import");
+    const tailwindAt = css.indexOf("@tailwind");
+    expect(importAt).toBeGreaterThan(-1);
+    expect(tailwindAt).toBeGreaterThan(-1);
+    expect(
+      importAt,
+      "@import must come before @tailwind or the token file is dropped from the bundle"
+    ).toBeLessThan(tailwindAt);
+  });
+
   it("gives keyboard users the same affordance as the mouse", () => {
     expect(css).toMatch(/\.rd-card-lift:focus-within/);
   });
