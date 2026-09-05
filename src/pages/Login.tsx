@@ -185,6 +185,16 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  // An icon-only button with no accessible name: a screen
+                  // reader announced "button" and nothing else, on the control
+                  // that reveals your password. axe rates this CRITICAL, above
+                  // every contrast finding on the site.
+                  aria-label={
+                    showPassword
+                      ? t("app.auth.hidePassword", "Hide password")
+                      : t("app.auth.showPassword", "Show password")
+                  }
+                  aria-pressed={showPassword}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-rd-ink-400 hover:text-rd-ink-700 transition-colors p-1 rounded-md hover:bg-rd-ink-100"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}

@@ -311,7 +311,22 @@ try {
   const require = createRequire(import.meta.url);
   const AXE = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 
-  const A11Y_PAGES = ["/", "/pricing", "/signup"];
+  // Every important marketing page, not a sample. The first three checked
+  // yielded ten serious violations, so a sample was clearly not enough to
+  // conclude anything about the rest.
+  const A11Y_PAGES = [
+    "/",
+    "/pricing",
+    "/features",
+    "/how-it-works",
+    "/faq",
+    "/contact",
+    "/resources",
+    "/login",
+    "/signup",
+    "/privacy-policy",
+    "/terms-of-service",
+  ];
   const a11yFindings = [];
 
   for (const route of A11Y_PAGES) {
