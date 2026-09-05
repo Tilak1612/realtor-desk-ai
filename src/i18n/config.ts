@@ -1765,6 +1765,8 @@ const resources = {
           passwordRequired: "Password is required",
           passwordMinLength: "Password must be at least 8 characters",
           passwordsDoNotMatch: "Passwords do not match",
+          showPassword: "Show password",
+          hidePassword: "Hide password",
           passwordRequirements: {
             minLength: "At least 8 characters",
             uppercase: "At least 1 uppercase letter (A-Z)",
@@ -4942,6 +4944,8 @@ const resources = {
           passwordRequired: "Le mot de passe est requis",
           passwordMinLength: "Le mot de passe doit contenir au moins 8 caractères",
           passwordsDoNotMatch: "Les mots de passe ne correspondent pas",
+          showPassword: "Afficher le mot de passe",
+          hidePassword: "Masquer le mot de passe",
           passwordRequirements: {
             minLength: "Au moins 8 caractères",
             uppercase: "Au moins 1 lettre majuscule (A-Z)",
