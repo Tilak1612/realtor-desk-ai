@@ -7,6 +7,12 @@ import { Link } from "react-router-dom";
 import { UserPlus, Link as LinkIcon, Brain, Settings, Rocket, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+// AVIF/WebP siblings from scripts/optimize-images.mjs. Imported explicitly:
+// Vite hashes each file independently, so the .avif URL cannot be derived
+// from the .jpg URL. This one image was 900KB of the 5.4MB shipped raster.
+import heroDashboardAvif from "@/assets/hero-dashboard.avif";
+import heroDashboardWebp from "@/assets/hero-dashboard.webp";
+import { Picture } from "@/components/Picture";
 
 const HowItWorks = () => {
   const { t } = useTranslation();
@@ -148,10 +154,15 @@ const HowItWorks = () => {
             </p>
             
             <div className="rounded-2xl overflow-hidden shadow-2xl mb-8">
-              <img
+              <Picture
                 src={heroDashboard}
-                alt="Realtor Desk AI Dashboard"
+                avif={heroDashboardAvif}
+                webp={heroDashboardWebp}
+                width={1344}
+                height={768}
+                alt="The Realtor Desk dashboard, showing the lead pipeline and Desk AI activity feed"
                 className="w-full"
+                priority
               />
             </div>
 
