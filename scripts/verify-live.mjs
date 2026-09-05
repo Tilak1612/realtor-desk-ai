@@ -155,28 +155,51 @@ try {
   await res.waitForTimeout(2500);
   const imgStats = await res.evaluate(() => {
     const loaded = [...document.images].filter((i) => i.currentSrc);
-    const fmt = loaded.map(
-      (i) => (i.currentSrc.match(/\.(avif|webp|jpe?g|png|svg)/i) || [])[1]?.toLowerCase()
-    );
+
+    // Classify EVERY loaded image into exactly one bucket. The previous
+    // version matched on a file extension, so the six images Vite inlines as
+    // data: URIs matched nothing and were counted in no category at all --
+    // invisible to the check. A raster accidentally inlined would have slipped
+    // straight through. `unclassified` exists so that can never happen again:
+    // the buckets are asserted to sum to the total.
+    const classify = (src) => {
+      if (src.startsWith("data:")) {
+        const mime = (src.match(/^data:image\/([a-z+]+)/i) || [])[1]?.toLowerCase();
+        // Inlined SVG is fine. Inlined RASTER is not -- it means an image
+        // small enough to inline is still shipping as jpg/png.
+        return mime === "svg+xml" ? "svg" : "unoptimised";
+      }
+      const ext = (src.match(/\.(avif|webp|jpe?g|png|svg)(?:$|[?#])/i) || [])[1]?.toLowerCase();
+      if (ext === "avif") return "avif";
+      if (ext === "svg") return "svg";
+      if (ext) return "unoptimised";
+      return "unclassified";
+    };
+
+    const buckets = { avif: 0, svg: 0, unoptimised: 0, unclassified: 0 };
+    for (const i of loaded) buckets[classify(i.currentSrc)]++;
+
     return {
       total: document.images.length,
       loaded: loaded.length,
-      avif: fmt.filter((f) => f === "avif").length,
-      // SVG is not a failure to negotiate AVIF -- for a flat brand graphic it
-      // is the better format outright: smaller, resolution-independent, and
-      // authored rather than generated. What must NOT appear is a raster
-      // served as jpg/png/webp when an AVIF sibling exists.
-      svg: fmt.filter((f) => f === "svg").length,
-      unoptimised: fmt.filter((f) => f && ["jpg", "jpeg", "png", "webp"].includes(f)).length,
+      ...buckets,
       broken: loaded.filter((i) => i.complete && i.naturalWidth === 0).length,
       missingAlt: [...document.images].filter((i) => !i.alt).length,
     };
   });
+  const reconciles =
+    imgStats.avif + imgStats.svg + imgStats.unoptimised + imgStats.unclassified ===
+    imgStats.loaded;
   record(
     "lazy images load; every raster negotiates AVIF",
-    imgStats.loaded > 0 && imgStats.unoptimised === 0 && imgStats.broken === 0,
+    imgStats.loaded > 0 &&
+      imgStats.unoptimised === 0 &&
+      imgStats.unclassified === 0 &&
+      imgStats.broken === 0 &&
+      reconciles,
     `${imgStats.loaded}/${imgStats.total} loaded — ${imgStats.avif} avif, ${imgStats.svg} svg, ` +
-      `${imgStats.unoptimised} unoptimised raster, ${imgStats.broken} broken`
+      `${imgStats.unoptimised} unoptimised, ${imgStats.unclassified} unclassified, ` +
+      `${imgStats.broken} broken${reconciles ? "" : " — BUCKETS DO NOT SUM"}`
   );
   record("every image has alt text", imgStats.missingAlt === 0, `${imgStats.missingAlt} missing`);
 
