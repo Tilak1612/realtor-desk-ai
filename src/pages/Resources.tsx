@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { resolveSources } from "@/lib/images/resolveSources";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -42,6 +43,38 @@ import blogLeadGeneration from "@/assets/blog-lead-generation-strategies.jpg";
 import blogOpenHouse from "@/assets/blog-open-house-digital.jpg";
 import blogDripCampaign from "@/assets/blog-drip-campaign-templates.jpg";
 import blogDatabaseReactivation from "@/assets/blog-database-reactivation.jpg";
+
+
+/**
+ * Card thumbnail for the resource grids.
+ *
+ * These were bare <img src={jpg}> while AVIF and WebP siblings for all 32
+ * already sat in src/assets -- 2675KB of JPEG where 1351KB of AVIF would do,
+ * a 49% saving on the heaviest page on the site.
+ *
+ * The box is sized entirely by CSS (w-full h-48 object-cover), so the missing
+ * width/height attributes were NOT causing layout shift here; the frame is
+ * reserved either way. They are supplied anyway because <img> without them is
+ * a latent shift the moment someone changes those classes.
+ */
+function ResourceThumb({ src, alt }: { src: string; alt: string }) {
+  const { avif, webp, src: fallback } = resolveSources(src);
+  return (
+    <picture>
+      {avif && <source srcSet={avif} type="image/avif" />}
+      {webp && <source srcSet={webp} type="image/webp" />}
+      <img
+        src={fallback}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        width={1200}
+        height={630}
+        className="w-full h-48 object-cover"
+      />
+    </picture>
+  );
+}
 
 const Resources = () => {
   const { t, i18n } = useTranslation();
@@ -475,10 +508,9 @@ const Resources = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {visibleArticles.map((article, index) => (
                   <Card key={index} className="overflow-hidden card-hover">
-                    <img loading="lazy" decoding="async" 
-                      src={article.image} 
+                    <ResourceThumb
+                      src={article.image}
                       alt={article.useTranslation ? t(article.titleKey!) : article.title}
-                      className="w-full h-48 object-cover"
                     />
                     
                     <div className="p-6">
@@ -533,10 +565,9 @@ const Resources = () => {
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     {categoryArticles.map((article, index) => (
                       <Card key={index} className="overflow-hidden card-hover">
-                        <img loading="lazy" decoding="async" 
-                          src={article.image} 
+                        <ResourceThumb
+                          src={article.image}
                           alt={article.useTranslation ? t(article.titleKey!) : article.title}
-                          className="w-full h-48 object-cover"
                         />
                         
                         <div className="p-6">
