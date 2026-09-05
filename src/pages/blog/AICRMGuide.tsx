@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // SVG for the on-page image; PNG for og:image, because social platforms do
 // not render SVG and an SVG there produces a card with no image at all.
 import blogAICRM from "@/assets/brand/blog-ai-crm.svg";
-import blogAICRMSocial from "@/assets/brand/blog-ai-crm.png";
+import blogAICRMSocial from "@/assets/brand/blog-ai-crm.jpg";
 import { SEO } from "@/components/SEO";
 
 const AICRMGuide = () => {
