@@ -62,6 +62,32 @@ export interface ResolvedSources {
   src: string;
   avif?: string;
   webp?: string;
+  /** `srcset` value with width descriptors, when narrower variants exist. */
+  avifSrcSet?: string;
+  webpSrcSet?: string;
+}
+
+/**
+ * Builds a srcset from whichever width variants the optimizer produced.
+ *
+ * The variants are optional by design: a source narrower than 640px never gets
+ * one, because upscaling would ship a bigger file that is no sharper. When
+ * none exist this returns undefined and the caller falls back to the single
+ * full-width source, which is exactly the previous behaviour.
+ */
+function srcSetFor(stem: string, ext: "avif" | "webp", full: string): string | undefined {
+  const map = ext === "avif" ? AVIF_BY_STEM : WEBP_BY_STEM;
+  const parts: string[] = [];
+  for (const w of [640, 960]) {
+    const v = map.get(`${stem}-${w}w`);
+    if (v) parts.push(`${v} ${w}w`);
+  }
+  if (!parts.length) return undefined;
+  // The full-width file closes the set. Its real width is unknown here, so it
+  // is described generously; browsers pick the smallest candidate that clears
+  // the slot, and an over-stated top end only means it is chosen less often.
+  parts.push(`${full} 1600w`);
+  return parts.join(", ");
 }
 
 /**
@@ -72,9 +98,13 @@ export interface ResolvedSources {
 export function resolveSources(importedUrl: string): ResolvedSources {
   const stem = STEM_BY_URL.get(importedUrl);
   if (!stem) return { src: importedUrl };
+  const avif = AVIF_BY_STEM.get(stem);
+  const webp = WEBP_BY_STEM.get(stem);
   return {
     src: importedUrl,
-    avif: AVIF_BY_STEM.get(stem),
-    webp: WEBP_BY_STEM.get(stem),
+    avif,
+    webp,
+    avifSrcSet: avif ? srcSetFor(stem, "avif", avif) : undefined,
+    webpSrcSet: webp ? srcSetFor(stem, "webp", webp) : undefined,
   };
 }

@@ -33,13 +33,31 @@ const FORCE = process.argv.includes("--force");
 const AVIF = { quality: 55, effort: 4 };
 const WEBP = { quality: 78 };
 
+// Responsive widths. Format negotiation (AVIF/WebP) is NOT the same thing as
+// responsive sizing, and this project only had the first: a 390px phone
+// downloaded the identical 1280px asset a 1440px desktop got.
+//
+// Measured on blog-crea-ddf: 1280w AVIF is 90KB, 640w is 40KB. A card that
+// renders at 356 CSS px needs 712px at 2x, so the phone was fetching roughly
+// 3.4x the pixels it could use -- a 56% overspend.
+//
+// Two extra widths, not five. Every variant is a real file in the repo and in
+// dist, and the gain from 960 -> 1120 does not pay for the clutter.
+const WIDTHS = [640, 960];
+
 function walk(dir) {
   const out = [];
   if (!existsSync(dir)) return out;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) out.push(...walk(full));
-    else if (SOURCE_EXT.has(extname(entry.name).toLowerCase())) out.push(full);
+    // Skip our own generated width variants, or a second run would treat
+    // "hero-640w.jpg" as a source and emit "hero-640w-640w.avif".
+    else if (
+      SOURCE_EXT.has(extname(entry.name).toLowerCase()) &&
+      !/-\d+w\.(jpe?g|png)$/i.test(entry.name)
+    )
+      out.push(full);
   }
   return out;
 }
@@ -80,6 +98,14 @@ for (const dir of DIRS) {
 
     await sharp(src).avif(AVIF).toFile(avifOut);
     await sharp(src).webp(WEBP).toFile(webpOut);
+
+    // Narrower variants, but never UPSCALE: an 800px source must not
+    // produce a 960px file larger than the original and no sharper.
+    for (const w of WIDTHS) {
+      if ((meta.width ?? 0) <= w) continue;
+      await sharp(src).resize({ width: w }).avif(AVIF).toFile(`${base}-${w}w.avif`);
+      await sharp(src).resize({ width: w }).webp(WEBP).toFile(`${base}-${w}w.webp`);
+    }
     afterAvif += statSync(avifOut).size;
     converted++;
     process.stdout.write(
