@@ -20,6 +20,7 @@
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import sharp from "sharp";
 
 const OUT = join(process.cwd(), "src/assets/brand");
 mkdirSync(OUT, { recursive: true });
@@ -203,6 +204,34 @@ const HEADERS = [
     labels: ["Elsewhere", "Realtor Desk"],
   },
   {
+    file: "blog-voice-ai",
+    title: ["Voice AI", "for Agents"],
+    subtitle: ["What happens to a call you cannot", "take right now."],
+    motif: "flow",
+    labels: ["Call comes in", "Answered and logged"],
+  },
+  {
+    file: "blog-ai-crm",
+    title: ["An AI CRM for", "Canadian Agents"],
+    subtitle: ["What the software should be doing", "while you are showing a property."],
+    motif: "flow",
+    labels: ["Lead lands", "Handled"],
+  },
+  {
+    file: "blog-best-crm-2025",
+    title: ["Choosing a CRM", "in 2025"],
+    subtitle: ["What actually matters when you are", "comparing them side by side."],
+    motif: "compare",
+    labels: ["Elsewhere", "Realtor Desk"],
+  },
+  {
+    file: "blog-vs-propertybase",
+    title: ["Propertybase", "Compared"],
+    subtitle: ["An honest look at where each tool", "fits a Canadian brokerage."],
+    motif: "compare",
+    labels: ["Elsewhere", "Realtor Desk"],
+  },
+  {
     file: "blog-ixact-alternatives",
     title: ["IXACT Contact", "Alternatives"],
     subtitle: ["What to weigh when you are", "considering a move."],
@@ -214,6 +243,17 @@ const HEADERS = [
 for (const spec of HEADERS) {
   const svg = render(spec);
   writeFileSync(join(OUT, `${spec.file}.svg`), svg, "utf8");
-  console.log(`  wrote ${spec.file}.svg  (${(svg.length / 1024).toFixed(1)}KB)`);
+
+  // A PNG twin, because these assets also feed og:image and SOCIAL PLATFORMS
+  // DO NOT RENDER SVG. Facebook, LinkedIn and X all require raster; pointing
+  // og:image at an SVG produces a card with no image at all, silently.
+  //
+  // 1200x630 is the canonical Open Graph size, which is also this artboard's
+  // aspect, so nothing is cropped.
+  const png = join(OUT, `${spec.file}.png`);
+  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(png);
+
+  console.log(`  wrote ${spec.file}.svg (${(svg.length / 1024).toFixed(1)}KB) + .png`);
 }
 console.log(`\n${HEADERS.length} header(s) generated in src/assets/brand/`);
+console.log("  .svg for on-page use, .png for og:image — social does not render SVG.");
