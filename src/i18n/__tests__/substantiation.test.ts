@@ -69,6 +69,27 @@ describe("marketing copy makes no claim the data cannot support", () => {
     ).toBeNull();
   });
 
+  it("no calculator hardcodes a conversion rate for this product", () => {
+    // CostOfMissedLeads.tsx had `const aiConversion = 2.7` driving a dollar
+    // figure it labelled the reader's "Lost Income". A hardcoded rate for
+    // OUR product, in arithmetic presented to a prospect, is a performance
+    // claim regardless of where it sits in the file.
+    const files = [
+      "src/pages/blog/CostOfMissedLeads.tsx",
+      "src/pages/rd/Pricing.tsx",
+    ];
+    for (const f of files) {
+      const code = readFileSync(join(process.cwd(), f), "utf8")
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/(^|[^:])\/\/.*$/gm, "$1");
+      // A conversion/uplift/rate constant assigned a literal number.
+      const bad = code.match(
+        /const\s+\w*(conversion|uplift|lift|improvement)\w*\s*=\s*[\d.]+/i
+      );
+      expect(bad, `${f}: ${bad?.[0]} — must come from user input, not a constant`).toBeNull();
+    }
+  });
+
   it.each(MARKETING_COMPONENTS)(
     "%s states no metric as a measured result",
     (file) => {

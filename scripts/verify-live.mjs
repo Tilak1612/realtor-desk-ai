@@ -351,9 +351,49 @@ try {
   }
 
   record(
-    "no serious or critical axe violations",
+    "no serious or critical axe violations (desktop)",
     a11yFindings.length === 0,
     a11yFindings.join(" | ") || `${A11Y_PAGES.length} pages clean, contrast included`
+  );
+
+  /* ── 5f. the same sweep at 390px ────────────────────────────────────────── */
+  //
+  // Desktop-only accessibility testing misses the criteria that are specific
+  // to small screens: reflow, and target size, which cannot fail at 1440 and
+  // routinely does at 390 where controls sit closer together.
+  const mobileCtx = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const mobileFindings = [];
+
+  for (const route of A11Y_PAGES) {
+    const mp = await mobileCtx.newPage();
+    await mp.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+    await mp.waitForTimeout(900);
+    await mp.addScriptTag({ content: AXE });
+    const res = await mp.evaluate(async () => {
+      const r = await window.axe.run(document, {
+        resultTypes: ["violations"],
+        runOnly: {
+          type: "tag",
+          values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"],
+        },
+      });
+      return r.violations
+        .filter((v) => v.impact === "serious" || v.impact === "critical")
+        .map((v) => `${v.id}(${v.impact}, ${v.nodes.length})`);
+    });
+    if (res.length) mobileFindings.push(`${route}: ${res.join(", ")}`);
+    await mp.close();
+  }
+  await mobileCtx.close();
+
+  record(
+    "no serious or critical axe violations (390px)",
+    mobileFindings.length === 0,
+    mobileFindings.join(" | ") || `${A11Y_PAGES.length} pages clean at 390px`
   );
 
   /* ── 6. no horizontal overflow at any target width ──────────────────────── */

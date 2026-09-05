@@ -560,22 +560,22 @@ const CASLComplianceGuide = () => {
                     Consent
                   </p>
                   <div className="space-y-2 ml-7">
-                    <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">I have express OR implied consent</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Consent is documented (date, method)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Consent is still valid (not expired)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Recipient hasn't unsubscribed</span>
-                    </div>
+                    </label>
                   </div>
                 </div>
 
@@ -585,22 +585,22 @@ const CASLComplianceGuide = () => {
                     Identification
                   </p>
                   <div className="space-y-2 ml-7">
-                    <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">My name is in the email</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Business name is in the email</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Physical mailing address is included</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Phone or email contact is included</span>
-                    </div>
+                    </label>
                   </div>
                 </div>
 
@@ -610,22 +610,22 @@ const CASLComplianceGuide = () => {
                     Unsubscribe
                   </p>
                   <div className="space-y-2 ml-7">
-                    <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe link is present</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe link works (tested it!)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe is one-click (no login)</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Processes within 10 business days</span>
-                    </div>
+                    </label>
                   </div>
                 </div>
 
@@ -635,18 +635,18 @@ const CASLComplianceGuide = () => {
                     Record-Keeping
                   </p>
                   <div className="space-y-2 ml-7">
-                    <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Consent records are stored</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe requests are logged</span>
-                    </div>
-                    <div className="flex items-center gap-2">
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Records kept for 3+ years</span>
-                    </div>
+                    </label>
                   </div>
                 </div>
               </div>
