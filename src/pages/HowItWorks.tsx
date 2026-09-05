@@ -6,12 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { UserPlus, Link as LinkIcon, Brain, Settings, Rocket, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import heroDashboard from "@/assets/hero-dashboard.jpg";
 // AVIF/WebP siblings from scripts/optimize-images.mjs. Imported explicitly:
 // Vite hashes each file independently, so the .avif URL cannot be derived
 // from the .jpg URL. This one image was 900KB of the 5.4MB shipped raster.
-import heroDashboardAvif from "@/assets/hero-dashboard.avif";
-import heroDashboardWebp from "@/assets/hero-dashboard.webp";
 import { Picture } from "@/components/Picture";
 
 const HowItWorks = () => {
@@ -153,18 +150,26 @@ const HowItWorks = () => {
               {t('howItWorks.dashboard.subtitle')}
             </p>
             
-            <div className="rounded-2xl overflow-hidden shadow-2xl mb-8">
-              <Picture
-                src={heroDashboard}
-                avif={heroDashboardAvif}
-                webp={heroDashboardWebp}
-                width={1344}
-                height={768}
-                alt="The Realtor Desk dashboard, showing the lead pipeline and Desk AI activity feed"
-                className="w-full"
-                priority
-              />
-            </div>
+            {/* The image that stood here was an AI-generated fake of the
+                product, not a screenshot of it: garbled interface text
+                ("Masnual by eda new peraslidng"), a fabricated agent name
+                -- "Sarah Johnson", the same invented persona removed from
+                the testimonials in PR #171 -- invented figures, and
+                purple/blue chrome that is not this product's navy and
+                terracotta.
+
+                Its alt text asserted "The Realtor Desk dashboard, showing
+                the lead pipeline and Desk AI activity feed", and it was
+                the priority LCP image -- so it was the first thing a
+                visitor to this page saw. A generated picture of software,
+                captioned as the software.
+
+                Left empty rather than filled with a placeholder frame. A
+                real screenshot goes here:
+                  npm run capture:screenshots && npm run optimize:images
+                then wrap it in <DeviceFrame variant="laptop">. The section
+                reads correctly without it meanwhile -- heading, subtitle
+                and the three capability cards below all stand alone. */}
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <Card className="p-6">
