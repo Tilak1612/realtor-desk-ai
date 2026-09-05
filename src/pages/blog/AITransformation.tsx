@@ -4,9 +4,10 @@ import Footer from "@/components/Footer";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import blogImage from "@/assets/blog-ai-transformation.jpg";
-import blogImageAvif from "@/assets/blog-ai-transformation.avif";
-import blogImageWebp from "@/assets/blog-ai-transformation.webp";
+// SVG on the page; the .jpg twin for og:image, because social platforms
+// do not render SVG and would show a card with no image at all.
+import blogImage from "@/assets/brand/blog-ai-transformation.svg";
+import blogImageSocial from "@/assets/brand/blog-ai-transformation.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
@@ -21,7 +22,7 @@ const AITransformation = () => {
         title="How AI Is Transforming Canadian Real Estate in 2025"
         description="Discover the latest AI innovations transforming how Canadian realtors work, from predictive analytics to automated transaction management."
         keywords="ai real estate canada, real estate ai tools, canadian realtors ai, predictive analytics real estate, ai crm"
-        image={blogImage}
+        image={blogImageSocial}
         article
         publishedTime="2025-01-15"
         modifiedTime="2025-01-15"
@@ -80,8 +81,6 @@ const AITransformation = () => {
           {/* Featured Image */}
           <Picture
             src={blogImage}
-            avif={blogImageAvif}
-            webp={blogImageWebp}
             width={1024}
             height={576}
             alt="AI technology transforming real estate"
