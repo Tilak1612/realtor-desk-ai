@@ -810,3 +810,59 @@ RD_DEMO_EMAIL='...' RD_DEMO_PASSWORD='...' node scripts/capture-screenshots.mjs
 node scripts/optimize-images.mjs
 node scripts/verify-live.mjs
 ```
+
+## 23. Image content audit — 2026-09-05
+
+Format verification cannot see a fabrication. Every image on the site
+passed the automated checks (AVIF negotiated, dimensions present, alt
+non-empty, not broken) while one of them was an AI-generated picture of
+the product captioned as the product. The only way to find that is to look
+at the pixels.
+
+### Removed (10 assets, 30 files)
+
+| Asset | Why |
+|---|---|
+| `hero-dashboard` | generated fake of the product, alt claimed it WAS the dashboard, priority LCP image on the "Dashboard Preview" section |
+| `hero-dashboard-ai` | same, plus an invented person |
+| `dashboard-unified` | same, plus two invented faces |
+| `realtor-sarah/-marc/-jennifer` | portraits of the three fabricated testimonial personas deleted in PR #171 |
+| `agent-profile-broker/-female/-team` | generated headshots used as agent profiles |
+| `blog-vs-kvcore` | monitor legibly rendered "KvCORE", a real competitor's trademark, above invented charts and a US map |
+
+### Fixed, not removed
+
+`agent-success.jpg` — legitimate decorative illustration. Its alt read
+"Canadian real estate professionals **using Realtor Desk AI**", which
+turned decoration into social proof. Alt now describes the picture.
+
+### Checked and kept
+
+Skylines, offices, listing grids, and generated CRM interfaces whose text
+is garbled and which carry **no legible third-party branding** —
+`blog-vs-lofty`, `blog-vs-followupboss`, `blog-vs-propertybase`,
+`blog-ixact-alternatives`. These are indistinguishable from ordinary stock
+and make no claim about anyone.
+
+`blog-compliance.jpg` is borderline and was kept: a sealed, ribboned
+binder with checkmarks implies "certified", but names no standard and no
+certifying body, so it asserts nothing. Worth revisiting if the compliance
+copy ever gets more specific.
+
+### The line applied
+
+- A generated picture **captioned as the product** is the image equivalent
+  of a fabricated testimonial. Remove.
+- A generated picture of a **named competitor's product** is a
+  representation about their product in comparative advertising. Remove.
+- A generated picture of **people or offices, making no claim**, is stock
+  photography. Keep, and make sure the alt text does not turn it into a
+  claim.
+
+### Still open — your call
+
+Roughly 15 blog headers contain generated software interfaces with garbled
+text. None carries legible third-party branding, so none is making a
+claim, but a reader who looks closely sees nonsense text. Replacing them
+is an art-direction decision, not a defect fix. Guard: see
+`src/test/a11y/noFabricatedProductImagery.test.ts`.
