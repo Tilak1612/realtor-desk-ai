@@ -32,7 +32,6 @@ import blogAIvsTraditional from "@/assets/blog-ai-vs-traditional.jpg";
 import blogVsFollowUpBoss from "@/assets/blog-vs-followupboss.jpg";
 import blogIxactAlternatives from "@/assets/blog-ixact-alternatives.jpg";
 import blogVsLofty from "@/assets/blog-vs-lofty.jpg";
-import blogBoomtownAlternative from "@/assets/blog-boomtown-alternative.jpg";
 import blogVsPropertybase from "@/assets/blog-vs-propertybase.jpg";
 import blogTorontoVancouver from "@/assets/blog-toronto-vancouver-compare.jpg";
 import blogPIPEDA from "@/assets/blog-pipeda-privacy.jpg";
@@ -265,7 +264,13 @@ const Resources = () => {
       title: "Best BoomTown Alternative for Canadian Real Estate Agents 2025",
       excerpt: "BoomTown alternatives comparison. Find better CRMs for Canadian realtors with lower pricing, better AI, and Canadian compliance.",
       readTime: 15,
-      image: blogBoomtownAlternative,
+      // Was blog-boomtown-alternative.jpg: the generator read "BoomTown"
+      // literally and produced a fiery EXPLOSION bursting out of a monitor,
+      // over a fake CRM dashboard, on a card for an article about a named
+      // competitor. Unprofessional on a B2B site that is asking for trust,
+      // and an explosion over a rival's category reads as disparagement
+      // rather than comparison.
+      image: blogVsPropertybase,
       link: "/blog/boomtown-alternative-canada",
       useTranslation: false,
     },

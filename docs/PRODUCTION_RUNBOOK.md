@@ -829,6 +829,7 @@ at the pixels.
 | `realtor-sarah/-marc/-jennifer` | portraits of the three fabricated testimonial personas deleted in PR #171 |
 | `agent-profile-broker/-female/-team` | generated headshots used as agent profiles |
 | `blog-vs-kvcore` | monitor legibly rendered "KvCORE", a real competitor's trademark, above invented charts and a US map |
+| `blog-boomtown-alternative` | the generator read "BoomTown" literally and produced a fiery **explosion** bursting out of a monitor, on a card for an article about that named competitor |
 
 ### Fixed, not removed
 
@@ -858,6 +859,19 @@ copy ever gets more specific.
 - A generated picture of **people or offices, making no claim**, is stock
   photography. Keep, and make sure the alt text does not turn it into a
   claim.
+
+### Coverage — be precise about this
+
+I inspected **19 of the ~42 raster assets**: every one in a category with
+real risk (product/dashboard, people and personas, named-competitor
+comparisons, compliance) plus a sample of editorial imagery. I did NOT
+open all 42.
+
+The unchecked remainder are the lowest-risk categories — city skylines,
+market and neighbourhood topics, lead-generation subjects. That is a
+judgement about base rates, not a claim of completeness. The hit rate in
+what I did check was high enough that someone finishing this should expect
+to find more.
 
 ### Still open — your call
 

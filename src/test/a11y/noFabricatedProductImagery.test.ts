@@ -45,6 +45,9 @@ const REMOVED_FABRICATIONS = [
   // against them. Depicting a NAMED competitor's product with fabricated
   // content is a different order of risk from generic stock imagery.
   "blog-vs-kvcore",
+  // The generator read "BoomTown" literally: a fiery explosion bursting out
+  // of a monitor, on a card for an article about that named competitor.
+  "blog-boomtown-alternative",
 ];
 
 describe("no fabricated product imagery", () => {
