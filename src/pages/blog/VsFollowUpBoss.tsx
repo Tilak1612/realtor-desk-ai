@@ -431,47 +431,18 @@ const VsFollowUpBoss = () => {
 
             <h2>Final Verdict & Scoring</h2>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>RealtorDesk AI</th>
-                  <th>Follow Up Boss</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>AI Automation</td>
-                  <td>⭐⭐⭐⭐⭐</td>
-                  <td>⭐⭐</td>
-                </tr>
-                <tr>
-                  <td>Speed</td>
-                  <td>⭐⭐⭐⭐⭐</td>
-                  <td>⭐⭐⭐</td>
-                </tr>
-                <tr>
-                  <td>Value</td>
-                  <td>⭐⭐⭐⭐⭐</td>
-                  <td>⭐⭐</td>
-                </tr>
-                <tr>
-                  <td>Team Features</td>
-                  <td>⭐⭐⭐⭐</td>
-                  <td>⭐⭐⭐⭐⭐</td>
-                </tr>
-                <tr>
-                  <td>Canadian Compliance</td>
-                  <td>⭐⭐⭐⭐⭐</td>
-                  <td>⭐⭐</td>
-                </tr>
-                <tr>
-                  <td>Mobile Experience</td>
-                  <td>⭐⭐⭐⭐</td>
-                  <td>⭐⭐⭐⭐⭐</td>
-                </tr>
-              </tbody>
-            </table>
+            {/* A star-rating scorecard stood here, awarding this product five
+                stars in nearly every category and Follow Up Boss two or three.
+            
+                Those scores were ours, self-assigned, with no methodology, no
+                source and no disclosure that a vendor was rating its own
+                competitor. The brief prohibits generating ratings, and a
+                scorecard where we win every row is not evidence -- it is an
+                assertion wearing the costume of one.
+            
+                The factual comparison content on this page stands on its own:
+                prices are published, and feature differences can be described
+                without scoring a competitor out of five. */}
 
             <p>
               <strong>Overall:</strong> For Canadian agents—especially solo practitioners and small teams—RealtorDesk AI is the clear winner on speed, automation, and value. Follow Up Boss remains a solid choice for large US teams with dedicated ISAs.

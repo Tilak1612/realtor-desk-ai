@@ -387,39 +387,32 @@ const BestCRMCanada2025 = () => {
                 <tr>
                   <th className="text-left">CRM</th>
                   <th className="text-right">Annual Cost</th>
-                  <th className="text-right">Value Rating</th>
-                </tr>
+                                  </tr>
               </thead>
               <tbody>
                 <tr className="border-t">
                   <td>Wise Agent</td>
                   <td className="text-right">$468 CAD</td>
-                  <td className="text-right">⭐⭐⭐</td>
                 </tr>
                 <tr className="border-t">
                   <td>IXACT Contact</td>
                   <td className="text-right">$636 CAD</td>
-                  <td className="text-right">⭐⭐⭐</td>
                 </tr>
                 <tr className="border-t">
                   <td>LionDesk</td>
                   <td className="text-right">$1,212 CAD</td>
-                  <td className="text-right">⭐⭐⭐⭐</td>
                 </tr>
                 <tr className="border-t bg-primary/5">
-                  <td className="font-bold">RealtorDesk AI ⭐</td>
+                  <td className="font-bold">RealtorDesk AI</td>
                   <td className="text-right font-bold">$1,788 CAD</td>
-                  <td className="text-right">⭐⭐⭐⭐⭐</td>
                 </tr>
                 <tr className="border-t">
                   <td>kvCORE</td>
                   <td className="text-right">$4,860 CAD</td>
-                  <td className="text-right">⭐⭐⭐</td>
                 </tr>
                 <tr className="border-t">
                   <td>Follow Up Boss</td>
                   <td className="text-right">$6,480 CAD</td>
-                  <td className="text-right">⭐⭐⭐</td>
                 </tr>
               </tbody>
             </table>
