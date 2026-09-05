@@ -29,7 +29,6 @@ import blogVoiceAI from "@/assets/blog-voice-ai.jpg";
 import blogAIChatbot from "@/assets/blog-ai-chatbot.jpg";
 import blogBestCRM2025 from "@/assets/blog-best-crm-2025.jpg";
 import blogAIvsTraditional from "@/assets/blog-ai-vs-traditional.jpg";
-import blogVsKvcore from "@/assets/blog-vs-kvcore.jpg";
 import blogVsFollowUpBoss from "@/assets/blog-vs-followupboss.jpg";
 import blogIxactAlternatives from "@/assets/blog-ixact-alternatives.jpg";
 import blogVsLofty from "@/assets/blog-vs-lofty.jpg";
@@ -209,7 +208,14 @@ const Resources = () => {
       title: "RealtorDesk AI vs kvCORE: Canadian Real Estate CRM Comparison 2025",
       excerpt: "Compare kvCORE and RealtorDesk AI for Canadian real estate. Features, pricing, Canadian compliance, and which CRM delivers better ROI.",
       readTime: 15,
-      image: blogVsKvcore,
+      // Was blog-vs-kvcore.jpg: a generated image whose monitor legibly
+      // rendered "KvCORE" -- a real competitor's trademark -- above invented
+      // charts and a US map, on a card for an article comparing against them.
+      // Depicting a named competitor's product with fabricated content is a
+      // different order of risk from generic stock, and the file is deleted
+      // rather than kept for reuse. blog-vs-lofty.jpg carries no legible
+      // branding and suits the same subject.
+      image: blogVsLofty,
       link: "/blog/vs-kvcore",
       useTranslation: false,
     },
