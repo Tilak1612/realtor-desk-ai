@@ -133,6 +133,11 @@ export function Sidebar({
               key={item.to}
               to={item.to}
               onClick={onClose}
+              // The current page was signalled ONLY by background colour, so a
+              // screen reader user moving through the sidebar had no way to
+              // know where they were. aria-current is what conveys that, and
+              // it is what assistive technology announces as "current page".
+              aria-current={active ? "page" : undefined}
               className={cn(
                 "flex items-center gap-2.5 px-3 py-[9px] rounded-md text-[13px] font-medium transition-colors",
                 active
@@ -151,7 +156,13 @@ export function Sidebar({
                     active ? "bg-rd-terra-700 text-white" : "bg-white/10 text-white/80"
                   )}
                 >
-                  {item.count}
+                  {/* The bare number read as "Leads 12", which could be a
+                      count, a shortcut or part of the name. The visually
+                      hidden noun says which. */}
+                  <span aria-hidden="true">{item.count}</span>
+                  <span className="sr-only">
+                    {`${item.count} ${t("rd.sidebar.itemCount", "items")}`}
+                  </span>
                 </span>
               )}
             </Link>

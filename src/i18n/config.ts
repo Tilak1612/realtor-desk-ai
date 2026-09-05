@@ -2868,6 +2868,7 @@ const resources = {
       },
       rd: {
         sidebar: {
+          itemCount: "items",
           workspaceTier: "Team plan",
           collapse: "Collapse sidebar",
           nav: {
@@ -6044,6 +6045,7 @@ const resources = {
       },
       rd: {
         sidebar: {
+          itemCount: "éléments",
           workspaceTier: "Forfait Équipe",
           collapse: "Réduire la barre latérale",
           nav: {
