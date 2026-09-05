@@ -1222,7 +1222,7 @@ const resources = {
         subtitle: "Find answers to common questions about Realtor Desk AI",
         q1: {
           question: "Is Realtor Desk ready for production use?",
-          answer: "Realtor Desk is in public beta. The platform is fully functional and stable, and we are actively gathering feedback and adding features. We are early enough that we do not quote a user count -- we would rather you judge it on a 14-day trial with your own leads. Beta users help shape the roadmap and keep their beta pricing for life."
+          answer: "Realtor Desk is in public beta. The platform is fully functional and stable, and we are actively gathering feedback and adding features. We are early enough that we do not quote a user count — we would rather you judge it on a 14-day trial with your own leads. Beta users help shape the roadmap and keep their beta pricing for life."
         },
         q2: {
           question: "What does 'beta' mean for me?",
@@ -4398,7 +4398,7 @@ const resources = {
         subtitle: "Trouvez des réponses aux questions courantes sur Realtor Desk AI",
         q1: {
           question: "RealtorDesk AI est-il prêt pour une utilisation en production?",
-          answer: "Realtor Desk est en bêta publique. La plateforme est entièrement fonctionnelle et stable, et nous continuons d'ajouter des fonctionnalités en tenant compte de vos commentaires. Nous sommes encore trop tôt pour citer un nombre d'utilisateurs -- nous préférons que vous en jugiez pendant un essai de 14 jours avec vos propres prospects. Les utilisateurs bêta influencent la feuille de route et conservent leur tarif bêta à vie."
+          answer: "Realtor Desk est en bêta publique. La plateforme est entièrement fonctionnelle et stable, et nous continuons d'ajouter des fonctionnalités en tenant compte de vos commentaires. Nous sommes encore trop tôt pour citer un nombre d'utilisateurs — nous préférons que vous en jugiez pendant un essai de 14 jours avec vos propres prospects. Les utilisateurs bêta influencent la feuille de route et conservent leur tarif bêta à vie."
         },
         q2: {
           question: "Que signifie 'bêta' pour moi?",
