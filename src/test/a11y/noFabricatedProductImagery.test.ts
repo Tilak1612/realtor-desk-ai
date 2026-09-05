@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ASSETS = join(process.cwd(), "src/assets");
@@ -25,9 +25,21 @@ const ASSETS = join(process.cwd(), "src/assets");
  * entry here -- do not weaken the check.
  */
 const REMOVED_FABRICATIONS = [
+  // Generated pictures of the product, captioned as the product.
   "hero-dashboard",
   "hero-dashboard-ai",
   "dashboard-unified",
+  // Generated portraits of the three invented testimonial personas whose
+  // quotes were deleted in PR #171. The quotes went; the faces stayed, so
+  // anyone rebuilding a testimonials section would have attached a fake face
+  // to a fake quote and shipped both.
+  "realtor-sarah",
+  "realtor-marc",
+  "realtor-jennifer",
+  // Generated headshots used as "agent profiles".
+  "agent-profile-broker",
+  "agent-profile-female",
+  "agent-profile-team",
 ];
 
 describe("no fabricated product imagery", () => {
@@ -40,6 +52,18 @@ describe("no fabricated product imagery", () => {
       `${found.join(", ")} — these were AI-generated fakes of the product. ` +
         `Real screenshots come from npm run capture:screenshots.`
     ).toEqual([]);
+  });
+
+  it("no image asserts customer usage it cannot support", () => {
+    // An image of invented people captioned "professionals USING Realtor Desk
+    // AI" is social proof, not decoration. Generic illustrative imagery is
+    // fine; a caption that turns it into a customer claim is not.
+    const src = readdirSync(join(process.cwd(), "src/pages"))
+      .filter((f) => f.endsWith(".tsx"))
+      .map((f) => readFileSync(join(process.cwd(), "src/pages", f), "utf8"))
+      .join("\n");
+    const claims = src.match(/alt="[^"]*\b(using|utilisant)\s+Realtor\s*Desk[^"]*"/gi);
+    expect(claims, `alt text asserting customer usage: ${claims?.join(" | ")}`).toBeNull();
   });
 
   it("no asset is named as a dashboard screenshot without coming from the capture script", () => {

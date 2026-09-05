@@ -22,6 +22,45 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import agentSuccess from "@/assets/agent-success.jpg";
 import { SEO } from "@/components/SEO";
+import { resolveSources } from "@/lib/images/resolveSources";
+
+
+/**
+ * <img> with AVIF/WebP siblings resolved at build time.
+ *
+ * This was a bare <img src={jpg}> -- no modern format and no dimensions,
+ * despite both siblings existing in src/assets.
+ */
+function ResolvedImage({
+  src,
+  alt,
+  width,
+  height,
+  className,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className?: string;
+}) {
+  const { avif, webp, src: fallback } = resolveSources(src);
+  return (
+    <picture>
+      {avif && <source srcSet={avif} type="image/avif" />}
+      {webp && <source srcSet={webp} type="image/webp" />}
+      <img
+        src={fallback}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        className={className}
+      />
+    </picture>
+  );
+}
 
 const CanadianMarket = () => {
   const { t } = useTranslation();
@@ -55,9 +94,18 @@ const CanadianMarket = () => {
               </p>
             </div>
             <div className="relative animate-fade-in animation-delay-200">
-              <img
+              {/* Generic illustrative imagery, not a photograph of customers.
+                  The alt read "Canadian real estate professionals USING
+                  Realtor Desk AI", which asserted customer usage: the four
+                  people are AI-generated and do not exist, and the tablet in
+                  frame shows a purple/blue interface that is not this product.
+                  Decorative imagery is fine; a caption that turns it into
+                  social proof is not. */}
+              <ResolvedImage
                 src={agentSuccess}
-                alt="Canadian real estate professionals using Realtor Desk AI"
+                alt="Illustration of a team meeting in an office overlooking a Canadian city skyline"
+                width={1280}
+                height={720}
                 className="rounded-2xl shadow-2xl"
               />
             </div>
