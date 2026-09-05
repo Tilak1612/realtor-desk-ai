@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import { ArrowLeft, Calendar, Clock, Share2, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import blogImage from "@/assets/blog-lead-conversion.jpg";
-import blogImageAvif from "@/assets/blog-lead-conversion.avif";
-import blogImageWebp from "@/assets/blog-lead-conversion.webp";
+// SVG on the page; .jpg twin for og:image -- social does not render SVG.
+import blogImage from "@/assets/brand/blog-lead-conversion.svg";
+import blogImageSocial from "@/assets/brand/blog-lead-conversion.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
@@ -21,7 +21,7 @@ const LeadConversion = () => {
         title="10 Ways to Increase Lead Conversion with Predictive Analytics"
         description="Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%."
         keywords="real estate lead conversion, predictive analytics real estate, AI lead scoring, realtor lead generation, CRM analytics"
-        image={blogImage}
+        image={blogImageSocial}
         article
         publishedTime="2024-12-28"
         modifiedTime="2024-12-28"
@@ -77,8 +77,6 @@ const LeadConversion = () => {
 
           <Picture
             src={blogImage}
-            avif={blogImageAvif}
-            webp={blogImageWebp}
             width={1024}
             height={576}
             alt="Predictive analytics dashboard"
