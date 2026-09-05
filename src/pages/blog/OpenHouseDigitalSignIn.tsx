@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-open-house-digital.jpg";
+import blogImageAvif from "@/assets/blog-open-house-digital.avif";
+import blogImageWebp from "@/assets/blog-open-house-digital.webp";
+import { Picture } from "@/components/Picture";
 
 const OpenHouseDigitalSignIn = () => {
   useEffect(() => {
@@ -76,11 +79,16 @@ const OpenHouseDigitalSignIn = () => {
 
           {/* Featured Image */}
           <div className="mb-12">
-            <img loading="lazy" decoding="async" 
-              src={blogImage} 
-              alt="Modern digital tablet for open house sign-in"
-              className="w-full rounded-2xl shadow-xl"
-            />
+            <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1200}
+            height={630}
+            alt="Modern digital tablet for open house sign-in"
+            className="w-full rounded-2xl shadow-xl"
+            priority
+          />
           </div>
 
           <Card className="p-6 mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">

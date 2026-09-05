@@ -6,6 +6,9 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, XCircle, TrendingUp, Shield, Users, Zap, DollarSign, HeadphonesIcon } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-ai-crm-guide.jpg";
+import blogImageAvif from "@/assets/blog-ai-crm-guide.avif";
+import blogImageWebp from "@/assets/blog-ai-crm-guide.webp";
+import { Picture } from "@/components/Picture";
 
 const RealEstateCRMBuyingGuide = () => {
   const articleSchema = {
@@ -61,10 +64,15 @@ const RealEstateCRMBuyingGuide = () => {
             <span>CRM Strategy</span>
           </div>
 
-          <img loading="lazy" decoding="async" 
-            src={blogImage} 
+          <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1024}
+            height={640}
             alt="Real Estate CRM Selection Guide"
             className="w-full h-[400px] object-cover rounded-xl mb-8"
+            priority
           />
         </header>
 

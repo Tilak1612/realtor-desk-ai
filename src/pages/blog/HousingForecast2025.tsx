@@ -5,6 +5,9 @@ import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-housing-forecast.jpg";
+import blogImageAvif from "@/assets/blog-housing-forecast.avif";
+import blogImageWebp from "@/assets/blog-housing-forecast.webp";
+import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
 const HousingForecast2025 = () => {
@@ -76,10 +79,15 @@ const HousingForecast2025 = () => {
           </header>
 
           {/* Featured Image */}
-          <img loading="lazy" decoding="async" 
-            src={blogImage} 
+          <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1920}
+            height={1024}
             alt="Canadian housing market data visualization showing price trends across Toronto, Vancouver, Calgary, and Montreal"
             className="w-full rounded-lg mb-8 shadow-lg"
+            priority
           />
 
           {/* Article Content */}

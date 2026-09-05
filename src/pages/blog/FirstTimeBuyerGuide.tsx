@@ -6,6 +6,9 @@ import { ArrowLeft, Clock, Calendar, Home, DollarSign, FileText, CheckCircle2, A
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-first-time-buyer.jpg";
+import blogImageAvif from "@/assets/blog-first-time-buyer.avif";
+import blogImageWebp from "@/assets/blog-first-time-buyer.webp";
+import { Picture } from "@/components/Picture";
 
 const FirstTimeBuyerGuide = () => {
   return (
@@ -72,11 +75,16 @@ const FirstTimeBuyerGuide = () => {
 
       {/* Featured Image */}
       <section className="container-custom -mt-8 mb-12">
-        <img loading="lazy" decoding="async" 
-          src={blogImage} 
-          alt="First-time home buyers with keys to new home"
-          className="w-full max-w-4xl rounded-2xl shadow-xl"
-        />
+        <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1024}
+            height={576}
+            alt="First-time home buyers with keys to new home"
+            className="w-full max-w-4xl rounded-2xl shadow-xl"
+            priority
+          />
       </section>
 
       {/* Article Content */}

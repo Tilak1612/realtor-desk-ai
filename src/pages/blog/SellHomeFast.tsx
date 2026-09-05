@@ -6,6 +6,9 @@ import { ArrowLeft, Clock, Calendar, DollarSign, Home, Camera, Megaphone, Users,
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-sell-home-fast.jpg";
+import blogImageAvif from "@/assets/blog-sell-home-fast.avif";
+import blogImageWebp from "@/assets/blog-sell-home-fast.webp";
+import { Picture } from "@/components/Picture";
 
 const SellHomeFast = () => {
   return (
@@ -72,11 +75,16 @@ const SellHomeFast = () => {
 
       {/* Featured Image */}
       <section className="container-custom -mt-8 mb-12">
-        <img loading="lazy" decoding="async" 
-          src={blogImage} 
-          alt="Sold home with professional staging"
-          className="w-full max-w-4xl rounded-2xl shadow-xl"
-        />
+        <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1024}
+            height={576}
+            alt="Sold home with professional staging"
+            className="w-full max-w-4xl rounded-2xl shadow-xl"
+            priority
+          />
       </section>
 
       {/* Article Content */}
