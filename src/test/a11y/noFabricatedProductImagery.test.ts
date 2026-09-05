@@ -112,6 +112,33 @@ describe("no fabricated product imagery", () => {
     ).toEqual([]);
   });
 
+  it("no page rates a product out of five stars", () => {
+    // Star scorecards rated NAMED competitors two or three while awarding this
+    // product five, with no methodology and no disclosure that the vendor was
+    // scoring its own rival. The brief prohibits generating ratings.
+    //
+    // A single decorative star in a phrase like "Top Pick" is marketing voice,
+    // not a rating, so the pattern requires two or more.
+    const walkPages = (dir: string): string[] => {
+      const out: string[] = [];
+      for (const e of readdirSync(dir)) {
+        const full = join(dir, e);
+        if (statSync(full).isDirectory()) out.push(...walkPages(full));
+        else if (full.endsWith(".tsx")) out.push(full);
+      }
+      return out;
+    };
+    const offenders: string[] = [];
+    for (const file of walkPages(join(process.cwd(), "src/pages"))) {
+      const code = readFileSync(file, "utf8").replace(/\{\/\*[\s\S]*?\*\/\}/g, "");
+      if (/\u2b50{2,}/.test(code)) offenders.push(file.split("/src/")[1]);
+    }
+    expect(
+      offenders,
+      `pages rendering multi-star ratings: ${offenders.join(", ")}`
+    ).toEqual([]);
+  });
+
   it("no image asserts customer usage it cannot support", () => {
     // An image of invented people captioned "professionals USING Realtor Desk
     // AI" is social proof, not decoration. Generic illustrative imagery is

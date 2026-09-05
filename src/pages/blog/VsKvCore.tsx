@@ -366,47 +366,18 @@ const VsKvCore = () => {
             <h2>Final Verdict</h2>
 
             <div className="verdict-card">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th>RealtorDesk AI</th>
-                    <th>kvCORE</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Canadian Compliance</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-                    <td>⭐⭐</td>
-                  </tr>
-                  <tr>
-                    <td>AI Capabilities</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-                    <td>⭐⭐⭐</td>
-                  </tr>
-                  <tr>
-                    <td>Ease of Use</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-                    <td>⭐⭐</td>
-                  </tr>
-                  <tr>
-                    <td>Value for Money</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-                    <td>⭐⭐⭐</td>
-                  </tr>
-                  <tr>
-                    <td>Feature Breadth</td>
-                    <td>⭐⭐⭐⭐</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-                  </tr>
-                  <tr>
-                    <td>Response Speed</td>
-                    <td>⭐⭐⭐⭐⭐</td>
-                    <td>⭐⭐</td>
-                  </tr>
-                </tbody>
-              </table>
+              {/* A star-rating scorecard stood here, awarding this product five
+                  stars in nearly every category and kvCORE two or three.
+              
+                  Those scores were ours, self-assigned, with no methodology, no
+                  source and no disclosure that a vendor was rating its own
+                  competitor. The brief prohibits generating ratings, and a
+                  scorecard where we win every row is not evidence -- it is an
+                  assertion wearing the costume of one.
+              
+                  The factual comparison content on this page stands on its own:
+                  prices are published, and feature differences can be described
+                  without scoring a competitor out of five. */}
             </div>
 
             <p>
