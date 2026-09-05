@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import { Reveal } from "@/components/motion/Reveal";
 import { STRIPE_PRICES } from "@/config/stripe";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -128,6 +129,10 @@ export default function Pricing() {
       </p>
 
       {/* Feature matrix */}
+      {/* Below the fold on every viewport, so it reveals. The plan grid
+          above is deliberately not wrapped -- it is the reason people
+          opened this page and must never wait on an observer. */}
+      <Reveal>
       <section className="px-8 md:px-14 py-[100px] bg-white border-t border-rd-line">
         <div className="mx-auto max-w-[1100px]">
           <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] text-center mb-10">
@@ -136,6 +141,7 @@ export default function Pricing() {
           <FeatureMatrix t={t} />
         </div>
       </section>
+      </Reveal>
     </MarketingLayout>
   );
 }
@@ -226,9 +232,12 @@ function PricingPlan({
   return (
     <div
       className={cn(
-        "relative rounded-rd-xl p-8",
+        "relative rounded-rd-xl p-8 rd-card-lift",
         featured
-          ? "bg-rd-navy-800 text-white border border-rd-navy-700 shadow-rd-lg -translate-y-2"
+          // -translate-y-2 is gone: rd-card-lift owns transform, and the two
+          // would fight. The resting offset moves into --rd-lift-base so the
+          // hover delta composes with it instead of replacing it.
+          ? "bg-rd-navy-800 text-white border border-rd-navy-700 shadow-rd-lg [--rd-lift-base:-0.5rem]"
           : "bg-white text-rd-ink-900 border border-rd-line shadow-rd-sm"
       )}
     >
