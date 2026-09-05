@@ -610,3 +610,39 @@ Verify with:
 dig +short A realtordesk.ai            # should return a record
 dig +short TXT realtordesk.ai | grep spf
 ```
+
+## 18. SECURITY DEFINER hardening (2026-09-05)
+
+Supabase's security advisor flagged every `SECURITY DEFINER` function in
+`public` as callable over `/rest/v1/rpc/`. Verified against the codebase:
+only `check_apify_rate_limit` and `check_concurrent_import` have a call site
+(both in `src/lib/apify.ts`). The rest are trigger bodies and RLS helpers that
+should never be reachable over REST.
+
+**Revoked from `anon` and `authenticated`:** `handle_new_user`,
+`guard_profile_privileged_columns`, `handle_updated_at`, `has_role`,
+`is_admin`. Revoking EXECUTE does not affect RLS — Postgres evaluates policies
+as the table owner, so the policies that call `has_role`/`is_admin` still work.
+What it stops is a signed-in user asking `has_role(<someone else's uuid>,
+'admin')` over REST and learning who the admins are.
+
+**`handle_updated_at`** now pins `search_path = public, pg_temp`. A mutable
+search_path on a SECURITY DEFINER function lets a caller who can create
+objects shadow an unqualified reference and have it run as the definer.
+
+**The two RPCs I wrote earlier took the user id as a parameter.** That was
+wrong: any signed-in user could pass someone else's uuid and read back their
+daily import count, or whether they had an import running. Identity now comes
+from `auth.uid()` and the argument is ignored. The signature is unchanged so
+`src/lib/apify.ts` keeps working without an edit.
+
+Verified live: authenticated call returns `true` even when handed a foreign
+uuid, `anon` gets 401, and the five helper functions return 403/404.
+
+Advisor count went 13 → 5. The five that remain are expected:
+
+| Finding | Why it stays |
+|---|---|
+| `ddf_sync_log`, `oauth_state_store` RLS-no-policy | INFO. Deliberate service-role-only tables; no policy means no client access, which is the intent. |
+| `check_apify_rate_limit`, `check_concurrent_import` callable by `authenticated` | Intentional — the client calls them, and they now answer only about the caller. |
+| Leaked password protection disabled | Dashboard setting: Authentication → Policies → enable "Leaked password protection" (checks HaveIBeenPwned). Worth turning on; it needs the dashboard, not SQL. |
