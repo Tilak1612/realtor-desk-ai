@@ -11,7 +11,20 @@ const CostOfMissedLeads = () => {
   const [leads, setLeads] = useState(400);
   const [currentConversion, setCurrentConversion] = useState(1.2);
   
-  const aiConversion = 2.7;
+  // `aiConversion` was hardcoded to 2.7 -- an assertion that this product
+  // converts leads at 2.7%, used to compute a dollar figure the page then
+  // labelled the reader's "Lost Income".
+  //
+  // No such rate has ever been measured. Production has recorded zero deals.
+  // It is the same fabrication as the "32s / -96%" hero KPI removed in
+  // PR #173, except that this one produced a number about the reader's own
+  // money, which is worse.
+  //
+  // It is now an input the reader controls, defaulted to a round figure and
+  // labelled as their assumption. The calculator still does the arithmetic it
+  // was built for; it just no longer supplies a claim as one of the operands.
+  const [targetConversion, setTargetConversion] = useState(2.5);
+  const aiConversion = targetConversion;
   const avgCommission = 12000;
   
   const currentDeals = (leads * currentConversion / 100);
@@ -498,8 +511,13 @@ const CostOfMissedLeads = () => {
               
               <div className="space-y-6 max-w-2xl mx-auto">
                 <div>
-                  <label className="block mb-2 font-semibold">Annual Leads</label>
+                  {/* The label was present but unassociated: no htmlFor, no id.
+                      Visually a label, programmatically nothing -- axe rates
+                      that critical, and clicking the text did not focus the
+                      field either. */}
+                  <label htmlFor="calc-annual-leads" className="block mb-2 font-semibold">Annual Leads</label>
                   <input 
+                    id="calc-annual-leads"
                     type="number" 
                     value={leads}
                     onChange={(e) => setLeads(Number(e.target.value))}
@@ -508,14 +526,33 @@ const CostOfMissedLeads = () => {
                 </div>
 
                 <div>
-                  <label className="block mb-2 font-semibold">Current Conversion Rate (%)</label>
+                  <label htmlFor="calc-conversion-rate" className="block mb-2 font-semibold">Current Conversion Rate (%)</label>
                   <input 
+                    id="calc-conversion-rate"
                     type="number" 
                     value={currentConversion}
                     onChange={(e) => setCurrentConversion(Number(e.target.value))}
                     step="0.1"
                     className="w-full p-3 rounded-lg text-gray-900 text-lg font-bold"
                   />
+                </div>
+
+                <div>
+                  <label htmlFor="calc-target-rate" className="block mb-2 font-semibold">
+                    Target Conversion Rate (%)
+                  </label>
+                  <input
+                    id="calc-target-rate"
+                    type="number"
+                    value={targetConversion}
+                    onChange={(e) => setTargetConversion(Number(e.target.value))}
+                    step="0.1"
+                    className="w-full p-3 rounded-lg text-gray-900 text-lg font-bold"
+                  />
+                  <p className="mt-2 text-xs text-white/80">
+                    Your assumption, not a Realtor Desk result. We have no published
+                    conversion figures &mdash; see the FAQ.
+                  </p>
                 </div>
 
                 <div className="bg-white/20 p-6 rounded-lg space-y-4">
