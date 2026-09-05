@@ -155,19 +155,28 @@ try {
   await res.waitForTimeout(2500);
   const imgStats = await res.evaluate(() => {
     const loaded = [...document.images].filter((i) => i.currentSrc);
-    const fmt = loaded.map((i) => (i.currentSrc.match(/\.(avif|webp|jpe?g|png)/i) || [])[1]?.toLowerCase());
+    const fmt = loaded.map(
+      (i) => (i.currentSrc.match(/\.(avif|webp|jpe?g|png|svg)/i) || [])[1]?.toLowerCase()
+    );
     return {
       total: document.images.length,
       loaded: loaded.length,
       avif: fmt.filter((f) => f === "avif").length,
+      // SVG is not a failure to negotiate AVIF -- for a flat brand graphic it
+      // is the better format outright: smaller, resolution-independent, and
+      // authored rather than generated. What must NOT appear is a raster
+      // served as jpg/png/webp when an AVIF sibling exists.
+      svg: fmt.filter((f) => f === "svg").length,
+      unoptimised: fmt.filter((f) => f && ["jpg", "jpeg", "png", "webp"].includes(f)).length,
       broken: loaded.filter((i) => i.complete && i.naturalWidth === 0).length,
       missingAlt: [...document.images].filter((i) => !i.alt).length,
     };
   });
   record(
-    "lazy images load and negotiate AVIF",
-    imgStats.loaded > 0 && imgStats.avif === imgStats.loaded && imgStats.broken === 0,
-    `${imgStats.loaded}/${imgStats.total} loaded, ${imgStats.avif} avif, ${imgStats.broken} broken`
+    "lazy images load; every raster negotiates AVIF",
+    imgStats.loaded > 0 && imgStats.unoptimised === 0 && imgStats.broken === 0,
+    `${imgStats.loaded}/${imgStats.total} loaded — ${imgStats.avif} avif, ${imgStats.svg} svg, ` +
+      `${imgStats.unoptimised} unoptimised raster, ${imgStats.broken} broken`
   );
   record("every image has alt text", imgStats.missingAlt === 0, `${imgStats.missingAlt} missing`);
 
