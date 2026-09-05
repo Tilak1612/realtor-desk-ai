@@ -18,6 +18,7 @@ import {
   IconShield,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
+import { SkeletonRows, SkeletonLines, SkeletonStatRow } from "@/components/rd/Skeleton";
 import { openLeads, openPipelineValue, openPipelineByStage } from "@/lib/rd/pipeline";
 import type { ActivityItem, Lead, PipelineStage, ReportMetric } from "@/types/rd";
 import { useLeads, useLead } from "@/hooks/rd/useLeads";
@@ -200,6 +201,15 @@ function KPIRow({
       },
     ];
   }, [liveLeads, liveLeadsSpark, t]);
+
+  // `loading` was destructured and then never used, so the tiles rendered their
+  // computed values immediately -- meaning an agent with 40 leads saw
+  // "Active leads 0" and "$0" for the duration of the fetch and then watched
+  // them jump. Wrong number first, and a layout shift when the real one landed
+  // in a 38px type slot.
+  if (loading) {
+    return <SkeletonStatRow count={3} />;
+  }
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -454,7 +464,7 @@ function TodayCard({ leads, loading }: { leads: Lead[]; loading: boolean }) {
         <h3 className="text-base font-semibold">Follow-ups due</h3>
       </div>
       {loading ? (
-        <div className="px-6 py-8 text-[13px] text-rd-ink-500">Loading…</div>
+        <SkeletonRows rows={3} />
       ) : due.length === 0 ? (
         <CardEmpty
           message="Nothing due today. Set a follow-up date on a lead and it appears here."
@@ -527,7 +537,7 @@ function PipelineSnapshotCard({ leads, loading }: { leads: Lead[]; loading: bool
         )}
       </div>
       {loading ? (
-        <div className="px-6 py-8 text-[13px] text-rd-ink-500">Loading…</div>
+        <SkeletonLines rows={4} />
       ) : !anyValue ? (
         <CardEmpty message="No leads in the pipeline yet." ctaLabel="Open pipeline" ctaHref="/app/pipeline" />
       ) : (
@@ -598,7 +608,7 @@ function LeadSourcesCard({ leads, loading }: { leads: Lead[]; loading: boolean }
         <h3 className="text-sm font-semibold">Lead sources</h3>
       </div>
       {loading ? (
-        <div className="px-6 py-8 text-[13px] text-rd-ink-500">Loading…</div>
+        <SkeletonLines rows={4} />
       ) : sources.length === 0 ? (
         <CardEmpty message="No leads yet, so there are no sources to break down." ctaLabel="Add a lead" ctaHref="/app/leads" />
       ) : (
