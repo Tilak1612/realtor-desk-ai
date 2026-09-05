@@ -646,3 +646,47 @@ Advisor count went 13 → 5. The five that remain are expected:
 | `ddf_sync_log`, `oauth_state_store` RLS-no-policy | INFO. Deliberate service-role-only tables; no policy means no client access, which is the intent. |
 | `check_apify_rate_limit`, `check_concurrent_import` callable by `authenticated` | Intentional — the client calls them, and they now answer only about the caller. |
 | Leaked password protection disabled | Dashboard setting: Authentication → Policies → enable "Leaked password protection" (checks HaveIBeenPwned). Worth turning on; it needs the dashboard, not SQL. |
+
+## 19. Password strength — what code enforces and what it cannot
+
+**Enforced in code** (`src/lib/auth/commonPasswords.ts`, applied by
+`validatePassword`, used by both Signup and ResetPassword):
+
+- 8+ characters, upper, lower, digit, symbol — the pre-existing rules
+- **not a known-weak password**, matched on the root after stripping
+  composition decoration and reversing leetspeak, so `password` also covers
+  `Password1!`, `P@ssw0rd2024` and `password!!`
+- on Signup only: **not derived from the user's own email address**
+
+The five composition rules alone were satisfied by `Password1!`,
+`Welcome1!` and `Summer2024!`. Composition does not merely fail to catch
+those — it steers users toward them.
+
+### Still to do in the Supabase dashboard — ACTION REQUIRED
+
+**Authentication → Policies → Leaked password protection: currently OFF.**
+
+Turn it on. It checks candidate passwords against Have I Been Pwned
+server-side, which the client-side denylist above cannot replace:
+
+| | code denylist | Supabase HIBP toggle |
+|---|---|---|
+| coverage | head of the distribution | full corpus |
+| bypassable by calling the API directly | yes | no |
+| depends on an external service at signup | no | yes (handled by Supabase) |
+
+They are complementary, not alternatives. The denylist helps a real user
+pick a better password and gives immediate inline feedback; the toggle is
+what actually enforces it against someone bypassing the form.
+
+A browser-side HIBP call was considered and rejected: failing closed would
+let someone else's outage block all registrations, and failing open is
+security theatre with a network round-trip on every keystroke.
+
+### If a legitimate password is rejected
+
+Over-blocking is the denylist's real risk and is invisible from our side —
+the user just sees a rule they believe they satisfied marked red. The root
+list is in `COMMON_ROOTS`; the tests in
+`src/lib/auth/__tests__/commonPasswords.test.ts` pin six passwords that
+must continue to be accepted. Add to that list before touching the roots.
