@@ -35,7 +35,12 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           "vendor-react": ["react", "react-dom", "react-router-dom"],
           "vendor-ui": ["@radix-ui/react-dialog", "@radix-ui/react-popover", "@radix-ui/react-tooltip", "@radix-ui/react-dropdown-menu", "@radix-ui/react-select", "@radix-ui/react-accordion"],
-          "vendor-charts": ["recharts"],
+          // recharts is deliberately NOT listed here. Forcing it into a static
+          // manual chunk made Vite modulepreload it in index.html on EVERY
+          // page -- 376KB that a homepage visitor downloads and never
+          // executes, because the only consumers (Reports, Market) are
+          // lazy-loaded routes. Left unlisted, Rollup splits it into the route
+          // chunks that actually use it.
           "vendor-query": ["@tanstack/react-query"],
           "vendor-forms": ["react-hook-form", "@hookform/resolvers", "zod"],
           "vendor-i18n": ["i18next", "react-i18next"],

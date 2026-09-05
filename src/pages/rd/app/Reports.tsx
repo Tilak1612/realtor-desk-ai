@@ -10,6 +10,7 @@ import {
   IconCalendar,
 } from "@/components/rd";
 import { cn } from "@/lib/utils";
+import { SkeletonStatRow } from "@/components/rd/Skeleton";
 import { useLeads } from "@/hooks/rd/useLeads";
 import {
   useFunnel,
@@ -33,7 +34,7 @@ import {
 // on its visually-correct empty state (zeroed rows / flat sparks).
 
 export default function Reports() {
-  const { leads } = useLeads();
+  const { leads, loading: leadsLoading } = useLeads();
   const { avgLabel, spark: rtSpark, loading: rtLoading } = useResponseTimeTrend(21);
   const { funnel } = useFunnel();
   const { rows: sourceRows } = useSourceBreakdown();
@@ -73,6 +74,7 @@ export default function Reports() {
           avgResponseLabel={avgLabel ?? "—"}
           avgResponseSpark={rtSpark}
           rtLoading={rtLoading}
+          leadsLoading={leadsLoading}
           showings={showings}
           won={won}
           revenue={revenue}
@@ -136,10 +138,13 @@ function Header({ onExport }: { onExport: () => void }) {
 
 /* ────────────────────────────────────────────────────────── */
 
+const KPI_GRID = "grid grid-cols-2 lg:grid-cols-4 gap-4";
+
 function KPIRow({
   avgResponseLabel,
   avgResponseSpark,
   rtLoading,
+  leadsLoading,
   showings,
   won,
   revenue,
@@ -148,6 +153,7 @@ function KPIRow({
   avgResponseLabel: string;
   avgResponseSpark: number[];
   rtLoading: boolean;
+  leadsLoading: boolean;
   showings: number;
   won: number;
   revenue: number;
@@ -159,8 +165,18 @@ function KPIRow({
   // so a brand-new account saw $0 revenue under a steeply climbing revenue
   // curve, and "-" avg response under an improving green one.
   const liveRtSpark = avgResponseSpark.length >= 2 ? avgResponseSpark : null;
+
+  // `won`, `revenue` and `capturedToShowing` all derive from `leads`, which is
+  // [] until the query resolves -- so mid-load this row asserted "Deals closed
+  // 0", "Revenue attributed $0" and "Lead -> Showing 0%" as measured facts.
+  // For an agent who has closed deals those are wrong numbers, not absent
+  // ones. Reserve the space instead of publishing a zero.
+  if (leadsLoading) {
+    return <SkeletonStatRow count={4} className={KPI_GRID} />;
+  }
+
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className={KPI_GRID}>
       <RDStatCard
         label={t("rd.kpi.avgResponseTime", "Avg response time")}
         value={rtLoading ? "…" : avgResponseLabel}
