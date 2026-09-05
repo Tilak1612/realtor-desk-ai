@@ -740,3 +740,39 @@ look busy. Revisit once there is real activity.
 
 Drives the system Chrome via playwright-core, so there is no browser
 download. Override with `CHROME_PATH` if Chrome is installed elsewhere.
+
+## 21. Verifying the live site in a browser that is actually rendering
+
+```bash
+node scripts/verify-live.mjs                  # production
+node scripts/verify-live.mjs http://localhost:5199   # or any origin
+```
+
+Nine checks. Exits non-zero on failure, so it can gate a deploy. Public
+pages only — it never signs in and needs no credentials.
+
+**Why it exists.** The in-app browser pane runs with
+`document.visibilityState === "hidden"`, and Chrome suspends both
+IntersectionObserver delivery and lazy image loading for hidden documents.
+A control observer with `threshold: 0` on a visibly-intersecting element
+fired zero times there, which is impossible in a visible page. Scroll
+reveal and lazy loading could be confirmed *present in the markup* but
+never confirmed to **fire**. Headless Chrome reports `visible` and does
+both.
+
+What it proves that markup inspection cannot:
+
+| Check | Why it needs a rendering browser |
+|---|---|
+| scroll reveal fires | IntersectionObserver is suspended when hidden |
+| reduced motion removes the transform | needs computed style under an emulated preference |
+| hover changes the border | needs a real pointer and a resolved custom property |
+| lazy images load and negotiate AVIF | lazy loading is suspended when hidden |
+| no horizontal overflow at 8 widths | needs real layout at each viewport |
+
+Analytics beacons are excluded from the failed-request check. They are
+fire-and-forget and the browser aborts them on teardown; counting them
+turns a green run red for no reason and trains people to ignore the check.
+
+Drives the system Chrome via playwright-core — no browser download.
+Override with `CHROME_PATH`.
