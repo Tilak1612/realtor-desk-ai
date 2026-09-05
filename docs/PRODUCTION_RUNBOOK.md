@@ -690,3 +690,53 @@ the user just sees a rule they believe they satisfied marked red. The root
 list is in `COMMON_ROOTS`; the tests in
 `src/lib/auth/__tests__/commonPasswords.test.ts` pin six passwords that
 must continue to be accepted. Add to that list before touching the roots.
+
+## 20. Capturing product screenshots for the marketing site
+
+The marketing compositions must show the running application, never a
+rendering of what it might look like. `scripts/capture-screenshots.mjs`
+takes them from production, signed in as a demo tenant, at 2x with browser
+chrome excluded.
+
+**Run it yourself — it needs a password, and this is deliberate.** The
+script reads credentials from the environment and defaults nothing: a
+password written into a committed script is a password in every clone,
+every fork, and every CI log that echoes its environment.
+
+```bash
+RD_DEMO_EMAIL='demo.brokerage@realtordesk.ai' \
+RD_DEMO_PASSWORD='<from section 15>' \
+node scripts/capture-screenshots.mjs
+```
+
+Writes six PNGs to `src/assets/product/`:
+
+| File | Route | Viewport |
+|---|---|---|
+| shot-dashboard-desktop.png | /app | 1440x900 @2x |
+| shot-leads-desktop.png | /app/leads | 1440x900 @2x |
+| shot-pipeline-desktop.png | /app/pipeline | 1440x900 @2x |
+| shot-inbox-desktop.png | /app/inbox | 1440x900 @2x |
+| shot-dashboard-mobile.png | /app | 390x844 @2x |
+| shot-inbox-mobile.png | /app/inbox | 390x844 @2x |
+
+Then generate the AVIF and WebP siblings and commit all three formats:
+
+```bash
+node scripts/optimize-images.mjs
+```
+
+**Options deliberately set.** `deviceScaleFactor: 2` because anything less
+looks soft beside the vector UI around it. `reducedMotion: "reduce"` and
+`animations: "disabled"` so no frame is captured mid-transition. The script
+waits for a loading string to disappear rather than sleeping a fixed
+interval, so a slow query cannot be photographed as an empty state and
+shipped as a product screenshot.
+
+**What cannot be captured, and why.** Reports and any task view render
+empty: `deals` and `tasks` have never held a row in production. Those two
+screens are excluded from the marketing compositions rather than seeded to
+look busy. Revisit once there is real activity.
+
+Drives the system Chrome via playwright-core, so there is no browser
+download. Override with `CHROME_PATH` if Chrome is installed elsewhere.
