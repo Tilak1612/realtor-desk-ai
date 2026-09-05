@@ -176,6 +176,17 @@ ${art}
  */
 const HEADERS = [
   {
+    // Hand-authored first in PR #193, before this generator existed, which
+    // meant it was the one brand SVG with no raster twin -- unusable as an
+    // og:image and caught only by the guard added afterwards. Folded in here
+    // so there is one way of making these, not two.
+    file: "blog-ai-chatbot",
+    title: ["AI Chatbot", "for Agents"],
+    subtitle: ["Answers every enquiry the instant it lands,", "in English or French."],
+    motif: "flow",
+    labels: ["New enquiry", "Replied automatically"],
+  },
+  {
     file: "blog-lead-response-time",
     title: ["Lead Response", "Time"],
     subtitle: ["Why the first reply decides the deal,", "and what to do about it."],
