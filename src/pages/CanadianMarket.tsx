@@ -560,7 +560,12 @@ const CanadianMarket = () => {
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-5xl">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-accent">Live Market Data</Badge>
+            {/* bg-rd-terra-800, not bg-accent. --accent is #D5724D and the badge
+              foreground is #F8F8F7, which is 3.11:1. The token itself is left
+              alone: it backs 104 other surfaces and changing it would be a
+              brand decision, not a defect fix. terra-800 is the brand's own
+              darker step and gives 6.4:1. */}
+            <Badge className="mb-4 bg-rd-terra-800">Live Market Data</Badge>
             <h2 className="mb-4">Canadian Market Intelligence Dashboard</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Real-time insights powered by CREA, CMHC, and regional MLS data

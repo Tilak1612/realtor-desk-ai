@@ -481,7 +481,11 @@ const AIvsTraditionalCRM = () => {
             </ul>
 
             <div className="bg-primary text-white p-8 rounded-lg my-8 text-center">
-              <h3 className="text-3xl font-bold mb-4">Total Annual Benefit</h3>
+              {/* Explicit white. The heading sat inside a navy panel with no colour of
+                  its own, so it inherited ink #13161B onto #0A233E -- 1.14:1,
+                  effectively invisible. Same failure mode as the CTA in PR #202:
+                  a dark default landing on a dark surface. */}
+              <h3 className="text-3xl font-bold mb-4 text-white">Total Annual Benefit</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <div className="text-2xl font-bold">$35,172</div>
