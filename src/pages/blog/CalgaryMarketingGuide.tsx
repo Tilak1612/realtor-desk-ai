@@ -702,9 +702,6 @@ const CalgaryMarketingGuide = () => {
               </div>
 
               <div className="bg-primary/10 p-6 rounded-lg">
-                <p className="text-lg italic text-gray-800">
-                  "Calgary winters used to be dead time. Now AI nurtures leads while I ski at Lake Louise. By March, I have 80+ warm leads ready to view properties. Best decision I made was embracing AI and hyperlocal content for Calgary neighborhoods."
-                </p>
               </div>
             </Card>
           </section>

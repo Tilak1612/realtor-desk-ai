@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const ASSETS = join(process.cwd(), "src/assets");
@@ -63,6 +63,52 @@ describe("no fabricated product imagery", () => {
       found,
       `${found.join(", ")} — these were AI-generated fakes of the product. ` +
         `Real screenshots come from npm run capture:screenshots.`
+    ).toEqual([]);
+  });
+
+  it("no page carries an invented customer testimonial", () => {
+    // Fabricated testimonials have been found in FIVE separate places in this
+    // codebase now: the i18n personas (PR #171), their portraits (#188), the
+    // "Canadian Success Stories" section, a "Real Agent Experiences" block
+    // citing G2 with star ratings, and twelve loose quotes across five more
+    // pages. So this is a standing check rather than another one-off removal.
+    //
+    // The signature is precise on purpose: an ITALIC paragraph containing a
+    // long quoted string. That is how every one of them was rendered, and it
+    // does not match section headings, feature copy or pricing, which an
+    // earlier broader heuristic did -- it flagged sixteen files, all false
+    // positives, and a guard that cries wolf gets deleted.
+    const ALLOWED = [
+      // Script and example dialogue, not customer claims. These are the
+      // product demonstrating what it says, not someone vouching for it.
+      "Hi! Looking at properties in Calgary",
+      "This call may be recorded for quality",
+      "The first agent to respond wins",
+    ];
+
+    const walkPages = (dir: string): string[] => {
+      const out: string[] = [];
+      for (const e of readdirSync(dir)) {
+        const full = join(dir, e);
+        if (statSync(full).isDirectory()) out.push(...walkPages(full));
+        else if (full.endsWith(".tsx")) out.push(full);
+      }
+      return out;
+    };
+
+    const offenders: string[] = [];
+    for (const file of walkPages(join(process.cwd(), "src/pages"))) {
+      const code = readFileSync(file, "utf8").replace(/\{\/\*[\s\S]*?\*\/\}/g, "");
+      for (const m of code.matchAll(/italic[^>]*>\s*\n?\s*"([^"]{40,})"/g)) {
+        const body = m[1];
+        if (ALLOWED.some((a) => body.includes(a))) continue;
+        offenders.push(`${file.split("/src/")[1]}: "${body.slice(0, 50)}…"`);
+      }
+    }
+
+    expect(
+      offenders,
+      `italic quoted claims that read as testimonials:\n  ${offenders.join("\n  ")}`
     ).toEqual([]);
   });
 

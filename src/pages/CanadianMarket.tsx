@@ -625,173 +625,28 @@ const CanadianMarket = () => {
         </div>
       </section>
 
-      {/* Canadian Success Stories */}
-      <section className="section-padding">
-        <div className="container-custom max-w-5xl">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-accent">Success Stories</Badge>
-            <h2 className="mb-4">Canadian Agents Winning with Realtor Desk AI</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Ontario Success */}
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
-                  J
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold">Jennifer Thompson</h4>
-                    <Badge variant="secondary" className="text-xs">Toronto, ON</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3 italic">
-                    "The GTA market intelligence is incredible. AI predicted Liberty Village condo surge 2 months early. 
-                    I positioned 3 clients perfectly and closed $2.6M in deals. My BoldTrail CRM had zero Canadian data."
-                  </p>
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
-                      <span className="font-semibold text-rd-terra-800">$127K</span>
-                    </div>
-                    <span className="text-muted-foreground">GCI increase</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* BC Success */}
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
-                  M
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold">Marcus Chen</h4>
-                    <Badge variant="secondary" className="text-xs">Vancouver, BC</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3 italic">
-                    "Foreign buyer tax calculator saved me hours. AI chatbot qualified a $3.2M Yaletown presale at 11pm—
-                    buyer was in Hong Kong. By morning, offer was in. Wise Agent couldn't do 1% of this."
-                  </p>
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
-                      <span className="font-semibold text-rd-terra-800">8 deals</span>
-                    </div>
-                    <span className="text-muted-foreground">closed in Q1</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Alberta Success */}
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
-                  S
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold">Sarah Kowalski</h4>
-                    <Badge variant="secondary" className="text-xs">Calgary, AB</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3 italic">
-                    "Oil price tracking is genius. When AI flagged Beltline demand spike, I called my database. 
-                    Listed 4 condos that week, all sold within 10 days. Made $42K commission in 2 weeks."
-                  </p>
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
-                      <span className="font-semibold text-rd-terra-800">15hrs</span>
-                    </div>
-                    <span className="text-muted-foreground">saved per week</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Quebec Success */}
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
-                  P
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold">Philippe Durocher</h4>
-                    <Badge variant="secondary" className="text-xs">Montreal, QC</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3 italic">
-                    "Finally, proper French! Not Google Translate garbage. AI uses correct Quebec terminology. 
-                    Closed 3 Plateau condos with francophone clients who appreciated the bilingual professionalism."
-                  </p>
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
-                      <span className="font-semibold text-rd-terra-800">41%</span>
-                    </div>
-                    <span className="text-muted-foreground">GCI increase</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Manitoba Success */}
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
-                  D
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold">David Martinez</h4>
-                    <Badge variant="secondary" className="text-xs">Winnipeg, MB</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3 italic">
-                    "Winnipeg market is unique. AI's rental analytics helped me build investor niche. 
-                    Closed 12 investment properties in 6 months. Other CRMs treat MB like an afterthought."
-                  </p>
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
-                      <span className="font-semibold text-rd-terra-800">$89K</span>
-                    </div>
-                    <span className="text-muted-foreground">additional revenue</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Nova Scotia Success */}
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
-                  L
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h4 className="font-bold">Laura MacDonald</h4>
-                    <Badge variant="secondary" className="text-xs">Halifax, NS</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-3 italic">
-                    "Migration boom tracking is perfect for Halifax. AI identified Ontario buyers moving east. 
-                    Closed 7 deals with Toronto transplants. They loved the waterfront property features."
-                  </p>
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
-                      <span className="font-semibold text-rd-terra-800">3X</span>
-                    </div>
-                    <span className="text-muted-foreground">more deals closed</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
+      {/* A "Canadian Success Stories" section stood here: six invented
+          people -- Jennifer Thompson, Marcus Chen, Sarah Kowalski,
+          Philippe Durocher, David Martinez, Laura MacDonald -- each with a
+          quote, a city badge, and a fabricated result: "$127K GCI
+          increase", "8 deals closed in Q1", "$89K", "closed $2.6M in
+          deals".
+      
+          Production has recorded ZERO deals. Not one of those figures
+          describes anything that happened.
+      
+          Two of the quotes also disparaged named competitors -- "My
+          BoldTrail CRM had zero Canadian data" and "Wise Agent couldn't do
+          1% of this" -- placed in the mouths of people who do not exist.
+          That is a representation about a competitor's product, made up,
+          and attributed to a fictional customer.
+      
+          Removed rather than rewritten. There is no honest version of a
+          customer success section for a product with no customer results
+          to cite. The homepage testimonial block already handles this
+          correctly: it renders only when a real attributed quote exists,
+          and stays hidden until then. Do the same here when there is
+          something real to show. */}
 
       {/* CTA Section */}
       <section className="section-padding bg-gradient-to-r from-primary to-secondary text-white">

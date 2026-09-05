@@ -152,13 +152,7 @@ const SwitchFromLofty = () => {
             </Card>
           </div>
 
-          <Card className="mt-8 p-6 bg-accent/10 border-accent/20">
-            <p className="text-center italic mb-2">
-              "Lofty's 'AI' sent the same generic email to everyone. Realtor Desk actually 
-              personalizes based on what each lead clicks. Night and day difference."
-            </p>
-            <p className="text-center font-semibold">- Marcus R., Vancouver</p>
-          </Card>
+          {/* An invented customer testimonial stood here -- a quote attributed to a person who does not exist, in several cases carrying a dollar figure or a percentage. Production has recorded zero deals, so none of it describes anything that happened. The brief prohibits generating testimonials; CLAUDE.md prohibits fabricating case studies. */}
         </div>
       </section>
 
@@ -280,10 +274,6 @@ const SwitchFromLofty = () => {
                   M
                 </div>
                 <div className="flex-1">
-                  <p className="italic mb-3">
-                    "The AI actually understands my clients. Lofty was just automated spam. 
-                    Realtor Desk has real conversations and books qualified appointments."
-                  </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Marcus R.</span>
                     <span className="text-muted-foreground">•</span>
@@ -299,10 +289,6 @@ const SwitchFromLofty = () => {
                   L
                 </div>
                 <div className="flex-1">
-                  <p className="italic mb-3">
-                    "My Lofty bill kept growing. $99 turned into $250+/month. Realtor Desk is 
-                    $999/year with EVERYTHING included. I'm saving thousands."
-                  </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Laura K.</span>
                     <span className="text-muted-foreground">•</span>

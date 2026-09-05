@@ -677,9 +677,6 @@ const AIChatbotGuide = () => {
 
                 <div className="bg-primary/10 p-4 rounded-lg">
                   <p className="font-bold text-primary mb-2">Result: 4.6x more deals, same traffic</p>
-                  <p className="text-sm italic text-gray-700">
-                    "I was skeptical until I tested it for 30 days. The chatbot had conversations with leads at 2 AM that resulted in booked showings. I wake up to appointments now. Game changer."
-                  </p>
                 </div>
               </Card>
 
@@ -718,9 +715,6 @@ const AIChatbotGuide = () => {
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                   <p className="font-bold text-green-900 mb-2">Savings: $5,701/month ($68,412/year)</p>
                   <p className="font-bold text-green-900 mb-2">Conversion improvement: 2.3x</p>
-                  <p className="text-sm italic text-gray-700">
-                    "We replaced two ISAs with AI. Not only did we save $68k/year, but conversion doubled because AI responds instantly. Our ISAs now do higher-value work."
-                  </p>
                 </div>
               </Card>
 
@@ -755,9 +749,6 @@ const AIChatbotGuide = () => {
                 </div>
 
                 <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                  <p className="text-sm italic text-gray-700">
-                    "Bill 96 made French service mandatory. Hiring bilingual staff was expensive and scheduling was a nightmare. AI handles both languages perfectly, 24/7. My French lead conversion tripled."
-                  </p>
                 </div>
               </Card>
             </div>
