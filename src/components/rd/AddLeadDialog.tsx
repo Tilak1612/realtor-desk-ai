@@ -126,7 +126,21 @@ export function AddLeadDialog({ open, onClose }: AddLeadDialogProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className={field}>
             <label className={label} htmlFor="al-first">{t("rd.addLead.firstName", "First name")} *</label>
-            <RDInput id="al-first" value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
+            <RDInput
+              id="al-first"
+              value={firstName}
+              // Clear on edit. The error was only ever set in submit() and
+              // never reset, so "First name is required." stayed on screen
+              // after the user had typed a name — telling them a field they
+              // had just filled was still wrong.
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                if (fieldError) setFieldError(null);
+              }}
+              aria-invalid={!!fieldError}
+              aria-describedby={fieldError ? "al-first-error" : undefined}
+              autoFocus
+            />
           </div>
           <div className={field}>
             <label className={label} htmlFor="al-last">{t("rd.addLead.lastName", "Last name")}</label>
@@ -196,7 +210,7 @@ export function AddLeadDialog({ open, onClose }: AddLeadDialogProps) {
         </label>
 
         {fieldError && (
-          <p role="alert" className="mt-3 text-sm font-medium text-rd-danger">
+          <p id="al-first-error" role="alert" className="mt-3 text-sm font-medium text-rd-danger">
             {fieldError}
           </p>
         )}
