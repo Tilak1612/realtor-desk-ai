@@ -32,10 +32,22 @@ export function SkeletonStatCard() {
   );
 }
 
-/** The dashboard KPI row. */
-export function SkeletonStatRow({ count = 3 }: { count?: number }) {
+/**
+ * A KPI row. `className` REPLACES the grid rather than extending it: Reports
+ * uses a 4-up grid and Dashboard a 3-up, and appending `lg:grid-cols-4` to a
+ * string already containing `lg:grid-cols-3` does not override it -- both land
+ * in the stylesheet and the later *rule* wins, not the later class name. The
+ * caller therefore supplies the whole grid or takes the default.
+ */
+export function SkeletonStatRow({
+  count = 3,
+  className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4",
+}: {
+  count?: number;
+  className?: string;
+}) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className={className} aria-hidden="true">
       {Array.from({ length: count }, (_, i) => (
         <SkeletonStatCard key={i} />
       ))}
