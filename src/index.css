@@ -162,6 +162,43 @@
     @apply border-border;
   }
 
+  /* ── Global focus indicator ──────────────────────────────
+     There was NO :focus or :focus-visible rule anywhere in this file or in
+     rd-tokens.css. Only ~10 components carried an explicit focus-visible
+     utility, so every other interactive element -- links, most buttons, table
+     rows, menu items -- had no visible focus at all. That is a WCAG 2.2 AA
+     failure (2.4.7 Focus Visible, and 2.4.11 Focus Not Obscured), and it makes
+     the product unusable by keyboard.
+
+     :focus-visible rather than :focus so mouse users do not see rings on
+     click. The `:focus:not(:focus-visible)` reset suppresses the UA default
+     that would otherwise show through in browsers applying both.
+
+     Components that already define their own focus-visible ring keep it —
+     Tailwind utilities are a later cascade layer than @layer base. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Respect users who ask for less motion. Paired with the focus work because
+     both are 2.2 AA baseline and neither existed. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     /* No min-width: the combination of `min-width: 320px` + `max-width: 100vw`
