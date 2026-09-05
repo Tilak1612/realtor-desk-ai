@@ -43,7 +43,11 @@ export function DeviceFrame({
   shadow?: boolean;
 }) {
   return (
-    <div className={cn("relative", className)}>
+    // data-device-frame is what verify-live.mjs looks for. Detecting product
+    // screenshots by filename pattern would mean guessing, and a rename would
+    // silently disable the check rather than fail it -- the same mistake that
+    // made the pricing-card locator match nothing.
+    <div className={cn("relative", className)} data-device-frame={variant}>
       <div
         className={cn(
           "bg-rd-ink-900 ring-1 ring-black/10",
