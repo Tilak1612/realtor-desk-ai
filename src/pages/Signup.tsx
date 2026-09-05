@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PasswordInput, validatePassword } from "@/components/ui/password-input";
+import { emailLocalPart } from "@/lib/auth/commonPasswords";
 import { Mail, User, Building2, ArrowRight, Info, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
@@ -43,6 +44,20 @@ const Signup = () => {
     // express consent for commercial electronic messages and passive
     // "by continuing" consent does not satisfy it.
     marketingConsent: z.boolean().optional(),
+  }).superRefine((data, ctx) => {
+    // Checked at the object level because it needs a sibling field. A password
+    // built from the user's own email is the commonest guessable choice and no
+    // generic denylist can see it -- only this form knows the address.
+    if (data.password && !validatePassword(data.password, emailLocalPart(data.email))) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["password"],
+        message: t(
+          'app.auth.passwordRequirements.tooSimilar',
+          'Password must not contain your name or email address'
+        ),
+      });
+    }
   });
 
   type SignupForm = z.infer<typeof signupSchema>;
@@ -301,6 +316,7 @@ const Signup = () => {
                 value={formData.password || ""}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 showValidation={true}
+                disallowList={emailLocalPart(formData.email)}
                 className="bg-white border-rd-line text-rd-ink-900 placeholder-rd-ink-400 focus:ring-rd-navy-500"
               />
               <PasswordStrengthMeter password={formData.password || ""} />

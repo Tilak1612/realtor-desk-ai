@@ -1803,6 +1803,8 @@ const resources = {
             lowercase: "At least 1 lowercase letter (a-z)",
             number: "At least 1 number (0-9)",
             special: "At least 1 special character (!@#$%^&*)",
+            notCommon: "Not a commonly used password",
+            tooSimilar: "Password must not contain your name or email address",
             notMet: "Password does not meet all requirements"
           }
         },
@@ -5009,6 +5011,8 @@ const resources = {
             lowercase: "Au moins 1 lettre minuscule (a-z)",
             number: "Au moins 1 chiffre (0-9)",
             special: "Au moins 1 caractère spécial (!@#$%^&*)",
+            notCommon: "Pas un mot de passe couramment utilisé",
+            tooSimilar: "Le mot de passe ne doit pas contenir votre nom ni votre adresse courriel",
             notMet: "Le mot de passe ne répond pas à toutes les exigences"
           }
         },
