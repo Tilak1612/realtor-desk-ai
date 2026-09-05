@@ -860,9 +860,45 @@ copy ever gets more specific.
   photography. Keep, and make sure the alt text does not turn it into a
   claim.
 
+### Three tiers, and the one worth copying
+
+Opening 20 of them showed the estate is not uniform. It is three distinct
+tiers, and knowing which is which is more useful than a verdict per file.
+
+**Tier 1 — on-brand designed graphics. Copy this.**
+`blog-database-reactivation.jpg` is the model: navy #0B2540 ground,
+terracotta accent, the maple leaf, correct legible typography, and
+abstract cards carrying no fabricated data -- "Dormant past client"
+becomes "Reactivated -> booked" with grey placeholder bars rather than
+invented names and figures. It communicates the concept without
+pretending to be a screenshot. Every replacement asset should look like
+this one.
+
+**Tier 2 — real stock photography. Fine.**
+`blog-open-house-digital.jpg` (model house and keys),
+`blog-success-story.jpg` (Toronto/Vancouver skylines). No claims, no
+people asserting anything.
+One caveat: `blog-drip-campaign-templates.jpg` is a genuine photo of iOS
+app icons that prominently includes the **BBC News logo**. Incidental
+third-party marks in real photography are ordinary editorial use and not
+a fabrication, but it is worth knowing it is there.
+
+**Tier 3 — AI-generated filler. Kept, but weak.**
+Generated CRM interfaces with garbled text and generated people, none
+carrying legible third-party branding and none making a claim, so none
+crosses the line that forced the removals above. They are simply poor:
+`blog-ai-chatbot.jpg` puts a humanoid ROBOT on the screen, which is a
+dated and inaccurate metaphor for what this product does;
+`blog-lead-response-time.jpg` shows a stopwatch whose face has two 10s
+and no 11 or 12; several have malformed hands.
+
+Replacing tier 3 with tier 1 is the single highest-value visual change
+left, and it needs no screenshots and no Higgsfield -- these are flat
+brand graphics.
+
 ### Coverage — be precise about this
 
-I inspected **19 of the ~42 raster assets**: every one in a category with
+I inspected **20 of the ~42 raster assets**: every one in a category with
 real risk (product/dashboard, people and personas, named-competitor
 comparisons, compliance) plus a sample of editorial imagery. I did NOT
 open all 42.
