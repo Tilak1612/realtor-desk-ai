@@ -570,7 +570,7 @@ const CostOfMissedLeads = () => {
                   </div>
                 </div>
 
-                <div className="bg-green-500 p-6 rounded-lg">
+                <div className="bg-green-700 p-6 rounded-lg">
                   <p className="text-sm mb-2">RealtorDesk AI Cost: $3,588/year</p>
                   <p className="text-sm mb-2">Your Return: ${lostIncome.toLocaleString()}/year</p>
                   <p className="text-sm mb-4">Net Gain: ${(lostIncome - 3588).toLocaleString()}/year</p>
