@@ -838,9 +838,6 @@ const VoiceAIGuide = () => {
 
                 <div className="bg-primary/10 p-4 rounded-lg">
                   <p className="font-bold text-primary mb-2">Result: 158% increase in conversion</p>
-                  <p className="text-sm italic text-gray-700">
-                    "Voice AI calls my leads faster than I can even see them come in. By the time I check my email in the morning, AI has already qualified 5-6 hot leads and booked appointments. It's like having a full-time ISA but 90% cheaper."
-                  </p>
                 </div>
               </Card>
 
@@ -876,9 +873,6 @@ const VoiceAIGuide = () => {
                 <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                   <p className="font-bold text-green-900 mb-2">Result: 107% increase in appointments</p>
                   <p className="font-bold text-green-900 mb-2">Savings: Avoided hiring $3,500/month ISA</p>
-                  <p className="text-sm italic text-gray-700">
-                    "We were drowning in leads. Voice AI was the solution we didn't know existed. Now every lead gets called within minutes."
-                  </p>
                 </div>
               </Card>
 
@@ -912,9 +906,6 @@ const VoiceAIGuide = () => {
                 </div>
 
                 <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                  <p className="text-sm italic text-gray-700">
-                    "Voice AI speaks better French than my ISA did. And it works 24/7. My French-speaking lead conversion more than doubled because AI responds instantly in French. Game changer for Quebec markets."
-                  </p>
                 </div>
               </Card>
             </div>

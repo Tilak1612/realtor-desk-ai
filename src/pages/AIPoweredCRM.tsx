@@ -378,13 +378,7 @@ const AIPoweredCRM = () => {
                 </div>
               </div>
 
-              <Card className="p-6 bg-accent/10 border-accent/20">
-                <p className="text-sm italic mb-2">
-                  "I closed a $1.2M deal because AI chatted with the buyer at 2am when they found 
-                  my listing. By morning, viewing was booked. Other agents never responded."
-                </p>
-                <p className="text-sm font-semibold">- Jennifer T., Toronto</p>
-              </Card>
+              {/* An invented customer testimonial stood here -- a quote attributed to a person who does not exist, in several cases carrying a dollar figure or a percentage. Production has recorded zero deals, so none of it describes anything that happened. The brief prohibits generating testimonials; CLAUDE.md prohibits fabricating case studies. */}
             </div>
           </div>
         </div>

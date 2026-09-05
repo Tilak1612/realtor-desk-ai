@@ -495,7 +495,20 @@
   @apply text-foreground font-sans;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+/* :where() so these contribute NO specificity of their own.
+ *
+ * As `.prose h3` this rule was (0,1,1) and beat every Tailwind text utility
+ * (0,1,0). An <h3 class="text-3xl font-bold text-white"> inside a navy panel
+ * rendered ink #13161B on #0A233E -- 1.14:1, invisible -- and adding
+ * `text-white` did nothing, because the utility could not win.
+ *
+ * Tailwind Typography wraps its own heading selectors in :where() for exactly
+ * this reason. This is the same fix as `.rd-reset button` in PR #202: a
+ * descendant selector at class+element specificity quietly outranking the
+ * utilities it was never meant to outrank.
+ *
+ * Same treatment for .prose p, which had the identical problem. */
+.prose :where(h1, h2, h3, h4, h5, h6) {
   @apply font-semibold tracking-tight text-foreground;
 }
 
@@ -503,7 +516,7 @@
 .prose h2 { @apply text-2xl sm:text-3xl md:text-4xl mb-4 mt-10; }
 .prose h3 { @apply text-xl sm:text-2xl md:text-3xl mb-3 mt-8; }
 
-.prose p {
+.prose :where(p) {
   @apply text-base md:text-lg leading-relaxed mb-6 text-foreground;
 }
 

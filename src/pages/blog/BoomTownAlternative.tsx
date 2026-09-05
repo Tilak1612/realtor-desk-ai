@@ -653,63 +653,23 @@ const BoomTownAlternative = () => {
             </div>
           </section>
 
-          {/* Real Agent Experiences */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Real Agent Experiences</h2>
-            
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-4">BoomTown User Reviews (from G2, 3.6/5 stars):</h3>
-              <div className="space-y-4">
-                <Card className="p-4">
-                  <div className="flex gap-1 mb-2">
-                    {[1,2,3].map(i => <span key={i} className="text-yellow-500">⭐</span>)}
-                  </div>
-                  <p className="text-sm text-gray-700 italic">
-                    "BoomTown generates leads but quality is hit or miss. I'm spending $1,800/month and closing maybe 1 deal from their leads every 2 months. ROI is questionable." - Agent, Texas
-                  </p>
-                </Card>
-
-                <Card className="p-4">
-                  <div className="flex gap-1 mb-2">
-                    {[1,2].map(i => <span key={i} className="text-yellow-500">⭐</span>)}
-                  </div>
-                  <p className="text-sm text-gray-700 italic">
-                    "Too expensive for what you get. Website is generic. Leads are low quality. Locked into 24-month contract. Looking for alternatives." - Agent, Florida
-                  </p>
-                </Card>
-
-                <Card className="p-4">
-                  <div className="flex gap-1 mb-2">
-                    {[1,2,3,4].map(i => <span key={i} className="text-yellow-500">⭐</span>)}
-                  </div>
-                  <p className="text-sm text-gray-700 italic">
-                    "Good for large teams with big budgets. Not for solo agents. Wish I could buy just the CRM without the forced lead gen." - Agent, California
-                  </p>
-                </Card>
-              </div>
-            </div>
-
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-4">Canadian Agent Feedback:</h3>
-              <Card className="p-6 bg-blue-50 border-blue-200">
-                <p className="text-gray-700 italic">
-                  "I tried BoomTown for 6 months. $2,100 CAD/month was killing me. Leads were low quality. Support during US hours only. Switched to RealtorDesk AI and my costs dropped 93% while my conversion increased 200% thanks to AI response speed." - Michael, Toronto
-                </p>
-              </Card>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">RealtorDesk AI User Reviews:</h3>
-              <Card className="p-4 bg-green-50 border-green-200">
-                <div className="flex gap-1 mb-2">
-                  {[1,2,3,4,5].map(i => <span key={i} className="text-yellow-500">⭐</span>)}
-                </div>
-                <p className="text-sm text-gray-700 italic">
-                  "Was considering BoomTown but couldn't justify $2,000+/month. RealtorDesk AI gives me better AI automation for $149/month. Best decision I made." - Sarah, Vancouver
-                </p>
-              </Card>
-            </div>
-          </section>
+          {/* A "Real Agent Experiences" section stood here. All of it was
+              invented:
+          
+                - three BoomTown "user reviews" with star ratings, presented as
+                  coming FROM G2 and headed "from G2, 3.6/5 stars". Attributing
+                  made-up quotes to a named third-party review platform is a
+                  representation about both BoomTown and G2.
+                - "Canadian Agent Feedback" from "Michael, Toronto", claiming
+                  costs dropped 93% and conversion increased 200% after
+                  switching. Production has recorded zero deals; neither figure
+                  describes anything measured.
+                - "RealtorDesk AI User Reviews", five stars, for a product with
+                  one paying subscription.
+          
+              The brief prohibits generating testimonials and ratings, and
+              CLAUDE.md prohibits fabricating case studies. Removed rather than
+              softened: there is no honest edit of an invented review. */}
 
           {/* Decision Framework */}
           <section className="mb-12">

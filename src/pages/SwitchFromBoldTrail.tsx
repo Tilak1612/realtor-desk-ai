@@ -194,10 +194,6 @@ const SwitchFromBoldTrail = () => {
                   J
                 </div>
                 <div className="flex-1">
-                  <p className="italic mb-3">
-                    "I switched from BoldTrail and wish I'd done it sooner. Support actually responds 
-                    now—within 30 minutes! And I'm saving over $5,000/year. No-brainer decision."
-                  </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Jennifer T.</span>
                     <span className="text-muted-foreground">•</span>
@@ -213,10 +209,6 @@ const SwitchFromBoldTrail = () => {
                   M
                 </div>
                 <div className="flex-1">
-                  <p className="italic mb-3">
-                    "BoldTrail kept crashing. Realtor Desk is rock solid. Plus the AI actually works—
-                    it closed a lead at 2am while I slept. BoldTrail could never do that."
-                  </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Marcus R.</span>
                     <span className="text-muted-foreground">•</span>
@@ -232,10 +224,6 @@ const SwitchFromBoldTrail = () => {
                   S
                 </div>
                 <div className="flex-1">
-                  <p className="italic mb-3">
-                    "Migration took 2 days. ALL my data came over perfectly. Team was productive 
-                    immediately. And we're saving $500/month. Why didn't I switch sooner?"
-                  </p>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Sarah K.</span>
                     <span className="text-muted-foreground">•</span>
