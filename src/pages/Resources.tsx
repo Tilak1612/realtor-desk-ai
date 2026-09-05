@@ -26,7 +26,10 @@ import blogCostMissedLeads from "@/assets/blog-cost-missed-leads.jpg";
 import blogCASLCompliance from "@/assets/blog-casl-compliance.jpg";
 import blogCalgaryMarketing from "@/assets/blog-calgary-marketing.jpg";
 import blogVoiceAI from "@/assets/blog-voice-ai.jpg";
-import blogAIChatbot from "@/assets/blog-ai-chatbot.jpg";
+// SVG, not raster. 8KB instead of 72KB, sharp at every density, no AVIF/WebP
+// sibling needed, and the brand colours are the real token values rather than
+// an approximation an image model guessed at.
+import blogAIChatbot from "@/assets/brand/blog-ai-chatbot.svg";
 import blogBestCRM2025 from "@/assets/blog-best-crm-2025.jpg";
 import blogAIvsTraditional from "@/assets/blog-ai-vs-traditional.jpg";
 import blogVsFollowUpBoss from "@/assets/blog-vs-followupboss.jpg";

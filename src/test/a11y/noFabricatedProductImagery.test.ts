@@ -48,6 +48,10 @@ const REMOVED_FABRICATIONS = [
   // The generator read "BoomTown" literally: a fiery explosion bursting out
   // of a monitor, on a card for an article about that named competitor.
   "blog-boomtown-alternative",
+  // A humanoid ROBOT on a laptop over a fake chat interface -- a dated and
+  // inaccurate metaphor for a text and voice assistant. Replaced with an
+  // on-brand SVG at src/assets/brand/.
+  "blog-ai-chatbot",
 ];
 
 describe("no fabricated product imagery", () => {
@@ -72,6 +76,25 @@ describe("no fabricated product imagery", () => {
       .join("\n");
     const claims = src.match(/alt="[^"]*\b(using|utilisant)\s+Realtor\s*Desk[^"]*"/gi);
     expect(claims, `alt text asserting customer usage: ${claims?.join(" | ")}`).toBeNull();
+  });
+
+  it("brand SVGs carry no fabricated interface text", () => {
+    // The whole point of replacing generated raster headers with authored SVG
+    // is that we control every glyph. If a <text> element inside one starts
+    // carrying invented names, figures or interface strings, it has become
+    // the thing it replaced.
+    const dir = join(process.cwd(), "src/assets/brand");
+    if (!existsSync(dir)) return;
+    for (const file of readdirSync(dir).filter((f) => f.endsWith(".svg"))) {
+      const svg = readFileSync(join(dir, file), "utf8");
+      const texts = [...svg.matchAll(/<text[^>]*>([^<]*)<\/text>/g)].map((m) => m[1].trim());
+      for (const t of texts) {
+        // No currency, no percentages, no bare figures posing as metrics.
+        expect(t, `${file}: "${t}" looks like a fabricated figure`).not.toMatch(
+          /[$€£]\s?\d|\d+\s?%|\b\d{2,}\b/
+        );
+      }
+    }
   });
 
   it("no asset is named as a dashboard screenshot without coming from the capture script", () => {
