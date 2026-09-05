@@ -140,7 +140,7 @@ const LeadGenerationStrategies = () => {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Cost Per Lead</p>
-                  <p className="text-2xl font-bold text-green-600">$12-$45</p>
+                  <p className="text-2xl font-bold text-green-700">$12-$45</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Conversion Rate</p>
@@ -158,23 +158,23 @@ const LeadGenerationStrategies = () => {
                 <p className="font-semibold mb-2">Implementation Steps:</p>
                 <ul className="space-y-2">
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                     <span>Create a database of 200-500 contacts (CRM essential)</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                     <span>Send monthly market updates with hyperlocal data</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                     <span>Call/text 10 contacts per day (5 min each = 50 min/day)</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                     <span>Host quarterly client appreciation events</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                     <span>Send personalized birthday/anniversary cards (automate with CRM)</span>
                   </li>
                 </ul>
@@ -190,7 +190,7 @@ const LeadGenerationStrategies = () => {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Cost Per Lead</p>
-                  <p className="text-2xl font-bold text-green-600">$25-$80</p>
+                  <p className="text-2xl font-bold text-green-700">$25-$80</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Conversion Rate</p>
@@ -306,19 +306,19 @@ const LeadGenerationStrategies = () => {
               <p className="mb-3"><strong>Strategy:</strong></p>
               <ul className="space-y-2 mb-0">
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <span>Use tablet with digital sign-in form (CASL-compliant)</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <span>Trigger instant text message with property details + your contact</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <span>Follow-up email within 2 hours with similar listings</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <span>Call hot leads (those who asked detailed questions) within 24 hours</span>
                 </li>
               </ul>
@@ -540,7 +540,7 @@ const LeadGenerationStrategies = () => {
                   <span>Average commission per deal:</span>
                   <span className="font-semibold">$10,000</span>
                 </div>
-                <div className="flex justify-between text-lg font-bold text-green-600 pt-2">
+                <div className="flex justify-between text-lg font-bold text-green-700 pt-2">
                   <span>Monthly revenue from leads:</span>
                   <span>$18,000</span>
                 </div>
@@ -556,31 +556,31 @@ const LeadGenerationStrategies = () => {
             <Card className="p-6 mb-8 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/20">
               <ul className="space-y-3 mb-0">
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Not responding fast enough:</strong> 78% of buyers choose the first agent who responds. Aim for under 5 minutes.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Relying on one lead source:</strong> Diversify to protect against algorithm changes and market shifts.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>No follow-up system:</strong> 80% of sales require 5+ follow-ups. Without automation, leads go cold.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Ignoring CASL compliance:</strong> Can result in $10,000 fines per violation in Canada.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Not tracking metrics:</strong> What gets measured gets improved. Track cost per lead, conversion rates, ROI.
                   </div>

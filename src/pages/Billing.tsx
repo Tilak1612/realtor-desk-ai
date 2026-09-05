@@ -221,7 +221,7 @@ const Billing = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base font-medium flex items-center gap-2">
-                    <Check className="w-4 h-4 text-accent" />
+                    <Check className="w-4 h-4 text-rd-terra-800" />
                     {subscriptionTier === 'agent' ? t('billing.agentPlan', 'Solo plan') : t('billing.teamPlan', 'Team plan')}
                   </CardTitle>
                   <CardDescription className="text-xs mt-1">
@@ -282,7 +282,7 @@ const Billing = () => {
                 {t('billing.yearly', 'Yearly')}
               </span>
               {isYearly && (
-                <Badge variant="secondary" className="text-accent font-semibold text-xs">
+                <Badge variant="secondary" className="text-rd-terra-800 font-semibold text-xs">
                   {t('billing.saveYearly', 'Save up to $789/year')}
                 </Badge>
               )}
@@ -322,7 +322,7 @@ const Billing = () => {
                 <ul className="space-y-2 mb-6">
                   {[t('billing.features.unlimitedContacts', 'Unlimited contacts & leads'), t('billing.features.aiCrm', 'AI-powered predictive CRM'), t('billing.features.chatbot', '24/7 AI chatbot'), t('billing.features.emailSms', 'Email & SMS automation'), t('billing.features.mobileApp', 'Mobile app included')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>
                     </li>
                   ))}
@@ -374,7 +374,7 @@ const Billing = () => {
                 <ul className="space-y-2 mb-6">
                   {[t('billing.features.everythingAgent', 'Everything in Solo, plus:'), t('billing.features.teamCollab', 'Team collaboration tools'), t('billing.features.leadRouting', 'Lead distribution & routing'), t('billing.features.advReporting', 'Advanced reporting'), t('billing.features.accountManager', 'Dedicated account manager')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>
                     </li>
                   ))}

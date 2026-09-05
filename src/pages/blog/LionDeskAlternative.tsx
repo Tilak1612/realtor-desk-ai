@@ -254,7 +254,7 @@ const LionDeskAlternative = () => {
 
                   <div className="grid md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <h4 className="font-semibold mb-3 text-green-600">Pros</h4>
+                      <h4 className="font-semibold mb-3 text-green-700">Pros</h4>
                       <ul className="space-y-2">
                         {alt.pros.map((pro, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm">

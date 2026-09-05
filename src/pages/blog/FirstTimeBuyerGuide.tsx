@@ -100,23 +100,23 @@ const FirstTimeBuyerGuide = () => {
               </h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   How much you need for a down payment in Canada
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Step-by-step home buying process from pre-approval to closing
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   First-time buyer programs and incentives by province
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   How to avoid common mistakes that cost first-time buyers thousands
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   What to expect for closing costs and hidden expenses
                 </li>
               </ul>
@@ -324,9 +324,9 @@ const FirstTimeBuyerGuide = () => {
                 { mistake: "Not Shopping Around for Mortgages", risk: "Accepting higher rates than necessary", fix: "Compare rates from 3+ lenders" },
               ].map((item, idx) => (
                 <Card key={idx} className="p-4 border-l-4 border-orange-500">
-                  <h4 className="font-bold text-orange-600 mb-2">❌ {item.mistake}</h4>
+                  <h4 className="font-bold text-orange-700 mb-2">❌ {item.mistake}</h4>
                   <p className="text-sm text-muted-foreground mb-2"><strong>Risk:</strong> {item.risk}</p>
-                  <p className="text-sm text-green-600"><strong>✓ Fix:</strong> {item.fix}</p>
+                  <p className="text-sm text-green-700"><strong>✓ Fix:</strong> {item.fix}</p>
                 </Card>
               ))}
             </div>

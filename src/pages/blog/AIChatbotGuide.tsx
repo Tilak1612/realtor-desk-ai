@@ -70,7 +70,7 @@ const AIChatbotGuide = () => {
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <Card className="p-6 bg-red-50 border-red-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <XCircle className="w-6 h-6 text-red-600" />
+                  <XCircle className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Traditional Chatbots (What You Don't Want)</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 mb-4">
@@ -88,14 +88,14 @@ const AIChatbotGuide = () => {
                     <p><strong>Bot:</strong> "Yes! [Button: Schedule Showing]"</p>
                     <p><strong>Lead:</strong> "What's the HOA fee?"</p>
                     <p><strong>Bot:</strong> "I don't understand. Please choose: [Buttons]"</p>
-                    <p className="text-red-600 italic">Lead leaves website ❌</p>
+                    <p className="text-red-700 italic">Lead leaves website ❌</p>
                   </div>
                 </div>
               </Card>
 
               <Card className="p-6 bg-green-50 border-green-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <CheckCircle2 className="w-6 h-6 text-green-600" />
+                  <CheckCircle2 className="w-6 h-6 text-green-700" />
                   <h3 className="text-xl font-bold">AI-Powered Chatbots (What You Want)</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 mb-4">
@@ -115,7 +115,7 @@ const AIChatbotGuide = () => {
                     <p><strong>AI:</strong> "$250/month, includes pool & snow removal. Looking in this area?"</p>
                     <p><strong>Lead:</strong> "Moving from Calgary, need schools."</p>
                     <p><strong>AI:</strong> "Perfect! 7-min walk to Hamilton Elementary. See it this weekend?"</p>
-                    <p className="text-green-600 italic">Appointment booked! ✅</p>
+                    <p className="text-green-700 italic">Appointment booked! ✅</p>
                   </div>
                 </div>
               </Card>
@@ -267,7 +267,7 @@ const AIChatbotGuide = () => {
                   <p><strong>AI:</strong> "Oui! C'est une belle propriété..."</p>
                   <p><strong>Lead:</strong> "What's the HOA fee?"</p>
                   <p><strong>AI:</strong> "The HOA is $250/month..."</p>
-                  <p className="text-green-600 mt-2 italic">✓ Seamless language switching</p>
+                  <p className="text-green-700 mt-2 italic">✓ Seamless language switching</p>
                 </div>
               </div>
 
@@ -334,49 +334,49 @@ const AIChatbotGuide = () => {
                     <tr className="border-b">
                       <td className="p-3">Avg Response Time</td>
                       <td className="p-3">18 minutes</td>
-                      <td className="p-3 text-green-600 font-semibold">2.3 seconds</td>
+                      <td className="p-3 text-green-700 font-semibold">2.3 seconds</td>
                       <td className="p-3 font-semibold">469x faster</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">After-Hours Engagement</td>
                       <td className="p-3">0%</td>
-                      <td className="p-3 text-green-600 font-semibold">67%</td>
+                      <td className="p-3 text-green-700 font-semibold">67%</td>
                       <td className="p-3 font-semibold">∞</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Leads Contacted</td>
                       <td className="p-3">73%</td>
-                      <td className="p-3 text-green-600 font-semibold">98.7%</td>
+                      <td className="p-3 text-green-700 font-semibold">98.7%</td>
                       <td className="p-3 font-semibold">+35%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Lead Qualification Rate</td>
                       <td className="p-3">12%</td>
-                      <td className="p-3 text-green-600 font-semibold">64%</td>
+                      <td className="p-3 text-green-700 font-semibold">64%</td>
                       <td className="p-3 font-semibold">+433%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Appointment Booking</td>
                       <td className="p-3">3.2%</td>
-                      <td className="p-3 text-green-600 font-semibold">11.8%</td>
+                      <td className="p-3 text-green-700 font-semibold">11.8%</td>
                       <td className="p-3 font-semibold">+269%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Agent Time on Qualification</td>
                       <td className="p-3">4.3 hrs/day</td>
-                      <td className="p-3 text-green-600 font-semibold">0.6 hrs/day</td>
+                      <td className="p-3 text-green-700 font-semibold">0.6 hrs/day</td>
                       <td className="p-3 font-semibold">-86%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Lead-to-Showing</td>
                       <td className="p-3">6.8%</td>
-                      <td className="p-3 text-green-600 font-semibold">15.2%</td>
+                      <td className="p-3 text-green-700 font-semibold">15.2%</td>
                       <td className="p-3 font-semibold">+124%</td>
                     </tr>
                     <tr>
                       <td className="p-3 font-bold">Overall Lead-to-Close</td>
                       <td className="p-3">1.22%</td>
-                      <td className="p-3 text-green-600 font-bold">3.50%</td>
+                      <td className="p-3 text-green-700 font-bold">3.50%</td>
                       <td className="p-3 font-bold text-primary">+187%</td>
                     </tr>
                   </tbody>
@@ -584,7 +584,7 @@ const AIChatbotGuide = () => {
                   <p><strong>AI:</strong> "Can I email you the brochure?"</p>
                   <p><strong>Lead:</strong> "sure, john@email.com"</p>
                   <p><strong>AI:</strong> "Thanks! You can unsubscribe anytime."</p>
-                  <p className="text-green-600 mt-2">✓ Consent obtained & logged</p>
+                  <p className="text-green-700 mt-2">✓ Consent obtained & logged</p>
                 </div>
               </Card>
 

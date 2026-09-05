@@ -100,23 +100,23 @@ const EdmontonMarket2025 = () => {
               </h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Current Edmonton housing market statistics and trends
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Best neighborhoods for families, young professionals, and investors
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Economic factors driving Edmonton's real estate outlook
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Price predictions and market forecast for 2025-2026
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Why Edmonton is outperforming other Canadian markets
                 </li>
               </ul>
@@ -134,19 +134,19 @@ const EdmontonMarket2025 = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span>Single-Family Detached</span>
-                    <span className="font-bold">$525,600 <span className="text-green-600 text-sm">↑3.2%</span></span>
+                    <span className="font-bold">$525,600 <span className="text-green-700 text-sm">↑3.2%</span></span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Semi-Detached</span>
-                    <span className="font-bold">$415,300 <span className="text-green-600 text-sm">↑2.8%</span></span>
+                    <span className="font-bold">$415,300 <span className="text-green-700 text-sm">↑2.8%</span></span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Townhouse</span>
-                    <span className="font-bold">$312,400 <span className="text-green-600 text-sm">↑4.1%</span></span>
+                    <span className="font-bold">$312,400 <span className="text-green-700 text-sm">↑4.1%</span></span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Condo</span>
-                    <span className="font-bold">$246,900 <span className="text-green-600 text-sm">↑1.9%</span></span>
+                    <span className="font-bold">$246,900 <span className="text-green-700 text-sm">↑1.9%</span></span>
                   </div>
                   <div className="flex justify-between items-center pt-3 border-t">
                     <span className="font-bold">Overall Average</span>
@@ -164,7 +164,7 @@ const EdmontonMarket2025 = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>Sales (Dec 2024)</span>
-                    <span className="font-bold">1,156 <span className="text-green-600 text-sm">↑5.3%</span></span>
+                    <span className="font-bold">1,156 <span className="text-green-700 text-sm">↑5.3%</span></span>
                   </div>
                   <div className="flex justify-between">
                     <span>Active Inventory</span>
@@ -176,7 +176,7 @@ const EdmontonMarket2025 = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>Avg Days on Market</span>
-                    <span className="font-bold">54 days <span className="text-green-600 text-sm">↓8 days</span></span>
+                    <span className="font-bold">54 days <span className="text-green-700 text-sm">↓8 days</span></span>
                   </div>
                 </div>
               </Card>
@@ -190,23 +190,23 @@ const EdmontonMarket2025 = () => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-2 bg-red-50 rounded">
                   <span>Vancouver</span>
-                  <span className="font-bold">$1,234,000 <span className="text-red-600">(3.0x more)</span></span>
+                  <span className="font-bold">$1,234,000 <span className="text-red-700">(3.0x more)</span></span>
                 </div>
                 <div className="flex justify-between items-center p-2 bg-red-50 rounded">
                   <span>Toronto</span>
-                  <span className="font-bold">$1,102,000 <span className="text-red-600">(2.7x more)</span></span>
+                  <span className="font-bold">$1,102,000 <span className="text-red-700">(2.7x more)</span></span>
                 </div>
                 <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
                   <span>Victoria</span>
-                  <span className="font-bold">$924,000 <span className="text-orange-600">(2.3x more)</span></span>
+                  <span className="font-bold">$924,000 <span className="text-orange-700">(2.3x more)</span></span>
                 </div>
                 <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
                   <span>Ottawa</span>
-                  <span className="font-bold">$612,000 <span className="text-yellow-600">(1.5x more)</span></span>
+                  <span className="font-bold">$612,000 <span className="text-yellow-700">(1.5x more)</span></span>
                 </div>
                 <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
                   <span>Calgary</span>
-                  <span className="font-bold">$568,000 <span className="text-yellow-600">(1.4x more)</span></span>
+                  <span className="font-bold">$568,000 <span className="text-yellow-700">(1.4x more)</span></span>
                 </div>
                 <div className="flex justify-between items-center p-2 bg-green-100 rounded">
                   <span className="font-bold">Edmonton</span>
@@ -223,14 +223,14 @@ const EdmontonMarket2025 = () => {
               <h3 className="font-bold text-lg mb-4 text-green-800">Why People Are Moving to Edmonton</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> Affordable housing vs Toronto/Vancouver</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> No provincial sales tax (5% GST only)</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> 30-40% lower cost of living</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Affordable housing vs Toronto/Vancouver</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> No provincial sales tax (5% GST only)</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> 30-40% lower cost of living</li>
                 </ul>
                 <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> Strong job market in energy, tech, healthcare</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> Rocky Mountains 3 hours away</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> No land transfer tax (saves $5k-10k)</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Strong job market in energy, tech, healthcare</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Rocky Mountains 3 hours away</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> No land transfer tax (saves $5k-10k)</li>
                 </ul>
               </div>
             </Card>
@@ -336,11 +336,11 @@ const EdmontonMarket2025 = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Equity Gain</p>
-                    <p className="font-bold text-green-600">$7,800/yr</p>
+                    <p className="font-bold text-green-700">$7,800/yr</p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Appreciation (3%)</p>
-                    <p className="font-bold text-green-600">$10,950/yr</p>
+                    <p className="font-bold text-green-700">$10,950/yr</p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Total ROI</p>
@@ -358,7 +358,7 @@ const EdmontonMarket2025 = () => {
                 <h4 className="font-bold text-green-800 mb-2">Best Case</h4>
                 <p className="text-2xl font-bold text-green-700 mb-2">$440,000-450,000</p>
                 <p className="text-sm text-muted-foreground">If rates drop to 3-4%, oil stabilizes at $75+</p>
-                <p className="text-sm font-bold text-green-600 mt-2">+8-10% growth</p>
+                <p className="text-sm font-bold text-green-700 mt-2">+8-10% growth</p>
               </Card>
               <Card className="p-4 bg-blue-50 border-blue-200">
                 <h4 className="font-bold text-blue-800 mb-2">Most Likely</h4>
@@ -370,7 +370,7 @@ const EdmontonMarket2025 = () => {
                 <h4 className="font-bold text-orange-800 mb-2">Pessimistic</h4>
                 <p className="text-2xl font-bold text-orange-700 mb-2">$395,000-400,000</p>
                 <p className="text-sm text-muted-foreground">If oil crashes, rates stay high</p>
-                <p className="text-sm font-bold text-orange-600 mt-2">-2-3% correction</p>
+                <p className="text-sm font-bold text-orange-700 mt-2">-2-3% correction</p>
               </Card>
             </div>
 

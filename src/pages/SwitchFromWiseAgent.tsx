@@ -39,15 +39,15 @@ const SwitchFromWiseAgent = () => {
         <div className="container-custom max-w-4xl">
           <h2 className="text-center mb-12">Why Canadian Agents Need Canadian CRM</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6 text-center"><Globe className="w-12 h-12 text-accent mx-auto mb-3" /><h3 className="font-bold mb-2">Canadian Markets</h3><p className="text-sm text-muted-foreground">Toronto, Vancouver, Calgary intelligence</p></Card>
+            <Card className="p-6 text-center"><Globe className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><h3 className="font-bold mb-2">Canadian Markets</h3><p className="text-sm text-muted-foreground">Toronto, Vancouver, Calgary intelligence</p></Card>
             <Card className="p-6 text-center"><div className="text-4xl mb-3">🇫🇷</div><h3 className="font-bold mb-2">Bilingual</h3><p className="text-sm text-muted-foreground">Full French/English support</p></Card>
-            <Card className="p-6 text-center"><Brain className="w-12 h-12 text-accent mx-auto mb-3" /><h3 className="font-bold mb-2">AI-Powered</h3><p className="text-sm text-muted-foreground">Predictive intelligence</p></Card>
+            <Card className="p-6 text-center"><Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><h3 className="font-bold mb-2">AI-Powered</h3><p className="text-sm text-muted-foreground">Predictive intelligence</p></Card>
           </div>
         </div>
       </section>
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <CheckCircle className="w-16 h-16 text-accent mx-auto mb-6" />
+          <CheckCircle className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
           <h2 className="mb-6">Switch to Canadian CRM Today</h2>
           <p className="text-lg text-muted-foreground mb-8">14 Days Free Trial • Free migration • Canadian support team</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

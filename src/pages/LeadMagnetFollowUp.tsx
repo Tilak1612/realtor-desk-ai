@@ -296,7 +296,7 @@ const OptInForm = ({
 const SuccessState = ({ firstName }: { firstName: string }) => (
   <div className="text-center space-y-4 py-4">
     <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-      <CheckCircle className="w-7 h-7 text-green-600" />
+      <CheckCircle className="w-7 h-7 text-green-700" />
     </div>
     <div>
       <h2 className="text-2xl font-bold text-foreground mb-1">

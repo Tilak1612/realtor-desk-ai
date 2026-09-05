@@ -92,23 +92,23 @@ const VsLofty = () => {
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Intelligent conversation, understands context</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Predicts which leads will convert (72% accuracy)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Learns and improves from every interaction</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Canadian market predictions (Toronto, Vancouver, Calgary)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Personalized content based on buyer behavior</span>
                 </li>
               </ul>
@@ -193,14 +193,14 @@ const VsLofty = () => {
                     <td className="p-4 font-medium">{row.feature}</td>
                     <td className="p-4 text-center">
                       {typeof row.rdai === 'boolean' ? (
-                        row.rdai ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                        row.rdai ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
                       ) : (
-                        <span className="text-accent font-semibold">{row.rdai}</span>
+                        <span className="text-rd-terra-800 font-semibold">{row.rdai}</span>
                       )}
                     </td>
                     <td className="p-4 text-center">
                       {typeof row.lofty === 'boolean' ? (
-                        row.lofty ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
+                        row.lofty ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
                       ) : (
                         <span className="text-muted-foreground">{row.lofty}</span>
                       )}
@@ -216,7 +216,7 @@ const VsLofty = () => {
       {/* Migration CTA */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <Brain className="w-16 h-16 text-accent mx-auto mb-6" />
+          <Brain className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
           <h2 className="mb-6">Upgrade to True AI-Powered Intelligence</h2>
           <p className="text-lg text-muted-foreground mb-8">
             See why Canadian agents are choosing RealtorDesk AI over Lofty
@@ -224,7 +224,7 @@ const VsLofty = () => {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
-              <Shield className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Risk-Free Switch</h3>
               <p className="text-sm text-muted-foreground">
                 30-day money-back guarantee. If it's not better than Lofty, full refund.
@@ -232,7 +232,7 @@ const VsLofty = () => {
             </Card>
 
             <Card className="p-6">
-              <Clock className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Quick Migration</h3>
               <p className="text-sm text-muted-foreground">
                 We handle everything. You're live and productive in 48 hours.
@@ -240,7 +240,7 @@ const VsLofty = () => {
             </Card>
 
             <Card className="p-6">
-              <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
+              <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Transparent Pricing</h3>
               <p className="text-sm text-muted-foreground">
                 $999/year, all-inclusive. No surprise charges. Ever.

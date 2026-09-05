@@ -41,15 +41,15 @@ const SwitchFromIxact = () => {
         <div className="container-custom max-w-4xl text-center">
           <h2 className="mb-8">The $20/Month Upgrade That Pays for Itself</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-8"><DollarSign className="w-12 h-12 text-accent mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">$243/year</div><p className="text-sm text-muted-foreground">Investment for AI upgrade</p></Card>
-            <Card className="p-8"><TrendingUp className="w-12 h-12 text-accent mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">6-8 deals</div><p className="text-sm text-muted-foreground">Extra closes per year</p></Card>
-            <Card className="p-8"><Brain className="w-12 h-12 text-accent mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">$60K+</div><p className="text-sm text-muted-foreground">Additional revenue</p></Card>
+            <Card className="p-8"><DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">$243/year</div><p className="text-sm text-muted-foreground">Investment for AI upgrade</p></Card>
+            <Card className="p-8"><TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">6-8 deals</div><p className="text-sm text-muted-foreground">Extra closes per year</p></Card>
+            <Card className="p-8"><Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">$60K+</div><p className="text-sm text-muted-foreground">Additional revenue</p></Card>
           </div>
         </div>
       </section>
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <CheckCircle className="w-16 h-16 text-accent mx-auto mb-6" />
+          <CheckCircle className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
           <h2 className="mb-6">14 Days Free Trial + Free Migration</h2>
           <p className="text-lg text-muted-foreground mb-8">Try risk-free for 14 days. We move all your IXACT data for free. If you don't close extra deals, full refund.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

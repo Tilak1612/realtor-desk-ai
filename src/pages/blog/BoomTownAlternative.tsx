@@ -67,7 +67,7 @@ const BoomTownAlternative = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <DollarSign className="w-6 h-6 text-red-600" />
+                  <DollarSign className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Reason #1: Cost is Prohibitive</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -79,7 +79,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Shield className="w-6 h-6 text-red-600" />
+                  <Shield className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Reason #2: US-Based Platform</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -91,7 +91,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Users className="w-6 h-6 text-red-600" />
+                  <Users className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Reason #3: Designed for Teams, Not Solo Agents</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -103,7 +103,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Clock className="w-6 h-6 text-red-600" />
+                  <Clock className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Reason #4: Long-Term Contracts</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -115,7 +115,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <AlertTriangle className="w-6 h-6 text-red-600" />
+                  <AlertTriangle className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Reason #5: Lead Gen Bundled</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -127,7 +127,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <XCircle className="w-6 h-6 text-red-600" />
+                  <XCircle className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Reason #6: No PIPEDA/CASL Compliance</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -163,35 +163,35 @@ const BoomTownAlternative = () => {
                 <h4 className="font-bold mb-3">Why It's Better Than BoomTown for Canadian Agents:</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                     <div>
                       <p className="font-semibold">Price</p>
                       <p className="text-sm text-gray-600">$149-299 CAD/month vs $1,350+ (saves $1,051-2,401/month)</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                     <div>
                       <p className="font-semibold">Canadian Compliance</p>
                       <p className="text-sm text-gray-600">PIPEDA/CASL built-in (BoomTown requires manual setup)</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                     <div>
                       <p className="font-semibold">AI Response</p>
                       <p className="text-sm text-gray-600">Sub-3-second AI response (BoomTown 5-15 minutes)</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                     <div>
                       <p className="font-semibold">No Lead Gen Bundling</p>
                       <p className="text-sm text-gray-600">CRM only, use your own lead sources</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                     <div>
                       <p className="font-semibold">Month-to-Month</p>
                       <p className="text-sm text-gray-600">No long-term contracts</p>
@@ -246,32 +246,32 @@ const BoomTownAlternative = () => {
                       <tr className="border-b">
                         <td className="py-2">Price/Month</td>
                         <td className="py-2">$1,350+ CAD</td>
-                        <td className="py-2 text-green-600 font-semibold">$149-299 CAD</td>
+                        <td className="py-2 text-green-700 font-semibold">$149-299 CAD</td>
                       </tr>
                       <tr className="border-b">
                         <td className="py-2">AI Response</td>
                         <td className="py-2">No AI</td>
-                        <td className="py-2 text-green-600 font-semibold">Sub-3-second</td>
+                        <td className="py-2 text-green-700 font-semibold">Sub-3-second</td>
                       </tr>
                       <tr className="border-b">
                         <td className="py-2">Canadian Compliance</td>
                         <td className="py-2">Manual</td>
-                        <td className="py-2 text-green-600 font-semibold">Built-in</td>
+                        <td className="py-2 text-green-700 font-semibold">Built-in</td>
                       </tr>
                       <tr className="border-b">
                         <td className="py-2">Contract</td>
                         <td className="py-2">12-24 months</td>
-                        <td className="py-2 text-green-600 font-semibold">Month-to-month</td>
+                        <td className="py-2 text-green-700 font-semibold">Month-to-month</td>
                       </tr>
                       <tr className="border-b">
                         <td className="py-2">Lead Gen</td>
                         <td className="py-2">Bundled</td>
-                        <td className="py-2 text-green-600 font-semibold">Separate</td>
+                        <td className="py-2 text-green-700 font-semibold">Separate</td>
                       </tr>
                       <tr>
                         <td className="py-2">Setup Time</td>
                         <td className="py-2">4-8 weeks</td>
-                        <td className="py-2 text-green-600 font-semibold">1-3 days</td>
+                        <td className="py-2 text-green-700 font-semibold">1-3 days</td>
                       </tr>
                     </tbody>
                   </table>
@@ -604,7 +604,7 @@ const BoomTownAlternative = () => {
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-red-600" />
+                  <Shield className="w-5 h-5 text-red-700" />
                   PIPEDA Requirements
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -616,7 +616,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                  <AlertTriangle className="w-5 h-5 text-red-700" />
                   CASL Requirements
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -628,7 +628,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <XCircle className="w-5 h-5 text-red-600" />
+                  <XCircle className="w-5 h-5 text-red-700" />
                   Quebec Bill 96
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -640,7 +640,7 @@ const BoomTownAlternative = () => {
 
               <Card className="p-6 bg-green-50 border-green-200">
                 <h3 className="font-bold mb-3 flex items-center gap-2 text-green-900">
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700" />
                   Solution: RealtorDesk AI
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">

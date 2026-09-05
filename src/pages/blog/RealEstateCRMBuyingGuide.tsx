@@ -363,27 +363,27 @@ const RealEstateCRMBuyingGuide = () => {
 
           <div className="space-y-4 my-8">
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-600">🚩 No Free Trial Available</p>
+              <p className="font-bold text-red-700">🚩 No Free Trial Available</p>
               <p className="text-sm mt-2">If a company won't let you test their product, they know it doesn't work well.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-600">🚩 Contract Lock-In (12-36 months)</p>
+              <p className="font-bold text-red-700">🚩 Contract Lock-In (12-36 months)</p>
               <p className="text-sm mt-2">Avoid CRMs that require long-term contracts. You should be able to cancel monthly.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-600">🚩 Poor Online Reviews (Under 4.0/5.0)</p>
+              <p className="font-bold text-red-700">🚩 Poor Online Reviews (Under 4.0/5.0)</p>
               <p className="text-sm mt-2">Check G2, Capterra, and Google reviews. Consistent 1-2 star reviews = stay away.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-600">🚩 US-Only Features (No Canadian Support)</p>
+              <p className="font-bold text-red-700">🚩 US-Only Features (No Canadian Support)</p>
               <p className="text-sm mt-2">If they don't mention CREA DDF®, PIPEDA, or bilingual support, they're not built for Canada.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-600">🚩 Unclear Pricing</p>
+              <p className="font-bold text-red-700">🚩 Unclear Pricing</p>
               <p className="text-sm mt-2">"Contact us for pricing" usually means it's too expensive. Transparent companies show pricing upfront.</p>
             </Card>
           </div>

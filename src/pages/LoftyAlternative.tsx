@@ -131,8 +131,8 @@ const LoftyAlternative = () => {
                 </div>
               </Card>
               <Card className="p-6 text-center border-2 border-accent">
-                <DollarSign className="w-12 h-12 mx-auto mb-4 text-accent" />
-                <div className="text-3xl font-bold mb-2 text-accent">$1,788</div>
+                <DollarSign className="w-12 h-12 mx-auto mb-4 text-rd-terra-800" />
+                <div className="text-3xl font-bold mb-2 text-rd-terra-800">$1,788</div>
                 <div className="text-sm text-muted-foreground mb-1">First Year with RealtorDesk AI</div>
                 <div className="text-xs text-muted-foreground">
                   $149/mo × 12 + $0 setup + $0 migration
@@ -175,7 +175,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">Starting Price (Monthly)</td>
-                    <td className="text-center py-3 px-4 font-bold text-accent">$149 CAD</td>
+                    <td className="text-center py-3 px-4 font-bold text-rd-terra-800">$149 CAD</td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$700+ USD</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -221,7 +221,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">AI Voice Agent (Inbound/Outbound)</td>
-                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-600 border-yellow-500">Coming Soon</Badge></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-700 border-yellow-500">Coming Soon</Badge></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -254,7 +254,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">WhatsApp Integration</td>
-                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-600 border-yellow-500">Coming Soon</Badge></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-700 border-yellow-500">Coming Soon</Badge></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -272,7 +272,7 @@ const LoftyAlternative = () => {
                   <tr className="border-t-2 bg-primary/5">
                     <td className="py-4 px-4 font-bold">Total First Year Cost</td>
                     <td className="text-center py-4 px-4">
-                      <div className="text-2xl font-bold text-accent">$1,788 CAD</div>
+                      <div className="text-2xl font-bold text-rd-terra-800">$1,788 CAD</div>
                       <div className="text-xs text-muted-foreground">$149/mo × 12</div>
                     </td>
                     <td className="text-center py-4 px-4">

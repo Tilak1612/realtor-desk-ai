@@ -404,37 +404,37 @@ const AIvsTraditionalCRM = () => {
                   <td>Avg Response Time</td>
                   <td className="text-right">18 minutes</td>
                   <td className="text-right font-bold">2.7 seconds</td>
-                  <td className="text-right text-green-600">400x faster</td>
+                  <td className="text-right text-green-700">400x faster</td>
                 </tr>
                 <tr className="border-t">
                   <td>Leads Contacted</td>
                   <td className="text-right">76%</td>
                   <td className="text-right font-bold">99.2%</td>
-                  <td className="text-right text-green-600">+23.2%</td>
+                  <td className="text-right text-green-700">+23.2%</td>
                 </tr>
                 <tr className="border-t">
                   <td>Lead-to-Appointment</td>
                   <td className="text-right">8.2%</td>
                   <td className="text-right font-bold">18.4%</td>
-                  <td className="text-right text-green-600">+124%</td>
+                  <td className="text-right text-green-700">+124%</td>
                 </tr>
                 <tr className="border-t">
                   <td>Close Rate</td>
                   <td className="text-right">1.8%</td>
                   <td className="text-right font-bold">4.1%</td>
-                  <td className="text-right text-green-600">+128%</td>
+                  <td className="text-right text-green-700">+128%</td>
                 </tr>
                 <tr className="border-t">
                   <td>Time on Follow-Up</td>
                   <td className="text-right">22 hrs/week</td>
                   <td className="text-right font-bold">4 hrs/week</td>
-                  <td className="text-right text-green-600">-82%</td>
+                  <td className="text-right text-green-700">-82%</td>
                 </tr>
                 <tr className="border-t">
                   <td>Agent Satisfaction</td>
                   <td className="text-right">6.8/10</td>
                   <td className="text-right font-bold">9.1/10</td>
-                  <td className="text-right text-green-600">+34%</td>
+                  <td className="text-right text-green-700">+34%</td>
                 </tr>
               </tbody>
             </table>

@@ -49,12 +49,12 @@ const SwitchFromBoldTrail = () => {
               <div className="text-xs text-muted-foreground">BoldTrail first year cost</div>
             </Card>
             
-            <TrendingDown className="w-8 h-8 text-accent" />
+            <TrendingDown className="w-8 h-8 text-rd-terra-800" />
             
             <Card className="p-4 border-accent">
               <div className="text-sm text-muted-foreground mb-1">Switch to</div>
               <div className="text-2xl font-bold gradient-text">$999/year</div>
-              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $5,988!</div>
+              <div className="text-xs text-rd-terra-800 font-semibold">{t('comparison.savings')} $5,988!</div>
             </Card>
           </div>
 
@@ -115,7 +115,7 @@ const SwitchFromBoldTrail = () => {
           <div className="grid md:grid-cols-5 gap-6">
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-6 h-6 text-accent" />
+                <Phone className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 1</div>
               <h3 className="font-semibold mb-2">15-Min Call</h3>
@@ -126,7 +126,7 @@ const SwitchFromBoldTrail = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Upload className="w-6 h-6 text-accent" />
+                <Upload className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 2</div>
               <h3 className="font-semibold mb-2">We Export</h3>
@@ -137,7 +137,7 @@ const SwitchFromBoldTrail = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Download className="w-6 h-6 text-accent" />
+                <Download className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 3</div>
               <h3 className="font-semibold mb-2">We Import</h3>
@@ -148,7 +148,7 @@ const SwitchFromBoldTrail = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-6 h-6 text-accent" />
+                <GraduationCap className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 4</div>
               <h3 className="font-semibold mb-2">30-Min Training</h3>
@@ -159,7 +159,7 @@ const SwitchFromBoldTrail = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-6 h-6 text-accent" />
+                <CheckCircle className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 5</div>
               <h3 className="font-semibold mb-2">You're Live!</h3>
@@ -170,7 +170,7 @@ const SwitchFromBoldTrail = () => {
           </div>
 
           <Card className="mt-12 p-8 bg-accent/10 border-accent text-center">
-            <DollarSign className="w-16 h-16 text-accent mx-auto mb-4" />
+            <DollarSign className="w-16 h-16 text-rd-terra-800 mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-3">100% Free Migration</h3>
             <p className="text-lg text-muted-foreground mb-4">
               $499 value included at no cost. We handle everything.

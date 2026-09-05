@@ -79,19 +79,19 @@ const VsKvCore = () => {
                 <h4 className="font-semibold mb-2 text-primary">RealtorDesk AI</h4>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>Sub-3-second AI response time</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>Built for Canadian compliance (PIPEDA/CASL)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>$149-299 CAD/month transparent pricing</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>CREA DDF® integration (coming Q3 2026)</span>
                   </li>
                 </ul>

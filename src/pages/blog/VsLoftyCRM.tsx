@@ -190,19 +190,19 @@ const VsLoftyCRM = () => {
               <h3 className="text-xl font-bold mb-4 text-red-900">The Problem:</h3>
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
-                  <XCircle className="w-5 h-5 text-red-600 mt-0.5" />
+                  <XCircle className="w-5 h-5 text-red-700 mt-0.5" />
                   <span>Features are scattered across complex interface</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <XCircle className="w-5 h-5 text-red-600 mt-0.5" />
+                  <XCircle className="w-5 h-5 text-red-700 mt-0.5" />
                   <span>Many features are half-baked (built but not refined)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <XCircle className="w-5 h-5 text-red-600 mt-0.5" />
+                  <XCircle className="w-5 h-5 text-red-700 mt-0.5" />
                   <span>Requires dedicated admin to manage</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <XCircle className="w-5 h-5 text-red-600 mt-0.5" />
+                  <XCircle className="w-5 h-5 text-red-700 mt-0.5" />
                   <span>Steep learning curve</span>
                 </li>
               </ul>
@@ -301,19 +301,19 @@ const VsLoftyCRM = () => {
               <h3 className="text-xl font-bold mb-4 text-green-900">The Advantage:</h3>
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                   <span>Every feature is polished and works well</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                   <span>No feature bloat</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                   <span>Simple interface anyone can learn</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
                   <span>AI does the heavy lifting</span>
                 </li>
               </ul>
@@ -749,23 +749,23 @@ const VsLoftyCRM = () => {
                   <p className="font-semibold text-green-700 mb-2">Pros:</p>
                   <ul className="space-y-1 text-sm">
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>237 features (most comprehensive)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Strong team collaboration tools</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Established player (8+ years)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Native mobile apps</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>150+ integrations</span>
                     </li>
                   </ul>
@@ -775,35 +775,35 @@ const VsLoftyCRM = () => {
                   <p className="font-semibold text-red-700 mb-2">Cons:</p>
                   <ul className="space-y-1 text-sm">
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Expensive ($675-1,620 CAD/month)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Overwhelming complexity</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>3-6 month learning curve</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Most features go unused (89%)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Not built for Canadian market</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>No PIPEDA/CASL compliance built-in</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Basic AI (chatbot only)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Slow setup (4-6 weeks)</span>
                     </li>
                   </ul>
@@ -817,39 +817,39 @@ const VsLoftyCRM = () => {
                   <p className="font-semibold text-green-700 mb-2">Pros:</p>
                   <ul className="space-y-1 text-sm">
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Affordable ($149-299 CAD/month)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Simple and focused (8 core features)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>1-2 week learning curve</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>97.5% feature usage</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Built for Canadian market</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>PIPEDA/CASL compliance built-in</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Advanced AI (chat + voice + predictive)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Fast setup (1-3 days)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                       <span>Sub-3-second response time</span>
                     </li>
                   </ul>
@@ -859,19 +859,19 @@ const VsLoftyCRM = () => {
                   <p className="font-semibold text-red-700 mb-2">Cons:</p>
                   <ul className="space-y-1 text-sm">
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Newer platform (less brand recognition)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Fewer total features (focused on essentials)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Native mobile app in development</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                       <span>Smaller integration library</span>
                     </li>
                   </ul>

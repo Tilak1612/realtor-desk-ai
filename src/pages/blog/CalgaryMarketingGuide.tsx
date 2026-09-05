@@ -456,7 +456,7 @@ const CalgaryMarketingGuide = () => {
 
             <Card className="p-6 bg-green-50 border-green-200 mt-6">
               <div className="flex items-center gap-3 mb-3">
-                <Zap className="w-6 h-6 text-green-600" />
+                <Zap className="w-6 h-6 text-green-700" />
                 <h3 className="font-bold text-green-900">AI Advantage</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-700">

@@ -100,23 +100,23 @@ const SellHomeFast = () => {
               </h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   The #1 factor that determines how fast your home sells
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Strategic pricing tactics that trigger bidding wars
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Home staging secrets that add 5-10% to sale price
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   Digital marketing techniques that attract buyers in 48 hours
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   How AI-powered agent tools accelerate the selling process
                 </li>
               </ul>
@@ -140,7 +140,7 @@ const SellHomeFast = () => {
                   </ul>
                 </div>
                 <div>
-                  <p className="font-bold text-2xl text-red-600">$2,800 - $6,700</p>
+                  <p className="font-bold text-2xl text-red-700">$2,800 - $6,700</p>
                   <p className="text-sm text-muted-foreground">Total monthly cost</p>
                   <p className="font-bold text-lg mt-4">Over 6 months: $16,800 - $40,200</p>
                   <p className="text-sm text-muted-foreground">Money that could be equity in your next home</p>
@@ -165,7 +165,7 @@ const SellHomeFast = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="bg-red-50 p-3 rounded-lg">
                       <p className="font-bold text-red-700">❌ When You Overprice:</p>
-                      <ul className="text-sm text-red-600 mt-2 space-y-1">
+                      <ul className="text-sm text-red-700 mt-2 space-y-1">
                         <li>Week 1-2: Few showings</li>
                         <li>Week 3-4: Agent suggests price reduction</li>
                         <li>Week 9+: Significant price drop needed</li>
@@ -173,7 +173,7 @@ const SellHomeFast = () => {
                     </div>
                     <div className="bg-green-50 p-3 rounded-lg">
                       <p className="font-bold text-green-700">✓ When You Price Right:</p>
-                      <ul className="text-sm text-green-600 mt-2 space-y-1">
+                      <ul className="text-sm text-green-700 mt-2 space-y-1">
                         <li>Week 1: High showing activity</li>
                         <li>Week 2: Multiple offers received</li>
                         <li>Week 3: Smooth closing scheduled</li>
@@ -279,11 +279,11 @@ const SellHomeFast = () => {
                     Where buyers search in 2025: 92% start online, 78% use social media, 64% watch video tours.
                   </p>
                   <ul className="space-y-2 text-sm">
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> MLS Listing with compelling headline (Day 1)</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> Realtor.ca syndication via CREA DDF®</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> Facebook & Instagram ad campaigns ($100-300)</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> Email blast to 500-2,000 buyer contacts</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600" /> YouTube video walkthrough</li>
+                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> MLS Listing with compelling headline (Day 1)</li>
+                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Realtor.ca syndication via CREA DDF®</li>
+                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Facebook & Instagram ad campaigns ($100-300)</li>
+                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Email blast to 500-2,000 buyer contacts</li>
+                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> YouTube video walkthrough</li>
                   </ul>
                 </div>
               </div>
@@ -395,7 +395,7 @@ const SellHomeFast = () => {
                 { mistake: "Skipping professional photography", why: "73% won't book showings with poor photos" },
               ].map((item, idx) => (
                 <Card key={idx} className="p-3 border-l-4 border-orange-500">
-                  <p className="font-bold text-orange-600">❌ {item.mistake}</p>
+                  <p className="font-bold text-orange-700">❌ {item.mistake}</p>
                   <p className="text-sm text-muted-foreground">Why it fails: {item.why}</p>
                 </Card>
               ))}

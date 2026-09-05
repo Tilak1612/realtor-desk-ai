@@ -91,27 +91,27 @@ const VsWiseAgent = () => {
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Toronto, Vancouver, Calgary market predictions</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Full bilingual support (English/French)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">CREA DDF® integration coming Q3 2026</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Provincial market intelligence (all 10 provinces)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Canadian support team (your timezone)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <span className="text-sm">Canadian dollar pricing (CAD)</span>
                 </li>
               </ul>
@@ -127,7 +127,7 @@ const VsWiseAgent = () => {
           
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="p-6 border-accent/20">
-              <Brain className="w-8 h-8 text-accent mb-3" />
+              <Brain className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Predictive Lead Scoring</h3>
               <p className="text-sm text-muted-foreground mb-3">
                 AI analyzes 50+ data points to predict which leads will convert in next 6-12 months
@@ -138,7 +138,7 @@ const VsWiseAgent = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Brain className="w-8 h-8 text-accent mb-3" />
+              <Brain className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Intelligent Conversation</h3>
               <p className="text-sm text-muted-foreground mb-3">
                 24/7 AI chatbot that understands context, qualifies leads, books appointments
@@ -149,7 +149,7 @@ const VsWiseAgent = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Brain className="w-8 h-8 text-accent mb-3" />
+              <Brain className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Market Intelligence</h3>
               <p className="text-sm text-muted-foreground mb-3">
                 AI predicts neighborhood trends, price movements, inventory changes
@@ -160,7 +160,7 @@ const VsWiseAgent = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Brain className="w-8 h-8 text-accent mb-3" />
+              <Brain className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Optimal Timing</h3>
               <p className="text-sm text-muted-foreground mb-3">
                 AI determines best time to contact each lead based on engagement patterns
@@ -208,14 +208,14 @@ const VsWiseAgent = () => {
                     <td className="p-4 font-medium">{row.feature}</td>
                     <td className="p-4 text-center">
                       {typeof row.rdai === 'boolean' ? (
-                        row.rdai ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                        row.rdai ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
                       ) : (
-                        <span className="text-accent font-semibold">{row.rdai}</span>
+                        <span className="text-rd-terra-800 font-semibold">{row.rdai}</span>
                       )}
                     </td>
                     <td className="p-4 text-center">
                       {typeof row.wise === 'boolean' ? (
-                        row.wise ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
+                        row.wise ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
                       ) : (
                         <span className="text-muted-foreground">{row.wise}</span>
                       )}
@@ -239,7 +239,7 @@ const VsWiseAgent = () => {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
-              <Shield className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Risk-Free Trial</h3>
               <p className="text-sm text-muted-foreground">
                 30-day money-back guarantee. If you miss Wise Agent, full refund.
@@ -247,7 +247,7 @@ const VsWiseAgent = () => {
             </Card>
 
             <Card className="p-6">
-              <Globe className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Globe className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Free Migration</h3>
               <p className="text-sm text-muted-foreground">
                 We move all your Wise Agent data. You're live in 48 hours.
@@ -255,7 +255,7 @@ const VsWiseAgent = () => {
             </Card>
 
             <Card className="p-6">
-              <TrendingUp className="w-12 h-12 text-accent mx-auto mb-3" />
+              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Canadian Success</h3>
               <p className="text-sm text-muted-foreground">
                 Built by Canadian agents who understand Toronto, Vancouver, Calgary markets.
