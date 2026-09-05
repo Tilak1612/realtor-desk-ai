@@ -40,6 +40,11 @@ const REMOVED_FABRICATIONS = [
   "agent-profile-broker",
   "agent-profile-female",
   "agent-profile-team",
+  // A generated monitor legibly rendering "KvCORE" -- a real competitor's
+  // trademark -- above invented charts, on a card for an article comparing
+  // against them. Depicting a NAMED competitor's product with fabricated
+  // content is a different order of risk from generic stock imagery.
+  "blog-vs-kvcore",
 ];
 
 describe("no fabricated product imagery", () => {
