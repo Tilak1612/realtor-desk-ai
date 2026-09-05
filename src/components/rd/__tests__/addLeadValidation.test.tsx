@@ -24,7 +24,7 @@ describe("AddLeadDialog validation", () => {
 
   it("shows a required-field error when first name is empty", async () => {
     const user = userEvent.setup({ delay: null });
-    render(<AddLeadDialog open onOpenChange={() => {}} />);
+    render(<AddLeadDialog open onClose={() => {}} />);
 
     await user.click(screen.getByRole("button", { name: /add lead|save|create/i }));
 
@@ -35,7 +35,7 @@ describe("AddLeadDialog validation", () => {
 
   it("clears the error as soon as the user types a name", async () => {
     const user = userEvent.setup({ delay: null });
-    render(<AddLeadDialog open onOpenChange={() => {}} />);
+    render(<AddLeadDialog open onClose={() => {}} />);
 
     await user.click(screen.getByRole("button", { name: /add lead|save|create/i }));
     await waitFor(() => expect(screen.getByRole("alert")).toBeInTheDocument());
@@ -50,7 +50,7 @@ describe("AddLeadDialog validation", () => {
 
   it("links the error to the input it describes", async () => {
     const user = userEvent.setup({ delay: null });
-    render(<AddLeadDialog open onOpenChange={() => {}} />);
+    render(<AddLeadDialog open onClose={() => {}} />);
 
     const input = screen.getByLabelText(/first name/i);
     expect(input).not.toHaveAttribute("aria-invalid", "true");
