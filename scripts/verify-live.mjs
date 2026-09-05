@@ -100,7 +100,11 @@ try {
   const pricing = await ctx.newPage();
   await pricing.goto(`${BASE}/pricing`, { waitUntil: "networkidle" });
   await pricing.waitForTimeout(700);
-  const featured = pricing.locator(".rd-card-lift").filter({ hasText: /most popular|populaire/i }).first();
+  // Located by the resting offset it declares, not by badge copy. Matching on
+  // text meant guessing the wording -- the badge reads "Most agents pick this",
+  // not "Most popular" -- and a marketing edit would silently disable this
+  // check rather than fail it.
+  const featured = pricing.locator('.rd-card-lift[class*="--rd-lift-base"]').first();
   const featuredCount = await featured.count();
   if (featuredCount > 0) {
     await featured.scrollIntoViewIfNeeded();
