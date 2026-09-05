@@ -157,6 +157,40 @@ try {
   );
   record("every image has alt text", imgStats.missingAlt === 0, `${imgStats.missingAlt} missing`);
 
+  /* ── 5b. the auth forms are usable and labelled ─────────────────────────── */
+  const auth = await ctx.newPage();
+  await auth.goto(`${BASE}/signup`, { waitUntil: "networkidle" });
+  await auth.waitForTimeout(800);
+  const authCheck = await auth.evaluate(() => {
+    const inputs = [...document.querySelectorAll("input")].filter(
+      (i) => !["hidden", "checkbox"].includes(i.type)
+    );
+    // Every field needs a programmatic name. A placeholder is not a label:
+    // it disappears on focus and is not announced by every screen reader.
+    const unlabelled = inputs.filter((i) => {
+      const byFor = i.id && document.querySelector(`label[for="${i.id}"]`);
+      const wrapped = i.closest("label");
+      return !byFor && !wrapped && !i.getAttribute("aria-label") && !i.getAttribute("aria-labelledby");
+    });
+    return {
+      inputs: inputs.length,
+      unlabelled: unlabelled.map((i) => i.name || i.type),
+      submit: !!document.querySelector('button[type="submit"]'),
+      autocomplete: inputs.filter((i) => i.getAttribute("autocomplete")).length,
+    };
+  });
+  record(
+    "signup fields are all labelled",
+    authCheck.inputs > 0 && authCheck.unlabelled.length === 0,
+    `${authCheck.inputs} fields, unlabelled: ${authCheck.unlabelled.join(", ") || "none"}`
+  );
+  record(
+    "signup has a submit and autocomplete hints",
+    authCheck.submit && authCheck.autocomplete > 0,
+    `submit=${authCheck.submit}, ${authCheck.autocomplete} fields with autocomplete`
+  );
+  await auth.close();
+
   /* ── 6. no horizontal overflow at any target width ──────────────────────── */
   const widths = [320, 375, 390, 430, 768, 1024, 1440, 1920];
   const overflow = [];

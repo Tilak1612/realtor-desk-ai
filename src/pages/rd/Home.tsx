@@ -233,11 +233,19 @@ function TrustStrip({ t }: { t: TFn }) {
         <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-rd-ink-500">
           {t("landing.trustStrip.label")}
         </div>
-        <div className="flex flex-wrap gap-x-10 gap-y-3 items-center font-bold text-[17px] text-rd-ink-600/70">
+        {/* A list of five things, marked up as one. It was five bare
+            <span>s, so assistive technology announced a run of words with
+            no indication they were a set or how many. */}
+        <ul className="flex flex-wrap gap-x-10 gap-y-3 items-center font-bold text-[17px] list-none p-0 m-0">
           {logos.map((l) => (
-            <span key={l}>{l}</span>
+            <li
+              key={l}
+              className="text-rd-ink-600/70 transition-colors duration-150 hover:text-rd-ink-900"
+            >
+              {l}
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
@@ -585,8 +593,19 @@ function TestimonialAndCTA({ t }: { t: TFn }) {
         )}
 
         {/* CTA */}
-        <div className="bg-rd-navy-800 rounded-rd-xl p-10 md:p-12 text-white flex flex-col justify-between gap-8">
-          <div>
+        <div className="relative overflow-hidden bg-rd-navy-800 rounded-rd-xl p-10 md:p-12 text-white flex flex-col justify-between gap-8">
+          {/* The same contained radial the big feature card already uses,
+              so the page has one depth idiom rather than two. Decorative,
+              and pointer-transparent so it cannot swallow a CTA click. */}
+          <div
+            aria-hidden="true"
+            className="absolute -right-16 -bottom-16 w-[300px] h-[300px] rounded-full opacity-30 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, var(--rd-terra-600) 0%, transparent 62%)",
+            }}
+          />
+          <div className="relative z-10">
             <h3 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.01em] leading-[1.15]">
               {t("landing.closingCta.title")}
             </h3>
@@ -599,6 +618,7 @@ function TestimonialAndCTA({ t }: { t: TFn }) {
             location="closing"
             variant="terra"
             size="lg"
+            className="relative z-10"
             trailingIcon={<IconArrow />}
           >
               {t("landing.closingCta.cta")}
