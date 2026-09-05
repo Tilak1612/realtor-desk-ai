@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import FeedbackDialog from "@/components/feedback/FeedbackDialog";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import { useDueTasks } from "@/hooks/useDueTasks";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
 
 interface DashboardNavbarProps {
@@ -31,7 +32,14 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const notificationCount = 0; // TODO: wire to real notifications
+  // Real signal, not a constant. See useDueTasks for why `tasks` is the honest
+  // source and why an unknown count must not be rendered as zero.
+  const {
+    tasks: dueTasks,
+    count: notificationCount,
+    loading: notifLoading,
+    error: notifError,
+  } = useDueTasks();
 
   useEffect(() => {
     setAvatarUrl(profile?.avatar_url ?? null);
@@ -214,10 +222,42 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             <DropdownMenuContent align="end" className="w-72">
               <DropdownMenuLabel className="text-sm">{t('nav.notifications', 'Notifications')}</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <div className="p-4 text-center">
-                <Bell className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">{t('nav.noNotifications', 'No new notifications')}</p>
-              </div>
+              {notifLoading ? (
+                <div className="p-4 space-y-2" aria-hidden="true">
+                  <div className="h-3 w-3/4 bg-muted rounded animate-pulse" />
+                  <div className="h-3 w-1/2 bg-muted rounded animate-pulse" />
+                </div>
+              ) : notifError ? (
+                /* Never report an empty inbox on a failed query -- that is the
+                   same false negative as the hardcoded 0, only harder to spot. */
+                <div className="p-4 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    {t('nav.notificationsUnavailable', "Couldn't load notifications")}
+                  </p>
+                </div>
+              ) : dueTasks.length === 0 ? (
+                <div className="p-4 text-center">
+                  <Bell className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                  <p className="text-sm text-muted-foreground">{t('nav.noNotifications', 'No new notifications')}</p>
+                </div>
+              ) : (
+                <div className="max-h-72 overflow-y-auto">
+                  {dueTasks.map((task) => (
+                    <DropdownMenuItem
+                      key={task.id}
+                      onClick={() => navigate('/tasks')}
+                      className="flex flex-col items-start gap-0.5 cursor-pointer"
+                    >
+                      <span className="text-sm truncate w-full">{task.title}</span>
+                      <span className={task.overdue ? 'text-[11px] text-destructive' : 'text-[11px] text-muted-foreground'}>
+                        {task.overdue
+                          ? t('nav.taskOverdue', 'Overdue')
+                          : t('nav.taskDueToday', 'Due today')}
+                      </span>
+                    </DropdownMenuItem>
+                  ))}
+                </div>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
 
