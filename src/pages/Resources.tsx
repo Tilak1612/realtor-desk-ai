@@ -25,17 +25,17 @@ import blogEdmontonMarket from "@/assets/blog-edmonton-market.jpg";
 import blogCostMissedLeads from "@/assets/brand/blog-cost-missed-leads.svg";
 import blogCASLCompliance from "@/assets/blog-casl-compliance.jpg";
 import blogCalgaryMarketing from "@/assets/blog-calgary-marketing.jpg";
-import blogVoiceAI from "@/assets/blog-voice-ai.jpg";
+import blogVoiceAI from "@/assets/brand/blog-voice-ai.svg";
 // SVG, not raster. 8KB instead of 72KB, sharp at every density, no AVIF/WebP
 // sibling needed, and the brand colours are the real token values rather than
 // an approximation an image model guessed at.
 import blogAIChatbot from "@/assets/brand/blog-ai-chatbot.svg";
-import blogBestCRM2025 from "@/assets/blog-best-crm-2025.jpg";
+import blogBestCRM2025 from "@/assets/brand/blog-best-crm-2025.svg";
 import blogAIvsTraditional from "@/assets/blog-ai-vs-traditional.jpg";
 import blogVsFollowUpBoss from "@/assets/brand/blog-vs-followupboss.svg";
 import blogIxactAlternatives from "@/assets/brand/blog-ixact-alternatives.svg";
 import blogVsLofty from "@/assets/brand/blog-vs-lofty.svg";
-import blogVsPropertybase from "@/assets/blog-vs-propertybase.jpg";
+import blogVsPropertybase from "@/assets/brand/blog-vs-propertybase.svg";
 import blogTorontoVancouver from "@/assets/blog-toronto-vancouver-compare.jpg";
 import blogPIPEDA from "@/assets/blog-pipeda-privacy.jpg";
 import blogLeadResponse from "@/assets/brand/blog-lead-response-time.svg";

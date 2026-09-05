@@ -89,10 +89,17 @@ describe("no fabricated product imagery", () => {
       const svg = readFileSync(join(dir, file), "utf8");
       const texts = [...svg.matchAll(/<text[^>]*>([^<]*)<\/text>/g)].map((m) => m[1].trim());
       for (const t of texts) {
-        // No currency, no percentages, no bare figures posing as metrics.
-        expect(t, `${file}: "${t}" looks like a fabricated figure`).not.toMatch(
-          /[$€£]\s?\d|\d+\s?%|\b\d{2,}\b/
-        );
+        // A calendar year in a title is not a metric. "Choosing a CRM in 2025"
+        // tripped the first version of this rule, and a guard that fires on
+        // legitimate content is a guard someone deletes.
+        const withoutYears = t.replace(/\b(19|20)\d{2}\b/g, "");
+
+        // What must never appear: currency, percentages, or any other
+        // multi-digit figure posing as a measurement.
+        expect(
+          withoutYears,
+          `${file}: "${t}" contains what looks like a fabricated figure`
+        ).not.toMatch(/[$€£]\s?\d|\d+\s?%|\b\d{2,}\b/);
       }
     }
   });

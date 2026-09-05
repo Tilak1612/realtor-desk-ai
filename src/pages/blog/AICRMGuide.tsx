@@ -3,7 +3,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, Database, Shield, Globe, Smartphone, BarChart3, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import blogAICRM from "@/assets/blog-ai-crm.jpg";
+// SVG for the on-page image; PNG for og:image, because social platforms do
+// not render SVG and an SVG there produces a card with no image at all.
+import blogAICRM from "@/assets/brand/blog-ai-crm.svg";
+import blogAICRMSocial from "@/assets/brand/blog-ai-crm.jpg";
 import { SEO } from "@/components/SEO";
 
 const AICRMGuide = () => {
@@ -17,7 +20,7 @@ const AICRMGuide = () => {
         title="Complete Guide to AI CRM for Canadian Real Estate Agents 2025"
         description="Everything Canadian Realtors need to know about AI-powered CRM systems, PIPEDA compliance, and how to choose the right platform."
         keywords="AI CRM for Canadian Realtors, best CRM for real estate agents Canada, PIPEDA compliant CRM, CREA DDF CRM integration"
-        image={blogAICRM}
+        image={blogAICRMSocial}
         article
         publishedTime="2025-01-18"
         modifiedTime="2025-01-18"
@@ -61,9 +64,17 @@ const AICRMGuide = () => {
               </p>
             </header>
 
-            <img loading="lazy" decoding="async" 
-              src={blogAICRM} 
-              alt="Canadian Realtor reviewing analytics on an AI-powered CRM dashboard" 
+            {/* Alt corrected. It read "Canadian Realtor reviewing analytics on
+                an AI-powered CRM dashboard" while the image was a stock photo
+                of a woman in pyjamas on a bed with a laptop -- describing
+                something the picture did not show. */}
+            <img
+              loading="lazy"
+              decoding="async"
+              src={blogAICRM}
+              width={1200}
+              height={630}
+              alt="Article header: an AI CRM for Canadian agents"
               className="w-full h-64 md:h-96 object-cover rounded-xl mb-12"
             />
 
