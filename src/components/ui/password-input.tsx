@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import { isCommonPassword } from "@/lib/auth/commonPasswords";
 
 interface PasswordRequirement {
   id: string;
@@ -14,10 +15,16 @@ interface PasswordRequirement {
 interface PasswordInputProps extends Omit<React.ComponentProps<"input">, "type"> {
   showValidation?: boolean;
   onValidationChange?: (isValid: boolean) => void;
+  /**
+   * Context-specific strings this password must not contain -- in practice
+   * the local part of the user's own email, which is the commonest source of
+   * a guessable password and is invisible to any generic denylist.
+   */
+  disallowList?: string[];
 }
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ className, showValidation = false, onValidationChange, value, onChange, ...props }, ref) => {
+  ({ className, showValidation = false, onValidationChange, disallowList = [], value, onChange, ...props }, ref) => {
     const { t } = useTranslation();
     const [showPassword, setShowPassword] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
@@ -48,6 +55,15 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
         id: "special",
         label: t('app.auth.passwordRequirements.special', 'At least 1 special character (!@#$%^&*()_+-=[]{}|;:,.<>?)'),
         validator: (pwd) => /[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(pwd),
+      },
+      {
+        id: "notCommon",
+        label: t('app.auth.passwordRequirements.notCommon', 'Not a commonly used password'),
+        // Its own tick, so a rejected password explains itself. The form gates
+        // on validatePassword, which applies the same check -- were it in only
+        // one of the two, the user would see every rule green and a submit that
+        // failed without saying why.
+        validator: (pwd: string) => pwd.length === 0 || !isCommonPassword(pwd, disallowList),
       },
     ];
 
@@ -141,12 +157,17 @@ PasswordInput.displayName = "PasswordInput";
 export { PasswordInput };
 export type { PasswordInputProps };
 
-export const validatePassword = (password: string): boolean => {
+export const validatePassword = (password: string, disallow: string[] = []): boolean => {
   const hasMinLength = password.length >= 8;
   const hasUppercase = /[A-Z]/.test(password);
   const hasLowercase = /[a-z]/.test(password);
   const hasNumber = /[0-9]/.test(password);
   const hasSpecial = /[!@#$%^&*()_+\-=[\]{}|;:,.<>?]/.test(password);
-  
-  return hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecial;
+
+  // The five rules above are all satisfied by "Password1!" and "Welcome1!".
+  // Composition does not merely fail to catch those -- it steers users to them.
+  return (
+    hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecial &&
+    !isCommonPassword(password, disallow)
+  );
 };
