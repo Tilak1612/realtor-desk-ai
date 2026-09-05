@@ -18,7 +18,7 @@ git config user.email "tilak1111@gmail.com"
 - **Stage**: Production / Launched
 - **Live URL**: https://www.realtordesk.ai
 - **Repo**: https://github.com/Tilak1612/realtor-desk-ai
-- **Supabase Project**: pseqajrtcgiphfnworii (realtordesk-prod)
+- **Supabase Project**: `vxkqwkeqincbxrgglmca` (realtordesk-prod, ca-central-1)
 
 ## Tech Stack
 
@@ -43,31 +43,38 @@ git config user.email "tilak1111@gmail.com"
 
 ```
 src/
-├── components/           # Reusable UI components (shadcn/ui based)
+├── assets/               # Raster + SVG. Run scripts/optimize-images.mjs after
+│                         # adding one; <Picture> needs .avif/.webp siblings.
+├── components/           # Shared UI
 │   ├── ui/               # shadcn primitives
-│   └── shared/           # App-wide shared components (Navbar, Sidebar, etc.)
-├── features/             # Feature modules (co-located logic + UI)
-│   ├── auth/             # Login, signup, OAuth, password reset
-│   ├── dashboard/        # Main agent dashboard, KPI cards
-│   ├── leads/            # AI lead scoring, lead list, lead detail
-│   ├── contacts/         # Client/contact management
-│   ├── deals/            # Deal pipeline (kanban + list view)
-│   ├── properties/       # Property listings, CREA DDF feed integration
-│   ├── tasks/            # Task management, calendar integration
-│   ├── chatbot/          # 24/7 AI chatbot (Lovable widget integration)
-│   ├── email/            # Email automation, drip campaigns
-│   ├── billing/          # Stripe subscription management
-│   └── virtual-tours/    # Matterport / iGuide virtual tour links
-├── hooks/                # Custom React hooks
-├── lib/                  # Utility functions, Supabase client, Stripe helpers, OpenAI client
-├── pages/                # Route-level page components
-├── types/                # Shared TypeScript interfaces and types
-└── styles/               # Global CSS / Tailwind config
+│   ├── rd/               # The "RD" product shell: AppShell, Sidebar, TopNav,
+│   │                     # StatCard, Table, and the /app design system
+│   ├── dashboard/        # Legacy dashboard widgets
+│   ├── contacts/ deals/ integrations/ contact-detail/
+│   └── Picture.tsx       # <picture> with AVIF -> WebP -> original.
+│                         # width/height are REQUIRED (prevents CLS).
+├── config/               # billing.ts, legal.ts — constants mirrored from
+│                         # server-side values, guarded by contract tests
+├── contexts/             # SubscriptionContext
+├── data/                 # Static reference data
+├── hooks/
+│   └── rd/               # useLeads, useReports, useConversation, ...
+├── i18n/                 # config.ts holds BOTH en and fr bundles inline.
+│                         # ~345KB; shape.test.ts enforces key parity.
+├── integrations/supabase/# client.ts + generated types.ts
+├── lib/
+│   └── rd/               # mapContact, mapActivity, pipeline, csv
+├── pages/                # Route components (marketing + /app + blog)
+└── styles/rd-tokens.css  # RD design tokens; base tokens live in index.css
 supabase/
-├── functions/            # Edge Functions (Deno) — webhook handlers, AI scoring, DDF sync
-├── migrations/           # SQL migrations (sequential)
-└── seed.sql              # Dev seed data (sample agents, leads, properties)
+├── functions/            # Edge Functions (Deno)
+└── migrations/
 ```
+
+**Note:** there is no `src/features/` directory. This tree is organised by kind
+(components / hooks / lib / pages), not by feature. Earlier revisions of this
+file described a feature-module layout that was never built.
+
 
 ## Conventions
 
