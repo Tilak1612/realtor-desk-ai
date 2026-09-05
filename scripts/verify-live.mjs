@@ -396,6 +396,59 @@ try {
     mobileFindings.join(" | ") || `${A11Y_PAGES.length} pages clean at 390px`
   );
 
+  /* ── 5g. field performance on a mid-range phone ─────────────────────────── */
+  //
+  // The brief asks that animations stay smooth on normal mobile devices and
+  // do not delay page loading. Until now that was an argument -- the CSS uses
+  // only transform and opacity -- rather than a measurement.
+  //
+  // 4x CPU throttling approximates a mid-range Android. LCP is gated; CLS is
+  // measured and REPORTED but not gated, for an honest reason: across nine
+  // runs it read 0.000 eight times and 0.4718 once, and six further runs with
+  // the observer installed from domcontentloaded could not reproduce it or
+  // attribute it to any node. Gating on a figure I cannot reproduce would
+  // produce a flaky check, and a flaky check gets ignored.
+  const perfCtx = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 2,
+    isMobile: true,
+    hasTouch: true,
+  });
+  const perfPage = await perfCtx.newPage();
+  const cdp = await perfCtx.newCDPSession(perfPage);
+  await cdp.send("Emulation.setCPUThrottlingRate", { rate: 4 });
+  await perfPage.goto(BASE, { waitUntil: "load" });
+  await perfPage.waitForTimeout(3500);
+
+  const vitals = await perfPage.evaluate(
+    () =>
+      new Promise((resolve) => {
+        let lcp = 0;
+        let cls = 0;
+        let longest = 0;
+        new PerformanceObserver((l) => {
+          for (const e of l.getEntries()) lcp = Math.round(e.startTime);
+        }).observe({ type: "largest-contentful-paint", buffered: true });
+        new PerformanceObserver((l) => {
+          for (const e of l.getEntries()) if (!e.hadRecentInput) cls += e.value;
+        }).observe({ type: "layout-shift", buffered: true });
+        new PerformanceObserver((l) => {
+          for (const e of l.getEntries()) longest = Math.max(longest, Math.round(e.duration));
+        }).observe({ type: "longtask", buffered: true });
+        setTimeout(() => resolve({ lcp, cls: +cls.toFixed(4), longest }), 1200);
+      })
+  );
+  await perfCtx.close();
+
+  // 2500ms is the "good" LCP threshold. The main thread is what this gates:
+  // a render-blocking regression or a newly-eager import shows up here long
+  // before anyone notices it by eye.
+  record(
+    "mobile LCP within budget (4x CPU throttle)",
+    vitals.lcp > 0 && vitals.lcp < 2500,
+    `LCP ${vitals.lcp}ms, longest task ${vitals.longest}ms, CLS ${vitals.cls} (reported, not gated)`
+  );
+
   /* ── 6. no horizontal overflow at any target width ──────────────────────── */
   const widths = [320, 375, 390, 430, 768, 1024, 1440, 1920];
   const overflow = [];
