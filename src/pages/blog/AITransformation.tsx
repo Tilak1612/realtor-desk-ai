@@ -5,6 +5,9 @@ import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-ai-transformation.jpg";
+import blogImageAvif from "@/assets/blog-ai-transformation.avif";
+import blogImageWebp from "@/assets/blog-ai-transformation.webp";
+import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
 const AITransformation = () => {
@@ -75,10 +78,15 @@ const AITransformation = () => {
           </header>
 
           {/* Featured Image */}
-          <img loading="lazy" decoding="async" 
-            src={blogImage} 
+          <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1024}
+            height={576}
             alt="AI technology transforming real estate"
             className="w-full rounded-lg mb-8 shadow-lg"
+            priority
           />
 
           {/* Article Content */}

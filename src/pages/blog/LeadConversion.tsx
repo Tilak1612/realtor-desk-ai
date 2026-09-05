@@ -5,6 +5,9 @@ import { ArrowLeft, Calendar, Clock, Share2, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-lead-conversion.jpg";
+import blogImageAvif from "@/assets/blog-lead-conversion.avif";
+import blogImageWebp from "@/assets/blog-lead-conversion.webp";
+import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
 const LeadConversion = () => {
@@ -72,10 +75,15 @@ const LeadConversion = () => {
             </p>
           </header>
 
-          <img loading="lazy" decoding="async" 
-            src={blogImage} 
+          <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1024}
+            height={576}
             alt="Predictive analytics dashboard"
             className="w-full rounded-lg mb-8 shadow-lg"
+            priority
           />
 
           <div className="prose prose-lg max-w-none">

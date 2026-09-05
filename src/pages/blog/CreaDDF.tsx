@@ -5,6 +5,9 @@ import { ArrowLeft, Calendar, Clock, Share2, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import blogImage from "@/assets/blog-crea-ddf.jpg";
+import blogImageAvif from "@/assets/blog-crea-ddf.avif";
+import blogImageWebp from "@/assets/blog-crea-ddf.webp";
+import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
 const CreaDDF = () => {
@@ -72,10 +75,15 @@ const CreaDDF = () => {
             </p>
           </header>
 
-          <img loading="lazy" decoding="async" 
-            src={blogImage} 
+          <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1280}
+            height={720}
             alt="CREA DDF integration visualization"
             className="w-full rounded-lg mb-8 shadow-lg"
+            priority
           />
 
           <div className="prose prose-lg max-w-none">

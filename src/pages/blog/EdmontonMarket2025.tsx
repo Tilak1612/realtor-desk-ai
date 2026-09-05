@@ -6,6 +6,9 @@ import { ArrowLeft, Clock, Calendar, MapPin, TrendingUp, Home, DollarSign, Build
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/blog-edmonton-market.jpg";
+import blogImageAvif from "@/assets/blog-edmonton-market.avif";
+import blogImageWebp from "@/assets/blog-edmonton-market.webp";
+import { Picture } from "@/components/Picture";
 
 const EdmontonMarket2025 = () => {
   return (
@@ -72,11 +75,16 @@ const EdmontonMarket2025 = () => {
 
       {/* Featured Image */}
       <section className="container-custom -mt-8 mb-12">
-        <img loading="lazy" decoding="async" 
-          src={blogImage} 
-          alt="Edmonton Alberta skyline with river valley"
-          className="w-full max-w-4xl rounded-2xl shadow-xl"
-        />
+        <Picture
+            src={blogImage}
+            avif={blogImageAvif}
+            webp={blogImageWebp}
+            width={1024}
+            height={576}
+            alt="Edmonton Alberta skyline with river valley"
+            className="w-full max-w-4xl rounded-2xl shadow-xl"
+            priority
+          />
       </section>
 
       {/* Article Content */}
