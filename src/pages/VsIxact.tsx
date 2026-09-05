@@ -54,7 +54,7 @@ const VsIxact = () => {
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
               <div className="text-3xl font-bold gradient-text mb-1">$999/year</div>
-              <div className="text-xs text-accent font-semibold">+$243 for AI superpowers</div>
+              <div className="text-xs text-rd-terra-800 font-semibold">+$243 for AI superpowers</div>
             </Card>
           </div>
         </div>
@@ -67,7 +67,7 @@ const VsIxact = () => {
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6 text-center">
-              <Brain className="w-12 h-12 text-accent mx-auto mb-4" />
+              <Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
               <h3 className="font-bold mb-2">Get AI Capabilities</h3>
               <p className="text-sm text-muted-foreground">
                 Predictive lead scoring, intelligent chatbot, automated nurturing IXACT doesn't have
@@ -75,7 +75,7 @@ const VsIxact = () => {
             </Card>
 
             <Card className="p-6 text-center">
-              <TrendingUp className="w-12 h-12 text-accent mx-auto mb-4" />
+              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
               <h3 className="font-bold mb-2">Close Meaningfully More Deals</h3>
               <p className="text-sm text-muted-foreground">
                 AI identifies your hottest leads. Focus on sellers ready to list, not cold contacts
@@ -83,7 +83,7 @@ const VsIxact = () => {
             </Card>
 
             <Card className="p-6 text-center">
-              <Zap className="w-12 h-12 text-accent mx-auto mb-4" />
+              <Zap className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
               <h3 className="font-bold mb-2">Save 15+ Hours/Week</h3>
               <p className="text-sm text-muted-foreground">
                 AI handles lead qualification, follow-up, appointment booking automatically
@@ -195,14 +195,14 @@ const VsIxact = () => {
                     <td className="p-4 font-medium">{row.feature}</td>
                     <td className="p-4 text-center">
                       {typeof row.rdai === 'boolean' ? (
-                        row.rdai ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                        row.rdai ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
                       ) : (
-                        <span className="text-accent font-semibold">{row.rdai}</span>
+                        <span className="text-rd-terra-800 font-semibold">{row.rdai}</span>
                       )}
                     </td>
                     <td className="p-4 text-center">
                       {typeof row.ixact === 'boolean' ? (
-                        row.ixact ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
+                        row.ixact ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
                       ) : (
                         <span className="text-muted-foreground">{row.ixact}</span>
                       )}
@@ -225,7 +225,7 @@ const VsIxact = () => {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
-              <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
+              <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Only ~$45 More/Month</h3>
               <p className="text-sm text-muted-foreground">
                 $999/year vs IXACT's $456. About a coffee a week for AI, bilingual EN/FR, and CASL-compliant email.
@@ -233,7 +233,7 @@ const VsIxact = () => {
             </Card>
 
             <Card className="p-6">
-              <Brain className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Free Migration</h3>
               <p className="text-sm text-muted-foreground">
                 We move all your IXACT contacts and data for free. Zero effort on your part.
@@ -241,7 +241,7 @@ const VsIxact = () => {
             </Card>
 
             <Card className="p-6">
-              <TrendingUp className="w-12 h-12 text-accent mx-auto mb-3" />
+              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Proven ROI</h3>
               <p className="text-sm text-muted-foreground">
                 Agents average 41% GCI increase first year. $243 investment, $75K+ return.

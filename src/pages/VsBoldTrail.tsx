@@ -58,12 +58,12 @@ const VsBoldTrail = () => {
               <div className="text-xs text-muted-foreground">$5,988/year + $999 setup</div>
             </Card>
             
-            <TrendingDown className="w-8 h-8 text-accent rotate-90 sm:rotate-0" />
+            <TrendingDown className="w-8 h-8 text-rd-terra-800 rotate-90 sm:rotate-0" />
             
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
               <div className="text-3xl font-bold gradient-text mb-1">$999</div>
-              <div className="text-xs text-accent font-semibold">{t('comparison.savings')} $5,988 {t('comparison.firstYear')}</div>
+              <div className="text-xs text-rd-terra-800 font-semibold">{t('comparison.savings')} $5,988 {t('comparison.firstYear')}</div>
             </Card>
           </div>
         </div>
@@ -135,7 +135,7 @@ const VsBoldTrail = () => {
           
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-accent mb-3" />
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">30-Minute Support Response</h3>
               <p className="text-sm text-muted-foreground">
                 Canadian support team responds within 30 minutes during business hours. Live chat available 24/7.
@@ -143,7 +143,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-accent mb-3" />
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Enterprise-Grade Reliability</h3>
               <p className="text-sm text-muted-foreground">
                 Built on enterprise infrastructure. Your CRM works when you need it. No embarrassing crashes.
@@ -151,7 +151,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-accent mb-3" />
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">$999/Year, Zero Setup Fees</h3>
               <p className="text-sm text-muted-foreground">
                 All-inclusive pricing. No hidden costs, no surprise charges. Save $5,988 first year vs BoldTrail.
@@ -159,7 +159,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-accent mb-3" />
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Easy to Learn and Use</h3>
               <p className="text-sm text-muted-foreground">
                 Intuitive interface. Most agents are productive within 24 hours. Free training included.
@@ -167,7 +167,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-accent mb-3" />
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Built for Canadian Market</h3>
               <p className="text-sm text-muted-foreground">
                 Toronto, Vancouver, Calgary market intelligence. Bilingual EN/FR. PIPEDA compliant. CREA DDF® integration coming Q3 2026.
@@ -175,7 +175,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-accent mb-3" />
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">True Predictive AI</h3>
               <p className="text-sm text-muted-foreground">
                 Not just automation - real AI that predicts which leads will convert. 6x better than basic CRMs.
@@ -221,14 +221,14 @@ const VsBoldTrail = () => {
                     <td className="p-4 font-medium">{row.feature}</td>
                     <td className="p-4 text-center">
                       {typeof row.rdai === 'boolean' ? (
-                        row.rdai ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                        row.rdai ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
                       ) : (
-                        <span className="text-accent font-semibold">{row.rdai}</span>
+                        <span className="text-rd-terra-800 font-semibold">{row.rdai}</span>
                       )}
                     </td>
                     <td className="p-4 text-center">
                       {typeof row.boldtrail === 'boolean' ? (
-                        row.boldtrail ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
+                        row.boldtrail ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
                       ) : (
                         <span className="text-muted-foreground">{row.boldtrail}</span>
                       )}
@@ -251,7 +251,7 @@ const VsBoldTrail = () => {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
-              <Shield className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">100% Free Migration</h3>
               <p className="text-sm text-muted-foreground">
                 We export your BoldTrail data and import it to your new account. $499 value, free.
@@ -259,7 +259,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6">
-              <Clock className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Live in 48 Hours</h3>
               <p className="text-sm text-muted-foreground">
                 Schedule migration call, we handle everything, you're up and running in 2 days.
@@ -267,7 +267,7 @@ const VsBoldTrail = () => {
             </Card>
 
             <Card className="p-6">
-              <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
+              <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">30-Day Guarantee</h3>
               <p className="text-sm text-muted-foreground">
                 If it's not better than BoldTrail, we refund 100%. No questions asked.

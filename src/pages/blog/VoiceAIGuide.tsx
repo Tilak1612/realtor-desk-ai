@@ -70,7 +70,7 @@ const VoiceAIGuide = () => {
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <Card className="p-6 bg-red-50 border-red-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <XCircle className="w-6 h-6 text-red-600" />
+                  <XCircle className="w-6 h-6 text-red-700" />
                   <h3 className="text-xl font-bold">Not a Robocall (What You DON'T Want)</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 mb-4">
@@ -86,14 +86,14 @@ const VoiceAIGuide = () => {
                   <p className="font-semibold text-sm mb-2">Example Robocall:</p>
                   <div className="space-y-2 text-xs">
                     <p><strong>Robot:</strong> "This is a message about 123 Main Street. Press 1 to speak to an agent. Press 2 to—"</p>
-                    <p className="text-red-600 italic">Lead hangs up ❌</p>
+                    <p className="text-red-700 italic">Lead hangs up ❌</p>
                   </div>
                 </div>
               </Card>
 
               <Card className="p-6 bg-green-50 border-green-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <CheckCircle2 className="w-6 h-6 text-green-600" />
+                  <CheckCircle2 className="w-6 h-6 text-green-700" />
                   <h3 className="text-xl font-bold">Conversational AI (What You WANT)</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700 mb-4">
@@ -115,7 +115,7 @@ const VoiceAIGuide = () => {
                     <p><strong>AI:</strong> "Perfect! It's fully fenced, about a quarter acre. When would you like to see it? Sarah has Saturday at 2 PM or Sunday at 10 AM available."</p>
                     <p><strong>Lead:</strong> "Saturday works"</p>
                     <p><strong>AI:</strong> "Great! You're booked for Saturday at 2 PM. Sarah will text you confirmation. Sound good?"</p>
-                    <p className="text-green-600 italic mt-2">Appointment booked! ✅</p>
+                    <p className="text-green-700 italic mt-2">Appointment booked! ✅</p>
                   </div>
                 </div>
               </Card>
@@ -157,8 +157,8 @@ const VoiceAIGuide = () => {
                     </tr>
                     <tr className="border-b bg-green-50">
                       <td className="p-3 font-semibold">Voice AI Call</td>
-                      <td className="p-3 font-semibold text-green-600">65-75%</td>
-                      <td className="p-3 font-semibold text-green-600">Immediate</td>
+                      <td className="p-3 font-semibold text-green-700">65-75%</td>
+                      <td className="p-3 font-semibold text-green-700">Immediate</td>
                     </tr>
                   </tbody>
                 </table>
@@ -459,49 +459,49 @@ const VoiceAIGuide = () => {
                     <tr className="border-b">
                       <td className="p-3">Calls Per Day</td>
                       <td className="p-3">8-15</td>
-                      <td className="p-3 text-green-600 font-semibold">100+</td>
+                      <td className="p-3 text-green-700 font-semibold">100+</td>
                       <td className="p-3 font-semibold">7-12x more</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Answer Rate</td>
                       <td className="p-3">22%</td>
-                      <td className="p-3 text-green-600 font-semibold">28%</td>
+                      <td className="p-3 text-green-700 font-semibold">28%</td>
                       <td className="p-3 font-semibold">+27%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Conversation Rate</td>
                       <td className="p-3">85%</td>
-                      <td className="p-3 text-yellow-600">78%</td>
+                      <td className="p-3 text-yellow-700">78%</td>
                       <td className="p-3">-8%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Qualification Rate</td>
                       <td className="p-3">18%</td>
-                      <td className="p-3 text-green-600 font-semibold">24%</td>
+                      <td className="p-3 text-green-700 font-semibold">24%</td>
                       <td className="p-3 font-semibold">+33%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Appointment Booking</td>
                       <td className="p-3">12%</td>
-                      <td className="p-3 text-green-600 font-semibold">16%</td>
+                      <td className="p-3 text-green-700 font-semibold">16%</td>
                       <td className="p-3 font-semibold">+33%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Appointment Show Rate</td>
                       <td className="p-3">68%</td>
-                      <td className="p-3 text-green-600 font-semibold">81%</td>
+                      <td className="p-3 text-green-700 font-semibold">81%</td>
                       <td className="p-3 font-semibold">+19%</td>
                     </tr>
                     <tr className="border-b">
                       <td className="p-3">Cost Per Call</td>
                       <td className="p-3">$8-12</td>
-                      <td className="p-3 text-green-600 font-semibold">$0.15</td>
+                      <td className="p-3 text-green-700 font-semibold">$0.15</td>
                       <td className="p-3 font-semibold">98% cheaper</td>
                     </tr>
                     <tr>
                       <td className="p-3 font-bold">Lead-to-Appointment</td>
                       <td className="p-3">2.3%</td>
-                      <td className="p-3 text-green-600 font-bold">3.6%</td>
+                      <td className="p-3 text-green-700 font-bold">3.6%</td>
                       <td className="p-3 font-bold text-primary">+57%</td>
                     </tr>
                   </tbody>
@@ -516,8 +516,8 @@ const VoiceAIGuide = () => {
                 <p className="text-sm text-gray-700">More calls than human agents</p>
               </Card>
               <Card className="p-6 bg-green-50">
-                <CheckCircle2 className="w-8 h-8 text-green-600 mb-3" />
-                <p className="text-3xl font-bold text-green-600 mb-2">56%</p>
+                <CheckCircle2 className="w-8 h-8 text-green-700 mb-3" />
+                <p className="text-3xl font-bold text-green-700 mb-2">56%</p>
                 <p className="text-sm text-gray-700">More appointments from same lead volume</p>
               </Card>
               <Card className="p-6 bg-blue-50">
@@ -783,7 +783,7 @@ const VoiceAIGuide = () => {
                     <td className="p-3 font-bold">98</td>
                     <td className="p-3 font-bold">13</td>
                     <td className="p-3 font-bold">2.3</td>
-                    <td className="p-3 font-bold text-green-600">$27,600</td>
+                    <td className="p-3 font-bold text-green-700">$27,600</td>
                     <td className="p-3 font-bold text-primary">Strong</td>
                   </tr>
                 </tbody>

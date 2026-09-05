@@ -112,23 +112,23 @@ const OpenHouseDigitalSignIn = () => {
               <h4 className="text-lg font-bold mb-3">The Paper Sign-In Problem</h4>
               <ul className="space-y-2 mb-0">
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <span>68% of visitors provide fake phone numbers on paper sheets</span>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <span>Illegible handwriting makes 22% of contact info unusable</span>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <span>Privacy concerns—visitors can see previous guests' information</span>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <span>No CASL compliance tracking or consent documentation</span>
                 </li>
                 <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0 mt-0.5" />
+                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <span>Follow-up delayed by 2-4 hours minimum (manual data entry)</span>
                 </li>
               </ul>
@@ -203,31 +203,31 @@ const OpenHouseDigitalSignIn = () => {
               <h4 className="font-bold mb-3">What CASL Requires for Open House Sign-Ins:</h4>
               <ul className="space-y-2 mb-0">
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>1. Clear Purpose Statement:</strong> "By signing, you consent to receive property updates, market information, and follow-up communications from [Agent Name]."
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>2. Contact Information Displayed:</strong> Your business name, address, phone, and email must be visible.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>3. Opt-Out Mechanism:</strong> Each communication must include an easy unsubscribe option.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>4. Consent Documentation:</strong> You must keep records proving consent for 3 years.
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>5. Granular Consent Options:</strong> Separate checkboxes for email, SMS, and phone calls.
                   </div>
@@ -341,7 +341,7 @@ const OpenHouseDigitalSignIn = () => {
                       <li>• Less professional appearance</li>
                       <li>• No offline mode</li>
                     </ul>
-                    <p className="text-xl font-bold text-green-600 mt-2">Free</p>
+                    <p className="text-xl font-bold text-green-700 mt-2">Free</p>
                   </div>
                 </div>
               </Card>
@@ -437,7 +437,7 @@ const OpenHouseDigitalSignIn = () => {
                   <li>• 4.2% conversion = 3.2 deals closed</li>
                   <li>• 3.2 deals × $10,000 avg commission = <strong className="text-lg">$32,000 revenue</strong></li>
                   <li>• Cost: $120 (printing, forms)</li>
-                  <li>• <strong className="text-green-600 text-lg">Net: $31,880</strong></li>
+                  <li>• <strong className="text-green-700 text-lg">Net: $31,880</strong></li>
                 </ul>
               </div>
 
@@ -449,7 +449,7 @@ const OpenHouseDigitalSignIn = () => {
                   <li>• 14.6% conversion = 30.5 appointments = 9.2 deals closed</li>
                   <li>• 9.2 deals × $10,000 avg commission = <strong className="text-lg">$92,000 revenue</strong></li>
                   <li>• Cost: $828/year (RealtorDesk AI subscription)</li>
-                  <li>• <strong className="text-green-600 text-xl">Net: $91,172</strong></li>
+                  <li>• <strong className="text-green-700 text-xl">Net: $91,172</strong></li>
                 </ul>
               </div>
 
@@ -465,42 +465,42 @@ const OpenHouseDigitalSignIn = () => {
               <h4 className="font-bold mb-4">Getting Started with Digital Sign-In (Step-by-Step)</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Week 1: Choose Your Platform</strong>
                     <p className="text-sm text-muted-foreground">Evaluate RealtorDesk AI, Spacio, or Google Forms based on your needs and budget.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Week 1: Get Hardware</strong>
                     <p className="text-sm text-muted-foreground">iPad ($449+) or Android tablet ($199+). Add a stand ($30-80) for professional presentation.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Week 1-2: Configure CASL Compliance</strong>
                     <p className="text-sm text-muted-foreground">Add consent language, disclosure information, and unsubscribe mechanisms.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Week 2: Build Follow-Up Sequences</strong>
                     <p className="text-sm text-muted-foreground">Create automated email/SMS templates for instant and drip follow-up.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Week 2: Test Run</strong>
                     <p className="text-sm text-muted-foreground">Do a mock open house with friends/family to test the full workflow.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Week 3: Launch at Real Open House</strong>
                     <p className="text-sm text-muted-foreground">Greet visitors: "We're going digital to protect your privacy and send you instant property updates—just takes 30 seconds!"</p>

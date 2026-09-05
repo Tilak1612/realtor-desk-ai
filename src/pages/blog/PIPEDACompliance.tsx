@@ -242,7 +242,7 @@ const PIPEDACompliance = () => {
                   </ul>
                 </div>
                 <div className="bg-green-500/5 border border-green-500/20 p-6 rounded-xl">
-                  <h4 className="font-bold mb-3 text-green-600">Green Flags</h4>
+                  <h4 className="font-bold mb-3 text-green-700">Green Flags</h4>
                   <ul className="text-sm mb-0">
                     <li>Explicit Canadian data residency</li>
                     <li>Clear privacy documentation</li>

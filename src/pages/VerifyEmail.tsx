@@ -114,7 +114,7 @@ const VerifyEmail = () => {
                 </>
               ) : (
                 <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                  <p className="text-green-600 dark:text-green-400 font-medium">
+                  <p className="text-green-700 dark:text-green-400 font-medium">
                     ✓ Email verified successfully! Redirecting to dashboard...
                   </p>
                 </div>

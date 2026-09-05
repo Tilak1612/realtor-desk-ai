@@ -127,7 +127,7 @@ const BestCRMCanada2025 = () => {
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <h4 className="font-semibold mb-3 flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-600" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700" />
                     What Makes It #1
                   </h4>
                   <ul className="space-y-2 text-sm">
@@ -174,19 +174,19 @@ const BestCRMCanada2025 = () => {
                 <h4 className="font-semibold mb-3">Best For</h4>
                 <div className="grid md:grid-cols-2 gap-3 text-sm">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>Canadian solo agents</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>Small teams (2-10 agents)</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>Agents who want AI automation</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
                     <span>Quebec markets (bilingual needs)</span>
                   </div>
                 </div>

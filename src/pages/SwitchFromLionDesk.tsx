@@ -169,7 +169,7 @@ const SwitchFromLionDesk = () => {
                 {comparisonRows.map((row, i) => (
                   <tr key={i} className={`border-t ${i % 2 === 0 ? "" : "bg-muted/30"}`}>
                     <td className="py-3 px-4 font-medium">{row.feature}</td>
-                    <td className="text-center py-3 px-4 text-green-600 font-medium">{row.rdai}</td>
+                    <td className="text-center py-3 px-4 text-green-700 font-medium">{row.rdai}</td>
                     <td className={`text-center py-3 px-4 ${row.liondesk.startsWith("✗") ? "text-destructive" : "text-muted-foreground"}`}>{row.liondesk}</td>
                   </tr>
                 ))}

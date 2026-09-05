@@ -87,7 +87,7 @@ const AIPoweredCRM = () => {
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold mb-1">Stop Wasting Time on Cold Leads</h4>
                     <p className="text-sm text-muted-foreground">
@@ -97,7 +97,7 @@ const AIPoweredCRM = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold mb-1">Identify Hidden Opportunities</h4>
                     <p className="text-sm text-muted-foreground">
@@ -107,7 +107,7 @@ const AIPoweredCRM = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold mb-1">Prioritize Your Day Automatically</h4>
                     <p className="text-sm text-muted-foreground">
@@ -119,7 +119,7 @@ const AIPoweredCRM = () => {
 
               <Card className="p-6 bg-accent/10 border-accent/20">
                 <div className="flex items-center gap-3 mb-3">
-                  <BarChart3 className="w-8 h-8 text-accent" />
+                  <BarChart3 className="w-8 h-8 text-rd-terra-800" />
                   <div>
                     <div className="text-2xl font-bold gradient-text">72%</div>
                     <div className="text-sm text-muted-foreground">Prediction Accuracy</div>
@@ -141,7 +141,7 @@ const AIPoweredCRM = () => {
                   <p className="text-sm text-muted-foreground mb-2">
                     Viewed 12 listings, opened 8 emails, searched "$800K Toronto condos"
                   </p>
-                  <div className="text-xs text-accent font-semibold">
+                  <div className="text-xs text-rd-terra-800 font-semibold">
                     ⚡ Predicted to buy in 30-45 days
                   </div>
                 </div>
@@ -194,7 +194,7 @@ const AIPoweredCRM = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <Card className="p-6 text-center">
-              <TrendingUp className="w-12 h-12 text-accent mx-auto mb-3" />
+              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Price Predictions</h3>
               <p className="text-sm text-muted-foreground">
                 30-90 day price forecasts by neighborhood
@@ -202,7 +202,7 @@ const AIPoweredCRM = () => {
             </Card>
 
             <Card className="p-6 text-center">
-              <Clock className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Days on Market</h3>
               <p className="text-sm text-muted-foreground">
                 Trend analysis to time listings perfectly
@@ -210,7 +210,7 @@ const AIPoweredCRM = () => {
             </Card>
 
             <Card className="p-6 text-center">
-              <Users className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Users className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Buyer Demand</h3>
               <p className="text-sm text-muted-foreground">
                 Track search volume by area and price range
@@ -218,7 +218,7 @@ const AIPoweredCRM = () => {
             </Card>
 
             <Card className="p-6 text-center">
-              <BarChart3 className="w-12 h-12 text-accent mx-auto mb-3" />
+              <BarChart3 className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Inventory Analysis</h3>
               <p className="text-sm text-muted-foreground">
                 Supply trends to position clients strategically
@@ -323,8 +323,8 @@ const AIPoweredCRM = () => {
 
                   <div className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
                     <div className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="font-semibold text-green-600">Lead qualified & appointment booked</span>
+                      <CheckCircle className="w-4 h-4 text-green-700" />
+                      <span className="font-semibold text-green-700">Lead qualified & appointment booked</span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
                       While you were sleeping, AI captured contact info, qualified budget, 
@@ -348,7 +348,7 @@ const AIPoweredCRM = () => {
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                  <Zap className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold mb-1">Instant Response = More Conversions</h4>
                     <p className="text-sm text-muted-foreground">
@@ -358,7 +358,7 @@ const AIPoweredCRM = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <Brain className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                  <Brain className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold mb-1">Understands Canadian Real Estate</h4>
                     <p className="text-sm text-muted-foreground">
@@ -368,7 +368,7 @@ const AIPoweredCRM = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <Target className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
+                  <Target className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-semibold mb-1">Qualifies Leads While You Sleep</h4>
                     <p className="text-sm text-muted-foreground">
@@ -410,7 +410,7 @@ const AIPoweredCRM = () => {
               <div className="space-y-6">
                 <div className="border-l-4 border-accent pl-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-accent" />
+                    <Clock className="w-4 h-4 text-rd-terra-800" />
                     <span className="text-sm font-semibold">Day 1 - 9:30 AM</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -420,7 +420,7 @@ const AIPoweredCRM = () => {
 
                 <div className="border-l-4 border-accent pl-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-accent" />
+                    <Clock className="w-4 h-4 text-rd-terra-800" />
                     <span className="text-sm font-semibold">Day 3 - 6:15 PM</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -430,7 +430,7 @@ const AIPoweredCRM = () => {
 
                 <div className="border-l-4 border-accent pl-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-accent" />
+                    <Clock className="w-4 h-4 text-rd-terra-800" />
                     <span className="text-sm font-semibold">Day 7 - 12:00 PM</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -440,8 +440,8 @@ const AIPoweredCRM = () => {
 
                 <div className="border-l-4 border-green-500 pl-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span className="text-sm font-semibold text-green-600">Day 14 - Lead Converts</span>
+                    <CheckCircle className="w-4 h-4 text-green-700" />
+                    <span className="text-sm font-semibold text-green-700">Day 14 - Lead Converts</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
                     Lead books viewing after receiving 7 perfectly-timed touches. You never lifted a finger.
@@ -531,23 +531,23 @@ const AIPoweredCRM = () => {
                     <td className="p-4 font-medium">{row.feature}</td>
                     <td className="p-4 text-center">
                       {typeof row.basic === 'boolean' ? (
-                        row.basic ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
+                        row.basic ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
                       ) : (
                         <span className="text-muted-foreground text-sm">{row.basic}</span>
                       )}
                     </td>
                     <td className="p-4 text-center">
                       {typeof row.otherAI === 'boolean' ? (
-                        row.otherAI ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
+                        row.otherAI ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
                       ) : (
                         <span className="text-muted-foreground text-sm">{row.otherAI}</span>
                       )}
                     </td>
                     <td className="p-4 text-center">
                       {typeof row.rdai === 'boolean' ? (
-                        row.rdai ? <Check className="w-5 h-5 text-accent mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                        row.rdai ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
                       ) : (
-                        <span className="text-accent font-semibold text-sm">{row.rdai}</span>
+                        <span className="text-rd-terra-800 font-semibold text-sm">{row.rdai}</span>
                       )}
                     </td>
                   </tr>
@@ -565,19 +565,19 @@ const AIPoweredCRM = () => {
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-8">
-              <TrendingUp className="w-12 h-12 text-accent mx-auto mb-3" />
+              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <div className="text-4xl font-bold gradient-text mb-2">41%</div>
               <p className="text-sm text-muted-foreground">Higher revenue per year</p>
             </Card>
 
             <Card className="p-8">
-              <Clock className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <div className="text-4xl font-bold gradient-text mb-2">15hrs</div>
               <p className="text-sm text-muted-foreground">Saved per week</p>
             </Card>
 
             <Card className="p-8">
-              <Target className="w-12 h-12 text-accent mx-auto mb-3" />
+              <Target className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <div className="text-4xl font-bold gradient-text mb-2">6-8</div>
               <p className="text-sm text-muted-foreground">More deals closed annually</p>
             </Card>

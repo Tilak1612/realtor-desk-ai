@@ -187,23 +187,23 @@ const VsPropertybase = () => {
                 <h3 className="font-bold mb-3 text-red-900">Propertybase Challenges:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                     <span>Expensive ($600-1,200+ USD/month + implementation)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                     <span>3-6 month implementation timeline</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                     <span>Requires Salesforce expertise (consultants needed)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                     <span>Complex interface (6-12 month learning curve)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
                     <span>No built-in AI automation</span>
                   </li>
                 </ul>
@@ -253,27 +253,27 @@ const VsPropertybase = () => {
                 <h3 className="font-bold mb-3 text-green-900">RealtorDesk AI Strengths:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                     <span>Affordable ($149-299 CAD/month)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                     <span>1-3 day implementation</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                     <span>No technical expertise required</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                     <span>Simple interface (1-2 week learning curve)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                     <span>Advanced AI built-in (chat + voice + predictive)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
                     <span>Canadian compliance built-in (PIPEDA/CASL)</span>
                   </li>
                 </ul>
@@ -283,19 +283,19 @@ const VsPropertybase = () => {
                 <h3 className="font-bold mb-3 text-yellow-900">RealtorDesk AI Limitations:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-yellow-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
                     <span>Limited customization (pre-configured workflows)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-yellow-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
                     <span>Not built for enterprises (100+ agents)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-yellow-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
                     <span>No Salesforce ecosystem access</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-yellow-600 mt-0.5" />
+                    <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
                     <span>Newer platform (less brand recognition)</span>
                   </li>
                 </ul>

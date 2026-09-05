@@ -129,23 +129,23 @@ const SwitchFromLofty = () => {
               <h3 className="text-xl font-bold mb-4">True Intelligence</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-accent">✓</span>
+                  <span className="text-rd-terra-800">✓</span>
                   <span>Understands context, has real conversations</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-accent">✓</span>
+                  <span className="text-rd-terra-800">✓</span>
                   <span>Predicts conversions with 72% accuracy</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-accent">✓</span>
+                  <span className="text-rd-terra-800">✓</span>
                   <span>Learns and improves from every interaction</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-accent">✓</span>
+                  <span className="text-rd-terra-800">✓</span>
                   <span>Personalized content based on behavior</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-accent">✓</span>
+                  <span className="text-rd-terra-800">✓</span>
                   <span>Canadian market predictions (TO, VAN, CAL)</span>
                 </li>
               </ul>
@@ -170,7 +170,7 @@ const SwitchFromLofty = () => {
           <div className="grid md:grid-cols-5 gap-6">
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-6 h-6 text-accent" />
+                <Phone className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 1</div>
               <h3 className="font-semibold mb-2">15-Min Call</h3>
@@ -181,7 +181,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Upload className="w-6 h-6 text-accent" />
+                <Upload className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 2</div>
               <h3 className="font-semibold mb-2">Data Export</h3>
@@ -192,7 +192,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Download className="w-6 h-6 text-accent" />
+                <Download className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 3</div>
               <h3 className="font-semibold mb-2">Import</h3>
@@ -203,7 +203,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-6 h-6 text-accent" />
+                <GraduationCap className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 4</div>
               <h3 className="font-semibold mb-2">Training</h3>
@@ -214,7 +214,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-6 h-6 text-accent" />
+                <CheckCircle className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 5</div>
               <h3 className="font-semibold mb-2">Go Live</h3>
@@ -252,17 +252,17 @@ const SwitchFromLofty = () => {
                 <li className="text-sm">✓ No call/text charges</li>
                 <li className="text-sm">✓ No surprise fees</li>
                 <li className="text-sm">✓ No overage charges</li>
-                <li className="text-sm text-accent font-semibold">✓ Budget you can plan</li>
+                <li className="text-sm text-rd-terra-800 font-semibold">✓ Budget you can plan</li>
               </ul>
             </Card>
           </div>
 
           <Card className="mt-8 p-6 bg-accent/10 border-accent/20 text-center">
-            <DollarSign className="w-12 h-12 text-accent mx-auto mb-3" />
+            <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
             <p className="font-semibold mb-2">What You Actually Pay:</p>
             <p className="text-sm text-muted-foreground">
               Lofty: $1,188-3,600/year + unpredictable charges<br/>
-              Realtor Desk: <span className="text-accent font-semibold">$999/year, period.</span>
+              Realtor Desk: <span className="text-rd-terra-800 font-semibold">$999/year, period.</span>
             </p>
           </Card>
         </div>
@@ -318,7 +318,7 @@ const SwitchFromLofty = () => {
       {/* CTA */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <Brain className="w-16 h-16 text-accent mx-auto mb-6" />
+          <Brain className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
           <h2 className="mb-6">Upgrade to Real AI Today</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             30-day money-back guarantee. If it's not better than Lofty, full refund. No questions asked.

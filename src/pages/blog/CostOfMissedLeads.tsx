@@ -65,7 +65,7 @@ const CostOfMissedLeads = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-red-100 px-4 py-2 rounded-full mb-6">
-              <TrendingDown className="w-4 h-4 text-red-600" />
+              <TrendingDown className="w-4 h-4 text-red-700" />
               <span className="text-sm font-semibold text-red-900">ROI Analysis: Lost Revenue</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
@@ -91,9 +91,9 @@ const CostOfMissedLeads = () => {
                 They responded to <strong>312 of them (64%)</strong>.
               </p>
               <p className="text-lg text-gray-700 mb-6">
-                They lost <strong>175 leads</strong>—worth <span className="text-red-600 font-bold text-2xl">$2,100,000</span> in potential commission—simply by not responding.
+                They lost <strong>175 leads</strong>—worth <span className="text-red-700 font-bold text-2xl">$2,100,000</span> in potential commission—simply by not responding.
               </p>
-              <div className="bg-red-600 text-white p-6 rounded-lg">
+              <div className="bg-red-700 text-white p-6 rounded-lg">
                 <p className="text-3xl font-bold mb-2">$336,000</p>
                 <p className="text-lg">in lost personal income per agent</p>
               </div>
@@ -128,7 +128,7 @@ const CostOfMissedLeads = () => {
               {/* Type 1 */}
               <Card className="p-6 border-2 border-red-300">
                 <div className="flex items-start gap-4">
-                  <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-lg">1</div>
+                  <div className="bg-red-700 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-lg">1</div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">Never Contacted (23% of leads)</h3>
                     <p className="text-gray-700 mb-3">Lead submits form → Agent doesn't see notification → Lead is never contacted</p>
@@ -148,7 +148,7 @@ const CostOfMissedLeads = () => {
               {/* Type 2 */}
               <Card className="p-6 border-2 border-orange-300">
                 <div className="flex items-start gap-4">
-                  <div className="bg-orange-600 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-lg">2</div>
+                  <div className="bg-orange-700 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-lg">2</div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">Contacted Too Slowly (31% of leads)</h3>
                     <p className="text-gray-700 mb-3">Lead submits form → Agent responds 15-60 minutes later → Lead already contacted 3 other agents → Fastest agent wins</p>
@@ -168,7 +168,7 @@ const CostOfMissedLeads = () => {
               {/* Type 3 */}
               <Card className="p-6 border-2 border-yellow-300">
                 <div className="flex items-start gap-4">
-                  <div className="bg-yellow-600 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-lg">3</div>
+                  <div className="bg-yellow-700 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-lg">3</div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">Inconsistent Follow-Up (28% of leads)</h3>
                     <p className="text-gray-700 mb-3">Agent responds once or twice → Lead goes cold → Agent forgets to follow up → Lead buys 6 months later from different agent</p>
@@ -226,7 +226,7 @@ const CostOfMissedLeads = () => {
               </Card>
             </div>
 
-            <Card className="p-6 mt-6 bg-red-600 text-white">
+            <Card className="p-6 mt-6 bg-red-700 text-white">
               <p className="text-2xl font-bold mb-2">Total Impact:</p>
               <p className="text-lg">82% of agents lose 30-40% of leads due to the above reasons</p>
             </Card>
@@ -265,16 +265,16 @@ const CostOfMissedLeads = () => {
               </Card>
 
               <Card className="p-6 bg-gradient-to-br from-green-50 to-blue-50">
-                <Target className="w-12 h-12 text-green-600 mb-4" />
+                <Target className="w-12 h-12 text-green-700 mb-4" />
                 <h3 className="text-xl font-bold mb-4">Conversion Rate Benchmarks</h3>
                 <div className="space-y-3 text-sm">
                   <div className="bg-white p-3 rounded-lg">
                     <p className="font-semibold text-green-900 mb-1">✓ Good Lead Management (AI)</p>
-                    <p className="text-2xl font-bold text-green-600">2.5%</p>
+                    <p className="text-2xl font-bold text-green-700">2.5%</p>
                   </div>
                   <div className="bg-white p-3 rounded-lg">
                     <p className="font-semibold text-red-900 mb-1">✗ Poor Lead Management (Manual)</p>
-                    <p className="text-2xl font-bold text-red-600">1.0%</p>
+                    <p className="text-2xl font-bold text-red-700">1.0%</p>
                   </div>
                   <div className="bg-primary text-white p-3 rounded-lg">
                     <p className="font-semibold mb-1">The Gap:</p>
@@ -305,7 +305,7 @@ const CostOfMissedLeads = () => {
                 </div>
               </div>
 
-              <div className="bg-red-600 p-6 rounded-lg text-center">
+              <div className="bg-red-700 p-6 rounded-lg text-center">
                 <p className="text-xl mb-2">Cost of Missed Leads:</p>
                 <p className="text-5xl font-bold">$90,000</p>
                 <p className="text-lg mt-2">per year in lost income</p>
@@ -336,8 +336,8 @@ const CostOfMissedLeads = () => {
                 <tbody>
                   <tr className="bg-green-50 border-b">
                     <td className="p-3 font-bold">&lt;1 minute</td>
-                    <td className="p-3 text-center text-2xl font-bold text-green-600">391% higher</td>
-                    <td className="p-3 text-center"><span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">BEST</span></td>
+                    <td className="p-3 text-center text-2xl font-bold text-green-700">391% higher</td>
+                    <td className="p-3 text-center"><span className="bg-green-700 text-white px-3 py-1 rounded-full text-sm font-bold">BEST</span></td>
                   </tr>
                   <tr className="bg-blue-50 border-b">
                     <td className="p-3">1-5 minutes</td>
@@ -346,18 +346,18 @@ const CostOfMissedLeads = () => {
                   </tr>
                   <tr className="bg-yellow-50 border-b">
                     <td className="p-3">5-10 minutes</td>
-                    <td className="p-3 text-center text-yellow-600 font-bold">-400%</td>
-                    <td className="p-3 text-center"><span className="bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-bold">POOR</span></td>
+                    <td className="p-3 text-center text-yellow-700 font-bold">-400%</td>
+                    <td className="p-3 text-center"><span className="bg-yellow-700 text-white px-3 py-1 rounded-full text-sm font-bold">POOR</span></td>
                   </tr>
                   <tr className="bg-orange-50 border-b">
                     <td className="p-3">10-30 minutes</td>
-                    <td className="p-3 text-center text-orange-600 font-bold">-600%</td>
-                    <td className="p-3 text-center"><span className="bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-bold">VERY POOR</span></td>
+                    <td className="p-3 text-center text-orange-700 font-bold">-600%</td>
+                    <td className="p-3 text-center"><span className="bg-orange-700 text-white px-3 py-1 rounded-full text-sm font-bold">VERY POOR</span></td>
                   </tr>
                   <tr className="bg-red-50">
                     <td className="p-3">30+ minutes</td>
-                    <td className="p-3 text-center text-red-600 font-bold">-900%</td>
-                    <td className="p-3 text-center"><span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">LOST</span></td>
+                    <td className="p-3 text-center text-red-700 font-bold">-900%</td>
+                    <td className="p-3 text-center"><span className="bg-red-700 text-white px-3 py-1 rounded-full text-sm font-bold">LOST</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -379,41 +379,41 @@ const CostOfMissedLeads = () => {
               </div>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                  <Trophy className="w-6 h-6 text-green-600" />
+                  <Trophy className="w-6 h-6 text-green-700" />
                   <div>
                     <p className="font-bold">Agent A (with AI):</p>
                     <p className="text-sm text-gray-700">Responds in 2.8 seconds</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
-                  <PhoneOff className="w-6 h-6 text-red-600" />
+                  <PhoneOff className="w-6 h-6 text-red-700" />
                   <div>
                     <p className="font-bold">Agent B (manual):</p>
                     <p className="text-sm text-gray-700">Responds at 9:15 AM next day (12.5 hours)</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
-                  <PhoneOff className="w-6 h-6 text-red-600" />
+                  <PhoneOff className="w-6 h-6 text-red-700" />
                   <div>
                     <p className="font-bold">Agent C (manual):</p>
                     <p className="text-sm text-gray-700">Responds at 2 PM next day (17 hours)</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
-                  <PhoneOff className="w-6 h-6 text-red-600" />
+                  <PhoneOff className="w-6 h-6 text-red-700" />
                   <div>
                     <p className="font-bold">Agent D (manual):</p>
                     <p className="text-sm text-gray-700">Never responds</p>
                   </div>
                 </div>
               </div>
-              <div className="bg-green-600 text-white p-4 rounded-lg mt-4">
+              <div className="bg-green-700 text-white p-4 rounded-lg mt-4">
                 <p className="font-bold mb-2">Result: Agent A books the showing</p>
                 <p className="text-sm">Agents B, C, D lose</p>
               </div>
               <div className="mt-4 space-y-2 text-sm">
                 <p><strong>Cost to Agent B:</strong> $12,000 (one lost deal)</p>
-                <p><strong>Cost if this happens 10 times/year:</strong> <span className="text-red-600 font-bold text-xl">$120,000</span></p>
+                <p><strong>Cost if this happens 10 times/year:</strong> <span className="text-red-700 font-bold text-xl">$120,000</span></p>
               </div>
             </Card>
           </section>
@@ -477,7 +477,7 @@ const CostOfMissedLeads = () => {
                   <li>• AI qualifies and books appointment</li>
                   <li>• Agent wakes up to confirmed showing</li>
                 </ul>
-                <div className="bg-green-600 text-white p-3 rounded">
+                <div className="bg-green-700 text-white p-3 rounded">
                   <p className="font-semibold">Conversion rate: 2.8%</p>
                 </div>
               </Card>
@@ -619,12 +619,12 @@ const CostOfMissedLeads = () => {
                     </div>
                     <div className="border-t-2 border-gray-200 pt-2 mt-2 flex justify-between">
                       <span className="font-bold">Income:</span>
-                      <span className="text-xl font-bold text-red-600">$69,000</span>
+                      <span className="text-xl font-bold text-red-700">$69,000</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-green-600 text-white p-6 rounded-lg">
+                <div className="bg-green-700 text-white p-6 rounded-lg">
                   <p className="font-bold mb-4">2024 (After RealtorDesk AI)</p>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -658,7 +658,7 @@ const CostOfMissedLeads = () => {
               <div className="mt-6 grid md:grid-cols-3 gap-4">
                 <Card className="p-4 text-center bg-white">
                   <p className="text-sm text-gray-600 mb-1">Income Increase</p>
-                  <p className="text-3xl font-bold text-green-600">$108,240</p>
+                  <p className="text-3xl font-bold text-green-700">$108,240</p>
                   <p className="text-sm text-gray-600">(157% increase)</p>
                 </Card>
                 <Card className="p-4 text-center bg-white">
@@ -781,7 +781,7 @@ const CostOfMissedLeads = () => {
                   </ul>
                 </div>
 
-                <div className="bg-green-600 text-white p-6 rounded-lg">
+                <div className="bg-green-700 text-white p-6 rounded-lg">
                   <p className="font-bold text-xl mb-3">The Solution:</p>
                   <ul className="space-y-2">
                     <li>• AI responds in &lt;3 seconds, 24/7</li>

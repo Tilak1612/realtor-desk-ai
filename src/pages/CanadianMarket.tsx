@@ -179,7 +179,7 @@ const CanadianMarket = () => {
                   <p className="text-muted-foreground mb-4 leading-relaxed">
                     CREA DDF® integration is on the Q3 2026 roadmap, with planned access to 65% of Canadian listings nationally plus regional systems (ITSO, Pillar 9, TREB). Today you can import listings from Realtor.ca via the built-in importer.
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold">
+                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
                     <CheckCircle className="w-5 h-5" />
                     Planned: goodbye to manual MLS searches and data re-entry
                   </div>
@@ -198,15 +198,15 @@ const CanadianMarket = () => {
                   <h4 className="font-bold mb-3">Translation Examples:</h4>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       "Listing" → "Inscription" (not "Liste")
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       "Offer to Purchase" → "Promesse d'achat"
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       Formal vs. informal French (Quebec style)
                     </li>
                   </ul>
@@ -219,7 +219,7 @@ const CanadianMarket = () => {
                   <p className="text-muted-foreground mb-4 leading-relaxed">
                     Our AI doesn't just translate - it understands context, real estate terminology, and cultural communication styles in both languages.
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold">
+                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
                     <CheckCircle className="w-5 h-5" />
                     Serve English and French clients with equal expertise
                   </div>
@@ -240,19 +240,19 @@ const CanadianMarket = () => {
                   </p>
                   <ul className="space-y-2 mb-4">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-sm">Automatic form selection by province</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-sm">Required disclosure tracking</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-sm">Cooling-off period management</span>
                     </li>
                   </ul>
-                  <div className="flex items-center gap-2 text-accent font-semibold">
+                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
                     <CheckCircle className="w-5 h-5" />
                     Never worry about compliance violations again
                   </div>
@@ -262,7 +262,7 @@ const CanadianMarket = () => {
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     {["Ontario (RECO)", "BC (BCFSA)", "Alberta (RECA)", "Quebec (OACIQ)", "Manitoba", "Saskatchewan", "Nova Scotia", "New Brunswick"].map((province) => (
                       <div key={province} className="flex items-center gap-1">
-                        <CheckCircle className="w-3 h-3 text-accent" />
+                        <CheckCircle className="w-3 h-3 text-rd-terra-800" />
                         <span>{province}</span>
                       </div>
                     ))}
@@ -278,23 +278,23 @@ const CanadianMarket = () => {
                   <h4 className="font-bold mb-3">Data Sources:</h4>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       Bank of Canada interest rates
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       CMHC housing market data
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       Provincial foreign buyer taxes
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       Immigration patterns
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-accent" />
+                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
                       Regional economic indicators
                     </li>
                   </ul>
@@ -307,7 +307,7 @@ const CanadianMarket = () => {
                   <p className="text-muted-foreground mb-4 leading-relaxed">
                     Real-time integration with Canadian economic indicators, government policies, and market-specific factors that matter to your clients.
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold">
+                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
                     <CheckCircle className="w-5 h-5" />
                     Position yourself as the Canadian market expert
                   </div>
@@ -334,7 +334,7 @@ const CanadianMarket = () => {
                 className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <Building2 className="w-6 h-6 text-accent" />
+                  <Building2 className="w-6 h-6 text-rd-terra-800" />
                   <div className="text-left">
                     <h3 className="font-bold text-lg">🏙️ Ontario/Toronto</h3>
                     <p className="text-sm text-muted-foreground">GTA-specific features, TRREB integration</p>
@@ -349,19 +349,19 @@ const CanadianMarket = () => {
                     <h4 className="font-semibold mb-3">Toronto Market Intelligence:</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>GTA condo market trends (Liberty Village, CityPlace, King West)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>905 area growth patterns (Mississauga, Brampton, Markham)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Foreign buyer tax (NRST) calculator integration</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>TRREB (Toronto Regional Real Estate Board) data sync</span>
                       </li>
                     </ul>
@@ -381,7 +381,7 @@ const CanadianMarket = () => {
                 className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <Mountain className="w-6 h-6 text-accent" />
+                  <Mountain className="w-6 h-6 text-rd-terra-800" />
                   <div className="text-left">
                     <h3 className="font-bold text-lg">🏔️ British Columbia/Vancouver</h3>
                     <p className="text-sm text-muted-foreground">Luxury market tools, foreign buyer features</p>
@@ -396,19 +396,19 @@ const CanadianMarket = () => {
                     <h4 className="font-semibold mb-3">Vancouver Market Features:</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Luxury property pricing models ($2M+ homes in West Van, Point Grey)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Foreign buyer tracking (20% additional tax calculator)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Presale condo management (assignment tracking)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Victoria/Kelowna market intelligence</span>
                       </li>
                     </ul>
@@ -428,7 +428,7 @@ const CanadianMarket = () => {
                 className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <Wheat className="w-6 h-6 text-accent" />
+                  <Wheat className="w-6 h-6 text-rd-terra-800" />
                   <div className="text-left">
                     <h3 className="font-bold text-lg">🌾 Alberta/Calgary</h3>
                     <p className="text-sm text-muted-foreground">Oil & gas market insights, growth tracking</p>
@@ -443,19 +443,19 @@ const CanadianMarket = () => {
                     <h4 className="font-semibold mb-3">Alberta Market Features:</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Oil price correlation tracking (impact on Calgary/Edmonton markets)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Beltline/Bridgeland/Marda Loop neighborhood analytics</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>New construction boom tracking</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Migration pattern analysis (interprovincial moves)</span>
                       </li>
                     </ul>
@@ -475,7 +475,7 @@ const CanadianMarket = () => {
                 className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <MessageSquare className="w-6 h-6 text-accent" />
+                  <MessageSquare className="w-6 h-6 text-rd-terra-800" />
                   <div className="text-left">
                     <h3 className="font-bold text-lg">🍁 Quebec/Montreal</h3>
                     <p className="text-sm text-muted-foreground">Full French language support, Quebec regulations</p>
@@ -490,19 +490,19 @@ const CanadianMarket = () => {
                     <h4 className="font-semibold mb-3">Quebec-Specific Features:</h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Complete French interface and AI (proper real estate terminology)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Quebec Civil Code compliance (different from Common Law provinces)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Montreal market insights (Plateau, Mile End, Old Montreal)</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                         <span>Notary integration requirements</span>
                       </li>
                     </ul>
@@ -522,7 +522,7 @@ const CanadianMarket = () => {
                 className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <MapPin className="w-6 h-6 text-accent" />
+                  <MapPin className="w-6 h-6 text-rd-terra-800" />
                   <div className="text-left">
                     <h3 className="font-bold text-lg">📍 Other Provinces</h3>
                     <p className="text-sm text-muted-foreground">Maritime, Prairie solutions</p>
@@ -646,8 +646,8 @@ const CanadianMarket = () => {
                   </p>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-accent fill-accent" />
-                      <span className="font-semibold text-accent">$127K</span>
+                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
+                      <span className="font-semibold text-rd-terra-800">$127K</span>
                     </div>
                     <span className="text-muted-foreground">GCI increase</span>
                   </div>
@@ -672,8 +672,8 @@ const CanadianMarket = () => {
                   </p>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-accent fill-accent" />
-                      <span className="font-semibold text-accent">8 deals</span>
+                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
+                      <span className="font-semibold text-rd-terra-800">8 deals</span>
                     </div>
                     <span className="text-muted-foreground">closed in Q1</span>
                   </div>
@@ -698,8 +698,8 @@ const CanadianMarket = () => {
                   </p>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-accent fill-accent" />
-                      <span className="font-semibold text-accent">15hrs</span>
+                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
+                      <span className="font-semibold text-rd-terra-800">15hrs</span>
                     </div>
                     <span className="text-muted-foreground">saved per week</span>
                   </div>
@@ -724,8 +724,8 @@ const CanadianMarket = () => {
                   </p>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-accent fill-accent" />
-                      <span className="font-semibold text-accent">41%</span>
+                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
+                      <span className="font-semibold text-rd-terra-800">41%</span>
                     </div>
                     <span className="text-muted-foreground">GCI increase</span>
                   </div>
@@ -750,8 +750,8 @@ const CanadianMarket = () => {
                   </p>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-accent fill-accent" />
-                      <span className="font-semibold text-accent">$89K</span>
+                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
+                      <span className="font-semibold text-rd-terra-800">$89K</span>
                     </div>
                     <span className="text-muted-foreground">additional revenue</span>
                   </div>
@@ -776,8 +776,8 @@ const CanadianMarket = () => {
                   </p>
                   <div className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-accent fill-accent" />
-                      <span className="font-semibold text-accent">3X</span>
+                      <Star className="w-4 h-4 text-rd-terra-800 fill-accent" />
+                      <span className="font-semibold text-rd-terra-800">3X</span>
                     </div>
                     <span className="text-muted-foreground">more deals closed</span>
                   </div>

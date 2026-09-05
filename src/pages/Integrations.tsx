@@ -199,28 +199,28 @@ const Integrations = () => {
               </p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-6 h-6 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="font-semibold">{t('integrationsPage.api.restApi')}</div>
                     <div className="text-sm text-muted-foreground">{t('integrationsPage.api.restApiDesc')}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-6 h-6 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="font-semibold">{t('integrationsPage.api.zapier')}</div>
                     <div className="text-sm text-muted-foreground">{t('integrationsPage.api.zapierDesc')}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-6 h-6 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="font-semibold">{t('integrationsPage.api.webhooks')}</div>
                     <div className="text-sm text-muted-foreground">{t('integrationsPage.api.webhooksDesc')}</div>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-6 h-6 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="font-semibold">{t('integrationsPage.api.devSupport')}</div>
                     <div className="text-sm text-muted-foreground">{t('integrationsPage.api.devSupportDesc')}</div>

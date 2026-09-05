@@ -122,7 +122,7 @@ const PIPEDACompliance = () => {
               </Card>
 
               <Card className="p-6">
-                <AlertCircle className="w-10 h-10 mb-4 text-accent" />
+                <AlertCircle className="w-10 h-10 mb-4 text-rd-terra-800" />
                 <h3 className="text-xl font-bold mb-2">Penalties for Non-Compliance</h3>
                 <p className="text-muted-foreground mb-4">
                   Failing to comply with PIPEDA can result in significant fines and reputational damage.

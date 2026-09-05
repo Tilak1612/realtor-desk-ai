@@ -38,7 +38,7 @@ const CASLComplianceGuide = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 bg-red-100 px-4 py-2 rounded-full mb-6">
-              <AlertTriangle className="w-4 h-4 text-red-600" />
+              <AlertTriangle className="w-4 h-4 text-red-700" />
               <span className="text-sm font-semibold text-red-900">Legal Compliance Required</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
@@ -57,7 +57,7 @@ const CASLComplianceGuide = () => {
           {/* Warning Box */}
           <Card className="p-6 mb-12 bg-red-50 border-2 border-red-200">
             <div className="flex items-start gap-4">
-              <AlertTriangle className="w-8 h-8 text-red-600 flex-shrink-0" />
+              <AlertTriangle className="w-8 h-8 text-red-700 flex-shrink-0" />
               <div>
                 <h3 className="text-xl font-bold text-red-900 mb-2">Critical Warning</h3>
                 <p className="text-gray-800 mb-3">
@@ -186,7 +186,7 @@ const CASLComplianceGuide = () => {
                 <div className="text-xs bg-white p-3 rounded">
                   <p>☐ I agree to the Terms of Service</p>
                   <p className="text-gray-500 mt-2">[Terms buried on page 47: "We may send you emails"]</p>
-                  <p className="text-red-600 mt-2 font-semibold">This is NOT valid consent!</p>
+                  <p className="text-red-700 mt-2 font-semibold">This is NOT valid consent!</p>
                 </div>
               </Card>
             </Card>
@@ -217,10 +217,10 @@ const CASLComplianceGuide = () => {
                   <p className="font-semibold mb-2 text-red-900">❌ BAD Identification:</p>
                   <div className="bg-white p-3 rounded text-sm">
                     <p>Sarah C.</p>
-                    <p className="text-gray-400">[No business name]</p>
-                    <p className="text-gray-400">[No address]</p>
-                    <p className="text-gray-400">[No phone]</p>
-                    <p className="text-red-600 mt-2 font-semibold text-xs">Missing required info!</p>
+                    <p className="text-gray-600">[No business name]</p>
+                    <p className="text-gray-600">[No address]</p>
+                    <p className="text-gray-600">[No phone]</p>
+                    <p className="text-red-700 mt-2 font-semibold text-xs">Missing required info!</p>
                   </div>
                 </div>
               </div>
@@ -262,7 +262,7 @@ const CASLComplianceGuide = () => {
                   <p className="font-semibold mb-2 text-red-900">❌ BAD Unsubscribe:</p>
                   <div className="bg-white p-3 rounded text-xs">
                     <p className="text-gray-700">To unsubscribe, log into your account, go to Settings → Email Preferences → Scroll to bottom → Check 17 boxes → Submit</p>
-                    <p className="text-red-600 mt-2 font-semibold">Too complicated!</p>
+                    <p className="text-red-700 mt-2 font-semibold">Too complicated!</p>
                   </div>
                 </div>
               </div>
@@ -275,14 +275,14 @@ const CASLComplianceGuide = () => {
             
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6 bg-red-50 border-2 border-red-400">
-                <DollarSign className="w-12 h-12 text-red-600 mb-4" />
+                <DollarSign className="w-12 h-12 text-red-700 mb-4" />
                 <h3 className="text-2xl font-bold text-red-900 mb-2">Individual Penalties</h3>
                 <p className="text-4xl font-bold text-red-900 mb-2">$1,000,000</p>
                 <p className="text-sm text-gray-700">Per violation</p>
               </Card>
 
               <Card className="p-6 bg-red-50 border-2 border-red-400">
-                <DollarSign className="w-12 h-12 text-red-600 mb-4" />
+                <DollarSign className="w-12 h-12 text-red-700 mb-4" />
                 <h3 className="text-2xl font-bold text-red-900 mb-2">Business Penalties</h3>
                 <p className="text-4xl font-bold text-red-900 mb-2">$10,000,000</p>
                 <p className="text-sm text-gray-700">Per violation</p>
@@ -291,7 +291,7 @@ const CASLComplianceGuide = () => {
 
             <Card className="p-6 bg-yellow-50 border-2 border-yellow-400 mb-6">
               <div className="flex items-start gap-3">
-                <AlertTriangle className="w-6 h-6 text-yellow-600 flex-shrink-0" />
+                <AlertTriangle className="w-6 h-6 text-yellow-700 flex-shrink-0" />
                 <div>
                   <p className="font-bold text-yellow-900 mb-2">"Per Violation" Means:</p>
                   <p className="text-sm text-gray-700 mb-2">Each non-compliant email is a separate violation</p>
@@ -307,11 +307,11 @@ const CASLComplianceGuide = () => {
             <div className="space-y-4">
               <Card className="p-6">
                 <div className="flex items-start gap-3">
-                  <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">1</div>
+                  <div className="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">1</div>
                   <div>
                     <h4 className="font-bold mb-1">Compu-Finder (2017)</h4>
                     <p className="text-sm text-gray-700 mb-2">Sent emails without consent</p>
-                    <p className="text-xl font-bold text-red-600">Penalty: $1,100,000</p>
+                    <p className="text-xl font-bold text-red-700">Penalty: $1,100,000</p>
                     <p className="text-sm italic text-gray-600">Lesson: Consent is not optional</p>
                   </div>
                 </div>
@@ -319,11 +319,11 @@ const CASLComplianceGuide = () => {
 
               <Card className="p-6">
                 <div className="flex items-start gap-3">
-                  <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">2</div>
+                  <div className="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">2</div>
                   <div>
                     <h4 className="font-bold mb-1">Porter Airlines (2019)</h4>
                     <p className="text-sm text-gray-700 mb-2">Failed to include working unsubscribe mechanism</p>
-                    <p className="text-xl font-bold text-red-600">Penalty: $150,000</p>
+                    <p className="text-xl font-bold text-red-700">Penalty: $150,000</p>
                     <p className="text-sm italic text-gray-600">Lesson: Unsubscribe must actually work</p>
                   </div>
                 </div>
@@ -331,12 +331,12 @@ const CASLComplianceGuide = () => {
 
               <Card className="p-6 bg-orange-50">
                 <div className="flex items-start gap-3">
-                  <div className="bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">3</div>
+                  <div className="bg-orange-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">3</div>
                   <div>
                     <h4 className="font-bold mb-1">Real Estate Agent (2021) - Unreported</h4>
                     <p className="text-sm text-gray-700 mb-2">Agent sent "Just Listed" emails to purchased list</p>
                     <p className="text-sm text-gray-700 mb-2">CRTC investigation, settled privately</p>
-                    <p className="text-xl font-bold text-orange-600">Estimated: $50,000-100,000</p>
+                    <p className="text-xl font-bold text-orange-700">Estimated: $50,000-100,000</p>
                     <p className="text-sm italic text-gray-600">Career damaged, reputation ruined</p>
                   </div>
                 </div>
@@ -416,7 +416,7 @@ const CASLComplianceGuide = () => {
               {/* Scenario 3 */}
               <Card className="p-6 border-2 border-red-400">
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                  <AlertTriangle className="w-6 h-6 text-red-600" />
+                  <AlertTriangle className="w-6 h-6 text-red-700" />
                   Scenario #3: Purchased Email List
                 </h3>
                 
@@ -444,7 +444,7 @@ const CASLComplianceGuide = () => {
               {/* Scenario 4 */}
               <Card className="p-6 border-2 border-orange-200">
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                  <Clock className="w-6 h-6 text-orange-600" />
+                  <Clock className="w-6 h-6 text-orange-700" />
                   Scenario #4: Past Client from 3 Years Ago
                 </h3>
                 
@@ -693,7 +693,7 @@ const CASLComplianceGuide = () => {
                 <Card key={index} className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="bg-red-100 rounded-full p-2 flex-shrink-0">
-                      <XCircle className="w-6 h-6 text-red-600" />
+                      <XCircle className="w-6 h-6 text-red-700" />
                     </div>
                     <div className="flex-1">
                       <p className="font-bold text-red-900 mb-2">❌ Mistake: "{item.mistake}"</p>

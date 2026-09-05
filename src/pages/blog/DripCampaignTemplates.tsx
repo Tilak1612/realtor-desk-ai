@@ -135,7 +135,7 @@ const DripCampaignTemplates = () => {
                   <h3 className="text-xl font-bold mb-1">1. New Buyer Lead Nurture (12 Emails, 6 Months)</h3>
                   <p className="text-sm text-muted-foreground">For cold buyers who filled out a form or attended an open house</p>
                 </div>
-                <span className="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">High Priority</span>
+                <span className="bg-green-700 text-white px-3 py-1 rounded-full text-sm font-semibold">High Priority</span>
               </div>
               
               <div className="space-y-4">
@@ -321,25 +321,25 @@ const DripCampaignTemplates = () => {
               <h4 className="font-bold mb-3">Critical: Every Email Must Include</h4>
               <ul className="space-y-2 mb-0">
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>1. Your full business information:</strong> Name, address, phone number
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>2. Clear unsubscribe mechanism:</strong> One-click unsubscribe link in footer
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>3. Documented consent:</strong> Keep records showing how/when they opted in
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>4. Truthful subject lines:</strong> No deceptive or misleading subjects
                   </div>

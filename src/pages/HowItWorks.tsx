@@ -120,7 +120,7 @@ const HowItWorks = () => {
                       <ul className="space-y-2">
                         {Array.isArray(details) && details.map((detail, detailIdx) => (
                           <li key={detailIdx} className="flex items-start gap-2">
-                            <CheckCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                            <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                             <span className="text-sm">{detail}</span>
                           </li>
                         ))}
