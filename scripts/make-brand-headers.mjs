@@ -229,6 +229,20 @@ const HEADERS = [
     labels: ["Start here"],
   },
   {
+    file: "blog-pipeda-privacy",
+    title: ["PIPEDA and", "Your Client Data"],
+    subtitle: ["What Canadian privacy law asks of a", "brokerage, in plain terms."],
+    motif: "flow",
+    labels: ["Data collected", "Handled lawfully"],
+  },
+  {
+    file: "blog-lead-conversion",
+    title: ["Converting", "More Leads"],
+    subtitle: ["What happens between the enquiry and", "the signed agreement."],
+    motif: "sequence",
+    labels: ["First contact"],
+  },
+  {
     file: "blog-vs-followupboss",
     title: ["Follow Up Boss", "Compared"],
     subtitle: ["An honest look at where each tool", "fits a Canadian brokerage."],
