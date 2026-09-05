@@ -199,6 +199,13 @@ const SeoDefaults = () => {
     "/billing",
     "/admin",
     "/call-workflow",
+    // The entire authenticated RD shell. Its absence here meant /app and every
+    // route beneath it served `<meta name="robots" content="index, follow,
+    // max-image-preview:large, ...>` in production -- actively inviting Google
+    // to crawl the logged-in product, not merely failing to discourage it.
+    // robots.txt did not cover it either (it lists /dashboard, /settings,
+    // /billing but not /app).
+    "/app",
   ];
   const shouldNoindex = noindexPrefixes.some((prefix) =>
     location.pathname === prefix || location.pathname.startsWith(`${prefix}/`)

@@ -42,6 +42,11 @@
     <meta property="og:title" content="Realtor Desk — The Canadian real estate CRM, powered by AI" />
     <meta property="og:description" content="AI-powered CRM for Canadian real estate agents. Bilingual EN/FR, PIPEDA-native, CASL-aware, CAD pricing. 14-day free trial." />
     <meta property="og:type" content="website" />
+    <!-- og:url was only ever set at runtime by src/components/SEO.tsx via
+         upsertMeta. Google executes JS, but Facebook, LinkedIn and Slack read
+         the raw HTML and do not — so shared links had no canonical og:url.
+         SEO.tsx still overwrites this per-route; this is the static default. -->
+    <meta property="og:url" content="https://www.realtordesk.ai/" />
     <meta property="og:image" content="https://www.realtordesk.ai/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

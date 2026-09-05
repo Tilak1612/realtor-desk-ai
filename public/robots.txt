@@ -2,6 +2,10 @@ User-agent: *
 Allow: /
 
 # Block sensitive/app areas
+# /app is the authenticated product shell (dashboard, leads, inbox, pipeline,
+# reports, settings). It was absent here AND from the in-app noindex list, so
+# the logged-in surfaces were being served "index, follow" in production.
+Disallow: /app
 Disallow: /dashboard
 Disallow: /admin
 Disallow: /settings
