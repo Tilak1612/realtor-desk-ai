@@ -41,7 +41,7 @@ export function RDSectionHeader({
           <div
             className={cn(
               "text-[11px] font-bold uppercase tracking-[0.14em]",
-              dark ? "text-rd-terra-400" : "text-rd-terra-700"
+              dark ? "text-rd-terra-400" : "text-rd-terra-800"
             )}
           >
             {eyebrow}
@@ -60,7 +60,7 @@ export function RDSectionHeader({
               <span
                 className={cn(
                   "font-rd-serif italic font-normal",
-                  dark ? "text-rd-terra-400" : "text-rd-terra-700"
+                  dark ? "text-rd-terra-400" : "text-rd-terra-800"
                 )}
               >
                 {accent}
