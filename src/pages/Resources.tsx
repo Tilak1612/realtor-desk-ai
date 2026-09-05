@@ -59,11 +59,27 @@ import blogDatabaseReactivation from "@/assets/blog-database-reactivation.jpg";
  * a latent shift the moment someone changes those classes.
  */
 function ResourceThumb({ src, alt }: { src: string; alt: string }) {
-  const { avif, webp, src: fallback } = resolveSources(src);
+  const { avif, webp, avifSrcSet, webpSrcSet, src: fallback } = resolveSources(src);
   return (
     <picture>
-      {avif && <source srcSet={avif} type="image/avif" />}
-      {webp && <source srcSet={webp} type="image/webp" />}
+      {/* `sizes` is what makes the srcset useful: without it the browser
+          assumes 100vw and picks the largest candidate on every screen,
+          which is the behaviour we are trying to fix. These cards are a
+          three-up grid above 1024, two-up above 640, and full width below. */}
+      {avif && (
+        <source
+          srcSet={avifSrcSet ?? avif}
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          type="image/avif"
+        />
+      )}
+      {webp && (
+        <source
+          srcSet={webpSrcSet ?? webp}
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          type="image/webp"
+        />
+      )}
       <img
         src={fallback}
         alt={alt}
