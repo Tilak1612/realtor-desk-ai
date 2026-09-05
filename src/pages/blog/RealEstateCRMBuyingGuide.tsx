@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, XCircle, TrendingUp, Shield, Users, Zap, DollarSign, HeadphonesIcon } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import blogImage from "@/assets/blog-ai-crm-guide.jpg";
-import blogImageAvif from "@/assets/blog-ai-crm-guide.avif";
-import blogImageWebp from "@/assets/blog-ai-crm-guide.webp";
+// SVG on the page; the .jpg twin for og:image, because social platforms
+// do not render SVG and would show a card with no image at all.
+import blogImage from "@/assets/brand/blog-ai-crm-guide.svg";
+import blogImageSocial from "@/assets/brand/blog-ai-crm-guide.jpg";
 import { Picture } from "@/components/Picture";
 
 const RealEstateCRMBuyingGuide = () => {
@@ -66,8 +67,6 @@ const RealEstateCRMBuyingGuide = () => {
 
           <Picture
             src={blogImage}
-            avif={blogImageAvif}
-            webp={blogImageWebp}
             width={1024}
             height={640}
             alt="Real Estate CRM Selection Guide"

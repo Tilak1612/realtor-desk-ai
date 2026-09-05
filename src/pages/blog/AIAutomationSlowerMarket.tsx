@@ -4,9 +4,10 @@ import Footer from "@/components/Footer";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import blogImage from "@/assets/blog-ai-automation-realtor.jpg";
-import blogImageAvif from "@/assets/blog-ai-automation-realtor.avif";
-import blogImageWebp from "@/assets/blog-ai-automation-realtor.webp";
+// SVG on the page; the .jpg twin for og:image, because social platforms
+// do not render SVG and would show a card with no image at all.
+import blogImage from "@/assets/brand/blog-ai-automation-realtor.svg";
+import blogImageSocial from "@/assets/brand/blog-ai-automation-realtor.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
 
@@ -21,7 +22,7 @@ const AIAutomationSlowerMarket = () => {
         title="How Canadian Realtors Can Thrive in a Slower Market with AI Automation"
         description="Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems."
         keywords="AI automation for Canadian Realtors, real estate CRM Canada, Realtor lead generation automation, automated follow-up system"
-        image={blogImage}
+        image={blogImageSocial}
         article
         publishedTime="2025-01-02"
         modifiedTime="2025-01-02"
@@ -81,8 +82,6 @@ const AIAutomationSlowerMarket = () => {
           {/* Featured Image */}
           <Picture
             src={blogImage}
-            avif={blogImageAvif}
-            webp={blogImageWebp}
             width={1920}
             height={1024}
             alt="Canadian Realtor using AI automation dashboard on laptop showing CRM interface"
