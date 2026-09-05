@@ -80,8 +80,17 @@ describe("motion and hover CSS contract", () => {
     // Dropping transform AND colour would leave a keyboard user with no
     // feedback at all. Only the movement should go.
     const reduced = reducedMotionBlocks();
-    const liftBlock = reduced.match(/\.rd-card-lift:hover[^}]*}/)?.[0] ?? "";
-    expect(liftBlock).toMatch(/transform:\s*none/);
+    const liftBlock = reduced.match(/\.rd-card-lift[^{]*\{[^}]*}/)?.[0] ?? "";
+
+    // The resting offset is LAYOUT, not motion -- the featured pricing card
+    // sits at -0.5rem whether or not the reader wants animation. What must go
+    // is the 2px hover delta, so the transform under reduced motion is exactly
+    // the base with no calc() subtracting from it.
+    expect(liftBlock).toMatch(/transform:\s*translate3d\(0,\s*var\(--rd-lift-base\),\s*0\)/);
+    expect(liftBlock).not.toMatch(/calc\(/);
+
+    // Colour must survive: it is the only feedback a keyboard user gets once
+    // the movement is gone.
     expect(liftBlock).not.toMatch(/border-color|background-color/);
   });
 

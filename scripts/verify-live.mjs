@@ -96,6 +96,35 @@ try {
     record("hover changes the border", false, "no .rd-card-lift found");
   }
 
+  /* ── 4b. the featured pricing card lifts UP, not down ───────────────────── */
+  const pricing = await ctx.newPage();
+  await pricing.goto(`${BASE}/pricing`, { waitUntil: "networkidle" });
+  await pricing.waitForTimeout(700);
+  const featured = pricing.locator(".rd-card-lift").filter({ hasText: /most popular|populaire/i }).first();
+  const featuredCount = await featured.count();
+  if (featuredCount > 0) {
+    await featured.scrollIntoViewIfNeeded();
+    const yOf = (el) => {
+      const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+      return m.m42;
+    };
+    const before = await featured.evaluate(yOf);
+    await featured.hover();
+    await pricing.waitForTimeout(320);
+    const after = await featured.evaluate(yOf);
+    // transform is a single property: a naive translate3d on hover REPLACES
+    // the card's resting -0.5rem offset and drops it 6px instead of raising
+    // it 2px. This asserts composition, not just that something moved.
+    record(
+      "featured pricing card lifts up, not down",
+      after < before,
+      `y ${before} -> ${after}`
+    );
+  } else {
+    record("featured pricing card lifts up, not down", false, "no featured card found");
+  }
+  await pricing.close();
+
   /* ── 5. lazy images actually load once scrolled to ──────────────────────── */
   const res = await ctx.newPage();
   await res.goto(`${BASE}/resources`, { waitUntil: "networkidle" });

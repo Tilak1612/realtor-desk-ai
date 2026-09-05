@@ -625,6 +625,14 @@
  * ──────────────────────────────────────────────────────────────── */
 @layer components {
   .rd-card-lift {
+    /* The lift COMPOSES with any resting offset rather than replacing it.
+       transform is a single property: a plain `translate3d(0,-2px,0)` on hover
+       overwrites whatever the element already had, so the featured pricing
+       card -- which rests at -translate-y-2 -- would jump DOWN on hover
+       instead of up. Callers that sit off their natural position set
+       --rd-lift-base and drop the Tailwind translate. */
+    --rd-lift-base: 0px;
+    transform: translate3d(0, var(--rd-lift-base), 0);
     transition:
       transform 140ms cubic-bezier(0.22, 0.61, 0.36, 1),
       box-shadow 140ms cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -634,7 +642,7 @@
 
   .rd-card-lift:hover,
   .rd-card-lift:focus-within {
-    transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, calc(var(--rd-lift-base) - 2px), 0);
     /* The rd-* tokens are hex, not HSL triplets like the shadcn --* ones.
        hsl(var(--rd-terra-300)) resolves to hsl(#F2C8B9), which is invalid and
        is dropped silently -- the hover would have had no border change at all. */
@@ -656,9 +664,12 @@
   /* Keep the colour change -- it is the affordance -- and drop only the
      movement. Removing both would leave a keyboard user with no feedback
      at all. */
+  .rd-card-lift,
   .rd-card-lift:hover,
   .rd-card-lift:focus-within {
-    transform: none;
+    /* Resting offset is kept -- it is layout, not motion. Only the 2px
+       hover delta is removed. */
+    transform: translate3d(0, var(--rd-lift-base), 0);
   }
   .rd-card-lift,
   .rd-card-lift-icon {
