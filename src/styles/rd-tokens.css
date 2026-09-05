@@ -119,8 +119,24 @@
 }
 
 .rd-reset button {
-  font: inherit;
-  color: inherit;
+  /* `font: inherit` and `color: inherit` USED TO BE HERE and both were
+     actively harmful.
+     
+     `.rd-reset button` has specificity (0,1,1). Tailwind's utilities are
+     (0,1,0). So this block beat every text utility applied to a button
+     inside the redesign shell -- `text-white` on the active pricing toggle
+     resolved to inherited ink #111418 on navy #0B2540, a contrast ratio of
+     1.18:1, and `text-[13px]` resolved to the inherited 16px. The "Talk to
+     sales" CTA rendered its label almost invisibly for the same reason.
+
+     Tailwind's preflight already normalises both, on
+     `button, input, optgroup, select, textarea`, at specificity (0,0,1) --
+     BELOW the utilities, which is why it works and this did not. Duplicating
+     it at class specificity is what broke it.
+
+     Found by running axe against the live pages. The jsdom axe run has
+     color-contrast disabled, because jsdom has no layout or paint, so this
+     was invisible to every test in the suite. */
   cursor: pointer;
 }
 
