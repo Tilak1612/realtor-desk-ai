@@ -590,3 +590,63 @@
     transition: none !important;
   }
 }
+
+/* ────────────────────────────────────────────────────────────────
+ * Hover and focus micro-interactions
+ *
+ * The marketing page had no `hover:` rule anywhere -- cards and tiles were
+ * completely inert under the cursor, which reads as a static document rather
+ * than software. These are deliberately small: a 1px rise and a slightly
+ * warmer border, not a scale transform. Scaling a card resamples its text
+ * for the duration of the transition, which on a low-DPI display looks like
+ * the type is blurring.
+ *
+ * Only transform, border-color and box-shadow animate. All three composite
+ * or repaint cheaply; none triggers layout, so a grid of twelve cards stays
+ * smooth on a mid-range phone.
+ *
+ * :focus-visible gets the same treatment as :hover, so a keyboard user sees
+ * the same affordance a mouse user does rather than only the focus ring.
+ * ──────────────────────────────────────────────────────────────── */
+@layer components {
+  .rd-card-lift {
+    transition:
+      transform 140ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 140ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      border-color 140ms ease;
+    will-change: auto;
+  }
+
+  .rd-card-lift:hover,
+  .rd-card-lift:focus-within {
+    transform: translate3d(0, -2px, 0);
+    /* The rd-* tokens are hex, not HSL triplets like the shadcn --* ones.
+       hsl(var(--rd-terra-300)) resolves to hsl(#F2C8B9), which is invalid and
+       is dropped silently -- the hover would have had no border change at all. */
+    border-color: var(--rd-terra-300);
+    box-shadow: 0 12px 28px -12px rgba(11, 37, 64, 0.18);
+  }
+
+  .rd-card-lift-icon {
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+  .rd-card-lift:hover .rd-card-lift-icon,
+  .rd-card-lift:focus-within .rd-card-lift-icon {
+    background-color: var(--rd-terra-600);
+    color: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the colour change -- it is the affordance -- and drop only the
+     movement. Removing both would leave a keyboard user with no feedback
+     at all. */
+  .rd-card-lift:hover,
+  .rd-card-lift:focus-within {
+    transform: none;
+  }
+  .rd-card-lift,
+  .rd-card-lift-icon {
+    transition: none;
+  }
+}

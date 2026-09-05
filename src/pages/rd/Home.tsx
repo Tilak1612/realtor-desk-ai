@@ -338,8 +338,8 @@ function Feature({
     );
   }
   return (
-    <div className="bg-white border border-rd-line rounded-rd-lg p-7 flex flex-col items-start gap-4">
-      <div className="w-11 h-11 rounded-rd-md bg-rd-navy-100 text-rd-navy-800 flex items-center justify-center">
+    <div className="rd-card-lift group bg-white border border-rd-line rounded-rd-lg p-7 flex flex-col items-start gap-4">
+      <div className="rd-card-lift-icon w-11 h-11 rounded-rd-md bg-rd-navy-100 text-rd-navy-800 flex items-center justify-center">
         {icon}
       </div>
       <h3 className="text-[19px] font-semibold tracking-[-0.01em] leading-[1.2]">{title}</h3>
