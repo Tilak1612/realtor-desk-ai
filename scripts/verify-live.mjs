@@ -205,6 +205,54 @@ try {
   );
   record("every image has alt text", imgStats.missingAlt === 0, `${imgStats.missingAlt} missing`);
 
+  /* ── 5a-ii. responsive SOURCES, which is not the same as AVIF ────────── */
+  //
+  // The check above proves format negotiation: the browser picked AVIF over
+  // JPEG. It says nothing about SIZE. A phone can be served a correctly-
+  // negotiated AVIF that is still 1600px wide, which is most of the payload
+  // saving thrown away, and the existing check would stay green throughout.
+  //
+  // Width descriptors and sizes are what make the browser choose by layout
+  // width. Asserting "no source lacks descriptors" rather than a count means
+  // adding an image without variants fails this instead of diluting it.
+  const sizing = await res.evaluate(() => {
+    let withW = 0;
+    let withoutW = 0;
+    let withSizes = 0;
+    for (const source of document.querySelectorAll("picture source")) {
+      const ss = source.getAttribute("srcset") || "";
+      if (/\d+w/.test(ss)) withW++;
+      else withoutW++;
+      if (source.getAttribute("sizes")) withSizes++;
+    }
+    const imgs = [...document.images];
+    return {
+      withW,
+      withoutW,
+      withSizes,
+      lazy: imgs.filter((i) => i.loading === "lazy").length,
+      dimensioned: imgs.filter(
+        (i) => i.getAttribute("width") && i.getAttribute("height")
+      ).length,
+      total: imgs.length,
+    };
+  });
+  record(
+    "images offer responsive sources, not just modern formats",
+    sizing.withW > 0 && sizing.withoutW === 0 && sizing.withSizes === sizing.withW,
+    `${sizing.withW} sources with width descriptors, ${sizing.withoutW} without, ` +
+      `${sizing.withSizes} with sizes`
+  );
+  // width/height on every <img> is what reserves the box before the bytes
+  // arrive. Without it the page reflows as each image lands, which is CLS.
+  record(
+    "every image is lazy and dimensioned",
+    sizing.total > 0 &&
+      sizing.lazy === sizing.total &&
+      sizing.dimensioned === sizing.total,
+    `${sizing.lazy}/${sizing.total} lazy, ${sizing.dimensioned}/${sizing.total} with width+height`
+  );
+
   /* ── 5b. the auth forms are usable and labelled ─────────────────────────── */
   const auth = await ctx.newPage();
   await auth.goto(`${BASE}/signup`, { waitUntil: "networkidle" });
