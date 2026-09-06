@@ -515,7 +515,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                 <div className="space-y-1">
                   {subscribed ? (
                     <>
-                      <Badge variant="default" className="bg-accent text-rd-terra-800-foreground text-xs">
+                      <Badge variant="default" className="bg-rd-terra-800 text-xs">
                         {subscriptionTier === 'agent'
                           ? t('billing.agentPlan', 'Solo plan')
                           : subscriptionTier === 'team'

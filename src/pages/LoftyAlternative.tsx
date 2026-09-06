@@ -139,8 +139,8 @@ const LoftyAlternative = () => {
                 </div>
               </Card>
               <Card className="p-6 text-center border-2 border-green-500">
-                <DollarSign className="w-12 h-12 mx-auto mb-4 text-green-500" />
-                <div className="text-3xl font-bold mb-2 text-green-500">$8,400</div>
+                <DollarSign className="w-12 h-12 mx-auto mb-4 text-green-700" />
+                <div className="text-3xl font-bold mb-2 text-green-700">$8,400</div>
                 <div className="text-sm text-muted-foreground mb-1">You Save in Year 1</div>
                 <div className="text-xs text-muted-foreground">
                   83% cost savings by switching
@@ -180,7 +180,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">Setup Fee</td>
-                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500">$0</Badge></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-green-500/10 text-green-800 border-green-500">$0</Badge></td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$499 - $1,499</td>
                   </tr>
                   <tr className="border-b">
@@ -221,7 +221,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">AI Voice Agent (Inbound/Outbound)</td>
-                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-700 border-yellow-500">Coming Soon</Badge></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-800 border-yellow-500">Coming Soon</Badge></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
@@ -254,7 +254,7 @@ const LoftyAlternative = () => {
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">WhatsApp Integration</td>
-                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-700 border-yellow-500">Coming Soon</Badge></td>
+                    <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-yellow-500/10 text-yellow-800 border-yellow-500">Coming Soon</Badge></td>
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">

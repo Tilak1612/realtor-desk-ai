@@ -86,7 +86,7 @@ const VsWiseAgent = () => {
             <Card className="p-8 border-accent">
               <div className="text-center mb-4">
                 <div className="text-4xl mb-3">🇨🇦</div>
-                <Badge className="mb-2 bg-accent">Realtor Desk</Badge>
+                <Badge className="mb-2 bg-rd-terra-800">Realtor Desk</Badge>
                 <h3 className="text-xl font-bold">Built for Canada</h3>
               </div>
               <ul className="space-y-3">
