@@ -90,7 +90,7 @@ const BoldTrailComparisonTable = () => {
                             href={row.boldtrailSource.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs underline text-primary mt-1 inline-block"
+                            className="text-xs underline text-primary mt-1 inline-flex items-center min-h-[24px]"
                           >
                             {row.boldtrailSource.label} ↗
                           </a>

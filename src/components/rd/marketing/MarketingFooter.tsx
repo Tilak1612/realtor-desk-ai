@@ -99,7 +99,17 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
       <div className="mx-auto max-w-[1200px] mt-10 pt-6 border-t border-rd-line flex flex-col md:flex-row md:justify-between gap-3 text-[12px] text-rd-ink-500">
         <div>{t("marketingFooter.copyright", { year: new Date().getFullYear() })}</div>
         <div className="flex gap-6">
-          <Link to="/unsubscribe" className="hover:text-rd-ink-900">{t("marketingFooter.itemUnsubscribe")}</Link>
+          {/* min-h-[24px] on the controls, not the row. At 12px these render
+              19px tall, under the 24x24 of WCAG 2.5.8 Target Size (Minimum).
+              inline-flex keeps them on the same baseline as the adjacent text
+              while growing the hit area rather than the type. Verified at
+              320/375/390/430/768 by scripts/verify-responsive.mjs. */}
+          <Link
+            to="/unsubscribe"
+            className="hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
+          >
+            {t("marketingFooter.itemUnsubscribe")}
+          </Link>
           {/* A consent decision has to be changeable, not just collectable.
               This control existed only in the legacy footer, so on the whole
               marketing shell there was no way to revisit it — while
@@ -111,7 +121,7 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
               localStorage.removeItem("cookie-consent");
               window.location.reload();
             }}
-            className="hover:text-rd-ink-900 underline-offset-2 hover:underline"
+            className="hover:text-rd-ink-900 underline-offset-2 hover:underline inline-flex items-center min-h-[24px]"
           >
             {t("marketingFooter.itemCookieSettings", "Cookie settings")}
           </button>
@@ -134,7 +144,11 @@ function FooterCol({
       <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-rd-ink-900 mb-3.5">
         {title}
       </div>
-      <ul className="flex flex-col gap-2.5">
+      {/* Column links are navigation, not prose: each is a standalone target,
+          so each needs 24px of height under WCAG 2.5.8. At 13px they rendered
+          16px tall. The gap tightens from 2.5 to 1 so the column keeps roughly
+          the same overall length -- the spacing moves inside each row. */}
+      <ul className="flex flex-col gap-1">
         {items.map((i) => (
           <li key={i.label}>
             {i.external ? (
@@ -142,12 +156,12 @@ function FooterCol({
                 href={i.to}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900"
+                className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
               >
                 {i.label}
               </a>
             ) : (
-              <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900">
+              <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900 inline-flex items-center min-h-[24px]">
                 {i.label}
               </Link>
             )}

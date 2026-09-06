@@ -273,7 +273,12 @@ function FeatureGrid({ t }: { t: TFn }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* Nested Reveal so the cards arrive in sequence rather than as one
+            block. The outer section Reveal wraps the whole <section>, whose
+            direct children are the header and this grid -- staggering there
+            would offset those two, not the cards. rd-stagger indexes direct
+            children, so it has to sit on the grid itself. */}
+        <Reveal stagger className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <Feature
             big
             icon={<IconSparkles />}
@@ -306,7 +311,7 @@ function FeatureGrid({ t }: { t: TFn }) {
             title={t("landing.featureGrid.automationsTitle")}
             desc={t("landing.featureGrid.automationsDesc")}
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

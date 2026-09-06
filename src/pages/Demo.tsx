@@ -375,7 +375,7 @@ const Demo = () => {
                 <div className="space-y-3">
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">{ t("demo.contact.email", "Email") }</p>
-                    <a href="mailto:support@realtordesk.ai" className="font-semibold text-primary hover:underline">
+                    <a href="mailto:support@realtordesk.ai" className="font-semibold text-primary hover:underline inline-flex items-center min-h-[24px]">
                       support@realtordesk.ai
                     </a>
                   </div>
