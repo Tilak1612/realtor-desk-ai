@@ -886,7 +886,7 @@ const VsLoftyCRM = () => {
             
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <Card className="p-6">
-                <h3 className="text-xl font-bold mb-4">Lofty CRM: 63/100</h3>
+                <h3 className="text-xl font-bold mb-4">Lofty CRM</h3>
                 <ul className="space-y-2 text-sm">
                   <li>• Features: 10/10 (most features)</li>
                   <li>• Usability: 4/10 (too complex)</li>
@@ -899,7 +899,7 @@ const VsLoftyCRM = () => {
               </Card>
 
               <Card className="p-6 border-2 border-primary bg-primary/5">
-                <h3 className="text-xl font-bold mb-4 text-primary">RealtorDesk AI: 94/100</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">RealtorDesk AI</h3>
                 <ul className="space-y-2 text-sm">
                   <li>• Features: 8/10 (focused essentials)</li>
                   <li>• Usability: 10/10 (simple and intuitive)</li>
