@@ -30,7 +30,7 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
       <div className="mb-6">
         <Link
           to="/"
-          className="inline-flex items-center gap-1.5 text-sm text-rd-ink-500 hover:text-rd-navy-800 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-rd-ink-500 hover:text-rd-navy-800 transition-colors min-h-[24px]"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           {t('auth.backToWebsite', 'Back to realtordesk.ai')}
