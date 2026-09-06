@@ -560,19 +560,19 @@ const CASLComplianceGuide = () => {
                     Consent
                   </p>
                   <div className="space-y-2 ml-7">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">I have express OR implied consent</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Consent is documented (date, method)</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Consent is still valid (not expired)</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Recipient hasn't unsubscribed</span>
                     </label>
@@ -585,19 +585,19 @@ const CASLComplianceGuide = () => {
                     Identification
                   </p>
                   <div className="space-y-2 ml-7">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">My name is in the email</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Business name is in the email</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Physical mailing address is included</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Phone or email contact is included</span>
                     </label>
@@ -610,19 +610,19 @@ const CASLComplianceGuide = () => {
                     Unsubscribe
                   </p>
                   <div className="space-y-2 ml-7">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe link is present</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe link works (tested it!)</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe is one-click (no login)</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Processes within 10 business days</span>
                     </label>
@@ -635,15 +635,15 @@ const CASLComplianceGuide = () => {
                     Record-Keeping
                   </p>
                   <div className="space-y-2 ml-7">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Consent records are stored</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Unsubscribe requests are logged</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer min-h-[24px]">
                       <input type="checkbox" className="w-4 h-4" />
                       <span className="text-sm">Records kept for 3+ years</span>
                     </label>

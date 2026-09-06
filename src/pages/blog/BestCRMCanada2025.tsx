@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Star, Award, TrendingUp, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Award, TrendingUp, CheckCircle2, XCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -117,10 +117,7 @@ const BestCRMCanada2025 = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-primary">94/100</div>
-                  <div className="flex gap-1">
-                    {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-primary text-primary" />)}
-                  </div>
+                  <div className="text-3xl font-bold text-primary"></div>
                 </div>
               </div>
 
@@ -222,13 +219,6 @@ const BestCRMCanada2025 = () => {
                     <p className="text-sm text-muted-foreground mb-0">Best for Team Collaboration</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold">82/100</div>
-                  <div className="flex gap-1">
-                    {[1,2,3,4].map(i => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
-                    <Star className="w-4 h-4 text-gray-300" />
-                  </div>
-                </div>
               </div>
 
               <p className="text-sm mb-4">
@@ -259,13 +249,6 @@ const BestCRMCanada2025 = () => {
                     <p className="text-sm text-muted-foreground mb-0">Best for Enterprise Features</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold">78/100</div>
-                  <div className="flex gap-1">
-                    {[1,2,3,4].map(i => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
-                    <Star className="w-4 h-4 text-gray-300" />
-                  </div>
-                </div>
               </div>
 
               <p className="text-sm mb-4">
@@ -292,10 +275,7 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#4 LionDesk</h4>
-                    <p className="text-sm text-muted-foreground">Best for Video Marketing • $34-101 CAD/month • 75/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3,4].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
+                    <p className="text-sm text-muted-foreground">Best for Video Marketing • $34-101 CAD/month</p>
                   </div>
                 </div>
               </Card>
@@ -304,14 +284,10 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#5 IXACT Contact</h4>
-                    <p className="text-sm text-muted-foreground">Best for Transaction Management • $53-80 CAD/month • 71/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
-                    <Star className="w-3 h-3 text-gray-300" />
+                    <p className="text-sm text-muted-foreground">Best for Transaction Management • $53-80 CAD/month</p>
                   </div>
                 </div>
-                <Link to="/blog/ixact-alternatives" className="text-sm text-primary mt-2 inline-block">
+                <Link to="/blog/ixact-alternatives" className="text-sm text-primary mt-2 inline-flex items-center min-h-[24px]">
                   See Alternatives →
                 </Link>
               </Card>
@@ -320,11 +296,7 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#6 Wise Agent</h4>
-                    <p className="text-sm text-muted-foreground">Best Budget Option • $39-63 CAD/month • 69/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
-                    <Star className="w-3 h-3 text-gray-300" />
+                    <p className="text-sm text-muted-foreground">Best Budget Option • $39-63 CAD/month</p>
                   </div>
                 </div>
               </Card>
@@ -333,11 +305,7 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#7 Top Producer</h4>
-                    <p className="text-sm text-muted-foreground">Best for CINC Users • $54-81 CAD/month • 68/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
-                    <Star className="w-3 h-3 text-gray-300" />
+                    <p className="text-sm text-muted-foreground">Best for CINC Users • $54-81 CAD/month</p>
                   </div>
                 </div>
               </Card>
@@ -346,10 +314,7 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#8 Real Geeks</h4>
-                    <p className="text-sm text-muted-foreground">Best CRM + Website Bundle • $336+ CAD/month • 67/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
+                    <p className="text-sm text-muted-foreground">Best CRM + Website Bundle • $336+ CAD/month</p>
                   </div>
                 </div>
               </Card>
@@ -358,10 +323,7 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#9 BoomTown</h4>
-                    <p className="text-sm text-muted-foreground">Best for High-Budget Teams • $1,350+ CAD/month • 65/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
+                    <p className="text-sm text-muted-foreground">Best for High-Budget Teams • $1,350+ CAD/month</p>
                   </div>
                 </div>
               </Card>
@@ -370,10 +332,7 @@ const BestCRMCanada2025 = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-bold">#10 Lofty</h4>
-                    <p className="text-sm text-muted-foreground">Most Features (Many Unused) • $675+ CAD/month • 63/100</p>
-                  </div>
-                  <div className="flex gap-1">
-                    {[1,2,3].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
+                    <p className="text-sm text-muted-foreground">Most Features (Many Unused) • $675+ CAD/month</p>
                   </div>
                 </div>
               </Card>
@@ -539,7 +498,7 @@ const BestCRMCanada2025 = () => {
             <div className="cta-section">
               <h2>Ready to Choose Your CRM?</h2>
               <p>
-                Start with Canada's #1 rated AI-powered CRM. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
+                Start with a bilingual AI-powered CRM built for Canadian agents. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
               </p>
               <div className="flex gap-4 flex-wrap justify-center">
                 <Link to="/demo">

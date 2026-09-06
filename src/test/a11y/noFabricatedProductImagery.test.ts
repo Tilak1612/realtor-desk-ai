@@ -131,7 +131,23 @@ describe("no fabricated product imagery", () => {
     const offenders: string[] = [];
     for (const file of walkPages(join(process.cwd(), "src/pages"))) {
       const code = readFileSync(file, "utf8").replace(/\{\/\*[\s\S]*?\*\/\}/g, "");
-      if (/\u2b50{2,}/.test(code)) offenders.push(file.split("/src/")[1]);
+      // The emoji is only one of the two spellings. /blog/best-crm-canada-2025
+      // rendered its ratings as lucide <Star> components -- ten of them, from
+      // array literals, each with a trailing grey star completing an
+      // out-of-five -- and sailed past a check that only looked for the
+      // character. That page scored eight NAMED competitors between 63 and 82
+      // out of 100 and placed itself first at 94, with no methodology and no
+      // disclosure that the ranker was a rival.
+      //
+      // An array literal mapped to <Star> is unambiguously a rating: nobody
+      // writes [1,2,3,4].map for decoration. A lone <Star> beside a heading
+      // still passes, which keeps this from flagging marketing voice.
+      const emojiStars = /\u2b50{2,}/.test(code);
+      const mappedStars = /\[[\s\d,]+\]\.map\([^)]*<Star/.test(code);
+      const outOfHundred = /\b\d{1,3}\/100\b/.test(code);
+      if (emojiStars || mappedStars || outOfHundred) {
+        offenders.push(file.split("/src/")[1]);
+      }
     }
     expect(
       offenders,

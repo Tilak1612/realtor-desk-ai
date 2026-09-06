@@ -28,7 +28,21 @@
 import { chromium } from "playwright-core";
 
 const BASE = process.env.BASE || "http://localhost:4173";
-const WIDTHS = [320, 375, 390, 430, 768, 1024, 1440, 1920];
+// All eight by default. WIDTHS=320,768 narrows it, which is what makes
+// sweeping every route in the sitemap practical: the priority pages get the
+// full set, and the long tail gets the extremes, where overflow and tap-target
+// problems actually live. A width outside the list is allowed -- the list is a
+// default, not a whitelist.
+const ALL_WIDTHS = [320, 375, 390, 430, 768, 1024, 1440, 1920];
+const WIDTHS = process.env.WIDTHS
+  ? process.env.WIDTHS.split(",")
+      .map((w) => Number(w.trim()))
+      .filter((w) => Number.isFinite(w) && w > 0)
+  : ALL_WIDTHS;
+if (!WIDTHS.length) {
+  console.error("WIDTHS was set but parsed to nothing usable");
+  process.exit(2);
+}
 const TOUCH_MAX_WIDTH = 768;
 const MIN_TAP = 24;
 const MIN_CHARS = 200;
@@ -121,6 +135,15 @@ for (const route of PAGES) {
             if (r.width <= 2 && r.height <= 2) continue;
             // An inline link inside a paragraph is explicitly exempt from
             // WCAG 2.5.8 -- its target is the text itself.
+            //
+            // KNOWN LIMITATION: <li> is broader than the spec warrants. The
+            // exception is for a link "in a sentence", and a footer nav list is
+            // not a sentence -- those links are standalone targets that happen
+            // to be marked up as a list. This exemption currently hides the
+            // legacy Footer's 17 column links, measured at 17px tall. Narrowing
+            // it means deciding when an <li> is prose and when it is navigation,
+            // which needs a judgement call this script should not make silently;
+            // it is recorded here rather than left as an unexplained pass.
             const inProse = el.tagName === "A" && el.closest("p, li, label");
             if (inProse) continue;
             // <Link><Button/></Link> renders an inline <a> whose own box
@@ -135,6 +158,24 @@ for (const route of PAGES) {
               const kr = kid.getBoundingClientRect();
               if (kr.width > ew) ew = kr.width;
               if (kr.height > eh) eh = kr.height;
+            }
+            // A checkbox or radio with an associated label is activated by
+            // clicking the label too, so the target is the whole row, not the
+            // 13px box the browser draws. Sixteen of these were reported across
+            // /resources and the CASL checklist, every one inside a <label>
+            // whose text toggles it.
+            const isBoxy =
+              el.tagName === "INPUT" &&
+              /^(checkbox|radio)$/i.test(el.getAttribute("type") || "");
+            if (isBoxy) {
+              const lbl =
+                el.closest("label") ||
+                (el.id && document.querySelector(`label[for="${CSS.escape(el.id)}"]`));
+              if (lbl) {
+                const lr = lbl.getBoundingClientRect();
+                if (lr.width > ew) ew = lr.width;
+                if (lr.height > eh) eh = lr.height;
+              }
             }
             if (ew >= minTap && eh >= minTap) continue;
             if (r.width < minTap || r.height < minTap) {

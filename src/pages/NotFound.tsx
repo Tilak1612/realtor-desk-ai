@@ -77,16 +77,16 @@ const NotFound = () => {
           <div className="mt-10 pt-6 border-t text-sm text-muted-foreground">
             <p className="mb-3">{t("notFound.tryInstead", "Try one of these instead:")}</p>
             <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              <Link to="/features" className="hover:text-primary transition-colors">
+              <Link to="/features" className="hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t("marketingHeader.navFeatures", "Features")}
               </Link>
-              <Link to="/pricing" className="hover:text-primary transition-colors">
+              <Link to="/pricing" className="hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t("marketingHeader.navPricing", "Pricing")}
               </Link>
-              <Link to="/resources" className="hover:text-primary transition-colors">
+              <Link to="/resources" className="hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t("marketingHeader.navResources", "Resources")}
               </Link>
-              <Link to="/contact" className="hover:text-primary transition-colors">
+              <Link to="/contact" className="hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t("footer.contact", "Contact")}
               </Link>
             </nav>
