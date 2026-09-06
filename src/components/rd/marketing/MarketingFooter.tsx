@@ -144,7 +144,11 @@ function FooterCol({
       <div className="text-[11px] font-bold uppercase tracking-[0.08em] text-rd-ink-900 mb-3.5">
         {title}
       </div>
-      <ul className="flex flex-col gap-2.5">
+      {/* Column links are navigation, not prose: each is a standalone target,
+          so each needs 24px of height under WCAG 2.5.8. At 13px they rendered
+          16px tall. The gap tightens from 2.5 to 1 so the column keeps roughly
+          the same overall length -- the spacing moves inside each row. */}
+      <ul className="flex flex-col gap-1">
         {items.map((i) => (
           <li key={i.label}>
             {i.external ? (
@@ -152,12 +156,12 @@ function FooterCol({
                 href={i.to}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900"
+                className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
               >
                 {i.label}
               </a>
             ) : (
-              <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900">
+              <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900 inline-flex items-center min-h-[24px]">
                 {i.label}
               </Link>
             )}
