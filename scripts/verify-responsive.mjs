@@ -136,15 +136,29 @@ for (const route of PAGES) {
             // An inline link inside a paragraph is explicitly exempt from
             // WCAG 2.5.8 -- its target is the text itself.
             //
-            // KNOWN LIMITATION: <li> is broader than the spec warrants. The
-            // exception is for a link "in a sentence", and a footer nav list is
-            // not a sentence -- those links are standalone targets that happen
-            // to be marked up as a list. This exemption currently hides the
-            // legacy Footer's 17 column links, measured at 17px tall. Narrowing
-            // it means deciding when an <li> is prose and when it is navigation,
-            // which needs a judgement call this script should not make silently;
-            // it is recorded here rather than left as an unexplained pass.
-            const inProse = el.tagName === "A" && el.closest("p, li, label");
+            // <li> alone was too broad. The exception is for a link "in a
+            // sentence", and a footer nav list is not a sentence -- those links
+            // are standalone targets that merely happen to be marked up as a
+            // list, and exempting them hid the legacy Footer's 17 column links
+            // at 17px tall.
+            //
+            // The distinction is decidable: an <li> whose only content is the
+            // link is navigation, and an <li> with prose around the link is a
+            // sentence. So the exemption applies only when the list item
+            // carries text the link does not. <p> and <label> stay exempt
+            // outright -- both are prose containers by definition.
+            const isLink = el.tagName === "A";
+            let inProse = isLink && !!el.closest("p, label");
+            if (isLink && !inProse) {
+              const li = el.closest("li");
+              if (li) {
+                const own = (li.textContent || "").replace(/\s+/g, " ").trim();
+                const linked = (el.textContent || "").replace(/\s+/g, " ").trim();
+                // More than a couple of stray characters of surrounding text
+                // (a separator, a bullet) means the link sits inside a sentence.
+                inProse = own.length - linked.length > 2;
+              }
+            }
             if (inProse) continue;
             // <Link><Button/></Link> renders an inline <a> whose own box
             // collapses to the line height -- 248x20 -- around a child button

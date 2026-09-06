@@ -67,24 +67,24 @@ const Footer = () => {
           {/* Product */}
           <div>
             <h3 className="font-semibold mb-4">{t('footer.product')}</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-0.5 text-sm">
               <li>
-                <Link to="/features" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/features" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.features')}
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.pricing')}
                 </Link>
               </li>
               <li>
-                <Link to="/how-it-works" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/how-it-works" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.howItWorks')}
                 </Link>
               </li>
               <li>
-                <Link to="/demo" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/demo" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('nav.bookDemo')}
                 </Link>
               </li>
@@ -94,29 +94,29 @@ const Footer = () => {
           {/* Resources */}
           <div>
             <h3 className="font-semibold mb-4">{t('footer.resourcesHeading', 'Resources')}</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-0.5 text-sm">
               <li>
-                <Link to="/resources" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/resources" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.blog')}
                 </Link>
               </li>
               <li>
-                <Link to="/roadmap" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/roadmap" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.roadmap', 'Product Roadmap')}
                 </Link>
               </li>
               <li>
-                <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/integrations" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.integrations')}
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('nav.faq')}
                 </Link>
               </li>
               <li>
-                <Link to="/partners" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/partners" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('marketingHeader.navPartners')}
                 </Link>
               </li>
@@ -126,19 +126,19 @@ const Footer = () => {
                     href={COMMUNITY_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]"
                   >
                     {t('marketingFooter.itemCommunity')}
                   </a>
                 </li>
               )}
               <li>
-                <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.careers')}
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   {t('footer.helpCenter')}
                 </Link>
               </li>
@@ -151,7 +151,7 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-primary" />
-                <a href="mailto:support@realtordesk.ai" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="mailto:support@realtordesk.ai" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                   support@realtordesk.ai
                 </a>
               </li>
@@ -162,7 +162,7 @@ const Footer = () => {
                 </span>
               </li>
               <li>
-                <Link to="/contact" className="text-primary hover:text-primary/80 transition-colors font-medium">
+                <Link to="/contact" className="text-primary hover:text-primary/80 transition-colors font-medium inline-flex items-center min-h-[24px]">
                   {t('footer.contact')} →
                 </Link>
               </li>
@@ -177,10 +177,10 @@ const Footer = () => {
               {t('footer.copyright')}
             </p>
             <div className="flex gap-6 text-sm">
-              <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t('footer.privacy')}
               </Link>
-              <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t('footer.terms')}
               </Link>
               <button 
@@ -188,11 +188,11 @@ const Footer = () => {
                   localStorage.removeItem("cookie-consent");
                   window.location.reload();
                 }} 
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]"
               >
                 {t('footer.cookieSettings', 'Cookie Settings')}
               </button>
-              <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
                 {t('footer.contact')}
               </Link>
             </div>
