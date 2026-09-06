@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Mail, Lock, ArrowRight, Info, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, ArrowRight, Info, Eye, EyeOff, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
 import { SEO } from "@/components/SEO";
@@ -206,7 +206,7 @@ const Login = () => {
             <div className="flex items-center justify-end">
               <Link
                 to="/forgot-password"
-                className="text-sm text-rd-navy-700 hover:text-rd-navy-800 font-medium underline underline-offset-2 transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-500"
+                className="text-sm text-rd-navy-700 hover:text-rd-navy-800 font-medium underline underline-offset-2 transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-500 inline-flex items-center min-h-[24px]"
               >
                 {t('auth.login.forgotPassword', 'Forgot password?')}
               </Link>
@@ -219,7 +219,14 @@ const Login = () => {
               className="w-full bg-rd-navy-800 text-white py-3 px-4 rounded-xl font-medium hover:bg-rd-navy-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               <span>{loading ? t('app.common.loading') : t('auth.login.signInSecurely', 'Sign in securely')}</span>
-              {!loading && <ArrowRight aria-hidden="true" className="w-4 h-4" />}
+              {/* aria-hidden: the state is already announced by the label text
+                    swapping to "Loading". Under prefers-reduced-motion the
+                    global rule freezes the rotation, leaving a static glyph
+                    beside that text -- still an indicator, just not moving. */}
+                {loading && (
+                  <Loader2 aria-hidden="true" className="w-4 h-4 animate-spin" />
+                )}
+                {!loading && <ArrowRight aria-hidden="true" className="w-4 h-4" />}
             </button>
 
             {/* Same notice as signup. Login had none at all, so a returning
