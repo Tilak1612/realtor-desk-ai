@@ -89,12 +89,17 @@ const AdminDemoRequests = () => {
   };
 
   const getStatusColor = (status: string) => {
+    // -700 rather than -500. Badge renders white text, and against the
+    // -500 shades that was blue 3.68, yellow 1.92, purple 3.96, green
+    // 2.28 -- four of the five statuses below the 4.5 threshold, yellow
+    // worst. The whole scale moves together so the statuses stay
+    // distinguishable; gray already passed and shifts only for consistency.
     const colors = {
-      new: "bg-blue-500",
-      contacted: "bg-yellow-500",
-      scheduled: "bg-purple-500",
-      completed: "bg-green-500",
-      cancelled: "bg-gray-500",
+      new: "bg-blue-700",
+      contacted: "bg-yellow-700",
+      scheduled: "bg-purple-700",
+      completed: "bg-green-700",
+      cancelled: "bg-gray-700",
     };
     return colors[status as keyof typeof colors] || "bg-gray-500";
   };

@@ -125,7 +125,7 @@ const SwitchFromLofty = () => {
             </Card>
 
             <Card className="p-8 border-accent">
-              <Badge className="mb-4 bg-accent">Realtor Desk</Badge>
+              <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
               <h3 className="text-xl font-bold mb-4">True Intelligence</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
@@ -239,7 +239,7 @@ const SwitchFromLofty = () => {
             </Card>
 
             <Card className="p-8 border-accent">
-              <Badge className="mb-4 bg-accent">Realtor Desk</Badge>
+              <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
               <div className="text-3xl font-bold gradient-text mb-4">$999/year</div>
               <ul className="space-y-2 mb-6">
                 <li className="text-sm">✓ All features included</li>

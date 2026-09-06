@@ -75,19 +75,32 @@ export function TopNav({ agent, isLive = false, onMenuClick }: TopNavProps) {
             onClick={() => setLang("en")}
             className={cn(
               "cursor-pointer transition-colors",
-              active === "en" ? "text-rd-ink-900" : "opacity-40 hover:opacity-80"
+              // Explicit ink, not opacity. opacity-40 composited the inherited
+              // ink to #A1A2A4 -- 2.55:1 on white, on a control a person is
+              // meant to click. rd-ink-500 is 4.83:1 and still reads clearly as
+              // the inactive half of the pair against the active 18:1.
+              active === "en"
+                ? "text-rd-ink-900"
+                : "text-rd-ink-500 hover:text-rd-ink-900"
             )}
             aria-pressed={active === "en"}
           >
             EN
           </button>
-          <span className="opacity-40">/</span>
+          {/* Decorative separator between the two language controls, not
+              content -- hidden from assistive tech rather than given a
+              contrast-compliant colour it does not need. */}
+          <span aria-hidden="true" className="text-rd-ink-300">
+            /
+          </span>
           <button
             type="button"
             onClick={() => setLang("fr")}
             className={cn(
               "cursor-pointer transition-colors",
-              active === "fr" ? "text-rd-ink-900" : "opacity-40 hover:opacity-80"
+              active === "fr"
+                ? "text-rd-ink-900"
+                : "text-rd-ink-500 hover:text-rd-ink-900"
             )}
             aria-pressed={active === "fr"}
           >

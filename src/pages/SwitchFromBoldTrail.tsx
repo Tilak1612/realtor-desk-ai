@@ -175,7 +175,7 @@ const SwitchFromBoldTrail = () => {
             <p className="text-lg text-muted-foreground mb-4">
               $499 value included at no cost. We handle everything.
             </p>
-            <Badge className="bg-accent">
+            <Badge className="bg-rd-terra-800">
               Zero downtime • Zero effort on your part
             </Badge>
           </Card>
