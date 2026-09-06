@@ -351,10 +351,31 @@ try {
 
   const A11Y_PAGES = [...new Set([...CORE_PAGES, ...sitemapPages])];
   const a11yFindings = [];
+  const unreachable = [];
 
   for (const route of A11Y_PAGES) {
     const ap = await ctx.newPage();
-    await ap.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+    // A transient network error must not destroy the run. One
+    // ERR_NETWORK_CHANGED partway through the sitemap sweep aborted the whole
+    // verification and threw away nine passing checks -- a gate that any
+    // flaky moment can kill is not a gate. One retry absorbs the blip; a
+    // route that fails twice is recorded and the sweep continues, so a
+    // genuinely unreachable page still surfaces as a finding.
+    let reached = false;
+    for (let attempt = 0; attempt < 2 && !reached; attempt++) {
+      try {
+        await ap.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+        reached = true;
+      } catch (err) {
+        if (attempt === 1) {
+          unreachable.push(`${route} (${String(err).split("\n")[0].slice(0, 60)})`);
+        }
+      }
+    }
+    if (!reached) {
+      await ap.close();
+      continue;
+    }
     // A fixed delay is a guess: animate-fade-in-up carries delays on top of
     // its duration, and axe scores whatever opacity it happens to find. That
     // produced four phantom contrast failures on /how-it-works at opacity
@@ -416,7 +437,27 @@ try {
   // doubles the wall clock for very little extra signal.
   for (const route of CORE_PAGES) {
     const mp = await mobileCtx.newPage();
-    await mp.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+    // A transient network error must not destroy the run. One
+    // ERR_NETWORK_CHANGED partway through the sitemap sweep aborted the whole
+    // verification and threw away nine passing checks -- a gate that any
+    // flaky moment can kill is not a gate. One retry absorbs the blip; a
+    // route that fails twice is recorded and the sweep continues, so a
+    // genuinely unreachable page still surfaces as a finding.
+    let reached = false;
+    for (let attempt = 0; attempt < 2 && !reached; attempt++) {
+      try {
+        await mp.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
+        reached = true;
+      } catch (err) {
+        if (attempt === 1) {
+          unreachable.push(`${route} (${String(err).split("\n")[0].slice(0, 60)})`);
+        }
+      }
+    }
+    if (!reached) {
+      await mp.close();
+      continue;
+    }
     // Same animation settle as the desktop pass above: wait for finite
     // animations only, under a cap, so contrast is measured at rest.
     await mp
@@ -454,6 +495,16 @@ try {
     "no serious or critical axe violations (390px)",
     mobileFindings.length === 0,
     mobileFindings.join(" | ") || `${CORE_PAGES.length} core pages clean at 390px`
+  );
+
+  // A page that failed to load twice was skipped above rather than
+  // crashing the run. It still has to be reported: silently sweeping
+  // fewer pages is exactly how coverage disappears unnoticed.
+  record(
+    "every page in the sweep was reachable",
+    unreachable.length === 0,
+    unreachable.join(" | ") ||
+      `${A11Y_PAGES.length + CORE_PAGES.length} navigations, no retries exhausted`
   );
 
   /* ── 5g. field performance on a mid-range phone ─────────────────────────── */
