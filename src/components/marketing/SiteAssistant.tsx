@@ -83,7 +83,7 @@ const SiteAssistant = () => {
   return (
       <button
         onClick={() => setOpen(true)}
-        aria-label="Ask Desk AI about Realtor Desk"
+        aria-label="Ask Agent about Realtor Desk"
         className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
         <MessageCircle className="h-6 w-6" />
@@ -94,12 +94,12 @@ const SiteAssistant = () => {
   return (
     <div
       role="dialog"
-      aria-label="Ask Desk AI"
+      aria-label="Ask Agent"
       className="fixed bottom-5 right-5 z-40 flex h-[32rem] w-[min(24rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div>
-          <p className="text-sm font-semibold text-foreground">Ask Desk AI</p>
+          <p className="text-sm font-semibold text-foreground">Ask Agent</p>
           <p className="text-xs text-muted-foreground">About Realtor Desk</p>
         </div>
         <button

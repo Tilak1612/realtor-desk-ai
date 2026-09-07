@@ -98,3 +98,41 @@ describe("site assistant endpoint — hardening checklist", () => {
     expect(handoffIdx).toBeLessThan(fetchIdx);
   });
 });
+
+describe("assistant identity", () => {
+  const widget = readFileSync(
+    resolve(process.cwd(), "src/components/marketing/SiteAssistant.tsx"),
+    "utf8"
+  );
+  const corpus = readFileSync(
+    resolve(process.cwd(), "supabase/functions/site-assistant/corpus.ts"),
+    "utf8"
+  );
+
+  it("calls the widget and the assistant by the same name", () => {
+    // The visible label and the assistant's own self-description live in two
+    // repos-worth of code -- one shipped by Vercel, one by the Supabase
+    // functions pipeline. They deploy separately, so they can drift: the
+    // header can say one name while the bot introduces itself as another.
+    expect(widget, "widget header no longer says Ask Agent").toContain("Ask Agent");
+    expect(corpus, "the assistant does not know it is Ask Agent").toContain(
+      'You are "Ask Agent"'
+    );
+  });
+
+  it("keeps the site assistant distinct from the in-app Desk AI", () => {
+    // "Desk AI" is the product feature that works leads inside the CRM --
+    // the sidebar status, the conversation author, the lead replies. The
+    // marketing-site helper is a different thing. Conflating them in the
+    // widget would tell a visitor the chatbot is the product.
+    const labels = widget.match(/aria-label="[^"]*"/g) ?? [];
+    for (const l of labels) {
+      expect(l, `widget label reuses the in-app feature name: ${l}`).not.toMatch(
+        /Desk AI/
+      );
+    }
+    expect(corpus, "the assistant should disclaim being the in-app Desk AI").toMatch(
+      /not claim to be the product's in-app Desk AI/
+    );
+  });
+});
