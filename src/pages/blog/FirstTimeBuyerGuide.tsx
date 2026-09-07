@@ -363,7 +363,7 @@ const FirstTimeBuyerGuide = () => {
 
             {/* CTA */}
             <Card className="p-8 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white text-center">
-              <h3 className="text-2xl font-bold mb-4">Ready to Start Your Home Buying Journey?</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">Ready to Start Your Home Buying Journey?</h3>
               <p className="mb-6 text-white/90">
                 Connect with a real estate agent who uses modern AI-powered tools to respond to your questions instantly and keep you updated every step of the way.
               </p>

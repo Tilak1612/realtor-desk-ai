@@ -297,7 +297,7 @@ const CostOfMissedLeads = () => {
                 </div>
 
                 <div className="bg-white/10 p-6 rounded-lg">
-                  <p className="text-red-400 font-bold mb-4">✗ With Poor Lead Management (Manual)</p>
+                  <p className="text-red-300 font-bold mb-4">✗ With Poor Lead Management (Manual)</p>
                   <div className="space-y-2 text-sm">
                     <p>500 leads × 1.0% = <strong>5 deals</strong></p>
                     <p>5 × $12,000 = <span className="text-2xl font-bold text-red-400">$60,000</span></p>

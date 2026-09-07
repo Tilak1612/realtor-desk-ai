@@ -146,7 +146,7 @@ const Login = () => {
             {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium text-rd-ink-800 flex items-center gap-2">
-                {t('auth.login.emailAddress', 'Email address')} <span className="text-xs text-red-400">*</span>
+                {t('auth.login.emailAddress', 'Email address')} <span className="text-xs text-red-700">*</span>
               </Label>
               <div className="relative">
                 <Input
@@ -167,7 +167,7 @@ const Login = () => {
             {/* Password */}
             <div className="space-y-2">
               <Label htmlFor="password" className="text-sm font-medium text-rd-ink-800 flex items-center gap-2">
-                {t('auth.login.password', 'Password')} <span className="text-xs text-red-400">*</span>
+                {t('auth.login.password', 'Password')} <span className="text-xs text-red-700">*</span>
               </Label>
               <div className="relative">
                 <Input
