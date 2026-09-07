@@ -439,7 +439,7 @@ const PIPEDACompliance = () => {
 
               <div className="mt-8 p-4 bg-primary/5 rounded-lg">
                 <p className="text-sm text-center">
-                  <strong>Need help?</strong> RealtorDesk keeps your client data in Canada and honours unsubscribe requests immediately; the remaining obligations here are yours to operate. <Link to="/demo" className="text-primary hover:underline">Book a demo</Link> to see how.
+                  <strong>Need help?</strong> RealtorDesk keeps your client data in Canada and honours unsubscribe requests immediately; the remaining obligations here are yours to operate. <Link to="/demo" className="text-primary underline">Book a demo</Link> to see how.
                 </p>
               </div>
             </Card>
@@ -518,7 +518,7 @@ const PIPEDACompliance = () => {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-6">
-              Questions about compliance? Email <a href="mailto:privacy@realtordesk.ai" className="text-primary hover:underline">privacy@realtordesk.ai</a>
+              Questions about compliance? Email <a href="mailto:privacy@realtordesk.ai" className="text-primary underline">privacy@realtordesk.ai</a>
             </p>
           </div>
         </div>

@@ -177,8 +177,14 @@ const Integrations = () => {
                       <div className="w-12 h-12 mb-3 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
                         {integration.name.charAt(0)}
                       </div>
-                      <h4 className="font-medium text-sm mb-1">{integration.name}</h4>
-                      <p className="text-xs text-muted-foreground">{getSubtitle(integration.subtitleKey)}</p>
+                      {/* Explicit light text. The card is bg-zinc-800, but these
+                          inherited the light-mode defaults: ink #13161B at 1.22:1
+                          and muted-foreground #616875 at 2.66:1 against #27272A.
+                          Twenty-three cards, forty-six violations, and the same
+                          dark-default-on-dark-surface failure as the CTA button in
+                          PR #202. */}
+                      <h4 className="font-medium text-sm mb-1 text-white">{integration.name}</h4>
+                      <p className="text-xs text-zinc-300">{getSubtitle(integration.subtitleKey)}</p>
                     </Card>
                   ))}
                 </div>

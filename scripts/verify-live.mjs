@@ -311,10 +311,31 @@ try {
   const require = createRequire(import.meta.url);
   const AXE = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 
-  // Every important marketing page, not a sample. The first three checked
-  // yielded ten serious violations, so a sample was clearly not enough to
-  // conclude anything about the rest.
-  const A11Y_PAGES = [
+  // Pulled from the live sitemap, not hardcoded.
+  //
+  // A fixed list goes stale the moment someone adds a page, and the new page
+  // is then the one nobody checks. The sitemap is what the site already
+  // publishes as its own index, so coverage extends itself.
+  //
+  // The blog sweep that found ~120 violations was a throwaway script. Folding
+  // it in here is the point: today's 31/31 means nothing if nothing re-checks
+  // it after the next content change.
+  const sitemapPages = await (async () => {
+    try {
+      const res = await ctx.request.get(`${BASE}/sitemap.xml`);
+      const xml = await res.text();
+      return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+        .map((m) => m[1].replace(BASE, "").replace(/^https?:\/\/[^/]+/, ""))
+        .filter((u) => u && !u.startsWith("/app"));
+    } catch {
+      return [];
+    }
+  })();
+
+  // The hand-picked set stays as a floor: if the sitemap fetch fails or the
+  // file is ever emptied, these are still checked rather than silently
+  // reducing coverage to nothing.
+  const CORE_PAGES = [
     "/",
     "/pricing",
     "/features",
@@ -327,12 +348,34 @@ try {
     "/privacy-policy",
     "/terms-of-service",
   ];
+
+  const A11Y_PAGES = [...new Set([...CORE_PAGES, ...sitemapPages])];
   const a11yFindings = [];
 
   for (const route of A11Y_PAGES) {
     const ap = await ctx.newPage();
     await ap.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
-    await ap.waitForTimeout(900);
+    // A fixed delay is a guess: animate-fade-in-up carries delays on top of
+    // its duration, and axe scores whatever opacity it happens to find. That
+    // produced four phantom contrast failures on /how-it-works at opacity
+    // 0.92/0.62/0.41/0.17 which do not exist once the animation lands on 1.
+    // Waiting on the animations themselves makes the measurement a property of
+    // the page, not of the timing. Only finite animations are awaited -- an
+    // infinite spinner never settles and would hang the sweep -- and the race
+    // caps even those.
+    await ap
+      .evaluate(async () => {
+        const finite = document.getAnimations().filter((a) => {
+          const t = a.effect?.getTiming?.();
+          return (t ? t.iterations : 1) !== Infinity;
+        });
+        await Promise.race([
+          Promise.all(finite.map((a) => a.finished.catch(() => {}))),
+          new Promise((r) => setTimeout(r, 2000)),
+        ]);
+      })
+      .catch(() => {});
+    await ap.waitForTimeout(300);
     await ap.addScriptTag({ content: AXE });
     const res = await ap.evaluate(async () => {
       // Serious and critical only. Minor and moderate on a real marketing
@@ -368,10 +411,27 @@ try {
   });
   const mobileFindings = [];
 
-  for (const route of A11Y_PAGES) {
+  // Mobile runs the CORE set only. The 390px-specific rules are layout and
+  // target-size, which the core pages exercise; running 60+ pages twice
+  // doubles the wall clock for very little extra signal.
+  for (const route of CORE_PAGES) {
     const mp = await mobileCtx.newPage();
     await mp.goto(`${BASE}${route}`, { waitUntil: "networkidle" });
-    await mp.waitForTimeout(900);
+    // Same animation settle as the desktop pass above: wait for finite
+    // animations only, under a cap, so contrast is measured at rest.
+    await mp
+      .evaluate(async () => {
+        const finite = document.getAnimations().filter((a) => {
+          const t = a.effect?.getTiming?.();
+          return (t ? t.iterations : 1) !== Infinity;
+        });
+        await Promise.race([
+          Promise.all(finite.map((a) => a.finished.catch(() => {}))),
+          new Promise((r) => setTimeout(r, 2000)),
+        ]);
+      })
+      .catch(() => {});
+    await mp.waitForTimeout(300);
     await mp.addScriptTag({ content: AXE });
     const res = await mp.evaluate(async () => {
       const r = await window.axe.run(document, {
@@ -393,7 +453,7 @@ try {
   record(
     "no serious or critical axe violations (390px)",
     mobileFindings.length === 0,
-    mobileFindings.join(" | ") || `${A11Y_PAGES.length} pages clean at 390px`
+    mobileFindings.join(" | ") || `${CORE_PAGES.length} core pages clean at 390px`
   );
 
   /* ── 5g. field performance on a mid-range phone ─────────────────────────── */

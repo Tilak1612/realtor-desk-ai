@@ -228,7 +228,7 @@ const Billing = () => {
                     {t('billing.subscriptionActive', 'Your subscription is active')}
                   </CardDescription>
                 </div>
-                <Badge variant="default" className="bg-accent text-xs">
+                <Badge variant="default" className="bg-rd-terra-800 text-xs">
                   Active
                 </Badge>
               </div>
@@ -302,7 +302,7 @@ const Billing = () => {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base font-medium">{t('billing.agentPlan', 'Solo plan')}</CardTitle>
                   {subscriptionTier === 'agent' && (
-                    <Badge variant="default" className="bg-accent text-xs">{t('billing.current', 'Current')}</Badge>
+                    <Badge variant="default" className="bg-rd-terra-800 text-xs">{t('billing.current', 'Current')}</Badge>
                   )}
                 </div>
                 <div className="mt-4">
@@ -352,7 +352,7 @@ const Billing = () => {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-base font-medium">{t('billing.teamPlan', 'Team plan')}</CardTitle>
                   {subscriptionTier === 'team' ? (
-                    <Badge variant="default" className="bg-accent text-xs">{t('billing.current', 'Current')}</Badge>
+                    <Badge variant="default" className="bg-rd-terra-800 text-xs">{t('billing.current', 'Current')}</Badge>
                   ) : (
                     <Badge variant="secondary" className="text-xs">{t('billing.mostPopular', 'Most popular')}</Badge>
                   )}

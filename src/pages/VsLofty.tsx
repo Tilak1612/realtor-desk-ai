@@ -87,7 +87,7 @@ const VsLofty = () => {
 
             <Card className="p-8 border-accent">
               <div className="text-center mb-4">
-                <Badge className="mb-2 bg-accent">Realtor Desk</Badge>
+                <Badge className="mb-2 bg-rd-terra-800">Realtor Desk</Badge>
                 <h3 className="text-xl font-bold">Predictive Intelligence</h3>
               </div>
               <ul className="space-y-3">

@@ -75,7 +75,7 @@ const AIPoweredCRM = () => {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4 bg-accent">
+              <Badge className="mb-4 bg-rd-terra-800">
                 <Target className="w-3 h-3 mr-1" />
                 Predictive Intelligence
               </Badge>
@@ -136,7 +136,7 @@ const AIPoweredCRM = () => {
                 <div className="bg-background rounded-lg p-4 border-l-4 border-green-500">
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-semibold">Sarah Thompson</span>
-                    <Badge className="bg-green-500">Hot Lead - 94%</Badge>
+                    <Badge className="bg-green-700">Hot Lead - 94%</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-2">
                     Viewed 12 listings, opened 8 emails, searched "$800K Toronto condos"
@@ -159,7 +159,12 @@ const AIPoweredCRM = () => {
                   </div>
                 </div>
 
-                <div className="bg-background rounded-lg p-4 border-l-4 border-gray-300 opacity-60">
+                {/* No opacity here on purpose. This card used opacity-60 to read
+                    as "cold", which composited the muted text to #9CA0A7 on
+                    #F5F5F3 -- 2.40:1. Alpha cannot rescue it: even opacity-90
+                    only reaches 4.18, still under 4.5. The gray left border and
+                    the "Cold" badge carry the same meaning at full opacity. */}
+                <div className="bg-background rounded-lg p-4 border-l-4 border-gray-300">
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-semibold">David Martinez</span>
                     <Badge variant="outline">Cold - 12%</Badge>
@@ -181,7 +186,7 @@ const AIPoweredCRM = () => {
       <section className="section-padding bg-muted">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-accent">
+            <Badge className="mb-4 bg-rd-terra-800">
               <MapPin className="w-3 h-3 mr-1" />
               Canadian Market Intelligence
             </Badge>
@@ -324,7 +329,7 @@ const AIPoweredCRM = () => {
                   <div className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
                     <div className="flex items-center gap-2 text-sm">
                       <CheckCircle className="w-4 h-4 text-green-700" />
-                      <span className="font-semibold text-green-700">Lead qualified & appointment booked</span>
+                      <span className="font-semibold text-green-800">Lead qualified & appointment booked</span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
                       While you were sleeping, AI captured contact info, qualified budget, 
@@ -336,7 +341,7 @@ const AIPoweredCRM = () => {
             </div>
 
             <div className="order-1 lg:order-2">
-              <Badge className="mb-4 bg-accent">
+              <Badge className="mb-4 bg-rd-terra-800">
                 <MessageSquare className="w-3 h-3 mr-1" />
                 Intelligent Conversation
               </Badge>
@@ -388,7 +393,7 @@ const AIPoweredCRM = () => {
       <section className="section-padding bg-muted">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-accent">
+            <Badge className="mb-4 bg-rd-terra-800">
               <Mail className="w-3 h-3 mr-1" />
               Automated Nurturing
             </Badge>
