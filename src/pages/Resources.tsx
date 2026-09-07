@@ -532,7 +532,7 @@ const Resources = () => {
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">
                   {t("resourcesPage.allArticlesHeading", "All articles")}
                 </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                <div className="w-16 h-1 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 rounded-full"></div>
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -589,7 +589,7 @@ const Resources = () => {
                     <h2 className="text-3xl md:text-4xl font-bold mb-2">
                       {t(categoryKey)}
                     </h2>
-                    <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                    <div className="w-16 h-1 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 rounded-full"></div>
                   </div>
                   
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -638,7 +638,7 @@ const Resources = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="section-padding bg-gradient-to-r from-primary to-secondary text-white">
+      <section className="section-padding bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white">
         <div className="container-custom text-center">
           <h2 className="mb-4 text-white">{t('resourcesPage.newsletter.title')}</h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">

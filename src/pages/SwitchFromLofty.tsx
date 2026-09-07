@@ -270,7 +270,7 @@ const SwitchFromLofty = () => {
           <div className="space-y-6">
             <Card className="p-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center text-white font-bold flex-shrink-0">
                   M
                 </div>
                 <div className="flex-1">
@@ -285,7 +285,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center text-white font-bold flex-shrink-0">
                   L
                 </div>
                 <div className="flex-1">

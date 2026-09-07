@@ -45,7 +45,7 @@ export function SignupAside() {
 
   return (
     <div className="max-w-lg">
-      <h2 className="text-3xl font-bold leading-tight tracking-tight text-white xl:text-4xl">
+      <h2 className="text-3xl font-bold leading-tight tracking-tight text-rd-ink-900 xl:text-4xl">
         {t(
           "auth.signup.aside.headline",
           "The Canadian real estate CRM that works your leads for you.",
@@ -102,25 +102,25 @@ export function SignupAside() {
       </ul>
 
       {/* Trust card */}
-      <div className="mt-8 rounded-2xl border border-rd-line bg-white/[0.04] p-5">
+      <div className="mt-8 rounded-2xl border border-rd-line bg-white p-5">
         <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-rd-ink-600">
           {t("auth.signup.aside.trustTitle", "Your data")}
         </h3>
         <ul className="mt-3.5 space-y-2.5">
           <li className="flex items-start gap-2.5 text-sm text-rd-ink-700">
-            <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" aria-hidden="true" />
+            <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
             {t("auth.signup.aside.t1", "PIPEDA-compliant handling, with consent recorded at signup.")}
           </li>
           <li className="flex items-start gap-2.5 text-sm text-rd-ink-700">
-            <Server className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" aria-hidden="true" />
+            <Server className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
             {t("auth.signup.aside.t2", "Stored on Canadian servers.")}
           </li>
           <li className="flex items-start gap-2.5 text-sm text-rd-ink-700">
-            <Lock className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" aria-hidden="true" />
+            <Lock className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
             {t("auth.signup.aside.t3", "256-bit SSL in transit and encrypted at rest.")}
           </li>
           <li className="flex items-start gap-2.5 text-sm text-rd-ink-700">
-            <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" aria-hidden="true" />
+            <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
             {t("auth.signup.aside.t4", "Your workspace is isolated — no other account can read your data.")}
           </li>
         </ul>

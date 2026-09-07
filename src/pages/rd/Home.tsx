@@ -154,7 +154,7 @@ function HeroProduct({ t }: { t: TFn }) {
               </div>
               <span className="font-semibold text-sm">{t("landing.heroProduct.deskLive")}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] text-white/60">
+            <div className="flex items-center gap-1.5 text-[11px] text-white/75">
               <span className="w-1.5 h-1.5 bg-rd-success rounded-full" />
               {t("landing.heroProduct.answering")}
             </div>
@@ -184,7 +184,7 @@ function HeroProduct({ t }: { t: TFn }) {
           {/* Captured card */}
           <div className="mt-auto p-3.5 bg-white/[0.06] rounded-rd-md border border-white/10">
             <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[11px] uppercase tracking-[0.08em] text-white/60 font-semibold">
+              <span className="text-[11px] uppercase tracking-[0.08em] text-white/75 font-semibold">
                 {t("landing.heroProduct.leadCaptured")}
               </span>
               <RDBadge tone="terra" size="sm">{t("landing.heroProduct.hotBadge")}</RDBadge>
@@ -220,7 +220,7 @@ function HeroProduct({ t }: { t: TFn }) {
 function KV({ k, v, vEn, isFr }: { k: string; v: string; vEn?: string; isFr?: boolean }) {
   return (
     <div>
-      <div className="text-white/50 text-[10px] uppercase tracking-[0.06em]">{k}</div>
+      <div className="text-white/70 text-[10px] uppercase tracking-[0.06em]">{k}</div>
       <div className="text-white font-medium text-[13px] mt-0.5">{isFr === undefined ? v : isFr ? v : (vEn ?? v)}</div>
     </div>
   );
@@ -404,7 +404,11 @@ function PipelinePreview({ t }: { t: TFn }) {
             <CtaLink
               to={CAL_ROUTE}
               location="pipeline_preview"
-              variant="ghost"
+              // light, not ghost. ghost is "transparent, slate text (nav/toolbar)"
+              // per Button.tsx and is for LIGHT surfaces; this band is near-black,
+              // so it rendered dark-on-dark at 1.37:1. Button.tsx already defines
+              // light as "white surface with navy text (on dark sections)".
+              variant="light"
               size="lg"
             >
                 {t("landing.pipelinePreview.ctaSecondary")}
@@ -465,7 +469,7 @@ function MiniPipeline({ t }: { t: TFn }) {
               <span className={`w-1.5 h-1.5 rounded-full ${c.tone}`} />
               {c.title}
             </div>
-            <span className="text-[11px] text-white/50">{c.count}</span>
+            <span className="text-[11px] text-white/70">{c.count}</span>
           </div>
           <div className="flex flex-col gap-2">
             {c.cards.map((k) => (
@@ -517,7 +521,7 @@ function CompareStrip({ t, locale }: { t: TFn; locale: "en-CA" | "fr-CA" }) {
       </div>
 
       <div className="mx-auto max-w-[1100px] mt-12 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm overflow-hidden">
-        <div className="grid grid-cols-[1.6fr_1fr_1fr] px-7 py-5 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.1em] text-rd-ink-500 items-center">
+        <div className="grid grid-cols-[1.6fr_1fr_1fr] px-7 py-5 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.1em] text-rd-ink-600 items-center">
           <div>{t("landing.compareStrip.hCapability")}</div>
           <div className="text-center text-rd-ink-600 text-sm normal-case tracking-normal font-semibold">
             {t("landing.compareStrip.hThem")}

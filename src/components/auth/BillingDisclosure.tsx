@@ -27,11 +27,11 @@ export function BillingDisclosure() {
   const amount = formatCad(LOWEST_MONTHLY_CAD, i18n.language);
 
   return (
-    <div className="rounded-xl border border-rd-line bg-white/[0.04] p-3.5 text-left">
+    <div className="rounded-xl border border-rd-line bg-rd-paper-2 p-3.5 text-left">
       <div className="flex items-start gap-2.5">
         <CreditCard className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
         <div className="space-y-1.5 text-xs leading-relaxed text-rd-ink-600">
-          <p className="font-semibold text-white">
+          <p className="font-semibold text-rd-ink-900">
             {t("auth.signup.billing.today", "You are not charged today.")}
           </p>
           <p>

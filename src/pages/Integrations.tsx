@@ -251,7 +251,7 @@ const Integrations = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-primary to-secondary text-white">
+      <section className="section-padding bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white">
         <div className="container-custom text-center">
           <h2 className="mb-6 text-white">{t('integrationsPage.cta.title')}</h2>
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">

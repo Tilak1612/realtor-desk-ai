@@ -399,7 +399,7 @@ function FeatureMatrix({ t }: { t: TFn }) {
         <Fragment key={section.labelKey}>
           <div
             className={cn(
-              "px-6 py-3 bg-rd-ink-50 text-[11px] font-bold uppercase tracking-[0.08em] text-rd-ink-500",
+              "px-6 py-3 bg-rd-ink-50 text-[11px] font-bold uppercase tracking-[0.08em] text-rd-ink-600",
               si === 0 ? "" : "border-t border-rd-line"
             )}
           >
