@@ -70,8 +70,15 @@ describe("contrast regressions", () => {
     // emerald-300 on cream measured 1.46:1; red-300 for validation errors on
     // white measured 1.9:1 -- and that red is the aria-live slot, so someone
     // mistyping an email saw a pale pink line most people never register.
-    const src = read("src/pages/Signup.tsx") + read("src/components/auth/SignupAside.tsx");
-    for (const cls of ["text-red-300", "text-emerald-300", "text-green-300"]) {
+    // Login.tsx is in this list because the first pass covered only Signup and
+    // missed it: Login's required-field asterisks were text-red-400, which is
+    // 2.77:1 on white. A guard that checks one of two auth forms is a guard
+    // with a hole in it.
+    const src =
+      read("src/pages/Signup.tsx") +
+      read("src/pages/Login.tsx") +
+      read("src/components/auth/SignupAside.tsx");
+    for (const cls of ["text-red-300", "text-red-400", "text-emerald-300", "text-green-300"]) {
       expect(src, `${cls} is not legible on a light surface`).not.toContain(cls);
     }
   });

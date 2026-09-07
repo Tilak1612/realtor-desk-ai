@@ -521,8 +521,17 @@
  *
  * In @layer components it loses to utilities, which is the intended order:
  * component defaults set the baseline, utilities override it. */
+/* not-prose is used in six places across two blog pages and, until this
+   change, did NOTHING. It is @tailwindcss/typography's escape hatch, and this
+   project does not use that plugin -- the .prose rules here are hand-rolled
+   and never implemented it. So a CTA panel marked not-prose still inherited
+   prose colours: a heading inside a navy panel rendered ink #13161B on
+   #0A233E, 1.14:1, invisible.
+
+   The exclusion below is the plugin's own technique, and it is wrapped in
+   :where() so it contributes no specificity. */
 @layer components {
-  .prose :where(h1, h2, h3, h4, h5, h6) {
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply font-semibold tracking-tight text-foreground;
   }
 }
@@ -532,17 +541,30 @@
 .prose h3 { @apply text-xl sm:text-2xl md:text-3xl mb-3 mt-8; }
 
 @layer components {
-  .prose :where(p) {
+  .prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply text-base md:text-lg leading-relaxed mb-6 text-foreground;
   }
 }
 
 .prose ul, .prose ol { @apply my-6 ml-6 space-y-2; }
 .prose li { @apply text-base md:text-lg leading-relaxed; }
-.prose strong { @apply font-semibold text-foreground; }
-.prose a { @apply text-primary hover:text-primary/80 underline transition-colors; }
+/* The colour-setting prose rules get the same treatment the headings and
+   paragraphs already have: :where() to flatten specificity, AND inside
+   @layer components so utilities win. Unlayered CSS beats layered CSS no
+   matter the specificity, which is what made the earlier :where()-only fix
+   look like it had worked.
+
+   `.prose a` at (0,1,1) was overriding an anchor's OWN text colour. A
+   button-styled link inside an article -- <a class="bg-primary
+   text-primary-foreground"> -- had its text forced back to text-primary,
+   rendering navy on navy: rgb(10,35,62) on rgb(10,35,62), a 1:1 ratio and a
+   completely invisible "Book a Free Demo" CTA on four pages. */
+@layer components {
+  .prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) { @apply font-semibold text-foreground; }
+  .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) { @apply text-primary hover:text-primary/80 underline transition-colors; }
+  .prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) { @apply border-l-4 border-primary pl-6 italic my-6 text-muted-foreground; }
+}
 .prose code { @apply bg-muted px-2 py-1 rounded text-sm font-mono; }
-.prose blockquote { @apply border-l-4 border-primary pl-6 italic my-6 text-muted-foreground; }
 
 @layer utilities {
   .animation-delay-100 { animation-delay: 100ms; }

@@ -406,7 +406,7 @@ const EdmontonMarket2025 = () => {
 
             {/* CTA */}
             <Card className="p-8 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white text-center">
-              <h3 className="text-2xl font-bold mb-4">Ready to Explore Edmonton Real Estate?</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">Ready to Explore Edmonton Real Estate?</h3>
               <p className="mb-6 text-white/90">
                 Connect with an agent who uses AI-powered tools to respond instantly and provide data-driven neighborhood insights.
               </p>
