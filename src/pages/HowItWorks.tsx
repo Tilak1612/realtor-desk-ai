@@ -6,10 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { UserPlus, Link as LinkIcon, Brain, Settings, Rocket, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-// AVIF/WebP siblings from scripts/optimize-images.mjs. Imported explicitly:
-// Vite hashes each file independently, so the .avif URL cannot be derived
-// from the .jpg URL. This one image was 900KB of the 5.4MB shipped raster.
-import { Picture } from "@/components/Picture";
+import { DashboardPreview } from "@/components/marketing/DashboardPreview";
 
 const HowItWorks = () => {
   const { t } = useTranslation();
@@ -164,12 +161,21 @@ const HowItWorks = () => {
                 visitor to this page saw. A generated picture of software,
                 captioned as the software.
 
-                Left empty rather than filled with a placeholder frame. A
-                real screenshot goes here:
+                Left empty rather than filled with a placeholder frame.
+                <DashboardPreview> below renders the real screenshot once it exists
+                and returns null until then, so the whole procedure is:
                   npm run capture:screenshots && npm run optimize:images
-                then wrap it in <DeviceFrame variant="laptop">. The section
-                reads correctly without it meanwhile -- heading, subtitle
-                and the three capability cards below all stand alone. */}
+                with no follow-up edit here. The section reads correctly meanwhile
+                -- heading, subtitle and the three capability cards below all
+                stand alone. */}
+              <DashboardPreview
+                shot="shot-dashboard-desktop"
+                alt={t(
+                  'howItWorks.dashboard.screenshotAlt',
+                  'The Realtor Desk application dashboard'
+                )}
+                className="mb-8 max-w-[900px] mx-auto"
+              />
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <Card className="p-6">
