@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { trackEvent } from "@/utils/analytics";
+import { CAL_ROUTE } from "@/config/booking";
 import { Mail, Phone, MapPin, Youtube, Twitter, Facebook, Instagram } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { RDMark } from "@/components/rd/Logo";
@@ -84,7 +86,20 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/demo" className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]">
+                {/* The one link in this footer worth attributing: it is a
+                    funnel step, not navigation. Same event name and shape as
+                    CtaLink emits, so the two surfaces aggregate together. */}
+                <Link
+                  to={CAL_ROUTE}
+                  onClick={() =>
+                    trackEvent("cta_click", {
+                      cta_location: "footer_legacy",
+                      cta_label: "book_demo",
+                      destination: CAL_ROUTE,
+                    })
+                  }
+                  className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center min-h-[24px]"
+                >
                   {t('nav.bookDemo')}
                 </Link>
               </li>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { CalEmbed } from "@/components/marketing/CalEmbed";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -127,13 +128,41 @@ const Demo = () => {
         </div>
       </section>
 
+      {/* Booking calendar. Placed above the request form deliberately: picking
+          a slot is the shorter path and confirms instantly, where the form is
+          a request someone has to answer. The form stays because it writes to
+          Supabase and /admin/demo-requests reads those rows -- removing it
+          would break a workflow that lives outside this page. */}
+      <section className="pb-4">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-2">
+              {t("demo.booking.heading", "Pick a time that suits you")}
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              {t(
+                "demo.booking.subtitle",
+                "A 30-minute walkthrough with the team. Choose a slot and you will get a calendar invite straight away."
+              )}
+            </p>
+            <CalEmbed location="demo_page" />
+          </div>
+        </div>
+      </section>
+
       {/* Demo Form Section */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Left Column - Form */}
             <Card className="p-8">
-              <h2 className="text-2xl font-bold mb-6">{t("demo.form.heading", "Request a Personalized Demo")}</h2>
+              <h2 className="text-2xl font-bold mb-2">{t("demo.form.heading", "Request a Personalized Demo")}</h2>
+                <p className="text-sm text-muted-foreground mb-6">
+                  {t(
+                    "demo.form.altSubtitle",
+                    "Rather not book a slot yet? Tell us what you need and we will come back to you."
+                  )}
+                </p>
               
               <Form {...form}>
                 <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

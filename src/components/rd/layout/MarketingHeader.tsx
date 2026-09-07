@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { CtaLink } from "@/components/rd/marketing/CtaLink";
+import { CAL_ROUTE } from "@/config/booking";
 import { useTranslation } from "react-i18next";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
@@ -182,6 +183,19 @@ export function MarketingHeader({
                 </DropdownMenu.Portal>
               </DropdownMenu.Root>
             )}
+            {/* lg and up only. The header already carries two CTAs plus the menu
+                trigger; a third at md crowds them into the nav links. Ghost keeps
+                the hierarchy -- Start free trial stays the one primary action. */}
+            <CtaLink
+              to={CAL_ROUTE}
+              location="header"
+              label="book_demo"
+              variant="ghost"
+              size="sm"
+              className={cn("hidden lg:inline-flex", dark && "text-white hover:text-white")}
+            >
+              {t("marketingHeader.ctaBookDemo", "Book a demo")}
+            </CtaLink>
             <CtaLink
               to="/login"
               location="header"
@@ -338,16 +352,42 @@ export function MarketingHeader({
                     "flex flex-col gap-3 px-6 py-5 border-t",
                     dark ? "border-white/10" : "border-rd-line"
                   )}>
-                    <Link to="/login" className="w-full">
-                      <RDButton variant={dark ? "light" : "outline"} size="lg" className="w-full min-h-[44px]">
-                        {t("marketingHeader.ctaSignIn")}
-                      </RDButton>
-                    </Link>
-                    <Link to="/signup" className="w-full">
-                      <RDButton variant={dark ? "terra" : "primary"} size="lg" className="w-full min-h-[44px]">
-                        {t("marketingHeader.ctaStartFreeTrial")}
-                      </RDButton>
-                    </Link>
+                    {/* CtaLink, not <Link><RDButton/></Link>. That pattern nests
+                        interactive content inside an anchor: invalid HTML, two tab
+                        stops per control, and it emitted no analytics -- so mobile CTA
+                        clicks were invisible while the desktop ones were tracked.
+                        Same appearance. The menu closes itself on route change. */}
+                    <CtaLink
+                      to={CAL_ROUTE}
+                      location="mobile_menu"
+                      label="book_demo"
+                      variant={dark ? "light" : "outline"}
+                      size="lg"
+                      full
+                      className="min-h-[44px]"
+                    >
+                      {t("marketingHeader.ctaBookDemo", "Book a demo")}
+                    </CtaLink>
+                    <CtaLink
+                      to="/login"
+                      location="mobile_menu"
+                      variant="ghost"
+                      size="lg"
+                      full
+                      className={cn("min-h-[44px]", dark && "text-white hover:text-white")}
+                    >
+                      {t("marketingHeader.ctaSignIn")}
+                    </CtaLink>
+                    <CtaLink
+                      to="/signup"
+                      location="mobile_menu"
+                      variant={dark ? "terra" : "primary"}
+                      size="lg"
+                      full
+                      className="min-h-[44px]"
+                    >
+                      {t("marketingHeader.ctaStartFreeTrial")}
+                    </CtaLink>
                   </div>
                 </Dialog.Content>
               </Dialog.Portal>

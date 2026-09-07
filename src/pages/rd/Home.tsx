@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CtaLink } from "@/components/rd/marketing/CtaLink";
+import { CAL_ROUTE } from "@/config/booking";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
@@ -103,7 +104,7 @@ function HeroSection({ t }: { t: TFn }) {
                 {t("landing.hero.ctaPrimary")}
             </CtaLink>
             <CtaLink
-              to="/demo"
+              to={CAL_ROUTE}
               location="hero"
               variant="outline"
               size="lg"
@@ -401,7 +402,7 @@ function PipelinePreview({ t }: { t: TFn }) {
                 {t("landing.pipelinePreview.ctaPrimary")}
             </CtaLink>
             <CtaLink
-              to="/demo"
+              to={CAL_ROUTE}
               location="pipeline_preview"
               variant="ghost"
               size="lg"
