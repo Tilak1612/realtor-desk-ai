@@ -473,7 +473,7 @@ const SellHomeFast = () => {
             </p>
 
             {/* CTA */}
-            <Card className="p-8 bg-gradient-to-r from-primary to-secondary text-white text-center">
+            <Card className="p-8 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white text-center">
               <h3 className="text-2xl font-bold mb-4">Ready to Sell Your Home Fast?</h3>
               <p className="mb-6 text-white/90">
                 Find a real estate agent who uses modern AI-powered tools to respond to buyers in seconds, not hours.

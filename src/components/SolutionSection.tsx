@@ -14,7 +14,7 @@ const SolutionSection = () => {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* AI Chatbot Card */}
           <Card className="p-6 sm:p-8 card-hover">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-4 sm:mb-6">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center mb-4 sm:mb-6">
               <MessageSquare className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t('solution.chatbot.title')}</h3>
@@ -36,7 +36,7 @@ const SolutionSection = () => {
 
           {/* AI Voice Agent Card */}
           <Card className="p-6 sm:p-8 card-hover">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-4 sm:mb-6">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center mb-4 sm:mb-6">
               <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t('solution.voice.title')}</h3>
@@ -58,7 +58,7 @@ const SolutionSection = () => {
 
           {/* Email Automation Card */}
           <Card className="p-6 sm:p-8 card-hover sm:col-span-2 md:col-span-1">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mb-4 sm:mb-6">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center mb-4 sm:mb-6">
               <Mail className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
             <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t('solution.email.title')}</h3>

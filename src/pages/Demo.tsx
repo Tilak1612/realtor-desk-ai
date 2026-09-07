@@ -415,7 +415,7 @@ const Demo = () => {
                 </div>
               </Card>
 
-              <Card className="p-6 bg-gradient-to-r from-primary to-secondary text-white">
+              <Card className="p-6 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white">
                 <h3 className="text-xl font-bold mb-2">{ t("demo.selfServe.heading", "Prefer to explore on your own?") }</h3>
                 <p className="mb-4 text-white/90">{ t("demo.selfServe.sub", "Start your 14-day free trial - no demo required") }</p>
                 <Link to="/signup">

@@ -192,7 +192,7 @@ const Signup = () => {
   // Reserves one line of vertical space whether or not an error is showing,
   // so validation never shifts the layout under the user's cursor.
   const FieldError = ({ id, message }: { id: string; message?: string }) => (
-    <p id={id} className="min-h-[18px] text-sm leading-[18px] text-red-300" aria-live="polite">
+    <p id={id} className="min-h-[18px] text-sm leading-[18px] text-red-700" aria-live="polite">
       {message ?? ""}
     </p>
   );
@@ -249,7 +249,7 @@ const Signup = () => {
             {/* Full Name */}
             <div className="space-y-1.5">
               <Label htmlFor="fullName" className="text-sm font-medium text-rd-ink-800">
-                {t('app.settings.fullName')} <span aria-hidden="true" className="text-red-300">*</span>
+                {t('app.settings.fullName')} <span aria-hidden="true" className="text-red-700">*</span>
                 <span className="sr-only">{t('app.validation.requiredField', '(required)')}</span>
               </Label>
               <div className="relative">
@@ -274,7 +274,7 @@ const Signup = () => {
             {/* Email */}
             <div className="space-y-1.5">
               <Label htmlFor="email" className="text-sm font-medium text-rd-ink-800">
-                {t('app.auth.email')} <span aria-hidden="true" className="text-red-300">*</span>
+                {t('app.auth.email')} <span aria-hidden="true" className="text-red-700">*</span>
                 <span className="sr-only">{t('app.validation.requiredField', '(required)')}</span>
               </Label>
               <div className="relative">
@@ -301,7 +301,7 @@ const Signup = () => {
                 live criteria is the current standard and removes a field. */}
             <div className="space-y-1.5">
               <Label htmlFor="password" className="text-sm font-medium text-rd-ink-800">
-                {t('app.auth.password')} <span aria-hidden="true" className="text-red-300">*</span>
+                {t('app.auth.password')} <span aria-hidden="true" className="text-red-700">*</span>
                 <span className="sr-only">{t('app.validation.requiredField', '(required)')}</span>
               </Label>
               <PasswordInput

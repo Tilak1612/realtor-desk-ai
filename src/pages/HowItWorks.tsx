@@ -97,7 +97,7 @@ const HowItWorks = () => {
                     <div className={`${idx % 2 === 1 ? 'md:order-2' : ''}`}>
                       <Card className="p-8 card-hover">
                         <div className="flex items-center gap-4 mb-6">
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-secondary text-white flex items-center justify-center text-2xl font-bold">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white flex items-center justify-center text-2xl font-bold">
                             {step.number}
                           </div>
                           <div>

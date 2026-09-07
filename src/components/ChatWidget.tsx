@@ -79,7 +79,7 @@ const ChatWidget = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-primary to-secondary text-white shadow-lg hover:scale-110 transition-transform flex items-center justify-center"
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white shadow-lg hover:scale-110 transition-transform flex items-center justify-center"
           aria-label="Open chat"
         >
           <MessageCircle className="w-6 h-6" />
@@ -90,7 +90,7 @@ const ChatWidget = () => {
       {isOpen && (
         <Card className="fixed bottom-6 right-6 z-50 w-80 sm:w-96 shadow-2xl animate-scale-in">
           {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-secondary text-white p-4 rounded-t-lg flex items-center justify-between">
+          <div className="bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Bot className="w-5 h-5" />
               <span className="font-semibold">AI Assistant</span>
