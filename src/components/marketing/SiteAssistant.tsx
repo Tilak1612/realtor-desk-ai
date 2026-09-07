@@ -84,9 +84,18 @@ const SiteAssistant = () => {
       <button
         onClick={() => setOpen(true)}
         aria-label="Ask Agent about Realtor Desk"
-        className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        /* A pill, not a bare circle. Naming the assistant is pointless if the
+           name appears nowhere until the panel is already open, so the closed
+           launcher carries it. h-14 keeps the previous hit area; px-5 grows it
+           sideways only. The label is aria-hidden because the button's own
+           aria-label already says "Ask Agent" -- without that a screen reader
+           announces the name twice. */
+        className="fixed bottom-5 right-5 z-40 inline-flex h-14 max-w-[calc(100vw-2.5rem)] items-center gap-2.5 rounded-full bg-primary px-5 text-primary-foreground shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
-        <MessageCircle className="h-6 w-6" />
+        <MessageCircle aria-hidden="true" className="h-6 w-6 flex-shrink-0" />
+        <span aria-hidden="true" className="text-sm font-semibold whitespace-nowrap">
+          Ask Agent
+        </span>
       </button>
     );
   }
