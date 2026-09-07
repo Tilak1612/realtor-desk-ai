@@ -190,7 +190,7 @@ describe("MarketingHeader mobile drawer", () => {
     expect(found.className).toMatch(/z-\[60\]/);
   });
 
-  it("exposes the full 8-item toolbar (5 nav links + EN/FR + Sign in + Start free trial)", async () => {
+  it("exposes the full 9-item toolbar (5 nav links + EN/FR + Book a demo + Sign in + Start free trial)", async () => {
     const user = userEvent.setup();
     renderWithProviders(<MarketingHeader />);
     await user.click(screen.getByRole("button", { name: "Open menu" }));
@@ -207,8 +207,16 @@ describe("MarketingHeader mobile drawer", () => {
     expect(screen.getAllByRole("button", { name: "EN" }).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByRole("button", { name: "FR" }).length).toBeGreaterThanOrEqual(1);
     // CTAs — there are two of each (hidden desktop + visible mobile drawer).
-    expect(screen.getAllByRole("button", { name: "Sign in" }).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByRole("button", { name: "Start free trial" }).length).toBeGreaterThanOrEqual(1);
+    //
+    // role "link", not "button". These used to be <Link><RDButton/></Link>,
+    // and it was the nested <button> that answered to role "button" — invalid
+    // HTML that also gave each control two tab stops and emitted no analytics.
+    // They are CtaLink now, which renders one anchor. A control that navigates
+    // is a link, which is what the nav-link assertions above already expect.
+    expect(screen.getAllByRole("link", { name: "Sign in" }).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole("link", { name: "Start free trial" }).length).toBeGreaterThanOrEqual(1);
+    // The booking CTA, added to both the drawer and the lg+ header.
+    expect(screen.getAllByRole("link", { name: "Book a demo" }).length).toBeGreaterThanOrEqual(1);
   });
 
   it("closes when Escape is pressed", async () => {

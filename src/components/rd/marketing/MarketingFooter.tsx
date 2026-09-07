@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "@/utils/analytics";
+import { CAL_ROUTE } from "@/config/booking";
 import { RDWordmark } from "../Logo";
 import { IconMaple } from "../icons";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
@@ -60,6 +62,9 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
             { label: t("marketingFooter.itemHowItWorks"), to: "/how-it-works" },
             { label: t("marketingFooter.itemIntegrations"), to: "/integrations" },
             { label: t("marketingFooter.itemRoadmap"), to: "/roadmap" },
+            // track: the only footer link whose click is a funnel step
+            // worth attributing. The rest are navigation.
+            { label: t("marketingFooter.itemBookDemo", "Book a demo"), to: CAL_ROUTE, track: "book_demo" },
           ]}
         />
         <FooterCol
@@ -137,7 +142,7 @@ function FooterCol({
   items,
 }: {
   title: string;
-  items: { label: string; to: string; external?: boolean }[];
+  items: { label: string; to: string; external?: boolean; track?: string }[];
 }) {
   return (
     <div>
@@ -161,7 +166,20 @@ function FooterCol({
                 {i.label}
               </a>
             ) : (
-              <Link to={i.to} className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900 inline-flex items-center min-h-[24px]">
+              <Link
+                to={i.to}
+                className="text-[13px] text-rd-ink-600 hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
+                onClick={
+                  i.track
+                    ? () =>
+                        trackEvent("cta_click", {
+                          cta_location: "footer",
+                          cta_label: i.track,
+                          destination: i.to,
+                        })
+                    : undefined
+                }
+              >
                 {i.label}
               </Link>
             )}

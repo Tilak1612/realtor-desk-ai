@@ -1,4 +1,6 @@
 import { useState, Fragment } from "react";
+import { CtaLink } from "@/components/rd/marketing/CtaLink";
+import { CAL_ROUTE } from "@/config/booking";
 import { Reveal } from "@/components/motion/Reveal";
 import { STRIPE_PRICES } from "@/config/stripe";
 import { Link } from "react-router-dom";
@@ -293,14 +295,22 @@ function PricingPlan({
         {desc}
       </p>
 
-      <Link
-        to={plan.cta === "talkSales" ? "/demo" : "/signup"}
-        className="block mt-6"
+      {/* CtaLink, not <Link><RDButton/></Link>. The nested pattern put an
+          interactive element inside an anchor and, more importantly here,
+          emitted no analytics -- so the pricing CTA, the closest click to
+          revenue on the site, was the one CTA nobody could attribute. */}
+      <CtaLink
+        to={plan.cta === "talkSales" ? CAL_ROUTE : "/signup"}
+        location={`pricing_${plan.id}`}
+        label={plan.cta === "talkSales" ? "book_demo" : "start_trial"}
+        variant={plan.ctaVariant}
+        size="lg"
+        full
+        className="mt-6"
+        trailingIcon={<IconArrow />}
       >
-        <RDButton variant={plan.ctaVariant} size="lg" trailingIcon={<IconArrow />} full>
-          {plan.cta === "talkSales" ? t("pricingRd.ctaTalkSales") : t("pricingRd.ctaStart")}
-        </RDButton>
-      </Link>
+        {plan.cta === "talkSales" ? t("pricingRd.ctaTalkSales") : t("pricingRd.ctaStart")}
+      </CtaLink>
 
       <ul className="mt-7 flex flex-col gap-3">
         {plan.featureKeys.map((fk) => {
