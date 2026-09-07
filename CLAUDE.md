@@ -114,7 +114,7 @@ file described a feature-module layout that was never built.
 ```env
 # Supabase
 VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
+VITE_SUPABASE_PUBLISHABLE_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
 # Stripe (CAD)
@@ -141,6 +141,43 @@ TWILIO_ACCOUNT_SID=
 TWILIO_AUTH_TOKEN=
 APIFY_API_KEY=
 ```
+
+## Verification
+
+Three harnesses, all Playwright + a real Chrome. The first two need a local
+`vite preview`; the third targets the live domain.
+
+```bash
+bunx vite preview --port 4173 --strictPort &
+npm run verify:a11y -- /pricing /integrations        # axe, serious + critical
+npm run verify:responsive -- /pricing                # 8 widths, overflow + tap size
+npm run verify:live                                  # 15 checks against production
+```
+
+`verify:responsive` accepts `WIDTHS=320,768` to narrow the default eight
+(320/375/390/430/768/1024/1440/1920) -- use it to sweep every sitemap route at
+the extremes, where overflow and tap-target problems actually live.
+
+**The local harnesses need Supabase env vars to render anything.** Without them
+`supabaseUrl is required` throws at module init and every page is blank -- and a
+blank page has no contrast violations and no small tap targets, so it would
+score perfectly. Both scripts therefore report EMPTY, never PASS, for a page
+under 200 characters of text. Throwaway values are enough for marketing pages:
+
+```bash
+VITE_SUPABASE_URL="https://placeholder.supabase.co" \
+VITE_SUPABASE_PUBLISHABLE_KEY="placeholder" npm run build
+```
+
+Two traps worth knowing, both of which produced false clean runs:
+
+- **A stale `vite preview` holding the port.** Vite prints "Port 4173 is in use,
+  trying another one" and binds elsewhere, so the run measures an old build.
+  Always pass `--strictPort`.
+- **Measuring mid-animation.** `animate-fade-in-up` passes through fractional
+  opacity, and axe scores whatever it finds. Both scripts wait for finite
+  animations to finish -- infinite ones (spinners) are skipped, since awaiting
+  one never returns.
 
 ## Agent Routing
 

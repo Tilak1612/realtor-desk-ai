@@ -83,7 +83,7 @@ const SwitchFromLionDesk = () => {
             <span className="gradient-text">Your CRM Shouldn't.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Switch to RealtorDesk AI — Canada's #1 AI-powered real estate CRM. Import your contacts, deals, and automations in minutes. Free migration. No disruption to your business.
+            Switch to RealtorDesk AI — a bilingual AI-powered real estate CRM built for Canada. Import your contacts, deals, and automations in minutes. Free migration. No disruption to your business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Link to="/signup">

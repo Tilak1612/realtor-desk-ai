@@ -112,11 +112,18 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
             onBlur={() => setIsFocused(false)}
             {...props}
           />
+          {/* The button was the size of its icon -- 20x20, under the 24x24 of
+              WCAG 2.5.8. The icon keeps its size; the hit area grows around it,
+              so nothing looks different.
+          
+              tabIndex={-1} is gone too. It kept the toggle out of the tab order,
+              which looks tidy but means a keyboard user cannot reveal what they
+              typed -- functionality available to a mouse and not to a keyboard
+              is WCAG 2.1.1. It costs one tab stop per password field. */}
           <button
             type="button"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={() => setShowPassword(!showPassword)}
-            tabIndex={-1}
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (

@@ -240,7 +240,7 @@ const FintracCompliance = () => {
           <div className="mt-8 p-6 bg-muted/50 rounded-xl border border-border text-sm text-muted-foreground">
             <strong>Official Resources:</strong><br />
             For official FINTRAC guidance, visit{" "}
-            <a href="https://www.fintrac-canafe.gc.ca/re-oi/sect1-eng" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+            <a href="https://www.fintrac-canafe.gc.ca/re-oi/sect1-eng" target="_blank" rel="noopener noreferrer" className="text-primary underline inline-flex items-center min-h-[24px]">
               fintrac-canafe.gc.ca
             </a>
             . Always consult the current FINTRAC guidelines and a qualified legal advisor for advice specific to your compliance obligations.
