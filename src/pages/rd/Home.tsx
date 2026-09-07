@@ -138,8 +138,12 @@ function HeroProduct({ t }: { t: TFn }) {
   const locale = normalizeLocale(i18n.language);
   return (
     <div className="relative aspect-square w-full max-w-[540px] mx-auto">
-      {/* Navy card */}
-      <div className="absolute inset-0 bg-rd-navy-800 rounded-rd-xl shadow-rd-lg overflow-hidden">
+      {/* Was a flat navy fill with one drop shadow, which reads as a
+          rectangle on paper rather than an object with a light source.
+          rd-depth-surface supplies the gradient, the top-edge hairline and
+          the layered shadow. Static paint -- no motion, no assets, nothing
+          extra to load. */}
+      <div className="absolute inset-0 rd-depth-surface rounded-rd-xl overflow-hidden">
         <div className="p-6 md:p-7 text-white flex flex-col h-full">
           {/* Card head */}
           <div className="flex items-center justify-between">

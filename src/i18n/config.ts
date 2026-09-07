@@ -2705,7 +2705,7 @@ const resources = {
         }
       },
       cookie: {
-        title: "🍪 Cookie Preferences",
+        title: "Cookie Preferences",
         description: "We use cookies to enhance your browsing experience and analyze site traffic. You can customize your cookie preferences or accept all.",
         privacyLink: "Privacy Policy",
         acceptAll: "Accept All Cookies",
@@ -5884,7 +5884,7 @@ const resources = {
         }
       },
       cookie: {
-        title: "🍪 Préférences de cookies",
+        title: "Préférences de cookies",
         description: "Nous utilisons des cookies pour améliorer votre expérience de navigation et analyser le trafic du site. Vous pouvez personnaliser vos préférences ou tout accepter.",
         privacyLink: "Politique de confidentialité",
         acceptAll: "Accepter tous les cookies",

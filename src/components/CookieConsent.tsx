@@ -96,9 +96,13 @@ const CookieConsent = () => {
         ? "mx-auto max-w-none rounded-none border-x-0 border-b-0 border-t bg-background px-4 py-2.5 shadow-lg"
         : "max-w-3xl mx-auto p-4 sm:p-6 shadow-lg border-2 bg-background"}>
         <div className="flex items-start gap-3">
+          {/* The heading string used to begin with a cookie emoji too, so at
+              sm: and up the banner showed two cookies side by side -- this icon
+              and the glyph. The icon is the design-system component and stays;
+              the emoji is gone from both locales. */}
           <Cookie className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 hidden sm:block" />
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-base sm:text-lg mb-2">{t('cookie.title', '🍪 Cookie Preferences')}</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-2">{t('cookie.title', 'Cookie Preferences')}</h3>
             <p className="text-xs sm:text-sm text-muted-foreground mb-4">
               {t('cookie.description', 'We use cookies to enhance your browsing experience and analyze site traffic. You can customize your cookie preferences or accept all.')}{" "}
               <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80 transition-colors">

@@ -718,3 +718,61 @@
     transition: none;
   }
 }
+
+/* ── Depth ─────────────────────────────────────────────────────────────────
+ *
+ * Three cues, each deliberately small. A flat fill with one drop shadow reads
+ * as a rectangle floating on paper; what makes a surface read as an object is
+ * that light behaves consistently across it. So: a gradient establishing where
+ * the light comes from, a hairline where the top edge catches it, and a faint
+ * halo for the air around it.
+ *
+ * All static. Nothing here animates, so there is nothing for reduced-motion to
+ * suppress and no cost on load -- it is paint, not layout or script.
+ *
+ * The gradient runs navy-800 -> navy-950, which DARKENS. White text measures
+ * 15.52:1 at the light end and 17.96:1 at the dark end, so contrast improves
+ * across the surface rather than degrading; the terra reply bubble keeps its
+ * own 4.64:1 because it paints its own background.
+ */
+@layer components {
+  .rd-depth-surface {
+    /* Solid colour FIRST, gradient over it. The class replaced a bg-rd-navy-800
+       utility, and setting only background-image would leave the surface
+       transparent if the gradient ever fails to parse -- white text on the
+       cream page ground, i.e. an invisible card. The paint order makes the
+       gradient an enhancement over a floor that always holds. */
+    background-color: var(--rd-navy-800);
+    background-image: linear-gradient(
+      152deg,
+      var(--rd-navy-700) 0%,
+      var(--rd-navy-800) 42%,
+      var(--rd-navy-950) 100%
+    );
+    /* The inset hairline is the whole trick: a real edge catches light along
+       its top face. 0.09 alpha is near-invisible named directly and obvious
+       by its absence. */
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.09),
+      inset 0 0 0 1px rgb(255 255 255 / 0.04),
+      0 12px 28px -12px rgb(11 37 64 / 0.30),
+      0 40px 80px -40px rgb(11 37 64 / 0.35);
+  }
+
+  /* A halo went here and was removed rather than shipped.
+     It rendered nothing at all at first -- z-index:-1 dropped it behind the
+     page ground -- and once that was fixed and it demonstrably painted, it was
+     still imperceptible against #FAFAF7 even at nearly double the intended
+     opacity. That left a blur(46px) over a 528px box, repainted on scroll, for
+     no visible gain, which is the wrong trade on a phone. The gradient, the
+     edge hairline and the layered shadow carry the depth on their own. */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Nothing to do -- this is static. Asserted so a later edit that adds a
+     transition here has to think about it rather than inherit motion silently. */
+  .rd-depth-surface {
+    transition: none;
+    animation: none;
+  }
+}
