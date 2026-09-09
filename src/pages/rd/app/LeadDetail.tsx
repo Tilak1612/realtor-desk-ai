@@ -12,6 +12,7 @@ import {
   IconHome,
   IconArrow,
 } from "@/components/rd";
+import { SkeletonConversation } from "@/components/rd/Skeleton";
 
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
@@ -49,7 +50,10 @@ export default function LeadDetail() {
   if (loading && !lead) {
     return (
       <AppShell>
-        <div className="p-10 text-center text-sm text-rd-ink-500">Loading lead…</div>
+        {/* Reserves the two-pane record's space. The bare "Loading lead…" line
+            this replaced was a few rem tall and swapped for a full-height
+            view, so the shell jumped as soon as the lead arrived. */}
+        <SkeletonConversation />
       </AppShell>
     );
   }

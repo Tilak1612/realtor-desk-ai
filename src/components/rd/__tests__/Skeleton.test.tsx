@@ -5,6 +5,7 @@ import {
   SkeletonStatRow,
   SkeletonRows,
   SkeletonLines,
+  SkeletonConversation,
 } from "../Skeleton";
 
 /**
@@ -33,6 +34,19 @@ describe("RD skeletons", () => {
   it("renders list lines in pairs", () => {
     const { container } = render(<SkeletonLines rows={4} />);
     expect(container.querySelectorAll(".animate-pulse")).toHaveLength(8);
+  });
+
+  it("mirrors the lead detail two-pane grid so the shell does not jump", () => {
+    // The value here is the GRID, not the bar count: LeadDetail renders
+    // lg:grid-cols-[1.6fr_1fr] and the skeleton has to reserve the same
+    // shape. It replaced a p-10 centred line that was a few rem tall and was
+    // swapped for a full-height record -- the largest shift left in the shell.
+    const { container } = render(<SkeletonConversation />);
+    const grid = container.firstElementChild as HTMLElement;
+    expect(grid.className).toContain("lg:grid-cols-[1.6fr_1fr]");
+    expect(grid.className).toContain("h-full");
+    // Header bars, four message bubbles, composer, and the sidebar fields.
+    expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(10);
   });
 
   it("hides placeholders from assistive technology", () => {
