@@ -130,11 +130,12 @@ function ThreadList({
         <div className="flex items-center gap-2 bg-rd-ink-50 border border-rd-line rounded-rd-sm px-3 py-1.5 text-rd-ink-500">
           <IconSearch />
           <input
-            type="text"
+            type="search"
             placeholder={t("rd.inbox.searchConversations", "Search conversations…")}
             value={query}
             onChange={(e) => onQuery(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400"
+            aria-label={t("rd.inbox.searchConversations", "Search conversations…")}
+            className="flex-1 min-h-[24px] bg-transparent outline-none text-[13px] text-rd-ink-900 placeholder:text-rd-ink-400"
           />
         </div>
         <div className="flex gap-1.5 mt-3">
@@ -297,7 +298,7 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
 
   if (!lead) {
     return (
-      <div className="flex items-center justify-center h-full bg-rd-paper-2 text-rd-ink-500 text-sm">
+      <div className="flex items-center justify-center h-full bg-rd-paper-2 text-rd-ink-600 text-sm">
         {t("rd.inbox.selectConversation", "Select a conversation from the left.")}
       </div>
     );

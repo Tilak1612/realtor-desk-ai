@@ -275,7 +275,7 @@ function KanbanColumn({
         <button
           type="button"
           onClick={onAddLead}
-          className="border-[1.5px] border-dashed border-rd-line-strong bg-transparent rounded-rd-sm py-2.5 text-xs text-rd-ink-500 flex items-center justify-center gap-1.5 font-medium hover:text-rd-ink-700 hover:border-rd-ink-400"
+          className="border-[1.5px] border-dashed border-rd-line-strong bg-transparent rounded-rd-sm py-2.5 text-xs text-rd-ink-600 flex items-center justify-center gap-1.5 font-medium hover:text-rd-ink-800 hover:border-rd-ink-400"
         >
           <IconPlus />
           {t("rd.actions.addLead", "Add lead")}

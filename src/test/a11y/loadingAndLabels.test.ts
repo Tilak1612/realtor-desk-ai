@@ -71,14 +71,26 @@ describe("loading states and labels", () => {
     const offenders: string[] = [];
     for (const f of FILES) {
       const src = readFileSync(f, "utf8");
-      for (const m of src.matchAll(/<Input\b([^>]*?)\/?>/gs)) {
+      // Raw <input> counts too. The /app/inbox search was a lowercase <input>
+      // with only a placeholder and slipped straight through a scan that only
+      // looked for the <Input> primitive.
+      //
+      // Arrow functions are neutralised first. `onChange={(e) => ...}` contains
+      // a ">", so an [^>] scan stops at the arrow and never sees attributes
+      // that follow it -- which is exactly how the Inbox search read as
+      // unlabelled after it had been labelled.
+      const scan = src.replace(/=>/g, "@@");
+      for (const m of scan.matchAll(/<[Ii]nput\b([^>]*?)\/?>/gs)) {
         const attrs = m[1];
+        // A primitive that spreads caller props cannot know its own label; the
+        // call site supplies it. Same reasoning as the components/ui exclusion.
+        if (/\{\.\.\.rest\}|\{\.\.\.props\}/.test(attrs)) continue;
         if (!/placeholder/.test(attrs)) continue;
         if (/\bid=|aria-label|aria-labelledby/.test(attrs)) continue;
         // shadcn <FormControl> injects id and aria-describedby through context,
         // so an Input inside one is labelled by its sibling <FormLabel>.
-        if (src.slice(Math.max(0, m.index! - 260), m.index!).includes("<FormControl>")) continue;
-        offenders.push(`${rel(f)}:${src.slice(0, m.index).split("\n").length}`);
+        if (scan.slice(Math.max(0, m.index! - 260), m.index!).includes("<FormControl>")) continue;
+        offenders.push(`${rel(f)}:${scan.slice(0, m.index).split("\n").length}`);
       }
     }
     expect(

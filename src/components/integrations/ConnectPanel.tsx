@@ -525,13 +525,13 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
             /* SMTP Fields */
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>{t('integrations.panel.smtpHost', 'SMTP Host')} *</Label>
-                <Input value={smtpHost} onChange={(e) => setSmtpHost(e.target.value)} placeholder="smtp.gmail.com" />
+                <Label htmlFor="cp-smtp-host">{t('integrations.panel.smtpHost', 'SMTP Host')} *</Label>
+                <Input id="cp-smtp-host" value={smtpHost} onChange={(e) => setSmtpHost(e.target.value)} placeholder="smtp.gmail.com" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-2">
-                  <Label>{t('integrations.panel.port', 'Port')} *</Label>
-                  <Input value={smtpPort} onChange={(e) => setSmtpPort(e.target.value)} placeholder="587" />
+                  <Label htmlFor="cp-smtp-port">{t('integrations.panel.port', 'Port')} *</Label>
+                  <Input id="cp-smtp-port" value={smtpPort} onChange={(e) => setSmtpPort(e.target.value)} placeholder="587" />
                 </div>
                 <div className="space-y-2">
                   <Label>{t('integrations.panel.encryption', 'Encryption')}</Label>
@@ -546,8 +546,8 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>{t('integrations.panel.username', 'Username')} *</Label>
-                <Input value={smtpUser} onChange={(e) => setSmtpUser(e.target.value)} placeholder="your@email.com" />
+                <Label htmlFor="cp-smtp-user">{t('integrations.panel.username', 'Username')} *</Label>
+                <Input id="cp-smtp-user" value={smtpUser} onChange={(e) => setSmtpUser(e.target.value)} placeholder="your@email.com" />
               </div>
               <div className="space-y-2">
                 <Label>{t('integrations.panel.password', 'Password')} *</Label>
@@ -558,8 +558,8 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
             /* API Key Fields */
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>{tool.slug === "twilio" ? "Account SID" : t('integrations.panel.apiKey', 'API Key')} *</Label>
-                <Input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)}
+                <Label htmlFor="cp-api-key">{tool.slug === "twilio" ? "Account SID" : t('integrations.panel.apiKey', 'API Key')} *</Label>
+                <Input id="cp-api-key" type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)}
                   placeholder={tool.slug === "twilio" ? "ACxxxxxxxxxxxxxxxx" : "Enter your API key"} />
               </div>
               {tool.slug === "twilio" && (
@@ -570,7 +570,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
                   </div>
                   <div className="space-y-2">
                     <Label>{t('integrations.panel.fromPhone', 'From Phone Number')} *</Label>
-                    <Input value={apiExtra} onChange={(e) => setApiExtra(e.target.value)} placeholder="+1xxxxxxxxxx" />
+                    <Input id="cp-api-extra" aria-label={tool.slug === "twilio" ? "Auth Token" : "Additional value"} value={apiExtra} onChange={(e) => setApiExtra(e.target.value)} placeholder="+1xxxxxxxxxx" />
                   </div>
                 </>
               )}

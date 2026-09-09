@@ -183,6 +183,7 @@ const ManualForm = ({ email, setEmail, onSubmit, t }: ManualFormProps) => (
     </p>
     <input
       type="email"
+      aria-label={t("unsubscribe.emailLabel", "Email address to unsubscribe")}
       required
       value={email}
       onChange={(e) => setEmail(e.target.value)}
