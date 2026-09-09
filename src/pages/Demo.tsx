@@ -377,7 +377,7 @@ const Demo = () => {
                   <div className="flex gap-4">
                     <MessageSquare className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">{ t("demo.expect.discovery", "Discovery Call (15 min)") }</h4>
+                      <h4 className="font-semibold mb-1">{ t("demo.expect.discovery", "Discovery call") }</h4>
                       <p className="text-sm text-muted-foreground">
                         { t("demo.expect.discoveryDesc", "We learn about your business, challenges, and goals") }
                       </p>
@@ -386,7 +386,7 @@ const Demo = () => {
                   <div className="flex gap-4">
                     <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">{ t("demo.expect.liveDemo", "Live Demo (30 min)") }</h4>
+                      <h4 className="font-semibold mb-1">{ t("demo.expect.liveDemo", "Live demo") }</h4>
                       <p className="text-sm text-muted-foreground">
                         { t("demo.expect.liveDemoDesc", "See Realtor Desk AI in action with examples specific to your market") }
                       </p>

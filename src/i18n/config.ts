@@ -107,7 +107,7 @@ const resources = {
         demo: {
           title: "See Realtor Desk in Action",
           description: "Watch how AI can transform your real estate business in just 2 minutes",
-          watchDemo: "Watch 2-Minute Product Demo",
+          watchDemo: "Book a 30-minute demo",
           bookDemo: "Book a live demo",
           exploreFeatures: "Explore All Features"
         }
@@ -353,9 +353,9 @@ const resources = {
         },
           expect: {
             title: "What to Expect",
-            discovery: "Discovery Call (15 min)",
+            discovery: "Discovery call",
             discoveryDesc: "We learn about your business, challenges, and goals",
-            liveDemo: "Live Demo (30 min)",
+            liveDemo: "Live demo",
             liveDemoDesc: "See Realtor Desk in action with examples specific to your market",
             onboarding: "Custom Onboarding",
           onboardingDesc: "Get started with personalized onboarding and support"
@@ -439,10 +439,27 @@ const resources = {
           headline2: "Calmly.",
           subtitle: "Realtor Desk answers every lead the instant they land — in French or English, on-brand, PIPEDA-aware. You show up to a shortlist, not a fire drill.",
           ctaPrimary: "Start 14-day free trial",
-          ctaSecondary: "Book a 15-min demo",
+          ctaSecondary: "Book a 30-min demo",
           trustNoCard: "Card required · cancel before day 14 and pay nothing",
           trustSetup: "~10-min setup",
           trustDdf: "Realtor.ca import today"
+        },
+        heroDash: {
+          appLabel: "Realtor Desk",
+          screen: "Leads",
+          summary: "12 total · 3 hot",
+          tabAll: "All",
+          tabHot: "Hot",
+          tabWarm: "Warm",
+          colLead: "LEAD",
+          colListing: "LISTING",
+          colScore: "SCORE",
+          colStage: "STAGE",
+          stageShowing: "Showing booked",
+          stageQualified: "Qualified",
+          stageContacted: "Contacted",
+          stageNew: "New",
+          langTag: "Replies in EN + FR",
         },
         heroProduct: {
           deskLive: "Desk AI · Live",
@@ -486,7 +503,7 @@ const resources = {
           heading: "You show up to a prioritized pipeline. Not an inbox.",
           body: "Every overnight lead triaged. Hot prospects surface at the top with a timestamped transcript of what AI already said — so your first call is informed, not a cold intro.",
           ctaPrimary: "Try the pipeline",
-          ctaSecondary: "Watch 2-min tour",
+          ctaSecondary: "Book a 30-min demo",
           colNewLeads: "New leads",
           colContacted: "Contacted",
           colShowingBooked: "Showing booked",
@@ -1384,7 +1401,7 @@ const resources = {
       },
       demoBooking: {
         title: "See RealtorDesk AI in Action",
-        demoTitle: "15-Minute Personalized Demo",
+        demoTitle: "30-Minute Personalized Demo",
         liveDemo: "Live, not recorded",
         whatYouSee: "What you'll see:",
         benefit1: "Live walkthrough of AI chatbot, voice agent, and email automation",
@@ -3289,7 +3306,7 @@ const resources = {
         demo: {
           title: "Voyez Realtor Desk AI en Action",
           description: "Découvrez comment l'IA peut transformer votre entreprise immobilière en seulement 2 minutes",
-          watchDemo: "Regarder la Démo Produit de 2 Minutes",
+          watchDemo: "Réserver une démo de 30 minutes",
           bookDemo: "Réservez une démo en direct",
           exploreFeatures: "Explorer Toutes les Fonctionnalités"
         }
@@ -3535,9 +3552,9 @@ const resources = {
         },
         expect: {
           title: "À Quoi S'Attendre",
-          discovery: "Appel Découverte (15 min)",
+          discovery: "Appel découverte",
           discoveryDesc: "Nous en apprenons sur votre entreprise, vos défis et vos objectifs",
-          liveDemo: "Démo en Direct (30 min)",
+          liveDemo: "Démo en direct",
           liveDemoDesc: "Voyez Realtor Desk AI en action avec des exemples spécifiques à votre marché",
           onboarding: "Intégration Personnalisée",
           onboardingDesc: "Démarrez avec une intégration et un support personnalisés"
@@ -3618,10 +3635,27 @@ const resources = {
           headline2: "Sans stress.",
           subtitle: "Realtor Desk répond à chaque client potentiel dès son arrivée — en français ou en anglais, dans votre voix, conforme à la LPRPDE. Vous arrivez à une liste courte, pas à un branle-bas de combat.",
           ctaPrimary: "Essai gratuit de 14 jours",
-          ctaSecondary: "Réserver une démo de 15 min",
+          ctaSecondary: "Réserver une démo de 30 min",
           trustNoCard: "Carte requise · annulez avant le 14e jour et ne payez rien",
           trustSetup: "Installation en ~10 min",
           trustDdf: "Import Realtor.ca dès aujourd'hui"
+        },
+        heroDash: {
+          appLabel: "Realtor Desk",
+          screen: "Prospects",
+          summary: "12 au total · 3 chauds",
+          tabAll: "Tous",
+          tabHot: "Chauds",
+          tabWarm: "Tièdes",
+          colLead: "PROSPECT",
+          colListing: "INSCRIPTION",
+          colScore: "SCORE",
+          colStage: "ÉTAPE",
+          stageShowing: "Visite réservée",
+          stageQualified: "Qualifié",
+          stageContacted: "Contacté",
+          stageNew: "Nouveau",
+          langTag: "Répond en FR + EN",
         },
         heroProduct: {
           deskLive: "Desk IA · En direct",
@@ -3665,7 +3699,7 @@ const resources = {
           heading: "Vous arrivez devant un pipeline priorisé. Pas une boîte de réception.",
           body: "Chaque prospect de la nuit est trié. Les prospects chauds remontent en haut avec une transcription horodatée de ce que l'IA a déjà dit — votre premier appel est informé, pas une prise de contact à froid.",
           ctaPrimary: "Essayer le pipeline",
-          ctaSecondary: "Visionner la tournée de 2 min",
+          ctaSecondary: "Réserver une démo de 30 min",
           colNewLeads: "Nouveaux prospects",
           colContacted: "Contactés",
           colShowingBooked: "Visite réservée",
@@ -4563,7 +4597,7 @@ const resources = {
       },
       demoBooking: {
         title: "Voyez RealtorDesk AI en Action",
-        demoTitle: "Démo Personnalisée de 15 Minutes",
+        demoTitle: "Démo Personnalisée de 30 Minutes",
         liveDemo: "En direct, pas enregistré",
         whatYouSee: "Ce que vous verrez:",
         benefit1: "Présentation en direct du chatbot IA, de l'agent vocal et de l'automation des emails",

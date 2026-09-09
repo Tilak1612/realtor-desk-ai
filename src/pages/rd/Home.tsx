@@ -137,93 +137,117 @@ function HeroSection({ t }: { t: TFn }) {
 }
 
 function HeroProduct({ t }: { t: TFn }) {
-  const { i18n } = useTranslation();
-  const locale = normalizeLocale(i18n.language);
+  // The hero's product visual: the /app/leads surface, rendered from the same
+  // RD components the real screen uses (RDBadge for score tone, RDAvatar for
+  // the lead, the same column order).
+  //
+  // It is NOT dressed up as a photograph. DeviceFrame's contract is that its
+  // children are a capture of the running app, never a reconstruction, and
+  // DashboardPreview returns null rather than show an empty bezel -- a frame
+  // with no screenshot in it makes a claim the page cannot back. So this sits
+  // in a plain app window instead, which is what it honestly is: a live
+  // composition, the same category of thing the conversation card it replaced
+  // always was.
+  //
+  // The moment scripts/capture-screenshots.mjs runs, <DashboardPreview
+  // shot="shot-leads-desktop" /> is the drop-in upgrade for this block.
+  //
+  // Every string is keyed, because the FR site is a RECO requirement and an
+  // English-only hero would strand a Quebec visitor on the one element that
+  // is supposed to prove the product speaks their language.
+  // Six rows, because the card is square and three left the lower third
+  // visibly empty -- which reads as a screen that failed to load rather than
+  // as a product surface. Neighbourhoods and names are illustrative, and the
+  // mix of anglophone and francophone leads is the point: it is the same
+  // bilingual claim the headline makes, shown rather than asserted.
+  //
+  // Names and neighbourhoods are NOT keyed. They are proper nouns, identical
+  // in both locales, and routing them through t() would invite a translator
+  // to "localize" a person's name. Only the stage labels are keyed.
+  //
+  // Exactly three rows score >= 80, which is what "3 hot" in the summary
+  // counts. If you add a row above 80, update the summary key too or the
+  // header contradicts the table under it.
+  const rows: { name: string; area: string; score: number; stage: string }[] = [
+    { name: "Sarah Mitchell", area: "Riverdale", score: 94, stage: t("landing.heroDash.stageShowing") },
+    { name: "James Okafor", area: "Leslieville", score: 81, stage: t("landing.heroDash.stageQualified") },
+    { name: "Marc Lévesque", area: "Le Plateau", score: 80, stage: t("landing.heroDash.stageQualified") },
+    { name: "Priya Raman", area: "The Beaches", score: 67, stage: t("landing.heroDash.stageContacted") },
+    { name: "Chloé Bergeron", area: "Mile End", score: 58, stage: t("landing.heroDash.stageContacted") },
+    { name: "Daniel Roy", area: "Kitsilano", score: 45, stage: t("landing.heroDash.stageNew") },
+  ];
+
   return (
     <div className="relative aspect-square w-full max-w-[540px] mx-auto">
-      {/* Was a flat navy fill with one drop shadow, which reads as a
-          rectangle on paper rather than an object with a light source.
-          rd-depth-surface supplies the gradient, the top-edge hairline and
-          the layered shadow. Static paint -- no motion, no assets, nothing
-          extra to load. */}
-      <div className="absolute inset-0 rd-depth-surface rounded-rd-xl overflow-hidden">
-        <div className="p-6 md:p-7 text-white flex flex-col h-full">
-          {/* Card head */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-rd-terra-600 rounded-[7px] flex items-center justify-center">
-                <IconSparkles />
-              </div>
-              <span className="font-semibold text-sm">{t("landing.heroProduct.deskLive")}</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-[11px] text-white/75">
-              <span className="w-1.5 h-1.5 bg-rd-success rounded-full" />
-              {t("landing.heroProduct.answering")}
-            </div>
+      <div className="absolute inset-0 rd-depth-surface rounded-rd-xl overflow-hidden p-2.5 md:p-3">
+        {/* App window title bar */}
+        <div className="flex items-center gap-2 px-1.5 pb-2.5">
+          <div className="w-5 h-5 bg-rd-terra-600 rounded-[5px] flex items-center justify-center">
+            <IconSparkles />
           </div>
+          <span className="text-white font-semibold text-[12px]">
+            {t("landing.heroDash.appLabel")}
+          </span>
+          <span className="text-white/45 text-[12px]">/</span>
+          <span className="text-white/75 text-[12px]">{t("landing.heroDash.screen")}</span>
+        </div>
 
-          {/* Lead message */}
-          <div className="mt-6 flex gap-3 items-start">
-            <RDAvatar name="Émilie Tremblay" size={32} tone="var(--rd-terra-700)" />
-            <div className="bg-white/[0.08] rounded-[4px_14px_14px_14px] px-3.5 py-3 text-[13px] leading-[1.5] max-w-[85%]">
-              {t("landing.heroProduct.leadMsg")}
+        {/* The product surface itself, on the app's own paper ground. */}
+        <div className="bg-white rounded-rd-md h-[calc(100%-2rem)] overflow-hidden flex flex-col">
+          <div className="px-4 pt-3.5 pb-3 border-b border-rd-line">
+            <div className="text-[10px] font-semibold tracking-[0.02em] text-rd-ink-500">
+              {t("landing.heroDash.summary")}
             </div>
-          </div>
-
-          {/* AI reply */}
-          <div className="mt-4 flex gap-3 items-start flex-row-reverse">
-            <div className="w-8 h-8 bg-rd-terra-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <IconSparkles />
+            <div className="flex items-end justify-between gap-3 mt-0.5">
+              <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-rd-ink-900">
+                {t("landing.heroDash.screen")}
+              </h3>
+              <RDBadge tone="navy" size="sm">{t("landing.heroDash.langTag")}</RDBadge>
             </div>
-            {/* terra-700, not terra-600. White on #D7714E is 3.30:1 at 13px, below
-                  the 4.5:1 WCAG AA threshold; on #BE552F it is 4.64:1. The accent
-                  reads the same at a glance and the message is now legible. */}
-              <div className="bg-rd-terra-700 text-white rounded-[14px_4px_14px_14px] px-3.5 py-3 text-[13px] leading-[1.5] max-w-[85%]">
-              {t("landing.heroProduct.aiReply")}
-            </div>
-          </div>
-
-          {/* Captured card */}
-          <div className="mt-auto p-3.5 bg-white/[0.06] rounded-rd-md border border-white/10">
-            <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[11px] uppercase tracking-[0.08em] text-white/75 font-semibold">
-                {t("landing.heroProduct.leadCaptured")}
+            <div className="flex gap-3 mt-2.5 text-[11px] font-semibold">
+              <span className="text-rd-ink-900 border-b-2 border-rd-terra-600 pb-1">
+                {t("landing.heroDash.tabAll")}
               </span>
-              <RDBadge tone="terra" size="sm">{t("landing.heroProduct.hotBadge")}</RDBadge>
+              <span className="text-rd-ink-500 pb-1">{t("landing.heroDash.tabHot")}</span>
+              <span className="text-rd-ink-500 pb-1">{t("landing.heroDash.tabWarm")}</span>
             </div>
-            <div className="grid grid-cols-2 gap-2.5 text-xs">
-              <KV k={t("landing.heroProduct.kListing")} v="Le Plateau · 680 k$ CA" vEn="Le Plateau · $680K CAD" isFr={locale === "fr-CA"} />
-              <KV k={t("landing.heroProduct.kTimeline")} v={t("landing.heroProduct.vTimelineTomorrow")} />
-              <KV k={t("landing.heroProduct.kLang")} v={t("landing.heroProduct.vLangDetected")} />
-              <KV k={t("landing.heroProduct.kBudget")} v={t("landing.heroProduct.vBudgetPreApproved")} />
-            </div>
+          </div>
+
+          {/* Column head — same order as /app/leads. */}
+          <div // ink-500 (#6B7280) on ink-50 measures 4.42:1 at this size -- under the 4.5
+          // AA floor, and axe caught it. ink-600 is 7.02:1 and reads identically at
+          // a glance. The real /app/leads header has the same pairing; it has never
+          // been scanned because /app sits behind auth.
+          className="grid grid-cols-[1.5fr_1fr_auto] gap-2 px-4 py-2 bg-rd-ink-50 border-b border-rd-line text-[9px] font-bold uppercase tracking-[0.06em] text-rd-ink-600">
+            <div>{t("landing.heroDash.colLead")}</div>
+            <div>{t("landing.heroDash.colListing")}</div>
+            <div>{t("landing.heroDash.colScore")}</div>
+          </div>
+
+          <div className="flex-1 min-h-0">
+            {rows.map((r) => (
+              <div
+                key={r.name}
+                className="grid grid-cols-[1.5fr_1fr_auto] gap-2 items-center px-4 py-[9px] border-b border-rd-line last:border-0"
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <RDAvatar name={r.name} size={24} tone="var(--rd-navy-700)" />
+                  <div className="min-w-0">
+                    <div className="text-[12px] font-semibold text-rd-ink-900 truncate">
+                      {r.name}
+                    </div>
+                    <div className="text-[10px] text-rd-ink-500 truncate">{r.stage}</div>
+                  </div>
+                </div>
+                <div className="text-[11px] text-rd-ink-600 truncate">{r.area}</div>
+                <RDBadge tone={r.score >= 80 ? "terra" : "neutral"} size="sm">
+                  {r.score}
+                </RDBadge>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-
-      {/* The floating KPI that stood here read "AVG RESPONSE TIME - 32s -96%"
-          beside a green pulse dot, above the fold, framed as live telemetry.
-          Both numbers were hardcoded literals: formatSeconds(32) and
-          formatPercent(-96).
-
-          A -96% figure is a comparative improvement claim, which needs a
-          baseline to be measured against. Production has recorded zero deals
-          and zero tasks, so no such baseline has ever existed. It was the most
-          prominent instance of exactly what PR #171 removed from the copy, and
-          it survived because the substantiation guard only scanned
-          i18n/config.ts, not component literals. That guard now covers both.
-
-          Deliberately not replaced with a softer metric. The hero gains its
-          depth from the device composition instead. */}
-    </div>
-  );
-}
-
-function KV({ k, v, vEn, isFr }: { k: string; v: string; vEn?: string; isFr?: boolean }) {
-  return (
-    <div>
-      <div className="text-white/70 text-[10px] uppercase tracking-[0.06em]">{k}</div>
-      <div className="text-white font-medium text-[13px] mt-0.5">{isFr === undefined ? v : isFr ? v : (vEn ?? v)}</div>
     </div>
   );
 }
