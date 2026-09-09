@@ -89,4 +89,71 @@ export function SkeletonLines({ rows = 4, className }: { rows?: number; classNam
   );
 }
 
+/**
+ * The lead detail view: a conversation pane beside a field sidebar.
+ *
+ * This replaced a centred "Loading lead…" line in a p-10 box. That box was a
+ * couple of rem tall and was swapped for a full-height two-pane record, so the
+ * whole shell jumped the moment the lead resolved -- the exact failure this
+ * file was written to stop, still present on the one route where the shift was
+ * largest.
+ *
+ * The grid below mirrors LeadDetail's own lg:grid-cols-[1.6fr_1fr]. The two
+ * must stay in step: if that layout changes and this does not, the skeleton
+ * reserves the wrong space and reintroduces the shift it exists to prevent.
+ */
+export function SkeletonConversation() {
+  return (
+    <div
+      className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] h-full overflow-hidden"
+      aria-hidden="true"
+    >
+      <div className="flex flex-col border-r border-rd-line min-h-0">
+        {/* Header: breadcrumb, score badge, language chip, action buttons. */}
+        <div className="px-7 py-4 border-b border-rd-line flex items-center gap-4">
+          <Bar className="h-3 w-28" />
+          <Bar className="h-5 w-16 rounded-rd-pill" />
+          <Bar className="h-4 w-7" />
+          <div className="ml-auto flex gap-2">
+            <Bar className="h-8 w-20 rounded-rd-md" />
+            <Bar className="h-8 w-28 rounded-rd-md" />
+          </div>
+        </div>
+        {/* Messages alternate sides, so the placeholder does too rather than
+            reading as a uniform stack of grey bars. */}
+        <div className="flex-1 px-7 py-6 flex flex-col gap-4 min-h-0">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className={cn("flex", i % 2 === 1 && "justify-end")}>
+              <Bar
+                className={cn(
+                  "h-14 rounded-rd-lg",
+                  i % 2 === 1 ? "w-[55%]" : "w-[65%]"
+                )}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="px-7 py-4 border-t border-rd-line">
+          <Bar className="h-11 w-full rounded-rd-md" />
+        </div>
+      </div>
+      <div className="p-6 flex flex-col gap-5">
+        <div className="flex items-center gap-3">
+          <Bar className="h-11 w-11 rounded-full shrink-0" />
+          <div className="flex-1 min-w-0">
+            <Bar className="h-3.5 w-2/3 mb-2" />
+            <Bar className="h-2.5 w-1/2" />
+          </div>
+        </div>
+        {[0, 1, 2, 3, 4].map((i) => (
+          <div key={i} className="flex items-center justify-between gap-3">
+            <Bar className="h-2.5 w-20" />
+            <Bar className="h-2.5 w-24" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default SkeletonRows;
