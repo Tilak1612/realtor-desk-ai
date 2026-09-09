@@ -628,6 +628,31 @@
  * Transform and opacity only: both composite on the GPU, so this stays smooth
  * on a mid-range phone. No width/height/top/left animation anywhere.
  * ──────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────
+ * Motion tokens.
+ *
+ * Every rd-* animation resolves to these four values. Before this there
+ * were two durations and one easing curve written out at seven call
+ * sites, which is the state where a later edit "fixes" one hover and
+ * leaves the rest at the old timing -- nothing errors, the site just
+ * stops feeling coherent.
+ *
+ * Two durations, deliberately: REVEAL is the long entrance for content
+ * arriving on scroll, HOVER is the short feedback on pointer. A third
+ * value in between would only ever be someone splitting the difference.
+ *
+ * The names must not contain width/height/top/left/right/bottom/margin/
+ * padding -- motionAndHover.test.ts scans transition shorthands for
+ * layout-triggering properties by word, and a token called --rd-ease-top
+ * would read as animating `top` and fail the guard.
+ * ──────────────────────────────────────────────────────────────── */
+:root {
+  --rd-dur-reveal: 480ms;
+  --rd-dur-hover: 140ms;
+  --rd-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --rd-stagger-step: 60ms;
+}
+
 @layer utilities {
   .rd-reveal {
     opacity: 1;
@@ -643,19 +668,29 @@
     opacity: 1;
     transform: translate3d(0, 0, 0);
     transition:
-      opacity 480ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      transform 480ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      opacity var(--rd-dur-reveal) var(--rd-ease),
+      transform var(--rd-dur-reveal) var(--rd-ease);
   }
 
   /* Stagger children of a revealed group. Capped at six: past that the last
      item waits almost half a second after the first, which reads as the page
      being slow rather than as choreography. */
   .rd-stagger > * { transition-delay: 0ms; }
-  .rd-reveal-shown.rd-stagger > *:nth-child(2) { transition-delay: 60ms; }
-  .rd-reveal-shown.rd-stagger > *:nth-child(3) { transition-delay: 120ms; }
-  .rd-reveal-shown.rd-stagger > *:nth-child(4) { transition-delay: 180ms; }
-  .rd-reveal-shown.rd-stagger > *:nth-child(5) { transition-delay: 240ms; }
-  .rd-reveal-shown.rd-stagger > *:nth-child(n + 6) { transition-delay: 300ms; }
+  .rd-reveal-shown.rd-stagger > *:nth-child(2) {
+    transition-delay: calc(var(--rd-stagger-step) * 1);
+  }
+  .rd-reveal-shown.rd-stagger > *:nth-child(3) {
+    transition-delay: calc(var(--rd-stagger-step) * 2);
+  }
+  .rd-reveal-shown.rd-stagger > *:nth-child(4) {
+    transition-delay: calc(var(--rd-stagger-step) * 3);
+  }
+  .rd-reveal-shown.rd-stagger > *:nth-child(5) {
+    transition-delay: calc(var(--rd-stagger-step) * 4);
+  }
+  .rd-reveal-shown.rd-stagger > *:nth-child(n + 6) {
+    transition-delay: calc(var(--rd-stagger-step) * 5);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -698,9 +733,9 @@
     --rd-lift-base: 0px;
     transform: translate3d(0, var(--rd-lift-base), 0);
     transition:
-      transform 140ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      box-shadow 140ms cubic-bezier(0.22, 0.61, 0.36, 1),
-      border-color 140ms ease;
+      transform var(--rd-dur-hover) var(--rd-ease),
+      box-shadow var(--rd-dur-hover) var(--rd-ease),
+      border-color var(--rd-dur-hover) ease;
     will-change: auto;
   }
 
@@ -715,7 +750,7 @@
   }
 
   .rd-card-lift-icon {
-    transition: background-color 140ms ease, color 140ms ease;
+    transition: background-color var(--rd-dur-hover) ease, color var(--rd-dur-hover) ease;
   }
   .rd-card-lift:hover .rd-card-lift-icon,
   .rd-card-lift:focus-within .rd-card-lift-icon {
