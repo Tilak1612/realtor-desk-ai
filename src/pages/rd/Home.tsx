@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { CtaLink } from "@/components/rd/marketing/CtaLink";
 import { CAL_ROUTE } from "@/config/booking";
+import trustGroundAvif from "@/assets/brand/trust-ground.avif";
+import trustGroundWebp from "@/assets/brand/trust-ground.webp";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
@@ -235,8 +237,19 @@ function KV({ k, v, vEn, isFr }: { k: string; v: string; vEn?: string; isFr?: bo
  * ────────────────────────────────────────────────────────── */
 function TrustStrip({ t }: { t: TFn }) {
   const logos = ["CREA DDF®", "Stripe", "OpenAI", "Twilio", "Supabase"];
+  // Decorative paper texture behind the strip. image-set rather than
+  // <Picture> because it is a background, not content: no alt text to
+  // write, nothing to announce, and it must not enter the accessibility
+  // tree. AVIF is 11KB, WebP 30KB, and bg-white underneath is the
+  // fallback when neither loads -- so the strip is never bare.
   return (
-    <section className="px-4 sm:px-8 md:px-14 py-8 border-y border-rd-line bg-white">
+      <section
+        className="px-4 sm:px-8 md:px-14 py-8 border-y border-rd-line bg-white bg-cover bg-center"
+        style={{
+          backgroundImage:
+            `image-set(url(${trustGroundAvif}) type("image/avif"), url(${trustGroundWebp}) type("image/webp"))`,
+        }}
+      >
       <div className="mx-auto max-w-[1200px] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-rd-ink-500">
           {t("landing.trustStrip.label")}
