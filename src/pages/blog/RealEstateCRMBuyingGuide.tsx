@@ -459,7 +459,7 @@ const RealEstateCRMBuyingGuide = () => {
                 </Link>
                 <Link to="/demo">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                    Watch 2-Min Demo
+                    Book a 30-Min Demo
                   </Button>
                 </Link>
               </div>
