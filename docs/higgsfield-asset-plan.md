@@ -4,7 +4,24 @@ Production-ready generation prompts for the marketing site. Lives in the repo
 rather than in a chat transcript so it is version-controlled, reviewable in a
 PR, and available to whoever runs the generation.
 
-**Status: no assets generated yet.** The Higgsfield connector needs OAuth in an
+**Status: first generation run complete (2026-09-09).** Six assets generated
+for 12 credits; one shipped, four rejected on review, one clean but not worth
+its bytes. Outcomes are recorded per spec below. A 1-in-6 ship rate is the
+honest number — the prompts produce usable output, and the review gate is what
+stops the rest reaching the site.
+
+**Two failure modes this run exposed, now in the gate:**
+
+- **Rendered as a framed artwork.** H-08 came back as a photographed print:
+  white mat border, drop shadow, grey surround. Every prompt now carries
+  `full-bleed` and negative-prompts the frame.
+- **Accent intensity lands well above the stated percentage.** "Roughly 15%
+  opacity, heavily diffused" produced a bloom that reads as a sun. State the
+  accent as a *barely perceptible tint* and name the failure — "must not read
+  as a sun, sunset, or light source" — rather than giving a number the model
+  does not honour.
+
+**Superseded status: no assets generated yet.** The Higgsfield connector needs OAuth in an
 interactive session, and no exports exist on disk — verified by searching the
 repository for `.mp4`, `.webm`, `.mov`, `.lottie` and `.riv`, which returns
 nothing. Every destination below is already built and will accept its asset
@@ -66,6 +83,11 @@ Applies to every asset unless a spec overrides it.
 # Stills
 
 ## H-01 · Hero ground, desktop
+> **Run 1: REJECTED.** Bloom far stronger than specified and positioned
+> top-right, where the hero's product card already sits — two focal points
+> competing. Regenerate with the accent as a barely perceptible tint, moved
+> to the upper LEFT away from the card.
+
 
 | Field | Value |
 |---|---|
@@ -97,6 +119,9 @@ Applies to every asset unless a spec overrides it.
 ---
 
 ## H-02 · Hero ground, mobile
+> **Run 1: REJECTED.** Bloom reads as a sun rather than a diffuse wash. The
+> lower two-thirds were correctly quiet.
+
 
 Same treatment as H-01, recomposed rather than cropped — a 16:9 crop loses the
 corner bloom that carries the whole effect.
@@ -203,6 +228,12 @@ corner bloom that carries the whole effect.
 ---
 
 ## H-06 · Trust section ground
+> **Run 1: SHIPPED.** Exact match — long horizontal rules, a soft grid
+> drifting out of alignment, faint navy on warm paper, no symbols. Applied to
+> the homepage trust strip as a CSS background via `image-set` (11KB AVIF /
+> 30KB WebP) with `bg-white` beneath, so the section is never bare. It is
+> decoration, so it carries no alt text and stays out of the a11y tree.
+
 
 | Field | Value |
 |---|---|
@@ -227,6 +258,11 @@ corner bloom that carries the whole effect.
 ---
 
 ## H-07 · Closing CTA band
+> **Run 1: CLEAN, NOT SHIPPED.** Passed the gate — left and centre stay dark
+> for white text. Not shipped because its destination is already a working CSS
+> gradient (`from-rd-navy-800 to-rd-navy-600`), so it would spend real bytes to
+> replace something costing none. Available if the texture is wanted.
+
 
 | Field | Value |
 |---|---|
@@ -251,6 +287,11 @@ corner bloom that carries the whole effect.
 ---
 
 ## H-08 · Auth panel ground
+> **Run 1: REJECTED.** Composition was good, but it rendered as a framed
+> print — mat border, drop shadow, grey surround — rather than a full-bleed
+> background. Regenerate with `full-bleed, fills the entire frame` and
+> negative-prompt frame, mat, border, drop shadow, gallery wall.
+
 
 | Field | Value |
 |---|---|
@@ -351,6 +392,10 @@ position once; *close* a shape completing a circuit. No literal depiction.
 ---
 
 ## H-11 · Feature grid texture
+> **Run 1: REJECTED.** Produced organic crackle/veining, closer to marble than
+> to the geometric line work specified. Say `straight ruled lines, drafting`
+> and negative-prompt crackle, craquelure, marble, veining, organic.
+
 
 | Field | Value |
 |---|---|
@@ -390,5 +435,9 @@ specific reason, not a matter of taste.
 7. **A visible loop seam** in video — it reads as a broken player.
 8. **Camera movement in H-09 or H-10.** Both are specified locked; movement
    competes with the copy for attention.
-9. **A hero video that pushes LCP past ~1.5 s** on a mid-range phone at 4× CPU
+9. **Rendered as a framed artwork** — mat, border, drop shadow or gallery
+   wall. It is a background, not a picture of a picture.
+10. **An accent that reads as a light source** — sun, sunset, lens flare.
+    The accent is a tint, not a subject.
+11. **A hero video that pushes LCP past ~1.5 s** on a mid-range phone at 4× CPU
    throttle. Measure before shipping, not after.
