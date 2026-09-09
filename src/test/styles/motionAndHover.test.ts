@@ -94,6 +94,35 @@ describe("motion and hover CSS contract", () => {
     expect(liftBlock).not.toMatch(/border-color|background-color/);
   });
 
+  it("keeps rd motion on the four tokens rather than inline values", () => {
+    // Before this, 480ms/140ms and one easing curve were written out at seven
+    // call sites. That is the state where someone retunes one hover, leaves
+    // the other six, and nothing errors -- the site just stops feeling like
+    // one thing. The tokens are the single place those values live.
+    for (const token of [
+      "--rd-dur-reveal",
+      "--rd-dur-hover",
+      "--rd-ease",
+      "--rd-stagger-step",
+    ]) {
+      expect(css, `${token} is not declared`).toContain(`${token}:`);
+    }
+
+    // Only the DECLARATIONS may carry the literal values. Anything else using
+    // them inline has drifted off the token.
+    const declared = /--rd-dur-reveal:\s*480ms|--rd-dur-hover:\s*140ms|--rd-ease:\s*cubic-bezier/;
+    const rdMotionRules = css
+      .split("\n")
+      .filter((l) => /\.rd-(reveal|stagger|card-lift)/.test(l) || /transition:|transition-delay:/.test(l))
+      .filter((l) => !declared.test(l));
+    const inline = rdMotionRules.filter((l) =>
+      /\b(480ms|140ms)\b|cubic-bezier\(0\.22/.test(l)
+    );
+    expect(inline, `rd motion written inline instead of via a token: ${inline.join(" | ")}`).toEqual(
+      []
+    );
+  });
+
   it("keeps @import above the @tailwind directives", () => {
     // CSS requires @import to precede every other statement. When it sat below
     // the @tailwind directives, vite warned on every build and silently
