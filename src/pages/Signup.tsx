@@ -391,7 +391,11 @@ const Signup = () => {
             {submitError && (
               <div
                 role="alert"
-                className="rounded-xl border border-red-400/40 bg-red-500/10 p-3 text-sm text-red-200"
+                // Was text-red-200 on bg-red-500/10 -- a dark-theme banner left
+                // behind by the light-theme migration. Measured 1.27:1 over the
+                // paper ground: the signup failure message was effectively
+                // invisible. This pairing measures 7.6:1.
+                className="rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-800"
               >
                 {submitError}
               </div>
