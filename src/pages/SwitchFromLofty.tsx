@@ -50,47 +50,6 @@ const SwitchFromLofty = () => {
         </div>
       </section>
 
-      {/* Why Agents Leave Lofty */}
-      <section className="section-padding">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Why Agents Are Leaving Lofty</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                title: "Unpredictable Costs",
-                quote: "$99/month turns into $300+ with call/text charges. Budget impossible to plan. Hidden fees everywhere."
-              },
-              {
-                title: "Support Goes Dark",
-                quote: "Chat support is useless. Takes weeks to hear back on actual issues. Phone support is a joke."
-              },
-              {
-                title: "Not Real AI",
-                quote: "The 'AI' is just canned responses. Doesn't understand context, doesn't learn. It's automation, not intelligence."
-              },
-              {
-                title: "No Canadian Features",
-                quote: "US-focused. No Toronto market data, no French support, pricing in USD. They don't get Canada."
-              },
-              {
-                title: "Can't Cancel Easily",
-                quote: "Locked into contracts. When I tried to cancel, they made it impossible. Felt trapped."
-              },
-              {
-                title: "Buggy Platform",
-                quote: "Constant glitches. Emails don't send. Leads get lost. Tech support says 'we're working on it' for months."
-              }
-            ].map((item, idx) => (
-              <Card key={idx} className="p-6">
-                <h3 className="font-bold mb-3 text-destructive">❌ {item.title}</h3>
-                <p className="text-sm text-muted-foreground italic">"{item.quote}"</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Real AI vs Fake AI */}
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-4xl">
@@ -107,7 +66,7 @@ const SwitchFromLofty = () => {
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-destructive">❌</span>
-                  <span>Can't predict which leads will convert</span>
+                  <span>No engagement-based lead ranking</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-destructive">❌</span>
@@ -134,7 +93,7 @@ const SwitchFromLofty = () => {
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Predicts conversions with 72% accuracy</span>
+                  <span>Ranks leads by observed engagement</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
@@ -240,7 +199,7 @@ const SwitchFromLofty = () => {
 
             <Card className="p-8 border-accent">
               <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
-              <div className="text-3xl font-bold gradient-text mb-4">$999/year</div>
+              <div className="text-3xl font-bold gradient-text mb-4">$149/mo CAD</div>
               <ul className="space-y-2 mb-6">
                 <li className="text-sm">✓ All features included</li>
                 <li className="text-sm">✓ No call/text charges</li>
@@ -256,7 +215,7 @@ const SwitchFromLofty = () => {
             <p className="font-semibold mb-2">What You Actually Pay:</p>
             <p className="text-sm text-muted-foreground">
               Lofty: $1,188-3,600/year + unpredictable charges<br/>
-              Realtor Desk: <span className="text-rd-terra-800 font-semibold">$999/year, period.</span>
+              Realtor Desk: <span className="text-rd-terra-800 font-semibold">$149/mo CAD.</span>
             </p>
           </Card>
         </div>
@@ -268,35 +227,7 @@ const SwitchFromLofty = () => {
           <h2 className="text-center mb-12">Why Canadian agents choose RealtorDesk AI over Lofty</h2>
           
           <div className="space-y-6">
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center text-white font-bold flex-shrink-0">
-                  M
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">Marcus R.</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-sm text-muted-foreground">Vancouver</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
 
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 flex items-center justify-center text-white font-bold flex-shrink-0">
-                  L
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">Laura K.</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-sm text-muted-foreground">Calgary</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
           </div>
         </div>
       </section>
@@ -307,7 +238,7 @@ const SwitchFromLofty = () => {
           <Brain className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
           <h2 className="mb-6">Upgrade to Real AI Today</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            30-day money-back guarantee. If it's not better than Lofty, full refund. No questions asked.
+            30-day money-back guarantee. Not satisfied for any reason, full refund. No questions asked.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
