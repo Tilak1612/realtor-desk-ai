@@ -376,7 +376,7 @@ function SourceROICard({
         </div>
       </div>
       <div>
-        <div className="grid grid-cols-[1.4fr_1fr_0.8fr_0.8fr_0.8fr] px-6 py-2.5 bg-rd-ink-50 text-[10px] font-bold uppercase tracking-[0.06em] text-rd-ink-500 border-b border-rd-line">
+        <div className="grid grid-cols-[1.4fr_1fr_0.8fr_0.8fr_0.8fr] px-6 py-2.5 bg-rd-ink-50 text-[10px] font-bold uppercase tracking-[0.06em] text-rd-ink-600 border-b border-rd-line">
           <div>{t("rd.columns.reports.source", "Source")}</div>
           <div>{t("rd.columns.reports.spend", "Spend")}</div>
           <div>{t("rd.columns.reports.leads", "Leads")}</div>

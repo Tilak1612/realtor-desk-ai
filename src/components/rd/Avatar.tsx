@@ -4,7 +4,10 @@ import type { CSSProperties } from "react";
 // The same name always produces the same background colour — good for
 // the leads table, kanban cards, and inbox list where stability matters.
 
-const PALETTE = ["#0B2540", "#1F4A72", "#BE552F", "#1F7A4D", "#6B4FA8", "#B88A2E"];
+// Every entry must clear 4.5:1 against the white initials drawn on it.
+// #B88A2E was 3.13:1 -- the only failing member, and it appeared on any name
+// whose char-code sum landed on it, so the defect was intermittent by name.
+const PALETTE = ["#0B2540", "#1F4A72", "#BE552F", "#1F7A4D", "#6B4FA8", "#85621B"];
 
 function hashedColor(name: string): string {
   const sum = [...name].reduce((acc, c) => acc + c.charCodeAt(0), 0);

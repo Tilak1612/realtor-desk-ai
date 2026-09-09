@@ -407,8 +407,8 @@ const IntegrationHub = () => {
           <p className="text-sm text-muted-foreground mb-4">{t('integrations.requestSubtitle', 'Tell us what you need. We prioritize integrations based on demand.')}</p>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>{t('integrations.requestToolName', 'Tool / Platform name')}</Label>
-              <Input value={requestName} onChange={(e) => setRequestName(e.target.value)} placeholder={t('integrations.requestPlaceholder', 'e.g., HubSpot, Monday.com')} />
+              <Label htmlFor="ih-request-name">{t('integrations.requestToolName', 'Tool / Platform name')}</Label>
+              <Input id="ih-request-name" value={requestName} onChange={(e) => setRequestName(e.target.value)} placeholder={t('integrations.requestPlaceholder', 'e.g., HubSpot, Monday.com')} />
             </div>
             <div className="space-y-2">
               <Label>{t('integrations.requestUseCase', 'How would you use it? (optional)')}</Label>

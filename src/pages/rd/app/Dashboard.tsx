@@ -116,7 +116,7 @@ function Greeting({ firstName }: { firstName: string }) {
   return (
     <div className="flex flex-wrap justify-between items-end gap-4 mb-6">
       <div>
-        <div className="text-[13px] text-rd-terra-700 font-semibold tracking-[0.02em]">
+        <div className="text-[13px] text-rd-terra-800 font-semibold tracking-[0.02em]">
           {today}
         </div>
         <h1 className="text-[28px] lg:text-[32px] font-semibold tracking-[-0.02em] mt-1">
@@ -438,7 +438,7 @@ function CardEmpty({ message, ctaLabel, ctaHref }: { message: string; ctaLabel?:
       {ctaLabel && ctaHref && (
         <Link
           to={ctaHref}
-          className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-rd-navy-800 hover:underline"
+          className="mt-3 inline-flex items-center gap-1 px-2 py-1.5 -mx-2 rounded text-xs font-semibold text-rd-navy-800 hover:underline"
         >
           {ctaLabel} <IconArrow />
         </Link>

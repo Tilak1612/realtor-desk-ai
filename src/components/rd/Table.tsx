@@ -25,7 +25,7 @@ export function RDTableHead({ className, children, ...rest }: HTMLAttributes<HTM
   return (
     <div
       className={cn(
-        "bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-500",
+        "bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-600",
         className
       )}
       {...rest}

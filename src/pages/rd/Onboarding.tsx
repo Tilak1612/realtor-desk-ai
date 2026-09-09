@@ -323,13 +323,20 @@ function TextField({
   type?: string;
   badge?: React.ReactNode;
 }) {
+  const fieldId = `onb-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
   return (
     <div className="mb-4">
       <div className="flex justify-between items-center mb-1.5">
-        <label className="text-[13px] font-semibold text-rd-ink-900">{label}</label>
+        {/* htmlFor/id, not just proximity. The label was visually adjacent but
+            never programmatically associated, so a screen reader read the
+            input as unlabelled and clicking the text did not focus it. */}
+        <label htmlFor={fieldId} className="text-[13px] font-semibold text-rd-ink-900">
+          {label}
+        </label>
         {badge}
       </div>
       <input
+        id={fieldId}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}

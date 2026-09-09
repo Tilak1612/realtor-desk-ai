@@ -38,7 +38,7 @@ export function RDTabs({ value, onValueChange, items, className }: RDTabsProps) 
           >
             {item.label}
             {item.count !== undefined && (
-              <span className="ml-1.5 text-rd-ink-400 font-normal">· {item.count}</span>
+              <span className="ml-1.5 text-rd-ink-600 font-normal">· {item.count}</span>
             )}
           </button>
         );
