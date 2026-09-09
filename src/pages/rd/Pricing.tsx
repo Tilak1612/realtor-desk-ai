@@ -164,7 +164,9 @@ function BillingToggle({
         onClick={() => onChange("monthly")}
         className={cn(
           "px-5 py-2 text-[13px] font-semibold rounded-rd-pill transition-colors",
-          cycle === "monthly" ? "bg-rd-navy-800 text-white" : "bg-transparent text-rd-ink-600"
+          cycle === "monthly"
+            ? "bg-rd-navy-800 text-white"
+            : "bg-transparent text-rd-ink-600 hover:text-rd-ink-900 hover:bg-rd-ink-50"
         )}
       >
         {t("pricingRd.toggleMonthly")}
@@ -174,7 +176,9 @@ function BillingToggle({
         onClick={() => onChange("annual")}
         className={cn(
           "px-5 py-2 text-[13px] font-semibold rounded-rd-pill transition-colors",
-          cycle === "annual" ? "bg-rd-navy-800 text-white" : "bg-transparent text-rd-ink-600"
+          cycle === "annual"
+            ? "bg-rd-navy-800 text-white"
+            : "bg-transparent text-rd-ink-600 hover:text-rd-ink-900 hover:bg-rd-ink-50"
         )}
       >
         {t("pricingRd.toggleAnnual")}
