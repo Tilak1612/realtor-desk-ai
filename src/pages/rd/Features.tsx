@@ -5,6 +5,7 @@ import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
 import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
 import { RDButton, RDBadge, IconArrow, IconCheck, IconSparkles } from "@/components/rd";
+import { Reveal } from "@/components/motion/Reveal";
 
 // /features — Features page per rd-app-extra.jsx Artboard_Features.
 // All copy flows through the `featuresRd.*` i18n namespace so the FR
@@ -91,14 +92,18 @@ export default function Features() {
       </section>
 
       {/* Three pillars */}
-      <section className="px-8 md:px-20 pb-24 max-w-[1280px] mx-auto flex flex-col gap-6">
+      <Reveal
+        as="section"
+        stagger
+        className="px-8 md:px-20 pb-24 max-w-[1280px] mx-auto flex flex-col gap-6"
+      >
         {PILLARS.map((pillar, i) => (
           <FeaturePillar key={pillar.titleKey} pillar={pillar} index={i + 1} t={t} />
         ))}
-      </section>
+      </Reveal>
 
       {/* Dark capabilities section */}
-      <section className="bg-rd-ink-900 text-white py-20">
+      <Reveal as="section" className="bg-rd-ink-900 text-white py-20">
         <div className="mx-auto max-w-[1280px] px-8 md:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-20 items-end mb-12">
             <div>
@@ -115,25 +120,25 @@ export default function Features() {
               {t("featuresRd.capsIntro")}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <Reveal stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {CAPABILITIES.map(([hKey, bKey]) => (
               <div
                 key={hKey}
-                className="p-6 bg-white/[0.04] border border-white/[0.08] rounded-[14px]"
+                className="rd-card-lift p-6 bg-white/[0.04] border border-white/[0.08] rounded-[14px]"
               >
-                <div className="w-7 h-7 bg-rd-terra-600 rounded-[8px] mb-4 flex items-center justify-center">
+                <div className="rd-card-lift-icon w-7 h-7 bg-rd-terra-600 rounded-[8px] mb-4 flex items-center justify-center">
                   <IconCheck />
                 </div>
                 <div className="text-[15px] font-semibold mb-1.5">{t(hKey)}</div>
                 <div className="text-[13px] text-white/65 leading-[1.55]">{t(bKey)}</div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
-      </section>
+      </Reveal>
 
       {/* CTA */}
-      <section className="px-8 md:px-20 py-20 max-w-[1280px] mx-auto text-center">
+      <Reveal as="section" className="px-8 md:px-20 py-20 max-w-[1280px] mx-auto text-center">
         <h2 className="text-[36px] md:text-[48px] font-semibold tracking-[-0.02em] leading-[1.1] max-w-[800px] mx-auto mb-5">
           {t("featuresRd.ctaH1Pre")}{" "}
           <span className="font-rd-serif italic font-normal text-rd-terra-600">
@@ -162,7 +167,7 @@ export default function Features() {
               {t("featuresRd.ctaSecondary")}
           </CtaLink>
         </div>
-      </section>
+      </Reveal>
     </MarketingLayout>
   );
 }
@@ -198,7 +203,7 @@ function FeaturePillar({ pillar, index, t }: PillarProps) {
   const tn = TONE[tone];
   return (
     <div
-      className={`grid grid-cols-1 lg:grid-cols-[60px_1fr_1.2fr] gap-8 lg:gap-10 p-9 ${tn.bg} rounded-[20px] border border-rd-line items-start`}
+      className={`grid grid-cols-1 lg:grid-cols-[60px_1fr_1.2fr] gap-8 lg:gap-10 p-9 ${tn.bg} rounded-[20px] border border-rd-line items-start shadow-[0_1px_2px_rgba(11,37,64,0.04),0_10px_28px_-18px_rgba(11,37,64,0.16)]`}
     >
       <div
         className={`font-rd-serif italic text-[48px] lg:text-[56px] font-normal tracking-[-0.02em] leading-none ${tn.num}`}

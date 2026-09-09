@@ -36,7 +36,12 @@ export function RDStatCard({
   return (
     <div
       className={cn(
+        // A resting shadow only -- no lift, no hover. A KPI tile is something
+        // you read, not something you click, and a hover affordance here would
+        // promise an interaction that does not exist. The shadow just stops the
+        // tile sitting flat in the canvas.
         "bg-rd-card border border-rd-line rounded-rd-lg p-5 flex flex-col gap-2.5",
+        "shadow-[0_1px_2px_rgba(11,37,64,0.04),0_6px_16px_-12px_rgba(11,37,64,0.14)]",
         className
       )}
       style={style}
@@ -45,7 +50,9 @@ export function RDStatCard({
         {label}
       </div>
       <div className="flex items-baseline gap-2.5">
-        <div className="text-[30px] font-bold tracking-[-0.02em] text-rd-ink-900">{value}</div>
+        <div className="text-[30px] font-bold tracking-[-0.02em] text-rd-ink-900 tabular-nums">
+          {value}
+        </div>
         {delta && (
           <span className={cn("text-xs font-semibold", DELTA_COLOUR[deltaTone])}>{delta}</span>
         )}
