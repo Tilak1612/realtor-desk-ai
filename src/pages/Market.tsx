@@ -10,6 +10,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useToast } from "@/hooks/use-toast";
 import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
+import { Spinner } from "@/components/rd";
 
 const Market = () => {
   const navigate = useNavigate();
@@ -107,7 +108,7 @@ const Market = () => {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <Spinner label="Loading" showLabel />
         </div>
       </AppLayout>
     );

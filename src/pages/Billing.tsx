@@ -10,6 +10,7 @@ import { Check, Loader2, CreditCard, Calendar, Crown } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import { useSubscription, SUBSCRIPTION_PRODUCTS } from '@/contexts/SubscriptionContext';
 import { useTranslation } from 'react-i18next';
+import { Spinner } from "@/components/rd";
 
 // Locale-aware plan price formatter. Canadian English: "$149/mo".
 // Canadian French: "149 $/mois" — number, NBSP, $, no decimal when whole.
@@ -128,7 +129,7 @@ const Billing = () => {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
-          <Loader2 className="w-8 h-8 animate-spin" />
+          <Spinner label="Loading" showLabel />
         </div>
       </AppLayout>
     );
@@ -248,7 +249,7 @@ const Billing = () => {
               >
                 {portalLoading ? (
                   <>
-                    <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                    <Loader2 aria-hidden="true" className="w-3.5 h-3.5 mr-1.5 animate-spin" />
                     {t('billing.opening', 'Opening...')}
                   </>
                 ) : (
@@ -335,7 +336,7 @@ const Billing = () => {
                   >
                     {checkoutLoading ? (
                       <>
-                        <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                        <Loader2 aria-hidden="true" className="w-3.5 h-3.5 mr-1.5 animate-spin" />
                         Loading...
                       </>
                     ) : (
@@ -387,7 +388,7 @@ const Billing = () => {
                   >
                     {checkoutLoading ? (
                       <>
-                        <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                        <Loader2 aria-hidden="true" className="w-3.5 h-3.5 mr-1.5 animate-spin" />
                         Loading...
                       </>
                     ) : (

@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 import CreateAutomationModal from "@/components/automations/CreateAutomationModal";
+import { Spinner } from "@/components/rd";
 
 interface Profile {
   full_name: string;
@@ -177,7 +178,7 @@ const Automations = () => {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+          <Spinner label="Loading" showLabel />
         </div>
       </AppLayout>
     );

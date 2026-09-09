@@ -177,7 +177,7 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
               disabled={oauthLoading !== null}
             >
               {oauthLoading === "google" ? (
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" />
               ) : null}
               Connect Gmail
             </Button>
@@ -201,7 +201,7 @@ const ImportContacts = ({ userId, onNext, onSkip, onBack }: ImportContactsProps)
               disabled={oauthLoading !== null}
             >
               {oauthLoading === "microsoft" ? (
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" />
               ) : null}
               Connect Outlook
             </Button>

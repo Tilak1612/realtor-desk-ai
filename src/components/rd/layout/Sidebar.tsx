@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import type { ReactNode } from "react";
+import { useDrawerA11y } from "@/hooks/useDrawerA11y";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { RDWordmark } from "../Logo";
@@ -48,6 +49,15 @@ export function Sidebar({
   const location = useLocation();
   const { t } = useTranslation();
 
+  // Escape, focus move/return, inert-when-closed and breakpoint-aware dialog
+  // semantics all live in useDrawerA11y, shared with DashboardSidebar.
+  const { ref: railRef, isStatic: isRail, drawerProps } = useDrawerA11y({
+    open: !!open,
+    onClose: () => onClose?.(),
+    label: t("rd.sidebar.nav", "Navigation"),
+  });
+
+
   const resolvedItems: SidebarItem[] = items ?? [
     { label: t("rd.sidebar.nav.dashboard", "Dashboard"), to: "/app", icon: <IconHome /> },
     { label: t("rd.sidebar.nav.leads", "Leads"), to: "/app/leads", icon: <IconLead /> },
@@ -82,7 +92,16 @@ export function Sidebar({
   return (
     <aside
       id="rd-app-nav"
-      aria-hidden={!open ? undefined : undefined}
+      ref={railRef}
+      // Below lg this is a modal overlay, so it needs dialog semantics and
+      // must leave the tab order when closed. At lg+ it is an ordinary
+      // navigation column and must NOT claim to be a dialog.
+      //
+      // The previous value here was `aria-hidden={!open ? undefined : undefined}`
+      // -- both branches identical, so it did nothing at all. The drawer stayed
+      // in the tab order while translated off-screen, and a keyboard user
+      // tabbing the page walked through nav links they could not see.
+      {...drawerProps}
       className={cn(
         "w-[240px] flex-shrink-0 bg-rd-navy-800 text-white px-3.5 py-5 flex flex-col gap-1",
         // Below lg the rail is an overlay drawer. It used to be a static
