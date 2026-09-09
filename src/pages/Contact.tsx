@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { useFormAnalytics } from "@/hooks/useFormAnalytics";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,6 +37,9 @@ const Contact = () => {
     privacyConsent: false
   });
 
+  const { onStart, onSubmitted } = useFormAnalytics("contact");
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -61,6 +65,9 @@ const Contact = () => {
         duration: 6000,
       });
       
+      // Success only. Firing on submit ATTEMPT would count validation
+      // failures and network errors as completions.
+      onSubmitted();
       setFormData({ name: "", email: "", phone: "", message: "", privacyConsent: false });
     } catch (error: unknown) {
       if (error instanceof z.ZodError) {
@@ -144,7 +151,9 @@ const Contact = () => {
             <div className="lg:col-span-2">
               <Card className="p-8">
                 <h2 className="text-3xl font-bold mb-6">{t('contact.form.title')}</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {/* onFocusCapture rather than a handler per field: one listener, fires
+                    once, and cannot drift as fields are added. */}
+                <form onSubmit={handleSubmit} onFocusCapture={onStart} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium mb-2">{t('contact.form.name')}</label>
