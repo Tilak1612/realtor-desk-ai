@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import authGroundAvif from "@/assets/brand/auth-ground.avif";
+import authGroundWebp from "@/assets/brand/auth-ground.webp";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -47,13 +49,27 @@ const AuthLayout = ({ children, aside }: AuthLayoutProps) => {
         }}
       />
 
-      {/* Faint dot grid — same device as the marketing background, in ink
-          rather than white so it reads on paper. */}
+      {/* Paper ground. Replaces the 60px dot-grid SVG that used to sit here:
+          at 3.5% ink it was invisible in practice, so the page read as flat
+          despite carrying three decorative layers.
+
+          Deliberately a SEPARATE absolutely-positioned overlay rather than a
+          background on the shell itself. The contrast checker walks an
+          element's ANCESTORS for the first opaque background and returns null
+          over a real image rather than guessing -- correct behaviour, and also
+          exactly the blind spot that let white-on-white text ship on this page.
+          Because this div is a SIBLING of the content, not an ancestor, form
+          and headline text still resolve against bg-rd-paper and stay fully
+          checkable.
+
+          image-set, not <Picture>: it is decoration, so it carries no alt text
+          and must not enter the accessibility tree. 47KB AVIF / 67KB WebP, with
+          bg-rd-paper underneath as the floor if neither format loads. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none bg-cover bg-center opacity-[0.28]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230B2540' fill-opacity='0.035'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `image-set(url(${authGroundAvif}) type("image/avif"), url(${authGroundWebp}) type("image/webp"))`,
         }}
       />
 
