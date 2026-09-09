@@ -74,12 +74,51 @@ describe("contrast regressions", () => {
     // missed it: Login's required-field asterisks were text-red-400, which is
     // 2.77:1 on white. A guard that checks one of two auth forms is a guard
     // with a hole in it.
-    const src =
+    // Comments stripped. The fix for the red-200 case documents the class it
+    // replaced, and scanning the explanation reported the fix as the bug --
+    // the same false positive the harness guard below already works around.
+    const strip = (t: string) =>
+      t.replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/^\s*\/\/.*$/gm, "");
+    const src = strip(
       read("src/pages/Signup.tsx") +
-      read("src/pages/Login.tsx") +
-      read("src/components/auth/SignupAside.tsx");
-    for (const cls of ["text-red-300", "text-red-400", "text-emerald-300", "text-green-300"]) {
+        read("src/pages/Login.tsx") +
+        read("src/components/auth/SignupAside.tsx")
+    );
+    // text-red-200 was added after it shipped and was missed: the guard listed
+    // 300 and 400 but not 200, and the signup submit-error alert -- the
+    // role="alert" a user sees when signup fails -- was text-red-200 on
+    // bg-red-500/10, measuring 1.27:1 over paper. A guard that enumerates
+    // shades will always have the hole of whichever shade nobody thought of,
+    // so the translucent dark-theme FILL is checked separately below.
+    for (const cls of [
+      "text-red-100",
+      "text-red-200",
+      "text-red-300",
+      "text-red-400",
+      "text-emerald-300",
+      "text-green-300",
+    ]) {
       expect(src, `${cls} is not legible on a light surface`).not.toContain(cls);
+    }
+  });
+
+  it("does not use dark-theme translucent status fills on the light auth pages", () => {
+    // bg-red-500/10 and friends are dark-theme surfaces: 10% of a saturated
+    // colour over near-black gives a readable tinted panel, but over #FAFAF7
+    // paper it is almost exactly the paper colour. Whatever text sits on it
+    // then needs to be dark, and the pairing that shipped was pale-on-pale.
+    // This catches the SURFACE regardless of which text shade accompanies it.
+    for (const file of [
+      "src/pages/Signup.tsx",
+      "src/pages/Login.tsx",
+      "src/pages/ForgotPassword.tsx",
+      "src/pages/ResetPassword.tsx",
+    ]) {
+      const src = read(file).replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/^\s*\/\/.*$/gm, "");
+      const bad = src.match(/bg-(red|green|emerald|amber|yellow)-\d00\/(5|10|15|20)\b/g) ?? [];
+      expect(bad, `${file} uses a dark-theme translucent status fill: ${bad.join(", ")}`).toEqual(
+        []
+      );
     }
   });
 
