@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useFormAnalytics } from "@/hooks/useFormAnalytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -62,6 +63,9 @@ const Demo = () => {
     },
   });
 
+  const { onStart, onSubmitted } = useFormAnalytics("demo_request");
+
+
   const onSubmit = async (values: DemoFormValues) => {
     setIsSubmitting(true);
 
@@ -83,6 +87,7 @@ const Demo = () => {
 
       if (error) throw error;
 
+      onSubmitted();
       trackEvent("demo_request", {
         demo_type: "live_demo",
       });
@@ -165,7 +170,7 @@ const Demo = () => {
                 </p>
               
               <Form {...form}>
-                <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form noValidate onFocusCapture={onStart} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useFormAnalytics } from "@/hooks/useFormAnalytics";
 import { resolveSources } from "@/lib/images/resolveSources";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -97,6 +99,36 @@ const Resources = () => {
   const { t, i18n } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [newsletterConsent, setNewsletterConsent] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterState, setNewsletterState] =
+    useState<"idle" | "sending" | "done" | "error">("idle");
+  const { onStart, onSubmitted } = useFormAnalytics("newsletter_resources");
+
+  // source distinguishes this capture from the lead-magnet one already writing
+  // to the same table. status "active" matches that existing row shape.
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const email = newsletterEmail.trim();
+    if (!email || !newsletterConsent || newsletterState === "sending") return;
+
+    setNewsletterState("sending");
+    try {
+      const { error } = await supabase
+        .from("email_captures")
+        .insert({ email, source: "newsletter_resources", status: "active" });
+
+      // A duplicate is not a failure for the visitor -- they are already on
+      // the list, which is the outcome they asked for. Same reasoning as the
+      // lead-magnet flow.
+      if (error && !error.message.includes("duplicate")) throw error;
+
+      onSubmitted();
+      setNewsletterState("done");
+    } catch (err) {
+      console.error("Newsletter signup failed:", err);
+      setNewsletterState("error");
+    }
+  };
   const isFr = (i18n.language || "en").toLowerCase().startsWith("fr");
   
   const articles = [
@@ -645,12 +677,29 @@ const Resources = () => {
             {t('resourcesPage.newsletter.subtitle')}
           </p>
           
-          <form noValidate className="max-w-xl mx-auto">
+          {/* This form had no onSubmit and an unbound input. type="submit"
+              therefore triggered a native GET: the page reloaded, the visitor
+              believed they had subscribed, and the address went nowhere. It
+              also collects CASL consent, so it was recording agreement for a
+              subscription that never existed.
+
+              It writes to email_captures now -- the same table and the same
+              source-discriminator pattern LeadMagnetFollowUp already uses, so
+              no new table and no new backend. */}
+          <form noValidate className="max-w-xl mx-auto" onSubmit={handleNewsletterSubmit}>
             <div className="flex flex-col sm:flex-row gap-4">
               <Input
                 type="email"
+                name="email"
+                value={newsletterEmail}
+                onChange={(e) => {
+                  setNewsletterEmail(e.target.value);
+                  onStart();
+                }}
                 placeholder={t('resourcesPage.newsletter.placeholder')}
                 required
+                aria-label={t('resourcesPage.newsletter.placeholder')}
+                disabled={newsletterState === "sending" || newsletterState === "done"}
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:bg-white/20"
               />
               <Button
@@ -658,9 +707,13 @@ const Resources = () => {
                 variant="secondary"
                 size="lg"
                 className="whitespace-nowrap"
-                disabled={!newsletterConsent}
+                disabled={!newsletterConsent || newsletterState === "sending" || newsletterState === "done"}
               >
-                {t('resourcesPage.newsletter.subscribe')}
+                {newsletterState === "sending"
+                  ? t('resourcesPage.newsletter.sending', 'Subscribing…')
+                  : newsletterState === "done"
+                    ? t('resourcesPage.newsletter.done', 'Subscribed')
+                    : t('resourcesPage.newsletter.subscribe')}
               </Button>
             </div>
             <label className="mt-4 flex items-start gap-2 text-left text-sm text-white/85 cursor-pointer">
@@ -673,6 +726,15 @@ const Resources = () => {
               />
               <span>{t('resourcesPage.newsletter.consent')}</span>
             </label>
+
+            {/* role=status so the outcome is announced, not just shown. */}
+            {newsletterState !== "idle" && newsletterState !== "sending" && (
+              <p role="status" className="mt-3 text-sm text-white">
+                {newsletterState === "done"
+                  ? t('resourcesPage.newsletter.success', "You're on the list — thanks.")
+                  : t('resourcesPage.newsletter.error', "That didn't go through. Please try again, or email support@realtordesk.ai.")}
+              </p>
+            )}
           </form>
 
           <p className="text-sm text-white/70 mt-4">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useFormAnalytics } from "@/hooks/useFormAnalytics";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -115,6 +116,9 @@ const Signup = () => {
     }
   };
 
+  const { onStart, onSubmitted } = useFormAnalytics("signup");
+
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     // Guard against double submission: a second click before the request
@@ -152,6 +156,7 @@ const Signup = () => {
       }
 
       if (data.user) {
+        onSubmitted();
         trackEvent("sign_up", { method: "email" });
         trackEvent("trial_start", { method: "email" });
         await new Promise((resolve) => setTimeout(resolve, 300));
@@ -241,7 +246,7 @@ const Signup = () => {
           </div>
 
           {/* Form */}
-          <form noValidate onSubmit={handleSignup} className="space-y-4">
+          <form noValidate onFocusCapture={onStart} onSubmit={handleSignup} className="space-y-4">
             {/* Identity before credentials: asking who you are, then how to
                 reach you, then a password, reads as an introduction. The old
                 order (email, password, confirm, name) read as paperwork. */}
