@@ -253,6 +253,7 @@ const AIAssistant = () => {
         {/* Input */}
         <form onSubmit={handleSubmit} className="flex gap-2">
           <Input
+            aria-label={t('ai.inputLabel', 'Message the assistant')}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t('ai.placeholder', 'Ask me anything about your CRM, contacts, deals...')}

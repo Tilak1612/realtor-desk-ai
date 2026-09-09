@@ -121,7 +121,7 @@ export function Sidebar({
           onClick={onClose}
           aria-label={t("rd.sidebar.close", "Close navigation")}
           aria-controls="rd-app-nav"
-          className="w-[22px] h-[22px] rounded-md bg-white/10 flex items-center justify-center text-white/60 hover:bg-white/15 lg:hidden"
+          className="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center text-white/60 hover:bg-white/15 lg:hidden"
         >
           <IconChevron />
         </button>

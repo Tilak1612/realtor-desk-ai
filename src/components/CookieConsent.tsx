@@ -105,7 +105,13 @@ const CookieConsent = () => {
             <h3 className="font-semibold text-base sm:text-lg mb-2">{t('cookie.title', 'Cookie Preferences')}</h3>
             <p className="text-xs sm:text-sm text-muted-foreground mb-4">
               {t('cookie.description', 'We use cookies to enhance your browsing experience and analyze site traffic. You can customize your cookie preferences or accept all.')}{" "}
-              <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80 transition-colors">
+              <Link
+                to="/privacy-policy"
+                // inline-block + py lifts this inline link to the 24px AA target
+                // floor. It measured 15px tall -- an inline <a> is only as tall as
+                // its line box. The banner itself is untouched.
+                className="inline-block py-1 text-primary underline hover:text-primary/80 transition-colors"
+              >
                 {t('cookie.privacyLink', 'Privacy Policy')}
               </Link>
             </p>
