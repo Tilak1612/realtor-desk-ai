@@ -444,6 +444,16 @@ const resources = {
           trustSetup: "~10-min setup",
           trustDdf: "Realtor.ca import today"
         },
+        productTour: {
+          eyebrow: "The product, as it is",
+          heading: "This is the dashboard you sign into.",
+          body: "A short walkthrough of a demo workspace: the morning overview, your leads, the conversation inbox and the pipeline board. Recorded from the live app, not mocked up.",
+          caption: "Demo workspace. Sample leads, not customer data.",
+          videoLabel: "Screen recording of the Realtor Desk dashboard: the morning overview, the leads list, the conversation inbox and the pipeline board.",
+          play: "Play walkthrough",
+          pause: "Pause walkthrough",
+          cta: "See it on your own leads",
+        },
         heroDash: {
           appLabel: "Realtor Desk",
           screen: "Leads",
@@ -3639,6 +3649,16 @@ const resources = {
           trustNoCard: "Carte requise · annulez avant le 14e jour et ne payez rien",
           trustSetup: "Installation en ~10 min",
           trustDdf: "Import Realtor.ca dès aujourd'hui"
+        },
+        productTour: {
+          eyebrow: "Le produit, tel quel",
+          heading: "Voici le tableau de bord auquel vous vous connectez.",
+          body: "Une courte visite d'un espace de démonstration : l'aperçu du matin, vos prospects, la boîte de conversations et le tableau du pipeline. Enregistré dans l'application réelle, pas une maquette.",
+          caption: "Espace de démonstration. Prospects fictifs, aucune donnée client.",
+          videoLabel: "Enregistrement d'écran du tableau de bord Realtor Desk : l'aperçu du matin, la liste des prospects, la boîte de conversations et le tableau du pipeline.",
+          play: "Lire la visite",
+          pause: "Mettre la visite en pause",
+          cta: "Essayez-le avec vos prospects",
         },
         heroDash: {
           appLabel: "Realtor Desk",
