@@ -24,6 +24,7 @@ import {
 } from "@/components/rd";
 import { normalizeLocale } from "@/lib/i18n/format";
 import { Reveal } from "@/components/motion/Reveal";
+import { ProductTour } from "@/components/marketing/ProductTour";
 
 // /  — Home page per rd-marketing.jsx Artboard_Home.
 //
@@ -58,6 +59,9 @@ export default function Home() {
           a decoration. Everything below the fold reveals on scroll. */}
       <HeroSection t={t} />
       <Reveal><TrustStrip t={t} /></Reveal>
+      {/* The real product, straight after the claims. Features explain it in
+          words; this shows the dashboard a visitor would actually sign into. */}
+      <Reveal><ProductTour /></Reveal>
       <Reveal><FeatureGrid t={t} /></Reveal>
       <Reveal><PipelinePreview t={t} /></Reveal>
       <Reveal><CompareStrip t={t} locale={locale} /></Reveal>
