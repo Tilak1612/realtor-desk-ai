@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Send } from "lucide-react";
-import { AskAgentIcon } from "./AskAgentIcon";
+import { MessageCircle, X, Send } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 // Public marketing-site assistant widget. Answers are rendered as PLAIN TEXT
@@ -93,7 +92,7 @@ const SiteAssistant = () => {
            announces the name twice. */
         className="fixed bottom-5 right-5 z-40 inline-flex h-14 max-w-[calc(100vw-2.5rem)] items-center gap-2.5 rounded-full bg-primary px-5 text-primary-foreground shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
-        <AskAgentIcon className="h-7 w-7 flex-shrink-0" />
+        <MessageCircle aria-hidden="true" className="h-6 w-6 flex-shrink-0" />
         <span aria-hidden="true" className="text-sm font-semibold whitespace-nowrap">
           Ask Agent
         </span>
@@ -108,20 +107,9 @@ const SiteAssistant = () => {
       className="fixed bottom-5 right-5 z-40 flex h-[32rem] w-[min(24rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div className="flex items-center gap-2.5">
-          {/* Same mark as the launcher, as an avatar disc: one identity whether
-              the panel is closed or open. Decorative -- the name sits right
-              beside it in text. */}
-          <span
-            aria-hidden="true"
-            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"
-          >
-            <AskAgentIcon className="h-5 w-5" />
-          </span>
-          <div>
-            <p className="text-sm font-semibold text-foreground">Ask Agent</p>
-            <p className="text-xs text-muted-foreground">About Realtor Desk</p>
-          </div>
+        <div>
+          <p className="text-sm font-semibold text-foreground">Ask Agent</p>
+          <p className="text-xs text-muted-foreground">About Realtor Desk</p>
         </div>
         <button
           onClick={() => setOpen(false)}
