@@ -22,7 +22,7 @@ const rows: Row[] = [
       label: "BoldTrail pricing requires a demo call (G2 review)",
       href: "https://www.g2.com/products/inside-real-estate-boldtrail/reviews",
     },
-    us: "Published on /pricing. $149/mo or $999/yr (Founding Member), CAD, GST/HST at checkout.",
+    us: "Published on /pricing. $149/mo CAD (Solo) or $299/mo (Team); annual billing saves up to $789/yr. GST/HST at checkout.",
   },
   {
     axis: "Billing commitment",

@@ -130,10 +130,10 @@ const VsWiseAgent = () => {
               <Brain className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Predictive Lead Scoring</h3>
               <p className="text-sm text-muted-foreground mb-3">
-                AI analyzes 50+ data points to predict which leads will convert in next 6-12 months
+                Ranks leads by observed engagement — visits, properties viewed, email activity
               </p>
               <Badge variant="outline" className="text-xs">
-                72% accuracy vs. Wise Agent's manual guess
+                Engagement-based ranking vs. Wise Agent's manual sorting
               </Badge>
             </Card>
 
@@ -242,7 +242,7 @@ const VsWiseAgent = () => {
               <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Risk-Free Trial</h3>
               <p className="text-sm text-muted-foreground">
-                30-day money-back guarantee. If you miss Wise Agent, full refund.
+                30-day money-back guarantee. Not satisfied for any reason, full refund.
               </p>
             </Card>
 
@@ -276,10 +276,6 @@ const VsWiseAgent = () => {
             </Link>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-8">
-            "Wise Agent didn't understand Canadian market. Realtor Desk gets it."<br/>
-            <span className="font-semibold">- Philippe D., Montreal</span>
-          </p>
         </div>
       </section>
 

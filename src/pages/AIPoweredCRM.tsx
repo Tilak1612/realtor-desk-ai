@@ -79,10 +79,11 @@ const AIPoweredCRM = () => {
                 <Target className="w-3 h-3 mr-1" />
                 Predictive Intelligence
               </Badge>
-              <h2 className="mb-6">Know Who Will Buy Before They Do</h2>
+              <h2 className="mb-6">See who is actually engaged</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Our AI analyzes 50+ data points—web activity, email engagement, past behavior, 
-                market timing—to score every lead with 72% accuracy on who will convert in 6-12 months.
+                Realtor Desk ranks each lead by the interest it has actually shown — website
+                visits, properties and documents viewed, time on site and email engagement —
+                so your list is ordered by engagement rather than by arrival time.
               </p>
               
               <div className="space-y-4 mb-8">
@@ -117,18 +118,6 @@ const AIPoweredCRM = () => {
                 </div>
               </div>
 
-              <Card className="p-6 bg-accent/10 border-accent/20">
-                <div className="flex items-center gap-3 mb-3">
-                  <BarChart3 className="w-8 h-8 text-rd-terra-800" />
-                  <div>
-                    <div className="text-2xl font-bold gradient-text">72%</div>
-                    <div className="text-sm text-muted-foreground">Prediction Accuracy</div>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Validated across our Canadian beta community
-                </p>
-              </Card>
             </div>
 
             <div className="bg-muted rounded-2xl p-8 border">
@@ -448,13 +437,6 @@ const AIPoweredCRM = () => {
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-accent/10 rounded-lg">
-                <p className="text-sm font-semibold mb-1">Real Example:</p>
-                <p className="text-sm text-muted-foreground">
-                  "Sarah in Toronto received 7 personalized touches over 90 days, all timed by AI. 
-                  She closed a $450K condo without me manually sending a single email." - Marc D., Toronto
-                </p>
-              </div>
             </Card>
           </div>
         </div>
@@ -487,7 +469,7 @@ const AIPoweredCRM = () => {
                     feature: "Predictive Lead Scoring", 
                     basic: false, 
                     otherAI: false, 
-                    rdai: "72% accuracy" 
+                    rdai: "Engagement-based" 
                   },
                   { 
                     feature: "Market Intelligence", 

@@ -163,9 +163,9 @@ const resources = {
       pricing: {
         taxDisclaimer: "Prices are in Canadian dollars (CAD). Sales tax — GST/HST, plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province. Every amount on this page matches what you will see on Stripe's secure checkout, before tax.",
         compare: {
-          boldtrailCost: "$5,988/year + $999 setup fee",
+          boldtrailCost: "$5,988/year + $999 setup fee (vendor figures unverified)",
           loftyCost: "$1,788 – $3,588/year per user",
-          ourCost: "$999/year (Founding Member), $0 setup",
+          ourCost: "$149/mo CAD, $0 setup",
           saveCallout: "Save up to 85% compared to BoldTrail, 45% vs Lofty"
         },
         banner: {
@@ -282,11 +282,11 @@ const resources = {
           monthly: "Monthly Plan",
           mo: "/mo",
           bestValue: "Best Value",
-          annualPlan: "Annual Plan (Founding Member)",
-          disclaimer: "Annual billing locks in your Founding Member rate forever. Monthly plans may increase to $149/month after promotion ends.",
+          annualPlan: "Annual Plan",
+          disclaimer: "Annual billing saves up to $789/yr against the monthly price.",
           yr: "/yr",
           save: "Save $789/year!",
-          foundingBonus: "Founding Member Bonus"
+          foundingBonus: "Annual plan bonus"
         },
         addons: {
           heading: "Enhance Your Plan with Add-Ons",
@@ -300,7 +300,7 @@ const resources = {
         guarantees: {
           heading: "Our Guarantees to You",
           moneyBack: "30-Day Money-Back Guarantee",
-          moneyBackDesc: "Close at least one additional deal in your first 30 days or get a full refund. No questions asked.",
+          moneyBackDesc: "Not satisfied in your first 30 days? Get a full refund. No questions asked.",
           noContracts: "No Contracts, Cancel Anytime",
           noContractsDesc: "All plans are month-to-month. Cancel anytime with one click. No penalties, no hassles.",
           freeSetup: "Free Setup & Migration",
@@ -598,7 +598,7 @@ const resources = {
         vUsPriceNoSetup: "CAD $149/mo, no setup",
         fAnnualSingle: "Annual plan (single agent)",
         vThemAnnual: "USD $1,188/yr",
-        vUsAnnualSave: "CAD $999/yr — save $789",
+        vUsAnnualSave: "Annual billing — save up to $789/yr",
         fPerUserAfter5: "Per-user cost after 5",
         vThemPerUser: "USD $49",
         vUsPerUser: "CAD $15",
@@ -1483,7 +1483,7 @@ const resources = {
           feature2Title: "24/7 Bilingual AI Chatbot",
           feature2Desc: "Captures leads in EN/FR, qualifies buyers, schedules showings, answers 200+ property questions. Never miss a 2 AM inquiry again",
           feature3Title: "Smart Transaction Coordinator",
-          feature3Desc: "Automate status updates, document requests, deadline tracking. Cut closing time from 60 to 35 days with 99% accuracy"
+          feature3Desc: "Automate status updates, document requests and deadline tracking so nothing slips between offer and close"
         },
         roiDisclaimer: "*ROI calculations are projections based on industry averages and pilot program data. Actual results depend on market conditions, lead quality, individual effort, and other factors. Past performance does not guarantee future results.",
         security: {
@@ -3509,7 +3509,7 @@ const resources = {
         guarantees: {
           heading: "Nos Garanties pour Vous",
           moneyBack: "Garantie de Remboursement de 30 Jours",
-          moneyBackDesc: "Concluez au moins une transaction supplémentaire dans vos 30 premiers jours ou obtenez un remboursement complet. Sans questions.",
+          moneyBackDesc: "Pas satisfait dans vos 30 premiers jours ? Obtenez un remboursement complet. Sans questions.",
           noContracts: "Sans Contrat, Annulez à Tout Moment",
           noContractsDesc: "Tous les plans sont mensuels. Annulez à tout moment en un clic. Sans pénalités, sans tracas.",
           freeSetup: "Installation et Migration Gratuites",

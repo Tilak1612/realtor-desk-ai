@@ -97,7 +97,7 @@ const VsLofty = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Predicts which leads will convert (72% accuracy)</span>
+                  <span className="text-sm">Ranks leads by observed engagement</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
@@ -112,47 +112,6 @@ const VsLofty = () => {
                   <span className="text-sm">Personalized content based on buyer behavior</span>
                 </li>
               </ul>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Common Complaints */}
-      <section className="section-padding bg-muted">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Why Agents Are Leaving Lofty</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Unpredictable Costs</h3>
-              <p className="text-sm text-muted-foreground">
-                "$99/month turns into $300+ with call/text charges. Budget impossible to plan."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Support Goes Dark</h3>
-              <p className="text-sm text-muted-foreground">
-                "Chat support is useless. Takes weeks to hear back on actual issues."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Not Real AI</h3>
-              <p className="text-sm text-muted-foreground">
-                "The 'AI' is just canned responses. Doesn't understand context or learn."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">No Canadian Features</h3>
-              <p className="text-sm text-muted-foreground">
-                "US-focused. No Toronto market data, no French support, pricing in USD."
-              </p>
             </Card>
           </div>
         </div>
@@ -174,7 +133,7 @@ const VsLofty = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Starting Price", rdai: "$999/year", lofty: "$1,188+/year" },
+                  { feature: "Starting price", rdai: "$149/mo CAD", lofty: "$1,188+/yr (unverified)" },
                   { feature: "Transparent Pricing", rdai: true, lofty: false },
                   { feature: "Predictive Lead Scoring", rdai: true, lofty: false },
                   { feature: "AI Learns & Adapts", rdai: true, lofty: false },
@@ -227,7 +186,7 @@ const VsLofty = () => {
               <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Risk-Free Switch</h3>
               <p className="text-sm text-muted-foreground">
-                30-day money-back guarantee. If it's not better than Lofty, full refund.
+                30-day money-back guarantee. Not satisfied for any reason, full refund.
               </p>
             </Card>
 
@@ -243,7 +202,7 @@ const VsLofty = () => {
               <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">Transparent Pricing</h3>
               <p className="text-sm text-muted-foreground">
-                $999/year, all-inclusive. No surprise charges. Ever.
+                $149/mo CAD on the Solo plan. Annual billing saves up to $789/yr.
               </p>
             </Card>
           </div>
@@ -261,10 +220,6 @@ const VsLofty = () => {
             </Link>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-8">
-            "The AI actually understands my clients. Lofty was just automated spam."<br/>
-            <span className="font-semibold">- Marcus R., Vancouver</span>
-          </p>
         </div>
       </section>
 
