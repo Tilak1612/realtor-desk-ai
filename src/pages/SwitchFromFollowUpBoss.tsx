@@ -61,6 +61,15 @@ const SwitchFromFollowUpBoss = () => {
             "name": "Switch from Follow Up Boss to RealtorDesk AI",
             "description": "Canadian real estate agents switching from Follow Up Boss to RealtorDesk AI save on USD pricing and gain built-in AI chatbot and bilingual support. CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap.",
             "url": "https://www.realtordesk.ai/switch-from-follow-up-boss"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((f) => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": { "@type": "Answer", "text": f.a },
+            })),
           }
         ]}
       />
