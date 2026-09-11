@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useDrawerA11y } from "@/hooks/useDrawerA11y";
 import {
   LayoutDashboard,
   Users,
@@ -39,6 +40,15 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Escape, focus move/return, and inert-when-closed. Before this the drawer
+  // was moved off-screen with -translate-x-full but stayed in the tab order,
+  // so keyboard users tabbed through invisible nav links, and there was no way
+  // to dismiss it from the keyboard at all.
+  const { ref: drawerRef, drawerProps } = useDrawerA11y({
+    open: isOpen,
+    onClose: () => setIsOpen(false),
+  });
   const [counts, setCounts] = useState<EntityCounts>({ contacts: 0, properties: 0, deals: 0 });
 
   useEffect(() => {
@@ -110,7 +120,9 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
           their contrast model. Before this PR the container was bg-card
           (white), making every link invisible (white-on-white). */}
       <aside
-        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-primary text-white border-r border-white/10 flex flex-col transition-transform duration-300 ease-in-out z-40 ${
+        ref={drawerRef}
+        {...drawerProps}
+        className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-primary text-white border-r border-white/10 flex flex-col motion-safe:transition-transform motion-safe:duration-300 ease-in-out z-40 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >

@@ -252,6 +252,7 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
                             </div>
                             <Input
                               placeholder="Email subject"
+                                aria-label="Email subject"
                               value={s.action_config.subject || ""}
                               onChange={(e) => updateStep(s.id, { subject: e.target.value })}
                             />
@@ -289,6 +290,7 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
                             </div>
                             <Input
                               placeholder="Tag name"
+                                aria-label="Tag name"
                               value={s.action_config.tag_name || ""}
                               onChange={(e) => updateStep(s.id, { tag_name: e.target.value })}
                             />
@@ -302,6 +304,7 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
                             </div>
                             <Input
                               placeholder="Task title"
+                                aria-label="Task title"
                               value={s.action_config.task_title || ""}
                               onChange={(e) => updateStep(s.id, { task_title: e.target.value })}
                             />

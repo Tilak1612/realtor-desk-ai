@@ -292,7 +292,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
                 variant="secondary"
                 className="gap-2"
               >
-                {importing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+                {importing ? <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
                 {importing ? t('properties.ddf.fetching', 'Looking up...') : t('properties.ddf.preview', 'Preview Listing')}
               </Button>
             </div>
@@ -530,7 +530,7 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
               {t("app.modals.addProperty.cancel")}
             </Button>
             <Button type="submit" disabled={loading || hasErrors}>
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {loading && <Loader2 aria-hidden="true" className="mr-2 h-4 w-4 animate-spin" />}
               {t("app.modals.addProperty.addProperty")}
             </Button>
           </DialogFooter>

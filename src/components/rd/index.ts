@@ -40,3 +40,4 @@ export { Sidebar } from "./layout/Sidebar";
 export type { SidebarItem } from "./layout/Sidebar";
 export { TopNav } from "./layout/TopNav";
 export { AppShell } from "./layout/AppShell";
+export { Spinner } from "./Spinner";

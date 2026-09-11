@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/select";
 import AICallSummaryPanel from "@/components/call-workflow/AICallSummaryPanel";
 import WorkflowFeedbackWidget from "@/components/feedback/WorkflowFeedbackWidget";
+import { Spinner } from "@/components/rd";
 
 interface Contact {
   id: string;
@@ -378,7 +379,7 @@ const CallWorkflow = () => {
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <Spinner label="Loading" />
             <p className="text-muted-foreground">Loading contact...</p>
           </div>
         </div>

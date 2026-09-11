@@ -29,7 +29,7 @@ const AIInsights = ({ contact }: AIInsightsProps) => {
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="flex items-center gap-2"><Brain className="h-5 w-5 text-primary" />AI Insights</CardTitle>
         <Button size="sm" variant="outline" onClick={calculateLeadScore} disabled={calculating}>
-          <RefreshCw className={`h-4 w-4 ${calculating ? "animate-spin" : ""}`} />
+          <RefreshCw aria-hidden="true" className={`h-4 w-4 ${calculating ? "animate-spin" : ""}`} />
         </Button>
       </CardHeader>
       <CardContent className="space-y-6">

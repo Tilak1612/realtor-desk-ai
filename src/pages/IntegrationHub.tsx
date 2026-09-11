@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { Search, Plug, Clock, CheckCircle, Bell, Send, ExternalLink } from "lucide-react";
 import ConnectPanel from "@/components/integrations/ConnectPanel";
 import SyncHealthBadge from "@/components/integrations/SyncHealthBadge";
+import { Spinner } from "@/components/rd";
 
 // ─── Tool Registry ────────────────────────────────────
 
@@ -291,7 +292,7 @@ const IntegrationHub = () => {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+          <Spinner label="Loading" showLabel />
         </div>
       </AppLayout>
     );
@@ -310,6 +311,8 @@ const IntegrationHub = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder={t('integrations.searchPlaceholder', 'Search integrations...')}
+                type="search"
+                aria-label={t('integrations.searchLabel', 'Search integrations')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-9 h-9"
