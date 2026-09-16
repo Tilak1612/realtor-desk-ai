@@ -316,37 +316,87 @@ try {
   }
 
   /* ── 5d. video, once it exists ──────────────────────────────────────────── */
+  // Two kinds of video, with different obligations, told apart by aria-hidden.
+  //
+  //  DECORATIVE (aria-hidden="true") -- ambient motion that carries no
+  //  information. Must be poster-backed, muted, playsinline, and must not ship
+  //  to a phone at all.
+  //
+  //  CONTENT (no aria-hidden) -- a product walkthrough that DOES carry
+  //  information, so hiding it from a screen reader would be wrong. It must
+  //  instead have an accessible name, a pause control (WCAG 2.2.2), no
+  //  autoplay attribute (play is JS-driven so reduced motion is honoured),
+  //  and it must cost a phone nothing until the visitor asks for it.
+  //
+  // This check was first written when the only planned video was a decorative
+  // hero loop, and it demanded aria-hidden of every <video>. Applied to a
+  // product demo that rule would have forced the wrong markup.
   const video = await page.evaluate(() => {
-    return [...document.querySelectorAll("video")].map((v) => ({
-      poster: !!v.getAttribute("poster"),
-      muted: v.muted,
-      playsInline: v.hasAttribute("playsinline"),
-      loop: v.loop,
-      preload: v.getAttribute("preload"),
-      hidden: v.getAttribute("aria-hidden") === "true",
-      sources: [...v.querySelectorAll("source")].map((sr) => sr.type),
-    }));
+    return [...document.querySelectorAll("video")].map((v) => {
+      const labelledBy = v.getAttribute("aria-labelledby");
+      const name =
+        v.getAttribute("aria-label") ||
+        (labelledBy && document.getElementById(labelledBy)?.textContent) ||
+        v.closest("figure")?.querySelector("figcaption")?.textContent ||
+        "";
+      return {
+        id: v.id,
+        poster: !!v.getAttribute("poster"),
+        muted: v.muted,
+        playsInline: v.hasAttribute("playsinline"),
+        autoplayAttr: v.hasAttribute("autoplay"),
+        preload: v.getAttribute("preload"),
+        decorative: v.getAttribute("aria-hidden") === "true",
+        name: name.trim().slice(0, 60),
+        pauseControl: !!(v.id && document.querySelector(`button[aria-controls="${v.id}"]`)),
+        sources: [...v.querySelectorAll("source")].map((sr) => sr.type),
+      };
+    });
   });
   if (video.length === 0) {
-    skip("hero video is poster-backed and decorative", "no <video> on the page yet — Higgsfield assets not generated");
+    skip("video is poster-backed and correctly classified", "no <video> on the page");
   } else {
-    // A decorative background video with no poster shows a black rectangle
-    // until the first frame decodes, and without muted+playsinline iOS
-    // refuses to autoplay it at all.
-    const bad = video.filter(
-      (v) => !v.poster || !v.muted || !v.playsInline || !v.hidden || !v.sources.includes("video/webm")
-    );
+    const faults = [];
+    for (const v of video) {
+      const base = [];
+      if (!v.poster) base.push("no poster");
+      if (!v.muted) base.push("not muted");
+      if (!v.playsInline) base.push("no playsinline");
+      if (!v.sources.includes("video/webm")) base.push("no webm source");
+      if (!v.decorative) {
+        if (!v.name) base.push("content video with no accessible name");
+        if (!v.pauseControl) base.push("no pause control (aria-controls)");
+        if (v.autoplayAttr) base.push("autoplay attribute ignores reduced motion");
+        if (!["none", "metadata"].includes(v.preload || "")) base.push(`preload=${v.preload}`);
+      }
+      if (base.length) faults.push(`${v.id || "(no id)"}: ${base.join(", ")}`);
+    }
     record(
-      "hero video is poster-backed and decorative",
-      bad.length === 0,
-      `${video.length} found; ${bad.length ? JSON.stringify(bad[0]) : "poster, muted, playsinline, aria-hidden, webm"}`
+      "video is poster-backed and correctly classified",
+      faults.length === 0,
+      faults.length
+        ? faults.join("; ")
+        : `${video.length} found: ${video.map((v) => (v.decorative ? "decorative" : "content")).join(", ")}`
     );
 
-    // And it must not be shipped to a phone.
+    // On a phone: no decorative video at all, and no content video spending
+    // bytes or CPU before the visitor taps it.
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.waitForTimeout(500);
-    const onMobile = await page.evaluate(() => document.querySelectorAll("video").length);
-    record("video is not served below 1024px", onMobile === 0, `${onMobile} <video> at 390px`);
+    await page.goto(BASE, { waitUntil: "networkidle" });
+    await page.waitForTimeout(800);
+    const mobile = await page.evaluate(() =>
+      [...document.querySelectorAll("video")].map((v) => ({
+        decorative: v.getAttribute("aria-hidden") === "true",
+        paused: v.paused,
+        preload: v.getAttribute("preload"),
+      }))
+    );
+    const mobileBad = mobile.filter((v) => v.decorative || !v.paused || v.preload !== "none");
+    record(
+      "video costs a phone nothing until tapped",
+      mobileBad.length === 0,
+      mobileBad.length ? JSON.stringify(mobileBad[0]) : `${mobile.length} content video(s), paused, preload=none at 390px`
+    );
     await page.setViewportSize({ width: 1440, height: 900 });
   }
 
