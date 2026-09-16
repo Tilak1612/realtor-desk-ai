@@ -334,19 +334,19 @@ const AIPoweredCRM = () => {
                 <MessageSquare className="w-3 h-3 mr-1" />
                 Intelligent Conversation
               </Badge>
-              <h2 className="mb-6">24/7 AI Chatbot That Actually Works</h2>
+              <h2 className="mb-6">An AI assistant that works on your own leads</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Most CRMs have auto-responders that send generic replies. Our AI understands context, 
-                qualifies leads, answers property questions, and books appointments—all while you sleep.
+                Open a lead and ask. The assistant can see that contact, draft a reply in English or
+                French, summarise a long thread and talk through what to do next.
               </p>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
                   <Zap className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-semibold mb-1">Instant Response = More Conversions</h4>
+                    <h4 className="font-semibold mb-1">A draft, not a blank page</h4>
                     <p className="text-sm text-muted-foreground">
-                      78% of buyers go with the first agent who responds. Be that agent, 24/7.
+                      Ask for a reply and edit it, rather than starting every follow-up from nothing.
                     </p>
                   </div>
                 </div>
@@ -354,9 +354,9 @@ const AIPoweredCRM = () => {
                 <div className="flex items-start gap-3">
                   <Brain className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-semibold mb-1">Understands Canadian Real Estate</h4>
+                    <h4 className="font-semibold mb-1">Works in English or French</h4>
                     <p className="text-sm text-muted-foreground">
-                      Trained on CREA data, Toronto/Vancouver/Calgary markets, bilingual (EN/FR)
+                      It answers in the language you ask in, and sees the contact you have open.
                     </p>
                   </div>
                 </div>
@@ -460,10 +460,10 @@ const AIPoweredCRM = () => {
               <tbody>
                 {[
                   { 
-                    feature: "24/7 Chatbot", 
+                    feature: "AI assistant on your own leads", 
                     basic: false, 
                     otherAI: "Canned responses", 
-                    rdai: "Intelligent conversation" 
+                    rdai: "Included" 
                   },
                   { 
                     feature: "Predictive Lead Scoring", 

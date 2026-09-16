@@ -73,13 +73,34 @@ function ns(name: string): string {
   return out;
 }
 
+/**
+ * The comparison pages are buyer-path copy too, and carried the same claims:
+ * a "24/7 AI Chatbot" tick against every competitor, "books showings", a
+ * "Market Intelligence" row with no forecasting behind it, and on /vs/ixact a
+ * headline ("Advanced AI for the Price of Basic CRM") that argued the opposite
+ * of the price card directly beneath it, $149 against $46.75.
+ */
+const COMPARISON_PAGES = [
+  "VsIxact",
+  "VsBoldTrail",
+  "VsLofty",
+  "VsWiseAgent",
+  "LoftyAlternative",
+  "SwitchFromLionDesk",
+  "AIPoweredCRM",
+];
+const comparisons = COMPARISON_PAGES.map((n) =>
+  stripComments(readFileSync(join(ROOT, `src/pages/${n}.tsx`), "utf8"))
+).join("\n");
+
 const marketing =
   ns("landing") +
   ns("featuresRd") +
   ns("pricingRd") +
   ns("aside") +
   stripComments(home) +
-  stripComments(features);
+  stripComments(features) +
+  comparisons;
 
 /** True while the named edge function is actually CALLED from somewhere. */
 function isInvoked(fn: string): boolean {
@@ -199,6 +220,33 @@ describe("capability claims", () => {
     expect(marketing).not.toContain("CRM since 2020");
     expect(marketing).not.toContain("CRM depuis 2020");
     expect(i18n).toContain("Now in public beta");
+  });
+
+  it("does not sell a 24/7 lead-facing chatbot on the comparison pages", () => {
+    for (const phrase of ["24/7 AI Chatbot", "24/7 Chatbot", "books showings", "all while you sleep"]) {
+      expect(comparisons).not.toContain(phrase);
+    }
+  });
+
+  it("never argues we are cheap on a page that shows us costing 3x", () => {
+    const ixact = readFileSync(join(ROOT, "src/pages/VsIxact.tsx"), "utf8");
+    // Both numbers are on the page; the copy around them has to agree.
+    expect(ixact).toContain("$149/mo CAD");
+    expect(ixact).toContain("$46.75");
+    for (const phrase of [
+      "Price of Basic CRM",
+      "without breaking your budget",
+      "Without Breaking Your Budget",
+      "budget-friendly pricing",
+    ]) {
+      expect(ixact).not.toContain(phrase);
+    }
+  });
+
+  it("does not quote outcome statistics with no source", () => {
+    for (const phrase of ["78% of buyers", "Save 15+ Hours/Week", "Trained on CREA data"]) {
+      expect(comparisons).not.toContain(phrase);
+    }
   });
 
   it("labels every roadmap capability on the features page", () => {
