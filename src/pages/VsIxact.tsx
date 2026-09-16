@@ -45,16 +45,16 @@ const VsIxact = () => {
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center max-w-2xl mx-auto">
             <Card className="p-6 flex-1">
               <div className="text-sm text-muted-foreground mb-2">IXACT Contact</div>
-              <div className="text-3xl font-bold mb-1">$456/year</div>
-              <div className="text-xs text-muted-foreground">Basic CRM, no AI</div>
+              <div className="text-3xl font-bold mb-1">$46.75/mo</div>
+              <div className="text-xs text-muted-foreground">Billed annually · currency not stated · ixactcontact.com, 9 Sep 2026</div>
             </Card>
             
             <div className="text-2xl font-bold">→</div>
             
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
-              <div className="text-3xl font-bold gradient-text mb-1">$999/year</div>
-              <div className="text-xs text-rd-terra-800 font-semibold">+$243 for AI superpowers</div>
+              <div className="text-3xl font-bold gradient-text mb-1">$149/mo CAD</div>
+              <div className="text-xs text-muted-foreground">Solo plan · billed monthly · 14-day free trial</div>
             </Card>
           </div>
         </div>
@@ -93,11 +93,11 @@ const VsIxact = () => {
 
           <Card className="p-8 bg-accent/10 border-accent/20 text-center">
             <p className="text-lg mb-4">
-              <strong>For just $20/month more,</strong> get AI features that help you close 
-              <span className="gradient-text font-bold"> 6-8 additional deals per year</span>
+              Realtor Desk costs more than IXACT. What you get for the difference is
+              <span className="gradient-text font-bold"> bilingual EN/FR replies, CASL-aware email and engagement-based lead ranking</span>.
             </p>
             <p className="text-sm text-muted-foreground">
-              At $10,000 average commission, that's $60,000-80,000 more revenue for a $243 investment
+              Compare both on your own numbers — seats, billing term and taxes differ by vendor.
             </p>
           </Card>
         </div>
@@ -113,7 +113,7 @@ const VsIxact = () => {
               <X className="w-8 h-8 text-destructive mb-3" />
               <h3 className="font-bold mb-2">No Predictive AI</h3>
               <p className="text-sm text-muted-foreground">
-                IXACT can't predict which leads will convert. You're guessing who to call first.
+                IXACT doesn't rank contacts by engagement. You're guessing who to call first.
               </p>
             </Card>
 
@@ -176,7 +176,7 @@ const VsIxact = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Annual Cost", rdai: "$999", ixact: "$456" },
+                  { feature: "List price", rdai: "$149/mo CAD", ixact: "$46.75/mo, billed annually" },
                   { feature: "Predictive Lead Scoring", rdai: true, ixact: false },
                   { feature: "24/7 AI Chatbot", rdai: true, ixact: false },
                   { feature: "Market Intelligence", rdai: true, ixact: false },
@@ -226,9 +226,10 @@ const VsIxact = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
               <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Only ~$45 More/Month</h3>
+              <h3 className="font-bold mb-2">A premium price</h3>
               <p className="text-sm text-muted-foreground">
-                $999/year vs IXACT's $456. About a coffee a week for AI, bilingual EN/FR, and CASL-compliant email.
+                $149/mo CAD versus IXACT's $46.75/mo billed annually. You pay more, for bilingual
+                EN/FR replies, CASL-aware email and engagement-based lead ranking.
               </p>
             </Card>
 
@@ -242,9 +243,10 @@ const VsIxact = () => {
 
             <Card className="p-6">
               <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Proven ROI</h3>
+              <h3 className="font-bold mb-2">Free migration</h3>
               <p className="text-sm text-muted-foreground">
-                Agents average 41% GCI increase first year. $243 investment, $75K+ return.
+                We move your IXACT contacts, notes and tags across, and a 30-day money-back
+                guarantee applies if it isn't right for you.
               </p>
             </Card>
           </div>
@@ -262,10 +264,6 @@ const VsIxact = () => {
             </Link>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-8">
-            "Best $20/month I ever spent. Closed 5 extra deals because AI told me who to call."<br/>
-            <span className="font-semibold">- Laura K., Calgary</span>
-          </p>
         </div>
       </section>
 

@@ -29,7 +29,7 @@ const VsBoldTrail = () => {
               "@type": "ItemList",
               "itemListElement": [
                 { "@type": "ListItem", "position": 1, "name": "BoldTrail", "description": "$6,987 first year with $999 setup fee" },
-                { "@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "$999/year, $0 setup, AI-powered lead generation" }
+                { "@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "$149/mo CAD, $0 setup fee" }
               ]
             }
           }
@@ -55,14 +55,14 @@ const VsBoldTrail = () => {
             <Card className="p-6 flex-1 border-destructive/20">
               <div className="text-sm text-muted-foreground mb-2">BoldTrail First Year</div>
               <div className="text-3xl font-bold text-destructive mb-1">$6,987</div>
-              <div className="text-xs text-muted-foreground">$5,988/year + $999 setup</div>
+              <div className="text-xs text-muted-foreground">$5,988/year + $999 setup · vendor figures unverified</div>
             </Card>
             
             <TrendingDown className="w-8 h-8 text-rd-terra-800 rotate-90 sm:rotate-0" />
             
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
-              <div className="text-3xl font-bold gradient-text mb-1">$999</div>
+              <div className="text-3xl font-bold gradient-text mb-1">$149/mo</div>
               <div className="text-xs text-rd-terra-800 font-semibold">{t('comparison.savings')} $5,988 {t('comparison.firstYear')}</div>
             </Card>
           </div>
@@ -70,63 +70,6 @@ const VsBoldTrail = () => {
       </section>
 
       <BoldTrailComparisonTable />
-
-      {/* Common Complaints Section */}
-      <section className="section-padding">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">{t('comparison.complaints')}</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Support Takes Days to Respond</h3>
-              <p className="text-sm text-muted-foreground">
-                "I submit tickets and wait 3-5 days for basic answers. Meanwhile, I'm losing leads."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Constant Bugs and Crashes</h3>
-              <p className="text-sm text-muted-foreground">
-                "The platform crashes during demos with clients. Super embarrassing and unprofessional."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Paying $6,987 First Year</h3>
-              <p className="text-sm text-muted-foreground">
-                "$999 setup fee is ridiculous. Then $5,988/year on top. Way overpriced for what you get."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Too Complicated to Use</h3>
-              <p className="text-sm text-muted-foreground">
-                "Takes months to learn. My team is frustrated and not using half the features."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">No Canadian-Specific Features</h3>
-              <p className="text-sm text-muted-foreground">
-                "Built for US market. No Toronto or Vancouver market insights. No French support."
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Hidden Costs Add Up Fast</h3>
-              <p className="text-sm text-muted-foreground">
-                "Extra fees for everything: more users, premium features, integrations. Budget explodes."
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* How We're Different */}
       <section className="section-padding bg-muted">
@@ -152,7 +95,7 @@ const VsBoldTrail = () => {
 
             <Card className="p-6 border-accent/20">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">$999/Year, Zero Setup Fees</h3>
+              <h3 className="font-bold mb-2">$149/mo CAD, zero setup fee</h3>
               <p className="text-sm text-muted-foreground">
                 All-inclusive pricing. No hidden costs, no surprise charges. Save $5,988 first year vs BoldTrail.
               </p>
@@ -201,8 +144,8 @@ const VsBoldTrail = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Annual Cost", rdai: "$999", boldtrail: "$5,988" },
-                  { feature: "Setup Fee", rdai: "$0", boldtrail: "$999" },
+                  { feature: "List price", rdai: "$149/mo CAD", boldtrail: "$5,988/yr (unverified)" },
+                  { feature: "Setup fee", rdai: "$0", boldtrail: "$999 (unverified)" },
                   { feature: "Predictive Lead Scoring", rdai: true, boldtrail: false },
                   { feature: "24/7 AI Chatbot", rdai: true, boldtrail: false },
                   { feature: "Canadian Market Intelligence", rdai: true, boldtrail: false },
@@ -270,7 +213,7 @@ const VsBoldTrail = () => {
               <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">30-Day Guarantee</h3>
               <p className="text-sm text-muted-foreground">
-                If it's not better than BoldTrail, we refund 100%. No questions asked.
+                Not satisfied for any reason in your first 30 days, we refund 100%. No questions asked.
               </p>
             </Card>
           </div>
@@ -288,10 +231,6 @@ const VsBoldTrail = () => {
             </Link>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-8">
-            "I switched from BoldTrail and wish I'd done it sooner. Support actually responds now!"<br/>
-            <span className="font-semibold">- Jennifer T., Toronto</span>
-          </p>
         </div>
       </section>
 
