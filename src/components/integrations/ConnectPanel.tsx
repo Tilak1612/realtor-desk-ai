@@ -353,7 +353,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
             <div className="space-y-3">
               {isOAuth && (
                 <Button variant="outline" className="w-full text-sm" onClick={handleOAuthConnect} disabled={loading}>
-                  {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <RefreshCw className="w-4 h-4 mr-2" />}
+                  {loading ? <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" /> : <RefreshCw className="w-4 h-4 mr-2" />}
                   {t('integrations.panel.reAuth', 'Re-authenticate')}
                 </Button>
               )}
@@ -405,7 +405,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
 
             {!connection?.webhook_token ? (
               <Button type="button" onClick={handleWebhookConnect} disabled={loading} className="w-full">
-                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                {loading ? <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" /> : null}
                 {t('integrations.panel.generateWebhook', 'Generate Webhook URL')}
               </Button>
             ) : (
@@ -487,7 +487,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
             </div>
 
             <Button onClick={handleOAuthConnect} disabled={loading} className="w-full" size="lg">
-              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              {loading ? <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" /> : null}
               {t('integrations.panel.connectWith', `Connect with ${providerName}`)}
             </Button>
 
@@ -581,7 +581,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
           <div className="space-y-3">
             <Button variant="outline" className="w-full" onClick={handleTestConnection}
               disabled={testResult === "testing" || (isSmtp ? !smtpHost || !smtpUser || !smtpPass : !apiKey)}>
-              {testResult === "testing" ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              {testResult === "testing" ? <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" /> : null}
               {testResult === "success" ? <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> : null}
               {testResult === "error" ? <XCircle className="w-4 h-4 mr-2 text-red-500" /> : null}
               {testResult === "testing" ? t('integrations.panel.testing', 'Testing...') :
@@ -596,7 +596,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
 
             <Button className="w-full" onClick={handleSaveAndConnect}
               disabled={loading || testResult !== "success"}>
-              {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              {loading ? <Loader2 aria-hidden="true" className="w-4 h-4 mr-2 animate-spin" /> : null}
               {t('integrations.panel.saveConnect', 'Save & Connect')}
             </Button>
           </div>

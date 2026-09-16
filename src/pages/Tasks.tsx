@@ -12,6 +12,7 @@ import AddTaskModal from "@/components/tasks/AddTaskModal";
 import TasksFilters from "@/components/tasks/TasksFilters";
 import BulkActions from "@/components/tasks/BulkActions";
 import { toast } from "sonner";
+import { Spinner } from "@/components/rd";
 
 const Tasks = () => {
   const { t } = useTranslation();
@@ -86,7 +87,7 @@ const Tasks = () => {
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <Spinner label="Loading" />
             <p className="mt-4 text-sm text-muted-foreground">{t('app.common.loading')}</p>
           </div>
         </div>

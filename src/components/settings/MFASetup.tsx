@@ -160,6 +160,9 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
         <div className="flex gap-2">
           <Input
             placeholder="000000"
+            aria-label={t("app.settings.twoFactor.codeLabel", "Six-digit verification code")}
+            inputMode="numeric"
+            autoComplete="one-time-code"
             value={verifyCode}
             onChange={(e) => setVerifyCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
             maxLength={6}
@@ -167,7 +170,7 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
           />
           <Button onClick={handleVerify} disabled={loading || verifyCode.length !== 6} size="sm">
             {loading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 aria-hidden="true" className="w-4 h-4 animate-spin" />
             ) : (
               t("app.settings.twoFactor.verify", "Verify")
             )}
@@ -246,7 +249,7 @@ const MFASetup = ({ mfaEnabled, onStatusChange }: MFASetupProps) => {
       ) : (
         <Button onClick={handleEnroll} size="sm" className="h-8 text-xs" disabled={loading}>
           {loading ? (
-            <Loader2 className="w-4 h-4 animate-spin mr-1.5" />
+            <Loader2 aria-hidden="true" className="w-4 h-4 animate-spin mr-1.5" />
           ) : (
             <Shield className="w-3.5 h-3.5 mr-1.5" />
           )}

@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import AppLayout from "@/components/layout/AppLayout";
+import { Spinner } from "@/components/rd";
 
 const COMING_SOON_MESSAGE = "Calendar events are coming soon — connect your Google / Outlook calendar from the Integrations page when it's ready.";
 
@@ -41,7 +42,7 @@ const CalendarPage = () => {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <Spinner label="Loading" showLabel />
         </div>
       </AppLayout>
     );

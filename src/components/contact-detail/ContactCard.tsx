@@ -102,7 +102,7 @@ const ContactCard = ({ contact, onUpdate }: ContactCardProps) => {
               <Button variant="ghost" size="sm" onClick={() => setIsAddingTag(true)} className="h-6"><Plus className="h-3 w-3 mr-1" />{t('contact.addTag', 'Add Tag')}</Button>
             ) : (
               <div className="flex gap-2 w-full">
-                <Input placeholder="New tag" value={newTag} onChange={(e) => setNewTag(e.target.value)} onKeyPress={(e) => e.key === "Enter" && handleAddTag()} className="h-8 text-sm" autoFocus />
+                <Input placeholder="New tag" aria-label={t('contact.newTagLabel', 'New tag name')} value={newTag} onChange={(e) => setNewTag(e.target.value)} onKeyPress={(e) => e.key === "Enter" && handleAddTag()} className="h-8 text-sm" autoFocus />
                 <Button size="sm" onClick={handleAddTag} className="h-8">Add</Button>
               </div>
             )}

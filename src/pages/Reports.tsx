@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
 import { DollarSign, Users, Briefcase, TrendingUp } from "lucide-react";
+import { Spinner } from "@/components/rd";
 
 interface ReportStats {
   totalRevenue: number;
@@ -142,7 +143,7 @@ const Reports = () => {
     return (
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <Spinner label="Loading" showLabel />
         </div>
       </AppLayout>
     );

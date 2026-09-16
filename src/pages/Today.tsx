@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Phone, Calendar, Tag, Clock, TrendingUp } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
+import { Spinner } from "@/components/rd";
 
 interface ContactToCall {
   id: string;
@@ -255,7 +256,7 @@ const Today = () => {
       <AppLayout user={user} profile={profile}>
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <Spinner label="Loading" />
             <p className="text-muted-foreground">{t('today.loading', 'Loading your day...')}</p>
           </div>
         </div>

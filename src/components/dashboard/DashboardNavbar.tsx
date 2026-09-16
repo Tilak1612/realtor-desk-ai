@@ -289,7 +289,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
                 </Avatar>
                 {avatarUploading && (
                   <span className="absolute inset-0 flex items-center justify-center rounded-full bg-background/80">
-                    <Loader2 className="h-3 w-3 animate-spin" />
+                    <Loader2 aria-hidden="true" className="h-3 w-3 animate-spin" />
                   </span>
                 )}
               </Button>

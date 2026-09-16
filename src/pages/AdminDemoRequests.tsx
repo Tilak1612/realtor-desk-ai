@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, Building2, MapPin, Calendar, MessageSquare } from "lucide-react";
+import { Spinner } from "@/components/rd";
 
 interface DemoRequest {
   id: string;
@@ -123,7 +124,7 @@ const AdminDemoRequests = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <Spinner label="Loading" />
           <p className="text-muted-foreground">Loading demo requests...</p>
         </div>
       </div>
