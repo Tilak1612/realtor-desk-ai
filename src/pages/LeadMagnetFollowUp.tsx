@@ -146,7 +146,7 @@ const LeadMagnetFollowUp = () => {
 
                 <p className="text-xs text-muted-foreground">
                   Already using RealtorDesk?{" "}
-                  <Link to="/dashboard" className="text-primary hover:underline">
+                  <Link to="/dashboard" className="text-primary underline">
                     Go to your dashboard →
                   </Link>
                 </p>

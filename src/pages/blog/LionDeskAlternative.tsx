@@ -150,7 +150,7 @@ const LionDeskAlternative = () => {
 
           {/* Breadcrumb — /resources is the canonical blog index; the
               /blog path is a redirect stub (vercel.json). */}
-          <Link to="/resources" className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 text-sm">
+          <Link to="/resources" className="inline-flex min-h-11 items-center gap-2 text-muted-foreground hover:text-foreground mb-8 text-sm">
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
           </Link>
@@ -254,7 +254,7 @@ const LionDeskAlternative = () => {
 
                   <div className="grid md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <h4 className="font-semibold mb-3 text-green-700">Pros</h4>
+                      <h4 className="font-semibold mb-3 text-green-800">Pros</h4>
                       <ul className="space-y-2">
                         {alt.pros.map((pro, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm">
