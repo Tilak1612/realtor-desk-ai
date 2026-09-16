@@ -47,15 +47,30 @@ const PILLARS: Pillar[] = [
   },
 ];
 
-const CAPABILITIES: [string, string][] = [
-  ["featuresRd.capDdfTitle", "featuresRd.capDdfBody"],
-  ["featuresRd.capChatTitle", "featuresRd.capChatBody"],
-  ["featuresRd.capEmailTitle", "featuresRd.capEmailBody"],
+// Two lists, never one. This grid used to be eight undifferentiated cards
+// under "Each of these is the default, not a premium add-on" -- and five of
+// the eight were not built: the DDF sync function is a scaffold awaiting CREA
+// credentials, there is no embeddable chat script in public/, no round-robin
+// routing anywhere, app_role is an enum of exactly ('admin','user'), and there
+// is no audit table. A buyer cannot tell a shipped feature from a planned one
+// by looking at identical cards, so the split is structural, not a footnote.
+const CAPS_NOW: [string, string][] = [
+  ["featuresRd.capImportTitle", "featuresRd.capImportBody"],
   ["featuresRd.capCalendarTitle", "featuresRd.capCalendarBody"],
+  ["featuresRd.capContactsTitle", "featuresRd.capContactsBody"],
+  ["featuresRd.capWebhooksTitle", "featuresRd.capWebhooksBody"],
+  ["featuresRd.capSmsTitle", "featuresRd.capSmsBody"],
+  ["featuresRd.capConsentTitle", "featuresRd.capConsentBody"],
+  ["featuresRd.capReportingTitle", "featuresRd.capReportingBody"],
+  ["featuresRd.capBilingualTitle", "featuresRd.capBilingualBody"],
+];
+
+const CAPS_ROADMAP: [string, string][] = [
+  ["featuresRd.capDdfTitle", "featuresRd.capDdfBody"],
+  ["featuresRd.capSequencesTitle", "featuresRd.capSequencesBody"],
+  ["featuresRd.capChatTitle", "featuresRd.capChatBody"],
   ["featuresRd.capRoutingTitle", "featuresRd.capRoutingBody"],
   ["featuresRd.capRolesTitle", "featuresRd.capRolesBody"],
-  ["featuresRd.capAuditTitle", "featuresRd.capAuditBody"],
-  ["featuresRd.capReportingTitle", "featuresRd.capReportingBody"],
 ];
 
 export default function Features() {
@@ -120,20 +135,19 @@ export default function Features() {
               {t("featuresRd.capsIntro")}
             </p>
           </div>
-          <Reveal stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {CAPABILITIES.map(([hKey, bKey]) => (
-              <div
-                key={hKey}
-                className="rd-card-lift p-6 bg-white/[0.04] border border-white/[0.08] rounded-[14px]"
-              >
-                <div className="rd-card-lift-icon w-7 h-7 bg-rd-terra-600 rounded-[8px] mb-4 flex items-center justify-center">
-                  <IconCheck />
-                </div>
-                <div className="text-[15px] font-semibold mb-1.5">{t(hKey)}</div>
-                <div className="text-[13px] text-white/65 leading-[1.55]">{t(bKey)}</div>
-              </div>
-            ))}
-          </Reveal>
+          <CapGroup
+            label={t("featuresRd.capsNowLabel")}
+            caps={CAPS_NOW}
+            t={t}
+            headingId="caps-now"
+          />
+          <CapGroup
+            label={t("featuresRd.capsRoadmapLabel")}
+            caps={CAPS_ROADMAP}
+            t={t}
+            headingId="caps-roadmap"
+            roadmapBadge={t("featuresRd.capsRoadmapBadge")}
+          />
         </div>
       </Reveal>
 
@@ -173,6 +187,55 @@ export default function Features() {
 }
 
 /* ────────────────────────────────────────────────────────── */
+
+type CapGroupProps = {
+  label: string;
+  caps: [string, string][];
+  t: TFn;
+  headingId: string;
+  /** Present only on the roadmap group; every card in it carries the badge. */
+  roadmapBadge?: string;
+};
+
+function CapGroup({ label, caps, t, headingId, roadmapBadge }: CapGroupProps) {
+  const isRoadmap = Boolean(roadmapBadge);
+  return (
+    <section aria-labelledby={headingId} className={isRoadmap ? "mt-14" : "mt-2"}>
+      <h3
+        id={headingId}
+        className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/60 mb-5"
+      >
+        {label}
+      </h3>
+      <Reveal stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {caps.map(([hKey, bKey]) => (
+          <div
+            key={hKey}
+            className={
+              isRoadmap
+                ? // Dashed, dimmer, no tick: a roadmap card should not be able
+                  // to pass for a shipped one at a glance or in a screenshot.
+                  "rd-card-lift p-6 bg-transparent border border-dashed border-white/20 rounded-[14px]"
+                : "rd-card-lift p-6 bg-white/[0.04] border border-white/[0.08] rounded-[14px]"
+            }
+          >
+            {isRoadmap ? (
+              <span className="inline-flex items-center rounded-full border border-white/25 px-2 py-0.5 mb-4 text-[10px] font-bold uppercase tracking-[0.1em] text-white/70">
+                {roadmapBadge}
+              </span>
+            ) : (
+              <div className="rd-card-lift-icon w-7 h-7 bg-rd-terra-600 rounded-[8px] mb-4 flex items-center justify-center">
+                <IconCheck />
+              </div>
+            )}
+            <div className="text-[15px] font-semibold mb-1.5">{t(hKey)}</div>
+            <div className="text-[13px] text-white/65 leading-[1.55]">{t(bKey)}</div>
+          </div>
+        ))}
+      </Reveal>
+    </section>
+  );
+}
 
 type PillarProps = { pillar: Pillar; index: number; t: TFn };
 
