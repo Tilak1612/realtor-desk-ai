@@ -108,7 +108,7 @@ export default function CompareBoldtrail() {
       {/* Comparison table */}
       <section className="px-8 md:px-14 py-14">
         <div className="mx-auto max-w-[1100px] bg-white border border-rd-line rounded-rd-lg overflow-hidden shadow-rd-sm">
-          <div className="grid grid-cols-[1.8fr_1fr_1fr] px-7 py-5 bg-rd-ink-50 border-b border-rd-line text-xs font-bold uppercase tracking-[0.08em] text-rd-ink-500">
+          <div className="grid grid-cols-[1.8fr_1fr_1fr] px-7 py-5 bg-rd-ink-50 border-b border-rd-line text-xs font-bold uppercase tracking-[0.08em] text-rd-ink-700">
             <div />
             <div className="text-center">BoldTrail</div>
             <div className="text-center text-rd-navy-800">Realtor Desk</div>
@@ -199,7 +199,7 @@ function CompareHeroCard({
         {stats.map(([k, v]) => (
           <div key={k}>
             <div className="text-[22px] font-bold tracking-[-0.02em]">{k}</div>
-            <div className="text-xs opacity-60 mt-0.5">{v}</div>
+            <div className={cn("text-xs mt-0.5", navy ? "text-white/80" : "text-rd-ink-700")}>{v}</div>
           </div>
         ))}
       </div>
