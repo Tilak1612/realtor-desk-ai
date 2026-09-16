@@ -74,7 +74,9 @@ export function TopNav({ agent, isLive = false, onMenuClick }: TopNavProps) {
             type="button"
             onClick={() => setLang("en")}
             className={cn(
-              "cursor-pointer transition-colors",
+              // px-1.5 py-1 lifts the hit area over the 24px AA floor without
+              // changing the type size -- it measured 16x16 at every width.
+              "cursor-pointer transition-colors px-1.5 py-1 rounded",
               // Explicit ink, not opacity. opacity-40 composited the inherited
               // ink to #A1A2A4 -- 2.55:1 on white, on a control a person is
               // meant to click. rd-ink-500 is 4.83:1 and still reads clearly as
@@ -97,7 +99,7 @@ export function TopNav({ agent, isLive = false, onMenuClick }: TopNavProps) {
             type="button"
             onClick={() => setLang("fr")}
             className={cn(
-              "cursor-pointer transition-colors",
+              "cursor-pointer transition-colors px-1.5 py-1 rounded",
               active === "fr"
                 ? "text-rd-ink-900"
                 : "text-rd-ink-500 hover:text-rd-ink-900"

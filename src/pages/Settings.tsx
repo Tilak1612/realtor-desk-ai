@@ -467,19 +467,19 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="english" id="lang-english" />
-                      <Label htmlFor="lang-english" className="cursor-pointer font-normal">
+                      <Label htmlFor="lang-english" className="cursor-pointer font-normal py-1.5">
                         {t("app.settings.language.english", "English")}
                       </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="french" id="lang-french" />
-                      <Label htmlFor="lang-french" className="cursor-pointer font-normal">
+                      <Label htmlFor="lang-french" className="cursor-pointer font-normal py-1.5">
                         {t("app.settings.language.french", "French")}
                       </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="both" id="lang-both" />
-                      <Label htmlFor="lang-both" className="cursor-pointer font-normal">
+                      <Label htmlFor="lang-both" className="cursor-pointer font-normal py-1.5">
                         {t("app.settings.language.both", "Bilingual")}
                       </Label>
                     </div>

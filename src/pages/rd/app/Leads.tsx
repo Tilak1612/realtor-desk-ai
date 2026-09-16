@@ -163,7 +163,7 @@ export default function Leads() {
         <div className="bg-white border border-rd-line rounded-rd-lg overflow-hidden shadow-rd-sm">
           <div
             style={GRID_COLS_ONLY}
-            className="hidden lg:grid px-5 py-3 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-500 items-center"
+            className="hidden lg:grid px-5 py-3 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-600 items-center"
           >
             <input type="checkbox" aria-label={t("rd.common.selectAll", "Select all")} />
             <div>{t("rd.columns.leads.lead", "Lead")}</div>
