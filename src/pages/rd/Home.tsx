@@ -24,6 +24,7 @@ import {
 } from "@/components/rd";
 import { normalizeLocale } from "@/lib/i18n/format";
 import { Reveal } from "@/components/motion/Reveal";
+import { ProductTour } from "@/components/marketing/ProductTour";
 
 // /  — Home page per rd-marketing.jsx Artboard_Home.
 //
@@ -47,8 +48,8 @@ export default function Home() {
         }
         description={
           isFr
-            ? "Desk IA répond à chaque prospect en français ou en anglais, conforme à la LCAP, natif LPRPDE, prêt pour le SDD de l'ACI. Conçu pour les courtiers canadiens."
-            : "Desk AI answers every lead in French or English, CASL-aware, PIPEDA-native, CREA DDF-ready. Built for Canadian realtors."
+            ? "CRM bilingue pour l'immobilier canadien : notation des prospects, pipeline glisser-déposer, une chronologie par client et import de fiches Realtor.ca. Données hébergées au Canada, tarifs en CAD."
+            : "The bilingual CRM for Canadian real estate: lead scoring, a drag-and-drop pipeline, one conversation timeline per client and Realtor.ca listing import. Data hosted in Canada, priced in CAD."
         }
         canonicalUrl="https://www.realtordesk.ai/"
       />
@@ -58,6 +59,9 @@ export default function Home() {
           a decoration. Everything below the fold reveals on scroll. */}
       <HeroSection t={t} />
       <Reveal><TrustStrip t={t} /></Reveal>
+      {/* The real product, straight after the claims. Features explain it in
+          words; this shows the dashboard a visitor would actually sign into. */}
+      <Reveal><ProductTour /></Reveal>
       <Reveal><FeatureGrid t={t} /></Reveal>
       <Reveal><PipelinePreview t={t} /></Reveal>
       <Reveal><CompareStrip t={t} locale={locale} /></Reveal>
@@ -260,7 +264,15 @@ function HeroProduct({ t }: { t: TFn }) {
  * card below, not the vendor-logo strip.
  * ────────────────────────────────────────────────────────── */
 function TrustStrip({ t }: { t: TFn }) {
-  const logos = ["CREA DDF®", "Stripe", "OpenAI", "Twilio", "Supabase"];
+  // Only integrations a customer can switch on TODAY, and only ones marked
+  // status: "available" in IntegrationHub. CREA DDF® used to head this list;
+  // it is a scaffold awaiting CREA credentials (Q3 2026 everywhere else on
+  // the site), and a bare wordmark in a logo strip reads as both "shipped"
+  // and "affiliated with CREA". Neither is true. Stripe, Supabase and OpenAI
+  // came out at the same time: they are our plumbing, not something the
+  // agent connects, and OpenAI was wrong anyway -- the in-app assistant runs
+  // on Gemini through the Lovable gateway.
+  const logos = ["Google Calendar", "Outlook", "Zapier", "Make", "Twilio"];
   // Decorative paper texture behind the strip. image-set rather than
   // <Picture> because it is a background, not content: no alt text to
   // write, nothing to announce, and it must not enter the accessibility
@@ -350,8 +362,8 @@ function FeatureGrid({ t }: { t: TFn }) {
           />
           <Feature
             icon={<IconBolt />}
-            title={t("landing.featureGrid.automationsTitle")}
-            desc={t("landing.featureGrid.automationsDesc")}
+            title={t("landing.featureGrid.inboxTitle")}
+            desc={t("landing.featureGrid.inboxDesc")}
           />
         </Reveal>
       </div>
@@ -543,9 +555,14 @@ function CompareStrip({ t, locale }: { t: TFn; locale: "en-CA" | "fr-CA" }) {
     { cap: t("landing.compareStrip.rowHosting"), them: false, us: true },
     { cap: t("landing.compareStrip.rowBilingual"), them: t("landing.compareStrip.valAddon"), us: true },
     { cap: t("landing.compareStrip.rowCasl"), them: t("landing.compareStrip.valManual"), us: true },
-    { cap: t("landing.compareStrip.rowDdf"), them: t("landing.compareStrip.valThirdParty"), us: true },
+    // DDF is on OUR roadmap too, so "Included" was wrong in our own column --
+    // the row caption said Q3 2026 while the tick beside it said shipped.
+    { cap: t("landing.compareStrip.rowDdf"), them: t("landing.compareStrip.valThirdParty"), us: t("landing.compareStrip.valRoadmap") },
     { cap: t("landing.compareStrip.rowCad"), them: isFr ? "USD, +20 %" : "USD, +20%", us: true },
-    { cap: t("landing.compareStrip.rowTtfr"), them: t("landing.compareStrip.valDays"), us: t("landing.compareStrip.valMinutes") },
+    // "Time to first AI response: 2-3 days vs 5 minutes" is gone. Neither
+    // number was sourced: we have no published measurement of BoldTrail, and
+    // on our side nothing invokes run-automation in production, so there is
+    // no automatic first response to time.
   ];
 
   return (
