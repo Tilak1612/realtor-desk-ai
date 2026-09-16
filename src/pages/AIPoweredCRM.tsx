@@ -171,83 +171,14 @@ const AIPoweredCRM = () => {
         </div>
       </section>
 
-      {/* Market Intelligence */}
-      <section className="section-padding bg-muted">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-rd-terra-800">
-              <MapPin className="w-3 h-3 mr-1" />
-              Canadian Market Intelligence
-            </Badge>
-            <h2 className="mb-4">Hyperlocal Insights for Toronto, Vancouver, Calgary & Beyond</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              AI analyzes MLS data, economic indicators, and historical trends to predict 
-              neighborhood-level price movements, inventory shifts, and buyer demand.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card className="p-6 text-center">
-              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Price Predictions</h3>
-              <p className="text-sm text-muted-foreground">
-                30-90 day price forecasts by neighborhood
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center">
-              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Days on Market</h3>
-              <p className="text-sm text-muted-foreground">
-                Trend analysis to time listings perfectly
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center">
-              <Users className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Buyer Demand</h3>
-              <p className="text-sm text-muted-foreground">
-                Track search volume by area and price range
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center">
-              <BarChart3 className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Inventory Analysis</h3>
-              <p className="text-sm text-muted-foreground">
-                Supply trends to position clients strategically
-              </p>
-            </Card>
-          </div>
-
-          <Card className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-            <div className="text-center mb-6">
-              <h3 className="text-xl font-bold mb-2">Real-Time Dashboard Example</h3>
-              <p className="text-muted-foreground">See what your market intelligence looks like</p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-background rounded-lg p-4">
-                <div className="text-sm text-muted-foreground mb-2">Toronto - Liberty Village</div>
-                <div className="text-2xl font-bold gradient-text mb-1">+4.2%</div>
-                <div className="text-xs text-muted-foreground">30-day price trend (condos)</div>
-              </div>
-
-              <div className="bg-background rounded-lg p-4">
-                <div className="text-sm text-muted-foreground mb-2">Vancouver - Yaletown</div>
-                <div className="text-2xl font-bold gradient-text mb-1">18 days</div>
-                <div className="text-xs text-muted-foreground">Avg. days on market (improving)</div>
-              </div>
-
-              <div className="bg-background rounded-lg p-4">
-                <div className="text-sm text-muted-foreground mb-2">Calgary - Beltline</div>
-                <div className="text-2xl font-bold gradient-text mb-1">High</div>
-                <div className="text-xs text-muted-foreground">Buyer demand (seller's market)</div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
+      {/* The "Canadian Market Intelligence" section stood here: 30-90 day
+          neighbourhood price forecasts, "AI analyzes MLS data, economic
+          indicators, and historical trends". None of it exists. There are no
+          market tables in the schema, no forecasting anywhere in the repo, and
+          the /market-intelligence page it pointed at renders three hardcoded
+          arrays -- which an agent can export to CSV. Nothing true was
+          available to put in its place, and price predictions are not a claim
+          to leave standing on a roadmap badge, so the section is gone. */}
 
       {/* 24/7 AI Chatbot */}
       <section className="section-padding">
@@ -470,12 +401,6 @@ const AIPoweredCRM = () => {
                     basic: false, 
                     otherAI: false, 
                     rdai: "Engagement-based" 
-                  },
-                  { 
-                    feature: "Market Intelligence", 
-                    basic: false, 
-                    otherAI: false, 
-                    rdai: "Hyperlocal Canadian data" 
                   },
                   { 
                     feature: "Learns & Adapts", 

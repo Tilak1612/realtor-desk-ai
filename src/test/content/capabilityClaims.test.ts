@@ -249,6 +249,25 @@ describe("capability claims", () => {
     }
   });
 
+  it("does not sell market forecasting", () => {
+    // /market-intelligence renders three hardcoded arrays and offers a CSV
+    // export of them. There are no market tables in the schema and no
+    // forecasting code, so nothing may promise a price prediction.
+    for (const phrase of [
+      "Market Intelligence",
+      "price forecasts",
+      "predicts neighborhood trends",
+      "predict neighborhood-level price movements",
+    ]) {
+      expect(comparisons).not.toContain(phrase);
+    }
+    const schema = readFileSync(
+      join(ROOT, "supabase/migrations/00000000000000_baseline_production_schema.sql"),
+      "utf8"
+    );
+    expect(/create table[^;]*market/i.test(schema)).toBe(false);
+  });
+
   it("labels every roadmap capability on the features page", () => {
     // The split is structural. If someone folds the two lists back into one,
     // a buyer loses the only signal separating shipped from planned.

@@ -150,12 +150,12 @@ const VsWiseAgent = () => {
 
             <Card className="p-6 border-accent/20">
               <Brain className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">Market Intelligence</h3>
+              <h3 className="font-bold mb-2">Leads arrive ranked</h3>
               <p className="text-sm text-muted-foreground mb-3">
-                AI predicts neighborhood trends, price movements, inventory changes
+                A 0-100 score per lead from intent, urgency, budget and timeline, with the factors behind it
               </p>
               <Badge variant="outline" className="text-xs">
-                Hyperlocal Canadian data
+                Suggested next action
               </Badge>
             </Card>
 
@@ -266,7 +266,7 @@ const VsWiseAgent = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" className="btn-gradient">
-                Get Bilingual Support & Market Intelligence
+                Get Bilingual Support & Ranked Leads
               </Button>
             </Link>
             <Link to="/pricing">
