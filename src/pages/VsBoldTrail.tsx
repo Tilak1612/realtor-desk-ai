@@ -147,7 +147,7 @@ const VsBoldTrail = () => {
                   { feature: "List price", rdai: "$149/mo CAD", boldtrail: "$5,988/yr (unverified)" },
                   { feature: "Setup fee", rdai: "$0", boldtrail: "$999 (unverified)" },
                   { feature: "Predictive Lead Scoring", rdai: true, boldtrail: false },
-                  { feature: "24/7 AI Chatbot", rdai: true, boldtrail: false },
+                  { feature: "AI assistant inside the CRM", rdai: true, boldtrail: false },
                   { feature: "Canadian Market Intelligence", rdai: true, boldtrail: false },
                   { feature: "Bilingual Support (EN/FR)", rdai: true, boldtrail: false },
                   { feature: "Support Response Time", rdai: "30 min", boldtrail: "3-5 days" },

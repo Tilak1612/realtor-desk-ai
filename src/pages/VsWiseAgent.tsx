@@ -190,7 +190,7 @@ const VsWiseAgent = () => {
               <tbody>
                 {[
                   { feature: "Predictive AI", rdai: true, wise: false },
-                  { feature: "24/7 AI Chatbot", rdai: true, wise: "Basic" },
+                  { feature: "AI assistant inside the CRM", rdai: true, wise: "Basic" },
                   { feature: "Canadian Market Data", rdai: true, wise: false },
                   { feature: "Bilingual (EN/FR)", rdai: true, wise: false },
                   { feature: "CREA DDF® Integration", rdai: "Q3 2026", wise: "Limited" },

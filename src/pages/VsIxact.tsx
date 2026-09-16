@@ -14,7 +14,7 @@ const VsIxact = () => {
     <div className="min-h-screen">
       <SEO
         title="IXACT Contact vs RealtorDesk AI | Upgrade to AI"
-        description="Upgrade from IXACT to AI-powered intelligence without breaking your budget. See pricing, features, and why Canadian agents switch."
+        description="IXACT Contact is $46.75/mo; Realtor Desk is $149/mo CAD. A side-by-side on price, bilingual EN/FR, CASL-aware email and lead ranking, so you can judge the difference."
         keywords="IXACT Contact vs RealtorDesk AI, IXACT alternative, Canadian real estate CRM comparison, AI CRM for realtors"
         canonicalUrl="https://www.realtordesk.ai/vs/ixact"
         structuredData={[
@@ -35,10 +35,10 @@ const VsIxact = () => {
             Comparison Guide
           </Badge>
           <h1 className="mb-6">
-            Advanced AI for the <span className="gradient-text">Price of Basic CRM</span>
+            More than IXACT. <span className="gradient-text">Here is what the difference buys.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Upgrade from IXACT to AI-powered intelligence without breaking your budget
+            IXACT is the cheaper contact manager. We cost about three times as much — so this page is the honest case for paying it.
           </p>
           
           {/* Price Comparison */}
@@ -76,17 +76,17 @@ const VsIxact = () => {
 
             <Card className="p-6 text-center">
               <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
-              <h3 className="font-bold mb-2">Close Meaningfully More Deals</h3>
+              <h3 className="font-bold mb-2">Know who to call first</h3>
               <p className="text-sm text-muted-foreground">
-                AI identifies your hottest leads. Focus on sellers ready to list, not cold contacts
+                Every lead carries a 0-100 score with the factors behind it, so your list is ranked before you open it
               </p>
             </Card>
 
             <Card className="p-6 text-center">
               <Zap className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
-              <h3 className="font-bold mb-2">Save 15+ Hours/Week</h3>
+              <h3 className="font-bold mb-2">One thread per client</h3>
               <p className="text-sm text-muted-foreground">
-                AI handles lead qualification, follow-up, appointment booking automatically
+                Messages, notes and tasks sit on a single timeline beside the contact, in English or French
               </p>
             </Card>
           </div>
@@ -103,57 +103,56 @@ const VsIxact = () => {
         </div>
       </section>
 
-      {/* What IXACT Is Missing */}
+      {/* Where we differ.
+          This was "What IXACT Doesn't Have", six cards of which three rested on
+          capabilities we do not have either -- a 24/7 lead-facing chatbot,
+          market prediction, and engagement-timed nurturing. A gap only counts
+          as a reason to switch if the thing is on our side of the line. The
+          "Dated Interface / looks like it's from 2010" card went with them:
+          that is an aesthetic opinion about a named competitor, not a fact we
+          can stand behind. */}
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">What IXACT Doesn't Have</h2>
-          
+          <h2 className="text-center mb-4">Where the two differ</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            IXACT is a well-established contact manager and costs a third of what we do.
+            These are the specific things you get here that you do not get there.
+          </p>
+
           <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">No Predictive AI</h3>
+            <Card className="p-6">
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
+              <h3 className="font-bold mb-2">Leads arrive ranked</h3>
               <p className="text-sm text-muted-foreground">
-                IXACT doesn't rank contacts by engagement. You're guessing who to call first.
+                Intent, urgency, budget and timeline roll up to a 0-100 score, with the
+                factors behind it and a suggested next action on the lead.
               </p>
             </Card>
 
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">No 24/7 Chatbot</h3>
+            <Card className="p-6">
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
+              <h3 className="font-bold mb-2">Bilingual end to end</h3>
               <p className="text-sm text-muted-foreground">
-                Leads come in at 10pm, they wait until morning. Many go to your competitor.
+                The app, your emails and every lead record run in English or French.
+                Set the language per contact and it stays there.
               </p>
             </Card>
 
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">No Market Intelligence</h3>
+            <Card className="p-6">
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
+              <h3 className="font-bold mb-2">Canadian by default</h3>
               <p className="text-sm text-muted-foreground">
-                Can't predict Toronto or Vancouver market trends. No neighborhood insights.
+                Data hosted in a Canadian region, CAD pricing and reporting, consent date
+                and source on every contact, and an unsubscribe honoured permanently.
               </p>
             </Card>
 
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Manual Lead Nurturing</h3>
+            <Card className="p-6">
+              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
+              <h3 className="font-bold mb-2">A pipeline, not just a list</h3>
               <p className="text-sm text-muted-foreground">
-                You decide when to follow up. AI knows the optimal time based on engagement.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Dated Interface</h3>
-              <p className="text-sm text-muted-foreground">
-                IXACT looks like it's from 2010. Clients notice. Realtor Desk is modern.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-destructive/20">
-              <X className="w-8 h-8 text-destructive mb-3" />
-              <h3 className="font-bold mb-2">Limited Canadian Features</h3>
-              <p className="text-sm text-muted-foreground">
-                No French support, limited CREA integration, no provincial market data.
+                Drag a lead between stages and it sticks. Every column carries its own
+                count and CAD value, so you can see where the money sits.
               </p>
             </Card>
           </div>
@@ -177,14 +176,12 @@ const VsIxact = () => {
               <tbody>
                 {[
                   { feature: "List price", rdai: "$149/mo CAD", ixact: "$46.75/mo, billed annually" },
-                  { feature: "Predictive Lead Scoring", rdai: true, ixact: false },
-                  { feature: "24/7 AI Chatbot", rdai: true, ixact: false },
-                  { feature: "Market Intelligence", rdai: true, ixact: false },
-                  { feature: "Automated Nurturing", rdai: "AI-optimized", ixact: "Manual" },
+                  { feature: "Lead scoring (0-100, with factors)", rdai: true, ixact: false },
+                  { feature: "Drag-and-drop pipeline with CAD value", rdai: true, ixact: false },
+                  { feature: "Email sequence builder", rdai: "Sending on the roadmap", ixact: "Manual" },
                   { feature: "Bilingual Support (EN/FR)", rdai: true, ixact: false },
-                  { feature: "Canadian Market Data", rdai: true, ixact: "Limited" },
-                  { feature: "Modern Interface", rdai: true, ixact: false },
-                  { feature: "Mobile App", rdai: true, ixact: true },
+                  { feature: "Data hosted in Canada", rdai: true, ixact: "Not stated" },
+                  { feature: "Mobile", rdai: "Responsive web", ixact: "Native app" },
                   { feature: "Email Marketing", rdai: true, ixact: true },
                   { feature: "Transaction Management", rdai: true, ixact: true },
                   { feature: "Contact Management", rdai: true, ixact: true },
@@ -218,9 +215,9 @@ const VsIxact = () => {
       {/* Upgrade CTA */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <h2 className="mb-6">Upgrade to AI Without Breaking Your Budget</h2>
+          <h2 className="mb-6">What the extra costs, and what it buys</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Keep your budget-friendly pricing, add AI superpowers
+            The three-times price gap is real. These are the things it pays for.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">

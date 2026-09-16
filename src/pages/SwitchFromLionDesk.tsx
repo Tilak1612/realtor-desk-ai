@@ -43,7 +43,7 @@ const SwitchFromLionDesk = () => {
     { feature: "Canadian MLS Integration (CREA DDF)", rdai: "Coming Q3 2026", liondesk: "✗ None" },
     { feature: "PIPEDA-Aware Design", rdai: "✓ Built-in", liondesk: "✗ US compliance" },
     { feature: "AI Lead Scoring", rdai: "✓ Advanced", liondesk: "✓ Basic" },
-    { feature: "24/7 AI Chatbot", rdai: "✓ Claude-powered", liondesk: "✓ Basic bot" },
+    { feature: "AI assistant inside the CRM", rdai: "✓ Included", liondesk: "✓ Basic bot" },
     { feature: "Email & SMS Automation", rdai: "✓ Yes", liondesk: "✓ Yes" },
     { feature: "Free Migration", rdai: "✓ Yes", liondesk: "N/A" },
     { feature: "Free Onboarding", rdai: "✓ Yes", liondesk: "✗ No" },
@@ -134,8 +134,8 @@ const SwitchFromLionDesk = () => {
             </Card>
             <Card className="p-6 text-center border-primary/20">
               <MessageSquare className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">24/7 AI Chatbot</h3>
-              <p className="text-muted-foreground">Never miss a lead again. Our AI chatbot qualifies leads, answers questions, and books showings in both English and French, around the clock.</p>
+              <h3 className="text-xl font-bold mb-2">An AI assistant in your desk</h3>
+              <p className="text-muted-foreground">Open a lead and ask. It can see that contact, draft a reply, summarise the thread and talk through your next move — in English or French.</p>
             </Card>
             <Card className="p-6 text-center border-primary/20">
               <Shield className="w-12 h-12 text-primary mx-auto mb-4" />

@@ -225,7 +225,7 @@ const LoftyAlternative = () => {
                     <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
                   </tr>
                   <tr className="border-b bg-muted/50">
-                    <td className="py-3 px-4">24/7 AI Chatbot</td>
+                    <td className="py-3 px-4">AI assistant inside the CRM</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="text-center py-3 px-4 text-muted-foreground">$99/mo add-on</td>
                   </tr>
