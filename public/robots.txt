@@ -1,10 +1,29 @@
-User-agent: *
-Allow: /
+# https://www.realtordesk.ai/robots.txt
+#
+# ONE GROUP DOES THE WORK, ON PURPOSE.
+#
+# This file used to carry named groups for Googlebot, Bingbot, GPTBot,
+# ClaudeBot, Google-Extended and CCBot, each containing only "Allow: /".
+# Under the robots.txt spec a crawler obeys exactly ONE group -- the most
+# specific one matching its token -- and ignores every other group, including
+# "*". So each of those groups silently cancelled the whole Disallow list
+# below it: Googlebot and Bingbot were free to crawl /app, /admin, /billing
+# and /settings, which is the opposite of what the list was written to do.
+#
+# The rule now lives in a single "*" group so it actually applies to
+# everyone. Add a named group only when a crawler genuinely needs different
+# rules, and when you do, REPEAT the Disallow list inside it.
+#
+# There is also no blanket "Allow: /" any more. robots.txt already defaults
+# to allow when nothing matches, and the two families of parser disagree on
+# precedence: Google takes the LONGEST matching rule, so Disallow: /app
+# would win, but a first-match-wins parser takes the Allow purely because it
+# is listed first -- cancelling the entire block list. Leaving it out makes
+# this file behave identically under both.
 
-# Block sensitive/app areas
-# /app is the authenticated product shell (dashboard, leads, inbox, pipeline,
-# reports, settings). It was absent here AND from the in-app noindex list, so
-# the logged-in surfaces were being served "index, follow" in production.
+User-agent: *
+Crawl-delay: 1
+# Authenticated product shell and account surfaces.
 Disallow: /app
 Disallow: /dashboard
 Disallow: /admin
@@ -22,44 +41,75 @@ Disallow: /campaigns
 Disallow: /calendar
 Disallow: /reports
 Disallow: /market
+Disallow: /market-intelligence
 Disallow: /automations
-# /signup and /login intentionally NOT disallowed: they were the only
-# CTAs reachable from the noscript fallback and the main-nav, and blocking
-# them broke internal link flow for Googlebot (2026-04-23 audit). Both
-# pages now emit <meta robots="noindex,follow"> via <SEO noindex> so they
-# can be crawled (link equity passes through) but don't appear in SERPs.
+Disallow: /profile
+Disallow: /today
+Disallow: /call-workflow
+# One-time-token pages. Reachable from email, never from search.
 Disallow: /verify-email
 Disallow: /forgot-password
 Disallow: /reset-password
-# CASL-required transactional page — link reachable from email footers
-# but must not be indexed (contains one-time tokens).
+Disallow: /unsubscribe
+#
+# /signup and /login are deliberately NOT disallowed. They were the only CTAs
+# reachable from the noscript fallback and the main nav, and blocking them
+# broke internal link flow for Googlebot (2026-04-23 audit). Both emit
+# <meta robots="noindex,follow"> via <SEO noindex>, so they are crawled for
+# link equity but stay out of SERPs.
+#
+# WHO THIS ALLOWS. Every crawler below is permitted over all public pages by
+# the group above. They are documented as comments rather than as named groups
+# on purpose: a named group would REPLACE this one for that crawler and hand
+# it the authenticated app -- the bug described at the top of this file.
+#
+#   Search        Googlebot, Bingbot, DuckDuckBot, Slurp, Applebot
+#   AI search     OAI-SearchBot (ChatGPT Search), ChatGPT-User, PerplexityBot,
+#                 Perplexity-User, Claude-SearchBot, Claude-User, Amazonbot,
+#                 and Bingbot again for Microsoft Copilot
+#   AI training   GPTBot, ClaudeBot, Google-Extended, Applebot-Extended
+#
+# OAI-SearchBot surfaces pages in ChatGPT Search; GPTBot is the model training
+# crawler. Separate tokens, separate concerns -- a change to one is not a
+# change to the other.
+#
+# TRAINING POLICY: this site currently permits AI training crawlers. That is a
+# deliberate owner choice and is unchanged here. To opt out of training WITHOUT
+# losing AI-search visibility, add groups for GPTBot / ClaudeBot /
+# Google-Extended / Applebot-Extended with "Disallow: /", each repeating the
+# block list above, and leave OAI-SearchBot, Claude-SearchBot and
+# PerplexityBot alone.
+
+# Common Crawl is a bulk archiver rather than a search crawler, so it gets a
+# slower rate. The Disallow list is repeated because this group replaces "*"
+# for this crawler -- that is the rule this file exists to demonstrate.
+User-agent: CCBot
+Crawl-delay: 2
+Disallow: /app
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /settings
+Disallow: /billing
+Disallow: /api
+Disallow: /auth
+Disallow: /onboarding
+Disallow: /contacts
+Disallow: /properties
+Disallow: /deals
+Disallow: /tasks
+Disallow: /ai-assistant
+Disallow: /campaigns
+Disallow: /calendar
+Disallow: /reports
+Disallow: /market
+Disallow: /market-intelligence
+Disallow: /automations
+Disallow: /profile
+Disallow: /today
+Disallow: /call-workflow
+Disallow: /verify-email
+Disallow: /forgot-password
+Disallow: /reset-password
 Disallow: /unsubscribe
 
-# Key crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-Crawl-delay: 1
-
-User-agent: ClaudeBot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Google-Extended
-Allow: /
-Crawl-delay: 1
-
-User-agent: CCBot
-Allow: /
-Crawl-delay: 2
-
-# Default crawl rate
-Crawl-delay: 1
-
-# Sitemap
 Sitemap: https://www.realtordesk.ai/sitemap.xml
