@@ -171,11 +171,16 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
           {/* Quick Add Button — inverted to pop on the navy header. */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
+              {/* Below sm the "Add" text is display:none, which removes it from
+                  the accessible name too -- the button was announced as an
+                  unnamed "button" on every phone. aria-label keeps the name at
+                  every width; the icon stays decorative. */}
               <Button
                 size="sm"
+                aria-label={t('nav.add', 'Add')}
                 className="h-8 gap-1.5 text-sm bg-white text-primary hover:bg-white/90 font-semibold"
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-4 w-4" aria-hidden="true" />
                 <span className="hidden sm:inline">{t('nav.add', 'Add')}</span>
               </Button>
             </DropdownMenuTrigger>

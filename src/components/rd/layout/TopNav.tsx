@@ -21,6 +21,8 @@ interface TopNavProps {
   agent: { name: string };
   /** Opens the mobile nav drawer. Only rendered below lg. */
   onMenuClick?: () => void;
+  /** Whether the navigation drawer is open. Drives aria-expanded on the toggle. */
+  navOpen?: boolean;
   /** Visual state only — true means the AI side is online. */
   isLive?: boolean;
 }
@@ -29,7 +31,7 @@ interface TopNavProps {
 // either, so every page rendered a green "Live" pill and a red unread dot
 // permanently -- for a notification system that does not exist. Defaulting
 // to false means the indicators only ever appear if something real sets them.
-export function TopNav({ agent, isLive = false, onMenuClick }: TopNavProps) {
+export function TopNav({ agent, isLive = false, onMenuClick, navOpen = false }: TopNavProps) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const active = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
@@ -46,6 +48,10 @@ export function TopNav({ agent, isLive = false, onMenuClick }: TopNavProps) {
         onClick={onMenuClick}
         aria-label={t("rd.topnav.openNav", "Open navigation")}
         aria-controls="rd-app-nav"
+        // Without this a screen reader announced "Open navigation, button" and
+        // never said whether the menu it controls was open. aria-controls names
+        // the target; aria-expanded is what reports its state (WCAG 4.1.2).
+        aria-expanded={navOpen}
         className="lg:hidden -ml-1 w-9 h-9 rounded-md flex items-center justify-center text-rd-ink-600 hover:bg-rd-ink-100 flex-shrink-0"
       >
         <IconMenu />

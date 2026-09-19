@@ -66,8 +66,14 @@ const CalendarPage = () => {
         </div>
 
         {/* Content */}
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card className="md:col-span-2">
+        {/* Content-sized calendar column, not equal thirds. At 1024px (the
+            legacy sidebar is a static 256px rail from lg) a third of the row
+            was 224px, the date picker needs ~252, and it spilled 42px past the
+            screen edge -- the next-month button and every Saturday were cut
+            off. The schedule now takes what is left; the picker keeps its
+            natural width at every size. */}
+        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto]">
+          <Card className="min-w-0">
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium">Today's Schedule</CardTitle>
             </CardHeader>

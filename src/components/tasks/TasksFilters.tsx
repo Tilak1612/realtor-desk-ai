@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,14 +10,38 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-interface TasksFiltersProps {
-  filters: any;
-  onFiltersChange: (filters: any) => void;
+export interface TaskFilterState {
+  search: string;
+  priorities: string[];
+  types: string[];
+  status: string[];
+  contactId: string;
 }
+
+interface TasksFiltersProps {
+  filters: TaskFilterState;
+  onFiltersChange: (filters: TaskFilterState) => void;
+}
+
+const PANEL_ID = "tasks-filters-panel";
 
 const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
   const [contacts, setContacts] = useState<Array<{ id: string; first_name: string; last_name: string }>>([]);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { t } = useTranslation();
+  // DEVICE PARITY. This panel -- search, priority, type, status, contact and
+  // clear -- was `hidden lg:block`, under a comment reading "Hidden on
+  // mobile". Below 1024px there was no way to search tasks or filter by
+  // anything beyond the quick chips. It now renders at every width: a sidebar
+  // at lg, a disclosure above the list below it.
+  //
+  // Collapsed by default below lg, so the list is not pushed off a phone
+  // screen; open by default at lg, as before. `null` = the user has not
+  // chosen yet, so crossing the breakpoint follows the default rather than a
+  // stale first-paint guess.
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const [userCollapsed, setUserCollapsed] = useState<boolean | null>(null);
+  const isCollapsed = userCollapsed ?? !isDesktop;
+  const setIsCollapsed = (v: boolean) => setUserCollapsed(v);
 
   useEffect(() => {
     fetchContacts();
@@ -65,29 +91,47 @@ const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
     });
   };
 
-  const hasActiveFilters = filters.search || filters.priorities.length > 0 || 
-    filters.types.length > 0 || filters.status.length > 0 || filters.contactId;
+  const activeCount =
+    (filters.search ? 1 : 0) +
+    filters.priorities.length +
+    filters.types.length +
+    filters.status.length +
+    (filters.contactId ? 1 : 0);
+  const hasActiveFilters = activeCount > 0;
 
   if (isCollapsed) {
     return (
+      // The count matters most on a phone: collapsed, this button is the only
+      // sign that the list below is filtered at all.
       <Button
         variant="outline"
         onClick={() => setIsCollapsed(false)}
-        className="h-full"
+        aria-expanded={false}
+        aria-controls={PANEL_ID}
+        className="w-full lg:w-auto lg:h-full justify-center"
       >
-        Show Filters
+        {t("app.tasks.filters.show", "Show filters")}
+        {hasActiveFilters && (
+          <span className="ml-2 rounded-full bg-primary text-primary-foreground text-xs px-2 py-0.5">
+            {activeCount}
+          </span>
+        )}
       </Button>
     );
   }
 
   return (
-    <Card className="hidden lg:block w-64 flex-shrink-0">
+    <Card id={PANEL_ID} className="w-full lg:w-64 flex-shrink-0">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-        <CardTitle className="text-sm font-medium">Filters</CardTitle>
+        <CardTitle className="text-sm font-medium">{t("app.tasks.filters.title", "Filters")}</CardTitle>
+        {/* Was an unnamed icon button: a screen reader said only "button". */}
         <Button
           variant="ghost"
           size="sm"
           onClick={() => setIsCollapsed(true)}
+          aria-label={t("app.tasks.filters.hide", "Hide filters")}
+          aria-expanded={true}
+          aria-controls={PANEL_ID}
         >
           <X className="h-4 w-4" />
         </Button>
@@ -95,12 +139,12 @@ const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
       <CardContent className="space-y-4">
         {/* Search */}
         <div>
-          <Label htmlFor="search">Search Tasks</Label>
+          <Label htmlFor="search">{t("app.tasks.filters.search", "Search tasks")}</Label>
           <div className="relative mt-1">
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               id="search"
-              placeholder="Search..."
+              placeholder={t("app.tasks.filters.searchPlaceholder", "Search…")}
               value={filters.search}
               onChange={(e) => onFiltersChange({ ...filters, search: e.target.value })}
               className="pl-8"
@@ -203,7 +247,7 @@ const TasksFilters = ({ filters, onFiltersChange }: TasksFiltersProps) => {
             onClick={clearFilters}
             className="w-full"
           >
-            Clear Filters
+            {t("app.tasks.filters.clear", "Clear filters")}
           </Button>
         )}
       </CardContent>

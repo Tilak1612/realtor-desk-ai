@@ -2045,6 +2045,14 @@ const resources = {
           }
         },
         tasks: {
+          filters: {
+            title: "Filters",
+            show: "Show filters",
+            hide: "Hide filters",
+            search: "Search tasks",
+            searchPlaceholder: "Search…",
+            clear: "Clear filters",
+          },
           title: "Tasks",
           addTask: "Add task",
           allTasks: "All",
@@ -2907,7 +2915,19 @@ const resources = {
         back: "Back to Realtor Desk"
       },
       rd: {
+        // rd.leads did not exist in either locale, so these fell back to
+        // their English defaults for French users.
+        leadDetail: {
+          changeStage: "Pipeline stage",
+          stageError: "Could not change the stage. Try again.",
+        },
+        leads: {
+          showing: "Showing {{from}}–{{to}} of {{total}}",
+          emailLead: "Email {{name}}",
+          callLead: "Call {{name}}",
+        },
         sidebar: {
+          close: "Close navigation",
           itemCount: "items",
           workspaceTier: "Team plan",
           collapse: "Collapse sidebar",
@@ -2918,6 +2938,13 @@ const resources = {
             pipeline: "Pipeline",
             automation: "Automation",
             reports: "Reports",
+            tasks: "Tasks",
+            calendar: "Calendar",
+            properties: "Properties",
+            campaigns: "Campaigns",
+            market: "Market",
+            aiAssistant: "AI Assistant",
+            integrations: "Integrations",
             settings: "Settings"
           },
           desk: {
@@ -2926,6 +2953,7 @@ const resources = {
           }
         },
         topnav: {
+          openNav: "Open navigation",
           search: "Search leads, listings, conversations…",
           live: "Live",
           account: "Account menu",
@@ -3060,6 +3088,7 @@ const resources = {
         inbox: {
           searchConversations: "Search conversations…",
           selectConversation: "Select a conversation from the left.",
+          backToList: "Back to conversations",
           emptyThread: "No messages yet. When a lead replies to a drip or sends a chat, it appears here.",
           suggestedReply: "Suggested reply:",
           composerPlaceholder: "Type a message to the lead…",
@@ -5262,6 +5291,14 @@ const resources = {
           }
         },
         tasks: {
+          filters: {
+            title: "Filtres",
+            show: "Afficher les filtres",
+            hide: "Masquer les filtres",
+            search: "Rechercher des tâches",
+            searchPlaceholder: "Rechercher…",
+            clear: "Effacer les filtres",
+          },
           title: "Tâches",
           addTask: "Ajouter une tâche",
           allTasks: "Toutes",
@@ -6124,7 +6161,17 @@ const resources = {
         back: "Retour à Realtor Desk"
       },
       rd: {
+        leadDetail: {
+          changeStage: "Étape du pipeline",
+          stageError: "Impossible de changer l'étape. Réessayez.",
+        },
+        leads: {
+          showing: "Affichage de {{from}} à {{to}} sur {{total}}",
+          emailLead: "Écrire à {{name}}",
+          callLead: "Appeler {{name}}",
+        },
         sidebar: {
+          close: "Fermer la navigation",
           itemCount: "éléments",
           workspaceTier: "Forfait Équipe",
           collapse: "Réduire la barre latérale",
@@ -6135,6 +6182,13 @@ const resources = {
             pipeline: "Pipeline",
             automation: "Automatisation",
             reports: "Rapports",
+            tasks: "Tâches",
+            calendar: "Calendrier",
+            properties: "Propriétés",
+            campaigns: "Campagnes",
+            market: "Marché",
+            aiAssistant: "Assistant IA",
+            integrations: "Intégrations",
             settings: "Paramètres"
           },
           desk: {
@@ -6143,6 +6197,7 @@ const resources = {
           }
         },
         topnav: {
+          openNav: "Ouvrir la navigation",
           search: "Rechercher clients, inscriptions, conversations…",
           live: "En direct",
           account: "Menu du compte",
@@ -6277,6 +6332,7 @@ const resources = {
         inbox: {
           searchConversations: "Rechercher des conversations…",
           selectConversation: "Sélectionnez une conversation à gauche.",
+          backToList: "Retour aux conversations",
           emptyThread: "Aucun message pour l'instant. Lorsqu'un client répond à une séquence ou écrit en clavardage, le message apparaît ici.",
           suggestedReply: "Réponse suggérée :",
           composerPlaceholder: "Écrire un message au client…",

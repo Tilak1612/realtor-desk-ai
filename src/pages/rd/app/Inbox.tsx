@@ -50,6 +50,9 @@ export default function Inbox() {
   );
   const [filter, setFilter] = useState<FilterKey>("all");
   const [query, setQuery] = useState("");
+  // Below lg only one pane shows at a time: the list, or the open thread.
+  // Desktop always shows both, so this state is inert at lg and up.
+  const [mobileView, setMobileView] = useState<"list" | "thread">("list");
 
   const threads = useMemo(() => {
     let items = leadSource;
@@ -72,18 +75,33 @@ export default function Inbox() {
 
   return (
     <AppShell>
+      {/* DEVICE PARITY. Below lg this grid used to stack the list and the
+          open thread into ONE screen height: two short panes, each with its
+          own scrollbar. The list showed three conversations; tapping another
+          opened it underneath, often off-screen, so the tap looked like it
+          did nothing -- and the marketing "Ask Agent" bubble sat on Send.
+          Now a phone gets the usual messaging pattern: the list full-screen,
+          then the thread full-screen with a way back. */}
       <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] h-full overflow-hidden">
         <ThreadList
+          className={mobileView === "thread" ? "hidden lg:flex" : "flex"}
           threads={threads}
           activeId={activeId}
-          onSelect={setActiveId}
+          onSelect={(id) => {
+            setActiveId(id);
+            setMobileView("thread");
+          }}
           filter={filter}
           onFilter={setFilter}
           query={query}
           onQuery={setQuery}
           latestByLead={latestByLead}
         />
-        <ActivePane lead={activeLead} />
+        <ActivePane
+          lead={activeLead}
+          className={mobileView === "list" ? "hidden lg:flex" : "flex"}
+          onBack={() => setMobileView("list")}
+        />
       </div>
     </AppShell>
   );
@@ -92,6 +110,7 @@ export default function Inbox() {
 /* ────────────────────────────────────────────────────────── */
 
 function ThreadList({
+  className,
   threads,
   activeId,
   onSelect,
@@ -101,6 +120,7 @@ function ThreadList({
   onQuery,
   latestByLead,
 }: {
+  className?: string;
   threads: Lead[];
   activeId: string;
   onSelect: (id: string) => void;
@@ -117,7 +137,7 @@ function ThreadList({
     return last?.author === "lead" && l.id !== activeId;
   }).length;
   return (
-    <div className="flex flex-col border-r border-rd-line bg-white overflow-hidden min-h-0">
+    <div className={cn("flex-col border-r border-rd-line bg-white overflow-hidden min-h-0", className)}>
       <div className="px-5 py-4 border-b border-rd-line">
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-lg font-semibold">
@@ -209,6 +229,8 @@ function ThreadRow({
     <button
       type="button"
       onClick={onSelect}
+      aria-controls="inbox-thread"
+      aria-current={active ? "true" : undefined}
       className={cn(
         "w-full text-left px-5 py-3.5 border-b border-rd-line flex gap-3 transition-colors",
         active ? "bg-rd-navy-100 border-l-[3px] border-l-rd-navy-800" : "border-l-[3px] border-l-transparent",
@@ -272,7 +294,16 @@ function ThreadRow({
 
 /* ────────────────────────────────────────────────────────── */
 
-function ActivePane({ lead }: { lead: Lead | undefined }) {
+function ActivePane({
+  lead,
+  className,
+  onBack,
+}: {
+  lead: Lead | undefined;
+  className?: string;
+  /** Below lg: return to the conversation list. */
+  onBack?: () => void;
+}) {
   const { t } = useTranslation();
   const { messages: liveMessages } = useConversation(lead?.id);
 
@@ -298,16 +329,29 @@ function ActivePane({ lead }: { lead: Lead | undefined }) {
 
   if (!lead) {
     return (
-      <div className="flex items-center justify-center h-full bg-rd-paper-2 text-rd-ink-600 text-sm">
+      <div
+        id="inbox-thread"
+        className={cn("items-center justify-center h-full bg-rd-paper-2 text-rd-ink-600 text-sm", className)}
+      >
         {t("rd.inbox.selectConversation", "Select a conversation from the left.")}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col overflow-hidden bg-rd-paper-2 min-h-0">
+    <div id="inbox-thread" className={cn("flex-col overflow-hidden bg-rd-paper-2 min-h-0", className)}>
+      {onBack && (
+        <button
+          type="button"
+          onClick={onBack}
+          className="lg:hidden flex items-center gap-1.5 px-4 min-h-11 text-[13px] font-semibold text-rd-navy-800 border-b border-rd-line bg-white"
+        >
+          <span aria-hidden="true">←</span>
+          {t("rd.inbox.backToList", "Back to conversations")}
+        </button>
+      )}
       {/* Active header */}
-      <div className="px-7 py-3.5 border-b border-rd-line bg-white flex items-center gap-3.5 flex-wrap">
+      <div className="px-4 sm:px-7 py-3.5 border-b border-rd-line bg-white flex items-center gap-3.5 flex-wrap">
         <RDAvatar name={lead.name} size={40} />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">

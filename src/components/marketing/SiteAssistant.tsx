@@ -17,7 +17,19 @@ const SiteAssistant = () => {
   // directly on top of the Phone field at 390px; a support widget that covers
   // the signup form costs more than it helps.
   const { pathname } = useLocation();
-  const hiddenOnRoute = ["/signup", "/login", "/verify-email"].includes(pathname);
+  // Also hidden inside the signed-in product. This is the PRE-SALES assistant
+  // ("Ask Agent about Realtor Desk"), fixed to the bottom-right corner --
+  // which on a phone is exactly where the Inbox Send button and the Leads
+  // pagination live. It sat on top of Send. Customers already in the app
+  // have the in-app AI assistant; this one is for visitors deciding.
+  const APP_PREFIXES = [
+    "/app", "/dashboard", "/tasks", "/calendar", "/properties", "/campaigns",
+    "/market", "/ai-assistant", "/billing", "/settings", "/profile",
+    "/onboarding", "/call-workflow", "/admin",
+  ];
+  const hiddenOnRoute =
+    ["/signup", "/login", "/verify-email"].includes(pathname) ||
+    APP_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
