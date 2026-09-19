@@ -165,7 +165,7 @@ const Tasks = () => {
 
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Filters Sidebar - Hidden on mobile */}
+          {/* Filters: sidebar at lg, collapsible panel above the list below it */}
           <TasksFilters
             filters={filters}
             onFiltersChange={setFilters}

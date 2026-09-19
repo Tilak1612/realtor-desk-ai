@@ -18,7 +18,8 @@
     "optimize:images": "node scripts/optimize-images.mjs",
     "verify:live": "node scripts/verify-live.mjs",
     "verify:a11y": "node scripts/axe-local.mjs",
-    "verify:responsive": "node scripts/verify-responsive.mjs"
+    "verify:responsive": "node scripts/verify-responsive.mjs",
+    "verify:parity": "node scripts/verify-dashboard-parity.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

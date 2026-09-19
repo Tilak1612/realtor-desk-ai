@@ -9,7 +9,6 @@ import {
   IconFilter,
   IconMail,
   IconPhone,
-  IconChevron,
   IconSparkles,
   IconPlus,
 } from "@/components/rd";
@@ -37,7 +36,9 @@ import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 //
 // The grid is now applied from `lg` up only; below that each row renders as a
 // card that leads with the name and email.
-const LEADS_GRID = "24px 2fr 1.4fr 1fr 1.4fr 1fr 1.2fr 100px";
+// No checkbox column: nothing stored a selection and no bulk action existed,
+// so the boxes promised a feature the product does not have.
+const LEADS_GRID = "2fr 1.4fr 1fr 1.4fr 1fr 1.2fr 84px";
 /** Applied to the row wrapper: card below lg, grid at lg and up. */
 const ROW_RESPONSIVE = "block lg:grid";
 /**
@@ -126,8 +127,12 @@ export default function Leads() {
 
         {error && <div className="mb-4"><DataError message={error.message} /></div>}
 
-        {/* Tabs + sort */}
-        <div className="flex items-center justify-between mb-4">
+        {/* Tabs + sort. This row did not wrap, so at 390px the tabs took the
+            full width and pushed Sort to x=433 -- past the edge of the screen,
+            where the app's overflow-x:hidden clipped it. It existed, had a
+            size, and could not be seen or tapped. Now it wraps onto its own
+            line below lg. */}
+        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2 mb-4">
           <RDTabs
             value={tab}
             onValueChange={(v) => setTab(v as TabKey)}
@@ -165,7 +170,6 @@ export default function Leads() {
             style={GRID_COLS_ONLY}
             className="hidden lg:grid px-5 py-3 bg-rd-ink-50 border-b border-rd-line text-[11px] font-bold uppercase tracking-[0.06em] text-rd-ink-600 items-center"
           >
-            <input type="checkbox" aria-label={t("rd.common.selectAll", "Select all")} />
             <div>{t("rd.columns.leads.lead", "Lead")}</div>
             <div>{t("rd.columns.leads.listing", "Listing")}</div>
             <div>{t("rd.columns.leads.source", "Source")}</div>
@@ -202,28 +206,48 @@ export default function Leads() {
 
 /* ────────────────────────────────────────────────────────── */
 
+/**
+ * A lead as a row (lg and up) or a card (below).
+ *
+ * DEVICE PARITY. This row used to give desktop and phone different products.
+ * Below lg the Listing cell and the Email / Call / Open buttons were
+ * `hidden lg:*` with no equivalent -- and on desktop those buttons did nothing
+ * at all: their only handler was stopPropagation(). The row checkbox held no
+ * state and no bulk action used it. All of it sat inside the row's <a>, which
+ * is invalid HTML (interactive content inside a link) and reads badly to a
+ * screen reader.
+ *
+ * Now: the NAME is the link, stretched over the row with ::after so the whole
+ * row stays clickable; Email and Call are real mailto:/tel: links, shown at
+ * every width and raised above the stretched link; Listing joins the mobile
+ * meta line. "Open" is gone -- it duplicated the row link.
+ */
 function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
+  const { t } = useTranslation();
+  // Webhook-created leads with no email get a placeholder address
+  // (no-email-<uuid>@placeholder.invalid). Never offer to mail it.
+  const email = lead.email && !lead.email.endsWith("@placeholder.invalid") ? lead.email : "";
+  const tel = lead.phone ? lead.phone.replace(/[^\d+]/g, "") : "";
+
   return (
-    <Link
-      to={`/app/leads/${lead.id}`}
+    <div
       style={GRID_COLS_ONLY}
       className={cn(
         ROW_RESPONSIVE,
-        "px-5 py-3.5 items-center text-[13px] hover:bg-rd-ink-50 transition-colors",
+        "relative px-5 py-3.5 items-center text-[13px] hover:bg-rd-ink-50 transition-colors",
         !isLast && "border-b border-rd-line"
       )}
     >
-      <input
-        type="checkbox"
-        aria-label={`Select ${lead.name}`}
-        onClick={(e) => e.stopPropagation()}
-        className="hidden lg:block"
-      />
       <div className="flex items-center gap-2.5 min-w-0">
         <RDAvatar name={lead.name} size={30} />
         <div className="min-w-0">
           <div className="font-semibold flex items-center gap-1.5 truncate">
-            {lead.name}
+            <Link
+              to={`/app/leads/${lead.id}`}
+              className="truncate focus-visible:outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-rd-terra-700"
+            >
+              {lead.name}
+            </Link>
             <span
               className={cn(
                 "text-[9px] font-bold tracking-[0.06em] rounded-[3px] px-1.5 py-[1px]",
@@ -238,8 +262,8 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
           <div className="text-[11px] text-rd-ink-500 truncate">{lead.email}</div>
         </div>
       </div>
-      {/* Below lg these five cells wrap into a single meta line under the
-          name; at lg they are separate grid columns again. */}
+      {/* Below lg these cells wrap into a single meta line under the name;
+          at lg they are separate grid columns again. */}
       <div className="hidden lg:block text-rd-ink-700 truncate">
         {lead.listing ?? <span className="text-rd-ink-400">—</span>}
       </div>
@@ -247,8 +271,13 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
         <span className="text-[11px] px-2 py-[2px] bg-rd-ink-100 text-rd-ink-700 rounded-[4px] font-semibold">
           {lead.source}
         </span>
-        {/* Score, stage and last activity ride along in the mobile meta line.
-            At lg they are hidden here and render in their own columns below. */}
+        {/* Listing, score, stage and last activity ride along in the mobile
+            meta line. At lg they render in their own columns instead. */}
+        {lead.listing && (
+          <span className="lg:hidden text-rd-ink-700 text-xs truncate max-w-[14rem]">
+            {lead.listing}
+          </span>
+        )}
         <span className="lg:hidden">
           <RDScore value={lead.score} />
         </span>
@@ -278,31 +307,42 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
         )}
         {lead.lastActivity}
       </div>
-      <div className="hidden lg:flex justify-end gap-1">
-        <IconBtn aria-label="Email">
-          <IconMail />
-        </IconBtn>
-        <IconBtn aria-label="Call">
-          <IconPhone />
-        </IconBtn>
-        <IconBtn aria-label="Open">
-          <IconChevron />
-        </IconBtn>
+      {/* relative z-10 lifts the actions above the stretched name link, so a
+          tap on Call calls rather than opening the lead. */}
+      <div className="relative z-10 mt-2.5 flex gap-1.5 lg:mt-0 lg:justify-end">
+        {email && (
+          <ActionLink
+            href={`mailto:${email}`}
+            label={t("rd.leads.emailLead", "Email {{name}}", { name: lead.name })}
+          >
+            <IconMail />
+          </ActionLink>
+        )}
+        {tel && (
+          <ActionLink
+            href={`tel:${tel}`}
+            label={t("rd.leads.callLead", "Call {{name}}", { name: lead.name })}
+          >
+            <IconPhone />
+          </ActionLink>
+        )}
       </div>
-    </Link>
+    </div>
   );
 }
 
-function IconBtn({ children, ...rest }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+function ActionLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
   return (
-    <button
-      type="button"
-      onClick={(e) => e.stopPropagation()}
-      className="w-[26px] h-[26px] rounded-rd-sm flex items-center justify-center text-rd-ink-500 hover:bg-rd-ink-100 hover:text-rd-ink-900"
-      {...rest}
+    <a
+      href={href}
+      aria-label={label}
+      title={label}
+      // 36px on touch widths, 28px in the dense desktop table; both clear the
+      // 24px WCAG 2.5.8 minimum.
+      className="w-9 h-9 lg:w-7 lg:h-7 rounded-rd-sm border border-rd-line lg:border-transparent flex items-center justify-center text-rd-ink-600 hover:bg-rd-ink-100 hover:text-rd-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-rd-terra-700"
     >
       {children}
-    </button>
+    </a>
   );
 }
 

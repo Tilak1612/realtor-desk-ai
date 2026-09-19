@@ -75,6 +75,9 @@ export function Sidebar({
     { label: t("rd.sidebar.nav.properties", "Properties"), to: "/properties", icon: <IconHome /> },
     { label: t("rd.sidebar.nav.campaigns", "Campaigns"), to: "/campaigns", icon: <IconMail /> },
     { label: t("rd.sidebar.nav.market", "Market"), to: "/market", icon: <IconGlobe /> },
+    // Was missing: /ai-assistant was linked only from the legacy sidebar, so
+    // from any /app screen -- desktop, tablet or phone -- there was no way in.
+    { label: t("rd.sidebar.nav.aiAssistant", "AI Assistant"), to: "/ai-assistant", icon: <IconSparkles /> },
     { label: t("rd.sidebar.nav.integrations", "Integrations"), to: "/dashboard/integrations", icon: <IconBolt /> },
     { label: t("rd.sidebar.nav.settings", "Settings"), to: "/app/settings", icon: <IconCog /> },
   ];

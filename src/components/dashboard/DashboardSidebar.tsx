@@ -23,6 +23,7 @@ import {
   Building2,
   Zap,
   Plug,
+  MessageSquare,
 } from "lucide-react";
 import { RDMark } from "@/components/rd/Logo";
 
@@ -78,6 +79,10 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
     { icon: LayoutDashboard, label: t('app.sidebar.today', 'Today'), path: "/today", featured: true },
     { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts", count: counts.contacts },
     { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
+    // Was missing: the conversation inbox existed only in the /app sidebar,
+    // so from Tasks, Calendar, Properties and the other legacy pages it could
+    // not be reached without going back to the dashboard first.
+    { icon: MessageSquare, label: t('rd.sidebar.nav.conversations', 'Conversations'), path: "/app/inbox" },
     { icon: CheckSquare, label: t('app.sidebar.tasks'), path: "/tasks" },
     { icon: Calendar, label: t('app.sidebar.calendar'), path: "/calendar" },
     { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
@@ -99,10 +104,17 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
   return (
     <>
       {/* Mobile Menu Button - Fixed position, always visible on mobile */}
+      {/* aria-controls + aria-expanded: the label used to be the only state
+          signal, and it was hardcoded English, so a French screen-reader user
+          heard "Open menu" with no indication of what it opened or whether it
+          was open. Matches the toggle in the /app shell (TopNav). */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-3 left-3 z-50 p-2.5 bg-card border border-border rounded-lg shadow-lg"
-        aria-label={isOpen ? "Close menu" : "Open menu"}
+        aria-label={isOpen ? t("rd.sidebar.close", "Close navigation") : t("rd.topnav.openNav", "Open navigation")}
+        aria-controls="app-sidebar"
+        aria-expanded={isOpen}
       >
         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
@@ -120,6 +132,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
           their contrast model. Before this PR the container was bg-card
           (white), making every link invisible (white-on-white). */}
       <aside
+        id="app-sidebar"
         ref={drawerRef}
         {...drawerProps}
         className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-primary text-white border-r border-white/10 flex flex-col motion-safe:transition-transform motion-safe:duration-300 ease-in-out z-40 ${

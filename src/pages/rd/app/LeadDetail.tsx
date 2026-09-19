@@ -14,12 +14,14 @@ import {
 } from "@/components/rd";
 import { SkeletonConversation } from "@/components/rd/Skeleton";
 
-import type { ConversationMessage, Lead } from "@/types/rd";
+import type { ConversationMessage, Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/hooks/rd/useLeads";
 import { useConversation, useSendMessage } from "@/hooks/rd/useConversation";
 import { useLeadScoreDetail } from "@/hooks/rd/useLeadScoreDetail";
 import { useRecordConsent, type ConsentSource } from "@/hooks/rd/useRecordConsent";
+import { useUpdateLeadStage } from "@/hooks/rd/useUpdateLeadStage";
+import { OPEN_STAGES, CLOSED_STAGES } from "@/lib/rd/pipeline";
 import { useTranslation } from "react-i18next";
 
 // /app/leads/:id — Lead detail per rd-app.jsx Artboard_LeadDetail.
@@ -79,7 +81,12 @@ export default function LeadDetail() {
 
   return (
     <AppShell>
-      <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] h-full overflow-hidden">
+      {/* Two full-height columns from lg up, each scrolling on its own. Below
+          lg the same h-full + overflow-hidden stacked them as two SHORT panes
+          sharing one screen, each with its own inner scrollbar -- the lead's
+          profile got a letterbox with the contact rows scrolled under its
+          edge. On a phone this is now one ordinary scrolling page. */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] lg:h-full lg:overflow-hidden">
         <ConversationPane lead={lead} messages={messages} />
         <LeadSidebar lead={lead} />
       </div>
@@ -105,7 +112,7 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
     );
   };
   return (
-    <div className="flex flex-col border-r border-rd-line overflow-hidden min-h-0">
+    <div className="flex flex-col border-b lg:border-b-0 lg:border-r border-rd-line lg:overflow-hidden lg:min-h-0">
       {/* Breadcrumb + header */}
       <div className="px-7 py-4 border-b border-rd-line flex items-center gap-4 flex-wrap">
         <div className="text-xs text-rd-ink-500">
@@ -163,7 +170,9 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
       )}
 
       {/* Thread */}
-      <div className="flex-1 overflow-y-auto px-7 py-6 flex flex-col gap-3.5 bg-rd-paper-2">
+      {/* Below lg the thread is capped and scrolls, like any chat; the page
+          around it scrolls normally. */}
+      <div className="max-h-[60vh] lg:max-h-none lg:flex-1 overflow-y-auto px-4 sm:px-7 py-6 flex flex-col gap-3.5 bg-rd-paper-2">
         {messages.length === 0 ? (
           <div className="text-center text-sm text-rd-ink-500 py-10">
             No conversation yet. When the website widget or email channel receives a message, it
@@ -357,7 +366,7 @@ function LeadSidebar({ lead }: { lead: Lead }) {
   const { t } = useTranslation();
   const { detail: scoreDetail } = useLeadScoreDetail(lead.id);
   return (
-    <div className="overflow-y-auto px-7 py-6 bg-white">
+    <div className="lg:overflow-y-auto px-4 sm:px-7 py-6 bg-white">
       {/* Header */}
       <div className="flex items-center gap-3.5 mb-6">
         <RDAvatar name={lead.name} size={56} tone="var(--rd-terra-700)" />
@@ -441,7 +450,7 @@ function LeadSidebar({ lead }: { lead: Lead }) {
           v={lead.budgetCad ? formatCad(lead.budgetCad) : <span className="text-rd-ink-500">—</span>}
         />
         <KVRow k="Areas" v={lead.city ?? "—"} />
-        <KVRow k="Stage" v={lead.stage.replace("_", " ")} />
+        <KVRow k="Stage" v={<StageControl leadId={lead.id} stage={lead.stage} />} />
         {lead.aiNextBest && <KVRow k="AI next step" v={lead.aiNextBest} />}
       </Section>
 
@@ -485,6 +494,47 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       </div>
       <div>{children}</div>
     </div>
+  );
+}
+
+/**
+ * Change a lead's stage from its own page.
+ *
+ * DEVICE PARITY. Until this, the ONLY way to move a lead between stages
+ * anywhere in the app was dragging its card on the Pipeline board. That is
+ * awkward on a phone (the card competes with the board's own scrolling) and
+ * impossible from a keyboard. A native <select> behaves identically under
+ * mouse, touch, keyboard and screen reader, and writes through the same
+ * mutation the board uses, so the two can never disagree.
+ */
+function StageControl({ leadId, stage }: { leadId: string; stage: PipelineStage }) {
+  const { t } = useTranslation();
+  const update = useUpdateLeadStage();
+  const id = `stage-${leadId}`;
+  return (
+    <span className="inline-flex flex-col gap-1">
+      <label htmlFor={id} className="sr-only">
+        {t("rd.leadDetail.changeStage", "Pipeline stage")}
+      </label>
+      <select
+        id={id}
+        value={stage}
+        disabled={update.isPending}
+        onChange={(e) => update.mutate({ leadId, toStage: e.target.value as PipelineStage })}
+        className="block w-full max-w-[14rem] min-h-9 border border-rd-line rounded-rd-sm px-2 py-1.5 text-[13px] bg-white disabled:opacity-60"
+      >
+        {[...OPEN_STAGES, ...CLOSED_STAGES].map((s) => (
+          <option key={s} value={s}>
+            {t(`rd.stages.${s}`, s)}
+          </option>
+        ))}
+      </select>
+      {update.isError && (
+        <span role="alert" className="text-[11px] text-rd-danger">
+          {t("rd.leadDetail.stageError", "Could not change the stage. Try again.")}
+        </span>
+      )}
+    </span>
   );
 }
 

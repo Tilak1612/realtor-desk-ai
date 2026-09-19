@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import {
   DndContext,
   DragOverlay,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   useDraggable,
   useDroppable,
   useSensor,
@@ -51,10 +52,18 @@ export default function Pipeline() {
   const [activeLead, setActiveLead] = useState<Lead | null>(null);
   const [addOpen, setAddOpen] = useState(false);
 
-  // distance:5 lets a pointerdown-then-click navigate to the lead detail
-  // without arming a drag — only ≥5px of movement starts the drag cycle.
+  // Mouse: distance:5 lets a click navigate to the lead without arming a drag.
+  //
+  // Touch is separate, and needs a press-and-hold. PointerSensor handled touch
+  // with the same 5px rule, which only worked because every card carried
+  // `touch-action: none` -- and that meant a finger landing on a card could
+  // not scroll the board. On a phone the board is mostly cards, so it barely
+  // scrolled, and any 5px twitch started a drag. A 250ms hold lets a swipe
+  // scroll and a deliberate press drag. (Stage can also be changed from the
+  // lead's own page, which is the path for keyboard users.)
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
+    useSensor(MouseSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 8 } })
   );
 
   const snapshot = useMemo(() => {
@@ -317,7 +326,8 @@ function KanbanCard({ lead, isLive }: { lead: Lead; isLive: boolean }) {
       }}
       className={cn(
         "block bg-white border border-rd-line rounded-rd-sm p-3 hover:shadow-rd-sm transition-shadow",
-        "cursor-grab active:cursor-grabbing touch-none select-none",
+        // manipulation, not none: the board has to scroll under a finger.
+        "cursor-grab active:cursor-grabbing touch-manipulation select-none",
         isDragging && "opacity-40"
       )}
     >

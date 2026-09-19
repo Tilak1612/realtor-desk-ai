@@ -21,7 +21,16 @@ interface RDTabsProps {
 
 export function RDTabs({ value, onValueChange, items, className }: RDTabsProps) {
   return (
-    <div className={cn("flex gap-0.5 border-b border-rd-line", className)}>
+    // Scroll sideways, never wrap. On a 390px phone five tabs squeezed into
+    // the row and each label broke across two or three lines ("AI- /
+    // handled · / 0"). min-w-0 lets the strip shrink inside a flex parent so
+    // it scrolls instead of shoving its neighbours off the screen.
+    <div
+      className={cn(
+        "flex gap-0.5 border-b border-rd-line min-w-0 max-w-full overflow-x-auto [scrollbar-width:none]",
+        className
+      )}
+    >
       {items.map((item) => {
         const active = item.value === value;
         return (
@@ -30,7 +39,7 @@ export function RDTabs({ value, onValueChange, items, className }: RDTabsProps) 
             type="button"
             onClick={() => onValueChange(item.value)}
             className={cn(
-              "px-4 py-2.5 text-[13px] font-semibold border-b-2 -mb-px transition-colors",
+              "px-4 py-2.5 text-[13px] font-semibold border-b-2 -mb-px transition-colors whitespace-nowrap flex-shrink-0",
               active
                 ? "text-rd-ink-900 border-rd-navy-800"
                 : "text-rd-ink-500 border-transparent hover:text-rd-ink-700"

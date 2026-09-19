@@ -85,6 +85,7 @@ export function AppShell({
         <TopNav
           agent={{ name: resolvedAgent }}
           onMenuClick={() => setNavOpen(true)}
+          navOpen={navOpen}
         />
         <div className="flex-1 overflow-y-auto overflow-x-hidden">{children}</div>
       </main>
