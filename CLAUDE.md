@@ -36,6 +36,7 @@ npm run verify:live
 npm run verify:a11y
 npm run verify:responsive
 npm run verify:parity        # dashboard: desktop vs tablet vs phone (vite preview on :4201)
+npm run verify:auth          # auth pages EN+FR incl. failure states (vite preview on :4201)
 ```
 
 ## Domain guardrails

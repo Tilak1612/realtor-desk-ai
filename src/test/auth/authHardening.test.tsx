@@ -205,6 +205,29 @@ describe("tenant isolation migration", () => {
   });
 });
 
+describe("a cancelled provider sign-in", () => {
+  // Google returns error=access_denied with error_description "The user denied
+  // the request". Classifying on the description alone matched neither
+  // "access_denied" nor "cancel", so backing out of the consent screen was
+  // reported as a failure. Classify on the code; the description is a
+  // fallback. Caught by scripts/verify-auth-flows.mjs, not by review.
+  const login = () => src("src/pages/Login.tsx");
+
+  it("reads the machine-readable code, not just the description", () => {
+    expect(login()).toContain('params.get("error")');
+    expect(login()).toMatch(/const cancelled\s*=/);
+    expect(login()).toMatch(/test\(code\)/);
+  });
+
+  it("treats a denied consent screen as cancelled, not failed", () => {
+    const classify = (code: string, description: string) =>
+      /access_denied|cancel/i.test(code) || /cancel|denied|consent_required/i.test(description);
+    expect(classify("access_denied", "The user denied the request")).toBe(true);
+    expect(classify("", "The user denied the request")).toBe(true);
+    expect(classify("server_error", "Something broke")).toBe(false);
+  });
+});
+
 describe("session expiry versus signing out", () => {
   // Both end as SIGNED_OUT, so without a marker the app cannot explain
   // itself: a session that expired mid-task dropped the person on /login

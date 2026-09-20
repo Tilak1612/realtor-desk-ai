@@ -134,6 +134,23 @@ text or moving these sends into an edge function.
   the functions are SECURITY DEFINER and return a boolean, and a non-admin
   still sees nothing.
 
+## Automated now — re-run these after any auth change
+
+```
+bunx vite preview --port 4201 --strictPort &
+npm run verify:auth      # 76 checks: both languages, phone and desktop
+```
+
+Covers /login, /forgot-password, /reset-password and /verify-email in English
+and French at 390px and 1440px: fields labelled, password managers able to
+fill, keyboard focus landing on a control, no untranslated keys leaking, no
+unsubstantiated claim, and the four failure states — wrong password, cancelled
+provider, expired session, stripped error params — each saying something in the
+right language rather than showing a raw provider code.
+
+Authorization is separate and runs against the database:
+`supabase/tests/rls_isolation.sql`, 147 checks.
+
 ## Worth a manual pass, not a setting
 
 These could not be exercised from CI and need a real browser and a real
