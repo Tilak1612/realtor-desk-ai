@@ -19,7 +19,8 @@
     "verify:live": "node scripts/verify-live.mjs",
     "verify:a11y": "node scripts/axe-local.mjs",
     "verify:responsive": "node scripts/verify-responsive.mjs",
-    "verify:parity": "node scripts/verify-dashboard-parity.mjs"
+    "verify:parity": "node scripts/verify-dashboard-parity.mjs",
+    "verify:auth": "node scripts/verify-auth-flows.mjs"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

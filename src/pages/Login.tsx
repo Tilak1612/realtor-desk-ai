@@ -38,10 +38,19 @@ const Login = () => {
   // given. Surface it once, then strip it so a refresh does not repeat it.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const err = params.get("error_description") || params.get("error");
-    if (!err) return;
+    const code = params.get("error") ?? "";
+    const description = params.get("error_description") ?? "";
+    if (!code && !description) return;
+    // Classify on the CODE, which is the machine-readable half. Reading
+    // error_description first got this wrong: Google sends
+    // error=access_denied with description "The user denied the request",
+    // and the description alone matches neither "access_denied" nor
+    // "cancel" -- so someone who simply backed out of the consent screen
+    // was told sign-in had failed.
+    const cancelled =
+      /access_denied|cancel/i.test(code) || /cancel|denied|consent_required/i.test(description);
     toast.error(
-      /access_denied|cancel/i.test(err)
+      cancelled
         ? t("auth.oauth.cancelled", "Sign-in was cancelled.")
         : t("auth.oauth.failed", "Could not start sign-in with that provider. Please try again.")
     );
