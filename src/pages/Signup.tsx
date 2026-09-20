@@ -406,7 +406,7 @@ const Signup = () => {
             {/* Security Notice */}
             <div className="flex items-center gap-2 text-xs text-rd-ink-700 bg-rd-navy-50 p-3 rounded-lg border border-rd-navy-200">
               <Info aria-hidden="true" className="w-4 h-4 text-rd-navy-600 flex-shrink-0" />
-              <span>{t('auth.signup.sslNote', 'Your data is stored securely on Canadian servers with 256-bit SSL encryption')}</span>
+              <span>{t('auth.signup.sslNote', 'Your data is stored on Canadian servers, encrypted in transit and at rest')}</span>
             </div>
           </form>
 

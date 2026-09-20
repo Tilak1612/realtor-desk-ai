@@ -117,7 +117,7 @@ export function SignupAside() {
           </li>
           <li className="flex items-start gap-2.5 text-sm text-rd-ink-700">
             <Lock className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
-            {t("auth.signup.aside.t3", "256-bit SSL in transit and encrypted at rest.")}
+            {t("auth.signup.aside.t3", "Encrypted in transit and at rest, on Canadian servers.")}
           </li>
           <li className="flex items-start gap-2.5 text-sm text-rd-ink-700">
             <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-rd-navy-700" aria-hidden="true" />
