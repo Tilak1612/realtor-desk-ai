@@ -916,109 +916,109 @@ ALTER TABLE public.webhook_events ENABLE ROW LEVEL SECURITY;
 
 -- ── Policies ───────────────────────────────────────────────────────────
 DROP POLICY IF EXISTS "Users can insert their own adoption events" ON public.adoption_events;
-CREATE POLICY "Users can insert their own adoption events" ON public.adoption_events AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert their own adoption events" ON public.adoption_events AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can read their own adoption events" ON public.adoption_events;
-CREATE POLICY "Users can read their own adoption events" ON public.adoption_events AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can read their own adoption events" ON public.adoption_events AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.ai_lead_scores;
 CREATE POLICY owner_insert ON public.ai_lead_scores AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = auth.uid())))));
+  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS owner_select ON public.ai_lead_scores;
 CREATE POLICY owner_select ON public.ai_lead_scores AS PERMISSIVE FOR SELECT TO authenticated USING ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = auth.uid())))));
+  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS owner_update ON public.ai_lead_scores;
 CREATE POLICY owner_update ON public.ai_lead_scores AS PERMISSIVE FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
+  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid)))))) WITH CHECK ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = auth.uid())))));
+  WHERE ((c.id = ai_lead_scores.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS apify_usage_insert_own ON public.apify_usage;
-CREATE POLICY apify_usage_insert_own ON public.apify_usage AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY apify_usage_insert_own ON public.apify_usage AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS apify_usage_select_own ON public.apify_usage;
-CREATE POLICY apify_usage_select_own ON public.apify_usage AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY apify_usage_select_own ON public.apify_usage AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS ae_all_own ON public.automation_enrollments;
-CREATE POLICY ae_all_own ON public.automation_enrollments AS PERMISSIVE FOR ALL TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY ae_all_own ON public.automation_enrollments AS PERMISSIVE FOR ALL TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS ass_all_own ON public.automation_sequence_steps;
 CREATE POLICY ass_all_own ON public.automation_sequence_steps AS PERMISSIVE FOR ALL TO authenticated USING ((EXISTS ( SELECT 1
    FROM automation_sequences s
-  WHERE ((s.id = automation_sequence_steps.sequence_id) AND (s.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
+  WHERE ((s.id = automation_sequence_steps.sequence_id) AND (s.user_id = ( SELECT auth.uid() AS uid)))))) WITH CHECK ((EXISTS ( SELECT 1
    FROM automation_sequences s
-  WHERE ((s.id = automation_sequence_steps.sequence_id) AND (s.user_id = auth.uid())))));
+  WHERE ((s.id = automation_sequence_steps.sequence_id) AND (s.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS as_all_own ON public.automation_sequences;
-CREATE POLICY as_all_own ON public.automation_sequences AS PERMISSIVE FOR ALL TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY as_all_own ON public.automation_sequences AS PERMISSIVE FOR ALL TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_all_via_parent ON public.automation_steps;
 CREATE POLICY owner_all_via_parent ON public.automation_steps AS PERMISSIVE FOR ALL TO authenticated USING ((EXISTS ( SELECT 1
    FROM email_automations a
-  WHERE ((a.id = automation_steps.automation_id) AND (a.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
+  WHERE ((a.id = automation_steps.automation_id) AND (a.user_id = ( SELECT auth.uid() AS uid)))))) WITH CHECK ((EXISTS ( SELECT 1
    FROM email_automations a
-  WHERE ((a.id = automation_steps.automation_id) AND (a.user_id = auth.uid())))));
+  WHERE ((a.id = automation_steps.automation_id) AND (a.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS "Users can manage their own calendar settings" ON public.calendar_settings;
-CREATE POLICY "Users can manage their own calendar settings" ON public.calendar_settings AS PERMISSIVE FOR ALL TO public USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can manage their own calendar settings" ON public.calendar_settings AS PERMISSIVE FOR ALL TO public USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can create own chatbot settings" ON public.chatbot_settings;
-CREATE POLICY "Users can create own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can create own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR INSERT TO public WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can delete own chatbot settings" ON public.chatbot_settings;
-CREATE POLICY "Users can delete own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR DELETE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can delete own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR DELETE TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can update own chatbot settings" ON public.chatbot_settings;
-CREATE POLICY "Users can update own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view own chatbot settings" ON public.chatbot_settings;
-CREATE POLICY "Users can view own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR SELECT TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can delete their own contact activities" ON public.contact_activities;
-CREATE POLICY "Users can delete their own contact activities" ON public.contact_activities AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can delete their own contact activities" ON public.contact_activities AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert their own contact activities" ON public.contact_activities;
-CREATE POLICY "Users can insert their own contact activities" ON public.contact_activities AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert their own contact activities" ON public.contact_activities AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can read their own contact activities" ON public.contact_activities;
-CREATE POLICY "Users can read their own contact activities" ON public.contact_activities AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can read their own contact activities" ON public.contact_activities AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can update their own contact activities" ON public.contact_activities;
-CREATE POLICY "Users can update their own contact activities" ON public.contact_activities AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update their own contact activities" ON public.contact_activities AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_delete ON public.contact_documents;
-CREATE POLICY owner_delete ON public.contact_documents AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_delete ON public.contact_documents AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.contact_documents;
-CREATE POLICY owner_insert ON public.contact_documents AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_insert ON public.contact_documents AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_select ON public.contact_documents;
-CREATE POLICY owner_select ON public.contact_documents AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_select ON public.contact_documents AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_update ON public.contact_documents;
-CREATE POLICY owner_update ON public.contact_documents AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_update ON public.contact_documents AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_delete ON public.contact_notes;
-CREATE POLICY owner_delete ON public.contact_notes AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_delete ON public.contact_notes AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.contact_notes;
-CREATE POLICY owner_insert ON public.contact_notes AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_insert ON public.contact_notes AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_select ON public.contact_notes;
-CREATE POLICY owner_select ON public.contact_notes AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_select ON public.contact_notes AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_update ON public.contact_notes;
-CREATE POLICY owner_update ON public.contact_notes AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_update ON public.contact_notes AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS anon_can_submit ON public.contact_submissions;
 CREATE POLICY anon_can_submit ON public.contact_submissions AS PERMISSIVE FOR INSERT TO anon, authenticated WITH CHECK (true);
 DROP POLICY IF EXISTS "Users can delete own contacts" ON public.contacts;
-CREATE POLICY "Users can delete own contacts" ON public.contacts AS PERMISSIVE FOR DELETE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can delete own contacts" ON public.contacts AS PERMISSIVE FOR DELETE TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert own contacts" ON public.contacts;
-CREATE POLICY "Users can insert own contacts" ON public.contacts AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert own contacts" ON public.contacts AS PERMISSIVE FOR INSERT TO public WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can update own contacts" ON public.contacts;
-CREATE POLICY "Users can update own contacts" ON public.contacts AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update own contacts" ON public.contacts AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view own contacts" ON public.contacts;
-CREATE POLICY "Users can view own contacts" ON public.contacts AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own contacts" ON public.contacts AS PERMISSIVE FOR SELECT TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS cm_delete_own ON public.conversation_messages;
-CREATE POLICY cm_delete_own ON public.conversation_messages AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY cm_delete_own ON public.conversation_messages AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS cm_insert_own ON public.conversation_messages;
-CREATE POLICY cm_insert_own ON public.conversation_messages AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY cm_insert_own ON public.conversation_messages AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS cm_select_own ON public.conversation_messages;
-CREATE POLICY cm_select_own ON public.conversation_messages AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY cm_select_own ON public.conversation_messages AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS cm_update_own ON public.conversation_messages;
-CREATE POLICY cm_update_own ON public.conversation_messages AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY cm_update_own ON public.conversation_messages AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Authenticated users can read DDF properties" ON public.ddf_properties;
 CREATE POLICY "Authenticated users can read DDF properties" ON public.ddf_properties AS PERMISSIVE FOR SELECT TO authenticated USING (true);
 DROP POLICY IF EXISTS "Users can delete own deals" ON public.deals;
-CREATE POLICY "Users can delete own deals" ON public.deals AS PERMISSIVE FOR DELETE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can delete own deals" ON public.deals AS PERMISSIVE FOR DELETE TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert own deals" ON public.deals;
-CREATE POLICY "Users can insert own deals" ON public.deals AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert own deals" ON public.deals AS PERMISSIVE FOR INSERT TO public WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can update own deals" ON public.deals;
-CREATE POLICY "Users can update own deals" ON public.deals AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update own deals" ON public.deals AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view own deals" ON public.deals;
-CREATE POLICY "Users can view own deals" ON public.deals AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own deals" ON public.deals AS PERMISSIVE FOR SELECT TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS anon_can_request_demo ON public.demo_requests;
 CREATE POLICY anon_can_request_demo ON public.demo_requests AS PERMISSIVE FOR INSERT TO anon, authenticated WITH CHECK (true);
 DROP POLICY IF EXISTS owner_all ON public.email_automations;
-CREATE POLICY owner_all ON public.email_automations AS PERMISSIVE FOR ALL TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_all ON public.email_automations AS PERMISSIVE FOR ALL TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS anon_can_capture ON public.email_captures;
 CREATE POLICY anon_can_capture ON public.email_captures AS PERMISSIVE FOR INSERT TO anon, authenticated WITH CHECK (true);
 DROP POLICY IF EXISTS "Service role only" ON public.email_events;
@@ -1026,113 +1026,113 @@ CREATE POLICY "Service role only" ON public.email_events AS PERMISSIVE FOR ALL T
 DROP POLICY IF EXISTS "Service role only" ON public.email_log;
 CREATE POLICY "Service role only" ON public.email_log AS PERMISSIVE FOR ALL TO public USING (false);
 DROP POLICY IF EXISTS owner_reads_own_suppressions ON public.email_suppressions;
-CREATE POLICY owner_reads_own_suppressions ON public.email_suppressions AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_reads_own_suppressions ON public.email_suppressions AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.engagement_stats;
 CREATE POLICY owner_insert ON public.engagement_stats AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = auth.uid())))));
+  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS owner_select ON public.engagement_stats;
 CREATE POLICY owner_select ON public.engagement_stats AS PERMISSIVE FOR SELECT TO authenticated USING ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = auth.uid())))));
+  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS owner_update ON public.engagement_stats;
 CREATE POLICY owner_update ON public.engagement_stats AS PERMISSIVE FOR UPDATE TO authenticated USING ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = auth.uid()))))) WITH CHECK ((EXISTS ( SELECT 1
+  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid)))))) WITH CHECK ((EXISTS ( SELECT 1
    FROM contacts c
-  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = auth.uid())))));
+  WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
 DROP POLICY IF EXISTS owner_all ON public.import_history;
-CREATE POLICY owner_all ON public.import_history AS PERMISSIVE FOR ALL TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_all ON public.import_history AS PERMISSIVE FOR ALL TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can delete own connections" ON public.integration_connections;
-CREATE POLICY "Users can delete own connections" ON public.integration_connections AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can delete own connections" ON public.integration_connections AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert own connections" ON public.integration_connections;
-CREATE POLICY "Users can insert own connections" ON public.integration_connections AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert own connections" ON public.integration_connections AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can update own connections" ON public.integration_connections;
-CREATE POLICY "Users can update own connections" ON public.integration_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update own connections" ON public.integration_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view own connections" ON public.integration_connections;
-CREATE POLICY "Users can view own connections" ON public.integration_connections AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own connections" ON public.integration_connections AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert own interests" ON public.integration_interest;
-CREATE POLICY "Users can insert own interests" ON public.integration_interest AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert own interests" ON public.integration_interest AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view own interests" ON public.integration_interest;
-CREATE POLICY "Users can view own interests" ON public.integration_interest AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own interests" ON public.integration_interest AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert own requests" ON public.integration_requests;
-CREATE POLICY "Users can insert own requests" ON public.integration_requests AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert own requests" ON public.integration_requests AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view own requests" ON public.integration_requests;
-CREATE POLICY "Users can view own requests" ON public.integration_requests AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own requests" ON public.integration_requests AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_delete ON public.integrations;
-CREATE POLICY owner_delete ON public.integrations AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_delete ON public.integrations AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.integrations;
-CREATE POLICY owner_insert ON public.integrations AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_insert ON public.integrations AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_select ON public.integrations;
-CREATE POLICY owner_select ON public.integrations AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_select ON public.integrations AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_update ON public.integrations;
-CREATE POLICY owner_update ON public.integrations AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_update ON public.integrations AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Service role only" ON public.lead_magnet_requests;
 CREATE POLICY "Service role only" ON public.lead_magnet_requests AS PERMISSIVE FOR ALL TO public USING (false);
 DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
-CREATE POLICY "Users can insert own profile" ON public.profiles AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = id));
+CREATE POLICY "Users can insert own profile" ON public.profiles AS PERMISSIVE FOR INSERT TO public WITH CHECK ((( SELECT auth.uid() AS uid) = id));
 DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
-CREATE POLICY "Users can update own profile" ON public.profiles AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = id)) WITH CHECK ((auth.uid() = id));
+CREATE POLICY "Users can update own profile" ON public.profiles AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = id)) WITH CHECK ((( SELECT auth.uid() AS uid) = id));
 DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
-CREATE POLICY "Users can view own profile" ON public.profiles AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = id));
+CREATE POLICY "Users can view own profile" ON public.profiles AS PERMISSIVE FOR SELECT TO public USING ((( SELECT auth.uid() AS uid) = id));
 DROP POLICY IF EXISTS owner_delete ON public.property_interests;
-CREATE POLICY owner_delete ON public.property_interests AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_delete ON public.property_interests AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.property_interests;
-CREATE POLICY owner_insert ON public.property_interests AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_insert ON public.property_interests AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_select ON public.property_interests;
-CREATE POLICY owner_select ON public.property_interests AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_select ON public.property_interests AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_update ON public.property_interests;
-CREATE POLICY owner_update ON public.property_interests AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_update ON public.property_interests AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can delete their own property listings" ON public.property_listings;
-CREATE POLICY "Users can delete their own property listings" ON public.property_listings AS PERMISSIVE FOR DELETE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can delete their own property listings" ON public.property_listings AS PERMISSIVE FOR DELETE TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert their own property listings" ON public.property_listings;
-CREATE POLICY "Users can insert their own property listings" ON public.property_listings AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert their own property listings" ON public.property_listings AS PERMISSIVE FOR INSERT TO public WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can update their own property listings" ON public.property_listings;
-CREATE POLICY "Users can update their own property listings" ON public.property_listings AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can update their own property listings" ON public.property_listings AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can view their own property listings" ON public.property_listings;
-CREATE POLICY "Users can view their own property listings" ON public.property_listings AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view their own property listings" ON public.property_listings AS PERMISSIVE FOR SELECT TO public USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Service role can manage scheduled emails" ON public.scheduled_emails;
 CREATE POLICY "Service role can manage scheduled emails" ON public.scheduled_emails AS PERMISSIVE FOR ALL TO service_role USING (true) WITH CHECK (true);
 DROP POLICY IF EXISTS "Service role only" ON public.scheduled_emails;
 CREATE POLICY "Service role only" ON public.scheduled_emails AS PERMISSIVE FOR ALL TO public USING (false);
 DROP POLICY IF EXISTS owner_all ON public.sms_consent;
-CREATE POLICY owner_all ON public.sms_consent AS PERMISSIVE FOR ALL TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_all ON public.sms_consent AS PERMISSIVE FOR ALL TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_delete ON public.tasks;
-CREATE POLICY owner_delete ON public.tasks AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_delete ON public.tasks AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.tasks;
-CREATE POLICY owner_insert ON public.tasks AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_insert ON public.tasks AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_select ON public.tasks;
-CREATE POLICY owner_select ON public.tasks AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_select ON public.tasks AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_update ON public.tasks;
-CREATE POLICY owner_update ON public.tasks AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_update ON public.tasks AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_delete ON public.user_analytics;
-CREATE POLICY owner_delete ON public.user_analytics AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_delete ON public.user_analytics AS PERMISSIVE FOR DELETE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.user_analytics;
-CREATE POLICY owner_insert ON public.user_analytics AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_insert ON public.user_analytics AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_select ON public.user_analytics;
-CREATE POLICY owner_select ON public.user_analytics AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY owner_select ON public.user_analytics AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS owner_update ON public.user_analytics;
-CREATE POLICY owner_update ON public.user_analytics AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY owner_update ON public.user_analytics AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can insert their own feedback" ON public.user_feedback;
-CREATE POLICY "Users can insert their own feedback" ON public.user_feedback AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "Users can insert their own feedback" ON public.user_feedback AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can read their own feedback" ON public.user_feedback;
-CREATE POLICY "Users can read their own feedback" ON public.user_feedback AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can read their own feedback" ON public.user_feedback AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "users read own onboarding row" ON public.user_onboarding;
-CREATE POLICY "users read own onboarding row" ON public.user_onboarding AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "users read own onboarding row" ON public.user_onboarding AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "users update own onboarding row" ON public.user_onboarding;
-CREATE POLICY "users update own onboarding row" ON public.user_onboarding AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "users update own onboarding row" ON public.user_onboarding AS PERMISSIVE FOR UPDATE TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "users upsert own onboarding row" ON public.user_onboarding;
-CREATE POLICY "users upsert own onboarding row" ON public.user_onboarding AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
+CREATE POLICY "users upsert own onboarding row" ON public.user_onboarding AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Admins can delete roles" ON public.user_roles;
-CREATE POLICY "Admins can delete roles" ON public.user_roles AS PERMISSIVE FOR DELETE TO authenticated USING (has_role(auth.uid(), 'admin'::app_role));
+CREATE POLICY "Admins can delete roles" ON public.user_roles AS PERMISSIVE FOR DELETE TO authenticated USING (has_role(( SELECT auth.uid() AS uid), 'admin'::app_role));
 DROP POLICY IF EXISTS "Admins can insert roles" ON public.user_roles;
-CREATE POLICY "Admins can insert roles" ON public.user_roles AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (has_role(auth.uid(), 'admin'::app_role));
+CREATE POLICY "Admins can insert roles" ON public.user_roles AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (has_role(( SELECT auth.uid() AS uid), 'admin'::app_role));
 DROP POLICY IF EXISTS "Admins can view all roles" ON public.user_roles;
-CREATE POLICY "Admins can view all roles" ON public.user_roles AS PERMISSIVE FOR SELECT TO authenticated USING (has_role(auth.uid(), 'admin'::app_role));
+CREATE POLICY "Admins can view all roles" ON public.user_roles AS PERMISSIVE FOR SELECT TO authenticated USING (has_role(( SELECT auth.uid() AS uid), 'admin'::app_role));
 DROP POLICY IF EXISTS "Users can view own webhook events" ON public.webhook_events;
-CREATE POLICY "Users can view own webhook events" ON public.webhook_events AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can view own webhook events" ON public.webhook_events AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS we_select_own ON public.webhook_events;
-CREATE POLICY we_select_own ON public.webhook_events AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY we_select_own ON public.webhook_events AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));
 
 -- ── Triggers ───────────────────────────────────────────────────────────
 DROP TRIGGER IF EXISTS update_contacts_updated_at ON public.contacts;
@@ -1149,3 +1149,29 @@ DROP TRIGGER IF EXISTS update_property_listings_updated_at ON public.property_li
 CREATE TRIGGER update_property_listings_updated_at BEFORE UPDATE ON public.property_listings FOR EACH ROW EXECUTE FUNCTION handle_updated_at();
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION handle_new_user();
+
+-- ── Storage policies and helper grants ─────────────────────────────────────
+-- storage.objects is outside the public schema the generator walks, so these
+-- are appended by the same script's STORAGE section. They are here because
+-- rebuilding from this file without them leaves contact-documents with RLS on
+-- and no policy: every upload, download and delete from the browser is denied
+-- and the feature is dead.
+--
+-- The grants matter for the same reason. Policies that call is_admin() raise
+-- "permission denied for function is_admin" for a role that cannot execute it,
+-- so a non-admin SELECT on storage.objects ERRORS instead of returning no
+-- rows. Granting EXECUTE lets the function return false, which is the intended
+-- deny.
+GRANT EXECUTE ON FUNCTION public.is_admin() TO authenticated;
+GRANT EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) TO authenticated;
+
+-- Path scheme written by DocumentsTab.tsx: {user_id}/{contact_id}/{ts}.{ext},
+-- so the first folder segment is the owner.
+DROP POLICY IF EXISTS contact_documents_select_own ON storage.objects;
+CREATE POLICY contact_documents_select_own ON storage.objects AS PERMISSIVE FOR SELECT TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+DROP POLICY IF EXISTS contact_documents_insert_own ON storage.objects;
+CREATE POLICY contact_documents_insert_own ON storage.objects AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+DROP POLICY IF EXISTS contact_documents_update_own ON storage.objects;
+CREATE POLICY contact_documents_update_own ON storage.objects AS PERMISSIVE FOR UPDATE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text))) WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+DROP POLICY IF EXISTS contact_documents_delete_own ON storage.objects;
+CREATE POLICY contact_documents_delete_own ON storage.objects AS PERMISSIVE FOR DELETE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));

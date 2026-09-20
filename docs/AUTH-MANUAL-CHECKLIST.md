@@ -11,7 +11,20 @@ identities.
 
 ---
 
-## 1. Turn on leaked-password protection — 2 minutes, do this first
+## DONE on 2026-09-20 — verified against the live project
+
+- **Leaked-password protection is on.** The advisor no longer reports it.
+- **Minimum password length raised to 10** (the signup form asks for 8, so the
+  server is now the stricter of the two — fine, but the form will let someone
+  type a 9-character password and the server will reject it. Worth raising the
+  client rule to 10 so the error arrives before the round trip).
+- **88 policies moved to the cached `(select auth.uid())` form.** Verified: 97
+  policies total, 88 optimized, 0 bare. The six `WITH CHECK` clauses added the
+  day before survived the rewrite, and all six are still `TO authenticated`.
+- **Authorization re-tested after that rewrite** — see
+  `supabase/tests/rls_isolation.sql`. 147 checks, all passing.
+
+## ~~1. Turn on leaked-password protection~~ — DONE
 
 **Supabase → Authentication → Policies (Passwords) → enable "Check against
 HaveIBeenPwned".**
@@ -22,7 +35,7 @@ upper, lower, number, symbol, plus a common-password blocklist) but that runs
 in the browser and anyone calling the API directly skips it. This check runs
 server-side and cannot be bypassed.
 
-## 2. Raise the server-side minimum password length to 8
+## ~~2. Raise the server-side minimum password length~~ — DONE (set to 10)
 
 **Supabase → Authentication → Policies (Passwords) → Minimum password length.**
 
@@ -106,6 +119,21 @@ text or moving these sends into an edge function.
 
 ---
 
+## Found and fixed on 2026-09-20 (second pass)
+
+- **`contact-documents` storage had no policies at all.** With RLS on
+  `storage.objects` that is deny-all, so every upload, download and delete of a
+  contact document from the browser was refused — the feature was dead, not
+  merely locked down. Four owner-scoped policies added, keyed on the first
+  folder segment being the user id, which is the path DocumentsTab already
+  writes.
+- **`is_admin()` and `has_role()` could not be executed by `authenticated`.**
+  Any policy calling them raised `permission denied for function is_admin`
+  instead of evaluating to false, so a signed-in non-admin reading
+  `storage.objects` got an error rather than an empty result. EXECUTE granted;
+  the functions are SECURITY DEFINER and return a boolean, and a non-admin
+  still sees nothing.
+
 ## Worth a manual pass, not a setting
 
 These could not be exercised from CI and need a real browser and a real
@@ -118,6 +146,24 @@ account:
 - Password reset: request the email, follow the link, set a new password.
 - Safari, Edge, and real iOS/Android hardware. Everything tested so far ran on
   Chrome's engine at phone, tablet and desktop widths.
+
+## Structural gap worth a decision
+
+**There is no brokerage, team or tenant in the database.** No table has a
+`brokerage_id`, `team_id`, `organization_id` or `tenant_id`; no policy
+references one; `contacts` has no `assigned_agent_id`. Every account is its own
+island, and isolation is per user.
+
+That is why the requested test matrix could not be built as written: there is
+no "same brokerage" relationship for an A-owner and an A-member to share. The
+suite therefore asserts what the database actually does — a second user of the
+same brokerage sees nothing of the first's contacts, deals, tasks, listings,
+notes, documents or conversations.
+
+This matters commercially. /pricing sells Team at $299/month with "5 users
+included", a "shared pipeline", "round-robin lead routing" and "team reports".
+The schema cannot express any of that today. Round-robin routing is already
+labelled roadmap on the pricing page; shared pipeline and team reports are not.
 
 ## Known and deliberate
 
