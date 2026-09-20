@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ShieldCheck, Lock, MapPin, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, MapPin, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RDMark } from '@/components/rd/Logo';
@@ -52,12 +52,11 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
         </h1>
         <p className="text-sm text-rd-ink-600 leading-relaxed">{subtitle}</p>
 
-        <div className="flex items-center justify-center gap-2 mt-3">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-rd-navy-50 border border-rd-navy-200 rounded-full text-xs font-semibold text-rd-navy-800">
-            <ShieldCheck className="w-3 h-3" />
-            <span>{t('auth.protectedSession', 'Protected Session')}</span>
-          </div>
-        </div>
+        {/* The "Protected Session" pill stood here. It named no control: every
+            HTTPS page has a protected session, so it reassured without saying
+            anything, and a reader cannot check it. Removed rather than
+            reworded -- the two claims below are the ones that are true and
+            verifiable. */}
       </div>
 
       {/* Card */}
@@ -65,19 +64,25 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
         {children}
       </div>
 
-      {/* Trust row */}
+      {/* Trust row. What was here:
+            - "PIPEDA Compliant" -- an absolute compliance claim. PIPEDA has no
+              certification to hold, so nothing could substantiate it.
+            - "256-bit SSL" -- true of essentially every site on the web, and
+              the cipher is negotiated per connection, not a property we set.
+              It told a buyer nothing and dated the page.
+            - "Canadian Data" -- true, and now stated precisely: the Supabase
+              project runs in ca-central-1, so data and auth are in Canada.
+          The replacement for the first is what the product actually does:
+          consent date and source recorded on every contact, unsubscribes
+          honoured permanently. Both chips below are checkable. */}
       <div className="flex items-center justify-center gap-4 mt-8 text-xs text-rd-ink-500 flex-wrap">
         <div className="flex items-center gap-1.5 px-2 py-1 rounded-md">
-          <ShieldCheck className="w-4 h-4 text-rd-navy-600" />
-          <span>{t('auth.pipedaCompliant', 'PIPEDA Compliant')}</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2 py-1 rounded-md">
-          <Lock className="w-4 h-4 text-rd-navy-600" />
-          <span>{t('auth.ssl', '256-bit SSL')}</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-2 py-1 rounded-md">
           <MapPin className="w-4 h-4 text-rd-terra-600" />
-          <span>{t('auth.canadianData', 'Canadian Data')}</span>
+          <span>{t('auth.canadianData', 'Data hosted in Canada')}</span>
+        </div>
+        <div className="flex items-center gap-1.5 px-2 py-1 rounded-md">
+          <ShieldCheck className="w-4 h-4 text-rd-navy-600" />
+          <span>{t('auth.privacyControls', 'Privacy controls built for Canadian real estate')}</span>
         </div>
       </div>
     </div>
