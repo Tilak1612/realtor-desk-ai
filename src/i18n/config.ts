@@ -2655,18 +2655,35 @@ const resources = {
       },
       auth: {
         backToWebsite: "Back to realtordesk.ai",
-        protectedSession: "Protected Session",
-        pipedaCompliant: "PIPEDA Compliant",
-        ssl: "256-bit SSL",
-        canadianData: "Canadian Data",
+        // protectedSession / pipedaCompliant / ssl removed: none of the three
+        // named a control anyone could verify. See AuthCard.
+        canadianData: "Data hosted in Canada",
+        privacyControls: "Privacy controls built for Canadian real estate",
+        oauth: {
+          google: "Continue with Google",
+          microsoft: "Continue with Microsoft",
+          failed: "Could not start sign-in with that provider. Please try again.",
+          cancelled: "Sign-in was cancelled.",
+          providerUnavailable: "That sign-in method is not available yet. Use your email and password."
+        },
+        mfa: {
+          title: "Two-step verification",
+          prompt: "Two-step verification is on for this account. Enter the current code from your authenticator app.",
+          codeLabel: "6-digit code",
+          sixDigits: "Enter the 6-digit code from your authenticator app.",
+          invalidCode: "That code was not accepted. Try the current one from your app.",
+          noFactor: "No authenticator is set up on this account.",
+          verify: "Verify and continue",
+          useAnotherAccount: "Sign out and use another account"
+        },
         login: {
           subtitle: "Sign in to your workspace",
           orEmail: "Or continue with email",
           emailAddress: "Email address",
           password: "Password",
+          rememberMe: "Remember me",
           forgotPassword: "Forgot password?",
           signInSecurely: "Sign in securely",
-          sslNotice: "Your connection is secured with 256-bit SSL encryption",
           noAccount: "Don't have an account?",
           startTrial: "Start your free trial"
         },
@@ -5901,18 +5918,33 @@ const resources = {
       },
       auth: {
         backToWebsite: "Retour à realtordesk.ai",
-        protectedSession: "Session Protégée",
-        pipedaCompliant: "Conforme LPRPDE",
-        ssl: "Chiffrement SSL 256 bits",
-        canadianData: "Données Canadiennes",
+        canadianData: "Données hébergées au Canada",
+        privacyControls: "Contrôles de confidentialité conçus pour l'immobilier canadien",
+        oauth: {
+          google: "Continuer avec Google",
+          microsoft: "Continuer avec Microsoft",
+          failed: "Impossible de lancer la connexion avec ce fournisseur. Veuillez réessayer.",
+          cancelled: "La connexion a été annulée.",
+          providerUnavailable: "Cette méthode de connexion n'est pas encore offerte. Utilisez votre courriel et votre mot de passe."
+        },
+        mfa: {
+          title: "Vérification en deux étapes",
+          prompt: "La vérification en deux étapes est activée sur ce compte. Saisissez le code actuel de votre application d'authentification.",
+          codeLabel: "Code à 6 chiffres",
+          sixDigits: "Saisissez le code à 6 chiffres de votre application d'authentification.",
+          invalidCode: "Ce code n'a pas été accepté. Essayez le code actuel affiché dans votre application.",
+          noFactor: "Aucune application d'authentification n'est configurée sur ce compte.",
+          verify: "Vérifier et continuer",
+          useAnotherAccount: "Se déconnecter et utiliser un autre compte"
+        },
         login: {
           subtitle: "Connectez-vous à votre espace de travail",
           orEmail: "Ou continuer avec un courriel",
           emailAddress: "Adresse courriel",
           password: "Mot de passe",
+          rememberMe: "Se souvenir de moi",
           forgotPassword: "Mot de passe oublié?",
           signInSecurely: "Connexion sécurisée",
-          sslNotice: "Votre connexion est sécurisée avec un chiffrement SSL 256 bits",
           noAccount: "Vous n'avez pas de compte?",
           startTrial: "Commencez votre essai gratuit"
         },

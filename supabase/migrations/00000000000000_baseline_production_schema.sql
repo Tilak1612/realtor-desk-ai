@@ -960,7 +960,7 @@ CREATE POLICY "Users can create own chatbot settings" ON public.chatbot_settings
 DROP POLICY IF EXISTS "Users can delete own chatbot settings" ON public.chatbot_settings;
 CREATE POLICY "Users can delete own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR DELETE TO public USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can update own chatbot settings" ON public.chatbot_settings;
-CREATE POLICY "Users can update own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR UPDATE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can update own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can view own chatbot settings" ON public.chatbot_settings;
 CREATE POLICY "Users can view own chatbot settings" ON public.chatbot_settings AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can delete their own contact activities" ON public.contact_activities;
@@ -970,7 +970,7 @@ CREATE POLICY "Users can insert their own contact activities" ON public.contact_
 DROP POLICY IF EXISTS "Users can read their own contact activities" ON public.contact_activities;
 CREATE POLICY "Users can read their own contact activities" ON public.contact_activities AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can update their own contact activities" ON public.contact_activities;
-CREATE POLICY "Users can update their own contact activities" ON public.contact_activities AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can update their own contact activities" ON public.contact_activities AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS owner_delete ON public.contact_documents;
 CREATE POLICY owner_delete ON public.contact_documents AS PERMISSIVE FOR DELETE TO authenticated USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS owner_insert ON public.contact_documents;
@@ -994,7 +994,7 @@ CREATE POLICY "Users can delete own contacts" ON public.contacts AS PERMISSIVE F
 DROP POLICY IF EXISTS "Users can insert own contacts" ON public.contacts;
 CREATE POLICY "Users can insert own contacts" ON public.contacts AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can update own contacts" ON public.contacts;
-CREATE POLICY "Users can update own contacts" ON public.contacts AS PERMISSIVE FOR UPDATE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can update own contacts" ON public.contacts AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can view own contacts" ON public.contacts;
 CREATE POLICY "Users can view own contacts" ON public.contacts AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS cm_delete_own ON public.conversation_messages;
@@ -1012,7 +1012,7 @@ CREATE POLICY "Users can delete own deals" ON public.deals AS PERMISSIVE FOR DEL
 DROP POLICY IF EXISTS "Users can insert own deals" ON public.deals;
 CREATE POLICY "Users can insert own deals" ON public.deals AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can update own deals" ON public.deals;
-CREATE POLICY "Users can update own deals" ON public.deals AS PERMISSIVE FOR UPDATE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can update own deals" ON public.deals AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can view own deals" ON public.deals;
 CREATE POLICY "Users can view own deals" ON public.deals AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS anon_can_request_demo ON public.demo_requests;
@@ -1048,7 +1048,7 @@ CREATE POLICY "Users can delete own connections" ON public.integration_connectio
 DROP POLICY IF EXISTS "Users can insert own connections" ON public.integration_connections;
 CREATE POLICY "Users can insert own connections" ON public.integration_connections AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can update own connections" ON public.integration_connections;
-CREATE POLICY "Users can update own connections" ON public.integration_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id));
+CREATE POLICY "Users can update own connections" ON public.integration_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can view own connections" ON public.integration_connections;
 CREATE POLICY "Users can view own connections" ON public.integration_connections AS PERMISSIVE FOR SELECT TO authenticated USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can insert own interests" ON public.integration_interest;
@@ -1088,7 +1088,7 @@ CREATE POLICY "Users can delete their own property listings" ON public.property_
 DROP POLICY IF EXISTS "Users can insert their own property listings" ON public.property_listings;
 CREATE POLICY "Users can insert their own property listings" ON public.property_listings AS PERMISSIVE FOR INSERT TO public WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can update their own property listings" ON public.property_listings;
-CREATE POLICY "Users can update their own property listings" ON public.property_listings AS PERMISSIVE FOR UPDATE TO public USING ((auth.uid() = user_id));
+CREATE POLICY "Users can update their own property listings" ON public.property_listings AS PERMISSIVE FOR UPDATE TO authenticated USING ((auth.uid() = user_id)) WITH CHECK ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Users can view their own property listings" ON public.property_listings;
 CREATE POLICY "Users can view their own property listings" ON public.property_listings AS PERMISSIVE FOR SELECT TO public USING ((auth.uid() = user_id));
 DROP POLICY IF EXISTS "Service role can manage scheduled emails" ON public.scheduled_emails;
