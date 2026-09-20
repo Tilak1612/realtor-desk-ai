@@ -175,14 +175,20 @@ describe("the login page", () => {
 });
 
 describe("tenant isolation migration", () => {
-  it("adds WITH CHECK to every UPDATE policy that lacked one", () => {
-    const m = src("supabase/migrations/20260920193500_rls_update_with_check.sql");
+  // This repo keeps ONE generated baseline; the change that was applied to
+  // production lives in _archive, and the baseline is the source of truth CI
+  // compares against. Assert on the baseline, so a regenerated baseline that
+  // lost the clause fails here.
+  it("has WITH CHECK on every UPDATE policy that lacked one", () => {
+    const baseline = src("supabase/migrations/00000000000000_baseline_production_schema.sql");
     for (const table of [
       "chatbot_settings", "contact_activities", "contacts",
       "deals", "integration_connections", "property_listings",
     ]) {
-      expect(m).toContain(`ON public.${table}`);
+      const re = new RegExp(
+        `CREATE POLICY [^\\n]*ON public\\.${table} [^\\n]*FOR UPDATE[^\\n]*WITH CHECK \\(\\(auth\\.uid\\(\\) = user_id\\)\\);`
+      );
+      expect(re.test(baseline), `${table} UPDATE policy without WITH CHECK`).toBe(true);
     }
-    expect((m.match(/WITH CHECK \(auth\.uid\(\) = user_id\)/g) ?? []).length).toBe(6);
   });
 });
