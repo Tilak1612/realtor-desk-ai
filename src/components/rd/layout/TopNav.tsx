@@ -5,6 +5,7 @@ import { RDBadge } from "../Badge";
 import { RDAvatar } from "../Avatar";
 import { IconDot, IconMenu } from "../icons";
 import { cn } from "@/lib/utils";
+import { signOutIntentionally } from "@/lib/auth/signOut";
 
 // Product topbar (AppShell topbar in rd-app.jsx). Command search, a live
 // status pill, EN/FR toggle (now wired to i18n.changeLanguage), bell
@@ -160,8 +161,7 @@ export function TopNav({ agent, isLive = false, onMenuClick, navOpen = false }: 
                   // Supabase client into this layout component's module graph,
                   // which then throws "supabaseUrl is required" anywhere the
                   // env is absent — including the component tests in CI.
-                  const { supabase } = await import("@/integrations/supabase/client");
-                  await supabase.auth.signOut();
+                  await signOutIntentionally();
                   navigate("/login", { replace: true });
                 }}
                 className="px-3 py-2 text-[13px] text-rd-danger rounded-rd-sm outline-none hover:bg-rd-danger-bg data-[highlighted]:bg-rd-danger-bg cursor-pointer"

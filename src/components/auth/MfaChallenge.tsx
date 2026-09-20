@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { signOutIntentionally } from "@/lib/auth/signOut";
 
 /**
  * The second factor, asked for at sign-in.
@@ -69,7 +70,7 @@ export function MfaChallenge({ onVerified }: { onVerified: () => void }) {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await signOutIntentionally();
     window.location.assign("/login");
   };
 

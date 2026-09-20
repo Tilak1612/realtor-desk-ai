@@ -6,6 +6,7 @@ import { Spinner } from "@/components/rd";
 import AuthLayout from "@/components/auth/AuthLayout";
 import AuthCard from "@/components/auth/AuthCard";
 import MfaChallenge from "@/components/auth/MfaChallenge";
+import { noteSessionEnded } from "@/lib/auth/signOut";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -60,7 +61,12 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       // MFA_CHALLENGE_VERIFIED raises the assurance level in place, so
       // re-resolve rather than assuming the old answer still holds.
       void resolve(!!session);
-      if (event === "SIGNED_OUT") setStatus("unauthenticated");
+      if (event === "SIGNED_OUT") {
+        // Distinguishes an expiry from a deliberate sign-out, so /login can
+        // say which happened instead of silently showing the form again.
+        noteSessionEnded();
+        setStatus("unauthenticated");
+      }
     });
 
     return () => {

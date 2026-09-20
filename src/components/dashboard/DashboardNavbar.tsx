@@ -20,6 +20,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { useDueTasks } from "@/hooks/useDueTasks";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
+import { signOutIntentionally } from "@/lib/auth/signOut";
 
 interface DashboardNavbarProps {
   user: any;
@@ -113,7 +114,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    await signOutIntentionally();
     toast.success(t('nav.signedOut', 'Signed out successfully'));
     navigate("/");
   };

@@ -14,6 +14,7 @@ import { SUBSCRIPTION_PRODUCTS } from "@/contexts/SubscriptionContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
+import { signOutIntentionally } from "@/lib/auth/signOut";
 
 interface TrialExpiredModalProps {
   isOpen: boolean;
@@ -156,7 +157,7 @@ const TrialExpiredModal = ({ isOpen }: TrialExpiredModalProps) => {
             type="button"
             onClick={async () => {
               const { supabase } = await import('@/integrations/supabase/client');
-              await supabase.auth.signOut();
+              await signOutIntentionally();
               navigate('/login', { replace: true });
             }}
             className="text-muted-foreground underline hover:text-foreground"

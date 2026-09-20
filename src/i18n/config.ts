@@ -2657,6 +2657,7 @@ const resources = {
         backToWebsite: "Back to realtordesk.ai",
         // protectedSession / pipedaCompliant / ssl removed: none of the three
         // named a control anyone could verify. See AuthCard.
+        sessionExpired: "Your session expired. Please sign in again.",
         canadianData: "Data hosted in Canada",
         privacyControls: "Privacy controls built for Canadian real estate",
         oauth: {
@@ -5918,6 +5919,7 @@ const resources = {
       },
       auth: {
         backToWebsite: "Retour à realtordesk.ai",
+        sessionExpired: "Votre session a expiré. Veuillez vous reconnecter.",
         canadianData: "Données hébergées au Canada",
         privacyControls: "Contrôles de confidentialité conçus pour l'immobilier canadien",
         oauth: {
