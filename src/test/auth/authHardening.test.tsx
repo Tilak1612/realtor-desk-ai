@@ -200,3 +200,55 @@ describe("tenant isolation migration", () => {
     }
   });
 });
+
+describe("session expiry versus signing out", () => {
+  // Both end as SIGNED_OUT, so without a marker the app cannot explain
+  // itself: a session that expired mid-task dropped the person on /login
+  // with no message, looking like the app had forgotten them.
+  beforeEach(() => sessionStorage.clear());
+
+  it("reports an expiry when nobody asked to sign out", async () => {
+    const { noteSessionEnded, consumeSessionExpired } = await import("@/lib/auth/signOut");
+    noteSessionEnded();
+    expect(consumeSessionExpired()).toBe(true);
+  });
+
+  it("stays quiet after a deliberate sign-out", async () => {
+    const { signOutIntentionally, noteSessionEnded, consumeSessionExpired } =
+      await import("@/lib/auth/signOut");
+    await signOutIntentionally();
+    noteSessionEnded();
+    expect(consumeSessionExpired()).toBe(false);
+  });
+
+  it("shows the message only once", async () => {
+    const { noteSessionEnded, consumeSessionExpired } = await import("@/lib/auth/signOut");
+    noteSessionEnded();
+    expect(consumeSessionExpired()).toBe(true);
+    expect(consumeSessionExpired()).toBe(false);
+  });
+
+  it("loads the supabase client lazily, or component tests cannot render", () => {
+    // TopNav and friends deliberately avoid a static import of the client:
+    // constructing it throws "supabaseUrl is required" wherever the env is
+    // absent, which is every component test. A static import in this helper
+    // reintroduced that through the back door and turned three layout suites
+    // red.
+    const helper = src("src/lib/auth/signOut.ts");
+    expect(helper).not.toMatch(/^import .*integrations\/supabase\/client/m);
+    expect(helper).toContain('await import("@/integrations/supabase/client")');
+  });
+
+  it("routes every sign-out through the helper, so none is mistaken for an expiry", () => {
+    for (const f of [
+      "src/components/rd/layout/TopNav.tsx",
+      "src/components/dashboard/DashboardNavbar.tsx",
+      "src/components/dashboard/TrialExpiredModal.tsx",
+      "src/pages/Settings.tsx",
+      "src/components/auth/MfaChallenge.tsx",
+    ]) {
+      expect(src(f), f).not.toContain("supabase.auth.signOut()");
+      expect(src(f), f).toContain("signOutIntentionally");
+    }
+  });
+});

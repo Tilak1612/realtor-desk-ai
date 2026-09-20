@@ -12,6 +12,7 @@ import { SEO } from "@/components/SEO";
 import ContinueConsentNotice from "@/components/auth/ContinueConsentNotice";
 import OAuthButtons from "@/components/auth/OAuthButtons";
 import { setRememberMe, isRemembered } from "@/lib/auth/sessionPersistence";
+import { consumeSessionExpired } from "@/lib/auth/signOut";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -21,6 +22,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(() => isRemembered());
+
+  // Say why they are back here, when the app ended the session rather than
+  // the person doing it.
+  useEffect(() => {
+    if (consumeSessionExpired()) {
+      toast.info(
+        t("auth.sessionExpired", "Your session expired. Please sign in again.")
+      );
+    }
+  }, [t]);
 
   // A failed provider round-trip comes back as query params on this page and
   // used to vanish silently -- the visitor saw the form again with no reason

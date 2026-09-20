@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { signOutIntentionally } from "@/lib/auth/signOut";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield, Upload } from "lucide-react";
@@ -249,7 +250,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
   const handleLogout = async () => {
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signOut();
+      const { error } = await signOutIntentionally();
       if (error) throw error;
       
       toast({
