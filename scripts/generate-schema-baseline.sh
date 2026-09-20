@@ -34,6 +34,24 @@ print((rows[0] or {}).get("ddl") or "" if rows else "")
 '
 }
 
+STORAGE_POLICIES=$(q <<'SQL'
+select string_agg(stmt, E'\n' order by stmt) as ddl from (
+  select 'DROP POLICY IF EXISTS ' || quote_ident(pol.polname) || ' ON storage.objects;' || E'\n' ||
+         'CREATE POLICY ' || quote_ident(pol.polname) || ' ON storage.objects AS ' ||
+         case pol.polpermissive when true then 'PERMISSIVE' else 'RESTRICTIVE' end || ' FOR ' ||
+         case pol.polcmd when 'r' then 'SELECT' when 'a' then 'INSERT' when 'w' then 'UPDATE'
+                         when 'd' then 'DELETE' else 'ALL' end || ' TO ' ||
+         coalesce((select string_agg(rolname, ', ') from pg_roles where oid = any(pol.polroles)), 'public') ||
+         coalesce(' USING (' || pg_get_expr(pol.polqual, pol.polrelid) || ')', '') ||
+         coalesce(' WITH CHECK (' || pg_get_expr(pol.polwithcheck, pol.polrelid) || ')', '') || ';' as stmt
+  from pg_policy pol
+  join pg_class c on c.oid = pol.polrelid
+  join pg_namespace n on n.oid = c.relnamespace
+  where n.nspname = 'storage' and c.relname = 'objects'
+) s;
+SQL
+)
+
 ENUMS=$(q <<'SQL'
 select string_agg(stmt, E'\n') as ddl from (
   select 'CREATE TYPE public.' || quote_ident(t.typname) || ' AS ENUM (' ||
@@ -175,6 +193,16 @@ HEADER
   echo
   echo "-- ── Triggers ───────────────────────────────────────────────────────────"
   echo "$TRIGGERS"
+  echo
+  echo "-- ── Storage policies and helper grants ─────────────────────────────────"
+  echo "-- storage.objects sits outside the public schema walked above. Without"
+  echo "-- these, a rebuild leaves contact-documents with RLS on and no policy, so"
+  echo "-- every browser upload and download is denied. The grants stop policies"
+  echo "-- that call is_admin() from raising \"permission denied for function\""
+  echo "-- instead of evaluating to false."
+  echo "GRANT EXECUTE ON FUNCTION public.is_admin() TO authenticated;"
+  echo "GRANT EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) TO authenticated;"
+  echo "$STORAGE_POLICIES"
 } > "$OUT"
 
 echo "wrote $OUT ($(wc -l < "$OUT") lines)"

@@ -193,8 +193,12 @@ describe("tenant isolation migration", () => {
       "chatbot_settings", "contact_activities", "contacts",
       "deals", "integration_connections", "property_listings",
     ]) {
+      // Accepts the bare form and the cached InitPlan form
+      // ( SELECT auth.uid() AS uid): both express the same rule, and the
+      // performance rewrite of 2026-09-20 switched every policy to the latter.
       const re = new RegExp(
-        `CREATE POLICY [^\\n]*ON public\\.${table} [^\\n]*FOR UPDATE[^\\n]*WITH CHECK \\(\\(auth\\.uid\\(\\) = user_id\\)\\);`
+        `CREATE POLICY [^\\n]*ON public\\.${table} [^\\n]*FOR UPDATE[^\\n]*` +
+          `WITH CHECK \\(\\((?:\\( SELECT )?auth\\.uid\\(\\)(?: AS uid\\))? = user_id\\)\\);`
       );
       expect(re.test(baseline), `${table} UPDATE policy without WITH CHECK`).toBe(true);
     }
