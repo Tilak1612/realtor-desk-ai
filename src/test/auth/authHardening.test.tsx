@@ -159,6 +159,14 @@ describe("the login page", () => {
     for (const gone of ["256-bit SSL", "Protected Session", "PIPEDA Compliant"]) {
       expect(card).not.toContain(gone);
     }
+    // Not just the login card: the same wording survived on /signup, which is
+    // the page where someone actually enters a card. Check every auth surface
+    // and both locales at once.
+    for (const claim of ["256-bit SSL", "SSL 256 bits", "256 bit SSL"]) {
+      expect(strip(src("src/i18n/config.ts")), claim).not.toContain(claim);
+      expect(strip(src("src/pages/Signup.tsx")), claim).not.toContain(claim);
+      expect(strip(src("src/components/auth/SignupAside.tsx")), claim).not.toContain(claim);
+    }
     expect(login()).not.toContain("sslNotice");
     // And the keys themselves are gone, so nothing can render them again.
     expect(i18n).not.toContain('protectedSession:');

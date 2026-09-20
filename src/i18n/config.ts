@@ -2727,14 +2727,14 @@ const resources = {
             trustTitle: "Your data",
             t1: "PIPEDA-compliant handling, with consent recorded at signup.",
             t2: "Stored on Canadian servers.",
-            t3: "256-bit SSL in transit and encrypted at rest.",
+            t3: "Encrypted in transit and at rest, on Canadian servers.",
             t4: "Your workspace is isolated — no other account can read your data."
           },
           agreeToThe: "I agree to the",
           privacyPolicy: "Privacy Policy",
           termsOfService: "Terms of Service",
           marketingConsent: "Email me product updates and Canadian real estate tips. You can unsubscribe anytime.",
-          sslNote: "Your data is stored securely on Canadian servers with 256-bit SSL encryption"
+          sslNote: "Your data is stored on Canadian servers, encrypted in transit and at rest"
         },
         forgot: {
           title: "Reset password",
@@ -5988,14 +5988,14 @@ const resources = {
             trustTitle: "Vos données",
             t1: "Traitement conforme à la LPRPDE, avec consentement enregistré à l'inscription.",
             t2: "Hébergées sur des serveurs canadiens.",
-            t3: "SSL 256 bits en transit et chiffrement au repos.",
+            t3: "Chiffré en transit et au repos, sur des serveurs canadiens.",
             t4: "Votre espace de travail est isolé — aucun autre compte ne peut lire vos données."
           },
           agreeToThe: "J'accepte la",
           privacyPolicy: "Politique de Confidentialité",
           termsOfService: "Conditions d'Utilisation",
           marketingConsent: "Envoyez-moi par courriel des nouveautés produit et des conseils en immobilier canadien. Vous pouvez vous désabonner à tout moment.",
-          sslNote: "Vos données sont stockées en toute sécurité sur des serveurs canadiens avec un chiffrement SSL 256 bits"
+          sslNote: "Vos données sont stockées sur des serveurs canadiens, chiffrées en transit et au repos"
         },
         forgot: {
           title: "Réinitialiser le mot de passe",
