@@ -293,6 +293,57 @@ function extractH1(src) {
   return inner || null;
 }
 
+/* --------------------------------------------------------------------- *
+ * 3b. Body copy, so the shell is not thin content.                       *
+ * Pull the text out of the page's own <h2>/<h3>/<p>/<li> elements. Only  *
+ * plain prose is taken — an element whose content includes a nested      *
+ * component, a map() or any expression other than t() is skipped, since  *
+ * we cannot render those without booting the app.                        *
+ * --------------------------------------------------------------------- */
+
+const INLINE_OK = /^(?:strong|em|b|i|span|br|a|code|u|small)$/i;
+
+function textOf(inner) {
+  // Reject anything with a nested component (capitalised tag) or a non-t()
+  // expression — those need the real renderer.
+  const tags = [...inner.matchAll(/<\/?([A-Za-z][\w.]*)/g)].map((m) => m[1]);
+  if (tags.some((tag) => !INLINE_OK.test(tag))) return null;
+
+  let s = inner;
+  if (/\bt\(/.test(s)) {
+    const resolved = resolveT(s);
+    if (!resolved) return null;
+    s = resolved;
+  }
+  s = s.replace(/\{["'`]\s*["'`]\}/g, ' '); // {" "}
+  if (/[{}]/.test(s)) return null; // some other expression survived
+  s = s
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&rsquo;|&#39;|&apos;/g, '’')
+    .replace(/&ldquo;/g, '“')
+    .replace(/&rdquo;/g, '”')
+    .replace(/&quot;/g, '"')
+    .replace(/&mdash;/g, '—')
+    .replace(/&ndash;/g, '–')
+    .replace(/&amp;/g, '&')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return s.length >= 25 ? s : null;
+}
+
+function extractBody(src, { limit = 40 } = {}) {
+  const out = [];
+  for (const m of src.matchAll(/<(h2|h3|p|li)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
+    const text = textOf(m[2]);
+    if (!text) continue;
+    if (out.some((b) => b.text === text)) continue;
+    out.push({ tag: m[1] === 'li' ? 'li' : m[1], text });
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
 /* ------------------------- *
  * 4. HTML shell construction *
  * ------------------------- */
@@ -404,7 +455,7 @@ function buildHead(baseHtml, { route, title, description, canonical }) {
   return head;
 }
 
-function buildShell({ route, h1, description }) {
+function buildShell({ route, h1, description, body }) {
   const links = FOOTER_LINKS.filter(([href]) => href !== route)
     .map(([href, label]) => `<li><a href="${href}">${esc(label)}</a></li>`)
     .join('');
@@ -419,12 +470,28 @@ function buildShell({ route, h1, description }) {
       route === '/' ? '' : route,
     )})document.getElementById('root').textContent='';</script>`;
 
+  // Wrap consecutive <li> runs back into a single list.
+  const bodyHtml = [];
+  let inList = false;
+  for (const block of body) {
+    if (block.tag === 'li' && !inList) {
+      bodyHtml.push('<ul>');
+      inList = true;
+    } else if (block.tag !== 'li' && inList) {
+      bodyHtml.push('</ul>');
+      inList = false;
+    }
+    bodyHtml.push(`<${block.tag}>${esc(block.text)}</${block.tag}>`);
+  }
+  if (inList) bodyHtml.push('</ul>');
+
   return [
     '<div id="root">',
     '<a href="/">Realtor Desk</a>',
     '<main>',
     `<h1>${esc(h1)}</h1>`,
     `<p>${esc(description)}</p>`,
+    bodyHtml.join(''),
     '<p><a href="/pricing">See pricing</a> or <a href="/demo">book a demo</a>.</p>',
     '</main>',
     `<nav aria-label="Site"><ul>${links}</ul></nav>`,
@@ -496,9 +563,11 @@ for (const route of routes) {
 
   const h1 = extractH1(src) || title;
 
+  const body = extractBody(src);
+
   const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical }).replace(
     /<div id="root">\s*<\/div>/,
-    buildShell({ route, h1, description }),
+    buildShell({ route, h1, description, body }),
   );
 
   // The whole point of this script is one unique, well-formed h1 and title per

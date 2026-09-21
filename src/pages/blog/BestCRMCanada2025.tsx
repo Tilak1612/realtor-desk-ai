@@ -15,7 +15,7 @@ const BestCRMCanada2025 = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Best CRM for Canadian Real Estate Agents in 2025"
+        title="Best CRM for Canadian Real Estate Agents"
         description="Compare the top real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities. Updated January 2025."
         keywords="best CRM Canada 2025, real estate CRM comparison, Canadian real estate CRM, PIPEDA compliant CRM, CREA DDF CRM"
         article
@@ -27,7 +27,7 @@ const BestCRMCanada2025 = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Best CRM for Canadian Real Estate Agents in 2025: Complete Comparison Guide",
+            "headline": "Best CRM for Canadian Real Estate Agents: Complete Comparison Guide",
             "description": "Compare the top real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -63,7 +63,7 @@ const BestCRMCanada2025 = () => {
             </div>
             
             <h1 className="mb-6">
-              Best CRM for Canadian Real Estate Agents in 2025: Complete Comparison Guide
+              Best CRM for Canadian Real Estate Agents: Complete Comparison Guide
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">
