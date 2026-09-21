@@ -15,7 +15,7 @@ const VsKvCore = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?"
+        title="RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents?"
         description="Compare RealtorDesk AI vs kvCORE for Canadian agents. Pricing, features, PIPEDA compliance, and why many switch to AI-first platforms."
         keywords="RealtorDesk AI vs kvCORE, kvCORE alternative Canada, Canadian real estate CRM comparison, PIPEDA compliant CRM"
         article
@@ -27,7 +27,7 @@ const VsKvCore = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?",
+            "headline": "RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents?",
             "description": "Compare RealtorDesk AI vs kvCORE for Canadian agents. Pricing, features, PIPEDA compliance, and why many switch to AI-first platforms.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -63,7 +63,7 @@ const VsKvCore = () => {
             </div>
             
             <h1 className="mb-6">
-              RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents in 2025?
+              RealtorDesk AI vs kvCORE: Which CRM Wins for Canadian Agents?
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

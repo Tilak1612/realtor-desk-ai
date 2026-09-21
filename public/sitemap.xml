@@ -35,6 +35,13 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.realtordesk.ai/what-is-a-real-estate-crm</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.realtordesk.ai/canadian-market</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -405,12 +412,6 @@
   </url>
   <url>
     <loc>https://www.realtordesk.ai/blog/community-launch</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.realtordesk.ai/blog/success-story</loc>
     <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

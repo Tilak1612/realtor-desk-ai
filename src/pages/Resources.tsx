@@ -165,7 +165,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.sales",
       icon: TrendingUp,
-      title: "Open House Sign-In Sheets: Digital vs Paper 2025 (CASL Compliance Guide)",
+      title: "Open House Sign-In Sheets: Digital vs Paper (CASL Compliance Guide)",
       excerpt: "Digital open house sign-in sheets capture 3x more contact details and enable instant follow-up. Learn CASL requirements, conversion rate differences, and get free templates.",
       readTime: 12,
       image: blogOpenHouse,

@@ -436,7 +436,7 @@ const resources = {
         hero: {
           badge: "Now in public beta · 14-day free trial",
           headline1: "Every lead in one place.",
-          headline2: "Built for Canada.",
+          headline2: "The real estate CRM for Canada.",
           subtitle: "Realtor Desk is the bilingual CRM for Canadian real estate. Score and triage new leads, keep every conversation in one thread, and move deals across a pipeline you can actually see — with your data hosted in Canada.",
           ctaPrimary: "Start 14-day free trial",
           ctaSecondary: "Book a 30-min demo",
@@ -2359,7 +2359,7 @@ const resources = {
             excerpt: "We just launched a community space where Canadian agents using Realtor Desk can share tips, ask questions, and shape what we build next."
           },
           aiTransformation: {
-            title: "How AI Is Transforming Canadian Real Estate in 2025",
+            title: "How AI Is Transforming Canadian Real Estate",
             excerpt: "Discover the latest AI innovations revolutionizing how Canadian realtors work, from predictive analytics to automated transaction management."
           },
           creaDdf: {
@@ -3700,7 +3700,7 @@ const resources = {
         hero: {
           badge: "Maintenant en bêta publique · Essai gratuit de 14 jours",
           headline1: "Chaque prospect, au même endroit.",
-          headline2: "Conçu pour le Canada.",
+          headline2: "Le CRM immobilier pour le Canada.",
           subtitle: "Realtor Desk est le CRM bilingue de l'immobilier canadien. Qualifiez et triez vos nouveaux prospects, gardez chaque échange dans un seul fil et faites avancer vos transactions dans un pipeline lisible — vos données hébergées au Canada.",
           ctaPrimary: "Essai gratuit de 14 jours",
           ctaSecondary: "Réserver une démo de 30 min",

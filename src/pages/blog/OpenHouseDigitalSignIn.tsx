@@ -19,7 +19,7 @@ const OpenHouseDigitalSignIn = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Open House Sign-In Sheets: Digital vs Paper 2025"
+        title="Open House Sign-In Sheets: Digital vs Paper"
         description="Digital open house sign-in sheets vs paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents."
         keywords="open house sign in sheet Canada, digital sign in sheet, CASL compliant open house, real estate open house leads, open house follow up"
         image={blogImage}

@@ -43,8 +43,8 @@ export default function Home() {
       <SEO
         title={
           isFr
-            ? "Realtor Desk — le CRM immobilier canadien propulsé par l'IA"
-            : "Realtor Desk — The Canadian real estate CRM, powered by AI"
+            ? "CRM immobilier pour courtiers canadiens | Realtor Desk"
+            : "Real Estate CRM for Canadian Agents | Realtor Desk"
         }
         description={
           isFr

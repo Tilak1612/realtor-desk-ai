@@ -17,7 +17,7 @@ const AICRMGuide = () => {
   return (
     <>
       <SEO
-        title="Complete Guide to AI CRM for Canadian Real Estate Agents 2025"
+        title="Complete Guide to AI CRM for Canadian Real Estate Agents"
         description="Everything Canadian Realtors need to know about AI-powered CRM systems, PIPEDA compliance, and how to choose the right platform."
         keywords="AI CRM for Canadian Realtors, best CRM for real estate agents Canada, PIPEDA compliant CRM, CREA DDF CRM integration"
         image={blogAICRMSocial}

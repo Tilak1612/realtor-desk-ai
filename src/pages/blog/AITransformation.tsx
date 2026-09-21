@@ -19,7 +19,7 @@ const AITransformation = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="How AI Is Transforming Canadian Real Estate in 2025"
+        title="How AI Is Transforming Canadian Real Estate"
         description="Discover the latest AI innovations transforming how Canadian realtors work, from predictive analytics to automated transaction management."
         keywords="ai real estate canada, real estate ai tools, canadian realtors ai, predictive analytics real estate, ai crm"
         image={blogImageSocial}
@@ -32,7 +32,7 @@ const AITransformation = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "How AI Is Transforming Canadian Real Estate in 2025",
+            "headline": "How AI Is Transforming Canadian Real Estate",
             "description": "Discover the latest AI innovations transforming how Canadian realtors work, from predictive analytics to automated transaction management.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -70,7 +70,7 @@ const AITransformation = () => {
             </div>
             
             <h1 className="mb-6">
-              How AI Is Transforming Canadian Real Estate in 2025
+              How AI Is Transforming Canadian Real Estate
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">
