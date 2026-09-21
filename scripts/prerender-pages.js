@@ -75,7 +75,7 @@ function readSitemapRoutes() {
  * The bundle lives as a plain object literal in src/i18n/config.ts.   *
  * ------------------------------------------------------------------ */
 
-function loadTranslations() {
+function loadEnTranslations() {
   const src = fs.readFileSync(path.join(repoRoot, 'src/i18n/config.ts'), 'utf-8');
   const start = src.indexOf('const resources = ');
   if (start === -1) return {};
@@ -108,24 +108,16 @@ function loadTranslations() {
 
   try {
     const obj = new Function('return (' + src.slice(objStart, end + 1) + ')')();
-    return { en: obj?.en?.translation ?? {}, fr: obj?.fr?.translation ?? {} };
+    return obj?.en?.translation ?? {};
   } catch {
-    return { en: {}, fr: {} };
+    return {};
   }
 }
 
-const BUNDLES = loadTranslations();
-
-// The locale currently being emitted. French falls back to the English string
-// when a key is untranslated, which matches what i18next does at runtime.
-let LOCALE = 'en';
+const EN = loadEnTranslations();
 
 function lookup(key) {
-  const path = key.split('.');
-  const read = (root) => path.reduce((acc, part) => (acc == null ? acc : acc[part]), root);
-  const primary = read(BUNDLES[LOCALE]);
-  if (typeof primary === 'string') return primary;
-  return read(BUNDLES.en);
+  return key.split('.').reduce((acc, part) => (acc == null ? acc : acc[part]), EN);
 }
 
 // Turn `{t('a.b')}` or `{t('a.b', 'Fallback copy')}` into the English string.
@@ -258,9 +250,7 @@ function literalProp(block, name) {
   // else-branch — the last string literal in the expression.
   const strings = [...expr.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map((m) => m[1]);
   if (/\bisFr\b|\blang\b|locale/.test(expr) && strings.length >= 2) {
-    // `isFr ? "<fr>" : "<en>"` — first string is the French branch.
-    const pick = LOCALE === 'fr' ? strings[0] : strings[strings.length - 1];
-    return pick.replace(/\\"/g, '"').replace(/\s+/g, ' ').trim() || null;
+    return strings[strings.length - 1].replace(/\\"/g, '"').replace(/\s+/g, ' ').trim() || null;
   }
   return null;
 }
@@ -405,23 +395,14 @@ function breadcrumbs(route, title) {
   };
 }
 
-function buildHead(baseHtml, { route, title, description, canonical, locale }) {
+function buildHead(baseHtml, { route, title, description, canonical }) {
   // index.html carries a <noscript> fallback holding the HOMEPAGE h1 and copy.
   // It was the previous attempt at serving crawlers something. Now that #root
   // holds this page's real h1 and description, that block would put a second,
   // wrong h1 and the homepage's description on all 67 pages. Drop it — a
   // browser without JS reads the #root content, which is strictly better.
   let head = baseHtml.replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
-  const base = canonical || SITE + (route === '/' ? '/' : route);
-  // The FR variant is a distinct URL (?lang=fr), so it self-canonicalises there
-  // rather than collapsing into the EN page. Mirrors SEO.tsx at runtime.
-  const url = locale === 'fr' ? base + '?lang=fr' : base;
-  if (locale === 'fr') {
-    head = head
-      .replace(/<html([^>]*)\slang="[^"]*"/, '<html$1 lang="fr-CA"')
-      .replace(/<meta\s+property="og:locale"\s+content="[^"]*"\s*\/?>/,
-        '<meta property="og:locale" content="fr_CA" />');
-  }
+  const url = canonical || SITE + (route === '/' ? '/' : route);
 
   const setTag = (pattern, replacement) => {
     head = pattern.test(head) ? head.replace(pattern, replacement) : head;
@@ -456,9 +437,9 @@ function buildHead(baseHtml, { route, title, description, canonical, locale }) {
   // Canonical + hreflang: replace an existing canonical, otherwise inject.
   const linkBlock =
     `<link rel="canonical" href="${esc(url)}" />` +
-    `<link rel="alternate" hreflang="en-CA" href="${esc(base)}?lang=en" />` +
-    `<link rel="alternate" hreflang="fr-CA" href="${esc(base)}?lang=fr" />` +
-    `<link rel="alternate" hreflang="x-default" href="${esc(base)}" />`;
+    `<link rel="alternate" hreflang="en-CA" href="${esc(url)}?lang=en" />` +
+    `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}?lang=fr" />` +
+    `<link rel="alternate" hreflang="x-default" href="${esc(url)}" />`;
   if (/<link\s+rel="canonical"[^>]*>/.test(head)) {
     head = head.replace(/<link\s+rel="canonical"[^>]*>/, linkBlock);
   } else {
@@ -552,45 +533,6 @@ let written = 0;
 const unresolved = [];
 const seenTitles = new Map();
 
-function emit(route, file, locale) {
-  LOCALE = locale;
-  const src = fs.readFileSync(file, 'utf-8');
-  const block = extractSeoBlock(src);
-  const title = block && literalProp(block, 'title');
-  const description = block && literalProp(block, 'description');
-  const canonical = block && literalProp(block, 'canonicalUrl');
-  if (!title || !description) return { ok: false, reason: 'no literal <SEO> title/description' };
-
-  const fullTitle =
-    title.includes('Realtor Desk') || title.includes('RealtorDesk')
-      ? title
-      : `${title} | Realtor Desk`;
-  const h1 = extractH1(src) || title;
-  const body = extractBody(src);
-
-  const html = buildHead(baseHtml, {
-    route,
-    title: fullTitle,
-    description,
-    canonical,
-    locale,
-  }).replace(/<div id="root">\s*<\/div>/, buildShell({ route, h1, description, body }));
-
-  const h1Count = (html.match(/<h1[\s>]/g) || []).length;
-  if (h1Count !== 1) return { ok: false, reason: `emitted ${h1Count} <h1> elements, expected exactly 1` };
-  if (/[{}<>]/.test(fullTitle) || /\bt\(/.test(fullTitle)) {
-    return { ok: false, reason: `title still contains raw JSX: ${fullTitle.slice(0, 60)}` };
-  }
-
-  // EN at dist/<route>, FR at dist/fr/<route>. vercel.json rewrites
-  // ?lang=fr onto the /fr tree, so no user-facing URL changes.
-  const localeRoot = locale === 'fr' ? path.join(distDir, 'fr') : distDir;
-  const outDir = route === '/' ? localeRoot : path.join(localeRoot, route);
-  fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf-8');
-  return { ok: true, title: fullTitle };
-}
-
 for (const route of routes) {
   if (redirectRoutes.has(route)) {
     unresolved.push(`${route} (listed in sitemap.xml but App.tsx redirects it — remove from the sitemap)`);
@@ -602,21 +544,52 @@ for (const route of routes) {
     continue;
   }
 
-  const en = emit(route, file, 'en');
-  if (!en.ok) {
-    unresolved.push(`${route} (${en.reason} in ${path.relative(repoRoot, file)})`);
-    continue;
-  }
-  const fr = emit(route, file, 'fr');
-  if (!fr.ok) {
-    unresolved.push(`${route} [fr] (${fr.reason})`);
+  const src = fs.readFileSync(file, 'utf-8');
+  const block = extractSeoBlock(src);
+  const title = block && literalProp(block, 'title');
+  const description = block && literalProp(block, 'description');
+  const canonical = block && literalProp(block, 'canonicalUrl');
+
+  if (!title || !description) {
+    unresolved.push(`${route} (no literal <SEO> title/description in ${path.relative(repoRoot, file)})`);
     continue;
   }
 
-  if (seenTitles.has(en.title)) {
-    unresolved.push(`${route} (duplicate title, same as ${seenTitles.get(en.title)})`);
+  // Match the runtime SEO component: brand the title unless it already is branded.
+  const fullTitle =
+    title.includes('Realtor Desk') || title.includes('RealtorDesk')
+      ? title
+      : `${title} | Realtor Desk`;
+
+  const h1 = extractH1(src) || title;
+
+  const body = extractBody(src);
+
+  const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical }).replace(
+    /<div id="root">\s*<\/div>/,
+    buildShell({ route, h1, description, body }),
+  );
+
+  // The whole point of this script is one unique, well-formed h1 and title per
+  // page. Verify the emitted HTML rather than trusting the extraction.
+  const h1Count = (html.match(/<h1[\s>]/g) || []).length;
+  if (h1Count !== 1) {
+    unresolved.push(`${route} (emitted ${h1Count} <h1> elements, expected exactly 1)`);
+    continue;
+  }
+  if (/[{}<>]/.test(fullTitle) || /\bt\(/.test(fullTitle)) {
+    unresolved.push(`${route} (title still contains raw JSX: ${fullTitle.slice(0, 60)})`);
+    continue;
+  }
+
+  const outDir = route === '/' ? distDir : path.join(distDir, route);
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf-8');
+
+  if (seenTitles.has(fullTitle)) {
+    unresolved.push(`${route} (duplicate title, same as ${seenTitles.get(fullTitle)})`);
   } else {
-    seenTitles.set(en.title, route);
+    seenTitles.set(fullTitle, route);
   }
   written++;
 }
