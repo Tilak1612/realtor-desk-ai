@@ -457,15 +457,23 @@ comparisons that do not rot.
   Toronto-vs-Vancouver, Edmonton market) target home buyers and sellers, not
   agents. That is off-ICP traffic for a B2B SaaS. Worth a decision on whether
   they stay.
-- **French — now done.** The prerenderer emits both locales: 68 EN + 68 FR
-  pages, French resolved against the `fr` bundle with `lang="fr-CA"`, `fr_CA`
-  og:locale and a `?lang=fr` canonical. Output goes to `dist/fr/<route>` and
-  `vercel.json` rewrites `?lang=fr` onto that tree, so no user-facing URL
-  changes. The rewrites are enumerated per route rather than a catch-all,
-  because a blanket rule would 404 `/login?lang=fr` and `/signup?lang=fr`;
-  `src/test/seo/frRewrites.test.ts` fails if they drift from the sitemap.
-  The one remaining FR gap is *content*: pages with no French translation fall
-  back to English strings, so their FR variant duplicates the EN copy.
+- **French — attempted, reverted, and here is exactly why.** The FR variant
+  lives at `?lang=fr`. I built locale-aware prerendering (68 FR pages with real
+  French titles, H1s, `lang="fr-CA"` and `?lang=fr` canonicals) into
+  `dist/fr/<route>`, and added `vercel.json` rewrites mapping `?lang=fr` onto
+  that tree. **It does not work, and cannot.** Vercel checks the filesystem
+  *before* applying rewrites, and filesystem matching ignores the query string
+  — so `/pricing?lang=fr` matches `pricing/index.html` and the rewrite never
+  fires. This is the same ordering that makes the English prerender work.
+  Verified on the deployed preview: `?lang=fr` returned the English title.
+  Reverted, because leaving `/fr/*` files that no React Router route matches
+  would give crawlers indexable URLs that render the 404 page.
+
+  **The real fix is path-based locales** (`/fr/pricing`), which needs three
+  things together: i18n detection from the path prefix, React Router serving
+  the `/fr` tree, and canonical/hreflang/sitemap moved onto the new URLs. That
+  is a contained project, not a config tweak. Until then French is invisible to
+  non-JS crawlers, exactly as it was before.
 - **`/pricing`, `/faq`, `/resources`** still prerender thin (70–102 words)
   because their content lives in data arrays rather than JSX prose.
 - **Re-audit**: the OpenSEO crawl reads the live site, so it cannot confirm these
