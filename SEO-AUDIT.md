@@ -480,7 +480,49 @@ comparisons that do not rot.
   fixes until the branch is deployed. Verification above is against the build
   output. Re-run `run_site_audit` after deploy.
 
-### 11. Recommended order next
+### 11. Backlinks and authority (measured 2026-09-21)
+
+| Metric | Value |
+|---|---|
+| Domain rank | **0** |
+| Backlinks | 17 |
+| Referring domains | 11 |
+| Backlink spam score | **40** |
+| Broken backlinks | 0 |
+
+Only one referring domain resolves in detail: `tinyhunt.dev` (7 backlinks, spam
+score 4) — a launch directory. Referring domains sat at **1** from March through
+July 2026, then jumped to **10 in August** (9 new in a single month). Worth
+confirming that jump was intentional; a sudden 1→10 month alongside a spam score
+of 40 is the shape of a directory blast, and if nobody on the team placed those,
+they are worth reviewing.
+
+**What this means for targeting.** Rank 0 with 11 referring domains will not
+outrank Salesforce, Forbes or Capterra on the head term any time soon. It does
+not have to: the target cluster sits at **KD 13–29**, and the Canadian SERP is
+padded with beatable pages (`joinrivercity.ca`, `cdtechnology.ca`,
+`agentroof.com`). On-page work is the binding constraint right now, not links —
+which is why the prerender fix comes first.
+
+**Opportunities that are real, in rough order of value:**
+
+1. **capterra.ca and getapp.ca directory listings.** Capterra ranks #3–#7 for
+   four of our target queries. A listing is both a citation from a domain Google
+   already trusts for this category and a referral channel. Free to claim.
+2. **Reddit `r/RealEstateTechnology`** ranks #2 for "best crm for real estate
+   canada" and #4 for "best crm for real estate". Genuine participation only —
+   the subreddit removes vendor spam, and a removed post is worse than nothing.
+3. **Canadian real estate boards and associations** (provincial boards, local
+   REALTOR® associations). Highly relevant, hard to get, durable.
+4. **theclose.com / housingwire.com** review coverage — both rank for competitor
+   brand terms. Editorial, so it depends on the product being newsworthy.
+5. **Comparison-site inclusion** in the "best real estate CRM" listicles that
+   currently occupy the SERP. Most accept vendor submissions.
+
+Not recommended: paid link placements or further directory blasts. With a spam
+score already at 40, more low-quality links are a liability.
+
+### 12. Recommended order next
 
 1. Deploy and re-run the OpenSEO site audit to confirm the six issue classes clear.
 2. Submit the updated sitemap in Search Console; request indexing for `/` and
