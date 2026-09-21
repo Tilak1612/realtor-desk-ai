@@ -522,7 +522,44 @@ which is why the prerender fix comes first.
 Not recommended: paid link placements or further directory blasts. With a spam
 score already at 40, more low-quality links are a liability.
 
-### 12. Recommended order next
+### 12. Verified against the live site (post-deploy)
+
+Both changes are merged and deployed. OpenSEO re-crawled production after each.
+
+| Issue | Baseline (2026-09-21, pre-fix) | After prerender (#251) | After internal linking (#252) |
+|---|---:|---:|---:|
+| Duplicate `<title>` | 68 | **0** | **0** |
+| Duplicate meta description | 68 | **0** | **0** |
+| Missing `<h1>` | 68 | **0** | **0** |
+| No outgoing links | 68 | **0** | **0** |
+| Thin content | 68 | 18 | **17** |
+| Orphan page | 67 | 53 | **32** |
+
+Four of the six issue classes are eliminated outright. Thin content is down 75%
+and orphans 52%.
+
+Spot-checked on production: `/`, `/pricing`, `/what-is-a-real-estate-crm` and
+`/vs/wise-agent` each serve their own title and H1 in raw HTML, and
+`/resources` serves all 16 comparison-hub links as real anchors.
+
+**Info-level items the crawler can only now see** (they were invisible while
+every page was an empty shell):
+
+| Issue | Count |
+|---|---:|
+| Title too long | 37 |
+| Meta description too long | 17 |
+| Heading levels skip | 8 |
+| Canonicalised to another URL | 1 |
+
+These are worth a pass but none of them block indexing.
+
+**Remaining 32 orphans** are pages outside the comparison hub — `/fintrac-compliance`,
+individual blog posts and resource articles. The pattern that fixed the
+comparison pages applies: they need a hub or contextual links from related
+content, not more footer entries.
+
+### 13. Recommended order next
 
 1. Deploy and re-run the OpenSEO site audit to confirm the six issue classes clear.
 2. Submit the updated sitemap in Search Console; request indexing for `/` and
