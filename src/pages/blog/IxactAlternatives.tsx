@@ -100,7 +100,7 @@ const IxactAlternatives = () => {
 
             <h3>Reason #3: Pricing vs Value Gap</h3>
             <p>
-              IXACT charges $39-59 USD/month ($53-80 CAD). That's not expensive, but what are you getting? A basic contact database with email marketing—features that modern AI-powered CRMs include along with intelligent automation, faster response times, and better lead conversion.
+              IXACT lists $46.75 USD/month billed annually, or $55 USD/month billed monthly. That's not expensive, but what are you getting? A basic contact database with email marketing—features that modern AI-powered CRMs include along with intelligent automation, faster response times, and better lead conversion.
             </p>
 
             <h3>Reason #4: Limited Modern Integrations</h3>
@@ -372,12 +372,12 @@ const IxactAlternatives = () => {
             <ul>
               <li><strong>Agent Plan:</strong> $149 CAD/month</li>
               <li><strong>Year 1 total:</strong> $1,788 CAD</li>
-              <li><strong>Difference:</strong> $828-1,152 more than IXACT</li>
+              <li><strong>Difference:</strong> IXACT lists $561 USD/year on its annual plan; the gap depends on the exchange rate on the day you pay</li>
             </ul>
 
             <h3>Value Analysis: Is the Extra Cost Worth It?</h3>
             <p>
-              IXACT saves you $828/year. But consider what you get with RealtorDesk AI:
+              IXACT is the cheaper line item. But consider what you get with RealtorDesk AI:
             </p>
             <ul>
               <li><strong>AI automation saves 10-15 hours/week:</strong> At $50/hour value = $26,000-39,000/year</li>
