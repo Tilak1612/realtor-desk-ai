@@ -301,7 +301,25 @@ function extractH1(src) {
  * we cannot render those without booting the app.                        *
  * --------------------------------------------------------------------- */
 
-const INLINE_OK = /^(?:strong|em|b|i|span|br|a|code|u|small)$/i;
+const INLINE_OK = /^(?:strong|em|b|i|span|br|a|code|u|small|Link)$/i;
+
+// Internal links are the whole point of the crawl graph: without them every
+// page below the footer nav is an orphan. React Router's <Link to="/x"> is
+// normalised to <a href="/x"> and kept; everything else is flattened to text.
+function normaliseLinks(html) {
+  return html
+    .replace(/<Link\s+([^>]*?)to="(\/[^"]*)"([^>]*)>/g, '<a href="$2">')
+    .replace(/<\/Link>/g, '</a>')
+    .replace(/<a\s+([^>]*?)href="(\/[^"]*)"([^>]*)>/g, '<a href="$2">');
+}
+
+// Escape text but leave the anchors we just normalised intact.
+function escapeAroundAnchors(html) {
+  return html
+    .split(/(<a href="\/[^"]*">|<\/a>)/g)
+    .map((part) => (/^<\/?a(\s|>)/.test(part) ? part : esc(part)))
+    .join('');
+}
 
 function textOf(inner) {
   // Reject anything with a nested component (capitalised tag) or a non-t()
@@ -309,7 +327,7 @@ function textOf(inner) {
   const tags = [...inner.matchAll(/<\/?([A-Za-z][\w.]*)/g)].map((m) => m[1]);
   if (tags.some((tag) => !INLINE_OK.test(tag))) return null;
 
-  let s = inner;
+  let s = normaliseLinks(inner);
   if (/\bt\(/.test(s)) {
     const resolved = resolveT(s);
     if (!resolved) return null;
@@ -318,7 +336,8 @@ function textOf(inner) {
   s = s.replace(/\{["'`]\s*["'`]\}/g, ' '); // {" "}
   if (/[{}]/.test(s)) return null; // some other expression survived
   s = s
-    .replace(/<[^>]+>/g, '')
+    // Strip every tag except the internal anchors normalised above.
+    .replace(/<(?!\/?a(?:\s|>))[^>]+>/g, '')
     .replace(/&nbsp;/g, ' ')
     .replace(/&rsquo;|&#39;|&apos;/g, '’')
     .replace(/&ldquo;/g, '“')
@@ -329,10 +348,19 @@ function textOf(inner) {
     .replace(/&amp;/g, '&')
     .replace(/\s+/g, ' ')
     .trim();
-  return s.length >= 25 ? s : null;
+  const visible = s.replace(/<[^>]+>/g, '').trim();
+  // The 25-char floor exists to drop stray fragments, but it was also dropping
+  // short link labels ("Switching from Lofty" is 20 chars), which silently
+  // re-orphaned the very pages the hub was added to link. Anything carrying an
+  // internal link is kept regardless of length.
+  const hasInternalLink = /<a href="\//.test(s);
+  if (!hasInternalLink && visible.length < 25) return null;
+  return visible.length > 0 ? s : null;
 }
 
-function extractBody(src, { limit = 40 } = {}) {
+// 40 was too low: on a long hub page like /resources the comparison links sat
+// past the cut, so the pages they de-orphan stayed orphaned.
+function extractBody(src, { limit = 140 } = {}) {
   const out = [];
   for (const m of src.matchAll(/<(h2|h3|p|li)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
     const text = textOf(m[2]);
@@ -481,7 +509,8 @@ function buildShell({ route, h1, description, body }) {
       bodyHtml.push('</ul>');
       inList = false;
     }
-    bodyHtml.push(`<${block.tag}>${esc(block.text)}</${block.tag}>`);
+    // block.text already has its text escaped and its anchors preserved.
+    bodyHtml.push(`<${block.tag}>${escapeAroundAnchors(block.text)}</${block.tag}>`);
   }
   if (inList) bodyHtml.push('</ul>');
 

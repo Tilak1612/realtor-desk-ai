@@ -669,6 +669,114 @@ const Resources = () => {
         </div>
       </section>
 
+      {/* Compare & switch hub.
+          The /vs/* and /switch-from-* pages had no inbound links from anywhere
+          on the site — the 2026-09-21 crawl flagged them as orphans, which is
+          also why they never accumulated any ranking signal. This is their hub. */}
+      <section className="section-padding border-t">
+        <div className="container-custom">
+          <h2 className="mb-3">Compare Realtor Desk</h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl">
+            Side-by-side comparisons with the CRMs Canadian agents most often
+            weigh us against, plus what moving your data actually involves.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-base font-semibold mb-3">Head to head</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/what-is-a-real-estate-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    What is a real estate CRM?
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/vs/wise-agent" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs Wise Agent
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/vs/ixact" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs IXACT Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/vs/boldtrail" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs BoldTrail
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/vs/lofty" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs Lofty
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/lofty-alternative" className="text-muted-foreground hover:text-primary transition-colors">
+                    Lofty alternatives for Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/best-crm-canada-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    Best CRM for Canadian real estate agents
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/real-estate-crm-buying-guide" className="text-muted-foreground hover:text-primary transition-colors">
+                    Real estate CRM buying guide
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold mb-3">Switching over</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/switch-from-wise-agent" className="text-muted-foreground hover:text-primary transition-colors">
+                    Switching from Wise Agent
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/switch-from-ixact" className="text-muted-foreground hover:text-primary transition-colors">
+                    Switching from IXACT Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/switch-from-boldtrail" className="text-muted-foreground hover:text-primary transition-colors">
+                    Switching from BoldTrail
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/switch-from-lofty" className="text-muted-foreground hover:text-primary transition-colors">
+                    Switching from Lofty
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/switch-from-liondesk" className="text-muted-foreground hover:text-primary transition-colors">
+                    Switching from LionDesk
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/switch-from-follow-up-boss" className="text-muted-foreground hover:text-primary transition-colors">
+                    Switching from Follow Up Boss
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/ai-powered-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    How the AI features work
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/pipeda-compliance" className="text-muted-foreground hover:text-primary transition-colors">
+                    PIPEDA and your client data
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Newsletter Section */}
       <section className="section-padding bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white">
         <div className="container-custom text-center">
