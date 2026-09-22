@@ -9,7 +9,7 @@
     { "source": "/compare", "destination": "/compare/boldtrail", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
