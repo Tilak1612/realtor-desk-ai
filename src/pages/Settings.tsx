@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield, Upload } from "lucide-react";
 import MFASetup from "@/components/settings/MFASetup";
+import GoogleCalendarCard from "@/components/integrations/GoogleCalendarCard";
 import ChangePassword, { useHasPasswordAuth } from "@/components/settings/ChangePassword";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -495,6 +496,9 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
               </form>
             </CardContent>
           </Card>
+
+          {/* Google Calendar integration */}
+          <GoogleCalendarCard />
 
           {/* Subscription Status Section */}
           <Card className={subscribed ? "border-accent/30 bg-accent/5" : trialExpired ? "border-destructive/30 bg-destructive/5" : "border-primary/30 bg-primary/5"}>
