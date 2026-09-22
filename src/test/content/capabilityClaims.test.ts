@@ -39,6 +39,7 @@ const ROOT = join(__dirname, "..", "..", "..");
 const i18n = readFileSync(join(ROOT, "src/i18n/config.ts"), "utf8");
 const home = readFileSync(join(ROOT, "src/pages/rd/Home.tsx"), "utf8");
 const features = readFileSync(join(ROOT, "src/pages/rd/Features.tsx"), "utf8");
+const integrationHub = readFileSync(join(ROOT, "src/pages/IntegrationHub.tsx"), "utf8");
 /**
  * Comments are not copy. Stripping them matters: the note in Home.tsx saying
  * why "Time to first AI response" was deleted contains the phrase itself, and
@@ -266,6 +267,53 @@ describe("capability claims", () => {
       "utf8"
     );
     expect(/create table[^;]*market/i.test(schema)).toBe(false);
+  });
+
+  it("does not sell calendar sync or contact import that is not built", () => {
+    // 2026-09-21: GOOGLE_CLIENT_ID/SECRET were added in Vercel, which prompted
+    // a look at what the calendar integration actually does. The OAuth flow in
+    // oauth-integration-auth is real, the token is encrypted and stored, and
+    // sync-health-check probes it. But nothing in the repo reads or writes a
+    // calendar event or imports a contact, and the production schema has no
+    // appointments, events or showings table to sync into. Meanwhile the site
+    // sold "Two-way sync showings and meetings" as available.
+    //
+    // This guard is pinned to the absence of that code: when a sync ships, the
+    // assertions below start failing and point at the copy that may return.
+    const fnRoot = join(ROOT, "supabase/functions");
+    const fnSources = readdirSync(fnRoot)
+      .filter((d) => statSync(join(fnRoot, d)).isDirectory())
+      .flatMap((d) => {
+        const f = join(fnRoot, d, "index.ts");
+        return existsSync(f) ? [{ name: d, body: readFileSync(f, "utf8") }] : [];
+      });
+
+    // sync-health-check hits calendarList purely to test whether the stored
+    // token still authenticates; that is a liveness probe, not a sync.
+    const writesEvents = fnSources.filter(
+      (f) =>
+        f.name !== "sync-health-check" &&
+        /calendar\/v3\/calendars|events\?|events\.insert|\/me\/events/.test(f.body)
+    );
+    expect(writesEvents.map((f) => f.name)).toEqual([]);
+
+    for (const phrase of [
+      "Two-way sync showings and meetings",
+      "Two-way sync with Google Calendar",
+      "Sync with Microsoft Outlook calendar",
+      "Import and sync Google contacts",
+      "Import and sync Outlook contacts",
+    ]) {
+      expect(integrationHub + home + features + comparisons).not.toContain(phrase);
+    }
+
+    // Calendar and contacts must sit in the roadmap list, not "available today".
+    const nowBlock = features.slice(
+      features.indexOf("CAPS_NOW"),
+      features.indexOf("CAPS_ROADMAP")
+    );
+    expect(nowBlock).not.toContain("capCalendar");
+    expect(nowBlock).not.toContain("capContacts");
   });
 
   it("labels every roadmap capability on the features page", () => {

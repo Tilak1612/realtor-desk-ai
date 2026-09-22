@@ -35,7 +35,7 @@ const SwitchFromFollowUpBoss = () => {
     },
     {
       q: "I have 200+ integrations set up in Follow Up Boss. Will I lose those?",
-      a: "Follow Up Boss's 200+ integrations are its biggest strength. RealtorDesk AI focuses on deep native integrations for Canadian agents rather than breadth. We cover the integrations that matter most today — Twilio, Google Calendar, email automation — and CREA DDF® (Canadian MLS) is planned for Q3 2026. We're adding more every quarter."
+      a: "Follow Up Boss's 200+ integrations are its biggest strength. RealtorDesk AI focuses on deep native integrations for Canadian agents rather than breadth. We cover the integrations that matter most today — Twilio SMS, inbound webhooks via Zapier and Make, and email automation. Google Calendar and Outlook connect today with event sync in build, and CREA DDF® (Canadian MLS) is planned for Q3 2026. We're adding more every quarter."
     },
     {
       q: "Does RealtorDesk AI work for teams?",

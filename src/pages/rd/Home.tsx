@@ -272,7 +272,11 @@ function TrustStrip({ t }: { t: TFn }) {
   // came out at the same time: they are our plumbing, not something the
   // agent connects, and OpenAI was wrong anyway -- the in-app assistant runs
   // on Gemini through the Lovable gateway.
-  const logos = ["Google Calendar", "Outlook", "Zapier", "Make", "Twilio"];
+  // Google Calendar and Outlook came out on 2026-09-21: the OAuth connection
+  // is built, but nothing reads or writes events, so "Works with" overstated
+  // it. They go back in when sync ships. Zapier and Make are real (they POST
+  // to webhook-receiver) and Twilio is real (send-sms).
+  const logos = ["Zapier", "Make", "Twilio"];
   // Decorative paper texture behind the strip. image-set rather than
   // <Picture> because it is a background, not content: no alt text to
   // write, nothing to announce, and it must not enter the accessibility
