@@ -56,8 +56,6 @@ const PILLARS: Pillar[] = [
 // by looking at identical cards, so the split is structural, not a footnote.
 const CAPS_NOW: [string, string][] = [
   ["featuresRd.capImportTitle", "featuresRd.capImportBody"],
-  ["featuresRd.capCalendarTitle", "featuresRd.capCalendarBody"],
-  ["featuresRd.capContactsTitle", "featuresRd.capContactsBody"],
   ["featuresRd.capWebhooksTitle", "featuresRd.capWebhooksBody"],
   ["featuresRd.capSmsTitle", "featuresRd.capSmsBody"],
   ["featuresRd.capConsentTitle", "featuresRd.capConsentBody"],
@@ -66,6 +64,12 @@ const CAPS_NOW: [string, string][] = [
 ];
 
 const CAPS_ROADMAP: [string, string][] = [
+  // Calendar and contacts: the OAuth connection is built and the token is
+  // stored and health-checked, but nothing reads or writes events or imports
+  // contacts yet — sync-health-check only probes calendarList to see whether
+  // the token is still valid. Listed as shipped until 2026-09-21.
+  ["featuresRd.capCalendarTitle", "featuresRd.capCalendarBody"],
+  ["featuresRd.capContactsTitle", "featuresRd.capContactsBody"],
   ["featuresRd.capDdfTitle", "featuresRd.capDdfBody"],
   ["featuresRd.capSequencesTitle", "featuresRd.capSequencesBody"],
   ["featuresRd.capChatTitle", "featuresRd.capChatBody"],

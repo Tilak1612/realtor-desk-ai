@@ -69,8 +69,8 @@ const Integrations = () => {
       titleKey: "integrationsPage.categories.calendarTools",
       icon: <Calendar className="w-5 h-5" />,
       integrations: [
-        { name: "Google Calendar", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/google-calendar-2020.svg" },
-        { name: "Outlook Calendar", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/outlook-1.svg" },
+        { name: "Google Calendar", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/google-calendar-2020.svg" },
+        { name: "Outlook Calendar", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/outlook-1.svg" },
       ]
     },
     {

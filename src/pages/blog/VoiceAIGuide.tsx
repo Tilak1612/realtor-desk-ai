@@ -710,7 +710,7 @@ const VoiceAIGuide = () => {
                   <li>✓ Connect Voice AI to CRM</li>
                   <li>✓ Map lead fields (name, phone, property interest)</li>
                   <li>✓ Set up auto-logging for all calls</li>
-                  <li>✓ Sync Google Calendar or Outlook</li>
+                  <li>✓ Connect Google Calendar or Outlook (event sync in build)</li>
                   <li>✓ Configure lead status updates</li>
                 </ul>
                 <p className="text-sm text-gray-600 mt-3"><strong>Time:</strong> 45-60 minutes</p>
