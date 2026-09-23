@@ -1175,3 +1175,46 @@ DROP POLICY IF EXISTS contact_documents_update_own ON storage.objects;
 CREATE POLICY contact_documents_update_own ON storage.objects AS PERMISSIVE FOR UPDATE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text))) WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
 DROP POLICY IF EXISTS contact_documents_delete_own ON storage.objects;
 CREATE POLICY contact_documents_delete_own ON storage.objects AS PERMISSIVE FOR DELETE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- google_calendar_connections
+--
+-- Added to production ahead of this baseline by
+-- supabase/migrations/20260921000001_google_calendar_connections.sql, which is
+-- now archived: the drift check allows exactly one applied migration, and two
+-- files in supabase/migrations/ failed it on main.
+--
+-- The DDL below was read back from the live database (columns via
+-- information_schema, policies via pg_policies) rather than copied from that
+-- file, so it records what production actually has. Both agreed.
+--
+-- Written by api/integrations/google/[action].ts, the Vercel function. Tokens
+-- are encrypted before they reach this table; encrypted_tokens is never plain.
+CREATE TABLE IF NOT EXISTS public.google_calendar_connections (
+    user_id uuid NOT NULL,
+    google_email text,
+    calendar_id text,
+    scope text,
+    encrypted_tokens text,
+    status text DEFAULT 'connected'::text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_pkey' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_pkey PRIMARY KEY (user_id); END IF; END $c$;
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_status_check' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_status_check CHECK (status = ANY (ARRAY['connected'::text, 'disconnected'::text])); END IF; END $c$;
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_user_id_fkey' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE; END IF; END $c$;
+
+ALTER TABLE public.google_calendar_connections ENABLE ROW LEVEL SECURITY;
+
+REVOKE ALL ON TABLE public.google_calendar_connections FROM anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.google_calendar_connections TO authenticated;
+
+DROP POLICY IF EXISTS gcal_select_own ON public.google_calendar_connections;
+CREATE POLICY gcal_select_own ON public.google_calendar_connections AS PERMISSIVE FOR SELECT TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS gcal_insert_own ON public.google_calendar_connections;
+CREATE POLICY gcal_insert_own ON public.google_calendar_connections AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS gcal_update_own ON public.google_calendar_connections;
+CREATE POLICY gcal_update_own ON public.google_calendar_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid))) WITH CHECK ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS gcal_delete_own ON public.google_calendar_connections;
+CREATE POLICY gcal_delete_own ON public.google_calendar_connections AS PERMISSIVE FOR DELETE TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid)));
