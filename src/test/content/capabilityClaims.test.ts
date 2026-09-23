@@ -270,32 +270,38 @@ describe("capability claims", () => {
   });
 
   it("does not sell calendar sync or contact import that is not built", () => {
-    // 2026-09-21: GOOGLE_CLIENT_ID/SECRET were added in Vercel, which prompted
-    // a look at what the calendar integration actually does. The OAuth flow in
-    // oauth-integration-auth is real, the token is encrypted and stored, and
-    // sync-health-check probes it. But nothing in the repo reads or writes a
-    // calendar event or imports a contact, and the production schema has no
-    // appointments, events or showings table to sync into. Meanwhile the site
-    // sold "Two-way sync showings and meetings" as available.
+    // 2026-09-22, corrected. An earlier version of this guard scanned only
+    // supabase/functions and concluded nothing could write a calendar event.
+    // That was wrong: api/integrations/google/[action].ts is a Vercel
+    // serverless function that does OAuth, creates an app-owned calendar and
+    // exposes an events endpoint that POSTs to calendar/v3. It reads
+    // GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET from Vercel, which is the right
+    // place for them. The guard missed a whole runtime.
     //
-    // This guard is pinned to the absence of that code: when a sync ships, the
-    // assertions below start failing and point at the copy that may return.
-    const fnRoot = join(ROOT, "supabase/functions");
-    const fnSources = readdirSync(fnRoot)
-      .filter((d) => statSync(join(fnRoot, d)).isDirectory())
-      .flatMap((d) => {
-        const f = join(fnRoot, d, "index.ts");
-        return existsSync(f) ? [{ name: d, body: readFileSync(f, "utf8") }] : [];
+    // What still makes "sync" untrue is narrower, and this is what to pin:
+    //
+    //   - Nothing in src/ calls the events endpoint. GoogleCalendarCard only
+    //     uses connect / status / disconnect, so no appointment or showing
+    //     ever reaches Google on its own.
+    //   - The scope is calendar.app.created, which grants access only to the
+    //     calendar the app itself made. It cannot read or write the user's
+    //     existing calendar, so "sits on the calendar you already use" is not
+    //     achievable under this scope at all.
+    //   - There is still no appointments / showings table to sync from.
+    //   - Outlook and Google Contacts have the OAuth flow only.
+    const walkSrc = (dir: string): string[] =>
+      readdirSync(dir).flatMap((e) => {
+        const full = join(dir, e);
+        return statSync(full).isDirectory() ? walkSrc(full) : [full];
       });
+    const appSrc = walkSrc(join(ROOT, "src"))
+      .filter((f) => /\.(ts|tsx)$/.test(f) && !f.includes("__tests__") && !f.includes("/test/"))
+      .map((f) => readFileSync(f, "utf8"))
+      .join("\n");
 
-    // sync-health-check hits calendarList purely to test whether the stored
-    // token still authenticates; that is a liveness probe, not a sync.
-    const writesEvents = fnSources.filter(
-      (f) =>
-        f.name !== "sync-health-check" &&
-        /calendar\/v3\/calendars|events\?|events\.insert|\/me\/events/.test(f.body)
-    );
-    expect(writesEvents.map((f) => f.name)).toEqual([]);
+    // A caller of the events endpoint is what would turn the endpoint into a
+    // feature. When one appears, this fails and the copy below may come back.
+    expect(/\/events`|\/api\/integrations\/google\/events/.test(appSrc)).toBe(false);
 
     for (const phrase of [
       "Two-way sync showings and meetings",
