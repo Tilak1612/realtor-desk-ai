@@ -7,7 +7,7 @@
 - Supabase: `vxkqwkeqincbxrgglmca` (realtordesk-prod, ca-central-1)
 
 ## Stack
-Vite + React (SPA, prerendered for SEO) · TypeScript strict · React Router 6 ·
+Vite + React (SPA, prerendered for SEO via `npm run build:seo`) · TypeScript strict · React Router 6 ·
 Tailwind + shadcn/ui · Supabase (Auth, RLS, Postgres, 32 Edge Functions) ·
 Stripe Checkout + Portal + webhooks · i18next (EN/FR) · Capacitor mobile
 wrapper · Sentry · Vercel Speed Insights · @dnd-kit pipeline board · recharts.
@@ -15,6 +15,13 @@ wrapper · Sentry · Vercel Speed Insights · @dnd-kit pipeline board · rechart
 ## Repo map
 - `src/pages`, `src/components`, `src/hooks`, `src/contexts`, `src/i18n`,
   `src/lib`, `src/integrations`, `src/config`
+- `api/` — **Vercel serverless functions.** There are two server runtimes in
+  this repo, not one: Supabase Edge Functions (Deno, `Deno.env.get`, secrets
+  via `supabase secrets set`) and Vercel functions (Node, `process.env`,
+  secrets via Vercel project env vars). `api/integrations/google/[action].ts`
+  is the Google Calendar OAuth + events endpoint and reads
+  `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` from Vercel. Check both runtimes
+  before concluding a feature is unimplemented.
 - `supabase/functions/` — `calculate-lead-score` / `lead-score-calculator`,
   `crea-ddf-sync`, `import-property-from-ddf`, `apify-runner`,
   `run-automation`, `email-automation`, `lifecycle-cron`, `send-lifecycle-email`,

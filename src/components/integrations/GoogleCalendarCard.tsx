@@ -152,8 +152,8 @@ export default function GoogleCalendarCard() {
       </CardHeader>
       <CardContent className="space-y-3">
         {status === null ? (
-          <p className="text-sm text-muted-foreground flex items-center gap-2">
-            <Loader2 className="h-4 w-4 animate-spin" /> Checking connection…
+          <p role="status" className="text-sm text-muted-foreground flex items-center gap-2">
+            <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" /> Checking connection…
           </p>
         ) : connected ? (
           <p className="text-sm">
@@ -185,8 +185,12 @@ export default function GoogleCalendarCard() {
             </>
           ) : (
             <Button size="sm" onClick={connect} disabled={busy || status === null || status?.configured === false}>
-              {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {status?.needsReconnect ? "Reconnect Google Calendar" : "Connect Google Calendar"}
+              {busy && <Loader2 aria-hidden="true" className="mr-2 h-4 w-4 animate-spin" />}
+              {busy
+                ? "Connecting…"
+                : status?.needsReconnect
+                  ? "Reconnect Google Calendar"
+                  : "Connect Google Calendar"}
             </Button>
           )}
         </div>
