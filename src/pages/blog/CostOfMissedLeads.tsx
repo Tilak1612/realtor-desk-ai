@@ -37,7 +37,7 @@ const CostOfMissedLeads = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="The Real Cost of Missed Real Estate Leads in Canada: 2025 Analysis"
+        title="The Cost of Missed Real Estate Leads"
         description="Every missed lead costs $12,000+ in commission. See the true cost of slow response times, poor follow-up, and outdated systems."
         keywords="missed real estate leads, lead response time, real estate ROI, Canadian real estate leads, lead follow-up"
         article
@@ -49,7 +49,7 @@ const CostOfMissedLeads = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "The Real Cost of Missed Real Estate Leads in Canada: 2025 Analysis",
+            "headline": "The Cost of Missed Real Estate Leads",
             "description": "Every missed lead costs $12,000+ in commission. See the true cost of slow response times, poor follow-up, and outdated systems.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -69,7 +69,7 @@ const CostOfMissedLeads = () => {
               <span className="text-sm font-semibold text-red-900">ROI Analysis: Lost Revenue</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              The Real Cost of Missed Real Estate Leads in Canada: 2025 Analysis
+              The Cost of Missed Real Estate Leads
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Every missed lead costs $12,000+ in lost commission. See the true cost of slow response times, poor follow-up, and outdated systems. Calculate your exact losses.

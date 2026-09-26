@@ -625,7 +625,7 @@ const resources = {
       },
       pricingRd: {
         seoTitle: "Pricing — Realtor Desk",
-        seoDesc: "One price. Bilingual, PIPEDA-native, Realtor.ca import today with native CREA DDF® on the Q3 2026 roadmap. CAD pricing, 14-day free trial; a card is required to start.",
+        seoDesc: "One price in CAD. Bilingual EN/FR and Realtor.ca import today, CREA DDF® on the Q3 2026 roadmap. 14-day trial; a card is required to start.",
         eyebrow: "Pricing in CAD",
         heading1: "One price.",
         heading2: "Every",
@@ -725,7 +725,7 @@ const resources = {
       },
       featuresRd: {
         seoTitle: "Features — Realtor Desk",
-        seoDesc: "A bilingual CRM for Canadian real estate: 0-100 lead scoring, a drag-and-drop pipeline, one conversation timeline per client, Realtor.ca listing import and reporting in CAD. Data hosted in Canada.",
+        seoDesc: "Lead scoring, a drag-and-drop pipeline, one conversation timeline per client and Realtor.ca listing import — bilingual, hosted in Canada, priced in CAD.",
         badge: "What Desk does",
         heroH1Pre: "Everything about a",
         heroH1Italic1: "lead",
@@ -792,7 +792,7 @@ const resources = {
       pageSeo: {
         howItWorksTitle: "How Realtor Desk Works | Setup in 10 Minutes",
         howItWorksDesc: "Get started with Realtor Desk in about 10 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration.",
-        resourcesTitle: "Resources | Guides for Canadian Real Estate Agents",
+        resourcesTitle: "Resources for Canadian Real Estate Agents",
         resourcesDesc: "Expert guides on AI tools, lead generation, compliance, and marketing for Canadian real estate agents using Realtor Desk.",
         loginTitle: "Sign in — Realtor Desk",
         loginDesc: "Sign in to your Realtor Desk workspace. Canadian-hosted, PIPEDA-aware, bilingual EN/FR.",
@@ -815,7 +815,7 @@ const resources = {
         termsTitle: "Terms of Service — Realtor Desk",
         termsDesc: "Realtor Desk's terms of service, including billing, cancellation, acceptable use, and Canadian jurisdiction.",
         partnersTitle: "Partner Program — Realtor Desk",
-        partnersDesc: "Earn recurring commissions by referring Canadian real estate teams to Realtor Desk. 25% starting rate, tiers up to 40%, 90-day last-click attribution, monthly CAD payouts.",
+        partnersDesc: "Earn recurring commissions referring Canadian real estate teams to Realtor Desk. 25% starting rate, 90-day attribution, monthly CAD payouts.",
         partnersApplyTitle: "Apply to the Partner Program — Realtor Desk",
         partnersApplyDesc: "Apply to become a Realtor Desk partner. We review every application within 5 business days.",
         partnersTermsTitle: "Partner Program Terms — Realtor Desk",
@@ -2368,15 +2368,15 @@ const resources = {
             excerpt: "Everything you need to know about accessing national MLS data and integrating CREA DDF® into your real estate workflow."
           },
           compliance: {
-            title: "Provincial Compliance Checklist: ON, BC, AB, QC",
+            title: "Provincial Compliance Checklist for Agents",
             excerpt: "Stay compliant with regulations across Canada. A comprehensive guide to RECO, BCFSA, RECA, and AMF requirements."
           },
           leadConversion: {
-            title: "10 Ways to Increase Lead Conversion with Predictive Analytics",
+            title: "Increase Lead Conversion with Lead Scoring",
             excerpt: "Learn how AI-powered lead scoring and predictive analytics can increase your conversion rate from 5% to 18%."
           },
           bilingual: {
-            title: "Bilingual Real Estate Marketing: Beyond Translation",
+            title: "Bilingual Real Estate Marketing in Canada",
             excerpt: "Master the art of true bilingual marketing for Canadian markets. It's not just about translation - it's about cultural communication."
           },
           successStory: {

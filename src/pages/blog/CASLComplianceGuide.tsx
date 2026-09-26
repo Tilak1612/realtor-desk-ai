@@ -10,7 +10,7 @@ const CASLComplianceGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide"
+        title="CASL Compliance for Real Estate Email"
         description="Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines with consent requirements, templates, and checklists."
         keywords="CASL compliance real estate, Canadian email marketing laws, CASL checklist, real estate email compliance"
         article
@@ -22,7 +22,7 @@ const CASLComplianceGuide = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide",
+            "headline": "CASL Compliance for Real Estate Email",
             "description": "Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines with consent requirements, templates, and checklists.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -42,7 +42,7 @@ const CASLComplianceGuide = () => {
               <span className="text-sm font-semibold text-red-900">Legal Compliance Required</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide
+              CASL Compliance for Real Estate Email
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines. Learn consent requirements, templates, and automation strategies. Includes compliance checklist.

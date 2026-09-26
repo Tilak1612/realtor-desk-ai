@@ -122,8 +122,8 @@ const LionDeskAlternative = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Best LionDesk Alternative for Canadian Realtors in 2026"
-        description="LionDesk is shutting down in 2025. Here are the best LionDesk alternatives for Canadian real estate agents — with honest pros, cons, and pricing. RealtorDesk AI, Lone Wolf, Wise Agent, Follow Up Boss, and AgentLocator compared."
+        title="Best LionDesk Alternative in Canada"
+        description="Compare LionDesk alternatives for Canadian real estate agents — Realtor Desk, Lone Wolf, Wise Agent and Follow Up Boss, with honest pros and cons."
         keywords="liondesk alternative, liondesk shutting down, liondesk migration Canada, best CRM replace liondesk, liondesk replacement Canadian realtors, switch from liondesk 2025"
         article
         publishedTime="2026-04-02"
@@ -134,7 +134,7 @@ const LionDeskAlternative = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Best LionDesk Alternative for Canadian Realtors in 2026",
+            "headline": "Best LionDesk Alternative in Canada",
             "description": "LionDesk is shutting down. The best alternatives for Canadian real estate agents — RealtorDesk AI, Lone Wolf, Wise Agent, Follow Up Boss, and AgentLocator compared.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -161,7 +161,7 @@ const LionDeskAlternative = () => {
             LionDesk Shutting Down — September 2025
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            Best LionDesk Alternative for Canadian Realtors in 2026
+            Best LionDesk Alternative in Canada
           </h1>
           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
             <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> April 2, 2026</span>

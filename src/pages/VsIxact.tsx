@@ -14,7 +14,7 @@ const VsIxact = () => {
     <div className="min-h-screen">
       <SEO
         title="IXACT Contact vs RealtorDesk AI | Upgrade to AI"
-        description="IXACT Contact lists $46.75/mo USD; Realtor Desk is $149/mo CAD. A side-by-side on price, bilingual EN/FR, CASL-aware email and lead ranking, so you can judge the difference."
+        description="IXACT Contact lists $46.75/mo USD; Realtor Desk is $149/mo CAD. Compare price, bilingual EN/FR, CASL-aware email and lead ranking."
         keywords="IXACT Contact vs RealtorDesk AI, IXACT alternative, Canadian real estate CRM comparison, AI CRM for realtors"
         canonicalUrl="https://www.realtordesk.ai/vs/ixact"
         structuredData={[

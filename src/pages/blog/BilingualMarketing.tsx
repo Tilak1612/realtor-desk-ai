@@ -18,7 +18,7 @@ const BilingualMarketing = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Bilingual Real Estate Marketing: Beyond Translation"
+        title="Bilingual Real Estate Marketing in Canada"
         description="Master true bilingual real estate marketing for Canadian markets with cultural localization, compliance, and SEO in both languages."
         keywords="bilingual real estate marketing, french real estate canada, quebec real estate marketing, bilingual CRM"
         image={blogImage}
@@ -31,7 +31,7 @@ const BilingualMarketing = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Bilingual Real Estate Marketing: Beyond Translation",
+            "headline": "Bilingual Real Estate Marketing in Canada",
             "description": "Master true bilingual real estate marketing for Canadian markets with cultural localization, compliance, and SEO in both languages.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -67,7 +67,7 @@ const BilingualMarketing = () => {
             </div>
             
             <h1 className="mb-6">
-              Bilingual Real Estate Marketing: Beyond Translation
+              Bilingual Real Estate Marketing in Canada
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

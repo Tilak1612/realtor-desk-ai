@@ -185,7 +185,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.sales",
       icon: TrendingUp,
-      title: "The Real Cost of Missed Real Estate Leads in Canada: 2025 Analysis",
+      title: "The Cost of Missed Real Estate Leads",
       excerpt: "Every missed lead costs $12,000+. See the true cost of slow response times and poor follow-up. Most agents lose $90,000-165,000/year. Includes ROI calculator.",
       readTime: 15,
       image: blogCostMissedLeads,
@@ -195,7 +195,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.compliance",
       icon: FileText,
-      title: "CASL Compliance for Real Estate Email Marketing: Complete 2026 Guide",
+      title: "CASL Compliance for Real Estate Email",
       excerpt: "Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines. Learn consent requirements, penalties, templates, and automation strategies.",
       readTime: 16,
       image: blogCASLCompliance,
@@ -205,7 +205,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.marketing",
       icon: BookOpen,
-      title: "Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026",
+      title: "Calgary Real Estate Marketing Strategies",
       excerpt: "Calgary's market is unique. Oil economy, suburban sprawl, and -30°C winters require specialized strategies. Learn 7 AI-powered tactics Calgary agents use to dominate—even in winter.",
       readTime: 13,
       image: blogCalgaryMarketing,
@@ -215,7 +215,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: TrendingUp,
-      title: "Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals",
+      title: "Voice AI for Real Estate Follow-Up",
       excerpt: "Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. See how Canadian agents use AI to follow up instantly with strong ROI for voice AI.",
       readTime: 14,
       image: blogVoiceAI,
@@ -282,7 +282,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: Database,
-      title: "Best LionDesk Alternative for Canadian Realtors in 2026 — LionDesk is Shutting Down",
+      title: "Best LionDesk Alternative in Canada — LionDesk is Shutting Down",
       excerpt: "LionDesk is being discontinued in September 2025. Here are the top LionDesk alternatives for Canadian agents — with honest pros, cons, and pricing compared.",
       readTime: 10,
       image: blogBestCRM2025,
@@ -348,7 +348,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.marketing",
       icon: Clock,
-      title: "How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025",
+      title: "How to Sell Your Home Fast in Canada",
       excerpt: "Learn how to sell your home fast in Canada with these 10 proven strategies. From pricing to staging to marketing, get expert tips for quick sales.",
       readTime: 16,
       image: blogSellHomeFast,
@@ -358,7 +358,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.canadianMarket",
       icon: MapPin,
-      title: "Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide",
+      title: "Edmonton Real Estate Market 2025",
       excerpt: "Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions.",
       readTime: 17,
       image: blogEdmontonMarket,
@@ -368,7 +368,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.canadianMarket",
       icon: Home,
-      title: "Canada Housing Market Forecast 2025-2026: What Realtors Need to Know",
+      title: "Canada Housing Market Forecast 2025-2026",
       excerpt: "Expert analysis of Canada's housing market forecast for 2025-2026. Interest rates, regional trends, and strategies for Canadian Realtors to succeed.",
       readTime: 15,
       image: blogHousingForecast,
@@ -378,7 +378,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: Cpu,
-      title: "How Canadian Realtors Can Thrive in a Slower Market with AI Automation",
+      title: "Thriving in a Slower Canadian Market",
       excerpt: "Discover proven AI automation strategies helping Canadian Realtors close more deals in slower markets. Lead generation, follow-up systems & CRM tools.",
       readTime: 18,
       image: blogAIAutomation,
@@ -398,7 +398,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.aiTech",
       icon: Database,
-      title: "The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025",
+      title: "The AI CRM for Canadian Real Estate Agents in 2025",
       excerpt: "Everything Canadian Realtors need to know about AI-powered CRM systems. Features, benefits, PIPEDA compliance, and how to choose the right platform.",
       readTime: 15,
       image: blogAICRMGuide,
@@ -418,7 +418,7 @@ const Resources = () => {
     {
       categoryKey: "resourcesPage.categories.compliance",
       icon: Shield,
-      title: "PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada",
+      title: "PIPEDA and AI Tools in Real Estate",
       excerpt: "Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements, best practices, and how to choose compliant platforms.",
       readTime: 16,
       image: blogPIPEDA,

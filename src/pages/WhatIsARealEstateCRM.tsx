@@ -44,8 +44,8 @@ const WhatIsARealEstateCRM = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="What Is a Real Estate CRM? A Plain-English Guide for Agents"
-        description="A real estate CRM keeps every lead, client and conversation in one place and tells you who to follow up with next. What it does, how it differs from a general CRM, and what Canadian agents should check before choosing one."
+        title="What Is a Real Estate CRM?"
+        description="A real estate CRM keeps every lead, client and conversation in one place and tells you who to follow up next — and how to choose one in Canada."
         keywords="what is real estate crm, what is real estate crm software, what does crm stand for in real estate, crm in real estate industry"
         canonicalUrl="https://www.realtordesk.ai/what-is-a-real-estate-crm"
         structuredData={[

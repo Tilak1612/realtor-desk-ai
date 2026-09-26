@@ -18,7 +18,7 @@ const LeadConversion = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="10 Ways to Increase Lead Conversion with Predictive Analytics"
+        title="Increase Lead Conversion with Lead Scoring"
         description="Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%."
         keywords="real estate lead conversion, predictive analytics real estate, AI lead scoring, realtor lead generation, CRM analytics"
         image={blogImageSocial}
@@ -31,7 +31,7 @@ const LeadConversion = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "10 Ways to Increase Lead Conversion with Predictive Analytics",
+            "headline": "Increase Lead Conversion with Lead Scoring",
             "description": "Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -67,7 +67,7 @@ const LeadConversion = () => {
             </div>
             
             <h1 className="mb-6">
-              10 Ways to Increase Lead Conversion with Predictive Analytics
+              Increase Lead Conversion with Lead Scoring
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

@@ -55,8 +55,8 @@ const SwitchFromLionDesk = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="LionDesk Shutting Down? Switch to RealtorDesk AI | Best LionDesk Alternative Canada"
-        description="LionDesk is shutting down in September 2025. Switch to RealtorDesk AI — Canada's AI-powered real estate CRM with free migration, bilingual support, and CREA DDF® integration on the Q3 2026 roadmap. Start your 14-day free trial today."
+        title="Switch from LionDesk to Realtor Desk"
+        description="Moving off LionDesk? Realtor Desk is a Canadian CRM with bilingual EN/FR, CAD pricing and a 14-day trial. CREA DDF® is on the Q3 2026 roadmap."
         keywords="LionDesk shutting down, LionDesk alternative Canada, switch from LionDesk, LionDesk migration, best CRM for Canadian realtors, LionDesk replacement"
         canonicalUrl="https://www.realtordesk.ai/switch-from-liondesk"
         structuredData={[

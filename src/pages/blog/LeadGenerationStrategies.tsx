@@ -19,7 +19,7 @@ const LeadGenerationStrategies = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Real Estate Lead Generation Strategies for Canada"
+        title="Real Estate Lead Generation in Canada"
         description="17 proven real estate lead generation strategies for Canadian agents in 2025. Includes digital marketing, social media, referrals, and AI automation."
         keywords="real estate lead generation Canada, realtor marketing strategies, real estate leads Canada, lead generation for realtors, real estate digital marketing"
         image={blogImage}

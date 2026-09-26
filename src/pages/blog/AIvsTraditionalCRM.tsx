@@ -15,7 +15,7 @@ const AIvsTraditionalCRM = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="AI CRM vs Traditional Real Estate CRM: ROI Analysis for Canadian Agents"
+        title="AI CRM vs Traditional CRM for Realtors"
         description="Compare AI-powered CRMs vs traditional real estate CRMs. See response times, conversion rates, costs, and why Canadian agents are switching to AI."
         keywords="AI CRM vs traditional CRM, real estate CRM ROI, Canadian realtor CRM, AI real estate automation"
         article
@@ -27,7 +27,7 @@ const AIvsTraditionalCRM = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "AI CRM vs Traditional Real Estate CRM: ROI Analysis for Canadian Agents",
+            "headline": "AI CRM vs Traditional CRM for Realtors",
             "description": "Compare AI-powered CRMs vs traditional real estate CRMs. See response times, conversion rates, costs, and why Canadian agents are switching to AI.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -63,7 +63,7 @@ const AIvsTraditionalCRM = () => {
             </div>
             
             <h1 className="mb-6">
-              AI CRM vs Traditional Real Estate CRM: ROI Analysis for Canadian Agents
+              AI CRM vs Traditional CRM for Realtors
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

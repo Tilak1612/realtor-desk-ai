@@ -14,7 +14,7 @@ const PIPEDACompliance = () => {
   return (
     <>
       <SEO
-        title="PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada"
+        title="PIPEDA and AI Tools in Real Estate"
         description="Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements, best practices, and how to choose compliant platforms."
         keywords="PIPEDA compliance for Canadian Realtors, real estate data privacy Canada, PIPEDA requirements for CRM, Canadian real estate AI compliance, Realtor data protection laws Canada"
         image={blogCompliance}
@@ -27,7 +27,7 @@ const PIPEDACompliance = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada",
+            "headline": "PIPEDA and AI Tools in Real Estate",
             "description": "Canadian Realtors must comply with PIPEDA when using AI tools and CRMs. Learn data privacy requirements and best practices.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -54,7 +54,7 @@ const PIPEDACompliance = () => {
                 <span>16 min read</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                PIPEDA Compliance for Real Estate: AI Tools & Data Privacy in Canada
+                PIPEDA and AI Tools in Real Estate
               </h1>
               <p className="text-xl text-muted-foreground">
                 Canadian real estate agents collect vast amounts of personal information. With AI-powered CRM systems and automation platforms, understanding PIPEDA compliance has never been more critical.

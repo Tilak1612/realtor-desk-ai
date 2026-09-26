@@ -37,8 +37,8 @@ const RealEstateCRMBuyingGuide = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="How to Choose a Real Estate CRM in 2026 | Ultimate Buying Guide"
-        description="Complete guide to choosing the best CRM for real estate agents. Compare features, pricing, Canadian compliance, AI capabilities, and avoid common mistakes. Expert analysis of 20+ CRMs."
+        title="How to Choose a Real Estate CRM in Canada"
+        description="How to choose a real estate CRM in Canada: map your workflow, define must-have features, check integrations and run a trial before committing."
         keywords="how to choose real estate CRM, best CRM for realtors, real estate CRM comparison, CRM buying guide, real estate software selection, choosing CRM for agents"
         canonicalUrl="https://www.realtordesk.ai/blog/real-estate-crm-buying-guide"
         structuredData={[articleSchema]}

@@ -50,8 +50,8 @@ const SwitchFromFollowUpBoss = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Switch from Follow Up Boss | Canadian Real Estate CRM Alternative"
-        description="Switch from Follow Up Boss to RealtorDesk AI. Save on USD pricing, get a built-in AI chatbot and PIPEDA-aware design — at $149 CAD/month. CREA DDF® integration coming Q3 2026. Free migration."
+        title="Switch from Follow Up Boss to Realtor Desk"
+        description="Move from Follow Up Boss to Realtor Desk: $149 CAD/month, bilingual EN/FR and CASL-aware email. CREA DDF® is on the Q3 2026 roadmap."
         keywords="Follow Up Boss alternative Canada, switch from Follow Up Boss, Follow Up Boss vs RealtorDesk AI, Canadian real estate CRM, best CRM for Canadian realtors"
         canonicalUrl="https://www.realtordesk.ai/switch-from-follow-up-boss"
         structuredData={[

@@ -533,6 +533,42 @@ function buildShell({ route, h1, description, body }) {
  * 5. Run it. *
  * ---------- */
 
+/**
+ * Resolve every sitemap route's title and description without touching dist.
+ * Same extraction the prerender uses, so a test cannot pass against a stale
+ * build. Exported for src/test/seo/metaLength.test.ts.
+ */
+export function collectMeta() {
+  const { routeToFile, redirectRoutes } = buildRouteFileMap();
+  const out = [];
+  for (const route of readSitemapRoutes()) {
+    if (redirectRoutes.has(route)) continue;
+    const file = routeToFile.get(route);
+    if (!file) continue;
+    const src = fs.readFileSync(file, 'utf-8');
+    const block = extractSeoBlock(src);
+    const title = block && literalProp(block, 'title');
+    const description = block && literalProp(block, 'description');
+    if (!title || !description) continue;
+    out.push({
+      route,
+      title:
+        title.includes('Realtor Desk') || title.includes('RealtorDesk')
+          ? title
+          : `${title} | Realtor Desk`,
+      description,
+    });
+  }
+  return out;
+}
+
+// Everything below runs only when this file is executed directly, so importing
+// it for collectMeta() does not require dist/ to exist.
+const isDirectRun =
+  process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url));
+
+if (isDirectRun) {
+
 const baseHtmlPath = path.join(distDir, 'index.html');
 if (!fs.existsSync(baseHtmlPath)) {
   console.error('✖ dist/index.html not found — run `vite build` first.');
@@ -635,4 +671,6 @@ if (unresolved.length) {
 if (unresolved.length) {
   console.error('\n✖ Every sitemap URL must prerender to a unique title.');
   process.exit(1);
+}
+
 }

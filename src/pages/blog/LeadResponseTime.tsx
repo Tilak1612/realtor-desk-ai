@@ -14,7 +14,7 @@ const LeadResponseTime = () => {
   return (
     <>
       <SEO
-        title="Why Canadian Real Estate Agents Lose Hot Leads (And How to Stop It)"
+        title="Why Canadian Agents Lose Hot Leads"
         description="Canadian agents lose deals every week — not from lack of skill, but from slow response time. Here's what's happening and how 24/7 AI follow-up fixes it."
         keywords="real estate lead response time, speed to lead real estate Canada, how to follow up with real estate leads, AI CRM Canadian real estate, never miss a real estate lead"
         image={blogLeadResponse}
@@ -27,7 +27,7 @@ const LeadResponseTime = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Why Canadian Real Estate Agents Lose Hot Leads (And How to Stop It)",
+            "headline": "Why Canadian Agents Lose Hot Leads",
             "description": "Canadian agents lose deals every week — not from lack of skill, but from slow response time. Here's what's happening and how 24/7 AI follow-up fixes it.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": {
@@ -67,7 +67,7 @@ const LeadResponseTime = () => {
                 <span>8 min read</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                Why Canadian Real Estate Agents Lose Hot Leads (And How to Stop It)
+                Why Canadian Agents Lose Hot Leads
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 It's not a skill problem. It's a timing problem — and it costs Canadian agents

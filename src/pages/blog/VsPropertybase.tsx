@@ -10,7 +10,7 @@ const VsPropertybase = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="Propertybase vs RealtorDesk AI: Enterprise vs Agile for Canadian Teams"
+        title="Propertybase vs Realtor Desk"
         description="Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams."
         keywords="Propertybase vs RealtorDesk AI, Canadian real estate CRM comparison, Salesforce real estate CRM alternative"
         article
@@ -22,7 +22,7 @@ const VsPropertybase = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Propertybase vs RealtorDesk AI: Enterprise vs Agile for Canadian Teams",
+            "headline": "Propertybase vs Realtor Desk",
             "description": "Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -38,7 +38,7 @@ const VsPropertybase = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              Propertybase vs RealtorDesk AI: Enterprise vs Agile for Canadian Teams
+              Propertybase vs Realtor Desk
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Propertybase is enterprise-grade. But do you need enterprise complexity, or do you need results?

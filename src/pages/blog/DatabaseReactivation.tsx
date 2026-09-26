@@ -37,7 +37,7 @@ const DatabaseReactivation = () => {
   return (
     <>
       <SEO
-        title="Real Estate Database Reactivation: A Canada Guide"
+        title="Real Estate Database Reactivation"
         description="Turn cold past clients into repeat and referral business. A CASL-aware database reactivation playbook for Canadian real estate agents."
         keywords="real estate database reactivation, past client follow-up real estate, sphere of influence real estate Canada, repeat and referral business real estate, real estate CRM Canada, CASL email marketing real estate"
         image={blogDatabaseReactivation}

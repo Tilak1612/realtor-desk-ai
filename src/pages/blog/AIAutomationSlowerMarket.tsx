@@ -19,7 +19,7 @@ const AIAutomationSlowerMarket = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="How Canadian Realtors Can Thrive in a Slower Market with AI Automation"
+        title="Thriving in a Slower Canadian Market"
         description="Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems."
         keywords="AI automation for Canadian Realtors, real estate CRM Canada, Realtor lead generation automation, automated follow-up system"
         image={blogImageSocial}
@@ -32,7 +32,7 @@ const AIAutomationSlowerMarket = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "How Canadian Realtors Can Thrive in a Slower Market with AI Automation",
+            "headline": "Thriving in a Slower Canadian Market",
             "description": "Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -71,7 +71,7 @@ const AIAutomationSlowerMarket = () => {
             </div>
             
             <h1 className="mb-6">
-              How Canadian Realtors Can Thrive in a Slower Market with AI Automation
+              Thriving in a Slower Canadian Market
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

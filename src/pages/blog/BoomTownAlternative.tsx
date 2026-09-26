@@ -10,7 +10,7 @@ const BoomTownAlternative = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="BoomTown Alternative for Canada: PIPEDA-Compliant Options"
+        title="BoomTown Alternative for Canada"
         description="BoomTown costs $1,350-2,700 CAD/month. Compare PIPEDA-compliant alternatives for Canadian agents with better ROI."
         keywords="BoomTown alternative Canada, PIPEDA compliant CRM, Canadian real estate CRM alternatives, BoomTown vs RealtorDesk"
         article
@@ -22,7 +22,7 @@ const BoomTownAlternative = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "BoomTown Alternative for Canada: PIPEDA-Compliant Options",
+            "headline": "BoomTown Alternative for Canada",
             "description": "BoomTown costs $1,350-2,700 CAD/month. Compare PIPEDA-compliant alternatives for Canadian agents with better ROI.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -38,7 +38,7 @@ const BoomTownAlternative = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              BoomTown Alternative for Canada: PIPEDA-Compliant Options
+              BoomTown Alternative for Canada
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               BoomTown costs $1,350-2,700 CAD/month. Canadian agents can get similar (or better) results for under $300 CAD/month with the right alternatives.
