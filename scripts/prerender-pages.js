@@ -388,7 +388,7 @@ function escapeAroundAnchors(html) {
     .join('');
 }
 
-function textOf(inner) {
+function textOf(inner, tag = '') {
   // Reject anything with a nested component (capitalised tag) or a non-t()
   // expression — those need the real renderer.
   const tags = [...inner.matchAll(/<\/?([A-Za-z][\w.]*)/g)].map((m) => m[1]);
@@ -421,7 +421,11 @@ function textOf(inner) {
   // re-orphaned the very pages the hub was added to link. Anything carrying an
   // internal link is kept regardless of length.
   const hasInternalLink = /<a href="\//.test(s);
-  if (!hasInternalLink && visible.length < 25) return null;
+  // Headings are structure, not prose: "All guides" is 10 characters and still
+  // worth emitting, because the shell otherwise ships a list with no heading
+  // above it. The floor stays for paragraphs and list items.
+  const isHeading = tag === 'h2' || tag === 'h3';
+  if (!hasInternalLink && !isHeading && visible.length < 25) return null;
   return visible.length > 0 ? s : null;
 }
 
@@ -430,7 +434,7 @@ function textOf(inner) {
 function extractBody(src, { limit = 140 } = {}) {
   const out = [];
   for (const m of src.matchAll(/<(h2|h3|p|li)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
-    const text = textOf(m[2]);
+    const text = textOf(m[2], m[1]);
     if (!text) continue;
     if (out.some((b) => b.text === text)) continue;
     out.push({ tag: m[1] === 'li' ? 'li' : m[1], text });
