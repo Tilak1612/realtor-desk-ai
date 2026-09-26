@@ -284,6 +284,64 @@ const Integrations = () => {
         </div>
       </section>
 
+      {/* The cards above are rendered from a data array, so a crawler read 97
+          words on this page. This is the structure the SEO report's
+          /integrations brief asks for: what is live, what runs through a
+          connector, what is planned, and the limits of each. Status here must
+          match the subtitleKey on the cards — capabilityClaims.test.ts pins
+          the native count to the native entries. */}
+      <section className="section-padding border-t">
+        <div className="container-custom max-w-3xl">
+          <h2 className="mb-6">What &ldquo;integrated&rdquo; means on this page</h2>
+          <p className="text-muted-foreground leading-relaxed mb-8">
+            Three different things, and it is worth separating them before you
+            plan a workflow around one.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Native connections</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Built and running today. Zapier, Make and n8n post inbound leads
+            straight into your contacts, de-duplicated by email address. Twilio
+            sends SMS, gated on a consent record — no consent row means no send,
+            which is deliberate under CASL. Email goes out through our own
+            provider on a verified domain.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Automation connectors</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Tools we reach through Zapier or Make rather than directly. The
+            practical difference is that you build and own the automation, and
+            the field mapping is yours to maintain. That covers a very long tail
+            of software we will never write a dedicated connector for.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Planned</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Listed so you can see them, and marked so you do not plan around
+            them. Native CREA DDF® listing sync is targeted at Q3 2026; until
+            then listings come in through the Realtor.ca importer. Google
+            Calendar and Outlook connect today and hold the connection, but
+            pushing appointments to them automatically is still in build.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Which direction data moves</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Inbound today. Leads and contacts flow into Realtor Desk from your
+            forms, portals and automations. Outbound sync — writing your Realtor
+            Desk data back into another system on a schedule — is not something
+            we do yet, and a CSV export is the honest answer if you need it.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">If something is missing</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Tell us which tool and what you need to move. Requests are tracked,
+            and the ones that come up repeatedly are what set the connector
+            order. A webhook endpoint is available in the meantime for anything
+            that can post JSON.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

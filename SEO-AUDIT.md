@@ -571,3 +571,86 @@ content, not more footer entries.
 Expect no movement for weeks — the pages have to be recrawled before any of this
 registers. The correct early signal is pages becoming *indexed with their own
 titles* in Search Console, not ranking changes.
+
+---
+
+# Part 3 — Full keyword and SEO implementation (2026-09-26)
+
+Driven by the external developer SEO report plus the OpenSEO crawl. Every
+number below is measured against the live site, not the build.
+
+## Issue counts across the whole programme
+
+| Issue | 2026-09-21 baseline | Now |
+|---|---:|---:|
+| Duplicate `<title>` | 68 | **0** |
+| Duplicate meta description | 68 | **0** |
+| Missing `<h1>` | 68 | **0** |
+| No outgoing links | 68 | **0** |
+| Orphan page | 67 | **0** |
+| Title too long | 37 | **0** |
+| Meta description too long | 17 | **0** |
+| Thin content | 68 | **12** |
+
+Average static content per page: **~35 words → 630**.
+
+Remaining, all informational: 18 heading-order skips, 1 canonicalised page.
+
+## Schema now actually ships
+
+Every page passed `structuredData` to `<SEO>`, which wrote it from a
+`useEffect` — so only the prerenderer's own BreadcrumbList reached crawlers.
+The prerenderer now lifts each page's JSON-LD, including schema built from a
+local const.
+
+| `@type` in static HTML | Before | After |
+|---|---:|---:|
+| BreadcrumbList | 69 | 69 |
+| Article | 0 | 32 |
+| Organization | 0 | 32 |
+| WebPage | 0 | 11 |
+| FAQPage | 0 | 1 |
+| CreativeWork | 0 | 1 |
+
+## Pages created
+
+- `/what-is-a-real-estate-crm` — "what is real estate crm", 50/mo at KD 5, the
+  lowest-difficulty term with real volume in the set.
+- `/resources/real-estate-crm-template` — the only new URL the report
+  sanctions, and only with a real asset. Ships
+  `public/downloads/real-estate-crm-template.csv`: 13 columns, synthetic
+  samples, CASL consent fields, no email gate.
+
+## Accuracy corrections made along the way
+
+These were not on the SEO plan; they were found while verifying it.
+
+1. A **fabricated 90-day study** on `/blog/best-crm-canada-2025` ("we signed up
+   for 23 different CRMs, tested them with real leads") plus its outputs: ROI
+   671%, 10-15 hours/week, conversion 2-3x, "80% of Canadian agents". Removed.
+2. `/integrations` counted **every** listing as native — 23 claimed, 5 true.
+3. Google/Outlook **calendar sync and contact import** were sold as available;
+   only the OAuth connection exists.
+4. `/pipeda-compliance` claimed the product "is fully PIPEDA compliant".
+5. A wrong **IXACT price** ($39-59 vs the actual $46.75/$55) and unmarked
+   USD/CAD comparisons.
+6. Unverified "**Save 85%** vs $700+/mo" against Lofty, and an advertised "AI
+   voice agent" that does not exist.
+
+Each is pinned by a mutation-checked guard in
+`src/test/content/capabilityClaims.test.ts` or `src/test/seo/metaLength.test.ts`.
+
+## What is still open
+
+- **12 thin pages.** Mostly small utility routes (`/partners/terms`, `/contact`,
+  `/faq`). They are component-built, and extraction has a floor — closing this
+  properly means SSR, which this repo cannot take safely today.
+- **41 unverified competitor price claims** across 13 pages. The largest
+  remaining accuracy risk, and the same failure mode as the fabricated study:
+  specific numbers that decay silently.
+- **French is invisible to non-JS crawlers.** `?lang=fr` cannot be statically
+  served because Vercel checks the filesystem before rewrites and ignores the
+  query string. Needs path-based locales.
+- **Six pages presenting 2025 market data** need a genuine refresh, and four
+  consumer-intent pages target buyers rather than agents.
+- **18 heading-order skips** — worth a pass, none blocking.
