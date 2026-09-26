@@ -333,9 +333,16 @@ function extractStructuredData(block, src = '') {
 }
 
 function extractH1(src) {
-  const m = src.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/);
-  if (!m) return null;
-  let inner = m[1];
+  // A page can hold more than one <h1> across conditional branches — a form
+  // page renders "Application received" when submitted, and that block often
+  // comes first in source order. The prerendered HTML represents the page as a
+  // visitor first sees it, so skip confirmation headings when another exists.
+  const all = [...src.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)].map((x) => x[1]);
+  if (all.length === 0) return null;
+  const isConfirmation = (raw) =>
+    /received|thank ?you|success|confirmed|submitted|all set/i.test(raw);
+  const preferred = all.length > 1 ? all.filter((raw) => !isConfirmation(raw)) : all;
+  let inner = (preferred.length ? preferred : all)[0];
   // Resolve any t('key') segments against the English bundle. If a key is
   // missing the caller falls back to the SEO title rather than ship a
   // half-empty H1.

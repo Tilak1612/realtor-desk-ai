@@ -782,6 +782,215 @@ const Resources = () => {
         </div>
       </section>
 
+      {/* Full guide index.
+          32 pages had no inbound link from anywhere on the site — they were in
+          the sitemap and reachable by URL, but nothing pointed at them, so they
+          accumulated no internal signal. The article cards above are built with
+          .map(), which the prerenderer cannot resolve, so those links never
+          reached the static HTML either. These are written out literally for
+          that reason. */}
+      <section className="section-padding border-t">
+        <div className="container-custom">
+          <h2 className="mb-3">All guides</h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl">
+            Everything we have published, grouped by what you are trying to do.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-base font-semibold mb-3">Guides for agents</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/blog/crea-ddf" className="text-muted-foreground hover:text-primary transition-colors">
+                    The complete guide to CREA DDF® integration
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/ai-transformation" className="text-muted-foreground hover:text-primary transition-colors">
+                    How AI is transforming Canadian real estate
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/ai-vs-traditional-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    AI CRM vs traditional CRM for realtors
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/lead-conversion" className="text-muted-foreground hover:text-primary transition-colors">
+                    Increase lead conversion with lead scoring
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/real-estate-lead-generation-strategies-canada-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    Real estate lead generation in Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/real-estate-drip-campaign-templates-canada-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    Real estate drip campaign templates
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/ai-chatbot-real-estate-websites-canada" className="text-muted-foreground hover:text-primary transition-colors">
+                    AI chatbots for Canadian real estate sites
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/bilingual-marketing" className="text-muted-foreground hover:text-primary transition-colors">
+                    Bilingual real estate marketing in Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/voice-ai-real-estate-lead-follow-up-canada" className="text-muted-foreground hover:text-primary transition-colors">
+                    Voice AI for real estate follow-up
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/calgary-real-estate-marketing-strategies" className="text-muted-foreground hover:text-primary transition-colors">
+                    Calgary real estate marketing strategies
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/cost-of-missed-real-estate-leads-canada" className="text-muted-foreground hover:text-primary transition-colors">
+                    The cost of missed real estate leads
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/slow-follow-up-calculator-canadian-realtors" className="text-muted-foreground hover:text-primary transition-colors">
+                    How much is slow follow-up costing you?
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/canadian-realtors-thrive-slower-market-ai-automation" className="text-muted-foreground hover:text-primary transition-colors">
+                    Thriving in a slower Canadian market
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold mb-3">Compliance</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/blog/compliance" className="text-muted-foreground hover:text-primary transition-colors">
+                    Provincial compliance checklist for agents
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/fintrac-compliance" className="text-muted-foreground hover:text-primary transition-colors">
+                    FINTRAC compliance for Canadian realtors
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/open-house-digital-sign-in-sheets-vs-paper-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    Open house sign-in sheets: digital vs paper
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold mb-3">More comparisons</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/compare/boldtrail" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs BoldTrail
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/vs-follow-up-boss" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs Follow Up Boss
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/vs-kvcore" className="text-muted-foreground hover:text-primary transition-colors">
+                    Realtor Desk vs kvCORE
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/vs-lofty-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    Lofty CRM vs Realtor Desk
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/vs-propertybase" className="text-muted-foreground hover:text-primary transition-colors">
+                    Propertybase vs Realtor Desk
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/ixact-alternatives" className="text-muted-foreground hover:text-primary transition-colors">
+                    IXACT Contact alternatives for Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/boomtown-alternative-canada" className="text-muted-foreground hover:text-primary transition-colors">
+                    BoomTown alternative for Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/best-liondesk-alternative-canadian-realtors" className="text-muted-foreground hover:text-primary transition-colors">
+                    Best LionDesk alternative in Canada
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold mb-3">Canadian market reports</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/canada-housing-market-forecast-2025-2026" className="text-muted-foreground hover:text-primary transition-colors">
+                    Canada housing market forecast 2025-2026
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/toronto-vs-vancouver-real-estate-market-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    Toronto vs Vancouver real estate
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/edmonton-real-estate-market-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    Edmonton real estate market
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold mb-3">Partner programme</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/partners/apply" className="text-muted-foreground hover:text-primary transition-colors">
+                    Apply to the partner programme
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/partners/terms" className="text-muted-foreground hover:text-primary transition-colors">
+                    Partner programme terms
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog/community-launch" className="text-muted-foreground hover:text-primary transition-colors">
+                    Introducing the Realtor Desk community
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold mb-3">For buyers and sellers</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/first-time-home-buyer-guide-canada-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    First-time home buyer guide for Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/sell-home-fast-canada-2025" className="text-muted-foreground hover:text-primary transition-colors">
+                    How to sell your home fast in Canada
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Newsletter Section */}
       <section className="section-padding bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white">
         <div className="container-custom text-center">
