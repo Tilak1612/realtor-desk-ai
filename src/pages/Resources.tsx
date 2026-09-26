@@ -691,6 +691,11 @@ const Resources = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/resources/real-estate-crm-template" className="text-muted-foreground hover:text-primary transition-colors">
+                    Free real estate CRM spreadsheet template
+                  </Link>
+                </li>
+                <li>
                   <Link to="/vs/wise-agent" className="text-muted-foreground hover:text-primary transition-colors">
                     Realtor Desk vs Wise Agent
                   </Link>
