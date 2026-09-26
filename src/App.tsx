@@ -76,6 +76,7 @@ const IntegrationsRoute = () => {
 // page files were deleted in chore/rd-redesign-legacy-cleanup.
 const CanadianMarket = lazyWithRetry(() => import("./pages/CanadianMarket"));
 const WhatIsARealEstateCRM = lazyWithRetry(() => import("./pages/WhatIsARealEstateCRM"));
+const RealEstateCrmTemplate = lazyWithRetry(() => import("./pages/resources/RealEstateCrmTemplate"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -301,6 +302,7 @@ const App = () => (
           <Route path="/pricing" element={<RDPricing />} />
           <Route path="/canadian-market" element={<CanadianMarket />} />
           <Route path="/what-is-a-real-estate-crm" element={<WhatIsARealEstateCRM />} />
+          <Route path="/resources/real-estate-crm-template" element={<RealEstateCrmTemplate />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />

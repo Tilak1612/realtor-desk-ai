@@ -272,6 +272,66 @@ function extractSeoBlock(src) {
   return null;
 }
 
+// Lift structuredData={[ ... ]} when it is a self-contained literal, so the
+// page's own JSON-LD reaches crawlers that do not run JS. Pages that build
+// their schema from a local const (FAQS.map(...)) cannot be evaluated here and
+// are skipped rather than guessed at — they still get BreadcrumbList.
+// Top-level `const NAME = [...]` / `{...}` literals from the page, so schema
+// built as FAQS.map(...) can be evaluated without duplicating the copy into
+// the <SEO> call. Anything referencing an import throws and is skipped.
+function localConstPrelude(src) {
+  const out = [];
+  for (const m of src.matchAll(/^const\s+([A-Z][A-Z0-9_]*)\s*(?::[^=]+)?=\s*([[{])/gm)) {
+    const openIdx = m.index + m[0].length - 1;
+    const openCh = m[2];
+    const closeCh = openCh === '[' ? ']' : '}';
+    let depth = 0;
+    let end = -1;
+    let quote = null;
+    for (let i = openIdx; i < src.length; i++) {
+      const c = src[i];
+      if (quote) {
+        if (c === quote && src[i - 1] !== '\\') quote = null;
+        continue;
+      }
+      if (c === '"' || c === "'" || c === '`') { quote = c; continue; }
+      if (c === openCh) depth++;
+      else if (c === closeCh) { depth--; if (depth === 0) { end = i; break; } }
+    }
+    if (end === -1) continue;
+    out.push(`const ${m[1]} = ${src.slice(openIdx, end + 1)};`);
+  }
+  return out.join('\n');
+}
+
+function extractStructuredData(block, src = '') {
+  const at = block.search(/\bstructuredData=\s*\{/);
+  if (at === -1) return null;
+  const open = block.indexOf('{', at);
+  let depth = 0;
+  let close = -1;
+  for (let i = open; i < block.length; i++) {
+    if (block[i] === '{') depth++;
+    else if (block[i] === '}') {
+      depth--;
+      if (depth === 0) {
+        close = i;
+        break;
+      }
+    }
+  }
+  if (close === -1) return null;
+  try {
+    const expr = block.slice(open + 1, close).trim();
+    const value = new Function(`${localConstPrelude(src)}\nreturn (${expr})`)();
+    if (!Array.isArray(value)) return null;
+    const usable = value.filter((v) => v && typeof v === 'object' && v['@type']);
+    return usable.length ? usable : null;
+  } catch {
+    return null;
+  }
+}
+
 function extractH1(src) {
   const m = src.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/);
   if (!m) return null;
@@ -423,7 +483,7 @@ function breadcrumbs(route, title) {
   };
 }
 
-function buildHead(baseHtml, { route, title, description, canonical }) {
+function buildHead(baseHtml, { route, title, description, canonical, structuredData }) {
   // index.html carries a <noscript> fallback holding the HOMEPAGE h1 and copy.
   // It was the previous attempt at serving crawlers something. Now that #root
   // holds this page's real h1 and description, that block would put a second,
@@ -474,11 +534,11 @@ function buildHead(baseHtml, { route, title, description, canonical }) {
     head = head.replace('</head>', `${linkBlock}</head>`);
   }
 
-  const ld = JSON.stringify(breadcrumbs(route, title));
-  head = head.replace(
-    '</head>',
-    `<script type="application/ld+json">${ld}</script></head>`,
-  );
+  const graph = [breadcrumbs(route, title), ...(structuredData ?? [])];
+  const ld = graph
+    .map((node) => `<script type="application/ld+json">${JSON.stringify(node)}</script>`)
+    .join('');
+  head = head.replace('</head>', `${ld}</head>`);
 
   return head;
 }
@@ -614,6 +674,7 @@ for (const route of routes) {
   const title = block && literalProp(block, 'title');
   const description = block && literalProp(block, 'description');
   const canonical = block && literalProp(block, 'canonicalUrl');
+  const structuredData = block && extractStructuredData(block, src);
 
   if (!title || !description) {
     unresolved.push(`${route} (no literal <SEO> title/description in ${path.relative(repoRoot, file)})`);
@@ -630,7 +691,7 @@ for (const route of routes) {
 
   const body = extractBody(src);
 
-  const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical }).replace(
+  const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical, structuredData }).replace(
     /<div id="root">\s*<\/div>/,
     buildShell({ route, h1, description, body }),
   );
