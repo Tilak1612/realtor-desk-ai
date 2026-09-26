@@ -434,6 +434,55 @@ const Demo = () => {
         </div>
       </section>
 
+      {/* Prose because the demo page is almost entirely interactive components,
+          so the 2026-09-26 crawl read 167 words. These are the sections the SEO
+          report's /demo brief asks for: what you will see, and what happens
+          next. Every workflow named here is one that ships. */}
+      <section className="section-padding border-t">
+        <div className="container-custom max-w-3xl">
+          <h2 className="mb-6">What you will see</h2>
+
+          <h3 className="text-lg font-semibold mb-2">A lead arriving and getting ranked</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            A new enquiry lands in one list rather than three inboxes, and gets a
+            score based on how it has engaged so far. The score is a prompt for
+            your attention, not a verdict — you can see what fed it and disagree
+            with it.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">One timeline per client</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Calls, emails, notes and appointments attach to the contact, so the
+            question &ldquo;what did I last tell this person?&rdquo; has one
+            answer in one place before you pick up the phone.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">A pipeline you can drag</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Stages from new through to closed, moved by dragging, with totals
+            reported in Canadian dollars.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">The follow-up that is due</h3>
+          <p className="text-muted-foreground leading-relaxed mb-8">
+            Tasks sit on the client record rather than in a separate app, which is
+            what stops a warm lead going quiet for three weeks.
+          </p>
+
+          <h2 className="mb-4">What happens next</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            The demo is a walkthrough of the live product, not a video of a
+            prototype. If it fits how you work, the 14-day trial starts from the
+            same account — a card is collected to begin and nothing is charged
+            before day 14. If it does not fit, our{" "}
+            <Link to="/blog/best-crm-canada-2025" className="underline">
+              comparison of Canadian CRM options
+            </Link>{" "}
+            is honest about where other products are the better answer.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

@@ -281,7 +281,7 @@ function extractSeoBlock(src) {
 // the <SEO> call. Anything referencing an import throws and is skipped.
 function localConstPrelude(src) {
   const out = [];
-  for (const m of src.matchAll(/^const\s+([A-Z][A-Z0-9_]*)\s*(?::[^=]+)?=\s*([[{])/gm)) {
+  for (const m of src.matchAll(/^const\s+([A-Za-z_$][\w$]*)\s*(?::[^=]+)?=\s*([[{])/gm)) {
     const openIdx = m.index + m[0].length - 1;
     const openCh = m[2];
     const closeCh = openCh === '[' ? ']' : '}';
@@ -301,7 +301,19 @@ function localConstPrelude(src) {
     if (end === -1) continue;
     out.push(`const ${m[1]} = ${src.slice(openIdx, end + 1)};`);
   }
-  return out.join('\n');
+  // Drop any declaration that cannot stand alone (it references an import, a
+  // component, or an earlier value we did not capture). Keeping the rest means
+  // one unusable const no longer costs us the whole page's copy.
+  const usable = [];
+  for (const decl of out) {
+    try {
+      new Function(`${usable.join('\n')}\n${decl}`)();
+      usable.push(decl);
+    } catch {
+      /* skip */
+    }
+  }
+  return usable.join('\n');
 }
 
 function extractStructuredData(block, src = '') {
@@ -431,6 +443,65 @@ function textOf(inner, tag = '') {
 
 // 40 was too low: on a long hub page like /resources the comparison links sat
 // past the cut, so the pages they de-orphan stayed orphaned.
+// Pages whose copy lives in a data array — FAQ entries, feature cards,
+// integration categories — render it through .map(), which extractBody cannot
+// follow. The 2026-09-26 crawl still flagged /features, /pricing, /demo,
+// /faq and ten others as thin for exactly that reason, and those are the
+// commercial pages.
+//
+// The consts are already evaluated for structuredData, so reuse that: walk the
+// evaluated values and take the human-readable strings. Anything that looks
+// like a slug, class name, URL, icon or single word is skipped, so this emits
+// prose rather than markup fragments.
+function extractDataStrings(src, { limit = 60 } = {}) {
+  const prelude = localConstPrelude(src);
+  const declared = new Set([...prelude.matchAll(/^const\s+([A-Za-z_$][\w$]*)/gm)].map((m) => m[1]));
+  const names = [...declared];
+  // Only consts the page actually maps over are page copy.
+  const mapped = names.filter((n) => new RegExp(`\\b${n}\\.map\\b`).test(src));
+  if (mapped.length === 0) return [];
+
+  let values;
+  try {
+    values = new Function(`${prelude}\nreturn [${mapped.join(',')}];`)();
+  } catch {
+    return [];
+  }
+
+  const out = [];
+  const seen = new Set();
+  const looksLikeProse = (v) =>
+    typeof v === 'string' &&
+    v.length >= 12 &&
+    /\s/.test(v.trim()) &&
+    !/^https?:|^\/|^#|^[a-z0-9-]+$/i.test(v.trim()) &&
+    !/[{}<>]/.test(v);
+
+  const walk = (node) => {
+    if (out.length >= limit) return;
+    if (Array.isArray(node)) {
+      node.forEach(walk);
+    } else if (node && typeof node === 'object') {
+      Object.values(node).forEach(walk);
+    } else if (typeof node === 'string') {
+      // Data arrays on these pages hold i18n keys rather than copy
+      // (CAPS_NOW is [["featuresRd.capImportTitle", ...]]), so resolve a
+      // dotted key through the English bundle before judging it.
+      const raw = node.trim();
+      const isKey = /^[a-z][\w]*(\.[\w]+)+$/.test(raw);
+      const resolved = isKey ? lookup(raw) : raw;
+      if (typeof resolved !== 'string') return;
+      const t = resolved.trim();
+      if (looksLikeProse(t) && !seen.has(t)) {
+        seen.add(t);
+        out.push(t);
+      }
+    }
+  };
+  values.forEach(walk);
+  return out;
+}
+
 function extractBody(src, { limit = 140 } = {}) {
   const out = [];
   for (const m of src.matchAll(/<(h2|h3|p|li)\b[^>]*>([\s\S]*?)<\/\1>/g)) {
@@ -439,6 +510,34 @@ function extractBody(src, { limit = 140 } = {}) {
     if (out.some((b) => b.text === text)) continue;
     out.push({ tag: m[1] === 'li' ? 'li' : m[1], text });
     if (out.length >= limit) break;
+  }
+  return out;
+}
+
+// Most of the pages the crawl still called thin compose their copy from child
+// components — /faq is eight lines of JSX around <MobileOptimizedFAQ />. The
+// extractors above only ever read the page file, so that copy was invisible.
+// Follow the page's own component imports one level deep and read those too.
+//
+// Shared chrome is excluded: Navbar and Footer appear on every page, so
+// pulling their text in would add the same block 69 times and say nothing.
+const CHROME = /(^|\/)(Navbar|Footer|SEO|CookieConsent|SkipToContent|ScrollToTop|SiteAssistant)$/;
+
+function localComponentSources(src, depth = 1, seen = new Set()) {
+  if (depth < 0) return [];
+  const out = [];
+  for (const m of src.matchAll(/^import\s+(?:\{[^}]*\}|\w+)\s+from\s+["'](@\/(?:components|pages)\/[^"']+)["']/gm)) {
+    const rel = m[1].replace(/^@\//, 'src/');
+    if (CHROME.test(rel) || rel.startsWith('src/components/ui/')) continue;
+    for (const ext of ['.tsx', '.ts', '/index.tsx']) {
+      const full = path.join(repoRoot, rel + ext);
+      if (!fs.existsSync(full) || seen.has(full)) continue;
+      seen.add(full);
+      const body = fs.readFileSync(full, 'utf-8');
+      out.push(body);
+      out.push(...localComponentSources(body, depth - 1, seen));
+      break;
+    }
   }
   return out;
 }
@@ -701,6 +800,23 @@ for (const route of routes) {
   const h1 = extractH1(src) || title;
 
   const body = extractBody(src);
+
+  // Copy that lives in mapped data arrays, on the page and in its own
+  // components.
+  const childSources = localComponentSources(src);
+  const dataStrings = [src, ...childSources].flatMap((code) => extractDataStrings(code));
+  for (const child of childSources) {
+    for (const blk of extractBody(child, { limit: 40 })) {
+      if (!body.some((b) => b.text === blk.text)) body.push(blk);
+    }
+  }
+  const seenText = new Set(body.map((b) => b.text));
+  for (const t of dataStrings) {
+    const esced = esc(t);
+    if (seenText.has(esced) || body.some((b) => b.text.includes(t))) continue;
+    seenText.add(esced);
+    body.push({ tag: 'p', text: esced });
+  }
 
   const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical, structuredData }).replace(
     /<div id="root">\s*<\/div>/,
