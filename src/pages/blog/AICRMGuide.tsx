@@ -17,7 +17,7 @@ const AICRMGuide = () => {
   return (
     <>
       <SEO
-        title="Complete Guide to AI CRM for Canadian Real Estate Agents"
+        title="AI CRM for Canadian Real Estate Agents"
         description="Everything Canadian Realtors need to know about AI-powered CRM systems, PIPEDA compliance, and how to choose the right platform."
         keywords="AI CRM for Canadian Realtors, best CRM for real estate agents Canada, PIPEDA compliant CRM, CREA DDF CRM integration"
         image={blogAICRMSocial}
@@ -30,7 +30,7 @@ const AICRMGuide = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025",
+            "headline": "The AI CRM for Canadian Real Estate Agents in 2025",
             "description": "Everything Canadian Realtors need to know about AI-powered CRM systems.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -57,7 +57,7 @@ const AICRMGuide = () => {
                 <span>15 min read</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-                The Complete Guide to AI CRM for Canadian Real Estate Agents in 2025
+                The AI CRM for Canadian Real Estate Agents in 2025
               </h1>
               <p className="text-xl text-muted-foreground">
                 If you're still managing leads in spreadsheets or using a generic CRM not designed for real estate, you're fighting an uphill battle. Here's everything you need to know about modern AI-powered CRM systems.

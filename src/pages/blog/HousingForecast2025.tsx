@@ -18,7 +18,7 @@ const HousingForecast2025 = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Canada Housing Market Forecast 2025-2026: What Realtors Need to Know"
+        title="Canada Housing Market Forecast 2025-2026"
         description="Expert analysis of Canada's housing market forecast for 2025-2026 with interest rates, regional trends, and strategies for Canadian Realtors."
         keywords="Canada housing market forecast 2025, Canadian real estate market predictions 2026, interest rates Canada housing, Toronto Vancouver housing trends, CREA housing forecast"
         image={blogImage}
@@ -31,7 +31,7 @@ const HousingForecast2025 = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Canada Housing Market Forecast 2025-2026: What Realtors Need to Know",
+            "headline": "Canada Housing Market Forecast 2025-2026",
             "description": "Expert analysis of Canada's housing market forecast for 2025-2026 with interest rates, regional trends, and strategies for Canadian Realtors.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -70,7 +70,7 @@ const HousingForecast2025 = () => {
             </div>
             
             <h1 className="mb-6">
-              Canada Housing Market Forecast 2025-2026: What Realtors Need to Know
+              Canada Housing Market Forecast 2025-2026
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

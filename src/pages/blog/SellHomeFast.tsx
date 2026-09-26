@@ -14,7 +14,7 @@ const SellHomeFast = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025"
+        title="How to Sell Your Home Fast in Canada"
         description="Learn how to sell your home fast in Canada with 10 proven strategies. From pricing to staging and marketing, get expert tips for quick sales."
         keywords="how to sell home fast Canada, home staging tips, real estate pricing strategy, sell house quickly, best time to sell house"
         image={blogImage}
@@ -27,7 +27,7 @@ const SellHomeFast = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025",
+            "headline": "How to Sell Your Home Fast in Canada",
             "description": "Learn how to sell your home fast in Canada with 10 proven strategies. From pricing to staging and marketing, get expert tips for quick sales.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -63,7 +63,7 @@ const SellHomeFast = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              How to Sell Your Home Fast in Canada: 10 Proven Strategies for 2025
+              How to Sell Your Home Fast in Canada
             </h1>
 
             <p className="text-xl text-muted-foreground">

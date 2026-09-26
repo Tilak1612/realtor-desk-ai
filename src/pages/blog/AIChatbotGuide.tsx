@@ -10,7 +10,7 @@ const AIChatbotGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="AI Chatbot for Real Estate Websites in Canada: Implementation Guide"
+        title="AI Chatbot for Canadian Real Estate Sites"
         description="Learn how AI chatbots capture and qualify real estate leads 24/7 with sub-3-second response times. Complete Canadian implementation guide."
         keywords="AI chatbot real estate Canada, real estate website chatbot, AI lead capture, realtor chatbot"
         article

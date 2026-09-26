@@ -10,7 +10,7 @@ const VsLoftyCRM = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="Lofty CRM vs Realtor Desk: Why Simplicity Beats Feature Bloat"
+        title="Lofty CRM vs Realtor Desk"
         description="Compare Lofty CRM (Chime) vs Realtor Desk for Canadian agents. Pricing, automation, and why simplicity wins in 2025."
         keywords="Lofty CRM vs Realtor Desk, Lofty CRM alternative, Chime CRM comparison, Canadian real estate CRM"
         article
@@ -22,7 +22,7 @@ const VsLoftyCRM = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Lofty CRM vs Realtor Desk: Why Simplicity Beats Feature Bloat for Canadian Agents",
+            "headline": "Lofty CRM vs Realtor Desk for Canadian Agents",
             "description": "Compare Lofty CRM (Chime) vs Realtor Desk for Canadian agents. Pricing, automation, and why simplicity wins in 2025.",
             "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": { "@type": "Organization", "name": "Realtor Desk" },

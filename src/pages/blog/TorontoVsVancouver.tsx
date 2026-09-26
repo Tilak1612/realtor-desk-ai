@@ -14,7 +14,7 @@ const TorontoVsVancouver = () => {
   return (
     <>
       <SEO
-        title="Toronto vs Vancouver Real Estate: Market Trends & Predictions 2025"
+        title="Toronto vs Vancouver Real Estate 2025"
         description="Compare Toronto and Vancouver housing markets for 2025. Price trends, inventory levels, and opportunities for buyers, sellers, and Realtors."
         keywords="Toronto vs Vancouver real estate 2025, Toronto housing market forecast 2025, Vancouver real estate trends 2025, GTA vs GVA property prices, Toronto Vancouver real estate comparison"
         image={blogTorontoVancouver}

@@ -10,7 +10,7 @@ const CalgaryMarketingGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026"
+        title="Calgary Real Estate Marketing Strategies"
         description="Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights for Alberta."
         keywords="Calgary real estate marketing, Alberta real estate agents, Calgary lead generation, AI marketing tools real estate"
         article
@@ -22,7 +22,7 @@ const CalgaryMarketingGuide = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026",
+            "headline": "Calgary Real Estate Marketing Strategies",
             "description": "Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights for Alberta.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -42,7 +42,7 @@ const CalgaryMarketingGuide = () => {
               <span className="text-sm font-semibold text-primary">Calgary, Alberta</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              Calgary Real Estate Marketing Strategies: AI Tools for Alberta Agents in 2026
+              Calgary Real Estate Marketing Strategies
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights to stand out in Alberta's competitive market.

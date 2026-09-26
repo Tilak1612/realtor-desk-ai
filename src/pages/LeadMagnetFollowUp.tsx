@@ -64,7 +64,7 @@ const LeadMagnetFollowUp = () => {
   return (
     <>
       <SEO
-        title="Free: Slow Follow-Up Calculator + 5 Scripts for Canadian Realtors"
+        title="Slow Follow-Up Calculator for Realtors"
         description="Find out how much slow lead response is costing you in lost GCI — then get 5 done-for-you follow-up scripts written for Canadian real estate agents."
         keywords="real estate follow up scripts Canada, lead response time calculator, slow follow up cost realtor, Canadian real estate lead scripts"
         canonicalUrl="https://www.realtordesk.ai/resources/slow-follow-up-calculator-canadian-realtors"

@@ -18,7 +18,7 @@ const Compliance = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Provincial Compliance Checklist: ON, BC, AB, QC"
+        title="Provincial Compliance Checklist for Agents"
         description="Stay compliant with Canadian real estate regulations. A practical checklist for RECO, BCFSA, RECA, and AMF requirements."
         keywords="real estate compliance canada, RECO requirements, BCFSA compliance, RECA rules, AMF real estate, PIPEDA"
         image={blogImage}
@@ -31,7 +31,7 @@ const Compliance = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Provincial Compliance Checklist: ON, BC, AB, QC",
+            "headline": "Provincial Compliance Checklist for Agents",
             "description": "Stay compliant with Canadian real estate regulations. A practical checklist for RECO, BCFSA, RECA, and AMF requirements.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -67,7 +67,7 @@ const Compliance = () => {
             </div>
             
             <h1 className="mb-6">
-              Provincial Compliance Checklist: ON, BC, AB, QC
+              Provincial Compliance Checklist for Agents
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

@@ -49,7 +49,7 @@ export default function Home() {
         description={
           isFr
             ? "CRM bilingue pour l'immobilier canadien : notation des prospects, pipeline glisser-déposer, une chronologie par client et import de fiches Realtor.ca. Données hébergées au Canada, tarifs en CAD."
-            : "The bilingual CRM for Canadian real estate: lead scoring, a drag-and-drop pipeline, one conversation timeline per client and Realtor.ca listing import. Data hosted in Canada, priced in CAD."
+            : "The bilingual CRM for Canadian real estate: lead scoring, a drag-and-drop pipeline and one conversation timeline per client. Hosted in Canada, priced in CAD."
         }
         canonicalUrl="https://www.realtordesk.ai/"
       />

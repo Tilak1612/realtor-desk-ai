@@ -14,8 +14,8 @@ const EdmontonMarket2025 = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide"
-        description="Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions for Alberta buyers and investors."
+        title="Edmonton Real Estate Market 2025"
+        description="Edmonton real estate market 2025: housing prices, neighbourhoods and what the data means for Alberta buyers, sellers and investors."
         keywords="Edmonton real estate market 2025, best neighborhoods Edmonton, Edmonton housing prices, invest in Edmonton real estate, Edmonton vs Calgary real estate"
         image={blogImage}
         article
@@ -27,8 +27,8 @@ const EdmontonMarket2025 = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide",
-            "description": "Edmonton real estate market 2025 analysis: housing prices, best neighborhoods, investment opportunities, and market predictions for Alberta buyers and investors.",
+            "headline": "Edmonton Real Estate Market 2025",
+            "description": "Edmonton real estate market 2025: housing prices, neighbourhoods and what the data means for Alberta buyers, sellers and investors.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
             "datePublished": "2025-01-01",
@@ -63,7 +63,7 @@ const EdmontonMarket2025 = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Edmonton Real Estate Market 2025: Complete Buyer's & Investor's Guide
+              Edmonton Real Estate Market 2025
             </h1>
 
             <p className="text-xl text-muted-foreground">

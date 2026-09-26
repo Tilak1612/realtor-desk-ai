@@ -15,7 +15,7 @@ const IxactAlternatives = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="IXACT Contact Alternatives: Why Canadian Agents Are Switching to AI-First CRMs"
+        title="IXACT Contact Alternatives for Canada"
         description="Compare IXACT Contact alternatives for Canadian agents. See why agents are switching to faster, more affordable AI-first CRMs."
         keywords="IXACT Contact alternatives, Canadian real estate CRM, AI CRM for realtors, IXACT alternative"
         article
@@ -27,7 +27,7 @@ const IxactAlternatives = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "IXACT Contact Alternatives: Why Canadian Agents Are Switching to AI-First CRMs in 2025",
+            "headline": "IXACT Contact Alternatives for Canada in 2025",
             "description": "Compare IXACT Contact alternatives for Canadian agents. See why agents are switching to faster, more affordable AI-first CRMs.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -63,7 +63,7 @@ const IxactAlternatives = () => {
             </div>
             
             <h1 className="mb-6">
-              IXACT Contact Alternatives: Why Canadian Agents Are Switching to AI-First CRMs in 2025
+              IXACT Contact Alternatives for Canada in 2025
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">

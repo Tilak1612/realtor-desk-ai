@@ -78,7 +78,7 @@ const FintracCompliance = () => {
     <div className="min-h-screen">
       <SEO
         title="FINTRAC Compliance for Canadian Realtors | RealtorDesk AI"
-        description="FINTRAC compliance guide for Canadian real estate agents. Understand your obligations — client ID, record keeping, suspicious transaction reporting — and how RealtorDesk AI helps you stay compliant."
+        description="FINTRAC obligations for Canadian real estate agents: client ID, record keeping and suspicious transaction reporting, and how Realtor Desk supports them."
         keywords="FINTRAC compliance real estate, FINTRAC obligations realtors Canada, real estate compliance Canada, FINTRAC record keeping, Canadian realtor compliance, AML real estate Canada"
         canonicalUrl="https://www.realtordesk.ai/fintrac-compliance"
         structuredData={[

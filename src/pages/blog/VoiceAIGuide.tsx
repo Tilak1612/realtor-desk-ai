@@ -10,7 +10,7 @@ const VoiceAIGuide = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
-        title="Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals"
+        title="Voice AI for Real Estate Follow-Up"
         description="Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close meaningfully more deals."
         keywords="voice AI for real estate, AI lead follow-up, real estate voice assistant, Canadian real estate automation"
         article
@@ -22,7 +22,7 @@ const VoiceAIGuide = () => {
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals",
+            "headline": "Voice AI for Real Estate Follow-Up",
             "description": "Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. Learn how Canadian agents close meaningfully more deals.",
             "author": { "@type": "Organization", "name": "RealtorDesk AI" },
             "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
@@ -38,7 +38,7 @@ const VoiceAIGuide = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-              Voice AI for Real Estate Lead Follow-Up: How Canadian Agents Close More Deals
+              Voice AI for Real Estate Follow-Up
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. See how Canadian agents use AI to follow up instantly and close meaningfully more deals.

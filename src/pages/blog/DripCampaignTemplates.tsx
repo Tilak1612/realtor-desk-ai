@@ -19,7 +19,7 @@ const DripCampaignTemplates = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Real Estate Drip Campaign Templates for Canada"
+        title="Real Estate Drip Campaign Templates"
         description="15 proven real estate email drip campaign templates for Canadian agents. Buyer nurture, seller follow-up, and listing alerts. CASL-compliant."
         keywords="real estate email templates, drip campaign real estate, realtor email sequences, CASL compliant email marketing, real estate nurture campaigns"
         image={blogImage}
