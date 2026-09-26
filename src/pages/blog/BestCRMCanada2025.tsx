@@ -74,19 +74,31 @@ const BestCRMCanada2025 = () => {
           <Card className="p-6 mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
             <h3 className="text-lg font-bold mb-3">Key Finding</h3>
             <p className="text-base mb-0">
-              After testing 23 CRMs and interviewing dozens of Canadian agents, we found that many agents use the wrong CRM—one built for US markets without PIPEDA compliance, French support, or CREA DDF integration. This comprehensive guide reveals the top 10 CRMs specifically evaluated for Canadian real estate professionals.
+              Most of the best-known real estate CRMs are built for the US market, so PIPEDA-aware data handling, French-language support and Canadian MLS coverage are the things worth checking before you commit. This guide compares the main options against those criteria, using each vendor's own published documentation.
             </p>
           </Card>
 
           <div className="prose prose-lg max-w-none">
             <p className="lead">
-              Choosing the right CRM can be the difference between closing 20 deals or 45 deals per year. For Canadian agents, the stakes are even higher—you need PIPEDA compliance, CASL-compliant templates, and ideally CREA DDF integration. This guide cuts through the noise.
+              A CRM will not close deals for you, but the wrong one quietly costs you follow-ups. For Canadian agents there are extra constraints worth getting right up front: where client data is stored under PIPEDA, whether email handling fits CASL, and whether the product covers Canadian MLS data at all.
             </p>
 
-            <h2>How We Evaluated: Our Testing Methodology</h2>
+            <h2>How this comparison was put together</h2>
 
             <p>
-              We didn't just read marketing materials. Over 90 days, we signed up for 23 different CRMs, tested them with real leads (with permission), and measured what matters: response times, conversion rates, ease of use, and Canadian compliance.
+              This is desk research, not a lab test. Each product below was assessed
+              from its own public documentation, pricing pages and support material,
+              checked against the criteria that matter in Canada. We have not run a
+              controlled trial of these products against each other, and we do not
+              publish conversion or response-time figures we cannot show you the
+              working for. Vendor pricing and features change often — check the
+              vendor's own page before deciding, and treat anything here as a
+              starting shortlist rather than a verdict.
+            </p>
+
+            <p>
+              We build one of the products compared here, so read the RealtorDesk
+              entry with that in mind.
             </p>
 
             <h3>Our 10 Evaluation Criteria</h3>
@@ -397,9 +409,9 @@ const BestCRMCanada2025 = () => {
               <strong>Recommendation:</strong> RealtorDesk AI
             </p>
             <ul>
-              <li>AI automates follow-up so you focus on closings</li>
-              <li>Time saved: 10-15 hours/week</li>
-              <li>ROI: 671% based on time savings alone</li>
+              <li>Lead scoring and a single conversation timeline per client</li>
+              <li>Bilingual EN/FR, with data hosted in Canada and CAD pricing</li>
+              <li>$149 CAD/month on the Solo plan</li>
             </ul>
 
             <h3>Small Team (2-5 Agents)</h3>
@@ -436,7 +448,7 @@ const BestCRMCanada2025 = () => {
 
             <h3>Mistake #3: Choosing the Cheapest Option</h3>
             <p>
-              Saving $100/month but losing 2 deals/year = -$12,000 in lost commission. Invest in tools that make you money.
+              As illustrative arithmetic only: saving $100/month but losing two deals a year would cost far more than it saves. Invest in tools that make you money.
             </p>
 
             <h3>Mistake #4: Not Testing with Real Leads</h3>
@@ -458,7 +470,7 @@ const BestCRMCanada2025 = () => {
 
             <h3>Is AI worth the extra cost?</h3>
             <p>
-              Yes. Our testing shows AI increases lead conversion by 2-3x because of sub-5-second response times. One extra deal pays for the CRM for the entire year.
+              It depends on whether you will use it. The AI features here help you triage and draft — lead scoring, summaries, suggested replies — rather than replacing your follow-up. We do not publish a conversion multiple for them, because we have not measured one.
             </p>
 
             <h3>How long does it take to set up a new CRM?</h3>
@@ -474,7 +486,7 @@ const BestCRMCanada2025 = () => {
             <h2>Final Recommendation: Start Here</h2>
 
             <p className="text-lg font-semibold">
-              For 80% of Canadian Real Estate Agents: Try RealtorDesk AI First
+              If you want a Canadian-built option: start with RealtorDesk AI
             </p>
 
             <ul className="list-none space-y-2">
