@@ -322,6 +322,57 @@ describe("capability claims", () => {
     expect(nowBlock).not.toContain("capContacts");
   });
 
+  it("does not claim first-party research that was never run", () => {
+    // /blog/best-crm-canada-2025 described a study in checkable detail: "Over
+    // 90 days, we signed up for 23 different CRMs, tested them with real leads
+    // (with permission), and measured response times, conversion rates". No
+    // such study exists. It also published the outputs — ROI 671%, 10-15
+    // hours/week saved, conversion up 2-3x, "80% of Canadian agents" — and
+    // attributed the conversion figure to "sub-5-second response times", a
+    // capability the guard above already establishes the product lacks.
+    //
+    // AGENTS.md: "Do not fabricate: customer counts, revenue, fines saved,
+    // uptime, or case studies."
+    const guide = readFileSync(
+      join(ROOT, "src/pages/blog/BestCRMCanada2025.tsx"),
+      "utf8"
+    );
+    for (const phrase of [
+      "testing 23 CRMs",
+      "23 different CRMs",
+      "with real leads",
+      "671%",
+      "10-15 hours/week",
+      "2-3x",
+      "sub-5-second",
+      "80% of Canadian Real Estate Agents",
+      "20 deals or 45 deals",
+    ]) {
+      expect(guide, `unsourced claim restored: ${phrase}`).not.toContain(phrase);
+    }
+    // The replacement has to keep saying how it was actually produced, and
+    // disclose that we compare our own product.
+    expect(guide).toContain("desk research");
+    expect(guide).toMatch(/we build one of the products compared here/i);
+  });
+
+  it("reports native integrations as the native count, not the total", () => {
+    // The hero printed totalIntegrations (23) under the label "Native
+    // Integrations". The 23 are 7 native, 11 not live and 5 reachable only
+    // through Zapier or Make, so the headline overstated native support about
+    // threefold. Each status is now counted separately.
+    const page = readFileSync(join(ROOT, "src/pages/Integrations.tsx"), "utf8");
+    const heroStat = page.slice(
+      page.indexOf("Integration Stats"),
+      page.indexOf("Categorized Integrations Grid")
+    );
+    expect(heroStat).toContain("{nativeCount}");
+    expect(heroStat).not.toContain("{totalIntegrations}+");
+    // A count rendered next to the native label must be derived from the
+    // native subtitleKey, not from the length of the whole list.
+    expect(page).toMatch(/const nativeCount = countBy\("native"\)/);
+  });
+
   it("labels every roadmap capability on the features page", () => {
     // The split is structural. If someone folds the two lists back into one,
     // a buyer loses the only signal separating shipped from planned.

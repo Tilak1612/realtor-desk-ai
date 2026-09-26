@@ -77,8 +77,8 @@ const Integrations = () => {
       titleKey: "integrationsPage.categories.contactLeadTools",
       icon: <Contact className="w-5 h-5" />,
       integrations: [
-        { name: "Google Contacts", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/google-contacts.svg" },
-        { name: "Microsoft Contacts", subtitleKey: "native", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-icon.svg" },
+        { name: "Google Contacts", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/google-contacts.svg" },
+        { name: "Microsoft Contacts", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/microsoft-icon.svg" },
         { name: "LinkedIn Lead Gen Forms", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg" },
         { name: "Facebook Lead Ads", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/facebook-icon.svg" },
         { name: "Centris (Quebec MLS)", subtitleKey: "comingSoon", logo: "https://cdn.worldvectorlogo.com/logos/canada-flag-icon.svg" },
@@ -87,6 +87,18 @@ const Integrations = () => {
   ];
 
   const totalIntegrations = categories.reduce((acc, cat) => acc + cat.integrations.length, 0);
+  // The hero used to print totalIntegrations under the label "Native
+  // Integrations". Of the 23 listed, 7 are native, 11 are not live yet and 5
+  // are reachable only through Zapier or Make — so the headline number
+  // overstated native support roughly threefold. Count each status instead.
+  const countBy = (key: string) =>
+    categories.reduce(
+      (acc, cat) => acc + cat.integrations.filter((i) => i.subtitleKey === key).length,
+      0
+    );
+  const nativeCount = countBy("native");
+  const comingSoonCount = countBy("comingSoon");
+  const connectorCount = countBy("zapier");
 
   const getSubtitle = (key: string) => {
     if (key === 'native') return t('integrationsPage.badges.nativeIntegration');
@@ -133,16 +145,16 @@ const Integrations = () => {
         <div className="container-custom">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <div className="text-5xl font-bold gradient-text mb-2">{totalIntegrations}+</div>
+              <div className="text-5xl font-bold gradient-text mb-2">{nativeCount}</div>
               <p className="text-muted-foreground">{t('integrationsPage.stats.nativeIntegrations')}</p>
             </div>
             <div>
-              <div className="text-5xl font-bold gradient-text mb-2">5,000+</div>
+              <div className="text-5xl font-bold gradient-text mb-2">{connectorCount}</div>
               <p className="text-muted-foreground">{t('integrationsPage.stats.viaZapier')}</p>
             </div>
             <div>
-              <div className="text-5xl font-bold gradient-text mb-2">24/7</div>
-              <p className="text-muted-foreground">{t('integrationsPage.stats.realTimeSync')}</p>
+              <div className="text-5xl font-bold gradient-text mb-2">{comingSoonCount}</div>
+              <p className="text-muted-foreground">{t('integrationsPage.stats.comingSoonCount', 'Planned')}</p>
             </div>
           </div>
         </div>

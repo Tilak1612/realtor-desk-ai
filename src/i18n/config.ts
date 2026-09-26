@@ -2297,6 +2297,7 @@ const resources = {
       integrationsPage: {
         stats: {
           nativeIntegrations: "Native Integrations",
+          comingSoonCount: "Planned",
           viaZapier: "Via Zapier Connection",
           realTimeSync: "Real-Time Sync"
         },
@@ -2307,7 +2308,7 @@ const resources = {
         },
         partners: {
           title: "Our Integration Partners",
-          subtitle: "Connect with {{count}}+ industry-leading tools and platforms"
+          subtitle: "{{count}} tools and platforms across native connections, automation connectors and planned integrations"
         },
         categories: {
           crmPlatforms: "CRM Platforms",
@@ -5561,6 +5562,7 @@ const resources = {
       integrationsPage: {
         stats: {
           nativeIntegrations: "Intégrations Natives",
+          comingSoonCount: "Prévues",
           viaZapier: "Via Connexion Zapier",
           realTimeSync: "Synchronisation en Temps Réel"
         },
