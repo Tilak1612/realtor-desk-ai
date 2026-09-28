@@ -163,6 +163,66 @@ export default function CompareBoldtrail() {
           </div>
         </div>
       </section>
+      <section className="px-8 md:px-14 py-[100px] border-t border-rd-line">
+        <div className="mx-auto max-w-[760px]">
+          <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] mb-4">
+            How to read this comparison
+          </h2>
+          <p className="text-rd-ink-600 leading-[1.6] mb-8">
+            We build one of these two products, so treat the framing accordingly.
+            Everything below about BoldTrail comes from their own site, read on
+            26 September 2026. Product details change — check
+            boldtrail.com before you decide, and hold us to the same standard.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">They are not the same kind of product</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-6">
+            BoldTrail, from Inside Real Estate, is a broad platform. Their site
+            markets to &ldquo;agents, teams, brokers, and enterprise-level
+            organizations&rdquo; and spans four modules: the main platform with
+            IDX websites, lead generation and CRM; BackOffice for commissions and
+            accounting; Recruit for brokerage growth; and a marketplace of add-ons.
+            Realtor Desk is a CRM for the working agent. If you need agent
+            billing, commission accounting and a recruiting pipeline in one
+            system, that is a real requirement and we do not meet it.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">What their site does not say</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-6">
+            Their homepage states no pricing, and makes no statement about Canadian
+            data residency, CREA DDF, or French-language support. That is an
+            observation about what is published, not a claim that the product
+            lacks those things — ask them directly if those matter to you. They
+            are the things we build around, so they are where we would expect the
+            difference to sit.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">What we will say about ourselves</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-6">
+            Data hosted in Canada, pricing in CAD at $149/month for Solo and $299
+            for Team, bilingual EN/FR in the interface and in client-facing email,
+            and CASL consent recorded per contact with sends refused when consent
+            is missing. Listings import from Realtor.ca today; native CREA DDF®
+            sync is on the roadmap for Q3 2026 and is not live.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Who should pick which</h3>
+          <p className="text-rd-ink-600 leading-[1.6]">
+            A brokerage that needs back office, recruiting and IDX websites in one
+            platform should look at BoldTrail. A Canadian agent or small team who
+            wants lead follow-up handled properly, in two languages, billed in
+            dollars that do not move, is who we built for. Our{" "}
+            <Link to="/blog/best-crm-canada-2025" className="underline">
+              comparison of Canadian CRM options
+            </Link>{" "}
+            covers the rest of the field, and{" "}
+            <Link to="/blog/real-estate-crm-buying-guide" className="underline">
+              the buying guide
+            </Link>{" "}
+            sets out how to run the evaluation yourself.
+          </p>
+        </div>
+      </section>
     </MarketingLayout>
   );
 }
