@@ -201,6 +201,83 @@ const SwitchFromFollowUpBoss = () => {
         </div>
       </section>
 
+      {/* The SEO report keeps the switch-from pages only where they carry real
+          migration substance — supported fields, what does not come across,
+          and how to test — rather than boilerplate. This is that, verified
+          against src/lib/csvImport.ts rather than described from memory. */}
+      <section className="section-padding border-t">
+        <div className="container-custom max-w-3xl">
+          <h2 className="mb-6">What actually moves across</h2>
+
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Migration is a CSV import. Export your contacts from Follow Up Boss, then
+            upload the file — the importer reads the header row and matches
+            common column names, so in most cases you do not have to rename
+            anything first.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Columns it recognises</h3>
+          <ul className="space-y-2 text-muted-foreground leading-relaxed list-disc pl-5 mb-6">
+            <li>
+              <strong>Email</strong> — <code>email</code>, <code>email_address</code>,
+              <code>e_mail</code> or <code>emailaddress</code>
+            </li>
+            <li>
+              <strong>Phone</strong> — <code>phone</code>, <code>mobile</code>,
+              <code>cell</code>, <code>telephone</code> and the usual variants
+            </li>
+            <li>
+              <strong>Name</strong> — <code>first_name</code> and <code>last_name</code>,
+              or a single <code>full_name</code> / <code>name</code> column, which is
+              split on the first space
+            </li>
+            <li>
+              <strong>Source</strong> — <code>source</code> or <code>lead_source</code>;
+              rows with neither are tagged <code>csv_import</code>
+            </li>
+            <li>
+              <strong>Tags</strong> — <code>tags</code> or <code>labels</code>, separated
+              by semicolons
+            </li>
+            <li>
+              <strong>Company, job title, notes</strong> — kept on the contact even
+              though they have no dedicated column, so nothing in the file is
+              discarded
+            </li>
+          </ul>
+
+          <h3 className="text-lg font-semibold mb-2">What does not come across</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Email and call history, attachments, saved searches, automation
+            sequences and anything specific to Follow Up Boss&rsquo;s own data model. A
+            CSV of contacts is a CSV of contacts. If the history matters, keep
+            your Follow Up Boss export file — it is the record, and we are not going to
+            pretend we can reconstruct a timeline we never had.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Test it before you commit</h3>
+          <ol className="space-y-2 text-muted-foreground leading-relaxed list-decimal pl-5 mb-6">
+            <li>Export everything from Follow Up Boss and keep that file somewhere safe.</li>
+            <li>Cut the first twenty rows into a separate CSV and import those.</li>
+            <li>
+              Open three of them and check the name split, the phone format and
+              whether the tags landed where you expected.
+            </li>
+            <li>Only then import the rest.</li>
+          </ol>
+
+          <h3 className="text-lg font-semibold mb-2">Getting back out</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Your contacts export to CSV from settings at any time, including
+            after you cancel. That is worth checking on any CRM you are
+            considering, including this one — a product that makes leaving hard
+            is telling you something. See{" "}
+            <Link to="/pricing" className="underline">pricing and trial terms</Link>{" "}
+            or <Link to="/features" className="underline">what the CRM does</Link>.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
