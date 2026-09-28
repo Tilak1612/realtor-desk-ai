@@ -49,9 +49,12 @@ const LoftyAlternative = () => {
 
   const comparisonTableSchema = {
     "@context": "https://schema.org",
-    "@type": "ComparisonTable",
-    "name": "Lofty vs RealtorDesk AI Feature Comparison",
-    "items": [
+    // ComparisonTable is not a schema.org type — the block validated as JSON
+    // but search engines ignore an unknown @type, so it did nothing. ItemList
+    // is the valid equivalent for a two-product comparison.
+    "@type": "ItemList",
+    "name": "Lofty vs Realtor Desk feature comparison",
+    "itemListElement": [
       {
         "@type": "Product",
         "name": "RealtorDesk AI",
