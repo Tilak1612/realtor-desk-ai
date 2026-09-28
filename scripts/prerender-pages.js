@@ -668,6 +668,20 @@ function buildShell({ route, h1, description, body }) {
       route === '/' ? '' : route,
     )})document.getElementById('root').textContent='';</script>`;
 
+  // The shell is a reduced view of the page, so a section whose first
+  // extracted heading is an <h3> would follow the <h1> directly and read as a
+  // skipped level — 16 pages were flagged for exactly that, and it was this
+  // script's doing rather than the page's. Clamp each heading to at most one
+  // level below the previous one.
+  let lastLevel = 1;
+  for (const block of body) {
+    if (block.tag !== 'h2' && block.tag !== 'h3') continue;
+    const level = block.tag === 'h2' ? 2 : 3;
+    const clamped = Math.min(level, lastLevel + 1);
+    block.tag = clamped === 2 ? 'h2' : 'h3';
+    lastLevel = clamped;
+  }
+
   // Wrap consecutive <li> runs back into a single list.
   const bodyHtml = [];
   let inList = false;
