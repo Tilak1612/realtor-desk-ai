@@ -427,36 +427,8 @@ const IxactAlternatives = () => {
             <h2>What Current IXACT Users Say</h2>
 
             <h3>Common Complaints from IXACT Users</h3>
-            <blockquote>
-              "The interface looks like it's from 2005. I'm embarrassed when training new team members."
-              <footer>— G2 Review</footer>
-            </blockquote>
-
-            <blockquote>
-              "No mobile app that actually works. I can't manage my business on the go."
-              <footer>— Capterra Review</footer>
-            </blockquote>
-
-            <blockquote>
-              "Support tickets take 3-5 days to resolve. Totally unacceptable in 2025."
-              <footer>— G2 Review</footer>
-            </blockquote>
-
-            <blockquote>
-              "It's not AI, it's not automation—it's just a glorified contact list with email."
-              <footer>— Capterra Review</footer>
-            </blockquote>
 
             <h3>Success Stories from Switchers</h3>
-            <blockquote>
-              "I used IXACT for 7 years. It was fine until I saw how fast AI CRMs respond. I switched to RealtorDesk AI and my lead conversion doubled in 60 days because I'm not losing leads to slow follow-up anymore."
-              <footer>— David R., Edmonton Agent</footer>
-            </blockquote>
-
-            <blockquote>
-              "IXACT felt like using a flip phone when everyone else had an iPhone. RealtorDesk AI brought me into 2025. The AI handles all my initial follow-up while I focus on closing deals."
-              <footer>— Lisa M., Vancouver Agent</footer>
-            </blockquote>
 
             <h2>Decision Framework: Which Alternative Is Right for You?</h2>
 

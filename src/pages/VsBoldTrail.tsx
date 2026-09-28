@@ -16,7 +16,7 @@ const VsBoldTrail = () => {
     <div className="min-h-screen">
       <SEO
         title="BoldTrail Alternative | RealtorDesk AI vs BoldTrail"
-        description="Looking for a BoldTrail alternative? RealtorDesk AI helps Canadian agents save $5,988 in year one with AI lead generation and faster support."
+        description="Looking for a BoldTrail alternative? RealtorDesk AI is $149/mo CAD with no setup fee, bilingual EN/FR and faster support."
         keywords="BoldTrail alternative, RealtorDesk AI vs BoldTrail, Canadian real estate CRM, AI CRM for realtors"
         canonicalUrl="https://www.realtordesk.ai/vs/boldtrail"
         structuredData={[
@@ -28,7 +28,7 @@ const VsBoldTrail = () => {
             "mainEntity": {
               "@type": "ItemList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "BoldTrail", "description": "$6,987 first year with $999 setup fee" },
+                { "@type": "ListItem", "position": 1, "name": "BoldTrail", "description": "Pricing quoted on request; not published" },
                 { "@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "$149/mo CAD, $0 setup fee" }
               ]
             }
@@ -44,18 +44,18 @@ const VsBoldTrail = () => {
             Best CRM for Real Estate Agents Comparison
           </Badge>
           <h1 className="mb-6">
-            Best BoldTrail Alternative: <span className="gradient-text">Realtor Desk</span> - Save $5,988 first year
+            BoldTrail Alternative for Canada: <span className="gradient-text">Realtor Desk</span> at $149/mo CAD
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            The best CRM for real estate agents with AI lead generation software. Save $5,988 first year vs BoldTrail while getting faster support and Canadian-focused features.
+            A Canadian CRM at $149/mo CAD with no setup fee, bilingual EN/FR and data hosted in Canada, while getting faster support and Canadian-focused features.
           </p>
           
           {/* Cost Comparison */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
             <Card className="p-6 flex-1 border-destructive/20">
               <div className="text-sm text-muted-foreground mb-2">BoldTrail First Year</div>
-              <div className="text-3xl font-bold text-destructive mb-1">$6,987</div>
-              <div className="text-xs text-muted-foreground">$5,988/year + $999 setup · vendor figures unverified</div>
+              <div className="text-3xl font-bold text-destructive mb-1">Quoted</div>
+              <div className="text-xs text-muted-foreground">BoldTrail does not publish pricing</div>
             </Card>
             
             <TrendingDown className="w-8 h-8 text-rd-terra-800 rotate-90 sm:rotate-0" />
@@ -63,7 +63,7 @@ const VsBoldTrail = () => {
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
               <div className="text-3xl font-bold gradient-text mb-1">$149/mo</div>
-              <div className="text-xs text-rd-terra-800 font-semibold">{t('comparison.savings')} $5,988 {t('comparison.firstYear')}</div>
+              <div className="text-xs text-rd-terra-800 font-semibold">$149/mo CAD · no setup fee</div>
             </Card>
           </div>
         </div>
@@ -97,7 +97,7 @@ const VsBoldTrail = () => {
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">$149/mo CAD, zero setup fee</h3>
               <p className="text-sm text-muted-foreground">
-                All-inclusive pricing. No hidden costs, no surprise charges. Save $5,988 first year vs BoldTrail.
+                All-inclusive pricing. No setup fee and no surprise charges — compare it against the total you are quoted.
               </p>
             </Card>
 
@@ -144,8 +144,8 @@ const VsBoldTrail = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "List price", rdai: "$149/mo CAD", boldtrail: "$5,988/yr (unverified)" },
-                  { feature: "Setup fee", rdai: "$0", boldtrail: "$999 (unverified)" },
+                  { feature: "List price", rdai: "$149/mo CAD", boldtrail: "Not published" },
+                  { feature: "Setup fee", rdai: "$0", boldtrail: "Not published" },
                   { feature: "Predictive Lead Scoring", rdai: true, boldtrail: false },
                   { feature: "AI assistant inside the CRM", rdai: true, boldtrail: false },
                   { feature: "Data hosted in Canada", rdai: true, boldtrail: false },

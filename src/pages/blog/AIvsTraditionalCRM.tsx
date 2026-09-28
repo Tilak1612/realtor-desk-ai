@@ -277,12 +277,6 @@ const AIvsTraditionalCRM = () => {
               <li>Agent wakes up Monday to confirmed appointments</li>
             </ul>
 
-            <blockquote>
-              "Traditional CRM: Lead inquires at 9:47 PM Friday. I respond Monday at 9 AM. Lead went with another agent who responded Friday night.<br/><br/>
-              AI CRM: Lead inquires at 9:47 PM Friday. AI responds in 3 seconds, qualifies them, books showing for Saturday 2 PM. I wake up to a confirmed appointment."
-              <footer>— Jennifer K., Toronto Agent</footer>
-            </blockquote>
-
             <p className="font-semibold text-primary">Winner: AI CRM</p>
 
             <h3>4. Conversation Quality 💬</h3>

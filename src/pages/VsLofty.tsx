@@ -19,7 +19,7 @@ const VsLofty = () => {
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "$700+ USD/mo with setup fees, US-focused"},
+        {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "Pricing quoted on request; not published"},
         {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "$149 CAD/mo, PIPEDA compliant, bilingual, CREA DDF® coming Q3 2026"}
       ]
     }
@@ -133,7 +133,7 @@ const VsLofty = () => {
               </thead>
               <tbody>
                 {[
-                  { feature: "Starting price", rdai: "$149/mo CAD", lofty: "$1,188+/yr (unverified)" },
+                  { feature: "Starting price", rdai: "$149/mo CAD", lofty: "Not published" },
                   { feature: "Transparent Pricing", rdai: true, lofty: false },
                   { feature: "Predictive Lead Scoring", rdai: true, lofty: false },
                   { feature: "AI Learns & Adapts", rdai: true, lofty: false },

@@ -373,6 +373,57 @@ describe("capability claims", () => {
     expect(page).toMatch(/const nativeCount = countBy\("native"\)/);
   });
 
+  it("does not publish invented testimonials or competitor prices", () => {
+    // 2026-09-28. Three separate fabrications, all live:
+    //
+    //   - 14 testimonials across four comparison posts, attributed to named
+    //     agents in named cities ("Sarah M., Vancouver Real Estate Team (5
+    //     agents)") with outcome figures ("lead conversion went from 7% to
+    //     16%"). None sourced. AGENTS.md forbids fabricated case studies.
+    //   - An ROI table on /blog/vs-lofty-crm concluding "Net Benefit:
+    //     $306,312/year", built on a 4.2% conversion rate and a "2.7 seconds
+    //     (AI)" response time the product does not have.
+    //   - Specific prices for Lofty and BoldTrail across nine files, including
+    //     inside JSON-LD. Verified 2026-09-28: lofty.com/pricing and
+    //     boldtrail.com publish no prices at all — both quote on request — so
+    //     every one of those figures was unverifiable, and two of them
+    //     contradicted each other on the same page.
+    //
+    // Our own prices stay allowed: 149/299 CAD monthly and 999/2997 annual all
+    // come from src/config/billing.ts.
+    const walkAll = (dir: string): string[] =>
+      readdirSync(dir).flatMap((e) => {
+        const full = join(dir, e);
+        return statSync(full).isDirectory() ? walkAll(full) : [full];
+      });
+    const sources = walkAll(join(ROOT, "src"))
+      .filter((f) => /\.(ts|tsx)$/.test(f) && !f.includes("__tests__") && !f.includes("/test/"))
+      // Strip comments first. The commit that removed these figures explains
+      // what it removed, and quoting a dead claim in a comment must not read
+      // as the claim being back.
+      .map((f) => ({
+        f,
+        body: readFileSync(f, "utf8")
+          .replace(/\{\/\*[\s\S]*?\*\/\}/g, "")
+          .replace(/\/\*[\s\S]*?\*\//g, "")
+          .replace(/^\s*\/\/.*$/gm, ""),
+      }));
+
+    const banned = [
+      "5,988", "6,987", "700+ USD", "$675/month", "306,312", "33,456%",
+      "$499-$1,499", "1,188+/yr",
+    ];
+    const offenders: string[] = [];
+    for (const { f, body } of sources) {
+      for (const b of banned) {
+        if (body.includes(b)) offenders.push(`${f.split("/src/")[1]}: ${b}`);
+      }
+      // Any quote attributed to a person or a review site.
+      if (/<footer>\s*—/.test(body)) offenders.push(`${f.split("/src/")[1]}: attributed testimonial`);
+    }
+    expect(offenders, `unsourced claim restored:\n${offenders.join("\n")}`).toEqual([]);
+  });
+
   it("labels every roadmap capability on the features page", () => {
     // The split is structural. If someone folds the two lists back into one,
     // a buyer loses the only signal separating shipped from planned.

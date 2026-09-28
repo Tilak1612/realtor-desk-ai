@@ -297,23 +297,6 @@ const VsKvCore = () => {
               <li>Better suited for solo/small teams than large brokerages (for now)</li>
             </ul>
 
-            <h2>Real User Experiences</h2>
-
-            <blockquote>
-              "We evaluated kvCORE but couldn't justify $675/month when their AI features were basically just scheduled emails. RealtorDesk AI's actual conversational AI sold us—it's like having an ISA that never sleeps."
-              <footer>— Sarah M., Vancouver Real Estate Team (5 agents)</footer>
-            </blockquote>
-
-            <blockquote>
-              "Switched from kvCORE and never looked back. I'm saving $400/month and responding 10x faster. My lead conversion went from 7% to 16% in two months."
-              <footer>— James L., Toronto Agent</footer>
-            </blockquote>
-
-            <blockquote>
-              "kvCORE had way too many features I never used. RealtorDesk AI focuses on what matters: fast response and follow-up. Plus, the PIPEDA compliance was huge for me—no more worrying about data storage."
-              <footer>— Michelle T., Calgary Agent</footer>
-            </blockquote>
-
             <h2>Migration: Switching from kvCORE to RealtorDesk AI</h2>
 
             <h3>What Gets Migrated</h3>

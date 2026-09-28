@@ -214,7 +214,7 @@ const SwitchFromLofty = () => {
             <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
             <p className="font-semibold mb-2">What You Actually Pay:</p>
             <p className="text-sm text-muted-foreground">
-              Lofty: $1,188-3,600/year + unpredictable charges<br/>
+              Lofty: pricing quoted on request, not published<br/>
               Realtor Desk: <span className="text-rd-terra-800 font-semibold">$149/mo CAD.</span>
             </p>
           </Card>

@@ -322,7 +322,7 @@ const RealEstateCRMBuyingGuide = () => {
           <Card className="p-6 bg-amber-50 dark:bg-amber-950/20 my-8">
             <h3 className="text-lg font-bold mb-4">🚨 Watch Out for Hidden Costs</h3>
             <ul className="space-y-2">
-              <li>• <strong>Setup fees:</strong> $499-$2,999 (common in Lofty, BoldTrail)</li>
+              <li>• <strong>Setup fees:</strong> ask every vendor directly — several quote them privately rather than publishing</li>
               <li>• <strong>Integration fees:</strong> $50-$200/month per integration</li>
               <li>• <strong>SMS/voice credits:</strong> $0.02-$0.15 per message/minute</li>
               <li>• <strong>Storage overages:</strong> $50-$100/mo for documents</li>
@@ -432,7 +432,7 @@ const RealEstateCRMBuyingGuide = () => {
 
             <Card className="p-6">
               <h3 className="font-bold mb-2">Best for Large US Teams:</h3>
-              <p className="text-lg mb-2"><strong>Lofty</strong> - $700+ USD/mo</p>
+              <p className="text-lg mb-2"><strong>Lofty</strong> - pricing quoted on request</p>
               <p className="text-sm text-muted-foreground">Enterprise features, complex setup, overkill for most Canadian agents</p>
             </Card>
 
