@@ -65,6 +65,94 @@ export default function Home() {
       <Reveal><FeatureGrid t={t} /></Reveal>
       <Reveal><PipelinePreview t={t} /></Reveal>
       <Reveal><CompareStrip t={t} locale={locale} /></Reveal>
+      <Reveal>
+        <section className="px-8 md:px-14 py-[100px] border-t border-rd-line">
+          <div className="mx-auto max-w-[760px]">
+            <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] mb-8">
+              A real estate CRM built around the Canadian workflow
+            </h2>
+
+            <h3 className="text-lg font-semibold mb-2">Keep every lead in one place</h3>
+            <p className="text-rd-ink-600 leading-[1.6] mb-6">
+              Enquiries from your website, from portals, from open houses and from
+              referrals land in one list instead of three inboxes and a notebook.
+              Each one becomes a contact with a source attached, de-duplicated by
+              email address, so the same person asking twice does not become two
+              records.
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">Know which follow-up matters today</h3>
+            <p className="text-rd-ink-600 leading-[1.6] mb-6">
+              Every lead carries a score based on how it has actually engaged.
+              It is a prompt for your attention, not a verdict — you can see what
+              fed it and overrule it. The point is not to rank people; it is to
+              stop the warm one going quiet while you work through the list in
+              the order it arrived.
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">One conversation per client, not five</h3>
+            <p className="text-rd-ink-600 leading-[1.6] mb-6">
+              Calls, emails, notes and appointments attach to the contact. Before
+              you pick up the phone, &ldquo;what did I last tell this person?&rdquo;
+              has one answer in one place, which is the difference between a
+              follow-up that sounds informed and one that sounds like a cold call.
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">A pipeline you can read in CAD</h3>
+            <p className="text-rd-ink-600 leading-[1.6] mb-6">
+              Drag deals between stages and see totals in Canadian dollars. No
+              exchange rate sitting between you and your own numbers, which is the
+              standing complaint about running a Canadian business on US-billed
+              software.
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">Built for Canadian rules, not adapted to them</h3>
+            <p className="text-rd-ink-600 leading-[1.6] mb-6">
+              Client data is hosted in Canada. Email carries a consent record and a
+              working unsubscribe path, because CASL is not optional. The interface
+              and the client-facing email both work in French, not just the
+              marketing site. Listings import from Realtor.ca today; native CREA
+              DDF® sync is on the roadmap for Q3 2026, and we say so rather than
+              implying it already works.
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">What it connects to</h3>
+            <p className="text-rd-ink-600 leading-[1.6] mb-6">
+              Zapier, Make and n8n push new leads straight in. Twilio sends SMS,
+              gated on consent. Google Calendar and Outlook connect today, with
+              automatic appointment push still in build. The{" "}
+              <Link to="/integrations" className="underline">
+                integrations page
+              </Link>{" "}
+              separates what is live from what is planned rather than listing both
+              under one number.
+            </p>
+
+            <h3 className="text-lg font-semibold mb-2">Where to start</h3>
+            <p className="text-rd-ink-600 leading-[1.6]">
+              If you are still deciding what a CRM should do for you, start with{" "}
+              <Link to="/what-is-a-real-estate-crm" className="underline">
+                what a real estate CRM actually is
+              </Link>
+              . If you are comparing products,{" "}
+              <Link to="/blog/best-crm-canada-2025" className="underline">
+                our comparison of Canadian options
+              </Link>{" "}
+              is honest about where another product fits better. If you are ready
+              to look at this one, the{" "}
+              <Link to={CAL_ROUTE} className="underline">
+                demo
+              </Link>{" "}
+              walks the live product and{" "}
+              <Link to="/pricing" className="underline">
+                pricing
+              </Link>{" "}
+              lists what the 14-day trial involves.
+            </p>
+          </div>
+        </section>
+      </Reveal>
+
       <Reveal><TestimonialAndCTA t={t} /></Reveal>
     </MarketingLayout>
   );

@@ -234,6 +234,58 @@ const HowItWorks = () => {
         </div>
       </section>
 
+      {/* The steps above are illustrated components, so the crawl read 157
+          words. This is the same sequence in prose, which is also what the
+          SEO report asks /how-it-works to carry. */}
+      <section className="section-padding border-t">
+        <div className="container-custom max-w-3xl">
+          <h2 className="mb-6">The first week, step by step</h2>
+
+          <h3 className="text-lg font-semibold mb-2">Day one: bring your contacts in</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Import a CSV from whatever you use now — a spreadsheet, another CRM,
+            an export from your brokerage. Fields map on screen before anything
+            is written, so you see what will land where. Duplicates are matched
+            on email address rather than name, which is what stops the same
+            client appearing three times with three spellings.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Day one: point your lead sources at it</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Website forms, portal enquiries and open-house sign-ups reach Realtor
+            Desk through Zapier, Make or n8n, or by posting to a webhook directly.
+            Each source is labelled, so after a season you can see which ones are
+            worth the money.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Week one: work the pipeline</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Leads arrive scored. You drag them between stages as things move, and
+            the next action sits on the contact record with a date attached. That
+            date is the thing doing the work — sort by it each morning and the
+            list tells you who to call before the day fills up.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Week one: send email that holds up</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Every marketing email carries an unsubscribe path and a consent record.
+            If a contact has no recorded consent, the send is refused rather than
+            attempted — that is deliberate, and it is how CASL exposure gets
+            avoided rather than managed.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Afterwards: what you actually get out</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Pipeline totals in Canadian dollars, lead source performance, and a CSV
+            export of everything whenever you want it — including after you cancel.
+            See{" "}
+            <Link to="/features" className="underline">the feature detail</Link>,{" "}
+            <Link to="/integrations" className="underline">what connects today</Link>{" "}
+            or <Link to="/pricing" className="underline">what it costs</Link>.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
