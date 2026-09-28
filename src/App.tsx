@@ -77,6 +77,9 @@ const IntegrationsRoute = () => {
 const CanadianMarket = lazyWithRetry(() => import("./pages/CanadianMarket"));
 const WhatIsARealEstateCRM = lazyWithRetry(() => import("./pages/WhatIsARealEstateCRM"));
 const RealEstateCrmTemplate = lazyWithRetry(() => import("./pages/resources/RealEstateCrmTemplate"));
+const AiLeadScoring = lazyWithRetry(() => import("./pages/features/AiLeadScoring"));
+const AiLeadFollowUp = lazyWithRetry(() => import("./pages/features/AiLeadFollowUp"));
+const BilingualCrm = lazyWithRetry(() => import("./pages/features/BilingualCrm"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -303,6 +306,9 @@ const App = () => (
           <Route path="/canadian-market" element={<CanadianMarket />} />
           <Route path="/what-is-a-real-estate-crm" element={<WhatIsARealEstateCRM />} />
           <Route path="/resources/real-estate-crm-template" element={<RealEstateCrmTemplate />} />
+          <Route path="/features/ai-lead-scoring" element={<AiLeadScoring />} />
+          <Route path="/features/ai-lead-follow-up" element={<AiLeadFollowUp />} />
+          <Route path="/features/bilingual-crm" element={<BilingualCrm />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />

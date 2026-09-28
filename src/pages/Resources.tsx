@@ -772,6 +772,21 @@ const Resources = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/features/ai-lead-scoring" className="text-muted-foreground hover:text-primary transition-colors">
+                    AI lead scoring, explained
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/ai-lead-follow-up" className="text-muted-foreground hover:text-primary transition-colors">
+                    AI follow-up: what it does and does not do
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/bilingual-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    The bilingual real estate CRM
+                  </Link>
+                </li>
+                <li>
                   <Link to="/pipeda-compliance" className="text-muted-foreground hover:text-primary transition-colors">
                     PIPEDA and your client data
                   </Link>
