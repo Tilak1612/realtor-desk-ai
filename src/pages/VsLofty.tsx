@@ -223,6 +223,64 @@ const VsLofty = () => {
         </div>
       </section>
 
+      <section className="section-padding border-t">
+        <div className="container-custom max-w-3xl">
+          <h2 className="mb-6">Choosing between them</h2>
+
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            We build one of these, so weigh the framing accordingly. What follows
+            is checkable: the Lofty facts come from lofty.com read on 28
+            September 2026, and ours come from our own pricing and product.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">They sell a platform; we sell a CRM</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Lofty bundles IDX websites, lead generation programmes and a CRM, with
+            tiers for agents, teams, brokers and enterprise. If you want your
+            website, your paid lead flow and your database from one vendor on one
+            invoice, that is a real advantage and we do not offer it. Realtor Desk
+            is the database and the follow-up, and expects your leads to arrive
+            from wherever you already get them.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Cost is knowable on one side only</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            We are $149 CAD a month on Solo, or $999 a year, with no setup fee.
+            Lofty does not publish prices — its pricing page asks you to request a
+            quote and notes that cost varies with package, seat count, upgrades
+            and lead-generation programmes. So ask for a written quote covering
+            seats, setup, contract length and anything billed separately, and
+            compare that total. Any number we printed for them would be a guess.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">The Canadian specifics</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Our data is hosted in Canada, billing is in CAD, and the interface and
+            client-facing email both work in French. CASL consent is recorded per
+            contact and a send is refused when it is missing. Lofty&rsquo;s site
+            does not make statements about Canadian data residency, CREA DDF or
+            French support — ask them if those matter to you rather than assuming
+            either way.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">Who should pick which</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Take Lofty if you want lead generation and a website bundled with the
+            CRM and are comfortable with quoted pricing. Take us if you have lead
+            sources already and want follow-up handled properly in two languages
+            at a price you can read off a page. If you are still shortlisting,{" "}
+            <Link to="/blog/real-estate-crm-buying-guide" className="underline">
+              the buying guide
+            </Link>{" "}
+            sets out how to run the evaluation, and{" "}
+            <Link to="/switch-from-lofty" className="underline">
+              the migration page
+            </Link>{" "}
+            covers what moves across if you do switch.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
