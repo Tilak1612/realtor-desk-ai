@@ -116,6 +116,17 @@ function loadEnTranslations() {
 
 const EN = loadEnTranslations();
 
+// Components often build their data arrays by calling t() at declaration —
+// [{ question: t('faq.q1') }]. Without a t in scope those throw and the page
+// loses its copy, which is why /faq prerendered at 91 words. Resolve through
+// the same English bundle; an unknown key falls back to any default argument,
+// then to empty, which the prose filter drops.
+const sandboxT = (key, fallback) => {
+  const v = lookup(key);
+  if (typeof v === 'string') return v;
+  return typeof fallback === 'string' ? fallback : '';
+};
+
 function lookup(key) {
   return key.split('.').reduce((acc, part) => (acc == null ? acc : acc[part]), EN);
 }
@@ -281,7 +292,11 @@ function extractSeoBlock(src) {
 // the <SEO> call. Anything referencing an import throws and is skipped.
 function localConstPrelude(src) {
   const out = [];
-  for (const m of src.matchAll(/^const\s+([A-Za-z_$][\w$]*)\s*(?::[^=]+)?=\s*([[{])/gm)) {
+  // Indented too: /faq keeps its questions in a `const faqs = [...]` declared
+  // inside the component. Declarations that reference props or hooks throw
+  // when evaluated and are dropped by the incremental pass below, so widening
+  // this costs nothing.
+  for (const m of src.matchAll(/^[ \t]*const\s+([A-Za-z_$][\w$]*)\s*(?::[^=]+)?=\s*([[{])/gm)) {
     const openIdx = m.index + m[0].length - 1;
     const openCh = m[2];
     const closeCh = openCh === '[' ? ']' : '}';
@@ -307,7 +322,7 @@ function localConstPrelude(src) {
   const usable = [];
   for (const decl of out) {
     try {
-      new Function(`${usable.join('\n')}\n${decl}`)();
+      new Function('t', `${usable.join('\n')}\n${decl}`)(sandboxT);
       usable.push(decl);
     } catch {
       /* skip */
@@ -335,7 +350,7 @@ function extractStructuredData(block, src = '') {
   if (close === -1) return null;
   try {
     const expr = block.slice(open + 1, close).trim();
-    const value = new Function(`${localConstPrelude(src)}\nreturn (${expr})`)();
+    const value = new Function('t', `${localConstPrelude(src)}\nreturn (${expr})`)(sandboxT);
     if (!Array.isArray(value)) return null;
     const usable = value.filter((v) => v && typeof v === 'object' && v['@type']);
     return usable.length ? usable : null;
@@ -379,6 +394,16 @@ function extractH1(src) {
  * component, a map() or any expression other than t() is skipped, since  *
  * we cannot render those without booting the app.                        *
  * --------------------------------------------------------------------- */
+
+// Empty-state and loading copy is UI chrome for a state the crawler is not in
+// — "No FAQs found matching your search" reads as a fact about the page once
+// it is sitting in the static HTML.
+function isEmptyState(v) {
+  return (
+    /^(no [a-z ]{0,25}(found|yet|results)|nothing to show|loading|try different)/i.test(String(v).trim()) ||
+    /matching your search/i.test(String(v))
+  );
+}
 
 const INLINE_OK = /^(?:strong|em|b|i|span|br|a|code|u|small|Link)$/i;
 
@@ -428,6 +453,7 @@ function textOf(inner, tag = '') {
     .replace(/\s+/g, ' ')
     .trim();
   const visible = s.replace(/<[^>]+>/g, '').trim();
+  if (isEmptyState(visible)) return null;
   // The 25-char floor exists to drop stray fragments, but it was also dropping
   // short link labels ("Switching from Lofty" is 20 chars), which silently
   // re-orphaned the very pages the hub was added to link. Anything carrying an
@@ -456,14 +482,21 @@ function textOf(inner, tag = '') {
 function extractDataStrings(src, { limit = 60 } = {}) {
   const prelude = localConstPrelude(src);
   const declared = new Set([...prelude.matchAll(/^const\s+([A-Za-z_$][\w$]*)/gm)].map((m) => m[1]));
+  // `faqs.map(` may be indented as well, which the caller's regex allows.
   const names = [...declared];
-  // Only consts the page actually maps over are page copy.
-  const mapped = names.filter((n) => new RegExp(`\\b${n}\\.map\\b`).test(src));
+  // Consts the page actually renders from. `.map()` alone was too narrow —
+  // /faq declares `faqs` and then maps a filtered copy of it — so accept any
+  // declaration referenced again after its own declaration. The prose filter
+  // below still throws away anything that is not human-readable copy.
+  const mapped = names.filter((n) => {
+    const uses = [...src.matchAll(new RegExp(`\\b${n}\\b`, 'g'))].length;
+    return uses > 1;
+  });
   if (mapped.length === 0) return [];
 
   let values;
   try {
-    values = new Function(`${prelude}\nreturn [${mapped.join(',')}];`)();
+    values = new Function('t', `${prelude}\nreturn [${mapped.join(',')}];`)(sandboxT);
   } catch {
     return [];
   }
@@ -472,6 +505,7 @@ function extractDataStrings(src, { limit = 60 } = {}) {
   const seen = new Set();
   const looksLikeProse = (v) =>
     typeof v === 'string' &&
+    !isEmptyState(v) &&
     v.length >= 12 &&
     /\s/.test(v.trim()) &&
     !/^https?:|^\/|^#|^[a-z0-9-]+$/i.test(v.trim()) &&

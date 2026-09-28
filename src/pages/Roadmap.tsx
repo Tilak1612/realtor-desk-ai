@@ -154,6 +154,48 @@ const Roadmap = () => {
         </div>
       </section>
 
+      <section className="section-padding border-t">
+        <div className="container-custom max-w-3xl">
+          <h2 className="mb-6">How to read this roadmap</h2>
+
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Dates here are intentions, not commitments, and we would rather say
+            that than have you plan a season around a quarter that slips. What is
+            marked shipped is running in production today; everything else is
+            still being built, and the honest answer to &ldquo;can I rely on this
+            in March?&rdquo; is no until it moves.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">What is live today</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Lead capture and scoring, a drag-and-drop pipeline with totals in CAD,
+            one conversation timeline per client, Realtor.ca listing import,
+            CASL-aware email with per-contact consent, SMS through Twilio, and
+            inbound automation from Zapier, Make and n8n. Bilingual EN/FR
+            throughout, with data hosted in Canada.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">The two people ask about most</h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Native CREA DDF® listing sync is targeted at Q3 2026. Until it lands,
+            listings come in through the Realtor.ca importer, and we say so
+            everywhere rather than implying the integration already exists.
+            Calendar sync is the other one: Google Calendar and Outlook connect
+            today and hold the connection, but pushing your appointments to them
+            automatically is still in build.
+          </p>
+
+          <h3 className="text-lg font-semibold mb-2">What we are deliberately not promising</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Outbound sync into other systems, and automatic replies sent to leads
+            without you in the loop. Both come up often; neither is built, and
+            neither has a date. See{" "}
+            <Link to="/features" className="underline">what the product does today</Link>{" "}
+            or <Link to="/integrations" className="underline">the integration status list</Link>.
+          </p>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
