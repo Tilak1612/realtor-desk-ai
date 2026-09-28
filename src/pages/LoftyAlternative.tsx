@@ -17,7 +17,7 @@ const LoftyAlternative = () => {
         "name": "How much cheaper is RealtorDesk AI than Lofty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "RealtorDesk AI starts at $149 CAD/month with no setup fees, while Lofty starts at $700+ USD/month with setup fees of $499-$1,499. Canadian agents save approximately 85% in the first year by switching to RealtorDesk AI."
+          "text": "RealtorDesk AI starts at $149 CAD/month with no setup fees. Lofty does not publish prices; its pricing page asks you to request a quote-$1,499. Canadian agents save approximately 85% in the first year by switching to RealtorDesk AI."
         }
       },
       {
@@ -96,7 +96,7 @@ const LoftyAlternative = () => {
               <span className="gradient-text">Built for Canadian Agents</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Get PIPEDA compliance, AI voice agent, bilingual support, and CREA DDF® integration (coming Q3 2026) at <strong>$149 CAD/month</strong> vs Lofty's <strong>$700+ USD/month</strong>. No setup fees. Free migration.
+              Get bilingual EN/FR support, data hosted in Canada, and CREA DDF® integration (coming Q3 2026) at <strong>$149 CAD/month</strong> with no setup fee. Lofty quotes its pricing on request rather than publishing it.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="group">
@@ -176,7 +176,7 @@ const LoftyAlternative = () => {
                   <tr className="border-b">
                     <td className="py-3 px-4">Starting Price (Monthly)</td>
                     <td className="text-center py-3 px-4 font-bold text-rd-terra-800">$149 CAD</td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">$700+ USD</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Not published</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">Setup Fee</td>
@@ -335,7 +335,7 @@ const LoftyAlternative = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">How much cheaper is RealtorDesk AI than Lofty?</h3>
                 <p className="text-muted-foreground">
-                  RealtorDesk AI starts at $149 CAD/month with no setup fees, while Lofty starts at $700+ USD/month with setup fees of $499-$1,499. Canadian agents save approximately 85% in the first year by switching to RealtorDesk AI.
+                  RealtorDesk AI starts at $149 CAD/month with no setup fees. Lofty does not publish prices; its pricing page asks you to request a quote. Canadian agents save approximately 85% in the first year by switching to RealtorDesk AI.
                 </p>
               </Card>
               <Card className="p-6">

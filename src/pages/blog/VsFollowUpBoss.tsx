@@ -147,10 +147,6 @@ const VsFollowUpBoss = () => {
             <p>
               <strong>Impact:</strong> Research shows 78% of leads go to the first responder. If your competition has AI responding in seconds while you're responding in minutes, you've already lost.
             </p>
-            <blockquote>
-              "RealtorDesk AI had 3 back-and-forth conversations with my lead before I even knew they existed. By the time I logged in, the showing was already booked."
-              <footer>— Alex P., Vancouver Agent</footer>
-            </blockquote>
 
             <h3>AI Automation: Auto-Responders vs Intelligence</h3>
             <p>
@@ -363,21 +359,6 @@ const VsFollowUpBoss = () => {
             </ul>
 
             <h2>Real Agent Testimonials</h2>
-
-            <blockquote>
-              "I used Follow Up Boss for 3 years. It was great—if you have time to manually respond to every lead. I switched to RealtorDesk AI and my conversion rate went from 6% to 14% because I'm not losing leads to slow follow-up anymore."
-              <footer>— Jennifer K., Toronto Agent</footer>
-            </blockquote>
-
-            <blockquote>
-              "Follow Up Boss costs our team $1,000/month. RealtorDesk AI costs $299/month and responds instantly. The ROI was obvious. We switched and never looked back."
-              <footer>— Mark R., Calgary Team Leader</footer>
-            </blockquote>
-
-            <blockquote>
-              "As a solo agent, I couldn't justify Follow Up Boss. But RealtorDesk AI's $149/month plan with full AI automation? That's a no-brainer."
-              <footer>— Patricia L., Montreal Agent</footer>
-            </blockquote>
 
             <h2>Real-World Scenario: Friday at 9:47 PM</h2>
 

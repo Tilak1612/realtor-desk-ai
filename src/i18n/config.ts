@@ -163,8 +163,8 @@ const resources = {
       pricing: {
         taxDisclaimer: "Prices are in Canadian dollars (CAD). Sales tax — GST/HST, plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province. Every amount on this page matches what you will see on Stripe's secure checkout, before tax.",
         compare: {
-          boldtrailCost: "$5,988/year + $999 setup fee (vendor figures unverified)",
-          loftyCost: "$1,788 – $3,588/year per user",
+          boldtrailCost: "Not published — quoted on request",
+          loftyCost: "Not published — quoted on request",
           ourCost: "$149/mo CAD, $0 setup",
           saveCallout: "Save up to 85% compared to BoldTrail, 45% vs Lofty"
         },
@@ -265,7 +265,7 @@ const resources = {
           limited: "Limited",
           varies: "Varies",
           boldtrailSwitch: "💰 Switching from BoldTrail?",
-          boldtrailSave: "You'll save $5,988 in year one alone!"
+          boldtrailSave: "Compare the quoted total against $149/mo CAD before you decide."
         },
         social: {
           heading: "Real Results from Real Agents",
@@ -595,7 +595,7 @@ const resources = {
         vThemPriceSetup: "USD $499 setup + $99/mo",
         vUsPriceNoSetup: "CAD $149/mo, no setup",
         fAnnualSingle: "Annual plan (single agent)",
-        vThemAnnual: "USD $1,188/yr",
+        vThemAnnual: "Quoted on request",
         vUsAnnualSave: "Annual billing — save up to $789/yr",
         fPerUserAfter5: "Per-user cost after 5",
         vThemPerUser: "USD $49",

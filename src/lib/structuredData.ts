@@ -125,7 +125,7 @@ export const homepageFAQSchema = {
       "name": "How much does Realtor Desk cost compared to Lofty?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Realtor Desk starts at CAD $149/month with no setup fees. Lofty publishes starting tiers at USD $700+/month plus setup fees on its public pricing page. Actual savings depend on tier selected and the current CAD/USD exchange rate; see /pricing for Realtor Desk pricing."
+        "text": "Realtor Desk starts at CAD $149/month with no setup fees. Lofty does not publish prices — its pricing page directs you to request a quote — so a like-for-like figure is not available; see /pricing for Realtor Desk pricing."
       }
     },
     {
@@ -164,7 +164,7 @@ export const pricingPageFAQSchema = {
       "name": "Are there setup fees?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, Realtor Desk has zero setup fees on all plans. Unlike competitors like Lofty ($499-$1,499) and Follow Up Boss ($199), you can start immediately without upfront costs."
+        "text": "No, Realtor Desk has zero setup fees on all plans. Several competitors quote setup fees privately rather than publishing them, so confirm the total first-year cost with any vendor before you compare."
       }
     },
     {

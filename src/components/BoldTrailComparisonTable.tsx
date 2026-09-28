@@ -17,7 +17,7 @@ interface Row {
 const rows: Row[] = [
   {
     axis: "Pricing transparency",
-    boldtrail: "Hidden — $999 setup fee + annual commitment, disclosed after a sales call.",
+    boldtrail: "Not published — quoted after a sales call.",
     boldtrailSource: {
       label: "BoldTrail pricing requires a demo call (G2 review)",
       href: "https://www.g2.com/products/inside-real-estate-boldtrail/reviews",

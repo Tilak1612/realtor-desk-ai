@@ -45,7 +45,7 @@ const SwitchFromBoldTrail = () => {
           <div className="flex items-center justify-center gap-4 mb-8">
             <Card className="p-4 border-destructive/20">
               <div className="text-sm text-muted-foreground mb-1">You're Paying</div>
-              <div className="text-2xl font-bold text-destructive">$6,987/year</div>
+              <div className="text-2xl font-bold text-destructive">Quoted</div>
               <div className="text-xs text-muted-foreground">BoldTrail first year cost</div>
             </Card>
             
@@ -54,7 +54,7 @@ const SwitchFromBoldTrail = () => {
             <Card className="p-4 border-accent">
               <div className="text-sm text-muted-foreground mb-1">Switch to</div>
               <div className="text-2xl font-bold gradient-text">$149/mo CAD</div>
-              <div className="text-xs text-rd-terra-800 font-semibold">{t('comparison.savings')} $5,988!</div>
+              <div className="text-xs text-rd-terra-800 font-semibold">$149/mo CAD · no setup fee</div>
             </Card>
           </div>
 
@@ -123,7 +123,7 @@ const SwitchFromBoldTrail = () => {
               <div className="text-lg font-bold mb-2">Step 5</div>
               <h3 className="font-semibold mb-2">You're Live!</h3>
               <p className="text-sm text-muted-foreground">
-                Up and running in 48 hours, saving $5,988/year
+                Up and running quickly, at $149/mo CAD with no setup fee
               </p>
             </Card>
           </div>
@@ -164,7 +164,7 @@ const SwitchFromBoldTrail = () => {
           </div>
 
           <p className="text-sm text-muted-foreground">
-            Switch from BoldTrail today. Save $5,988 in year one versus their $6,987 first-year total.
+            Switch from BoldTrail today. $149/mo CAD with no setup fee — compare it against the total you are quoted.
           </p>
         </div>
       </section>

@@ -693,48 +693,41 @@ const VsLoftyCRM = () => {
             </Card>
           </section>
 
-          {/* The Math: ROI Comparison */}
+          {/* An invented ROI comparison stood here until 2026-09-28. It put
+              Lofty at "$675/month" (Lofty publishes no prices at all), gave
+              Realtor Desk a "2.7 seconds (AI)" response time and a "4.2%
+              conversion rate (2x due to speed)", and concluded with a "Net
+              Benefit: $306,312/year". None of it was measured, the response
+              time describes a capability the product does not have — see
+              capabilityClaims.test.ts — and AGENTS.md forbids fabricating
+              revenue and case studies. Replaced with the arithmetic a reader
+              can actually run for themselves. */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">The Math: ROI Comparison</h2>
-            
-            <p className="text-gray-700 mb-6">
-              <strong>Scenario:</strong> Solo agent, 100 leads/month, $12,000 avg commission
+            <h2 className="text-3xl font-bold mb-6">Working out the cost difference</h2>
+
+            <p className="text-gray-700 mb-4">
+              We can give you one side of this honestly. Realtor Desk is $149 CAD
+              a month on the Solo plan, or $999 a year, with no setup fee — so
+              $1,788 billed monthly, $999 billed annually.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <Card className="p-6">
-                <h3 className="text-xl font-bold mb-4">Lofty CRM</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Cost: $675/month = $8,100/year</li>
-                  <li>• Response time: 10 minutes (manual)</li>
-                  <li>• Conversion rate: 2.1% (industry average)</li>
-                  <li>• Deals closed: 25 deals/year</li>
-                  <li>• Revenue: $300,000/year</li>
-                  <li className="font-bold text-base pt-2">ROI: 3,604%</li>
-                </ul>
-              </Card>
+            <p className="text-gray-700 mb-4">
+              We cannot give you the other side. Lofty does not publish prices:
+              its pricing page lists four tiers and asks you to request a quote,
+              and it states that cost &ldquo;varies based on your choice of
+              platform package, seat count, optional upgrades and lead-gen
+              programs&rdquo;. Any figure we printed here would be guesswork
+              dressed up as research.
+            </p>
 
-              <Card className="p-6 border-2 border-primary">
-                <h3 className="text-xl font-bold mb-4">RealtorDesk AI</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Cost: $149/month = $1,788/year</li>
-                  <li>• Response time: 2.7 seconds (AI)</li>
-                  <li>• Conversion rate: 4.2% (2x due to speed)</li>
-                  <li>• Deals closed: 50 deals/year</li>
-                  <li>• Revenue: $600,000/year</li>
-                  <li className="font-bold text-base pt-2 text-primary">ROI: 33,456%</li>
-                </ul>
-              </Card>
-            </div>
-
-            <Card className="p-6 bg-primary text-white">
-              <h3 className="text-xl font-bold mb-4">Comparison:</h3>
-              <ul className="space-y-2">
-                <li>✓ RealtorDesk AI costs $6,312 LESS per year</li>
-                <li>✓ RealtorDesk AI generates $300,000 MORE per year</li>
-                <li className="text-2xl font-bold pt-4">Net Benefit: $306,312/year</li>
-              </ul>
-            </Card>
+            <p className="text-gray-700">
+              So ask them for a written quote covering the seats you need, the
+              setup fee, the contract length and anything billed separately, then
+              compare that total against $999–$1,788 a year. We are not going to
+              estimate your conversion rate or your commission income to make the
+              gap look larger — those depend on your market and your follow-up,
+              not on which CRM you bought.
+            </p>
           </section>
 
           {/* Pros & Cons */}
@@ -906,8 +899,7 @@ const VsLoftyCRM = () => {
                   <li>• Value: 10/10 (affordable)</li>
                   <li>• AI: 10/10 (best-in-class)</li>
                   <li>• Canadian Fit: 10/10 (built for Canada)</li>
-                  <li>• Speed: 10/10 (sub-3-second response)</li>
-                  <li>• ROI: 10/10 (33,456%)</li>
+                  <li>• Canadian fit: bilingual EN/FR, data hosted in Canada</li>
                 </ul>
               </Card>
             </div>
@@ -981,7 +973,7 @@ const VsLoftyCRM = () => {
               <h2 className="text-3xl font-bold mb-4">Conclusion</h2>
               <div className="prose prose-lg max-w-none">
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  Lofty CRM is a classic case of "feature bloat." 237 features sounds impressive until you realize you'll use 26. Paying $675/month for features you don't use doesn't make sense.
+                  Lofty is a broad platform, and breadth has a real cost: you pay for the whole package whether or not you use it. Whether that trade is worth it depends on how much of the platform you would actually put to work — ask for a quote covering only the seats and modules you need.
                 </p>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   RealtorDesk AI: 8 features, all exceptional, all used daily.
