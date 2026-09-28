@@ -654,3 +654,91 @@ Each is pinned by a mutation-checked guard in
 - **Six pages presenting 2025 market data** need a genuine refresh, and four
   consumer-intent pages target buyers rather than agents.
 - **18 heading-order skips** — worth a pass, none blocking.
+
+---
+
+# Part 4 — Final state (2026-09-28)
+
+Measured against the live site after the last deploy.
+
+## Every issue class the original crawl found
+
+| Issue | 2026-09-21 baseline | Now |
+|---|---:|---:|
+| Duplicate `<title>` | 68 | **0** |
+| Duplicate meta description | 68 | **0** |
+| Missing `<h1>` | 68 | **0** |
+| No outgoing links | 68 | **0** |
+| Orphan page | 67 | **0** |
+| Title too long | 37 | **0** |
+| Meta description too long | 17 | **0** |
+| Heading level skips | 16 | **0** |
+| Thin content | 68 | **3** |
+
+Average static content per page: **~35 → 740 words**.
+
+The three thin pages are `/contact`, `/partners/apply` and `/partners/terms`:
+a contact form, a form, and a terms page. They are short because they are
+short — padding them to clear a warning is the thin-content anti-pattern
+pointed the other way, so they stay.
+
+One informational item remains: `/signup` canonicalises to `/`, which is
+correct for a conversion endpoint that should not compete with the homepage.
+
+## Page depth, the pages that matter
+
+| Page | Before | Now |
+|---|---:|---:|
+| `/` (owns the ~2,800/mo head cluster) | 237 | 578 |
+| `/features` | 132 | 306 |
+| `/pricing` | 84 | 348 |
+| `/demo` | 167 | 373 |
+| `/integrations` | 97 | 394 |
+| `/how-it-works` | 157 | 416 |
+| `/compare/boldtrail` | 118 | 457 |
+| `/vs/lofty` | 147 | 400+ |
+| `/roadmap` | 109 | 400+ |
+| `/switch-from-*` (six pages) | 110–196 | 401–732 |
+
+## Accuracy work, which was most of it
+
+Removing fabrications took more effort than the SEO itself, and every one was
+already live:
+
+1. A **90-day study that never happened** on the Canada comparison guide,
+   plus its outputs: ROI 671%, 10-15 hours/week, conversion 2-3x, "80% of
+   Canadian agents".
+2. **14 testimonials** attributed to named agents in named cities with
+   invented outcomes, across four comparison posts. Four more credited to
+   "G2 Review" with no link or date.
+3. An **ROI table promising "Net Benefit: $306,312/year"**, built on a 4.2%
+   conversion rate and a "2.7 seconds (AI)" response time the product does
+   not have.
+4. **27 prices for Lofty and BoldTrail**, neither of which publishes any —
+   both verified 2026-09-28. Two contradicted each other on the same page.
+   Two sat inside JSON-LD served to search engines.
+5. `/integrations` counting **23 native when 5 are true**.
+6. Calendar sync and contact import **sold as available** when only the OAuth
+   connection exists.
+7. `/pipeda-compliance` claiming the product **"is fully PIPEDA compliant"**.
+8. A wrong **IXACT price** and unmarked USD/CAD comparisons.
+
+Our own numbers survived verification and stayed: $149/$299 CAD monthly,
+$999/$2,997 annual, and the "$789/yr annual saving" line, which is arithmetic
+on those. IXACT's $46.75/$55 USD stayed too — they publish it.
+
+Each is pinned by a mutation-checked guard in
+`src/test/content/capabilityClaims.test.ts` or `src/test/seo/metaLength.test.ts`.
+
+## Still open
+
+- **French is invisible to non-JS crawlers.** `?lang=fr` cannot be served
+  statically: Vercel checks the filesystem before rewrites and ignores the
+  query string. Needs path-based locales — a contained project, not a config
+  change. This is the largest remaining SEO gap.
+- **Six pages presenting 2025 market data** need a genuine refresh; four
+  consumer-intent pages target buyers rather than agents.
+- **Measurement** (report phase 9) is not done: GSC/GA4 cohort tracking and
+  demo/trial instrumentation need account access.
+- The lint baseline moved 64 → 74 when `api/integrations/google/[action].ts`
+  landed; it carries 10 `no-explicit-any`, which AGENTS.md forbids.
