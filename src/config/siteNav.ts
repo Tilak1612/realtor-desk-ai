@@ -119,6 +119,20 @@ export const SOLUTIONS_PANES: NavPane[] = [
         desc: "A suggested next action and a time to do it. You send it.",
       },
       {
+        to: "/features/pipeline",
+        labelKey: "siteNav.pipeline",
+        label: "Pipeline",
+        descKey: "siteNav.pipelineDesc",
+        desc: "Drag deals between your own stages; totals in Canadian dollars.",
+      },
+      {
+        to: "/features/conversations",
+        labelKey: "siteNav.conversations",
+        label: "Conversations",
+        descKey: "siteNav.conversationsDesc",
+        desc: "Calls, email, SMS and notes on one timeline per client.",
+      },
+      {
         to: "/what-is-a-real-estate-crm",
         labelKey: "siteNav.whatIsCrm",
         label: "What is a real estate CRM?",
@@ -181,6 +195,13 @@ export const SOLUTIONS_PANES: NavPane[] = [
         label: "Bilingual workflows",
         descKey: "siteNav.bilingualDesc",
         desc: "Interface and client email in French, set per contact.",
+      },
+      {
+        to: "/features/listing-import",
+        labelKey: "siteNav.listingImport",
+        label: "Listing import",
+        descKey: "siteNav.listingImportDesc",
+        desc: "Realtor.ca and MLS import today; native DDF\u00ae is Q3 2026.",
       },
       {
         to: "/roadmap",

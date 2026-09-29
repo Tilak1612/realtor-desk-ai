@@ -75,6 +75,9 @@ const IntegrationsRoute = () => {
 // Features + Pricing now render via Phase 2 RD* imports above; the legacy
 // page files were deleted in chore/rd-redesign-legacy-cleanup.
 const CanadianMarket = lazyWithRetry(() => import("./pages/CanadianMarket"));
+const FeaturePipeline = lazyWithRetry(() => import("./pages/features/Pipeline"));
+const FeatureConversations = lazyWithRetry(() => import("./pages/features/Conversations"));
+const FeatureListingImport = lazyWithRetry(() => import("./pages/features/ListingImport"));
 const CompareHub = lazyWithRetry(() => import("./pages/compare/CompareHub"));
 const About = lazyWithRetry(() => import("./pages/About"));
 const WhatIsARealEstateCRM = lazyWithRetry(() => import("./pages/WhatIsARealEstateCRM"));
@@ -325,6 +328,9 @@ const App = () => (
           <Route path="/features/casl-compliant-email" element={<CaslCompliantEmail />} />
           <Route path="/resources/real-estate-crm-pricing" element={<RealEstateCrmPricing />} />
           <Route path="/use-cases/solo-agent" element={<SoloAgent />} />
+          <Route path="/features/pipeline" element={<FeaturePipeline />} />
+          <Route path="/features/conversations" element={<FeatureConversations />} />
+          <Route path="/features/listing-import" element={<FeatureListingImport />} />
           <Route path="/compare" element={<CompareHub />} />
           <Route path="/compare/real-geeks-alternative" element={<RealGeeksAlternative />} />
           <Route path="/compare/top-producer-alternative" element={<TopProducerAlternative />} />
