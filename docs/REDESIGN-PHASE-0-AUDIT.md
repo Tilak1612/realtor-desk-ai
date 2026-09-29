@@ -344,3 +344,76 @@ One responsive failure found and fixed: the footer's `X` social link rendered
 
 8. **Not deployed.** The brief withholds deployment and billing/legal changes.
    Pricing, trial terms and legal wording are untouched.
+
+---
+
+# 12. Live site audit — www.realtordesk.ai, 2026-09-29
+
+Run against **production as it stands today**, which is `main` — none of the
+work on this branch is deployed yet. 82 indexed pages.
+
+## Technical SEO: clean
+
+| Check | Result |
+|---|---|
+| Sitemap URLs returning 200 | **82 / 82** |
+| Missing `<title>` / description | 0 / 0 |
+| Duplicate titles | **0** |
+| Duplicate descriptions | **0** |
+| Titles over 60 chars | 0 |
+| Descriptions over 160 chars | 0 |
+| Missing canonical | 0 |
+| Canonical pointing somewhere other than self | 0 |
+| Pages with no `<h1>` | 0 |
+| Accidental `noindex` | 0 |
+| Orphans (indexed, linked from nowhere) | **0** |
+| Pages with fewer than 5 outgoing links | 0 |
+| Pages with no JSON-LD | 0 |
+| Invalid JSON-LD | **0** of 311 blocks |
+| `robots.txt` | Single `*` group; authenticated surfaces disallowed; `/signup` and `/login` deliberately crawlable and `noindex,follow` |
+| `llms.txt` | 200 |
+
+`npm run verify:live`: **20/20**, including axe clean on 84 pages desktop and
+11 at 390px, mobile LCP 1488 ms under 4× CPU throttle, CLS 0.0003, no console
+errors, no failed requests, no horizontal overflow 320–1920.
+
+Live schema: Organization 82, SoftwareApplication 82, Product 82,
+BreadcrumbList 82, Article 34, FAQPage 18, WebPage 11, CreativeWork 1,
+ItemList 1.
+
+**Nothing in the technical layer needs fixing.** The live site is in good shape
+structurally, which is what makes the next section the real finding.
+
+## What is wrong on the live site is the copy
+
+Verified in the rendered DOM at https://www.realtordesk.ai/lofty-alternative
+on 2026-09-29. Every one of these is public right now:
+
+    Save 85%                      $10,188                 $8,400
+    83% cost savings              $1,499                  $399
+    $700/mo                       $499 - $1,499           Mobile App (iOS/Android)
+    hundreds of Canadian agents
+
+The page states in its own comparison table that Lofty's price is "Not
+published" — which is true — and then prints seven Lofty prices and two
+different savings percentages derived from them.
+
+Also live: `Savings over 3 years: $9,716 CAD` on `/blog/vs-kvcore`, against a
+vendor that publishes no prices either.
+
+Only the static HTML hid some of these from a `curl`; they render for every
+human visitor and for any crawler that executes JavaScript.
+
+**One FAQ parity failure live**, found by running this branch's new check
+against production: `/use-cases/brokerage` emits an answer in `FAQPage` markup
+that the page body does not contain, because the source string held a literal
+`&rsquo;` — which React renders verbatim from a JS string. Visitors see
+`the obligations remain the brokerage&rsquo;s`.
+
+Every item in this section is already fixed on
+`redesign/phase-0-audit-and-shared-shell` and is waiting on review.
+
+## Not verifiable from here
+
+GSC and GA4 need account access. Nothing in this audit substitutes for
+impressions, clicks or position data — it is a crawl and render audit only.
