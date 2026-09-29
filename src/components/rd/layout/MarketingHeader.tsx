@@ -307,10 +307,13 @@ export function MarketingHeader({
                     <ul className="flex flex-col">
                       {PRIMARY_NAV.map((g) => {
                         const label = t(g.labelKey, g.label);
-                        const children = [
-                          ...(g.items ?? []),
-                          ...(g.panes ?? []).flatMap((p) => p.items),
-                        ];
+                        // A two-level group keeps its pane headings here too.
+                        // Flattening Solutions produced one undifferentiated
+                        // ten-item list where "Roadmap" sat directly under
+                        // "Bilingual workflows" with nothing to say why.
+                        const sections = g.panes?.length
+                          ? g.panes.map((p) => ({ heading: p.label, headingKey: p.labelKey, items: p.items }))
+                          : [{ heading: null, headingKey: null, items: g.items ?? [] }];
                         const border = dark ? "border-white/10" : "border-rd-line";
 
                         if (g.to) {
@@ -348,25 +351,36 @@ export function MarketingHeader({
                                   <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                               </summary>
-                              <ul className="pb-2">
-                                {children.map((it) => {
-                                  const active = location.pathname === it.to;
-                                  return (
-                                    <li key={it.to}>
-                                      <Link
-                                        to={it.to}
-                                        aria-current={active ? "page" : undefined}
-                                        className={cn(
-                                          "flex min-h-[44px] items-center py-2.5 pl-3 text-[15px]",
-                                          active ? "opacity-100 font-medium" : "opacity-75 hover:opacity-100"
-                                        )}
-                                      >
-                                        {it.label}
-                                      </Link>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
+                              <div className="pb-2">
+                                {sections.map((sec, si) => (
+                                  <div key={sec.heading ?? si} className={cn(si > 0 && "mt-3")}>
+                                    {sec.heading && (
+                                      <div className="pl-3 pb-1 text-[11px] font-bold uppercase tracking-[0.08em] opacity-50">
+                                        {sec.headingKey ? t(sec.headingKey, sec.heading) : sec.heading}
+                                      </div>
+                                    )}
+                                    <ul>
+                                      {sec.items.map((it) => {
+                                        const active = location.pathname === it.to;
+                                        return (
+                                          <li key={it.to}>
+                                            <Link
+                                              to={it.to}
+                                              aria-current={active ? "page" : undefined}
+                                              className={cn(
+                                                "flex min-h-[44px] items-center py-2.5 pl-3 text-[15px]",
+                                                active ? "opacity-100 font-medium" : "opacity-75 hover:opacity-100"
+                                              )}
+                                            >
+                                              {t(it.labelKey, it.label)}
+                                            </Link>
+                                          </li>
+                                        );
+                                      })}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
                             </details>
                           </li>
                         );
@@ -376,8 +390,9 @@ export function MarketingHeader({
                     {showLanguageToggle && (
                       <div
                         className={cn(
-                          "flex items-center gap-3 pt-5 mt-5 border-t",
-                          dark ? "border-white/10" : "border-rd-line"
+                          // No border-t: the nav list above already ends on a
+                          // rule, and stacking both drew two lines with a gap.
+                          "flex items-center gap-3 pt-5"
                         )}
                         role="group"
                         aria-label={t("marketingHeader.langAriaLabel")}

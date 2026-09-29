@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import type { NavItem, NavPane } from "@/config/siteNav";
 
@@ -53,6 +54,7 @@ export function NavDisclosure({
   panes,
   active,
 }: NavDisclosureProps) {
+  const { t } = useTranslation();
   const open = openId === id;
   const panelId = `${useId()}-panel`;
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -130,10 +132,12 @@ export function NavDisclosure({
             onClick={() => setOpenId(null)}
             className="block rounded-rd-md px-3 py-2.5 transition-colors hover:bg-rd-ink-50 focus-visible:bg-rd-ink-50 outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-400"
           >
-            <span className="block text-sm font-semibold text-rd-ink-900">{it.label}</span>
+            <span className="block text-sm font-semibold text-rd-ink-900">
+              {t(it.labelKey, it.label)}
+            </span>
             {it.desc && (
               <span className="mt-0.5 block text-[13px] leading-[1.45] text-rd-ink-500">
-                {it.desc}
+                {it.descKey ? t(it.descKey, it.desc) : it.desc}
               </span>
             )}
           </Link>
@@ -234,8 +238,12 @@ export function NavDisclosure({
                           selected ? "bg-rd-navy-50" : "hover:bg-rd-ink-50",
                         )}
                       >
-                        <span className="block text-sm font-semibold text-rd-ink-900">{p.label}</span>
-                        <span className="mt-0.5 block text-[12px] text-rd-ink-500">{p.desc}</span>
+                        <span className="block text-sm font-semibold text-rd-ink-900">
+                          {t(p.labelKey, p.label)}
+                        </span>
+                        <span className="mt-0.5 block text-[12px] text-rd-ink-500">
+                          {t(p.descKey, p.desc)}
+                        </span>
                       </Link>
                     </li>
                   );
