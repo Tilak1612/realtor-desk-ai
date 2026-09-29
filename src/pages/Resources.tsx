@@ -787,6 +787,16 @@ const Resources = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/features/casl-compliant-email" className="text-muted-foreground hover:text-primary transition-colors">
+                    CASL-compliant email for realtors
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/resources/real-estate-crm-pricing" className="text-muted-foreground hover:text-primary transition-colors">
+                    What a real estate CRM costs
+                  </Link>
+                </li>
+                <li>
                   <Link to="/pipeda-compliance" className="text-muted-foreground hover:text-primary transition-colors">
                     PIPEDA and your client data
                   </Link>
