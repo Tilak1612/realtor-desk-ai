@@ -7,6 +7,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Globe, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PRIMARY_NAV } from "@/config/siteNav";
+import { NavDisclosure } from "./NavDisclosure";
 import { RDWordmark } from "../Logo";
 import { RDButton } from "../Button";
 
@@ -28,26 +30,20 @@ type Tone = "paper" | "dark";
 
 interface MarketingHeaderProps {
   tone?: Tone;
-  /** Override the nav links. Pass {labelKey, to} to resolve through t(), or
-   *  {label, to} for literal strings. If omitted, DEFAULT_LINK_KEYS is used. */
-  links?: ({ label: string; to: string } | { labelKey: string; to: string })[];
+  // No `links` override prop. The nav comes from src/config/siteNav.ts and
+  // nowhere else — an override would reintroduce exactly the second source of
+  // truth the registry exists to remove. Nothing passed one.
   className?: string;
   showLanguageToggle?: boolean;
 }
 
-const DEFAULT_LINK_KEYS: { labelKey: string; to: string }[] = [
-  { labelKey: "marketingHeader.navFeatures", to: "/features" },
-  { labelKey: "marketingHeader.navHowItWorks", to: "/how-it-works" },
-  { labelKey: "marketingHeader.navPricing", to: "/pricing" },
-  { labelKey: "marketingHeader.navCompare", to: "/compare/boldtrail" },
-  { labelKey: "marketingHeader.navResources", to: "/resources" },
-];
-
-const MD_BREAKPOINT = 768;
+// The desktop nav carries five groups plus three actions; below 1024 it no
+// longer fits, so the drawer takes over at lg rather than md. This constant and
+// the Tailwind `lg:` prefixes must move together.
+const DESKTOP_BREAKPOINT = 1024;
 
 export function MarketingHeader({
   tone = "paper",
-  links,
   className,
   showLanguageToggle = true,
 }: MarketingHeaderProps) {
@@ -55,12 +51,8 @@ export function MarketingHeader({
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const resolvedLinks: { label: string; to: string }[] = (
-    links ?? DEFAULT_LINK_KEYS
-  ).map((l) =>
-    "labelKey" in l ? { label: t(l.labelKey), to: l.to } : l,
-  );
+  /** id of the single open desktop panel, or null. */
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const activeLang = (i18n.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
   const setLang = (next: "en" | "fr") => {
@@ -69,13 +61,15 @@ export function MarketingHeader({
 
   useEffect(() => {
     setMobileOpen(false);
+    setOpenMenu(null);
   }, [location.pathname]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mql = window.matchMedia(`(min-width: ${MD_BREAKPOINT}px)`);
+    const mql = window.matchMedia(`(min-width: ${DESKTOP_BREAKPOINT}px)`);
     const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) setMobileOpen(false);
+      else setOpenMenu(null);
     };
     mql.addEventListener("change", onChange);
     return () => mql.removeEventListener("change", onChange);
@@ -101,38 +95,63 @@ export function MarketingHeader({
             <RDWordmark size={20} tone={dark ? "paper" : "navy"} />
           </Link>
 
-          {/* Desktop nav — active item gets an underlined treatment via a
-              bottom border inside a fixed-height link so the baseline
-              doesn't shift between active and inactive states. */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
-            {resolvedLinks.map((l) => {
-              const active = location.pathname === l.to;
-              return (
-                <Link
-                  key={l.to}
-                  to={l.to}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "relative inline-flex items-center text-sm font-medium transition-colors whitespace-nowrap py-1",
-                    active
-                      ? dark
-                        ? "text-white"
-                        : "text-rd-ink-900"
-                      : dark
-                        ? "text-white/75 hover:text-white"
-                        : "text-rd-ink-700 hover:text-rd-ink-900"
-                  )}
-                >
-                  {l.label}
-                  <span
-                    aria-hidden="true"
+          {/* Desktop nav. Groups come from the registry so the drawer and the
+              footer cannot drift from what is shown here. A group with a `to`
+              renders as a plain link (Pricing); the rest are disclosures.
+              `openId` lives here rather than inside each disclosure, which is
+              what enforces "at most one panel open". */}
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+            {PRIMARY_NAV.map((g) => {
+              const label = t(g.labelKey, g.label);
+              const groupRoutes = [
+                ...(g.to ? [g.to] : []),
+                ...(g.items ?? []).map((i) => i.to),
+                ...(g.panes ?? []).flatMap((p) => [p.to, ...p.items.map((i) => i.to)]),
+              ];
+              const active = groupRoutes.includes(location.pathname);
+
+              if (g.to) {
+                return (
+                  <Link
+                    key={g.id}
+                    to={g.to}
+                    aria-current={active ? "page" : undefined}
                     className={cn(
-                      "absolute left-0 right-0 -bottom-px h-0.5 rounded-full transition-all",
-                      dark ? "bg-white" : "bg-rd-navy-900",
-                      active ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+                      "relative inline-flex items-center text-sm font-medium transition-colors whitespace-nowrap py-1",
+                      active
+                        ? dark
+                          ? "text-white"
+                          : "text-rd-ink-900"
+                        : dark
+                          ? "text-white/75 hover:text-white"
+                          : "text-rd-ink-700 hover:text-rd-ink-900"
                     )}
-                  />
-                </Link>
+                  >
+                    {label}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute left-0 right-0 -bottom-px h-0.5 rounded-full transition-all",
+                        dark ? "bg-white" : "bg-rd-navy-900",
+                        active ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+                      )}
+                    />
+                  </Link>
+                );
+              }
+
+              return (
+                <NavDisclosure
+                  key={g.id}
+                  id={g.id}
+                  label={label}
+                  dark={dark}
+                  openId={openMenu}
+                  setOpenId={setOpenMenu}
+                  items={g.items}
+                  panes={g.panes}
+                  active={active}
+                />
               );
             })}
           </div>
@@ -221,7 +240,7 @@ export function MarketingHeader({
                   type="button"
                   aria-label={mobileOpen ? t("marketingHeader.closeMenu") : t("marketingHeader.openMenu")}
                   className={cn(
-                    "md:hidden w-11 h-11 flex items-center justify-center rounded-md border",
+                    "lg:hidden w-11 h-11 flex items-center justify-center rounded-md border",
                     dark
                       ? "border-white/20 text-white hover:bg-white/10"
                       : "border-rd-line text-rd-ink-900 hover:bg-rd-ink-50"
@@ -280,22 +299,75 @@ export function MarketingHeader({
                   </div>
 
                   <nav className="flex-1 overflow-y-auto px-6 py-4">
+                    {/* Same registry, nested <details> disclosures. Native
+                        <details> gives keyboard operation, the expanded state
+                        and screen-reader semantics without a state machine, and
+                        degrades to open content if scripting fails. Radix owns
+                        the focus trap and scroll lock for the drawer itself. */}
                     <ul className="flex flex-col">
-                      {resolvedLinks.map((l) => {
-                        const active = location.pathname === l.to;
+                      {PRIMARY_NAV.map((g) => {
+                        const label = t(g.labelKey, g.label);
+                        const children = [
+                          ...(g.items ?? []),
+                          ...(g.panes ?? []).flatMap((p) => p.items),
+                        ];
+                        const border = dark ? "border-white/10" : "border-rd-line";
+
+                        if (g.to) {
+                          const active = location.pathname === g.to;
+                          return (
+                            <li key={g.id}>
+                              <Link
+                                to={g.to}
+                                aria-current={active ? "page" : undefined}
+                                className={cn(
+                                  "flex items-center min-h-[44px] py-3 text-base font-medium border-b",
+                                  border,
+                                  active ? "opacity-100" : "opacity-80 hover:opacity-100"
+                                )}
+                              >
+                                {label}
+                              </Link>
+                            </li>
+                          );
+                        }
+
                         return (
-                          <li key={l.to}>
-                            <Link
-                              to={l.to}
-                              aria-current={active ? "page" : undefined}
-                              className={cn(
-                                "flex items-center min-h-[44px] py-3 text-base font-medium border-b",
-                                dark ? "border-white/10" : "border-rd-line",
-                                active ? "opacity-100" : "opacity-80 hover:opacity-100"
-                              )}
-                            >
-                              {l.label}
-                            </Link>
+                          <li key={g.id} className={cn("border-b", border)}>
+                            <details className="group">
+                              <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between py-3 text-base font-medium outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-400 rounded">
+                                {label}
+                                <svg
+                                  width="12"
+                                  height="7"
+                                  viewBox="0 0 10 6"
+                                  fill="none"
+                                  aria-hidden="true"
+                                  className="transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                                >
+                                  <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                                </svg>
+                              </summary>
+                              <ul className="pb-2">
+                                {children.map((it) => {
+                                  const active = location.pathname === it.to;
+                                  return (
+                                    <li key={it.to}>
+                                      <Link
+                                        to={it.to}
+                                        aria-current={active ? "page" : undefined}
+                                        className={cn(
+                                          "flex min-h-[44px] items-center py-2.5 pl-3 text-[15px]",
+                                          active ? "opacity-100 font-medium" : "opacity-75 hover:opacity-100"
+                                        )}
+                                      >
+                                        {it.label}
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </details>
                           </li>
                         );
                       })}

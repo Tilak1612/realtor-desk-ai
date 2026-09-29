@@ -5,8 +5,15 @@ import { CAL_ROUTE } from "@/config/booking";
 import { RDWordmark } from "../Logo";
 import { IconMaple } from "../icons";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
+import { FOOTER_COLUMNS } from "@/config/siteNav";
 
-// Shared footer for every /redesign marketing page. Five columns of
+// Shared footer for every public page. Columns come from FOOTER_COLUMNS in
+// src/config/siteNav.ts, the same registry that drives the header and the
+// mobile drawer, so a destination cannot be current in one and stale in the
+// other. Only the community link is resolved here, because it depends on an
+// env var rather than on the registry.
+//
+// Five columns of
 // links, wordmark + tagline on the left, "Made in Canada" strip,
 // copyright + legal links. Copy flows through the `marketingFooter.*`
 // namespace so the FR toggle swaps column headings, link labels, and
@@ -20,32 +27,39 @@ interface MarketingFooterProps {
 export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
   const { t } = useTranslation();
 
-  // Community link surfaces only when VITE_COMMUNITY_URL is configured.
-  // Slotted into the Company column between Blog and Careers since
-  // "Community" is brand-adjacent rather than product or compliance.
-  const companyItems = [
-    { label: t("marketingFooter.itemBlog"), to: "/resources" },
-    // /faq was the only destination the legacy Footer carried that this
-    // one did not. Ported here so retiring that component loses nothing.
-    { label: t("nav.faq", "FAQ"), to: "/faq" },
-    { label: t("marketingHeader.navPartners"), to: "/partners" },
-    ...(isCommunityEnabled()
-      ? [{ label: t("marketingFooter.itemCommunity"), to: COMMUNITY_URL, external: true }]
-      : []),
-    { label: t("marketingFooter.itemCareers"), to: "/careers" },
-    { label: t("marketingFooter.itemContact"), to: "/contact" },
-    { label: t("marketingFooter.itemPrivacy"), to: "/privacy-policy" },
-    { label: t("marketingFooter.itemTerms"), to: "/terms-of-service" },
-  ];
+  // Community link surfaces only when VITE_COMMUNITY_URL is configured, so it
+  // is injected here rather than sitting in the registry as a dead entry.
+  // Slotted after Careers since "Community" is brand-adjacent rather than
+  // product or compliance.
+  const columns = FOOTER_COLUMNS.map((col) => {
+    const items = col.items.map((i) => ({
+      label: t(i.labelKey, i.label),
+      to: i.to,
+      external: i.external,
+      track: i.track,
+    }));
+    if (col.id === "company" && isCommunityEnabled()) {
+      const at = items.findIndex((i) => i.to === "/careers");
+      items.splice(at < 0 ? items.length : at + 1, 0, {
+        label: t("marketingFooter.itemCommunity"),
+        to: COMMUNITY_URL,
+        external: true,
+        track: undefined,
+      });
+    }
+    return { id: col.id, title: t(col.titleKey, col.title), items };
+  });
 
   return (
     <footer
       className={`bg-white px-4 sm:px-8 md:px-14 py-14 ${topBorder ? "border-t border-rd-line" : ""}`}
     >
-      {/* 6-col grid on md+ so Brand(span 2) + Product + Compare + Canada + Company
-          = 6 slots fit in one row. Was grid-cols-5, which forced Company
-          to wrap onto a second row with 3 columns stranded above (2026-04-24 audit). */}
-      <div className="mx-auto max-w-[1200px] grid grid-cols-2 md:grid-cols-6 gap-10 text-rd-ink-700">
+      {/* Brand spans 2, then one slot per registry column. Adding "Who we help"
+          took this from 6 slots to 7, which is too many to read at md — so md
+          runs 4-up (brand + 2 columns, rest wrap) and the single row only
+          appears at lg. The 2026-04-24 audit fixed the opposite failure, a
+          grid too narrow for its columns, and the fix has to hold both ways. */}
+      <div className="mx-auto max-w-[1200px] grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-10 text-rd-ink-700">
         <div className="col-span-2 md:col-span-2">
           <RDWordmark size={18} />
           <p className="mt-3.5 text-[13px] text-rd-ink-500 leading-[1.55] max-w-[280px]">
@@ -57,46 +71,9 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
           </div>
         </div>
 
-        <FooterCol
-          title={t("marketingFooter.colProduct")}
-          items={[
-            { label: t("marketingFooter.itemFeatures"), to: "/features" },
-            { label: t("marketingFooter.itemPricing"), to: "/pricing" },
-            { label: t("marketingFooter.itemHowItWorks"), to: "/how-it-works" },
-            { label: t("marketingFooter.itemIntegrations"), to: "/integrations" },
-            { label: t("marketingFooter.itemRoadmap"), to: "/roadmap" },
-            // track: the only footer link whose click is a funnel step
-            // worth attributing. The rest are navigation.
-            { label: t("marketingFooter.itemBookDemo", "Book a demo"), to: CAL_ROUTE, track: "book_demo" },
-          ]}
-        />
-        <FooterCol
-          title={t("marketingFooter.colCompare")}
-          items={[
-            { label: t("marketingFooter.itemVsBoldtrail"), to: "/compare/boldtrail" },
-            { label: t("marketingFooter.itemVsFub"), to: "/switch-from-follow-up-boss" },
-            { label: t("marketingFooter.itemVsLofty"), to: "/switch-from-lofty" },
-            { label: t("marketingFooter.itemVsIxact"), to: "/switch-from-ixact" },
-            { label: t("marketingFooter.itemVsWiseAgent"), to: "/switch-from-wise-agent" },
-          ]}
-        />
-        <FooterCol
-          title={t("marketingFooter.colCanada")}
-          items={[
-            { label: t("marketingFooter.itemPipeda"), to: "/pipeda-compliance" },
-            // CASL now points at the real CASL-compliance resource
-            // article rather than the PIPEDA page (2026-04-24 audit:
-            // CASL ≠ PIPEDA, pointing one at the other misleads users
-            // who are actively trying to verify our CASL posture).
-            { label: t("marketingFooter.itemCasl"), to: "/resources/casl-compliance-real-estate-email-marketing-canada" },
-            { label: t("marketingFooter.itemFintrac"), to: "/fintrac-compliance" },
-            { label: t("marketingFooter.itemCreaDdf"), to: "/canadian-market" },
-          ]}
-        />
-        <FooterCol
-          title={t("marketingFooter.colCompany")}
-          items={companyItems}
-        />
+        {columns.map((col) => (
+          <FooterCol key={col.id} title={col.title} items={col.items} />
+        ))}
       </div>
 
       {/* Bottom bar: Privacy + Terms were previously duplicated here

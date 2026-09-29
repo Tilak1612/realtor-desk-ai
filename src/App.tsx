@@ -75,6 +75,7 @@ const IntegrationsRoute = () => {
 // Features + Pricing now render via Phase 2 RD* imports above; the legacy
 // page files were deleted in chore/rd-redesign-legacy-cleanup.
 const CanadianMarket = lazyWithRetry(() => import("./pages/CanadianMarket"));
+const About = lazyWithRetry(() => import("./pages/About"));
 const WhatIsARealEstateCRM = lazyWithRetry(() => import("./pages/WhatIsARealEstateCRM"));
 const RealEstateCrmTemplate = lazyWithRetry(() => import("./pages/resources/RealEstateCrmTemplate"));
 const AiLeadScoring = lazyWithRetry(() => import("./pages/features/AiLeadScoring"));
@@ -314,6 +315,7 @@ const App = () => (
           <Route path="/features" element={<RDFeatures />} />
           <Route path="/pricing" element={<RDPricing />} />
           <Route path="/canadian-market" element={<CanadianMarket />} />
+          <Route path="/about" element={<About />} />
           <Route path="/what-is-a-real-estate-crm" element={<WhatIsARealEstateCRM />} />
           <Route path="/resources/real-estate-crm-template" element={<RealEstateCrmTemplate />} />
           <Route path="/features/ai-lead-scoring" element={<AiLeadScoring />} />

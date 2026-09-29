@@ -587,22 +587,82 @@ const esc = (s) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
-// Mirrors the real <Footer> link set so the shell's links match the rendered page.
-const FOOTER_LINKS = [
-  ['/features', 'Features'],
-  ['/pricing', 'Pricing'],
-  ['/how-it-works', 'How it works'],
-  ['/integrations', 'Integrations'],
-  ['/canadian-market', 'Built for Canada'],
-  ['/resources', 'Resources'],
-  ['/roadmap', 'Roadmap'],
-  ['/faq', 'FAQ'],
-  ['/partners', 'Partners'],
-  ['/careers', 'Careers'],
-  ['/contact', 'Contact'],
-  ['/privacy-policy', 'Privacy policy'],
-  ['/terms-of-service', 'Terms of service'],
-];
+// The shell's site nav, read from the SAME registry the React header and
+// footer use: src/config/siteNav.ts.
+//
+// This list used to be a hand-written copy of the footer, and it was the copy
+// that mattered most — a crawler with no JS sees only this, so the shell's
+// links ARE the site's internal link graph. It had drifted: no audience pages,
+// no comparisons, no /about, no compliance pages. Thirteen links where the
+// real footer has thirty-two.
+//
+// Parsed rather than imported because this is a Node script and the registry
+// is TypeScript. The parse is narrow — top-level `const NAME = [...]` array
+// literals of flat objects — and if it yields nothing the build fails loudly
+// instead of quietly shipping a shell with no navigation.
+function readNavRegistry() {
+  const src = fs.readFileSync(path.join(repoRoot, 'src/config/siteNav.ts'), 'utf8');
+
+  // CAL_ROUTE is the registry's only import. Read its value from the config it
+  // comes from rather than hardcoding "/demo" here — that is how a second copy
+  // starts.
+  const booking = fs.readFileSync(path.join(repoRoot, 'src/config/booking.ts'), 'utf8');
+  const cal = booking.match(/export const CAL_ROUTE\s*=\s*["']([^"']+)["']/);
+  if (!cal) throw new Error('prerender: CAL_ROUTE not found in src/config/booking.ts');
+
+  // Strip type annotations on the declarations we want, then evaluate each in
+  // order so later arrays can reference earlier ones (FOOTER_COLUMNS reuses
+  // WHO_WE_HELP). `satisfies`/interfaces are left behind by the filter.
+  const decls = [];
+  for (const m of src.matchAll(/^(?:export\s+)?const\s+([A-Z][A-Z0-9_]*)\s*(?::[^=]+?)?=\s*\[/gm)) {
+    const open = src.indexOf('[', m.index + m[0].length - 1);
+    let depth = 0, quote = null, end = -1;
+    for (let i = open; i < src.length; i++) {
+      const c = src[i];
+      if (quote) { if (c === quote && src[i - 1] !== '\\') quote = null; continue; }
+      if (c === '"' || c === "'" || c === '`') { quote = c; continue; }
+      if (c === '[') depth++;
+      else if (c === ']') { depth--; if (depth === 0) { end = i; break; } }
+    }
+    if (end !== -1) decls.push([m[1], src.slice(open, end + 1)]);
+  }
+
+  const scope = { CAL_ROUTE: cal[1] };
+  for (const [name, literal] of decls) {
+    try {
+      const keys = Object.keys(scope);
+      scope[name] = new Function(...keys, `return (${literal});`)(...keys.map((k) => scope[k]));
+    } catch {
+      /* references something we did not capture — skip it */
+    }
+  }
+
+  const seen = new Map();
+  const add = (item) => {
+    if (!item || typeof item.to !== 'string') return;
+    if (item.external || !item.to.startsWith('/')) return;
+    if (!seen.has(item.to)) seen.set(item.to, item.label);
+  };
+  for (const group of scope.PRIMARY_NAV ?? []) {
+    if (group.to) add(group);
+    for (const i of group.items ?? []) add(i);
+    for (const p of group.panes ?? []) {
+      add(p);
+      for (const i of p.items ?? []) add(i);
+    }
+  }
+  for (const col of scope.FOOTER_COLUMNS ?? []) for (const i of col.items ?? []) add(i);
+
+  if (seen.size < 20) {
+    throw new Error(
+      `prerender: only parsed ${seen.size} links from siteNav.ts — the registry's shape changed ` +
+        'and readNavRegistry() needs updating. Refusing to prerender a site with no navigation.',
+    );
+  }
+  return [...seen.entries()];
+}
+
+const FOOTER_LINKS = readNavRegistry();
 
 function breadcrumbs(route, title) {
   const items = [{ name: 'Home', item: SITE + '/' }];
