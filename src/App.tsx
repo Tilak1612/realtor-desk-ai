@@ -80,6 +80,8 @@ const RealEstateCrmTemplate = lazyWithRetry(() => import("./pages/resources/Real
 const AiLeadScoring = lazyWithRetry(() => import("./pages/features/AiLeadScoring"));
 const AiLeadFollowUp = lazyWithRetry(() => import("./pages/features/AiLeadFollowUp"));
 const BilingualCrm = lazyWithRetry(() => import("./pages/features/BilingualCrm"));
+const CaslCompliantEmail = lazyWithRetry(() => import("./pages/features/CaslCompliantEmail"));
+const RealEstateCrmPricing = lazyWithRetry(() => import("./pages/resources/RealEstateCrmPricing"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -309,6 +311,8 @@ const App = () => (
           <Route path="/features/ai-lead-scoring" element={<AiLeadScoring />} />
           <Route path="/features/ai-lead-follow-up" element={<AiLeadFollowUp />} />
           <Route path="/features/bilingual-crm" element={<BilingualCrm />} />
+          <Route path="/features/casl-compliant-email" element={<CaslCompliantEmail />} />
+          <Route path="/resources/real-estate-crm-pricing" element={<RealEstateCrmPricing />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
