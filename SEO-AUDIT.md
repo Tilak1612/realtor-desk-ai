@@ -742,3 +742,66 @@ Each is pinned by a mutation-checked guard in
   demo/trial instrumentation need account access.
 - The lint baseline moved 64 → 74 when `api/integrations/google/[action].ts`
   landed; it carries 10 `no-explicit-any`, which AGENTS.md forbids.
+
+---
+
+# Part 5 — Keyword & Page Plan, brief-by-brief (2026-09-28)
+
+Against the 22 briefs in *RealtorDesk Keyword & Page Plan* (28 Sep 2026). The
+plan's own instruction — "do not launch 22 thin pages together" — set the
+sequence.
+
+## Built (8 new pages)
+
+| # | Page | Words |
+|---|---|---:|
+| 09 | `/features/ai-lead-scoring` | 728 |
+| 10 | `/features/ai-lead-follow-up` | 689 |
+| 11 | `/features/bilingual-crm` | 538 |
+| 12 | `/features/casl-compliant-email` | 597 |
+| 13 | `/use-cases/solo-agent` | 669 |
+| 07 | `/compare/real-geeks-alternative` | 607 |
+| 08 | `/compare/top-producer-alternative` | 590 |
+| 20 | `/resources/real-estate-crm-pricing` | 688 |
+
+All eight carry FAQPage schema in the static HTML, follow the plan's
+citation-ready recipe, and are linked from the `/resources` hub. Site is at
+77 prerendered routes, zero orphans.
+
+## Already served by an existing URL (6 briefs)
+
+Briefs 1–6 and 19 and 21 are marked "rebuild" at *new* slugs —
+`/compare/ixact-contact-alternative/` when `/vs/ixact` and
+`/switch-from-ixact` already exist. **Minting the new slugs would split intent
+across duplicate URLs**, which is the cannibalisation the earlier developer
+report warned against, so the existing URLs were strengthened instead (see
+Part 3 and Part 4). This is a deliberate departure from the plan's literal
+slugs and is worth an explicit decision if you disagree.
+
+## Not built, and why
+
+| # | Brief | Reason |
+|---|---|---|
+| 14 | CRM for real estate teams | **No team exists.** `information_schema` has no seat, assignment, organization or shared-pipeline column. The $299 Team plan is a billing tier, not a capability. |
+| 15 | Brokerage CRM, FINTRAC-ready | Same, plus FINTRAC workflows are roadmap. |
+| 16 | CRM for Toronto realtors | The plan requires "actual board and market workflows, not a city-name swap". Board-specific workflow substance could not be verified, and the city-swap version is what the plan forbids. |
+| 17 | CRM for Vancouver realtors | Same. |
+| 18 | French Quebec pillar | Would be invisible to non-JS crawlers — `?lang=fr` cannot be statically served. Needs path-based locales first. |
+| 22 | Lead-response benchmark | The plan itself: "Do not publish until the study is real." It is not. |
+
+Wave 3's off-site items — YouTube, G2/Capterra/SoftwareAdvice profiles,
+community participation — are account actions, not code.
+
+## Verified, not assumed
+
+Wave 1's sixth item is allowing legitimate AI crawlers. `robots.txt` already
+permits GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot and Google-Extended
+through the `*` group, with a comment explaining why a named group would
+silently hand them the authenticated app. No change was needed.
+
+`/pricing`'s feature matrix was checked for overclaiming: every unshipped row
+already reads "(roadmap)" or "(Q3 2026)".
+
+The `metaLength` guard rejected four of the eight new pages on first build —
+two titles over 60 characters and three descriptions over 160. Copy was
+tightened rather than the budget raised.
