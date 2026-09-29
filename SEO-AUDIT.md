@@ -782,15 +782,34 @@ slugs and is worth an explicit decision if you disagree.
 
 | # | Brief | Reason |
 |---|---|---|
-| 14 | CRM for real estate teams | **No team exists.** `information_schema` has no seat, assignment, organization or shared-pipeline column. The $299 Team plan is a billing tier, not a capability. |
-| 15 | Brokerage CRM, FINTRAC-ready | Same, plus FINTRAC workflows are roadmap. |
-| 16 | CRM for Toronto realtors | The plan requires "actual board and market workflows, not a city-name swap". Board-specific workflow substance could not be verified, and the city-swap version is what the plan forbids. |
-| 17 | CRM for Vancouver realtors | Same. |
-| 18 | French Quebec pillar | Would be invisible to non-JS crawlers — `?lang=fr` cannot be statically served. Needs path-based locales first. |
-| 22 | Lead-response benchmark | The plan itself: "Do not publish until the study is real." It is not. |
+| 22 | Lead-response benchmark | The plan itself: "Do not publish until the study is real." It is not, and inventing the data is what this codebase spent September removing. |
+
+**Everything else in the 22 is now live.** Briefs 14 and 15 ship as buyer
+guides rather than product pages, because production still has no team model —
+both open by saying so and then give the evaluation checklist, and both carry
+a source comment telling the next person to rewrite rather than quietly add
+team claims if a seat model ships.
+
+### Corrections to earlier deferrals
+
+Three of the four reasons I gave for deferring did not survive a second look:
+
+- **Geo (16, 17).** The blocker was that I had not researched the boards, not
+  that the facts were unknowable. TRREB and GVR both publish their coverage
+  and member tooling. The two pages now argue different things — Toronto on
+  volume and pace, Vancouver on an 18–24 month decision cycle — rather than
+  being the same page with the nouns changed, which is what the plan forbade.
+- **French (18).** I had conflated two problems. `?lang=fr` genuinely cannot
+  be served statically, and the sitewide fix still needs path-based locales.
+  But `/fr/crm-immobilier` is a normal route with a real page, so the
+  prerenderer emits it like any other and a crawler gets 717 words of French
+  HTML. One French page is not a locale migration.
+- **Teams and brokerage (14, 15).** The product limitation is real, but it
+  blocked a *product page*, not a useful page.
 
 Wave 3's off-site items — YouTube, G2/Capterra/SoftwareAdvice profiles,
-community participation — are account actions, not code.
+community participation — remain account actions rather than code.
+
 
 ## Verified, not assumed
 
