@@ -413,13 +413,78 @@ describe("capability claims", () => {
       "5,988", "6,987", "700+ USD", "$675/month", "306,312", "33,456%",
       "$499-$1,499", "1,188+/yr",
     ];
+
+    // The literal list above is history, not the guard. It missed a whole page.
+    //
+    // /lofty-alternative still carried "$700/mo", "$1,499 setup fee", "$399
+    // migration", "$10,188+ USD", "~$13,850 CAD" and "$499 - $1,499" — the last
+    // one identical to a banned string except for the spaces around the dash.
+    // From those it derived "Save 85%" in the H1 and "83% cost savings" on the
+    // card beneath it, while the comparison table two sections down correctly
+    // said Lofty's price is "Not published". An exact-match blocklist can only
+    // catch the fabrication you already found, so match the SHAPE instead:
+    // any money figure within a short distance of a competitor's name.
+    // ONLY the vendors verified on 2026-09-28 as publishing no prices at all.
+    //
+    // This list is short on purpose. IXACT publishes $46.75/$55 USD, LionDesk
+    // was a documented $39/month, Wise Agent and Follow Up Boss publish too —
+    // quoting those is sourcing, not fabricating, and a guard that flagged
+    // them would train everyone to ignore it. Add a vendor here only after
+    // checking their pricing page and recording the date.
+    const NO_PUBLISHED_PRICE = /\b(Lofty|BoldTrail|kvCORE)\b/i;
+    const MONEY = /\$\s?\d[\d,]*(?:\.\d{2})?/;
+    /**
+     * Our own figures: monthly and annual plan prices from
+     * src/config/billing.ts, their 12-month totals, the annual saving, and $0
+     * for "no setup fee". Every comparison page states these next to a
+     * competitor's name by design — that is what a comparison is.
+     */
+    const OURS = /^\$\s?(0|149|299|789|999|2,?997|1,?788|3,?588)$/;
+
     const offenders: string[] = [];
     for (const { f, body } of sources) {
+      const rel = f.split("/src/")[1];
       for (const b of banned) {
-        if (body.includes(b)) offenders.push(`${f.split("/src/")[1]}: ${b}`);
+        if (body.includes(b)) offenders.push(`${rel}: ${b}`);
       }
       // Any quote attributed to a person or a review site.
-      if (/<footer>\s*—/.test(body)) offenders.push(`${f.split("/src/")[1]}: attributed testimonial`);
+      if (/<footer>\s*—/.test(body)) offenders.push(`${rel}: attributed testimonial`);
+
+      // A money figure and a competitor name inside the same ~90 characters.
+      // Window rather than whole-file, so a page may still say "$149" and name
+      // Lofty in different sentences — which every comparison page must.
+      for (const m of body.matchAll(new RegExp(MONEY.source, "g"))) {
+        const amount = m[0].replace(/\s/g, "");
+        if (OURS.test(amount)) continue;
+        // 55 characters, not 90. A wider window bled across adjacent rows of
+        // a pricing table and flagged Wise Agent's genuinely published $42/$59
+        // because the Lofty row happened to sit underneath it.
+        const window = body.slice(Math.max(0, m.index - 55), m.index + 55);
+        if (NO_PUBLISHED_PRICE.test(window)) {
+          offenders.push(`${rel}: "${amount}" quoted beside Lofty/BoldTrail/kvCORE, none of which publish prices`);
+        }
+      }
+
+      // A savings percentage is the same fabrication one step downstream: it
+      // can only be computed from a competitor price we do not have.
+      for (const m of body.matchAll(/\b\d{1,3}\s?%/g)) {
+        const window = body.slice(Math.max(0, m.index - 110), m.index + 110);
+        if (/\b(save|saving|savings|cheaper|less than)\b/i.test(window) && NO_PUBLISHED_PRICE.test(window)) {
+          offenders.push(`${rel}: "${m[0]}" savings claim against a vendor that publishes no price`);
+        }
+      }
+
+      // Our own customer count. We do not publish one.
+      for (const m of body.matchAll(
+        /\b(hundreds|thousands|dozens)\s+of\s+(Canadian\s+)?(agents|realtors|brokerages|teams|customers|users)/gi,
+      )) {
+        const window = body.slice(Math.max(0, m.index - 120), m.index + 60);
+        // Describing a COMPETITOR's user base from public reporting is fine;
+        // claiming our own is not.
+        if (/\b(join|already|trusted by|used by us|our|we serve|switched to)\b/i.test(window) && !/\b(Lofty|BoldTrail|kvCORE|LionDesk|IXACT|Wise ?Agent|Follow ?Up ?Boss|Propertybase|BoomTown)\b/i.test(window.slice(0, 120))) {
+          offenders.push(`${rel}: "${m[0]}" — we do not publish a customer count`);
+        }
+      }
     }
     expect(offenders, `unsourced claim restored:\n${offenders.join("\n")}`).toEqual([]);
   });

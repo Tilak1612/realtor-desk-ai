@@ -166,7 +166,7 @@ const resources = {
           boldtrailCost: "Not published — quoted on request",
           loftyCost: "Not published — quoted on request",
           ourCost: "$149/mo CAD, $0 setup",
-          saveCallout: "Save up to 85% compared to BoldTrail, 45% vs Lofty"
+          saveCallout: "Neither publishes a price, so we cannot tell you the difference \u2014 ours is $149/mo CAD"
         },
         banner: {
           trial: "🎉 14 Days Free Trial - Start Today!",
@@ -3498,7 +3498,7 @@ const resources = {
           boldtrailCost: "5\u00a0988\u00a0$/an + frais d'installation de 999\u00a0$",
           loftyCost: "1\u00a0788\u00a0$ à 3\u00a0588\u00a0$/an par utilisateur",
           ourCost: "999\u00a0$/an (Membre Fondateur), 0\u00a0$ d'installation",
-          saveCallout: "Économisez jusqu'à 85\u00a0% par rapport à BoldTrail, 45\u00a0% vs Lofty"
+          saveCallout: "Ni l’un ni l’autre ne publie ses prix, donc l’écart reste invisible \u2014 le nôtre est de 149\u00a0$ CA/mois"
         },
         banner: {
           trial: "🎉 Essai Gratuit de 14 Jours - Commencez Aujourd'hui!",
