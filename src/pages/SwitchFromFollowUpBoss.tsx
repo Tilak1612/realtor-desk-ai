@@ -19,7 +19,7 @@ const SwitchFromFollowUpBoss = () => {
     { feature: "AI Lead Scoring", rdai: "✓ Included", fub: "✗ Basic tagging only" },
     { feature: "Email & SMS Automation", rdai: "✓ Yes", fub: "✓ Yes" },
     { feature: "Free Onboarding & Migration", rdai: "✓ Yes", fub: "✗ No" },
-    { feature: "Mobile App", rdai: "✓ iOS & Android", fub: "✓ Yes" },
+    { feature: "Mobile access", rdai: "Responsive web", fub: "Native apps" },
     { feature: "CAD Billing", rdai: "✓ Pay in CAD", fub: "✗ USD only" },
     { feature: "Setup Fee", rdai: "✓ None", fub: "✗ None (but USD pricing)" },
   ];

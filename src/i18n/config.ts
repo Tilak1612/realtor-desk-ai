@@ -135,15 +135,22 @@ const resources = {
         market: { h1: "AI-Powered Property Insights (Coming Soon)", p1: "AI-assisted property analysis using local market trends, comparable sales, and neighbourhood data to support your CMA process", sub1: "Faster, data-backed CMAs for your clients", h2: "Off-Market Opportunity Detection", p2: "AI predicts which homeowners are likely to sell 3-6 months before listing", sub2: "Get exclusive listings before competitors", h3: "Real-Time Market Reports", p3: "Automated comparative market analysis with absorption rates, days-on-market trends, price-per-sqft evolution", sub3: "Position yourself as the local market expert" },
         transaction: { h1: "Intelligent Timeline Prediction", p1: "AI forecasts closing dates based on transaction type, parties involved, and historical performance", sub1: "Designed to accelerate your closing timeline with fewer missed steps", h2: "Automated Vendor Coordination", p2: "Smart scheduling of inspectors, appraisers, lawyers with availability optimization", sub2: "Deadlines and follow-ups tracked in one place", h3: "Risk Detection Engine", p3: "Predictive alerts for financing issues, inspection problems, and buyer/seller cold feet", sub3: "See every deal's next step in one pipeline view" },
         marketing: { h1: "AI Content Generation", p1: "Automated creation of property descriptions, social posts, email campaigns, and neighborhood guides", sub1: "Draft listing copy and social posts from the listing itself", h2: "Intelligent Distribution", p2: "AI determines optimal posting times, channels, and audience segments for each piece of content", sub2: "Schedule posts across your channels from one place", h3: "Performance Analytics", p3: "ROI tracking by content type, platform, and campaign with improvement recommendations", sub3: "See which sources actually produce your closings" },
+        // Rewritten 2026-09-29. This block described a native app that does
+        // not exist: "Available on iOS & Android", "Download from App Store or
+        // Google Play", plus Offline Mode and Voice Commands. There is no ios/
+        // or android/ project, no store listing, and the roadmap FAQ in this
+        // same file says a native app is not planned for 2026. Nothing renders
+        // it today, but it shipped in the JS bundle and was one import away
+        // from being true-looking copy on a real page.
         mobile: {
-          title: "Work From Anywhere with Our Mobile App",
-          subtitle: "Manage your entire real estate business from your phone. Respond to leads, schedule showings, and close deals on the go.",
-          appStores: "Available on iOS & Android",
-          f1title: "Full CRM Access", f1desc: "View and manage all contacts, leads, and deals from your phone",
-          f2title: "Push Notifications", f2desc: "Get instant alerts for new leads, messages, and deal updates",
-          f3title: "Offline Mode", f3desc: "Access your data even without internet connection",
-          f4title: "Voice Commands", f4desc: "Add notes and create tasks hands-free while driving",
-          download: "Download from App Store or Google Play"
+          title: "Works on your phone, in the browser you already have",
+          subtitle: "Realtor Desk is a responsive web app. Open it on a phone and you get the same contacts, conversations and pipeline, with nothing to install.",
+          appStores: "No app to install \u2014 open it in Safari or Chrome",
+          f1title: "The whole CRM", f1desc: "Contacts, leads, conversations and deals, the same as on desktop",
+          f2title: "Add it to your home screen", f2desc: "Save it like an app if you want the icon, from your browser's share menu",
+          f3title: "Nothing to update", f3desc: "No app store review, no version drift between your phone and your desk",
+          f4title: "Native app", f4desc: "Not planned for 2026 \u2014 see the roadmap rather than a coming-soon badge",
+          download: "Open realtordesk.ai on your phone"
         },
         comparison: {
           title: "How We Compare to Leading CRMs",
@@ -3475,14 +3482,14 @@ const resources = {
         transaction: { h1: "Prédiction Intelligente des Délais", p1: "L'IA prévoit les dates de clôture selon le type de transaction, les parties impliquées et les performances historiques", sub1: "Conçu pour accélérer vos délais de clôture avec moins d'étapes manquées", h2: "Coordination Automatisée des Fournisseurs", p2: "Planification intelligente des inspecteurs, évaluateurs et avocats avec optimisation des disponibilités", sub2: "Échéances et relances suivies au même endroit", h3: "Moteur de Détection des Risques", p3: "Alertes prédictives pour problèmes de financement, d'inspection et hésitations acheteur/vendeur", sub3: "Voyez la prochaine étape de chaque transaction dans une seule vue" },
         marketing: { h1: "Génération de Contenu par IA", p1: "Création automatisée de descriptions de propriétés, publications sociales, campagnes courriel et guides de quartier", sub1: "Rédigez fiches et publications à partir de l'inscription elle-même", h2: "Distribution Intelligente", p2: "L'IA détermine les horaires de publication optimaux, les canaux et segments d'audience pour chaque contenu", sub2: "Planifiez vos publications sur vos canaux depuis un seul endroit", h3: "Analyses de Performance", p3: "Suivi du ROI par type de contenu, plateforme et campagne avec recommandations d'amélioration", sub3: "Voyez quelles sources produisent réellement vos transactions" },
         mobile: {
-          title: "Travaillez de N'importe Où avec Notre Application Mobile",
-          subtitle: "Gérez toute votre entreprise immobilière depuis votre téléphone. Répondez aux prospects, planifiez des visites et concluez des ventes en déplacement.",
-          appStores: "Disponible sur iOS et Android",
-          f1title: "Accès CRM Complet", f1desc: "Consultez et gérez tous vos contacts, prospects et transactions depuis votre téléphone",
-          f2title: "Notifications Push", f2desc: "Recevez des alertes instantanées pour les nouveaux prospects, messages et mises à jour",
-          f3title: "Mode Hors Ligne", f3desc: "Accédez à vos données même sans connexion internet",
-          f4title: "Commandes Vocales", f4desc: "Ajoutez des notes et créez des tâches en mains libres en conduisant",
-          download: "Téléchargez depuis l'App Store ou Google Play"
+          title: "Fonctionne sur votre téléphone, dans le navigateur que vous avez déjà",
+          subtitle: "Realtor Desk est une application web adaptative. Ouvrez-la sur un téléphone et vous retrouvez les mêmes contacts, conversations et pipeline, sans rien installer.",
+          appStores: "Aucune application à installer \u2014 ouvrez-la dans Safari ou Chrome",
+          f1title: "Tout le CRM", f1desc: "Contacts, prospects, conversations et transactions, comme sur ordinateur",
+          f2title: "Ajoutez-la à l’écran d’accueil", f2desc: "Enregistrez-la comme une application depuis le menu de partage de votre navigateur",
+          f3title: "Rien à mettre à jour", f3desc: "Pas de révision en boutique, pas d’écart de version entre votre téléphone et votre bureau",
+          f4title: "Application native", f4desc: "Non prévue pour 2026 \u2014 consultez la feuille de route plutôt qu’une pastille « à venir »",
+          download: "Ouvrez realtordesk.ai sur votre téléphone"
         },
         comparison: {
           title: "Comment Nous Comparons aux Principaux CRM",

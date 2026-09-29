@@ -32,7 +32,12 @@ export const softwareApplicationSchema = {
   "@type": "SoftwareApplication",
   "name": "Realtor Desk",
   "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web, iOS, Android",
+  // There is no native app: no ios/ or android/ project in the repo, no store
+  // listing, and capacitor.config.ts still holds a default app.lovable.* id
+  // pointing at a scaffold URL. The roadmap FAQ already says a native app is
+  // not planned for 2026 — this line contradicted it, in machine-readable
+  // form, on every page of the site.
+  "operatingSystem": "Web browser",
   "description": "AI-powered real estate CRM with 24/7 chatbot, lead scoring, and automated follow-ups for Canadian agents. CREA DDF® integration is on the roadmap.",
   "offers": {
     "@type": "AggregateOffer",

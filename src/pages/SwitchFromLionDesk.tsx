@@ -47,7 +47,7 @@ const SwitchFromLionDesk = () => {
     { feature: "Email & SMS Automation", rdai: "✓ Yes", liondesk: "✓ Yes" },
     { feature: "Free Migration", rdai: "✓ Yes", liondesk: "N/A" },
     { feature: "Free Onboarding", rdai: "✓ Yes", liondesk: "✗ No" },
-    { feature: "Mobile App", rdai: "✓ iOS & Android", liondesk: "✓ Yes" },
+    { feature: "Mobile access", rdai: "Responsive web", liondesk: "Native apps" },
     { feature: "Deal Pipeline", rdai: "✓ Yes", liondesk: "✓ Yes" },
     { feature: "CAD Billing", rdai: "✓ Pay in CAD", liondesk: "✗ USD only" },
   ];

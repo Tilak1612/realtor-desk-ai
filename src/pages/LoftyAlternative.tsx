@@ -266,7 +266,7 @@ const LoftyAlternative = () => {
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">Mobile App (iOS/Android)</td>
+                    <td className="py-3 px-4">Mobile access</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                   </tr>
