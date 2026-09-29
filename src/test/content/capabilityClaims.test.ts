@@ -467,10 +467,33 @@ describe("capability claims", () => {
 
       // A savings percentage is the same fabrication one step downstream: it
       // can only be computed from a competitor price we do not have.
-      for (const m of body.matchAll(/\b\d{1,3}\s?%/g)) {
-        const window = body.slice(Math.max(0, m.index - 110), m.index + 110);
-        if (/\b(save|saving|savings|cheaper|less than)\b/i.test(window) && NO_PUBLISHED_PRICE.test(window)) {
-          offenders.push(`${rel}: "${m[0]}" savings claim against a vendor that publishes no price`);
+      //
+      // The window here is 350 characters, not 110. At 110 /vs/lofty slipped
+      // through twice — "Save 85% with PIPEDA compliance…" in the hero and
+      // "why agents save 85%" in the JSON-LD description, both just past the
+      // window from the nearest "Lofty". It reached production and was caught
+      // by a post-deploy audit rather than by this test.
+      //
+      // File scope was the other overcorrection and is wrong too: it flagged
+      // our own "Save 44%" annual-billing discount, a "$149-299 vs $2,080-3,080
+      // AI is 90% cheaper" comparison against an ISA salary rather than a
+      // vendor, and the sentence on /compare that exists to disclaim exactly
+      // this kind of claim. A paragraph-sized window keeps the vendor
+      // association that makes the claim a claim.
+      const DISCLAIMED =
+        /\b(invented|fabricat|made up|somebody|we removed|cannot tell you|no public|not published|there is no)\b/i;
+
+      const savingsPatterns = [
+        /\b(save|saving|savings|cheaper|less)\b[^.<>{}]{0,40}?\b\d{1,3}\s?%/gi,
+        /\b\d{1,3}\s?%[^.<>{}]{0,30}?\b(cheaper|less than|savings?)\b/gi,
+      ];
+      for (const re of savingsPatterns) {
+        for (const m of body.matchAll(re)) {
+          const near = body.slice(Math.max(0, m.index - 350), m.index + 350);
+          if (!NO_PUBLISHED_PRICE.test(near)) continue;
+          // A sentence that exists to debunk the claim is not the claim.
+          if (DISCLAIMED.test(near)) continue;
+          offenders.push(`${rel}: "${m[0].trim()}" — savings claim against a vendor that publishes no price`);
         }
       }
 

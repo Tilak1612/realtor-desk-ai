@@ -15,7 +15,7 @@ const VsLofty = () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Lofty vs RealtorDesk AI Comparison",
-    "description": "Compare Lofty with RealtorDesk AI for Canadian real estate agents. See pricing, features, CREA DDF® integration on the roadmap, and why agents save 85% with RealtorDesk AI.",
+    "description": "Compare Lofty with RealtorDesk AI for Canadian real estate agents: published CAD pricing, bilingual EN/FR, data hosted in Canada, and CREA DDF\u00ae integration on the roadmap for Q3 2026.",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": [
@@ -45,7 +45,11 @@ const VsLofty = () => {
             Why Canadian Agents Choose <span className="gradient-text">RealtorDesk AI</span> Over Lofty
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Save 85% with PIPEDA compliance, bilingual support, true AI-powered automation built for the Canadian market, and CREA DDF® integration coming Q3 2026.
+            {/* Was "Save 85%". Lofty publishes no price — this page's own
+                JSON-LD says so two screens up ("Pricing quoted on request; not
+                published") — so there was no figure to compute a saving
+                against. Verified 2026-09-28. */}
+            $149 CAD a month, published rather than quoted. Bilingual EN/FR, data hosted in Canada, and CREA DDF® integration on the roadmap for Q3 2026.
           </p>
         </div>
       </section>
