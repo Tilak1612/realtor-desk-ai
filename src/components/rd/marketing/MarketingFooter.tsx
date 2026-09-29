@@ -25,6 +25,9 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
   // "Community" is brand-adjacent rather than product or compliance.
   const companyItems = [
     { label: t("marketingFooter.itemBlog"), to: "/resources" },
+    // /faq was the only destination the legacy Footer carried that this
+    // one did not. Ported here so retiring that component loses nothing.
+    { label: t("nav.faq", "FAQ"), to: "/faq" },
     { label: t("marketingHeader.navPartners"), to: "/partners" },
     ...(isCommunityEnabled()
       ? [{ label: t("marketingFooter.itemCommunity"), to: COMMUNITY_URL, external: true }]
@@ -101,7 +104,38 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
           Kept only Unsubscribe in the bottom bar — it's the CASL-
           required single-click reachable-from-footer link; Privacy +
           Terms stay in the Company column. */}
-      <div className="mx-auto max-w-[1200px] mt-10 pt-6 border-t border-rd-line flex flex-col md:flex-row md:justify-between gap-3 text-[12px] text-rd-ink-500">
+      {/* Social accounts and the support address lived only in the legacy
+          Footer. They move here as part of retiring it, so the 84 pages that
+          used the old component do not silently lose the only published way
+          to reach us. Same four verified profiles, unchanged. */}
+      <div className="mx-auto max-w-[1200px] mt-10 pt-6 border-t border-rd-line flex flex-wrap items-center gap-x-6 gap-y-3 text-[12px] text-rd-ink-500">
+        <a
+          href="mailto:support@realtordesk.ai"
+          className="hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
+        >
+          support@realtordesk.ai
+        </a>
+        <span className="flex items-center gap-4">
+          {[
+            ["YouTube", "https://www.youtube.com/@RealtorDeskAI"],
+            ["X", "https://x.com/Realtor_desk_AI"],
+            ["Facebook", "https://www.facebook.com/profile.php?id=61583653411571"],
+            ["Instagram", "https://www.instagram.com/realtor_desk_ai/"],
+          ].map(([name, href]) => (
+            <a
+              key={name}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
+            >
+              {name}
+            </a>
+          ))}
+        </span>
+      </div>
+
+      <div className="mx-auto max-w-[1200px] mt-6 pt-6 border-t border-rd-line flex flex-col md:flex-row md:justify-between gap-3 text-[12px] text-rd-ink-500">
         <div>{t("marketingFooter.copyright", { year: new Date().getFullYear() })}</div>
         <div className="flex gap-6">
           {/* min-h-[24px] on the controls, not the row. At 12px these render
