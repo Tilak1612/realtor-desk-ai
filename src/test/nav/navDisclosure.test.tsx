@@ -42,6 +42,24 @@ describe("desktop nav disclosures", () => {
     );
   });
 
+  it("does not let a closing menu shut the one that replaced it", async () => {
+    // Moving the pointer from one trigger to the next fires mouseleave on the
+    // first and mouseenter on the second. The first schedules a close; if that
+    // timer fires blind it lands after the second has opened and blinks it
+    // shut. Waiting past the delay is the whole point of this test.
+    const user = userEvent.setup();
+    renderWithProviders(<MarketingHeader />);
+
+    await openMenu(user, "Who we help");
+    const solutions = await openMenu(user, "Solutions");
+
+    await new Promise((r) => setTimeout(r, 250));
+    expect(
+      solutions,
+      "the neighbouring menu's close timer should not have closed this one",
+    ).toHaveAttribute("aria-expanded", "true");
+  });
+
   it("closes on Escape and returns focus to the trigger", async () => {
     const user = userEvent.setup();
     renderWithProviders(<MarketingHeader />);

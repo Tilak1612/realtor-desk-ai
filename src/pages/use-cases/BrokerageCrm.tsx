@@ -21,7 +21,7 @@ const FAQS = [
   },
   {
     q: "Does any CRM make a brokerage FINTRAC compliant?",
-    a: "No. Software can help you keep and retrieve records; the obligations remain the brokerage&rsquo;s. Treat any claim of compliance-by-purchase as a reason to look harder at the vendor.",
+    a: "No. Software can help you keep and retrieve records; the obligations remain the brokerage’s. Treat any claim of compliance-by-purchase as a reason to look harder at the vendor.",
   },
   {
     q: "What should we ask about record retention?",

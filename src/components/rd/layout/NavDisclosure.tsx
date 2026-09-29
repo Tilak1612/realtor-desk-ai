@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
@@ -29,7 +30,8 @@ interface NavDisclosureProps {
   dark: boolean;
   /** id of the currently open panel, or null. */
   openId: string | null;
-  setOpenId: (id: string | null) => void;
+  /** Accepts an updater, which the close timer relies on — see scheduleClose. */
+  setOpenId: Dispatch<SetStateAction<string | null>>;
   items?: NavItem[];
   panes?: NavPane[];
   /** Marks the trigger as the current section. */
@@ -85,7 +87,15 @@ export function NavDisclosure({
   };
   const scheduleClose = () => {
     cancelClose();
-    closeTimer.current = setTimeout(() => setOpenId(null), CLOSE_DELAY_MS);
+    closeTimer.current = setTimeout(
+      // Only close if THIS menu is still the open one. Moving the pointer from
+      // one trigger to the next fires mouseleave here and mouseenter there, so
+      // a bare setOpenId(null) would land after the neighbour had opened and
+      // blink it shut. It showed up as a flaky "at most one panel open" test
+      // under load; on a busy page a user would see the same blink.
+      () => setOpenId((cur) => (cur === id ? null : cur)),
+      CLOSE_DELAY_MS,
+    );
   };
   useEffect(() => cancelClose, []);
   useEffect(() => {

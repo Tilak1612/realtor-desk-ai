@@ -433,6 +433,15 @@ const resources = {
       // exist in both locales (enforced by the shape parity test at
       // src/i18n/__tests__/shape.test.ts).
       landing: {
+        audience: {
+          heading: "A desk for the way you work",
+          body: "Three honest starting points. Each one says what Realtor Desk does for that shape of business \u2014 and, where it is not the right fit yet, says that instead.",
+          cta: "Read the guide"
+        },
+        resources: {
+          all: "All guides",
+          read: "Read it"
+        },
         hero: {
           badge: "Now in public beta · 14-day free trial",
           headline1: "Every lead in one place.",
@@ -3753,6 +3762,15 @@ const resources = {
       // Keep the exact same key shape as en.landing so the parity test
       // stays green and drop-in replacement is trivial.
       landing: {
+        audience: {
+          heading: "Un bureau adapt\u00e9 \u00e0 votre fa\u00e7on de travailler",
+          body: "Trois points de d\u00e9part honn\u00eates. Chacun dit ce que Realtor Desk fait pour ce type d\u2019entreprise \u2014 et, l\u00e0 o\u00f9 ce n\u2019est pas encore le bon choix, le dit aussi.",
+          cta: "Lire le guide"
+        },
+        resources: {
+          all: "Tous les guides",
+          read: "Lire"
+        },
         hero: {
           badge: "Maintenant en bêta publique · Essai gratuit de 14 jours",
           headline1: "Chaque prospect, au même endroit.",
