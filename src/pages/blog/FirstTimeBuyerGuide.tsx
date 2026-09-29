@@ -9,6 +9,7 @@ import blogImage from "@/assets/blog-first-time-buyer.jpg";
 import blogImageAvif from "@/assets/blog-first-time-buyer.avif";
 import blogImageWebp from "@/assets/blog-first-time-buyer.webp";
 import { Picture } from "@/components/Picture";
+import { ContentVintage } from "@/components/marketing/ContentVintage";
 
 const FirstTimeBuyerGuide = () => {
   return (
@@ -66,6 +67,7 @@ const FirstTimeBuyerGuide = () => {
               First-Time Home Buyer Guide for Canada 2025: Everything You Need to Know
             </h1>
 
+            <ContentVintage published="2026-01-09" className="mb-6" />
             <p className="text-xl text-muted-foreground">
               Buying your first home in Canada is one of the most significant financial decisions you'll ever make. This comprehensive guide walks you through every step with province-specific insights and expert advice.
             </p>

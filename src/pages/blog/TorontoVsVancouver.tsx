@@ -5,6 +5,7 @@ import { ArrowLeft, Building2, TrendingUp, DollarSign, Users, MapPin } from "luc
 import { Link } from "react-router-dom";
 import blogTorontoVancouver from "@/assets/blog-toronto-vancouver.jpg";
 import { SEO } from "@/components/SEO";
+import { ContentVintage } from "@/components/marketing/ContentVintage";
 
 const TorontoVsVancouver = () => {
   useEffect(() => {
@@ -56,6 +57,7 @@ const TorontoVsVancouver = () => {
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
                 Toronto vs Vancouver Real Estate: Market Trends & Predictions for 2025
               </h1>
+              <ContentVintage published="2026-01-03" className="mb-6" />
               <p className="text-xl text-muted-foreground">
                 Canada's two largest housing markets command premium prices and face affordability challenges. But beneath surface similarities lie important differences that create distinct opportunities.
               </p>

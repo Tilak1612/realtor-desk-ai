@@ -9,6 +9,7 @@ import blogImageAvif from "@/assets/blog-housing-forecast.avif";
 import blogImageWebp from "@/assets/blog-housing-forecast.webp";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
+import { ContentVintage } from "@/components/marketing/ContentVintage";
 
 const HousingForecast2025 = () => {
   useEffect(() => {
@@ -73,6 +74,7 @@ const HousingForecast2025 = () => {
               Canada Housing Market Forecast 2025-2026
             </h1>
             
+            <ContentVintage published="2026-01-02" className="mb-6" />
             <p className="text-xl text-muted-foreground leading-relaxed">
               The Canadian real estate landscape is entering a pivotal transition period. Understanding regional variations, interest rate trajectories, and evolving buyer behaviour is essential for agents who want to thrive in this shifting environment.
             </p>

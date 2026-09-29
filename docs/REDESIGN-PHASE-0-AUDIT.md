@@ -258,7 +258,14 @@ needed gating.
 | 11 Final CTA | Existing |
 | 12 Footer | Shared, registry-driven |
 
-## 9. Comparison pages — cannibalisation and corrections
+## 9. Comparison pages — corrections, and a claim of mine that did not survive testing
+
+> **Correction, 2026-09-29.** The section below originally called these pages
+> cannibalisation and recommended consolidating them. I then measured it, and
+> the measurement says otherwise — see §13. The inventory here is accurate; the
+> "all competing for the same query" conclusion was an assumption I had not
+> tested. Consolidation is **no longer recommended** without SERP data.
+
 
 **17 comparison URLs in the sitemap for 9 vendors.** Three each for BoldTrail
 (`/compare/boldtrail`, `/switch-from-boldtrail`, `/vs/boldtrail`), Lofty
@@ -417,3 +424,49 @@ Every item in this section is already fixed on
 
 GSC and GA4 need account access. Nothing in this audit substitutes for
 impressions, clicks or position data — it is a crawl and render audit only.
+
+---
+
+# 13. The cannibalisation claim, retracted
+
+I reported 17 comparison URLs across 9 vendors as cannibalisation and
+recommended consolidating them. Before implementing that, I measured the
+overlap. It does not hold.
+
+**Method.** Six-word shingles over the prerendered body text of every page in
+each vendor cluster, pairwise, reporting Jaccard similarity and containment of
+the smaller page within the larger.
+
+| Cluster | Pages | Highest containment between any pair |
+|---|---|---|
+| BoldTrail / kvCORE | 4 | 0.14 |
+| Lofty | 4 | 0.15 |
+| IXACT | 3 | 0.16 |
+| Wise Agent | 2 | 0.26 |
+| LionDesk | 2 | 0.09 |
+| Follow Up Boss | 2 | 0.06 |
+
+Near-duplicate content starts around 0.45 containment. Nothing here is close.
+Jaccard similarity never exceeds 0.10. **The copy on these pages is genuinely
+distinct**, and the titles address different intents — alternative-seeking
+(`/x-alternative`), comparison (`/vs/x`), migration (`/switch-from-x`) and
+research (`/blog/vs-x`).
+
+Two corrections to what I wrote earlier:
+
+1. The count is **18, not 17** — BoldTrail and Lofty each have four indexed
+   pages once the blog comparisons are included.
+2. "All competing for the same query" was an **assumption, not a finding**.
+   Whether these cannibalise depends on whether Google returns the same page
+   for the same query across the cluster, which requires Search Console
+   impression and position data per URL. That needs account access this session
+   does not have.
+
+**Recommendation changed: do not consolidate.** Canonicalising four substantive
+pages into one on an untested assumption would have destroyed indexed content
+that is not duplicated. The right next step is to open Search Console, filter
+to each cluster, and look for two URLs trading positions on one query. Only
+then is there something to consolidate, and only for the pairs that show it.
+
+The fabricated-pricing corrections in §9 stand — those were verified
+individually and are unrelated to this retraction.
