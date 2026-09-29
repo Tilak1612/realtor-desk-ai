@@ -812,6 +812,31 @@ const Resources = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/ca/toronto-realtor-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    CRM for Toronto realtors (TRREB)
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/ca/vancouver-realtor-crm" className="text-muted-foreground hover:text-primary transition-colors">
+                    CRM for Vancouver realtors
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/use-cases/real-estate-team" className="text-muted-foreground hover:text-primary transition-colors">
+                    Choosing a CRM for a real estate team
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/use-cases/brokerage" className="text-muted-foreground hover:text-primary transition-colors">
+                    Choosing a brokerage CRM in Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/fr/crm-immobilier" className="text-muted-foreground hover:text-primary transition-colors">
+                    CRM immobilier bilingue (français)
+                  </Link>
+                </li>
+                <li>
                   <Link to="/pipeda-compliance" className="text-muted-foreground hover:text-primary transition-colors">
                     PIPEDA and your client data
                   </Link>

@@ -85,6 +85,11 @@ const RealEstateCrmPricing = lazyWithRetry(() => import("./pages/resources/RealE
 const SoloAgent = lazyWithRetry(() => import("./pages/use-cases/SoloAgent"));
 const RealGeeksAlternative = lazyWithRetry(() => import("./pages/compare/RealGeeksAlternative"));
 const TopProducerAlternative = lazyWithRetry(() => import("./pages/compare/TopProducerAlternative"));
+const TorontoRealtorCrm = lazyWithRetry(() => import("./pages/ca/TorontoRealtorCrm"));
+const VancouverRealtorCrm = lazyWithRetry(() => import("./pages/ca/VancouverRealtorCrm"));
+const RealEstateTeam = lazyWithRetry(() => import("./pages/use-cases/RealEstateTeam"));
+const BrokerageCrm = lazyWithRetry(() => import("./pages/use-cases/BrokerageCrm"));
+const CrmImmobilier = lazyWithRetry(() => import("./pages/fr/CrmImmobilier"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -319,6 +324,11 @@ const App = () => (
           <Route path="/use-cases/solo-agent" element={<SoloAgent />} />
           <Route path="/compare/real-geeks-alternative" element={<RealGeeksAlternative />} />
           <Route path="/compare/top-producer-alternative" element={<TopProducerAlternative />} />
+          <Route path="/ca/toronto-realtor-crm" element={<TorontoRealtorCrm />} />
+          <Route path="/ca/vancouver-realtor-crm" element={<VancouverRealtorCrm />} />
+          <Route path="/use-cases/real-estate-team" element={<RealEstateTeam />} />
+          <Route path="/use-cases/brokerage" element={<BrokerageCrm />} />
+          <Route path="/fr/crm-immobilier" element={<CrmImmobilier />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
