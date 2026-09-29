@@ -104,7 +104,11 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-rd-ink-900 inline-flex items-center min-h-[24px]"
+              // min-w as well as min-h. "X" is a one-character label, so the
+              // anchor was 8x24 — under the 24x24 of WCAG 2.5.8 Target Size,
+              // and the only tap-target failure on the whole site. Caught by
+              // verify-responsive at every width below 1024.
+              className="hover:text-rd-ink-900 inline-flex items-center justify-center min-h-[24px] min-w-[24px]"
             >
               {name}
             </a>

@@ -209,11 +209,14 @@ const RESOURCES: NavItem[] = [
     desc: "Lead in, context reviewed, next step chosen.",
   },
   {
-    to: "/compare/boldtrail",
+    // The hub, not a single vendor page. "Compare" pointed at
+    // /compare/boldtrail, which sent everyone to one competitor regardless of
+    // which one they actually use.
+    to: "/compare",
     labelKey: "siteNav.compare",
     label: "Compare",
     descKey: "siteNav.compareDesc",
-    desc: "Side-by-side against the CRMs agents actually switch from.",
+    desc: "Nine comparisons, and which vendors publish a price.",
   },
   {
     to: "/faq",
@@ -324,6 +327,7 @@ const FOOTER_PRODUCT: NavItem[] = [
 ];
 
 const FOOTER_COMPARE: NavItem[] = [
+  { to: "/compare", labelKey: "siteNav.compareAll", label: "All comparisons" },
   { to: "/compare/boldtrail", labelKey: "marketingFooter.itemVsBoldtrail", label: "vs BoldTrail" },
   { to: "/switch-from-follow-up-boss", labelKey: "marketingFooter.itemVsFub", label: "vs Follow Up Boss" },
   { to: "/switch-from-lofty", labelKey: "marketingFooter.itemVsLofty", label: "vs Lofty" },

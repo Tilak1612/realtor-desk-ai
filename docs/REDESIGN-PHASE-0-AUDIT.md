@@ -195,3 +195,152 @@ that do **not** exist are the conditional/competitor-only ones in
 lead-gen services, autonomous agents) — none has an established capability, so
 none is created. `/about` is the one genuinely new non-conditional page in the
 brief that has no current route.
+
+---
+
+# Delivery record
+
+Written after the work, not before it. Everything below is verified against the
+build in `dist/` or a run of the checks named.
+
+## 7. Route disposition — every row in the brief's table
+
+| Brief page | Brief's proposed path | Disposition | Where it landed |
+|---|---|---|---|
+| Home | `/` | **Published** | Rebuilt to the brief's sequence; see §8 |
+| Platform | `/features` | Mapped to existing | Unchanged |
+| How it works | `/how-it-works` | Mapped to existing | Unchanged |
+| Agents | `/solutions/agents` | **Mapped to existing** | `/use-cases/solo-agent` — indexed; the proposed path would have been a duplicate |
+| Teams | `/solutions/teams` | **Mapped to existing** | `/use-cases/real-estate-team` |
+| Brokerages | `/solutions/brokerages` | **Mapped to existing** | `/use-cases/brokerage` |
+| CRM | `/features/real-estate-crm` | **Not built** | Covered by `/what-is-a-real-estate-crm` and `/features/ai-powered-crm`. A third page would be the "ten interchangeable pages" the brief warns against |
+| Desk AI | "resolve current destination first" | **Resolved** | `/features/ai-powered-crm`. *Not* `/ai-assistant` — that is `<ProtectedRoute>` |
+| Lead scoring | `/features/lead-scoring` | Mapped to existing | `/features/ai-lead-scoring` |
+| Pipeline | `/features/pipeline` | **Deferred** | Capability is real (dnd-kit board, CAD totals) but has no page. Genuine gap, see §10 |
+| Conversations | `/features/conversations` | **Deferred** | Same |
+| Bilingual | `/features/bilingual-crm` | Mapped to existing | Unchanged |
+| Listing import | `/features/listing-import` | **Deferred** | Same |
+| Integrations | `/integrations` | Mapped to existing | Unchanged |
+| Pricing | `/pricing` | Preserved | Untouched — billing is the source of truth |
+| Demo | `/demo` | Preserved | Untouched |
+| Sign up / in | `/signup`, `/login` | Preserved | Untouched |
+| Resources | `/resources` | Mapped to existing | Now linked from the homepage |
+| Compare hub | `/compare` | **Published** | New. See §9 |
+| Comparison detail | existing | Preserved and corrected | Fabricated pricing removed, see §9 |
+| Roadmap | `/roadmap` | Mapped to existing | Unchanged |
+| About | `/about` | **Published** | New. Known facts only |
+| Contact | `/contact` | Mapped to existing | Unchanged |
+| Partners | `/partners` | Mapped to existing | Unchanged |
+| Onboarding | `/onboarding` | **Excluded from nav** | `<ProtectedRoute>` + `<RequireBilling>`. Not a public page |
+| Help | reuse existing | Mapped to existing | `/faq`, now in the nav and reachable from the footer |
+| Careers | `/careers` | Mapped to existing | Unchanged |
+| Legal / Canada | existing | Preserved | Wording untouched; grouped in the footer |
+| 404 | catch-all | Unchanged | — |
+| Lenders, Power Dialer, IDX site, Social Studio, Back Office, MCP server, ad services, Lofty Legends, Legends/LIVE, Leadership, News | — | **Not built** | The competitor map marks each "conditional draft — not established". None is established. No empty pages were created to fill menus |
+
+No route is published as a preview-only draft, because nothing was built that
+needed gating.
+
+## 8. Homepage, against the brief's twelve-step sequence
+
+| Step | State |
+|---|---|
+| 1 Hero | Existing, preserved with trial disclosure |
+| 2 Audience cards | **Added**, from the nav registry |
+| 3 Platform overview | Existing `ProductTour` |
+| 4 Desk AI panel | Existing `FeatureGrid` |
+| 5 Feature grid | Existing |
+| 6 How it works, navy | Existing `PipelinePreview` |
+| 7 Proof | Existing `CompareStrip` — product walkthrough, no customer stories, because we have none we can name |
+| 8 Canadian context | Existing prose, **now bilingual** (was ~700 hardcoded English words on the French homepage) |
+| 9 Resources | **Added** — three real articles, no invented dates or bylines |
+| 10 FAQ | **Added** — six questions, FAQPage schema built from the same array |
+| 11 Final CTA | Existing |
+| 12 Footer | Shared, registry-driven |
+
+## 9. Comparison pages — cannibalisation and corrections
+
+**17 comparison URLs in the sitemap for 9 vendors.** Three each for BoldTrail
+(`/compare/boldtrail`, `/switch-from-boldtrail`, `/vs/boldtrail`), Lofty
+(`/lofty-alternative`, `/vs/lofty`, `/switch-from-lofty`) and IXACT
+(`/vs/ixact`, `/switch-from-ixact`, `/blog/ixact-alternatives`); two each for
+Wise Agent and LionDesk. All self-canonical, all competing for the same query.
+
+`/compare` links **one page per vendor** rather than all 17. Consolidating the
+rest needs a recorded old→new redirect map and explicit sign-off, since these
+are indexed URLs — **not done here, recommended.**
+
+Fabricated competitor pricing removed while auditing them. The 2026-09-28 sweep
+had left an exact-string blocklist behind, which missed a whole page:
+
+- `/lofty-alternative` — `$700/mo`, `$1,499` setup, `$399` migration,
+  `$499 - $1,499`, `$10,188+ USD`, `~$13,850 CAD`, and an 85%/83% saving
+  derived from them, while the page's own table said Lofty's price is "Not
+  published"
+- `/blog/vs-kvcore` — kvCORE's whole price list, a `$15,080` three-year total
+  and `Savings over 3 years: $9,716`
+- the sitewide callout `Save up to 85% compared to BoldTrail, 45% vs Lofty`
+- `/switch-from-lofty` — a `$99-300+/mo` Lofty card
+- `/blog/best-crm-canada-2025`, `/blog/boomtown-alternative-canada` — kvCORE figures
+- `/compare/boldtrail` — `$499 value` attached to our own migration
+- our own `Brokerage: typically $1,200-2,500/month`, absent from `billing.ts`
+- two fabricated customer counts ("Join hundreds of Canadian agents")
+
+The guard now matches shape — any money figure within 55 characters of Lofty,
+BoldTrail or kvCORE, any nearby savings percentage, and our own customer count.
+Scoped to those three vendors only: IXACT, LionDesk, Wise Agent and Follow Up
+Boss do publish, and flagging sourced figures would train everyone to ignore it.
+
+## 10. Verification run
+
+| Check | Result |
+|---|---|
+| Vitest | 454 passing, 58 files |
+| `tsc --noEmit` | clean |
+| ESLint | 74 errors / 8 warnings — the `main` baseline, unchanged |
+| Prerender | 84/84 routes, unique titles |
+| Orphans | 0 |
+| axe (`/`, `/compare`, `/about`, `/pricing`, `/use-cases/solo-agent`) | **0 violations** |
+| Responsive, 320→1920 | 40/40 checks clean after one fix |
+| 200% zoom (720×450) | no horizontal overflow |
+| Keyboard | every disclosure trigger tabbable; Escape, focus return, outside click covered by tests |
+| Static shell links | 13 → 33 internal destinations per page |
+| Homepage static body | 704 → 1087 words |
+
+One responsive failure found and fixed: the footer's `X` social link rendered
+8×24, under WCAG 2.5.8's 24×24, at every width below 1024.
+
+## 11. Remaining blockers and recommendations
+
+**Needs a decision, not more work**
+
+1. **Comparison consolidation.** 17 URLs, 9 vendors. Needs an old→new redirect
+   map and sign-off before touching indexed pages.
+2. **The brief's violet palette.** Its tokens (`#5634D8` / `#10162E`) are read
+   off the competitor recording. The repo has a deliberate navy/terracotta
+   system from the 2026-04 rebrand, and the brief also says to preserve brand
+   assets. Structure was adopted; hue was not. Reversible either way.
+
+**Needs evidence we do not have**
+
+3. **Mobile app claims.** `softwareApplicationSchema` says
+   `"operatingSystem": "Web, iOS, Android"` and `/lofty-alternative` ticks
+   "Mobile App (iOS/Android)". The repo has a Capacitor wrapper; whether a
+   build is published to either store is unverified. **Flagged, not changed** —
+   it needs someone to check the store listings.
+4. **Customer stories.** Homepage step 7 stays a product walkthrough until
+   there is a permissioned one.
+
+**Real gaps, deliberately not filled with thin pages**
+
+5. `/features/pipeline`, `/features/conversations`, `/features/listing-import` —
+   all three capabilities ship; none has a page. Worth building properly.
+6. **French locale URLs.** FR still lives behind `?lang=fr`, which Vercel cannot
+   serve statically, so French pages are invisible to non-JS crawlers.
+   `/fr/crm-immobilier` is the one exception. Needs path-based locales.
+7. **Six pages carry 2025 market data.**
+
+**Not done, by instruction**
+
+8. **Not deployed.** The brief withholds deployment and billing/legal changes.
+   Pricing, trial terms and legal wording are untouched.
