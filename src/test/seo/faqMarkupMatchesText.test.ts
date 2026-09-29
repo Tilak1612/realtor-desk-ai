@@ -95,6 +95,11 @@ describe.skipIf(!built)("FAQPage markup matches visible text", () => {
   // Own walker rather than readdirSync({recursive:true}) — the Dirent overload
   // is not typed for it in this TS version, and parentPath is newer than the
   // Node types here.
+  //
+  // Called inside each test, NOT in the describe body. skipIf skips the tests
+  // but still RUNS the body during collection, so a readdirSync out here threw
+  // ENOENT in CI, where tests run before the build. A skipped suite that can
+  // still fail the run is worse than no suite.
   const collect = (dir: string, out: string[] = []): string[] => {
     for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const full = path.join(dir, e.name);
@@ -103,16 +108,15 @@ describe.skipIf(!built)("FAQPage markup matches visible text", () => {
     }
     return out;
   };
-  const pages = collect(DIST);
 
   it("finds prerendered pages to check", () => {
-    expect(pages.length).toBeGreaterThan(0);
+    expect(collect(DIST).length).toBeGreaterThan(0);
   });
 
   it("renders every marked-up question and answer into the page body", () => {
     const failures: string[] = [];
 
-    for (const file of pages) {
+    for (const file of collect(DIST)) {
       const html = fs.readFileSync(file, "utf8");
       const faqs = faqBlocks(html);
       if (!faqs.length) continue;
