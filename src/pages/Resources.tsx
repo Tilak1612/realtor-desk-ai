@@ -797,6 +797,21 @@ const Resources = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/use-cases/solo-agent" className="text-muted-foreground hover:text-primary transition-colors">
+                    Best CRM for a solo agent in Canada
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/compare/real-geeks-alternative" className="text-muted-foreground hover:text-primary transition-colors">
+                    Real Geeks alternative
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/compare/top-producer-alternative" className="text-muted-foreground hover:text-primary transition-colors">
+                    Top Producer alternative
+                  </Link>
+                </li>
+                <li>
                   <Link to="/pipeda-compliance" className="text-muted-foreground hover:text-primary transition-colors">
                     PIPEDA and your client data
                   </Link>

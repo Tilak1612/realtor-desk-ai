@@ -82,6 +82,9 @@ const AiLeadFollowUp = lazyWithRetry(() => import("./pages/features/AiLeadFollow
 const BilingualCrm = lazyWithRetry(() => import("./pages/features/BilingualCrm"));
 const CaslCompliantEmail = lazyWithRetry(() => import("./pages/features/CaslCompliantEmail"));
 const RealEstateCrmPricing = lazyWithRetry(() => import("./pages/resources/RealEstateCrmPricing"));
+const SoloAgent = lazyWithRetry(() => import("./pages/use-cases/SoloAgent"));
+const RealGeeksAlternative = lazyWithRetry(() => import("./pages/compare/RealGeeksAlternative"));
+const TopProducerAlternative = lazyWithRetry(() => import("./pages/compare/TopProducerAlternative"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -313,6 +316,9 @@ const App = () => (
           <Route path="/features/bilingual-crm" element={<BilingualCrm />} />
           <Route path="/features/casl-compliant-email" element={<CaslCompliantEmail />} />
           <Route path="/resources/real-estate-crm-pricing" element={<RealEstateCrmPricing />} />
+          <Route path="/use-cases/solo-agent" element={<SoloAgent />} />
+          <Route path="/compare/real-geeks-alternative" element={<RealGeeksAlternative />} />
+          <Route path="/compare/top-producer-alternative" element={<TopProducerAlternative />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />
