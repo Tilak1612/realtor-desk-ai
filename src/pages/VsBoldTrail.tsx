@@ -197,7 +197,7 @@ const VsBoldTrail = () => {
               <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">100% Free Migration</h3>
               <p className="text-sm text-muted-foreground">
-                We export your BoldTrail data and import it to your new account. $499 value, free.
+                We export your BoldTrail data and import it to your new account, at no charge.
               </p>
             </Card>
 

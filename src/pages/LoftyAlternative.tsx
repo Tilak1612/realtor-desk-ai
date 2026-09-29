@@ -14,10 +14,10 @@ const LoftyAlternative = () => {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How much cheaper is RealtorDesk AI than Lofty?",
+        "name": "How much cheaper is Realtor Desk than Lofty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "RealtorDesk AI starts at $149 CAD/month with no setup fees. Lofty does not publish prices; its pricing page asks you to request a quote-$1,499. Canadian agents save approximately 85% in the first year by switching to RealtorDesk AI."
+          "text": "We cannot tell you, and neither can anyone else. Realtor Desk is $149 CAD a month with no setup fee. Lofty does not publish prices \u2014 its pricing page asks you to request a quote \u2014 so there is no public figure to compare against."
         }
       },
       {
@@ -95,8 +95,8 @@ const LoftyAlternative = () => {
               #1 Lofty Alternative for Canadian Agents
             </Badge>
             <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
-              Save 85% vs Lofty:<br />
-              <span className="gradient-text">Built for Canadian Agents</span>
+              A Canadian alternative to Lofty<br />
+              <span className="gradient-text">with a price you can read</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Get bilingual EN/FR support, data hosted in Canada, and CREA DDF® integration (coming Q3 2026) at <strong>$149 CAD/month</strong> with no setup fee. Lofty quotes its pricing on request rather than publishing it.
@@ -119,37 +119,35 @@ const LoftyAlternative = () => {
         </div>
       </section>
 
-      {/* Price Comparison Hero Stats */}
+      {/* What a price comparison can honestly say.
+          This was three cards — "$10,188 First Year with Lofty" built from
+          $700/mo + a $1,499 setup fee + $399 migration, against "$1,788" for
+          us, concluding "$8,400 You Save". Verified 2026-09-28: lofty.com
+          publishes no prices at all. Every one of those competitor figures was
+          invented, the page said so itself two sections later ("Not
+          published"), and the saving derived from them was quoted as 85% in
+          the H1 and 83% on the card. A comparison that makes up the other
+          side's number is not a comparison. */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-center mb-12">The Real Cost Comparison</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 text-center border-2 border-primary">
-                <DollarSign className="w-12 h-12 mx-auto mb-4 text-primary" />
-                <div className="text-3xl font-bold mb-2 text-primary">$10,188</div>
-                <div className="text-sm text-muted-foreground mb-1">First Year with Lofty</div>
-                <div className="text-xs text-muted-foreground">
-                  $700/mo × 12 + $1,499 setup fee + $399 migration
-                </div>
-              </Card>
-              <Card className="p-6 text-center border-2 border-accent">
-                <DollarSign className="w-12 h-12 mx-auto mb-4 text-rd-terra-800" />
-                <div className="text-3xl font-bold mb-2 text-rd-terra-800">$1,788</div>
-                <div className="text-sm text-muted-foreground mb-1">First Year with RealtorDesk AI</div>
-                <div className="text-xs text-muted-foreground">
-                  $149/mo × 12 + $0 setup + $0 migration
-                </div>
-              </Card>
-              <Card className="p-6 text-center border-2 border-green-500">
-                <DollarSign className="w-12 h-12 mx-auto mb-4 text-green-700" />
-                <div className="text-3xl font-bold mb-2 text-green-700">$8,400</div>
-                <div className="text-sm text-muted-foreground mb-1">You Save in Year 1</div>
-                <div className="text-xs text-muted-foreground">
-                  83% cost savings by switching
-                </div>
-              </Card>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="mb-6">What a price comparison can honestly say</h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              Realtor Desk is <strong>$149 CAD a month</strong> for a single
+              agent and <strong>$299</strong> for the Team plan, with no setup
+              fee. Those numbers are on our pricing page and on the checkout.
+            </p>
+            <p className="text-muted-foreground mb-6">
+              Lofty does not publish prices. Its pricing page asks you to
+              request a quote, so anyone telling you what Lofty costs — us
+              included — is guessing. We are not going to invent a figure and
+              then calculate your savings from it.
+            </p>
+            <p className="text-muted-foreground">
+              What you can compare today is what each vendor is willing to tell
+              you before you talk to sales. Ask Lofty for a written quote
+              including setup and migration, then put it next to ours.
+            </p>
           </div>
         </div>
       </section>
@@ -184,17 +182,19 @@ const LoftyAlternative = () => {
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">Setup Fee</td>
                     <td className="text-center py-3 px-4"><Badge variant="outline" className="bg-green-500/10 text-green-800 border-green-500">$0</Badge></td>
-                    <td className="text-center py-3 px-4 text-muted-foreground">$499 - $1,499</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Not published</td>
                   </tr>
                   <tr className="border-b">
                     <td className="py-3 px-4">Free Data Migration</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
+                    {/* Was a red X. We have no source for what Lofty includes
+                        in a quote it does not publish. */}
+                    <td className="text-center py-3 px-4 text-muted-foreground">Not published</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">Free Trial</td>
                     <td className="text-center py-3 px-4 font-medium">14 days</td>
-                    <td className="text-center py-3 px-4"><X className="w-5 h-5 text-destructive mx-auto" /></td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Demo on request</td>
                   </tr>
                   <tr className="border-b bg-muted/30">
                     <td className="py-4 px-4 font-semibold" colSpan={3}>Canadian Market Features</td>
@@ -266,7 +266,7 @@ const LoftyAlternative = () => {
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">Mobile App (iOS/Android)</td>
+                    <td className="py-3 px-4">Mobile access</td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                     <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
                   </tr>
@@ -276,11 +276,12 @@ const LoftyAlternative = () => {
                     <td className="py-4 px-4 font-bold">Total First Year Cost</td>
                     <td className="text-center py-4 px-4">
                       <div className="text-2xl font-bold text-rd-terra-800">$1,788 CAD</div>
-                      <div className="text-xs text-muted-foreground">$149/mo × 12</div>
+                      <div className="text-xs text-muted-foreground">$149/mo × 12, no setup fee</div>
                     </td>
+                    {/* Was "$10,188+ USD / ~$13,850 CAD". Both invented. */}
                     <td className="text-center py-4 px-4">
-                      <div className="text-2xl font-bold text-destructive">$10,188+ USD</div>
-                      <div className="text-xs text-muted-foreground">~$13,850 CAD</div>
+                      <div className="text-2xl font-bold text-muted-foreground">Quote only</div>
+                      <div className="text-xs text-muted-foreground">No public price to total</div>
                     </td>
                   </tr>
                 </tfoot>
@@ -305,9 +306,9 @@ const LoftyAlternative = () => {
               </Card>
               <Card className="p-6">
                 <DollarSign className="w-10 h-10 mb-4 text-primary" />
-                <h3 className="text-xl font-bold mb-2">85% Cost Savings</h3>
+                <h3 className="text-xl font-bold mb-2">A price you can check</h3>
                 <p className="text-muted-foreground">
-                  Save over $8,000 in the first year alone. No setup fees, no hidden costs, no expensive add-ons. Transparent pricing that makes sense for Canadian agents.
+                  $149 CAD a month, no setup fee, no add-on tiers, and the number is published rather than quoted. You can see what you will pay before you speak to anyone.
                 </p>
               </Card>
               <Card className="p-6">
@@ -321,7 +322,7 @@ const LoftyAlternative = () => {
                 <Clock className="w-10 h-10 mb-4 text-primary" />
                 <h3 className="text-xl font-bold mb-2">Free Migration & Setup</h3>
                 <p className="text-muted-foreground">
-                  We'll migrate your data from Lofty for free and help you set up your account. No $1,499 setup fee, no $399 migration charge. Just seamless onboarding.
+                  We&rsquo;ll migrate your data from Lofty for free and help you set up your account. No setup fee and no migration charge on our side.
                 </p>
               </Card>
             </div>
@@ -336,9 +337,9 @@ const LoftyAlternative = () => {
             <h2 className="text-center mb-12">Frequently Asked Questions</h2>
             <div className="space-y-6">
               <Card className="p-6">
-                <h3 className="text-lg font-bold mb-2">How much cheaper is RealtorDesk AI than Lofty?</h3>
+                <h3 className="text-lg font-bold mb-2">How much cheaper is Realtor Desk than Lofty?</h3>
                 <p className="text-muted-foreground">
-                  RealtorDesk AI starts at $149 CAD/month with no setup fees. Lofty does not publish prices; its pricing page asks you to request a quote. Canadian agents save approximately 85% in the first year by switching to RealtorDesk AI.
+                  We cannot tell you, and neither can anyone else. Realtor Desk is $149 CAD a month with no setup fee. Lofty does not publish prices \u2014 its pricing page asks you to request a quote \u2014 so there is no public figure to compare against. Ask them for a written quote and put it next to ours.
                 </p>
               </Card>
               <Card className="p-6">
@@ -374,9 +375,9 @@ const LoftyAlternative = () => {
       <section className="section-padding bg-gradient-to-br from-primary/10 to-secondary/10">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="mb-6">Ready to Save 85% and Get More Features?</h2>
+            <h2 className="mb-6">See it before you decide</h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join hundreds of Canadian agents who switched from Lofty to RealtorDesk AI. Start your free 14-day trial today—cancel anytime before you're charged.
+              Start a free 14-day trial and work a week of your own leads in it. A card is collected up front and nothing is charged before day 14, so you can cancel before you pay anything.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild className="group">

@@ -200,61 +200,35 @@ const VsKvCore = () => {
 
             <h2>Pricing Comparison: What You Actually Pay</h2>
 
-            <h3>kvCORE Pricing Breakdown (CAD Conversion)</h3>
-            <ul>
-              <li><strong>Starter:</strong> $299 USD = approximately $405 CAD/month</li>
-              <li><strong>Pro:</strong> $499 USD = approximately $675 CAD/month</li>
-              <li><strong>Hidden costs:</strong> Setup fees ($500-1,500), contract length (12-36 months), add-on features</li>
-              <li><strong>Total first-year cost (solo agent):</strong> $5,360-8,600 CAD</li>
-            </ul>
+            {/* This section was a full kvCORE price list — "Starter: $299 USD =
+                approximately $405 CAD/month", "Pro: $499 USD", setup fees of
+                "$500-1,500", a "$5,360-8,600" first year, a three-year table
+                totalling "$15,080", and "Savings over 3 years: $9,716 CAD".
+                Verified 2026-09-28: kvCORE (now BoldTrail) publishes no prices
+                at all. Every figure on their side of that table was invented,
+                and so was every saving derived from it. Our own "Brokerage:
+                typically $1,200-2,500/month" went too — it is not in
+                src/config/billing.ts, where the Brokerage plan is quoted. */}
 
-            <h3>RealtorDesk AI Pricing Breakdown (CAD)</h3>
-            <ul>
-              <li><strong>Agent Plan:</strong> $149 CAD/month (no contract)</li>
-              <li><strong>Team Plan:</strong> $299 CAD/month (up to 5 agents)</li>
-              <li><strong>Brokerage:</strong> Custom pricing (typically $1,200-2,500/month)</li>
-              <li><strong>No hidden fees:</strong> No setup fees, no per-user charges, no surprise add-ons</li>
-              <li><strong>14-day free trial:</strong> Cancel anytime before you're charged</li>
-              <li><strong>Total first-year cost (solo agent):</strong> $1,788 CAD</li>
-            </ul>
-
-            <h3>3-Year Total Cost of Ownership</h3>
-            <table className="comparison-table">
-              <thead>
-                <tr>
-                  <th>Platform</th>
-                  <th>Year 1</th>
-                  <th>Year 2</th>
-                  <th>Year 3</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>kvCORE</td>
-                  <td>$5,360</td>
-                  <td>$4,860</td>
-                  <td>$4,860</td>
-                  <td>$15,080</td>
-                </tr>
-                <tr>
-                  <td>RealtorDesk AI</td>
-                  <td>$1,788</td>
-                  <td>$1,788</td>
-                  <td>$1,788</td>
-                  <td>$5,364</td>
-                </tr>
-                <tr className="font-bold">
-                  <td>Your Savings</td>
-                  <td>$3,572</td>
-                  <td>$3,072</td>
-                  <td>$3,072</td>
-                  <td>$9,716</td>
-                </tr>
-              </tbody>
-            </table>
+            <h3>What each vendor will tell you before you talk to sales</h3>
             <p>
-              <strong>Savings over 3 years: $9,716 CAD</strong> — enough to invest in marketing, training, or additional team members.
+              kvCORE does not publish prices. Its site asks you to book a demo,
+              and the number arrives in a quote afterwards. We are not going to
+              guess at it and then calculate your savings from our own guess.
+            </p>
+            <p>
+              Realtor Desk publishes: <strong>$149 CAD a month</strong> for a
+              single agent, <strong>$299</strong> for the Team plan, no setup
+              fee, no per-user charge, no contract. The Brokerage plan is quoted
+              because the scope genuinely varies. A 14-day trial collects a card
+              up front and charges nothing before day 14.
+            </p>
+            <p>
+              That gives you one thing you can act on today: ask kvCORE for a
+              written quote covering the subscription, the setup fee, the
+              contract term and any add-ons, then put it beside ours. If the
+              quote comes with a term commitment, the number that matters is the
+              total over that term, not the monthly headline.
             </p>
 
             <h2>Honest Assessment: Pros & Cons</h2>

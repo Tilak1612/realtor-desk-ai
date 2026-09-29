@@ -135,15 +135,22 @@ const resources = {
         market: { h1: "AI-Powered Property Insights (Coming Soon)", p1: "AI-assisted property analysis using local market trends, comparable sales, and neighbourhood data to support your CMA process", sub1: "Faster, data-backed CMAs for your clients", h2: "Off-Market Opportunity Detection", p2: "AI predicts which homeowners are likely to sell 3-6 months before listing", sub2: "Get exclusive listings before competitors", h3: "Real-Time Market Reports", p3: "Automated comparative market analysis with absorption rates, days-on-market trends, price-per-sqft evolution", sub3: "Position yourself as the local market expert" },
         transaction: { h1: "Intelligent Timeline Prediction", p1: "AI forecasts closing dates based on transaction type, parties involved, and historical performance", sub1: "Designed to accelerate your closing timeline with fewer missed steps", h2: "Automated Vendor Coordination", p2: "Smart scheduling of inspectors, appraisers, lawyers with availability optimization", sub2: "Deadlines and follow-ups tracked in one place", h3: "Risk Detection Engine", p3: "Predictive alerts for financing issues, inspection problems, and buyer/seller cold feet", sub3: "See every deal's next step in one pipeline view" },
         marketing: { h1: "AI Content Generation", p1: "Automated creation of property descriptions, social posts, email campaigns, and neighborhood guides", sub1: "Draft listing copy and social posts from the listing itself", h2: "Intelligent Distribution", p2: "AI determines optimal posting times, channels, and audience segments for each piece of content", sub2: "Schedule posts across your channels from one place", h3: "Performance Analytics", p3: "ROI tracking by content type, platform, and campaign with improvement recommendations", sub3: "See which sources actually produce your closings" },
+        // Rewritten 2026-09-29. This block described a native app that does
+        // not exist: "Available on iOS & Android", "Download from App Store or
+        // Google Play", plus Offline Mode and Voice Commands. There is no ios/
+        // or android/ project, no store listing, and the roadmap FAQ in this
+        // same file says a native app is not planned for 2026. Nothing renders
+        // it today, but it shipped in the JS bundle and was one import away
+        // from being true-looking copy on a real page.
         mobile: {
-          title: "Work From Anywhere with Our Mobile App",
-          subtitle: "Manage your entire real estate business from your phone. Respond to leads, schedule showings, and close deals on the go.",
-          appStores: "Available on iOS & Android",
-          f1title: "Full CRM Access", f1desc: "View and manage all contacts, leads, and deals from your phone",
-          f2title: "Push Notifications", f2desc: "Get instant alerts for new leads, messages, and deal updates",
-          f3title: "Offline Mode", f3desc: "Access your data even without internet connection",
-          f4title: "Voice Commands", f4desc: "Add notes and create tasks hands-free while driving",
-          download: "Download from App Store or Google Play"
+          title: "Works on your phone, in the browser you already have",
+          subtitle: "Realtor Desk is a responsive web app. Open it on a phone and you get the same contacts, conversations and pipeline, with nothing to install.",
+          appStores: "No app to install \u2014 open it in Safari or Chrome",
+          f1title: "The whole CRM", f1desc: "Contacts, leads, conversations and deals, the same as on desktop",
+          f2title: "Add it to your home screen", f2desc: "Save it like an app if you want the icon, from your browser's share menu",
+          f3title: "Nothing to update", f3desc: "No app store review, no version drift between your phone and your desk",
+          f4title: "Native app", f4desc: "Not planned for 2026 \u2014 see the roadmap rather than a coming-soon badge",
+          download: "Open realtordesk.ai on your phone"
         },
         comparison: {
           title: "How We Compare to Leading CRMs",
@@ -166,7 +173,7 @@ const resources = {
           boldtrailCost: "Not published — quoted on request",
           loftyCost: "Not published — quoted on request",
           ourCost: "$149/mo CAD, $0 setup",
-          saveCallout: "Save up to 85% compared to BoldTrail, 45% vs Lofty"
+          saveCallout: "Neither publishes a price, so we cannot tell you the difference \u2014 ours is $149/mo CAD"
         },
         banner: {
           trial: "🎉 14 Days Free Trial - Start Today!",
@@ -433,6 +440,15 @@ const resources = {
       // exist in both locales (enforced by the shape parity test at
       // src/i18n/__tests__/shape.test.ts).
       landing: {
+        audience: {
+          heading: "A desk for the way you work",
+          body: "Three honest starting points. Each one says what Realtor Desk does for that shape of business \u2014 and, where it is not the right fit yet, says that instead.",
+          cta: "Read the guide"
+        },
+        resources: {
+          all: "All guides",
+          read: "Read it"
+        },
         hero: {
           badge: "Now in public beta · 14-day free trial",
           headline1: "Every lead in one place.",
@@ -607,6 +623,68 @@ const resources = {
         closingBody: "Import your BoldTrail leads in one click. 14-day trial. We'll match your remaining annual contract.",
         closingCtaPrimary: "Start your switch",
         closingCtaSecondary: "Talk to a Canadian"
+      },
+      siteNav: {
+        whoWeHelp: "Who we help",
+        solutions: "Solutions",
+        pricing: "Pricing",
+        resources: "Resources",
+        company: "Company",
+        agents: "Agents",
+        agentsDesc: "One agent, every lead in one list, and a next step waiting each morning.",
+        teams: "Teams",
+        teamsDesc: "What a team should demand from a CRM, and where we are not there yet.",
+        brokerages: "Brokerages",
+        brokeragesDesc: "A brokerage buyer guide: FINTRAC records, seats, offboarding.",
+        panePlatform: "Platform",
+        panePlatformDesc: "The CRM itself",
+        paneDeskAi: "Desk AI",
+        paneDeskAiDesc: "Where AI helps",
+        paneConnections: "Connections",
+        paneConnectionsDesc: "Listings and other tools",
+        platformOverview: "Platform overview",
+        platformOverviewDesc: "Everything the product does, on one page.",
+        pipeline: "Pipeline",
+        pipelineDesc: "Drag deals between your own stages; totals in Canadian dollars.",
+        conversations: "Conversations",
+        conversationsDesc: "Calls, email, SMS and notes on one timeline per client.",
+        listingImport: "Listing import",
+        listingImportDesc: "Realtor.ca and MLS import today; native DDF\u00ae is Q3 2026.",
+        leadScoring: "Lead scoring",
+        leadScoringDesc: "A 0\u2013100 score per lead, with the reasons shown rather than hidden.",
+        followUp: "Follow-up",
+        followUpDesc: "A suggested next action and a time to do it. You send it.",
+        whatIsCrm: "What is a real estate CRM?",
+        whatIsCrmDesc: "Start here if you are still working from a spreadsheet.",
+        aiCrm: "AI in the CRM",
+        aiCrmDesc: "The specific places AI does work, and where it stops.",
+        aiGuide: "AI for Canadian agents",
+        aiGuideDesc: "A guide to what these tools can and cannot do here.",
+        caslEmail: "CASL-aware email",
+        caslEmailDesc: "Consent recorded per contact; sending is refused without it.",
+        integrations: "Integrations",
+        integrationsDesc: "What connects today, per capability rather than per vendor.",
+        bilingual: "Bilingual workflows",
+        bilingualDesc: "Interface and client email in French, set per contact.",
+        roadmap: "Roadmap",
+        roadmapDesc: "Live, partial and planned \u2014 including CREA DDF\u00ae.",
+        guides: "Guides & articles",
+        guidesDesc: "Written for the Canadian market, dated and sourced.",
+        howItWorks: "How it works",
+        howItWorksDesc: "Lead in, context reviewed, next step chosen.",
+        compare: "Compare",
+        compareDesc: "Nine comparisons, and which vendors publish a price.",
+        compareAll: "All comparisons",
+        faq: "FAQ",
+        faqDesc: "Pricing, data residency, CASL and the trial.",
+        about: "About",
+        aboutDesc: "Who builds Realtor Desk, and where.",
+        contact: "Contact",
+        contactDesc: "Reach a person, not a queue number.",
+        partners: "Partners",
+        partnersDesc: "The referral program and its actual terms.",
+        careers: "Careers",
+        careersDesc: "Open roles, or an honest note when there are none."
       },
       marketingHeader: {
         navFeatures: "Features",
@@ -3404,14 +3482,14 @@ const resources = {
         transaction: { h1: "Prédiction Intelligente des Délais", p1: "L'IA prévoit les dates de clôture selon le type de transaction, les parties impliquées et les performances historiques", sub1: "Conçu pour accélérer vos délais de clôture avec moins d'étapes manquées", h2: "Coordination Automatisée des Fournisseurs", p2: "Planification intelligente des inspecteurs, évaluateurs et avocats avec optimisation des disponibilités", sub2: "Échéances et relances suivies au même endroit", h3: "Moteur de Détection des Risques", p3: "Alertes prédictives pour problèmes de financement, d'inspection et hésitations acheteur/vendeur", sub3: "Voyez la prochaine étape de chaque transaction dans une seule vue" },
         marketing: { h1: "Génération de Contenu par IA", p1: "Création automatisée de descriptions de propriétés, publications sociales, campagnes courriel et guides de quartier", sub1: "Rédigez fiches et publications à partir de l'inscription elle-même", h2: "Distribution Intelligente", p2: "L'IA détermine les horaires de publication optimaux, les canaux et segments d'audience pour chaque contenu", sub2: "Planifiez vos publications sur vos canaux depuis un seul endroit", h3: "Analyses de Performance", p3: "Suivi du ROI par type de contenu, plateforme et campagne avec recommandations d'amélioration", sub3: "Voyez quelles sources produisent réellement vos transactions" },
         mobile: {
-          title: "Travaillez de N'importe Où avec Notre Application Mobile",
-          subtitle: "Gérez toute votre entreprise immobilière depuis votre téléphone. Répondez aux prospects, planifiez des visites et concluez des ventes en déplacement.",
-          appStores: "Disponible sur iOS et Android",
-          f1title: "Accès CRM Complet", f1desc: "Consultez et gérez tous vos contacts, prospects et transactions depuis votre téléphone",
-          f2title: "Notifications Push", f2desc: "Recevez des alertes instantanées pour les nouveaux prospects, messages et mises à jour",
-          f3title: "Mode Hors Ligne", f3desc: "Accédez à vos données même sans connexion internet",
-          f4title: "Commandes Vocales", f4desc: "Ajoutez des notes et créez des tâches en mains libres en conduisant",
-          download: "Téléchargez depuis l'App Store ou Google Play"
+          title: "Fonctionne sur votre téléphone, dans le navigateur que vous avez déjà",
+          subtitle: "Realtor Desk est une application web adaptative. Ouvrez-la sur un téléphone et vous retrouvez les mêmes contacts, conversations et pipeline, sans rien installer.",
+          appStores: "Aucune application à installer \u2014 ouvrez-la dans Safari ou Chrome",
+          f1title: "Tout le CRM", f1desc: "Contacts, prospects, conversations et transactions, comme sur ordinateur",
+          f2title: "Ajoutez-la à l’écran d’accueil", f2desc: "Enregistrez-la comme une application depuis le menu de partage de votre navigateur",
+          f3title: "Rien à mettre à jour", f3desc: "Pas de révision en boutique, pas d’écart de version entre votre téléphone et votre bureau",
+          f4title: "Application native", f4desc: "Non prévue pour 2026 \u2014 consultez la feuille de route plutôt qu’une pastille « à venir »",
+          download: "Ouvrez realtordesk.ai sur votre téléphone"
         },
         comparison: {
           title: "Comment Nous Comparons aux Principaux CRM",
@@ -3434,7 +3512,7 @@ const resources = {
           boldtrailCost: "5\u00a0988\u00a0$/an + frais d'installation de 999\u00a0$",
           loftyCost: "1\u00a0788\u00a0$ à 3\u00a0588\u00a0$/an par utilisateur",
           ourCost: "999\u00a0$/an (Membre Fondateur), 0\u00a0$ d'installation",
-          saveCallout: "Économisez jusqu'à 85\u00a0% par rapport à BoldTrail, 45\u00a0% vs Lofty"
+          saveCallout: "Ni l’un ni l’autre ne publie ses prix, donc l’écart reste invisible \u2014 le nôtre est de 149\u00a0$ CA/mois"
         },
         banner: {
           trial: "🎉 Essai Gratuit de 14 Jours - Commencez Aujourd'hui!",
@@ -3698,6 +3776,15 @@ const resources = {
       // Keep the exact same key shape as en.landing so the parity test
       // stays green and drop-in replacement is trivial.
       landing: {
+        audience: {
+          heading: "Un bureau adapt\u00e9 \u00e0 votre fa\u00e7on de travailler",
+          body: "Trois points de d\u00e9part honn\u00eates. Chacun dit ce que Realtor Desk fait pour ce type d\u2019entreprise \u2014 et, l\u00e0 o\u00f9 ce n\u2019est pas encore le bon choix, le dit aussi.",
+          cta: "Lire le guide"
+        },
+        resources: {
+          all: "Tous les guides",
+          read: "Lire"
+        },
         hero: {
           badge: "Maintenant en bêta publique · Essai gratuit de 14 jours",
           headline1: "Chaque prospect, au même endroit.",
@@ -3872,6 +3959,68 @@ const resources = {
         closingBody: "Importez vos prospects BoldTrail en un clic. Essai de 14 jours. Nous égalons le reste de votre contrat annuel.",
         closingCtaPrimary: "Commencez votre transition",
         closingCtaSecondary: "Parler à une équipe canadienne"
+      },
+      siteNav: {
+        whoWeHelp: "Pour qui",
+        solutions: "Solutions",
+        pricing: "Tarifs",
+        resources: "Ressources",
+        company: "Entreprise",
+        agents: "Courtiers",
+        agentsDesc: "Un courtier, tous les prospects dans une liste, et une prochaine action chaque matin.",
+        teams: "\u00c9quipes",
+        teamsDesc: "Ce qu\u2019une \u00e9quipe doit exiger d\u2019un CRM, et o\u00f9 nous n\u2019y sommes pas encore.",
+        brokerages: "Agences",
+        brokeragesDesc: "Guide d\u2019achat pour agences : registres CANAFE, si\u00e8ges, d\u00e9parts.",
+        panePlatform: "Plateforme",
+        panePlatformDesc: "Le CRM lui-m\u00eame",
+        paneDeskAi: "Desk AI",
+        paneDeskAiDesc: "O\u00f9 l\u2019IA aide",
+        paneConnections: "Connexions",
+        paneConnectionsDesc: "Inscriptions et autres outils",
+        platformOverview: "Vue d\u2019ensemble",
+        platformOverviewDesc: "Tout ce que fait le produit, sur une seule page.",
+        pipeline: "Pipeline",
+        pipelineDesc: "Glissez vos transactions entre vos \u00e9tapes; totaux en dollars canadiens.",
+        conversations: "Conversations",
+        conversationsDesc: "Appels, courriels, SMS et notes sur une seule chronologie par client.",
+        listingImport: "Import de fiches",
+        listingImportDesc: "Import Realtor.ca et MLS aujourd\u2019hui; le SDD\u00ae natif est pr\u00e9vu au T3 2026.",
+        leadScoring: "Notation des prospects",
+        leadScoringDesc: "Une note de 0 \u00e0 100 par prospect, avec le d\u00e9tail visible.",
+        followUp: "Relances",
+        followUpDesc: "Une prochaine action propos\u00e9e et un moment pour l\u2019effectuer. Vous l\u2019envoyez.",
+        whatIsCrm: "Qu\u2019est-ce qu\u2019un CRM immobilier ?",
+        whatIsCrmDesc: "Commencez ici si vous travaillez encore dans un chiffrier.",
+        aiCrm: "L\u2019IA dans le CRM",
+        aiCrmDesc: "Les endroits pr\u00e9cis o\u00f9 l\u2019IA travaille, et o\u00f9 elle s\u2019arr\u00eate.",
+        aiGuide: "L\u2019IA pour les courtiers canadiens",
+        aiGuideDesc: "Ce que ces outils peuvent et ne peuvent pas faire ici.",
+        caslEmail: "Courriel conforme \u00e0 la LCAP",
+        caslEmailDesc: "Consentement enregistr\u00e9 par contact; sans lui, l\u2019envoi est refus\u00e9.",
+        integrations: "Int\u00e9grations",
+        integrationsDesc: "Ce qui se connecte aujourd\u2019hui, par capacit\u00e9 plut\u00f4t que par fournisseur.",
+        bilingual: "Flux bilingues",
+        bilingualDesc: "Interface et courriels clients en fran\u00e7ais, r\u00e9gl\u00e9s par contact.",
+        roadmap: "Feuille de route",
+        roadmapDesc: "En ligne, partiel et pr\u00e9vu \u2014 dont le SDD\u00ae de l\u2019ACI.",
+        guides: "Guides et articles",
+        guidesDesc: "\u00c9crits pour le march\u00e9 canadien, dat\u00e9s et sourc\u00e9s.",
+        howItWorks: "Fonctionnement",
+        howItWorksDesc: "Le prospect arrive, le contexte est revu, l\u2019action est choisie.",
+        compare: "Comparer",
+        compareDesc: "Neuf comparatifs, et qui publie ses prix.",
+        compareAll: "Tous les comparatifs",
+        faq: "FAQ",
+        faqDesc: "Tarifs, h\u00e9bergement des donn\u00e9es, LCAP et essai.",
+        about: "\u00c0 propos",
+        aboutDesc: "Qui con\u00e7oit Realtor Desk, et o\u00f9.",
+        contact: "Nous joindre",
+        contactDesc: "Parlez \u00e0 une personne, pas \u00e0 un num\u00e9ro de file.",
+        partners: "Partenaires",
+        partnersDesc: "Le programme de r\u00e9f\u00e9rence et ses conditions r\u00e9elles.",
+        careers: "Carri\u00e8res",
+        careersDesc: "Postes ouverts, ou une note honn\u00eate quand il n\u2019y en a pas."
       },
       marketingHeader: {
         navFeatures: "Fonctionnalités",

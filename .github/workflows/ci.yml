@@ -36,8 +36,20 @@ jobs:
       - name: Test
         run: npm test
 
+      # build:seo, not build. Vercel's buildCommand in vercel.json is
+      # `npm run build:seo`, so CI running plain `vite build` meant the
+      # prerenderer — the thing that produces every crawlable page — was never
+      # exercised before production. A crash or a silent drop in it reached the
+      # live site with a green CI.
       - name: Build
-        run: npm run build
+        run: npm run build:seo
+
+      # Tests that can only run against prerendered output: the FAQPage markup
+      # must match the text the static HTML actually contains. Crawlers read
+      # that HTML, and the mismatch is invisible in the browser because React
+      # renders the accordion either way.
+      - name: Post-build checks
+        run: npm run test:postbuild
 
   schema:
     name: schema drift

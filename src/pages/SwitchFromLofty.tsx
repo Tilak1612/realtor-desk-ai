@@ -187,13 +187,16 @@ const SwitchFromLofty = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="p-8 border-destructive/20">
               <Badge variant="outline" className="mb-4">Lofty</Badge>
-              <div className="text-3xl font-bold text-destructive mb-4">$99-300+/mo</div>
+              {/* Was "$99-300+/mo" with an invented tier breakdown. Lofty
+                  publishes no prices (verified 2026-09-28), so the figures and
+                  the "unpredictable budget" conclusion drawn from them were
+                  both ours, not theirs. */}
+              <div className="text-3xl font-bold text-muted-foreground mb-4">Quoted on request</div>
               <ul className="space-y-2 mb-6">
-                <li className="text-sm text-muted-foreground">• Base: $99-199/month</li>
-                <li className="text-sm text-muted-foreground">• + Call/text charges</li>
-                <li className="text-sm text-muted-foreground">• + Premium features</li>
-                <li className="text-sm text-muted-foreground">• + Overages</li>
-                <li className="text-sm text-destructive font-semibold">= Unpredictable budget</li>
+                <li className="text-sm text-muted-foreground">• No published price list</li>
+                <li className="text-sm text-muted-foreground">• Sales conversation before a number</li>
+                <li className="text-sm text-muted-foreground">• Ask for setup and add-ons in writing</li>
+                <li className="text-sm text-muted-foreground font-semibold">= You will not know until you ask</li>
               </ul>
             </Card>
 

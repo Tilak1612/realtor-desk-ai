@@ -52,6 +52,17 @@ const repoRoot = path.join(__dirname, '..');
 const distDir = path.join(repoRoot, 'dist');
 const SITE = 'https://www.realtordesk.ai';
 
+// The one value both the nav registry and the @/content modules import. Read
+// once, from its own config, and injected into every sandbox below — without
+// it those modules throw on evaluation and their copy silently vanishes from
+// the prerendered HTML while still rendering fine in the browser.
+const CAL_ROUTE = (() => {
+  const booking = fs.readFileSync(path.join(repoRoot, 'src/config/booking.ts'), 'utf8');
+  const m = booking.match(/export const CAL_ROUTE\s*=\s*["']([^"']+)["']/);
+  if (!m) throw new Error('prerender: CAL_ROUTE not found in src/config/booking.ts');
+  return m[1];
+})();
+
 /* ------------------------------------------------------------------ *
  * 1. Routes to prerender — read from the sitemap so they never drift. *
  * ------------------------------------------------------------------ */
@@ -290,6 +301,119 @@ function extractSeoBlock(src) {
 // Top-level `const NAME = [...]` / `{...}` literals from the page, so schema
 // built as FAQS.map(...) can be evaluated without duplicating the copy into
 // the <SEO> call. Anything referencing an import throws and is skipped.
+// Declarations pulled in from a page's `@/content/*` module.
+//
+// The brief asks for new prose to live outside JSX, so pages now import their
+// FAQ and card copy from src/content/*.ts. That broke schema lifting silently:
+// the homepage's structuredData built its FAQPage from HOME_FAQS(isFr), an
+// imported function, so the expression threw here and the page shipped with
+// BreadcrumbList only — no FAQPage, and none of the answers in the static HTML.
+//
+// Resolving these imports is narrow on purpose: only "@/content/..." specifiers
+// (never node_modules, never arbitrary source), and only top-level `export
+// const` / `export function` declarations, type annotations stripped. Anything
+// that fails to evaluate is dropped, exactly like a local const.
+function importedContentPrelude(src) {
+  const out = [];
+  for (const m of src.matchAll(/import\s*\{([^}]+)\}\s*from\s*["']@\/content\/([\w./-]+)["']/g)) {
+    const file = path.join(repoRoot, 'src/content', m[2].replace(/\.[jt]sx?$/, '') + '.ts');
+    if (!fs.existsSync(file)) continue;
+    const mod = fs.readFileSync(file, 'utf8');
+    const wanted = m[1]
+      .split(',')
+      .map((n) => n.trim().split(/\s+as\s+/).pop().trim())
+      .filter(Boolean);
+
+    for (const name of wanted) {
+      // `export function NAME(...) { ... }` — brace-matched, then stripped of
+      // the parameter and return type annotations TypeScript adds.
+      const fnAt = mod.search(new RegExp(`export\\s+function\\s+${name}\\b`));
+      if (fnAt !== -1) {
+        // Find the BODY brace, not the first one after the parameter list.
+        // `function F(x: boolean): { heading: string }` puts an object literal
+        // in the return-type annotation, so "first { after )" matched the type
+        // and produced a declaration that threw — which is how the homepage's
+        // prose silently vanished from the static HTML while still rendering in
+        // the browser. Brace-match each candidate and take the first whose
+        // contents contain a `return`; a type annotation never does.
+        const open = (() => {
+          let at = mod.indexOf(')', fnAt);
+          for (;;) {
+            const cand = mod.indexOf('{', at);
+            if (cand === -1) return -1;
+            let d = 0, q = null, close = -1;
+            for (let i = cand; i < mod.length; i++) {
+              const c = mod[i];
+              if (q) { if (c === q && mod[i - 1] !== '\\') q = null; continue; }
+              if (c === '"' || c === "'" || c === '`') { q = c; continue; }
+              if (c === '{') d++;
+              else if (c === '}') { d--; if (d === 0) { close = i; break; } }
+            }
+            if (close === -1) return -1;
+            if (/\breturn\b/.test(mod.slice(cand, close))) return cand;
+            at = close + 1;
+          }
+        })();
+        if (open === -1) continue;
+        let depth = 0, quote = null, end = -1;
+        for (let i = open; i < mod.length; i++) {
+          const c = mod[i];
+          if (quote) { if (c === quote && mod[i - 1] !== '\\') quote = null; continue; }
+          if (c === '"' || c === "'" || c === '`') { quote = c; continue; }
+          if (c === '{') depth++;
+          else if (c === '}') { depth--; if (depth === 0) { end = i; break; } }
+        }
+        if (end !== -1) {
+          const sig = mod.slice(fnAt, open);
+          const params = sig.slice(sig.indexOf('(') + 1, sig.lastIndexOf(')'));
+          const plain = params
+            .split(',')
+            .map((a) => a.split(':')[0].trim())
+            .filter(Boolean)
+            .join(', ');
+          out.push(`function ${name}(${plain}) ${mod.slice(open, end + 1)}`);
+          // A content module that exports HOME_FAQS(isFr) hands back its copy
+          // only when called, so the declaration alone leaves the strings
+          // unreachable to the prose extractor — which is how the homepage
+          // ended up emitting FAQPage markup for answers the static HTML did
+          // not contain. Materialise the English result under a marked name.
+          const arity = plain ? plain.split(',').length : 0;
+          if (arity <= 1) out.push(`const ${name}__CONTENT = ${name}(${arity ? 'false' : ''});`);
+        }
+        continue;
+      }
+
+      // `export const NAME = [...] | {...}`
+      const cm = mod.match(new RegExp(`export\\s+const\\s+${name}\\s*(?::[^=]+)?=\\s*([\\[{])`));
+      if (!cm) continue;
+      const open = mod.indexOf(cm[1], cm.index);
+      const closeCh = cm[1] === '[' ? ']' : '}';
+      let depth = 0, quote = null, end = -1;
+      for (let i = open; i < mod.length; i++) {
+        const c = mod[i];
+        if (quote) { if (c === quote && mod[i - 1] !== '\\') quote = null; continue; }
+        if (c === '"' || c === "'" || c === '`') { quote = c; continue; }
+        if (c === cm[1]) depth++;
+        else if (c === closeCh) { depth--; if (depth === 0) { end = i; break; } }
+      }
+      if (end !== -1) out.push(`const ${name} = ${mod.slice(open, end + 1)};`);
+    }
+  }
+
+  // Same incremental guard the local prelude uses: one unusable declaration
+  // must not cost the page its whole schema.
+  const usable = [];
+  for (const decl of out) {
+    try {
+      new Function('t', 'CAL_ROUTE', `${usable.join('\n')}\n${decl}`)(sandboxT, CAL_ROUTE);
+      usable.push(decl);
+    } catch {
+      /* skip */
+    }
+  }
+  return usable.join('\n');
+}
+
 function localConstPrelude(src) {
   const out = [];
   // Indented too: /faq keeps its questions in a `const faqs = [...]` declared
@@ -322,13 +446,19 @@ function localConstPrelude(src) {
   const usable = [];
   for (const decl of out) {
     try {
-      new Function('t', `${usable.join('\n')}\n${decl}`)(sandboxT);
+      new Function('t', 'CAL_ROUTE', `${usable.join('\n')}\n${decl}`)(sandboxT, CAL_ROUTE);
       usable.push(decl);
     } catch {
       /* skip */
     }
   }
-  return usable.join('\n');
+  // Locale flag for pages that branch their schema on language. Every route in
+  // sitemap.xml is the English canonical — the French variant lives behind a
+  // query string that Vercel cannot serve statically — so English is the
+  // correct value here, not a convenient default. Declared first so a page's
+  // own `isFr` shadows it if one is ever hoisted into the prelude.
+  const localeFlags = `const isFr = false; const isEn = true; const CAL_ROUTE = ${JSON.stringify(CAL_ROUTE)};`;
+  return [localeFlags, importedContentPrelude(src), usable.join('\n')].filter(Boolean).join('\n');
 }
 
 function extractStructuredData(block, src = '') {
@@ -489,6 +619,10 @@ function extractDataStrings(src, { limit = 60 } = {}) {
   // declaration referenced again after its own declaration. The prose filter
   // below still throws away anything that is not human-readable copy.
   const mapped = names.filter((n) => {
+    // Copy lifted from an imported @/content module is included on sight: the
+    // page referenced it once, at the import, and the "used twice" heuristic
+    // below is about local consts that are declared and then rendered.
+    if (n.endsWith('__CONTENT')) return true;
     const uses = [...src.matchAll(new RegExp(`\\b${n}\\b`, 'g'))].length;
     return uses > 1;
   });
@@ -587,22 +721,78 @@ const esc = (s) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
-// Mirrors the real <Footer> link set so the shell's links match the rendered page.
-const FOOTER_LINKS = [
-  ['/features', 'Features'],
-  ['/pricing', 'Pricing'],
-  ['/how-it-works', 'How it works'],
-  ['/integrations', 'Integrations'],
-  ['/canadian-market', 'Built for Canada'],
-  ['/resources', 'Resources'],
-  ['/roadmap', 'Roadmap'],
-  ['/faq', 'FAQ'],
-  ['/partners', 'Partners'],
-  ['/careers', 'Careers'],
-  ['/contact', 'Contact'],
-  ['/privacy-policy', 'Privacy policy'],
-  ['/terms-of-service', 'Terms of service'],
-];
+// The shell's site nav, read from the SAME registry the React header and
+// footer use: src/config/siteNav.ts.
+//
+// This list used to be a hand-written copy of the footer, and it was the copy
+// that mattered most — a crawler with no JS sees only this, so the shell's
+// links ARE the site's internal link graph. It had drifted: no audience pages,
+// no comparisons, no /about, no compliance pages. Thirteen links where the
+// real footer has thirty-two.
+//
+// Parsed rather than imported because this is a Node script and the registry
+// is TypeScript. The parse is narrow — top-level `const NAME = [...]` array
+// literals of flat objects — and if it yields nothing the build fails loudly
+// instead of quietly shipping a shell with no navigation.
+function readNavRegistry() {
+  const src = fs.readFileSync(path.join(repoRoot, 'src/config/siteNav.ts'), 'utf8');
+
+  // CAL_ROUTE comes from the booking config rather than being hardcoded here
+  // — hardcoding "/demo" is how a second copy starts.
+
+  // Strip type annotations on the declarations we want, then evaluate each in
+  // order so later arrays can reference earlier ones (FOOTER_COLUMNS reuses
+  // WHO_WE_HELP). `satisfies`/interfaces are left behind by the filter.
+  const decls = [];
+  for (const m of src.matchAll(/^(?:export\s+)?const\s+([A-Z][A-Z0-9_]*)\s*(?::[^=]+?)?=\s*\[/gm)) {
+    const open = src.indexOf('[', m.index + m[0].length - 1);
+    let depth = 0, quote = null, end = -1;
+    for (let i = open; i < src.length; i++) {
+      const c = src[i];
+      if (quote) { if (c === quote && src[i - 1] !== '\\') quote = null; continue; }
+      if (c === '"' || c === "'" || c === '`') { quote = c; continue; }
+      if (c === '[') depth++;
+      else if (c === ']') { depth--; if (depth === 0) { end = i; break; } }
+    }
+    if (end !== -1) decls.push([m[1], src.slice(open, end + 1)]);
+  }
+
+  const scope = { CAL_ROUTE };
+  for (const [name, literal] of decls) {
+    try {
+      const keys = Object.keys(scope);
+      scope[name] = new Function(...keys, `return (${literal});`)(...keys.map((k) => scope[k]));
+    } catch {
+      /* references something we did not capture — skip it */
+    }
+  }
+
+  const seen = new Map();
+  const add = (item) => {
+    if (!item || typeof item.to !== 'string') return;
+    if (item.external || !item.to.startsWith('/')) return;
+    if (!seen.has(item.to)) seen.set(item.to, item.label);
+  };
+  for (const group of scope.PRIMARY_NAV ?? []) {
+    if (group.to) add(group);
+    for (const i of group.items ?? []) add(i);
+    for (const p of group.panes ?? []) {
+      add(p);
+      for (const i of p.items ?? []) add(i);
+    }
+  }
+  for (const col of scope.FOOTER_COLUMNS ?? []) for (const i of col.items ?? []) add(i);
+
+  if (seen.size < 20) {
+    throw new Error(
+      `prerender: only parsed ${seen.size} links from siteNav.ts — the registry's shape changed ` +
+        'and readNavRegistry() needs updating. Refusing to prerender a site with no navigation.',
+    );
+  }
+  return [...seen.entries()];
+}
+
+const FOOTER_LINKS = readNavRegistry();
 
 function breadcrumbs(route, title) {
   const items = [{ name: 'Home', item: SITE + '/' }];

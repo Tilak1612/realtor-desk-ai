@@ -379,7 +379,7 @@ const BestCRMCanada2025 = () => {
                 </tr>
                 <tr className="border-t">
                   <td>kvCORE</td>
-                  <td className="text-right">$4,860 CAD</td>
+                  <td className="text-right text-muted-foreground">Not published</td>
                 </tr>
                 <tr className="border-t">
                   <td>Follow Up Boss</td>

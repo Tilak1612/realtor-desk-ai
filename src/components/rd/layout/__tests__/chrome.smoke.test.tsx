@@ -5,6 +5,7 @@ import { renderWithProviders } from "@/test/render";
 import { Sidebar } from "../Sidebar";
 import { TopNav } from "../TopNav";
 import { MarketingHeader } from "../MarketingHeader";
+import { PRIMARY_NAV } from "@/config/siteNav";
 
 // Redesign chrome smoke: guards Phase I bilingual wiring. If a t() key
 // is ever renamed without updating the fallback, or if the EN/FR toggle
@@ -190,19 +191,43 @@ describe("MarketingHeader mobile drawer", () => {
     expect(found.className).toMatch(/z-\[60\]/);
   });
 
-  it("exposes the full 9-item toolbar (5 nav links + EN/FR + Book a demo + Sign in + Start free trial)", async () => {
+  it("exposes every registry group and its links, plus EN/FR and the three actions", async () => {
     const user = userEvent.setup();
     renderWithProviders(<MarketingHeader />);
     await user.click(screen.getByRole("button", { name: "Open menu" }));
+    await screen.findByRole("dialog");
 
-    // Nav links rendered inside the drawer. Desktop nav is also mounted
-    // (hidden via md:hidden but still in the DOM), so there can be ≥1.
-    const featuresLinks = await screen.findAllByRole("link", { name: "Features" });
-    expect(featuresLinks.length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "How it works" }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "Pricing" }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "Compare" }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "Resources" }).length).toBeGreaterThan(0);
+    // The drawer is registry-driven, so assert against the registry rather
+    // than a hardcoded list — that is the property worth pinning. A group with
+    // a `to` is a plain link; the rest are <details> whose summary carries the
+    // label and whose children are the links.
+    for (const g of PRIMARY_NAV) {
+      if (g.to) {
+        expect(
+          screen.getAllByRole("link", { name: g.label }).length,
+          `drawer is missing the "${g.label}" link`,
+        ).toBeGreaterThan(0);
+        continue;
+      }
+      const summaries = screen.getAllByText(g.label, { selector: "summary" });
+      expect(summaries.length, `drawer is missing the "${g.label}" group`).toBeGreaterThan(0);
+
+      // Open it and confirm its children are reachable. <details> children are
+      // in the DOM either way, so this checks the disclosure actually toggles.
+      const details = summaries[0].closest("details") as HTMLDetailsElement;
+      expect(details.open, `"${g.label}" should start collapsed`).toBe(false);
+      await user.click(summaries[0]);
+      expect(details.open, `"${g.label}" should expand on click`).toBe(true);
+
+      const children = [...(g.items ?? []), ...(g.panes ?? []).flatMap((p) => p.items)];
+      for (const child of children) {
+        expect(
+          details.querySelector(`a[href="${child.to}"]`),
+          `"${g.label}" should link to ${child.to}`,
+        ).toBeTruthy();
+      }
+    }
+
     // EN/FR toggle is inside the drawer in addition to the (hidden-on-mobile) bar.
     expect(screen.getAllByRole("button", { name: "EN" }).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByRole("button", { name: "FR" }).length).toBeGreaterThanOrEqual(1);

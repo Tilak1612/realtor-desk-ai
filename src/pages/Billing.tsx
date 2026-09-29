@@ -321,7 +321,7 @@ const Billing = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 mb-6">
-                  {[t('billing.features.unlimitedContacts', 'Unlimited contacts & leads'), t('billing.features.aiCrm', 'AI-powered predictive CRM'), t('billing.features.chatbot', '24/7 AI chatbot'), t('billing.features.emailSms', 'Email & SMS automation'), t('billing.features.mobileApp', 'Mobile app included')].map((feature) => (
+                  {[t('billing.features.unlimitedContacts', 'Unlimited contacts & leads'), t('billing.features.aiCrm', 'AI-powered predictive CRM'), t('billing.features.chatbot', '24/7 AI chatbot'), t('billing.features.emailSms', 'Email & SMS automation'), t('billing.features.mobileApp', 'Works in any mobile browser')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>

@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:postbuild": "vitest run src/test/seo/faqMarkupMatchesText.test.ts",
     "test:watch": "vitest",
     "gen:favicons": "node scripts/generate-favicons.mjs",
     "typecheck": "tsc -p tsconfig.app.json --noEmit",

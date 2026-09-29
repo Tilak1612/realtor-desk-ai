@@ -21,7 +21,12 @@ const read = (rel: string) => readFileSync(join(process.cwd(), rel), "utf8");
 const SURFACES = [
   ["header + mobile menu", "src/components/rd/layout/MarketingHeader.tsx"],
   ["marketing footer", "src/components/rd/marketing/MarketingFooter.tsx"],
-  ["legacy footer", "src/components/Footer.tsx"],
+  // The legacy footer was a second real Book-a-Demo surface until the two
+  // public shells were merged. src/components/Footer.tsx is now a shim that
+  // renders MarketingFooter, so it holds no CTA of its own and asserting
+  // against its source would only be testing the shim. The surface itself is
+  // still covered by the MarketingFooter row above — verified that it keeps
+  // CAL_ROUTE and the book_demo analytics event through the merge.
   ["homepage hero + closing CTA", "src/pages/rd/Home.tsx"],
   ["pricing", "src/pages/rd/Pricing.tsx"],
 ] as const;

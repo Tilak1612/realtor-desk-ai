@@ -9,6 +9,7 @@ import blogImage from "@/assets/blog-edmonton-market.jpg";
 import blogImageAvif from "@/assets/blog-edmonton-market.avif";
 import blogImageWebp from "@/assets/blog-edmonton-market.webp";
 import { Picture } from "@/components/Picture";
+import { ContentVintage } from "@/components/marketing/ContentVintage";
 
 const EdmontonMarket2025 = () => {
   return (
@@ -66,6 +67,7 @@ const EdmontonMarket2025 = () => {
               Edmonton Real Estate Market 2025
             </h1>
 
+            <ContentVintage published="2026-01-09" className="mb-6" />
             <p className="text-xl text-muted-foreground">
               With average home prices at $407,800, Edmonton offers exceptional value compared to Toronto and Vancouver—yet provides comparable quality of life and economic opportunity.
             </p>

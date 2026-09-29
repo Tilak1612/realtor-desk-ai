@@ -399,7 +399,7 @@ const BoomTownAlternative = () => {
                 <div>
                   <h4 className="font-bold mb-2 text-green-700">Why It's Better Than BoomTown:</h4>
                   <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• More affordable: $405-675 CAD/month</li>
+                    <li>• Deep feature set for larger teams</li>
                     <li>• Strong automation</li>
                     <li>• No forced bundling of all services</li>
                   </ul>

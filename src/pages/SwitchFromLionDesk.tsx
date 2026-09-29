@@ -47,7 +47,7 @@ const SwitchFromLionDesk = () => {
     { feature: "Email & SMS Automation", rdai: "✓ Yes", liondesk: "✓ Yes" },
     { feature: "Free Migration", rdai: "✓ Yes", liondesk: "N/A" },
     { feature: "Free Onboarding", rdai: "✓ Yes", liondesk: "✗ No" },
-    { feature: "Mobile App", rdai: "✓ iOS & Android", liondesk: "✓ Yes" },
+    { feature: "Mobile access", rdai: "Responsive web", liondesk: "Native apps" },
     { feature: "Deal Pipeline", rdai: "✓ Yes", liondesk: "✓ Yes" },
     { feature: "CAD Billing", rdai: "✓ Pay in CAD", liondesk: "✗ USD only" },
   ];
@@ -231,7 +231,7 @@ const SwitchFromLionDesk = () => {
           <Badge className="mb-4">⏰ LionDesk Shuts Down September 2025</Badge>
           <h2 className="mb-6">Don't Wait. Switch Today.</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Join hundreds of Canadian agents who have already made the switch. Start your 14-day free trial and experience a CRM that was actually built for you.
+            Start a 14-day free trial and move a week of your own work into it. A card is collected up front and nothing is charged before day 14.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup">
