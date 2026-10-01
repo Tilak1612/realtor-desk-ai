@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, Bot, User, Sparkles, Trash2 } from "lucide-react";
+import { Send, User, Sparkles, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import AppLayout from "@/components/layout/AppLayout";
 import { useTranslation } from "react-i18next";
+import { AgentAvatar, AgentFigure } from "@/components/AgentMascot";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -147,7 +148,7 @@ const AIAssistant = () => {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-semibold flex items-center gap-2">
-              <Bot className="w-5 h-5 text-primary" />
+              <AgentAvatar size="lg" className="h-10 w-10" />
               {t('ai.title', 'Realtor AI Assistant')}
             </h1>
             <p className="text-sm text-muted-foreground">
@@ -189,7 +190,7 @@ const AIAssistant = () => {
           {messages.length === 0 ? (
             <div className="h-full flex items-center justify-center text-center">
               <div>
-                <Bot className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+                <AgentFigure className="mx-auto mb-4 h-36 w-auto" />
                 <h3 className="text-lg font-semibold mb-2">{t('ai.welcomeTitle', 'Welcome to Realtor AI Assistant')}</h3>
                 <p className="text-sm text-muted-foreground max-w-md">
                   {t('ai.welcomeDesc', 'I can help you manage contacts, analyze deals, create tasks, and provide real estate insights. Try one of the quick actions above!')}
@@ -205,13 +206,13 @@ const AIAssistant = () => {
                     message.role === 'assistant' ? 'flex-row' : 'flex-row-reverse'
                   }`}
                 >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden ${
                     message.role === 'assistant' 
-                      ? 'bg-primary text-primary-foreground' 
+                      ? 'bg-white ring-1 ring-border' 
                       : 'bg-muted'
                   }`}>
                     {message.role === 'assistant' ? (
-                      <Bot className="w-5 h-5" />
+                      <AgentAvatar className="h-full w-full" />
                     ) : (
                       <User className="w-5 h-5" />
                     )}
@@ -233,8 +234,8 @@ const AIAssistant = () => {
               ))}
               {loading && (
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-primary-foreground" />
+                  <div className="w-8 h-8 overflow-hidden rounded-full bg-white ring-1 ring-border flex items-center justify-center">
+                    <AgentAvatar className="h-full w-full" />
                   </div>
                   <div className="bg-muted rounded-lg p-3">
                     <div className="flex gap-1">
