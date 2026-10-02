@@ -54,7 +54,7 @@ const FintracCompliance = () => {
     },
     {
       q: "What happens if I don't comply with FINTRAC?",
-      a: "FINTRAC can impose administrative monetary penalties (AMPs) of up to $1 million for individuals and $2 million for entities for compliance failures. FINTRAC conducts examinations of real estate businesses regularly. Non-compliance is not a minor risk."
+      a: "FINTRAC can impose administrative monetary penalties and examines real estate businesses. The amounts and the examination process are set by FINTRAC and have been changing, so read its current published policy at fintrac-canafe.canada.ca rather than a figure on a software vendor's page. Non-compliance is not a minor risk."
     },
     {
       q: "Does RealtorDesk AI replace my brokerage's compliance program?",
@@ -77,7 +77,7 @@ const FintracCompliance = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="FINTRAC Compliance for Canadian Realtors | RealtorDesk AI"
+        title="FINTRAC Obligations for Canadian Realtors | Realtor Desk"
         description="FINTRAC obligations for Canadian real estate agents: client ID, record keeping and suspicious transaction reporting, and how Realtor Desk supports them."
         keywords="FINTRAC compliance real estate, FINTRAC obligations realtors Canada, real estate compliance Canada, FINTRAC record keeping, Canadian realtor compliance, AML real estate Canada"
         canonicalUrl="https://www.realtordesk.ai/fintrac-compliance"
@@ -141,7 +141,7 @@ const FintracCompliance = () => {
                 This means you have legally binding obligations every time you work with a buyer, seller, or landlord. These are not optional — FINTRAC conducts regular examinations and can impose significant penalties for non-compliance.
               </p>
               <p className="text-muted-foreground">
-                No other real estate CRM in Canada has been purpose-built to support FINTRAC record-keeping. RealtorDesk AI is changing that.
+                Realtor Desk is not a FINTRAC compliance system. It keeps timestamped notes and attached documents on each contact, which can hold identity records you collect. Your brokerage's written compliance program remains the compliance program.
               </p>
             </div>
             <div className="space-y-4">
@@ -155,9 +155,9 @@ const FintracCompliance = () => {
               <Card className="p-4 border-primary/20">
                 <div className="flex items-center gap-3 mb-2">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="font-semibold">Penalties up to $1M for individuals</span>
+                  <span className="font-semibold">Penalties and examinations</span>
                 </div>
-                <p className="text-sm text-muted-foreground pl-8">FINTRAC administrative monetary penalties are significant. Compliance is not optional.</p>
+                <p className="text-sm text-muted-foreground pl-8">FINTRAC can impose administrative monetary penalties. Check its current published schedule for the amounts.</p>
               </Card>
               <Card className="p-4 border-primary/20">
                 <div className="flex items-center gap-3 mb-2">
@@ -183,7 +183,7 @@ const FintracCompliance = () => {
         <div className="container-custom">
           <h2 className="text-center mb-4">Your FINTRAC Obligations — and How RealtorDesk AI Supports Them</h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
-            RealtorDesk AI is the only Canadian real estate CRM designed to support your FINTRAC record-keeping obligations.
+            What Realtor Desk can and cannot do for each obligation, stated plainly. It helps you keep records; it does not run a FINTRAC workflow.
           </p>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {obligations.map((item, i) => (
@@ -211,10 +211,10 @@ const FintracCompliance = () => {
       <section className="section-padding">
         <div className="container-custom max-w-3xl">
           <Card className="p-8 border-2 border-primary/30 text-center">
-            <Badge className="mb-4">Canada-Exclusive Feature</Badge>
-            <h2 className="mb-4">No Other CRM Does This for Canadian Agents</h2>
+            <Badge className="mb-4">Scope</Badge>
+            <h2 className="mb-4">A record-keeping aid, not a compliance system</h2>
             <p className="text-muted-foreground mb-6">
-              Follow Up Boss, Lofty, kvCORE, and Wise Agent are all US platforms with zero FINTRAC awareness. AgentLocator and IXACT Contact are Canadian-built but have no compliance record-keeping features. RealtorDesk AI is the only CRM designed to support Canadian real estate compliance obligations — FINTRAC, PIPEDA, and CASL — in a single platform.
+              There is no FINTRAC workflow in Realtor Desk today: no structured identity fields, no reporting, no risk assessment, no verification step. What it gives you is a single place to keep timestamped notes and documents against each client. Your brokerage's written compliance program, and whoever administers it, remain responsible for the obligations above.
             </p>
             <Link to="/signup">
               <Button size="lg" className="btn-gradient">
@@ -251,9 +251,9 @@ const FintracCompliance = () => {
       {/* CTA */}
       <section className="section-padding bg-gradient-to-br from-primary/10 to-accent/5">
         <div className="container-custom max-w-3xl text-center">
-          <h2 className="mb-6">Build Your Compliance Records in RealtorDesk AI</h2>
+          <h2 className="mb-6">Keep your client records in one place</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Start your 14-day free trial and experience the only Canadian real estate CRM designed to support FINTRAC, PIPEDA, and CASL compliance in one place.
+            Start a 14-day free trial and keep notes and documents on every contact. Realtor Desk helps you keep records; it does not make you compliant with FINTRAC, PIPEDA or CASL.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup">

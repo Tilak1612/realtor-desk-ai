@@ -115,8 +115,8 @@ const Demo = () => {
     <div className="min-h-screen">
       <SEO
         canonicalUrl="https://www.realtordesk.ai/demo"
-        title="Book a Free Demo | RealtorDesk AI"
-        description="Book a free demo of RealtorDesk AI. See AI lead generation, virtual tour integration, and real estate marketing tools in action."
+        title="Book a Free Demo | Realtor Desk"
+        description="Book a free Realtor Desk demo. See lead scoring, the deal pipeline, one conversation timeline per client and French per contact, and ask about your own workflow."
         keywords="real estate crm demo, ai crm demo, realtor software demo, real estate lead generation software demo"
       />
       <Navbar />

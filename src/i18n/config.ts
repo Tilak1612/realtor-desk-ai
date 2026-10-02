@@ -421,9 +421,9 @@ const resources = {
       },
       canadianMarket: {
         hero: {
-          title: "The Only AI Platform Built Specifically for",
-          titleGradient: "Canadian Real Estate",
-          subtitle: "CREA DDF®, bilingual AI, and provincial compliance - not an afterthought, but the foundation"
+          title: "A real estate CRM built for",
+          titleGradient: "Canadian agents",
+          subtitle: "French per contact, data stored in Canada, CAD pricing and a consent record for CASL. Native CREA DDF® sync is not live; Realtor.ca import is."
         }
       },
       resources: {
@@ -567,7 +567,7 @@ const resources = {
         }
       },
       compareBoldtrail: {
-        seoTitle: "Realtor Desk vs BoldTrail — the Canadian-first alternative",
+        seoTitle: "Realtor Desk vs BoldTrail: a Canadian Comparison",
         seoDesc: "BoldTrail is a great platform — for KW agents in Dallas. If you're selling pre-construction in Mississauga or condos in Le Plateau, here's how we compare.",
         eyebrow: "Realtor Desk vs BoldTrail",
         headline1: "One's built for the US.",
@@ -702,7 +702,7 @@ const resources = {
         drawerTitle: "Realtor Desk navigation"
       },
       pricingRd: {
-        seoTitle: "Pricing — Realtor Desk",
+        seoTitle: "Real Estate CRM Pricing in CAD | Realtor Desk",
         seoDesc: "One price in CAD. Bilingual EN/FR and Realtor.ca import today, CREA DDF® on the Q3 2026 roadmap. 14-day trial; a card is required to start.",
         eyebrow: "Pricing in CAD",
         heading1: "One price.",
@@ -802,7 +802,7 @@ const resources = {
         copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
       },
       featuresRd: {
-        seoTitle: "Features — Realtor Desk",
+        seoTitle: "CRM Features for Canadian Real Estate Agents | Realtor Desk",
         seoDesc: "Lead scoring, a drag-and-drop pipeline, one conversation timeline per client and Realtor.ca listing import — bilingual, hosted in Canada, priced in CAD.",
         badge: "What Desk does",
         heroH1Pre: "Everything about a",
@@ -869,20 +869,20 @@ const resources = {
       },
       pageSeo: {
         howItWorksTitle: "How Realtor Desk Works | Setup in 10 Minutes",
-        howItWorksDesc: "Get started with Realtor Desk in about 10 minutes. Simple CRM setup, AI tools for Realtors, lead generation configuration, and virtual tour integration.",
+        howItWorksDesc: "Get started with Realtor Desk: create your account, import your contacts from a CSV, and work your first lead with a guided checklist.",
         resourcesTitle: "Resources for Canadian Real Estate Agents",
         resourcesDesc: "Expert guides on AI tools, lead generation, compliance, and marketing for Canadian real estate agents using Realtor Desk.",
         loginTitle: "Sign in — Realtor Desk",
         loginDesc: "Sign in to your Realtor Desk workspace. Canadian-hosted, PIPEDA-aware, bilingual EN/FR.",
         signupTitle: "Start your 14-day free trial — Realtor Desk",
         signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, Realtor.ca import, CAD pricing. A card is required to start; you're not charged until the trial ends.",
-        integrationsTitle: "Integrations — Realtor Desk",
+        integrationsTitle: "Real Estate CRM Integrations | Realtor Desk",
         integrationsDesc: "Integrate Realtor Desk via Zapier, Make, and n8n (5,000+ apps). Native connectors on the roadmap. CREA DDF® coming Q3 2026.",
         roadmapTitle: "Product Roadmap — Realtor Desk",
         roadmapDesc: "See what's shipping next. Voice AI, CREA DDF, Centris sync, and more on the Realtor Desk roadmap for 2026.",
         contactTitle: "Contact — Realtor Desk",
         contactDesc: "Get in touch with the Realtor Desk team. Canadian support, bilingual EN/FR, average reply in under 24 hours.",
-        faqTitle: "FAQ — Realtor Desk",
+        faqTitle: "Realtor Desk FAQ: Pricing, Trial, French and Data",
         faqDesc: "Answers to common questions about Realtor Desk: pricing in CAD, PIPEDA/CASL compliance, CREA DDF, bilingual support, cancellation.",
         unsubscribeTitle: "Unsubscribe — Realtor Desk",
         unsubscribeDesc: "Manage your Realtor Desk email preferences or unsubscribe. CASL-compliant one-click opt-out.",
@@ -3760,9 +3760,9 @@ const resources = {
       },
       canadianMarket: {
         hero: {
-          title: "La Seule Plateforme IA Construite Spécifiquement pour l'",
-          titleGradient: "Immobilier Canadien",
-          subtitle: "CREA DDF®, IA bilingue et conformité provinciale - pas une réflexion après coup, mais la fondation"
+          title: "Un CRM immobilier conçu pour les",
+          titleGradient: "courtiers canadiens",
+          subtitle: "Le français par contact, des données stockées au Canada, des tarifs en dollars canadiens et un registre de consentement pour la LCAP. La synchronisation SDD® de l'ACI n'est pas active; l'import Realtor.ca l'est."
         }
       },
       resources: {
@@ -3903,7 +3903,7 @@ const resources = {
         }
       },
       compareBoldtrail: {
-        seoTitle: "Realtor Desk vs BoldTrail — l'alternative canadienne d'abord",
+        seoTitle: "Realtor Desk vs BoldTrail : comparatif canadien",
         seoDesc: "BoldTrail est une excellente plateforme — pour les agents KW à Dallas. Si vous vendez de la pré-construction à Mississauga ou des condos au Plateau, voici comment nous nous comparons.",
         eyebrow: "Realtor Desk vs BoldTrail",
         headline1: "L'une est conçue pour les États-Unis.",
@@ -4038,7 +4038,7 @@ const resources = {
         drawerTitle: "Navigation Realtor Desk"
       },
       pricingRd: {
-        seoTitle: "Tarifs — Realtor Desk",
+        seoTitle: "Tarifs d'un CRM immobilier en $ CA | Realtor Desk",
         seoDesc: "Un seul prix. Toutes les fonctionnalités. Bilingue, conforme LPRPDE, compatible SDD de l'ACI. Tarifs en CAD, essai de 14 jours, annulez avant la fin de l'essai.",
         eyebrow: "Tarifs en CAD",
         heading1: "Un seul prix.",
@@ -4138,7 +4138,7 @@ const resources = {
         copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
       },
       featuresRd: {
-        seoTitle: "Fonctionnalités — Realtor Desk",
+        seoTitle: "Fonctionnalités CRM pour courtiers canadiens | Realtor Desk",
         seoDesc: "Un CRM bilingue pour l'immobilier canadien : notation des prospects de 0 à 100, pipeline glisser-déposer, une seule chronologie par client, import de fiches Realtor.ca et rapports en CAD. Données hébergées au Canada.",
         badge: "Ce que fait Desk",
         heroH1Pre: "Tout sur un",
@@ -4205,20 +4205,20 @@ const resources = {
       },
       pageSeo: {
         howItWorksTitle: "Fonctionnement de Realtor Desk | Installation en 10 minutes",
-        howItWorksDesc: "Commencez avec Realtor Desk en environ 10 minutes. Configuration CRM simple, outils IA pour courtiers, configuration de génération de prospects, et intégration de visites virtuelles.",
+        howItWorksDesc: "Commencez avec Realtor Desk : créez votre compte, importez vos contacts par CSV et traitez votre premier prospect avec une liste de départ guidée.",
         resourcesTitle: "Ressources | Guides pour courtiers immobiliers canadiens",
         resourcesDesc: "Guides d'experts sur les outils IA, la génération de prospects, la conformité et le marketing pour les courtiers immobiliers canadiens qui utilisent Realtor Desk.",
         loginTitle: "Se connecter — Realtor Desk",
         loginDesc: "Connectez-vous à votre espace de travail Realtor Desk. Hébergé au Canada, conforme LPRPDE, bilingue FR/EN.",
         signupTitle: "Commencez votre essai gratuit de 14 jours — Realtor Desk",
         signupDesc: "Commencez votre essai gratuit de 14 jours de Realtor Desk. Réponse IA aux prospects, agent 24/7, compatible SDD de l'ACI, tarifs en CAD. Annulez avant la fin de l'essai.",
-        integrationsTitle: "Intégrations — Realtor Desk",
+        integrationsTitle: "Intégrations du CRM immobilier | Realtor Desk",
         integrationsDesc: "Intégrez Realtor Desk via Zapier, Make et n8n (5 000+ applications). Connecteurs natifs sur la feuille de route. SDD de l'ACI prévu pour le T3 2026.",
         roadmapTitle: "Feuille de route du produit — Realtor Desk",
         roadmapDesc: "Découvrez ce qui arrive. IA vocale, SDD de l'ACI, synchronisation Centris et plus encore sur la feuille de route Realtor Desk 2026.",
         contactTitle: "Contact — Realtor Desk",
         contactDesc: "Contactez l'équipe Realtor Desk. Soutien canadien, bilingue FR/EN, réponse moyenne en moins de 24 heures.",
-        faqTitle: "Foire aux questions — Realtor Desk",
+        faqTitle: "FAQ Realtor Desk : tarifs, essai, français et données",
         faqDesc: "Réponses aux questions fréquentes sur Realtor Desk : tarifs en CAD, conformité LPRPDE/LCAP, SDD de l'ACI, soutien bilingue, annulation.",
         unsubscribeTitle: "Se désabonner — Realtor Desk",
         unsubscribeDesc: "Gérez vos préférences de courriel Realtor Desk ou désabonnez-vous. Retrait en un clic conforme à la LCAP.",
