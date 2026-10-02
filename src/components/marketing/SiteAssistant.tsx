@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { X, Send } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { AgentAvatar } from "@/components/AgentMascot";
 
 // Public marketing-site assistant widget. Answers are rendered as PLAIN TEXT
 // (whitespace-pre-line) — the endpoint strips markdown, so no parser is needed.
@@ -102,9 +103,14 @@ const SiteAssistant = () => {
            sideways only. The label is aria-hidden because the button's own
            aria-label already says "Ask Agent" -- without that a screen reader
            announces the name twice. */
-        className="fixed bottom-5 right-5 z-40 inline-flex h-14 max-w-[calc(100vw-2.5rem)] items-center gap-2.5 rounded-full bg-primary px-5 text-primary-foreground shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="fixed bottom-5 right-5 z-40 inline-flex h-14 max-w-[calc(100vw-2.5rem)] items-center gap-2.5 rounded-full bg-primary pl-1.5 pr-5 text-primary-foreground shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
-        <MessageCircle aria-hidden="true" className="h-6 w-6 flex-shrink-0" />
+        {/* The mascot sits on a white chip so the white-and-navy robot keeps its
+            own colours against the navy pill; bg-white, not a theme token, so the
+            chip stays white in dark mode too. */}
+        <span className="grid h-11 w-11 flex-shrink-0 place-items-center overflow-hidden rounded-full bg-white">
+          <AgentAvatar size="lg" className="h-full w-full" />
+        </span>
         <span aria-hidden="true" className="text-sm font-semibold whitespace-nowrap">
           Ask Agent
         </span>
@@ -119,9 +125,14 @@ const SiteAssistant = () => {
       className="fixed bottom-5 right-5 z-40 flex h-[32rem] w-[min(24rem,calc(100vw-2.5rem))] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div>
-          <p className="text-sm font-semibold text-foreground">Ask Agent</p>
-          <p className="text-xs text-muted-foreground">About Realtor Desk</p>
+        <div className="flex items-center gap-2.5">
+          <span className="grid h-9 w-9 flex-shrink-0 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-border">
+            <AgentAvatar className="h-full w-full" />
+          </span>
+          <div>
+            <p className="text-sm font-semibold text-foreground">Ask Agent</p>
+            <p className="text-xs text-muted-foreground">About Realtor Desk</p>
+          </div>
         </div>
         <button
           onClick={() => setOpen(false)}

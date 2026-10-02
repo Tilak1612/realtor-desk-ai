@@ -10,7 +10,6 @@ import {
   Users,
   Briefcase,
   CheckSquare,
-  Bot,
   Mail,
   Calendar,
   TrendingUp,
@@ -26,6 +25,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { RDMark } from "@/components/rd/Logo";
+import { AgentNavIcon } from "@/components/AgentMascot";
 
 interface DashboardSidebarProps {
   trialDaysLeft?: number;
@@ -90,7 +90,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
   ];
 
   const advancedItems = [
-    { icon: Bot, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
+    { icon: AgentNavIcon, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
     { icon: Zap, label: t('app.sidebar.automations', 'Automations'), path: "/automations" },
     { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
     { icon: MapPin, label: t('app.sidebar.market'), path: "/market" },
