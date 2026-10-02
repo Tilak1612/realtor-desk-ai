@@ -8,13 +8,17 @@ import { SEO } from "@/components/SEO";
 // /compare — the hub the brief asks for. There was none: nine vendors' worth
 // of comparison pages and no page that listed them.
 //
-// ONE DESTINATION PER VENDOR, DELIBERATELY. The audit behind this page found
-// 17 comparison URLs in the sitemap covering 9 vendors — three each for
-// BoldTrail, Lofty and IXACT, all self-canonical, all competing for the same
-// query. A hub that linked all 17 would concentrate internal links on the
-// duplication instead of resolving it. Consolidating the extras needs a
-// recorded old-to-new redirect map and is not done here; the inventory is in
-// docs/REDESIGN-PHASE-0-AUDIT.md.
+// ONE DESTINATION PER VENDOR, DELIBERATELY. The sitemap holds 18 comparison URLs
+// for 9 vendors: four each for BoldTrail and Lofty, three for IXACT. They are
+// NOT duplicates. Measured 2026-09-29 (six-word shingle overlap, REDESIGN-PHASE-0-
+// AUDIT.md section 13), the highest content containment between any pair is 0.26
+// against a near-duplicate threshold around 0.45, and the titles target
+// different intents (alternative, versus, migration, research).
+//
+// The hub links one page per vendor because a hub is a short list, not because
+// the others are redundant. Whether any pair trades positions on one query is a
+// Search Console question this repo cannot answer; consolidate only pairs that
+// show it.
 //
 // No comparison table on this page. Every factual cell belongs on the vendor
 // page that can date and source it, and a summary table here would be a second
@@ -66,7 +70,7 @@ const RIVALS: Rival[] = [
   {
     vendor: "LionDesk",
     to: "/switch-from-liondesk",
-    fit: "Anyone moving off LionDesk after its migration into Lone Wolf Relationships.",
+    fit: "Anyone moving off LionDesk, which Lone Wolf discontinued in September 2025.",
     pricing: "published",
   },
   {

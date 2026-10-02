@@ -2,330 +2,227 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { CheckCircle, X, AlertTriangle, ArrowRight, Users, Brain, Globe, Shield, Zap, MessageSquare } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
+
+// /switch-from-liondesk — rewritten 2026-10-02.
+//
+// The previous version was written while LionDesk was still running and was
+// never updated: "LionDesk Shutting Down — September 2025", "migrate before the
+// deadline", "don't wait until the last minute", a countdown badge, and a
+// feature table scoring a product that no longer exists. That is more than a
+// year stale, and it also promised "free data migration done by our team within
+// 24 hours" and "30 days of free hands-on support", neither of which the product
+// or the repo supports.
+//
+// WHAT THIS PAGE CLAIMS, AND WHERE EACH CLAIM COMES FROM
+//   LionDesk's end                 Inman, 2025-05-16 (linked). The vendor
+//                                  announced the wind-down, kept the software
+//                                  up through September 2025, and offered
+//                                  Lone Wolf Relationships.
+//   what a CSV import accepts      src/lib/csvImport.ts, read 2026-10-02:
+//                                  quoted fields, BOM, CRLF, header variants,
+//                                  full_name-only files, unrecognised columns
+//                                  kept as metadata, source defaulting to
+//                                  "csv_import", semicolon-separated tags, rows
+//                                  with no name and no email skipped.
+//   imports carry no consent       the import payload has no consent fields.
+//   price                          /pricing, unchanged.
+//
+// There is deliberately no feature-by-feature table. LionDesk cannot be
+// evaluated any more, and a column of unsourced ticks against a discontinued
+// product helps nobody.
+
+const FAQS = [
+  {
+    q: "Is LionDesk still available?",
+    a: "No. Lone Wolf Technologies announced in May 2025 that it was winding LionDesk down, kept the software available through September 2025, and offered customers Lone Wolf Relationships. If a page still says LionDesk is about to shut down, it was written before then.",
+  },
+  {
+    q: "Can I move my LionDesk contacts into Realtor Desk?",
+    a: "Yes, by CSV. Export your contacts from wherever they now live and import the file. The importer reads first and last name or a single full name, email, phone, source and tags, keeps any extra columns as notes on the record, and skips rows that have neither a name nor an email.",
+  },
+  {
+    q: "Are imported contacts ready to email?",
+    a: "No. The import creates contacts but does not record consent, and under CASL the burden of proving consent is on you. Record the date and source of consent for each contact before you email them, and only for contacts you actually have a basis to message.",
+  },
+  {
+    q: "Does the import bring my deals and message history?",
+    a: "No. A CSV import creates contacts. It does not recreate deals, conversations or automations, so keep your old exports for your records and rebuild any live deals in the pipeline.",
+  },
+  {
+    q: "Is Realtor Desk a like-for-like replacement?",
+    a: "Not necessarily. Compare it with what you actually used. Realtor Desk is a single-agent CRM with no seats, no native mobile app (it is a responsive web app), and no automated email sequences. If you relied on any of those, check before you move.",
+  },
+];
 
 const SwitchFromLionDesk = () => {
-  const faqs = [
-    {
-      q: "When is LionDesk shutting down?",
-      a: "LionDesk is being fully migrated to Lone Wolf Relationships by September 2025. After that date, LionDesk will no longer be available as a standalone product. If you're on LionDesk, now is the time to migrate."
-    },
-    {
-      q: "Can you import my LionDesk contacts and data?",
-      a: "Yes. We offer free data migration from LionDesk including contacts, deal history, notes, and tags. Our team handles the migration for you — no tech skills required. Most migrations complete within 24 hours."
-    },
-    {
-      q: "How does RealtorDesk AI compare to LionDesk on price?",
-      a: "LionDesk was $39/month USD. RealtorDesk AI starts at $149 CAD/month — which includes far more AI capability, bilingual support, and a platform purpose-built for Canadian agents. CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap."
-    },
-    {
-      q: "Will I lose my automation sequences when I switch?",
-      a: "No. We'll help you recreate your LionDesk drip campaigns and action plans in RealtorDesk AI. Our AI can even improve them based on your client types and Canadian market context."
-    },
-    {
-      q: "Is RealtorDesk AI suitable for Canadian agents?",
-      a: "Yes — it's built exclusively for Canadian agents. Bilingual EN/FR support, PIPEDA-aware data handling, and Canadian market intelligence are core features today; CREA DDF® (Canadian MLS) integration is planned for Q3 2026."
-    },
-    {
-      q: "How long does onboarding take?",
-      a: "Most agents are fully set up and productive within 24-48 hours. We provide free onboarding, video tutorials, and a dedicated support contact during your first 30 days."
-    },
-  ];
-
-  const comparisonRows = [
-    { feature: "Pricing (CAD)", rdai: "$149/mo CAD", liondesk: "$53/mo CAD (USD)" },
-    { feature: "Still Available After Sept 2025", rdai: "✓ Yes", liondesk: "✗ No — shutting down" },
-    { feature: "Built for Canadian Agents", rdai: "✓ Purpose-built", liondesk: "✗ US-focused" },
-    { feature: "Bilingual EN/FR", rdai: "✓ Full support", liondesk: "✗ English only" },
-    { feature: "Canadian MLS Integration (CREA DDF)", rdai: "Coming Q3 2026", liondesk: "✗ None" },
-    { feature: "PIPEDA-Aware Design", rdai: "✓ Built-in", liondesk: "✗ US compliance" },
-    { feature: "AI Lead Scoring", rdai: "✓ Advanced", liondesk: "✓ Basic" },
-    { feature: "AI assistant inside the CRM", rdai: "✓ Included", liondesk: "✓ Basic bot" },
-    { feature: "Email & SMS Automation", rdai: "✓ Yes", liondesk: "✓ Yes" },
-    { feature: "Free Migration", rdai: "✓ Yes", liondesk: "N/A" },
-    { feature: "Free Onboarding", rdai: "✓ Yes", liondesk: "✗ No" },
-    { feature: "Mobile access", rdai: "Responsive web", liondesk: "Native apps" },
-    { feature: "Deal Pipeline", rdai: "✓ Yes", liondesk: "✓ Yes" },
-    { feature: "CAD Billing", rdai: "✓ Pay in CAD", liondesk: "✗ USD only" },
-  ];
-
   return (
     <div className="min-h-screen">
       <SEO
         title="Switch from LionDesk to Realtor Desk"
-        description="Moving off LionDesk? Realtor Desk is a Canadian CRM with bilingual EN/FR, CAD pricing and a 14-day trial. CREA DDF® is on the Q3 2026 roadmap."
-        keywords="LionDesk shutting down, LionDesk alternative Canada, switch from LionDesk, LionDesk migration, best CRM for Canadian realtors, LionDesk replacement"
+        description="LionDesk was discontinued in September 2025. How to move your contacts into Realtor Desk by CSV, what does not come across, and what to check first."
+        keywords="LionDesk alternative Canada, LionDesk discontinued, switch from LionDesk, LionDesk replacement, LionDesk migration, Lone Wolf Relationships alternative"
         canonicalUrl="https://www.realtordesk.ai/switch-from-liondesk"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Switch from LionDesk to RealtorDesk AI",
-            "description": "LionDesk is shutting down September 2025. Migrate to RealtorDesk AI — Canada's AI-first real estate CRM with free migration and bilingual support.",
-            "url": "https://www.realtordesk.ai/switch-from-liondesk"
-          }
+            name: "Switch from LionDesk to Realtor Desk",
+            description:
+              "LionDesk was discontinued in September 2025. How to move contacts into Realtor Desk by CSV and what to check first.",
+            url: "https://www.realtordesk.ai/switch-from-liondesk",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-destructive/5 to-primary/5">
-        <div className="container-custom text-center">
-          <Badge variant="destructive" className="mb-6 text-sm px-4 py-2">
-            <AlertTriangle className="w-4 h-4 mr-2 inline" />
-            LionDesk Shutting Down — September 2025
-          </Badge>
-          <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
-            LionDesk Is Shutting Down.<br />
-            <span className="gradient-text">Your CRM Shouldn't.</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Switch to RealtorDesk AI — a bilingual AI-powered real estate CRM built for Canada. Import your contacts, deals, and automations in minutes. Free migration. No disruption to your business.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link to="/signup">
-              <Button size="lg" className="btn-gradient text-lg px-8">
-                Start Your Free 14-Day Trial
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/demo">
-              <Button size="lg" variant="outline" className="text-lg px-8">
-                Book a Migration Demo
-              </Button>
-            </Link>
+      <main>
+        <section className="pt-32 md:pt-40 pb-10">
+          <div className="container-custom max-w-3xl">
+            <h1 className="mb-6">Moving from LionDesk to Realtor Desk</h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              LionDesk was discontinued in September 2025. If your contacts are
+              still waiting for a new home, this page covers what happened, your
+              options, and exactly how a CSV move into Realtor Desk works.
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">Cancel anytime before you're charged · Free data migration · Setup in under 24 hours</p>
-        </div>
-      </section>
+        </section>
 
-      {/* Urgency Banner */}
-      <section className="bg-destructive/10 border-y border-destructive/20 py-6">
-        <div className="container-custom text-center">
-          <p className="text-lg font-semibold text-destructive">
-            ⚠️ LionDesk is migrating all users to Lone Wolf Relationships by September 2025. Don't wait until the last minute — migrate now and get 30 days of free hands-on support.
-          </p>
-        </div>
-      </section>
-
-      {/* Why Switch */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <h2 className="text-center mb-4">Why Canadian Agents Are Switching to RealtorDesk AI</h2>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">LionDesk was built for the US market. RealtorDesk AI is built for you.</p>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="p-6 text-center border-primary/20">
-              <Globe className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">Built for Canada</h3>
-              <p className="text-muted-foreground">Bilingual EN/FR, PIPEDA-aware design, and CAD pricing. Not a US platform retrofitted for Canada. CREA DDF® (Canadian MLS) integration coming Q3 2026.</p>
-            </Card>
-            <Card className="p-6 text-center border-primary/20">
-              <Brain className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">More Powerful AI</h3>
-              <p className="text-muted-foreground">Claude-powered AI chatbot, predictive lead scoring, and automated follow-ups that LionDesk's basic bot never matched.</p>
-            </Card>
-            <Card className="p-6 text-center border-primary/20">
-              <Zap className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">Migrate in Minutes</h3>
-              <p className="text-muted-foreground">Free white-glove migration from LionDesk. Contacts, notes, deals, and automations — all moved for you within 24 hours.</p>
-            </Card>
-            <Card className="p-6 text-center border-primary/20">
-              <MessageSquare className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">An AI assistant in your desk</h3>
-              <p className="text-muted-foreground">Open a lead and ask. It can see that contact, draft a reply, summarise the thread and talk through your next move — in English or French.</p>
-            </Card>
-            <Card className="p-6 text-center border-primary/20">
-              <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">PIPEDA-Aware</h3>
-              <p className="text-muted-foreground">Canadian privacy law built into the platform — consent tracking, breach notification protocols, and data handling designed for Canadian compliance obligations.</p>
-            </Card>
-            <Card className="p-6 text-center border-primary/20">
-              <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">Canadian Support</h3>
-              <p className="text-muted-foreground">Real support from people who understand the Canadian real estate market. No overseas call centres. No generic scripts.</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison Table */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-custom">
-          <h2 className="text-center mb-4">LionDesk vs RealtorDesk AI</h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-xl mx-auto">See why Canadian agents are making the switch before LionDesk disappears</p>
-          <div className="max-w-3xl mx-auto overflow-x-auto">
-            <table className="w-full border rounded-xl overflow-hidden">
-              <thead>
-                <tr className="bg-muted">
-                  <th className="text-left py-4 px-4 font-semibold">Feature</th>
-                  <th className="text-center py-4 px-4 font-semibold text-primary">RealtorDesk AI</th>
-                  <th className="text-center py-4 px-4 font-semibold text-muted-foreground">LionDesk</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, i) => (
-                  <tr key={i} className={`border-t ${i % 2 === 0 ? "" : "bg-muted/30"}`}>
-                    <td className="py-3 px-4 font-medium">{row.feature}</td>
-                    <td className="text-center py-3 px-4 text-green-700 font-medium">{row.rdai}</td>
-                    <td className={`text-center py-3 px-4 ${row.liondesk.startsWith("✗") ? "text-destructive" : "text-muted-foreground"}`}>{row.liondesk}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Migration Steps */}
-      <section className="section-padding">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-4">How to Switch in 3 Easy Steps</h2>
-          <p className="text-center text-muted-foreground mb-12">Your business keeps running — we handle the technical work</p>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-primary">1</span>
-              </div>
-              <h3 className="font-bold mb-2">Start Your Free Trial</h3>
-              <p className="text-muted-foreground text-sm">Sign up in 2 minutes. A card is required to start; you're not charged until the trial ends. Your 14-day free trial starts immediately.</p>
+        <section className="pb-16">
+          <div className="container-custom max-w-3xl space-y-12">
+            <div>
+              <h2 className="mb-4">What happened to LionDesk</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Lone Wolf Technologies, which bought LionDesk in 2021, announced in
+                May 2025 that it was winding the product down. The software stayed
+                available through September 2025 and customers were offered{" "}
+                <strong>Lone Wolf Relationships</strong>, the company&rsquo;s own
+                CRM. The announcement was reported by{" "}
+                <a
+                  className="underline"
+                  href="https://www.inman.com/2025/05/16/lone-wolf-technologies-to-wind-down-popular-liondesk-crm/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Inman
+                </a>
+                .
+              </p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-primary">2</span>
-              </div>
-              <h3 className="font-bold mb-2">We Migrate Your Data</h3>
-              <p className="text-muted-foreground text-sm">Export your LionDesk data and send it to us. We import everything — contacts, notes, deals, tags — within 24 hours.</p>
+
+            <div>
+              <h2 className="mb-4">Your options</h2>
+              <ul className="space-y-3 text-muted-foreground leading-relaxed list-disc pl-5">
+                <li>
+                  <strong className="text-foreground">Lone Wolf Relationships.</strong>{" "}
+                  The vendor&rsquo;s own offer, and the path of least resistance
+                  if you were happy with LionDesk.
+                </li>
+                <li>
+                  <strong className="text-foreground">Another CRM.</strong> Our{" "}
+                  <Link className="underline" to="/blog/best-crm-canada-2025">
+                    guide to choosing a CRM in Canada
+                  </Link>{" "}
+                  lists what several vendors publish on price and trial, and our{" "}
+                  <Link className="underline" to="/compare">
+                    comparison hub
+                  </Link>{" "}
+                  covers them one at a time.
+                </li>
+                <li>
+                  <strong className="text-foreground">Realtor Desk.</strong> CAD
+                  $149 a month for a single agent, French set per contact, and a
+                  database that runs in Canada. It suits a solo agent who wants
+                  those things. It is not the cheapest option, and it is the wrong
+                  choice for a team that needs seats.
+                </li>
+              </ul>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-primary">3</span>
-              </div>
-              <h3 className="font-bold mb-2">Start Closing More Deals</h3>
-              <p className="text-muted-foreground text-sm">Get a personal onboarding session. Your AI chatbot, lead scoring, and automation are live within 48 hours.</p>
+
+            <div>
+              <h2 className="mb-4">How a CSV move works</h2>
+              <ol className="space-y-3 text-muted-foreground leading-relaxed list-decimal pl-5">
+                <li>
+                  <strong className="text-foreground">Export your contacts</strong>{" "}
+                  from wherever they are now, as a CSV.
+                </li>
+                <li>
+                  <strong className="text-foreground">Import the file.</strong> The
+                  importer copes with quoted fields, the byte-order mark Excel adds,
+                  mixed line endings, and header variants such as &ldquo;First
+                  name&rdquo; against <code>first_name</code>. A file with only a
+                  full name is split into first and last.
+                </li>
+                <li>
+                  <strong className="text-foreground">Check what landed.</strong>{" "}
+                  Columns it does not recognise are kept as notes on the record,
+                  tags separated by semicolons become tags, the source defaults to
+                  an import label, and rows with neither a name nor an email are
+                  skipped.
+                </li>
+                <li>
+                  <strong className="text-foreground">Record consent before you email.</strong>{" "}
+                  The import does not capture it, and under CASL proving consent
+                  is your responsibility. Our{" "}
+                  <Link
+                    className="underline"
+                    to="/resources/casl-compliance-real-estate-email-marketing-canada"
+                  >
+                    CASL guide for real estate email
+                  </Link>{" "}
+                  explains the consent windows.
+                </li>
+              </ol>
             </div>
+
+            <div>
+              <h2 className="mb-4">What does not come across</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                A CSV import creates contacts. It does not recreate deals,
+                conversations or automations, and Realtor Desk has no native mobile
+                app and no automated email sequences today. If you depended on any
+                of those, check before you move. The{" "}
+                <Link className="underline" to="/roadmap">
+                  roadmap
+                </Link>{" "}
+                marks what is live and what is not.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="mb-6">Questions</h2>
+              <FAQAccordion items={FAQS} />
+            </div>
+
+            <Card className="p-8 text-center">
+              <h2 className="mb-3">Try it with a small file first</h2>
+              <p className="text-muted-foreground mb-6">
+                Import twenty contacts and see how they land. The trial is 14 days,
+                a card is collected up front, and nothing is charged before day 14.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button asChild>
+                  <Link to="/signup">Start free trial</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link to="/pricing">See pricing</Link>
+                </Button>
+              </div>
+            </Card>
           </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-custom max-w-3xl">
-          <h2 className="text-center mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            {faqs.map((faq, i) => (
-              <Card key={i} className="p-6">
-                <h3 className="font-bold text-lg mb-3">{faq.q}</h3>
-                <p className="text-muted-foreground">{faq.a}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding bg-gradient-to-br from-primary/10 to-accent/5">
-        <div className="container-custom max-w-3xl text-center">
-          <Badge className="mb-4">⏰ LionDesk Shuts Down September 2025</Badge>
-          <h2 className="mb-6">Don't Wait. Switch Today.</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Start a 14-day free trial and move a week of your own work into it. A card is collected up front and nothing is charged before day 14.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/signup">
-              <Button size="lg" className="btn-gradient text-lg px-10">
-                Start Free Trial — Cancel anytime
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/demo">
-              <Button size="lg" variant="outline" className="text-lg px-10">
-                Book a Live Migration Demo
-              </Button>
-            </Link>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">Free data migration · 14-day free trial · Cancel anytime</p>
-        </div>
-      </section>
-
-      {/* The SEO report keeps the switch-from pages only where they carry real
-          migration substance — supported fields, what does not come across,
-          and how to test — rather than boilerplate. This is that, verified
-          against src/lib/csvImport.ts rather than described from memory. */}
-      <section className="section-padding border-t">
-        <div className="container-custom max-w-3xl">
-          <h2 className="mb-6">What actually moves across</h2>
-
-          <p className="text-muted-foreground leading-relaxed mb-6">
-            Migration is a CSV import. Export your contacts from LionDesk, then
-            upload the file — the importer reads the header row and matches
-            common column names, so in most cases you do not have to rename
-            anything first.
-          </p>
-
-          <h3 className="text-lg font-semibold mb-2">Columns it recognises</h3>
-          <ul className="space-y-2 text-muted-foreground leading-relaxed list-disc pl-5 mb-6">
-            <li>
-              <strong>Email</strong> — <code>email</code>, <code>email_address</code>,
-              <code>e_mail</code> or <code>emailaddress</code>
-            </li>
-            <li>
-              <strong>Phone</strong> — <code>phone</code>, <code>mobile</code>,
-              <code>cell</code>, <code>telephone</code> and the usual variants
-            </li>
-            <li>
-              <strong>Name</strong> — <code>first_name</code> and <code>last_name</code>,
-              or a single <code>full_name</code> / <code>name</code> column, which is
-              split on the first space
-            </li>
-            <li>
-              <strong>Source</strong> — <code>source</code> or <code>lead_source</code>;
-              rows with neither are tagged <code>csv_import</code>
-            </li>
-            <li>
-              <strong>Tags</strong> — <code>tags</code> or <code>labels</code>, separated
-              by semicolons
-            </li>
-            <li>
-              <strong>Company, job title, notes</strong> — kept on the contact even
-              though they have no dedicated column, so nothing in the file is
-              discarded
-            </li>
-          </ul>
-
-          <h3 className="text-lg font-semibold mb-2">What does not come across</h3>
-          <p className="text-muted-foreground leading-relaxed mb-6">
-            Email and call history, attachments, saved searches, automation
-            sequences and anything specific to LionDesk&rsquo;s own data model. A
-            CSV of contacts is a CSV of contacts. If the history matters, keep
-            your LionDesk export file — it is the record, and we are not going to
-            pretend we can reconstruct a timeline we never had.
-          </p>
-
-          <h3 className="text-lg font-semibold mb-2">Test it before you commit</h3>
-          <ol className="space-y-2 text-muted-foreground leading-relaxed list-decimal pl-5 mb-6">
-            <li>Export everything from LionDesk and keep that file somewhere safe.</li>
-            <li>Cut the first twenty rows into a separate CSV and import those.</li>
-            <li>
-              Open three of them and check the name split, the phone format and
-              whether the tags landed where you expected.
-            </li>
-            <li>Only then import the rest.</li>
-          </ol>
-
-          <h3 className="text-lg font-semibold mb-2">Getting back out</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Your contacts export to CSV from settings at any time, including
-            after you cancel. That is worth checking on any CRM you are
-            considering, including this one — a product that makes leaving hard
-            is telling you something. See{" "}
-            <Link to="/pricing" className="underline">pricing and trial terms</Link>{" "}
-            or <Link to="/features" className="underline">what the CRM does</Link>.
-          </p>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>
