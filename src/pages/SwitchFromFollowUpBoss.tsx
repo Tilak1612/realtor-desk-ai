@@ -2,281 +2,218 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { CheckCircle, X, ArrowRight, Globe, Brain, Shield, DollarSign, MessageSquare, Zap } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
+
+// /switch-from-follow-up-boss — rewritten 2026-10-02.
+//
+// The previous version said Follow Up Boss "requires expensive add-ons for AI
+// chatbots (Structurely ~$499/mo)", that Realtor Desk's "24/7 bilingual AI
+// chatbot is built in and powered by Claude", that "no Structurely, no Ylopo, no
+// extra monthly bill" applies, and that Realtor Desk "gives you everything
+// Follow Up Boss doesn't". There is no lead-facing chatbot, the Structurely
+// price was never sourced, and Follow Up Boss lists lead routing, a team inbox,
+// calling and 250+ integrations, none of which Realtor Desk has.
+//
+// WHAT THIS PAGE CLAIMS, AND FROM WHERE
+//   Follow Up Boss features / pricing   followupboss.com and /pricing, read
+//                                       2026-10-02 (linked in the body).
+//   what a CSV import accepts           src/lib/csvImport.ts, read 2026-10-02.
+//   imports carry no consent            the import payload has no consent fields.
+//   Realtor Desk price and trial        /pricing, unchanged.
+//
+// INTENT. /blog/vs-follow-up-boss is the side-by-side. This page is how to move.
+
+const GIVE_UP: { feature: string; fub: string; rd: string }[] = [
+  { feature: "Lead routing and a team inbox", fub: "Listed", rd: "Not available: no seats, assignment or shared pipeline" },
+  { feature: "Calling", fub: "Listed (add-on on the Grow plan)", rd: "Not available" },
+  { feature: "Texting", fub: "Listed", rd: "Available through Twilio, only to numbers with a recorded consent" },
+  { feature: "Automations", fub: "Listed", rd: "A sequence builder exists; scheduled sending is not switched on" },
+  { feature: "Integrations", fub: "250+ listed", rd: "Zapier, Make, n8n, Twilio and SMTP" },
+  { feature: "Mobile apps", fub: "Listed", rd: "A responsive web app, no native app" },
+];
+
+const FAQS = [
+  {
+    q: "Can I move my Follow Up Boss contacts into Realtor Desk?",
+    a: "Yes, by CSV, if your plan lets you export them. Import the file into Realtor Desk. It reads first and last name or a single full name, email, phone, source and tags, keeps company, job title and notes in the contact's metadata, and skips rows that have neither a name nor an email.",
+  },
+  {
+    q: "Are imported contacts ready to email?",
+    a: "No. The import creates contacts but does not record consent, and under CASL the burden of proving consent is on you. Record the date and source of consent for each contact before you email them.",
+  },
+  {
+    q: "Is Realtor Desk cheaper than Follow Up Boss?",
+    a: "Not for one agent, at face value. Follow Up Boss shows its Grow plan at $69 per user a month, in a currency its pricing page does not name, and Realtor Desk is CAD $149. Calling on Grow is an extra $39 per user a month.",
+  },
+  {
+    q: "Does Realtor Desk have lead routing or a team inbox?",
+    a: "No. It is a single-agent product with no seats, lead assignment or shared pipeline. If your work depends on those, stay on Follow Up Boss.",
+  },
+  {
+    q: "Do I lose my deals and message history?",
+    a: "A CSV import creates contacts only. It does not recreate deals, conversations or automations, so keep your Follow Up Boss exports for your records and rebuild any live deals in the pipeline.",
+  },
+];
 
 const SwitchFromFollowUpBoss = () => {
-  const comparisonRows = [
-    { feature: "Monthly Price", rdai: "$149 CAD/month", fub: "$69–$1,000 USD/month" },
-    { feature: "Pricing Currency", rdai: "CAD — no surprises", fub: "USD — 35%+ premium for Canadians" },
-    { feature: "Built for Canadian Agents", rdai: "✓ Purpose-built", fub: "✗ US-focused" },
-    { feature: "Bilingual EN/FR", rdai: "✓ Full support", fub: "✗ English only" },
-    { feature: "Canadian MLS Integration (CREA DDF)", rdai: "Coming Q3 2026", fub: "✗ Requires 3rd-party IDX" },
-    { feature: "PIPEDA-Aware Design", rdai: "✓ Built-in", fub: "✗ US compliance" },
-    { feature: "AI Chatbot", rdai: "✓ Claude-powered, 24/7", fub: "✗ Requires Structurely ($499/mo)" },
-    { feature: "AI Lead Scoring", rdai: "✓ Included", fub: "✗ Basic tagging only" },
-    { feature: "Email & SMS Automation", rdai: "✓ Yes", fub: "✓ Yes" },
-    { feature: "Free Onboarding & Migration", rdai: "✓ Yes", fub: "✗ No" },
-    { feature: "Mobile access", rdai: "Responsive web", fub: "Native apps" },
-    { feature: "CAD Billing", rdai: "✓ Pay in CAD", fub: "✗ USD only" },
-    { feature: "Setup Fee", rdai: "✓ None", fub: "✗ None (but USD pricing)" },
-  ];
-
-  const faqs = [
-    {
-      q: "How does RealtorDesk AI compare to Follow Up Boss for Canadian agents?",
-      a: "Follow Up Boss is a strong CRM but built for the US market. It charges USD, requires expensive add-ons for AI chatbots (Structurely ~$499/mo), and lacks PIPEDA-aware data handling. RealtorDesk AI includes the AI chatbot and PIPEDA-aware design at $149 CAD/month, with CREA DDF® (Canadian MLS) integration planned for Q3 2026."
-    },
-    {
-      q: "Can I import my Follow Up Boss data?",
-      a: "Yes. We offer free migration from Follow Up Boss including all contacts, tags, notes, and deal history. Our team handles the migration — most complete within 24 hours."
-    },
-    {
-      q: "I have 200+ integrations set up in Follow Up Boss. Will I lose those?",
-      a: "Follow Up Boss's 200+ integrations are its biggest strength. RealtorDesk AI focuses on deep native integrations for Canadian agents rather than breadth. We cover the integrations that matter most today — Twilio SMS, inbound webhooks via Zapier and Make, and email automation. Google Calendar and Outlook connect today with event sync in build, and CREA DDF® (Canadian MLS) is planned for Q3 2026. We're adding more every quarter."
-    },
-    {
-      q: "Does RealtorDesk AI work for teams?",
-      a: "Not yet. Realtor Desk today is built for a single agent per account — every lead, conversation and task belongs to one login. Shared pipelines, lead distribution and team reporting are roadmap work, not something we can sell you now. If you need multiple agents working one book today, Follow Up Boss will serve you better and we would rather say so."
-    },
-    {
-      q: "Is the AI chatbot really included, or is it an add-on?",
-      a: "It's fully included. No Structurely, no Ylopo, no extra monthly bill. RealtorDesk AI's 24/7 bilingual AI chatbot is built in and powered by Claude — one of the most advanced AI models available."
-    },
-  ];
-
   return (
     <div className="min-h-screen">
       <SEO
         title="Switch from Follow Up Boss to Realtor Desk"
-        description="Move from Follow Up Boss to Realtor Desk: $149 CAD/month, bilingual EN/FR and CASL-aware email. CREA DDF® is on the Q3 2026 roadmap."
-        keywords="Follow Up Boss alternative Canada, switch from Follow Up Boss, Follow Up Boss vs RealtorDesk AI, Canadian real estate CRM, best CRM for Canadian realtors"
+        description="Moving from Follow Up Boss to Realtor Desk: what you give up, how a CSV import works, and what to record before you email an imported contact."
+        keywords="Follow Up Boss alternative Canada, switch from Follow Up Boss, Follow Up Boss CSV export, move from Follow Up Boss, Canadian real estate CRM"
         canonicalUrl="https://www.realtordesk.ai/switch-from-follow-up-boss"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Switch from Follow Up Boss to RealtorDesk AI",
-            "description": "Canadian real estate agents switching from Follow Up Boss to RealtorDesk AI save on USD pricing and gain built-in AI chatbot and bilingual support. CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap.",
-            "url": "https://www.realtordesk.ai/switch-from-follow-up-boss"
-          }
+            name: "Switch from Follow Up Boss to Realtor Desk",
+            description:
+              "What you give up, how a CSV import works, and what to record before emailing an imported contact.",
+            url: "https://www.realtordesk.ai/switch-from-follow-up-boss",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
-        <div className="container-custom text-center">
-          <Badge variant="secondary" className="mb-6 text-sm px-4 py-2">
-            🇨🇦 Built for Canadian Realtors
-          </Badge>
-          <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
-            Follow Up Boss Is Great for the US.<br />
-            <span className="gradient-text">Canadian Agents Deserve Better.</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Stop paying USD, adding expensive AI chatbot add-ons, and working around a platform not built for Canadian compliance. RealtorDesk AI gives you everything Follow Up Boss doesn't — at $149 CAD/month.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-            <Link to="/signup">
-              <Button size="lg" className="btn-gradient text-lg px-8">
-                Start Free 14-Day Trial
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/demo">
-              <Button size="lg" variant="outline" className="text-lg px-8">
-                Book a Demo
-              </Button>
-            </Link>
+      <main>
+        <section className="pt-32 md:pt-40 pb-10">
+          <div className="container-custom max-w-3xl">
+            <h1 className="mb-6">Moving from Follow Up Boss to Realtor Desk</h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Realtor Desk suits a solo agent who wants French per contact, a consent
+              record for CASL and a database in Canada. It does not replace Follow Up
+              Boss for a team. This page covers what you would give up and how the
+              move works.
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">Free migration · Cancel anytime · Setup in 24 hours</p>
-        </div>
-      </section>
+        </section>
 
-      {/* Key Differences */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <h2 className="text-center mb-4">What You Get That Follow Up Boss Doesn't Offer</h2>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">RealtorDesk AI is not a Follow Up Boss clone. It's what Canadian agents actually need.</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="p-6 border-primary/20">
-              <Globe className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">CAD Pricing — No Surprises</h3>
-              <p className="text-sm text-muted-foreground">Pay in Canadian dollars. No currency conversion, no 35% USD premium. $149 CAD is $149 CAD.</p>
-            </Card>
-            <Card className="p-6 border-primary/20">
-              <Brain className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">AI Chatbot Included</h3>
-              <p className="text-sm text-muted-foreground">No Structurely add-on at $499/month. RealtorDesk AI's Claude-powered 24/7 bilingual chatbot is built in and included in every plan.</p>
-            </Card>
-            <Card className="p-6 border-primary/20">
-              <Zap className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">Canadian MLS Integration (Q3 2026)</h3>
-              <p className="text-sm text-muted-foreground">CREA DDF® integration is on the Q3 2026 roadmap. In the meantime, import listings from Realtor.ca via the built-in importer.</p>
-            </Card>
-            <Card className="p-6 border-primary/20">
-              <Shield className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">PIPEDA-Aware Design</h3>
-              <p className="text-sm text-muted-foreground">Canadian privacy law built in. Consent management, breach notification protocols, and data practices designed for Canadian agents.</p>
-            </Card>
-            <Card className="p-6 border-primary/20">
-              <MessageSquare className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">Full Bilingual Support</h3>
-              <p className="text-sm text-muted-foreground">Full English and French interface and AI chatbot. Serve Quebec clients and francophone leads natively.</p>
-            </Card>
-            <Card className="p-6 border-primary/20">
-              <DollarSign className="w-10 h-10 text-primary mb-4" />
-              <h3 className="font-bold mb-2">Free Migration Included</h3>
-              <p className="text-sm text-muted-foreground">We handle your entire migration from Follow Up Boss. Contacts, tags, notes, deals — all moved for you at no cost.</p>
+        <section className="pb-16">
+          <div className="container-custom max-w-3xl space-y-12">
+            <div>
+              <h2 className="mb-4">What you would give up</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                From Follow Up Boss&rsquo;s own{" "}
+                <a className="underline" href="https://www.followupboss.com" rel="noopener noreferrer" target="_blank">
+                  homepage
+                </a>
+                , read October 2, 2026. If your work leans on any of these, stop here.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="min-w-full text-sm">
+                  <caption className="sr-only">
+                    Follow Up Boss features against what Realtor Desk offers.
+                  </caption>
+                  <thead>
+                    <tr className="border-b-2 text-left">
+                      <th scope="col" className="py-2 pr-4 font-semibold">Feature</th>
+                      <th scope="col" className="py-2 pr-4 font-semibold">Follow Up Boss</th>
+                      <th scope="col" className="py-2 font-semibold">Realtor Desk</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {GIVE_UP.map((r) => (
+                      <tr key={r.feature} className="border-b align-top">
+                        <th scope="row" className="py-3 pr-4 text-left font-semibold">{r.feature}</th>
+                        <td className="py-3 pr-4 text-muted-foreground">{r.fub}</td>
+                        <td className="py-3 text-muted-foreground">{r.rd}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="mb-4">How a CSV move works</h2>
+              <ol className="space-y-3 text-muted-foreground leading-relaxed list-decimal pl-5">
+                <li>
+                  <strong className="text-foreground">Export your contacts</strong> from
+                  Follow Up Boss as a CSV, if your plan allows it. Check Follow Up
+                  Boss&rsquo;s own help for the steps.
+                </li>
+                <li>
+                  <strong className="text-foreground">Import the file.</strong> The
+                  importer copes with quoted fields, the byte-order mark Excel adds,
+                  mixed line endings and header variants such as &ldquo;First
+                  name&rdquo; against <code>first_name</code>. A file with only a full
+                  name is split into first and last.
+                </li>
+                <li>
+                  <strong className="text-foreground">Check what landed.</strong> Company, job title and notes are kept in the contact's metadata, other columns are not imported, tags
+                  separated by semicolons become tags, the source defaults to an
+                  import label, and rows with neither a name nor an email are
+                  skipped.
+                </li>
+                <li>
+                  <strong className="text-foreground">Record consent before you email.</strong>{" "}
+                  The import does not capture it, and under CASL proving consent is
+                  your responsibility. Our{" "}
+                  <Link
+                    className="underline"
+                    to="/resources/casl-compliance-real-estate-email-marketing-canada"
+                  >
+                    CASL guide for real estate email
+                  </Link>{" "}
+                  explains the consent windows.
+                </li>
+              </ol>
+            </div>
+
+            <div>
+              <h2 className="mb-4">Price, at face value</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Follow Up Boss shows its Grow plan at $69 per user a month, or $58 on
+                annual billing, with a 14-day free trial, per its{" "}
+                <a className="underline" href="https://followupboss.com/pricing" rel="noopener noreferrer" target="_blank">
+                  pricing page
+                </a>
+                . The page does not name a currency. Realtor Desk is CAD $149 a month
+                for a single agent. For one seat Follow Up Boss is the lower figure, so
+                the reasons to move are French, consent handling and data location, not
+                price. See the{" "}
+                <Link className="underline" to="/blog/vs-follow-up-boss">
+                  side-by-side comparison
+                </Link>
+                .
+              </p>
+            </div>
+
+            <div>
+              <h2 className="mb-6">Questions</h2>
+              <FAQAccordion items={FAQS} />
+            </div>
+
+            <Card className="p-8 text-center">
+              <h2 className="mb-3">Try it with a small file first</h2>
+              <p className="text-muted-foreground mb-6">
+                Import twenty contacts and see how they land. The trial is 14 days, a
+                card is collected up front, and nothing is charged before day 14.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button asChild>
+                  <Link to="/signup">Start free trial</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link to="/pricing">See pricing</Link>
+                </Button>
+              </div>
             </Card>
           </div>
-        </div>
-      </section>
-
-      {/* Comparison Table */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-custom">
-          <h2 className="text-center mb-12">Follow Up Boss vs RealtorDesk AI</h2>
-          <div className="max-w-3xl mx-auto overflow-x-auto">
-            <table className="w-full border rounded-xl overflow-hidden">
-              <thead>
-                <tr className="bg-muted">
-                  <th className="text-left py-4 px-4 font-semibold">Feature</th>
-                  <th className="text-center py-4 px-4 font-semibold text-primary">RealtorDesk AI</th>
-                  <th className="text-center py-4 px-4 font-semibold text-muted-foreground">Follow Up Boss</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, i) => (
-                  <tr key={i} className={`border-t ${i % 2 === 0 ? "" : "bg-muted/30"}`}>
-                    <td className="py-3 px-4 font-medium">{row.feature}</td>
-                    <td className="text-center py-3 px-4 text-green-700 font-medium">{row.rdai}</td>
-                    <td className={`text-center py-3 px-4 ${row.fub.startsWith("✗") ? "text-destructive" : "text-muted-foreground"}`}>{row.fub}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="section-padding">
-        <div className="container-custom max-w-3xl">
-          <h2 className="text-center mb-12">Common Questions from Follow Up Boss Users</h2>
-          <div className="space-y-6">
-            {faqs.map((faq, i) => (
-              <Card key={i} className="p-6">
-                <h3 className="font-bold text-lg mb-3">{faq.q}</h3>
-                <p className="text-muted-foreground">{faq.a}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding bg-gradient-to-br from-primary/10 to-accent/5">
-        <div className="container-custom max-w-3xl text-center">
-          <h2 className="mb-6">Ready to Switch?</h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Join Canadian agents who've made the switch. Start your free trial — we handle the migration so you never skip a beat.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/signup">
-              <Button size="lg" className="btn-gradient text-lg px-10">
-                Start Free Trial <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/demo">
-              <Button size="lg" variant="outline" className="text-lg px-10">
-                Book a Demo
-              </Button>
-            </Link>
-          </div>
-          <p className="text-sm text-muted-foreground mt-4">14-day free trial · Free migration · Cancel anytime · $149 CAD/mo</p>
-        </div>
-      </section>
-
-      {/* The SEO report keeps the switch-from pages only where they carry real
-          migration substance — supported fields, what does not come across,
-          and how to test — rather than boilerplate. This is that, verified
-          against src/lib/csvImport.ts rather than described from memory. */}
-      <section className="section-padding border-t">
-        <div className="container-custom max-w-3xl">
-          <h2 className="mb-6">What actually moves across</h2>
-
-          <p className="text-muted-foreground leading-relaxed mb-6">
-            Migration is a CSV import. Export your contacts from Follow Up Boss, then
-            upload the file — the importer reads the header row and matches
-            common column names, so in most cases you do not have to rename
-            anything first.
-          </p>
-
-          <h3 className="text-lg font-semibold mb-2">Columns it recognises</h3>
-          <ul className="space-y-2 text-muted-foreground leading-relaxed list-disc pl-5 mb-6">
-            <li>
-              <strong>Email</strong> — <code>email</code>, <code>email_address</code>,
-              <code>e_mail</code> or <code>emailaddress</code>
-            </li>
-            <li>
-              <strong>Phone</strong> — <code>phone</code>, <code>mobile</code>,
-              <code>cell</code>, <code>telephone</code> and the usual variants
-            </li>
-            <li>
-              <strong>Name</strong> — <code>first_name</code> and <code>last_name</code>,
-              or a single <code>full_name</code> / <code>name</code> column, which is
-              split on the first space
-            </li>
-            <li>
-              <strong>Source</strong> — <code>source</code> or <code>lead_source</code>;
-              rows with neither are tagged <code>csv_import</code>
-            </li>
-            <li>
-              <strong>Tags</strong> — <code>tags</code> or <code>labels</code>, separated
-              by semicolons
-            </li>
-            <li>
-              <strong>Company, job title, notes</strong> — kept on the contact even
-              though they have no dedicated column, so nothing in the file is
-              discarded
-            </li>
-          </ul>
-
-          <h3 className="text-lg font-semibold mb-2">What does not come across</h3>
-          <p className="text-muted-foreground leading-relaxed mb-6">
-            Email and call history, attachments, saved searches, automation
-            sequences and anything specific to Follow Up Boss&rsquo;s own data model. A
-            CSV of contacts is a CSV of contacts. If the history matters, keep
-            your Follow Up Boss export file — it is the record, and we are not going to
-            pretend we can reconstruct a timeline we never had.
-          </p>
-
-          <h3 className="text-lg font-semibold mb-2">Test it before you commit</h3>
-          <ol className="space-y-2 text-muted-foreground leading-relaxed list-decimal pl-5 mb-6">
-            <li>Export everything from Follow Up Boss and keep that file somewhere safe.</li>
-            <li>Cut the first twenty rows into a separate CSV and import those.</li>
-            <li>
-              Open three of them and check the name split, the phone format and
-              whether the tags landed where you expected.
-            </li>
-            <li>Only then import the rest.</li>
-          </ol>
-
-          <h3 className="text-lg font-semibold mb-2">Getting back out</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Your contacts export to CSV from settings at any time, including
-            after you cancel. That is worth checking on any CRM you are
-            considering, including this one — a product that makes leaving hard
-            is telling you something. See{" "}
-            <Link to="/pricing" className="underline">pricing and trial terms</Link>{" "}
-            or <Link to="/features" className="underline">what the CRM does</Link>.
-          </p>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

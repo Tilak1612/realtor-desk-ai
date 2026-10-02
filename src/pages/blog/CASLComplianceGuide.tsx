@@ -903,13 +903,13 @@ const CASLComplianceGuide = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Related Compliance Resources</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <Link to="/features/pipeda-compliance">
+              <Link to="/pipeda-compliance">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">PIPEDA Compliance</h3>
                   <p className="text-sm text-gray-600">Data privacy for AI tools</p>
                 </Card>
               </Link>
-              <Link to="/features/email-automation">
+              <Link to="/features/casl-compliant-email">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Email Automation</h3>
                   <p className="text-sm text-gray-600">CASL-compliant automation</p>

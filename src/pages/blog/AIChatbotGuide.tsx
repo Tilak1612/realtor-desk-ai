@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { ArrowRight, CheckCircle2, XCircle, Clock, Zap, Brain, MessageSquare, TrendingUp, Shield, Users, DollarSign, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const AIChatbotGuide = () => {
   return (
@@ -16,7 +17,7 @@ const AIChatbotGuide = () => {
         article
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/ai-chatbot-real-estate-websites-canada"
         structuredData={[
           {
@@ -24,8 +25,8 @@ const AIChatbotGuide = () => {
             "@type": "Article",
             "headline": "AI Chatbot for Real Estate Websites in Canada: Complete 2025 Implementation Guide",
             "description": "Learn how AI chatbots capture and qualify real estate leads 24/7 with sub-3-second response times. Complete Canadian implementation guide.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
             "dateModified": "2025-01-01"
           }
@@ -40,6 +41,7 @@ const AIChatbotGuide = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               AI Chatbot for Real Estate Websites in Canada: Complete 2025 Implementation Guide
             </h1>
+            <ProductScopeNote className="mb-6" />
             <p className="text-xl text-gray-600 mb-8">
               67% of leads come after 6 PM. Are you awake to respond? Learn how AI chatbots capture and qualify leads 24/7 with sub-3-second response times.
             </p>
@@ -409,24 +411,24 @@ const AIChatbotGuide = () => {
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="p-4 bg-primary/5 border-2 border-primary rounded-lg">
-                    <p className="font-bold mb-2">Option A: RealtorDesk AI</p>
-                    <p className="text-sm text-gray-600 mb-3">Recommended for Canadian agents</p>
+                    <p className="font-bold mb-2">Option A: A chatbot built into your CRM</p>
+                    <p className="text-sm text-gray-600 mb-3">One vendor, one login</p>
                     <ul className="space-y-1 text-sm text-gray-700">
                       <li>✓ Built-in with CRM</li>
-                      <li>✓ PIPEDA/CASL compliant</li>
-                      <li>✓ Bilingual (English/French)</li>
-                      <li>✓ CREA DDF (Q3 2026)</li>
-                      <li>✓ Setup: 15 minutes</li>
+                      <li>✓ Check where data is stored and processed</li>
+                      <li>✓ Check French support for visitors</li>
+                      <li>✓ Check which listing source it uses</li>
+                      <li>✓ Setup time varies by vendor</li>
                     </ul>
                   </div>
                   <div className="p-4 bg-gray-50 border rounded-lg">
                     <p className="font-bold mb-2">Option B: Standalone Tools</p>
                     <p className="text-sm text-gray-600 mb-3">Intercom, Drift, ManyChat</p>
                     <ul className="space-y-1 text-sm text-gray-700">
-                      <li>• Setup: 2-4 hours</li>
-                      <li>• Requires technical knowledge</li>
+                      <li>• Setup time varies by vendor</li>
+                      <li>• May need technical help</li>
                       <li>• Separate CRM needed</li>
-                      <li>• Manual compliance setup</li>
+                      <li>• Consent handling may need configuring</li>
                     </ul>
                   </div>
                 </div>
@@ -499,59 +501,32 @@ const AIChatbotGuide = () => {
 
           {/* ROI Calculator */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">ROI Calculator: Is an AI Chatbot Worth It?</h2>
-            
-            <p className="text-gray-700 mb-6">
-              <strong>Scenario:</strong> Solo agent, 500 website visitors/month
+            <h2 className="text-3xl font-bold mb-6">Is an AI chatbot worth it? Work out your own number</h2>
+
+            {/* A worked model stood here: 100 chat engagements, 64 "qualified by
+                AI", 12 appointments, "$24,840/month" revenue, and "ROI: 7,584% to
+                15,218%", priced at Realtor Desk's plan. Every step rate in it was
+                invented, and Realtor Desk does not sell a chatbot, so it modelled
+                a product that does not exist. Removed 2026-10-02. */}
+            <p className="text-gray-700 mb-4">
+              Any vendor&rsquo;s ROI figure rests on conversion rates that depend on
+              your market, your lead sources and how you follow up, so a headline
+              percentage tells you little. A fair test takes four numbers from your own
+              business:
             </p>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <Card className="p-6 bg-red-50 border-red-200">
-                <h3 className="text-xl font-bold mb-4">Without AI Chatbot</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Website visitors: <strong>500/month</strong></li>
-                  <li>• Contact form submissions: <strong>15</strong> (3%)</li>
-                  <li>• Agent contacts: <strong>11</strong> (27% missed)</li>
-                  <li>• Qualified leads: <strong>2</strong> (18%)</li>
-                  <li>• Showings: <strong>1</strong> (50%)</li>
-                  <li>• Deals closed: <strong>0.18</strong> (18% close rate)</li>
-                  <li className="pt-3 font-bold text-lg text-red-900">Revenue: $2,160/month</li>
-                </ul>
-              </Card>
-
-              <Card className="p-6 bg-green-50 border-green-200">
-                <h3 className="text-xl font-bold mb-4">With AI Chatbot</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Website visitors: <strong>500/month</strong></li>
-                  <li>• Chat engagements: <strong>100</strong> (20%)</li>
-                  <li>• Qualified by AI: <strong>64</strong> (64%)</li>
-                  <li>• Appointments booked: <strong>12</strong> (19%)</li>
-                  <li>• Showings kept: <strong>9</strong> (75%)</li>
-                  <li>• Deals closed: <strong>2.07</strong> (23% close rate)</li>
-                  <li className="pt-3 font-bold text-lg text-green-900">Revenue: $24,840/month</li>
-                </ul>
-              </Card>
-            </div>
-
-            <Card className="p-8 bg-primary text-white">
-              <h3 className="text-2xl font-bold mb-4">The Numbers:</h3>
-              <div className="space-y-3 text-lg">
-                <p>Additional Revenue: <strong className="text-3xl">$22,680/month</strong></p>
-                <p>Annual Additional Revenue: <strong className="text-3xl">$272,160</strong></p>
-                <p className="pt-4">AI Chatbot Cost: $149-299/month = $1,788-3,588/year</p>
-                <p className="text-4xl font-bold pt-4">ROI: 7,584% to 15,218%</p>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-yellow-50 border-yellow-200 mt-6">
-              <p className="font-bold mb-2">Even if these numbers are 50% optimistic:</p>
-              <ul className="space-y-1 text-sm text-gray-700">
-                <li>• Additional revenue: $136,080/year</li>
-                <li>• Cost: $3,588/year</li>
-                <li>• <strong className="text-xl text-primary">ROI: 3,692%</strong></li>
-              </ul>
-              <p className="text-lg font-bold text-gray-900 mt-4">Still worth it.</p>
-            </Card>
+            <ol className="space-y-2 text-gray-700 list-decimal pl-6 mb-4">
+              <li>How many inquiries you get a month, and how many arrive outside your working hours.</li>
+              <li>What share of those you answer within the hour today.</li>
+              <li>Your own rate from inquiry to appointment to closed deal, from your records.</li>
+              <li>The vendor&rsquo;s written quote, including setup, usage limits and contract term.</li>
+            </ol>
+            <p className="text-gray-700">
+              Run those through our{" "}
+              <Link className="underline" to="/resources/slow-follow-up-calculator-canadian-realtors">
+                slow follow-up calculator
+              </Link>{" "}
+              and treat the answer as a range, not a promise.
+            </p>
           </section>
 
           {/* Canadian Compliance */}
@@ -706,7 +681,7 @@ const AIChatbotGuide = () => {
                       <li>• 320 leads/month</li>
                       <li>• 0 ISAs (redeployed)</li>
                       <li>• AI cost: $299/month</li>
-                      <li>• Response: 2.4 seconds</li>
+                      <li>• Response: within seconds</li>
                       <li>• Lead-to-appointment: <strong className="text-primary">16%</strong></li>
                     </ul>
                   </div>
@@ -803,10 +778,10 @@ const AIChatbotGuide = () => {
                 <div className="bg-green-50 p-4 rounded-lg">
                   <p className="font-semibold text-green-900 mb-2">✅ The Truth:</p>
                   <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• RealtorDesk AI: $149/month (less than phone bill)</li>
-                    <li>• Setup: 3-4 hours</li>
-                    <li>• No technical expertise needed</li>
-                    <li>• ROI: 3,692-15,218%</li>
+                    <li>• Price varies by vendor: ask for a written quote</li>
+                    <li>• Setup time varies, so ask for an estimate in writing</li>
+                    <li>• Ask what technical help is included</li>
+                    <li>• Work out your own return before you buy; any quoted ROI is a guess</li>
                   </ul>
                 </div>
               </Card>
@@ -834,7 +809,7 @@ const AIChatbotGuide = () => {
               <Card className="p-6">
                 <h3 className="font-bold mb-2">Do I need technical skills to set up an AI chatbot?</h3>
                 <p className="text-gray-700">
-                  No. Modern AI chatbots like RealtorDesk AI are designed for non-technical users. Setup takes 3-4 hours with step-by-step guidance. If you can use Gmail, you can set up an AI chatbot.
+                  Not usually, but setup effort varies by vendor. Ask for a realistic estimate in writing and a reference from an agent who has done it.
                 </p>
               </Card>
 
@@ -855,14 +830,14 @@ const AIChatbotGuide = () => {
               <Card className="p-6">
                 <h3 className="font-bold mb-2">Is AI compliant with Canadian privacy laws?</h3>
                 <p className="text-gray-700">
-                  Depends on the platform. RealtorDesk AI is built with CASL/PIPEDA compliance by design. US-based chatbots may require manual compliance configuration.
+                  Depends on the platform. Ask where the vendor stores and processes data, and whether it records consent. Realtor Desk does not offer a website chatbot.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="font-bold mb-2">How much does an AI chatbot cost?</h3>
                 <p className="text-gray-700">
-                  $50-500/month depending on features. RealtorDesk AI is $149-299/month and includes CRM. Standalone chatbots are $50-200/month but require separate CRM.
+                  It varies by vendor and by what is bundled, so ask for a written quote that covers setup, usage limits and any contract term. Realtor Desk does not sell a chatbot.
                 </p>
               </Card>
 
@@ -917,14 +892,14 @@ const AIChatbotGuide = () => {
           {/* Final CTA */}
           <section className="text-center py-12">
             <Card className="p-8 bg-gradient-to-r from-primary to-blue-600 text-white">
-              <h2 className="text-3xl font-bold mb-4">Ready to Capture Leads 24/7?</h2>
+              <h2 className="text-3xl font-bold mb-4">Weighing a chatbot?</h2>
               <p className="text-xl mb-6">
-                RealtorDesk AI includes an advanced AI chatbot built specifically for Canadian real estate.
+                Realtor Desk does not offer a website chatbot. It is a CRM that scores leads and suggests a next action.
               </p>
               <ul className="space-y-2 mb-8 text-lg">
                 <li>✓ Sub-3-second response time</li>
-                <li>✓ Bilingual (English/French)</li>
-                <li>✓ PIPEDA/CASL compliant</li>
+                <li>✓ Check French support for visitors</li>
+                <li>✓ Check where data is stored and processed</li>
                 <li>✓ Setup in 15 minutes</li>
               </ul>
               <div className="flex flex-wrap gap-4 justify-center">
@@ -944,22 +919,22 @@ const AIChatbotGuide = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Related Resources</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <Link to="/resources/ai-crm-vs-traditional-real-estate-crm-canada">
+              <Link to="/blog/ai-vs-traditional-crm">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">AI CRM vs Traditional CRM</h3>
                   <p className="text-sm text-gray-600">ROI analysis and performance data</p>
                 </Card>
               </Link>
-              <Link to="/resources/best-crm-canadian-real-estate-agents-2025">
+              <Link to="/blog/best-crm-canada-2025">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Best CRM for Canadian Agents 2025</h3>
                   <p className="text-sm text-gray-600">Top 10 CRM comparison</p>
                 </Card>
               </Link>
-              <Link to="/features/ai-chatbot">
+              <Link to="/features">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">AI Chatbot Features</h3>
-                  <p className="text-sm text-gray-600">See RealtorDesk AI chatbot in action</p>
+                  <h3 className="font-bold mb-2">Realtor Desk features</h3>
+                  <p className="text-sm text-gray-600">See what Realtor Desk does today</p>
                 </Card>
               </Link>
             </div>

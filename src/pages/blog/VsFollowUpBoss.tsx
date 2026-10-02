@@ -1,11 +1,104 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, CheckCircle2, XCircle, Zap } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
+
+// /blog/vs-follow-up-boss — rewritten 2026-10-02.
+//
+// The previous version said Realtor Desk "uses GPT-4 powered conversational AI
+// to engage, qualify and nurture", "responds to every lead in under 3 seconds
+// ... handles objections, and books appointments, all automatically", "responds
+// 98% faster", and offers "intelligent lead distribution, shared team inbox,
+// performance dashboards, and collaborative notes". It priced Follow Up Boss at
+// "$810 CAD a month for a team of 5" against our $299, and listed "20,000+
+// agents" as a Follow Up Boss strength. Realtor Desk does not reply to leads,
+// has no lead distribution or team inbox, and the price figures were not
+// sourced. The page also asserted a product launch year it could not support.
+//
+// FACTS ABOUT FOLLOW UP BOSS BELOW were read from its own pages on 2026-10-02:
+// followupboss.com (its description of itself and its feature list) and
+// followupboss.com/pricing. Where those pages did not say something (a currency,
+// whether a card is needed for the trial, anything about Canada) this page says
+// so. It does not say FOLLOW UP BOSS lacks a thing it simply did not mention.
+//
+// INTENT. This is the side-by-side. /switch-from-follow-up-boss is how to move.
+
+const ROWS: { topic: string; fub: string; rd: string }[] = [
+  {
+    topic: "What it is",
+    fub: "Calls itself the real estate operating system, built around organising leads, engaging them and coaching a team.",
+    rd: "A single-agent CRM: contacts, one conversation timeline per client, lead scoring and a deal pipeline.",
+  },
+  {
+    topic: "Published pricing",
+    fub: "Grow $69 per user a month, Pro $499 a month for 10 users, Platform $1,000 a month for 30 users. Annual billing lowers these to $58, $416 and $833.",
+    rd: "Solo CAD $149 a month. Team CAD $299 a month, which is a price tier rather than a set of team features.",
+  },
+  {
+    topic: "Currency stated",
+    fub: "Not stated on the pricing page.",
+    rd: "Canadian dollars, before tax; GST/HST, plus QST or PST where it applies, at checkout.",
+  },
+  {
+    topic: "Trial",
+    fub: "14-day free trial. The page does not say whether a card is needed.",
+    rd: "14 days. A card is collected up front and nothing is charged before day 14.",
+  },
+  {
+    topic: "Team features",
+    fub: "Lists lead distribution and routing, a team inbox, team collaboration tools and a team leaderboard.",
+    rd: "None today: no seats, lead assignment or shared pipeline.",
+  },
+  {
+    topic: "Calling and texting",
+    fub: "Lists calling and texting. Calling is an add-on at $39 per user a month on Grow.",
+    rd: "SMS through Twilio, sent only to numbers with a recorded consent. No calling.",
+  },
+  {
+    topic: "Integrations",
+    fub: "Lists 250+ integrations.",
+    rd: "Zapier, Make and n8n for inbound leads, plus Twilio and SMTP.",
+  },
+  {
+    topic: "AI",
+    fub: "Lists AI capabilities, described as AI that adapts to your business.",
+    rd: "An in-app assistant that drafts replies and summarises a thread on the contact you have open. It does not message leads on its own.",
+  },
+  {
+    topic: "Mobile",
+    fub: "Lists mobile apps.",
+    rd: "A responsive web app. No native app.",
+  },
+  {
+    topic: "Canada",
+    fub: "The pages we read do not mention Canada, Canadian dollars, French, CASL or data location. Ask Follow Up Boss.",
+    rd: "French per contact, a database in Canada, CAD pricing, and a consent record for CASL.",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Is Realtor Desk cheaper than Follow Up Boss?",
+    a: "Not for one agent, at face value. Follow Up Boss's Grow plan is shown at $69 per user a month, and Realtor Desk is CAD $149. The currencies differ and Follow Up Boss does not state one, so check what you would actually be billed. Calling on Grow is an extra $39 per user a month.",
+  },
+  {
+    q: "Does Realtor Desk have lead routing or a team inbox?",
+    a: "No. There are no seats, lead assignment or shared pipeline today, so a team cannot work in one shared account. If you rely on routing or a team inbox, Follow Up Boss is the better fit.",
+  },
+  {
+    q: "Which is better for a Canadian agent?",
+    a: "It depends on what you need to be true. If you work alone and need French per contact, a consent record for CASL and a database in Canada, Realtor Desk is built around those. If you run a team and need routing, calling and a large integration library, Follow Up Boss lists those and Realtor Desk does not.",
+  },
+  {
+    q: "Does Follow Up Boss work in Canada?",
+    a: "Ask them. The Follow Up Boss pages we read do not mention Canada, Canadian dollars, French, CASL or data location, so we cannot say either way. Put those four questions to their sales team and get the answers in writing.",
+  },
+];
 
 const VsFollowUpBoss = () => {
   useEffect(() => {
@@ -16,28 +109,38 @@ const VsFollowUpBoss = () => {
     <div className="min-h-screen">
       <SEO
         title="Realtor Desk vs Follow Up Boss for Canada"
-        description="Follow Up Boss alternative comparison for Canadian agents. AI automation, PIPEDA compliance, bilingual support, and transparent pricing."
-        keywords="Follow Up Boss alternative, RealtorDesk AI vs Follow Up Boss, Canadian real estate CRM comparison, PIPEDA compliant CRM"
+        description="Follow Up Boss and Realtor Desk compared for Canadian agents: published pricing, team features, handling of consent and data, and who each one suits."
+        keywords="Follow Up Boss alternative Canada, Follow Up Boss vs Realtor Desk, Follow Up Boss pricing, CRM for Canadian realtors, Follow Up Boss CASL"
         article
         publishedTime="2025-01-16"
-        modifiedTime="2025-01-16"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-02"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/vs-follow-up-boss"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Realtor Desk vs Follow Up Boss for Canada",
-            "description": "Follow Up Boss alternative comparison for Canadian agents. AI automation, PIPEDA compliance, bilingual support, and transparent pricing.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "datePublished": "2025-01-16",
-            "dateModified": "2025-01-16"
-          }
+            headline: "Realtor Desk vs Follow Up Boss for Canadian agents",
+            description:
+              "Follow Up Boss and Realtor Desk compared for Canadian agents, using what Follow Up Boss publishes about itself.",
+            author: { "@type": "Organization", name: "Realtor Desk" },
+            publisher: { "@type": "Organization", name: "Realtor Desk" },
+            datePublished: "2025-01-16",
+            dateModified: "2026-10-02",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
       <Navbar />
-      
+
       <article className="pt-32 md:pt-40 pb-20">
         <div className="container-custom max-w-4xl">
           <Link to="/resources">
@@ -49,432 +152,121 @@ const VsFollowUpBoss = () => {
 
           <header className="mb-8">
             <div className="flex items-center gap-4 mb-6 text-sm text-muted-foreground flex-wrap">
-              <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold">
-                CRM Comparison
-              </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>January 16, 2025</span>
+                <span>Updated October 2, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>10 min read</span>
+                <span>5 min read</span>
               </div>
             </div>
-            
-            <h1 className="mb-6">
-              Realtor Desk vs Follow Up Boss for Canada
-            </h1>
-            
+            <h1 className="mb-6">Realtor Desk vs Follow Up Boss for Canadian agents</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Follow Up Boss alternative comparison for Canadian agents. AI automation, PIPEDA compliance, bilingual support, and transparent pricing. Start free 14-day trial.
+              Follow Up Boss is a much larger product built around teams. Realtor Desk
+              is a single-agent CRM built around Canadian practice. This is a
+              side-by-side using what Follow Up Boss publishes about itself.
             </p>
           </header>
 
-          {/* Key Stats Card */}
-          <Card className="p-6 mb-8 bg-gradient-to-br from-primary/5 to-secondary/5">
-            <div className="flex items-center gap-3 mb-4">
-              <Zap className="w-6 h-6 text-primary" />
-              <h3 className="text-xl font-bold">The Bottom Line</h3>
-            </div>
-            <p className="text-lg mb-4">
-              Follow Up Boss costs $810 CAD/month for a team of 5. RealtorDesk AI costs $299 CAD for the same team—and responds 98% faster.
+          <Card className="p-6 mb-8">
+            <h2 className="text-lg font-bold mb-3">Short answer</h2>
+            <p className="text-base mb-3">
+              If you run a team, or need routing, a team inbox, calling and a large
+              integration library, Follow Up Boss lists all of those and Realtor Desk
+              has none. If you work alone and need French per contact, a consent
+              record and a database in Canada, Realtor Desk is built around those, and
+              the Follow Up Boss pages we read do not mention them.
             </p>
-            <div className="grid md:grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="text-3xl font-bold text-primary">$7,872</div>
-                <div className="text-sm text-muted-foreground">Savings in Year 1</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-primary">2.7 sec</div>
-                <div className="text-sm text-muted-foreground">AI Response Time</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-primary">24/7</div>
-                <div className="text-sm text-muted-foreground">Automated Engagement</div>
-              </div>
-            </div>
+            <p className="text-sm text-muted-foreground mb-0">
+              We build Realtor Desk, a competitor, so weigh this accordingly. Follow Up
+              Boss facts were read from its own site on October 2, 2026.
+            </p>
           </Card>
 
           <div className="prose prose-lg max-w-none">
-            <p className="lead">
-              Follow Up Boss is solid for teams with dedicated inside sales agents (ISAs). But in 2025, Canadian agents are choosing AI over manual follow-up—and saving thousands in the process.
+            <h2>Side by side</h2>
+            <p>
+              Follow Up Boss column: its{" "}
+              <a href="https://www.followupboss.com" rel="noopener noreferrer" target="_blank">homepage</a>{" "}
+              and{" "}
+              <a href="https://followupboss.com/pricing" rel="noopener noreferrer" target="_blank">pricing page</a>.
+              Where a page did not say something, the table says so rather than
+              assuming it is absent.
             </p>
 
-            <h2>What is Follow Up Boss?</h2>
-            <p>
-              Founded in 2011, Follow Up Boss is a US-based lead management platform designed around a simple premise: route leads to agents quickly and track their manual follow-up. It's built for teams that have dedicated staff to handle lead engagement.
-            </p>
-            <p>
-              Follow Up Boss excels at organizing leads, automating assignment, and tracking agent activity. However, it requires humans to do all the actual follow-up work. There's no conversational AI, no intelligent automation—just smart routing and basic auto-responders.
-            </p>
-
-            <h2>What is RealtorDesk AI?</h2>
-            <p>
-              RealtorDesk AI takes a fundamentally different approach: eliminate manual follow-up entirely. Built for the Canadian market in 2024, RealtorDesk AI uses GPT-4 powered conversational AI to engage, qualify, and nurture leads automatically—with zero human intervention required for initial contact.
-            </p>
-            <p>
-              While Follow Up Boss helps you manage manual follow-up, RealtorDesk AI makes manual follow-up obsolete.
-            </p>
-
-            <h2>The Core Philosophy Difference</h2>
-
-            <h3>Follow Up Boss: Manual Follow-Up at Scale</h3>
-            <p>
-              Follow Up Boss assumes your business model includes humans responding to every lead. It routes leads to the right agent, reminds them to follow up, and tracks whether they did. This works well if you have ISAs or team members dedicated to lead response.
-            </p>
-            <p>
-              But what if you're a solo agent? Or a small team without dedicated ISAs? You're back to manually responding to leads—and studies show 78% of leads choose the first agent who responds.
-            </p>
-
-            <h3>RealtorDesk AI: Automated Follow-Up Instantly</h3>
-            <p>
-              RealtorDesk AI's AI responds to every lead in under 3 seconds, asks qualifying questions, handles objections, and books appointments—all automatically. Agents only engage when the lead is qualified and ready for human interaction.
-            </p>
-            <p>
-              This approach works for everyone: solo agents, small teams, and large brokerages. No ISAs required.
-            </p>
-
-            <h2>Feature Comparison Deep Dive</h2>
-
-            <h3>Lead Response Time: The Critical Metric</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> Instantly routes leads to assigned agents via SMS, email, or push notification. Agent must manually respond. Average response time: 8-15 minutes during business hours, hours or days outside business hours.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> AI responds automatically in 2.7 seconds, 24/7/365. Engages leads in natural conversation, asks qualifying questions, and nurtures them through the sales funnel.
-            </p>
-            <p>
-              <strong>Impact:</strong> Research shows 78% of leads go to the first responder. If your competition has AI responding in seconds while you're responding in minutes, you've already lost.
-            </p>
-
-            <h3>AI Automation: Auto-Responders vs Intelligence</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> Offers basic automation like scheduled drip campaigns and generic auto-responders. These are pre-written messages sent at specific intervals—not intelligent conversations.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> Full GPT-4 powered conversational AI that:
-            </p>
-            <ul>
-              <li>Understands context and intent</li>
-              <li>Remembers previous conversations</li>
-              <li>Adapts responses based on lead behavior</li>
-              <li>Handles objections and questions naturally</li>
-              <li>Books appointments directly into your calendar</li>
-              <li>Qualifies leads through intelligent questioning</li>
-            </ul>
-            <p>
-              <strong>Example:</strong> When a lead asks "I'm looking for something near a good school district with a big backyard," RealtorDesk AI understands this is likely a family, prioritizes properties near top-rated schools, and asks about budget, bedrooms, and preferred neighborhoods. Follow Up Boss would send a generic "Thanks for your inquiry" email.
-            </p>
-            <p>
-              <strong>Winner: RealtorDesk AI</strong> — True AI beats scheduled messages every time.
-            </p>
-
-            <h3>Team Collaboration: Both Strong</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> Excellent team workflows, lead assignment rules, activity tracking, and performance dashboards. Built for teams from day one.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> Intelligent lead distribution, shared team inbox, performance dashboards, and collaborative notes. AI handles initial engagement for all team members automatically.
-            </p>
-            <p>
-              <strong>Winner: Tie</strong> — Both platforms excel at team collaboration.
-            </p>
-
-            <h3>Canadian Compliance: Critical Difference</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> US platform built for US regulations. No built-in PIPEDA or CASL compliance. Canadian agents must manually create compliant consent forms, manage unsubscribe lists, and ensure data residency requirements are met.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> PIPEDA-native platform with Canadian data residency. CASL-compliant email templates with automatic consent tracking. Pre-built forms for federal and provincial requirements. Automatic audit trails for compliance verification.
-            </p>
-            <p>
-              <strong>Legal risk:</strong> PIPEDA violations can result in fines up to $100,000. CASL violations up to $10 million. Using a compliant-by-design platform eliminates this risk.
-            </p>
-            <p>
-              <strong>Winner: RealtorDesk AI</strong> — Canadian compliance built-in vs DIY compliance.
-            </p>
-
-            <h3>Integrations: Quantity vs Relevance</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> 300+ integrations with various platforms—mostly US-focused tools. Impressive breadth.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> 30+ integrations prioritizing Canadian tools: RateSpy, BrokerBay, Canadian mortgage calculators, and more. CREA DDF® / local MLS integration is on the Q3 2026 roadmap.
-            </p>
-            <p>
-              <strong>The question:</strong> Do you need 300 integrations, or do you need the right 30?
-            </p>
-            <p>
-              <strong>Winner: Follow Up Boss (breadth) | RealtorDesk AI (relevance for Canada)</strong>
-            </p>
-
-            <h3>User Interface: Clean vs Minimal</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> Clean, intuitive interface designed for agents. Praised for ease of use.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> Minimal interface because AI does most of the work. You spend less time in the CRM and more time closing deals.
-            </p>
-            <p>
-              <strong>Winner: Tie</strong> — Both offer excellent UX, just different philosophies.
-            </p>
-
-            <h3>Mobile Experience</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> Excellent native mobile apps for iOS and Android. Full feature parity with desktop.
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> Mobile-responsive web interface. Native apps in development (Q2 2025).
-            </p>
-            <p>
-              <strong>Winner: Follow Up Boss</strong> — For now. RealtorDesk AI's mobile apps launching soon.
-            </p>
-
-            <h3>Email & SMS Marketing</h3>
-            <p>
-              <strong>Follow Up Boss:</strong> Basic email campaigns through integrations. SMS requires third-party tools (extra cost).
-            </p>
-            <p>
-              <strong>RealtorDesk AI:</strong> Built-in CASL-compliant email and SMS. AI-generated sequences that adapt based on engagement. No additional costs.
-            </p>
-            <p>
-              <strong>Winner: RealtorDesk AI</strong> — Built-in, compliant, and AI-powered.
-            </p>
-
-            <h2>Pricing Comparison: The Real Cost</h2>
-
-            <h3>Follow Up Boss Pricing (CAD Conversion)</h3>
-            <ul>
-              <li><strong>Team Plan:</strong> $399 USD = $540 CAD/month (up to 4 users)</li>
-              <li><strong>Team+ Plan:</strong> $599 USD = $810 CAD/month (up to 8 users)</li>
-              <li><strong>Enterprise:</strong> $899+ USD = $1,215+ CAD/month</li>
-              <li><strong>Add-ons:</strong> Dialer ($29/user/month), integrations (varies)</li>
-            </ul>
-            <p>
-              <strong>First-year cost for team of 5:</strong>
-            </p>
-            <ul>
-              <li>Base: $810 CAD × 12 = $9,720 CAD</li>
-              <li>Dialer: $29 × 5 × 12 = $1,740 CAD</li>
-              <li><strong>Total: $11,460 CAD</strong></li>
-            </ul>
-
-            <h3>RealtorDesk AI Pricing (CAD)</h3>
-            <ul>
-              <li><strong>Team Plan:</strong> $299 CAD/month (up to 5 users)</li>
-              <li><strong>Everything included:</strong> AI chatbot, voice AI, SMS, email, all features</li>
-              <li><strong>No per-user charges</strong></li>
-              <li><strong>No hidden fees or add-ons</strong></li>
-              <li><strong>14-day free trial, cancel anytime before you're charged</strong></li>
-            </ul>
-            <p>
-              <strong>First-year cost for team of 5:</strong>
-            </p>
-            <ul>
-              <li>$299 × 12 = <strong>$3,588 CAD</strong></li>
-            </ul>
-            <p>
-              <strong>Your savings: $7,872 CAD in year 1</strong>
-            </p>
-
-            <h3>3-Year Total Cost Comparison</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Platform</th>
-                  <th>Year 1</th>
-                  <th>Year 2</th>
-                  <th>Year 3</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Follow Up Boss</td>
-                  <td>$11,460</td>
-                  <td>$11,460</td>
-                  <td>$11,460</td>
-                  <td>$34,380</td>
-                </tr>
-                <tr>
-                  <td>RealtorDesk AI</td>
-                  <td>$3,588</td>
-                  <td>$3,588</td>
-                  <td>$3,588</td>
-                  <td>$10,764</td>
-                </tr>
-                <tr className="font-bold">
-                  <td>Your Savings</td>
-                  <td>$7,872</td>
-                  <td>$7,872</td>
-                  <td>$7,872</td>
-                  <td>$23,616</td>
-                </tr>
-              </tbody>
-            </table>
-            <p>
-              <strong>$23,616 CAD saved over 3 years</strong> — enough to hire an additional agent or invest in serious lead generation.
-            </p>
-
-            <h2>Honest Assessment: Pros & Cons</h2>
-
-            <h3>Follow Up Boss Pros</h3>
-            <ul>
-              <li>Mature product (13+ years in market)</li>
-              <li>Excellent for teams with dedicated ISAs</li>
-              <li>Strong integration library (300+)</li>
-              <li>Trusted by 20,000+ agents worldwide</li>
-              <li>Native mobile apps (iOS/Android)</li>
-              <li>Strong community and resources</li>
-            </ul>
-
-            <h3>Follow Up Boss Cons</h3>
-            <ul>
-              <li>Expensive for Canadian teams ($810-1,215 CAD/month)</li>
-              <li>No built-in AI automation—just routing</li>
-              <li>Manual follow-up required (defeats the purpose of automation)</li>
-              <li>US-centric (no PIPEDA/CASL by design)</li>
-              <li>Per-user pricing adds up fast</li>
-              <li>Requires ISAs or dedicated staff to maximize value</li>
-            </ul>
-
-            <h3>RealtorDesk AI Pros</h3>
-            <ul>
-              <li>AI eliminates manual follow-up entirely</li>
-              <li>Built for Canadian compliance (PIPEDA/CASL)</li>
-              <li>Transparent pricing in CAD ($299/month for teams)</li>
-              <li>Sub-3-second response time, 24/7</li>
-              <li>Solo agent friendly (no ISAs needed)</li>
-              <li>Bilingual (English/French) for Quebec markets</li>
-              <li>Simple, focused feature set—productive in 15 minutes</li>
-            </ul>
-
-            <h3>RealtorDesk AI Cons</h3>
-            <ul>
-              <li>Newer platform (less brand recognition)</li>
-              <li>Smaller integration library (30 vs 300)</li>
-              <li>Mobile app still in development</li>
-              <li>Better for small/medium teams than large enterprises (for now)</li>
-            </ul>
-
-            <h2>Real Agent Testimonials</h2>
-
-            <h2>Real-World Scenario: Friday at 9:47 PM</h2>
-
-            <p>
-              A lead submits an inquiry on Friday evening at 9:47 PM asking about a 3-bedroom condo. Here's how each platform handles it:
-            </p>
-
-            <h3>Follow Up Boss Flow:</h3>
-            <ol>
-              <li><strong>9:47 PM:</strong> Lead enters system (instant)</li>
-              <li><strong>9:47 PM:</strong> SMS/email notification sent to agent (instant)</li>
-              <li><strong>Saturday 10:30 AM:</strong> Agent sees notification, responds (12+ hours later)</li>
-              <li><strong>Result:</strong> Lead has contacted 3 other agents and booked showings with the first responder</li>
-            </ol>
-
-            <h3>RealtorDesk AI Flow:</h3>
-            <ol>
-              <li><strong>9:47:03 PM:</strong> AI responds in 3 seconds</li>
-              <li><strong>9:48 PM:</strong> AI asks qualifying questions: "What's your budget?" "When are you looking to move?"</li>
-              <li><strong>9:52 PM:</strong> AI presents 3 matching properties based on criteria</li>
-              <li><strong>9:55 PM:</strong> AI books Saturday 2 PM showing</li>
-              <li><strong>Saturday 8 AM:</strong> Agent receives notification with qualified lead and confirmed appointment</li>
-            </ol>
-
-            <p>
-              <strong>Result:</strong> While Follow Up Boss users were sleeping, RealtorDesk AI turned a cold inquiry into a booked showing with a qualified buyer.
-            </p>
-
-            <h2>Which Platform Fits Your Needs?</h2>
-
-            <h3>Choose Follow Up Boss If:</h3>
-            <ul>
-              <li>You have 10+ agents with dedicated ISAs</li>
-              <li>Manual follow-up with human touch is core to your strategy</li>
-              <li>Budget is $800+ CAD/month</li>
-              <li>You're primarily in the US market</li>
-              <li>You need 300+ integrations</li>
-            </ul>
-
-            <h3>Choose RealtorDesk AI If:</h3>
-            <ul>
-              <li>You're a Canadian solo agent or small team (2-10 agents)</li>
-              <li>You want AI to automate follow-up entirely</li>
-              <li>Speed matters more than feature quantity</li>
-              <li>You need PIPEDA/CASL compliance</li>
-              <li>Budget is under $300 CAD/month</li>
-              <li>You don't have staff for manual follow-up</li>
-              <li>You serve Quebec markets (need bilingual)</li>
-              <li>You're tired of losing leads to slow response times</li>
-            </ul>
-
-            <h2>Final Verdict & Scoring</h2>
-
-            {/* A star-rating scorecard stood here, awarding this product five
-                stars in nearly every category and Follow Up Boss two or three.
-            
-                Those scores were ours, self-assigned, with no methodology, no
-                source and no disclosure that a vendor was rating its own
-                competitor. The brief prohibits generating ratings, and a
-                scorecard where we win every row is not evidence -- it is an
-                assertion wearing the costume of one.
-            
-                The factual comparison content on this page stands on its own:
-                prices are published, and feature differences can be described
-                without scoring a competitor out of five. */}
-
-            <p>
-              <strong>Overall:</strong> For Canadian agents—especially solo practitioners and small teams—RealtorDesk AI is the clear winner on speed, automation, and value. Follow Up Boss remains a solid choice for large US teams with dedicated ISAs.
-            </p>
-
-            <h2>Frequently Asked Questions</h2>
-
-            <h3>Can I use both platforms together?</h3>
-            <p>
-              Technically yes, but it would be expensive and redundant. If you're considering this, start with RealtorDesk AI's 14-day free trial first—you may find it replaces your need for Follow Up Boss entirely.
-            </p>
-
-            <h3>Does RealtorDesk AI have all the features of Follow Up Boss?</h3>
-            <p>
-              No—RealtorDesk AI intentionally focuses on core features that drive results: AI automation, lead management, and follow-up. It doesn't try to be everything to everyone. For most Canadian agents, this focused approach is actually better.
-            </p>
-
-            <h3>What do I lose by switching from Follow Up Boss?</h3>
-            <p>
-              You'll lose some integrations and the native mobile apps (temporarily—launching Q2 2025). You'll gain AI automation, Canadian compliance, $7,000+ in annual savings, and sub-3-second response times.
-            </p>
-
-            <h3>Is Follow Up Boss available in Canada?</h3>
-            <p>
-              Yes, Canadian agents can use Follow Up Boss. However, it's a US-based platform without built-in Canadian compliance or local market features.
-            </p>
-
-            <h3>How long does it take to learn each platform?</h3>
-            <p>
-              Follow Up Boss: 1-2 weeks to proficiency. RealtorDesk AI: 15 minutes to productivity (because AI does most of the work).
-            </p>
-
-            <div className="cta-section">
-              <h2>Ready to Automate Your Follow-Up?</h2>
-              <p>
-                Stop losing leads to slow response times. Let AI handle your follow-up in under 3 seconds—24/7/365.
-              </p>
-              <div className="flex gap-4 flex-wrap justify-center">
-                <Link to="/demo">
-                  <Button size="lg" className="btn-gradient">
-                    Start Free 14-Day Trial
-                  </Button>
-                </Link>
-                <Link to="/pricing">
-                  <Button size="lg" variant="outline">
-                    Calculate Your Savings
-                  </Button>
-                </Link>
-              </div>
+            <div className="overflow-x-auto not-prose my-6">
+              <table className="min-w-full text-sm">
+                <caption className="text-left text-muted-foreground pb-3">
+                  Follow Up Boss as it describes itself, against Realtor Desk.
+                </caption>
+                <thead>
+                  <tr className="border-b-2 text-left">
+                    <th scope="col" className="py-2 pr-4 font-semibold">Topic</th>
+                    <th scope="col" className="py-2 pr-4 font-semibold">Follow Up Boss</th>
+                    <th scope="col" className="py-2 font-semibold">Realtor Desk</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ROWS.map((r) => (
+                    <tr key={r.topic} className="border-b align-top">
+                      <th scope="row" className="py-3 pr-4 text-left font-semibold">{r.topic}</th>
+                      <td className="py-3 pr-4 text-muted-foreground">{r.fub}</td>
+                      <td className="py-3 text-muted-foreground">{r.rd}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+
+            <h2>Who each one suits</h2>
+            <ul>
+              <li>
+                <strong>A team, or anyone who needs routing and calling:</strong> Follow
+                Up Boss lists those features. Realtor Desk does not support teams
+                today, and our{" "}
+                <Link to="/use-cases/real-estate-team">team guide</Link> says what to look
+                for instead.
+              </li>
+              <li>
+                <strong>A solo Canadian agent who works in French or needs Canadian
+                data location:</strong> Realtor Desk is built around those. See the{" "}
+                <Link to="/use-cases/solo-agent">solo agent guide</Link>.
+              </li>
+              <li>
+                <strong>Anyone price-sensitive for one seat:</strong> compare carefully.
+                At face value Follow Up Boss Grow is lower per month than Realtor Desk,
+                in a currency its page does not name.
+              </li>
+            </ul>
+
+            <p>
+              For other vendors, see the{" "}
+              <Link to="/blog/best-crm-canada-2025">guide to choosing a CRM in Canada</Link>{" "}
+              or the <Link to="/compare">comparison hub</Link>. To move your contacts,
+              see <Link to="/switch-from-follow-up-boss">moving from Follow Up Boss</Link>.
+            </p>
+
+            <h2>Questions</h2>
           </div>
+
+          <FAQAccordion items={FAQS} className="mb-12" />
+
+          <Card className="p-8 text-center">
+            <h2 className="text-2xl font-bold mb-3">See the smaller product on your own contacts</h2>
+            <p className="text-muted-foreground mb-6">
+              14 days, then CAD $149 a month. A card is collected up front and nothing
+              is charged before day 14.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button asChild>
+                <Link to="/signup">Start free trial</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/pricing">See pricing</Link>
+              </Button>
+            </div>
+          </Card>
         </div>
       </article>
 

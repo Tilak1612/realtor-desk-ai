@@ -6,6 +6,7 @@ import { ArrowRight, DollarSign, AlertTriangle, TrendingDown, Clock, PhoneOff, U
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { SEO } from '@/components/SEO';
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const CostOfMissedLeads = () => {
   const [leads, setLeads] = useState(400);
@@ -71,6 +72,7 @@ const CostOfMissedLeads = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               The Cost of Missed Real Estate Leads
             </h1>
+            <ProductScopeNote className="mb-6" />
             <p className="text-xl text-gray-600 mb-8">
               Every missed lead costs $12,000+ in lost commission. See the true cost of slow response times, poor follow-up, and outdated systems. Calculate your exact losses.
             </p>
@@ -382,7 +384,7 @@ const CostOfMissedLeads = () => {
                   <Trophy className="w-6 h-6 text-green-700" />
                   <div>
                     <p className="font-bold">Agent A (with AI):</p>
-                    <p className="text-sm text-gray-700">Responds in 2.8 seconds</p>
+                    <p className="text-sm text-gray-700">Responds within seconds</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
@@ -473,7 +475,7 @@ const CostOfMissedLeads = () => {
                 <h3 className="font-bold mb-4 text-green-900">✓ AI-Powered Agent Response</h3>
                 <ul className="space-y-2 text-sm text-gray-700 mb-4">
                   <li>• After-hours lead arrives</li>
-                  <li>• AI responds in 2.7 seconds</li>
+                  <li>• AI responds within seconds</li>
                   <li>• AI qualifies and books appointment</li>
                   <li>• Agent wakes up to confirmed showing</li>
                 </ul>
@@ -599,7 +601,7 @@ const CostOfMissedLeads = () => {
                 },
                 {
                   week: "Week 2: Implement",
-                  tasks: ["Sign up for AI CRM (RealtorDesk AI recommended)", "Connect to website", "Set up AI chatbot and voice AI", "Configure automated follow-up"]
+                  tasks: ["Choose a CRM and import your contacts", "Connect your lead sources", "Set up lead scoring and next-action reminders", "Write your own follow-up rules"]
                 },
                 {
                   week: "Week 3: Monitor",

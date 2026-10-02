@@ -10,6 +10,7 @@ import blogImage from "@/assets/brand/blog-ai-automation-realtor.svg";
 import blogImageSocial from "@/assets/brand/blog-ai-automation-realtor.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const AIAutomationSlowerMarket = () => {
   useEffect(() => {
@@ -73,6 +74,7 @@ const AIAutomationSlowerMarket = () => {
             <h1 className="mb-6">
               Thriving in a Slower Canadian Market
             </h1>
+            <ProductScopeNote className="mb-6" />
             
             <p className="text-xl text-muted-foreground leading-relaxed">
               When the housing market cools, many real estate agents panic. But here's the truth that top-performing Canadian Realtors understand: slower markets don't eliminate opportunity—they redistribute it to agents who work smarter, not just harder.
@@ -139,7 +141,7 @@ const AIAutomationSlowerMarket = () => {
             </p>
             
             <p>
-              Platforms like <Link to="/how-it-works" className="text-primary hover:underline">RealtorDesk AI</Link> offer Canadian-specific AI chatbots that respond in under 3 seconds and automatically route qualified leads to your CRM for systematic follow-up.
+              <Link to="/how-it-works" className="text-primary hover:underline">Realtor Desk</Link> is a Canadian CRM that scores new leads and suggests a next action in English or French. It does not reply to leads on its own, so you stay the sender.
             </p>
 
             <h3>2. Voice AI for Phone Inquiries</h3>

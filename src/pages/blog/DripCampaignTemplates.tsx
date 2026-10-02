@@ -504,15 +504,15 @@ const DripCampaignTemplates = () => {
                   <h4 className="font-semibold mb-2">17 Lead Generation Strategies for 2025</h4>
                   <p className="text-sm text-muted-foreground">Complete guide to generating more qualified leads</p>
                 </Link>
-                <Link to="/blog/casl-compliance-guide-real-estate-agents" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">CASL Compliance Guide for Realtors</h4>
                   <p className="text-sm text-muted-foreground">Avoid $10,000+ fines with proper email compliance</p>
                 </Link>
-                <Link to="/blog/lead-response-time-study" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/lead-response-time-canadian-realtors" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">Lead Response Time Study</h4>
                   <p className="text-sm text-muted-foreground">Why instant follow-up converts 78% better</p>
                 </Link>
-                <Link to="/blog/cost-of-missed-real-estate-leads" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/resources/cost-of-missed-real-estate-leads-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">Cost of Missed Real Estate Leads</h4>
                   <p className="text-sm text-muted-foreground">Each missed lead costs $12,000+ in commission</p>
                 </Link>

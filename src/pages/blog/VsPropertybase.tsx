@@ -11,7 +11,7 @@ const VsPropertybase = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="Propertybase vs Realtor Desk"
-        description="Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams."
+        description="Propertybase and Realtor Desk compared for Canadian agents: what each does, how each is priced, and who each suits. Realtor Desk is a single-agent product."
         keywords="Propertybase vs RealtorDesk AI, Canadian real estate CRM comparison, Salesforce real estate CRM alternative"
         article
         publishedTime="2025-01-01"
@@ -343,7 +343,7 @@ const VsPropertybase = () => {
                   <ul className="text-sm text-gray-600 space-y-1">
                     <li>• No technical knowledge required</li>
                     <li>• Purpose-built for real estate</li>
-                    <li>• Pre-configured workflows</li>
+                    <li>• French set per contact</li>
                     <li>• Self-service platform</li>
                   </ul>
                 </div>
@@ -699,24 +699,24 @@ const VsPropertybase = () => {
                   <div>
                     <p className="font-semibold">Lead Response:</p>
                     <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• AI automation (24/7)</li>
-                      <li>• 2.7 second response time</li>
-                      <li>• 4.2% conversion rate (2x)</li>
+                      <li>• Scores each lead and suggests a next action</li>
+                      <li>• You send every message</li>
+                      <li>• Consent date and source recorded per contact</li>
                     </ul>
                   </div>
                   
                   <div>
                     <p className="font-semibold">Training Required:</p>
                     <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• 15-minute video per user</li>
-                      <li>• Intuitive interface</li>
+                      <li>• A guided onboarding checklist</li>
+                      <li>• One conversation timeline per client</li>
                       <li>• Pre-configured workflows</li>
                     </ul>
                   </div>
                   
                   <div className="pt-3">
                     <p className="font-bold text-green-900">Result:</p>
-                    <p className="text-gray-700">Low cost, instant implementation, AI automation</p>
+                    <p className="text-gray-700">A smaller product at a published CAD price</p>
                   </div>
                 </div>
               </Card>
@@ -818,19 +818,19 @@ const VsPropertybase = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Related Comparisons</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <Link to="/resources/best-crm-canadian-real-estate-agents-2025">
+              <Link to="/blog/best-crm-canada-2025">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Best CRM for Canadian Agents 2025</h3>
                   <p className="text-sm text-gray-600">Comprehensive top 10 ranking</p>
                 </Card>
               </Link>
-              <Link to="/resources/vs-lofty-crm">
+              <Link to="/blog/vs-lofty-crm">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Lofty CRM vs RealtorDesk AI</h3>
                   <p className="text-sm text-gray-600">Feature bloat vs simplicity</p>
                 </Card>
               </Link>
-              <Link to="/resources/boomtown-alternative-canada">
+              <Link to="/blog/boomtown-alternative-canada">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">BoomTown Alternatives</h3>
                   <p className="text-sm text-gray-600">Top 5 for Canadian agents</p>

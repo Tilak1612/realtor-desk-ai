@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import blogDatabaseReactivation from "@/assets/blog-database-reactivation.jpg";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const DatabaseReactivation = () => {
   useEffect(() => {
@@ -101,6 +102,7 @@ const DatabaseReactivation = () => {
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
                 Real Estate Database Reactivation: The Canadian Agent's Guide to Repeat and Referral Business
               </h1>
+              <ProductScopeNote className="mb-6" />
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Your next three deals are probably already in your phone. Here is how to
                 reactivate a cold database the right way — and stay onside with CASL while you do it.

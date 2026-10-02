@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { ArrowRight, CheckCircle2, XCircle, Phone, Zap, TrendingUp, Shield, Users, DollarSign, Clock, MessageSquare, Globe, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const VoiceAIGuide = () => {
   return (
@@ -40,6 +41,7 @@ const VoiceAIGuide = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               Voice AI for Real Estate Follow-Up
             </h1>
+            <ProductScopeNote className="mb-6" />
             <p className="text-xl text-gray-600 mb-8">
               Voice AI makes 100+ calls per day, qualifies leads, books appointments, and sounds human. See how Canadian agents use AI to follow up instantly and close meaningfully more deals.
             </p>
@@ -262,7 +264,7 @@ const VoiceAIGuide = () => {
               </div>
 
               <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                <p className="font-semibold mb-2">RealtorDesk AI's Voice System Can:</p>
+                <p className="font-semibold mb-2">A good voice AI system can:</p>
                 <ul className="space-y-1 text-sm text-gray-700">
                   <li>✓ Laugh naturally</li>
                   <li>✓ Say "hmm" or "uh-huh" like humans do</li>
@@ -996,16 +998,15 @@ const VoiceAIGuide = () => {
           {/* Final CTA */}
           <section className="text-center py-12">
             <Card className="p-8 bg-gradient-to-r from-primary to-blue-600 text-white">
-              <h2 className="text-3xl font-bold mb-4">Ready to Make 100+ Calls Per Day?</h2>
+              <h2 className="text-3xl font-bold mb-4">Weighing voice AI?</h2>
               <p className="text-xl mb-6">
-                RealtorDesk AI includes advanced Voice AI built specifically for Canadian real estate.
+                Realtor Desk does not offer voice AI, and it is not on the 2026 roadmap. It is a CRM that scores leads and suggests a next action.
               </p>
               <ul className="space-y-2 mb-8 text-lg">
-                <li>✓ Natural-sounding voice</li>
-                <li>✓ Bilingual (English/French)</li>
-                <li>✓ Books appointments automatically</li>
-                <li>✓ PIPEDA compliant</li>
-                <li>✓ Setup in 45 minutes</li>
+                <li>✓ Suggests who to contact next</li>
+                <li>✓ Drafts replies in English or French</li>
+                <li>✓ Records consent date and source</li>
+                <li>✓ You send every message</li>
               </ul>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary" className="text-lg px-8">
@@ -1014,7 +1015,7 @@ const VoiceAIGuide = () => {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="text-lg px-8 bg-white text-primary hover:bg-gray-100">
-                  <Link to="/features/voice-ai">Hear Sample Call</Link>
+                  <Link to="/features">See what it does today</Link>
                 </Button>
               </div>
             </Card>
@@ -1030,16 +1031,16 @@ const VoiceAIGuide = () => {
                   <p className="text-sm text-gray-600">Companion feature to Voice AI</p>
                 </Card>
               </Link>
-              <Link to="/resources/ai-crm-vs-traditional-real-estate-crm-canada">
+              <Link to="/blog/ai-vs-traditional-crm">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">AI CRM vs Traditional CRM</h3>
                   <p className="text-sm text-gray-600">ROI analysis and performance data</p>
                 </Card>
               </Link>
-              <Link to="/features/voice-ai">
+              <Link to="/features">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">Voice AI Features</h3>
-                  <p className="text-sm text-gray-600">See RealtorDesk AI Voice AI in action</p>
+                  <h3 className="font-bold mb-2">Realtor Desk features</h3>
+                  <p className="text-sm text-gray-600">See what the product does today</p>
                 </Card>
               </Link>
             </div>

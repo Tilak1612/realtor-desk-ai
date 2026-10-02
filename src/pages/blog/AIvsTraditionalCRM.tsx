@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const AIvsTraditionalCRM = () => {
   useEffect(() => {
@@ -65,6 +66,7 @@ const AIvsTraditionalCRM = () => {
             <h1 className="mb-6">
               AI CRM vs Traditional CRM for Realtors
             </h1>
+            <ProductScopeNote className="mb-6" />
             
             <p className="text-xl text-muted-foreground leading-relaxed">
               Compare AI-powered CRMs vs traditional real estate CRMs. See response times, conversion rates, costs, and why Canadian agents are switching to AI. Data-driven analysis with real-world results.

@@ -10,6 +10,7 @@ import blogImage from "@/assets/brand/blog-ai-transformation.svg";
 import blogImageSocial from "@/assets/brand/blog-ai-transformation.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const AITransformation = () => {
   useEffect(() => {
@@ -72,6 +73,7 @@ const AITransformation = () => {
             <h1 className="mb-6">
               How AI Is Transforming Canadian Real Estate
             </h1>
+            <ProductScopeNote className="mb-6" />
             
             <p className="text-xl text-muted-foreground leading-relaxed">
               Discover the latest AI innovations revolutionizing how Canadian realtors work, from predictive analytics to automated transaction management.

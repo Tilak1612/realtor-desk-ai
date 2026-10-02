@@ -16,7 +16,7 @@ const VsBoldTrail = () => {
     <div className="min-h-screen">
       <SEO
         title="BoldTrail Alternative for Canadian Agents"
-        description="Looking for a BoldTrail alternative? RealtorDesk AI is $149/mo CAD with no setup fee, bilingual EN/FR and faster support."
+        description="A BoldTrail alternative for Canadian agents: Realtor Desk is a single-agent CRM at CAD $149 a month, with French per contact. BoldTrail quotes on request."
         keywords="BoldTrail alternative, RealtorDesk AI vs BoldTrail, Canadian real estate CRM, AI CRM for realtors"
         canonicalUrl="https://www.realtordesk.ai/vs/boldtrail"
         structuredData={[

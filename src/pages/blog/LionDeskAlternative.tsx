@@ -48,7 +48,7 @@ const LionDeskAlternative = () => {
     <div className="min-h-screen">
       <SEO
         title="LionDesk Alternatives for Canadian Realtors"
-        description="LionDesk ended in September 2025. Your options in Canada, what each vendor publishes on price and currency, and what to check before you move. Checked October 2026."
+        description="LionDesk ended in September 2025. Your options in Canada, what each vendor publishes on price and currency, and what to check before moving. Oct 2026."
         keywords="LionDesk alternative Canada, LionDesk replacement, best LionDesk alternative, Lone Wolf Relationships alternative, CRM for Canadian realtors"
         article
         publishedTime="2026-04-02"

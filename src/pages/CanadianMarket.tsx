@@ -185,7 +185,7 @@ const CanadianMarket = () => {
       <SEO
         canonicalUrl="https://www.realtordesk.ai/canadian-market"
         title="Canadian Real Estate CRM, Built for Canada"
-        description="Realtor Desk for Canadian agents: French per contact, data stored in Canada, CAD pricing and CASL consent records. CREA DDF sync is not live; Realtor.ca import is."
+        description="Realtor Desk for Canadian agents: French per contact, database in Canada, CAD pricing and CASL consent records. CREA DDF sync is not live; Realtor.ca import is."
         keywords="canadian real estate crm, real estate crm canada, bilingual real estate crm, CASL consent crm, crm for canadian realtors"
         structuredData={[
           {

@@ -41,7 +41,7 @@ const FAQS = [
   },
   {
     q: "Can I move my LionDesk contacts into Realtor Desk?",
-    a: "Yes, by CSV. Export your contacts from wherever they now live and import the file. The importer reads first and last name or a single full name, email, phone, source and tags, keeps any extra columns as notes on the record, and skips rows that have neither a name nor an email.",
+    a: "Yes, by CSV. Export your contacts from wherever they now live and import the file. The importer reads first and last name or a single full name, email, phone, source and tags, keeps company, job title and notes in the contact's metadata, and skips rows that have neither a name nor an email.",
   },
   {
     q: "Are imported contacts ready to email?",
@@ -166,8 +166,7 @@ const SwitchFromLionDesk = () => {
                 </li>
                 <li>
                   <strong className="text-foreground">Check what landed.</strong>{" "}
-                  Columns it does not recognise are kept as notes on the record,
-                  tags separated by semicolons become tags, the source defaults to
+                  Company, job title and notes are kept in the contact's metadata, other columns are not imported, tags separated by semicolons become tags, the source defaults to
                   an import label, and rows with neither a name nor an email are
                   skipped.
                 </li>
