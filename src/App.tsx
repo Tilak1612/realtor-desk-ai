@@ -75,6 +75,7 @@ const IntegrationsRoute = () => {
 // Features + Pricing now render via Phase 2 RD* imports above; the legacy
 // page files were deleted in chore/rd-redesign-legacy-cleanup.
 const CanadianMarket = lazyWithRetry(() => import("./pages/CanadianMarket"));
+const FeatureImportContacts = lazyWithRetry(() => import("./pages/features/ImportContacts"));
 const FeaturePipeline = lazyWithRetry(() => import("./pages/features/Pipeline"));
 const FeatureConversations = lazyWithRetry(() => import("./pages/features/Conversations"));
 const FeatureListingImport = lazyWithRetry(() => import("./pages/features/ListingImport"));
@@ -328,6 +329,7 @@ const App = () => (
           <Route path="/features/casl-compliant-email" element={<CaslCompliantEmail />} />
           <Route path="/resources/real-estate-crm-pricing" element={<RealEstateCrmPricing />} />
           <Route path="/use-cases/solo-agent" element={<SoloAgent />} />
+          <Route path="/features/import-contacts" element={<FeatureImportContacts />} />
           <Route path="/features/pipeline" element={<FeaturePipeline />} />
           <Route path="/features/conversations" element={<FeatureConversations />} />
           <Route path="/features/listing-import" element={<FeatureListingImport />} />

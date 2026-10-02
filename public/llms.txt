@@ -40,6 +40,7 @@ No customer counts, revenue, closing-rate increases, hours-saved figures, respon
 - [Follow-up](https://www.realtordesk.ai/features/ai-lead-follow-up): suggests a next action and a time to take it. Nothing is sent automatically.
 - [Pipeline](https://www.realtordesk.ai/features/pipeline): drag-and-drop stages with CAD value per stage. No forecasting, no team pipeline.
 - [Conversations](https://www.realtordesk.ai/features/conversations): one timeline per client; language recorded per message. Not a shared team inbox.
+- [Import contacts](https://www.realtordesk.ai/features/import-contacts): CSV only. The columns it reads, what is kept in metadata, and what it does not do: it imports no consent, merges no duplicates and brings no deals.
 - [Listing import](https://www.realtordesk.ai/features/listing-import): Realtor.ca address or MLS number. An importer, not a CREA DDF® feed and not an IDX website.
 - [Bilingual CRM](https://www.realtordesk.ai/features/bilingual-crm): English and French, set per contact.
 - [CASL-aware email](https://www.realtordesk.ai/features/casl-compliant-email): consent date and source stored per contact; sends are refused without consent.

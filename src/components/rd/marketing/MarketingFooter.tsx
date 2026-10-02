@@ -6,6 +6,7 @@ import { RDWordmark } from "../Logo";
 import { IconMaple } from "../icons";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
 import { FOOTER_COLUMNS } from "@/config/siteNav";
+import { RelatedPages } from "./RelatedPages";
 
 // Shared footer for every public page. Columns come from FOOTER_COLUMNS in
 // src/config/siteNav.ts, the same registry that drives the header and the
@@ -59,6 +60,8 @@ export function MarketingFooter({ topBorder = true }: MarketingFooterProps) {
           runs 4-up (brand + 2 columns, rest wrap) and the single row only
           appears at lg. The 2026-04-24 audit fixed the opposite failure, a
           grid too narrow for its columns, and the fix has to hold both ways. */}
+      <RelatedPages />
+
       <div className="mx-auto max-w-[1200px] grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-10 text-rd-ink-700">
         <div className="col-span-2 md:col-span-2">
           <RDWordmark size={18} />
