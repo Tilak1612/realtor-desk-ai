@@ -1140,6 +1140,23 @@ for (const route of routes) {
 }
 
 console.log(`✔ Prerendered ${written}/${routes.length} sitemap routes with unique titles.`);
+
+// dist/404.html — what Vercel serves, with status 404, for any URL that is
+// neither a file nor a route in vercel.json's generated rewrites (see
+// scripts/sync-vercel-rewrites.mjs). Same empty app shell, so a visitor still
+// gets the router's NotFound page, but crawlers get a 404 status and noindex.
+{
+  const notFoundHtml = baseHtml
+    .replace(/<title>[\s\S]*?<\/title>/, '<title>Page not found | Realtor Desk</title>')
+    .replace(/<meta name="robots" content="[^"]*"\s*\/?>/, '<meta name="robots" content="noindex, follow" />')
+    .replace(/<meta property="og:url" content="[^"]*"\s*\/?>/, '');
+  if (!/content="noindex, follow"/.test(notFoundHtml)) {
+    console.error('✖ Could not build dist/404.html: robots meta not found in the app shell.');
+    process.exit(1);
+  }
+  fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml, 'utf-8');
+}
+
 if (unresolved.length) {
   console.log(`\n⚠ ${unresolved.length} route(s) need attention:`);
   for (const r of unresolved) console.log(`   - ${r}`);
