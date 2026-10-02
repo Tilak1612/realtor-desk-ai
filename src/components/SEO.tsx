@@ -70,7 +70,13 @@ export const SEO = ({
 
   const ogLocale = locale === 'fr-CA' ? 'fr_CA' : 'en_CA';
   const ogLocaleAlt = locale === 'fr-CA' ? 'en_CA' : 'fr_CA';
-  const htmlLang = locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
+  // A route under /fr/ is a standalone French page with no English twin, so its
+  // document language is French whatever the visitor's UI language is, and it has
+  // no en-CA / x-default alternate to declare. scripts/prerender-pages.js applies
+  // the same rule to the static HTML; the two must agree because a rendering
+  // crawler sees this effect's output replace the static tags.
+  const isFrenchRoute = basePath.startsWith('/fr/');
+  const htmlLang = isFrenchRoute || locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
 
   // react-helmet-async 2.0.5 is inert under React 19 — verified in production:
   // every page carried the homepage <title> and description, and there were
@@ -140,9 +146,21 @@ export const SEO = ({
     upsertMeta("name", "twitter:image", image);
 
     upsertLink("canonical", currentUrl);
-    upsertLink("alternate", altEn, "en-CA");
-    upsertLink("alternate", altFr, "fr-CA");
-    upsertLink("alternate", altEn, "x-default");
+    if (isFrenchRoute) {
+      // One self-referencing fr-CA entry. Drop anything the static head carried
+      // for other languages: those alternates would point at this same page.
+      document.head
+        .querySelectorAll('link[rel="alternate"][hreflang="en-CA"], link[rel="alternate"][hreflang="x-default"]')
+        .forEach((n) => n.remove());
+      upsertLink("alternate", currentUrl, "fr-CA");
+    } else {
+      upsertLink("alternate", altEn, "en-CA");
+      upsertLink("alternate", altFr, "fr-CA");
+      // x-default is the clean URL, as in the static HTML. It used to be ?lang=en
+      // here and the clean URL there, so a crawler that renders JavaScript saw the
+      // value change under it.
+      upsertLink("alternate", `${siteUrl}${basePath}`, "x-default");
+    }
 
     // Page-scoped JSON-LD. Tagged so it can be cleared on unmount without
     // touching the static blocks index.html ships.
@@ -161,7 +179,7 @@ export const SEO = ({
     };
   }, [
     fullTitle, description, keywords, noindex, article, currentUrl, image,
-    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, publishedTime, modifiedTime,
+    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, isFrenchRoute, basePath, publishedTime, modifiedTime,
     author, structuredData,
   ]);
 

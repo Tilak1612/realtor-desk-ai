@@ -59,6 +59,19 @@ export default function Home() {
         canonicalUrl="https://www.realtordesk.ai/"
         structuredData={[
           {
+            // The one schema type the site did not emit. It names the site as an
+            // entity distinct from the company and declares its languages, which
+            // answer engines use to resolve "Realtor Desk" to a single site.
+            // Deliberately no SearchAction: the site has no search, and markup
+            // for a feature that does not exist is the thing to avoid.
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Realtor Desk",
+            url: "https://www.realtordesk.ai/",
+            inLanguage: ["en-CA", "fr-CA"],
+            publisher: { "@type": "Organization", name: "Realtor Desk" },
+          },
+          {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             // Built from HOME_FAQS, the same array <FAQAccordion> renders, so
