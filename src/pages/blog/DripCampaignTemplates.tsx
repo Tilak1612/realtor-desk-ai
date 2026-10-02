@@ -345,7 +345,7 @@ const DripCampaignTemplates = () => {
                   </div>
                 </li>
               </ul>
-              <p className="mt-4 text-sm font-semibold">Penalties for non-compliance: Up to $10,000 per violation ($1M for businesses)</p>
+              <p className="mt-4 text-sm font-semibold">Penalties for non-compliance: up to $1 million per violation for an individual and $10 million for a business</p>
             </Card>
 
             <h2>Performance Benchmarks (What to Expect)</h2>
