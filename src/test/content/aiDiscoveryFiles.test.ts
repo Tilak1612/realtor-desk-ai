@@ -84,6 +84,17 @@ const UNBUILT_AS_SHIPPED = [
   "immutable activity/audit log",
   "FINTRAC verifications",
   "FINTRAC workflows tracked",
+  // Added 2026-10-02. These shipped in all four files as available features
+  // for weeks after the site itself corrected them (2026-09-21): the Google
+  // Calendar and Outlook connections exist but nothing reads or writes events,
+  // contacts come in by CSV only, SMS runs on one platform Twilio account, and
+  // the Team plan has no seat model. The phrases are the exact wording that was
+  // wrong, so they cannot be re-quoted from a cached copy of this file.
+  "Two-way calendar sync",
+  "Two-way with Google Calendar",
+  "Google, Microsoft, or CSV",
+  "customer's own Twilio",
+  "5 users included",
 ];
 
 describe("AI discovery files", () => {
@@ -120,6 +131,25 @@ describe("AI discovery files", () => {
         expect(offending, `${name}: "${claim}" stated as shipped`).toEqual([]);
       }
     }
+  });
+
+  it("lists as available only integrations the hub marks available", () => {
+    // IntegrationHub.tsx is where each integration's status is decided, so it
+    // is the source of truth. The knowledge base listed Google Calendar, Outlook
+    // Calendar, Google Contacts and Microsoft Contacts as available while the hub
+    // marked all four coming_soon.
+    const hub = readFileSync(join(ROOT, "src", "pages", "IntegrationHub.tsx"), "utf8");
+    const comingSoon = [
+      ...hub.matchAll(/name:\s*"([^"]+)"[^{}]{0,400}?status:\s*"coming_soon"/gs),
+    ].map((m) => m[1]);
+    expect(comingSoon.length, "could not read statuses from IntegrationHub").toBeGreaterThan(5);
+
+    const kb = JSON.parse(KB_RAW);
+    const listed: string[] = kb.integrations_available;
+    const wrong = listed.filter((entry) =>
+      comingSoon.some((name) => entry.toLowerCase().includes(name.toLowerCase())),
+    );
+    expect(wrong, `listed as available but marked coming_soon in the hub: ${wrong.join(", ")}`).toEqual([]);
   });
 
   it("quotes the same prices as billing.ts", async () => {

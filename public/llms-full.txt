@@ -3,7 +3,7 @@
 > Plain-text snapshot of the Realtor Desk public site, intended for citation by
 > LLM-based search engines (ChatGPT Search, Perplexity, Claude, Copilot, Gemini).
 > The authoritative version of each section lives at the URL in brackets.
-> Last verified: 2026-09-16.
+> Last verified: 2026-10-02.
 
 CORRECTION NOTICE. Revisions of this file before 2026-09-16 described a
 product that does not exist: a 24/7 AI chatbot answering leads unattended,
@@ -53,24 +53,30 @@ value per stage — in English or French.*
    either language. Language is set per contact and stays there.
 5. **Realtor.ca listing import.** Paste a Realtor.ca listing URL or an MLS
    number and the property details come into the CRM.
-6. **Calendar sync.** Two-way with Google Calendar and Outlook.
-7. **Contact import.** Google, Microsoft, or CSV upload.
-8. **Lead capture webhooks.** Zapier, Make and n8n; new leads arrive as
+6. **Contact import.** CSV upload. Imported contacts carry no consent
+   record, so consent must be recorded before they are emailed.
+7. **Lead capture webhooks.** Zapier, Make and n8n; new leads arrive as
    contacts, de-duplicated by email address.
-9. **SMS.** Through the customer's own Twilio account, with consent recorded
-   per number.
-10. **Consent and unsubscribe.** Consent date and source on every contact. An
-    unsubscribe is honoured immediately and permanently, across every send.
-11. **In-app AI assistant.** Open a lead and ask: it can see that contact,
+8. **SMS.** Sent through Twilio, and only to numbers with a recorded consent.
+9. **Consent and unsubscribe.** Consent date and source on every contact. An
+   unsubscribe is honoured immediately and permanently, across every send.
+10. **In-app AI assistant.** Open a lead and ask: it can see that contact,
     draft a reply, summarise the thread, and talk through a next step, in
     English or French. It is internal to the CRM and requires sign-in.
-12. **Reporting.** Response time, deals closed, stage conversion and lead
+11. **Reporting.** Response time, deals closed, stage conversion and lead
     source, in CAD.
 
 ### Not built — do not describe these as available
 
 - **CREA DDF® sync.** The sync function is a scaffold awaiting CREA
-  credentials. Targeted Q3 2026. Listing import today is via Realtor.ca.
+  credentials and is not live; see the roadmap page for current status.
+  Listing import today is via Realtor.ca.
+- **Calendar sync.** The Google Calendar and Outlook connections exist, but
+  nothing reads or writes events yet.
+- **Google and Microsoft contact import.** CSV is the only import today.
+- **Seats, lead assignment and shared pipelines.** The Team plan is a price
+  tier, not a set of collaboration features.
+- **A native mobile app.** Realtor Desk is a responsive web app.
 - **Automated email sequences.** The sequence builder (email, wait, tag, task)
   exists in the app; scheduled sending is not switched on.
 - **A lead-facing website chatbot.** The AI assistant does not answer leads
@@ -93,9 +99,10 @@ PST where it applies — is calculated at checkout from the billing province.
 **Solo** — CAD $149/month. 1 user. Bilingual EN/FR, lead scoring and pipeline,
 Realtor.ca listing import, CASL email footer and instant unsubscribe.
 
-**Team** — CAD $299/month. 5 users included. Everything in Solo, plus team
-reports and the agent leaderboard. Round-robin routing is on the roadmap and
-is labelled as such on the pricing page.
+**Team** — CAD $299/month. A price tier: the product has no seats, lead
+assignment or shared pipeline today, so a team cannot yet work in one shared
+account. Round-robin routing is on the roadmap and is labelled as such on the
+pricing page. The team and brokerage pages explain what to look for.
 
 **Brokerage** — custom annual contract. Everything in Team, plus a dedicated
 Canadian CSM and an uptime commitment agreed in the contract. SAML SSO, FINTRAC
@@ -123,7 +130,9 @@ No response-time comparison is published for any competitor. None has been
 measured, on either side.
 
 Competitors named on the site: BoldTrail, Follow Up Boss, Lofty (formerly
-Chime), IXACT Contact, Wise Agent, LionDesk.
+Chime), IXACT Contact, Wise Agent, LionDesk (discontinued September 2025),
+Top Producer, Real Geeks, BoomTown, Propertybase and CloseFlow. Lofty and
+BoldTrail publish no prices, so no saving against them is claimed.
 
 ---
 
@@ -147,9 +156,9 @@ their own provincial compliance; the CRM holds the record, not the licence.
 
 ## Bilingual support (FR-CA)
 
-Every public-site surface ships in both English and Canadian French. The
-language switch is the EN/FR toggle in the header, or a `?lang=fr` query
-parameter; each variant is separately canonical with hreflang alternates.
+Every public-site surface ships in both English and Canadian French. The language switch is the EN/FR toggle in the header. French is available in
+the app and across the site; `/fr/crm-immobilier` is the one standalone French
+page with its own URL.
 
 Canadian French typography is followed: 24-hour time (`19 h`, not `7 p.m.`),
 narrow no-break space before `%` and unit symbols (`32 s`, `20 %`, `1,4 M$ CA`),
@@ -163,8 +172,11 @@ FINTRAC → CANAFE, CREA DDF → SDD de l'ACI.
 
 [https://www.realtordesk.ai/roadmap]
 
-- **CREA DDF® integration** — Q3 2026. Requires a formal CREA agreement.
+- **CREA DDF® integration** — not live. Requires a formal CREA agreement; the
+  roadmap page carries the current status.
 - **Centris Quebec MLS sync** — follows CREA DDF.
+- **Calendar sync and Google/Microsoft contact import** — the OAuth
+  connection is built; nothing reads or writes events or imports contacts yet.
 - **Automated sending for email sequences** — builder shipped, sending not yet.
 - **LinkedIn Lead Gen Forms, Facebook Lead Ads, WhatsApp Cloud API** — pending
   each platform's business-app review.

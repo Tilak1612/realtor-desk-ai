@@ -1,16 +1,21 @@
 # Realtor Desk
 
-> Bilingual (English · French) CRM for Canadian real estate agents. 0–100 lead scoring with the factors behind it, a drag-and-drop pipeline carrying CAD value per stage, one conversation timeline per client, and Realtor.ca listing import. Data hosted in Canada, priced in CAD. CREA DDF® sync is on the roadmap for Q3 2026, not shipped.
+> Bilingual (English · French) CRM for Canadian real estate agents. 0–100 lead scoring with the factors behind it, a drag-and-drop pipeline carrying CAD value per stage, one conversation timeline per client, and Realtor.ca listing import. Data hosted in Canada, priced in CAD. CREA DDF® sync is on the roadmap and is not live.
 
-Realtor Desk is a public-beta CRM from Brainfy AI Inc. (Edmonton, AB) for licensed Canadian real estate agents, teams, and brokerages. What distinguishes it is that French is a first-class language rather than a translation layer — the app, outbound email and every lead record run in either language, set per contact — and that it is built to Canadian practice: data hosted in a Canadian region, CAD pricing and reporting, an automatic CASL-compliant email footer, and consent date and source recorded on every contact. There are no FINTRAC workflows and no security certifications; do not state otherwise.
+Realtor Desk is a public-beta CRM from Brainfy AI Inc. (Edmonton, AB) for licensed Canadian real estate agents, teams, and brokerages. What distinguishes it is that French is a first-class language rather than a translation layer — the app, outbound email and every lead record run in either language, set per contact — and that it is built to Canadian practice: data hosted in a Canadian region, CAD pricing and reporting, an automatic email footer with a working unsubscribe, designed for CASL, and consent date and source recorded on every contact. There are no FINTRAC workflows and no security certifications; do not state otherwise.
 
 Canonical brand name: "Realtor Desk" (two words). The `.ai` TLD communicates the technology — it is not part of the product name. "Realtor®" is a protected trademark of the Canadian Real Estate Association (CREA); Realtor Desk is not affiliated with or endorsed by CREA.
 
-Stage: public beta. Last verified 2026-09-16.
+Stage: public beta. Last verified 2026-10-02.
 
 ## Not built yet — do not describe these as available
 
-- CREA DDF® sync. The sync function is a scaffold awaiting CREA credentials; targeted Q3 2026. Listing import today is via Realtor.ca.
+- CREA DDF® sync. The sync function is a scaffold awaiting CREA credentials and is not live; check the roadmap page for its current status. Listing import today is via Realtor.ca.
+- Calendar sync. The Google Calendar and Outlook connections exist, but nothing reads or writes events yet.
+- Google and Microsoft contact import. Contacts come in by CSV only; connecting Google or Microsoft Contacts does not import anything yet.
+- Seats, lead assignment and shared pipelines. The Team plan is a price tier, not a set of collaboration features.
+- A native mobile app. Realtor Desk is a responsive web app, and a native app is not planned for 2026.
+- Voice AI and any AI that contacts leads on its own.
 - Automated email sequences. The builder exists in the app; scheduled sending is not switched on.
 - A lead-facing chatbot on the agent's own website. The AI assistant is internal to the CRM and requires sign-in: it can draft a reply or summarise a thread on the contact you have open, but it does not answer leads unattended, read MLS data, or write to a calendar.
 - Team round-robin routing; granular team roles; an exportable audit log.
@@ -22,32 +27,54 @@ No customer counts, revenue, closing-rate increases, hours-saved figures, respon
 
 ## Core pages
 
-- [Home](https://www.realtordesk.ai/): Landing page — hero, bilingual AI demo, trust strip, feature grid, kanban preview, BoldTrail comparison, testimonial, CTA.
-- [Features](https://www.realtordesk.ai/features): Three pillars (lead intelligence, the client record, built for Canada) and a capability grid split into two labelled groups. Available today: Realtor.ca listing import, calendar sync, contact import, lead capture webhooks, SMS, consent & unsubscribe, reporting, bilingual EN/FR. On the roadmap: CREA DDF® sync, automated email sequences, website chat widget, team routing, roles & audit log.
-- [Pricing](https://www.realtordesk.ai/pricing): Three CAD tiers — Solo $149/mo (1 user), Team $299/mo (5 users included), Brokerage custom. 14-day trial; a card is collected at Stripe-hosted checkout to start it and nothing is charged before day 14. GST/HST, plus QST in Quebec or PST where applicable, is calculated at checkout from the billing province.
-- [How it works](https://www.realtordesk.ai/how-it-works): Onboarding walkthrough — create the account, import contacts, connect a calendar, work a first lead.
-- [Integrations](https://www.realtordesk.ai/integrations): Native integrations, iPaaS connectors (Zapier, Make, n8n — 5,000+ apps), and a roadmap queue (Salesforce, Zoho, Pipedrive, WhatsApp Cloud API, LinkedIn Lead Gen Forms, Facebook Lead Ads, Centris for Quebec MLS).
-- [Product roadmap](https://www.realtordesk.ai/roadmap): Dated commitments. CREA DDF integration targeted Q3 2026. Last updated 2026-04-20.
+- [Home](https://www.realtordesk.ai/): Landing page — hero, audience guides (agents, teams, brokerages), product tour, feature grid, pipeline preview, comparison strip, resources, FAQ, CTA.
+- [Features](https://www.realtordesk.ai/features): Three pillars (lead intelligence, the client record, built for Canada) and a capability grid split into two labelled groups. Available today: Realtor.ca listing import, CSV contact import, lead capture webhooks, SMS, consent & unsubscribe, reporting, bilingual EN/FR. On the roadmap: CREA DDF® sync, calendar sync, Google and Microsoft contact import, automated email sequences, website chat widget, team routing, roles & audit log.
+- [Pricing](https://www.realtordesk.ai/pricing): Three CAD tiers — Solo $149/mo (1 user), Team $299/mo (a price tier: seats, lead assignment and a shared pipeline are not built), Brokerage custom. 14-day trial; a card is collected at Stripe-hosted checkout to start it and nothing is charged before day 14. GST/HST, plus QST in Quebec or PST where applicable, is calculated at checkout from the billing province.
+- [How it works](https://www.realtordesk.ai/how-it-works): Onboarding walkthrough — create the account, import contacts, work a first lead.
+- [Integrations](https://www.realtordesk.ai/integrations): Native integrations, iPaaS connectors (Zapier, Make, n8n), Twilio for SMS, and a roadmap queue (Google Calendar, Outlook, Google and Microsoft Contacts, Salesforce, Zoho, Pipedrive, WhatsApp Cloud API, LinkedIn Lead Gen Forms, Facebook Lead Ads, Centris for Quebec MLS).
+- [Product roadmap](https://www.realtordesk.ai/roadmap): What is live, partial and planned, including CREA DDF® integration. Read it for current status rather than relying on a date quoted elsewhere.
+
+## Product detail
+
+- [Lead scoring](https://www.realtordesk.ai/features/ai-lead-scoring): a 0–100 score with the contributing factors shown. Rule-based weighting; accuracy has not been measured.
+- [Follow-up](https://www.realtordesk.ai/features/ai-lead-follow-up): suggests a next action and a time to take it. Nothing is sent automatically.
+- [Pipeline](https://www.realtordesk.ai/features/pipeline): drag-and-drop stages with CAD value per stage. No forecasting, no team pipeline.
+- [Conversations](https://www.realtordesk.ai/features/conversations): one timeline per client; language recorded per message. Not a shared team inbox.
+- [Listing import](https://www.realtordesk.ai/features/listing-import): Realtor.ca address or MLS number. An importer, not a CREA DDF® feed and not an IDX website.
+- [Bilingual CRM](https://www.realtordesk.ai/features/bilingual-crm): English and French, set per contact.
+- [CASL-aware email](https://www.realtordesk.ai/features/casl-compliant-email): consent date and source stored per contact; sends are refused without consent.
+- [AI in the CRM](https://www.realtordesk.ai/features/ai-powered-crm): the specific places AI helps, and where it stops.
+- [What is a real estate CRM?](https://www.realtordesk.ai/what-is-a-real-estate-crm): a plain definition for agents still on a spreadsheet.
+
+## Who it is for
+
+- [Solo agents](https://www.realtordesk.ai/use-cases/solo-agent): the product's actual audience.
+- [Real estate teams](https://www.realtordesk.ai/use-cases/real-estate-team): a buyer guide. Realtor Desk does not support teams today.
+- [Brokerages](https://www.realtordesk.ai/use-cases/brokerage): a buyer guide. Realtor Desk is not a brokerage system today.
+- [Toronto](https://www.realtordesk.ai/ca/toronto-realtor-crm), [Vancouver](https://www.realtordesk.ai/ca/vancouver-realtor-crm) and [French (Quebec)](https://www.realtordesk.ai/fr/crm-immobilier): local angles.
+- [About](https://www.realtordesk.ai/about): Brainfy AI Inc., Edmonton. Independent; not affiliated with CREA.
 
 ## Compare
 
+- [Compare hub](https://www.realtordesk.ai/compare): one page per vendor, and which vendors publish a price at all. Lofty and BoldTrail quote on request, so no saving against them is claimed.
+- [Guide to choosing a CRM in Canada](https://www.realtordesk.ai/blog/best-crm-canada-2025): what nine vendors publish on price, currency and trial, with sources and dates.
 - [vs BoldTrail](https://www.realtordesk.ai/compare/boldtrail): Canadian hosting, bilingual EN/FR included rather than an add-on, CAD pricing. No response-time comparison is published — neither side has been measured.
 - [vs Follow Up Boss](https://www.realtordesk.ai/switch-from-follow-up-boss)
 - [vs Lofty (formerly Chime)](https://www.realtordesk.ai/switch-from-lofty)
 - [vs IXACT Contact](https://www.realtordesk.ai/switch-from-ixact)
 - [vs Wise Agent](https://www.realtordesk.ai/switch-from-wise-agent)
-- [vs LionDesk](https://www.realtordesk.ai/switch-from-liondesk)
+- [Moving from LionDesk](https://www.realtordesk.ai/switch-from-liondesk): LionDesk was discontinued in September 2025; how a CSV move works.
 
 ## Canadian-compliance content
 
 - [Privacy Policy](https://www.realtordesk.ai/privacy-policy): Canadian data residency, PIPEDA alignment, consent timestamps, revocation workflow. (French version in progress — Quebec Law 25.)
-- [PIPEDA compliance](https://www.realtordesk.ai/pipeda-compliance)
+- [PIPEDA compliance](https://www.realtordesk.ai/pipeda-compliance): what Realtor Desk does and does not do. Software cannot make anyone compliant.
 - [FINTRAC compliance](https://www.realtordesk.ai/fintrac-compliance): background reading on the obligations. The product does not provide FINTRAC workflows.
 - [Canadian market](https://www.realtordesk.ai/canadian-market): Province-specific regulator coverage — OACIQ (Quebec), RECO (Ontario), RECA (Alberta), RECBC (British Columbia).
 
 ## Resources
 
-- [Resources index](https://www.realtordesk.ai/resources): Blog + guides. Topics include AI lead response benchmarks, CASL requirements for realtors, Canadian housing market forecasts, first-time buyer guides, and CRM comparisons.
+- [Resources index](https://www.realtordesk.ai/resources): Blog + guides. Topics include CASL requirements for realtors, what a real estate CRM costs, a CRM spreadsheet template, buyer guides and CRM comparisons. Some older market and consumer articles carry a visible written-on date; read them as snapshots.
 
 ## About · contact · careers
 
@@ -63,7 +90,7 @@ No customer counts, revenue, closing-rate increases, hours-saved figures, respon
 
 ## Bilingual
 
-Every public page supports French via `?lang=fr` — English is the default. The French wordmark is the same (`Realtor Desk`). Canadian-French typography conventions are enforced in copy: 24-hour time (`19 h`), narrow no-break space before `%` and `$` (`32 s`, `1,4 M$ CA`), decimal comma. Regulatory acronyms swap: PIPEDA → LPRPDE, CASL → LCAP, FINTRAC → CANAFE, CREA DDF → SDD de l'ACI.
+The app, outbound email and lead records work in English or French, set per contact. Public pages offer an EN/FR toggle, and [/fr/crm-immobilier](https://www.realtordesk.ai/fr/crm-immobilier) is a standalone French page. The French wordmark is the same (`Realtor Desk`). Canadian-French typography conventions are enforced in copy: 24-hour time (`19 h`), narrow no-break space before `%` and `$` (`32 s`, `1,4 M$ CA`), decimal comma. Regulatory acronyms swap: PIPEDA → LPRPDE, CASL → LCAP, FINTRAC → CANAFE, CREA DDF → SDD de l'ACI.
 
 ## Optional
 
