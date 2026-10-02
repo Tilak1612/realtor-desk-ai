@@ -470,3 +470,53 @@ then is there something to consolidate, and only for the pairs that show it.
 
 The fabricated-pricing corrections in §9 stand — those were verified
 individually and are unrelated to this retraction.
+
+---
+
+## 14. SEO / AEO / GEO audit and upgrade (2026-10-02)
+
+Branch `seo/aeo-geo-audit-2026-10`. Method: source + prerendered `dist` + live site; every capability or price claim checked against code or a dated vendor page.
+
+### Before / after (88 sitemap routes; live site vs. fresh `build:seo`)
+
+| Metric | Live (before) | Branch (after) |
+|---|---|---|
+| Pages with fewer than 3 distinct inbound internal links | 48 | 2 (`/partners/apply`, `/partners/terms`, exempt by design) |
+| Pages with 0 inbound links | 1 | 0 |
+| Median internal links per page | 38 | 43 |
+| Median words per page | 712 | 763 |
+| Titles over 60 / descriptions over 160 | 0 / 0 | 0 / 0 |
+| Pages without H1 / with several H1 | 0 / 0 | 0 / 0 |
+| Pages without JSON-LD | 0 | 0 |
+
+"Before" used the live site against the branch sitemap, so the new import page reads as the soft-404 shell there. Title, description and H1 hygiene was already clean; the gains are in link graph, claims and consistency.
+
+### Critical (fixed)
+- AI-discovery files (`llms*.txt`, `ai-company-info.txt`, `knowledge-base.json`) described features that do not exist (two-way calendar sync, Google/Microsoft contact import, customer's own Twilio, Team seats). Rewritten and guarded by `aiDiscoveryFiles.test.ts`.
+- ~20 pages built on unsourced or false premises (invented ROI, Realtor Desk attributed a lead-facing chatbot/voice AI, unsourced competitor prices, TRREB sync, "only CRM" for FINTRAC, LionDesk "shutting down" a year late). Rewritten from code or dated vendor pages.
+- Legal accuracy: CASL consent windows and penalties, PIPEDA guarantee/SOC 2 wording, BC regulator.
+
+### High (fixed)
+- French routes had `lang="en-CA"`/en-CA + x-default hreflang; now `fr-CA` with a single self-referencing alternate, static and runtime in agreement (`frenchRoute.test.ts`).
+- Internal linking: generated `relatedLinks.ts` (73 pages, clusters + ring siblings), rendered in the footer and in prerendered HTML; `internalLinkDepth.test.ts` enforces 3 inbound links.
+- 14 dead internal link targets (24 occurrences) remapped.
+- Entity: `sameAs` aligned across JSON-LD, `index.html` and footer; `WebSite` schema on the homepage.
+- New page `/features/import-contacts` (CSV importer, documented from `csvImport.ts`; states what it does not do).
+- Compare hub restructured (primary link + secondary links, Propertybase added); titles/descriptions corrected on 12 pages.
+
+### Medium / Low (open)
+- **Soft-404**: unknown URLs return HTTP 200 with the homepage shell. `NotFound` sets `noindex` at runtime, but the static shell says `index, follow`. A true 404 needs a build-time route manifest in `vercel.json` rewrites without breaking `/app/*`, auth or `/api`. Owner decision.
+- One shared `og-image.png` for 88 pages; SoftwareApplication/Product `offers` emitted on every page.
+- Path-based French pages for the main money pages (largest remaining GEO/SEO gap in Quebec).
+- `/blog/success-story` not yet checked for a fabricated story; remaining RD-attributed capability claims in long guides; stale 2025 market pages carry a vintage notice only.
+
+### Needs the owner
+1. Merge #273 and the PR for this branch (production `/compare` still redirects and `/vs/lofty` still claims 85% until #273 merges).
+2. "Q3 2026" CREA DDF wording (116 occurrences, 45 files) is past due; needs the real status.
+3. "Free migration" claims on four switch pages are unverifiable; confirm the service or remove.
+4. Pricing page Team copy ("shared pipeline", "2-10 agents") conflicts with the no-seat product. Pricing-adjacent, not touched.
+5. PIPEDA hosting wording (database in ca-central-1; SMS, email and AI vendors may process outside Canada) needs legal review.
+6. Search Console, Bing Webmaster and GA4 access, to replace inference with query data.
+
+### Next 30 days
+Week 1: merge, submit the sitemap, decide the soft-404 approach. Week 2: DDF wording, free-migration decision, success-story check. Week 3: French money pages (`/fr/*` for pricing, features, CASL guide) and per-page OG images. Week 4: CASL consent-expiry calculator and Zapier/Make/n8n lead-intake page, then read Search Console and prune or merge what does not earn impressions.
