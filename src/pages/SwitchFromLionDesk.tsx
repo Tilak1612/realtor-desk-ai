@@ -66,6 +66,15 @@ const SwitchFromLionDesk = () => {
             "name": "Switch from LionDesk to RealtorDesk AI",
             "description": "LionDesk is shutting down September 2025. Migrate to RealtorDesk AI — Canada's AI-first real estate CRM with free migration and bilingual support.",
             "url": "https://www.realtordesk.ai/switch-from-liondesk"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((f) => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": { "@type": "Answer", "text": f.a },
+            })),
           }
         ]}
       />
