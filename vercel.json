@@ -1,37 +1,600 @@
 {
   "buildCommand": "npm run build:seo",
   "redirects": [
-    { "source": "/vs-lofty", "destination": "/lofty-alternative", "permanent": true },
-    { "source": "/lofty", "destination": "/lofty-alternative", "permanent": true },
-    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
-    { "source": "/terms", "destination": "/terms-of-service", "permanent": true },
-    { "source": "/blog", "destination": "/resources", "permanent": true }
+    {
+      "source": "/vs-lofty",
+      "destination": "/lofty-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/lofty",
+      "destination": "/lofty-alternative",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms-of-service",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/resources",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/demo-requests",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ai-assistant",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ai-crm-canadian-real-estate-agents-guide",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/automation",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/inbox",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/leads",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/leads/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/pipeline",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/reports",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app/settings",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/automations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/billing",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/ai-chatbot-real-estate-websites-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/ai-transformation",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/ai-vs-traditional-crm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/best-crm-canada-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/best-liondesk-alternative-canadian-realtors",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/bilingual-marketing",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/boomtown-alternative-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/community-launch",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/compliance",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/crea-ddf",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/ixact-alternatives",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/lead-conversion",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/open-house-digital-sign-in-sheets-vs-paper-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/real-estate-crm-buying-guide",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/real-estate-drip-campaign-templates-canada-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/real-estate-lead-generation-strategies-canada-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/success-story",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/vs-follow-up-boss",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/vs-kvcore",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/vs-lofty-crm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/vs-propertybase",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ca/toronto-realtor-crm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ca/vancouver-realtor-crm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/calendar",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/call-workflow/:contactId",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/campaigns",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/canada-housing-market-forecast-2025-2026",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/canadian-market",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/canadian-realtors-thrive-slower-market-ai-automation",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compare",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compare/boldtrail",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compare/real-geeks-alternative",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compare/top-producer-alternative",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contacts",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contacts/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard/integrations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/deals",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/demo",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/edmonton-real-estate-market-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/ai-lead-follow-up",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/ai-lead-scoring",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/ai-powered-crm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/bilingual-crm",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/casl-compliant-email",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/conversations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/import-contacts",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/listing-import",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/features/pipeline",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fintrac-compliance",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/first-time-home-buyer-guide-canada-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/forgot-password",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fr/crm-immobilier",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fr/importer-contacts-csv",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fr/lcap-courriels-immobilier",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/integrations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lead-response-time-canadian-realtors",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/lofty-alternative",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/market",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/market-intelligence",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/onboarding",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/partners",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/partners/apply",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/partners/terms",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pipeda-compliance",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pipeda-compliance-real-estate-ai-tools-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/profile",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/properties",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/real-estate-database-reactivation-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/reports",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/reset-password",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/calgary-real-estate-marketing-strategies",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/casl-compliance-real-estate-email-marketing-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/cost-of-missed-real-estate-leads-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/real-estate-crm-pricing",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/real-estate-crm-template",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/slow-follow-up-calculator-canadian-realtors",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/voice-ai-real-estate-lead-follow-up-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/roadmap",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/sell-home-fast-canada-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/settings",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/sign-in",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/sign-up",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/signin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/signup",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/switch-from-boldtrail",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/switch-from-follow-up-boss",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/switch-from-ixact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/switch-from-liondesk",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/switch-from-lofty",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/switch-from-wise-agent",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tasks",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/today",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/toronto-vs-vancouver-real-estate-market-2025",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/unsubscribe",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/use-cases/brokerage",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/use-cases/real-estate-team",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/use-cases/solo-agent",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/verify-email",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vs/boldtrail",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vs/ixact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vs/lofty",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vs/wise-agent",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/what-is-a-real-estate-crm",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://app.cal.com https://cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; connect-src 'self' https://*.supabase.co https://*.supabase.in wss://*.supabase.co https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://api.stripe.com https://api.resend.com https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://*.ingest.de.sentry.io https://api.cal.com https://cal.com https://app.cal.com; frame-src https://js.stripe.com https://hooks.stripe.com https://app.heygen.com https://*.heygen.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://cal.com https://app.cal.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'" }
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://app.cal.com https://cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; connect-src 'self' https://*.supabase.co https://*.supabase.in wss://*.supabase.co https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://api.stripe.com https://api.resend.com https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://*.ingest.de.sentry.io https://api.cal.com https://cal.com https://app.cal.com; frame-src https://js.stripe.com https://hooks.stripe.com https://app.heygen.com https://*.heygen.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://cal.com https://app.cal.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*).html",
       "headers": [
-        { "key": "Cache-Control", "value": "max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "max-age=0, must-revalidate"
+        }
       ]
     }
   ]

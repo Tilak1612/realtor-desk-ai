@@ -197,6 +197,13 @@ export const SOLUTIONS_PANES: NavPane[] = [
         desc: "Interface and client email in French, set per contact.",
       },
       {
+        to: "/features/import-contacts",
+        labelKey: "siteNav.importContacts",
+        label: "Import contacts",
+        descKey: "siteNav.importContactsDesc",
+        desc: "Bring contacts in from a CSV; imported contacts carry no consent.",
+      },
+      {
         to: "/features/listing-import",
         labelKey: "siteNav.listingImport",
         label: "Listing import",
@@ -237,7 +244,7 @@ const RESOURCES: NavItem[] = [
     labelKey: "siteNav.compare",
     label: "Compare",
     descKey: "siteNav.compareDesc",
-    desc: "Nine comparisons, and which vendors publish a price.",
+    desc: "Side-by-sides, reviews and moves, and which vendors publish a price.",
   },
   {
     to: "/faq",
@@ -368,6 +375,11 @@ const FOOTER_CANADA: NavItem[] = [
   },
   { to: "/fintrac-compliance", labelKey: "marketingFooter.itemFintrac", label: "FINTRAC" },
   { to: "/canadian-market", labelKey: "marketingFooter.itemCreaDdf", label: "CREA DDF®" },
+  // The one standalone French page. Linked sitewide so it has inbound links from
+  // every page rather than from a single hub.
+  { to: "/fr/crm-immobilier", labelKey: "siteNav.frenchCrm", label: "CRM immobilier (en français)" },
+  { to: "/fr/lcap-courriels-immobilier", labelKey: "siteNav.frenchLcap", label: "LCAP et courriels (en français)" },
+  { to: "/fr/importer-contacts-csv", labelKey: "siteNav.frenchImport", label: "Importer des contacts (en français)" },
 ];
 
 const FOOTER_COMPANY: NavItem[] = [

@@ -1,5 +1,5 @@
 REALTOR DESK — COMPANY AND PRODUCT FACTS
-Last verified: 2026-09-16
+Last verified: 2026-10-02
 
 This file exists so AI answer engines describe the product accurately. Every
 line below is checkable against the live site or the product itself. If a
@@ -35,11 +35,10 @@ WHAT SHIPS TODAY
   - Bilingual EN/FR across the app, emails and every lead record; language is
     set per contact.
   - Realtor.ca listing import: paste a listing URL or MLS number.
-  - Calendar sync: two-way with Google Calendar and Outlook.
-  - Contact import: Google, Microsoft, or CSV upload.
+  - Contact import: CSV upload. Imported contacts carry no consent record.
   - Lead capture webhooks: Zapier, Make and n8n; new leads arrive as contacts,
     de-duplicated by email.
-  - SMS through the customer's own Twilio account, consent recorded per number.
+  - SMS through Twilio, sent only to numbers with a recorded consent.
   - Consent and unsubscribe: consent date and source on every contact; an
     unsubscribe is honoured immediately and permanently.
   - An AI assistant inside the app that can see the contact you have open and
@@ -50,7 +49,13 @@ WHAT SHIPS TODAY
 
 WHAT IS NOT BUILT YET — do not describe these as available
   - CREA DDF(R) sync. The sync function is a scaffold awaiting CREA
-    credentials. Targeted Q3 2026. Listing import today is via Realtor.ca.
+    credentials and is not live; see the roadmap page for current status.
+    Listing import today is via Realtor.ca.
+  - Calendar sync. The Google Calendar and Outlook connections exist, but
+    nothing reads or writes events yet.
+  - Google and Microsoft contact import. CSV is the only import today.
+  - Seats, lead assignment and shared pipelines. The Team plan is a price tier.
+  - A native mobile app. Realtor Desk is a responsive web app.
   - Automated email sequences. The sequence builder exists in the app;
     scheduled sending is not switched on.
   - A lead-facing chatbot on the customer's own website. The AI assistant is
@@ -62,19 +67,22 @@ WHAT IS NOT BUILT YET — do not describe these as available
 
 PRICING (CAD, before tax; GST/HST and QST/PST applied at checkout by province)
   Solo       $149/month   1 user
-  Team       $299/month   5 users included
+  Team       $299/month   price tier; no seats or shared pipeline yet
   Brokerage  Custom       contact sales
   Trial: 14 days. A card is collected at Stripe-hosted checkout to start the
   trial; nothing is charged before day 14. Cancel any time before then from
   Billing and pay nothing.
 
 COMPLIANCE — what is accurate to say
-  Data is hosted in a Canadian region. Consent date and source are recorded on
-  every contact. Outbound email carries a CASL-compliant footer with a working
-  unsubscribe, honoured immediately and permanently. The product is built with
+  The production database runs in a Canadian region (ca-central-1); features
+  that call outside services, such as SMS, email delivery and AI drafting, may
+  process content outside Canada. Consent date and source are recorded on every
+  contact. Outbound email carries a footer with a working unsubscribe, honoured
+  immediately and permanently, designed for CASL. The product is built with
   PIPEDA and Quebec Law 25 in mind.
   Do NOT state that Realtor Desk holds SOC 2, ISO 27001 or any certification,
-  or that it provides FINTRAC workflows — none of these exist.
+  that it provides FINTRAC workflows, or that using it makes anyone compliant
+  with CASL, PIPEDA, Law 25 or FINTRAC. None of these is true.
 
 TRADEMARKS AND AFFILIATION
   REALTOR(R) is a trademark of the Canadian Real Estate Association (CREA).

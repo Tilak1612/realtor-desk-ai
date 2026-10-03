@@ -5,16 +5,20 @@ import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 
-// /compare — the hub the brief asks for. There was none: nine vendors' worth
+// /compare — the hub the brief asks for. There was none: ten vendors' worth
 // of comparison pages and no page that listed them.
 //
-// ONE DESTINATION PER VENDOR, DELIBERATELY. The audit behind this page found
-// 17 comparison URLs in the sitemap covering 9 vendors — three each for
-// BoldTrail, Lofty and IXACT, all self-canonical, all competing for the same
-// query. A hub that linked all 17 would concentrate internal links on the
-// duplication instead of resolving it. Consolidating the extras needs a
-// recorded old-to-new redirect map and is not done here; the inventory is in
-// docs/REDESIGN-PHASE-0-AUDIT.md.
+// ONE DESTINATION PER VENDOR, DELIBERATELY. The sitemap holds 18 comparison URLs
+// for 9 vendors: four each for BoldTrail and Lofty, three for IXACT. They are
+// NOT duplicates. Measured 2026-09-29 (six-word shingle overlap, REDESIGN-PHASE-0-
+// AUDIT.md section 13), the highest content containment between any pair is 0.26
+// against a near-duplicate threshold around 0.45, and the titles target
+// different intents (alternative, versus, migration, research).
+//
+// The hub links one page per vendor because a hub is a short list, not because
+// the others are redundant. Whether any pair trades positions on one query is a
+// Search Console question this repo cannot answer; consolidate only pairs that
+// show it.
 //
 // No comparison table on this page. Every factual cell belongs on the vendor
 // page that can date and source it, and a summary table here would be a second
@@ -25,8 +29,13 @@ interface Rival {
   to: string;
   /** Who should read it. Not a verdict on the competitor. */
   fit: string;
-  /** Publishes a price, or quotes on request. Checked 2026-09-28. */
-  pricing: "published" | "on request";
+  /** Publishes a price, or quotes on request. Checked 2026-09-28. Left unset
+   *  for a vendor we have not checked, in which case no claim is shown. */
+  pricing?: "published" | "on request";
+  /** The vendor's other pages: the side-by-side, the review, the move. They are
+   *  distinct pages, not duplicates (measured, REDESIGN-PHASE-0-AUDIT.md section
+   *  13), so the hub lists them. */
+  more?: { to: string; label: string }[];
 }
 
 // `pricing` is the one fact stated here rather than on the vendor page, because
@@ -38,36 +47,42 @@ const RIVALS: Rival[] = [
     to: "/compare/boldtrail",
     fit: "Large teams weighing a full lead-gen suite against a CRM that does less on purpose.",
     pricing: "on request",
+    more: [{ to: "/vs/boldtrail", label: "BoldTrail alternative" }, { to: "/switch-from-boldtrail", label: "Moving from BoldTrail" }, { to: "/blog/vs-kvcore", label: "kvCORE, now BoldTrail" }],
   },
   {
     vendor: "Lofty (formerly Chime)",
     to: "/lofty-alternative",
     fit: "Agents who want the AI features without the US-market assumptions underneath them.",
     pricing: "on request",
+    more: [{ to: "/vs/lofty", label: "Side by side" }, { to: "/switch-from-lofty", label: "Moving from Lofty" }, { to: "/blog/vs-lofty-crm", label: "Lofty review" }],
   },
   {
     vendor: "Follow Up Boss",
     to: "/switch-from-follow-up-boss",
     fit: "Teams who like its follow-up discipline and want Canadian hosting and French.",
     pricing: "published",
+    more: [{ to: "/blog/vs-follow-up-boss", label: "Side by side" }],
   },
   {
     vendor: "IXACT Contact",
     to: "/vs/ixact",
     fit: "Canadian agents already on a low-cost CRM, asking what more spend actually buys.",
     pricing: "published",
+    more: [{ to: "/switch-from-ixact", label: "Moving from IXACT" }, { to: "/blog/ixact-alternatives", label: "IXACT alternatives" }],
   },
   {
     vendor: "Wise Agent",
     to: "/vs/wise-agent",
     fit: "Solo agents comparing a cheaper US product against one billed and hosted here.",
     pricing: "published",
+    more: [{ to: "/switch-from-wise-agent", label: "Moving from Wise Agent" }],
   },
   {
     vendor: "LionDesk",
     to: "/switch-from-liondesk",
-    fit: "Anyone moving off LionDesk after its migration into Lone Wolf Relationships.",
+    fit: "Anyone moving off LionDesk, which Lone Wolf discontinued in September 2025.",
     pricing: "published",
+    more: [{ to: "/blog/best-liondesk-alternative-canadian-realtors", label: "LionDesk alternatives" }],
   },
   {
     vendor: "Real Geeks",
@@ -80,6 +95,11 @@ const RIVALS: Rival[] = [
     to: "/compare/top-producer-alternative",
     fit: "Long-time users deciding whether to modernise or move.",
     pricing: "published",
+  },
+  {
+    vendor: "Propertybase",
+    to: "/blog/vs-propertybase",
+    fit: "Teams weighing an enterprise-grade platform against a smaller CRM at a published price.",
   },
   {
     vendor: "BoomTown",
@@ -122,7 +142,7 @@ const CompareHub = () => {
             "@type": "CollectionPage",
             name: "Compare Realtor Desk to other real estate CRMs",
             url: "https://www.realtordesk.ai/compare",
-            hasPart: RIVALS.map((r) => ({
+            hasPart: RIVALS.flatMap((r) => [{ to: r.to, vendor: r.vendor }, ...(r.more ?? []).map((m) => ({ to: m.to, vendor: r.vendor }))]).map((r) => ({
               "@type": "WebPage",
               name: `Realtor Desk compared with ${r.vendor}`,
               url: `https://www.realtordesk.ai${r.to}`,
@@ -146,7 +166,7 @@ const CompareHub = () => {
           <div className="container-custom max-w-3xl">
             <h1 className="mb-6">Compare Realtor Desk</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Nine comparisons against the CRMs Canadian agents actually switch
+              Comparisons against the CRMs Canadian agents actually switch
               from. Each one says who the other product suits, not just who it
               does not.
             </p>
@@ -178,24 +198,39 @@ const CompareHub = () => {
               <ul className="space-y-4 list-none p-0 m-0">
                 {RIVALS.map((r) => (
                   <li key={r.to}>
-                    <Link
-                      to={r.to}
-                      className="block rounded-lg border p-5 transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                        <span className="text-base font-semibold">
-                          Realtor Desk vs {r.vendor}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {r.pricing === "published"
-                            ? "Publishes a price"
-                            : "Quotes on request"}
-                        </span>
-                      </div>
-                      <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
-                        {r.fit}
-                      </p>
-                    </Link>
+                    <div className="rounded-lg border p-5 transition-shadow hover:shadow-md focus-within:ring-2 focus-within:ring-ring">
+                      <Link
+                        to={r.to}
+                        className="block focus-visible:outline-none"
+                      >
+                        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                          <span className="text-base font-semibold">
+                            Realtor Desk vs {r.vendor}
+                          </span>
+                          {r.pricing && (
+                            <span className="text-xs text-muted-foreground">
+                              {r.pricing === "published"
+                                ? "Publishes a price"
+                                : "Quotes on request"}
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                          {r.fit}
+                        </p>
+                      </Link>
+                      {r.more && r.more.length > 0 && (
+                        <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 list-none p-0 text-sm">
+                          {r.more.map((m) => (
+                            <li key={m.to}>
+                              <Link className="underline underline-offset-2" to={m.to}>
+                                {m.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                   </li>
                 ))}
               </ul>

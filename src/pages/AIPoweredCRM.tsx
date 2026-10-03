@@ -2,504 +2,229 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { CheckCircle, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { 
-  Brain, 
-  TrendingUp, 
-  MessageSquare, 
-  Zap, 
-  Target,
-  MapPin,
-  Clock,
-  CheckCircle,
-  X,
-  Check,
-  BarChart3,
-  Users,
-  Mail
-} from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
+
+// /features/ai-powered-crm — rewritten 2026-10-02.
+//
+// The site's navigation describes this page as "the specific places AI does
+// work, and where it stops". The previous page did the opposite. It said
+// Realtor Desk "uses machine learning to predict leads" (the score is a
+// rule-based weighting), showed example leads at "Hot Lead - 94%" and a
+// scripted 24/7 chatbot conversation that books a viewing, promised "AI
+// determines optimal contact timing" and "7 perfectly-timed touches, you never
+// lifted a finger", compared itself on a "Canadian Market Data" row, and closed
+// with an "Agents Using Our AI See: 41% ..." block of outcome statistics.
+// None of those capabilities or numbers exist. A code comment on the old page
+// already recorded that a "Canadian Market Intelligence" section had been
+// removed for the same reason; the rest of the page had not caught up.
+//
+// WHAT IS TRUE, AND WHERE IT COMES FROM (public/knowledge-base.json, checked
+// against the code on 2026-10-02):
+//   lead score        0-100, a weighted combination of factors, with the factors
+//                     and a suggested next action shown on the lead. Rule-based.
+//                     Accuracy has never been measured.
+//   AI assistant      inside the app, requires sign-in, sees the contact you
+//                     have open, drafts a reply, summarises a thread, talks
+//                     through a next step, in English or French.
+//   nothing is sent   without you. There is no lead-facing chatbot, no voice
+//                     agent, no automated sequences (the builder exists;
+//                     scheduled sending is not switched on).
+
+const DOES: { title: string; body: string }[] = [
+  {
+    title: "A lead score with its working shown",
+    body: "Each lead gets a 0 to 100 score built from factors such as engagement, behaviour, budget match, timeline and qualification. The factors are listed beside the score, so you can see why a lead is ranked where it is and overrule it. It is a rule-based weighting, not a trained model.",
+  },
+  {
+    title: "A suggested next action",
+    body: "Beside the score the product suggests what to do next and when. It is a prompt for your attention: you decide, and you send.",
+  },
+  {
+    title: "An assistant on the contact you have open",
+    body: "Inside the app, the assistant can see the contact in front of you and draft a reply, summarise the thread, or talk through a next step, in English or French. It needs you signed in, and it works on one contact at a time.",
+  },
+];
+
+const DOES_NOT: string[] = [
+  "Contact a lead on its own. Nothing is sent without you.",
+  "Run a chatbot on your website or answer leads out of hours.",
+  "Make or take calls. There is no voice agent.",
+  "Send scheduled email sequences. The builder exists, but scheduled sending is not switched on.",
+  "Predict prices, forecast the market or value a property.",
+  "Choose the best time to contact someone. It suggests; it does not optimise.",
+  "Measure its own accuracy. How well the score predicts outcomes has not been studied.",
+];
+
+const FAQS = [
+  {
+    q: "Is the lead score machine learning?",
+    a: "No. It is a rule-based weighting of factors such as engagement, behaviour, budget match, timeline and qualification, with the factors shown on the lead. That makes it explainable, and it also means nobody has tested how well it predicts a sale.",
+  },
+  {
+    q: "Does the AI reply to my leads for me?",
+    a: "No. The assistant drafts and summarises inside the app for the contact you have open. Nothing is sent to a lead until you send it, which also keeps you on the right side of CASL consent.",
+  },
+  {
+    q: "Is there an AI chatbot for my website?",
+    a: "Not today. The assistant is internal to the CRM and needs a signed-in user. It does not answer leads unattended.",
+  },
+  {
+    q: "Does the assistant work in French?",
+    a: "Yes. It can draft and summarise in English or French, and the language of a client's messages is recorded per contact.",
+  },
+  {
+    q: "Where does the AI process my data?",
+    a: "AI-assisted features send the content they work on to an outside AI provider, which may process it outside Canada. The database itself runs in Canada. Our PIPEDA page explains the difference between where records are stored and where each processing step happens.",
+  },
+];
 
 const AIPoweredCRM = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="AI-Powered CRM for Real Estate | RealtorDesk AI"
-        description="Real AI for Canadian agents with predictive lead scoring, market intelligence, and 24/7 automation."
-        keywords="AI powered CRM, real estate AI CRM, predictive lead scoring, Canadian real estate CRM"
+        title="AI-Powered CRM for Real Estate | Realtor Desk"
+        description="Where AI helps in Realtor Desk: a lead score with its factors shown, an in-app assistant that drafts replies, and a plain list of what it does not do."
+        keywords="AI CRM real estate, AI powered CRM Canada, real estate lead scoring, AI assistant for realtors, explainable lead scoring"
         canonicalUrl="https://www.realtordesk.ai/features/ai-powered-crm"
         structuredData={[
           {
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "AI-Powered CRM",
-            "description": "AI-powered CRM for Canadian real estate agents with predictive lead scoring and automation."
-          }
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
-        <div className="container-custom text-center">
-          <Badge variant="secondary" className="mb-4 gap-1.5">
-            <Brain className="w-3 h-3" />
-            AI-Powered Intelligence
-          </Badge>
-          <h1 className="mb-6">
-            Real AI. Real Results. <span className="gradient-text">Not Just Another Chatbot.</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            While other CRMs call basic automation "AI", we use machine learning to predict leads, 
-            optimize timing, and understand Canadian markets—giving you a measurable edge.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/demo">
-              <Button size="lg" className="btn-gradient">
-                See AI in Action
-              </Button>
-            </Link>
-            <Link to="/pricing">
-              <Button size="lg" variant="outline">
-                View Pricing
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Predictive Lead Scoring */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4 bg-rd-terra-800">
-                <Target className="w-3 h-3 mr-1" />
-                Predictive Intelligence
-              </Badge>
-              <h2 className="mb-6">See who is actually engaged</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Realtor Desk ranks each lead by the interest it has actually shown — website
-                visits, properties and documents viewed, time on site and email engagement —
-                so your list is ordered by engagement rather than by arrival time.
-              </p>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Stop Wasting Time on Cold Leads</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Focus on the 18% of leads that are actually ready to transact
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Identify Hidden Opportunities</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Find sellers ready to list 3-6 months before they contact you
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Prioritize Your Day Automatically</h4>
-                    <p className="text-sm text-muted-foreground">
-                      AI tells you exactly who to call first every morning
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div className="bg-muted rounded-2xl p-8 border">
-              <div className="space-y-4">
-                <div className="bg-background rounded-lg p-4 border-l-4 border-green-500">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold">Sarah Thompson</span>
-                    <Badge className="bg-green-700">Hot Lead - 94%</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Viewed 12 listings, opened 8 emails, searched "$800K Toronto condos"
-                  </p>
-                  <div className="text-xs text-rd-terra-800 font-semibold">
-                    ⚡ Predicted to buy in 30-45 days
-                  </div>
-                </div>
-
-                <div className="bg-background rounded-lg p-4 border-l-4 border-yellow-500">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold">Michael Chen</span>
-                    <Badge variant="secondary">Warm - 61%</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Opened 3 emails, no property views yet, saved search active
-                  </p>
-                  <div className="text-xs text-muted-foreground">
-                    📅 Follow up in 2-3 weeks
-                  </div>
-                </div>
-
-                {/* No opacity here on purpose. This card used opacity-60 to read
-                    as "cold", which composited the muted text to #9CA0A7 on
-                    #F5F5F3 -- 2.40:1. Alpha cannot rescue it: even opacity-90
-                    only reaches 4.18, still under 4.5. The gray left border and
-                    the "Cold" badge carry the same meaning at full opacity. */}
-                <div className="bg-background rounded-lg p-4 border-l-4 border-gray-300">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold">David Martinez</span>
-                    <Badge variant="outline">Cold - 12%</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    No email opens in 90 days, inactive
-                  </p>
-                  <div className="text-xs text-muted-foreground">
-                    💤 Nurture campaign only
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* The "Canadian Market Intelligence" section stood here: 30-90 day
-          neighbourhood price forecasts, "AI analyzes MLS data, economic
-          indicators, and historical trends". None of it exists. There are no
-          market tables in the schema, no forecasting anywhere in the repo, and
-          the /market-intelligence page it pointed at renders three hardcoded
-          arrays -- which an agent can export to CSV. Nothing true was
-          available to put in its place, and price predictions are not a claim
-          to leave standing on a roadmap badge, so the section is gone. */}
-
-      {/* 24/7 AI Chatbot */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="bg-muted rounded-2xl p-8 border">
-                <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white flex-shrink-0">
-                      <MessageSquare className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="bg-accent/10 rounded-lg p-3 mb-1">
-                        <p className="text-sm">
-                          Hi! I'm looking for a 3-bedroom condo in Liberty Village under $900K. 
-                          What's available?
-                        </p>
-                      </div>
-                      <div className="text-xs text-muted-foreground">Lead • 11:47 PM</div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white flex-shrink-0">
-                      AI
-                    </div>
-                    <div className="flex-1">
-                      <div className="bg-background rounded-lg p-3 mb-1 border">
-                        <p className="text-sm">
-                          Great timing! I found 4 Liberty Village condos matching your criteria. 
-                          The market is hot—2 have offers coming in this week. Can I send you details 
-                          and book a viewing for tomorrow or this weekend?
-                        </p>
-                      </div>
-                      <div className="text-xs text-muted-foreground">AI Assistant • 11:47 PM</div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white flex-shrink-0">
-                      <MessageSquare className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="bg-accent/10 rounded-lg p-3 mb-1">
-                        <p className="text-sm">Yes please! Saturday works.</p>
-                      </div>
-                      <div className="text-xs text-muted-foreground">Lead • 11:48 PM</div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white flex-shrink-0">
-                      AI
-                    </div>
-                    <div className="flex-1">
-                      <div className="bg-background rounded-lg p-3 mb-1 border">
-                        <p className="text-sm">
-                          Perfect! I've notified Sarah (your agent) and she'll call you tomorrow 
-                          morning to book Saturday viewings. Check your email for the 4 listings. 
-                          Anything else I can help with?
-                        </p>
-                      </div>
-                      <div className="text-xs text-muted-foreground">AI Assistant • 11:48 PM</div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-                    <div className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="w-4 h-4 text-green-700" />
-                      <span className="font-semibold text-green-800">Lead qualified & appointment booked</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      While you were sleeping, AI captured contact info, qualified budget, 
-                      scheduled viewing, and sent listings.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <Badge className="mb-4 bg-rd-terra-800">
-                <MessageSquare className="w-3 h-3 mr-1" />
-                Intelligent Conversation
-              </Badge>
-              <h2 className="mb-6">An AI assistant that works on your own leads</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Open a lead and ask. The assistant can see that contact, draft a reply in English or
-                French, summarise a long thread and talk through what to do next.
-              </p>
-              
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">A draft, not a blank page</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Ask for a reply and edit it, rather than starting every follow-up from nothing.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Brain className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Works in English or French</h4>
-                    <p className="text-sm text-muted-foreground">
-                      It answers in the language you ask in, and sees the contact you have open.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Target className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Qualifies Leads While You Sleep</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Asks budget, timeline, must-haves. You wake up to qualified appointments.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* An invented customer testimonial stood here -- a quote attributed to a person who does not exist, in several cases carrying a dollar figure or a percentage. Production has recorded zero deals, so none of it describes anything that happened. The brief prohibits generating testimonials; CLAUDE.md prohibits fabricating case studies. */}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Automated Nurturing */}
-      <section className="section-padding bg-muted">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-rd-terra-800">
-              <Mail className="w-3 h-3 mr-1" />
-              Automated Nurturing
-            </Badge>
-            <h2 className="mb-4">AI Determines Optimal Contact Timing</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Stop guessing when to follow up. AI analyzes engagement patterns to send 
-              emails and texts when each lead is most likely to respond.
+      <main>
+        <section className="pt-32 md:pt-40 pb-10">
+          <div className="container-custom max-w-3xl">
+            <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted-foreground">
+              <Link to="/features" className="hover:underline">
+                Platform
+              </Link>
+              <span aria-hidden="true"> / </span>
+              <span>AI in the CRM</span>
+            </nav>
+            <h1 className="mb-6">AI in a real estate CRM: where it helps, and where it stops</h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Realtor Desk uses AI in three specific places. It does not contact your
+              leads, run a chatbot or forecast the market, and this page lists both
+              sides so you can judge it.
             </p>
           </div>
+        </section>
 
-          <div className="max-w-4xl mx-auto">
-            <Card className="p-8">
-              <div className="space-y-6">
-                <div className="border-l-4 border-accent pl-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-rd-terra-800" />
-                    <span className="text-sm font-semibold">Day 1 - 9:30 AM</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Lead downloads buyers guide → AI sends welcome email with market overview
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-accent pl-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-rd-terra-800" />
-                    <span className="text-sm font-semibold">Day 3 - 6:15 PM</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Lead opens email → AI detects optimal send time, sends personalized neighborhood guide
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-accent pl-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Clock className="w-4 h-4 text-rd-terra-800" />
-                    <span className="text-sm font-semibold">Day 7 - 12:00 PM</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Lead clicks 3 listings → AI scores as "warm", notifies you to call, queues property alerts
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-green-500 pl-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <CheckCircle className="w-4 h-4 text-green-700" />
-                    <span className="text-sm font-semibold text-green-700">Day 14 - Lead Converts</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Lead books viewing after receiving 7 perfectly-timed touches. You never lifted a finger.
-                  </p>
-                </div>
-              </div>
-
+        <section className="pb-16">
+          <div className="container-custom max-w-3xl space-y-12">
+            <Card className="p-6">
+              <h2 className="text-lg font-bold mb-3">Short answer</h2>
+              <p className="text-base mb-0">
+                The AI ranks your leads, suggests a next step and drafts text for you
+                to review. You stay the sender of every message. That is a smaller
+                claim than most &ldquo;AI CRM&rdquo; pages make, and it is the one the
+                product can back.
+              </p>
             </Card>
-          </div>
-        </div>
-      </section>
 
-      {/* Comparison Table */}
-      <section className="section-padding">
-        <div className="container-custom max-w-5xl">
-          <h2 className="text-center mb-12">What Makes Our AI Different</h2>
-          
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b-2">
-                  <th className="text-left p-4 font-bold">Capability</th>
-                  <th className="text-center p-4 font-bold">Basic CRMs</th>
-                  <th className="text-center p-4 font-bold">Other "AI" CRMs</th>
-                  <th className="text-center p-4 font-bold">Realtor Desk</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { 
-                    feature: "AI assistant on your own leads", 
-                    basic: false, 
-                    otherAI: "Canned responses", 
-                    rdai: "Included" 
-                  },
-                  { 
-                    feature: "Predictive Lead Scoring", 
-                    basic: false, 
-                    otherAI: false, 
-                    rdai: "Engagement-based" 
-                  },
-                  { 
-                    feature: "Learns & Adapts", 
-                    basic: false, 
-                    otherAI: "Partial", 
-                    rdai: "Continuously improves" 
-                  },
-                  { 
-                    feature: "Canadian Market Data", 
-                    basic: false, 
-                    otherAI: false, 
-                    rdai: "Toronto, Vancouver, Calgary+" 
-                  },
-                  { 
-                    feature: "Bilingual AI (EN/FR)", 
-                    basic: false, 
-                    otherAI: false, 
-                    rdai: true 
-                  },
-                  { 
-                    feature: "Optimal Timing", 
-                    basic: "Manual", 
-                    otherAI: "Basic rules", 
-                    rdai: "AI-determined per lead" 
-                  },
-                  { 
-                    feature: "Email Automation", 
-                    basic: true, 
-                    otherAI: true, 
-                    rdai: true 
-                  },
-                ].map((row, idx) => (
-                  <tr key={idx} className="border-b hover:bg-muted/50">
-                    <td className="p-4 font-medium">{row.feature}</td>
-                    <td className="p-4 text-center">
-                      {typeof row.basic === 'boolean' ? (
-                        row.basic ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
-                      ) : (
-                        <span className="text-muted-foreground text-sm">{row.basic}</span>
-                      )}
-                    </td>
-                    <td className="p-4 text-center">
-                      {typeof row.otherAI === 'boolean' ? (
-                        row.otherAI ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />
-                      ) : (
-                        <span className="text-muted-foreground text-sm">{row.otherAI}</span>
-                      )}
-                    </td>
-                    <td className="p-4 text-center">
-                      {typeof row.rdai === 'boolean' ? (
-                        row.rdai ? <Check className="w-5 h-5 text-rd-terra-800 mx-auto" /> : <X className="w-5 h-5 text-muted-foreground mx-auto" />
-                      ) : (
-                        <span className="text-rd-terra-800 font-semibold text-sm">{row.rdai}</span>
-                      )}
-                    </td>
-                  </tr>
+            <div>
+              <h2 className="mb-6">What the AI does</h2>
+              <ul className="space-y-6 list-none p-0">
+                {DOES.map((d) => (
+                  <li key={d.title} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" aria-hidden="true" />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-1">{d.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed mb-0">{d.body}</p>
+                    </div>
+                  </li>
                 ))}
-              </tbody>
-            </table>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="mb-4">What it does not do</h2>
+              <ul className="space-y-3 list-none p-0">
+                {DOES_NOT.map((line) => (
+                  <li key={line} className="flex items-start gap-3 text-muted-foreground">
+                    <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="mb-4">Why it is built this way</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Under CASL the burden of proving consent is on the sender, so a system
+                that messages leads on its own creates risk in your name. Keeping the
+                human as the sender is a deliberate constraint, and it is why the
+                assistant drafts rather than sends.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Showing the factors behind a score is the same instinct. A number you
+                cannot inspect is a number you cannot argue with, and you know your
+                leads better than a weighting does.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="mb-6">Questions</h2>
+              <FAQAccordion items={FAQS} />
+            </div>
+
+            <div>
+              <h2 className="mb-4">Related</h2>
+              <ul className="space-y-2 text-muted-foreground leading-relaxed list-disc pl-5">
+                <li>
+                  <Link to="/features/ai-lead-scoring" className="underline">
+                    How the lead score works
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/features/ai-lead-follow-up" className="underline">
+                    Follow-up: a suggested next action, not an auto-reply
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/pipeda-compliance" className="underline">
+                    What the product does about privacy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/ai-crm-canadian-real-estate-agents-guide" className="underline">
+                    A guide to AI CRMs for Canadian agents
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <Card className="p-8 text-center">
+              <h2 className="mb-3">See it on your own leads</h2>
+              <p className="text-muted-foreground mb-6">
+                14 days, then CAD $149 a month. A card is collected up front and
+                nothing is charged before day 14.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button asChild>
+                  <Link to="/signup">Start free trial</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link to="/features">See the platform</Link>
+                </Button>
+              </div>
+            </Card>
           </div>
-        </div>
-      </section>
-
-      {/* ROI Section */}
-      <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
-        <div className="container-custom max-w-4xl text-center">
-          <h2 className="mb-6">Agents Using Our AI See:</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <Card className="p-8">
-              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <div className="text-4xl font-bold gradient-text mb-2">41%</div>
-              <p className="text-sm text-muted-foreground">Higher revenue per year</p>
-            </Card>
-
-            <Card className="p-8">
-              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <div className="text-4xl font-bold gradient-text mb-2">15hrs</div>
-              <p className="text-sm text-muted-foreground">Saved per week</p>
-            </Card>
-
-            <Card className="p-8">
-              <Target className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <div className="text-4xl font-bold gradient-text mb-2">6-8</div>
-              <p className="text-sm text-muted-foreground">More deals closed annually</p>
-            </Card>
-          </div>
-
-          <Link to="/pricing#roi-calculator">
-            <Button size="lg" className="btn-gradient">
-              Calculate Your AI ROI
-            </Button>
-          </Link>
-
-          <p className="text-sm text-muted-foreground mt-6">
-            * Based on beta participant data from Realtor Desk AI
-          </p>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
     </div>

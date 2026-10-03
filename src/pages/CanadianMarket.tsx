@@ -1,36 +1,51 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { 
-  CheckCircle, 
-  X, 
-  MapPin, 
-  MessageSquare, 
-  FileText, 
-  TrendingUp,
-  ChevronDown,
-  ChevronUp,
-  Building2,
-  Mountain,
-  Wheat,
-  Star
-} from "lucide-react";
+import { CheckCircle, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import agentSuccess from "@/assets/agent-success.jpg";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
 import { resolveSources } from "@/lib/images/resolveSources";
 
+// /canadian-market — rewritten 2026-10-02.
+//
+// This is the page that owns "real estate CRM Canada", so what it says matters
+// more than most. The previous version advertised, as product features:
+//
+//   - "TRREB data sync" and "Foreign buyer tax (NRST) calculator integration"
+//   - "Luxury property pricing models" and a "foreign buyer tracking (20%
+//     additional tax calculator)" for BC
+//   - "Notary integration requirements" for Quebec
+//   - a "Canadian Market Intelligence Dashboard" badged "Live Market Data",
+//     "real-time insights powered by CREA, CMHC, and regional MLS data",
+//     "$865K +4.2%", and the footer "Updated hourly from live MLS feeds"
+//   - a "65%" figure beside the DDF section
+//   - a hero reading "CREA DDF®, bilingual AI, and provincial compliance ... the
+//     foundation"
+//
+// None of it exists. /ca/toronto-realtor-crm says in plain words that there is
+// no TRREB integration and none is scheduled, so two pages on one site
+// contradicted each other. There is no market dashboard, no MLS feed, and no
+// province-specific functionality: the same product runs everywhere.
+//
+// WHERE EACH FACT BELOW COMES FROM
+//   regulators and statutes   checked 2026-10-02 against the Office of the
+//                             Privacy Commissioner of Canada ("provincial laws
+//                             that may apply instead of PIPEDA") and the BC
+//                             Financial Services Authority, which took over BC
+//                             real estate regulation from the Real Estate
+//                             Council of BC on 2021-08-01. The old page, and
+//                             llms.txt, still named RECBC.
+//   product facts             docs/REDESIGN-PHASE-0-AUDIT.md section 3, and
+//                             public/knowledge-base.json.
+//
+// The page deliberately does not describe what each regulator requires. It names
+// the regulator and the statute, links the primary source, and says what the
+// product does. Rules change, and a CRM vendor is not where to read them.
 
-/**
- * <img> with AVIF/WebP siblings resolved at build time.
- *
- * This was a bare <img src={jpg}> -- no modern format and no dimensions,
- * despite both siblings existing in src/assets.
- */
 function ResolvedImage({
   src,
   alt,
@@ -62,45 +77,146 @@ function ResolvedImage({
   );
 }
 
+const TODAY: { title: string; body: string }[] = [
+  {
+    title: "Canadian dollars, with tax handled at checkout",
+    body: "Prices are in CAD and shown before tax. GST/HST, plus QST in Quebec or PST where it applies, is calculated at checkout from your billing province.",
+  },
+  {
+    title: "French set per contact",
+    body: "The language rides on the contact, so an English-speaking agent can work a francophone client in French, in the interface and in the email the client receives.",
+  },
+  {
+    title: "A consent record for CASL",
+    body: "The date and source of consent are stored on every contact, and a text message to a number with no recorded consent is refused rather than sent. It gives you proof to produce; it does not decide whether your consent was valid.",
+  },
+  {
+    title: "A database that runs in Canada",
+    body: "The production database and file storage run in the ca-central-1 region. Features that call outside services, such as SMS, email delivery and AI drafting, send the relevant content to those providers, which may process it outside Canada.",
+  },
+  {
+    title: "Listings from Realtor.ca",
+    body: "Paste a Realtor.ca address or an MLS number and the property comes into the CRM. This is an importer, not a CREA DDF® feed.",
+  },
+];
+
+const NOT_YET: string[] = [
+  "CREA DDF® sync. The function is a scaffold awaiting CREA credentials and is not live.",
+  "Any board or MLS data feed, including TRREB. There is none, and none is scheduled.",
+  "Centris for Quebec. It is on the roadmap, not built.",
+  "A market data or intelligence dashboard. Realtor Desk does not show market statistics.",
+  "Province-specific features. The same product runs in every province.",
+  "Calendar sync. The Google Calendar and Outlook connections exist, but nothing reads or writes events yet.",
+  "A native mobile app. Realtor Desk is a responsive web app.",
+  "Seats, lead assignment or a shared pipeline. It is a single-agent product.",
+];
+
+interface Province {
+  province: string;
+  regulator: string;
+  regulatorHref: string;
+  privacy: string;
+  privacyHref: string;
+}
+
+const PROVINCES: Province[] = [
+  {
+    province: "Ontario",
+    regulator: "RECO",
+    regulatorHref: "https://www.reco.on.ca",
+    privacy: "PIPEDA, the federal law",
+    privacyHref: "https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/",
+  },
+  {
+    province: "British Columbia",
+    regulator: "BC Financial Services Authority (BCFSA)",
+    regulatorHref: "https://www.bcfsa.ca",
+    privacy: "BC's Personal Information Protection Act",
+    privacyHref: "https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/r_o_p/prov-pipeda/",
+  },
+  {
+    province: "Alberta",
+    regulator: "RECA",
+    regulatorHref: "https://www.reca.ca",
+    privacy: "Alberta's Personal Information Protection Act",
+    privacyHref: "https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/r_o_p/prov-pipeda/",
+  },
+  {
+    province: "Quebec",
+    regulator: "OACIQ",
+    regulatorHref: "https://www.oaciq.com",
+    privacy: "Quebec's private-sector privacy Act, as amended by Law 25",
+    privacyHref: "https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/r_o_p/prov-pipeda/",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Is Realtor Desk built in Canada?",
+    a: "Yes. It is built by Brainfy AI Inc., a Canadian company based in Edmonton, Alberta, and priced in Canadian dollars. It is an independent product, not affiliated with or endorsed by CREA, any real estate board or any provincial regulator.",
+  },
+  {
+    q: "Does Realtor Desk integrate with CREA DDF or my board's MLS?",
+    a: "No. Native CREA DDF® sync is a scaffold that is not live, and there is no board or MLS feed, including TRREB. What works today is importing a single listing from a Realtor.ca address or an MLS number. The roadmap page carries the current status.",
+  },
+  {
+    q: "Where is my client data stored?",
+    a: "The production database and file storage run in Canada, in the ca-central-1 region. Features that call outside services, such as SMS, email delivery and AI-assisted drafting, send the relevant content to those providers, which may process it outside Canada. Storage location is not the same as where every processing step happens.",
+  },
+  {
+    q: "Does it work in French?",
+    a: "Yes. The interface and the email your client receives both work in French, set per contact, so a Montreal client can be worked entirely in French while you work in English.",
+  },
+  {
+    q: "Are the prices in Canadian dollars, and do they include tax?",
+    a: "Prices are in Canadian dollars and shown before tax. GST/HST, plus QST in Quebec or PST where it applies, is calculated at checkout from your billing province.",
+  },
+  {
+    q: "Does it make me compliant with CASL, PIPEDA or my provincial rules?",
+    a: "No, and no software can. Realtor Desk records consent and lets you export or delete a contact, which are inputs to meeting your obligations. How you collect consent and handle requests stays with you and your brokerage.",
+  },
+];
+
 const CanadianMarket = () => {
   const { t } = useTranslation();
-  const [openProvince, setOpenProvince] = useState<string | null>(null);
-
-  const toggleProvince = (province: string) => {
-    setOpenProvince(openProvince === province ? null : province);
-  };
 
   return (
     <div className="min-h-screen">
       <SEO
         canonicalUrl="https://www.realtordesk.ai/canadian-market"
         title="Canadian Real Estate CRM, Built for Canada"
-        description="Realtor Desk is built for Canadian agents: bilingual EN/FR, data hosted in Canada and CAD pricing. CREA DDF® integration is on the Q3 2026 roadmap."
-        keywords="canadian real estate crm, CREA DDF, PIPEDA compliant crm, bilingual real estate crm, canadian realtors"
+        description="Realtor Desk for Canadian agents: French per contact, database in Canada, CAD pricing and CASL consent records. CREA DDF sync is not live; Realtor.ca import is."
+        keywords="canadian real estate crm, real estate crm canada, bilingual real estate crm, CASL consent crm, crm for canadian realtors"
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ]}
       />
       <Navbar />
 
-      {/* Hero Section */}
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <h1 className="mb-6">
-                {t('canadianMarket.hero.title')}{" "}
-                <span className="gradient-text">{t('canadianMarket.hero.titleGradient')}</span>
+                {t("canadianMarket.hero.title")}{" "}
+                <span className="gradient-text">{t("canadianMarket.hero.titleGradient")}</span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                {t('canadianMarket.hero.subtitle')}
+                {t("canadianMarket.hero.subtitle")}
               </p>
             </div>
             <div className="relative animate-fade-in animation-delay-200">
-              {/* Generic illustrative imagery, not a photograph of customers.
-                  The alt read "Canadian real estate professionals USING
-                  Realtor Desk AI", which asserted customer usage: the four
-                  people are AI-generated and do not exist, and the tablet in
-                  frame shows a purple/blue interface that is not this product.
-                  Decorative imagery is fine; a caption that turns it into
-                  social proof is not. */}
+              {/* Generic illustrative imagery, not a photograph of customers. The
+                  people are AI-generated and do not exist, so the alt text must not
+                  imply customer usage. */}
               <ResolvedImage
                 src={agentSuccess}
                 alt="Illustration of a team meeting in an office overlooking a Canadian city skyline"
@@ -113,553 +229,120 @@ const CanadianMarket = () => {
         </div>
       </section>
 
-      {/* Challenge Section */}
       <section className="section-padding">
-        <div className="container-custom">
-          <h2 className="text-center mb-12">Why Generic Real Estate CRMs Fail Canadian Agents</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="p-8 border-destructive/20">
-              <div className="w-12 h-12 rounded-lg bg-destructive/10 flex items-center justify-center mb-4">
-                <X className="w-6 h-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Missing Canadian Data</h3>
-              <p className="text-muted-foreground">
-                Most CRMs don't integrate with CREA DDF® or regional MLS systems, leaving you with manual data entry and outdated information.
-              </p>
-            </Card>
-
-            <Card className="p-8 border-destructive/20">
-              <div className="w-12 h-12 rounded-lg bg-destructive/10 flex items-center justify-center mb-4">
-                <X className="w-6 h-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Translation ≠ Bilingual</h3>
-              <p className="text-muted-foreground">
-                Google Translate doesn't understand real estate terminology or Quebec's unique market language. "Listing" is not "Liste."
-              </p>
-            </Card>
-
-            <Card className="p-8 border-destructive/20">
-              <div className="w-12 h-12 rounded-lg bg-destructive/10 flex items-center justify-center mb-4">
-                <X className="w-6 h-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Provincial Blind Spots</h3>
-              <p className="text-muted-foreground">
-                Forms and compliance for BC don't work in Ontario. Generic tools miss critical regional requirements and regulations.
-              </p>
-            </Card>
-
-            <Card className="p-8 border-destructive/20">
-              <div className="w-12 h-12 rounded-lg bg-destructive/10 flex items-center justify-center mb-4">
-                <X className="w-6 h-6 text-destructive" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">US-Centric Features</h3>
-              <p className="text-muted-foreground">
-                Features built for NAR and US markets don't address CMHC policies, foreign buyer taxes, or Canadian mortgage rules.
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Solution Showcase */}
-      <section className="section-padding bg-muted">
-        <div className="container-custom">
-          <h2 className="text-center mb-12">How Realtor Desk AI Solves Canadian Real Estate Challenges</h2>
-
-          <div className="space-y-12 max-w-5xl mx-auto">
-            {/* Feature 1 */}
-            <Card className="p-8 card-hover">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <MapPin className="w-8 h-8 text-primary" />
-                    <h3 className="text-2xl font-bold">CREA DDF® Integration (Coming Q3 2026)</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    CREA DDF® integration is on the Q3 2026 roadmap, with planned access to 65% of Canadian listings nationally plus regional systems (ITSO, Pillar 9, TREB). Today you can import listings from Realtor.ca via the built-in importer.
-                  </p>
-                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
-                    <CheckCircle className="w-5 h-5" />
-                    Planned: goodbye to manual MLS searches and data re-entry
-                  </div>
-                </div>
-                <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6 text-center">
-                  <div className="text-4xl font-bold gradient-text mb-2">65%</div>
-                  <div className="text-sm text-muted-foreground">of Canadian listings accessible</div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Feature 2 */}
-            <Card className="p-8 card-hover">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div className="order-2 md:order-1 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6">
-                  <h4 className="font-bold mb-3">Translation Examples:</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      "Listing" → "Inscription" (not "Liste")
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      "Offer to Purchase" → "Promesse d'achat"
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      Formal vs. informal French (Quebec style)
-                    </li>
-                  </ul>
-                </div>
-                <div className="order-1 md:order-2">
-                  <div className="flex items-center gap-3 mb-4">
-                    <MessageSquare className="w-8 h-8 text-primary" />
-                    <h3 className="text-2xl font-bold">True Bilingual Intelligence</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    Our AI doesn't just translate - it understands context, real estate terminology, and cultural communication styles in both languages.
-                  </p>
-                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
-                    <CheckCircle className="w-5 h-5" />
-                    Serve English and French clients with equal expertise
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Feature 3 */}
-            <Card className="p-8 card-hover">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <FileText className="w-8 h-8 text-primary" />
-                    <h3 className="text-2xl font-bold">Provincial Compliance Engine</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    Automatic compliance with RECO (Ontario), BCFSA (BC), RECA (Alberta), OACIQ (Quebec) and all other provincial regulations.
-                  </p>
-                  <ul className="space-y-2 mb-4">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Automatic form selection by province</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Required disclosure tracking</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Cooling-off period management</span>
-                    </li>
-                  </ul>
-                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
-                    <CheckCircle className="w-5 h-5" />
-                    Never worry about compliance violations again
-                  </div>
-                </div>
-                <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6">
-                  <h4 className="font-bold mb-3 text-center">Supported Provinces:</h4>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    {["Ontario (RECO)", "BC (BCFSA)", "Alberta (RECA)", "Quebec (OACIQ)", "Manitoba", "Saskatchewan", "Nova Scotia", "New Brunswick"].map((province) => (
-                      <div key={province} className="flex items-center gap-1">
-                        <CheckCircle className="w-3 h-3 text-rd-terra-800" />
-                        <span>{province}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Feature 4 */}
-            <Card className="p-8 card-hover">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div className="order-2 md:order-1 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6">
-                  <h4 className="font-bold mb-3">Data Sources:</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      Bank of Canada interest rates
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      CMHC housing market data
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      Provincial foreign buyer taxes
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      Immigration patterns
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-rd-terra-800" />
-                      Regional economic indicators
-                    </li>
-                  </ul>
-                </div>
-                <div className="order-1 md:order-2">
-                  <div className="flex items-center gap-3 mb-4">
-                    <TrendingUp className="w-8 h-8 text-primary" />
-                    <h3 className="text-2xl font-bold">Canadian Market Intelligence</h3>
-                  </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    Real-time integration with Canadian economic indicators, government policies, and market-specific factors that matter to your clients.
-                  </p>
-                  <div className="flex items-center gap-2 text-rd-terra-800 font-semibold">
-                    <CheckCircle className="w-5 h-5" />
-                    Position yourself as the Canadian market expert
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Provincial Solutions Section */}
-      <section className="section-padding">
-        <div className="container-custom max-w-5xl">
-          <h2 className="text-center mb-4">Provincial Solutions</h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Tailored features for each province's unique market and regulations
-          </p>
-          
-          <div className="space-y-4">
-            {/* Ontario/Toronto */}
-            <Card className={`overflow-hidden transition-all ${openProvince === 'ontario' ? 'border-accent' : ''}`}>
-              <button
-                onClick={() => toggleProvince('ontario')}
-                className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Building2 className="w-6 h-6 text-rd-terra-800" />
-                  <div className="text-left">
-                    <h3 className="font-bold text-lg">🏙️ Ontario/Toronto</h3>
-                    <p className="text-sm text-muted-foreground">GTA-specific features, TRREB integration</p>
-                  </div>
-                </div>
-                {openProvince === 'ontario' ? <ChevronUp /> : <ChevronDown />}
-              </button>
-              
-              {openProvince === 'ontario' && (
-                <div className="px-6 pb-6 space-y-4 animate-fade-in">
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-3">Toronto Market Intelligence:</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>GTA condo market trends (Liberty Village, CityPlace, King West)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>905 area growth patterns (Mississauga, Brampton, Markham)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Foreign buyer tax (NRST) calculator integration</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>TRREB (Toronto Regional Real Estate Board) data sync</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">Ontario Compliance:</h4>
-                    <p className="text-sm text-muted-foreground">RECO regulations, FINTRAC reporting, HST on new builds</p>
-                  </div>
-                </div>
-              )}
-            </Card>
-
-            {/* BC/Vancouver */}
-            <Card className={`overflow-hidden transition-all ${openProvince === 'bc' ? 'border-accent' : ''}`}>
-              <button
-                onClick={() => toggleProvince('bc')}
-                className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Mountain className="w-6 h-6 text-rd-terra-800" />
-                  <div className="text-left">
-                    <h3 className="font-bold text-lg">🏔️ British Columbia/Vancouver</h3>
-                    <p className="text-sm text-muted-foreground">Luxury market tools, foreign buyer features</p>
-                  </div>
-                </div>
-                {openProvince === 'bc' ? <ChevronUp /> : <ChevronDown />}
-              </button>
-              
-              {openProvince === 'bc' && (
-                <div className="px-6 pb-6 space-y-4 animate-fade-in">
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-3">Vancouver Market Features:</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Luxury property pricing models ($2M+ homes in West Van, Point Grey)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Foreign buyer tracking (20% additional tax calculator)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Presale condo management (assignment tracking)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Victoria/Kelowna market intelligence</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">BC Compliance:</h4>
-                    <p className="text-sm text-muted-foreground">BCFSA regulations, Property Transfer Tax, Speculation & Vacancy Tax tracking</p>
-                  </div>
-                </div>
-              )}
-            </Card>
-
-            {/* Alberta/Calgary */}
-            <Card className={`overflow-hidden transition-all ${openProvince === 'alberta' ? 'border-accent' : ''}`}>
-              <button
-                onClick={() => toggleProvince('alberta')}
-                className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Wheat className="w-6 h-6 text-rd-terra-800" />
-                  <div className="text-left">
-                    <h3 className="font-bold text-lg">🌾 Alberta/Calgary</h3>
-                    <p className="text-sm text-muted-foreground">Oil & gas market insights, growth tracking</p>
-                  </div>
-                </div>
-                {openProvince === 'alberta' ? <ChevronUp /> : <ChevronDown />}
-              </button>
-              
-              {openProvince === 'alberta' && (
-                <div className="px-6 pb-6 space-y-4 animate-fade-in">
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-3">Alberta Market Features:</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Oil price correlation tracking (impact on Calgary/Edmonton markets)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Beltline/Bridgeland/Marda Loop neighborhood analytics</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>New construction boom tracking</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Migration pattern analysis (interprovincial moves)</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">Alberta Compliance:</h4>
-                    <p className="text-sm text-muted-foreground">RECA regulations, No PST on real estate (unique advantage)</p>
-                  </div>
-                </div>
-              )}
-            </Card>
-
-            {/* Quebec/Montreal */}
-            <Card className={`overflow-hidden transition-all ${openProvince === 'quebec' ? 'border-accent' : ''}`}>
-              <button
-                onClick={() => toggleProvince('quebec')}
-                className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <MessageSquare className="w-6 h-6 text-rd-terra-800" />
-                  <div className="text-left">
-                    <h3 className="font-bold text-lg">🍁 Quebec/Montreal</h3>
-                    <p className="text-sm text-muted-foreground">Full French language support, Quebec regulations</p>
-                  </div>
-                </div>
-                {openProvince === 'quebec' ? <ChevronUp /> : <ChevronDown />}
-              </button>
-              
-              {openProvince === 'quebec' && (
-                <div className="px-6 pb-6 space-y-4 animate-fade-in">
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-3">Quebec-Specific Features:</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Complete French interface and AI (proper real estate terminology)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Quebec Civil Code compliance (different from Common Law provinces)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Montreal market insights (Plateau, Mile End, Old Montreal)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                        <span>Notary integration requirements</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">Quebec Compliance:</h4>
-                    <p className="text-sm text-muted-foreground">OACIQ regulations, Charter of French language, Welcome Tax (transfer tax) calculations</p>
-                  </div>
-                </div>
-              )}
-            </Card>
-
-            {/* Other Provinces */}
-            <Card className={`overflow-hidden transition-all ${openProvince === 'other' ? 'border-accent' : ''}`}>
-              <button
-                onClick={() => toggleProvince('other')}
-                className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-6 h-6 text-rd-terra-800" />
-                  <div className="text-left">
-                    <h3 className="font-bold text-lg">📍 Other Provinces</h3>
-                    <p className="text-sm text-muted-foreground">Maritime, Prairie solutions</p>
-                  </div>
-                </div>
-                {openProvince === 'other' ? <ChevronUp /> : <ChevronDown />}
-              </button>
-              
-              {openProvince === 'other' && (
-                <div className="px-6 pb-6 space-y-3 animate-fade-in">
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">Manitoba (Winnipeg):</h4>
-                    <p className="text-sm text-muted-foreground">Strong rental market tools, affordable housing analytics</p>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">Saskatchewan (Regina/Saskatoon):</h4>
-                    <p className="text-sm text-muted-foreground">Agriculture-linked market tracking</p>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">Nova Scotia (Halifax):</h4>
-                    <p className="text-sm text-muted-foreground">Atlantic migration boom tracking, waterfront property features</p>
-                  </div>
-                  <div className="bg-muted rounded-lg p-4">
-                    <h4 className="font-semibold mb-2">New Brunswick:</h4>
-                    <p className="text-sm text-muted-foreground">Bilingual requirements, remote work migration analytics</p>
-                  </div>
-                </div>
-              )}
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Market Intelligence Dashboard */}
-      <section className="section-padding bg-muted">
-        <div className="container-custom max-w-5xl">
-          <div className="text-center mb-12">
-            {/* bg-rd-terra-800, not bg-accent. --accent is #D5724D and the badge
-              foreground is #F8F8F7, which is 3.11:1. The token itself is left
-              alone: it backs 104 other surfaces and changing it would be a
-              brand decision, not a defect fix. terra-800 is the brand's own
-              darker step and gives 6.4:1. */}
-            <Badge className="mb-4 bg-rd-terra-800">Live Market Data</Badge>
-            <h2 className="mb-4">Canadian Market Intelligence Dashboard</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Real-time insights powered by CREA, CMHC, and regional MLS data
+        <div className="container-custom max-w-4xl">
+          <Card className="p-6 mb-12">
+            <h2 className="text-lg font-bold mb-3">Short answer</h2>
+            <p className="text-base mb-0">
+              Realtor Desk is a single-agent CRM for Canadian real estate. What makes
+              it Canadian is practical: French per contact, a database in Canada,
+              Canadian-dollar pricing with tax handled at checkout, and a record of
+              consent for CASL. It has no market data, no board feeds and no
+              province-specific features, and the list below says what else it does
+              not do.
             </p>
+          </Card>
+
+          <h2 className="mb-6">What &ldquo;built for Canada&rdquo; means here</h2>
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            {TODAY.map((item) => (
+              <Card key={item.title} className="p-6">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-1" aria-hidden="true" />
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground mb-0">{item.body}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
 
-          <Card className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-background rounded-lg p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-semibold text-sm">Toronto - Liberty Village</h4>
-                  <TrendingUp className="w-5 h-5 text-green-500" />
-                </div>
-                <div className="text-3xl font-bold gradient-text mb-2">$865K</div>
-                <div className="text-sm text-muted-foreground mb-3">Avg. 1BR Condo Price</div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="text-xs">+4.2%</Badge>
-                  <span className="text-xs text-muted-foreground">30-day trend</span>
-                </div>
-              </div>
+          <h2 className="mb-4">What it does not do</h2>
+          <p className="text-muted-foreground mb-6">
+            Said plainly, because other pages in this market blur it.
+          </p>
+          <ul className="space-y-3 mb-16 list-none p-0">
+            {NOT_YET.map((line) => (
+              <li key={line} className="flex items-start gap-3 text-muted-foreground">
+                <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
 
-              <div className="bg-background rounded-lg p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-semibold text-sm">Vancouver - Yaletown</h4>
-                  <TrendingUp className="w-5 h-5 text-green-500" />
-                </div>
-                <div className="text-3xl font-bold gradient-text mb-2">18 days</div>
-                <div className="text-sm text-muted-foreground mb-3">Avg. Days on Market</div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="text-xs">-3 days</Badge>
-                  <span className="text-xs text-muted-foreground">Improving</span>
-                </div>
-              </div>
+          <h2 className="mb-4">Regulators and privacy laws by province</h2>
+          <p className="text-muted-foreground mb-6">
+            This is a map of who to ask, not advice on what they require. Rules change,
+            so read each source directly. Realtor Desk has no province-specific
+            behaviour: the same product runs in every province.
+          </p>
+          <div className="overflow-x-auto mb-6">
+            <table className="min-w-full text-sm">
+              <caption className="text-left text-muted-foreground pb-3">
+                Checked October 2, 2026. Alberta, British Columbia and Quebec each have a
+                private-sector privacy law the federal Privacy Commissioner treats as
+                substantially similar to PIPEDA.
+              </caption>
+              <thead>
+                <tr className="border-b-2 text-left">
+                  <th scope="col" className="py-2 pr-4 font-semibold">Province</th>
+                  <th scope="col" className="py-2 pr-4 font-semibold">Real estate regulator</th>
+                  <th scope="col" className="py-2 font-semibold">Private-sector privacy law</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PROVINCES.map((p) => (
+                  <tr key={p.province} className="border-b align-top">
+                    <th scope="row" className="py-3 pr-4 text-left font-semibold">{p.province}</th>
+                    <td className="py-3 pr-4">
+                      <a className="underline" href={p.regulatorHref} rel="noopener noreferrer" target="_blank">
+                        {p.regulator}
+                      </a>
+                    </td>
+                    <td className="py-3">
+                      <a className="underline" href={p.privacyHref} rel="noopener noreferrer" target="_blank">
+                        {p.privacy}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-muted-foreground mb-16">
+            Other provinces and territories: check your own regulator and the Office of
+            the Privacy Commissioner of Canada. In Quebec, French-language rules can
+            also reach client communications, so read OACIQ&rsquo;s guidance. For how
+            CASL consent windows work, see our{" "}
+            <Link className="underline" to="/resources/casl-compliance-real-estate-email-marketing-canada">
+              CASL guide for real estate email
+            </Link>
+            , and for what the product does about privacy,{" "}
+            <Link className="underline" to="/pipeda-compliance">
+              the PIPEDA page
+            </Link>
+            .
+          </p>
 
-              <div className="bg-background rounded-lg p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-semibold text-sm">Calgary - Beltline</h4>
-                  <TrendingUp className="w-5 h-5 text-green-500" />
-                </div>
-                <div className="text-3xl font-bold gradient-text mb-2">High</div>
-                <div className="text-sm text-muted-foreground mb-3">Buyer Demand Index</div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="text-xs">Seller's Market</Badge>
-                </div>
-              </div>
-            </div>
+          <h2 className="mb-6">Questions</h2>
+          <FAQAccordion items={FAQS} className="mb-16" />
 
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground mb-4">
-                Updated hourly from live MLS feeds • Includes: price trends, inventory levels, days on market, buyer demand
-              </p>
-              <Link to="/demo">
-                <Button variant="outline">See Your Market Data</Button>
-              </Link>
+          <Card className="p-8 text-center">
+            <h2 className="text-2xl font-bold mb-3">Try it on your own contacts</h2>
+            <p className="text-muted-foreground mb-6">
+              14 days, then CAD $149 a month. A card is collected up front and nothing is
+              charged before day 14.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button asChild>
+                <Link to="/signup">Start free trial</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/features">See the platform</Link>
+              </Button>
             </div>
           </Card>
-        </div>
-      </section>
-
-      {/* A "Canadian Success Stories" section stood here: six invented
-          people -- Jennifer Thompson, Marcus Chen, Sarah Kowalski,
-          Philippe Durocher, David Martinez, Laura MacDonald -- each with a
-          quote, a city badge, and a fabricated result: "$127K GCI
-          increase", "8 deals closed in Q1", "$89K", "closed $2.6M in
-          deals".
-      
-          Production has recorded ZERO deals. Not one of those figures
-          describes anything that happened.
-      
-          Two of the quotes also disparaged named competitors -- "My
-          BoldTrail CRM had zero Canadian data" and "Wise Agent couldn't do
-          1% of this" -- placed in the mouths of people who do not exist.
-          That is a representation about a competitor's product, made up,
-          and attributed to a fictional customer.
-      
-          Removed rather than rewritten. There is no honest version of a
-          customer success section for a product with no customer results
-          to cite. The homepage testimonial block already handles this
-          correctly: it renders only when a real attributed quote exists,
-          and stays hidden until then. Do the same here when there is
-          something real to show. */}
-
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white">
-        <div className="container-custom text-center">
-          <h2 className="mb-6 text-white">Experience the Canadian Advantage</h2>
-          <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
-            Join the Canadian agents building their business on a platform made for this market
-          </p>
-          <Link to="/demo">
-            <Button size="lg" variant="secondary" className="text-lg">
-              Schedule a Demo
-            </Button>
-          </Link>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import blogLeadResponse from "@/assets/blog-lead-response.jpg";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const LeadResponseTime = () => {
   useEffect(() => {
@@ -69,6 +70,7 @@ const LeadResponseTime = () => {
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
                 Why Canadian Agents Lose Hot Leads
               </h1>
+              <ProductScopeNote className="mb-6" />
               <p className="text-xl text-muted-foreground leading-relaxed">
                 It's not a skill problem. It's a timing problem — and it costs Canadian agents
                 tens of thousands of dollars in lost GCI every year.

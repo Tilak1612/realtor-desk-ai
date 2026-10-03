@@ -97,7 +97,7 @@ const OpenHouseDigitalSignIn = () => {
               Research Finding
             </h3>
             <p className="text-base mb-0">
-              After tracking 450+ open houses across Canada, agents using digital sign-in sheets captured complete contact information from 87% of visitors vs. only 32% with paper sheets. More importantly, digital systems enabled instant follow-up which increased lead-to-appointment conversion by 340%.
+              Paper captures what a visitor can read and what you can decipher later; a tablet captures what they type. Either way, the thing that decides whether you can follow up is whether you have a clean email or number and a record of consent, so build the sheet around those two. We have not measured capture rates across open houses and do not quote any0%.
             </p>
           </Card>
 
@@ -267,20 +267,20 @@ const OpenHouseDigitalSignIn = () => {
             <div className="space-y-4 mb-8">
               <Card className="p-6">
                 <div className="flex justify-between items-start mb-3">
-                  <h4 className="text-xl font-bold">1. RealtorDesk AI (Best All-in-One)</h4>
+                  <h4 className="text-xl font-bold">1. Realtor Desk (a CRM, not a sign-in app)</h4>
                   <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">Recommended</span>
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  Full CRM with built-in open house mode. Captures leads, triggers instant automated follow-up, and manages entire sales pipeline.
+                  A CRM that can hold the contacts you collect, record the date and source of consent on each one, and rank them. It has no dedicated open-house sign-in mode and does not work offline, so you would enter or import visitors afterwards.
                 </p>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="font-semibold mb-1">Pros:</p>
                     <ul className="space-y-1 text-muted-foreground">
-                      <li>• CASL/PIPEDA compliant by default</li>
-                      <li>• Instant AI chatbot follow-up</li>
-                      <li>• Automated drip campaigns</li>
-                      <li>• Works offline (syncs later)</li>
+                      <li>• Consent date and source recorded per contact</li>
+                      <li>• In-app assistant drafts a reply for you to send</li>
+                      <li>• One conversation timeline per client</li>
+                      <li>• French set per contact</li>
                       <li>• Lead scoring and prioritization</li>
                     </ul>
                   </div>
@@ -536,7 +536,7 @@ const OpenHouseDigitalSignIn = () => {
             <Card className="p-8 mb-8 bg-gradient-to-br from-primary/10 to-secondary/10">
               <h3 className="text-2xl font-bold mb-4 text-center">Ready to Capture More Open House Leads?</h3>
               <p className="text-center text-muted-foreground mb-6">
-                RealtorDesk AI includes CASL-compliant digital sign-in, instant follow-up, and full CRM—all in one platform.
+                Realtor Desk can hold the contacts you collect and record when and how each one consented. It does not have a dedicated sign-in tablet mode.
               </p>
               <div className="flex justify-center gap-4">
                 <Link to="/pricing">
@@ -560,15 +560,15 @@ const OpenHouseDigitalSignIn = () => {
                   <h4 className="font-semibold mb-2">17 Lead Generation Strategies for 2025</h4>
                   <p className="text-sm text-muted-foreground">Complete guide to generating more qualified real estate leads</p>
                 </Link>
-                <Link to="/blog/casl-compliance-guide-real-estate-agents" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">CASL Compliance Guide for Realtors</h4>
                   <p className="text-sm text-muted-foreground">Avoid $10,000+ fines with proper email marketing compliance</p>
                 </Link>
-                <Link to="/blog/lead-response-time-study" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/lead-response-time-canadian-realtors" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">Lead Response Time: Why 5 Minutes Matters</h4>
                   <p className="text-sm text-muted-foreground">Data shows instant follow-up converts 3.5x better</p>
                 </Link>
-                <Link to="/blog/ai-automation-slower-housing-market" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/canadian-realtors-thrive-slower-market-ai-automation" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">AI Automation in Slower Markets</h4>
                   <p className="text-sm text-muted-foreground">How to do more with less when inventory is tight</p>
                 </Link>

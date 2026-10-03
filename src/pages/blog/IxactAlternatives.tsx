@@ -16,7 +16,7 @@ const IxactAlternatives = () => {
     <div className="min-h-screen">
       <SEO
         title="IXACT Contact Alternatives for Canada"
-        description="Compare IXACT Contact alternatives for Canadian agents. See why agents are switching to faster, more affordable AI-first CRMs."
+        description="IXACT Contact alternatives for Canadian agents: what each vendor publishes on price and currency, and what to check before you switch."
         keywords="IXACT Contact alternatives, Canadian real estate CRM, AI CRM for realtors, IXACT alternative"
         article
         publishedTime="2025-01-16"
@@ -90,12 +90,12 @@ const IxactAlternatives = () => {
               IXACT's last major redesign was in 2017. The interface feels clunky compared to modern cloud-based apps. Navigation requires multiple clicks for simple tasks. The mobile experience is particularly poor, making on-the-go management frustrating.
             </p>
 
-            <h3>Reason #2: Zero AI Automation</h3>
+            <h3>Reason #2: You want AI help</h3>
             <p>
-              Everything in IXACT is manual. There are no chatbots, no voice AI, no predictive lead scoring, no intelligent automation. While your competitors use AI to respond to leads in seconds, IXACT users manually type every response.
+              IXACT's pricing page lists a CRM, email marketing, an automated monthly e-newsletter, agent websites and a mobile app, and it does not list AI features. If AI drafting or lead scoring matters to you, ask IXACT directly what it offers.
             </p>
             <p>
-              In 2025, this puts you at a massive competitive disadvantage. 78% of leads choose the first agent who responds—and manual response times average 8-15 minutes while AI responds in under 3 seconds.
+              Speed of follow-up matters, but no tool replaces a person choosing what to send. The useful question is which product makes it easiest for you to follow up quickly and consistently.
             </p>
 
             <h3>Reason #3: Pricing vs Value Gap</h3>
@@ -151,9 +151,9 @@ const IxactAlternatives = () => {
 
               <h4 className="text-lg font-semibold mt-4 mb-2">Why It's Better Than IXACT</h4>
               <ul>
-                <li><strong>AI eliminates manual follow-up:</strong> Respond in 3 seconds vs 8+ minutes</li>
+                <li><strong>An in-app assistant:</strong> drafts a reply and summarises a thread for you to review and send</li>
                 <li><strong>Built for Canadian compliance:</strong> PIPEDA/CASL native vs DIY</li>
-                <li><strong>Modern, intuitive interface:</strong> 2025 design vs 2017 design</li>
+                <li><strong>French and CAD:</strong> French set per contact, and pricing in Canadian dollars</li>
                 <li><strong>10x faster lead response:</strong> AI automation vs manual typing</li>
               </ul>
 
@@ -543,7 +543,7 @@ const IxactAlternatives = () => {
 
             <h3>Which alternative is closest to IXACT's layout?</h3>
             <p>
-              Wise Agent has a similar straightforward interface. However, RealtorDesk AI's minimal design requires even less learning because AI automation handles most tasks automatically.
+              Wise Agent has a similar straightforward interface. Realtor Desk is also a small, single-purpose CRM. Try the trial on a few contacts to judge the learning curve yourself.
             </p>
 
             <h2>The Bottom Line: Is It Time to Leave IXACT?</h2>

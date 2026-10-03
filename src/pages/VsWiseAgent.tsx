@@ -13,8 +13,8 @@ const VsWiseAgent = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Wise Agent vs RealtorDesk AI | Canadian CRM Comparison"
-        description="Wise Agent is built for the US market. Compare with RealtorDesk AI for Canadian compliance, bilingual support, and AI automation."
+        title="Wise Agent vs Realtor Desk | Canadian CRM Comparison"
+        description="Wise Agent prices in US dollars. Compare it with Realtor Desk on currency, French per contact, consent records and what each plan includes."
         keywords="Wise Agent vs RealtorDesk AI, Wise Agent alternative Canada, Canadian real estate CRM, AI CRM comparison"
         canonicalUrl="https://www.realtordesk.ai/vs/wise-agent"
         structuredData={[

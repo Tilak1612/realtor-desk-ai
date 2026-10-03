@@ -2,6 +2,11 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { normalizeLocale } from '@/lib/i18n/format';
+import { OG_IMAGE_SLUGS } from '@/config/ogImages';
+
+// Mirrors slugFor() in scripts/generate-og-images.mjs.
+const ogSlugFor = (pathname: string) =>
+  pathname === '/' || pathname === '' ? 'home' : pathname.replace(/^\/|\/$/g, '').replace(/\//g, '--');
 
 interface SEOProps {
   title: string;
@@ -26,7 +31,7 @@ export const SEO = ({
   title,
   description,
   keywords,
-  image = 'https://www.realtordesk.ai/og-image.png',
+  image,
   article = false,
   publishedTime,
   modifiedTime,
@@ -40,6 +45,15 @@ export const SEO = ({
   const locale = normalizeLocale(i18n.language);
 
   const siteUrl = 'https://www.realtordesk.ai';
+
+  // Per-page share card (1200x630, scripts/generate-og-images.mjs) when one
+  // exists for this path; otherwise the shared square image. The declared
+  // dimensions below follow the file so previews are not mis-cropped, and the
+  // static prerender (scripts/prerender-pages.js) picks the same file.
+  const ogSlug = ogSlugFor(canonicalUrl ? new URL(canonicalUrl).pathname : location.pathname);
+  const hasCard = !image && OG_IMAGE_SLUGS.has(ogSlug);
+  const ogImage = image ?? (hasCard ? `${siteUrl}/og/${ogSlug}.png` : `${siteUrl}/og-image.png`);
+  const ogIsWide = hasCard || (!!image && image !== `${siteUrl}/og-image.png`);
 
   // Canonical must reflect the CURRENT locale, not collapse FR into EN.
   // 2026-04-24 audit: `/?lang=fr` was self-canonicalling to `/` (the EN URL),
@@ -70,7 +84,13 @@ export const SEO = ({
 
   const ogLocale = locale === 'fr-CA' ? 'fr_CA' : 'en_CA';
   const ogLocaleAlt = locale === 'fr-CA' ? 'en_CA' : 'fr_CA';
-  const htmlLang = locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
+  // A route under /fr/ is a standalone French page with no English twin, so its
+  // document language is French whatever the visitor's UI language is, and it has
+  // no en-CA / x-default alternate to declare. scripts/prerender-pages.js applies
+  // the same rule to the static HTML; the two must agree because a rendering
+  // crawler sees this effect's output replace the static tags.
+  const isFrenchRoute = basePath.startsWith('/fr/');
+  const htmlLang = isFrenchRoute || locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
 
   // react-helmet-async 2.0.5 is inert under React 19 — verified in production:
   // every page carried the homepage <title> and description, and there were
@@ -123,9 +143,9 @@ export const SEO = ({
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", article ? "article" : "website");
     upsertMeta("property", "og:url", currentUrl);
-    upsertMeta("property", "og:image", image);
-    upsertMeta("property", "og:image:width", "1200");
-    upsertMeta("property", "og:image:height", "630");
+    upsertMeta("property", "og:image", ogImage);
+    upsertMeta("property", "og:image:width", ogIsWide ? "1200" : "1024");
+    upsertMeta("property", "og:image:height", ogIsWide ? "630" : "1024");
     upsertMeta("property", "og:site_name", "Realtor Desk");
     upsertMeta("property", "og:locale", ogLocale);
     upsertMeta("property", "og:locale:alternate", ogLocaleAlt);
@@ -137,12 +157,24 @@ export const SEO = ({
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", fullTitle);
     upsertMeta("name", "twitter:description", description);
-    upsertMeta("name", "twitter:image", image);
+    upsertMeta("name", "twitter:image", ogImage);
 
     upsertLink("canonical", currentUrl);
-    upsertLink("alternate", altEn, "en-CA");
-    upsertLink("alternate", altFr, "fr-CA");
-    upsertLink("alternate", altEn, "x-default");
+    if (isFrenchRoute) {
+      // One self-referencing fr-CA entry. Drop anything the static head carried
+      // for other languages: those alternates would point at this same page.
+      document.head
+        .querySelectorAll('link[rel="alternate"][hreflang="en-CA"], link[rel="alternate"][hreflang="x-default"]')
+        .forEach((n) => n.remove());
+      upsertLink("alternate", currentUrl, "fr-CA");
+    } else {
+      upsertLink("alternate", altEn, "en-CA");
+      upsertLink("alternate", altFr, "fr-CA");
+      // x-default is the clean URL, as in the static HTML. It used to be ?lang=en
+      // here and the clean URL there, so a crawler that renders JavaScript saw the
+      // value change under it.
+      upsertLink("alternate", `${siteUrl}${basePath}`, "x-default");
+    }
 
     // Page-scoped JSON-LD. Tagged so it can be cleared on unmount without
     // touching the static blocks index.html ships.
@@ -160,8 +192,8 @@ export const SEO = ({
       document.head.querySelectorAll(`script[${tag}]`).forEach((n) => n.remove());
     };
   }, [
-    fullTitle, description, keywords, noindex, article, currentUrl, image,
-    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, publishedTime, modifiedTime,
+    fullTitle, description, keywords, noindex, article, currentUrl, image, ogImage, ogIsWide,
+    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, isFrenchRoute, basePath, publishedTime, modifiedTime,
     author, structuredData,
   ]);
 

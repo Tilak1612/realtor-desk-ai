@@ -9,6 +9,7 @@ import blogImage from "@/assets/brand/blog-lead-conversion.svg";
 import blogImageSocial from "@/assets/brand/blog-lead-conversion.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const LeadConversion = () => {
   useEffect(() => {
@@ -69,6 +70,7 @@ const LeadConversion = () => {
             <h1 className="mb-6">
               Increase Lead Conversion with Lead Scoring
             </h1>
+            <ProductScopeNote className="mb-6" />
             
             <p className="text-xl text-muted-foreground leading-relaxed">
               Learn how AI-powered lead scoring and predictive analytics can increase your conversion rate from 5% to 18%.

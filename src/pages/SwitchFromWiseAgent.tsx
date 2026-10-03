@@ -14,7 +14,7 @@ const SwitchFromWiseAgent = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from Wise Agent | Canadian CRM Upgrade"
-        description="Switch from Wise Agent to RealtorDesk AI for bilingual support and Canadian market intelligence. CREA DDF® integration coming Q3 2026."
+        description="Moving from Wise Agent to Realtor Desk: US-dollar pricing against CAD, French per contact and a consent record for CASL. What you give up, too."
         keywords="switch from Wise Agent, Wise Agent alternative Canada, Canadian real estate CRM, RealtorDesk AI"
         canonicalUrl="https://www.realtordesk.ai/switch-from-wise-agent"
         structuredData={[

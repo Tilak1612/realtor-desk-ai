@@ -10,6 +10,7 @@ import blogImage from "@/assets/blog-lead-generation-strategies.jpg";
 import blogImageAvif from "@/assets/blog-lead-generation-strategies.avif";
 import blogImageWebp from "@/assets/blog-lead-generation-strategies.webp";
 import { Picture } from "@/components/Picture";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const LeadGenerationStrategies = () => {
   useEffect(() => {
@@ -71,6 +72,7 @@ const LeadGenerationStrategies = () => {
             <h1 className="mb-6">
               17 Proven Real Estate Lead Generation Strategies for Canadian Agents in 2025
             </h1>
+            <ProductScopeNote className="mb-6" />
             
             <p className="text-xl text-muted-foreground leading-relaxed">
               Generate more qualified real estate leads with these battle-tested strategies. Includes cost breakdowns, ROI expectations, and free templates. Updated for the 2025 Canadian market.
@@ -657,7 +659,7 @@ const LeadGenerationStrategies = () => {
             <div className="mt-12 pt-8 border-t">
               <h3 className="text-xl font-bold mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-4">
-                <Link to="/blog/lead-response-time-study" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/lead-response-time-canadian-realtors" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">Lead Response Time Study: Why 5 Minutes Matters</h4>
                   <p className="text-sm text-muted-foreground">Research shows 78% of buyers choose the first responsive agent</p>
                 </Link>
@@ -665,11 +667,11 @@ const LeadGenerationStrategies = () => {
                   <h4 className="font-semibold mb-2">AI Chatbots for Real Estate Websites</h4>
                   <p className="text-sm text-muted-foreground">How AI increases lead capture by 35-60%</p>
                 </Link>
-                <Link to="/blog/cost-of-missed-real-estate-leads" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/resources/cost-of-missed-real-estate-leads-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">The Real Cost of Missed Leads</h4>
                   <p className="text-sm text-muted-foreground">Each missed lead costs $12,000+ in lost commission</p>
                 </Link>
-                <Link to="/blog/casl-compliance-guide-real-estate-agents" className="block p-4 rounded-lg border hover:border-primary transition-colors">
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">CASL Compliance Guide for Realtors</h4>
                   <p className="text-sm text-muted-foreground">Avoid $10,000+ fines with proper email marketing</p>
                 </Link>

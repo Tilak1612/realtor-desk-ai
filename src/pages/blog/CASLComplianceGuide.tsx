@@ -173,10 +173,10 @@ const CASLComplianceGuide = () => {
                   <h4 className="font-bold mb-3 text-blue-900">Implied Consent (Assumed)</h4>
                   <p className="text-sm text-gray-700 mb-3">Based on existing business relationship</p>
                   <ul className="space-y-2 text-sm text-gray-700">
-                    <li>• <strong>Inquiry:</strong> Valid 2 years after inquiry</li>
-                    <li>• <strong>Transaction:</strong> Valid 2 years after purchase/sale</li>
-                    <li>• <strong>Business card:</strong> Valid 6 months (conspicuous publication)</li>
-                    <li>• <strong>Open house:</strong> Valid 6 months</li>
+                    <li>• <strong>Inquiry or application:</strong> 6 months from the inquiry</li>
+                    <li>• <strong>Purchase, lease or contract:</strong> 2 years from the transaction</li>
+                    <li>• <strong>Address they gave you or published:</strong> no fixed expiry in the statute, but the message must be relevant to their role or business and they must not have said they do not want messages</li>
+                    <li>• <strong>Open house sign-in:</strong> do not assume it. Put an express-consent tick box on the sheet</li>
                   </ul>
                 </div>
               </div>
@@ -405,9 +405,9 @@ const CASLComplianceGuide = () => {
                 <div className="p-4 bg-blue-50 rounded-lg mb-4">
                   <p className="font-semibold mb-2">CASL Analysis:</p>
                   <ul className="space-y-1 text-sm text-gray-700">
-                    <li>✓ You have implied consent (conspicuous publication)</li>
-                    <li>✓ Valid for 6 months</li>
-                    <li>✓ Can send relevant property info</li>
+                    <li>✓ A business card can support implied consent, but only for messages relevant to that person's role or business, and only if they have not said they do not want them</li>
+                    <li>✓ There is no fixed expiry in the statute; it is judged case by case</li>
+                    <li>✓ Safest route: ask for express consent in writing, then you do not depend on that judgment</li>
                     <li>⚠️ Still must include unsubscribe</li>
                   </ul>
                 </div>
@@ -431,7 +431,7 @@ const CASLComplianceGuide = () => {
                     <li>❌ <strong>EXTREMELY RISKY</strong></li>
                     <li>❌ You do NOT have consent (non-transferable)</li>
                     <li>❌ Each email = potential violation</li>
-                    <li>❌ 10,000 emails × $1M = $10B in theoretical penalties</li>
+                    <li>❌ Penalties run per violation: up to $1M for an individual and $10M for a business</li>
                   </ul>
                 </div>
 
@@ -660,9 +660,9 @@ const CASLComplianceGuide = () => {
             <div className="space-y-4">
               {[
                 {
-                  mistake: "I met them at an open house, I can email them forever",
-                  reality: "Implied consent from open house expires after 6 months",
-                  fix: "After 6 months, send re-opt-in email or get express consent"
+                  mistake: "I met them at an open house, so I can email them whenever I like",
+                  reality: "Attending an open house is not itself a consent. Implied consent needs a defined relationship, such as an inquiry (6 months) or a purchase or contract (2 years)",
+                  fix: "Capture express consent on the sign-in sheet, record the date and source, and stop sending when the implied window closes"
                 },
                 {
                   mistake: "They called me about a property, so they're on my list",
@@ -771,7 +771,7 @@ const CASLComplianceGuide = () => {
               {[
                 {
                   q: "Can I email past clients without consent?",
-                  a: "Yes, if transaction was within last 2 years (implied consent). After 2 years, you need to re-obtain consent."
+                  a: "Yes, while the 2-year implied-consent window from the purchase or contract is still open. After it closes, you need express consent."
                 },
                 {
                   q: "Does CASL apply to text messages?",
@@ -783,7 +783,7 @@ const CASLComplianceGuide = () => {
                 },
                 {
                   q: "Can I email someone whose email is on their website?",
-                  a: "Yes (implied consent via conspicuous publication), but only for 6 months. Still must include unsubscribe."
+                  a: "Only in limited cases. Consent can be implied when the address was conspicuously published, there is no notice saying they do not want messages, and your message is relevant to their business or role. It does not cover an unrelated consumer pitch. Every message still needs identification and an unsubscribe."
                 },
                 {
                   q: "Are there exemptions for small businesses?",
@@ -795,7 +795,7 @@ const CASLComplianceGuide = () => {
                 },
                 {
                   q: "How long do I keep consent records?",
-                  a: "Minimum 3 years. Recommended: Keep forever (storage is cheap, penalties are expensive)."
+                  a: "The burden of proving consent is on the sender. Three years is the commonly recommended minimum, because that is the limitation period for enforcement. Many agents keep consent records for as long as the contact exists."
                 },
                 {
                   q: "Can I send a 'one last email' after unsubscribe?",
@@ -812,6 +812,35 @@ const CASLComplianceGuide = () => {
 
           {/* Conclusion */}
           <section className="mb-12">
+            <Card className="p-6 mb-12 border-dashed">
+              <h2 className="text-xl font-bold mb-3">Sources and limits of this guide</h2>
+              <p className="text-sm text-gray-700 mb-3">
+                The consent windows and penalty figures above follow the CRTC&rsquo;s published
+                guidance. Read them at the source, because they are what a regulator would apply:
+              </p>
+              <ul className="space-y-1 text-sm text-gray-700 mb-3">
+                <li>
+                  &bull;{" "}
+                  <a className="underline" href="https://crtc.gc.ca/eng/com500/guide.htm" rel="noopener noreferrer" target="_blank">
+                    CRTC: guidance on implied consent
+                  </a>
+                </li>
+                <li>
+                  &bull;{" "}
+                  <a className="underline" href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener noreferrer" target="_blank">
+                    CRTC: frequently asked questions about Canada&rsquo;s anti-spam legislation
+                  </a>
+                </li>
+              </ul>
+              <p className="text-sm text-gray-600">
+                This is general information for Canadian real estate agents, not legal advice.
+                Whether a particular message is covered depends on the facts, so check with a
+                lawyer or your brokerage&rsquo;s compliance contact. No software makes you
+                compliant by itself: how you collect consent and handle requests stays your
+                responsibility.
+              </p>
+            </Card>
+
             <Card className="p-8 bg-gradient-to-r from-gray-50 to-blue-50">
               <h2 className="text-3xl font-bold mb-4">Conclusion</h2>
               <div className="space-y-4 text-gray-700">
@@ -874,13 +903,13 @@ const CASLComplianceGuide = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Related Compliance Resources</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <Link to="/features/pipeda-compliance">
+              <Link to="/pipeda-compliance">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">PIPEDA Compliance</h3>
                   <p className="text-sm text-gray-600">Data privacy for AI tools</p>
                 </Card>
               </Link>
-              <Link to="/features/email-automation">
+              <Link to="/features/casl-compliant-email">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Email Automation</h3>
                   <p className="text-sm text-gray-600">CASL-compliant automation</p>

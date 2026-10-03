@@ -17,7 +17,7 @@ const PIPEDACompliance = () => {
         "name": "Is RealtorDesk AI PIPEDA compliant?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "RealtorDesk AI is designed with PIPEDA's 10 fair information principles in mind. All client data is encrypted at rest and in transit, hosted on Canadian-optimized infrastructure, and processed with consent-first workflows."
+          "text": "No software makes you PIPEDA compliant, and we will not tell you otherwise. Realtor Desk is built to support the work: the production database runs in Canada (ca-central-1), data is encrypted in transit and at rest, and the date and source of consent are recorded on every contact. Your own obligations, such as obtaining meaningful consent, answering access requests and reporting breaches, stay with you and your brokerage."
         }
       },
       {
@@ -25,7 +25,7 @@ const PIPEDACompliance = () => {
         "name": "Where is my data stored?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "RealtorDesk AI data is hosted on Canadian-optimized infrastructure to support PIPEDA data residency best practices and protect Canadian real estate client information."
+          "text": "The production database and file storage run in Canada, in the ca-central-1 region. Features that call outside services, such as SMS delivery, email delivery and AI-assisted drafting, send the relevant content to those providers, which may process it outside Canada. So the database location answers where your records are stored, not where every processing step happens."
         }
       },
       {
@@ -33,7 +33,7 @@ const PIPEDACompliance = () => {
         "name": "Can I export client data for PIPEDA compliance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, RealtorDesk AI provides one-click data export functionality so you can fulfill client access requests under PIPEDA within the required 30-day timeframe."
+          "text": "Yes. You can export your data from Settings and export contacts to CSV, which helps when you answer an access request. PIPEDA expects a response within 30 days, and handling the request itself remains your responsibility."
         }
       },
       {
@@ -41,7 +41,7 @@ const PIPEDACompliance = () => {
         "name": "How does RealtorDesk AI handle data deletion requests?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "RealtorDesk AI provides tools to permanently delete client data upon request, in compliance with PIPEDA's withdrawal of consent provisions. All deletions are logged for audit purposes."
+          "text": "You can delete a contact and its records from inside the app. There is no exportable audit log of deletions today, so keep your own record of when you received and completed each request."
         }
       }
     ]
@@ -71,7 +71,7 @@ const PIPEDACompliance = () => {
               Principles for Canadian Agents
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              RealtorDesk AI is designed with PIPEDA principles at its core — encryption, consent management, automated compliance logging, and Canadian-optimized infrastructure — so you can focus on clients, not compliance headaches.
+              Realtor Desk is built to support PIPEDA work: encryption, consent date and source recorded on every contact, data export, and a production database that runs in Canada. Meeting PIPEDA still depends on how you collect consent and handle requests.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
@@ -169,7 +169,7 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">1. Canadian Data Residency</h3>
                     <p className="text-muted-foreground mb-3">
-                      Client data is hosted on Canadian-optimized infrastructure. We are working to ensure data remains within Canadian borders as our infrastructure scales.
+                      The production database and file storage run in Canada, in the ca-central-1 region. Some features send content to outside providers, such as SMS, email delivery and AI-assisted drafting, which may process it outside Canada.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
@@ -220,7 +220,7 @@ const PIPEDACompliance = () => {
                       <ul className="text-sm text-muted-foreground space-y-1">
                         <li>• Automatic consent logging for all communications</li>
                         <li>• One-click unsubscribe for clients</li>
-                        <li>• Audit trail for PIPEDA compliance reviews</li>
+                        <li>• Consent date and source recorded on each contact</li>
                       </ul>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ const PIPEDACompliance = () => {
                       <ul className="text-sm text-muted-foreground space-y-1">
                         <li>• Fulfill access requests in under 30 days (PIPEDA requirement)</li>
                         <li>• Export client data for portability</li>
-                        <li>• Searchable audit logs for all data access</li>
+                        <li>• Your data in CSV and JSON, on request from Settings</li>
                       </ul>
                     </div>
                   </div>
@@ -257,14 +257,14 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">5. Data Retention & Deletion</h3>
                     <p className="text-muted-foreground mb-3">
-                      Automatic data retention policies (e.g., delete inactive contacts after 7 years) and manual deletion tools to comply with "limiting retention" requirements.
+                      You decide how long to keep a contact. There is no automatic retention schedule today; you can delete a contact and its records yourself, including when a client asks you to.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Automated deletion of old data</li>
-                        <li>• Permanent deletion upon client request</li>
-                        <li>• Configurable retention policies per data type</li>
+                        <li>• Delete a contact and its records from inside the app</li>
+                        <li>• Act on a deletion request yourself; handling it stays your responsibility</li>
+                        <li>• No automatic retention schedule yet, so set your own review routine</li>
                       </ul>
                     </div>
                   </div>
@@ -279,14 +279,14 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">6. Security Practices</h3>
                     <p className="text-muted-foreground mb-3">
-                      RealtorDesk AI is designed around PIPEDA principles and industry security best practices. Formal third-party audits and SOC 2 certification are planned as we exit beta.
+                      Realtor Desk holds no third-party security certification and has not been independently audited. Any certification will be listed here only once it exists.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
                         <li>• Encryption at rest and in transit by default</li>
                         <li>• Consent tracking and data-export flows built in</li>
-                        <li>• Transparent public beta — certifications shared as they're earned</li>
+                        <li>• No certifications claimed today</li>
                       </ul>
                     </div>
                   </div>
@@ -457,42 +457,42 @@ const PIPEDACompliance = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Is RealtorDesk AI PIPEDA compliant?</h3>
                 <p className="text-muted-foreground">
-                  RealtorDesk AI is designed with PIPEDA's 10 fair information principles in mind. All client data is encrypted at rest and in transit, hosted on Canadian-optimized infrastructure, and processed with consent-first workflows.
+                  No software makes you PIPEDA compliant, and we will not tell you otherwise. Realtor Desk is built to support the work: the production database runs in Canada (ca-central-1), data is encrypted in transit and at rest, and the date and source of consent are recorded on every contact. Your own obligations, such as obtaining meaningful consent, answering access requests and reporting breaches, stay with you and your brokerage.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Where is my data stored?</h3>
                 <p className="text-muted-foreground">
-                  RealtorDesk AI data is hosted on Canadian-optimized infrastructure to support PIPEDA data residency best practices and protect Canadian real estate client information.
+                  The production database and file storage run in Canada, in the ca-central-1 region. Features that call outside services, such as SMS delivery, email delivery and AI-assisted drafting, send the relevant content to those providers, which may process it outside Canada. So the database location answers where your records are stored, not where every processing step happens.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Can I export client data for PIPEDA compliance?</h3>
                 <p className="text-muted-foreground">
-                  Yes, RealtorDesk AI provides one-click data export functionality so you can fulfill client access requests under PIPEDA within the required 30-day timeframe.
+                  Yes. You can export your data from Settings and export contacts to CSV, which helps when you answer an access request. PIPEDA expects a response within 30 days, and handling the request itself remains your responsibility.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">How does RealtorDesk AI handle data deletion requests?</h3>
                 <p className="text-muted-foreground">
-                  RealtorDesk AI provides tools to permanently delete client data upon request, in compliance with PIPEDA's withdrawal of consent provisions. All deletions are logged for audit purposes.
+                  You can delete a contact and its records from inside the app. There is no exportable audit log of deletions today, so keep your own record of when you received and completed each request.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Do I need a separate privacy policy if I use RealtorDesk AI?</h3>
                 <p className="text-muted-foreground">
-                  Yes, your brokerage still needs its own privacy policy that describes how you collect and use client information. RealtorDesk AI provides a template you can customize.
+                  Yes. Your brokerage still needs its own privacy policy describing how you collect and use client information. Realtor Desk's privacy policy covers how we handle data on our side; it does not replace yours.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">What if I'm also subject to provincial privacy laws (PIPA)?</h3>
                 <p className="text-muted-foreground">
-                  RealtorDesk AI is compliant with both PIPEDA and provincial privacy laws in Alberta, British Columbia, and Quebec. Our Canadian data residency and consent management features meet all requirements.
+                  It depends on where and how you operate. Alberta, British Columbia and Quebec have their own private-sector privacy laws that the federal privacy commissioner treats as substantially similar to PIPEDA, and those provincial laws generally govern collection within the province. Ask your brokerage's privacy officer or a lawyer which applies to you. Realtor Desk records consent date and source per contact and lets you export or delete a contact. Those are inputs to meeting your obligations, not a guarantee that you meet them.
                 </p>
               </Card>
             </div>

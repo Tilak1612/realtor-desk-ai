@@ -41,7 +41,7 @@ const LoftyAlternative = () => {
         "name": "Does RealtorDesk AI have the same features as Lofty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon). CREA DDF® (Canadian MLS) integration is planned for Q3 2026."
+          "text": "Not all of them. Realtor Desk covers the CRM core: lead management, a deal pipeline, SMS and one conversation timeline per client, with French per contact. It does not include an IDX website, lead generation, a power dialer or a voice agent, which Lofty lists. Choose on which of those you actually use."
         }
       }
     ]
@@ -357,7 +357,7 @@ const LoftyAlternative = () => {
               <Card className="p-6">
                 <h3 className="text-lg font-bold mb-2">Does RealtorDesk AI have the same features as Lofty?</h3>
                 <p className="text-muted-foreground">
-                  Yes, RealtorDesk AI includes all core CRM features (lead management, pipeline, automation, SMS/email) plus PIPEDA-aware data handling, bilingual support, and an AI voice agent (coming soon). CREA DDF® (Canadian MLS) integration is planned for Q3 2026.
+                  Not all of them. Realtor Desk covers the CRM core: lead management, a deal pipeline, SMS and one conversation timeline per client, with French per contact. It does not include an IDX website, lead generation, a power dialer or a voice agent, which Lofty lists. Choose on which of those you actually use.
                 </p>
               </Card>
               <Card className="p-6">

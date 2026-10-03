@@ -11,7 +11,7 @@ const BoomTownAlternative = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="BoomTown Alternative for Canada"
-        description="BoomTown costs $1,350-2,700 CAD/month. Compare PIPEDA-compliant alternatives for Canadian agents with better ROI."
+        description="BoomTown quotes pricing on request. What to check before you buy or switch: lead-generation bundles, contract terms, and consent and data handling in Canada."
         keywords="BoomTown alternative Canada, PIPEDA compliant CRM, Canadian real estate CRM alternatives, BoomTown vs RealtorDesk"
         article
         publishedTime="2025-01-01"
@@ -780,19 +780,19 @@ const BoomTownAlternative = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Related Comparisons</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <Link to="/resources/best-crm-canadian-real-estate-agents-2025">
+              <Link to="/blog/best-crm-canada-2025">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Best CRM for Canadian Agents 2025</h3>
                   <p className="text-sm text-gray-600">Top 10 CRM comparison guide</p>
                 </Card>
               </Link>
-              <Link to="/resources/vs-kvcore">
+              <Link to="/blog/vs-kvcore">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">kvCORE vs RealtorDesk AI</h3>
                   <p className="text-sm text-gray-600">Speed vs features comparison</p>
                 </Card>
               </Link>
-              <Link to="/resources/vs-lofty-crm">
+              <Link to="/blog/vs-lofty-crm">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Lofty CRM vs RealtorDesk AI</h3>
                   <p className="text-sm text-gray-600">Simplicity vs feature bloat</p>

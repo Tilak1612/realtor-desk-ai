@@ -177,8 +177,8 @@ const LeadMagnetFollowUp = () => {
                 Ready to stop losing leads to faster agents?
               </h2>
               <p className="text-white/85 mb-6 max-w-xl mx-auto">
-                RealtorDesk AI responds to every lead in seconds — CREA DDF integrated,
-                PIPEDA compliant, bilingual. Starting at $149/month CAD.
+                Realtor Desk ranks every new lead and suggests who to contact next, in
+                English or French. From CAD $149 a month.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link

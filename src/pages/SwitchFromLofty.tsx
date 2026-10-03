@@ -14,7 +14,7 @@ const SwitchFromLofty = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from Lofty | Upgrade to Real AI"
-        description="Move from Lofty to RealtorDesk AI for true predictive intelligence, transparent pricing, and Canadian support."
+        description="Moving from Lofty to Realtor Desk: what you would give up, how a CSV move works, and CAD pricing. Lofty quotes pricing on request."
         keywords="switch from Lofty, Lofty CRM migration, Lofty alternative Canada, RealtorDesk AI"
         canonicalUrl="https://www.realtordesk.ai/switch-from-lofty"
         structuredData={[

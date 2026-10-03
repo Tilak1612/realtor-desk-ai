@@ -1,11 +1,118 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Award, TrendingUp, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
+
+// /blog/best-crm-canada-2025 — rewritten 2026-10-02.
+//
+// The slug keeps its "2025" because it is an indexed address with inbound links;
+// the page itself no longer carries a year in its title.
+//
+// WHAT THE PREVIOUS VERSION DID, AND WHY IT WAS REPLACED. It ranked Realtor
+// Desk "#1 of 10" against a rubric with invented weights, printed a Follow Up
+// Boss first-year cost of "$6,480 CAD" (the vendor's own page shows $69 per user
+// per month), claimed "fastest lead response tested (2.7 seconds)" for a product
+// that does not respond to leads, said the Team plan covers "up to 5", and told
+// budget buyers to "try LionDesk", which Lone Wolf discontinued in September
+// 2025. It was dated January 2025 with "next update April 2025".
+//
+// EVERYTHING ABOUT ANOTHER VENDOR BELOW WAS READ FROM THAT VENDOR'S OWN PAGE ON
+// 2026-10-02, with the URL shown. Where a page did not state something (a
+// currency, a trial length, a hosting location) this page says "not stated"
+// rather than filling the gap. Lofty and BoldTrail were checked 2026-09-28: both
+// ask you to request a quote.
+
+const CHECKED = "October 2, 2026";
+
+interface Row {
+  crm: string;
+  price: string;
+  note: string;
+  source?: { label: string; href: string };
+}
+
+const ROWS: Row[] = [
+  {
+    crm: "Realtor Desk",
+    price: "CAD $149 a month (Solo), CAD $299 a month (Team)",
+    note: "14-day trial, card collected up front, nothing charged before day 14. EN/FR set per contact, database in Canada. Team is a price tier: there are no seats, assignment or shared pipeline today.",
+    source: { label: "Pricing page", href: "/pricing" },
+  },
+  {
+    crm: "CloseFlow",
+    price: "CA$49, CA$99 or CA$179 a month",
+    note: "14-day trial. Prices are marked as a founder rate locked for the first 100 agents. States CASL consent tracking. The pricing page does not mention data location or French. The top plan lists CREA / TRREB data as pending approval.",
+    source: { label: "closeflow.ca/pricing", href: "https://www.closeflow.ca/pricing" },
+  },
+  {
+    crm: "Follow Up Boss",
+    price: "$69 per user a month (Grow); $499 a month for 10 users (Pro); $1,000 a month for 30 users (Platform)",
+    note: "Annual billing lowers these to $58, $416 and $833. 14-day free trial. The page does not state a currency. Calling on the Grow plan is an add-on.",
+    source: { label: "followupboss.com/pricing", href: "https://followupboss.com/pricing" },
+  },
+  {
+    crm: "IXACT Contact",
+    price: "$46.75 a month billed annually, or $55 a month",
+    note: "Team members are $28.90 or $34 a month. Includes the CRM, email marketing, agent websites and a mobile app. No trial length or currency is stated on the page.",
+    source: { label: "ixactcontact.com pricing", href: "https://www.ixactcontact.com/real-estate-crm-pricing/" },
+  },
+  {
+    crm: "Wise Agent",
+    price: "US$49 a month, or US$42 billed annually (CRM); US$69 or US$59 with WiseSocial",
+    note: "Priced in US dollars. 14-day trial. Enterprise pricing is custom. The CRM plan allows up to 5 team members on a shared login.",
+    source: { label: "wiseagent.com/pricing", href: "https://www.wiseagent.com/pricing.asp" },
+  },
+  {
+    crm: "Top Producer",
+    price: "$179 per user a month (Pro); team plans from $399 a month for up to 5 users",
+    note: "No currency or trial length is stated. The page says to request pricing for Canadians.",
+    source: { label: "topproducer.com/pricing", href: "https://www.topproducer.com/pricing" },
+  },
+  {
+    crm: "Lofty (formerly Chime)",
+    price: "Not published: request a quote",
+    note: "Checked September 28, 2026.",
+  },
+  {
+    crm: "BoldTrail (formerly kvCORE)",
+    price: "Not published: request a quote",
+    note: "Checked September 28, 2026.",
+  },
+  {
+    crm: "LionDesk",
+    price: "Discontinued",
+    note: "Lone Wolf Technologies announced the wind-down in May 2025, kept the software available through September 2025, and offered customers Lone Wolf Relationships.",
+    source: { label: "Inman report", href: "https://www.inman.com/2025/05/16/lone-wolf-technologies-to-wind-down-popular-liondesk-crm/" },
+  },
+];
+
+const FAQS = [
+  {
+    q: "What is the best CRM for a Canadian real estate agent?",
+    a: "There is no single best one. It depends on what you need to be true: published pricing in Canadian dollars, French for some clients, consent records for CASL, where the data is stored, and whether you work alone or on a team. The table above lists what each vendor states publicly so you can compare on those points.",
+  },
+  {
+    q: "Do I need a CRM built in Canada?",
+    a: "Not necessarily, but ask each vendor four things: which currency it bills in, whether it records consent date and source for CASL, where it stores your data, and whether the interface and client email work in French. If a page does not say, treat that as a question to put to the vendor in writing.",
+  },
+  {
+    q: "How much does a real estate CRM cost?",
+    a: "Among the vendors that publish a price, a single agent pays from about $42 a month (Wise Agent, billed annually, in US dollars) up to $179 a month (Top Producer Pro), in whichever currency each page uses, and several do not state one. Lofty and BoldTrail ask you to request a quote. Realtor Desk is CAD $149 a month, which is not the cheapest on this list.",
+  },
+  {
+    q: "Is LionDesk still available?",
+    a: "No. Lone Wolf Technologies announced in May 2025 that it was winding LionDesk down, kept it available through September 2025, and offered customers Lone Wolf Relationships. Any page still recommending LionDesk is out of date.",
+  },
+  {
+    q: "Does Realtor Desk work for a team or a brokerage?",
+    a: "Not yet. The Team plan is a price tier, not a set of collaboration features: there are no seats, lead assignment or shared pipeline. A team that needs those should choose another product today. Our team and brokerage pages explain what to look for.",
+  },
+];
 
 const BestCRMCanada2025 = () => {
   useEffect(() => {
@@ -16,28 +123,38 @@ const BestCRMCanada2025 = () => {
     <div className="min-h-screen">
       <SEO
         title="Best CRM for Canadian Real Estate Agents"
-        description="Compare the top real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities. Updated January 2025."
-        keywords="best CRM Canada 2025, real estate CRM comparison, Canadian real estate CRM, PIPEDA compliant CRM, CREA DDF CRM"
+        description="How to choose a real estate CRM in Canada: what nine vendors publish on price, currency and trial, plus CASL, French and data location. Checked October 2026."
+        keywords="best CRM for real estate Canada, real estate CRM Canada, CRM for Canadian realtors, real estate CRM pricing Canada, CASL real estate CRM"
         article
         publishedTime="2025-01-16"
-        modifiedTime="2025-01-16"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-02"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/best-crm-canada-2025"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Best CRM for Canadian Real Estate Agents: Complete Comparison Guide",
-            "description": "Compare the top real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "datePublished": "2025-01-16",
-            "dateModified": "2025-01-16"
-          }
+            headline: "Best CRM for Canadian Real Estate Agents: how to choose",
+            description:
+              "How to choose a real estate CRM in Canada, with what nine vendors state publicly about price, currency and trial.",
+            author: { "@type": "Organization", name: "Realtor Desk" },
+            publisher: { "@type": "Organization", name: "Realtor Desk" },
+            datePublished: "2025-01-16",
+            dateModified: "2026-10-02",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
       <Navbar />
-      
+
       <article className="pt-32 md:pt-40 pb-20">
         <div className="container-custom max-w-4xl">
           <Link to="/resources">
@@ -50,485 +167,228 @@ const BestCRMCanada2025 = () => {
           <header className="mb-8">
             <div className="flex items-center gap-4 mb-6 text-sm text-muted-foreground flex-wrap">
               <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold">
-                Comprehensive Guide
+                Buyer guide
               </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>January 16, 2025</span>
+                <span>Updated {CHECKED}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>15 min read</span>
+                <span>7 min read</span>
               </div>
             </div>
-            
-            <h1 className="mb-6">
-              Best CRM for Canadian Real Estate Agents: Complete Comparison Guide
-            </h1>
-            
+
+            <h1 className="mb-6">Best CRM for Canadian Real Estate Agents: how to choose</h1>
+
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Compare the top 10 real estate CRMs for Canadian agents. Features, pricing, PIPEDA compliance, and AI capabilities. Free trials available. Updated January 2025.
+              No single CRM suits every Canadian agent. This guide lists what nine
+              vendors say publicly about price, currency and trial, then the
+              questions that matter in Canada: CASL consent, French, and where your
+              data is stored.
             </p>
           </header>
 
-          <Card className="p-6 mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
-            <h3 className="text-lg font-bold mb-3">Key Finding</h3>
-            <p className="text-base mb-0">
-              Most of the best-known real estate CRMs are built for the US market, so PIPEDA-aware data handling, French-language support and Canadian MLS coverage are the things worth checking before you commit. This guide compares the main options against those criteria, using each vendor's own published documentation.
+          <Card className="p-6 mb-8">
+            <h2 className="text-lg font-bold mb-3">Short answer</h2>
+            <p className="text-base mb-3">
+              Pick on the constraints you cannot give up, then compare price. For a
+              Canadian agent those are usually a bill in Canadian dollars, a record
+              of when and how each contact consented, French for some clients, and
+              a known data location. Most vendors below state some of these on their
+              pricing page and leave the rest unsaid.
+            </p>
+            <p className="text-sm text-muted-foreground mb-0">
+              We build one of the products compared here, Realtor Desk, so read its
+              row with that in mind. It is not the cheapest here, and it is the wrong
+              choice for a team that needs seats or shared pipelines.
             </p>
           </Card>
 
           <div className="prose prose-lg max-w-none">
-            <p className="lead">
-              A CRM will not close deals for you, but the wrong one quietly costs you follow-ups. For Canadian agents there are extra constraints worth getting right up front: where client data is stored under PIPEDA, whether email handling fits CASL, and whether the product covers Canadian MLS data at all.
-            </p>
-
-            <h2>How this comparison was put together</h2>
+            <h2>What each vendor publishes</h2>
 
             <p>
-              This is desk research, not a lab test. Each product below was assessed
-              from its own public documentation, pricing pages and support material,
-              checked against the criteria that matter in Canada. We have not run a
-              controlled trial of these products against each other, and we do not
-              publish conversion or response-time figures we cannot show you the
-              working for. Vendor pricing and features change often — check the
-              vendor's own page before deciding, and treat anything here as a
-              starting shortlist rather than a verdict.
+              Every figure in this table was read from the vendor&rsquo;s own page on{" "}
+              {CHECKED}, unless a row says otherwise. Where a page did not state a
+              currency, a trial length or a hosting location, the table says so
+              rather than guessing.
             </p>
 
-            <p>
-              We build one of the products compared here, so read the RealtorDesk
-              entry with that in mind.
-            </p>
-
-            <h3>Our 10 Evaluation Criteria</h3>
-
-            <ol>
-              <li><strong>Canadian Compliance (20% weight):</strong> PIPEDA, CASL, CREA DDF integration</li>
-              <li><strong>AI & Automation (20% weight):</strong> Conversational AI, predictive scoring, workflow automation</li>
-              <li><strong>Lead Response Speed (15% weight):</strong> How fast can you engage a new lead?</li>
-              <li><strong>Ease of Use (10% weight):</strong> Learning curve, interface design, mobile experience</li>
-              <li><strong>Pricing & Value (10% weight):</strong> Total cost of ownership vs features delivered</li>
-              <li><strong>Mobile Experience (10% weight):</strong> Native apps, offline functionality</li>
-              <li><strong>Integration Ecosystem (5% weight):</strong> Connections to tools you already use</li>
-              <li><strong>Customer Support (5% weight):</strong> Response times, Canadian hours coverage</li>
-              <li><strong>Bilingual Support (3% weight):</strong> English/French for Quebec markets</li>
-              <li><strong>Track Record (2% weight):</strong> Reliability, uptime, company stability</li>
-            </ol>
-
-            <h2>The Top 10 CRMs for Canadian Real Estate Agents</h2>
-
-            {/* #1 RealtorDesk AI */}
-            <Card className="p-8 mb-8 border-2 border-primary">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="text-4xl font-bold text-primary">🏆 #1</div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-1">RealtorDesk AI</h3>
-                    <p className="text-sm text-muted-foreground mb-0">Best Overall for Canadian Agents</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-primary"></div>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="font-semibold mb-3 flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-700" />
-                    What Makes It #1
-                  </h4>
-                  <ul className="space-y-2 text-sm">
-                    <li>✅ Purpose-built for Canadian market</li>
-                    <li>✅ Sub-3-second AI lead response (fastest tested)</li>
-                    <li>✅ Native PIPEDA/CASL compliance</li>
-                    <li>✅ CREA DDF integration (coming Q3 2026)</li>
-                    <li>✅ Bilingual AI for Quebec markets</li>
-                    <li>✅ Transparent pricing ($149-299 CAD)</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-3">Detailed Scores</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Canadian Compliance</span>
-                      <span className="font-bold">20/20</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>AI & Automation</span>
-                      <span className="font-bold">19/20</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Lead Response Speed</span>
-                      <span className="font-bold">15/15</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Ease of Use</span>
-                      <span className="font-bold">10/10</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Pricing & Value</span>
-                      <span className="font-bold">9/10</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Mobile Experience</span>
-                      <span className="font-bold">9/10</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <h4 className="font-semibold mb-3">Best For</h4>
-                <div className="grid md:grid-cols-2 gap-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
-                    <span>Canadian solo agents</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
-                    <span>Small teams (2-10 agents)</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
-                    <span>Agents who want AI automation</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5 flex-shrink-0" />
-                    <span>Quebec markets (bilingual needs)</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg mb-4">
-                <p className="text-sm mb-0">
-                  <strong>Pricing:</strong> $149 CAD/month (solo) | $299 CAD/month (team up to 5)
-                </p>
-              </div>
-
-              <div className="flex gap-3">
-                <Link to="/demo" className="flex-1">
-                  <Button size="lg" className="btn-gradient w-full">
-                    Try Free for 14 Days
-                  </Button>
-                </Link>
-                <Link to="/blog/vs-kvcore" className="flex-1">
-                  <Button size="lg" variant="outline" className="w-full">
-                    See Comparisons
-                  </Button>
-                </Link>
-              </div>
-            </Card>
-
-            {/* #2 Follow Up Boss */}
-            <Card className="p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="text-3xl font-bold text-gray-600">🥈 #2</div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">Follow Up Boss</h3>
-                    <p className="text-sm text-muted-foreground mb-0">Best for Team Collaboration</p>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-sm mb-4">
-                Excellent team workflows and lead routing with 300+ integrations. Trusted by 20,000+ agents but lacks true AI automation and Canadian-specific features.
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 text-sm mb-4">
-                <div>
-                  <strong>Pros:</strong> Great team features, many integrations
-                </div>
-                <div>
-                  <strong>Cons:</strong> No AI, manual follow-up, expensive ($540-810 CAD/month)
-                </div>
-              </div>
-
-              <Link to="/blog/vs-follow-up-boss">
-                <Button variant="outline" size="sm">Full Comparison →</Button>
-              </Link>
-            </Card>
-
-            {/* #3 kvCORE */}
-            <Card className="p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="text-3xl font-bold text-gray-600">🥉 #3</div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">kvCORE</h3>
-                    <p className="text-sm text-muted-foreground mb-0">Best for Enterprise Features</p>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-sm mb-4">
-                Comprehensive feature set with lead generation tools. Established platform (15+ years) but complex interface and lacks Canadian focus. Good for large teams with Keller Williams.
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 text-sm mb-4">
-                <div>
-                  <strong>Pros:</strong> Many features, established
-                </div>
-                <div>
-                  <strong>Cons:</strong> Complex, expensive ($405-675 CAD), not Canadian-focused
-                </div>
-              </div>
-
-              <Link to="/blog/vs-kvcore">
-                <Button variant="outline" size="sm">Full Comparison →</Button>
-              </Link>
-            </Card>
-
-            {/* Remaining 7 in condensed format */}
-            <div className="space-y-4 mb-8">
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#4 LionDesk</h4>
-                    <p className="text-sm text-muted-foreground">Best for Video Marketing • $34-101 CAD/month</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#5 IXACT Contact</h4>
-                    <p className="text-sm text-muted-foreground">Best for Transaction Management • $53-80 CAD/month</p>
-                  </div>
-                </div>
-                <Link to="/blog/ixact-alternatives" className="text-sm text-primary mt-2 inline-flex items-center min-h-[24px]">
-                  See Alternatives →
-                </Link>
-              </Card>
-
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#6 Wise Agent</h4>
-                    <p className="text-sm text-muted-foreground">Best Budget Option • $39-63 CAD/month</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#7 Top Producer</h4>
-                    <p className="text-sm text-muted-foreground">Best for CINC Users • $54-81 CAD/month</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#8 Real Geeks</h4>
-                    <p className="text-sm text-muted-foreground">Best CRM + Website Bundle • $336+ CAD/month</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#9 BoomTown</h4>
-                    <p className="text-sm text-muted-foreground">Best for High-Budget Teams • $1,350+ CAD/month</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold">#10 Lofty</h4>
-                    <p className="text-sm text-muted-foreground">Most Features (Many Unused) • $675+ CAD/month</p>
-                  </div>
-                </div>
-              </Card>
+            <div className="overflow-x-auto not-prose my-6">
+              <table className="min-w-full text-sm">
+                <caption className="text-left text-muted-foreground pb-3">
+                  Published pricing for a single agent, as stated by each vendor.
+                  Prices change, so confirm on the vendor&rsquo;s page.
+                </caption>
+                <thead>
+                  <tr className="border-b-2 text-left">
+                    <th scope="col" className="py-2 pr-4 font-semibold">CRM</th>
+                    <th scope="col" className="py-2 pr-4 font-semibold">Published price</th>
+                    <th scope="col" className="py-2 pr-4 font-semibold">What the page also says</th>
+                    <th scope="col" className="py-2 font-semibold">Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ROWS.map((r) => (
+                    <tr key={r.crm} className="border-b align-top">
+                      <th scope="row" className="py-3 pr-4 text-left font-semibold">{r.crm}</th>
+                      <td className="py-3 pr-4">{r.price}</td>
+                      <td className="py-3 pr-4 text-muted-foreground">{r.note}</td>
+                      <td className="py-3">
+                        {r.source ? (
+                          r.source.href.startsWith("/") ? (
+                            <Link className="underline" to={r.source.href}>{r.source.label}</Link>
+                          ) : (
+                            <a className="underline" href={r.source.href} rel="noopener noreferrer" target="_blank">
+                              {r.source.label}
+                            </a>
+                          )
+                        ) : (
+                          <span className="text-muted-foreground">Vendor site</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
 
-            <h2>Pricing Comparison: Total First-Year Cost</h2>
+            <h2>Five questions that matter more in Canada</h2>
 
-            <h3>Solo Agent</h3>
-            <table className="min-w-full">
-              <thead>
-                <tr>
-                  <th className="text-left">CRM</th>
-                  <th className="text-right">Annual Cost</th>
-                                  </tr>
-              </thead>
-              <tbody>
-                <tr className="border-t">
-                  <td>Wise Agent</td>
-                  <td className="text-right">$468 CAD</td>
-                </tr>
-                <tr className="border-t">
-                  <td>IXACT Contact</td>
-                  <td className="text-right">$636 CAD</td>
-                </tr>
-                <tr className="border-t">
-                  <td>LionDesk</td>
-                  <td className="text-right">$1,212 CAD</td>
-                </tr>
-                <tr className="border-t bg-primary/5">
-                  <td className="font-bold">RealtorDesk AI</td>
-                  <td className="text-right font-bold">$1,788 CAD</td>
-                </tr>
-                <tr className="border-t">
-                  <td>kvCORE</td>
-                  <td className="text-right text-muted-foreground">Not published</td>
-                </tr>
-                <tr className="border-t">
-                  <td>Follow Up Boss</td>
-                  <td className="text-right">$6,480 CAD</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <p className="text-sm text-muted-foreground mt-4">
-              <strong>Note:</strong> RealtorDesk AI isn't the cheapest, but offers the best value when considering AI automation, time savings, and conversion rate increases.
-            </p>
-
-            <h2>Use Case Recommendations</h2>
-
-            <h3>New Agent (First Year)</h3>
+            <h3>1. Which currency does it bill in?</h3>
             <p>
-              <strong>Recommendation:</strong> RealtorDesk AI or IXACT Contact
+              Wise Agent states US dollars. Follow Up Boss, IXACT Contact and Top
+              Producer show prices without naming a currency, and Top Producer tells
+              Canadians to request pricing. A bill in a currency you do not earn in
+              adds exchange rate and card fees you will not see on the pricing page.
             </p>
+
+            <h3>2. Does it record consent for CASL?</h3>
+            <p>
+              Canada&rsquo;s anti-spam law puts the burden of proving consent on the
+              sender. A CRM can store the date and source of consent against each
+              contact, which makes that proof easy to produce. It cannot decide
+              whether your consent was valid. We explain the consent windows in our{" "}
+              <Link className="underline" to="/resources/casl-compliance-real-estate-email-marketing-canada">
+                CASL guide for real estate email
+              </Link>
+              .
+            </p>
+
+            <h3>3. Does it work in French?</h3>
+            <p>
+              &ldquo;Supports French&rdquo; can mean a translated website, a French
+              interface, or French client email. Ask which. In Realtor Desk the
+              language is set per contact, so an English-speaking agent can write
+              to a francophone client in French. See{" "}
+              <Link className="underline" to="/features/bilingual-crm">
+                how bilingual workflows work
+              </Link>
+              .
+            </p>
+
+            <h3>4. Where is the data stored?</h3>
+            <p>
+              Most pricing pages do not say. Realtor Desk&rsquo;s production
+              database runs in Canada (ca-central-1); features that call outside
+              services, such as SMS and AI drafting, may send content to those
+              providers. Ask every vendor for both answers: where records are stored
+              and which third parties see them.
+            </p>
+
+            <h3>5. Which listing source does it use?</h3>
+            <p>
+              Importing a listing from a public Realtor.ca page is not the same as a
+              licensed CREA DDF&reg; feed. Realtor Desk imports from Realtor.ca
+              today; native DDF sync is on the roadmap and not live. Our{" "}
+              <Link className="underline" to="/features/listing-import">
+                listing import page
+              </Link>{" "}
+              explains the difference between an importer, a feed and an IDX website.
+            </p>
+
+            <h2>Who each option tends to suit</h2>
+
             <ul>
-              <li><strong>RealtorDesk AI:</strong> AI gives you an unfair advantage with instant follow-up</li>
-              <li><strong>IXACT Contact:</strong> Affordable option if budget is tight and you're okay with manual work</li>
-              <li><strong>Avoid:</strong> BoomTown, Real Geeks (too expensive for your current volume)</li>
-            </ul>
-
-            <h3>Solo Agent (Established, 30-50 deals/year)</h3>
-            <p>
-              <strong>Recommendation:</strong> RealtorDesk AI
-            </p>
-            <ul>
-              <li>Lead scoring and a single conversation timeline per client</li>
-              <li>Bilingual EN/FR, with data hosted in Canada and CAD pricing</li>
-              <li>$149 CAD/month on the Solo plan</li>
-            </ul>
-
-            <h3>Small Team (2-5 Agents)</h3>
-            <p>
-              <strong>Recommendation:</strong> RealtorDesk AI or Follow Up Boss
-            </p>
-            <ul>
-              <li><strong>RealtorDesk AI ($299 CAD/mo):</strong> Best value, includes AI, great for Canadian compliance</li>
-              <li><strong>Follow Up Boss ($810 CAD/mo):</strong> Better if you have dedicated ISA doing all follow-up</li>
-            </ul>
-
-            <h3>Quebec Market (Bilingual Required)</h3>
-            <p>
-              <strong>Recommendation:</strong> RealtorDesk AI (only true bilingual AI)
-            </p>
-            <ul>
-              <li>Native English/French AI conversations</li>
-              <li>Automatic language detection</li>
-              <li><strong>Second choice:</strong> IXACT Contact (has French interface but no AI)</li>
-              <li><strong>Avoid:</strong> All US-based CRMs (no French support)</li>
-            </ul>
-
-            <h2>Common CRM Selection Mistakes to Avoid</h2>
-
-            <h3>Mistake #1: Choosing Based on Features, Not Outcomes</h3>
-            <p>
-              More features ≠ more deals. Focus on: Does it help me respond faster and close more?
-            </p>
-
-            <h3>Mistake #2: Picking a US CRM Without Checking Canadian Compliance</h3>
-            <p>
-              PIPEDA violations can cost up to $100,000. CASL violations up to $1,000,000. Not worth the risk when Canadian-built options exist.
-            </p>
-
-            <h3>Mistake #3: Choosing the Cheapest Option</h3>
-            <p>
-              As illustrative arithmetic only: saving $100/month but losing two deals a year would cost far more than it saves. Invest in tools that make you money.
-            </p>
-
-            <h3>Mistake #4: Not Testing with Real Leads</h3>
-            <p>
-              Every CRM looks good in a demo. Sign up for trials and test with actual leads before committing.
-            </p>
-
-            <h2>FAQ: Choosing the Best CRM</h2>
-
-            <h3>What's the best CRM for solo agents in Canada?</h3>
-            <p>
-              RealtorDesk AI ranks #1 for solo Canadian agents because of AI automation, Canadian compliance, and transparent pricing. IXACT Contact is a good budget alternative if you're okay with manual workflows.
-            </p>
-
-            <h3>Do I need a Canadian-specific CRM?</h3>
-            <p>
-              Yes, if you want built-in PIPEDA/CASL compliance. US-based CRMs require manual compliance work that costs time and increases legal risk.
-            </p>
-
-            <h3>Is AI worth the extra cost?</h3>
-            <p>
-              It depends on whether you will use it. The AI features here help you triage and draft — lead scoring, summaries, suggested replies — rather than replacing your follow-up. We do not publish a conversion multiple for them, because we have not measured one.
-            </p>
-
-            <h3>How long does it take to set up a new CRM?</h3>
-            <p>
-              Simple CRMs (RealtorDesk AI, LionDesk): 1-3 days. Medium CRMs (Follow Up Boss): 1-2 weeks. Complex CRMs (kvCORE, Lofty): 3-6 weeks.
-            </p>
-
-            <h3>What's the minimum I should spend on a CRM?</h3>
-            <p>
-              $100-150 CAD/month for a quality CRM with automation. Anything cheaper likely lacks critical features that will cost you deals.
-            </p>
-
-            <h2>Final Recommendation: Start Here</h2>
-
-            <p className="text-lg font-semibold">
-              If you want a Canadian-built option: start with RealtorDesk AI
-            </p>
-
-            <ul className="list-none space-y-2">
-              <li>✅ Built specifically for Canada</li>
-              <li>✅ AI gives you competitive advantage</li>
-              <li>✅ Fastest lead response tested (2.7 seconds)</li>
-              <li>✅ Transparent pricing ($149-299 CAD/month)</li>
-              <li>✅ 14-day free trial, cancel anytime before you're charged</li>
-            </ul>
-
-            <p className="text-sm text-muted-foreground mt-4">
-              <strong>If RealtorDesk AI doesn't fit:</strong>
-            </p>
-            <ul className="text-sm">
-              <li>Budget &lt;$100/month → Try LionDesk</li>
-              <li>Large team with ISAs → Try Follow Up Boss</li>
-              <li>Need enterprise features → Try kvCORE</li>
-              <li>Need lead gen included → Try Real Geeks</li>
-            </ul>
-
-            <div className="cta-section">
-              <h2>Ready to Choose Your CRM?</h2>
-              <p>
-                Start with a bilingual AI-powered CRM built for Canadian agents. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
-              </p>
-              <div className="flex gap-4 flex-wrap justify-center">
-                <Link to="/demo">
-                  <Button size="lg" className="btn-gradient">
-                    Start Free 14-Day Trial
-                  </Button>
+              <li>
+                <strong>A solo agent watching the budget:</strong> IXACT Contact,
+                Wise Agent and CloseFlow all publish lower monthly prices than
+                Realtor Desk. Compare what each includes, and confirm the currency.
+              </li>
+              <li>
+                <strong>A solo agent who works in French or needs Canadian data
+                location:</strong> Realtor Desk is built around those two points.
+                See the{" "}
+                <Link className="underline" to="/use-cases/solo-agent">
+                  solo agent guide
                 </Link>
-                <Link to="/pricing">
-                  <Button size="lg" variant="outline">
-                    View Pricing Details
-                  </Button>
-                </Link>
-              </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                <strong>Last Updated:</strong> January 16, 2025 | <strong>Next Update:</strong> April 2025
-              </p>
-            </div>
+                .
+              </li>
+              <li>
+                <strong>A team with an inside sales role:</strong> Follow Up Boss
+                prices per user and by team size, which suits that shape. Realtor
+                Desk does not support teams today.
+              </li>
+              <li>
+                <strong>A large team or brokerage:</strong> Lofty and BoldTrail
+                quote on request, and Top Producer publishes team plans. Ask for a
+                written quote covering setup, seats and anything billed separately.
+              </li>
+              <li>
+                <strong>Anyone moving off LionDesk:</strong> it is discontinued.
+                Lone Wolf Relationships is the vendor&rsquo;s own offer; the others
+                above are alternatives to compare against it.
+              </li>
+            </ul>
+
+            <h2>How this was put together</h2>
+
+            <p>
+              This is desk research from each vendor&rsquo;s own public pages, not a
+              lab test. We did not run these products against each other, and we do
+              not publish conversion or response-time figures we cannot show you the
+              working for. Prices and features change often, so use this as a
+              shortlist and confirm on the vendor&rsquo;s page before you decide. If
+              a figure here is out of date,{" "}
+              <Link className="underline" to="/contact">
+                tell us
+              </Link>{" "}
+              and we will correct it.
+            </p>
+
+            <p>
+              For a head-to-head on a single product, see the{" "}
+              <Link className="underline" to="/compare">
+                comparison hub
+              </Link>
+              . To price Realtor Desk on its own, see{" "}
+              <Link className="underline" to="/resources/real-estate-crm-pricing">
+                what a real estate CRM costs
+              </Link>
+              .
+            </p>
+
+            <h2>Questions</h2>
           </div>
+
+          <FAQAccordion items={FAQS} className="mb-12" />
+
+          <Card className="p-8 text-center">
+            <h2 className="text-2xl font-bold mb-3">Try it on your own contacts</h2>
+            <p className="text-muted-foreground mb-6">
+              14 days, then CAD $149 a month. A card is collected up front and
+              nothing is charged before day 14.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button asChild>
+                <Link to="/signup">Start free trial</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/pricing">See pricing</Link>
+              </Button>
+            </div>
+          </Card>
         </div>
       </article>
 

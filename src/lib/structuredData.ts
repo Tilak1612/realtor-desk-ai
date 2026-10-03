@@ -21,9 +21,15 @@ export const organizationSchema = {
     "email": "support@realtordesk.ai",
     "availableLanguage": ["English", "French"]
   },
+  // Must match the static Organization block in index.html and the profiles the
+  // footer links. This copy used to list a LinkedIn page nobody had verified and
+  // an X handle spelled differently from the real one, so two Organization nodes
+  // disagreed about who the company is. entityLinks.test.ts keeps them identical.
   "sameAs": [
-    "https://www.linkedin.com/company/realtordesk-ai",
-    "https://twitter.com/realtordeskai"
+    "https://twitter.com/Realtor_desk_AI",
+    "https://www.facebook.com/profile.php?id=61583653411571",
+    "https://www.instagram.com/realtor_desk_ai",
+    "https://www.youtube.com/@RealtorDeskAI"
   ]
 };
 

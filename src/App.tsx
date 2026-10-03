@@ -75,6 +75,7 @@ const IntegrationsRoute = () => {
 // Features + Pricing now render via Phase 2 RD* imports above; the legacy
 // page files were deleted in chore/rd-redesign-legacy-cleanup.
 const CanadianMarket = lazyWithRetry(() => import("./pages/CanadianMarket"));
+const FeatureImportContacts = lazyWithRetry(() => import("./pages/features/ImportContacts"));
 const FeaturePipeline = lazyWithRetry(() => import("./pages/features/Pipeline"));
 const FeatureConversations = lazyWithRetry(() => import("./pages/features/Conversations"));
 const FeatureListingImport = lazyWithRetry(() => import("./pages/features/ListingImport"));
@@ -95,6 +96,8 @@ const VancouverRealtorCrm = lazyWithRetry(() => import("./pages/ca/VancouverReal
 const RealEstateTeam = lazyWithRetry(() => import("./pages/use-cases/RealEstateTeam"));
 const BrokerageCrm = lazyWithRetry(() => import("./pages/use-cases/BrokerageCrm"));
 const CrmImmobilier = lazyWithRetry(() => import("./pages/fr/CrmImmobilier"));
+const FrLcapCourriels = lazyWithRetry(() => import("./pages/fr/LcapCourriels"));
+const FrImporterContacts = lazyWithRetry(() => import("./pages/fr/ImporterContacts"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -328,6 +331,7 @@ const App = () => (
           <Route path="/features/casl-compliant-email" element={<CaslCompliantEmail />} />
           <Route path="/resources/real-estate-crm-pricing" element={<RealEstateCrmPricing />} />
           <Route path="/use-cases/solo-agent" element={<SoloAgent />} />
+          <Route path="/features/import-contacts" element={<FeatureImportContacts />} />
           <Route path="/features/pipeline" element={<FeaturePipeline />} />
           <Route path="/features/conversations" element={<FeatureConversations />} />
           <Route path="/features/listing-import" element={<FeatureListingImport />} />
@@ -339,6 +343,8 @@ const App = () => (
           <Route path="/use-cases/real-estate-team" element={<RealEstateTeam />} />
           <Route path="/use-cases/brokerage" element={<BrokerageCrm />} />
           <Route path="/fr/crm-immobilier" element={<CrmImmobilier />} />
+          <Route path="/fr/lcap-courriels-immobilier" element={<FrLcapCourriels />} />
+          <Route path="/fr/importer-contacts-csv" element={<FrImporterContacts />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />

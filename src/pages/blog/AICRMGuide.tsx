@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import blogAICRM from "@/assets/brand/blog-ai-crm.svg";
 import blogAICRMSocial from "@/assets/brand/blog-ai-crm.jpg";
 import { SEO } from "@/components/SEO";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const AICRMGuide = () => {
   useEffect(() => {
@@ -59,6 +60,7 @@ const AICRMGuide = () => {
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
                 The AI CRM for Canadian Real Estate Agents in 2025
               </h1>
+              <ProductScopeNote className="mb-6" />
               <p className="text-xl text-muted-foreground">
                 If you're still managing leads in spreadsheets or using a generic CRM not designed for real estate, you're fighting an uphill battle. Here's everything you need to know about modern AI-powered CRM systems.
               </p>

@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { ArrowRight, TrendingUp, MapPin, Snowflake, Users, Building2, Video, Zap, Target, DollarSign, Calendar, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const CalgaryMarketingGuide = () => {
   return (
@@ -44,6 +45,7 @@ const CalgaryMarketingGuide = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               Calgary Real Estate Marketing Strategies
             </h1>
+            <ProductScopeNote className="mb-6" />
             <p className="text-xl text-gray-600 mb-8">
               Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights to stand out in Alberta's competitive market.
             </p>
@@ -595,7 +597,7 @@ const CalgaryMarketingGuide = () => {
                 <div>
                   <p className="font-semibold mb-2">After AI:</p>
                   <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Response time: 2.7 seconds</li>
+                    <li>• Response time: within seconds</li>
                     <li>• Lead-to-showing: 15.2%</li>
                     <li>• <strong className="text-green-900">142% increase</strong></li>
                   </ul>
@@ -693,7 +695,7 @@ const CalgaryMarketingGuide = () => {
                   <h4 className="font-bold mb-3 text-green-900">After AI Marketing</h4>
                   <ul className="space-y-2 text-sm text-gray-700">
                     <li>• AI lead follow-up</li>
-                    <li>• Response time: 2.8 seconds</li>
+                    <li>• Response time: within seconds</li>
                     <li>• Winter: 7 deals (nurtured Nov-Feb)</li>
                     <li>• Spring: 14 deals (AI pipeline)</li>
                     <li>• <strong className="text-green-900">Annual: 41 deals (+86%)</strong></li>
@@ -790,7 +792,7 @@ const CalgaryMarketingGuide = () => {
               </p>
               <ul className="space-y-2 mb-8 text-lg">
                 <li>✓ Capture Calgary leads 24/7 (even at -30°C)</li>
-                <li>✓ Respond in 2.7 seconds</li>
+                <li>✓ Respond within seconds</li>
                 <li>✓ CREA DDF integration for Calgary MLS (coming Q3 2026)</li>
                 <li>✓ Winter lead nurturing automation</li>
                 <li>✓ Video script generation</li>
@@ -824,7 +826,7 @@ const CalgaryMarketingGuide = () => {
                   <p className="text-sm text-gray-600">Call 100+ Calgary leads per day</p>
                 </Card>
               </Link>
-              <Link to="/features/crea-integration">
+              <Link to="/features/listing-import">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">CREA DDF Integration</h3>
                   <p className="text-sm text-gray-600">Sync with Calgary MLS automatically</p>
