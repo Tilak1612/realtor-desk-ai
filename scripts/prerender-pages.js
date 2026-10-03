@@ -643,13 +643,18 @@ function extractDataStrings(src, { limit = 60 } = {}) {
     v.length >= 12 &&
     /\s/.test(v.trim()) &&
     !/^https?:|^\/|^#|^[a-z0-9-]+$/i.test(v.trim()) &&
-    !/[{}<>]/.test(v);
+    !/[{}<>]/.test(v) &&
+    !looksLikeClassList(v);
 
   const walk = (node) => {
     if (out.length >= limit) return;
     if (Array.isArray(node)) {
       node.forEach(walk);
     } else if (node && typeof node === 'object') {
+      // Illustrative sample rows in a product mock-up (a person's name with a
+      // lead score) are interface decoration, not page copy, and a crawler
+      // would read them as real people. Skip the whole row.
+      if ('name' in node && 'score' in node) return;
       Object.values(node).forEach(walk);
     } else if (typeof node === 'string') {
       // Data arrays on these pages hold i18n keys rather than copy
@@ -668,6 +673,14 @@ function extractDataStrings(src, { limit = 60 } = {}) {
   };
   values.forEach(walk);
   return out;
+}
+
+// Tailwind class lists ("px-3.5 py-1.5 text-[13px]") live in the same
+// constants as copy (Button SIZES/VARIANTS) and must never become a <p>.
+function looksLikeClassList(v) {
+  const tokens = v.trim().split(/\s+/);
+  const classy = tokens.filter((tok) => /^[a-z0-9:.\[\]\/%()#_-]+$/.test(tok) && /[-:\[]/.test(tok));
+  return tokens.length >= 2 && classy.length / tokens.length >= 0.6 && !/[.!?]$/.test(v.trim());
 }
 
 function extractBody(src, { limit = 140 } = {}) {
