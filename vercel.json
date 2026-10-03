@@ -5,8 +5,7 @@
     { "source": "/lofty", "destination": "/lofty-alternative", "permanent": true },
     { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
     { "source": "/terms", "destination": "/terms-of-service", "permanent": true },
-    { "source": "/blog", "destination": "/resources", "permanent": true },
-    { "source": "/compare", "destination": "/compare/boldtrail", "permanent": false }
+    { "source": "/blog", "destination": "/resources", "permanent": true }
   ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
