@@ -862,7 +862,7 @@ function breadcrumbs(route, title) {
   };
 }
 
-function buildHead(baseHtml, { route, title, description, canonical, structuredData }) {
+function buildHead(baseHtml, { route, title, description, canonical, structuredData, cardImage }) {
   // index.html carries a <noscript> fallback holding the HOMEPAGE h1 and copy.
   // It was the previous attempt at serving crawlers something. Now that #root
   // holds this page's real h1 and description, that block would put a second,
@@ -900,6 +900,15 @@ function buildHead(baseHtml, { route, title, description, canonical, structuredD
     /<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/,
     `<meta name="twitter:description" content="${esc(description)}" />`,
   );
+
+  // Per-page 1200x630 share card (scripts/generate-og-images.mjs), when the page
+  // has one and does not choose its own image (those pages set it at runtime).
+  if (cardImage) {
+    setTag(/<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/, `<meta property="og:image" content="${cardImage}" />`);
+    setTag(/<meta\s+property="og:image:width"\s+content="[^"]*"\s*\/?>/, '<meta property="og:image:width" content="1200" />');
+    setTag(/<meta\s+property="og:image:height"\s+content="[^"]*"\s*\/?>/, '<meta property="og:image:height" content="630" />');
+    setTag(/<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/, `<meta name="twitter:image" content="${cardImage}" />`);
+  }
 
   // Canonical + hreflang: replace an existing canonical, otherwise inject.
   //
@@ -1123,7 +1132,13 @@ for (const route of routes) {
     body.push({ tag: 'p', text: esced });
   }
 
-  const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical, structuredData }).replace(
+  const ogSlug = route === '/' ? 'home' : route.replace(/^\/|\/$/g, '').replace(/\//g, '--');
+  const cardImage =
+    !/image=\{/.test(src) && fs.existsSync(path.join(repoRoot, 'public/og', ogSlug + '.png'))
+      ? `https://www.realtordesk.ai/og/${ogSlug}.png`
+      : null;
+
+  const html = buildHead(baseHtml, { route, title: fullTitle, description, canonical, structuredData, cardImage }).replace(
     /<div id="root">\s*<\/div>/,
     buildShell({ route, h1, description, body }),
   );

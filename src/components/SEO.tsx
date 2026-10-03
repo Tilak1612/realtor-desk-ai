@@ -2,6 +2,11 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { normalizeLocale } from '@/lib/i18n/format';
+import { OG_IMAGE_SLUGS } from '@/config/ogImages';
+
+// Mirrors slugFor() in scripts/generate-og-images.mjs.
+const ogSlugFor = (pathname: string) =>
+  pathname === '/' || pathname === '' ? 'home' : pathname.replace(/^\/|\/$/g, '').replace(/\//g, '--');
 
 interface SEOProps {
   title: string;
@@ -26,7 +31,7 @@ export const SEO = ({
   title,
   description,
   keywords,
-  image = 'https://www.realtordesk.ai/og-image.png',
+  image,
   article = false,
   publishedTime,
   modifiedTime,
@@ -40,6 +45,15 @@ export const SEO = ({
   const locale = normalizeLocale(i18n.language);
 
   const siteUrl = 'https://www.realtordesk.ai';
+
+  // Per-page share card (1200x630, scripts/generate-og-images.mjs) when one
+  // exists for this path; otherwise the shared square image. The declared
+  // dimensions below follow the file so previews are not mis-cropped, and the
+  // static prerender (scripts/prerender-pages.js) picks the same file.
+  const ogSlug = ogSlugFor(canonicalUrl ? new URL(canonicalUrl).pathname : location.pathname);
+  const hasCard = !image && OG_IMAGE_SLUGS.has(ogSlug);
+  const ogImage = image ?? (hasCard ? `${siteUrl}/og/${ogSlug}.png` : `${siteUrl}/og-image.png`);
+  const ogIsWide = hasCard || (!!image && image !== `${siteUrl}/og-image.png`);
 
   // Canonical must reflect the CURRENT locale, not collapse FR into EN.
   // 2026-04-24 audit: `/?lang=fr` was self-canonicalling to `/` (the EN URL),
@@ -129,9 +143,9 @@ export const SEO = ({
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", article ? "article" : "website");
     upsertMeta("property", "og:url", currentUrl);
-    upsertMeta("property", "og:image", image);
-    upsertMeta("property", "og:image:width", "1200");
-    upsertMeta("property", "og:image:height", "630");
+    upsertMeta("property", "og:image", ogImage);
+    upsertMeta("property", "og:image:width", ogIsWide ? "1200" : "1024");
+    upsertMeta("property", "og:image:height", ogIsWide ? "630" : "1024");
     upsertMeta("property", "og:site_name", "Realtor Desk");
     upsertMeta("property", "og:locale", ogLocale);
     upsertMeta("property", "og:locale:alternate", ogLocaleAlt);
@@ -143,7 +157,7 @@ export const SEO = ({
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", fullTitle);
     upsertMeta("name", "twitter:description", description);
-    upsertMeta("name", "twitter:image", image);
+    upsertMeta("name", "twitter:image", ogImage);
 
     upsertLink("canonical", currentUrl);
     if (isFrenchRoute) {
@@ -178,7 +192,7 @@ export const SEO = ({
       document.head.querySelectorAll(`script[${tag}]`).forEach((n) => n.remove());
     };
   }, [
-    fullTitle, description, keywords, noindex, article, currentUrl, image,
+    fullTitle, description, keywords, noindex, article, currentUrl, image, ogImage, ogIsWide,
     ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, isFrenchRoute, basePath, publishedTime, modifiedTime,
     author, structuredData,
   ]);
