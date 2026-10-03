@@ -96,6 +96,8 @@ const VancouverRealtorCrm = lazyWithRetry(() => import("./pages/ca/VancouverReal
 const RealEstateTeam = lazyWithRetry(() => import("./pages/use-cases/RealEstateTeam"));
 const BrokerageCrm = lazyWithRetry(() => import("./pages/use-cases/BrokerageCrm"));
 const CrmImmobilier = lazyWithRetry(() => import("./pages/fr/CrmImmobilier"));
+const FrLcapCourriels = lazyWithRetry(() => import("./pages/fr/LcapCourriels"));
+const FrImporterContacts = lazyWithRetry(() => import("./pages/fr/ImporterContacts"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -341,6 +343,8 @@ const App = () => (
           <Route path="/use-cases/real-estate-team" element={<RealEstateTeam />} />
           <Route path="/use-cases/brokerage" element={<BrokerageCrm />} />
           <Route path="/fr/crm-immobilier" element={<CrmImmobilier />} />
+          <Route path="/fr/lcap-courriels-immobilier" element={<FrLcapCourriels />} />
+          <Route path="/fr/importer-contacts-csv" element={<FrImporterContacts />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />

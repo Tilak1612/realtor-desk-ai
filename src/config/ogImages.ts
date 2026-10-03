@@ -51,6 +51,8 @@ export const OG_IMAGE_SLUGS: ReadonlySet<string> = new Set([
   "fintrac-compliance",
   "first-time-home-buyer-guide-canada-2025",
   "fr--crm-immobilier",
+  "fr--importer-contacts-csv",
+  "fr--lcap-courriels-immobilier",
   "how-it-works",
   "integrations",
   "lead-response-time-canadian-realtors",

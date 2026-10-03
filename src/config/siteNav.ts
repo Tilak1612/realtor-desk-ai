@@ -378,6 +378,8 @@ const FOOTER_CANADA: NavItem[] = [
   // The one standalone French page. Linked sitewide so it has inbound links from
   // every page rather than from a single hub.
   { to: "/fr/crm-immobilier", labelKey: "siteNav.frenchCrm", label: "CRM immobilier (en français)" },
+  { to: "/fr/lcap-courriels-immobilier", labelKey: "siteNav.frenchLcap", label: "LCAP et courriels (en français)" },
+  { to: "/fr/importer-contacts-csv", labelKey: "siteNav.frenchImport", label: "Importer des contacts (en français)" },
 ];
 
 const FOOTER_COMPANY: NavItem[] = [

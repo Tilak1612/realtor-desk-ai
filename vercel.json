@@ -321,6 +321,14 @@
       "destination": "/index.html"
     },
     {
+      "source": "/fr/importer-contacts-csv",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fr/lcap-courriels-immobilier",
+      "destination": "/index.html"
+    },
+    {
       "source": "/how-it-works",
       "destination": "/index.html"
     },
