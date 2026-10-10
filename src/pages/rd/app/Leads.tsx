@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
@@ -18,6 +18,7 @@ import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
 import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
+import { applyLeadView, isLeadView, isStage } from "@/lib/rd/leadViews";
 
 // /app/leads — Leads table per rd-app.jsx Artboard_Leads.
 //
@@ -65,7 +66,24 @@ export default function Leads() {
   // Never substitute fixtures. This used to fall back to MOCK_LEADS whenever
   // the query returned nothing OR errored -- so a schema/RLS fault rendered
   // convincing fake leads while a real lead sat invisible behind the error.
-  const source: Lead[] = liveLeads;
+  //
+  // ?view= and ?stage= are the dashboard drill-downs: every dashboard number
+  // opens the list it counts. The filter is shown, named, and clearable.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const viewParam = searchParams.get("view");
+  const stageParam = searchParams.get("stage");
+  const view = isLeadView(viewParam) ? viewParam : null;
+  const stageFilter = isStage(stageParam) ? stageParam : null;
+  const source: Lead[] = useMemo(
+    () => (view || stageFilter ? applyLeadView(liveLeads, view, stageFilter) : liveLeads),
+    [liveLeads, view, stageFilter]
+  );
+  const clearView = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("view");
+    next.delete("stage");
+    setSearchParams(next, { replace: true });
+  };
 
   const counts = useMemo(() => {
     const hot = source.filter((l) => l.score >= 80).length;
@@ -126,6 +144,28 @@ export default function Leads() {
         </div>
 
         {error && <div className="mb-4"><DataError message={error.message} /></div>}
+
+        {(view || stageFilter) && (
+          <div className="mb-4 flex flex-wrap items-center gap-2 text-[13px]" role="status">
+            <span className="text-rd-ink-600">{t("rd.dash.views.filtered", "Filtered:")}</span>
+            <span className="inline-flex items-center gap-1.5 rounded-rd-pill bg-rd-navy-800 text-white px-3 py-1 text-xs font-semibold">
+              {[
+                view ? t(`rd.dash.views.${view}`, view) : null,
+                stageFilter ? t(`rd.dash.stage.${stageFilter}`, stageFilter) : null,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
+              <button
+                type="button"
+                onClick={clearView}
+                className="ml-1 -mr-1 rounded-full px-1 hover:bg-white/15"
+                aria-label={t("rd.dash.views.clear", "Clear filter")}
+              >
+                ×
+              </button>
+            </span>
+          </div>
+        )}
 
         {/* Tabs + sort. This row did not wrap, so at 390px the tabs took the
             full width and pushed Sort to x=433 -- past the edge of the screen,

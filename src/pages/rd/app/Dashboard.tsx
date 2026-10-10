@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
@@ -24,6 +24,10 @@ import type { ActivityItem, Lead, PipelineStage, ReportMetric } from "@/types/rd
 import { useLeads, useLead } from "@/hooks/rd/useLeads";
 import { useSession } from "@/hooks/rd/useSession";
 import { useActivityFeed, useLeadsPerDay } from "@/hooks/rd/useDashboardFeed";
+import { useDashboardV2Flag } from "@/hooks/rd/useDashboardV2Flag";
+
+// v2 ships in its own chunk so accounts without the flag never download it.
+const DashboardV2 = lazy(() => import("./DashboardV2"));
 
 // /app — Dashboard page per rd-app.jsx Artboard_Dashboard.
 //
@@ -36,7 +40,25 @@ import { useActivityFeed, useLeadsPerDay } from "@/hooks/rd/useDashboardFeed";
 //   - AI activity, Today, Pipeline/Sources/Compliance cards: static
 //                  previews until their dedicated backend rungs land.
 
+/**
+ * /app entry. v1 (below) stays the default; dashboard v2 renders only behind
+ * useDashboardV2Flag (?v=2, or profiles.business_preferences.dashboard_v2).
+ * While an account flag is still being read, v1 renders — the default must
+ * never wait on the flag.
+ */
 export default function Dashboard() {
+  const { enabled } = useDashboardV2Flag();
+  if (enabled) {
+    return (
+      <Suspense fallback={<DashboardV1 />}>
+        <DashboardV2 />
+      </Suspense>
+    );
+  }
+  return <DashboardV1 />;
+}
+
+function DashboardV1() {
   const { user } = useSession();
   const { t } = useTranslation();
   const { leads: liveLeads, loading: leadsLoading } = useLeads();

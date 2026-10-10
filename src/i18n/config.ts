@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { rdDashEn, rdDashFr } from './rdDashboard';
 
 const resources = {
   en: {
@@ -6694,6 +6695,10 @@ const resources = {
     }
   }
 };
+
+// Dashboard v2 copy lives in ./rdDashboard so it can be reviewed on its own.
+(resources.en.translation.rd as Record<string, unknown>).dash = rdDashEn;
+(resources.fr.translation.rd as Record<string, unknown>).dash = rdDashFr;
 
 i18n
   .use(LanguageDetector)

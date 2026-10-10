@@ -1,4 +1,6 @@
-import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { awaitsReply } from "@/lib/rd/dashboard";
+import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/rd/layout/AppShell";
 import {
@@ -33,7 +35,11 @@ import {
 //   - Active pane : useConversation(activeId) for the full thread.
 //   - Composer    : useSendMessage() posts an agent-authored row.
 
-type FilterKey = "all" | "unread" | "ai" | "mine";
+// "awaiting" has no tab: it is the dashboard's "Awaiting reply" drill-down
+// (?filter=awaiting), shown as a named, clearable chip, and uses the same rule
+// as the tile (lib/rd/dashboard awaitsReply) so the count and list agree.
+type FilterKey = "all" | "unread" | "ai" | "mine" | "awaiting";
+const LINKABLE: readonly FilterKey[] = ["unread", "ai", "mine", "awaiting"];
 
 export default function Inbox() {
   const { leads: liveLeads, loading: leadsLoading } = useLeads();
@@ -45,19 +51,43 @@ export default function Inbox() {
     return leadSource.filter((l) => latestByLead[l.id]);
   }, [leadSource, latestByLead]);
 
+  // Deep links from the dashboard: ?lead=<id> opens that thread (on a phone,
+  // straight into the thread pane) and ?filter=unread opens the awaiting-reply
+  // view that the "Awaiting reply" tile counts.
+  const [searchParams] = useSearchParams();
+  const linkedLead = searchParams.get("lead");
+  const linkedFilter = searchParams.get("filter");
   const [activeId, setActiveId] = useState<string>(
-    threadsWithConversations[0]?.id ?? leadSource[0]?.id ?? ""
+    linkedLead ?? threadsWithConversations[0]?.id ?? leadSource[0]?.id ?? ""
   );
-  const [filter, setFilter] = useState<FilterKey>("all");
+  const [filter, setFilter] = useState<FilterKey>(
+    LINKABLE.includes(linkedFilter as FilterKey) ? (linkedFilter as FilterKey) : "all"
+  );
   const [query, setQuery] = useState("");
   // Below lg only one pane shows at a time: the list, or the open thread.
   // Desktop always shows both, so this state is inert at lg and up.
-  const [mobileView, setMobileView] = useState<"list" | "thread">("list");
+  const [mobileView, setMobileView] = useState<"list" | "thread">(linkedLead ? "thread" : "list");
+
+  // Follow the URL when it changes under an open Inbox (a second dashboard
+  // click, browser back/forward) — initial state alone would ignore it.
+  useEffect(() => {
+    if (linkedLead) {
+      setActiveId(linkedLead);
+      setMobileView("thread");
+    }
+  }, [linkedLead]);
+  useEffect(() => {
+    setFilter(LINKABLE.includes(linkedFilter as FilterKey) ? (linkedFilter as FilterKey) : "all");
+  }, [linkedFilter]);
 
   const threads = useMemo(() => {
     let items = leadSource;
     if (filter === "ai") items = items.filter((l) => l.aiHandling);
     if (filter === "mine") items = items.filter((l) => !l.aiHandling);
+    if (filter === "awaiting") {
+      const now = new Date();
+      items = items.filter((l) => awaitsReply(latestByLead[l.id], l.stage, now));
+    }
     if (filter === "unread") {
       items = items.filter((l) => {
         const last = latestByLead[l.id];
@@ -187,6 +217,21 @@ function ThreadList({
         </div>
       </div>
 
+      {filter === "awaiting" && (
+        <div className="px-5 py-2 border-b border-rd-line flex items-center gap-2 text-xs" role="status">
+          <span className="inline-flex items-center gap-1.5 rounded-rd-pill bg-rd-navy-800 text-white px-3 py-1 font-semibold">
+            {t("rd.dash.kpi.awaiting", "Awaiting reply")}
+            <button
+              type="button"
+              onClick={() => onFilter("all")}
+              className="ml-1 -mr-1 rounded-full px-1 hover:bg-white/15"
+              aria-label={t("rd.dash.views.clear", "Clear filter")}
+            >
+              ×
+            </button>
+          </span>
+        </div>
+      )}
       <div className="flex-1 overflow-y-auto">
         {threads.length === 0 && (
           <div className="p-6 text-center text-sm text-rd-ink-500">
