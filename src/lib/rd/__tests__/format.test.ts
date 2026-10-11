@@ -6,7 +6,9 @@ const norm = (s: string) => s.replace(/[\u00a0\u202f]/g, " ");
 describe("dashboard formatting", () => {
   it("compact CAD in both languages, no trailing zero", () => {
     expect(formatCad(8_420_000, "en-CA", true)).toBe("$8.4M");
-    expect(norm(formatCad(8_420_000, "fr-CA", true))).toBe("8,4 M$");
+    // ICU versions differ on the space before "$" (Node 22 locally: "8,4 M$";
+    // CI's Node: "8,4 M $"). Both are correct French; assert what matters.
+    expect(norm(formatCad(8_420_000, "fr-CA", true)).replace(/ (?=\$)/, "")).toBe("8,4 M$");
     expect(formatCad(1_000_000, "en-CA", true)).toBe("$1M");
     expect(formatCad(4_500, "en-CA", true)).toBe("$4,500");
   });
