@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, Shield, AlertTriangle, CheckCircle2, XCircle, FileText, Mail, Scale, Lock, Users, DollarSign, Bell, Clock } from 'lucide-react';
+import { ArrowRight, Shield, AlertTriangle, CheckCircle2, XCircle, FileText, Scale, Lock, Users, DollarSign, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 
@@ -11,23 +11,23 @@ const CASLComplianceGuide = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="CASL Compliance for Real Estate Email"
-        description="Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines with consent requirements, templates, and checklists."
+        description="CASL for Canadian real estate email: what counts as consent, how long implied consent lasts, what every message needs, and the maximum penalties."
         keywords="CASL compliance real estate, Canadian email marketing laws, CASL checklist, real estate email compliance"
         article
         publishedTime="2026-01-01"
-        modifiedTime="2026-01-01"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/resources/casl-compliance-real-estate-email-marketing-canada"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "CASL Compliance for Real Estate Email",
-            "description": "Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines with consent requirements, templates, and checklists.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "CASL for Canadian real estate email: what counts as consent, how long implied consent lasts, what every message needs, and the maximum penalties.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2026-01-01",
-            "dateModified": "2026-01-01"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
@@ -45,10 +45,10 @@ const CASLComplianceGuide = () => {
               CASL Compliance for Real Estate Email
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Master CASL compliance for Canadian real estate email marketing. Avoid $1M+ fines. Learn consent requirements, templates, and automation strategies. Includes compliance checklist.
+              What CASL requires of a Canadian real estate agent who emails or texts clients: consent, how long implied consent lasts, what every message must contain, and how to keep the record.
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-500">
-              <span>📅 Updated: January 2026</span>
+              <span>📅 Updated: October 2026</span>
               <span>⏱️ 16 min read</span>
               <span>⚖️ Legal Compliance Guide</span>
             </div>
@@ -59,9 +59,9 @@ const CASLComplianceGuide = () => {
             <div className="flex items-start gap-4">
               <AlertTriangle className="w-8 h-8 text-red-700 flex-shrink-0" />
               <div>
-                <h3 className="text-xl font-bold text-red-900 mb-2">Critical Warning</h3>
+                <h3 className="text-xl font-bold text-red-900 mb-2">Who enforces it</h3>
                 <p className="text-gray-800 mb-3">
-                  In 2024, a Canadian business paid <strong>$1.1 million</strong> in CASL penalties for non-compliant email marketing. Real estate agents face the same risk every time they send an email without proper consent.
+                  The CRTC enforces CASL and can issue administrative monetary penalties. The same rules apply to a solo agent&rsquo;s listing alerts as to a large company&rsquo;s newsletter.
                 </p>
                 <p className="text-gray-800 font-semibold">
                   Maximum Penalties: <span className="text-red-900">$10 million (businesses)</span> or <span className="text-red-900">$1 million (individuals)</span>
@@ -296,7 +296,7 @@ const CASLComplianceGuide = () => {
                   <p className="font-bold text-yellow-900 mb-2">"Per Violation" Means:</p>
                   <p className="text-sm text-gray-700 mb-2">Each non-compliant email is a separate violation</p>
                   <p className="text-sm font-semibold text-yellow-900">
-                    Send 1,000 emails without consent = $1-10 million in potential penalties
+                    The maximums above are per violation, so a single campaign sent without consent can count many times over. Actual penalties depend on the case.
                   </p>
                 </div>
               </div>
@@ -708,59 +708,40 @@ const CASLComplianceGuide = () => {
             </div>
           </section>
 
-          {/* RealtorDesk AI Solution */}
+          {/* What the product does and does not do. The previous section was headed
+              "How RealtorDesk AI Ensures CASL Compliance" and promised IP-logged
+              opt-ins, "proof for CRTC", expiry alerts, automatic re-opt-in
+              campaigns, "PIPEDA-compliant by default" and "Zero CASL Compliance
+              Work". None of that is in the product, and no software makes a sender
+              compliant. Each line below was read from the code on 2026-10-11:
+              hooks/rd/useRecordConsent.ts, pages/rd/app/Inbox.tsx,
+              supabase/functions/send-sms and email-automation, lib/csvImport.ts. */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">How RealtorDesk AI Ensures CASL Compliance</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">What Realtor Desk does about consent, and what it leaves to you</h2>
+
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="p-6 bg-primary/5">
                 <Shield className="w-10 h-10 text-primary mb-4" />
-                <h3 className="font-bold mb-3">Automated Consent Tracking</h3>
+                <h3 className="font-bold mb-3">What it does</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ Every opt-in logged (date, time, method, IP)</li>
-                  <li>✓ Consent history viewable anytime</li>
-                  <li>✓ Proof for CRTC if ever audited</li>
-                </ul>
-              </Card>
-
-              <Card className="p-6 bg-primary/5">
-                <Mail className="w-10 h-10 text-primary mb-4" />
-                <h3 className="font-bold mb-3">Built-In Compliance</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ All templates CASL-compliant by default</li>
-                  <li>✓ Sender identification auto-populated</li>
-                  <li>✓ One-click unsubscribe in every email</li>
-                  <li>✓ Suppression list managed automatically</li>
-                </ul>
-              </Card>
-
-              <Card className="p-6 bg-primary/5">
-                <Bell className="w-10 h-10 text-primary mb-4" />
-                <h3 className="font-bold mb-3">Implied Consent Management</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ Tracks inquiry dates</li>
-                  <li>✓ Alerts when consent expiring</li>
-                  <li>✓ Auto re-opt-in campaigns</li>
+                  <li>✓ Records the date and the source of consent on each contact</li>
+                  <li>✓ Refuses to send from the inbox to a contact with no consent on file</li>
+                  <li>✓ Refuses a text message when no consent is recorded for the number</li>
+                  <li>✓ Stops automated email to a contact who has withdrawn consent</li>
                 </ul>
               </Card>
 
               <Card className="p-6 bg-primary/5">
                 <Lock className="w-10 h-10 text-primary mb-4" />
-                <h3 className="font-bold mb-3">Canadian Data Residency</h3>
+                <h3 className="font-bold mb-3">What it does not do</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ All data stored in Canada (AWS Canada)</li>
-                  <li>✓ PIPEDA-compliant by default</li>
-                  <li>✓ No cross-border data issues</li>
+                  <li>• Decide whether a consent is valid. That judgment is yours.</li>
+                  <li>• Track when an implied consent expires or warn you before it does</li>
+                  <li>• Record consent for imported contacts. A CSV import carries none.</li>
+                  <li>• Make you compliant. How you collect consent stays your responsibility.</li>
                 </ul>
               </Card>
             </div>
-
-            <Card className="p-6 bg-primary text-white mt-6">
-              <h3 className="text-2xl font-bold mb-3">Result: Zero CASL Compliance Work</h3>
-              <p className="text-lg">
-                Everything handled automatically. You focus on selling homes. We handle compliance.
-              </p>
-            </Card>
           </section>
 
           {/* FAQ */}
@@ -845,7 +826,7 @@ const CASLComplianceGuide = () => {
               <h2 className="text-3xl font-bold mb-4">Conclusion</h2>
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg">
-                  CASL compliance isn't optional—it's the law. Penalties up to $10 million mean every email you send carries legal risk.
+                  CASL applies to every commercial message you send. The maximum penalties are high, so it is worth getting consent and record-keeping right from the start.
                 </p>
                 <div className="bg-white p-6 rounded-lg">
                   <p className="font-bold mb-3">Key Takeaways:</p>
@@ -853,20 +834,16 @@ const CASLComplianceGuide = () => {
                     <li>1. Get consent (express or implied) before sending</li>
                     <li>2. Identify yourself clearly in every message</li>
                     <li>3. Include one-click unsubscribe in every message</li>
-                    <li>4. Use CASL-compliant tools (like RealtorDesk AI)</li>
+                    <li>4. Record where and when each consent was given</li>
                     <li>5. Keep consent records for 3+ years</li>
                     <li>6. Never buy email lists</li>
                     <li>7. When in doubt, get express consent</li>
                   </ul>
                 </div>
-                <p className="text-xl font-bold text-primary pt-4">
-                  The Good News: Compliance is easy with the right tools.
-                </p>
                 <p className="text-lg">
-                  RealtorDesk AI handles CASL automatically—consent tracking, unsubscribe management, sender identification, everything.
-                </p>
-                <p className="text-xl font-bold text-primary">
-                  You focus on selling homes. We handle compliance.
+                  A CRM can keep the record and refuse some sends for you. It cannot decide
+                  whether a consent is valid, and it does not replace advice on your own
+                  situation.
                 </p>
               </div>
             </Card>
@@ -875,21 +852,20 @@ const CASLComplianceGuide = () => {
           {/* Final CTA */}
           <section className="text-center py-12">
             <Card className="p-8 bg-gradient-to-r from-primary to-blue-600 text-white">
-              <h2 className="text-3xl font-bold mb-4">Never Worry About CASL Again</h2>
+              <h2 className="text-3xl font-bold mb-4">Keep the consent record with the contact</h2>
               <p className="text-xl mb-6">
-                RealtorDesk AI ensures every email you send is CASL-compliant.
+                Realtor Desk records when and how each contact consented, and refuses to
+                message a contact with no consent on file.
               </p>
               <ul className="space-y-2 mb-8 text-lg">
-                <li>✓ Automatic consent tracking (date, time, method, IP)</li>
-                <li>✓ One-click unsubscribe in every email</li>
-                <li>✓ Canadian data residency (PIPEDA compliant)</li>
-                <li>✓ Zero compliance work for you</li>
-                <li>✓ Avoid $1M+ penalties</li>
+                <li>✓ Consent date and source on every contact</li>
+                <li>✓ No inbox message or text without recorded consent</li>
+                <li>✓ Database hosted in Canada</li>
               </ul>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary" className="text-lg px-8">
                   <Link to="/demo">
-                    Start Free 14-Day Trial <ArrowRight className="ml-2" />
+                    Book a demo <ArrowRight className="ml-2" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="text-lg px-8 bg-white text-primary hover:bg-gray-100">
@@ -912,13 +888,13 @@ const CASLComplianceGuide = () => {
               <Link to="/features/casl-compliant-email">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Email Automation</h3>
-                  <p className="text-sm text-gray-600">CASL-compliant automation</p>
+                  <p className="text-sm text-gray-600">How consent gates email</p>
                 </Card>
               </Link>
               <Link to="/pricing">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">RealtorDesk AI Pricing</h3>
-                  <p className="text-sm text-gray-600">Compliance included free</p>
+                  <h3 className="font-bold mb-2">Realtor Desk pricing</h3>
+                  <p className="text-sm text-gray-600">Plans in CAD</p>
                 </Card>
               </Link>
             </div>

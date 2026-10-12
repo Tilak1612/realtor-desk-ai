@@ -19,24 +19,24 @@ const Compliance = () => {
     <div className="min-h-screen">
       <SEO
         title="Provincial Compliance Checklist for Agents"
-        description="Stay compliant with Canadian real estate regulations. A practical checklist for RECO, BCFSA, RECA, and AMF requirements."
-        keywords="real estate compliance canada, RECO requirements, BCFSA compliance, RECA rules, AMF real estate, PIPEDA"
+        description="An overview of what RECO, BCFSA, RECA and OACIQ expect of Canadian real estate agents, plus the federal rules, with links to each regulator."
+        keywords="real estate compliance canada, RECO requirements, BCFSA compliance, RECA rules, OACIQ, PIPEDA"
         image={blogImage}
         article
         publishedTime="2025-01-05"
-        modifiedTime="2025-01-05"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/compliance"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Provincial Compliance Checklist for Agents",
-            "description": "Stay compliant with Canadian real estate regulations. A practical checklist for RECO, BCFSA, RECA, and AMF requirements.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "An overview of what RECO, BCFSA, RECA and OACIQ expect of Canadian real estate agents, plus the federal rules, with links to each regulator.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-05",
-            "dateModified": "2025-01-05"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
@@ -58,7 +58,7 @@ const Compliance = () => {
               </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>January 5, 2025</span>
+                <span>January 5, 2025 · revised October 11, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
@@ -71,7 +71,7 @@ const Compliance = () => {
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Stay compliant with regulations across Canada. A comprehensive guide to RECO, BCFSA, RECA, and AMF requirements.
+              An overview of what the provincial regulators expect, with a link to each one. It is a starting point, not a substitute for the regulator&rsquo;s own rules.
             </p>
           </header>
 
@@ -101,15 +101,10 @@ const Compliance = () => {
             <ul>
               <li><strong>Advertising Standards:</strong> All ads must include your brokerage name and be truthful and not misleading</li>
               <li><strong>Client Disclosure:</strong> Working relationships must be disclosed in writing before showing properties</li>
-              <li><strong>FINTRAC Compliance:</strong> Record keeping for transactions over $10,000 as per federal anti-money laundering rules</li>
+              <li><strong>FINTRAC:</strong> Federal anti-money-laundering rules on client identification and record keeping apply to real estate transactions</li>
               <li><strong>Data Privacy:</strong> Must comply with PIPEDA for personal information handling</li>
               <li><strong>Continuing Education:</strong> Maintain your registration through ongoing education requirements</li>
             </ul>
-
-            <h3>How RealtorDesk AI Helps:</h3>
-            <p>
-              Our platform automatically includes brokerage information in all generated marketing materials, maintains audit trails for client communications, and provides PIPEDA-compliant data handling with encryption and consent management.
-            </p>
 
             <h2><Shield className="w-6 h-6 inline mr-2" />British Columbia - BCFSA</h2>
             <p>
@@ -118,17 +113,12 @@ const Compliance = () => {
             
             <h3>Key Requirements:</h3>
             <ul>
-              <li><strong>Disclosure of Representation:</strong> Must provide Form 320 before showing properties</li>
+              <li><strong>Disclosure of Representation:</strong> Disclose who you represent, using BCFSA&rsquo;s disclosure form, before providing trading services</li>
               <li><strong>Contract Deposits:</strong> Strict rules for handling deposit funds</li>
               <li><strong>Disclosure of Interest:</strong> Must disclose any personal interest in properties</li>
               <li><strong>Marketing Standards:</strong> Cannot make misleading statements about property values or features</li>
               <li><strong>Digital Signatures:</strong> Electronic signatures must meet specific standards</li>
             </ul>
-
-            <h3>How RealtorDesk AI Helps:</h3>
-            <p>
-              Automated disclosure form distribution, secure document signing with audit trails, and automated reminders for required disclosures ensure you never miss a compliance step.
-            </p>
 
             <h2><Shield className="w-6 h-6 inline mr-2" />Alberta - RECA</h2>
             <p>
@@ -139,34 +129,24 @@ const Compliance = () => {
             <ul>
               <li><strong>Service Agreements:</strong> Written service agreements required before providing brokerage services</li>
               <li><strong>Advertising Rules:</strong> Must include brokerage name in all advertising</li>
-              <li><strong>Record Retention:</strong> Must maintain transaction records for 6 years</li>
+              <li><strong>Record Retention:</strong> Keep transaction records for the period RECA&rsquo;s rules set</li>
               <li><strong>Trust Accounting:</strong> Strict rules for handling client funds</li>
               <li><strong>Mandatory Education:</strong> Annual continuing education requirements</li>
             </ul>
 
-            <h3>How RealtorDesk AI Helps:</h3>
+            <h2><Shield className="w-6 h-6 inline mr-2" />Quebec - OACIQ</h2>
             <p>
-              Digital service agreement templates, automatic brokerage branding on all materials, and secure cloud storage with 10-year retention ensure compliance with all RECA requirements.
-            </p>
-
-            <h2><Shield className="w-6 h-6 inline mr-2" />Quebec - OACIQ/AMF</h2>
-            <p>
-              Quebec's Organisme d'autoréglementation du courtage immobilier du Québec (OACIQ) and Autorité des marchés financiers (AMF) have unique bilingual requirements.
+              The Organisme d'autoréglementation du courtage immobilier du Québec (OACIQ) regulates real estate brokerage in Quebec, where French-language rules also apply.
             </p>
             
             <h3>Key Requirements:</h3>
             <ul>
-              <li><strong>Bilingual Communication:</strong> All documents must be available in French; English available upon request</li>
+              <li><strong>French:</strong> Contracts and commercial communications must be available in French</li>
               <li><strong>Mandatory Forms:</strong> Must use OACIQ-approved forms for all transactions</li>
               <li><strong>Disclosure Obligations:</strong> Extensive disclosure requirements for conflicts of interest</li>
               <li><strong>Professional Liability Insurance:</strong> Specific coverage requirements</li>
               <li><strong>Charter of the French Language:</strong> Compliance with Bill 96 for commercial communications</li>
             </ul>
-
-            <h3>How RealtorDesk AI Helps:</h3>
-            <p>
-              Built-in bilingual support with professionally translated French documents, OACIQ form integration, and automatic language detection for client communications ensure Quebec compliance.
-            </p>
 
             <h2>Federal Requirements (All Provinces)</h2>
             <p>
@@ -196,14 +176,42 @@ const Compliance = () => {
               <li>☐ Quebec-specific: French documents available</li>
             </ul>
 
+            {/* Four "How RealtorDesk AI Helps" paragraphs stood under the provinces,
+                and a "Stay Compliant Automatically" box stood here. They promised
+                disclosure-form distribution, document signing with audit trails,
+                10-year storage, OACIQ form integration and automatic language
+                detection. The product has none of those. What follows is read from
+                the code (useRecordConsent, csvImport, per-contact language). */}
+            <h2>What Realtor Desk does, and what it does not</h2>
+            <p>
+              Realtor Desk is a CRM. It records the date and source of a contact&rsquo;s
+              consent, lets you set French or English per contact, and keeps its
+              database in Canada. It does not provide regulator forms, electronic
+              signatures, document storage for transaction records, trust accounting or
+              FINTRAC reporting, and it does not make you compliant with any of the
+              rules above.
+            </p>
+
+            <h2>Check the source</h2>
+            <p>
+              Rules change, and this page is a summary. Read the requirements at the
+              regulator:{" "}
+              <a href="https://www.reco.on.ca" rel="noopener noreferrer" target="_blank">RECO</a>,{" "}
+              <a href="https://www.bcfsa.ca" rel="noopener noreferrer" target="_blank">BCFSA</a>,{" "}
+              <a href="https://www.reca.ca" rel="noopener noreferrer" target="_blank">RECA</a>,{" "}
+              <a href="https://www.oaciq.com" rel="noopener noreferrer" target="_blank">OACIQ</a> and{" "}
+              <a href="https://fintrac-canafe.canada.ca" rel="noopener noreferrer" target="_blank">FINTRAC</a>.
+              This is general information, not legal advice.
+            </p>
+
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
-              <h3 className="text-2xl font-bold mb-4">Stay Compliant Automatically</h3>
+              <h3 className="text-2xl font-bold mb-4">See the CRM on your own contacts</h3>
               <p className="mb-6">
-                RealtorDesk AI builds compliance into every feature, so you can focus on closing deals instead of worrying about regulations.
+                A consent record on every contact, French per contact, and a database in Canada.
               </p>
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">
-                  See How It Works
+                  Book a demo
                 </Button>
               </Link>
             </div>

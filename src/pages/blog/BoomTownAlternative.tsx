@@ -641,13 +641,13 @@ const BoomTownAlternative = () => {
               <Card className="p-6 bg-green-50 border-green-200">
                 <h3 className="font-bold mb-3 flex items-center gap-2 text-green-900">
                   <CheckCircle2 className="w-5 h-5 text-green-700" />
-                  Solution: RealtorDesk AI
+                  What Realtor Desk offers
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• PIPEDA compliant by default</li>
-                  <li>• CASL templates built-in</li>
-                  <li>• Bilingual for Quebec</li>
-                  <li>• Canadian data residency (AWS Canada)</li>
+                  <li>• Database hosted in Canada</li>
+                  <li>• Consent date and source recorded per contact</li>
+                  <li>• French or English set per contact</li>
+                  <li>• Priced in Canadian dollars</li>
                 </ul>
               </Card>
             </div>

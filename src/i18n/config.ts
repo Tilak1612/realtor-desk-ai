@@ -1352,7 +1352,7 @@ const resources = {
         },
         q3: {
           question: "Can I trust the platform with my client data?",
-          answer: "Absolutely. We use bank-level encryption (AES-256), host data on Canadian-optimized infrastructure, and are designed with PIPEDA principles — including right-to-erasure and breach notification protocols."
+          answer: "Your client data sits in a database hosted in Canada and is encrypted in transit and at rest. Each account can only read its own records. Some outside services, such as SMS and email delivery, may process data outside Canada. We do not hold a SOC 2 certification."
         },
         q4: {
           question: "What if the platform doesn't work as described?",
@@ -2453,7 +2453,7 @@ const resources = {
           },
           compliance: {
             title: "Provincial Compliance Checklist for Agents",
-            excerpt: "Stay compliant with regulations across Canada. A comprehensive guide to RECO, BCFSA, RECA, and AMF requirements."
+            excerpt: "An overview of what RECO, BCFSA, RECA and OACIQ expect of agents, plus the federal rules, with a link to each regulator."
           },
           leadConversion: {
             title: "Increase Lead Conversion with Lead Scoring",
@@ -4694,7 +4694,7 @@ const resources = {
         },
         q3: {
           question: "Puis-je faire confiance à la plateforme avec les données de mes clients?",
-          answer: "Absolument. Nous utilisons un chiffrement de niveau bancaire (AES-256), hébergeons les données sur une infrastructure optimisée pour le Canada, et sommes conçus selon les principes de la LPRPDE — y compris le droit à l'effacement et les protocoles de notification de violation."
+          answer: "Les données de vos clients se trouvent dans une base de données hébergée au Canada et sont chiffrées en transit et au repos. Chaque compte ne peut lire que ses propres dossiers. Certains services externes, comme l\u2019envoi de SMS et de courriels, peuvent traiter des données hors du Canada. Nous ne détenons pas de certification SOC 2."
         },
         q4: {
           question: "Que se passe-t-il si la plateforme ne fonctionne pas comme décrit?",
@@ -5795,7 +5795,7 @@ const resources = {
           },
           compliance: {
             title: "Liste de Contrôle de Conformité Provinciale : ON, BC, AB, QC",
-            excerpt: "Restez conforme aux réglementations à travers le Canada. Un guide complet des exigences RECO, BCFSA, RECA et AMF."
+            excerpt: "Un aperçu de ce que RECO, BCFSA, RECA et l\u2019OACIQ attendent des courtiers, ainsi que des règles fédérales, avec un lien vers chaque organisme."
           },
           leadConversion: {
             title: "10 Façons d'Augmenter la Conversion des Prospects avec l'Analyse Prédictive",

@@ -107,7 +107,7 @@ const FintracCompliance = () => {
             <span className="gradient-text">for Canadian Realtors</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Every Canadian realtor is a FINTRAC Reporting Entity. Understand your legal obligations and how RealtorDesk AI helps you build an audit-ready record-keeping system.
+            Real estate brokers and sales representatives are reporting entities under FINTRAC&rsquo;s rules. This page outlines the obligations and what a CRM can and cannot do to help you keep records.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <Link to="/signup">
