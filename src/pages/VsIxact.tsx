@@ -8,21 +8,30 @@ import { Check, X, Brain, Zap, TrendingUp, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: "USD" on
+// IXACT's price (the page's own source note says the currency is not stated),
+// "Predictive lead scoring, intelligent chatbot, automated nurturing IXACT
+// doesn't have", the transaction management, email marketing and "ROI
+// Tracking" ticks for Realtor Desk, "Sending on the roadmap", "CASL-aware
+// email", and the unsourced crosses, "Manual", "Basic", "Native app" and "Not
+// stated" verdicts on IXACT. The IXACT price stays because the hero attributes
+// it to ixactcontact.com with a date. The two migration cards are untouched.
+
 const VsIxact = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
         title="IXACT Contact vs Realtor Desk for Canadian Agents"
-        description="IXACT Contact lists $46.75/mo USD; Realtor Desk is $149/mo CAD. Compare price, bilingual EN/FR, CASL-aware email and lead ranking."
-        keywords="IXACT Contact vs RealtorDesk AI, IXACT alternative, Canadian real estate CRM comparison, AI CRM for realtors"
+        description="IXACT Contact lists $46.75/mo billed annually; Realtor Desk is $149/mo CAD. Compare price, French per contact, consent records and the lead score."
+        keywords="IXACT Contact vs Realtor Desk, IXACT alternative, Canadian real estate CRM comparison"
         canonicalUrl="https://www.realtordesk.ai/vs/ixact"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "IXACT Contact vs Realtor Desk",
-            "description": "Compare IXACT Contact with Realtor Desk AI for pricing, AI features, and Canadian market support."
+            "description": "IXACT Contact lists $46.75/mo billed annually; Realtor Desk is $149/mo CAD. Compare price, French per contact, consent records and the lead score."
           }
         ]}
       />
@@ -37,8 +46,11 @@ const VsIxact = () => {
           <h1 className="mb-6">
             More than IXACT. <span className="gradient-text">Here is what the difference buys.</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
             IXACT is the cheaper contact manager. We cost about three times as much — so this page is the honest case for paying it.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly.
           </p>
           
           {/* Price Comparison */}
@@ -63,14 +75,14 @@ const VsIxact = () => {
       {/* Value Proposition */}
       <section className="section-padding">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Why Upgrade from IXACT?</h2>
+          <h2 className="text-center mb-12">What the difference buys</h2>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6 text-center">
               <Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
-              <h3 className="font-bold mb-2">Get AI Capabilities</h3>
+              <h3 className="font-bold mb-2">An assistant that drafts</h3>
               <p className="text-sm text-muted-foreground">
-                Predictive lead scoring, intelligent chatbot, automated nurturing IXACT doesn't have
+                The in-app assistant drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you
               </p>
             </Card>
 
@@ -78,7 +90,7 @@ const VsIxact = () => {
               <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-4" />
               <h3 className="font-bold mb-2">Know who to call first</h3>
               <p className="text-sm text-muted-foreground">
-                Every lead carries a 0-100 score with the factors behind it, so your list is ranked before you open it
+                Every lead carries a rule-based 0-100 score with the breakdown behind it, and a suggested next action
               </p>
             </Card>
 
@@ -94,7 +106,7 @@ const VsIxact = () => {
           <Card className="p-8 bg-accent/10 border-accent/20 text-center">
             <p className="text-lg mb-4">
               Realtor Desk costs more than IXACT. What you get for the difference is
-              <span className="gradient-text font-bold"> bilingual EN/FR replies, CASL-aware email and engagement-based lead ranking</span>.
+              <span className="gradient-text font-bold"> French or English per contact, a consent record on each contact and a rule-based lead score</span>.
             </p>
             <p className="text-sm text-muted-foreground">
               Compare both on your own numbers — seats, billing term and taxes differ by vendor.
@@ -115,8 +127,8 @@ const VsIxact = () => {
         <div className="container-custom max-w-4xl">
           <h2 className="text-center mb-4">Where the two differ</h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            IXACT is a well-established contact manager and costs a third of what we do.
-            These are the specific things you get here that you do not get there.
+            IXACT&rsquo;s list price is about a third of ours. These are the specific
+            things you get here; check IXACT&rsquo;s own feature pages for what it offers on each.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -124,35 +136,38 @@ const VsIxact = () => {
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">Leads arrive ranked</h3>
               <p className="text-sm text-muted-foreground">
-                Intent, urgency, budget and timeline roll up to a 0-100 score, with the
-                factors behind it and a suggested next action on the lead.
+                Engagement, behaviour, budget match, timeline and qualification roll up
+                to a rule-based 0-100 score, with the breakdown visible and a suggested
+                next action on the lead.
               </p>
             </Card>
 
             <Card className="p-6">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">Bilingual end to end</h3>
+              <h3 className="font-bold mb-2">French per contact</h3>
               <p className="text-sm text-muted-foreground">
-                The app, your emails and every lead record run in English or French.
-                Set the language per contact and it stays there.
+                The interface and client email both work in French. Set French or
+                English per contact and it stays there.
               </p>
             </Card>
 
             <Card className="p-6">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">Canadian by default</h3>
+              <h3 className="font-bold mb-2">Canadian specifics</h3>
               <p className="text-sm text-muted-foreground">
-                Data hosted in a Canadian region, CAD pricing and reporting, consent date
-                and source on every contact, and an unsubscribe honoured permanently.
+                The production database is hosted in Canada, pricing is in CAD, and every
+                contact carries the date and source of consent. Automated email stops for a
+                contact who has withdrawn. Some outside services (SMS, email delivery, AI
+                drafting) may process data outside Canada.
               </p>
             </Card>
 
             <Card className="p-6">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">A pipeline, not just a list</h3>
+              <h3 className="font-bold mb-2">A drag-and-drop pipeline</h3>
               <p className="text-sm text-muted-foreground">
-                Drag a lead between stages and it sticks. Every column carries its own
-                count and CAD value, so you can see where the money sits.
+                Drag a deal between stages and it sticks. The pipeline carries totals in
+                CAD, so you can see where the money sits.
               </p>
             </Card>
           </div>
@@ -162,7 +177,7 @@ const VsIxact = () => {
       {/* Feature Comparison */}
       <section className="section-padding">
         <div className="container-custom max-w-5xl">
-          <h2 className="text-center mb-12">See What You're Missing</h2>
+          <h2 className="text-center mb-12">Side by Side</h2>
           
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
@@ -176,17 +191,17 @@ const VsIxact = () => {
               <tbody>
                 {[
                   { feature: "List price", rdai: "$149/mo CAD", ixact: "$46.75/mo, billed annually" },
-                  { feature: "Lead scoring (0-100, with factors)", rdai: true, ixact: false },
-                  { feature: "Drag-and-drop pipeline with CAD value", rdai: true, ixact: false },
-                  { feature: "Email sequence builder", rdai: "Sending on the roadmap", ixact: "Manual" },
-                  { feature: "Bilingual Support (EN/FR)", rdai: true, ixact: false },
-                  { feature: "Data hosted in Canada", rdai: true, ixact: "Not stated" },
-                  { feature: "Mobile", rdai: "Responsive web", ixact: "Native app" },
-                  { feature: "Email Marketing", rdai: true, ixact: true },
-                  { feature: "Transaction Management", rdai: true, ixact: true },
-                  { feature: "Contact Management", rdai: true, ixact: true },
+                  { feature: "Rule-based lead score (0-100, with breakdown)", rdai: true, ixact: "Ask the vendor" },
+                  { feature: "Drag-and-drop pipeline with CAD totals", rdai: true, ixact: "Ask the vendor" },
+                  { feature: "In-app assistant that drafts a reply", rdai: true, ixact: "Ask the vendor" },
+                  { feature: "French or English per contact", rdai: true, ixact: "Ask the vendor" },
+                  { feature: "Consent date and source on each contact", rdai: true, ixact: "Ask the vendor" },
+                  { feature: "Production database hosted in Canada", rdai: true, ixact: "Ask the vendor" },
+                  { feature: "Automated email sequences", rdai: "Not available (a builder exists; scheduled sending is not on)", ixact: "Ask the vendor" },
+                  { feature: "Lead-facing chatbot or automatic replies", rdai: "Not available", ixact: "Ask the vendor" },
+                  { feature: "Transaction Management", rdai: "Not available", ixact: "Ask the vendor" },
+                  { feature: "Native mobile app", rdai: "Not available (responsive web app)", ixact: "Ask the vendor" },
                   { feature: "Free Migration", rdai: true, ixact: "N/A" },
-                  { feature: "ROI Tracking", rdai: true, ixact: "Basic" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -225,8 +240,8 @@ const VsIxact = () => {
               <DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
               <h3 className="font-bold mb-2">A premium price</h3>
               <p className="text-sm text-muted-foreground">
-                $149/mo CAD versus IXACT's $46.75/mo USD billed annually. You pay more, for bilingual
-                EN/FR replies, CASL-aware email and engagement-based lead ranking.
+                $149/mo CAD versus IXACT's $46.75/mo billed annually (currency not stated on its site). You pay
+                more, for French or English per contact, a consent record on each contact and a rule-based lead score.
               </p>
             </Card>
 
@@ -251,7 +266,7 @@ const VsIxact = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" className="btn-gradient">
-                Upgrade to AI-Powered CRM
+                Book a Demo
               </Button>
             </Link>
             <Link to="/pricing">

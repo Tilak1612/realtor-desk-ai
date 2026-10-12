@@ -177,7 +177,7 @@ const Roadmap = () => {
 
           <h3 className="text-lg font-semibold mb-2">The two people ask about most</h3>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Native CREA DDF® listing sync is targeted at Q3 2026. Until it lands,
+            Native CREA DDF® listing sync is not live yet. Until it lands,
             listings come in through the Realtor.ca importer, and we say so
             everywhere rather than implying the integration already exists.
             Calendar sync is the other one: Google Calendar and Outlook connect

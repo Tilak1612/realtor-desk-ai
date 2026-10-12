@@ -87,15 +87,19 @@ describe("native mobile app claims", () => {
   it("declares only the web in structured data", () => {
     // This one is machine-readable and sits on every page, so a wrong value
     // here is the version search engines and AI crawlers actually believe.
-    // TWO copies of this schema exist: src/lib/structuredData.ts and a static
-    // block in index.html. They had already drifted — index.html said "Web",
-    // structuredData.ts said "Web, iOS, Android" — so check both, or fixing one
-    // leaves the other shipping the wrong answer.
-    for (const file of ["src/lib/structuredData.ts", "index.html"]) {
-      const body = readFileSync(join(ROOT, file), "utf8");
-      const m = body.match(/"operatingSystem":\s*"([^"]+)"/);
-      expect(m, `operatingSystem missing from ${file}`).toBeTruthy();
-      expect(m?.[1], `${file} declares a native platform`).not.toMatch(/iOS|Android/);
+    // The live copy is the static block in index.html. A second copy used to
+    // sit in src/lib/structuredData.ts and had drifted — index.html said "Web",
+    // structuredData.ts said "Web, iOS, Android". That export was unused and was
+    // deleted on 2026-10-11; if a SoftwareApplication block is ever added back
+    // there, it is held to the same rule.
+    const html = readFileSync(join(ROOT, "index.html"), "utf8");
+    const live = html.match(/"operatingSystem":\s*"([^"]+)"/);
+    expect(live, "operatingSystem missing from index.html").toBeTruthy();
+    expect(live?.[1], "index.html declares a native platform").not.toMatch(/iOS|Android/);
+
+    const lib = readFileSync(join(ROOT, "src/lib/structuredData.ts"), "utf8");
+    for (const m of lib.matchAll(/"operatingSystem":\s*"([^"]+)"/g)) {
+      expect(m[1], "src/lib/structuredData.ts declares a native platform").not.toMatch(/iOS|Android/);
     }
   });
 

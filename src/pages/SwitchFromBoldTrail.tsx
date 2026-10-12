@@ -4,9 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Phone, Upload, Download, GraduationCap, CheckCircle, DollarSign, TrendingDown } from "lucide-react";
+import { Phone, Upload, Download, GraduationCap, CheckCircle, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: "Switch &
+// Save" and the downward-trend arrow (a saving cannot be computed against a
+// price BoldTrail does not publish), "Frustrated with BoldTrail? You're Not
+// Alone.", "Canadian agents are choosing Realtor Desk over BoldTrail", "better
+// AI, faster support, and Canadian features BoldTrail lacks", "CASL-aware
+// email" and "Canadian support and AI automation". Added what the product does
+// not have. The migration steps and guarantee sentences are untouched.
 
 const SwitchFromBoldTrail = () => {
   const { t } = useTranslation();
@@ -14,15 +22,15 @@ const SwitchFromBoldTrail = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from BoldTrail to Realtor Desk"
-        description="Free migration and CSV import if you're moving from BoldTrail to Realtor Desk — CASL-aware email, bilingual EN/FR, $149/mo CAD."
-        keywords="switch from BoldTrail, BoldTrail migration, BoldTrail alternative Canada, RealtorDesk AI"
+        description="Free migration and CSV import if you're moving from BoldTrail to Realtor Desk — a consent record and French per contact, $149/mo CAD."
+        keywords="switch from BoldTrail, BoldTrail migration, BoldTrail alternative Canada, Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/switch-from-boldtrail"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Switch from BoldTrail",
-            "description": "Free migration from BoldTrail to RealtorDesk AI with Canadian support and AI automation."
+            "description": "Free migration and CSV import if you're moving from BoldTrail to Realtor Desk — a consent record and French per contact, $149/mo CAD."
           }
         ]}
       />
@@ -32,27 +40,34 @@ const SwitchFromBoldTrail = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            Switch & Save
+            Switching from BoldTrail
           </Badge>
           <h1 className="mb-6">
-            Frustrated with <span className="gradient-text">BoldTrail?</span> You're Not Alone.
+            Moving from <span className="gradient-text">BoldTrail</span> to Realtor Desk
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Canadian agents are choosing Realtor Desk over BoldTrail — $149/mo CAD, no setup fee,
-            while getting better AI, faster support, and Canadian features BoldTrail lacks.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+            Realtor Desk is a CRM for a single Canadian agent at $149/mo CAD with no setup fee.
+            BoldTrail publishes no prices and quotes on request, so compare against the total you are quoted.
+          </p>
+          <p className="text-muted-foreground max-w-3xl mx-auto mb-4">
+            It has no seats, lead routing, shared pipeline, IDX website, lead generation or transaction
+            management. Check that list against what you use in BoldTrail today.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly.
           </p>
           
           <div className="flex items-center justify-center gap-4 mb-8">
-            <Card className="p-4 border-destructive/20">
-              <div className="text-sm text-muted-foreground mb-1">You're Paying</div>
-              <div className="text-2xl font-bold text-destructive">Quoted</div>
-              <div className="text-xs text-muted-foreground">BoldTrail first year cost</div>
+            <Card className="p-4">
+              <div className="text-sm text-muted-foreground mb-1">BoldTrail</div>
+              <div className="text-2xl font-bold text-muted-foreground">Quoted</div>
+              <div className="text-xs text-muted-foreground">BoldTrail does not publish pricing</div>
             </Card>
             
-            <TrendingDown className="w-8 h-8 text-rd-terra-800" />
+            <div className="text-lg font-semibold text-muted-foreground">vs</div>
             
             <Card className="p-4 border-accent">
-              <div className="text-sm text-muted-foreground mb-1">Switch to</div>
+              <div className="text-sm text-muted-foreground mb-1">Realtor Desk</div>
               <div className="text-2xl font-bold gradient-text">$149/mo CAD</div>
               <div className="text-xs text-rd-terra-800 font-semibold">$149/mo CAD · no setup fee</div>
             </Card>

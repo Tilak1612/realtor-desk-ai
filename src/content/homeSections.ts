@@ -44,7 +44,7 @@ export function HOME_FAQS(isFr: boolean): FaqItem[] {
       },
       {
         q: "Quelles intégrations fonctionnent aujourd’hui ?",
-        a: "Zapier, Make et n8n poussent les nouveaux prospects directement. Twilio envoie des SMS, conditionnés au consentement. Google Agenda et Outlook se connectent, mais la synchronisation des rendez-vous n’est pas encore active. La synchronisation SDD® de l’ACI est prévue pour le T3 2026. La page Intégrations sépare le disponible du prévu.",
+        a: "Zapier, Make et n8n poussent les nouveaux prospects directement. Twilio envoie des SMS, conditionnés au consentement. Google Agenda et Outlook se connectent, mais la synchronisation des rendez-vous n’est pas encore active. La synchronisation SDD® de l’ACI est sur la feuille de route et n’est pas encore active. La page Intégrations sépare le disponible du prévu.",
       },
       {
         q: "Où sont hébergées les données de mes clients ?",
@@ -72,7 +72,7 @@ export function HOME_FAQS(isFr: boolean): FaqItem[] {
     },
     {
       q: "Which integrations work today?",
-      a: "Zapier, Make and n8n push new leads straight in. Twilio sends SMS, gated on consent. Google Calendar and Outlook connect, but appointment sync is not live yet. Native CREA DDF® sync is on the roadmap for Q3 2026. The integrations page separates what is available from what is planned.",
+      a: "Zapier, Make and n8n push new leads straight in. Twilio sends SMS, gated on consent. Google Calendar and Outlook connect, but appointment sync is not live yet. Native CREA DDF® sync is on the roadmap and is not live yet. The integrations page separates what is available from what is planned.",
     },
     {
       q: "Where is my client data stored?",
@@ -175,7 +175,7 @@ export function HOME_WORKFLOW(isFr: boolean): { heading: string; blocks: ProseBl
         {
           h: "Pensé pour les règles canadiennes, pas adapté après coup",
           p: [
-            "Les données clients sont hébergées au Canada. Chaque courriel porte un enregistrement de consentement et un lien de désabonnement fonctionnel, parce que la LCAP n’est pas facultative. L’interface et les courriels destinés au client fonctionnent en français, pas seulement le site web. Les fiches s’importent depuis Realtor.ca aujourd’hui; la synchronisation native SDD® de l’ACI est prévue pour le T3 2026, et nous le disons plutôt que de laisser croire que c’est déjà actif.",
+            "Les données clients sont hébergées au Canada. Chaque courriel porte un enregistrement de consentement et un lien de désabonnement fonctionnel, parce que la LCAP n’est pas facultative. L’interface et les courriels destinés au client fonctionnent en français, pas seulement le site web. Les fiches s’importent depuis Realtor.ca aujourd’hui; la synchronisation native SDD® de l’ACI est sur la feuille de route et n’est pas encore active, et nous le disons plutôt que de laisser croire que c’est déjà actif.",
           ],
         },
         {
@@ -234,7 +234,7 @@ export function HOME_WORKFLOW(isFr: boolean): { heading: string; blocks: ProseBl
       {
         h: "Built for Canadian rules, not adapted to them",
         p: [
-          "Client data is hosted in Canada. Email carries a consent record and a working unsubscribe path, because CASL is not optional. The interface and the client-facing email both work in French, not just the marketing site. Listings import from Realtor.ca today; native CREA DDF® sync is on the roadmap for Q3 2026, and we say so rather than implying it already works.",
+          "Client data is hosted in Canada. Email carries a consent record and a working unsubscribe path, because CASL is not optional. The interface and the client-facing email both work in French, not just the marketing site. Listings import from Realtor.ca today; native CREA DDF® sync is on the roadmap and not live yet, and we say so rather than implying it already works.",
         ],
       },
       {

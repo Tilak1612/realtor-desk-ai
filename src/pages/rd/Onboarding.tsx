@@ -376,7 +376,7 @@ function StepWelcome({ onContinue }: { onContinue: () => void }) {
           <HelperCard icon={<IconShield />} title={t("rd.onboarding.welcome.helperCanadaTitle", "Hosted in Canada")}>
             {t(
               "rd.onboarding.welcome.helperCanadaBody",
-              "Your leads, messages, and MLS data stay on Canadian soil. PIPEDA-compliant from minute one."
+              "Your leads and messages are stored in a database hosted in Canada."
             )}
           </HelperCard>
           <HelperCard icon={<IconMaple />} title={t("rd.onboarding.welcome.helperMarketTitle", "Built for our market")}>

@@ -549,10 +549,24 @@ Index status on 2026-10-11: `/fr/lcap-courriels-immobilier` indexed (crawled 6 O
 - FINTRAC hero ("audit-ready record-keeping system"), a BoomTown card ("PIPEDA compliant by default"), and the `/faq` trust answer ("bank-level encryption", "breach notification protocols").
 - `metaLength` and `internalLinkDepth` failed after a plain `vite build` (the screenshot harnesses run one); they now need a prerendered build to run against `dist`.
 
+### Second pass, same day: the long tail of product claims
+The first audit rewrote about twenty pages and put a scope note on the rest. A sweep on 2026-10-11 showed that was not enough: some forty files still described Realtor Desk with features it does not have, or stated figures with no source. All of it was removed against one fact sheet read from the code (single-agent CRM; rule-based score; in-app drafting assistant; nothing sent without the agent; consent date and source per contact; French per contact; database in Canada; no chatbot, voice, WhatsApp, automatic replies or booking, market data, team features or certifications).
+
+- `/faq`: thirteen of twenty answers rewritten in English and French (voice AI, a chatbot widget, "25-40% more appointments", "unlimited users", invented Follow Up Boss prices). These were also emitted as FAQPage JSON-LD.
+- Comparison and switch pages: Propertybase, Lofty (three pages), Wise Agent (two), BoldTrail (two, plus the four-row table component), IXACT (three), BoomTown. Competitor cells with no source now say "Ask the vendor"; Realtor Desk cells say "Not available" where that is true.
+- Guides: AI vs traditional CRM, CRM buying guide, AI CRM guide, AI transformation, Calgary marketing, lead response time, slower-market automation, lead generation, database reactivation, cost of missed leads, lead conversion, the chatbot guide and the voice AI guide. Invented studies, ROI maths, response times and "day in the life" results are gone; calculators now take the reader's own numbers.
+- PIPEDA page ("Ensures PIPEDA Compliance", "Meets PIPEDA's data residency requirements", "End-to-End Encryption", "Join hundreds of Canadian real estate agents") and FINTRAC page ("retained with full history", a 30-day reporting deadline that is no longer the rule).
+- Smaller: a drip-templates card that priced Realtor Desk at $69/month with pre-loaded templates, the in-app billing feature list ("24/7 AI chatbot"), the CREA DDF post's setup flow, four unused JSON-LD exports in `lib/structuredData.ts` ("AI Voice Agent", "WhatsApp Messaging").
+- "Q3 2026" for CREA DDF replaced with "on the roadmap, not live yet" everywhere except the pricing page and the roadmap page's quarter headings, which are the owner's.
+- Resources index cards, sitemap dates and share cards were regenerated to match the rewritten pages. Author and publisher names in page metadata are now "Realtor Desk" throughout.
+
+Not changed, on purpose: any price, plan name, trial term, money-back guarantee or migration offer; the pricing page; the roadmap's quarter headings; legal pages.
+
 ### Still waiting on the owner
 1. `/pricing` plan copy. The plan cards never reach the static HTML that non-JS crawlers read, and they should not be added as they stand: "5 users included", "Shared pipeline", "Team reports & leaderboard" (no seat model), "Desk AI chatbot, 500 msgs/mo" (other pages say there is no chatbot), four "Q3 2026" DDF lines (past), "Dedicated Canadian CSM" (unverified). Pricing wording is not changed without instruction.
-2. "Q3 2026" for CREA DDF: 104 occurrences in 33 files, now past. DDF is not live (`ddf_properties` is empty). Needs a new target or a decision to drop the date.
-3. "Free migration" / "We handle everything" on the switch pages.
+2. CREA DDF target date. The past-due "Q3 2026" now remains only on the pricing page (plan cards and SEO description) and as a quarter heading on the roadmap page. Everywhere else says "on the roadmap, not live yet". Give a new target, or confirm the date-free wording, and say what the roadmap page should show.
+3. Migration offers left exactly as written on the switch and comparison pages ("We move your IXACT data for free", "$499 value included at no cost. We handle everything.", "live and productive in 48 hours", "We export all your Lofty contacts and deals"). Several contradict the CSV-only import described on the same pages. Confirm the service or remove them.
+3a. Team-plan mentions left as written ("$149-299 CAD/month", "Team Plan: $299/month") beside copy that now says the product is single-agent.
 4. PIPEDA hosting wording, and a native-speaker review of the two French pages added on 2026-10-02.
 5. In Search Console: request indexing for `/pricing`, `/features/import-contacts`, `/fr/importer-contacts-csv`, and read the sitemap warning.
 

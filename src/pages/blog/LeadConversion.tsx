@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Share2, TrendingUp } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 // SVG on the page; .jpg twin for og:image -- social does not render SVG.
@@ -9,7 +9,32 @@ import blogImage from "@/assets/brand/blog-lead-conversion.svg";
 import blogImageSocial from "@/assets/brand/blog-lead-conversion.jpg";
 import { Picture } from "@/components/Picture";
 import { SEO } from "@/components/SEO";
-import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
+
+// /blog/lead-conversion — rewritten 2026-10-11.
+//
+// The previous version was invented from top to bottom: "conversion rate from 5%
+// to 18%", "AI analyzes hundreds of data points", "increasing response rates by up
+// to 40%", a "Real Results" list (3.6x conversion, 60% less wasted time, $15,000
+// saved, 14 extra deals a year, 50% faster sales cycles), and a closing "Ready to
+// 3x Your Conversion Rate?" with a "Free Analysis". There is no sample behind any
+// of those numbers, the score is rule-based rather than predictive, and nothing
+// in the product schedules outreach or runs nurture sequences.
+//
+// WHAT THIS PAGE CLAIMS, AND FROM WHERE
+//   the five score inputs and their weights   supabase/functions/calculate-lead-score
+//                                             (30 / 30 / 20 / 15 / 5, capped at 100),
+//                                             the same figures /features/ai-lead-scoring uses
+//   the breakdown is visible                  components/contact-detail/LeadScoreExplainer
+//   nothing is sent without the agent         the inbox composer posts agent-authored rows only
+// It makes no claim about conversion, time saved or deals closed.
+
+const PARTS: { points: string; name: string; what: string }[] = [
+  { points: "30", name: "Engagement", what: "Email opens, clicks and replies, with a bonus for recent contact." },
+  { points: "30", name: "Behaviour", what: "Site visits, property views and document activity." },
+  { points: "20", name: "Budget match", what: "The budget range the lead has given you." },
+  { points: "15", name: "Timeline", what: "How soon the lead says they want to move." },
+  { points: "5", name: "Qualification", what: "How complete the lead's details are." },
+];
 
 const LeadConversion = () => {
   useEffect(() => {
@@ -20,29 +45,29 @@ const LeadConversion = () => {
     <div className="min-h-screen">
       <SEO
         title="Increase Lead Conversion with Lead Scoring"
-        description="Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%."
-        keywords="real estate lead conversion, predictive analytics real estate, AI lead scoring, realtor lead generation, CRM analytics"
+        description="What a lead score is, how to use one to decide who to call first, and what it cannot tell you. With the five inputs Realtor Desk scores on."
+        keywords="real estate lead scoring, lead conversion real estate, how to prioritise leads, lead score CRM, realtor follow-up"
         image={blogImageSocial}
         article
         publishedTime="2024-12-28"
-        modifiedTime="2024-12-28"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/lead-conversion"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Increase Lead Conversion with Lead Scoring",
-            "description": "Learn how AI lead scoring and predictive analytics can boost real estate lead conversion rates from 5% to 18%.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "What a lead score is, how to use one to decide who to call first, and what it cannot tell you. With the five inputs Realtor Desk scores on.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2024-12-28",
-            "dateModified": "2024-12-28"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
       <Navbar />
-      
+
       <article className="pt-32 md:pt-40 pb-20">
         <div className="container-custom max-w-4xl">
           <Link to="/resources">
@@ -53,27 +78,26 @@ const LeadConversion = () => {
           </Link>
 
           <header className="mb-8">
-            <div className="flex items-center gap-4 mb-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-4 mb-6 text-sm text-muted-foreground flex-wrap">
               <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold">
-                Marketing
+                Lead handling
               </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>December 28, 2024</span>
+                <span>Rewritten October 11, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>7 min read</span>
+                <span>4 min read</span>
               </div>
             </div>
-            
+
             <h1 className="mb-6">
               Increase Lead Conversion with Lead Scoring
             </h1>
-            <ProductScopeNote className="mb-6" />
-            
+
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Learn how AI-powered lead scoring and predictive analytics can increase your conversion rate from 5% to 18%.
+              A lead score does not convert anyone. It helps you decide who to call first, so the warm lead does not go quiet while you work through the list in the order it arrived.
             </p>
           </header>
 
@@ -81,139 +105,80 @@ const LeadConversion = () => {
             src={blogImage}
             width={1024}
             height={576}
-            alt="Predictive analytics dashboard"
+            alt="Illustration of a ranked list of leads"
             className="w-full rounded-lg mb-8 shadow-lg"
             priority
           />
 
           <div className="prose prose-lg max-w-none">
-            <h2>The Lead Conversion Challenge</h2>
+            <h2>What a lead score is</h2>
             <p>
-              The average real estate agent converts only 5% of leads into clients. With the cost of lead generation constantly rising, most agents waste thousands of dollars on leads that never convert. But what if you could predict which leads are most likely to close before you even pick up the phone?
+              A lead score is a number that ranks your leads by how engaged they look. It is built from things a lead has done, such as opening an email or viewing a listing, and things they have told you, such as their budget and timeline. A higher number means more signs of interest, not a promise that the lead will buy.
             </p>
 
-            <h2>1. Implement AI-Powered Lead Scoring</h2>
-            <p>
-              Modern AI systems analyze hundreds of data points to assign a conversion probability score to each lead. High-scoring leads receive immediate attention, while low-scoring leads enter automated nurture sequences. This prioritization alone can double your conversion rate.
-            </p>
-            <p>
-              <strong>Key factors AI evaluates:</strong>
-            </p>
-            <ul>
-              <li>Email engagement patterns and open rates</li>
-              <li>Website behavior and time spent on listings</li>
-              <li>Property search criteria and price range</li>
-              <li>Response time to communications</li>
-              <li>Social media engagement and shares</li>
-              <li>Timing indicators (season, market conditions)</li>
-            </ul>
-
-            <h2>2. Perfect Your Follow-Up Timing</h2>
-            <p>
-              <TrendingUp className="w-5 h-5 inline mr-2 text-primary" />
-              Predictive analytics reveals the optimal time to contact each lead. Some prospects respond best to morning calls, others prefer evening emails. AI learns these patterns and schedules your outreach accordingly, increasing response rates by up to 40%.
-            </p>
-
-            <h2>3. Personalize at Scale</h2>
-            <p>
-              Generic mass emails are dead. AI analyzes each lead's behavior to determine their specific interests—whether it's condos in downtown Toronto or family homes in suburban Calgary—and automatically tailors all communications to match.
-            </p>
-
-            <h2>4. Predict Property Preferences</h2>
-            <p>
-              Before your first conversation, AI can predict which properties each lead will love based on their browsing history, saved searches, and demographic data. Send them exactly what they want to see, when they're most likely to engage.
-            </p>
-
-            <h2>5. Automate Multi-Touch Campaigns</h2>
-            <p>
-              Studies show it takes 8-12 touches to close a real estate lead. Set up automated sequences that adapt based on engagement:
-            </p>
-            <ul>
-              <li>Day 1: Welcome email with local market insights</li>
-              <li>Day 3: SMS with 3 hand-picked property matches</li>
-              <li>Day 5: Video message introducing yourself</li>
-              <li>Day 7: Market report for their target neighborhood</li>
-              <li>Day 10: Invitation to virtual open house</li>
-              <li>Day 14: Follow-up phone call (AI schedules optimal time)</li>
-            </ul>
-
-            <h2>6. Identify Hot Leads Instantly</h2>
-            <p>
-              Get real-time alerts when a lead shows high-intent behavior: viewing the same property multiple times, spending 5+ minutes on a listing, or opening emails immediately. Strike while the iron is hot and conversion rates soar.
-            </p>
-
-            <h2>7. Prevent Lead Cooling</h2>
-            <p>
-              AI monitors engagement levels and alerts you when previously hot leads start to cool off. Automated re-engagement campaigns trigger before you lose them to competitors, saving leads that would otherwise be lost.
-            </p>
-
-            <h2>8. Optimize Your Marketing Spend</h2>
-            <p>
-              Predictive models identify which lead sources deliver the highest quality prospects. Allocate more budget to high-performing channels (maybe Facebook ads convert better than Zillow leads for you) and cut underperforming sources.
-            </p>
-
-            <h2>9. Segment for Success</h2>
-            <p>
-              Not all leads are the same. AI automatically segments your database:
-            </p>
-            <ul>
-              <li><strong>Hot Buyers:</strong> Ready to view properties this week</li>
-              <li><strong>Future Prospects:</strong> Exploring options for 3-6 months out</li>
-              <li><strong>Investors:</strong> Different priorities and communication style</li>
-              <li><strong>Sellers:</strong> Need market valuations and listing info</li>
-              <li><strong>Cold Leads:</strong> Long-term nurture sequences</li>
-            </ul>
-
-            <h2>10. Learn from Every Interaction</h2>
-            <p>
-              The more you use predictive analytics, the smarter it gets. Every email opened, call made, and deal closed trains the AI to better predict future outcomes. Your conversion rate compounds over time.
-            </p>
-
-            <h2>Real Results</h2>
-            <p>
-              Agents using AI-powered predictive analytics report:
-            </p>
-            <ul>
-              <li>3.6x increase in lead-to-client conversion rate</li>
-              <li>60% reduction in time wasted on dead-end leads</li>
-              <li>$15,000+ savings on marketing spend annually</li>
-              <li>14 extra deals closed per year on average</li>
-              <li>50% faster sales cycles</li>
-            </ul>
-
-            <h2>Getting Started</h2>
-            <p>
-              You don't need to be a data scientist to leverage predictive analytics. Modern platforms like RealtorDesk AI make it as simple as:
-            </p>
+            <h2>How to use one</h2>
             <ol>
-              <li>Import your existing leads</li>
-              <li>Connect your email and property feeds</li>
-              <li>Let AI analyze and score your database</li>
-              <li>Follow the system's recommendations</li>
-              <li>Watch your conversion rate climb</li>
+              <li><strong>Start the day at the top.</strong> Call or write to the highest-scoring leads first, while their interest is recent.</li>
+              <li><strong>Read the reason, not only the number.</strong> A score built on recent replies means something different from one built on an old burst of listing views.</li>
+              <li><strong>Overrule it when you know better.</strong> A referral from a past client can score low and still be your best lead.</li>
+              <li><strong>Keep low scores on a schedule.</strong> A low score means little activity so far. Set a follow-up date instead of dropping the lead.</li>
+              <li><strong>Check consent before you write.</strong> A high score does not give you permission to email or text someone. Under CASL you still need consent.</li>
             </ol>
 
+            <h2>What a score cannot tell you</h2>
+            <ul>
+              <li>Whether the lead will buy or sell. It measures activity, not intent.</li>
+              <li>Anything about a lead who has given you no data yet. A new contact with no history scores low by default.</li>
+              <li>How good your follow-up is. Two agents with the same scores can get very different results.</li>
+            </ul>
+
+            <h2>How Realtor Desk scores a lead</h2>
+            <p>
+              Realtor Desk gives each lead a score from 0 to 100. It is rule-based, not a prediction, and the lead record shows how each part contributed, so you can see why a lead ranks where it does.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto my-6">
+            <table className="min-w-full text-sm">
+              <caption className="text-left text-muted-foreground pb-3">
+                The five parts of the Realtor Desk lead score. The total is capped at 100.
+              </caption>
+              <thead>
+                <tr className="border-b-2 text-left">
+                  <th scope="col" className="py-2 pr-4 font-semibold">Part</th>
+                  <th scope="col" className="py-2 pr-4 font-semibold">Up to</th>
+                  <th scope="col" className="py-2 font-semibold">Based on</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PARTS.map((p) => (
+                  <tr key={p.name} className="border-b align-top">
+                    <th scope="row" className="py-3 pr-4 text-left font-semibold">{p.name}</th>
+                    <td className="py-3 pr-4 text-muted-foreground">{p.points} points</td>
+                    <td className="py-3 text-muted-foreground">{p.what}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="prose prose-lg max-w-none">
+            <p>
+              The product also suggests a next action and a time to take it. It does not contact the lead for you: nothing is sent without you. We do not publish conversion figures, because we do not have a sample that would stand behind one. More detail is on the{" "}
+              <Link to="/features/ai-lead-scoring">lead scoring page</Link>.
+            </p>
+
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
-              <h3 className="text-2xl font-bold mb-4">Ready to 3x Your Conversion Rate?</h3>
+              <h3 className="text-2xl font-bold mb-4">See the score on your own leads</h3>
               <p className="mb-6">
-                See how predictive analytics can transform your lead generation ROI. Book a personalized demo and we'll analyze your current conversion rate.
+                Book a demo, or start the 14-day trial and import a few contacts to see how they rank.
               </p>
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">
-                  Book Your Free Analysis
+                  Book a demo
                 </Button>
               </Link>
             </div>
-          </div>
-
-          <div className="mt-12 pt-8 border-t flex items-center justify-between">
-            <div className="text-sm text-muted-foreground">
-              Share this article:
-            </div>
-            <Button variant="outline" size="sm">
-              <Share2 className="w-4 h-4 mr-2" />
-              Share
-            </Button>
           </div>
         </div>
       </article>

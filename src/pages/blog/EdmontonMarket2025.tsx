@@ -22,7 +22,7 @@ const EdmontonMarket2025 = () => {
         article
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/edmonton-real-estate-market-2025"
         structuredData={[
           {
@@ -30,8 +30,8 @@ const EdmontonMarket2025 = () => {
             "@type": "Article",
             "headline": "Edmonton Real Estate Market 2025",
             "description": "Edmonton real estate market 2025: housing prices, neighbourhoods and what the data means for Alberta buyers, sellers and investors.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
             "dateModified": "2025-01-01"
           }
@@ -410,7 +410,7 @@ const EdmontonMarket2025 = () => {
             <Card className="p-8 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white text-center">
               <h3 className="text-2xl font-bold mb-4 text-white">Ready to Explore Edmonton Real Estate?</h3>
               <p className="mb-6 text-white/90">
-                Connect with an agent who uses AI-powered tools to respond instantly and provide data-driven neighborhood insights.
+                Realtor Desk is a CRM for Canadian real estate agents. If you are an agent, see how it keeps your leads and follow-ups in one place.
               </p>
               <Link to="/demo">
                 <Button size="lg" variant="secondary">

@@ -43,7 +43,7 @@ const FAQS = [
   },
   {
     q: "Et les fiches inscriptions ?",
-    a: "Vous pouvez importer une propriété à partir d'une adresse Realtor.ca ou d'un numéro MLS dès aujourd'hui. La synchronisation native SDD® de l'ACI est prévue pour le T3 2026 et n'est pas encore active — nous le disons plutôt que de laisser croire le contraire.",
+    a: "Vous pouvez importer une propriété à partir d'une adresse Realtor.ca ou d'un numéro MLS dès aujourd'hui. La synchronisation native SDD® de l'ACI est sur la feuille de route et n'est pas encore active — nous le disons plutôt que de laisser croire le contraire.",
   },
   {
     q: "Combien ça coûte ?",

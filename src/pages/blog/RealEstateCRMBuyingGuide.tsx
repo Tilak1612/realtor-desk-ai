@@ -1,3 +1,21 @@
+// Rewritten 2026-10-11 to follow the Realtor Desk fact sheet of that date.
+//
+// Removed: the "wrong CRM costs $12,000-$18,000 a year" opener, every response
+// time, conversion, time-saved and lost-lead percentage, the "78% of buyers"
+// line, the price bands in the decision framework and pricing sections, the
+// unsourced competitor prices and feature claims (IXACT Contact, LionDesk,
+// HubSpot, Wise Agent, "US-based CRMs don't include these"), the PIPEDA fine
+// figure, the "lead messages you on Facebook at 10 PM" scenario, the "Best CRMs
+// by Situation" ranking that named Realtor Desk best for solo agents as
+// "PIPEDA compliant" with DDF "coming Q3 2026", and the "analyzed 20+ CRMs and
+// interviewed dozens of agents" author note.
+//
+// Competitor facts that remain are the ones on the fact sheet, checked on the
+// vendors' own sites on 2026-10-02. The guide now lists what to check and what
+// to ask, then says what Realtor Desk does and does not do.
+//
+// The prose is static JSX on purpose: the prerenderer skips elements that
+// contain an expression.
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,36 +28,37 @@ import { SEO } from "@/components/SEO";
 import blogImage from "@/assets/brand/blog-ai-crm-guide.svg";
 import blogImageSocial from "@/assets/brand/blog-ai-crm-guide.jpg";
 import { Picture } from "@/components/Picture";
+import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
 
 const RealEstateCRMBuyingGuide = () => {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "How to Choose a Real Estate CRM in 2026: The Ultimate Buying Guide",
-    "description": "Complete guide to choosing the best CRM for real estate agents. Learn what features matter, pricing models, Canadian compliance requirements, and how to avoid expensive mistakes.",
+    "headline": "How to Choose a Real Estate CRM in Canada",
+    "description": "How to choose a real estate CRM in Canada: map your workflow, define must-have features, check integrations and run a trial before committing.",
     "image": "https://www.realtordesk.ai/blog-ai-crm-guide.jpg",
     "author": {
       "@type": "Organization",
-      "name": "RealtorDesk AI"
+      "name": "Realtor Desk"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "RealtorDesk AI",
+      "name": "Realtor Desk",
       "logo": {
         "@type": "ImageObject",
         "url": "https://www.realtordesk.ai/favicon-512x512.png"
       }
     },
     "datePublished": "2026-01-29",
-    "dateModified": "2026-01-29"
+    "dateModified": "2026-10-11"
   };
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO 
+      <SEO
         title="How to Choose a Real Estate CRM in Canada"
         description="How to choose a real estate CRM in Canada: map your workflow, define must-have features, check integrations and run a trial before committing."
-        keywords="how to choose real estate CRM, best CRM for realtors, real estate CRM comparison, CRM buying guide, real estate software selection, choosing CRM for agents"
+        keywords="how to choose real estate CRM, real estate CRM Canada, real estate CRM comparison, CRM buying guide, real estate software selection, choosing CRM for agents"
         canonicalUrl="https://www.realtordesk.ai/blog/real-estate-crm-buying-guide"
         structuredData={[articleSchema]}
       />
@@ -52,18 +71,25 @@ const RealEstateCRMBuyingGuide = () => {
             <span>/</span>
             <span>CRM Buying Guide</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            How to Choose a Real Estate CRM in 2026: The Ultimate Buying Guide
+            How to Choose a Real Estate CRM in Canada
           </h1>
-          
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8">
+
+          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8 flex-wrap">
             <time dateTime="2026-01-29">January 29, 2026</time>
             <span>•</span>
-            <span>18 min read</span>
+            <span>Updated October 11, 2026</span>
+            <span>•</span>
+            <span>8 min read</span>
             <span>•</span>
             <span>CRM Strategy</span>
           </div>
+
+          <ProductScopeNote className="mb-4" />
+          <p className="text-sm text-muted-foreground mb-8">
+            We build one of the products compared here, so weigh this accordingly.
+          </p>
 
           <Picture
             src={blogImage}
@@ -77,7 +103,7 @@ const RealEstateCRMBuyingGuide = () => {
 
         <div className="prose prose-lg max-w-none">
           <p className="lead text-xl text-muted-foreground mb-8">
-            Choosing the wrong CRM costs the average Canadian real estate agent $12,000-$18,000 per year in lost deals, wasted time, and switching costs. This guide will help you make the right choice the first time.
+            A CRM is something you use every day for years, and moving out of one takes effort. This guide lists what to check, what to ask each vendor and how to run a trial. It does not rank products.
           </p>
 
           <Card className="p-6 bg-primary/5 border-primary/20 mb-8">
@@ -85,248 +111,196 @@ const RealEstateCRMBuyingGuide = () => {
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <span><strong>Solo agent, 0-2 years experience:</strong> Simple CRM with AI ($149-249/mo)</span>
+                <span><strong>Solo agent:</strong> a single-agent CRM is enough. You do not need seats, lead routing or team reports, so do not pay for them.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <span><strong>Established agent, 10+ deals/year:</strong> AI-powered CRM with automation ($249-399/mo)</span>
+                <span><strong>Team:</strong> you need lead routing, a shared pipeline and a team inbox. Confirm each one exists before you sign; not every CRM has them.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <span><strong>Team (2-10 agents):</strong> Team CRM with shared pipeline ($499-899/mo)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <span><strong>Brokerage (10+ agents):</strong> Enterprise CRM with custom features (Custom pricing)</span>
+                <span><strong>Brokerage:</strong> you are likely also buying back office and transaction management. These products are usually quoted on request.</span>
               </li>
             </ul>
           </Card>
 
-          <h2>Why Your CRM Choice Matters More Than Ever</h2>
+          <h2>Start With Your Own Workflow</h2>
           <p>
-            In 2026, your CRM isn't just software—it's your competitive advantage. With average lead response times dropping from hours to seconds thanks to AI, agents using outdated CRMs are losing 40-60% of inbound leads to faster competitors.
+            Before you look at any product, write down where your leads come from, how you follow up today, and what you forget or do twice. The right CRM is the one that fits that list and that you will keep up to date.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 my-8">
             <Card className="p-6">
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-500" />
-                With the Right CRM
+                Signs of a Good Fit
               </h3>
               <ul className="space-y-2 text-sm">
-                <li>• Instant lead response (3-47 seconds)</li>
-                <li>• 30% lift in qualified appointments (conservative estimate)</li>
-                <li>• 10-15 hours/week saved on admin</li>
-                <li>• 25-40% higher conversion rates</li>
-                <li>• Better client experience = more referrals</li>
+                <li>• New leads arrive without retyping</li>
+                <li>• You can see what is due today</li>
+                <li>• Each client has one history you can read</li>
+                <li>• You can explain the monthly bill</li>
+                <li>• You can get your data out</li>
               </ul>
             </Card>
 
             <Card className="p-6 bg-red-50 dark:bg-red-950/20">
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <XCircle className="w-5 h-5 text-red-500" />
-                With the Wrong CRM
+                Signs of a Poor Fit
               </h3>
               <ul className="space-y-2 text-sm">
-                <li>• 4-24 hour lead response times</li>
-                <li>• 40-60% of leads go cold</li>
-                <li>• 15+ hours/week on manual tasks</li>
-                <li>• Frustrated clients leave bad reviews</li>
-                <li>• Constant "CRM hopping" wastes time/money</li>
+                <li>• You keep a spreadsheet alongside it</li>
+                <li>• You pay for features you never open</li>
+                <li>• Messages go out that you did not review</li>
+                <li>• Charges appear that you did not expect</li>
+                <li>• You cannot tell where your data is stored</li>
               </ul>
             </Card>
           </div>
 
-          <h2>The 10 Must-Have Features in Any Real Estate CRM</h2>
+          <h2>Ten Things to Check in Any Real Estate CRM</h2>
 
           <h3 className="flex items-center gap-2">
             <Zap className="w-6 h-6 text-primary" />
-            1. Instant Lead Capture & Response
+            1. Lead Capture and First Response
           </h3>
           <p>
-            <strong>What it means:</strong> Leads from your website, Facebook ads, Zillow, and other sources automatically flow into your CRM and receive instant responses.
-          </p>
-          <p>
-            <strong>Why it matters:</strong> 78% of buyers choose the first agent who responds. If your CRM takes hours to notify you, you've already lost.
+            Leads from your website and ad forms should arrive in the CRM without retyping. Some CRMs also offer a website chatbot or an automatic text reply to new enquiries.
           </p>
           <Card className="p-4 bg-green-50 dark:bg-green-950/20 my-4">
-            <p className="text-sm mb-2"><strong>✓ Look for:</strong></p>
+            <p className="text-sm mb-2"><strong>Ask the vendor:</strong></p>
             <ul className="text-sm space-y-1">
-              <li>• Sub-5-second response time via AI chatbot</li>
-              <li>• Webhooks from major lead sources (Zillow, Realtor.ca, Facebook)</li>
-              <li>• SMS/email auto-responses with personalization</li>
-              <li>• Instant mobile notifications</li>
+              <li>• Which of my lead sources connect directly, and which need a tool such as Zapier?</li>
+              <li>• If there is an automatic reply, how is consent recorded before it is sent?</li>
+              <li>• Can I review or switch off automatic replies?</li>
+              <li>• How am I notified of a new lead?</li>
             </ul>
           </Card>
 
           <h3 className="flex items-center gap-2">
             <Shield className="w-6 h-6 text-primary" />
-            2. Canadian Compliance (PIPEDA + CASL)
+            2. Privacy and Consent (PIPEDA and CASL)
           </h3>
           <p>
-            If you're a Canadian agent, non-compliance with PIPEDA can result in fines up to $100,000. Your CRM must include:
+            PIPEDA and CASL apply to you, not to your software. A CRM does not make anyone compliant, but it can keep the records you need. Ask:
           </p>
           <ul>
-            <li>Canadian data residency (servers in Toronto/Vancouver)</li>
-            <li>CASL-compliant email marketing (consent tracking, unsubscribe)</li>
-            <li>PIPEDA data breach notification protocols</li>
-            <li>Right-to-erasure tools (GDPR-style data deletion)</li>
+            <li>Where is the database hosted, and which outside services process data elsewhere?</li>
+            <li>Does it record the date and source of consent for each contact?</li>
+            <li>Does it stop sending to a contact who has withdrawn consent?</li>
+            <li>How do I export or delete one person's data?</li>
           </ul>
           <p className="italic text-muted-foreground">
-            <strong>Warning:</strong> US-based CRMs (Lofty, kvCORE, BoldTrail) don't include these features by default—you'll need costly add-ons or manual compliance work.
+            This is general information, not legal advice. Put the same questions to every vendor, wherever they are based.
           </p>
 
           <h3 className="flex items-center gap-2">
             <Users className="w-6 h-6 text-primary" />
-            3. CREA DDF® Integration
+            3. Listing Data and CREA DDF®
           </h3>
           <p>
-            For Canadian agents, native CREA DDF® integration is non-negotiable. This lets you:
-          </p>
-          <ul>
-            <li>Sync MLS listings automatically</li>
-            <li>Match buyers to properties in real-time</li>
-            <li>Send property updates to clients instantly</li>
-            <li>Track which listings get the most engagement</li>
-          </ul>
-          <p>
-            Without this, you'll waste hours manually copying listing data and risk sending clients outdated information.
+            If you want listings to flow into the CRM automatically, ask whether the vendor has a native CREA DDF® connection that is live today, not planned. If it is not live, ask how listings get in and how much of that is manual.
           </p>
 
-          <h3>4. AI-Powered Lead Qualification</h3>
+          <h3>4. Lead Scoring and Qualification</h3>
           <p>
-            In 2026, manual lead qualification is obsolete. Your CRM should use AI to:
+            Many CRMs score leads, and some ask qualifying questions by chat or text. Ask:
           </p>
           <ul>
-            <li>Score leads based on engagement, budget, and timeline</li>
-            <li>Ask qualifying questions via chat/SMS</li>
-            <li>Prioritize hot leads for immediate follow-up</li>
-            <li>Auto-nurture cold leads until they're ready</li>
+            <li>Is the score rule-based or produced by a statistical model?</li>
+            <li>Can I see why a lead received its score?</li>
+            <li>If the software asks questions for me, can I read the transcript?</li>
+            <li>Does anything reach a lead without my review?</li>
           </ul>
-          <p>
-            <strong>ROI Impact:</strong> AI qualification increases agent productivity by 40% by letting you focus on ready-to-buy leads instead of tire-kickers.
-          </p>
 
-          <h3>5. Multi-Channel Communication</h3>
+          <h3>5. Communication Channels</h3>
           <p>
-            Modern buyers expect to reach you via email, SMS, phone, WhatsApp, and social media. Your CRM should unify all these into one inbox so you never miss a message.
+            Clients reach agents by email, text, phone and social apps. Check which channels the CRM actually sends and receives on, and whether they all land in one history per client. Do not assume a channel is covered because it appears on a features page.
           </p>
-          <Card className="p-4 bg-blue-50 dark:bg-blue-950/20 my-4">
-            <p className="text-sm"><strong>Example:</strong> A lead messages you on Facebook at 10 PM. Your CRM's AI chatbot responds instantly, asks qualifying questions, and books a showing for tomorrow—all while you sleep. You wake up to a qualified appointment.</p>
-          </Card>
 
           <h3 className="flex items-center gap-2">
             <TrendingUp className="w-6 h-6 text-primary" />
-            6. Pipeline & Deal Management
+            6. Pipeline and Deal Management
           </h3>
           <p>
-            Track every deal from first contact to closing with visual pipelines. Must-haves:
+            A visual pipeline shows every deal from first contact to closing. Decide which of these you need, because not every CRM includes them all:
           </p>
           <ul>
             <li>Drag-and-drop deal stages</li>
-            <li>Automated task creation (inspections, appraisals, closings)</li>
-            <li>Document storage and e-signature integration</li>
-            <li>Commission tracking and forecasting</li>
+            <li>Tasks and reminders tied to a deal</li>
+            <li>Document storage and e-signature</li>
+            <li>Commission tracking</li>
           </ul>
 
-          <h3>7. Email & SMS Automation</h3>
+          <h3>7. Email and SMS Automation</h3>
           <p>
-            Set up automated drip campaigns that nurture leads without manual work:
-          </p>
-          <ul>
-            <li><strong>New lead sequence:</strong> Welcome email → property matches → market updates</li>
-            <li><strong>Showing follow-up:</strong> "Thank you" text → feedback request → next steps</li>
-            <li><strong>Past client re-engagement:</strong> Quarterly check-ins → birthday wishes → referral requests</li>
-          </ul>
-          <p>
-            <strong>Time savings:</strong> 10-12 hours per week on average.
+            Some CRMs send scheduled sequences: a welcome series for a new lead, a follow-up after a showing, a periodic check-in with past clients. Ask whether scheduled sending is switched on today, whether it checks consent before each send, and how an unsubscribe is honoured.
           </p>
 
-          <h3>8. Reporting & Analytics</h3>
+          <h3>8. Reporting</h3>
           <p>
-            Your CRM should answer critical business questions:
+            Write down the questions you want answered and check the CRM can answer them:
           </p>
           <ul>
-            <li>Which lead sources generate the most closed deals?</li>
-            <li>What's my average time from lead to closing?</li>
-            <li>How many touchpoints does it take to convert a lead?</li>
-            <li>Which email subject lines get the highest open rates?</li>
-            <li>What's my projected commission for the next 90 days?</li>
+            <li>Which lead sources produce closed deals?</li>
+            <li>How long does a lead take to reach closing?</li>
+            <li>Where do deals stall in my pipeline?</li>
+            <li>What is in my pipeline for the next few months?</li>
           </ul>
 
-          <h3>9. Mobile App</h3>
+          <h3>9. Use on Your Phone</h3>
           <p>
-            Real estate happens in the field, not at a desk. Your CRM must have a full-featured mobile app (iOS + Android) that lets you:
+            Much of the job happens away from a desk. Some CRMs have native iOS and Android apps; others are responsive web apps that run in the phone's browser. Either can work. During the trial, try these from your phone:
           </p>
           <ul>
-            <li>Respond to leads from showings</li>
-            <li>Add notes after client meetings</li>
-            <li>View property details during tours</li>
-            <li>Update deal stages on the go</li>
+            <li>Reply to a lead</li>
+            <li>Add a note after a meeting</li>
+            <li>Move a deal to the next stage</li>
           </ul>
 
           <h3 className="flex items-center gap-2">
             <HeadphonesIcon className="w-6 h-6 text-primary" />
-            10. Customer Support Quality
+            10. Support
           </h3>
           <p>
-            When leads are coming in and your CRM breaks, you need help NOW—not in 3-5 business days.
+            Ask what hours support is open and through which channels. Then test it: send a real question during the trial and note how long a useful answer takes.
           </p>
-          <div className="grid md:grid-cols-3 gap-4 my-6">
-            <Card className="p-4 bg-green-50 dark:bg-green-950/20">
-              <p className="font-bold text-green-700 dark:text-green-400 mb-2">Best</p>
-              <p className="text-sm">Live chat available 24/7, average response under 1 hour</p>
-            </Card>
-            <Card className="p-4 bg-yellow-50 dark:bg-yellow-950/20">
-              <p className="font-bold text-yellow-700 dark:text-yellow-400 mb-2">Acceptable</p>
-              <p className="text-sm">Email/chat support 9-5, response within 4-8 hours</p>
-            </Card>
-            <Card className="p-4 bg-red-50 dark:bg-red-950/20">
-              <p className="font-bold text-red-700 dark:text-red-400 mb-2">Avoid</p>
-              <p className="text-sm">Ticket-only support, 2-5 day response times</p>
-            </Card>
-          </div>
 
-          <h2>Pricing Models Explained: What You're Actually Paying For</h2>
+          <h2>Pricing Models: What You Are Paying For</h2>
 
           <h3 className="flex items-center gap-2">
             <DollarSign className="w-6 h-6 text-primary" />
-            Per-User Pricing ($49-$199/user/month)
+            Per-User Pricing
           </h3>
           <p>
-            <strong>Common in:</strong> Follow Up Boss, LionDesk, Wise Agent
-          </p>
-          <p>
-            <strong>Pros:</strong> Scales with team size, predictable costs<br />
-            <strong>Cons:</strong> Gets expensive fast for teams (5 users = $500-$1,000/mo)
+            Each person on the account pays. The cost follows team size. Follow Up Boss, for example, shows its Grow plan at $69 per user a month ($58 on annual billing) on its own site, with the currency not stated, and lists lead routing, a team inbox, calling and 250+ integrations (checked October 2, 2026).
           </p>
 
-          <h3>Flat-Rate Pricing ($149-$999/month)</h3>
+          <h3>One Price for One Agent</h3>
           <p>
-            <strong>Common in:</strong> RealtorDesk AI, Lofty, kvCORE
-          </p>
-          <p>
-            <strong>Pros:</strong> Unlimited users, easier budgeting<br />
-            <strong>Cons:</strong> May include features you don't need
+            A single-agent product has one price and no seats. Realtor Desk is CAD $149 a month for a single agent.
           </p>
 
-          <h3>Freemium Models ($0-$299/month)</h3>
+          <h3>Quoted on Request</h3>
           <p>
-            <strong>Common in:</strong> HubSpot, RealtyJuggler
+            Some vendors publish no prices. Lofty and BoldTrail (formerly kvCORE) quote on request (checked October 2, 2026). Ask for a written quote that covers twelve months.
           </p>
+
+          <h3>Free Tiers</h3>
           <p>
-            <strong>Pros:</strong> Low initial cost, can test before committing<br />
-            <strong>Cons:</strong> Critical features locked behind paid tiers, hidden costs add up
+            Some general-purpose CRMs have a free tier. Check which features sit behind the paid tiers before you build your process on it.
           </p>
 
           <Card className="p-6 bg-amber-50 dark:bg-amber-950/20 my-8">
-            <h3 className="text-lg font-bold mb-4">🚨 Watch Out for Hidden Costs</h3>
+            <h3 className="text-lg font-bold mb-4">Costs to Ask About</h3>
             <ul className="space-y-2">
               <li>• <strong>Setup fees:</strong> ask every vendor directly — several quote them privately rather than publishing</li>
-              <li>• <strong>Integration fees:</strong> $50-$200/month per integration</li>
-              <li>• <strong>SMS/voice credits:</strong> $0.02-$0.15 per message/minute</li>
-              <li>• <strong>Storage overages:</strong> $50-$100/mo for documents</li>
-              <li>• <strong>Training costs:</strong> $500-$2,000 for onboarding</li>
+              <li>• <strong>Integration fees:</strong> is each connection included or charged separately?</li>
+              <li>• <strong>SMS and voice usage:</strong> who bills for messages and minutes, and at what rate?</li>
+              <li>• <strong>Storage:</strong> is there a limit, and what happens past it?</li>
+              <li>• <strong>Training and onboarding:</strong> included or extra?</li>
+              <li>• <strong>Currency:</strong> is the price in Canadian or US dollars?</li>
             </ul>
             <p className="mt-4 font-semibold">
               Always calculate <strong>Total Cost of Ownership</strong> over 12 months, not just the advertised monthly price.
@@ -335,126 +309,156 @@ const RealEstateCRMBuyingGuide = () => {
 
           <h2>How to Test a CRM Before Committing</h2>
 
-          <h3>Step 1: Sign Up for Free Trials (14-30 days)</h3>
+          <h3>Step 1: Start a Trial</h3>
           <p>
-            Test 2-3 CRMs simultaneously. Most offer free trials without requiring credit cards.
+            Shortlist two or three CRMs. For each, check whether a card is required to start and on which day the first charge happens.
           </p>
 
           <h3>Step 2: Import Real Data</h3>
           <p>
-            Don't test with fake contacts. Import 50-100 real leads and see how the CRM handles them.
+            Test with real contacts, not invented ones. Ask what an import brings across: contacts only, or also consent records, deals and history.
           </p>
 
           <h3>Step 3: Run These Specific Tests</h3>
           <ul>
-            <li><strong>Speed test:</strong> Submit a lead form and time how long it takes to get notified</li>
+            <li><strong>Lead test:</strong> Submit your own lead form and see how and when you are notified</li>
             <li><strong>Mobile test:</strong> Try managing a lead entirely from your phone</li>
             <li><strong>Integration test:</strong> Connect your email, calendar, and one lead source</li>
-            <li><strong>Automation test:</strong> Set up a simple drip campaign and see if it works</li>
-            <li><strong>Support test:</strong> Contact support with a question and time the response</li>
+            <li><strong>Automation test:</strong> Set up one simple follow-up and confirm it does what the vendor says</li>
+            <li><strong>Support test:</strong> Contact support with a question and note the response</li>
           </ul>
 
           <h3>Step 4: Ask Current Users</h3>
           <p>
-            Join Facebook groups like "Canadian Real Estate CRM Users" and ask agents which CRMs they recommend/regret.
+            Ask agents in your brokerage or board who use the product day to day what they like and what they regret.
           </p>
 
-          <h2>Red Flags: When to Walk Away</h2>
+          <h2>Things to Be Careful About</h2>
 
           <div className="space-y-4 my-8">
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-700">🚩 No Free Trial Available</p>
-              <p className="text-sm mt-2">If a company won't let you test their product, they know it doesn't work well.</p>
+              <p className="font-bold text-red-700">No Way to Try It</p>
+              <p className="text-sm mt-2">Ask for a trial, or a monthly plan you can cancel, before you commit to anything longer.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-700">🚩 Contract Lock-In (12-36 months)</p>
-              <p className="text-sm mt-2">Avoid CRMs that require long-term contracts. You should be able to cancel monthly.</p>
+              <p className="font-bold text-red-700">Long Contracts</p>
+              <p className="text-sm mt-2">Ask whether you can pay monthly, what it costs to leave early, and how you get your data out.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-700">🚩 Poor Online Reviews (Under 4.0/5.0)</p>
-              <p className="text-sm mt-2">Check G2, Capterra, and Google reviews. Consistent 1-2 star reviews = stay away.</p>
+              <p className="font-bold text-red-700">Repeated Complaints in Reviews</p>
+              <p className="text-sm mt-2">Read recent reviews on independent sites and look for the same problem raised by different people.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-700">🚩 US-Only Features (No Canadian Support)</p>
-              <p className="text-sm mt-2">If they don't mention CREA DDF®, PIPEDA, or bilingual support, they're not built for Canada.</p>
+              <p className="font-bold text-red-700">Canadian Needs Left Unanswered</p>
+              <p className="text-sm mt-2">Ask about where data is hosted, French, listing data and the billing currency. A vague answer is an answer.</p>
             </Card>
 
             <Card className="p-4 border-l-4 border-red-500">
-              <p className="font-bold text-red-700">🚩 Unclear Pricing</p>
-              <p className="text-sm mt-2">"Contact us for pricing" usually means it's too expensive. Transparent companies show pricing upfront.</p>
+              <p className="font-bold text-red-700">Quote-Only Pricing</p>
+              <p className="text-sm mt-2">It is not a fault in itself, but it makes comparison harder. Get the quote in writing.</p>
             </Card>
           </div>
 
           <h2>FAQ: Real Estate CRM Selection</h2>
 
-          <h3>Should I choose a real estate-specific CRM or a general CRM like HubSpot?</h3>
+          <h3>Should I choose a real estate-specific CRM or a general CRM?</h3>
           <p>
-            <strong>Real estate-specific CRM every time.</strong> Generic CRMs lack critical features like MLS integration, property matching, and showing scheduling. You'll spend thousands customizing HubSpot to do what a $149 real estate CRM does out of the box.
+            A real estate CRM usually arrives with pipeline stages and fields that fit a transaction. A general CRM can be configured to do the same, and that takes setup time. Choose the one you will actually keep up to date.
           </p>
 
           <h3>Can I switch CRMs later if I change my mind?</h3>
           <p>
-            Yes, but it's painful. Expect 2-4 weeks of data migration, lost historical data, broken automations, and re-training. Choose carefully the first time.
+            Yes, but moving takes effort. Before you start with any CRM, ask what you can export (contacts, notes, deals, history) and in what format.
           </p>
 
           <h3>Do I need AI features or is a basic CRM enough?</h3>
           <p>
-            In 2026, AI isn't optional—it's essential. Agents without AI lose 40-60% of leads to faster competitors. If you're only doing 3-5 deals/year, a basic CRM might work. For 10+ deals/year, AI pays for itself 10X over.
+            Not necessarily. Decide which tasks you want help with, such as ranking leads or drafting replies, and whether you are comfortable with software sending anything without your review. A basic CRM used every day beats an advanced one left unopened.
           </p>
 
           <h3>How long should I test a CRM before deciding?</h3>
           <p>
-            Minimum 14 days with real leads. You need time to set up automations, test integrations, and see actual results. Don't rush this decision.
+            Long enough to take a real lead from first contact through a follow-up. Use the whole trial period.
           </p>
 
-          <h3>What's the #1 mistake agents make when choosing a CRM?</h3>
+          <h3>What is a common mistake agents make when choosing a CRM?</h3>
           <p>
-            <strong>Choosing based on price alone.</strong> A $49/mo CRM that wastes 10 hours/week costs you way more than a $249/mo CRM that saves 15 hours/week and closes 2 extra deals. Calculate ROI, not just cost.
+            Choosing on price or on the length of the feature list alone. Compare what each one costs over a year against the work you will actually do in it.
           </p>
 
-          <h2>The Bottom Line: Best CRMs by Situation</h2>
+          <h2>What We Can Say About Specific Vendors</h2>
+
+          <p>
+            We do not rank products here. These points come from the vendors' own sites, checked October 2, 2026. Confirm them yourself before you decide.
+          </p>
 
           <div className="space-y-4 my-8">
             <Card className="p-6">
-              <h3 className="font-bold mb-2">Best for Canadian Solo Agents:</h3>
-              <p className="text-lg mb-2"><strong>RealtorDesk AI</strong> - $149 CAD/mo</p>
-              <p className="text-sm text-muted-foreground">AI-powered, PIPEDA compliant, setup in 20 minutes. CREA DDF® integration coming Q3 2026.</p>
+              <h3 className="font-bold mb-2">Follow Up Boss</h3>
+              <p className="text-sm text-muted-foreground">Grow plan shown at $69 per user a month ($58 on annual billing), currency not stated. Lists lead routing, a team inbox, calling and 250+ integrations.</p>
             </Card>
 
             <Card className="p-6">
-              <h3 className="font-bold mb-2">Best Budget Option:</h3>
-              <p className="text-lg mb-2"><strong>IXACT Contact</strong> - $37/mo</p>
-              <p className="text-sm text-muted-foreground">Basic features, no AI, good for agents doing 5-8 deals/year</p>
+              <h3 className="font-bold mb-2">Lofty</h3>
+              <p className="text-sm text-muted-foreground">Publishes no prices. Pricing is quoted on request.</p>
             </Card>
 
             <Card className="p-6">
-              <h3 className="font-bold mb-2">Best for Large US Teams:</h3>
-              <p className="text-lg mb-2"><strong>Lofty</strong> - pricing quoted on request</p>
-              <p className="text-sm text-muted-foreground">Enterprise features, complex setup, overkill for most Canadian agents</p>
+              <h3 className="font-bold mb-2">BoldTrail (formerly kvCORE)</h3>
+              <p className="text-sm text-muted-foreground">Publishes no prices. Pricing is quoted on request.</p>
             </Card>
 
             <Card className="p-6">
-              <h3 className="font-bold mb-2">Best Simple CRM:</h3>
-              <p className="text-lg mb-2"><strong>LionDesk</strong> - $25 USD/user/mo</p>
-              <p className="text-sm text-muted-foreground">Easy to use, good mobile app, but requires manual follow-up</p>
+              <h3 className="font-bold mb-2">LionDesk</h3>
+              <p className="text-sm text-muted-foreground">Discontinued in September 2025 (Lone Wolf Technologies). Older guides that recommend it are out of date.</p>
             </Card>
           </div>
+
+          <h2>Where Realtor Desk Fits</h2>
+
+          <p>
+            Realtor Desk is a CRM for Canadian real estate agents, built for a single agent. It is CAD $149 a month.
+          </p>
+
+          <h3>What It Does</h3>
+          <ul>
+            <li>Contacts, one conversation timeline per client, a drag-and-drop deal pipeline with totals in CAD, and basic reports.</li>
+            <li>A lead score from 0 to 100. It is rule-based, with a visible breakdown: engagement, behaviour, budget match, timeline and qualification. It is not machine learning.</li>
+            <li>A suggested next action and a time to take it.</li>
+            <li>An in-app assistant that drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you.</li>
+            <li>French or English, set per contact. The interface and client email both work in French.</li>
+            <li>A consent record: the date and source of consent on each contact. It refuses to send from the inbox or by SMS when no consent is on file.</li>
+            <li>A production database hosted in Canada. Some outside services (SMS, email delivery, AI drafting) may process data outside Canada.</li>
+            <li>Zapier, Make and n8n can push leads in. Twilio sends SMS. Email goes through your own SMTP server.</li>
+            <li>Contacts import from a CSV. The import does not bring consent, deals or history, and does not merge duplicates.</li>
+          </ul>
+
+          <h3>What It Does Not Do</h3>
+          <ul>
+            <li>No seats, lead routing, shared pipeline or team inbox. A team needs a different product.</li>
+            <li>No website chatbot, no voice agent and no WhatsApp. No automatic replies or automatic showing booking.</li>
+            <li>A sequence builder exists, but scheduled email sequences are not switched on.</li>
+            <li>Native CREA DDF® sync is on the roadmap and is not live yet. A single listing can be imported from a Realtor.ca address or an MLS number.</li>
+            <li>Google Calendar and Outlook connect, but appointment sync is not live.</li>
+            <li>No transaction management, e-signature, document storage or commission tracking.</li>
+            <li>No native iOS or Android app. It is a responsive web app.</li>
+          </ul>
 
           <Card className="p-8 bg-gradient-to-br from-primary/10 to-secondary/10 my-12">
             <div className="text-center">
               <h2 className="text-2xl font-bold mb-4">
-                Ready to Choose the Right CRM?
+                Try Realtor Desk
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Try RealtorDesk AI risk-free for 14 days. Built specifically for Canadian real estate agents with AI and PIPEDA compliance today; CREA DDF® integration coming Q3 2026.
+                Realtor Desk has a 14-day trial. A card is collected up front and nothing is charged before day 14. Run the tests in this guide against it, as you would with any other CRM.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/signup">
                   <Button size="lg" className="w-full sm:w-auto">
-                    Start 14-Day Free Trial
+                    Start 14-Day Trial
                   </Button>
                 </Link>
                 <Link to="/demo">
@@ -464,14 +468,14 @@ const RealEstateCRMBuyingGuide = () => {
                 </Link>
               </div>
               <p className="text-sm text-muted-foreground mt-4">
-                Cancel anytime before you're charged • Setup in 20 minutes • Cancel anytime
+                Cancel anytime before you're charged
               </p>
             </div>
           </Card>
 
           <div className="border-t pt-8 mt-12">
             <p className="text-sm text-muted-foreground">
-              <strong>About the Author:</strong> This guide was created by the RealtorDesk AI team after analyzing 20+ real estate CRMs and interviewing dozens of Canadian agents about their CRM experiences. Last updated January 2026.
+              <strong>About this guide:</strong> Written by the Realtor Desk team. We build one of the products in this category. Last updated October 2026.
             </p>
           </div>
         </div>

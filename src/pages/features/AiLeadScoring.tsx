@@ -50,7 +50,7 @@ const AiLeadScoring = () => {
       <SEO
         title="AI Lead Scoring for Real Estate: How It Works"
         description="How Realtor Desk scores leads 0-100 from engagement, behaviour, budget match, timeline and qualification — and why the score is a prompt, not a verdict."
-        keywords="ai lead scoring real estate, real estate lead scoring, lead scoring crm, predictive lead scoring realtors"
+        keywords="ai lead scoring real estate, real estate lead scoring, lead scoring crm, lead scoring for realtors"
         canonicalUrl="https://www.realtordesk.ai/features/ai-lead-scoring"
         structuredData={[
           {

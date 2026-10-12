@@ -4,47 +4,75 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Brain, TrendingUp, DollarSign, CheckCircle } from "lucide-react";
+import { Languages, ListChecks, DollarSign, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: "The
+// $20/Month Upgrade That Pays for Itself" with its "6-8 deals / extra closes
+// per year" and "$60K+ additional revenue" cards (invented outcomes; the price
+// gap is not $20 either), "AI-powered lead conversion", "CASL-aware email",
+// "engagement-based lead ranking" and the IXACT price, which this page quoted
+// with no source (the sourced figure is on /vs/ixact). Added the list of what
+// Realtor Desk does not have. The migration and money-back sentence is
+// untouched.
 
 const SwitchFromIxact = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
-        title="Switch from IXACT | Upgrade to AI CRM"
-        description="Moving from IXACT to Realtor Desk: free migration, bilingual EN/FR, CASL-aware email and engagement-based lead ranking. Solo plan $149/mo CAD."
-        keywords="switch from IXACT, IXACT migration, IXACT alternative, AI CRM for Canadian realtors"
+        title="Switch from IXACT to Realtor Desk"
+        description="Moving from IXACT to Realtor Desk: free migration, French per contact, a consent record on each contact and a rule-based lead score. Solo plan $149/mo CAD."
+        keywords="switch from IXACT, IXACT migration, IXACT alternative, CRM for Canadian realtors"
         canonicalUrl="https://www.realtordesk.ai/switch-from-ixact"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Switch from IXACT",
-            "description": "Upgrade from IXACT to RealtorDesk AI with free migration and AI-powered lead conversion."
+            "name": "Switch from IXACT to Realtor Desk",
+            "description": "Moving from IXACT to Realtor Desk: free migration, French per contact, a consent record on each contact and a rule-based lead score. Solo plan $149/mo CAD."
           }
         ]}
       />
       <Navbar />
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
-          <Badge variant="secondary" className="mb-4">Upgrade to AI</Badge>
-          <h1 className="mb-6">Love IXACT's Price? <span className="gradient-text">You'll Love AI Even More.</span></h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Realtor Desk is $149/mo CAD against IXACT's $46.75/mo billed annually. For the
-            difference you get bilingual EN/FR replies, CASL-aware email and engagement-based
-            lead ranking. 14-day free trial.
+          <Badge variant="secondary" className="mb-4">Switching from IXACT</Badge>
+          <h1 className="mb-6">Moving from IXACT <span className="gradient-text">to Realtor Desk</span></h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+            Realtor Desk is $149/mo CAD for a single agent, with a 14-day free trial. On the
+            list price we read on ixactcontact.com on 9 September 2026, Realtor Desk costs more.
+            Check IXACT&rsquo;s own pricing page for what you pay today.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly. The{" "}
+            <Link to="/vs/ixact" className="underline">comparison page</Link>{" "}
+            has the IXACT figure we read, its source and the date.
           </p>
         </div>
       </section>
       <section className="section-padding">
         <div className="container-custom max-w-4xl text-center">
-          <h2 className="mb-8">The $20/Month Upgrade That Pays for Itself</h2>
+          <h2 className="mb-8">What the higher price buys</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-2xl font-bold gradient-text mb-2">$149/mo</div><p className="text-sm text-muted-foreground">Solo plan, CAD, billed monthly</p>
-            <Card className="p-8"><TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">6-8 deals</div><p className="text-sm text-muted-foreground">Extra closes per year</p></Card>
-            <Card className="p-8"><Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">$60K+</div><p className="text-sm text-muted-foreground">Additional revenue</p></Card>
+            <Card className="p-8"><DollarSign className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">$149/mo</div><p className="text-sm text-muted-foreground">Solo plan, CAD, billed monthly</p></Card>
+            <Card className="p-8"><Languages className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">French per contact</div><p className="text-sm text-muted-foreground">The interface and client email both work in French</p></Card>
+            <Card className="p-8"><ListChecks className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" /><div className="text-2xl font-bold gradient-text mb-2">A lead score</div><p className="text-sm text-muted-foreground">Rule-based, from 0 to 100, with a visible breakdown</p></Card>
+          </div>
+
+          <div className="text-left max-w-3xl mx-auto mt-12">
+            <h3 className="text-lg font-semibold mb-2">What you give up</h3>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Check this list against what you use in IXACT today.
+            </p>
+            <ul className="space-y-2 text-muted-foreground leading-relaxed list-disc pl-5">
+              <li>No automated email sequences. A sequence builder exists, but scheduled sending is not switched on.</li>
+              <li>No transaction management, e-signature or document storage.</li>
+              <li>No lead-facing chatbot, automatic replies or voice agent.</li>
+              <li>No native mobile app. It is a responsive web app.</li>
+              <li>Consent records are not carried in by the CSV import, and duplicates are not merged.</li>
+            </ul>
           </div>
         </div>
       </section>

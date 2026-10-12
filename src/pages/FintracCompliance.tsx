@@ -13,7 +13,7 @@ const FintracCompliance = () => {
       icon: Users,
       title: "Client Identification",
       description: "FINTRAC requires realtors to verify the identity of every client before entering into a business relationship — including buyers, sellers, and landlords.",
-      how: "You can attach documents and timestamped notes to any contact profile, which gives you somewhere to keep your identity records. RealtorDesk does not yet capture structured identity fields (document type, number, issuing jurisdiction) or verify identity for you — that stays your process."
+      how: "You can attach documents and timestamped notes to any contact profile, which gives you somewhere to keep your identity records. Realtor Desk does not yet capture structured identity fields (document type, number, issuing jurisdiction) or verify identity for you — that stays your process."
     },
     {
       icon: FileText,
@@ -25,25 +25,25 @@ const FintracCompliance = () => {
       icon: Clock,
       title: "Record Retention (5+ Years)",
       description: "FINTRAC requires realtors to retain client and transaction records for at least 5 years after the last business activity.",
-      how: "All contact data, deal records, notes, and compliance-related fields in RealtorDesk AI are retained with full history. Data export is available at any time for your compliance files."
+      how: "Realtor Desk keeps a contact and its notes until you delete them, and you can export contacts to CSV. It has no retention schedule and is not a records archive, so keep your FINTRAC records where your brokerage's program says to."
     },
     {
       icon: AlertTriangle,
       title: "Suspicious Transaction Reporting",
-      description: "Realtors must report suspicious transactions or attempted suspicious transactions to FINTRAC within 30 days.",
-      how: "RealtorDesk AI lets you flag contacts and deals with compliance notes and internal tags to track suspicious activity and document your reporting obligations."
+      description: "Realtors must report suspicious transactions, and attempted ones, to FINTRAC as soon as practicable once there are reasonable grounds to suspect. Check FINTRAC's current guidance for the timing.",
+      how: "Realtor Desk has no suspicious-transaction workflow and does not report to FINTRAC. You can keep a private note on a contact; reporting is done by you or your brokerage through FINTRAC's own channels."
     },
     {
       icon: Shield,
       title: "Compliance Program",
       description: "Every realtor subject to FINTRAC must have a written compliance program — policies, procedures, risk assessment, and training records.",
-      how: "RealtorDesk stores contacts, deals, notes and documents with timestamps, which forms part of your record-keeping. Your brokerage's written policies and procedures remain the compliance program itself."
+      how: "Realtor Desk stores contacts, deals, notes and documents with timestamps, which forms part of your record-keeping. Your brokerage's written policies and procedures remain the compliance program itself."
     },
     {
       icon: BookOpen,
       title: "Ongoing Training Documentation",
       description: "Your compliance program must include documented training for you and any employees or contractors who conduct real estate transactions.",
-      how: "Training records can be stored as notes on a contact. RealtorDesk does not currently send compliance reminders — set those in your own calendar."
+      how: "Training records can be stored as notes on a contact. Realtor Desk does not currently send compliance reminders — set those in your own calendar."
     },
   ];
 
@@ -57,8 +57,8 @@ const FintracCompliance = () => {
       a: "FINTRAC can impose administrative monetary penalties and examines real estate businesses. The amounts and the examination process are set by FINTRAC and have been changing, so read its current published policy at fintrac-canafe.canada.ca rather than a figure on a software vendor's page. Non-compliance is not a minor risk."
     },
     {
-      q: "Does RealtorDesk AI replace my brokerage's compliance program?",
-      a: "No. RealtorDesk AI provides the record-keeping infrastructure and tools to support your compliance program — but your brokerage must have a formal written compliance program. We help you store, track, and retrieve the records your program requires."
+      q: "Does Realtor Desk replace my brokerage's compliance program?",
+      a: "No. Realtor Desk is a CRM. It can hold notes and documents against a contact, but your brokerage must have its own written compliance program, and the records that program requires belong where it says to keep them."
     },
     {
       q: "Do I need to verify client identity before or after receiving an offer?",
@@ -70,7 +70,7 @@ const FintracCompliance = () => {
     },
     {
       q: "Does the FINTRAC requirement apply to rental transactions?",
-      a: "Yes. FINTRAC applies to the purchase and sale of real property, AND the management, brokering, or leasing of real property when rent exceeds $10,000/month. Always confirm the current thresholds with FINTRAC or your legal advisor."
+      a: "FINTRAC's real estate guidance is written around acting as an agent in the purchase or sale of real property. Whether a particular leasing or property-management activity is covered depends on the facts, so check FINTRAC's current guidance or ask your compliance officer."
     },
   ];
 
@@ -78,7 +78,7 @@ const FintracCompliance = () => {
     <div className="min-h-screen">
       <SEO
         title="FINTRAC Obligations for Canadian Realtors | Realtor Desk"
-        description="FINTRAC obligations for Canadian real estate agents: client ID, record keeping and suspicious transaction reporting, and how Realtor Desk supports them."
+        description="FINTRAC obligations for Canadian real estate agents: client ID, record keeping and suspicious transaction reporting, and what a CRM can and cannot do."
         keywords="FINTRAC compliance real estate, FINTRAC obligations realtors Canada, real estate compliance Canada, FINTRAC record keeping, Canadian realtor compliance, AML real estate Canada"
         canonicalUrl="https://www.realtordesk.ai/fintrac-compliance"
         structuredData={[
@@ -181,7 +181,7 @@ const FintracCompliance = () => {
       {/* Obligations + How RealtorDesk helps */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
-          <h2 className="text-center mb-4">Your FINTRAC Obligations — and How RealtorDesk AI Supports Them</h2>
+          <h2 className="text-center mb-4">Your FINTRAC obligations, and what Realtor Desk does and does not do</h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
             What Realtor Desk can and cannot do for each obligation, stated plainly. It helps you keep records; it does not run a FINTRAC workflow.
           </p>
@@ -198,7 +198,7 @@ const FintracCompliance = () => {
                   </div>
                 </div>
                 <div className="bg-primary/5 rounded-lg p-4 border border-primary/10">
-                  <p className="text-sm font-medium text-primary mb-1">How RealtorDesk AI helps:</p>
+                  <p className="text-sm font-medium text-primary mb-1">Realtor Desk:</p>
                   <p className="text-sm text-muted-foreground">{item.how}</p>
                 </div>
               </Card>

@@ -1,3 +1,16 @@
+// Rewritten 2026-10-11 to follow the Realtor Desk fact sheet of that date.
+//
+// Removed: the "research consistently shows" response-time claims and the
+// "tens of thousands of dollars in lost GCI" figure, neither of which had a
+// source on the page; the section presenting a 24/7 chatbot that qualifies
+// leads as the fix; the statement that a CRM hosted outside Canada is not
+// PIPEDA-compliant; an invented USD-to-CAD price comparison; and the closing
+// call to action, which credited Realtor Desk with 24/7 AI follow-up, PIPEDA
+// compliance and a dated CREA DDF roadmap.
+//
+// The scenario and the five windows stay as illustration and advice. The
+// buying checklist and three-step routine now say what Realtor Desk does and
+// does not do.
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,28 +29,28 @@ const LeadResponseTime = () => {
     <>
       <SEO
         title="Why Canadian Agents Lose Hot Leads"
-        description="Canadian agents lose deals every week — not from lack of skill, but from slow response time. Here's what's happening and how 24/7 AI follow-up fixes it."
-        keywords="real estate lead response time, speed to lead real estate Canada, how to follow up with real estate leads, AI CRM Canadian real estate, never miss a real estate lead"
+        description="Why new enquiries go cold while you are with clients, the five windows where it happens, and a routine Canadian agents can use to reply sooner."
+        keywords="real estate lead response time, speed to lead real estate Canada, how to follow up with real estate leads, real estate CRM Canada"
         image={blogLeadResponse}
         article
         publishedTime="2026-04-01"
-        modifiedTime="2026-04-01"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/lead-response-time-canadian-realtors"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Why Canadian Agents Lose Hot Leads",
-            "description": "Canadian agents lose deals every week — not from lack of skill, but from slow response time. Here's what's happening and how 24/7 AI follow-up fixes it.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "Why new enquiries go cold while you are with clients, the five windows where it happens, and a routine Canadian agents can use to reply sooner.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": {
               "@type": "Organization",
-              "name": "RealtorDesk AI",
+              "name": "Realtor Desk",
               "logo": { "@type": "ImageObject", "url": "https://www.realtordesk.ai/og-image.png" }
             },
             "datePublished": "2026-04-01",
-            "dateModified": "2026-04-01",
+            "dateModified": "2026-10-11",
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": "https://www.realtordesk.ai/lead-response-time-canadian-realtors"
@@ -72,8 +85,8 @@ const LeadResponseTime = () => {
               </h1>
               <ProductScopeNote className="mb-6" />
               <p className="text-xl text-muted-foreground leading-relaxed">
-                It's not a skill problem. It's a timing problem — and it costs Canadian agents
-                tens of thousands of dollars in lost GCI every year.
+                Often it is not a skill problem. It is a timing problem, and timing problems
+                can be fixed with a routine.
               </p>
             </header>
 
@@ -85,7 +98,7 @@ const LeadResponseTime = () => {
 
             <div className="prose prose-lg max-w-none">
               <p>
-                It's 11:47 AM on a Thursday. You're in the middle of a showing in Oakville —
+                Picture a situation most agents will recognise. It's 11:47 AM on a Thursday. You're in the middle of a showing in Oakville —
                 buyers who are close, the kind of appointment you don't rush. Your phone is in
                 your pocket on vibrate.
               </p>
@@ -105,22 +118,22 @@ const LeadResponseTime = () => {
                 You call back at 12:31. The lead says: "Thanks — I actually just booked a call
                 with someone. I'll reach out if it doesn't work out."
               </p>
-              <p>It won't come back.</p>
+              <p>That lead rarely comes back.</p>
 
-              <h2>The Real Reason Canadian Agents Lose Deals</h2>
+              <h2>A Reason Canadian Agents Lose Deals That Has Nothing to Do With Skill</h2>
               <p>
-                Most agents believe they lose deals because of price, market conditions, or a
+                Agents often put a lost deal down to price, market conditions, or a
                 competitor who is simply better. In some cases, that's true. But there's a
                 category of lost business that has nothing to do with skill, and everything to
                 do with timing.
               </p>
               <p>
-                Research consistently shows that real estate lead response time is one of the
-                single highest-leverage factors in conversion. A lead contacted within five
-                minutes is dramatically more likely to connect and engage than one contacted 30
-                minutes later. Beyond an hour, the odds of meaningful contact drop sharply —
-                not because the lead found a better agent, but because they stopped waiting and
-                moved on.
+                The reasoning is simple. Someone who has just sent an enquiry is thinking about
+                it right now, and may send the same enquiry to more than one agent. The longer
+                a reply takes, the more likely they are to be talking to someone else already,
+                or to have moved on to something else. We have no measured figures to put on
+                this, and you should be wary of precise response-time statistics that are
+                quoted without a source.
               </p>
               <p>
                 For Canadian real estate agents, this problem is amplified by the nature of the
@@ -136,15 +149,15 @@ const LeadResponseTime = () => {
 
               <h2>The Five Windows Where Canadian Agents Miss the Most Leads</h2>
               <p>
-                Agents who track their missed leads carefully tend to find the same patterns.
-                The losses cluster around predictable windows.
+                If you log when enquiries arrive and when you answer them, the gaps tend to
+                fall in predictable windows. These five are worth checking in your own records.
               </p>
 
               <h3>1. During showings (10 AM – 6 PM weekdays, all day weekends)</h3>
               <p>
                 This is where the Oakville scenario lives. You are physically with another
-                client and cannot reasonably respond. This is your highest-value time — and
-                it's also when buyer activity peaks. The showing you're in is winning you one
+                client and cannot reasonably respond. This is your highest-value time, and
+                new enquiries keep arriving through it. The showing you're in is winning you one
                 client while potentially costing you another.
               </p>
 
@@ -152,8 +165,7 @@ const LeadResponseTime = () => {
               <p>
                 Buyers who are actively looking browse listings at night — after work, after
                 dinner, before bed. A form submitted at 10:30 PM that doesn't get a response
-                until 8:15 AM has been sitting for nearly 10 hours. In a competitive market,
-                that's a lifetime in lead time.
+                until 8:15 AM has been sitting for nearly 10 hours.
               </p>
 
               <h3>3. Long weekends and statutory holidays</h3>
@@ -217,8 +229,8 @@ const LeadResponseTime = () => {
                   How Much Is Slow Follow-Up Costing You?
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  A 5-minute GCI loss calculator + 5 done-for-you response scripts for
-                  Canadian agents. No fluff — copy, paste, send.
+                  A calculator that runs on your own numbers, plus response scripts for
+                  Canadian agents to adapt and send.
                 </p>
                 <Link
                   to="/resources/slow-follow-up-calculator-canadian-realtors"
@@ -228,90 +240,90 @@ const LeadResponseTime = () => {
                 </Link>
               </div>
 
-              <h2>How 24/7 AI Follow-Up Changes the Equation</h2>
+              <h2>Automatic First-Response Tools: What They Are, and What Realtor Desk Is Not</h2>
               <p>
-                The shift that AI makes in real estate follow-up isn't subtle. It removes the
-                constraint entirely.
+                One answer to the timing problem is a tool that replies for you. Some vendors
+                sell website chat or auto-reply products that acknowledge an enquiry the moment
+                it arrives and ask a few opening questions: what the person is looking for,
+                their timeline, their preferred area.
               </p>
               <p>
-                A 24/7 AI chatbot — properly configured for your business — can respond to an
-                incoming lead within seconds of submission, regardless of whether you're in a
-                showing, asleep, or on a long weekend. It doesn't apologize for the delay. It
-                engages immediately with the lead's actual question: what they're looking for,
-                their timeline, their budget range, their preferred area.
+                That is a category of product, and Realtor Desk is not in it. Realtor Desk has
+                no website chatbot, sends no automatic replies and does not qualify leads on
+                its own. Nothing is sent to a client without you.
               </p>
               <p>
-                By the time you're back at your phone, the lead has already been qualified. You
-                know who they are, what they want, how ready they are, and whether they're
-                worth prioritizing above the other leads that came in today. Your first call is
-                already a warm conversation, not a cold introduction to someone who barely
-                remembers filling out your form.
-              </p>
-              <p>
-                This is what real estate lead response time looks like when it stops depending
-                on you being available.
+                If you are considering an automatic first-response tool from another vendor,
+                ask to see exactly what it says to a lead, who reviews those messages, how it
+                records consent for follow-up under CASL, and where the conversation data is
+                stored. An acknowledgement that is honest about when a person will reply is
+                better than one that pretends to be you.
               </p>
 
-              <h2>What to Look for in a Canadian AI CRM</h2>
+              <h2>What to Ask When You Compare CRMs in Canada</h2>
               <p>
-                Not every AI CRM solves this problem equally — and for Canadian agents, there
-                are requirements that most options on the market simply don't meet.
+                A CRM will not answer enquiries for you, but it does decide how quickly you can
+                see who is waiting. These are questions worth putting to any vendor, with our
+                own answers alongside.
               </p>
 
-              <h3>CREA DDF integration</h3>
+              <h3>CREA DDF connection</h3>
               <p>
-                Your leads come through Canadian MLS data. A CRM that doesn't connect natively
-                to CREA DDF means manual imports, workarounds, and sync failures. Native
-                integration means every MLS lead lands directly in your pipeline,
-                automatically, without you touching it.
+                Ask whether the product has a native CREA DDF® connection and whether it is
+                live today rather than planned. For Realtor Desk: native CREA DDF® sync is on
+                the roadmap and is not live yet. A single listing can be imported from a
+                Realtor.ca address or an MLS number.
               </p>
 
-              <h3>PIPEDA compliance and Canadian data residency</h3>
+              <h3>Where client data is stored</h3>
               <p>
-                Your clients' personal data is subject to Canadian privacy law. A US-built CRM
-                that stores that data on American servers is not PIPEDA-compliant. This isn't a
-                technicality — it's a liability risk that most agents are currently ignoring
-                because they don't know their CRM is offside.
+                Your clients' personal information is subject to Canadian privacy law, and you
+                remain responsible for how it is handled. Ask each vendor where its database is
+                hosted and which outside services process your data, and get the answer in
+                writing. No software makes you compliant. Realtor Desk's production database is
+                hosted in Canada; some outside services it relies on (SMS, email delivery, AI
+                drafting) may process data outside Canada. This is general information, not
+                legal advice.
               </p>
 
-              <h3>AI that's core, not bolt-on</h3>
+              <h3>What the AI actually does</h3>
               <p>
-                Many established CRMs have added AI features as an afterthought. The difference
-                between bolt-on AI and an AI-native platform is whether the AI actually runs
-                your follow-up or just suggests you might want to follow up. One changes your
-                business. The other adds a notification.
+                Some tools send messages on their own. Others suggest and draft, and leave the
+                sending to you. Neither is wrong, but know which one you are buying. Realtor
+                Desk is the second kind: it suggests a next action and a time to take it, and
+                its in-app assistant drafts a reply or summarises the conversation on the
+                contact you have open.
               </p>
 
-              <h3>CAD pricing</h3>
+              <h3>Currency</h3>
               <p>
-                A US CRM priced at $299/month USD is $415+/month CAD — and it fluctuates with
-                the exchange rate. Canadian-built and Canadian-priced tools give you
-                predictable costs and no currency exposure.
+                A price quoted in US dollars moves with the exchange rate. Check the currency
+                on each vendor's own pricing page before you compare. Realtor Desk is CAD $149
+                a month for a single agent.
               </p>
 
-              <h2>A 3-Step System That Works While You're With Clients</h2>
+              <h2>A 3-Step Routine for the Hours You're With Clients</h2>
               <p>
-                Whether you're using RealtorDesk or building your own system, these three
-                elements need to be in place for your lead response problem to stop being a
-                problem.
+                Whatever tools you use, these three things need to be in place for slow
+                replies to stop costing you conversations.
               </p>
 
               <div className="not-prose space-y-4 my-6">
                 {[
                   {
                     step: "1",
-                    title: "Instant first contact — automated, within 60 seconds",
-                    body: "Every inbound lead channel needs an automated first response that goes out immediately. Not in 10 minutes. In seconds. Acknowledge the inquiry, introduce yourself briefly, and ask the one qualifying question that matters most.",
+                    title: "Decide how every enquiry gets a first reply, and by when",
+                    body: "Set fixed points in the day to check for new enquiries, including between appointments, and keep a saved first reply ready to personalise: acknowledge the enquiry, introduce yourself briefly, and ask the one question that matters most. If you use an auto-reply tool from another vendor, keep its message short and honest about when you will be in touch. Realtor Desk does not send automatic replies.",
                   },
                   {
                     step: "2",
-                    title: "AI qualification before your first call",
-                    body: "The goal of automated follow-up is not just to say hello — it's to gather enough information that your first call is a warm conversation. An AI chatbot configured with the right qualification flow delivers you a lead profile before you ever pick up the phone.",
+                    title: "Ask a few qualifying questions before the first call",
+                    body: "Area, timeline and financing are enough to turn a first call into a useful conversation. You can ask them in your first reply or on your enquiry form. Record the answers on the contact so you are not relying on memory.",
                   },
                   {
                     step: "3",
-                    title: "Prioritized follow-up queue based on lead readiness",
-                    body: "AI lead scoring tells you which leads to call today, which to put in a 30-day drip, and which to deprioritize. You stop guessing and start working the right list.",
+                    title: "Work a prioritised follow-up list",
+                    body: "Rank who to contact today rather than working from the top of your inbox. Realtor Desk gives each lead a rule-based score from 0 to 100 with a visible breakdown, and suggests a next action and a time to take it. You decide what to send.",
                   },
                 ].map(({ step, title, body }) => (
                   <div key={step} className="flex gap-4 p-4 rounded-lg bg-muted/50">
@@ -326,31 +338,49 @@ const LeadResponseTime = () => {
                 ))}
               </div>
 
-              <h2>The Agent Who Responds First Wins. Every Time.</h2>
+              <h2>A Systems Gap Is Fixable</h2>
               <p>
                 The deal you lose to a faster competitor isn't a character failure. It's a
                 systems gap. And unlike skill, personality, or market conditions, a systems gap
                 is fixable.
               </p>
               <p>
-                The agents winning consistently in Canadian real estate aren't necessarily the
-                most experienced or the best negotiators. They're the ones who respond first,
-                follow up consistently, and never let a qualified lead sit unanswered for more
-                than a few seconds.
+                You do not need to be the most experienced agent or the best negotiator to
+                reply promptly and follow up on the day you said you would. You need a routine
+                you can keep on your busiest day.
               </p>
-              <p>That's not willpower. That's infrastructure.</p>
+
+              <h2>Where Realtor Desk Fits</h2>
+              <p>
+                Realtor Desk is a CRM for a single Canadian real estate agent. It will not
+                answer a lead for you. What it does is make it quicker to see who is waiting
+                and what to say:
+              </p>
+              <ul>
+                <li>One list of leads, with one conversation timeline per client.</li>
+                <li>A rule-based lead score from 0 to 100, with the breakdown shown.</li>
+                <li>A suggested next action and a time to take it.</li>
+                <li>
+                  An in-app assistant that drafts a reply for you to review. Nothing is sent to
+                  a client without you.
+                </li>
+                <li>
+                  The date and source of consent recorded on each contact. It refuses to send
+                  from the inbox or by SMS when no consent is on file.
+                </li>
+                <li>French or English set per contact.</li>
+              </ul>
 
               {/* Primary CTA block */}
               <div className="not-prose mt-12 rounded-xl bg-gradient-to-r from-primary to-primary/80 p-8 text-white">
                 <h3 className="text-2xl font-bold mb-2">
-                  The first agent to respond wins.
-                  <br />
-                  RealtorDesk makes sure that's always you.
+                  See who is waiting, and what to say next.
                 </h3>
                 <p className="text-white/85 mb-6">
-                  AI-native CRM for Canadian real estate agents — PIPEDA compliance,
-                  24/7 AI follow-up, bilingual support, and CREA DDF® integration on the Q3 2026 roadmap.
-                  Starting at $149/month CAD.
+                  Realtor Desk is a CRM for Canadian real estate agents: one list of leads, a
+                  rule-based score, a suggested next action and a drafting assistant. You stay
+                  the sender. Native CREA DDF® sync is on the roadmap and is not live yet.
+                  CAD $149 a month for a single agent.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link

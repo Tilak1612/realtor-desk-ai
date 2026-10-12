@@ -1,3 +1,15 @@
+// Rewritten 2026-10-11 to follow the Realtor Desk fact sheet of that date.
+//
+// Removed: the "research consistently shows" first-responder claim and the
+// "80%+ of routine inquiries" figure (no source on the page); the Agent A /
+// Agent B "day in the life", which was an invented scenario written up as
+// results; the statement that a CRM must store data on Canadian servers to
+// satisfy PIPEDA; and the closing call to action ("Canada's first AI-native
+// CRM", "sub-3-second response times", automated follow-ups, a dated CREA DDF
+// roadmap).
+//
+// The five tool categories stay as general descriptions. Each now says plainly
+// whether Realtor Desk is in that category.
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,24 +33,24 @@ const AIAutomationSlowerMarket = () => {
     <div className="min-h-screen">
       <SEO
         title="Thriving in a Slower Canadian Market"
-        description="Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems."
+        description="Automation tools for Canadian Realtors in a slower market: what each category does, what to ask vendors, and which of them Realtor Desk is and is not."
         keywords="AI automation for Canadian Realtors, real estate CRM Canada, Realtor lead generation automation, automated follow-up system"
         image={blogImageSocial}
         article
         publishedTime="2025-01-02"
-        modifiedTime="2025-01-02"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/canadian-realtors-thrive-slower-market-ai-automation"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Thriving in a Slower Canadian Market",
-            "description": "Proven AI automation strategies that help Canadian Realtors close more deals in slower markets with lead gen and follow-up systems.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "Automation tools for Canadian Realtors in a slower market: what each category does, what to ask vendors, and which of them Realtor Desk is and is not.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-02",
-            "dateModified": "2025-01-02"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
@@ -67,17 +79,17 @@ const AIAutomationSlowerMarket = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>18 min read</span>
+                <span>10 min read</span>
               </div>
             </div>
-            
+
             <h1 className="mb-6">
               Thriving in a Slower Canadian Market
             </h1>
             <ProductScopeNote className="mb-6" />
-            
+
             <p className="text-xl text-muted-foreground leading-relaxed">
-              When the housing market cools, many real estate agents panic. But here's the truth that top-performing Canadian Realtors understand: slower markets don't eliminate opportunity—they redistribute it to agents who work smarter, not just harder.
+              When the housing market cools, there are fewer transactions to go around and each client takes longer to decide. This guide looks at the kinds of automation tool Canadian Realtors use to stay organised through that, and what to ask before buying one.
             </p>
           </header>
 
@@ -94,107 +106,111 @@ const AIAutomationSlowerMarket = () => {
           {/* Article Content */}
           <div className="prose prose-lg max-w-none">
             <p>
-              When the housing market cools, many real estate agents panic. Transaction volumes decline, competition for available buyers intensifies, and suddenly the strategies that worked during boom times no longer deliver results. But here's the truth that top-performing Canadian Realtors understand: slower markets don't eliminate opportunity—they redistribute it to agents who work smarter, not just harder.
-            </p>
-            
-            <p>
-              The game-changer in 2025? Artificial intelligence and automation tools specifically designed for the Canadian real estate market. While your competitors are manually following up with leads and drowning in administrative tasks, you can be systematically capturing, nurturing, and converting prospects with technology that works around the clock.
-            </p>
-            
-            <p>
-              This isn't about replacing the personal touch that makes great Realtors successful. It's about eliminating the repetitive, time-consuming tasks that prevent you from focusing on what you do best: building relationships and closing deals.
+              When the housing market cools, transaction volumes decline, there is more competition for the buyers who remain, and the approach that worked in a busy market may stop working. A slower market does not remove the opportunity, but it does reward agents who stay organised and keep in touch over a longer period.
             </p>
 
-            <h2>Why Slower Markets Actually Favour Tech-Savvy Realtors</h2>
-            <p>Counterintuitively, market slowdowns create advantages for agents who embrace automation:</p>
-            
             <p>
-              <strong>Longer decision cycles mean more touchpoints:</strong> In hot markets, buyers make quick decisions and don't require extensive nurturing. In slower markets, the buyer journey extends over weeks or months. Automation allows you to stay top-of-mind through dozens of touchpoints without manual effort.
-            </p>
-            
-            <p>
-              <strong>Competition intensifies for quality leads:</strong> Every serious buyer becomes more valuable when transaction volumes decline. The agent who responds fastest and follows up most consistently typically wins the client. AI-powered response systems give you that edge.
-            </p>
-            
-            <p>
-              <strong>Operational efficiency becomes critical:</strong> When revenue per agent declines, profit margins tighten. Automation reduces the hours required to manage your pipeline, allowing you to serve more clients with the same or fewer resources.
-            </p>
-            
-            <p>
-              <strong>Differentiation matters more:</strong> When buyers have more time to research and compare agents, your technology stack becomes a competitive differentiator. Clients appreciate responsiveness, organization, and modern communication tools.
+              Automation tools can take some of the repetitive work off your plate. They are sold in several distinct categories, and no single product does everything. This guide goes through five categories, says what each is for, and says plainly which of them Realtor Desk is and is not.
             </p>
 
-            <h2>The AI Automation Stack for Canadian Realtors</h2>
-            <p>Here's what a comprehensive automation system looks like for Canadian real estate professionals in 2025:</p>
+            <p>
+              None of this replaces the personal contact that clients choose an agent for. The aim is to spend less time on administration and more on conversations.
+            </p>
 
-            <h3>1. Instant Lead Response (The Non-Negotiable Foundation)</h3>
+            <h2>What Changes for a Realtor in a Slower Market</h2>
+            <p>A slowdown changes the work in a few practical ways:</p>
+
             <p>
-              Research consistently shows that the agent who contacts a new lead first wins the business the vast majority of the time. Yet most Realtors take hours or even days to respond to new inquiries.
+              <strong>Longer decision cycles mean more touchpoints:</strong> In a hot market, buyers decide quickly. In a slower one, the same decision can stretch over weeks or months, and you need a reliable way to remember who to contact and when.
             </p>
-            
+
             <p>
-              An AI chatbot on your website and social media channels ensures every visitor receives an instant response 24/7—even when you're sleeping, showing properties, or enjoying time off. These intelligent systems can answer common questions about listings, neighbourhood information, your services, and more, while simultaneously capturing contact details for your follow-up.
+              <strong>Each serious buyer matters more:</strong> With fewer transactions, a missed or late reply costs more. Replying promptly and following up on the day you said you would become more important.
             </p>
-            
+
             <p>
-              For Canadian Realtors specifically, your chatbot should understand bilingual queries (English and French), comply with PIPEDA privacy requirements, and integrate with CREA DDF to provide accurate MLS information.
+              <strong>Time is tighter:</strong> When income per agent falls, hours spent on administration are harder to justify. Anything that shortens the routine parts of managing a pipeline is worth a look.
             </p>
-            
+
             <p>
-              <Link to="/how-it-works" className="text-primary hover:underline">Realtor Desk</Link> is a Canadian CRM that scores new leads and suggests a next action in English or French. It does not reply to leads on its own, so you stay the sender.
+              <strong>Clients compare more:</strong> Buyers with time to research will notice which agents are responsive and organised.
+            </p>
+
+            <h2>Five Categories of Automation Tool</h2>
+            <p>These are the categories a Canadian Realtor is most likely to be offered. They are usually separate products from separate vendors.</p>
+
+            <h3>1. First-Response Tools (Website Chat and Auto-Replies)</h3>
+            <p>
+              Someone who sends an enquiry is thinking about it right now, and may contact more than one agent. A first-response tool exists to acknowledge that enquiry at once, at any hour.
+            </p>
+
+            <p>
+              A website chatbot can answer common questions about your services and collect contact details for you to follow up. How well it does this depends entirely on the product and how it is set up, so ask for a trial and read what it actually says to visitors.
+            </p>
+
+            <p>
+              If you look at one, check that it handles both English and French, ask how it collects consent and treats personal information, and ask where its listing information comes from.
+            </p>
+
+            <p>
+              <Link to="/how-it-works" className="text-primary hover:underline">Realtor Desk</Link> is not in this category. It is a Canadian CRM that scores new leads and suggests a next action in English or French. It has no website chatbot and does not reply to leads on its own, so you stay the sender.
             </p>
 
             <h3>2. Voice AI for Phone Inquiries</h3>
             <p>
-              Text-based chat handles many inquiries, but some prospects prefer phone contact. Voice AI agents can answer incoming calls, qualify leads, book appointments directly into your calendar, and provide listing information—all without your direct involvement.
+              Some prospects prefer to phone. Voice AI products from other vendors are sold to answer incoming calls, ask qualifying questions and offer appointment times without you on the line.
             </p>
-            
-            <p>This is particularly valuable for:</p>
+
+            <p>Vendors typically pitch them for:</p>
             <ul>
-              <li>After-hours inquiries (evenings and weekends when many buyers browse listings)</li>
-              <li>High-volume periods when you can't personally answer every call</li>
-              <li>Initial qualification before spending your valuable time with unqualified prospects</li>
+              <li>After-hours inquiries (evenings and weekends)</li>
+              <li>Busy periods when you can't personally answer every call</li>
+              <li>A first round of questions before you call back</li>
             </ul>
-            
+
             <p>
-              The key is ensuring your voice agent sounds natural, understands Canadian real estate terminology, and creates a positive first impression that reflects well on your brand.
+              Before using one, listen to real calls it has handled, check that callers are told they are speaking to an automated system, and confirm how call recordings are stored. Realtor Desk does not offer voice AI.
             </p>
 
             <h3>3. Automated Email Sequences for Nurturing</h3>
             <p>
-              Not every lead is ready to transact immediately. Many are in the early research phase, exploring neighbourhoods, or waiting for the right market conditions. These leads need systematic nurturing over weeks or months.
-            </p>
-            
-            <p>Email automation allows you to create sophisticated drip campaigns that:</p>
-            <ul>
-              <li>Provide valuable market updates and neighbourhood insights</li>
-              <li>Showcase new listings matching their criteria</li>
-              <li>Share educational content about the buying or selling process</li>
-              <li>Remind prospects of your expertise at regular intervals</li>
-              <li>Prompt engagement with calls-to-action at strategic moments</li>
-            </ul>
-            
-            <p>
-              The best email automation systems segment your audience based on behaviour (what they've clicked, properties they've viewed, timeline signals) and deliver personalized content accordingly. This creates the impression of individual attention while actually serving hundreds of prospects simultaneously.
+              Not every lead is ready to transact immediately. Many are in the early research phase, exploring neighbourhoods, or waiting for the right market conditions. These leads need regular contact over weeks or months.
             </p>
 
-            <h3>4. CRM Integration and Pipeline Management</h3>
-            <p>
-              All your automation tools need a central command center: a customer relationship management (CRM) system designed specifically for real estate.
-            </p>
-            
-            <p>Your CRM should:</p>
+            <p>An email marketing tool lets you schedule a series of messages that:</p>
             <ul>
-              <li>Automatically capture leads from your website, social media, and advertising</li>
-              <li>Track every interaction and touchpoint with each prospect</li>
-              <li>Trigger appropriate automated follow-up sequences based on lead source and behavior</li>
-              <li>Provide visibility into your entire pipeline so you know exactly where every opportunity stands</li>
-              <li>Integrate with CREA DDF for MLS data access</li>
-              <li>Generate reports showing your marketing ROI and conversion metrics</li>
+              <li>Share market updates and neighbourhood information</li>
+              <li>Point out new listings that match what the person asked for</li>
+              <li>Explain the buying or selling process</li>
+              <li>Remind people you are available, at sensible intervals</li>
+              <li>Invite a reply when the timing is right</li>
             </ul>
-            
+
             <p>
-              For Canadian Realtors, PIPEDA compliance isn't optional—it's legally required. Your CRM must store data on Canadian servers and implement appropriate privacy controls. Learn more about compliance in our <Link to="/resources" className="text-primary hover:underline">Resources</Link> section.
+              Under CASL, each of these messages needs the recipient's consent and a working way to unsubscribe. Realtor Desk has a sequence builder, but scheduled sending is not switched on, so it does not run email sequences today. For automated sequences you would use a separate email marketing tool.
+            </p>
+
+            <h3>4. A CRM for Contacts and Pipeline</h3>
+            <p>
+              Whatever else you use, you need one place where every contact and conversation lives: a customer relationship management (CRM) system.
+            </p>
+
+            <p>Questions to ask of any CRM:</p>
+            <ul>
+              <li>How do leads get in from my website, social media and advertising?</li>
+              <li>Can I see every interaction with a person in one place?</li>
+              <li>Does it send anything on its own, and can I control that?</li>
+              <li>Can I see my whole pipeline and where each deal stands?</li>
+              <li>Does it have a live CREA DDF® connection, or is that planned?</li>
+              <li>What reports does it produce?</li>
+            </ul>
+
+            <p>
+              Realtor Desk is in this category. It is a single-agent CRM with contacts, one conversation timeline per client, a drag-and-drop deal pipeline with totals in CAD, and basic reports. Zapier, Make and n8n can push leads into it. Native CREA DDF® sync is on the roadmap and is not live yet.
+            </p>
+
+            <p>
+              On privacy: you remain responsible for your clients' personal information whichever tool holds it, and no software makes you compliant. Ask each vendor where its database is hosted and which outside services process your data. Realtor Desk's production database is hosted in Canada; some outside services it relies on (SMS, email delivery, AI drafting) may process data outside Canada. There is more general reading in our <Link to="/resources" className="text-primary hover:underline">Resources</Link> section.
             </p>
 
             <h3>5. Social Media Automation</h3>
@@ -209,117 +225,111 @@ const AIAutomationSlowerMarket = () => {
             </ul>
             
             <p>
-              The goal isn't to remove the human element from social media—authenticity matters—but rather to streamline the publishing and management process so you maintain consistency without constant manual effort.
+              The goal isn't to remove the human element from social media—authenticity matters—but rather to streamline the publishing and management process so you maintain consistency without constant manual effort. This is a separate category of tool from a CRM.
             </p>
 
-            <h2>Real-World Application: A Day in the Life with Automation</h2>
-            <p>Let's compare two Canadian Realtors operating in the same slower market:</p>
-
-            <h3>Agent A (Traditional Approach):</h3>
-            <ul>
-              <li>Arrives at office at 9 AM, discovers three new leads from last night (two website inquiries, one Facebook message)</li>
-              <li>Spends 30 minutes crafting personalized responses to each</li>
-              <li>Checks email and finds 20 messages requiring responses (follow-ups, client questions, admin tasks)</li>
-              <li>Spends an hour responding to emails</li>
-              <li>Receives call from prospect at 11:30 AM while showing property—misses call, forgets to return it until next day</li>
-              <li>Manually enters new client information into spreadsheet</li>
-              <li>Tries to remember which past leads to follow up with but gets distracted by immediate priorities</li>
-              <li><strong>End of day:</strong> contacted 5 new people, followed up with 3 existing leads</li>
-            </ul>
-
-            <h3>Agent B (Automation-Powered Approach):</h3>
-            <ul>
-              <li>AI chatbot responded instantly to all three overnight leads, captured their information, answered their initial questions, and added them to automated email sequence</li>
-              <li>Arrives at office at 9 AM to find leads already qualified and prioritized in CRM</li>
-              <li>Spends 15 minutes making personal follow-up calls to the highest-priority leads</li>
-              <li>Voice AI handled two incoming calls during property showing, booked one tour for tomorrow</li>
-              <li>CRM automatically triggered follow-up emails to 30 prospects who haven't responded in two weeks</li>
-              <li>Social media posts auto-published at optimal times</li>
-              <li><strong>End of day:</strong> contacted 35 people (5 personally, 30 via automated systems), generated 2 new showings</li>
-            </ul>
-            
+            <h2>Find Out Where Your Own Time Goes</h2>
             <p>
-              Agent B isn't working harder—they're working smarter. The automation handles routine tasks while they focus on high-value activities: personal conversations, property tours, negotiations, and relationship building.
+              Before buying anything, spend one ordinary week writing down the repetitive tasks you do. It takes a few minutes a day and tells you which category of tool, if any, would help.
+            </p>
+            <ul>
+              <li>How many new enquiries arrived, and how long each waited for a first reply</li>
+              <li>How many calls you missed while with a client, and how many you returned the same day</li>
+              <li>How much time went on re-typing contact details from one place into another</li>
+              <li>How many people you meant to follow up with and did not</li>
+              <li>How long you spent preparing and publishing social media posts</li>
+            </ul>
+
+            <p>
+              Then mark each line: could a tool do this, could a tool remind me to do it, or does it need me in person? Late first replies point to a first-response routine or tool. Forgotten follow-ups and re-typing point to a CRM. Conversations, showings and negotiations stay with you.
             </p>
 
-            <h2>Common Objections (And Why They're Wrong)</h2>
-            
+            <h2>Common Objections</h2>
+
             <h3>"Automation feels impersonal. My clients want the personal touch."</h3>
             <p>
-              Automation doesn't replace personal service—it enables more of it. By eliminating repetitive tasks, you have MORE time for personal interactions, not less. The key is using automation for appropriate tasks (initial responses, routine follow-ups, information delivery) while reserving your personal attention for substantive conversations and relationship building.
+              That is a fair concern, and it is a reason to choose carefully what you automate. Reminders, record-keeping and drafts are low risk. Messages sent in your name without you reading them are higher risk. You can use tools that organise and draft, and still send every message yourself.
             </p>
 
             <h3>"AI can't answer complex questions. It'll make me look bad."</h3>
             <p>
-              Modern AI systems are remarkably sophisticated and can handle 80%+ of routine inquiries accurately. For complex questions, the system should smoothly transfer to you or clearly communicate that it's collecting information for your personal follow-up. Properly configured automation enhances your reputation by demonstrating responsiveness and organization.
+              It can. Any tool that answers the public on your behalf will sometimes get things wrong, so test it with the questions your clients actually ask, and make sure it hands over to you clearly when it does not know. If that risk worries you, use AI only for drafts that you review before sending.
             </p>
 
             <h3>"I'm not tech-savvy enough to implement these systems."</h3>
             <p>
-              Today's automation platforms are designed for real estate professionals, not software engineers. Most systems offer guided setup, templates, and support. The learning curve is measured in hours, not months, and the payoff in time savings and lead conversion is immediate.
+              Most of these products are built for agents rather than engineers and come with guided setup. Use the trial period to find out whether you can run it yourself, and start with one tool rather than several.
             </p>
 
             <h3>"This sounds expensive. I can't afford fancy technology in a slow market."</h3>
             <p>
-              Consider the cost of lost opportunities. If automation helps you capture even one additional deal per quarter that you would have otherwise lost to slow follow-up or limited availability, the ROI is massive. Most Canadian Realtor automation platforms cost less than a single monthly transaction commission. <Link to="/demo" className="text-primary hover:underline">See our pricing</Link> to learn more.
+              Work it out against your own numbers. Add up the monthly cost of each tool, then ask how many extra conversations or saved hours it would need to produce to pay for itself, and whether your week of notes suggests that is realistic. Check each vendor's own pricing page for current prices. Realtor Desk is CAD $149 a month for a single agent; <Link to="/pricing" className="text-primary hover:underline">see our pricing</Link>.
             </p>
 
-            <h2>Implementation Roadmap: Getting Started with Automation</h2>
-            <p>If you're ready to modernize your real estate business, here's a practical roadmap:</p>
+            <h2>Getting Started: A Step-by-Step Order</h2>
+            <p>If you decide to add tools, this order keeps the work manageable:</p>
 
             <h3>Phase 1 (Week 1-2): Foundation</h3>
             <ul>
-              <li>Select a Canadian real estate CRM with built-in automation capabilities</li>
-              <li>Migrate your existing contacts and lead sources into the system</li>
-              <li>Set up basic lead capture on your website</li>
+              <li>Choose a CRM and confirm what it does and does not send on its own</li>
+              <li>Bring your existing contacts and lead sources into it</li>
+              <li>Set up a basic enquiry form on your website</li>
             </ul>
 
-            <h3>Phase 2 (Week 3-4): Instant Response</h3>
+            <h3>Phase 2 (Week 3-4): First Replies</h3>
             <ul>
-              <li>Implement AI chatbot on your website and key social media platforms</li>
-              <li>Configure voice AI to handle after-hours phone inquiries</li>
-              <li>Create templates for common responses</li>
+              <li>Write saved replies for the enquiries you get most often</li>
+              <li>Set fixed times each day to check and answer new enquiries</li>
+              <li>Optional: trial a website chatbot or voice AI product from another vendor. Realtor Desk offers neither</li>
             </ul>
 
-            <h3>Phase 3 (Month 2): Nurturing Sequences</h3>
+            <h3>Phase 3 (Month 2): Staying in Touch</h3>
             <ul>
-              <li>Build automated email sequences for different lead types (buyers, sellers, different timeline stages)</li>
-              <li>Set up automated social media posting schedule</li>
-              <li>Create triggers for re-engagement with cold leads</li>
+              <li>Draft email sequences for different lead types (buyers, sellers, different timelines) in an email marketing tool, with consent and an unsubscribe link</li>
+              <li>Set up a social media posting schedule</li>
+              <li>Decide when and how you will re-contact leads that have gone quiet</li>
             </ul>
 
-            <h3>Phase 4 (Month 3+): Optimization</h3>
+            <h3>Phase 4 (Month 3+): Review</h3>
             <ul>
-              <li>Analyze which automated touchpoints generate the best engagement</li>
-              <li>Refine messaging based on conversion data</li>
-              <li>Expand automation to additional lead sources and channels</li>
+              <li>Look at which messages people reply to</li>
+              <li>Rewrite the ones that get no response</li>
+              <li>Cancel any tool you are paying for and not using</li>
             </ul>
-            
+
             <p>
-              The most important step? Starting. Many Realtors spend months researching the "perfect" system while competitors who simply implemented something are already seeing results.
+              Start small. One tool that you use every day is worth more than several you set up and forget.
             </p>
 
-            <h2>The Competitive Advantage You Can't Afford to Ignore</h2>
+            <h2>Keep It in Proportion</h2>
             <p>
-              Here's the uncomfortable truth: in every Canadian market, a growing number of tech-savvy Realtors are already using AI automation to capture leads, provide superior service, and close more deals. Every month you delay implementation, you're falling further behind.
+              Tools do not create demand in a slow market. What they can do is help you waste fewer of the enquiries you do get and keep in touch with people over a longer decision.
             </p>
-            
+
             <p>
-              The good news? It's not too late. The majority of Canadian Realtors still rely on manual processes and outdated systems. By embracing automation now, you can leap ahead of most of your local competition and position yourself as a modern, efficient professional.
+              Slower markets do not last forever. The habits you build now, such as replying promptly, recording every conversation and following up on a set date, carry over when volumes pick up again.
             </p>
-            
+
+            <h2>Where Realtor Desk Fits</h2>
             <p>
-              Slower markets don't last forever. When conditions improve and transaction volumes increase, the agents with superior systems will be positioned to scale their businesses dramatically while others continue struggling with manual processes.
+              Of the five categories above, Realtor Desk is the fourth: a CRM, built for a single Canadian real estate agent. It gives you:
             </p>
-            
+            <ul>
+              <li>One list of leads, with one conversation timeline per client</li>
+              <li>A rule-based lead score from 0 to 100, with the breakdown shown</li>
+              <li>A suggested next action and a time to take it</li>
+              <li>An in-app assistant that drafts a reply for you to review. Nothing is sent to a client without you</li>
+              <li>The date and source of consent recorded on each contact</li>
+              <li>French or English set per contact</li>
+            </ul>
             <p>
-              The question isn't whether automation will reshape real estate—it already is. The question is whether you'll be among the leaders benefiting from this transformation or the laggards struggling to keep up.
+              It is not a chatbot, a voice agent, an email sequence tool or a social media scheduler.
             </p>
 
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
-              <h3 className="text-2xl font-bold mb-4">Ready to See AI Automation in Action?</h3>
+              <h3 className="text-2xl font-bold mb-4">See Realtor Desk for Yourself</h3>
               <p className="mb-6">
-                Book a free demo of RealtorDesk AI—Canada's first AI-native CRM built specifically for Canadian Realtors. See firsthand how sub-3-second response times and automated follow-ups can help you close more deals faster. CREA DDF® integration is on the Q3 2026 roadmap.
+                Book a demo of Realtor Desk, a CRM for Canadian real estate agents. We will show you the lead list, the rule-based score, the suggested next action and the drafting assistant. Native CREA DDF® sync is on the roadmap and is not live yet.
               </p>
               <Link to="/demo">
                 <Button size="lg" className="btn-gradient">

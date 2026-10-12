@@ -1,38 +1,105 @@
+// 2026-10-11: rewritten to follow the 2026-10-11 Realtor Desk fact sheet.
+// Removed: every BoomTown price, contract length, setup time, server
+// location and "no AI / no compliance" claim (none had a source), the savings
+// and first-year cost figures built on them, the unsourced prices and
+// pros/cons for Follow Up Boss, Real Geeks, kvCORE and LionDesk, and the
+// Realtor Desk claims the product does not support (sub-3-second AI response,
+// voice AI, "PIPEDA/CASL built-in", predictive scoring, the Q3 2026 DDF date,
+// small-team positioning, month-to-month and setup-time claims, "best for").
+// Lines that state the existing Agent / Team prices were left as they were.
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, CheckCircle2, XCircle, DollarSign, Shield, Zap, AlertTriangle, TrendingUp, Users, Clock } from 'lucide-react';
+import { ArrowRight, CheckCircle2, XCircle, DollarSign, Shield, AlertTriangle, Users, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
+
+const ASK_VENDOR = "Ask the vendor";
+
+// Realtor Desk column follows the fact sheet. The BoomTown column makes no
+// claim: we have no dated source for BoomTown's features or terms.
+const COMPARISON_ROWS = [
+  { feature: "Price/Month", boomtown: "Ask the vendor for a written quote", realtorDesk: "$149-299 CAD" },
+  { feature: "Contacts, deal pipeline, basic reports", boomtown: ASK_VENDOR, realtorDesk: "Yes" },
+  { feature: "Lead score", boomtown: ASK_VENDOR, realtorDesk: "Rule-based, 0 to 100, with a visible breakdown" },
+  { feature: "Drafted replies", boomtown: ASK_VENDOR, realtorDesk: "In-app assistant drafts; you review and send" },
+  { feature: "Automatic replies to leads", boomtown: ASK_VENDOR, realtorDesk: "Not available" },
+  { feature: "Automated email sequences", boomtown: ASK_VENDOR, realtorDesk: "Not available (builder exists; scheduled sending is not on)" },
+  { feature: "Lead generation and ads", boomtown: ASK_VENDOR, realtorDesk: "Not available" },
+  { feature: "IDX website", boomtown: ASK_VENDOR, realtorDesk: "Not available" },
+  { feature: "Team seats and lead routing", boomtown: ASK_VENDOR, realtorDesk: "Not available" },
+  { feature: "Transaction management", boomtown: ASK_VENDOR, realtorDesk: "Not available" },
+  { feature: "Native CREA DDF® sync", boomtown: ASK_VENDOR, realtorDesk: "Not available (on the roadmap, not live yet)" },
+  { feature: "Native mobile app", boomtown: ASK_VENDOR, realtorDesk: "Not available (responsive web app)" },
+  { feature: "Consent date and source per contact", boomtown: ASK_VENDOR, realtorDesk: "Yes" },
+  { feature: "Database hosted in Canada", boomtown: ASK_VENDOR, realtorDesk: "Yes" },
+  { feature: "French or English per contact", boomtown: ASK_VENDOR, realtorDesk: "Yes" },
+];
+
+// Competitor lines are limited to what the fact sheet records from the
+// vendors' own sites (checked 2026-10-02). Everything else points the reader
+// to the vendor.
+const VENDOR_ROWS = [
+  {
+    vendor: "BoomTown",
+    price: "Ask the vendor for a written quote",
+    notes: "Check the vendor's own site for current features",
+  },
+  {
+    vendor: "Realtor Desk",
+    price: "$149-299 CAD/month",
+    notes: "Single-agent CRM. No lead generation, website or team features",
+  },
+  {
+    vendor: "Follow Up Boss",
+    price: "Grow plan shown at $69 per user a month ($58 on annual billing); currency not stated",
+    notes: "Lists lead routing, a team inbox, calling and 250+ integrations",
+  },
+  {
+    vendor: "Real Geeks",
+    price: "Check the vendor's own pricing page",
+    notes: "Check the vendor's own site for current features",
+  },
+  {
+    vendor: "BoldTrail (formerly kvCORE)",
+    price: "No published price; quotes on request",
+    notes: "Check the vendor's own site for current features",
+  },
+  {
+    vendor: "LionDesk",
+    price: "Discontinued September 2025",
+    notes: "Lone Wolf Technologies. No longer an option",
+  },
+];
 
 const BoomTownAlternative = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="BoomTown Alternative for Canada"
-        description="BoomTown quotes pricing on request. What to check before you buy or switch: lead-generation bundles, contract terms, and consent and data handling in Canada."
-        keywords="BoomTown alternative Canada, PIPEDA compliant CRM, Canadian real estate CRM alternatives, BoomTown vs RealtorDesk"
+        description="Considering BoomTown in Canada? What to check before you buy or switch: lead-generation bundles, contract terms, and consent and data handling."
+        keywords="BoomTown alternative Canada, BoomTown alternatives, Canadian real estate CRM, BoomTown vs Realtor Desk"
         article
         publishedTime="2025-01-01"
-        modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/boomtown-alternative-canada"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "BoomTown Alternative for Canada",
-            "description": "BoomTown costs $1,350-2,700 CAD/month. Compare PIPEDA-compliant alternatives for Canadian agents with better ROI.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "Considering BoomTown in Canada? What to check before you buy or switch: lead-generation bundles, contract terms, and consent and data handling.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
-            "dateModified": "2025-01-01"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto max-w-4xl">
@@ -41,99 +108,94 @@ const BoomTownAlternative = () => {
               BoomTown Alternative for Canada
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              BoomTown costs $1,350-2,700 CAD/month. Canadian agents can get similar (or better) results for under $300 CAD/month with the right alternatives.
+              What to check before you buy BoomTown or switch away from it: price and currency, what is bundled, contract terms, and how consent and client data are handled in Canada.
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-500">
-              <span>📅 Updated: January 2025</span>
-              <span>⏱️ 10 min read</span>
-              <span>🎯 Alternative Guide</span>
+              <span>Updated: October 2026</span>
+              <span>6 min read</span>
+              <span>Alternative guide</span>
             </div>
           </div>
+
+          {/* Disclosure */}
+          <Card className="p-6 mb-12">
+            <p className="text-gray-700">
+              We build one of the products compared here, so weigh this accordingly.
+            </p>
+          </Card>
 
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-lg text-gray-700 leading-relaxed">
-              BoomTown is powerful for US teams with $2,000+/month budgets. But for Canadian agents, there are better, more affordable options that include PIPEDA compliance, Canadian data residency, and AI automation—without the forced lead generation bundling.
+              We do not print a BoomTown price or feature list here. Ask BoomTown for a written quote and check its own site for current features.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              In this guide, we'll show you the top 5 BoomTown alternatives for Canadian real estate agents, and why most solo agents and small teams are switching to more focused, AI-powered solutions.
+              This page covers the questions worth asking, the other vendors agents look at, and what our own product, Realtor Desk, does and does not do.
             </p>
           </div>
 
-          {/* Why Looking for Alternatives */}
+          {/* What to check */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Why Canadian Agents Are Looking for BoomTown Alternatives</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">What to Check Before You Buy or Switch</h2>
+
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <DollarSign className="w-6 h-6 text-red-700" />
-                  <h3 className="text-xl font-bold">Reason #1: Cost is Prohibitive</h3>
+                  <DollarSign className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">Price and Currency</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• BoomTown: $1,000-2,000+ USD/month = $1,350-2,700 CAD/month</li>
-                  <li>• Most Canadian solo agents can't justify this expense</li>
-                  <li>• Better ROI available elsewhere</li>
+                  <li>• What is the monthly price, in writing, and in which currency?</li>
+                  <li>• Are there setup or onboarding fees?</li>
+                  <li>• Is advertising spend included or billed on top?</li>
                 </ul>
               </Card>
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Shield className="w-6 h-6 text-red-700" />
-                  <h3 className="text-xl font-bold">Reason #2: US-Based Platform</h3>
+                  <AlertTriangle className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">What Is Bundled</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Servers in US (PIPEDA concerns)</li>
-                  <li>• Support during US business hours only</li>
-                  <li>• No Canadian-specific features (CREA DDF, CASL templates)</li>
+                  <li>• Does the quote include lead generation or a website?</li>
+                  <li>• Can you buy the CRM on its own?</li>
+                  <li>• Can you keep using your own lead sources?</li>
                 </ul>
               </Card>
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Users className="w-6 h-6 text-red-700" />
-                  <h3 className="text-xl font-bold">Reason #3: Designed for Teams, Not Solo Agents</h3>
+                  <Clock className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">Contract Terms</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Minimum contract often requires team size</li>
-                  <li>• Features built for 10+ agent teams</li>
-                  <li>• Solo agents pay for features they don't need</li>
+                  <li>• How long is the term, and how does it renew?</li>
+                  <li>• What does it cost to cancel early?</li>
+                  <li>• What can you export if you leave, and in what format?</li>
                 </ul>
               </Card>
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Clock className="w-6 h-6 text-red-700" />
-                  <h3 className="text-xl font-bold">Reason #4: Long-Term Contracts</h3>
+                  <Users className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">Team or Single Agent</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• 12-24 month contracts standard</li>
-                  <li>• High cancellation fees</li>
-                  <li>• Difficult to switch if unsatisfied</li>
+                  <li>• Is there a minimum number of seats?</li>
+                  <li>• Which features only matter if you run a team?</li>
+                  <li>• What would a single agent actually use?</li>
                 </ul>
               </Card>
 
-              <Card className="p-6">
+              <Card className="p-6 md:col-span-2">
                 <div className="flex items-center gap-3 mb-3">
-                  <AlertTriangle className="w-6 h-6 text-red-700" />
-                  <h3 className="text-xl font-bold">Reason #5: Lead Gen Bundled</h3>
+                  <Shield className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-bold">Consent and Client Data</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Can't buy just the CRM</li>
-                  <li>• Forced to pay for lead gen even if you have your own sources</li>
-                  <li>• Many agents report low-quality leads</li>
-                </ul>
-              </Card>
-
-              <Card className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <XCircle className="w-6 h-6 text-red-700" />
-                  <h3 className="text-xl font-bold">Reason #6: No PIPEDA/CASL Compliance</h3>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Requires manual setup for Canadian privacy laws</li>
-                  <li>• Risk of fines if not configured correctly</li>
-                  <li>• No bilingual support for Quebec</li>
+                  <li>• Where is client data stored, and which outside services process it?</li>
+                  <li>• How does the product record consent, and what happens when a contact withdraws it?</li>
+                  <li>• Can you work with clients in French?</li>
                 </ul>
               </Card>
             </div>
@@ -141,74 +203,119 @@ const BoomTownAlternative = () => {
 
           {/* Top 5 Alternatives */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Top 5 BoomTown Alternatives for Canadian Agents</h2>
+            <h2 className="text-3xl font-bold mb-6">BoomTown Alternatives to Look At</h2>
+            <p className="text-gray-700 mb-6">
+              Our own product is listed first. That is not a ranking.
+            </p>
 
-            {/* Alternative #1: RealtorDesk AI */}
+            {/* Realtor Desk */}
             <Card className="p-8 mb-8 border-2 border-primary bg-primary/5">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl">
-                  1
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold">RealtorDesk AI</h3>
-                  <p className="text-primary font-semibold">⭐ Best for Canadian Solo Agents & Small Teams</p>
-                </div>
+              <div className="mb-4">
+                <h3 className="text-2xl font-bold">Realtor Desk</h3>
+                <p className="text-primary font-semibold">A CRM for Canadian real estate agents</p>
               </div>
 
               <p className="text-gray-700 mb-4">
-                <strong>What It Is:</strong> AI-first CRM built specifically for Canadian real estate
+                <strong>What It Is:</strong> A single-agent CRM. There are no seats, no lead assignment or routing, no shared pipeline and no team inbox. It runs as a responsive web app, and there is no native iOS or Android app.
               </p>
 
               <div className="mb-6">
-                <h4 className="font-bold mb-3">Why It's Better Than BoomTown for Canadian Agents:</h4>
+                <h4 className="font-bold mb-3">What It Does:</h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold">Price</p>
-                      <p className="text-sm text-gray-600">$149-299 CAD/month vs $1,350+ (saves $1,051-2,401/month)</p>
+                      <p className="font-semibold">Contacts and Pipeline</p>
+                      <p className="text-sm text-gray-600">Contacts, one conversation timeline per client, a drag-and-drop deal pipeline with totals in CAD, and basic reports</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold">Canadian Compliance</p>
-                      <p className="text-sm text-gray-600">PIPEDA/CASL built-in (BoomTown requires manual setup)</p>
+                      <p className="font-semibold">Lead Score</p>
+                      <p className="text-sm text-gray-600">A rule-based score from 0 to 100 with a visible breakdown: engagement, behaviour, budget match, timeline and qualification</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold">AI Response</p>
-                      <p className="text-sm text-gray-600">Sub-3-second AI response (BoomTown 5-15 minutes)</p>
+                      <p className="font-semibold">Next Action and Drafting</p>
+                      <p className="text-sm text-gray-600">It suggests a next action and a time to take it. An in-app assistant drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="font-semibold">Consent Record</p>
+                      <p className="text-sm text-gray-600">Records the date and source of consent on each contact, refuses to send from the inbox or by SMS when no consent is on file, and stops automated email to a contact who has withdrawn</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="font-semibold">French and English</p>
+                      <p className="text-sm text-gray-600">French or English set per contact. The interface and client email both work in French</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-semibold">No Lead Gen Bundling</p>
                       <p className="text-sm text-gray-600">CRM only, use your own lead sources</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold">Month-to-Month</p>
-                      <p className="text-sm text-gray-600">No long-term contracts</p>
+                      <p className="font-semibold">Connections</p>
+                      <p className="text-sm text-gray-600">Zapier, Make and n8n can push leads in. SMS goes through Twilio, and email through your own SMTP server</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-green-700 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="font-semibold">Imports</p>
+                      <p className="text-sm text-gray-600">Contacts from a CSV file, and a single listing from a Realtor.ca address or an MLS number</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="mb-6">
-                <h4 className="font-bold mb-3">Key Features:</h4>
-                <ul className="grid md:grid-cols-2 gap-2 text-sm">
-                  <li>• Sub-3-second AI lead response</li>
-                  <li>• Voice AI for phone calls</li>
-                  <li>• PIPEDA/CASL compliance automation</li>
-                  <li>• CREA DDF (Q3 2026)</li>
-                  <li>• Bilingual AI (English/French)</li>
-                  <li>• Predictive lead scoring</li>
+                <h4 className="font-bold mb-3">What It Does Not Do:</h4>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>No lead generation, ads or IDX website</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>No team seats, lead routing, shared pipeline or team reports</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>No automatic replies to leads, no lead-facing chatbot and no voice AI</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>No automated email sequences. A sequence builder exists, but scheduled sending is not switched on</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>No automatic appointment booking. Google Calendar and Outlook connect, but appointment sync is not live</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>Native CREA DDF® sync is on the roadmap and is not live yet</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>No transaction management, e-signature or document storage</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
+                    <span>The CSV import does not bring in consent records, deals or history, and it does not merge duplicates</span>
+                  </li>
                 </ul>
               </div>
 
@@ -218,16 +325,16 @@ const BoomTownAlternative = () => {
                   <li>• Agent: $149 CAD/month</li>
                   <li>• Team: $299 CAD/month</li>
                   <li>• 14-day free trial</li>
+                  <li>• A card is collected up front and nothing is charged before day 14</li>
                 </ul>
               </div>
 
               <div className="mb-6">
-                <h4 className="font-bold mb-3">Best For:</h4>
+                <h4 className="font-bold mb-3">Who It Suits:</h4>
                 <ul className="space-y-1 text-sm text-gray-700">
-                  <li>• Solo agents</li>
-                  <li>• Small teams (2-10 agents)</li>
-                  <li>• Agents who want AI automation</li>
-                  <li>• Quebec markets (bilingual)</li>
+                  <li>• A single agent in Canada</li>
+                  <li>• Agents with their own lead sources and website</li>
+                  <li>• Agents who work with French-speaking clients</li>
                 </ul>
               </div>
 
@@ -237,51 +344,31 @@ const BoomTownAlternative = () => {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b">
-                        <th className="text-left pb-2">Feature</th>
-                        <th className="text-left pb-2">BoomTown</th>
-                        <th className="text-left pb-2">RealtorDesk AI</th>
+                        <th className="text-left pb-2 pr-4">Feature</th>
+                        <th className="text-left pb-2 pr-4">BoomTown</th>
+                        <th className="text-left pb-2">Realtor Desk</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="border-b">
-                        <td className="py-2">Price/Month</td>
-                        <td className="py-2">$1,350+ CAD</td>
-                        <td className="py-2 text-green-700 font-semibold">$149-299 CAD</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-2">AI Response</td>
-                        <td className="py-2">No AI</td>
-                        <td className="py-2 text-green-700 font-semibold">Sub-3-second</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-2">Canadian Compliance</td>
-                        <td className="py-2">Manual</td>
-                        <td className="py-2 text-green-700 font-semibold">Built-in</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-2">Contract</td>
-                        <td className="py-2">12-24 months</td>
-                        <td className="py-2 text-green-700 font-semibold">Month-to-month</td>
-                      </tr>
-                      <tr className="border-b">
-                        <td className="py-2">Lead Gen</td>
-                        <td className="py-2">Bundled</td>
-                        <td className="py-2 text-green-700 font-semibold">Separate</td>
-                      </tr>
-                      <tr>
-                        <td className="py-2">Setup Time</td>
-                        <td className="py-2">4-8 weeks</td>
-                        <td className="py-2 text-green-700 font-semibold">1-3 days</td>
-                      </tr>
+                      {COMPARISON_ROWS.map((row) => (
+                        <tr key={row.feature} className="border-b last:border-b-0">
+                          <td className="py-2 pr-4">{row.feature}</td>
+                          <td className="py-2 pr-4">{row.boomtown}</td>
+                          <td className="py-2">{row.realtorDesk}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
+                <p className="text-xs text-gray-600 mt-3">
+                  We have no dated source for BoomTown's features or terms, so that column sends you to the vendor.
+                </p>
               </div>
 
               <div className="flex gap-4">
                 <Button asChild size="lg">
                   <Link to="/demo">
-                    Try RealtorDesk AI Free <ArrowRight className="ml-2" />
+                    Try Realtor Desk <ArrowRight className="ml-2" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
@@ -290,351 +377,147 @@ const BoomTownAlternative = () => {
               </div>
             </Card>
 
-            {/* Alternative #2: Follow Up Boss */}
+            {/* Follow Up Boss */}
             <Card className="p-6 mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-gray-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                  2
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">Follow Up Boss</h3>
-                  <p className="text-gray-600 font-semibold">Best for Team Collaboration</p>
-                </div>
-              </div>
-
-              <p className="text-gray-700 mb-4">
-                <strong>What It Is:</strong> US-based CRM focused on lead management and team workflows
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <h4 className="font-bold mb-2 text-green-700">Why It's Better Than BoomTown:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• More affordable: $540-810 CAD/month vs $1,350+</li>
-                    <li>• No forced lead generation bundling</li>
-                    <li>• Excellent team features</li>
-                    <li>• Simpler interface</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-red-700">Why It's Not as Good as RealtorDesk AI:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• No AI automation</li>
-                    <li>• Still US-based (no PIPEDA)</li>
-                    <li>• Manual follow-up required</li>
-                    <li>• Still expensive vs RealtorDesk AI</li>
-                  </ul>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-700 mb-2">
-                <strong>Pricing:</strong> $399-899 USD/month ($540-1,215 CAD)
+              <h3 className="text-xl font-bold mb-3">Follow Up Boss</h3>
+              <p className="text-gray-700 mb-2">
+                A real estate CRM. On 2026-10-02 its own site showed the Grow plan at $69 per user a month ($58 on annual billing), currency not stated, and listed lead routing, a team inbox, calling and 250+ integrations.
               </p>
               <p className="text-sm text-gray-700">
-                <strong>Best For:</strong> Large US-based teams with Canadian offices
+                Check the vendor's own site for current pricing and features.
               </p>
             </Card>
 
-            {/* Alternative #3: Real Geeks */}
+            {/* Real Geeks */}
             <Card className="p-6 mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-gray-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                  3
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">Real Geeks</h3>
-                  <p className="text-gray-600 font-semibold">Best for Lead Gen + CRM Bundle</p>
-                </div>
-              </div>
-
-              <p className="text-gray-700 mb-4">
-                <strong>What It Is:</strong> Website platform with integrated CRM and lead generation
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <h4 className="font-bold mb-2 text-green-700">Why It's Better Than BoomTown:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• More affordable: $336-675 CAD/month</li>
-                    <li>• Website included</li>
-                    <li>• Good lead gen tools</li>
-                    <li>• Month-to-month contracts available</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-red-700">Why It's Not as Good as RealtorDesk AI:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• No true AI (basic chatbot only)</li>
-                    <li>• Forces website purchase (even if you have one)</li>
-                    <li>• US-focused</li>
-                  </ul>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-700 mb-2">
-                <strong>Pricing:</strong> $249-499 USD/month ($336-675 CAD)
+              <h3 className="text-xl font-bold mb-3">Real Geeks</h3>
+              <p className="text-gray-700 mb-2">
+                A real estate website and CRM product.
               </p>
               <p className="text-sm text-gray-700">
-                <strong>Best For:</strong> Agents who need website + CRM + lead gen all-in-one
+                Check the vendor's own site for current pricing and features.
               </p>
             </Card>
 
-            {/* Alternative #4: kvCORE */}
+            {/* BoldTrail (formerly kvCORE) */}
             <Card className="p-6 mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-gray-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                  4
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">kvCORE</h3>
-                  <p className="text-gray-600 font-semibold">Best for Enterprise Features</p>
-                </div>
-              </div>
-
-              <p className="text-gray-700 mb-4">
-                <strong>What It Is:</strong> Comprehensive CRM with lead gen and automation
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <h4 className="font-bold mb-2 text-green-700">Why It's Better Than BoomTown:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Deep feature set for larger teams</li>
-                    <li>• Strong automation</li>
-                    <li>• No forced bundling of all services</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-red-700">Why It's Not as Good as RealtorDesk AI:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Complex interface (steep learning curve)</li>
-                    <li>• No AI automation</li>
-                    <li>• US-focused</li>
-                  </ul>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-700 mb-2">
-                <strong>Pricing:</strong> $299-499 USD/month ($405-675 CAD)
+              <h3 className="text-xl font-bold mb-3">BoldTrail (formerly kvCORE)</h3>
+              <p className="text-gray-700 mb-2">
+                A real estate CRM platform. On 2026-10-02 its own site published no prices. It quotes on request.
               </p>
               <p className="text-sm text-gray-700">
-                <strong>Best For:</strong> Large teams who need enterprise features
+                Check the vendor's own site for current pricing and features.
               </p>
             </Card>
 
-            {/* Alternative #5: LionDesk */}
+            {/* LionDesk */}
             <Card className="p-6 mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-gray-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                  5
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">LionDesk</h3>
-                  <p className="text-gray-600 font-semibold">Best Budget Alternative</p>
-                </div>
-              </div>
-
-              <p className="text-gray-700 mb-4">
-                <strong>What It Is:</strong> Affordable CRM with video email focus
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <h4 className="font-bold mb-2 text-green-700">Why It's Better Than BoomTown:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Very affordable: $34-101 CAD/month</li>
-                    <li>• Easy to use</li>
-                    <li>• Good video tools</li>
-                    <li>• Month-to-month</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2 text-red-700">Why It's Not as Good as RealtorDesk AI:</h4>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• No AI automation</li>
-                    <li>• No lead generation included</li>
-                    <li>• Basic features only</li>
-                  </ul>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-700 mb-2">
-                <strong>Pricing:</strong> $25-75 USD/month ($34-101 CAD)
-              </p>
-              <p className="text-sm text-gray-700">
-                <strong>Best For:</strong> Budget-conscious agents who don't need AI
+              <h3 className="text-xl font-bold mb-3">LionDesk</h3>
+              <p className="text-gray-700">
+                LionDesk was discontinued in September 2025 (Lone Wolf Technologies), so it is no longer an option.
               </p>
             </Card>
           </section>
 
-          {/* Comprehensive Comparison Table */}
+          {/* Vendor price summary */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Comprehensive Comparison Table</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">What Each Vendor Publishes on Price</h2>
+
             <Card className="p-6 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left pb-3 pr-4">Platform</th>
-                    <th className="text-left pb-3 pr-4">Price (CAD/mo)</th>
-                    <th className="text-left pb-3 pr-4">AI</th>
-                    <th className="text-left pb-3 pr-4">Canadian</th>
-                    <th className="text-left pb-3 pr-4">Contract</th>
-                    <th className="text-left pb-3 pr-4">Best For</th>
+                    <th className="text-left pb-3 pr-4">Vendor</th>
+                    <th className="text-left pb-3 pr-4">Published price</th>
+                    <th className="text-left pb-3 pr-4">Notes</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
-                  <tr className="border-b bg-red-50">
-                    <td className="py-3 pr-4 font-semibold">BoomTown</td>
-                    <td className="py-3 pr-4">$1,350-2,700</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">12-24 mo</td>
-                    <td className="py-3 pr-4">Large US teams</td>
-                  </tr>
-                  <tr className="border-b bg-green-50">
-                    <td className="py-3 pr-4 font-semibold">RealtorDesk AI</td>
-                    <td className="py-3 pr-4">$149-299</td>
-                    <td className="py-3 pr-4">✅ Advanced</td>
-                    <td className="py-3 pr-4">✅ Yes</td>
-                    <td className="py-3 pr-4">Month-to-month</td>
-                    <td className="py-3 pr-4">Canadian solo/small teams</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 pr-4 font-semibold">Follow Up Boss</td>
-                    <td className="py-3 pr-4">$540-1,215</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">Month-to-month</td>
-                    <td className="py-3 pr-4">Team collaboration</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 pr-4 font-semibold">Real Geeks</td>
-                    <td className="py-3 pr-4">$336-675</td>
-                    <td className="py-3 pr-4">⚠️ Basic</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">Month-to-month</td>
-                    <td className="py-3 pr-4">All-in-one bundle</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 pr-4 font-semibold">kvCORE</td>
-                    <td className="py-3 pr-4">$405-675</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">12 months</td>
-                    <td className="py-3 pr-4">Enterprise features</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-3 pr-4 font-semibold">LionDesk</td>
-                    <td className="py-3 pr-4">$34-101</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">❌ No</td>
-                    <td className="py-3 pr-4">Month-to-month</td>
-                    <td className="py-3 pr-4">Budget option</td>
-                  </tr>
+                  {VENDOR_ROWS.map((row) => (
+                    <tr key={row.vendor} className="border-b last:border-b-0">
+                      <td className="py-3 pr-4 font-semibold">{row.vendor}</td>
+                      <td className="py-3 pr-4">{row.price}</td>
+                      <td className="py-3 pr-4">{row.notes}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+              <p className="text-xs text-gray-600 mt-4">
+                The Follow Up Boss and BoldTrail lines were checked on the vendors' own sites on 2026-10-02. Check each vendor's own site for current pricing and features.
+              </p>
             </Card>
           </section>
 
-          {/* BoomTown Value Breakdown */}
+          {/* Buying the pieces separately */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">The BoomTown Value Proposition Breakdown</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">Buying the Pieces Separately</h2>
+
+            <p className="text-gray-700 mb-6">
+              Realtor Desk is a CRM only. If you move from an all-in-one platform to a standalone CRM, you supply the other pieces yourself. Price each one before you compare totals with any quote.
+            </p>
+
             <Card className="p-6 mb-6">
-              <h3 className="font-bold mb-4">What You Get with BoomTown:</h3>
-              <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-700">
-                <li>✓ CRM platform</li>
-                <li>✓ IDX website</li>
-                <li>✓ Lead generation (paid traffic)</li>
-                <li>✓ Lead routing</li>
-                <li>✓ Transaction management</li>
-                <li>✓ Reporting</li>
-                <li>✓ Support</li>
-              </ul>
-            </Card>
-
-            <Card className="p-6 mb-6 border-red-200 bg-red-50">
-              <h3 className="font-bold mb-4 text-red-900">The Problem:</h3>
+              <h3 className="font-bold mb-4">What You Would Line Up:</h3>
               <ul className="space-y-2 text-sm text-gray-700">
-                <li>• You're forced to buy ALL of it, even if you only need the CRM</li>
-                <li>• Many agents report lead quality is poor</li>
-                <li>• Website is generic template (not custom)</li>
-                <li>• High cost makes ROI difficult</li>
+                <li>• RealtorDesk AI CRM: $299/month = $3,588/year</li>
+                <li>• Your own website: get a quote from your web provider</li>
+                <li>• Lead generation: your own advertising budget</li>
               </ul>
             </Card>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <Card className="p-6 bg-red-50 border-red-200">
-                <h3 className="font-bold mb-4">BoomTown First-Year Cost (Team of 5):</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Base: $1,500 USD/month = $2,025 CAD/month</li>
-                  <li>• Year 1: $24,300 CAD</li>
-                  <li>• Plus: Setup fees ($3,000-5,000)</li>
-                  <li className="font-bold text-lg text-red-900 pt-2">Total Year 1: $27,300-29,300 CAD</li>
-                </ul>
-              </Card>
-
-              <Card className="p-6 bg-green-50 border-green-200">
-                <h3 className="font-bold mb-4">RealtorDesk AI Alternative Approach:</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• RealtorDesk AI CRM: $299/month = $3,588/year</li>
-                  <li>• Your own website: $100-200/month = $1,200-2,400/year</li>
-                  <li>• Facebook Ads (lead gen): $500/month = $6,000/year</li>
-                  <li className="font-bold text-lg text-green-900 pt-2">Total Year 1: $10,788-11,988 CAD</li>
-                </ul>
-              </Card>
-            </div>
-
-            <Card className="p-6 bg-primary text-white">
-              <h3 className="text-2xl font-bold mb-2">Savings: $15,312-18,512 CAD</h3>
-              <p className="mb-4">Plus:</p>
-              <ul className="space-y-1">
-                <li>✓ You control your lead quality (own ad campaigns)</li>
-                <li>✓ You own your website (not BoomTown's generic template)</li>
-                <li>✓ You can change components independently</li>
+            <Card className="p-6">
+              <h3 className="font-bold mb-4">The Trade-Off:</h3>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• You choose your own lead sources</li>
+                <li>• You can change components independently</li>
+                <li>• You manage more than one supplier</li>
+                <li>• Realtor Desk does not run ads, host an IDX website or route leads to a team</li>
               </ul>
             </Card>
           </section>
 
-          {/* Canadian Compliance Concerns */}
+          {/* Consent and data handling */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Canadian Compliance Concerns with BoomTown</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">Consent and Data Handling in Canada</h2>
+
+            <p className="text-gray-700 mb-6">
+              Canadian privacy and anti-spam rules affect how you collect, store and message client contacts. Software does not make anyone compliant, so ask your broker or a lawyer what applies to you, and put these questions to every vendor.
+            </p>
+
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-red-700" />
-                  PIPEDA Requirements
+                  <Shield className="w-5 h-5 text-primary" />
+                  Where Data Lives
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Data must be stored in Canada or with proper consent</li>
-                  <li>• BoomTown stores data on US servers</li>
-                  <li>• Requires extra legal work to be compliant</li>
+                  <li>• Where is the database hosted?</li>
+                  <li>• Which outside services process client data, and where?</li>
+                  <li>• What does the contract say about access and deletion?</li>
                 </ul>
               </Card>
 
               <Card className="p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-700" />
-                  CASL Requirements
+                  <AlertTriangle className="w-5 h-5 text-primary" />
+                  Consent and Withdrawal
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Express consent for emails</li>
-                  <li>• BoomTown email templates are US-focused</li>
-                  <li>• Must customize for Canadian law</li>
+                  <li>• Does the product record when and how each contact gave consent?</li>
+                  <li>• What happens to automated email when a contact withdraws?</li>
+                  <li>• Can you edit the templates to suit your own legal advice?</li>
                 </ul>
               </Card>
 
               <Card className="p-6">
                 <h3 className="font-bold mb-3 flex items-center gap-2">
-                  <XCircle className="w-5 h-5 text-red-700" />
-                  Quebec Bill 96
+                  <Users className="w-5 h-5 text-primary" />
+                  French-Speaking Clients
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Requires French language options</li>
-                  <li>• BoomTown has no bilingual support</li>
-                  <li>• Quebec agents face compliance issues</li>
+                  <li>• Can you set a client's language?</li>
+                  <li>• Does client email work in French?</li>
+                  <li>• Is the interface available in French?</li>
                 </ul>
               </Card>
 
@@ -651,6 +534,10 @@ const BoomTownAlternative = () => {
                 </ul>
               </Card>
             </div>
+
+            <p className="text-sm text-gray-700">
+              For Realtor Desk, some outside services (SMS, email delivery, AI drafting) may process data outside Canada. It refuses to send from the inbox or by SMS when no consent is on file, and it stops automated email to a contact who has withdrawn.
+            </p>
           </section>
 
           {/* A "Real Agent Experiences" section stood here. All of it was
@@ -679,23 +566,20 @@ const BoomTownAlternative = () => {
               <Card className="p-6">
                 <h3 className="font-bold mb-4 text-lg">Stay with BoomTown If:</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ You're in the US (better support/integrations)</li>
-                  <li>✓ You have large team (20+ agents)</li>
-                  <li>✓ Budget is unlimited ($2,500+/month)</li>
-                  <li>✓ BoomTown leads are converting well for you</li>
-                  <li>✓ You're happy with generic website</li>
+                  <li>✓ It is working for you and the quote suits your budget</li>
+                  <li>✓ You run a team and need seats, lead routing or a shared pipeline</li>
+                  <li>✓ You want your CRM, website and lead generation from one supplier</li>
                 </ul>
               </Card>
 
               <Card className="p-6 border-2 border-primary bg-primary/5">
-                <h3 className="font-bold mb-4 text-lg">Switch to Alternative If:</h3>
+                <h3 className="font-bold mb-4 text-lg">Consider Realtor Desk If:</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ You're a Canadian agent (compliance concerns)</li>
-                  <li>✓ You're solo or small team (&lt;10 agents)</li>
-                  <li>✓ BoomTown leads aren't converting</li>
-                  <li>✓ You want AI automation</li>
-                  <li>✓ You want to save $1,000-2,000/month</li>
-                  <li>✓ You can get better leads elsewhere</li>
+                  <li>✓ You are a single agent in Canada</li>
+                  <li>✓ You already have your own lead sources and website</li>
+                  <li>✓ You want consent recorded per contact and the database hosted in Canada</li>
+                  <li>✓ You work with French-speaking clients</li>
+                  <li>✓ You want a price in Canadian dollars</li>
                 </ul>
               </Card>
             </div>
@@ -704,40 +588,40 @@ const BoomTownAlternative = () => {
           {/* FAQ */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6">FAQ: BoomTown Alternatives</h2>
-            
+
             <div className="space-y-4">
               <Card className="p-6">
                 <h3 className="font-bold mb-2">Is BoomTown worth the price?</h3>
                 <p className="text-gray-700">
-                  For most Canadian agents, no. The cost ($1,350-2,700 CAD/month) rarely produces positive ROI. Better alternatives exist for under $300 CAD/month.
-                </p>
-              </Card>
-
-              <Card className="p-6">
-                <h3 className="font-bold mb-2">Can I negotiate BoomTown pricing?</h3>
-                <p className="text-gray-700">
-                  Sometimes. They may offer discounts for 24-month contracts or larger teams. Still expensive compared to alternatives.
+                  That depends on the quote you get and on your own numbers. Ask for the price in writing, with the currency, any setup fees and any advertising spend, then compare it with what a CRM, a website and your own advertising would cost you separately.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="font-bold mb-2">What happens to my data if I leave BoomTown?</h3>
                 <p className="text-gray-700">
-                  You can export contacts and history. You'll lose the website (BoomTown-owned). All lead gen stops immediately.
+                  Ask BoomTown before you sign: what you can export, in what format, and what happens to your website and lead sources. Realtor Desk imports contacts from a CSV file. The import does not bring in consent records, deals or history, and it does not merge duplicates.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Is RealtorDesk AI really a BoomTown alternative?</h3>
+                <h3 className="font-bold mb-2">Is Realtor Desk really a BoomTown alternative?</h3>
                 <p className="text-gray-700">
-                  Yes, for the CRM component. You'll need separate website and lead gen, but total cost is still 60-70% less with better AI automation.
+                  Only for the CRM part, and only for a single agent. Realtor Desk does not include lead generation, ads, an IDX website, lead routing or team features. If you need those from one vendor, it is not a replacement.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Does anyone actually succeed with BoomTown in Canada?</h3>
+                <h3 className="font-bold mb-2">Does Realtor Desk reply to leads automatically?</h3>
                 <p className="text-gray-700">
-                  Some large teams do. But most Canadian solo agents and small teams struggle with the cost and US-focus.
+                  No. It suggests a next action and a time to take it, and an in-app assistant drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you.
+                </p>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="font-bold mb-2">What does the Realtor Desk trial cost?</h3>
+                <p className="text-gray-700">
+                  The trial runs for 14 days. A card is collected up front and nothing is charged before day 14.
                 </p>
               </Card>
             </div>
@@ -748,11 +632,11 @@ const BoomTownAlternative = () => {
             <Card className="p-8 bg-gradient-to-r from-gray-50 to-blue-50">
               <h2 className="text-3xl font-bold mb-4">Conclusion</h2>
               <div className="space-y-4 text-gray-700">
-                <p>BoomTown is powerful but expensive and US-focused. Canadian agents have better options.</p>
-                <p>RealtorDesk AI offers better AI, Canadian compliance, and saves $1,051-2,401/month.</p>
-                <p>Unbundling (separate CRM + website + lead gen) gives you more control and flexibility.</p>
+                <p>BoomTown and Realtor Desk are different kinds of product, so the choice is mostly about what you need from one supplier.</p>
+                <p>If you want a CRM, lead generation and a website from one vendor, or you run a team, Realtor Desk is not a replacement.</p>
+                <p>If you are a single agent in Canada with your own lead sources, Realtor Desk is a small CRM with consent recorded per contact, the database hosted in Canada and French set per contact.</p>
                 <p className="text-xl font-bold text-primary pt-4">
-                  For 90% of Canadian agents, alternatives make more sense.
+                  Get BoomTown's quote in writing, and try Realtor Desk on a few real contacts before you decide.
                 </p>
               </div>
             </Card>
@@ -760,14 +644,14 @@ const BoomTownAlternative = () => {
 
           {/* Final CTA */}
           <section className="text-center py-12">
-            <h2 className="text-3xl font-bold mb-4">Try a Canadian BoomTown Alternative</h2>
+            <h2 className="text-3xl font-bold mb-4">Try Realtor Desk for 14 Days</h2>
             <p className="text-xl text-gray-600 mb-8">
-              Save $15,000+ per year with better AI automation and Canadian compliance
+              A card is collected up front and nothing is charged before day 14.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8">
-                <Link to="/demo">
-                  Start Free Trial <ArrowRight className="ml-2" />
+                <Link to="/signup">
+                  Start the 14-Day Trial <ArrowRight className="ml-2" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="text-lg px-8">
@@ -782,20 +666,20 @@ const BoomTownAlternative = () => {
             <div className="grid md:grid-cols-3 gap-4">
               <Link to="/blog/best-crm-canada-2025">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">Best CRM for Canadian Agents 2025</h3>
-                  <p className="text-sm text-gray-600">Top 10 CRM comparison guide</p>
+                  <h3 className="font-bold mb-2">Best CRM for Canadian Real Estate Agents</h3>
+                  <p className="text-sm text-gray-600">CRM comparison guide</p>
                 </Card>
               </Link>
               <Link to="/blog/vs-kvcore">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">kvCORE vs RealtorDesk AI</h3>
-                  <p className="text-sm text-gray-600">Speed vs features comparison</p>
+                  <h3 className="font-bold mb-2">Realtor Desk vs kvCORE for Canadian Agents</h3>
+                  <p className="text-sm text-gray-600">Side-by-side comparison</p>
                 </Card>
               </Link>
               <Link to="/blog/vs-lofty-crm">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">Lofty CRM vs RealtorDesk AI</h3>
-                  <p className="text-sm text-gray-600">Simplicity vs feature bloat</p>
+                  <h3 className="font-bold mb-2">Lofty CRM Review for Canadian Agents</h3>
+                  <p className="text-sm text-gray-600">Vendor review</p>
                 </Card>
               </Link>
             </div>

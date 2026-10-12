@@ -4,25 +4,35 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Phone, Upload, Download, GraduationCap, CheckCircle, Brain, DollarSign } from "lucide-react";
+import { Phone, Upload, Download, GraduationCap, CheckCircle, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: the title
+// and headings that called Lofty's AI fake, the five unsourced crosses against
+// Lofty, and for Realtor Desk "real conversations", "learns from every
+// interaction", "Canadian market predictions (TO, VAN, CAL)", "predictive
+// intelligence", "All features included", "No call/text charges", "No overage
+// charges", "responsive Canadian support" and the empty "Why Canadian agents
+// choose us over Lofty" section. Replaced with what the product does, what it
+// does not, and the published price. The migration steps and the money-back
+// sentence are untouched.
 
 const SwitchFromLofty = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
-        title="Switch from Lofty | Upgrade to Real AI"
+        title="Switch from Lofty to Realtor Desk"
         description="Moving from Lofty to Realtor Desk: what you would give up, how a CSV move works, and CAD pricing. Lofty quotes pricing on request."
-        keywords="switch from Lofty, Lofty CRM migration, Lofty alternative Canada, RealtorDesk AI"
+        keywords="switch from Lofty, Lofty CRM migration, Lofty alternative Canada, Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/switch-from-lofty"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Switch from Lofty",
-            "description": "Upgrade from Lofty to RealtorDesk AI with real AI features and Canadian market support."
+            "name": "Switch from Lofty to Realtor Desk",
+            "description": "Moving from Lofty to Realtor Desk: what you would give up, how a CSV move works, and CAD pricing. Lofty quotes pricing on request."
           }
         ]}
       />
@@ -32,14 +42,17 @@ const SwitchFromLofty = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            Upgrade to Real AI
+            Switching from Lofty
           </Badge>
           <h1 className="mb-6">
-            Tired of Lofty's <span className="gradient-text">"AI" That Doesn't Actually Work?</span>
+            Moving from Lofty <span className="gradient-text">to Realtor Desk</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Get true predictive intelligence, transparent pricing, and responsive Canadian support. 
-            Join the agents who upgraded from basic automation to AI that actually closes deals.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+            Realtor Desk is a CRM for a single Canadian agent at a published price of $149 CAD a month.
+            It does less than a full platform, so this page covers what you would give up as well as how the move works.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly.
           </p>
           
           <Link to="/demo">
@@ -50,62 +63,72 @@ const SwitchFromLofty = () => {
         </div>
       </section>
 
-      {/* Real AI vs Fake AI */}
+      {/* What you give up and what you get. This was "Real AI vs. Lofty's AI":
+          five crosses against Lofty with no source, beside five ticks for
+          things Realtor Desk does not do. */}
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Real AI vs. Lofty's "AI"</h2>
+          <h2 className="text-center mb-12">What you would give up, and what you would get</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 border-destructive/20">
-              <Badge variant="outline" className="mb-4">Lofty's "AI"</Badge>
-              <h3 className="text-xl font-bold mb-4">Basic Automation</h3>
+            <Card className="p-8">
+              <Badge variant="outline" className="mb-4">Not in Realtor Desk</Badge>
+              <h3 className="text-xl font-bold mb-4">What you would give up</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>Pre-programmed chatbot with canned responses</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No IDX website, lead generation or ads</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>No engagement-based lead ranking</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No lead-facing chatbot, automatic replies or voice agent</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>Doesn't learn from your interactions</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No seats, lead routing, shared pipeline or team inbox</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>Generic email templates for everyone</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No transaction management, e-signature or document storage</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>No market intelligence or predictions</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No automated email sequences switched on</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm">
+                  <span className="text-muted-foreground">–</span>
+                  <span>No native mobile app; it is a responsive web app</span>
                 </li>
               </ul>
             </Card>
 
             <Card className="p-8 border-accent">
               <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
-              <h3 className="text-xl font-bold mb-4">True Intelligence</h3>
+              <h3 className="text-xl font-bold mb-4">What you would get</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Understands context, has real conversations</span>
+                  <span>Contacts with one conversation timeline per client</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Ranks leads by observed engagement</span>
+                  <span>A drag-and-drop deal pipeline with totals in CAD</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Learns and improves from every interaction</span>
+                  <span>A rule-based lead score from 0 to 100, with a visible breakdown</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Personalized content based on behavior</span>
+                  <span>An in-app assistant that drafts a reply; you send every message</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Canadian market predictions (TO, VAN, CAL)</span>
+                  <span>French or English set per contact</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm">
+                  <span className="text-rd-terra-800">✓</span>
+                  <span>Date and source of consent recorded on each contact</span>
                 </li>
               </ul>
             </Card>
@@ -204,11 +227,11 @@ const SwitchFromLofty = () => {
               <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
               <div className="text-3xl font-bold gradient-text mb-4">$149/mo CAD</div>
               <ul className="space-y-2 mb-6">
-                <li className="text-sm">✓ All features included</li>
-                <li className="text-sm">✓ No call/text charges</li>
-                <li className="text-sm">✓ No surprise fees</li>
-                <li className="text-sm">✓ No overage charges</li>
-                <li className="text-sm text-rd-terra-800 font-semibold">✓ Budget you can plan</li>
+                <li className="text-sm">✓ For a single agent</li>
+                <li className="text-sm">✓ Published on the pricing page</li>
+                <li className="text-sm">✓ 14-day trial</li>
+                <li className="text-sm">✓ Card collected up front; nothing charged before day 14</li>
+                <li className="text-sm text-rd-terra-800 font-semibold">✓ A number you can read before you ask</li>
               </ul>
             </Card>
           </div>
@@ -224,22 +247,15 @@ const SwitchFromLofty = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section className="section-padding">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Why Canadian agents choose RealtorDesk AI over Lofty</h2>
-          
-          <div className="space-y-6">
-
-          </div>
-        </div>
-      </section>
+      {/* A "Why Canadian agents choose RealtorDesk AI over Lofty" section stood
+          here with a heading and nothing under it. Removed 2026-10-11: there
+          are no customer stories to put in it. */}
 
       {/* CTA */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <Brain className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
-          <h2 className="mb-6">Upgrade to Real AI Today</h2>
+          <CheckCircle className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
+          <h2 className="mb-6">Try it before you move anything</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             30-day money-back guarantee. Not satisfied for any reason, full refund. No questions asked.
           </p>

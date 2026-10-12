@@ -5,8 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, Brain, Shield, Clock, DollarSign } from "lucide-react";
+import { Check, X, Shield, Clock, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: the
+// "Lofty's AI vs ours" cards (unsourced verdicts on Lofty; a chatbot, learning
+// AI, predictive scoring and Toronto/Vancouver/Calgary market predictions we do
+// not have), table rows that ticked a chatbot, email automation, a mobile app,
+// a website builder and market data for Realtor Desk, the unsourced "30 min"
+// support and "No contracts" rows, "PIPEDA compliant", the dated CREA DDF
+// promise and the "200+ agents left Lofty" button. Lofty cells with no source
+// now say "Ask the vendor"; the ones that cite lofty.com rest on the dated
+// reading in the "Choosing between them" section.
 
 const VsLofty = () => {
   const { t } = useTranslation();
@@ -14,13 +24,13 @@ const VsLofty = () => {
   const comparisonSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Lofty vs RealtorDesk AI Comparison",
-    "description": "Compare Lofty with RealtorDesk AI for Canadian real estate agents: published CAD pricing, bilingual EN/FR, data hosted in Canada, and CREA DDF\u00ae integration on the roadmap for Q3 2026.",
+    "name": "Lofty vs Realtor Desk Comparison",
+    "description": "Realtor Desk vs Lofty for Canadian agents: published CAD pricing, French per contact, database hosted in Canada. Lofty quotes its prices on request.",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Lofty", "description": "Pricing quoted on request; not published"},
-        {"@type": "ListItem", "position": 2, "name": "RealtorDesk AI", "description": "$149 CAD/mo, PIPEDA compliant, bilingual, CREA DDF® coming Q3 2026"}
+        {"@type": "ListItem", "position": 2, "name": "Realtor Desk", "description": "$149 CAD a month for a single agent; French per contact; production database hosted in Canada"}
       ]
     }
   };
@@ -29,8 +39,8 @@ const VsLofty = () => {
     <div className="min-h-screen">
       <SEO 
         title="Realtor Desk vs Lofty for Canadian Agents"
-        description="Realtor Desk vs Lofty for Canadian agents: CAD pricing, bilingual EN/FR and data hosted in Canada. CREA DDF® is on the Q3 2026 roadmap."
-        keywords="Lofty alternative, Lofty CRM alternative Canada, real estate CRM cheaper than Lofty, best CRM for Canadian realtors, CREA DDF integration, PIPEDA compliant CRM"
+        description="Realtor Desk vs Lofty for Canadian agents: published CAD pricing, French per contact, database hosted in Canada. Lofty quotes its prices on request."
+        keywords="Lofty alternative, Lofty CRM alternative Canada, Realtor Desk vs Lofty, real estate CRM Canada"
         structuredData={[comparisonSchema]}
       />
       <Navbar />
@@ -42,82 +52,93 @@ const VsLofty = () => {
             Lofty Alternative for Canadian Agents
           </Badge>
           <h1 className="mb-6">
-            Why Canadian Agents Choose <span className="gradient-text">RealtorDesk AI</span> Over Lofty
+            <span className="gradient-text">Realtor Desk</span> and Lofty, compared for Canadian agents
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
             {/* Was "Save 85%". Lofty publishes no price — this page's own
                 JSON-LD says so two screens up ("Pricing quoted on request; not
                 published") — so there was no figure to compute a saving
                 against. Verified 2026-09-28. */}
-            $149 CAD a month, published rather than quoted. Bilingual EN/FR, data hosted in Canada, and CREA DDF® integration on the roadmap for Q3 2026.
+            $149 CAD a month for a single agent, published rather than quoted. French or English set per contact, and the production database hosted in Canada.
+          </p>
+          <p className="text-muted-foreground max-w-3xl mx-auto mb-4">
+            Native CREA DDF® sync is on the roadmap and is not live yet.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly.
           </p>
         </div>
       </section>
 
-      {/* AI Comparison */}
+      {/* What the AI does. The Lofty half of this section is gone: we have no
+          source for what Lofty's AI can or cannot do. */}
       <section className="section-padding">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">What "AI" Really Means</h2>
+          <h2 className="text-center mb-12">What the AI in Realtor Desk does, and does not do</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 border-destructive/20">
+            <Card className="p-8 border-accent">
               <div className="text-center mb-4">
-                <Badge variant="outline" className="mb-2">Lofty's "AI"</Badge>
-                <h3 className="text-xl font-bold">Basic Automation</h3>
+                <Badge className="mb-2 bg-rd-terra-800">Realtor Desk</Badge>
+                <h3 className="text-xl font-bold">What it does</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Pre-programmed chatbot responses</span>
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">Scores each lead from 0 to 100 by rule, with a visible breakdown</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">No predictive lead scoring</span>
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">Breakdown covers engagement, behaviour, budget match, timeline and qualification</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Can't learn from your interactions</span>
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">Suggests a next action and a time to take it</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">No market intelligence</span>
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">An in-app assistant drafts a reply or summarises the thread on the contact you have open</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <X className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Generic email templates</span>
+                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">Nothing is sent to a client without you</span>
                 </li>
               </ul>
             </Card>
 
-            <Card className="p-8 border-accent">
+            <Card className="p-8">
               <div className="text-center mb-4">
-                <Badge className="mb-2 bg-rd-terra-800">Realtor Desk</Badge>
-                <h3 className="text-xl font-bold">Predictive Intelligence</h3>
+                <Badge variant="outline" className="mb-2">Realtor Desk</Badge>
+                <h3 className="text-xl font-bold">What it does not do</h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Intelligent conversation, understands context</span>
+                  <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">No lead-facing chatbot or website chat widget</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Ranks leads by observed engagement</span>
+                  <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">No automatic replies and no automatic appointment booking</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Learns and improves from every interaction</span>
+                  <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">No voice agent and no WhatsApp</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Canadian market predictions (Toronto, Vancouver, Calgary)</span>
+                  <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">No market data or price predictions</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-rd-terra-800 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm">Personalized content based on buyer behavior</span>
+                  <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">The score is rule-based; it is not machine learning</span>
                 </li>
               </ul>
             </Card>
           </div>
+
+          <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto mt-8">
+            We make no claim here about what Lofty&rsquo;s AI features do. Ask Lofty for a demo on your own leads and judge it there.
+          </p>
         </div>
       </section>
 
@@ -138,19 +159,22 @@ const VsLofty = () => {
               <tbody>
                 {[
                   { feature: "Starting price", rdai: "$149/mo CAD", lofty: "Not published" },
-                  { feature: "Transparent Pricing", rdai: true, lofty: false },
-                  { feature: "Predictive Lead Scoring", rdai: true, lofty: false },
-                  { feature: "AI Learns & Adapts", rdai: true, lofty: false },
-                  { feature: "Canadian Market Data", rdai: true, lofty: false },
-                  { feature: "Bilingual (EN/FR)", rdai: true, lofty: false },
-                  { feature: "Support Response Time", rdai: "30 min", lofty: "Days/weeks" },
-                  { feature: "Call/Text Charges", rdai: "Included", lofty: "Extra cost" },
-                  { feature: "Basic Chatbot", rdai: true, lofty: true },
-                  { feature: "Email Automation", rdai: true, lofty: true },
-                  { feature: "Mobile App", rdai: true, lofty: true },
-                  { feature: "Website Builder", rdai: true, lofty: true },
-                  { feature: "Free Migration", rdai: true, lofty: false },
-                  { feature: "No Contracts", rdai: true, lofty: false },
+                  { feature: "Published price", rdai: true, lofty: "Quoted on request" },
+                  { feature: "Rule-based lead score (0 to 100, with breakdown)", rdai: true, lofty: "Ask the vendor" },
+                  { feature: "In-app assistant that drafts a reply", rdai: true, lofty: "Ask the vendor" },
+                  { feature: "French or English per contact", rdai: true, lofty: "Not stated on lofty.com" },
+                  { feature: "Production database hosted in Canada", rdai: true, lofty: "Not stated on lofty.com" },
+                  { feature: "Consent date and source on each contact", rdai: true, lofty: "Ask the vendor" },
+                  { feature: "Native CREA DDF® sync (roadmap)", rdai: "Not available yet", lofty: "Not stated on lofty.com" },
+                  { feature: "IDX website", rdai: "Not available", lofty: "Listed on lofty.com" },
+                  { feature: "Lead generation programmes", rdai: "Not available", lofty: "Listed on lofty.com" },
+                  { feature: "Seats, lead routing, shared pipeline", rdai: "Not available", lofty: "Ask the vendor" },
+                  { feature: "Lead-facing chatbot", rdai: "Not available", lofty: "Ask the vendor" },
+                  { feature: "Voice agent", rdai: "Not available", lofty: "Ask the vendor" },
+                  { feature: "Automated email sequences", rdai: "Not available", lofty: "Ask the vendor" },
+                  { feature: "Market data", rdai: "Not available", lofty: "Ask the vendor" },
+                  { feature: "Native mobile app", rdai: "Not available (responsive web app)", lofty: "Ask the vendor" },
+                  { feature: "Free Migration", rdai: true, lofty: "Ask the vendor" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -179,10 +203,9 @@ const VsLofty = () => {
       {/* Migration CTA */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <Brain className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
-          <h2 className="mb-6">Upgrade to True AI-Powered Intelligence</h2>
+          <h2 className="mb-6">If you decide to switch</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            See why Canadian agents are choosing RealtorDesk AI over Lofty
+            The trial runs 14 days. A card is collected up front and nothing is charged before day 14.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -214,7 +237,7 @@ const VsLofty = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" className="btn-gradient">
-                See Why 200+ Agents Left Lofty
+                Book a Demo
               </Button>
             </Link>
             <Link to="/pricing">
@@ -259,9 +282,12 @@ const VsLofty = () => {
 
           <h3 className="text-lg font-semibold mb-2">The Canadian specifics</h3>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Our data is hosted in Canada, billing is in CAD, and the interface and
-            client-facing email both work in French. CASL consent is recorded per
-            contact and a send is refused when it is missing. Lofty&rsquo;s site
+            Our production database is hosted in Canada, billing is in CAD, and the
+            interface and client-facing email both work in French. Some outside
+            services (SMS, email delivery, AI drafting) may process data outside
+            Canada. The date and source of consent are recorded per contact and a
+            send from the inbox or by SMS is refused when no consent is on file.
+            Lofty&rsquo;s site
             does not make statements about Canadian data residency, CREA DDF or
             French support — ask them if those matter to you rather than assuming
             either way.
@@ -270,9 +296,11 @@ const VsLofty = () => {
           <h3 className="text-lg font-semibold mb-2">Who should pick which</h3>
           <p className="text-muted-foreground leading-relaxed">
             Take Lofty if you want lead generation and a website bundled with the
-            CRM and are comfortable with quoted pricing. Take us if you have lead
-            sources already and want follow-up handled properly in two languages
-            at a price you can read off a page. If you are still shortlisting,{" "}
+            CRM and are comfortable with quoted pricing, or if you need seats for
+            a team: Realtor Desk is a single-agent product. Take us if you work
+            alone, have lead sources already and want a CRM that works in two
+            languages at a price you can read off a page. If you are still
+            shortlisting,{" "}
             <Link to="/blog/real-estate-crm-buying-guide" className="underline">
               the buying guide
             </Link>{" "}
