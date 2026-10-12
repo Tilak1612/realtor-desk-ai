@@ -1,8 +1,20 @@
+// Rewritten 2026-10-11 to follow the Realtor Desk fact sheet of that date.
+//
+// Removed: every Calgary statistic that had no source on the page (buyer
+// percentages, average prices, "40% slower", "63% after 6 PM", "60% fewer
+// showings", "67% first responder"), two invented case studies, the "Mark S."
+// success story, the "Expected ROI" card, and every passage that credited
+// Realtor Desk with things it does not have: generated neighbourhood content,
+// MLS or market data, a chatbot, automatic replies, automated nurturing, video
+// scripts and voiceover, a live CREA DDF connection.
+//
+// What is left is advice the reader can carry out with any tools, plus a short
+// section on what Realtor Desk does.
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, TrendingUp, MapPin, Snowflake, Users, Building2, Video, Zap, Target, DollarSign, Calendar, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, TrendingUp, MapPin, Snowflake, Users, Building2, Video, Zap, Calendar, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { ProductScopeNote } from "@/components/marketing/ProductScopeNote";
@@ -12,23 +24,23 @@ const CalgaryMarketingGuide = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="Calgary Real Estate Marketing Strategies"
-        description="Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights for Alberta."
-        keywords="Calgary real estate marketing, Alberta real estate agents, Calgary lead generation, AI marketing tools real estate"
+        description="Seven marketing ideas for Calgary real estate agents: neighbourhood content, winter follow-up, relocation buyers, video and a routine for replying to leads."
+        keywords="Calgary real estate marketing, Alberta real estate agents, Calgary lead generation, real estate marketing ideas Calgary"
         article
         publishedTime="2026-01-01"
-        modifiedTime="2026-01-01"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/resources/calgary-real-estate-marketing-strategies"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Calgary Real Estate Marketing Strategies",
-            "description": "Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights for Alberta.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "Seven marketing ideas for Calgary real estate agents: neighbourhood content, winter follow-up, relocation buyers, video and a routine for replying to leads.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2026-01-01",
-            "dateModified": "2026-01-01"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
@@ -47,32 +59,32 @@ const CalgaryMarketingGuide = () => {
             </h1>
             <ProductScopeNote className="mb-6" />
             <p className="text-xl text-gray-600 mb-8">
-              Discover AI-powered marketing strategies for Calgary real estate agents. Lead generation, automation, and local market insights to stand out in Alberta's competitive market.
+              Seven marketing ideas for Calgary real estate agents, written as steps you can carry out with whatever tools you already use.
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-500">
-              <span>📅 Updated: January 2026</span>
-              <span>⏱️ 13 min read</span>
-              <span>🎯 Local Strategy Guide</span>
+              <span>Updated: October 2026</span>
+              <span>8 min read</span>
+              <span>Local Strategy Guide</span>
             </div>
           </div>
 
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-lg text-gray-700 leading-relaxed">
-              Calgary's real estate market operates differently than Toronto or Vancouver. Oil price swings, suburban neighborhoods like Mahogany and Auburn Bay, and -30°C winters require marketing strategies that recognize these realities.
+              Calgary's real estate market does not behave like Toronto's or Vancouver's. Energy prices, suburban communities like Mahogany and Auburn Bay, and -30°C winters all shape how people buy and sell here.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Generic Canadian marketing advice doesn't work in Calgary. You need strategies designed for Alberta's unique market dynamics, seasonal challenges, and buyer demographics.
+              Marketing advice written for other cities needs adjusting before it fits. The ideas below are organised around the things that are particular to Calgary: its communities, its seasons and the people who move here.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              This guide reveals 7 AI-powered marketing strategies that Calgary agents use to dominate their markets—even in winter.
+              This guide quotes no market statistics. We do not hold Calgary market data, so where a number matters, take it from the Calgary Real Estate Board's published statistics and say where it came from.
             </p>
           </div>
 
           {/* Understanding Calgary Market */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Understanding Calgary's Unique Real Estate Market</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">Understanding Calgary's Real Estate Market</h2>
+
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
@@ -80,11 +92,11 @@ const CalgaryMarketingGuide = () => {
                   <h3 className="text-xl font-bold">Economic Factors</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• <strong>Oil & gas influence:</strong> 22% of buyers work in energy sector</li>
-                  <li>• <strong>Boom/bust cycles:</strong> 2014 crash, 2021 recovery, 2026 stabilization</li>
-                  <li>• <strong>Tech sector growth:</strong> 16% of buyers (Amazon, Mphasis, Infosys)</li>
-                  <li>• <strong>Average home price:</strong> $575,000 (vs $1.1M Toronto)</li>
-                  <li>• <strong>Affordability advantage:</strong> Major selling point for interprovincial buyers</li>
+                  <li>• <strong>Oil & gas influence:</strong> many buyers and sellers work in or around the energy sector</li>
+                  <li>• <strong>Boom and bust cycles:</strong> confidence follows energy prices, so plan for both</li>
+                  <li>• <strong>Technology sector:</strong> a second source of relocating buyers</li>
+                  <li>• <strong>Prices:</strong> quote current figures from the Calgary Real Estate Board, with the date</li>
+                  <li>• <strong>Affordability:</strong> a common reason buyers from other provinces look here</li>
                 </ul>
               </Card>
 
@@ -104,25 +116,24 @@ const CalgaryMarketingGuide = () => {
             </div>
 
             <Card className="p-6 mb-6">
-              <h3 className="text-xl font-bold mb-4">Calgary Buyer Demographics</h3>
+              <h3 className="text-xl font-bold mb-4">Buyer Groups to Plan For</h3>
               <div className="grid md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-primary/5 rounded-lg">
-                  <p className="text-3xl font-bold text-primary">35%</p>
-                  <p className="text-sm text-gray-600">Young Families</p>
+                  <p className="text-sm font-semibold text-gray-700">Young Families</p>
                 </div>
                 <div className="text-center p-4 bg-primary/5 rounded-lg">
-                  <p className="text-3xl font-bold text-primary">22%</p>
-                  <p className="text-sm text-gray-600">Energy Professionals</p>
+                  <p className="text-sm font-semibold text-gray-700">Energy Professionals</p>
                 </div>
                 <div className="text-center p-4 bg-primary/5 rounded-lg">
-                  <p className="text-3xl font-bold text-primary">16%</p>
-                  <p className="text-sm text-gray-600">Tech Sector</p>
+                  <p className="text-sm font-semibold text-gray-700">Tech Sector</p>
                 </div>
                 <div className="text-center p-4 bg-primary/5 rounded-lg">
-                  <p className="text-3xl font-bold text-primary">12%</p>
-                  <p className="text-sm text-gray-600">Retirees</p>
+                  <p className="text-sm font-semibold text-gray-700">Retirees</p>
                 </div>
               </div>
+              <p className="text-sm text-gray-600 mt-4">
+                We give no percentages for these groups because we have no sourced figures. Look at your own last two years of clients to see which you serve most.
+              </p>
             </Card>
 
             <Card className="p-6">
@@ -133,31 +144,34 @@ const CalgaryMarketingGuide = () => {
               <div className="grid md:grid-cols-4 gap-4">
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <p className="font-bold mb-2">Nov-Feb (Winter)</p>
-                  <p className="text-sm text-gray-700">40% slower market</p>
+                  <p className="text-sm text-gray-700">Slower market</p>
                 </div>
                 <div className="p-4 bg-green-50 rounded-lg">
                   <p className="font-bold mb-2">Mar-May (Spring)</p>
-                  <p className="text-sm text-gray-700">Highest activity</p>
+                  <p className="text-sm text-gray-700">Usually the busiest season</p>
                 </div>
                 <div className="p-4 bg-yellow-50 rounded-lg">
                   <p className="font-bold mb-2">Jun-Aug (Summer)</p>
-                  <p className="text-sm text-gray-700">Strong but vacations</p>
+                  <p className="text-sm text-gray-700">Active, with holidays in the way</p>
                 </div>
                 <div className="p-4 bg-orange-50 rounded-lg">
                   <p className="font-bold mb-2">Sep-Oct (Fall)</p>
-                  <p className="text-sm text-gray-700">Second wave</p>
+                  <p className="text-sm text-gray-700">A second, shorter busy period</p>
                 </div>
               </div>
+              <p className="text-sm text-gray-600 mt-4">
+                This is the general seasonal pattern, not a measurement. Check the Calgary Real Estate Board's monthly statistics for the current year.
+              </p>
             </Card>
           </section>
 
           {/* Strategy 1: Hyperlocal Content */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Strategy #1: Hyperlocal Neighborhood Content</h2>
-            
+
             <Card className="p-6 mb-6 border-2 border-primary">
               <p className="text-lg font-semibold text-primary mb-4">
-                Why This Works in Calgary: 200+ distinct neighborhoods. Buyers research specific communities intensely.
+                Why this suits Calgary: the city is made up of many distinct communities, and buyers tend to research the specific ones they are considering.
               </p>
             </Card>
 
@@ -198,20 +212,20 @@ const CalgaryMarketingGuide = () => {
               <Card className="p-6 bg-primary/5">
                 <div className="flex items-center gap-3 mb-4">
                   <Zap className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-bold">AI Advantage</h3>
+                  <h3 className="text-xl font-bold">Where to Get the Facts</h3>
                 </div>
                 <p className="text-sm text-gray-700 mb-3">
-                  RealtorDesk AI auto-generates neighborhood content using:
+                  Neighbourhood content is only useful if it is accurate. Draw on:
                 </p>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ MLS data for pricing trends</li>
-                  <li>✓ School board data for rankings</li>
-                  <li>✓ Census data for demographics</li>
-                  <li>✓ Google Maps for commute times</li>
+                  <li>✓ Calgary Real Estate Board statistics for pricing trends</li>
+                  <li>✓ School board websites for catchments and programs</li>
+                  <li>✓ Statistics Canada census profiles for demographics</li>
+                  <li>✓ A mapping app for commute times at rush hour</li>
                 </ul>
                 <div className="mt-4 p-3 bg-white rounded-lg">
-                  <p className="text-sm font-semibold text-green-900">Result:</p>
-                  <p className="text-sm text-gray-700">Rank for "Mahogany Calgary real estate", "Auburn Bay homes", etc.</p>
+                  <p className="text-sm font-semibold text-gray-900">Realtor Desk does not do this for you.</p>
+                  <p className="text-sm text-gray-700">It does not generate neighbourhood content and does not supply MLS or market data. You write these pages yourself, or with a general writing tool whose output you check.</p>
                 </div>
               </Card>
             </div>
@@ -220,25 +234,25 @@ const CalgaryMarketingGuide = () => {
           {/* Strategy 2: Winter Market */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Strategy #2: Winter Market Tactics</h2>
-            
+
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6 bg-red-50 border-red-200">
                 <h3 className="font-bold mb-3 text-red-900">The Challenge</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Nov-Feb sales drop 40%</li>
+                  <li>• Sales slow from November to February</li>
                   <li>• Buyers hesitate in cold weather</li>
                   <li>• Showings are literally freezing</li>
-                  <li>• Traditional agents slow down</li>
+                  <li>• It is tempting to ease off until spring</li>
                 </ul>
               </Card>
 
               <Card className="p-6 bg-green-50 border-green-200">
-                <h3 className="font-bold mb-3 text-green-900">AI-Powered Response</h3>
+                <h3 className="font-bold mb-3 text-green-900">A Practical Response</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• Use winter to build spring pipeline</li>
-                  <li>• AI nurtures leads 24/7</li>
-                  <li>• Virtual tours eliminate weather barrier</li>
-                  <li>• By March: 100+ warm leads ready</li>
+                  <li>• Use winter to build your spring pipeline</li>
+                  <li>• Keep in touch with winter enquiries on a set schedule</li>
+                  <li>• Offer virtual tours so weather is less of a barrier</li>
+                  <li>• Go into March with a list of people to call</li>
                 </ul>
               </Card>
             </div>
@@ -247,26 +261,26 @@ const CalgaryMarketingGuide = () => {
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <Video className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-bold">Tactic #1: Virtual Tours at Scale</h3>
+                  <h3 className="text-xl font-bold">Tactic #1: Virtual Tours</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• 3D Matterport tours (no one wants to visit 10 homes in -25°C)</li>
-                  <li>• AI-narrated video tours</li>
-                  <li>• "See Before You Freeze" campaign</li>
-                  <li>• Reduce unnecessary in-person showings by 60%</li>
+                  <li>• 3D tours (no one wants to visit 10 homes in -25°C)</li>
+                  <li>• Narrated video walkthroughs</li>
+                  <li>• A "See Before You Freeze" campaign</li>
+                  <li>• Let buyers rule homes out before booking an in-person showing</li>
                 </ul>
               </Card>
 
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <Users className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-bold">Tactic #2: Nurture Winter Browsers</h3>
+                  <h3 className="text-xl font-bold">Tactic #2: Keep in Touch With Winter Browsers</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• AI chatbot engages winter website visitors</li>
-                  <li>• "Start your search now, see properties in spring"</li>
-                  <li>• Automated drip campaigns throughout winter</li>
-                  <li>• By March, you have 100+ warm leads ready to view</li>
+                  <li>• Reply personally to each winter website enquiry</li>
+                  <li>• Offer a reason to start now: "Start your search now, see properties in spring"</li>
+                  <li>• Set a date for the next contact every time you speak to someone</li>
+                  <li>• Only email people who have agreed to hear from you, and include a way to unsubscribe</li>
                 </ul>
               </Card>
 
@@ -276,30 +290,22 @@ const CalgaryMarketingGuide = () => {
                   <h3 className="text-xl font-bold">Tactic #3: Off-Season Seller Prep</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>• "Prepare Your Home to Sell in Spring" content</li>
-                  <li>• Winter is when sellers research</li>
-                  <li>• Capture them now for spring listings</li>
-                  <li>• Jan-Feb: Generate 20-30 spring seller leads</li>
+                  <li>• Publish "Prepare Your Home to Sell in Spring" content</li>
+                  <li>• Many spring sellers start thinking about it in winter</li>
+                  <li>• Offer a pre-listing walkthrough in January or February</li>
+                  <li>• Note each seller's intended timing so you call at the right moment</li>
                 </ul>
               </Card>
             </div>
-
-            <Card className="p-6 bg-primary text-white mt-6">
-              <h3 className="text-xl font-bold mb-3">Case Study: Calgary Winter Success</h3>
-              <p className="text-sm mb-3">
-                Calgary agent used AI to nurture 87 winter leads. When market opened in March, booked 34 showings in first week.
-              </p>
-              <p className="text-2xl font-bold">Result: 7 deals closed by April</p>
-            </Card>
           </section>
 
           {/* Strategy 3: Oil & Gas Marketing */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Strategy #3: Oil & Gas Sector Marketing</h2>
-            
+
             <Card className="p-6 mb-6 bg-blue-50 border-blue-200">
               <p className="text-lg font-semibold text-blue-900">
-                Why This Matters: 22% of Calgary buyers work in energy. These are high-income, motivated buyers.
+                Why this matters: the energy sector is a major employer in Calgary, and its staff relocate in and out of the city.
               </p>
             </Card>
 
@@ -308,8 +314,8 @@ const CalgaryMarketingGuide = () => {
                 <h3 className="font-bold mb-3">Marketing Tactics</h3>
                 <div className="space-y-3 text-sm text-gray-700">
                   <div>
-                    <p className="font-semibold mb-1">Corporate Relocation Packages:</p>
-                    <p>Partner with Suncor, Cenovus, CNRL for relocation referrals</p>
+                    <p className="font-semibold mb-1">Corporate Relocation Contacts:</p>
+                    <p>Introduce yourself to the people who handle relocation at large energy employers and at relocation firms</p>
                   </div>
                   <div>
                     <p className="font-semibold mb-1">LinkedIn Presence:</p>
@@ -344,7 +350,7 @@ const CalgaryMarketingGuide = () => {
             
             <Card className="p-6 mb-6">
               <p className="text-lg mb-4">
-                <strong>35% of Calgary buyers are young families</strong> looking for:
+                <strong>Many Calgary buyers are young families</strong> looking for:
               </p>
               <div className="grid md:grid-cols-4 gap-3">
                 <div className="text-center p-3 bg-primary/5 rounded-lg">
@@ -379,12 +385,12 @@ const CalgaryMarketingGuide = () => {
               </Card>
 
               <Card className="p-6 bg-green-50">
-                <h3 className="font-bold mb-3">AI Advantage for Family Marketing</h3>
+                <h3 className="font-bold mb-3">Writing for Families</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ AI generates family-focused listing descriptions</li>
-                  <li>✓ "3-bedroom backing onto park—perfect for kids!"</li>
-                  <li>✓ AI chatbot asks: "Do you have kids? What ages?"</li>
-                  <li>✓ Recommends age-appropriate neighborhoods automatically</li>
+                  <li>✓ Describe what is nearby: schools, parks, pathways, recreation centres</li>
+                  <li>✓ Be specific: "3-bedroom backing onto a park" says more than "family home"</li>
+                  <li>✓ Ask buyers what they want close to home, and let them tell you</li>
+                  <li>✓ Suggest communities from what they said, not from assumptions about them</li>
                 </ul>
               </Card>
             </div>
@@ -393,14 +399,14 @@ const CalgaryMarketingGuide = () => {
           {/* Strategy 5: Interprovincial Migration */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6">Strategy #5: Interprovincial Migration Marketing</h2>
-            
+
             <Card className="p-6 mb-6 border-2 border-primary">
               <div className="flex items-center gap-3 mb-3">
                 <TrendingUp className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-bold">The Opportunity</h3>
               </div>
               <p className="text-lg">
-                Thousands of Ontarians and BCers moving to Calgary for <strong>affordability</strong>. Average savings: $500,000+ vs Toronto/Vancouver.
+                Buyers from Ontario and British Columbia move to Calgary in part for <strong>affordability</strong>. If you quote a price difference, take it from published board statistics and give the date.
               </p>
             </Card>
 
@@ -409,9 +415,9 @@ const CalgaryMarketingGuide = () => {
                 <h3 className="font-bold mb-3">The Challenge</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li>• Don't know Calgary neighborhoods</li>
-                  <li>• Unfamiliar with market dynamics</li>
-                  <li>• Process differences (no land transfer tax!)</li>
-                  <li>• Can't visit 20 times before moving</li>
+                  <li>• Unfamiliar with the local market</li>
+                  <li>• Closing costs and process differ between provinces</li>
+                  <li>• Can't visit many times before moving</li>
                 </ul>
               </Card>
 
@@ -459,13 +465,13 @@ const CalgaryMarketingGuide = () => {
             <Card className="p-6 bg-green-50 border-green-200 mt-6">
               <div className="flex items-center gap-3 mb-3">
                 <Zap className="w-6 h-6 text-green-700" />
-                <h3 className="font-bold text-green-900">AI Advantage</h3>
+                <h3 className="font-bold text-green-900">Handling a Relocation Enquiry</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-700">
-                <li>• AI chatbot detects: "We're moving from Toronto"</li>
-                <li>• Automatically sends comprehensive relocation guide</li>
-                <li>• Prioritizes these leads (high intent, high budget)</li>
-                <li>• Follows up with Toronto-specific comparisons</li>
+                <li>• Ask where they are moving from and when</li>
+                <li>• Send your relocation guide yourself, with a short personal note</li>
+                <li>• Record their timeline and budget on the contact so you can pick it up later</li>
+                <li>• Follow up with a comparison written for the city they are leaving</li>
               </ul>
             </Card>
           </section>
@@ -500,7 +506,7 @@ const CalgaryMarketingGuide = () => {
                     <div className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-sm font-bold">1</div>
                     <div>
                       <p className="font-semibold text-sm">Property Video Tours</p>
-                      <p className="text-sm text-gray-700">60-90 second walkthroughs with AI-generated voiceover</p>
+                      <p className="text-sm text-gray-700">60-90 second walkthroughs with a voiceover</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -514,7 +520,7 @@ const CalgaryMarketingGuide = () => {
                     <div className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-sm font-bold">3</div>
                     <div>
                       <p className="font-semibold text-sm">Market Update Videos</p>
-                      <p className="text-sm text-gray-700">Monthly Calgary market stats and trends</p>
+                      <p className="text-sm text-gray-700">A monthly summary of the Calgary Real Estate Board's published statistics, with the source named</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -530,221 +536,158 @@ const CalgaryMarketingGuide = () => {
               <Card className="p-6 bg-primary/5">
                 <div className="flex items-center gap-3 mb-3">
                   <Zap className="w-6 h-6 text-primary" />
-                  <h3 className="font-bold">AI Video Advantage</h3>
+                  <h3 className="font-bold">Keeping Video Manageable</h3>
                 </div>
                 <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ RealtorDesk AI auto-generates video scripts from MLS data</li>
-                  <li>✓ AI voiceover (no need to record yourself)</li>
-                  <li>✓ Scale to 50+ videos/month</li>
-                  <li>✓ Consistent quality every time</li>
+                  <li>✓ Write one short script outline and reuse it for every property</li>
+                  <li>✓ Film on your phone first; upgrade equipment once the habit sticks</li>
+                  <li>✓ Set a number of videos a month that you can keep up</li>
+                  <li>✓ Check every fact in the script against the listing before you publish</li>
                 </ul>
                 <div className="mt-4 p-3 bg-white rounded">
-                  <p className="text-sm font-semibold text-green-900">Result:</p>
-                  <p className="text-sm text-gray-700">Video tours eliminate 60% of unnecessary showings</p>
+                  <p className="text-sm font-semibold text-gray-900">Realtor Desk does not do this for you.</p>
+                  <p className="text-sm text-gray-700">It does not generate video scripts or voiceovers. General writing and video tools from other vendors can help; review what they produce.</p>
                 </div>
               </Card>
             </div>
           </section>
 
-          {/* Strategy 7: AI Lead Response */}
+          {/* Strategy 7: Lead Response */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Strategy #7: AI-Powered Lead Response</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">Strategy #7: A Routine for Replying to Leads</h2>
+
             <Card className="p-6 mb-6 border-2 border-primary">
-              <h3 className="text-xl font-bold mb-3">Calgary Market Reality</h3>
-              <p className="text-lg mb-3">
-                Competitive market. Multiple agents vie for each lead. <strong>Speed wins.</strong>
+              <h3 className="text-xl font-bold mb-3">Why It Matters</h3>
+              <p className="text-lg">
+                Someone who sends an enquiry often sends it to more than one agent. A prompt, useful reply gives you a better chance of being the one they talk to. We have no measured Calgary figures on this, so none are quoted here.
               </p>
-              <div className="bg-primary/10 p-4 rounded-lg">
-                <p className="font-bold text-primary">Data from Calgary Market Test:</p>
-                <p className="text-gray-700">Agent who responded first got the listing <strong>67% of the time</strong></p>
-              </div>
             </Card>
 
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               <Card className="p-6">
-                <h3 className="font-bold mb-3">Sub-3-Second Response</h3>
-                <p className="text-sm text-gray-700 mb-3">AI chatbot responds instantly:</p>
+                <h3 className="font-bold mb-3">A Saved First Reply</h3>
+                <p className="text-sm text-gray-700 mb-3">Keep a short opening message ready to personalise and send:</p>
                 <div className="bg-gray-50 p-3 rounded text-xs">
                   <p className="italic">"Hi! Looking at properties in Calgary? Which neighborhoods interest you?"</p>
                 </div>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-3">After-Hours Advantage</h3>
-                <p className="text-sm text-gray-700 mb-3">63% of Calgary leads come after 6 PM</p>
-                <p className="text-sm text-gray-700">AI captures these while competitors sleep</p>
+                <h3 className="font-bold mb-3">Evenings</h3>
+                <p className="text-sm text-gray-700 mb-3">Many people browse listings after work.</p>
+                <p className="text-sm text-gray-700">Pick one time each evening to check and answer new enquiries, and stick to it.</p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-3">Weekend Capture</h3>
-                <p className="text-sm text-gray-700 mb-3">Calgary buyers love Sunday browsing</p>
-                <p className="text-sm text-gray-700">AI works weekends (no overtime pay)</p>
+                <h3 className="font-bold mb-3">Weekends</h3>
+                <p className="text-sm text-gray-700 mb-3">Weekends are showing days, so replies slip.</p>
+                <p className="text-sm text-gray-700">Check between appointments, or arrange cover with a colleague you trust.</p>
               </Card>
             </div>
 
-            <Card className="p-6 bg-green-50 border-green-200">
-              <h3 className="text-xl font-bold mb-3 text-green-900">Case Study: Calgary Agent Speed Test</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <p className="font-semibold mb-2">Before AI:</p>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Response time: 18 minutes</li>
-                    <li>• Lead-to-showing: 6.3%</li>
-                    <li>• Lost leads to faster agents</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-semibold mb-2">After AI:</p>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Response time: within seconds</li>
-                    <li>• Lead-to-showing: 15.2%</li>
-                    <li>• <strong className="text-green-900">142% increase</strong></li>
-                  </ul>
-                </div>
-              </div>
+            <Card className="p-6 bg-gray-50">
+              <h3 className="text-xl font-bold mb-3">About Chatbots and Automatic Replies</h3>
+              <p className="text-sm text-gray-700 mb-3">
+                Some agents add a website chat or auto-reply tool from another vendor so that an enquiry is acknowledged the moment it arrives. That is a separate category of product. If you look at one, ask the vendor what it says to leads, who reviews it, and how it records consent.
+              </p>
+              <p className="text-sm text-gray-700">
+                Realtor Desk does not offer a chatbot, a voice agent or automatic replies. It scores each lead, suggests a next action and drafts a reply for you to review and send.
+              </p>
             </Card>
           </section>
 
           {/* Marketing Budget */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Calgary Real Estate Marketing Budget Breakdown</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">Planning a Calgary Marketing Budget</h2>
+
             <Card className="p-6 mb-6">
-              <h3 className="text-xl font-bold mb-4">Solo Agent Budget: $2,000/month</h3>
-              
+              <h3 className="text-xl font-bold mb-4">Lines to Put in a Solo Agent's Budget</h3>
+              <p className="text-sm text-gray-700 mb-4">
+                Fill in each line with a quote you have obtained yourself. The only price we can state is our own.
+              </p>
+
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                  <span className="text-sm font-semibold">RealtorDesk AI CRM</span>
-                  <span className="text-sm font-bold">$149</span>
+                  <span className="text-sm font-semibold">Realtor Desk CRM (single agent)</span>
+                  <span className="text-sm font-bold">CAD $149 a month</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                  <span className="text-sm font-semibold">Google Ads (Calgary targeting)</span>
-                  <span className="text-sm font-bold">$500</span>
+                  <span className="text-sm font-semibold">Search ads (Calgary targeting)</span>
+                  <span className="text-sm font-bold">Your figure</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                  <span className="text-sm font-semibold">Facebook Ads (Local)</span>
-                  <span className="text-sm font-bold">$500</span>
+                  <span className="text-sm font-semibold">Social media ads (local)</span>
+                  <span className="text-sm font-bold">Your figure</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                  <span className="text-sm font-semibold">Video Production</span>
-                  <span className="text-sm font-bold">$300</span>
+                  <span className="text-sm font-semibold">Video production</span>
+                  <span className="text-sm font-bold">Your figure</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                  <span className="text-sm font-semibold">Content Creation</span>
-                  <span className="text-sm font-bold">$300</span>
+                  <span className="text-sm font-semibold">Content creation</span>
+                  <span className="text-sm font-bold">Your figure</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                  <span className="text-sm font-semibold">Calgary Herald Digital</span>
-                  <span className="text-sm font-bold">$250</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-primary text-white rounded">
-                  <span className="font-bold">Total Monthly Investment</span>
-                  <span className="font-bold">$1,999</span>
+                  <span className="text-sm font-semibold">Local media advertising</span>
+                  <span className="text-sm font-bold">Your figure</span>
                 </div>
               </div>
             </Card>
 
             <Card className="p-6 bg-green-50 border-green-200">
-              <h3 className="text-xl font-bold mb-4 text-green-900">Expected ROI</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <p className="font-semibold mb-2">Monthly Results:</p>
-                  <ul className="space-y-1 text-sm text-gray-700">
-                    <li>• Leads generated: 40-60</li>
-                    <li>• Appointments booked: 8-12</li>
-                    <li>• Deals closed: 1.5-2.5</li>
-                    <li>• Revenue: $18,000-30,000</li>
-                  </ul>
-                </div>
-                <div className="flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-4xl font-bold text-green-900">900-1,500%</p>
-                    <p className="text-sm text-gray-700">Return on Investment</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </section>
-
-          {/* Success Story */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Calgary Agent Success Story</h2>
-            
-            <Card className="p-8 border-2 border-primary">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl">MS</div>
-                <div>
-                  <h3 className="text-2xl font-bold">Mark S.</h3>
-                  <p className="text-gray-600">Calgary SE Specialist</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8 mb-6">
-                <div>
-                  <h4 className="font-bold mb-3 text-red-900">Before AI Marketing</h4>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                    <li>• Manual lead follow-up</li>
-                    <li>• Response time: 15-25 minutes</li>
-                    <li>• Winter: 2-3 deals</li>
-                    <li>• Spring: 6-8 deals</li>
-                    <li>• <strong>Annual: 22 deals</strong></li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-3 text-green-900">After AI Marketing</h4>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                    <li>• AI lead follow-up</li>
-                    <li>• Response time: within seconds</li>
-                    <li>• Winter: 7 deals (nurtured Nov-Feb)</li>
-                    <li>• Spring: 14 deals (AI pipeline)</li>
-                    <li>• <strong className="text-green-900">Annual: 41 deals (+86%)</strong></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-primary/10 p-6 rounded-lg">
-              </div>
+              <h3 className="text-xl font-bold mb-4 text-green-900">Work Out Your Own Return</h3>
+              <p className="text-sm text-gray-700 mb-3">
+                We publish no expected return, because we have no measured results to base one on. Track these each month instead:
+              </p>
+              <ul className="space-y-1 text-sm text-gray-700">
+                <li>• Total spend, by line</li>
+                <li>• Enquiries received, by source</li>
+                <li>• Appointments that came from those enquiries</li>
+                <li>• Deals closed and the commission from each</li>
+              </ul>
+              <p className="text-sm text-gray-700 mt-3">
+                After three months you will know what a lead and a client cost you from each source, and which lines to cut.
+              </p>
             </Card>
           </section>
 
           {/* FAQ */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold mb-6">FAQ: Calgary Real Estate Marketing</h2>
-            
+
             <div className="space-y-4">
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Is AI effective in Calgary's traditional market?</h3>
+                <h3 className="font-bold mb-2">Do I need AI tools to market in Calgary?</h3>
                 <p className="text-gray-700">
-                  Yes. Calgary buyers appreciate fast response. AI's sub-3-second response wins listings. Data shows Calgary agents with AI respond 6.5x faster and close 86% more deals.
+                  No. Everything in this guide can be done without them. General writing tools can help you draft neighbourhood pages or video scripts faster, as long as you check the facts. Realtor Desk's assistant drafts a reply or summarises a conversation on the contact you have open; it does not reply to anyone on its own.
                 </p>
               </Card>
 
               <Card className="p-6">
                 <h3 className="font-bold mb-2">Should I focus on inner city or suburbs?</h3>
                 <p className="text-gray-700">
-                  Depends on your niche. Suburbs (Mahogany, Cranston, Auburn Bay) have higher volume. Inner city (Bridgeland, Kensington, Inglewood) has higher commissions. Pick one quadrant, dominate it.
+                  It depends on your niche. Suburban communities such as Mahogany, Cranston and Auburn Bay and inner-city areas such as Bridgeland, Kensington and Inglewood attract different buyers. Pick the area you know best and can cover consistently.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">How do I compete with Calgary's top agents?</h3>
+                <h3 className="font-bold mb-2">How do I compete with Calgary's established agents?</h3>
                 <p className="text-gray-700">
-                  Speed and AI. Top agents get leads first—but with AI, you respond first even if you get the lead second. AI levels the playing field for solo agents.
+                  Be specific and be consistent. Choose a narrow area, publish accurate content about it, reply to enquiries promptly, and follow up on the date you said you would.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">What's the best time to generate listings in Calgary?</h3>
+                <h3 className="font-bold mb-2">When should I start talking to spring sellers?</h3>
                 <p className="text-gray-700">
-                  Jan-Feb. Sellers research in winter, list in spring. Capture them early with winter content marketing. AI nurtures them until they're ready to list in March.
+                  In winter. Publish seller-preparation content in January and February, note each seller's intended timing, and stay in touch until they are ready to list.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Is video really necessary in Calgary?</h3>
+                <h3 className="font-bold mb-2">Is video worth the effort in Calgary?</h3>
                 <p className="text-gray-700">
-                  Yes. Large city, winter weather, interprovincial buyers who can't visit 20 times. Video tours eliminate 60% of unnecessary showings and save hours of drive time.
+                  It suits the city: distances are long, winters are cold, and buyers from other provinces cannot visit often. A video tour lets a buyer rule a home in or out before anyone drives across town.
                 </p>
               </Card>
             </div>
@@ -756,55 +699,63 @@ const CalgaryMarketingGuide = () => {
               <h2 className="text-3xl font-bold mb-4">Conclusion</h2>
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg">
-                  Calgary's real estate market is unique. Oil economy volatility, suburban sprawl, harsh winters, and interprovincial migration require specialized marketing strategies.
+                  Calgary has its own conditions: an energy-driven economy, spread-out communities, hard winters and steady arrivals from other provinces. Marketing that takes those into account will fit better than advice written for another city.
                 </p>
                 <div className="bg-white p-6 rounded-lg">
                   <p className="font-bold mb-3">Key Takeaways:</p>
                   <ul className="space-y-2">
-                    <li>✓ Hyperlocal content ranks well ("Mahogany homes", "Auburn Bay real estate")</li>
-                    <li>✓ Winter nurturing builds spring pipeline (80+ warm leads by March)</li>
-                    <li>✓ AI captures after-hours and weekend leads (63% come after 6 PM)</li>
-                    <li>✓ Video tours reduce unnecessary showings by 60%</li>
-                    <li>✓ Interprovincial migration is huge opportunity ($500k+ savings)</li>
-                    <li>✓ Energy sector buyers are high-income, motivated purchasers</li>
-                    <li>✓ Family-focused marketing captures 35% of buyers</li>
+                    <li>✓ Write accurate content about specific communities</li>
+                    <li>✓ Use winter to stay in touch with people who will act in spring</li>
+                    <li>✓ Decide in advance how evening and weekend enquiries get answered</li>
+                    <li>✓ Offer video tours so buyers can narrow their list from home</li>
+                    <li>✓ Prepare a relocation guide for buyers arriving from other provinces</li>
+                    <li>✓ Build contacts with the people who handle energy-sector relocation</li>
+                    <li>✓ Describe what families look for: schools, parks and recreation nearby</li>
                   </ul>
                 </div>
-                <p className="text-xl font-bold text-primary pt-4">
-                  The Winning Formula for Calgary:
-                </p>
-                <p className="text-xl font-bold text-primary">
-                  AI Automation + Hyperlocal Content + Video Marketing = Calgary Real Estate Success
-                </p>
-                <p className="text-lg font-semibold pt-2">
-                  Calgary agents who adapt to AI now will dominate the market in 2026-2027.
-                </p>
               </div>
+            </Card>
+          </section>
+
+          {/* Where Realtor Desk fits */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold mb-6">Where Realtor Desk Fits</h2>
+            <Card className="p-6">
+              <p className="text-gray-700 mb-4">
+                Realtor Desk is a CRM for a single Canadian real estate agent. It does not generate leads, create marketing content or supply Calgary market data. It helps you keep track of the people your marketing brings in:
+              </p>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• One list of leads, with one conversation timeline per client</li>
+                <li>• A rule-based lead score from 0 to 100, with the breakdown shown</li>
+                <li>• A suggested next action and a time to take it</li>
+                <li>• An in-app assistant that drafts a reply for you to review. Nothing is sent to a client without you</li>
+                <li>• The date and source of consent recorded on each contact</li>
+                <li>• French or English set per contact</li>
+              </ul>
+              <p className="text-sm text-gray-700 mt-4">
+                A single listing can be imported from a Realtor.ca address or an MLS number. Native CREA DDF® sync is on the roadmap and is not live yet.
+              </p>
             </Card>
           </section>
 
           {/* Final CTA */}
           <section className="text-center py-12">
             <Card className="p-8 bg-gradient-to-r from-primary to-blue-600 text-white">
-              <h2 className="text-3xl font-bold mb-4">Ready to Dominate Calgary Real Estate?</h2>
+              <h2 className="text-3xl font-bold mb-4">Keep Your Calgary Leads in One Place</h2>
               <p className="text-xl mb-6">
-                RealtorDesk AI is built for Canadian agents—with Calgary market strategies built in.
+                Realtor Desk is a CRM for Canadian real estate agents. CAD $149 a month for a single agent.
               </p>
-              <ul className="space-y-2 mb-8 text-lg">
-                <li>✓ Capture Calgary leads 24/7 (even at -30°C)</li>
-                <li>✓ Respond within seconds</li>
-                <li>✓ CREA DDF integration for Calgary MLS (coming Q3 2026)</li>
-                <li>✓ Winter lead nurturing automation</li>
-                <li>✓ Video script generation</li>
-              </ul>
+              <p className="mb-8 text-lg">
+                14-day trial. A card is collected up front and nothing is charged before day 14.
+              </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary" className="text-lg px-8">
-                  <Link to="/demo">
+                  <Link to="/signup">
                     Start Free 14-Day Trial <ArrowRight className="ml-2" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="text-lg px-8 bg-white text-primary hover:bg-gray-100">
-                  <Link to="/pricing">See Calgary Agent Pricing</Link>
+                  <Link to="/pricing">See Pricing</Link>
                 </Button>
               </div>
             </Card>
@@ -816,20 +767,20 @@ const CalgaryMarketingGuide = () => {
             <div className="grid md:grid-cols-3 gap-4">
               <Link to="/blog/ai-chatbot-real-estate-websites-canada">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">AI Chatbot Implementation</h3>
-                  <p className="text-sm text-gray-600">Capture after-hours Calgary leads</p>
+                  <h3 className="font-bold mb-2">Website Chatbots: A Category Guide</h3>
+                  <p className="text-sm text-gray-600">A general guide. Realtor Desk does not offer a chatbot</p>
                 </Card>
               </Link>
               <Link to="/resources/voice-ai-real-estate-lead-follow-up-canada">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">Voice AI Lead Follow-Up</h3>
-                  <p className="text-sm text-gray-600">Call 100+ Calgary leads per day</p>
+                  <h3 className="font-bold mb-2">Voice AI: A Category Guide</h3>
+                  <p className="text-sm text-gray-600">A general guide. Realtor Desk does not offer voice AI</p>
                 </Card>
               </Link>
               <Link to="/features/listing-import">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">CREA DDF Integration</h3>
-                  <p className="text-sm text-gray-600">Sync with Calgary MLS automatically</p>
+                  <h3 className="font-bold mb-2">Listing Import</h3>
+                  <p className="text-sm text-gray-600">Import a single listing from a Realtor.ca address or an MLS number</p>
                 </Card>
               </Link>
             </div>

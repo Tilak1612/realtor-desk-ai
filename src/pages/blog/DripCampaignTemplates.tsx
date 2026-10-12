@@ -26,7 +26,7 @@ const DripCampaignTemplates = () => {
         article
         publishedTime="2025-01-29"
         modifiedTime="2025-01-29"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/real-estate-drip-campaign-templates-canada-2025"
         structuredData={[
           {
@@ -34,8 +34,8 @@ const DripCampaignTemplates = () => {
             "@type": "Article",
             "headline": "15 Real Estate Drip Campaign Templates for Canadian Agents (2025 Edition)",
             "description": "15 proven real estate email drip campaign templates for Canadian agents. Buyer nurture, seller follow-up, and listing alerts. CASL-compliant.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-29",
             "dateModified": "2025-01-29"
           }
@@ -445,42 +445,38 @@ const DripCampaignTemplates = () => {
               <Card className="p-6 border-2 border-primary">
                 <div className="flex justify-between items-start mb-3">
                   <h4 className="text-xl font-bold">RealtorDesk AI</h4>
-                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">Best for Canadian Agents</span>
+                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">Our product</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  All 15 templates pre-loaded, CASL/PIPEDA compliant, integrated with full CRM, AI-powered personalization.
+                  A CRM for Canadian agents. It does not send these sequences for you today: a sequence builder exists, but scheduled sending is not switched on, and the templates on this page are not pre-loaded.
                 </p>
                 <div className="text-sm">
-                  <p className="font-semibold mb-2">Key Features:</p>
+                  <p className="font-semibold mb-2">What it does do:</p>
                   <ul className="space-y-1 mb-4">
-                    <li>• Pre-built Canadian market templates (bilingual EN/FR)</li>
-                    <li>• Automatic CASL compliance + consent tracking</li>
-                    <li>• Triggered campaigns (new listing, price drop, etc.)</li>
-                    <li>• A/B testing built-in</li>
-                    <li>• Performance analytics dashboard</li>
+                    <li>• Records the date and source of consent on each contact</li>
+                    <li>• Refuses to send to a contact with no consent on file</li>
+                    <li>• Lets you set French or English per contact</li>
+                    <li>• Suggests a next action, and drafts a reply for you to edit and send</li>
                   </ul>
-                  <p className="text-xl font-bold text-primary">$69/month</p>
-                  <p className="text-xs text-muted-foreground">Includes unlimited contacts + full CRM</p>
+                  <p className="text-xs text-muted-foreground">CAD $149 a month for a single agent. See the pricing page for details.</p>
                 </div>
               </Card>
 
               <Card className="p-5">
                 <h4 className="text-lg font-bold mb-2">Mailchimp</h4>
-                <p className="text-sm text-muted-foreground mb-2">Popular general email platform. Requires manual setup of sequences.</p>
-                <p className="text-sm"><strong>Pricing:</strong> $20-$100/month depending on list size</p>
+                <p className="text-sm text-muted-foreground mb-2">A general email platform with automated sequences. Check its own site for current plans and for how it records consent.</p>
               </Card>
 
               <Card className="p-5">
                 <h4 className="text-lg font-bold mb-2">Follow Up Boss</h4>
-                <p className="text-sm text-muted-foreground mb-2">Real estate CRM with email automation. US-focused, CASL compliance unclear.</p>
-                <p className="text-sm"><strong>Pricing:</strong> $69-$99/user/month</p>
+                <p className="text-sm text-muted-foreground mb-2">A real estate CRM that lists automations among its features. Check its pricing page for current plans, and ask how consent is recorded.</p>
               </Card>
             </div>
 
             <Card className="p-8 mb-8 bg-gradient-to-br from-primary/10 to-secondary/10">
               <h3 className="text-2xl font-bold mb-4 text-center">Ready to Automate Your Follow-Up?</h3>
               <p className="text-center text-muted-foreground mb-6">
-                Get all 15 drip campaign templates pre-loaded in RealtorDesk AI. No setup required—just import your leads and watch conversions increase.
+                Use the templates above in whichever tool sends your sequences. Realtor Desk keeps the consent record and the conversation history beside each contact.
               </p>
               <div className="flex justify-center gap-4">
                 <Link to="/pricing">

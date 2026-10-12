@@ -181,8 +181,10 @@ export default function Pricing() {
 
           <h3 className="text-lg font-semibold mb-2">What is not included yet?</h3>
           <p className="text-rd-ink-600 leading-[1.6] mb-6">
-            Native CREA DDF® listing sync is on the roadmap for Q3 2026 — until
-            then, listings come in through the Realtor.ca importer. Google
+            Native CREA DDF® listing sync is on the roadmap and is not live yet.
+            Until then, listings come in through the Realtor.ca importer. Seats,
+            a shared pipeline and team reports on the Team plan are also on the
+            roadmap: today every plan is used by one agent. Google
             Calendar and Outlook connect today, but pushing appointments to them
             automatically is still in build. We would rather you read that here
             than discover it in week two.

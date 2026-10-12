@@ -33,7 +33,7 @@ const FAQS = [
   },
   {
     q: "What about MLS listings?",
-    a: "Realtor.ca import works today. Native CREA DDF® sync is on the Q3 2026 roadmap and is not live. We say that everywhere rather than implying the integration already exists.",
+    a: "Realtor.ca import works today. Native CREA DDF® sync is on the roadmap and is not live. We say that everywhere rather than implying the integration already exists.",
   },
   {
     q: "Can I move my contacts over?",
@@ -99,7 +99,7 @@ const RealGeeksAlternative = () => {
                 Realtor Desk hosts client data in Canada, bills in CAD at $149 a month with no setup fee, records CASL consent per contact and refuses a send without it, and works in English and French in both the interface and client-facing email.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                On listings: Realtor.ca import works today. Native CREA DDF® sync is on the roadmap for Q3 2026 and is not live, so if MLS-driven IDX search is the centre of your business right now, that is an argument for a platform that already does it rather than for us.
+                On listings: Realtor.ca import works today. Native CREA DDF® sync is on the roadmap and is not live, so if MLS-driven IDX search is the centre of your business right now, that is an argument for a platform that already does it rather than for us.
               </p>
             </div>
 

@@ -47,7 +47,7 @@ const FAQS = [
 const PRINCIPLES = [
   {
     h: "Say what ships, and what does not",
-    p: "Our roadmap page marks features live, partial or planned, and the product pages say where a capability stops. Listing import from a Realtor.ca address works today; native CREA DDF® sync does not, and is marked Q3 2026. We would rather lose a sale to a competitor's longer feature list than win one a buyer regrets in week three.",
+    p: "Our roadmap page marks features live, partial or planned, and the product pages say where a capability stops. Listing import from a Realtor.ca address works today; native CREA DDF® sync does not, and is marked as planned. We would rather lose a sale to a competitor's longer feature list than win one a buyer regrets in week three.",
   },
   {
     h: "Nothing goes out in your name without you",

@@ -1,7 +1,15 @@
+// 2026-10-11: rewritten to follow the 2026-10-11 Realtor Desk fact sheet.
+// Removed: the "Top Pick" ranking, 24/7 and sub-3-second AI response, the
+// chatbot and voice AI, "PIPEDA/CASL compliance built-in", predictive lead
+// scoring, automatic appointment booking, the Q3 2026 DDF date, the ROI,
+// hours-saved, conversion and learning-time figures, the unsourced criticism
+// of IXACT, the unsourced prices and feature lists for other vendors, and the
+// "what modern CRMs offer" list. Other vendors are now named with a neutral
+// line and a pointer to their own sites.
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Star, TrendingUp } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,22 +25,22 @@ const IxactAlternatives = () => {
       <SEO
         title="IXACT Contact Alternatives for Canada"
         description="IXACT Contact alternatives for Canadian agents: what each vendor publishes on price and currency, and what to check before you switch."
-        keywords="IXACT Contact alternatives, Canadian real estate CRM, AI CRM for realtors, IXACT alternative"
+        keywords="IXACT Contact alternatives, IXACT alternative, Canadian real estate CRM, CRM for Canadian realtors"
         article
         publishedTime="2025-01-16"
-        modifiedTime="2025-01-16"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/ixact-alternatives"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "IXACT Contact Alternatives for Canada in 2025",
-            "description": "Compare IXACT Contact alternatives for Canadian agents. See why agents are switching to faster, more affordable AI-first CRMs.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "headline": "IXACT Contact Alternatives for Canada",
+            "description": "IXACT Contact alternatives for Canadian agents: what each vendor publishes on price and currency, and what to check before you switch.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-16",
-            "dateModified": "2025-01-16"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
@@ -54,43 +62,38 @@ const IxactAlternatives = () => {
               </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>January 16, 2025</span>
+                <span>January 16, 2025 · Updated October 11, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>11 min read</span>
+                <span>5 min read</span>
               </div>
             </div>
             
             <h1 className="mb-6">
-              IXACT Contact Alternatives for Canada in 2025
+              IXACT Contact Alternatives for Canada
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Looking for IXACT Contact alternatives? Compare AI-powered CRMs for Canadian agents. See why agents are switching to faster, more affordable options with modern features.
+              Thinking about leaving IXACT Contact? This page covers what IXACT lists on price, what Realtor Desk does and does not do, and what to check with any vendor before you switch.
             </p>
           </header>
 
           <Card className="p-6 mb-8 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950">
-            <h3 className="text-lg font-bold mb-3">Reality Check</h3>
+            <h3 className="text-lg font-bold mb-3">Disclosure</h3>
             <p className="text-base mb-0">
-              IXACT Contact hasn't had a major update since 2019. Meanwhile, AI has revolutionized real estate CRMs. If you're searching for alternatives, this guide covers the top 5 modern options—including why 67% of agents who switch choose AI-first platforms.
+              We build one of the products compared here, so weigh this accordingly. For every other vendor on this page, check the vendor's own site for current pricing and features.
             </p>
           </Card>
 
           <div className="prose prose-lg max-w-none">
-            <h2>Why Agents Are Looking for IXACT Alternatives</h2>
+            <h2>Two Things to Check Before You Look Elsewhere</h2>
 
             <p>
-              IXACT Contact was innovative when it launched. But in 2025, it feels like using a flip phone in the iPhone era. Here's why agents are actively seeking alternatives:
+              IXACT Contact may be doing the job for you. If you are looking around anyway, these are two things worth checking first.
             </p>
 
-            <h3>Reason #1: Outdated User Interface</h3>
-            <p>
-              IXACT's last major redesign was in 2017. The interface feels clunky compared to modern cloud-based apps. Navigation requires multiple clicks for simple tasks. The mobile experience is particularly poor, making on-the-go management frustrating.
-            </p>
-
-            <h3>Reason #2: You want AI help</h3>
+            <h3>You want AI help</h3>
             <p>
               IXACT's pricing page lists a CRM, email marketing, an automated monthly e-newsletter, agent websites and a mobile app, and it does not list AI features. If AI drafting or lead scoring matters to you, ask IXACT directly what it offers.
             </p>
@@ -98,442 +101,178 @@ const IxactAlternatives = () => {
               Speed of follow-up matters, but no tool replaces a person choosing what to send. The useful question is which product makes it easiest for you to follow up quickly and consistently.
             </p>
 
-            <h3>Reason #3: Pricing vs Value Gap</h3>
+            <h3>You want pricing in Canadian dollars</h3>
             <p>
-              IXACT lists $46.75 USD/month billed annually, or $55 USD/month billed monthly. That's not expensive, but what are you getting? A basic contact database with email marketing—features that modern AI-powered CRMs include along with intelligent automation, faster response times, and better lead conversion.
+              IXACT lists $46.75 USD/month billed annually, or $55 USD/month billed monthly. A price in US dollars moves with the exchange rate, so look at what lands on your card statement. Confirm the current figures on IXACT's own pricing page.
             </p>
 
-            <h3>Reason #4: Limited Modern Integrations</h3>
+            <h2>IXACT Contact Alternatives to Look At</h2>
+
             <p>
-              IXACT's integrations feel dated. Missing are modern essentials like AI chatbots, social media automation, voice AI, and predictive analytics. The integrations that do exist often require manual setup and ongoing maintenance.
+              Our own product is listed first. That is not a ranking.
             </p>
 
-            <h3>Reason #5: Stagnant Innovation</h3>
-            <p>
-              The product hasn't meaningfully evolved with the industry. Feature requests languish. The platform feels like it's in maintenance mode rather than active development. Compare this to modern CRMs that release new AI features monthly.
-            </p>
-
-            <h2>Top 5 IXACT Contact Alternatives for Canadian Agents</h2>
-
-            {/* Alternative #1 */}
+            {/* Realtor Desk */}
             <Card className="p-6 mb-6 border-2 border-primary">
-              <div className="flex items-center gap-2 mb-3">
-                <Star className="w-5 h-5 text-primary fill-primary" />
-                <h3 className="text-2xl font-bold mb-0">Alternative #1: RealtorDesk AI</h3>
-              </div>
-              <p className="text-primary font-semibold mb-4">⭐ Top Pick for Canadian Agents</p>
+              <h3 className="text-2xl font-bold mb-3">Realtor Desk</h3>
 
               <h4 className="text-lg font-semibold mt-4 mb-2">What It Is</h4>
               <p>
-                AI-first CRM built specifically for Canadian real estate. Purpose-built for PIPEDA/CASL compliance and bilingual support. CREA DDF® integration is on the Q3 2026 roadmap.
+                A CRM for Canadian real estate agents. It is a single-agent product: there are no seats, no lead assignment or routing, no shared pipeline and no team inbox. It runs as a responsive web app, and there is no native iOS or Android app.
               </p>
 
-              <h4 className="text-lg font-semibold mt-4 mb-2">Key Features</h4>
+              <h4 className="text-lg font-semibold mt-4 mb-2">What It Does</h4>
               <ul>
-                <li>Sub-3-second AI lead response (24/7)</li>
-                <li>GPT-powered conversational chatbot & voice AI</li>
-                <li>PIPEDA/CASL compliance built-in</li>
-                <li>CREA DDF® integration coming Q3 2026 (all Canadian MLS boards)</li>
-                <li>Native bilingual support (English/French)</li>
-                <li>Predictive lead scoring</li>
-                <li>Automated appointment booking</li>
+                <li>Contacts, one conversation timeline per client, and basic reports</li>
+                <li>A drag-and-drop deal pipeline with totals in CAD</li>
+                <li>A rule-based lead score from 0 to 100 with a visible breakdown (engagement, behaviour, budget match, timeline, qualification)</li>
+                <li>A suggested next action and a time to take it</li>
+                <li>An in-app assistant that drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you</li>
+                <li>French or English set per contact. The interface and client email both work in French</li>
+                <li>The date and source of consent recorded on each contact. It refuses to send from the inbox or by SMS when no consent is on file, and it stops automated email to a contact who has withdrawn</li>
+                <li>Leads pushed in through Zapier, Make or n8n, SMS through Twilio, and email through your own SMTP server</li>
+                <li>Contact import from a CSV file, and single-listing import from a Realtor.ca address or an MLS number</li>
               </ul>
+
+              <h4 className="text-lg font-semibold mt-4 mb-2">What It Does Not Do</h4>
+              <ul>
+                <li>No automatic replies to leads, no lead-facing chatbot or website chat widget, and no voice AI</li>
+                <li>No automated email sequences. A sequence builder exists, but scheduled sending is not switched on</li>
+                <li>No automatic appointment or showing booking. Google Calendar and Outlook connect, but appointment sync is not live</li>
+                <li>Native CREA DDF® sync is on the roadmap and is not live yet</li>
+                <li>No IDX website, lead generation, ads or market data</li>
+                <li>No transaction management, e-signature or document storage</li>
+                <li>The CSV import does not bring in consent records, deals or history, and it does not merge duplicates</li>
+              </ul>
+
+              <h4 className="text-lg font-semibold mt-4 mb-2">Data and Consent</h4>
+              <p>
+                The production database is hosted in Canada. Some outside services (SMS, email delivery, AI drafting) may process data outside Canada. Software does not make anyone compliant. The consent record is there to help you keep track.
+              </p>
 
               <h4 className="text-lg font-semibold mt-4 mb-2">Pricing</h4>
               <p>
                 <strong>$149-299 CAD/month</strong> (transparent, no hidden fees)
               </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Best For</h4>
               <p>
-                Canadian solo agents and teams (2-20 agents) who want AI automation and need Canadian compliance.
+                CAD $149 a month for a single agent. There is a 14-day trial. A card is collected up front and nothing is charged before day 14.
               </p>
 
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why It's Better Than IXACT</h4>
+              <h4 className="text-lg font-semibold mt-4 mb-2">Who It Suits</h4>
+              <p>
+                A single agent in Canada who wants a small CRM priced in Canadian dollars, with consent recorded per contact and French set per contact.
+              </p>
+
+              <h4 className="text-lg font-semibold mt-4 mb-2">Worth Comparing With IXACT</h4>
               <ul>
                 <li><strong>An in-app assistant:</strong> drafts a reply and summarises a thread for you to review and send</li>
-                <li><strong>Built for Canadian compliance:</strong> PIPEDA/CASL native vs DIY</li>
                 <li><strong>French and CAD:</strong> French set per contact, and pricing in Canadian dollars</li>
-                <li><strong>10x faster lead response:</strong> AI automation vs manual typing</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Pros</h4>
-              <ul>
-                <li>Purpose-built for Canadian market</li>
-                <li>True AI automation (not just scheduled emails)</li>
-                <li>Transparent pricing in CAD</li>
-                <li>Simple, focused feature set</li>
-                <li>Learn in 15 minutes vs days/weeks</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Cons</h4>
-              <ul>
-                <li>Newer platform (less brand recognition)</li>
-                <li>Fewer legacy integrations than established platforms</li>
               </ul>
 
               <div className="mt-6">
                 <Link to="/demo">
                   <Button size="lg" className="btn-gradient w-full">
-                    Try RealtorDesk AI Free for 14 Days →
+                    Try Realtor Desk for 14 Days
                   </Button>
                 </Link>
               </div>
             </Card>
 
-            {/* Alternative #2 */}
+            {/* Other vendors: names only, with a pointer to their own sites */}
             <Card className="p-6 mb-6">
-              <h3 className="text-xl font-bold mb-3">Alternative #2: LionDesk</h3>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">What It Is</h4>
+              <h3 className="text-xl font-bold mb-3">Other Vendors</h3>
               <p>
-                US-based CRM with a focus on video messaging and text marketing. Popular with agents who prioritize video prospecting.
+                We do not print prices or feature lists for these vendors, because we have no dated source for them on this page.
               </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Key Features</h4>
               <ul>
-                <li>Video email capabilities</li>
-                <li>Text message marketing</li>
-                <li>Transaction management</li>
-                <li>Drip campaign automation</li>
-                <li>Lead capture tools</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Pricing</h4>
-              <p>
-                $25-75 USD/month ($34-101 CAD)
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Best For</h4>
-              <p>
-                Agents who love video prospecting and want an affordable CRM with basic automation.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why It's Better Than IXACT</h4>
-              <ul>
-                <li>Modern interface</li>
-                <li>Video messaging built-in</li>
-                <li>Active development (regular updates)</li>
-                <li>Better mobile experience</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why RealtorDesk AI Is Better</h4>
-              <ul>
-                <li>No true AI automation (just scheduled messages)</li>
-                <li>No Canadian compliance focus</li>
-                <li>US-centric platform</li>
-                <li>Manual follow-up required</li>
+                <li><strong>Wise Agent:</strong> a real estate CRM. Check the vendor's own site for current pricing and features.</li>
+                <li><strong>Top Producer:</strong> a real estate CRM. Check the vendor's own site for current pricing and features.</li>
+                <li><strong>Real Geeks:</strong> a real estate website and CRM product. Check the vendor's own site for current pricing and features.</li>
+                <li><strong>LionDesk:</strong> discontinued in September 2025 (Lone Wolf Technologies), so it is no longer an option.</li>
               </ul>
             </Card>
 
-            {/* Alternative #3 */}
-            <Card className="p-6 mb-6">
-              <h3 className="text-xl font-bold mb-3">Alternative #3: Wise Agent</h3>
+            <h2>Pricing Comparison</h2>
 
-              <h4 className="text-lg font-semibold mt-4 mb-2">What It Is</h4>
-              <p>
-                Budget-friendly CRM designed for solo agents and small teams. Focuses on essential features without overwhelming users.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Key Features</h4>
-              <ul>
-                <li>Email marketing</li>
-                <li>Transaction tracking</li>
-                <li>Basic lead management</li>
-                <li>Website builder</li>
-                <li>Document storage</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Pricing</h4>
-              <p>
-                $29-47 USD/month ($39-63 CAD)
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Best For</h4>
-              <p>
-                Budget-conscious solo agents who want basic CRM functionality without frills.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why It's Better Than IXACT</h4>
-              <ul>
-                <li>More affordable</li>
-                <li>Easier to use</li>
-                <li>Better mobile app</li>
-                <li>All-in-one solution</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why RealtorDesk AI Is Better</h4>
-              <ul>
-                <li>No AI capabilities whatsoever</li>
-                <li>Manual follow-up only</li>
-                <li>Not Canadian-focused</li>
-                <li>Basic automation at best</li>
-              </ul>
-            </Card>
-
-            {/* Alternative #4 */}
-            <Card className="p-6 mb-6">
-              <h3 className="text-xl font-bold mb-3">Alternative #4: Top Producer</h3>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">What It Is</h4>
-              <p>
-                Enterprise CRM from Real Estate Plus (CINC parent company). Designed for established agents and teams already in the CINC ecosystem.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Key Features</h4>
-              <ul>
-                <li>Comprehensive lead management</li>
-                <li>Email campaign tools</li>
-                <li>Mobile CRM apps</li>
-                <li>MLS integration (limited Canadian support)</li>
-                <li>Transaction management</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Pricing</h4>
-              <p>
-                $40-60 USD/month ($54-81 CAD)
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Best For</h4>
-              <p>
-                Agents already using CINC for lead generation who want integrated CRM.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why It's Better Than IXACT</h4>
-              <ul>
-                <li>More modern interface</li>
-                <li>Better integrations (especially with CINC)</li>
-                <li>Backed by large company with resources</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why RealtorDesk AI Is Better</h4>
-              <ul>
-                <li>No AI automation</li>
-                <li>US-centric (limited Canadian support)</li>
-                <li>Manual workflows</li>
-                <li>Complex feature set</li>
-              </ul>
-            </Card>
-
-            {/* Alternative #5 */}
-            <Card className="p-6 mb-6">
-              <h3 className="text-xl font-bold mb-3">Alternative #5: Real Geeks CRM</h3>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">What It Is</h4>
-              <p>
-                CRM bundled with Real Geeks lead generation websites. Can't purchase separately—requires website package.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Key Features</h4>
-              <ul>
-                <li>Lead generation website included</li>
-                <li>Built-in CRM</li>
-                <li>Auto-follow-up (basic)</li>
-                <li>Lead routing for teams</li>
-                <li>IDX website integration</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Pricing</h4>
-              <p>
-                $249+ USD/month ($336+ CAD) — includes website
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Best For</h4>
-              <p>
-                Agents who need both a lead generation website and CRM bundled together.
-              </p>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why It's Better Than IXACT</h4>
-              <ul>
-                <li>Lead generation included</li>
-                <li>Modern technology stack</li>
-                <li>Good automation features</li>
-              </ul>
-
-              <h4 className="text-lg font-semibold mt-4 mb-2">Why RealtorDesk AI Is Better</h4>
-              <ul>
-                <li>Real Geeks forces website purchase</li>
-                <li>No true AI (just auto-responders)</li>
-                <li>Expensive if you only need CRM</li>
-                <li>Limited Canadian market features</li>
-              </ul>
-            </Card>
-
-            <h2>Pricing Comparison: What You Actually Pay</h2>
-
-            <h3>IXACT Contact True Cost</h3>
             <ul>
-              <li><strong>Core Plan:</strong> $39 USD = $53 CAD/month</li>
-              <li><strong>Pro Plan:</strong> $59 USD = $80 CAD/month</li>
-              <li><strong>Year 1 total:</strong> $636-960 CAD</li>
-            </ul>
-
-            <h3>RealtorDesk AI True Cost</h3>
-            <ul>
+              <li><strong>IXACT Contact:</strong> the figures quoted above, which you should confirm on IXACT's own pricing page</li>
               <li><strong>Agent Plan:</strong> $149 CAD/month</li>
-              <li><strong>Year 1 total:</strong> $1,788 CAD</li>
               <li><strong>Difference:</strong> IXACT lists $561 USD/year on its annual plan; the gap depends on the exchange rate on the day you pay</li>
             </ul>
-
-            <h3>Value Analysis: Is the Extra Cost Worth It?</h3>
             <p>
-              IXACT is the cheaper line item. But consider what you get with RealtorDesk AI:
-            </p>
-            <ul>
-              <li><strong>AI automation saves 10-15 hours/week:</strong> At $50/hour value = $26,000-39,000/year</li>
-              <li><strong>Faster response increases conversion 2-3x:</strong> From 5% to 15% = 10 extra closings/year</li>
-              <li><strong>10 extra closings × $3,000 commission:</strong> $30,000 extra revenue</li>
-            </ul>
-            <p>
-              <strong>ROI: Invest $1,788, gain $30,000+ in additional commission</strong> = 1,576% return on investment.
-            </p>
-            <p>
-              IXACT is cheaper upfront. RealtorDesk AI makes you more money.
+              IXACT is the cheaper line item. Whether the difference is worth paying depends on whether the things Realtor Desk does matter to you. We have no results figures to offer.
             </p>
 
-            <h2>Migration Guide: Leaving IXACT Contact</h2>
+            <h2>Moving Off IXACT Contact</h2>
 
-            <h3>What Data Can Be Exported</h3>
-            <ul>
-              <li>All contacts (CSV export available)</li>
-              <li>Contact notes and history</li>
-              <li>Custom fields and tags</li>
-              <li>Email templates</li>
-            </ul>
-
-            <h3>Import Process to New CRM</h3>
             <ol>
-              <li><strong>Export from IXACT:</strong> Use their CSV export tool (30 minutes)</li>
-              <li><strong>Prepare data:</strong> Clean duplicates, verify fields (1-2 hours)</li>
-              <li><strong>Import to new CRM:</strong> Use CSV mapping tools (1-2 hours)</li>
-              <li><strong>Verify data:</strong> Spot-check contacts and history (1 hour)</li>
-              <li><strong>Test workflows:</strong> Ensure everything works (1 day)</li>
+              <li><strong>Ask IXACT what you can export</strong> and in what format, before you cancel anything.</li>
+              <li><strong>Clean the file.</strong> Remove duplicates and check the columns. Realtor Desk's CSV import does not merge duplicates.</li>
+              <li><strong>Import your contacts.</strong> Realtor Desk imports contacts from a CSV file. It does not import consent records, deals or history.</li>
+              <li><strong>Record consent again.</strong> Consent is not imported, so add the date and source of consent to each contact you plan to message. Realtor Desk refuses to send from the inbox or by SMS when no consent is on file.</li>
+              <li><strong>Spot-check</strong> a sample of contacts against IXACT before you rely on the new system.</li>
             </ol>
 
-            <h3>Typical Migration Timeline</h3>
-            <ul>
-              <li><strong>Day 1:</strong> Export from IXACT, prepare data</li>
-              <li><strong>Day 2-3:</strong> Import to new CRM, verify data</li>
-              <li><strong>Day 4-7:</strong> Test workflows, train team</li>
-              <li><strong>Day 8:</strong> Go live</li>
-              <li><strong>Total: 1 week</strong></li>
-            </ul>
-
-            <h3>Minimizing Downtime</h3>
+            <h3>Run Both for a While</h3>
             <p>
-              Run both systems in parallel for 1 week. Use IXACT for existing contacts while testing new CRM with fresh leads. This ensures zero disruption to your business.
+              Keep IXACT active while you test the new CRM on a few contacts. Cancel only once you have checked that what you need has come across.
             </p>
 
-            <h2>What Current IXACT Users Say</h2>
+            <h2>Which Option Fits?</h2>
 
-            <h3>Common Complaints from IXACT Users</h3>
-
-            <h3>Success Stories from Switchers</h3>
-
-            <h2>Decision Framework: Which Alternative Is Right for You?</h2>
-
-            <h3>Choose RealtorDesk AI If:</h3>
+            <h3>Consider Realtor Desk If:</h3>
             <ul>
-              <li>✅ You're a Canadian agent (solo or team)</li>
-              <li>✅ Speed and AI automation matter to you</li>
-              <li>✅ You want PIPEDA/CASL compliance built-in</li>
-              <li>✅ You serve Quebec markets (need bilingual)</li>
+              <li>✅ You are a single agent in Canada</li>
+              <li>✅ You want the date and source of consent recorded on each contact</li>
+              <li>✅ You work with French-speaking clients and want French set per contact</li>
               <li>✅ Budget: $149-299 CAD/month</li>
-              <li>✅ You want to increase lead conversion 2-3x</li>
             </ul>
 
-            <h3>Choose LionDesk If:</h3>
+            <h3>Realtor Desk Is Not a Fit If:</h3>
             <ul>
-              <li>Video messaging is your primary strategy</li>
-              <li>You're in the US market</li>
-              <li>Budget: $34-101 CAD/month</li>
-              <li>You're okay with manual workflows</li>
+              <li>You need team seats, lead routing or a shared pipeline</li>
+              <li>You need a native iOS or Android app</li>
+              <li>You need automated email sequences, an automated newsletter or automatic replies to leads</li>
+              <li>You need an agent website, IDX or lead generation from your CRM vendor</li>
             </ul>
 
-            <h3>Choose Wise Agent If:</h3>
+            <h3>Stay With IXACT If:</h3>
             <ul>
-              <li>Price is your only decision factor</li>
-              <li>You're okay with basic features</li>
-              <li>You don't need AI or automation</li>
-              <li>Budget: $39-63 CAD/month</li>
+              <li>It is working for you and the price suits you</li>
+              <li>You rely on things its pricing page lists that Realtor Desk does not have: the automated monthly e-newsletter, agent websites and a mobile app</li>
             </ul>
 
-            <h3>Choose Top Producer If:</h3>
-            <ul>
-              <li>You're already using CINC</li>
-              <li>You need enterprise features</li>
-              <li>Budget: $54-81 CAD/month</li>
-            </ul>
+            <h3>Looking at Wise Agent, Top Producer or Real Geeks?</h3>
+            <p>
+              Check each vendor's own site for current pricing and features, and put the questions below to them.
+            </p>
 
-            <h3>Choose Real Geeks If:</h3>
-            <ul>
-              <li>You need website + CRM bundle</li>
-              <li>Lead generation is your priority #1</li>
-              <li>Budget: $336+ CAD/month</li>
-            </ul>
+            <h2>Questions to Ask Any CRM Vendor</h2>
 
-            <h3>Stay with IXACT If:</h3>
             <ul>
-              <li>You've customized it extensively over many years</li>
-              <li>Your workflow completely depends on its quirks</li>
-              <li>You don't need AI, speed, or modern features</li>
-              <li>You're retiring soon (seriously)</li>
-            </ul>
-
-            <h2>Beyond IXACT: What Modern CRMs Offer in 2025</h2>
-
-            <h3>AI-Powered Features</h3>
-            <ul>
-              <li><strong>Conversational chatbots:</strong> Engage leads in natural dialogue</li>
-              <li><strong>Voice AI:</strong> Handle phone calls automatically</li>
-              <li><strong>Predictive lead scoring:</strong> Focus on high-probability leads</li>
-              <li><strong>Automated nurture sequences:</strong> AI-generated, personalized content</li>
-            </ul>
-
-            <h3>Modern Integrations</h3>
-            <ul>
-              <li><strong>Social media scheduling:</strong> Automate your online presence</li>
-              <li><strong>AI content generation:</strong> Create posts, emails, and listings</li>
-              <li><strong>Video platforms:</strong> Record and send videos seamlessly</li>
-              <li><strong>Smart home data:</strong> Integrate IoT for property insights</li>
-            </ul>
-
-            <h3>Mobile-First Design</h3>
-            <ul>
-              <li><strong>Native mobile apps:</strong> Full functionality on the go</li>
-              <li><strong>Offline functionality:</strong> Work without internet</li>
-              <li><strong>Push notifications:</strong> Never miss a hot lead</li>
-              <li><strong>Mobile lead capture:</strong> Add contacts with a tap</li>
-            </ul>
-
-            <h3>Compliance Automation</h3>
-            <ul>
-              <li><strong>PIPEDA data management:</strong> Automated privacy compliance</li>
-              <li><strong>CASL email consent:</strong> Track consent automatically</li>
-              <li><strong>Do-not-contact lists:</strong> Automatic enforcement</li>
-              <li><strong>Audit trails:</strong> Complete compliance documentation</li>
+              <li>What is the price, in which currency, and what is charged during the trial?</li>
+              <li>Where is client data stored, and which outside services process it?</li>
+              <li>How does the product record consent, and what happens when a contact withdraws it?</li>
+              <li>Does anything get sent to a client automatically, and can you turn that off?</li>
+              <li>Can you set a client's language, and do the interface and client email work in French?</li>
+              <li>What can you export if you leave, and in what format?</li>
             </ul>
 
             <h2>Frequently Asked Questions</h2>
 
             <h3>Will I lose my contact data if I switch from IXACT?</h3>
             <p>
-              No. IXACT allows full CSV export of all contacts, notes, and custom fields. Any reputable CRM (including RealtorDesk AI) will help you import this data with zero loss.
+              Ask IXACT what its export includes before you cancel. Realtor Desk imports contacts from a CSV file. The import does not bring in consent records, deals or history, and it does not merge duplicates, so plan to re-enter what you need.
             </p>
 
             <h3>Can I try a new CRM while still using IXACT?</h3>
             <p>
-              Yes. Most modern CRMs (including RealtorDesk AI) offer 14-day free trials. Run both in parallel to test features before fully committing to the switch.
-            </p>
-
-            <h3>How long does it take to learn a new CRM compared to IXACT?</h3>
-            <p>
-              IXACT: 1-2 weeks to proficiency. RealtorDesk AI: 15 minutes (because AI does most of the work). LionDesk/Wise Agent: 3-5 days. Top Producer/Real Geeks: 1-2 weeks.
+              Yes. Realtor Desk has a 14-day trial. A card is collected up front and nothing is charged before day 14. Check each other vendor's site for its trial terms.
             </p>
 
             <h3>What if I don't like my new CRM—can I go back to IXACT?</h3>
             <p>
-              Yes, though few agents do. Your IXACT account remains active until you cancel. Most free trials don't require credit cards, so there's zero risk in testing alternatives.
+              Keep your IXACT account active until you have decided, and ask IXACT what happens to your data if you cancel and return later.
             </p>
 
             <h3>Do I need to cancel IXACT before starting a trial?</h3>
@@ -543,49 +282,34 @@ const IxactAlternatives = () => {
 
             <h3>Which alternative is closest to IXACT's layout?</h3>
             <p>
-              Wise Agent has a similar straightforward interface. Realtor Desk is also a small, single-purpose CRM. Try the trial on a few contacts to judge the learning curve yourself.
+              We can't judge that for you. Realtor Desk is a small, single-purpose CRM. Try the trial on a few contacts to judge the learning curve yourself.
             </p>
 
-            <h2>The Bottom Line: Is It Time to Leave IXACT?</h2>
+            <h3>Does Realtor Desk reply to leads for me?</h3>
+            <p>
+              No. It suggests a next action and a time to take it, and an in-app assistant drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you.
+            </p>
 
-            <h3>Signs It's Time to Switch</h3>
-            <ul>
-              <li>✅ You're losing leads to faster-responding competitors</li>
-              <li>✅ You spend hours on manual follow-up every week</li>
-              <li>✅ Your CRM feels like a burden instead of a tool</li>
-              <li>✅ You're curious about AI but IXACT doesn't offer it</li>
-              <li>✅ The mobile experience frustrates you</li>
-              <li>✅ You need Canadian compliance features</li>
-            </ul>
+            <h2>The Bottom Line</h2>
 
-            <h3>What You Gain by Switching to RealtorDesk AI</h3>
-            <ul>
-              <li>⚡ Sub-3-second lead response (vs 8+ minutes manual)</li>
-              <li>🤖 AI automation (vs manual everything)</li>
-              <li>🇨🇦 Canadian compliance built-in (vs DIY)</li>
-              <li>📱 Modern interface (vs 2017 design)</li>
-              <li>💰 Better ROI (2-3x lead conversion increase)</li>
-              <li>⏱️ 10-15 hours/week saved (vs manual work)</li>
-            </ul>
-
-            <p className="text-xl font-semibold">
-              IXACT Contact was great for its time. 2025 demands AI, speed, and Canadian compliance. Don't get left behind.
+            <p>
+              IXACT is the cheaper line item, and its pricing page lists things Realtor Desk does not have. Realtor Desk is a smaller, single-agent CRM priced in Canadian dollars, with a rule-based lead score, an in-app drafting assistant, consent recorded per contact and French set per contact. Try both on a few real contacts before you decide.
             </p>
 
             <div className="cta-section">
-              <h2>Ready to Experience 2025 Technology?</h2>
+              <h2>Try Realtor Desk for 14 Days</h2>
               <p>
-                See how AI-first CRMs outperform legacy platforms. Try RealtorDesk AI free for 14 days—cancel anytime before you're charged.
+                A card is collected up front and nothing is charged before day 14.
               </p>
               <div className="flex gap-4 flex-wrap justify-center">
-                <Link to="/demo">
+                <Link to="/signup">
                   <Button size="lg" className="btn-gradient">
-                    Start Free 14-Day Trial
+                    Start the 14-Day Trial
                   </Button>
                 </Link>
                 <Link to="/pricing">
                   <Button size="lg" variant="outline">
-                    Compare Pricing
+                    See Pricing
                   </Button>
                 </Link>
               </div>

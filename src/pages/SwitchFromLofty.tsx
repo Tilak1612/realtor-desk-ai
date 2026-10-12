@@ -4,25 +4,44 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Phone, Upload, Download, GraduationCap, CheckCircle, Brain, DollarSign } from "lucide-react";
+import { Upload, Download, ListChecks, ClipboardCheck, CheckCircle, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: the title
+// and headings that called Lofty's AI fake, the five unsourced crosses against
+// Lofty, and for Realtor Desk "real conversations", "learns from every
+// interaction", "Canadian market predictions (TO, VAN, CAL)", "predictive
+// intelligence", "All features included", "No call/text charges", "No overage
+// charges", "responsive Canadian support" and the empty "Why Canadian agents
+// choose us over Lofty" section. Replaced with what the product does, what it
+// does not, and the published price.
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// both buttons that booked a migration call and the five-step "Simple, Fast
+// Migration Process" (a 15-minute call, staff exporting the Lofty contacts
+// and deals, "Everything moved", "30-minute personalized onboarding" and a
+// promised turnaround time). Replaced with the steps the agent takes
+// themselves, read from src/lib/csvImport.ts and the import modal: a CSV
+// import that creates contacts only, with no consent and no duplicate merging.
+// The money-back sentence is unchanged.
 
 const SwitchFromLofty = () => {
   const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <SEO
-        title="Switch from Lofty | Upgrade to Real AI"
+        title="Switch from Lofty to Realtor Desk"
         description="Moving from Lofty to Realtor Desk: what you would give up, how a CSV move works, and CAD pricing. Lofty quotes pricing on request."
-        keywords="switch from Lofty, Lofty CRM migration, Lofty alternative Canada, RealtorDesk AI"
+        keywords="switch from Lofty, Lofty CRM migration, Lofty alternative Canada, Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/switch-from-lofty"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "Switch from Lofty",
-            "description": "Upgrade from Lofty to RealtorDesk AI with real AI features and Canadian market support."
+            "name": "Switch from Lofty to Realtor Desk",
+            "description": "Moving from Lofty to Realtor Desk: what you would give up, how a CSV move works, and CAD pricing. Lofty quotes pricing on request."
           }
         ]}
       />
@@ -32,80 +51,93 @@ const SwitchFromLofty = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            Upgrade to Real AI
+            Switching from Lofty
           </Badge>
           <h1 className="mb-6">
-            Tired of Lofty's <span className="gradient-text">"AI" That Doesn't Actually Work?</span>
+            Moving from Lofty <span className="gradient-text">to Realtor Desk</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Get true predictive intelligence, transparent pricing, and responsive Canadian support. 
-            Join the agents who upgraded from basic automation to AI that actually closes deals.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+            Realtor Desk is a CRM for a single Canadian agent at a published price of $149 CAD a month.
+            It does less than a full platform, so this page covers what you would give up as well as how the move works.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly.
           </p>
           
           <Link to="/demo">
             <Button size="lg" className="btn-gradient">
-              Schedule Free Migration Call
+              Book a demo
             </Button>
           </Link>
         </div>
       </section>
 
-      {/* Real AI vs Fake AI */}
+      {/* What you give up and what you get. This was "Real AI vs. Lofty's AI":
+          five crosses against Lofty with no source, beside five ticks for
+          things Realtor Desk does not do. */}
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Real AI vs. Lofty's "AI"</h2>
+          <h2 className="text-center mb-12">What you would give up, and what you would get</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 border-destructive/20">
-              <Badge variant="outline" className="mb-4">Lofty's "AI"</Badge>
-              <h3 className="text-xl font-bold mb-4">Basic Automation</h3>
+            <Card className="p-8">
+              <Badge variant="outline" className="mb-4">Not in Realtor Desk</Badge>
+              <h3 className="text-xl font-bold mb-4">What you would give up</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>Pre-programmed chatbot with canned responses</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No IDX website, lead generation or ads</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>No engagement-based lead ranking</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No lead-facing chatbot, automatic replies or voice agent</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>Doesn't learn from your interactions</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No seats, lead routing, shared pipeline or team inbox</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>Generic email templates for everyone</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No transaction management, e-signature or document storage</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                  <span className="text-destructive">❌</span>
-                  <span>No market intelligence or predictions</span>
+                  <span className="text-muted-foreground">–</span>
+                  <span>No automated email sequences switched on</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm">
+                  <span className="text-muted-foreground">–</span>
+                  <span>No native mobile app; it is a responsive web app</span>
                 </li>
               </ul>
             </Card>
 
             <Card className="p-8 border-accent">
               <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
-              <h3 className="text-xl font-bold mb-4">True Intelligence</h3>
+              <h3 className="text-xl font-bold mb-4">What you would get</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Understands context, has real conversations</span>
+                  <span>Contacts with one conversation timeline per client</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Ranks leads by observed engagement</span>
+                  <span>A drag-and-drop deal pipeline with totals in CAD</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Learns and improves from every interaction</span>
+                  <span>A rule-based lead score from 0 to 100, with a visible breakdown</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Personalized content based on behavior</span>
+                  <span>An in-app assistant that drafts a reply; you send every message</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm">
                   <span className="text-rd-terra-800">✓</span>
-                  <span>Canadian market predictions (TO, VAN, CAL)</span>
+                  <span>French or English set per contact</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm">
+                  <span className="text-rd-terra-800">✓</span>
+                  <span>Date and source of consent recorded on each contact</span>
                 </li>
               </ul>
             </Card>
@@ -115,20 +147,38 @@ const SwitchFromLofty = () => {
         </div>
       </section>
 
-      {/* Migration Process */}
+      {/* How the move works. This was a five-step "migration process" in which
+          Realtor Desk staff exported and imported the data and ran a training
+          session. There is no such service: the agent does every step. */}
       <section className="section-padding">
         <div className="container-custom max-w-5xl">
-          <h2 className="text-center mb-12">Simple, Fast Migration Process</h2>
-          
+          <h2 className="text-center mb-4">How the move works</h2>
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
+            You do each step yourself, with a CSV file. Nobody at Realtor Desk exports, maps or imports your data for you, and there is no migration call or onboarding session. The{" "}
+            <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+            lists the columns the importer reads.
+          </p>
+
           <div className="grid md:grid-cols-5 gap-6">
             <Card className="p-6 text-center">
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-6 h-6 text-rd-terra-800" />
+                <Download className="w-6 h-6 text-rd-terra-800" />
               </div>
               <div className="text-lg font-bold mb-2">Step 1</div>
-              <h3 className="font-semibold mb-2">15-Min Call</h3>
+              <h3 className="font-semibold mb-2">Export a CSV</h3>
               <p className="text-sm text-muted-foreground">
-                Quick call to understand your Lofty setup
+                Export your contacts from Lofty as a CSV file. Check Lofty&rsquo;s own help for the steps.
+              </p>
+            </Card>
+
+            <Card className="p-6 text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                <ListChecks className="w-6 h-6 text-rd-terra-800" />
+              </div>
+              <div className="text-lg font-bold mb-2">Step 2</div>
+              <h3 className="font-semibold mb-2">Try twenty rows</h3>
+              <p className="text-sm text-muted-foreground">
+                Cut the first twenty rows into a separate file and import those first.
               </p>
             </Card>
 
@@ -136,32 +186,10 @@ const SwitchFromLofty = () => {
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <Upload className="w-6 h-6 text-rd-terra-800" />
               </div>
-              <div className="text-lg font-bold mb-2">Step 2</div>
-              <h3 className="font-semibold mb-2">Data Export</h3>
-              <p className="text-sm text-muted-foreground">
-                We export all your Lofty contacts and deals
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center">
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Download className="w-6 h-6 text-rd-terra-800" />
-              </div>
               <div className="text-lg font-bold mb-2">Step 3</div>
-              <h3 className="font-semibold mb-2">Import</h3>
+              <h3 className="font-semibold mb-2">Import the rest</h3>
               <p className="text-sm text-muted-foreground">
-                Everything moved to Realtor Desk
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center">
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="w-6 h-6 text-rd-terra-800" />
-              </div>
-              <div className="text-lg font-bold mb-2">Step 4</div>
-              <h3 className="font-semibold mb-2">Training</h3>
-              <p className="text-sm text-muted-foreground">
-                30-minute personalized onboarding
+                De-duplicate the file, then upload it. Duplicates are not merged for you.
               </p>
             </Card>
 
@@ -169,10 +197,21 @@ const SwitchFromLofty = () => {
               <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-6 h-6 text-rd-terra-800" />
               </div>
-              <div className="text-lg font-bold mb-2">Step 5</div>
-              <h3 className="font-semibold mb-2">Go Live</h3>
+              <div className="text-lg font-bold mb-2">Step 4</div>
+              <h3 className="font-semibold mb-2">Check what landed</h3>
               <p className="text-sm text-muted-foreground">
-                Productive in 48 hours
+                Names, email, phone, source and tags come in. Deals and history do not.
+              </p>
+            </Card>
+
+            <Card className="p-6 text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                <ClipboardCheck className="w-6 h-6 text-rd-terra-800" />
+              </div>
+              <div className="text-lg font-bold mb-2">Step 5</div>
+              <h3 className="font-semibold mb-2">Record consent</h3>
+              <p className="text-sm text-muted-foreground">
+                The import carries no consent. Record its date and source before you email anyone.
               </p>
             </Card>
           </div>
@@ -204,11 +243,11 @@ const SwitchFromLofty = () => {
               <Badge className="mb-4 bg-rd-terra-800">Realtor Desk</Badge>
               <div className="text-3xl font-bold gradient-text mb-4">$149/mo CAD</div>
               <ul className="space-y-2 mb-6">
-                <li className="text-sm">✓ All features included</li>
-                <li className="text-sm">✓ No call/text charges</li>
-                <li className="text-sm">✓ No surprise fees</li>
-                <li className="text-sm">✓ No overage charges</li>
-                <li className="text-sm text-rd-terra-800 font-semibold">✓ Budget you can plan</li>
+                <li className="text-sm">✓ For a single agent</li>
+                <li className="text-sm">✓ Published on the pricing page</li>
+                <li className="text-sm">✓ 14-day trial</li>
+                <li className="text-sm">✓ Card collected up front; nothing charged before day 14</li>
+                <li className="text-sm text-rd-terra-800 font-semibold">✓ A number you can read before you ask</li>
               </ul>
             </Card>
           </div>
@@ -224,22 +263,15 @@ const SwitchFromLofty = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section className="section-padding">
-        <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">Why Canadian agents choose RealtorDesk AI over Lofty</h2>
-          
-          <div className="space-y-6">
-
-          </div>
-        </div>
-      </section>
+      {/* A "Why Canadian agents choose RealtorDesk AI over Lofty" section stood
+          here with a heading and nothing under it. Removed 2026-10-11: there
+          are no customer stories to put in it. */}
 
       {/* CTA */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <Brain className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
-          <h2 className="mb-6">Upgrade to Real AI Today</h2>
+          <CheckCircle className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
+          <h2 className="mb-6">Try it before you move anything</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             30-day money-back guarantee. Not satisfied for any reason, full refund. No questions asked.
           </p>
@@ -247,7 +279,7 @@ const SwitchFromLofty = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" className="btn-gradient">
-                Schedule Free Migration Call
+                Book a demo
               </Button>
             </Link>
             <Link to="/vs/lofty">
@@ -260,18 +292,24 @@ const SwitchFromLofty = () => {
       </section>
 
       {/* The SEO report keeps the switch-from pages only where they carry real
-          migration substance — supported fields, what does not come across,
-          and how to test — rather than boilerplate. This is that, verified
-          against src/lib/csvImport.ts rather than described from memory. */}
+          substance about the move — supported fields, what does not come
+          across, and how to test — rather than boilerplate. This is that,
+          verified against src/lib/csvImport.ts rather than described from
+          memory. The agent runs the import; Realtor Desk has no migration
+          service. */}
       <section className="section-padding border-t">
         <div className="container-custom max-w-3xl">
           <h2 className="mb-6">What actually moves across</h2>
 
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Migration is a CSV import. Export your contacts from Lofty, then
-            upload the file — the importer reads the header row and matches
-            common column names, so in most cases you do not have to rename
-            anything first.
+            The move is a CSV import that you run yourself. Export your contacts
+            from Lofty as a CSV file, then upload that file in Realtor Desk. The
+            importer reads the header row and matches English column names such
+            as &ldquo;first name&rdquo;, &ldquo;email&rdquo; and
+            &ldquo;phone&rdquo;. There is no column-mapping screen, so rename a
+            column in the file if it is not recognised. The{" "}
+            <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+            lists every header it accepts.
           </p>
 
           <h3 className="text-lg font-semibold mb-2">Columns it recognises</h3>
@@ -298,36 +336,55 @@ const SwitchFromLofty = () => {
               by semicolons
             </li>
             <li>
-              <strong>Company, job title, notes</strong> — kept on the contact even
-              though they have no dedicated column, so nothing in the file is
-              discarded
+              <strong>Company, website, job title, notes</strong> — kept in the
+              contact&rsquo;s metadata. Any other column is not imported
             </li>
           </ul>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Rows with neither a name nor an email are skipped.
+          </p>
 
           <h3 className="text-lg font-semibold mb-2">What does not come across</h3>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Deals, conversations, message and call history, automations, tasks,
+            documents and anything specific to Lofty&rsquo;s own data model. The
+            import creates contacts only. Keep your Lofty exports for your
+            records and rebuild any live deals in the pipeline by hand.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Duplicates are not merged. A contact that appears twice in the file
+            is created twice, so de-duplicate the file in a spreadsheet before
+            you import it, and import it once.
+          </p>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Email and call history, attachments, saved searches, automation
-            sequences and anything specific to Lofty&rsquo;s own data model. A
-            CSV of contacts is a CSV of contacts. If the history matters, keep
-            your Lofty export file — it is the record, and we are not going to
-            pretend we can reconstruct a timeline we never had.
+            Consent is not imported. Under CASL you must record the date and
+            source of consent for each contact before you email them. Our{" "}
+            <Link
+              to="/resources/casl-compliance-real-estate-email-marketing-canada"
+              className="underline"
+            >
+              CASL guide for real estate email
+            </Link>{" "}
+            explains the consent windows.
           </p>
 
           <h3 className="text-lg font-semibold mb-2">Test it before you commit</h3>
           <ol className="space-y-2 text-muted-foreground leading-relaxed list-decimal pl-5 mb-6">
-            <li>Export everything from Lofty and keep that file somewhere safe.</li>
+            <li>Export your contacts from Lofty and keep an untouched copy of that file.</li>
+            <li>De-duplicate the file in a spreadsheet.</li>
             <li>Cut the first twenty rows into a separate CSV and import those.</li>
             <li>
               Open three of them and check the name split, the phone format and
               whether the tags landed where you expected.
             </li>
             <li>Only then import the rest.</li>
+            <li>Record the date and source of consent on each contact before you email them.</li>
           </ol>
 
           <h3 className="text-lg font-semibold mb-2">Getting back out</h3>
           <p className="text-muted-foreground leading-relaxed">
-            Your contacts export to CSV from settings at any time, including
-            after you cancel. That is worth checking on any CRM you are
+            You can export your contacts to a CSV yourself from the Contacts
+            page. That is worth checking on any CRM you are
             considering, including this one — a product that makes leaving hard
             is telling you something. See{" "}
             <Link to="/pricing" className="underline">pricing and trial terms</Link>{" "}

@@ -22,7 +22,7 @@ const TorontoVsVancouver = () => {
         article
         publishedTime="2025-01-20"
         modifiedTime="2025-01-20"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/toronto-vs-vancouver-real-estate-market-2025"
         structuredData={[
           {
@@ -30,8 +30,8 @@ const TorontoVsVancouver = () => {
             "@type": "Article",
             "headline": "Toronto vs Vancouver Real Estate: Market Trends & Predictions for 2025",
             "description": "Compare Toronto and Vancouver housing markets for 2025.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-20",
             "dateModified": "2025-01-20"
           }

@@ -104,7 +104,7 @@ const LeadMagnetFollowUp = () => {
                       {
                         icon: <Calculator className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />,
                         title: "Your annual GCI loss estimate",
-                        body: "A simple 4-input calculator that shows exactly how much slow response time is costing you in real dollars — most agents land between $30K–$120K/year.",
+                        body: "A simple 4-input calculator that turns your own lead volume, conversion rates and commission into an estimate. It is arithmetic on your numbers, not a forecast.",
                       },
                       {
                         icon: <Clock className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />,
@@ -310,7 +310,7 @@ const SuccessState = ({ firstName }: { firstName: string }) => (
     </div>
     <div className="pt-2 space-y-3">
       <p className="text-sm font-medium text-foreground">
-        While you wait — see 24/7 AI follow-up in action:
+        While you wait, see the CRM itself:
       </p>
       <Link
         to="/signup"

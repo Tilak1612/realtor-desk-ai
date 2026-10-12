@@ -22,7 +22,7 @@ const FirstTimeBuyerGuide = () => {
         article
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/first-time-home-buyer-guide-canada-2025"
         structuredData={[
           {
@@ -30,8 +30,8 @@ const FirstTimeBuyerGuide = () => {
             "@type": "Article",
             "headline": "First-Time Home Buyer Guide for Canada 2025: Everything You Need to Know",
             "description": "Complete first-time home buyer guide for Canada 2025. Learn about down payments, mortgage pre-approval, closing costs, and CMHC insurance.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
             "dateModified": "2025-01-01"
           }

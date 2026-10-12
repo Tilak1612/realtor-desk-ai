@@ -31,7 +31,7 @@ const FAQS = [
   },
   {
     q: "Is this a CREA DDF® feed?",
-    a: "No, and the difference matters. DDF is a licensed data feed that syncs listings continuously across boards. This reads one public listing at a time, on your instruction. Native DDF sync is on our roadmap for Q3 2026 and is marked that way on the pricing page and the roadmap. We are not affiliated with or endorsed by CREA.",
+    a: "No, and the difference matters. DDF is a licensed data feed that syncs listings continuously across boards. This reads one public listing at a time, on your instruction. Native DDF sync is on our roadmap and is not live yet. We are not affiliated with or endorsed by CREA.",
   },
   {
     q: "Is it an IDX website?",
@@ -52,7 +52,7 @@ const ListingImport = () => {
     <div className="min-h-screen">
       <SEO
         title="Import listings from Realtor.ca"
-        description="Bring a property into your CRM from a Realtor.ca address or MLS number, with duplicates counted. Native CREA DDF sync is on the Q3 2026 roadmap."
+        description="Bring a property into your CRM from a Realtor.ca address or MLS number, with duplicates counted. Native CREA DDF sync is on the roadmap, not live."
         keywords="realtor.ca listing import, mls listing import crm, crea ddf integration, real estate listing crm canada"
         canonicalUrl="https://www.realtordesk.ai/features/listing-import"
         structuredData={[
@@ -99,7 +99,7 @@ const ListingImport = () => {
                 it to — that is what ships today. A{" "}
                 <strong>CREA DDF® feed</strong> is licensed MLS data that syncs
                 continuously; ours is scaffolded and waiting on credentials, and
-                is marked Q3 2026 on the roadmap and the pricing page. An{" "}
+                is marked as planned on the roadmap. An{" "}
                 <strong>IDX website</strong> publishes searchable listings to
                 the public on your own domain; we do not offer one at all.
               </p>

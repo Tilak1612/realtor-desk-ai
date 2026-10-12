@@ -116,7 +116,7 @@ const FAQS = [
   },
   {
     q: "Are these comparisons fair?",
-    a: "They are ours, so judge them accordingly. What we can commit to is narrower and checkable: no invented competitor prices, no fabricated customer quotes, and a plain statement of what Realtor Desk does not do — no teams, no seats, no native CREA DDF® sync until Q3 2026.",
+    a: "They are ours, so judge them accordingly. What we can commit to is narrower and checkable: no invented competitor prices, no fabricated customer quotes, and a plain statement of what Realtor Desk does not do — no teams, no seats, no native CREA DDF® sync yet.",
   },
   {
     q: "Which one should I read?",
@@ -242,7 +242,7 @@ const CompareHub = () => {
                 If you run a team and need seats, lead assignment or a shared
                 pipeline, we do not have them — there is no team model in the
                 product at all, and the Team plan is a billing tier. If you need
-                native CREA DDF® sync today, ours is on the roadmap for Q3 2026
+                native CREA DDF® sync today, ours is on the roadmap and not live
                 and Realtor.ca import is what works now. If you want a CRM
                 bundled with paid lead generation, that is not what this is.
                 Those are the three reasons people leave, and it is cheaper for

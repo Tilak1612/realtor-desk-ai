@@ -4,10 +4,33 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, TrendingDown, Shield, Clock, DollarSign } from "lucide-react";
+import { Check, X, Upload, ListChecks, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import BoldTrailComparisonTable from "@/components/BoldTrailComparisonTable";
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: "30-minute
+// support response" and 24/7 live chat, "enterprise-grade reliability",
+// "productive within 24 hours", "Toronto, Vancouver, Calgary market
+// intelligence", "PIPEDA compliant", "True Predictive AI ... 6x better", the
+// dated CREA DDF promise, table rows ticking transaction management, email
+// automation and a mobile app for Realtor Desk, the unsourced BoldTrail
+// verdicts ("3-5 days" support, contract "Yes", crosses), "why Canadian agents
+// are switching" and "early-access agents who chose us". BoldTrail cells with
+// no source now say "Ask the vendor".
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the migration row in the table, the card in which Realtor Desk staff
+// exported and imported the BoldTrail data, the card that promised a
+// turnaround time, and the button that booked a migration call. Replaced with
+// the true process, read from
+// src/lib/csvImport.ts and the import modal: the agent exports a CSV and
+// imports it themselves; contacts only, no consent, no duplicate merging. The
+// 30-day guarantee card is unchanged.
+//
+// NOT changed here: <BoldTrailComparisonTable /> lives in src/components and
+// was outside this edit's file list.
 
 const VsBoldTrail = () => {
   const { t } = useTranslation();
@@ -17,14 +40,14 @@ const VsBoldTrail = () => {
       <SEO
         title="BoldTrail Alternative for Canadian Agents"
         description="A BoldTrail alternative for Canadian agents: Realtor Desk is a single-agent CRM at CAD $149 a month, with French per contact. BoldTrail quotes on request."
-        keywords="BoldTrail alternative, RealtorDesk AI vs BoldTrail, Canadian real estate CRM, AI CRM for realtors"
+        keywords="BoldTrail alternative, Realtor Desk vs BoldTrail, Canadian real estate CRM"
         canonicalUrl="https://www.realtordesk.ai/vs/boldtrail"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "BoldTrail vs Realtor Desk Comparison",
-            "description": "Compare BoldTrail with Realtor Desk to see pricing, features, and why Canadian agents are switching.",
+            "description": "A BoldTrail alternative for Canadian agents: Realtor Desk is a single-agent CRM at CAD $149 a month, with French per contact. BoldTrail quotes on request.",
             "mainEntity": {
               "@type": "ItemList",
               "itemListElement": [
@@ -41,24 +64,29 @@ const VsBoldTrail = () => {
       <section className="pt-32 md:pt-40 pb-16 bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="container-custom text-center">
           <Badge variant="secondary" className="mb-4">
-            Best CRM for Real Estate Agents Comparison
+            BoldTrail Comparison
           </Badge>
           <h1 className="mb-6">
             BoldTrail Alternative for Canada: <span className="gradient-text">Realtor Desk</span> at $149/mo CAD
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A Canadian CRM at $149/mo CAD with no setup fee, bilingual EN/FR and data hosted in Canada, while getting faster support and Canadian-focused features.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+            A CRM for a single Canadian agent at $149/mo CAD with no setup fee, French or English set per contact, and the production database hosted in Canada.
+          </p>
+          <p className="text-sm text-muted-foreground max-w-3xl mx-auto mb-8">
+            We build one of the products compared here, so weigh this accordingly.
           </p>
           
           {/* Cost Comparison */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
             <Card className="p-6 flex-1 border-destructive/20">
               <div className="text-sm text-muted-foreground mb-2">BoldTrail First Year</div>
-              <div className="text-3xl font-bold text-destructive mb-1">Quoted</div>
+              <div className="text-3xl font-bold text-muted-foreground mb-1">Quoted</div>
               <div className="text-xs text-muted-foreground">BoldTrail does not publish pricing</div>
             </Card>
             
-            <TrendingDown className="w-8 h-8 text-rd-terra-800 rotate-90 sm:rotate-0" />
+            {/* Was a downward-trend arrow, which read as a saving. There is no
+                published BoldTrail price to compute one from. */}
+            <div className="text-lg font-semibold text-muted-foreground">vs</div>
             
             <Card className="p-6 flex-1 border-accent">
               <div className="text-sm text-muted-foreground mb-2">Realtor Desk</div>
@@ -74,54 +102,38 @@ const VsBoldTrail = () => {
       {/* How We're Different */}
       <section className="section-padding bg-muted">
         <div className="container-custom max-w-4xl">
-          <h2 className="text-center mb-12">How Realtor Desk Is Different</h2>
+          <h2 className="text-center mb-12">What Realtor Desk Is, and Is Not</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="p-6 border-accent/20">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">30-Minute Support Response</h3>
-              <p className="text-sm text-muted-foreground">
-                Canadian support team responds within 30 minutes during business hours. Live chat available 24/7.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">Enterprise-Grade Reliability</h3>
-              <p className="text-sm text-muted-foreground">
-                Built on enterprise infrastructure. Your CRM works when you need it. No embarrassing crashes.
-              </p>
-            </Card>
-
-            <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
               <h3 className="font-bold mb-2">$149/mo CAD, zero setup fee</h3>
               <p className="text-sm text-muted-foreground">
-                All-inclusive pricing. No setup fee and no surprise charges — compare it against the total you are quoted.
+                The price is published, for a single agent, with no setup fee. Compare it against the total you are quoted.
               </p>
             </Card>
 
             <Card className="p-6 border-accent/20">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">Easy to Learn and Use</h3>
+              <h3 className="font-bold mb-2">Canadian specifics</h3>
               <p className="text-sm text-muted-foreground">
-                Intuitive interface. Most agents are productive within 24 hours. Free training included.
+                French or English set per contact. Date and source of consent recorded on each contact. Production database hosted in Canada.
               </p>
             </Card>
 
             <Card className="p-6 border-accent/20">
               <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">Built for Canadian Market</h3>
+              <h3 className="font-bold mb-2">A lead score you can read</h3>
               <p className="text-sm text-muted-foreground">
-                Toronto, Vancouver, Calgary market intelligence. Bilingual EN/FR. PIPEDA compliant. CREA DDF® integration coming Q3 2026.
+                A rule-based score from 0 to 100 with a visible breakdown, and a suggested next action. An in-app assistant drafts a reply; nothing is sent to a client without you.
               </p>
             </Card>
 
-            <Card className="p-6 border-accent/20">
-              <Check className="w-8 h-8 text-rd-terra-800 mb-3" />
-              <h3 className="font-bold mb-2">True Predictive AI</h3>
+            <Card className="p-6">
+              <X className="w-8 h-8 text-muted-foreground mb-3" />
+              <h3 className="font-bold mb-2">What it does not do</h3>
               <p className="text-sm text-muted-foreground">
-                Not just automation - real AI that predicts which leads will convert. 6x better than basic CRMs.
+                No seats, lead routing or shared pipeline. No IDX website, lead generation, transaction management or back office. Native CREA DDF® sync is on the roadmap and is not live yet.
               </p>
             </Card>
           </div>
@@ -146,19 +158,18 @@ const VsBoldTrail = () => {
                 {[
                   { feature: "List price", rdai: "$149/mo CAD", boldtrail: "Not published" },
                   { feature: "Setup fee", rdai: "$0", boldtrail: "Not published" },
-                  { feature: "Predictive Lead Scoring", rdai: true, boldtrail: false },
-                  { feature: "AI assistant inside the CRM", rdai: true, boldtrail: false },
-                  { feature: "Data hosted in Canada", rdai: true, boldtrail: false },
-                  { feature: "Bilingual Support (EN/FR)", rdai: true, boldtrail: false },
-                  { feature: "Support Response Time", rdai: "30 min", boldtrail: "3-5 days" },
-                  { feature: "Reliability", rdai: "Enterprise-grade", boldtrail: "No published SLA" },
-                  { feature: "CREA DDF® Integration", rdai: "Q3 2026", boldtrail: true },
-                  { feature: "Email Automation", rdai: true, boldtrail: true },
-                  { feature: "Mobile App", rdai: true, boldtrail: true },
-                  { feature: "Transaction Management", rdai: true, boldtrail: true },
-                  { feature: "Free Migration", rdai: true, boldtrail: false },
-                  { feature: "Free Training", rdai: true, boldtrail: false },
-                  { feature: "Contract Required", rdai: "No", boldtrail: "Yes" },
+                  { feature: "Rule-based lead score (0 to 100, with breakdown)", rdai: true, boldtrail: "Ask the vendor" },
+                  { feature: "AI assistant inside the CRM", rdai: true, boldtrail: "Ask the vendor" },
+                  { feature: "Production database hosted in Canada", rdai: true, boldtrail: "Ask the vendor" },
+                  { feature: "French or English per contact", rdai: true, boldtrail: "Ask the vendor" },
+                  { feature: "Consent date and source on each contact", rdai: true, boldtrail: "Ask the vendor" },
+                  { feature: "Native CREA DDF® sync (roadmap)", rdai: "Not available yet", boldtrail: "Ask the vendor" },
+                  { feature: "Seats, lead routing, shared pipeline", rdai: "Not available", boldtrail: "Ask the vendor" },
+                  { feature: "IDX website and lead generation", rdai: "Not available", boldtrail: "Ask the vendor" },
+                  { feature: "Automated email sequences", rdai: "Not available", boldtrail: "Ask the vendor" },
+                  { feature: "Transaction Management", rdai: "Not available", boldtrail: "Ask the vendor" },
+                  { feature: "Native mobile app", rdai: "Not available (responsive web app)", boldtrail: "Ask the vendor" },
+                  { feature: "Moving your contacts", rdai: "CSV import you run yourself", boldtrail: "Ask the vendor" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -184,28 +195,33 @@ const VsBoldTrail = () => {
         </div>
       </section>
 
-      {/* Migration CTA */}
+      {/* If you decide to switch. This was "We Make Switching Easy": a free
+          migration done by Realtor Desk staff, with a promised turnaround. There is no
+          such service; the agent moves their own contacts by CSV. */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <h2 className="mb-6">We Make Switching Easy</h2>
+          <h2 className="mb-6">If you decide to switch</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Join early-access Canadian agents who chose RealtorDesk AI over BoldTrail
+            You move your own contacts, with a CSV file. Nobody at Realtor Desk exports, maps or imports your data for you.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
-              <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">100% Free Migration</h3>
+              <Upload className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">A CSV import you run yourself</h3>
               <p className="text-sm text-muted-foreground">
-                We export your BoldTrail data and import it to your new account, at no charge.
+                Export your contacts from BoldTrail as a CSV file and import that file into Realtor Desk. Try twenty rows first. The{" "}
+                <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+                lists the columns it reads.
               </p>
             </Card>
 
             <Card className="p-6">
-              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Live in 48 Hours</h3>
+              <ListChecks className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">Contacts only</h3>
               <p className="text-sm text-muted-foreground">
-                Schedule migration call, we handle everything, you're up and running in 2 days.
+                Deals, conversations, automations, tasks and documents are not imported, and duplicates are not merged. Consent is not imported either: record its date and source before you email a contact. See the{" "}
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="underline">CASL guide</Link>.
               </p>
             </Card>
 
@@ -221,7 +237,7 @@ const VsBoldTrail = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" className="btn-gradient">
-                Schedule Free Migration Call
+                Book a demo
               </Button>
             </Link>
             <Link to="/pricing">

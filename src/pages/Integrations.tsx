@@ -318,7 +318,7 @@ const Integrations = () => {
           <h3 className="text-lg font-semibold mb-2">Planned</h3>
           <p className="text-muted-foreground leading-relaxed mb-6">
             Listed so you can see them, and marked so you do not plan around
-            them. Native CREA DDF® listing sync is targeted at Q3 2026; until
+            them. Native CREA DDF® listing sync is on the roadmap and not live yet; until
             then listings come in through the Realtor.ca importer. Google
             Calendar and Outlook connect today and hold the connection, but
             pushing appointments to them automatically is still in build.

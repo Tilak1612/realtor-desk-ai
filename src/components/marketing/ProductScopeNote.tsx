@@ -31,8 +31,8 @@ export function ProductScopeNote({ className }: ProductScopeNoteProps) {
         This guide covers a category in general. Realtor Desk is a single-agent CRM
         that scores leads, suggests a next action and drafts text for you to review.
         It does not offer a website chatbot or a voice agent, and nothing is sent to
-        a lead without you. Figures quoted below come from third-party sources that
-        we have not independently verified.
+        a lead without you. Where a figure from a third party is quoted, we have not
+        independently verified it.
       </p>
     </aside>
   );

@@ -14,7 +14,7 @@ const PIPEDACompliance = () => {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is RealtorDesk AI PIPEDA compliant?",
+        "name": "Is Realtor Desk PIPEDA compliant?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No software makes you PIPEDA compliant, and we will not tell you otherwise. Realtor Desk is built to support the work: the production database runs in Canada (ca-central-1), data is encrypted in transit and at rest, and the date and source of consent are recorded on every contact. Your own obligations, such as obtaining meaningful consent, answering access requests and reporting breaches, stay with you and your brokerage."
@@ -38,7 +38,7 @@ const PIPEDACompliance = () => {
       },
       {
         "@type": "Question",
-        "name": "How does RealtorDesk AI handle data deletion requests?",
+        "name": "How does Realtor Desk handle data deletion requests?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "You can delete a contact and its records from inside the app. There is no exportable audit log of deletions today, so keep your own record of when you received and completed each request."
@@ -78,7 +78,7 @@ const PIPEDACompliance = () => {
                 <Link to="/signup">Start Free 14-Day Trial</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link to="/demo">See Compliance Features</Link>
+                <Link to="/demo">Book a demo</Link>
               </Button>
             </div>
           </div>
@@ -125,12 +125,12 @@ const PIPEDACompliance = () => {
                 <AlertCircle className="w-10 h-10 mb-4 text-rd-terra-800" />
                 <h3 className="text-xl font-bold mb-2">Penalties for Non-Compliance</h3>
                 <p className="text-muted-foreground mb-4">
-                  Failing to comply with PIPEDA can result in significant fines and reputational damage.
+                  A privacy complaint can lead to an investigation by the Privacy Commissioner, and some offences carry fines.
                 </p>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
-                    <span>Fines up to $100,000 per violation</span>
+                    <span>Fines of up to $100,000 for certain offences, such as failing to report a breach</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
@@ -142,7 +142,7 @@ const PIPEDACompliance = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
-                    <span>RECO/CREA disciplinary action</span>
+                    <span>Possible discipline from your regulator</span>
                   </li>
                 </ul>
               </Card>
@@ -151,13 +151,18 @@ const PIPEDACompliance = () => {
         </div>
       </section>
 
-      {/* How RealtorDesk AI Ensures PIPEDA Compliance */}
+      {/* Was headed "How RealtorDesk AI Ensures PIPEDA Compliance", with "built PIPEDA
+          compliance into every feature so you never have to worry", "Meets PIPEDA's
+          data residency requirements" (PIPEDA has none), "No foreign government
+          access", "End-to-End Encryption ... even database administrators cannot
+          access", "Bank-level security" and a closing "Join hundreds of Canadian real
+          estate agents". Revised 2026-10-11 to what the product does. */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-center mb-4">How RealtorDesk AI Ensures PIPEDA Compliance</h2>
+            <h2 className="text-center mb-4">What Realtor Desk does that helps with PIPEDA</h2>
             <p className="text-center text-muted-foreground mb-12">
-              We've built PIPEDA compliance into every feature so you never have to worry about data privacy violations.
+              Six things the product does or does not do. None of them makes you compliant; they support the work you and your brokerage remain responsible for.
             </p>
 
             <div className="space-y-6">
@@ -174,9 +179,9 @@ const PIPEDACompliance = () => {
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Meets PIPEDA's data residency requirements</li>
-                        <li>• Client data protected under Canadian privacy laws</li>
-                        <li>• No foreign government access to your data</li>
+                        <li>• You can tell a client where their record is stored</li>
+                        <li>• PIPEDA does not require data to stay in Canada, but it does expect you to be open about transfers</li>
+                        <li>• Tell clients that some processing, such as SMS and email delivery, may happen outside Canada</li>
                       </ul>
                     </div>
                   </div>
@@ -189,16 +194,16 @@ const PIPEDACompliance = () => {
                     <Lock className="w-6 h-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">2. End-to-End Encryption</h3>
+                    <h3 className="text-xl font-bold mb-2">2. Encryption in Transit and at Rest</h3>
                     <p className="text-muted-foreground mb-3">
-                      All personal information is encrypted at rest (AES-256) and in transit (TLS 1.3). Even database administrators cannot access unencrypted client data.
+                      Data is encrypted in transit and at rest by the hosting platform. This is not end-to-end encryption: the application can read the data in order to show it to you.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Protects against data breaches</li>
-                        <li>• Meets PIPEDA's "safeguards" principle</li>
-                        <li>• Bank-level security for client information</li>
+                        <li>• One part of the safeguards PIPEDA expects, not all of them</li>
+                        <li>• Each account can only read its own records</li>
+                        <li>• Your own passwords, devices and staff access still matter</li>
                       </ul>
                     </div>
                   </div>
@@ -213,14 +218,14 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">3. Consent Management</h3>
                     <p className="text-muted-foreground mb-3">
-                      Built-in consent tracking for each contact. Record when and how consent was obtained, what it covers, and allow clients to withdraw consent at any time.
+                      Each contact carries a consent record: when consent was given and where it came from. You can also record that a contact has withdrawn it.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Automatic consent logging for all communications</li>
-                        <li>• One-click unsubscribe for clients</li>
                         <li>• Consent date and source recorded on each contact</li>
+                        <li>• No inbox message or text to a contact with no consent on file</li>
+                        <li>• Imported contacts arrive with no consent; you record it yourself</li>
                       </ul>
                     </div>
                   </div>
@@ -235,12 +240,12 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">4. Data Access & Portability</h3>
                     <p className="text-muted-foreground mb-3">
-                      Clients can request their data through you, and you can export it in CSV/JSON format within minutes. Supports PIPEDA's "individual access" principle.
+                      When a client asks what you hold about them, you can export your data from Settings and export contacts to CSV. That helps you answer the request; answering it is still your job.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
-                        <li>• Fulfill access requests in under 30 days (PIPEDA requirement)</li>
+                        <li>• PIPEDA expects a response to an access request within 30 days</li>
                         <li>• Export client data for portability</li>
                         <li>• Your data in CSV and JSON, on request from Settings</li>
                       </ul>
@@ -352,7 +357,7 @@ const PIPEDACompliance = () => {
             
             <Card className="p-8">
               <p className="text-muted-foreground mb-6">
-                Use this checklist to ensure you're meeting PIPEDA requirements when using RealtorDesk AI:
+                Use this checklist to review your own practice. It applies whichever CRM you use:
               </p>
               
               <div className="space-y-4">
@@ -408,7 +413,7 @@ const PIPEDACompliance = () => {
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-semibold">Safeguards</h4>
-                    <p className="text-sm text-muted-foreground">You use secure tools like RealtorDesk AI with encryption and Canadian data hosting.</p>
+                    <p className="text-sm text-muted-foreground">You use tools that encrypt client data and tell you where it is stored.</p>
                   </div>
                 </div>
 
@@ -455,7 +460,7 @@ const PIPEDACompliance = () => {
             
             <div className="space-y-6">
               <Card className="p-6">
-                <h3 className="text-lg font-bold mb-2">Is RealtorDesk AI PIPEDA compliant?</h3>
+                <h3 className="text-lg font-bold mb-2">Is Realtor Desk PIPEDA compliant?</h3>
                 <p className="text-muted-foreground">
                   No software makes you PIPEDA compliant, and we will not tell you otherwise. Realtor Desk is built to support the work: the production database runs in Canada (ca-central-1), data is encrypted in transit and at rest, and the date and source of consent are recorded on every contact. Your own obligations, such as obtaining meaningful consent, answering access requests and reporting breaches, stay with you and your brokerage.
                 </p>
@@ -476,14 +481,14 @@ const PIPEDACompliance = () => {
               </Card>
 
               <Card className="p-6">
-                <h3 className="text-lg font-bold mb-2">How does RealtorDesk AI handle data deletion requests?</h3>
+                <h3 className="text-lg font-bold mb-2">How does Realtor Desk handle data deletion requests?</h3>
                 <p className="text-muted-foreground">
                   You can delete a contact and its records from inside the app. There is no exportable audit log of deletions today, so keep your own record of when you received and completed each request.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="text-lg font-bold mb-2">Do I need a separate privacy policy if I use RealtorDesk AI?</h3>
+                <h3 className="text-lg font-bold mb-2">Do I need a separate privacy policy if I use Realtor Desk?</h3>
                 <p className="text-muted-foreground">
                   Yes. Your brokerage still needs its own privacy policy describing how you collect and use client information. Realtor Desk's privacy policy covers how we handle data on our side; it does not replace yours.
                 </p>
@@ -507,14 +512,14 @@ const PIPEDACompliance = () => {
             <Shield className="w-16 h-16 mx-auto mb-6 text-primary" />
             <h2 className="mb-6">Protect Your Clients. Protect Your Business.</h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join hundreds of Canadian real estate agents using RealtorDesk AI for PIPEDA-compliant client data management.
+              Realtor Desk keeps a consent record on each contact and its database in Canada. See it on your own contacts during the 14-day trial.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
                 <Link to="/signup">Start Free 14-Day Trial</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link to="/demo">Book Compliance Demo</Link>
+                <Link to="/demo">Book a demo</Link>
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-6">
