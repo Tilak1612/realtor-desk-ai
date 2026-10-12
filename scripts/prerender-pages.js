@@ -926,7 +926,8 @@ function buildHead(baseHtml, { route, title, description, canonical, structuredD
     ? `<link rel="canonical" href="${esc(url)}" />` +
       `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}" />`
     : `<link rel="canonical" href="${esc(url)}" />` +
-      `<link rel="alternate" hreflang="en-CA" href="${esc(url)}?lang=en" />` +
+      // en-CA is the canonical (clean) URL, matching src/components/SEO.tsx.
+      `<link rel="alternate" hreflang="en-CA" href="${esc(url)}" />` +
       `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}?lang=fr" />` +
       `<link rel="alternate" hreflang="x-default" href="${esc(url)}" />`;
   if (/<link\s+rel="canonical"[^>]*>/.test(head)) {

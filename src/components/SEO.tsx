@@ -68,9 +68,13 @@ export const SEO = ({
     ? canonicalUrl
     : `${siteUrl}${basePath}${canonicalQuery}`;
 
-  // hreflang alternates — both variants always point at the stable
-  // ?lang=* entry points so Google can index them as distinct URLs.
-  const altEn = `${siteUrl}${basePath}?lang=en`;
+  // hreflang alternates. The English alternate is the clean URL, because that is
+  // the URL the English page declares as canonical: an hreflang entry has to name
+  // a canonical URL or it is ignored. It used to be ?lang=en, which told Google
+  // the English page lived at a URL that canonicalises elsewhere, and Search
+  // Console showed /?lang=en earning impressions as a second copy of the
+  // homepage. French has no path of its own yet, so it stays at ?lang=fr.
+  const altEn = `${siteUrl}${basePath}`;
   const altFr = `${siteUrl}${basePath}?lang=fr`;
 
   // Title already lives in the locale-specific page copy, so don't

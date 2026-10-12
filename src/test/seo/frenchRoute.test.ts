@@ -34,3 +34,28 @@ describe.skipIf(!fs.existsSync(file))("standalone French route", () => {
     expect(alt).toBe(canonical);
   });
 });
+
+// An English page's own hreflang entry has to be its canonical URL. It used to
+// be the same page at ?lang=en, which canonicalises to the clean URL, so the
+// annotation named a non-canonical address and Search Console listed /?lang=en
+// as a separate page.
+const englishFile = path.join(DIST, "pricing/index.html");
+
+describe.skipIf(!fs.existsSync(englishFile))("English page hreflang", () => {
+  const html = () => fs.readFileSync(englishFile, "utf8");
+  const href = (lang: string) =>
+    html().match(new RegExp('<link[^>]+hreflang="' + lang + '"[^>]+href="([^"]+)"'))?.[1];
+
+  it("names the canonical URL as the en-CA and x-default alternate", () => {
+    const canonical = html().match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    expect(canonical).toBe("https://www.realtordesk.ai/pricing");
+    expect(href("en-CA")).toBe(canonical);
+    expect(href("x-default")).toBe(canonical);
+  });
+
+  it("keeps French at ?lang=fr and never emits ?lang=en", () => {
+    expect(href("fr-CA")).toBe("https://www.realtordesk.ai/pricing?lang=fr");
+    expect(html()).not.toContain("?lang=en");
+  });
+});
+
