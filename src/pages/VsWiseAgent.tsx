@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, Brain, Globe, Shield, DollarSign } from "lucide-react";
+import { Check, X, Brain, Globe, Shield, DollarSign, Upload } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 
@@ -17,6 +17,14 @@ import { SEO } from "@/components/SEO";
 // the Canadian support team, "built by Canadian agents" and the dated CREA DDF
 // promise. Wise Agent cells now say "Ask the vendor" and the Wise Agent card is
 // a list of questions to put to them.
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the migration row in the table and the card in which Realtor Desk staff
+// moved the Wise Agent data within a promised time. Replaced with the true
+// process, read from src/lib/csvImport.ts and the import modal: the agent
+// exports a CSV and imports it themselves; contacts only, no consent, no
+// duplicate merging. The money-back guarantee card is unchanged.
 
 const VsWiseAgent = () => {
   const { t } = useTranslation();
@@ -215,7 +223,7 @@ const VsWiseAgent = () => {
                   { feature: "Automated email sequences", rdai: "Not available", wise: "Ask the vendor" },
                   { feature: "Transaction management", rdai: "Not available", wise: "Ask the vendor" },
                   { feature: "Native mobile app", rdai: "Not available (responsive web app)", wise: "Ask the vendor" },
-                  { feature: "Free Migration", rdai: true, wise: "Ask the vendor" },
+                  { feature: "Moving your contacts", rdai: "CSV import you run yourself", wise: "Ask the vendor" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -259,10 +267,17 @@ const VsWiseAgent = () => {
             </Card>
 
             <Card className="p-6">
-              <Globe className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Free Migration</h3>
+              {/* Was a migration done by Realtor Desk staff, with a promised
+                  turnaround. There is no migration service; the agent moves
+                  their own contacts. */}
+              <Upload className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">A CSV import you run yourself</h3>
               <p className="text-sm text-muted-foreground">
-                We move all your Wise Agent data. You're live in 48 hours.
+                Export your Wise Agent contacts as a CSV file and import that file yourself. Nobody at Realtor Desk moves your data for you. It creates contacts only: no deals, history or consent. The{" "}
+                <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+                lists the columns it reads, and the{" "}
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="underline">CASL guide</Link>{" "}
+                covers the consent to record before you email a contact.
               </p>
             </Card>
 

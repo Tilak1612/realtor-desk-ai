@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, Shield, Clock, DollarSign } from "lucide-react";
+import { Check, X, Upload, ListChecks, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import BoldTrailComparisonTable from "@/components/BoldTrailComparisonTable";
@@ -18,6 +18,16 @@ import BoldTrailComparisonTable from "@/components/BoldTrailComparisonTable";
 // verdicts ("3-5 days" support, contract "Yes", crosses), "why Canadian agents
 // are switching" and "early-access agents who chose us". BoldTrail cells with
 // no source now say "Ask the vendor".
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the migration row in the table, the card in which Realtor Desk staff
+// exported and imported the BoldTrail data, the card that promised a
+// turnaround time, and the button that booked a migration call. Replaced with
+// the true process, read from
+// src/lib/csvImport.ts and the import modal: the agent exports a CSV and
+// imports it themselves; contacts only, no consent, no duplicate merging. The
+// 30-day guarantee card is unchanged.
 //
 // NOT changed here: <BoldTrailComparisonTable /> lives in src/components and
 // was outside this edit's file list.
@@ -159,7 +169,7 @@ const VsBoldTrail = () => {
                   { feature: "Automated email sequences", rdai: "Not available", boldtrail: "Ask the vendor" },
                   { feature: "Transaction Management", rdai: "Not available", boldtrail: "Ask the vendor" },
                   { feature: "Native mobile app", rdai: "Not available (responsive web app)", boldtrail: "Ask the vendor" },
-                  { feature: "Free Migration", rdai: true, boldtrail: "Ask the vendor" },
+                  { feature: "Moving your contacts", rdai: "CSV import you run yourself", boldtrail: "Ask the vendor" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -185,28 +195,33 @@ const VsBoldTrail = () => {
         </div>
       </section>
 
-      {/* Migration CTA */}
+      {/* If you decide to switch. This was "We Make Switching Easy": a free
+          migration done by Realtor Desk staff, with a promised turnaround. There is no
+          such service; the agent moves their own contacts by CSV. */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
-          <h2 className="mb-6">We Make Switching Easy</h2>
+          <h2 className="mb-6">If you decide to switch</h2>
           <p className="text-lg text-muted-foreground mb-8">
-            If you decide to move, this is what we offer.
+            You move your own contacts, with a CSV file. Nobody at Realtor Desk exports, maps or imports your data for you.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-6">
-              <Shield className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">100% Free Migration</h3>
+              <Upload className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">A CSV import you run yourself</h3>
               <p className="text-sm text-muted-foreground">
-                We export your BoldTrail data and import it to your new account, at no charge.
+                Export your contacts from BoldTrail as a CSV file and import that file into Realtor Desk. Try twenty rows first. The{" "}
+                <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+                lists the columns it reads.
               </p>
             </Card>
 
             <Card className="p-6">
-              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Live in 48 Hours</h3>
+              <ListChecks className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">Contacts only</h3>
               <p className="text-sm text-muted-foreground">
-                Schedule migration call, we handle everything, you're up and running in 2 days.
+                Deals, conversations, automations, tasks and documents are not imported, and duplicates are not merged. Consent is not imported either: record its date and source before you email a contact. See the{" "}
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="underline">CASL guide</Link>.
               </p>
             </Card>
 
@@ -222,7 +237,7 @@ const VsBoldTrail = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/demo">
               <Button size="lg" className="btn-gradient">
-                Schedule Free Migration Call
+                Book a demo
               </Button>
             </Link>
             <Link to="/pricing">

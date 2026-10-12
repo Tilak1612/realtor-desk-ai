@@ -562,11 +562,14 @@ The first audit rewrote about twenty pages and put a scope note on the rest. A s
 
 Not changed, on purpose: any price, plan name, trial term, money-back guarantee or migration offer; the pricing page; the roadmap's quarter headings; legal pages.
 
-### Still waiting on the owner
-1. `/pricing` plan copy. The plan cards never reach the static HTML that non-JS crawlers read, and they should not be added as they stand: "5 users included", "Shared pipeline", "Team reports & leaderboard" (no seat model), "Desk AI chatbot, 500 msgs/mo" (other pages say there is no chatbot), four "Q3 2026" DDF lines (past), "Dedicated Canadian CSM" (unverified). Pricing wording is not changed without instruction.
-2. CREA DDF target date. The past-due "Q3 2026" now remains only on the pricing page (plan cards and SEO description) and as a quarter heading on the roadmap page. Everywhere else says "on the roadmap, not live yet". Give a new target, or confirm the date-free wording, and say what the roadmap page should show.
-3. Migration offers left exactly as written on the switch and comparison pages ("We move your IXACT data for free", "$499 value included at no cost. We handle everything.", "live and productive in 48 hours", "We export all your Lofty contacts and deals"). Several contradict the CSV-only import described on the same pages. Confirm the service or remove them.
-3a. Team-plan mentions left as written ("$149-299 CAD/month", "Team Plan: $299/month") beside copy that now says the product is single-agent.
-4. PIPEDA hosting wording, and a native-speaker review of the two French pages added on 2026-10-02.
-5. In Search Console: request indexing for `/pricing`, `/features/import-contacts`, `/fr/importer-contacts-csv`, and read the sitemap warning.
+### Owner decisions taken on 2026-10-11, and applied
+- **CREA DDF: no date.** The pricing page and its plan cards now say "roadmap" with no quarter, and the roadmap page lists DDF, AI-derived scoring and trigger-based sequences under "Planned, no date" (the Q2 and Q3 2026 columns are gone). `docs/ROADMAP_COMMITMENTS_2026-04-20.md` carries a revision note.
+- **No migration service.** Every "free migration", "we handle everything", "live in 48 hours" and migration-call button on the nine switch and comparison pages is replaced by the true process: a CSV the agent exports and imports themselves, contacts only, consent not included.
+- **Team plan: marked as roadmap.** "5 users included", "Team reports & leaderboard" and the plan description now carry "(roadmap)", in English and French, and the pricing page says every plan is used by one agent today. The price is unchanged.
 
+### Still waiting on the owner
+1. Pricing page, remaining wording: "Desk AI chatbot, 500 msgs/mo" on Solo (other pages say there is no chatbot, only an in-app assistant), "Dedicated Canadian CSM" on Brokerage (unverified), and "Your contacts export to CSV at any point, including after you cancel" (export exists; access after cancellation not verified).
+2. Team-plan price mentions elsewhere ("$149-299 CAD/month") sit beside copy that says the product is single-agent.
+3. PIPEDA hosting wording and the softened legal summaries (CASL, PIPEDA, FINTRAC, provincial regulators) have not had a legal review.
+4. Native-speaker review of the French pages and the rewritten French FAQ answers.
+5. In Search Console: request indexing for `/pricing`, `/features/import-contacts`, `/fr/importer-contacts-csv`, and read the sitemap warning.

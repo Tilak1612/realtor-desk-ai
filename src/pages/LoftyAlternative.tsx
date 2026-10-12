@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, DollarSign, Clock, Shield, Zap } from "lucide-react";
+import { Check, X, DollarSign, Upload, Shield, Zap } from "lucide-react";
 
 // 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: the "#1"
 // badge, the "AI Voice Agent" and "WhatsApp Integration" rows and card (neither
@@ -15,9 +15,18 @@ import { Check, X, DollarSign, Clock, Shield, Zap } from "lucide-react";
 // add-on") and every Lofty tick, cross and "US-focused" verdict that had no
 // source. Lofty cells with no source now say "Ask the vendor".
 //
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the data-migration tick under the hero buttons, the data-migration row in
+// the table, the "Migration & Setup" card (staff migrating the Lofty data and
+// setting up the account) and the third FAQ answer (staff transferring
+// contacts, deals and automation workflows at no cost).
+// Replaced with the true process, read from src/lib/csvImport.ts and the
+// import modal: the agent exports a CSV and imports it themselves; contacts
+// only, no consent, no duplicate merging.
+//
 // The FAQ lives in one array so the FAQPage JSON-LD and the visible list
-// cannot drift apart. The third answer is a migration offer and is carried
-// over word for word.
+// cannot drift apart.
 const FAQS = [
   {
     q: "How much cheaper is Realtor Desk than Lofty?",
@@ -29,7 +38,7 @@ const FAQS = [
   },
   {
     q: "Can I migrate from Lofty to Realtor Desk?",
-    a: "Yes, RealtorDesk AI offers free data migration from Lofty. Our team will help you transfer your contacts, deals, and automation workflows at no additional cost.",
+    a: "Yes, by a CSV file that you export from Lofty and import into Realtor Desk yourself. Nobody at Realtor Desk moves the data for you. The import creates contacts only: it reads name, email, phone, source and tags, and it does not bring deals, conversations, automations, tasks or documents. It does not import consent either, so under CASL you must record the date and source of consent for each contact before you email them.",
   },
   {
     q: "Does Realtor Desk have the same features as Lofty?",
@@ -112,7 +121,7 @@ const LoftyAlternative = () => {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              ✓ Cancel anytime before you're charged &nbsp;•&nbsp; ✓ Free data migration &nbsp;•&nbsp; ✓ Cancel anytime
+              ✓ Cancel anytime before you're charged &nbsp;•&nbsp; ✓ CSV contact import you run yourself &nbsp;•&nbsp; ✓ Cancel anytime
             </p>
           </div>
         </div>
@@ -184,11 +193,13 @@ const LoftyAlternative = () => {
                     <td className="text-center py-3 px-4 text-muted-foreground">Not published</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3 px-4">Free Data Migration</td>
-                    <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                    {/* Was a red X. We have no source for what Lofty includes
-                        in a quote it does not publish. */}
-                    <td className="text-center py-3 px-4 text-muted-foreground">Not published</td>
+                    {/* Was a data-migration row with a tick for Realtor Desk.
+                        There is no migration service. The Lofty cell was a red
+                        X, then "Not published"; we have no source for how
+                        Lofty handles it. */}
+                    <td className="py-3 px-4">Moving your contacts</td>
+                    <td className="text-center py-3 px-4 font-medium">CSV import you run yourself</td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">Ask the vendor</td>
                   </tr>
                   <tr className="border-b bg-muted/50">
                     <td className="py-3 px-4">Free Trial</td>
@@ -333,10 +344,14 @@ const LoftyAlternative = () => {
                 </p>
               </Card>
               <Card className="p-6">
-                <Clock className="w-10 h-10 mb-4 text-primary" />
-                <h3 className="text-xl font-bold mb-2">Free Migration & Setup</h3>
+                <Upload className="w-10 h-10 mb-4 text-primary" />
+                <h3 className="text-xl font-bold mb-2">Moving your contacts</h3>
                 <p className="text-muted-foreground">
-                  We&rsquo;ll migrate your data from Lofty for free and help you set up your account. No setup fee and no migration charge on our side.
+                  You export your contacts from Lofty as a CSV file and import that file yourself. Nobody at Realtor Desk moves your data or sets up your account for you. The import creates contacts only, with no deals, history or consent, so try twenty rows first. The{" "}
+                  <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+                  lists the columns it reads, and the{" "}
+                  <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="underline">CASL guide</Link>{" "}
+                  covers the consent to record before you email a contact. There is no setup fee.
                 </p>
               </Card>
             </div>

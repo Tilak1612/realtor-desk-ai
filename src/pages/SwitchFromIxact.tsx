@@ -14,8 +14,17 @@ import { SEO } from "@/components/SEO";
 // gap is not $20 either), "AI-powered lead conversion", "CASL-aware email",
 // "engagement-based lead ranking" and the IXACT price, which this page quoted
 // with no source (the sourced figure is on /vs/ixact). Added the list of what
-// Realtor Desk does not have. The migration and money-back sentence is
-// untouched.
+// Realtor Desk does not have.
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the migration offer in the description, in the closing heading and in the
+// sentence under it that said Realtor Desk staff would move the IXACT data
+// (the trial and money-back sentences around it are unchanged). Replaced with
+// the true process, read from
+// src/lib/csvImport.ts and the import modal: the agent exports a CSV and
+// imports it themselves; it creates contacts only, with no consent and no
+// duplicate merging.
 
 const SwitchFromIxact = () => {
   const { t } = useTranslation();
@@ -23,7 +32,7 @@ const SwitchFromIxact = () => {
     <div className="min-h-screen">
       <SEO
         title="Switch from IXACT to Realtor Desk"
-        description="Moving from IXACT to Realtor Desk: free migration, French per contact, a consent record on each contact and a rule-based lead score. Solo plan $149/mo CAD."
+        description="Moving from IXACT to Realtor Desk by a CSV you import yourself: French per contact, a consent record and a rule-based lead score. Solo plan $149/mo CAD."
         keywords="switch from IXACT, IXACT migration, IXACT alternative, CRM for Canadian realtors"
         canonicalUrl="https://www.realtordesk.ai/switch-from-ixact"
         structuredData={[
@@ -31,7 +40,7 @@ const SwitchFromIxact = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             "name": "Switch from IXACT to Realtor Desk",
-            "description": "Moving from IXACT to Realtor Desk: free migration, French per contact, a consent record on each contact and a rule-based lead score. Solo plan $149/mo CAD."
+            "description": "Moving from IXACT to Realtor Desk by a CSV you import yourself: French per contact, a consent record and a rule-based lead score. Solo plan $149/mo CAD."
           }
         ]}
       />
@@ -79,8 +88,8 @@ const SwitchFromIxact = () => {
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
           <CheckCircle className="w-16 h-16 text-rd-terra-800 mx-auto mb-6" />
-          <h2 className="mb-6">14 Days Free Trial + Free Migration</h2>
-          <p className="text-lg text-muted-foreground mb-8">Try free for 14 days. We move your IXACT data for free. A 30-day money-back guarantee applies after that.</p>
+          <h2 className="mb-6">14 Days Free Trial</h2>
+          <p className="text-lg text-muted-foreground mb-8">Try free for 14 days. You bring your IXACT contacts in yourself, by CSV. A 30-day money-back guarantee applies after that.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup"><Button size="lg" className="btn-gradient">Start 14-Day Free Trial</Button></Link>
             <Link to="/vs/ixact"><Button size="lg" variant="outline">See Comparison</Button></Link>
@@ -88,18 +97,24 @@ const SwitchFromIxact = () => {
         </div>
       </section>
       {/* The SEO report keeps the switch-from pages only where they carry real
-          migration substance — supported fields, what does not come across,
-          and how to test — rather than boilerplate. This is that, verified
-          against src/lib/csvImport.ts rather than described from memory. */}
+          substance about the move — supported fields, what does not come
+          across, and how to test — rather than boilerplate. This is that,
+          verified against src/lib/csvImport.ts rather than described from
+          memory. The agent runs the import; Realtor Desk has no migration
+          service. */}
       <section className="section-padding border-t">
         <div className="container-custom max-w-3xl">
           <h2 className="mb-6">What actually moves across</h2>
 
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Migration is a CSV import. Export your contacts from IXACT Contact, then
-            upload the file — the importer reads the header row and matches
-            common column names, so in most cases you do not have to rename
-            anything first.
+            The move is a CSV import that you run yourself. Export your contacts
+            from IXACT Contact as a CSV file, then upload that file in Realtor
+            Desk. The importer reads the header row and matches English column
+            names such as &ldquo;first name&rdquo;, &ldquo;email&rdquo; and
+            &ldquo;phone&rdquo;. There is no column-mapping screen, so rename a
+            column in the file if it is not recognised. The{" "}
+            <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+            lists every header it accepts.
           </p>
 
           <h3 className="text-lg font-semibold mb-2">Columns it recognises</h3>
@@ -126,36 +141,56 @@ const SwitchFromIxact = () => {
               by semicolons
             </li>
             <li>
-              <strong>Company, job title, notes</strong> — kept on the contact even
-              though they have no dedicated column, so nothing in the file is
-              discarded
+              <strong>Company, website, job title, notes</strong> — kept in the
+              contact&rsquo;s metadata. Any other column is not imported
             </li>
           </ul>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            Rows with neither a name nor an email are skipped.
+          </p>
 
           <h3 className="text-lg font-semibold mb-2">What does not come across</h3>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Deals, conversations, message and call history, automations, tasks,
+            documents and anything specific to IXACT Contact&rsquo;s own data
+            model. The import creates contacts only. Keep your IXACT Contact
+            exports for your records and rebuild any live deals in the pipeline
+            by hand.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mb-4">
+            Duplicates are not merged. A contact that appears twice in the file
+            is created twice, so de-duplicate the file in a spreadsheet before
+            you import it, and import it once.
+          </p>
           <p className="text-muted-foreground leading-relaxed mb-6">
-            Email and call history, attachments, saved searches, automation
-            sequences and anything specific to IXACT Contact&rsquo;s own data model. A
-            CSV of contacts is a CSV of contacts. If the history matters, keep
-            your IXACT Contact export file — it is the record, and we are not going to
-            pretend we can reconstruct a timeline we never had.
+            Consent is not imported. Under CASL you must record the date and
+            source of consent for each contact before you email them. Our{" "}
+            <Link
+              to="/resources/casl-compliance-real-estate-email-marketing-canada"
+              className="underline"
+            >
+              CASL guide for real estate email
+            </Link>{" "}
+            explains the consent windows.
           </p>
 
           <h3 className="text-lg font-semibold mb-2">Test it before you commit</h3>
           <ol className="space-y-2 text-muted-foreground leading-relaxed list-decimal pl-5 mb-6">
-            <li>Export everything from IXACT Contact and keep that file somewhere safe.</li>
+            <li>Export your contacts from IXACT Contact and keep an untouched copy of that file.</li>
+            <li>De-duplicate the file in a spreadsheet.</li>
             <li>Cut the first twenty rows into a separate CSV and import those.</li>
             <li>
               Open three of them and check the name split, the phone format and
               whether the tags landed where you expected.
             </li>
             <li>Only then import the rest.</li>
+            <li>Record the date and source of consent on each contact before you email them.</li>
           </ol>
 
           <h3 className="text-lg font-semibold mb-2">Getting back out</h3>
           <p className="text-muted-foreground leading-relaxed">
-            Your contacts export to CSV from settings at any time, including
-            after you cancel. That is worth checking on any CRM you are
+            You can export your contacts to a CSV yourself from the Contacts
+            page. That is worth checking on any CRM you are
             considering, including this one — a product that makes leaving hard
             is telling you something. See{" "}
             <Link to="/pricing" className="underline">pricing and trial terms</Link>{" "}

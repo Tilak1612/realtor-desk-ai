@@ -4,6 +4,8 @@
 **Date:** 2026-04-20
 **Status:** Draft — requires Tilak sign-off before /roadmap page goes public.
 
+> **Revision, 2026-10-11 (owner decision).** The Q2 2026 and Q3 2026 dates below have passed and the three items they covered are not live: AI-derived lead scoring, trigger-based email sequences, and agent websites on CREA DDF. The public `/roadmap` page now lists them under "Planned, no date", and the site says CREA DDF is "on the roadmap, not live yet" with no quarter. On the pricing page, Team-plan seats, the shared pipeline and team reports are labelled "roadmap". The dated commitments in this file are kept as the April record; they are no longer the public wording. Set a new date here first if one is ever published again.
+
 This doc answers the five BoldTrail table-stakes capabilities with a single, defensible sentence each. It is the source of truth for the public `/roadmap` page (PR J) and for every marketing claim the product makes about what ships when.
 
 **Working rule:** every date below is either (a) a sprint we have capacity for, (b) a quarter we are committed to and can deliver in, or (c) explicitly out of scope. No "soon." No "planned." No hand-waving.

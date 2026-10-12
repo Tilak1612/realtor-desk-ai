@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 // drift from the internal commitments file.
 
 type Status = "shipping" | "building" | "designing" | "roadmapped" | "considering" | "shipped";
-type SectionId = "now" | "q2" | "q3" | "q1_2027" | "not_on";
-type QuarterKey = "apr_2026" | "q2_2026" | "q3_2026" | "q1_2027" | "tbd";
+type SectionId = "now" | "planned" | "q1_2027" | "not_on";
+type QuarterKey = "apr_2026" | "none" | "q1_2027" | "tbd";
 type ItemId =
   | "casl_footer"
   | "pricing_parity"
@@ -37,22 +37,23 @@ const SECTIONS: { id: SectionId; items: RoadmapItem[] }[] = [
   {
     id: "now",
     items: [
-      { id: "casl_footer", quarterKey: "apr_2026", status: "shipping" },
-      { id: "pricing_parity", quarterKey: "apr_2026", status: "shipping" },
-      { id: "lead_score_explainer", quarterKey: "apr_2026", status: "shipping" },
-      { id: "onboarding_checklist", quarterKey: "apr_2026", status: "shipping" },
+      { id: "casl_footer", quarterKey: "apr_2026", status: "shipped" },
+      { id: "pricing_parity", quarterKey: "apr_2026", status: "shipped" },
+      { id: "lead_score_explainer", quarterKey: "apr_2026", status: "shipped" },
+      { id: "onboarding_checklist", quarterKey: "apr_2026", status: "shipped" },
     ],
   },
+  // Revised 2026-10-11. These three sat under "Q2 2026" and "Q3 2026". Both
+  // quarters have passed and none of the three is live: the score is still a
+  // fixed formula, scheduled sending is not switched on, and CREA DDF sync is not
+  // running. By the owner's decision they carry no date until one can be kept.
   {
-    id: "q2",
+    id: "planned",
     items: [
-      { id: "ai_scoring", quarterKey: "q2_2026", status: "designing" },
-      { id: "trigger_campaigns", quarterKey: "q2_2026", status: "designing" },
+      { id: "ai_scoring", quarterKey: "none", status: "designing" },
+      { id: "trigger_campaigns", quarterKey: "none", status: "designing" },
+      { id: "idx_sites", quarterKey: "none", status: "building" },
     ],
-  },
-  {
-    id: "q3",
-    items: [{ id: "idx_sites", quarterKey: "q3_2026", status: "building" }],
   },
   {
     id: "q1_2027",

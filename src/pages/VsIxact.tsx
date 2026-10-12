@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, Brain, Zap, TrendingUp, DollarSign } from "lucide-react";
+import { Check, X, Brain, Zap, TrendingUp, DollarSign, Upload } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 
@@ -15,7 +15,16 @@ import { SEO } from "@/components/SEO";
 // Tracking" ticks for Realtor Desk, "Sending on the roadmap", "CASL-aware
 // email", and the unsourced crosses, "Manual", "Basic", "Native app" and "Not
 // stated" verdicts on IXACT. The IXACT price stays because the hero attributes
-// it to ixactcontact.com with a date. The two migration cards are untouched.
+// it to ixactcontact.com with a date.
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the migration row in the table and the two migration cards, which said
+// Realtor Desk staff would bring the IXACT contacts, notes and tags across
+// with no effort on the customer's part. Replaced with the true
+// process, read from src/lib/csvImport.ts and the import modal: the agent
+// exports a CSV and imports it themselves; contacts only, no consent, no
+// duplicate merging. The money-back guarantee wording is unchanged.
 
 const VsIxact = () => {
   const { t } = useTranslation();
@@ -201,7 +210,7 @@ const VsIxact = () => {
                   { feature: "Lead-facing chatbot or automatic replies", rdai: "Not available", ixact: "Ask the vendor" },
                   { feature: "Transaction Management", rdai: "Not available", ixact: "Ask the vendor" },
                   { feature: "Native mobile app", rdai: "Not available (responsive web app)", ixact: "Ask the vendor" },
-                  { feature: "Free Migration", rdai: true, ixact: "N/A" },
+                  { feature: "Moving your contacts", rdai: "CSV import you run yourself", ixact: "Ask the vendor" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -245,19 +254,26 @@ const VsIxact = () => {
               </p>
             </Card>
 
+            {/* These two cards both offered a migration done by Realtor Desk
+                staff. There is no migration service: the agent moves their
+                own contacts by CSV. */}
             <Card className="p-6">
-              <Brain className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Free Migration</h3>
+              <Upload className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">A CSV import you run yourself</h3>
               <p className="text-sm text-muted-foreground">
-                We move all your IXACT contacts and data for free. Zero effort on your part.
+                Export your IXACT contacts as a CSV file and import that file yourself. Nobody at Realtor Desk moves your data for you. Try twenty rows first. The{" "}
+                <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+                lists the columns it reads.
               </p>
             </Card>
 
             <Card className="p-6">
-              <TrendingUp className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Free migration</h3>
+              <Check className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">Contacts only, then a guarantee</h3>
               <p className="text-sm text-muted-foreground">
-                We move your IXACT contacts, notes and tags across, and a 30-day money-back
+                The import creates contacts only: no deals, history or consent. Record the date and source of consent before you email a contact; the{" "}
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="underline">CASL guide</Link>{" "}
+                explains the consent windows. A 30-day money-back
                 guarantee applies if it isn't right for you.
               </p>
             </Card>

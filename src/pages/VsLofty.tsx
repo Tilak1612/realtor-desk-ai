@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Check, X, Shield, Clock, DollarSign } from "lucide-react";
+import { Check, X, Shield, Upload, DollarSign } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 // 2026-10-11: rewritten against the 2026-10-11 fact sheet. Removed: the
@@ -17,6 +17,14 @@ import { useTranslation } from "react-i18next";
 // promise and the "200+ agents left Lofty" button. Lofty cells with no source
 // now say "Ask the vendor"; the ones that cite lofty.com rest on the dated
 // reading in the "Choosing between them" section.
+//
+// 2026-10-11, later the same day, by the owner's decision: Realtor Desk does
+// NOT offer a migration service, so every migration offer was removed. Gone:
+// the migration row in the table and the "Quick Migration" card, in which
+// Realtor Desk staff did the whole move within a promised time. Replaced with the
+// true process, read from src/lib/csvImport.ts and the import modal: the agent
+// exports a CSV and imports it themselves; contacts only, no consent, no
+// duplicate merging. The money-back guarantee card is unchanged.
 
 const VsLofty = () => {
   const { t } = useTranslation();
@@ -174,7 +182,7 @@ const VsLofty = () => {
                   { feature: "Automated email sequences", rdai: "Not available", lofty: "Ask the vendor" },
                   { feature: "Market data", rdai: "Not available", lofty: "Ask the vendor" },
                   { feature: "Native mobile app", rdai: "Not available (responsive web app)", lofty: "Ask the vendor" },
-                  { feature: "Free Migration", rdai: true, lofty: "Ask the vendor" },
+                  { feature: "Moving your contacts", rdai: "CSV import you run yourself", lofty: "Ask the vendor" },
                 ].map((row, idx) => (
                   <tr key={idx} className="border-b hover:bg-muted/50">
                     <td className="p-4 font-medium">{row.feature}</td>
@@ -200,7 +208,9 @@ const VsLofty = () => {
         </div>
       </section>
 
-      {/* Migration CTA */}
+      {/* If you decide to switch. The middle card was "Quick Migration": Realtor
+          Desk staff handling the whole move, with a promised turnaround. There is no such service;
+          the agent moves their own contacts by CSV. */}
       <section className="section-padding bg-gradient-to-br from-accent/10 to-accent/5">
         <div className="container-custom max-w-4xl text-center">
           <h2 className="mb-6">If you decide to switch</h2>
@@ -218,10 +228,14 @@ const VsLofty = () => {
             </Card>
 
             <Card className="p-6">
-              <Clock className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
-              <h3 className="font-bold mb-2">Quick Migration</h3>
+              <Upload className="w-12 h-12 text-rd-terra-800 mx-auto mb-3" />
+              <h3 className="font-bold mb-2">A CSV import you run yourself</h3>
               <p className="text-sm text-muted-foreground">
-                We handle everything. You're live and productive in 48 hours.
+                Export your Lofty contacts as a CSV file and import that file yourself. Nobody at Realtor Desk moves your data for you. It creates contacts only: no deals, history or consent. The{" "}
+                <Link to="/features/import-contacts" className="underline">import documentation</Link>{" "}
+                lists the columns it reads, and the{" "}
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="underline">CASL guide</Link>{" "}
+                covers the consent to record before you email a contact.
               </p>
             </Card>
 
@@ -306,9 +320,10 @@ const VsLofty = () => {
             </Link>{" "}
             sets out how to run the evaluation, and{" "}
             <Link to="/switch-from-lofty" className="underline">
-              the migration page
+              the page on moving from Lofty
             </Link>{" "}
-            covers what moves across if you do switch.
+            covers what a CSV import you run yourself brings across if you do
+            switch.
           </p>
         </div>
       </section>
