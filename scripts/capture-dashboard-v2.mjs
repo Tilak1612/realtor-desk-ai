@@ -80,12 +80,18 @@ const msg = (lead, author, ago, body, lang = "EN") =>
 msg(byName("Émilie"), "lead", 22 * M, "Quand puis-je faire la vérification d’identité?", "FR");
 msg(byName("Lucas"), "agent", 2 * D, "Merci d’être passé à la visite libre!", "FR");
 msg(byName("Lucas"), "lead", 3 * H, "Oui, intéressé.", "FR");
-// Five answered threads this week so the first-response median is measurable.
+// Six answered threads this week so the first-response median is measurable.
+// Answered by the agent: the composer only ever posts agent-authored rows, and
+// a fixture where "Desk AI" replies on its own would picture behaviour the
+// product does not have. These leads are English-language contacts, so their
+// threads stay in English in the French capture too — language is per contact.
 [["Priya", 4], ["Jordan", 2], ["Grace", 9], ["Sarah", 6], ["Raj", 3], ["Mia", 12]].forEach(([f, mins], i) => {
   msg(byName(f), "lead", (i + 1) * D, "Is this still available?");
-  msg(byName(f), "ai", (i + 1) * D - mins * M, "Yes — want to book a showing?");
+  msg(byName(f), "agent", (i + 1) * D - mins * M, "Yes — want to book a showing?");
 });
-const TASKS = [{ id: id(), user_id: USER, contact_id: byName("Grace"), title: "Send CMA for Leaside", due_date: day(0), status: "pending", priority: "high" }];
+// The task title is the agent's own text, so it follows the language they work in.
+const TASK_TITLE = { en: "Send CMA for Leaside", fr: "Envoyer l’analyse comparative pour Leaside" };
+const TASKS = (lang) => [{ id: id(), user_id: USER, contact_id: byName("Grace"), title: TASK_TITLE[lang], due_date: day(0), status: "pending", priority: "high" }];
 
 const STRINGS = { en: "en-CA", fr: "fr-CA" };
 
@@ -128,7 +134,8 @@ async function shot(browser, route, size, lang, file) {
     const allowed = m ? m[1].split(",").map((x) => x.replace(/"/g, "")) : null;
     json(r, allowed ? MESSAGES.filter((x) => allowed.includes(x.author)) : MESSAGES);
   });
-  await page.route("**/rest/v1/tasks**", (r) => json(r, TASKS));
+  const tasks = TASKS(lang);
+  await page.route("**/rest/v1/tasks**", (r) => json(r, tasks));
   await page.route("**/rest/v1/profiles**", (r) => json(r, [PROFILE]));
   await page.route("**/functions/v1/check-subscription", (r) =>
     r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ subscribed: true, subscription_tier: "agent" }) }));

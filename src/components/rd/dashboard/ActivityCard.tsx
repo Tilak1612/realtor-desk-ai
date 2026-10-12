@@ -8,11 +8,13 @@ import { SkeletonRows } from "../Skeleton";
 import { IconDot } from "../icons";
 import type { ActivityItem } from "@/types/rd";
 import { appLocale, formatClock } from "@/lib/rd/format";
+import { dedupeFeed, feedSentence, isAiAuthored, isMessage } from "@/lib/rd/activityFeed";
 
 // Recent activity, ported from the v1 dashboard's "Desk AI activity" card with
 // the same data (useActivityFeed) and the same honesty rule — "Live" only when
 // live rows render — but every string translated and each sentence built per
 // language, since "replied to" word order does not survive translation.
+// Wording and de-duplication of rows live in lib/rd/activityFeed.ts.
 
 type Filter = "all" | "replies" | "showings";
 
@@ -28,8 +30,13 @@ export function ActivityCard({
   const { t, i18n } = useTranslation();
   const locale = appLocale(i18n.language);
   const [filter, setFilter] = useState<Filter>("all");
-  const rows = activity.filter((a) =>
-    filter === "replies" ? a.kind === "ai_reply" : filter === "showings" ? a.kind === "ai_booked_showing" : true
+  const feed = dedupeFeed(activity);
+  const rows = feed.filter((a) =>
+    filter === "replies"
+      ? isMessage(a) || a.kind === "ai_reply"
+      : filter === "showings"
+        ? a.kind === "ai_booked_showing"
+        : true
   );
 
   const when = (iso: string) => {
@@ -83,7 +90,7 @@ export function ActivityCard({
         <ol className="list-none m-0 py-2 px-0">
           {rows.slice(0, 6).map((a) => {
             const lead = (a.leadId && names[a.leadId]) || t("rd.dash.activity.aLead");
-            const sentence = t(`rd.dash.activity.kind.${a.kind}`, { actor: a.actor, lead, summary: a.summary });
+            const sentence = t(`rd.dash.activity.kind.${feedSentence(a)}`, { actor: a.actor, lead, summary: a.summary });
             return (
               <li key={a.id} className="grid grid-cols-[64px_minmax(0,1fr)] gap-3 px-5 py-2.5">
                 <time dateTime={a.at} className="text-[11px] text-rd-ink-500 font-semibold tabular-nums pt-0.5">
@@ -97,6 +104,11 @@ export function ActivityCard({
                       </Link>
                     ) : (
                       sentence
+                    )}
+                    {isAiAuthored(a) && (
+                      <span className="ml-2 text-[10px] font-bold tracking-[0.04em] bg-rd-ink-50 text-rd-ink-700 border border-rd-line rounded-[4px] px-1.5 py-[1px]">
+                        {a.actor}
+                      </span>
                     )}
                     {a.language === "FR" && (
                       <span className="ml-2 text-[10px] font-bold tracking-[0.08em] bg-rd-terra-100 text-rd-terra-800 rounded-[4px] px-1.5 py-[1px]">
