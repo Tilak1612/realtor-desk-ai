@@ -13,7 +13,7 @@ import { useSession } from "./useSession";
 // findLead(id) on the returned array; /app/pipeline groups by stage.
 
 const LEADS_COLUMNS =
-  "id, first_name, last_name, email, phone, ai_score, stage, source, preferred_language, last_contact_date, consent_date, next_followup_date, metadata";
+  "id, first_name, last_name, email, phone, ai_score, stage, source, preferred_language, last_contact_date, consent_date, next_followup_date, created_at, metadata";
 
 // Newest first. This used to be ORDER BY ai_score DESC with the same 250 cap --
 // and since contacts.ai_score defaults to 0 and no create path sets it, every
@@ -23,7 +23,13 @@ const LEADS_COLUMNS =
 // created_at DESC makes the cap behave predictably: the most recent 250 are
 // always present, so a lead can never be created and then be invisible.
 const LEADS_ORDER_COLUMN = "created_at";
-const LEADS_FETCH_LIMIT = 250;
+// 2026-10: no longer a cap. The dashboard now counts every contact and each of
+// its numbers links here (?view=, ?stage=) — a list capped at the newest 250
+// would show "Follow-ups due 40" opening a list of 12 for any agent with an
+// imported sphere. Pages of 1,000 (PostgREST's max_rows) until exhausted,
+// with a ceiling so a runaway loop can never hammer the API.
+const LEADS_PAGE = 1000;
+const LEADS_MAX_PAGES = 20;
 
 interface UseLeadsResult {
   leads: Lead[];
@@ -39,14 +45,24 @@ export function useLeads(): UseLeadsResult {
     queryKey: ["rd.leads", userId],
     queryFn: async () => {
       if (!userId) return [];
-      const { data, error } = await supabase
-        .from("contacts")
-        .select(LEADS_COLUMNS)
-        .eq("user_id", userId)
-        .order(LEADS_ORDER_COLUMN, { ascending: false })
-        .limit(LEADS_FETCH_LIMIT);
-      if (error) throw new Error(error.message);
-      return (data as ContactRow[]).map(mapContactToLead);
+      const rows: ContactRow[] = [];
+      for (let page = 0; page < LEADS_MAX_PAGES; page++) {
+        const from = page * LEADS_PAGE;
+        const { data, error } = await supabase
+          .from("contacts")
+          .select(LEADS_COLUMNS)
+          .eq("user_id", userId)
+          .order(LEADS_ORDER_COLUMN, { ascending: false })
+          // Tie-break so pages never overlap or skip rows sharing a timestamp
+          // (bulk imports stamp many rows with the same created_at).
+          .order("id", { ascending: true })
+          .range(from, from + LEADS_PAGE - 1);
+        if (error) throw new Error(error.message);
+        const batch = (data ?? []) as ContactRow[];
+        rows.push(...batch);
+        if (batch.length < LEADS_PAGE) break;
+      }
+      return rows.map(mapContactToLead);
     },
     enabled: !!userId,
     staleTime: 30_000,

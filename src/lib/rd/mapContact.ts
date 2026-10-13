@@ -24,6 +24,7 @@ export interface ContactRow {
   last_contact_date: string | null;
   consent_date: string | null;
   next_followup_date?: string | null;
+  created_at?: string | null;
   metadata?: unknown;
 }
 
@@ -51,6 +52,7 @@ export function mapContactToLead(row: ContactRow): Lead {
     aiNextBest: asString(meta.aiNextBest),
     budgetCad: typeof meta.budgetCad === "number" ? meta.budgetCad : undefined,
     nextFollowupDate: row.next_followup_date ?? null,
+    createdAt: row.created_at ?? null,
     caslConsentAt: row.consent_date ?? undefined,
     assignedAgentId: asString(meta.assignedAgentId) ?? null,
   };
@@ -61,20 +63,44 @@ function joinName(first: string, last: string | null): string {
 }
 
 function normalizeLanguage(raw: string | null): Language {
-  return raw?.toLowerCase() === "fr" ? "FR" : "EN";
+  // Production holds "fr", "en" and "English"; accept the spelled-out French
+  // forms too, so a contact saved as "French" or "Français" is not read as EN.
+  const v = (raw ?? "").trim().toLowerCase();
+  return v === "fr" || v.startsWith("fr-") || v === "french" || v === "français" || v === "francais"
+    ? "FR"
+    : "EN";
 }
 
-function normalizeSource(raw: string | null): LeadSource {
-  const v = (raw ?? "").toLowerCase();
-  if (v.includes("ddf") || v.includes("crea")) return "DDF";
-  if (v.includes("form") || v.includes("website")) return "Form";
-  if (v.includes("ad") || v.includes("facebook") || v.includes("google")) return "Ads";
-  if (v.includes("referr")) return "Referral";
+/**
+ * Free-text source → LeadSource.
+ *
+ * Matching is on whole words after folding `_`/`-` to spaces. The previous
+ * version used `includes("ad")`, which classified any source containing "lead"
+ * ("Lead magnet", "Zillow lead") as Ads, and it had no bucket for open houses
+ * or the Realtor.ca importer, so those landed in Other. Order matters: the
+ * specific channels are tested before the generic ones.
+ */
+export function normalizeSource(raw: string | null): LeadSource {
+  const v = ` ${(raw ?? "").toLowerCase().replace(/[_\-./]+/g, " ").replace(/\s+/g, " ").trim()} `;
+  const has = (...words: string[]) => words.some((w) => v.includes(` ${w} `));
+  if (has("ddf", "crea", "crea ddf")) return "DDF";
+  if (v.includes(" realtor ca ") || has("realtorca", "mls")) return "Realtor.ca";
+  if (has("open house", "openhouse", "visite libre", "portes ouvertes")) return "Open house";
+  if (has("referral", "referred", "referrals", "recommandation", "référence")) return "Referral";
+  if (v.includes(" referr")) return "Referral";
+  if (has("form", "website", "web form", "site web", "landing page", "formulaire")) return "Form";
+  if (has("ad", "ads", "facebook", "instagram", "meta", "google", "ppc", "publicité", "publicite")) return "Ads";
   return "Other";
 }
 
-function normalizeStage(raw: string | null): PipelineStage {
-  const v = (raw ?? "new").toLowerCase().replace(/\s+/g, "_");
+/**
+ * Free-text stage → PipelineStage. Shared with lib/rd/dashboard so the
+ * dashboard's per-stage counts and the /app/leads?stage= list it links to can
+ * never disagree about a messy value like "contacted " or the legacy "new_lead".
+ */
+export function normalizeStage(raw: string | null): PipelineStage {
+  const v = (raw ?? "new").trim().toLowerCase().replace(/\s+/g, "_");
+  if (v === "new_lead") return "new";
   const allowed: PipelineStage[] = [
     "new",
     "contacted",

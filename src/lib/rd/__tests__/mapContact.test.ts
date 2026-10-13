@@ -43,6 +43,36 @@ describe("mapContactToLead", () => {
     expect(src("")).toBe("Other");
   });
 
+  it("buckets every source vocabulary present in production (2026-10)", () => {
+    const src = (s: string) => mapContactToLead({ ...base, source: s }).source;
+    // Exact strings found in public.contacts.source on realtordesk-prod.
+    expect(src("Open house")).toBe("Open house");
+    expect(src("Realtor.ca import")).toBe("Realtor.ca");
+    expect(src("crea_ddf")).toBe("DDF");
+    expect(src("Referral")).toBe("Referral");
+    expect(src("referral")).toBe("Referral");
+    expect(src("Website form")).toBe("Form");
+    expect(src("website_form")).toBe("Form");
+    expect(src("Ads")).toBe("Ads");
+    expect(src("google_ads")).toBe("Ads");
+    expect(src("facebook")).toBe("Ads");
+  });
+
+  it("does not classify words that merely contain 'ad' as Ads", () => {
+    const src = (s: string) => mapContactToLead({ ...base, source: s }).source;
+    expect(src("Lead magnet")).toBe("Other");
+    expect(src("Zillow lead")).toBe("Other");
+    expect(src("Broadview sign call")).toBe("Other");
+  });
+
+  it("reads spelled-out French as FR", () => {
+    const lang = (s: string) => mapContactToLead({ ...base, preferred_language: s }).language;
+    expect(lang("French")).toBe("FR");
+    expect(lang("Français")).toBe("FR");
+    expect(lang("fr-CA")).toBe("FR");
+    expect(lang("English")).toBe("EN");
+  });
+
   it("normalizes stage, defaulting unknown/space-laden values to new", () => {
     const stage = (s: string | null) => mapContactToLead({ ...base, stage: s }).stage;
     expect(stage("qualified")).toBe("qualified");

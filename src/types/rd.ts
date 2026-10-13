@@ -23,7 +23,12 @@ export type PipelineStage =
 
 /** Acquisition channel. Kept loose enough that marketing teams can add
  *  new values without a code change. */
-export type LeadSource = "DDF" | "Form" | "Ads" | "Referral" | "Other";
+/**
+ * Normalised lead source. "Open house" and "Realtor.ca" were added 2026-10:
+ * before that they fell through to "Other" -- 19 of 55 production leads (35%),
+ * so every source breakdown understated the two biggest real channels.
+ */
+export type LeadSource = "DDF" | "Realtor.ca" | "Form" | "Open house" | "Ads" | "Referral" | "Other";
 
 /** A single lead — the core row in /app/leads and the header on
  *  /app/leads/:id. */
@@ -52,6 +57,8 @@ export interface Lead {
   temperature?: LeadScoreBand;
   /** Budget hint rendered on the lead detail page. */
   budgetCad?: number;
+  /** contacts.created_at — used by the "new this week" drill-down. */
+  createdAt?: string | null;
   /** contacts.next_followup_date — drives the dashboard "Follow-ups due" card. */
   nextFollowupDate?: string | null;
   /** CASL consent timestamp. Absent = not yet collected. */
