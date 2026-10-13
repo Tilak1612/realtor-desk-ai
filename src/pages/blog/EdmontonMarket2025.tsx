@@ -1,3 +1,20 @@
+// Fact-checked 2026-10-12 against the Realtor Desk fact sheet of that date.
+//
+// The price and activity figures that were here ($407,800 overall, 1,156
+// sales, 54 days on market and so on) had no source and did not match the
+// REALTORS Association of Edmonton's own release for the same month. They are
+// replaced with the association's December 2024 figures (media release of
+// January 3, 2025), attributed in the text.
+//
+// Removed (no source): the city-by-city price table, every neighbourhood
+// average price, rental yield and cash-on-cash figures, the worked investment
+// example and its 20.2% return, the three price scenarios for 2025-2026, the
+// "30-40% lower cost of living" and "saves $5k-10k" lines, and the FAQ answers
+// built on those numbers.
+//
+// Kept and sourced: no provincial sales tax (CRA), Alberta land titles fees
+// (fee schedule effective October 1, 2026), the federal minimum down payment
+// (FCAC) and CMHC's closing-cost guidance.
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -21,7 +38,7 @@ const EdmontonMarket2025 = () => {
         image={blogImage}
         article
         publishedTime="2025-01-01"
-        modifiedTime="2025-01-01"
+        modifiedTime="2026-10-12"
         author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/edmonton-real-estate-market-2025"
         structuredData={[
@@ -33,7 +50,7 @@ const EdmontonMarket2025 = () => {
             "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
-            "dateModified": "2025-01-01"
+            "dateModified": "2026-10-12"
           }
         ]}
       />
@@ -59,7 +76,7 @@ const EdmontonMarket2025 = () => {
               </div>
               <div className="flex items-center text-muted-foreground text-sm">
                 <Calendar className="w-4 h-4 mr-1" />
-                January 2025
+                January 2025 · Updated October 12, 2026
               </div>
             </div>
 
@@ -67,9 +84,13 @@ const EdmontonMarket2025 = () => {
               Edmonton Real Estate Market 2025
             </h1>
 
-            <ContentVintage published="2026-01-09" className="mb-6" />
+            <ContentVintage
+              published="2026-01-09"
+              className="mb-6"
+              note="One exception: on October 12, 2026 figures without a named source were removed, and the December 2024 statistics were replaced with those published by the REALTORS Association of Edmonton. The market commentary was not refreshed."
+            />
             <p className="text-xl text-muted-foreground">
-              With average home prices at $407,800, Edmonton offers exceptional value compared to Toronto and Vancouver—yet provides comparable quality of life and economic opportunity.
+              Edmonton is often compared with Toronto and Vancouver on price. This page gives the December 2024 figures published by the REALTORS Association of Edmonton and points to the bodies that publish current ones.
             </p>
           </div>
         </div>
@@ -103,23 +124,23 @@ const EdmontonMarket2025 = () => {
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  Current Edmonton housing market statistics and trends
+                  Edmonton housing statistics for December 2024, with the source named
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  Best neighborhoods for families, young professionals, and investors
+                  Neighbourhoods to look at for families, young professionals and investors
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  Economic factors driving Edmonton's real estate outlook
+                  Tax and fee differences between Alberta and other provinces
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  Price predictions and market forecast for 2025-2026
+                  Where to find published forecasts for 2025-2026
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  Why Edmonton is outperforming other Canadian markets
+                  How to compare Edmonton with other Canadian cities on published data
                 </li>
               </ul>
             </Card>
@@ -130,134 +151,121 @@ const EdmontonMarket2025 = () => {
               Edmonton Real Estate Market Overview: January 2025
             </h2>
 
+            <p className="text-muted-foreground mb-6">
+              The figures below are for the Greater Edmonton Area in December 2024, as published by the REALTORS Association of Edmonton in its media release of January 3, 2025. The percentage beside each figure is the change from December 2023.
+            </p>
+
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <Card className="p-6">
-                <h3 className="font-bold text-lg mb-4">Average Home Prices</h3>
+                <h3 className="font-bold text-lg mb-4">Average Selling Prices (December 2024)</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span>Single-Family Detached</span>
-                    <span className="font-bold">$525,600 <span className="text-green-700 text-sm">↑3.2%</span></span>
+                    <span>Detached</span>
+                    <span className="font-bold">$540,232 <span className="text-green-700 text-sm">↑10.6%</span></span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Semi-Detached</span>
-                    <span className="font-bold">$415,300 <span className="text-green-700 text-sm">↑2.8%</span></span>
+                    <span className="font-bold">$408,823 <span className="text-green-700 text-sm">↑12.3%</span></span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span>Townhouse</span>
-                    <span className="font-bold">$312,400 <span className="text-green-700 text-sm">↑4.1%</span></span>
+                    <span>Row/Townhouse</span>
+                    <span className="font-bold">$292,640 <span className="text-green-700 text-sm">↑12.3%</span></span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span>Condo</span>
-                    <span className="font-bold">$246,900 <span className="text-green-700 text-sm">↑1.9%</span></span>
+                    <span>Apartment Condominium</span>
+                    <span className="font-bold">$203,920 <span className="text-green-700 text-sm">↑19.8%</span></span>
                   </div>
                   <div className="flex justify-between items-center pt-3 border-t">
-                    <span className="font-bold">Overall Average</span>
-                    <span className="font-bold text-primary text-xl">$407,800</span>
+                    <span className="font-bold">All-Residential Average</span>
+                    <span className="font-bold text-primary text-xl">$435,549 <span className="text-green-700 text-sm">↑12.2%</span></span>
                   </div>
                 </div>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold text-lg mb-4">Market Activity</h3>
+                <h3 className="font-bold text-lg mb-4">Market Activity (December 2024)</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span>New Listings (Dec 2024)</span>
-                    <span className="font-bold">1,842</span>
+                    <span>New Residential Listings</span>
+                    <span className="font-bold">1,367 <span className="text-muted-foreground text-sm">↓7.3%</span></span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Sales (Dec 2024)</span>
-                    <span className="font-bold">1,156 <span className="text-green-700 text-sm">↑5.3%</span></span>
+                    <span>Residential Sales</span>
+                    <span className="font-bold">1,428 <span className="text-green-700 text-sm">↑17.2%</span></span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Active Inventory</span>
-                    <span className="font-bold">4,234 listings</span>
+                    <span>Inventory at Month End</span>
+                    <span className="font-bold">3,491 <span className="text-muted-foreground text-sm">↓24.6%</span></span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Months of Supply</span>
-                    <span className="font-bold">3.7 months</span>
+                    <span>MLS HPI Composite Benchmark</span>
+                    <span className="font-bold">$403,900 <span className="text-green-700 text-sm">↑7.8%</span></span>
                   </div>
                   <div className="flex justify-between">
                     <span>Avg Days on Market</span>
-                    <span className="font-bold">54 days <span className="text-green-700 text-sm">↓8 days</span></span>
+                    <span className="font-bold">44 days <span className="text-green-700 text-sm">↓8 days</span></span>
                   </div>
                 </div>
               </Card>
             </div>
 
+            <p className="text-sm text-muted-foreground mb-8">
+              Source: <a className="underline" href="https://realtorsofedmonton.com/wp-content/uploads/2025/01/DECEMBER_2024_YEGMediastats.pdf" rel="noopener noreferrer" target="_blank">REALTORS Association of Edmonton, media release of January 3, 2025</a>. The association notes that average prices indicate market trends only and do not show the change in value of any particular property. For the latest month, see realtorsofedmonton.com.
+            </p>
+
             {/* Price Comparison */}
-            <h2 className="text-3xl font-bold mt-12 mb-6">Why Edmonton Is Attracting National Attention</h2>
+            <h2 className="text-3xl font-bold mt-12 mb-6">How Edmonton Compares With Other Canadian Cities</h2>
 
             <Card className="p-6 mb-8">
-              <h3 className="font-bold text-lg mb-4">Affordability Comparison: Edmonton vs Other Canadian Cities</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center p-2 bg-red-50 rounded">
-                  <span>Vancouver</span>
-                  <span className="font-bold">$1,234,000 <span className="text-red-700">(3.0x more)</span></span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-red-50 rounded">
-                  <span>Toronto</span>
-                  <span className="font-bold">$1,102,000 <span className="text-red-700">(2.7x more)</span></span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
-                  <span>Victoria</span>
-                  <span className="font-bold">$924,000 <span className="text-orange-700">(2.3x more)</span></span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
-                  <span>Ottawa</span>
-                  <span className="font-bold">$612,000 <span className="text-yellow-700">(1.5x more)</span></span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
-                  <span>Calgary</span>
-                  <span className="font-bold">$568,000 <span className="text-yellow-700">(1.4x more)</span></span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-green-100 rounded">
-                  <span className="font-bold">Edmonton</span>
-                  <span className="font-bold text-green-700">$407,800 (Baseline)</span>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                💡 For the price of a 600 sq ft condo in Toronto, you can buy a <strong>2,000 sq ft single-family home with a yard</strong> in Edmonton.
+              <h3 className="font-bold text-lg mb-4">Comparing Prices Across Cities</h3>
+              <p className="text-muted-foreground mb-4">
+                This page gives no city-by-city price table. A fair comparison needs figures from one source, for the same month, measured the same way, and we have none we can stand behind for Vancouver, Toronto, Victoria, Ottawa or Calgary.
+              </p>
+              <p className="text-muted-foreground mb-0">
+                The Canadian Real Estate Association publishes average prices and MLS Home Price Index benchmarks for each local board at crea.ca. Use the same month and the same measure for each city. For reference, the Greater Edmonton Area all-residential average was $435,549 in December 2024 (REALTORS Association of Edmonton).
               </p>
             </Card>
 
-            {/* Why People Move to Edmonton */}
+            {/* What is different about Alberta */}
             <Card className="p-6 mb-8 bg-green-50 border-green-200">
-              <h3 className="font-bold text-lg mb-4 text-green-800">Why People Are Moving to Edmonton</h3>
+              <h3 className="font-bold text-lg mb-4 text-green-800">What Is Different About Buying in Alberta</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Affordable housing vs Toronto/Vancouver</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> No provincial sales tax (5% GST only)</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> 30-40% lower cost of living</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> No provincial sales tax: 5% GST only (Canada Revenue Agency)</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Employers in energy, technology and health care</li>
                 </ul>
                 <ul className="space-y-2 text-sm">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Strong job market in energy, tech, healthcare</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Rocky Mountains 3 hours away</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> No land transfer tax (saves $5k-10k)</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> The Rocky Mountains are within driving distance</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-700" /> Land titles registration fees instead of a land transfer tax</li>
                 </ul>
               </div>
+              <p className="text-sm text-muted-foreground mt-4 mb-0">
+                Alberta's Land Titles fee schedule, effective October 1, 2026, sets the fee to register a transfer at $50 plus $5 per $5,000 of the property's value, and the same on the principal of a mortgage. We quote no cost-of-living comparison because we have none we can source.
+              </p>
             </Card>
 
             {/* Best Neighborhoods */}
             <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center">
               <MapPin className="w-8 h-8 mr-3 text-primary" />
-              Best Neighborhoods in Edmonton for 2025
+              Edmonton Neighbourhoods to Look At in 2025
             </h2>
+
+            <p className="text-muted-foreground mb-6">
+              The association's monthly release does not break prices out by neighbourhood, so this section quotes none. Ask a local REALTOR for recent comparable sales in any area you are considering.
+            </p>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">For Families</h3>
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <Card className="p-4">
                 <h4 className="font-bold text-primary">Terwillegar (Southwest)</h4>
-                <p className="text-lg font-bold mb-2">$625,000 avg</p>
-                <p className="text-sm text-muted-foreground">Top-rated schools, Terwillegar Park (300 acres), quick access to Whitemud Drive</p>
+                <p className="text-sm text-muted-foreground">Schools in the area, Terwillegar Park, access to Whitemud Drive</p>
               </Card>
               <Card className="p-4">
-                <h4 className="font-bold text-primary">Summerside (West)</h4>
-                <p className="text-lg font-bold mb-2">$495,000 avg</p>
-                <p className="text-sm text-muted-foreground">Strong community, Lewis Farms Recreation Centre, affordable for families</p>
+                <h4 className="font-bold text-primary">Summerside (Southeast)</h4>
+                <p className="text-sm text-muted-foreground">Community built around Lake Summerside, south of Ellerslie Road</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary">Laurier Heights (West-Central)</h4>
-                <p className="text-lg font-bold mb-2">$545,000 avg</p>
                 <p className="text-sm text-muted-foreground">Mature trees, close to University of Alberta, character homes</p>
               </Card>
             </div>
@@ -265,19 +273,16 @@ const EdmontonMarket2025 = () => {
             <h3 className="text-2xl font-bold mt-8 mb-4">For Young Professionals & First-Time Buyers</h3>
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <Card className="p-4">
-                <h4 className="font-bold text-primary">Oliver (Central)</h4>
-                <p className="text-lg font-bold mb-2">$265,000 condo | $485,000 home</p>
+                <h4 className="font-bold text-primary">Wîhkwêntôwin, formerly Oliver (Central)</h4>
                 <p className="text-sm text-muted-foreground">Walking distance to downtown, trendy 124 Street, vibrant nightlife</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary">Ritchie (South-Central)</h4>
-                <p className="text-lg font-bold mb-2">$425,000 avg</p>
-                <p className="text-sm text-muted-foreground">Character homes, walkable to Whyte Avenue, appreciation potential</p>
+                <p className="text-sm text-muted-foreground">Character homes, walkable to Whyte Avenue</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary">Bonnie Doon (East-Central)</h4>
-                <p className="text-lg font-bold mb-2">$238,000 condo | $410,000 home</p>
-                <p className="text-sm text-muted-foreground">Valley Line LRT station, affordable, river valley access</p>
+                <p className="text-sm text-muted-foreground">Valley Line LRT stop, river valley access</p>
               </Card>
             </div>
 
@@ -285,18 +290,15 @@ const EdmontonMarket2025 = () => {
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <Card className="p-4 border-2 border-green-500">
                 <h4 className="font-bold text-green-700">Mill Woods (Southeast)</h4>
-                <p className="text-lg font-bold mb-2">$365,000 avg</p>
-                <p className="text-sm text-muted-foreground">Highest rental demand, 10-12% rental yields, LRT access coming</p>
+                <p className="text-sm text-muted-foreground">Valley Line Southeast LRT stop at Mill Woods, in service since November 2023</p>
               </Card>
               <Card className="p-4 border-2 border-green-500">
                 <h4 className="font-bold text-green-700">Abbottsfield (Northeast)</h4>
-                <p className="text-lg font-bold mb-2">$298,000 avg</p>
-                <p className="text-sm text-muted-foreground">Lowest entry point, 8-10% cash-on-cash returns, gentrification potential</p>
+                <p className="text-sm text-muted-foreground">Northeast neighbourhood. Check recent sale prices and current rents before you assume any return</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary">Strathcona (University Area)</h4>
-                <p className="text-lg font-bold mb-2">$295,000 condo | $525,000 home</p>
-                <p className="text-sm text-muted-foreground">U of A student rental market, steady demand, 5-7% yields</p>
+                <p className="text-sm text-muted-foreground">Close to the University of Alberta and Whyte Avenue</p>
               </Card>
             </div>
 
@@ -306,75 +308,64 @@ const EdmontonMarket2025 = () => {
               Edmonton Real Estate Investment Analysis
             </h2>
 
+            <p className="text-muted-foreground mb-6">
+              This page gives no example return and no rental yield, because we have no sourced figures for purchase price, rent or appreciation in any one neighbourhood. The outline below shows what to gather. For rents and vacancy, CMHC publishes a Rental Market Report that covers Edmonton.
+            </p>
+
             <Card className="p-6 mb-8">
-              <h3 className="font-bold text-lg mb-4">Example: Mill Woods Investment Property</h3>
+              <h3 className="font-bold text-lg mb-4">Work It Out With Your Own Figures</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-bold mb-2">Purchase Details</h4>
                   <div className="space-y-1 text-sm">
-                    <div className="flex justify-between"><span>Purchase Price:</span><span>$365,000</span></div>
-                    <div className="flex justify-between"><span>Down Payment (20%):</span><span>$73,000</span></div>
-                    <div className="flex justify-between"><span>Mortgage:</span><span>$292,000</span></div>
-                    <div className="flex justify-between"><span>Closing Costs:</span><span>$7,500</span></div>
+                    <div className="flex justify-between"><span>Purchase Price:</span><span>from comparable sales</span></div>
+                    <div className="flex justify-between"><span>Down Payment:</span><span>ask your lender</span></div>
+                    <div className="flex justify-between"><span>Mortgage:</span><span>price less down payment</span></div>
+                    <div className="flex justify-between"><span>Closing Costs:</span><span>quote from your lawyer</span></div>
                   </div>
                 </div>
                 <div>
                   <h4 className="font-bold mb-2">Monthly Costs</h4>
                   <div className="space-y-1 text-sm">
-                    <div className="flex justify-between"><span>Mortgage Payment:</span><span>$1,885</span></div>
-                    <div className="flex justify-between"><span>Property Taxes:</span><span>$275</span></div>
-                    <div className="flex justify-between"><span>Insurance:</span><span>$125</span></div>
-                    <div className="flex justify-between"><span>Maintenance Reserve:</span><span>$150</span></div>
-                    <div className="flex justify-between font-bold pt-2 border-t"><span>Total Expenses:</span><span>$2,435</span></div>
+                    <div className="flex justify-between"><span>Mortgage Payment:</span><span>from your lender</span></div>
+                    <div className="flex justify-between"><span>Property Taxes:</span><span>from the tax notice</span></div>
+                    <div className="flex justify-between"><span>Insurance:</span><span>quote from an insurer</span></div>
+                    <div className="flex justify-between"><span>Maintenance and Vacancy:</span><span>your allowance</span></div>
+                    <div className="flex justify-between font-bold pt-2 border-t"><span>Total Expenses:</span><span>the sum of the above</span></div>
                   </div>
                 </div>
               </div>
               <div className="mt-6 p-4 bg-green-50 rounded-lg">
-                <h4 className="font-bold text-green-800 mb-2">Annual Returns</h4>
-                <div className="grid md:grid-cols-4 gap-4 text-center">
+                <h4 className="font-bold text-green-800 mb-2">Annual Return</h4>
+                <div className="grid md:grid-cols-3 gap-4 text-center">
                   <div>
                     <p className="text-sm text-muted-foreground">Rental Income</p>
-                    <p className="font-bold">$2,100/mo</p>
+                    <p className="font-bold">from current listings</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Equity Gain</p>
-                    <p className="font-bold text-green-700">$7,800/yr</p>
+                    <p className="text-sm text-muted-foreground">Less Annual Expenses</p>
+                    <p className="font-bold">from the list above</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Appreciation (3%)</p>
-                    <p className="font-bold text-green-700">$10,950/yr</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Total ROI</p>
-                    <p className="font-bold text-primary text-xl">20.2%</p>
+                    <p className="text-sm text-muted-foreground">Divided By</p>
+                    <p className="font-bold">the cash you put in</p>
                   </div>
                 </div>
+                <p className="text-sm text-muted-foreground mt-4 mb-0">
+                  Appreciation is not known in advance, so leave it out of the return you plan on. Speak to an accountant about tax before you buy.
+                </p>
               </div>
             </Card>
 
             {/* Market Predictions */}
-            <h2 className="text-3xl font-bold mt-12 mb-6">Market Predictions: 2025-2026</h2>
-            
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
-              <Card className="p-4 bg-green-50 border-green-200">
-                <h4 className="font-bold text-green-800 mb-2">Best Case</h4>
-                <p className="text-2xl font-bold text-green-700 mb-2">$440,000-450,000</p>
-                <p className="text-sm text-muted-foreground">If rates drop to 3-4%, oil stabilizes at $75+</p>
-                <p className="text-sm font-bold text-green-700 mt-2">+8-10% growth</p>
-              </Card>
-              <Card className="p-4 bg-blue-50 border-blue-200">
-                <h4 className="font-bold text-blue-800 mb-2">Most Likely</h4>
-                <p className="text-2xl font-bold text-blue-700 mb-2">$420,000-430,000</p>
-                <p className="text-sm text-muted-foreground">Moderate growth with balanced conditions</p>
-                <p className="text-sm font-bold text-blue-600 mt-2">+3-5% growth</p>
-              </Card>
-              <Card className="p-4 bg-orange-50 border-orange-200">
-                <h4 className="font-bold text-orange-800 mb-2">Pessimistic</h4>
-                <p className="text-2xl font-bold text-orange-700 mb-2">$395,000-400,000</p>
-                <p className="text-sm text-muted-foreground">If oil crashes, rates stay high</p>
-                <p className="text-sm font-bold text-orange-700 mt-2">-2-3% correction</p>
-              </Card>
-            </div>
+            <h2 className="text-3xl font-bold mt-12 mb-6">Market Forecasts for 2025-2026: Where to Look</h2>
+
+            <p className="text-muted-foreground mb-4">
+              This page makes no price prediction for Edmonton. A forecast is only as good as the body behind it and the date it was made.
+            </p>
+            <p className="text-muted-foreground mb-8">
+              Published forecasts come from CMHC, in its Housing Market Outlook, and from the Canadian Real Estate Association, in its quarterly forecast. The REALTORS Association of Edmonton reports what actually happened each month. Read the date on any forecast before you use it with a client.
+            </p>
 
             {/* FAQs */}
             <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center">
@@ -384,11 +375,11 @@ const EdmontonMarket2025 = () => {
 
             <div className="space-y-4 mb-8">
               {[
-                { q: "Is Edmonton real estate a good investment in 2025?", a: "Yes. With 3-5% annual appreciation, 7-9% rental yields, and strong economic fundamentals, Edmonton offers better risk-adjusted returns than Toronto/Vancouver." },
-                { q: "What neighborhoods should first-time buyers target?", a: "Summerside, Ritchie, Bonnie Doon, and Mill Woods offer affordability ($300k-450k) with good schools and amenities." },
-                { q: "Are condos or houses better investments in Edmonton?", a: "Houses appreciate faster (3.2% vs 1.9%) and offer basement suite income potential. Condos better for hands-off investors." },
-                { q: "How much do I need for a down payment in Edmonton?", a: "Minimum 5% on homes under $500k. On $400k home = $20k down + $10k closing costs = $30k total." },
-                { q: "Should I buy in Edmonton or Calgary?", a: "Edmonton is more affordable ($407k vs $568k average). Calgary has stronger job market but less affordability. Choose based on job location." },
+                { q: "Is Edmonton real estate a good investment in 2025?", a: "That depends on the property, the price you pay, the rent it earns and your costs, and this page cannot answer it for you. Work through the outline in the investment section with current figures, and speak to a licensed REALTOR and an accountant before you buy." },
+                { q: "What neighborhoods should first-time buyers target?", a: "Summerside, Ritchie, Bonnie Doon and Mill Woods are among the areas covered above. Ask a local REALTOR for recent sale prices in each, because the association's monthly release does not break prices out by neighbourhood." },
+                { q: "Are condos or houses better investments in Edmonton?", a: "In December 2024, detached homes in the Greater Edmonton Area averaged $540,232, up 10.6% from a year earlier, and apartment condominiums averaged $203,920, up 19.8% (REALTORS Association of Edmonton). One month of averages does not predict returns. A house costs more to buy and maintain. A condo comes with condo fees and less upkeep." },
+                { q: "How much do I need for a down payment in Edmonton?", a: "The federal minimum is 5% of a purchase price of $500,000 or less, so $20,000 on a $400,000 home (Financial Consumer Agency of Canada, as of October 2026). CMHC advises budgeting a further 1.5% to 4% of the price for closing costs, which is $6,000 to $16,000 on $400,000." },
+                { q: "Should I buy in Edmonton or Calgary?", a: "Compare the two using the Canadian Real Estate Association's figures for each board, for the same month and the same measure, then weigh where your work is. This page quotes no Calgary figure because it has none from the same source and period." },
               ].map((item, idx) => (
                 <Card key={idx} className="p-4">
                   <h4 className="font-bold mb-2">{item.q}</h4>
@@ -400,10 +391,10 @@ const EdmontonMarket2025 = () => {
             {/* Conclusion */}
             <h2 className="text-3xl font-bold mt-12 mb-6">Conclusion</h2>
             <p className="text-muted-foreground mb-6">
-              Edmonton's real estate market in 2025 presents a <strong>rare combination of affordability, economic stability, and growth potential</strong> that's increasingly hard to find in Canada's major cities.
+              Edmonton's real estate market in 2025 is best judged from <strong>published figures with a named source and a date</strong>, not from a single headline number.
             </p>
             <p className="text-muted-foreground mb-8">
-              With average home prices at <strong>$407,800</strong>, steady appreciation of <strong>3-5% annually</strong>, and strong fundamentals driven by energy sector diversification, tech growth, and interprovincial migration, Edmonton offers compelling opportunities for buyers and investors alike.
+              In December 2024 the all-residential average selling price in the Greater Edmonton Area was <strong>$435,549</strong>, up <strong>12.2%</strong> from December 2023 (REALTORS Association of Edmonton). For the current month, and for any forecast, go to the association, the Canadian Real Estate Association or CMHC directly.
             </p>
 
             {/* CTA */}

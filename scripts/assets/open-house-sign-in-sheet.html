@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Open House Sign-In Sheet</title>
+<style>
+  @page { size: Letter; margin: 0.55in 0.6in; }
+  * { box-sizing: border-box; }
+  body { font-family: Helvetica, Arial, sans-serif; color: #111; margin: 0; font-size: 10.5pt; }
+  h1 { font-size: 22pt; margin: 0 0 4pt; letter-spacing: -0.01em; }
+  .sub { color: #444; margin: 0 0 14pt; font-size: 10pt; }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt 18pt; margin-bottom: 12pt; }
+  .field { border-bottom: 1px solid #111; padding-bottom: 14pt; font-size: 8.5pt; color: #444; text-transform: uppercase; letter-spacing: 0.04em; }
+  .field.wide { grid-column: 1 / -1; }
+  .consent { border: 1px solid #111; padding: 8pt 10pt; margin-bottom: 12pt; font-size: 9.5pt; line-height: 1.4; }
+  .consent b { font-size: 9.5pt; }
+  .blank { display: inline-block; border-bottom: 1px solid #111; min-width: 150pt; height: 10pt; vertical-align: bottom; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1.5px solid #111; padding: 5pt 6pt; vertical-align: bottom; }
+  td { border-bottom: 1px solid #999; height: 30pt; padding: 0 6pt; }
+  td.n { color: #777; width: 20pt; font-size: 8.5pt; }
+  th.c, td.c { text-align: center; width: 62pt; }
+  .box { display: inline-block; width: 12pt; height: 12pt; border: 1px solid #111; vertical-align: middle; }
+  .yn { color: #555; font-size: 9pt; letter-spacing: 0.1em; }
+  .foot { margin-top: 10pt; display: flex; justify-content: space-between; color: #555; font-size: 8pt; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .how h2 { font-size: 13pt; margin: 16pt 0 6pt; }
+  .how p, .how li { font-size: 10.5pt; line-height: 1.5; }
+  .how ol, .how ul { padding-left: 16pt; margin: 0 0 8pt; }
+</style></head><body>
+
+<div class="page">
+  <h1>Open House Sign-In</h1>
+  <p class="sub">Welcome. Please sign in. Signing in is optional.</p>
+  <div class="fields">
+    <div class="field wide">Property address</div>
+    <div class="field">Date</div>
+    <div class="field">Hosted by (agent)</div>
+    <div class="field">Brokerage</div>
+    <div class="field">Phone or email</div>
+    <div class="field wide">Mailing address</div>
+  </div>
+  <div class="consent">
+    <b>Would you like to hear from us by email?</b> Tick <b>Yes</b> in the last column to agree to receive emails
+    about this property and similar homes from the agent and brokerage named above. You can withdraw your consent
+    at any time by replying to any email or by contacting us at the details above. Leaving the box empty is fine.
+  </div>
+  <table>
+    <thead><tr>
+      <th></th><th>Name</th><th>Email</th><th>Phone</th>
+      <th class="c">Working with an agent?</th><th class="c">Yes, email me</th>
+    </tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">2</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">3</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">4</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">5</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">6</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">7</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">8</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">9</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">10</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">11</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+      <tr><td class="n">12</td><td></td><td></td><td></td><td class="c yn">Y / N</td><td class="c"><span class="box"></span></td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span>Keep this sheet. It is your record of who agreed to be emailed, and when.</span><span>Free template from realtordesk.ai</span></div>
+</div>
+
+<div class="page how">
+  <h1>How to use this sheet</h1>
+  <p class="sub">For the agent. Do not put this page out for visitors.</p>
+  <h2>Before the open house</h2>
+  <ol>
+    <li>Fill in every line at the top. A request for consent under Canada's anti-spam law has to name who is asking and give a mailing address plus a phone number, an email address or a web address.</li>
+    <li>Print one sheet for every twelve visitors you expect, and bring a pen that works.</li>
+  </ol>
+  <h2>During</h2>
+  <ul>
+    <li>Signing in is optional, and so is the email box. Do not tick it for anyone.</li>
+    <li>If someone asks you a question about the property, note it. An inquiry is a different thing from a name on a list.</li>
+  </ul>
+  <h2>After</h2>
+  <ol>
+    <li>Enter the contacts the same day. The matching CSV on the template page has the same columns.</li>
+    <li>For each person who ticked Yes, record the date and "open house sign-in sheet" as the source of consent.</li>
+    <li>Do not add anyone who left the box empty to a mailing list.</li>
+    <li>File the paper sheet. The sender has the onus of proving consent.</li>
+  </ol>
+  <h2>Outside Canada</h2>
+  <p>The consent wording follows Canadian law. Other countries have their own rules for email, texts and calls. Check them before you use the sheet there.</p>
+  <p style="color:#555;font-size:9pt;margin-top:18pt">General information, not legal advice. realtordesk.ai/resources/open-house-sign-in-sheet-template</p>
+</div>
+</body></html>

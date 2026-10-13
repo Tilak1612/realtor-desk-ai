@@ -577,3 +577,35 @@ Not changed, on purpose: any price, plan name, trial term, money-back guarantee 
 2. PIPEDA hosting wording and the softened legal summaries (CASL, PIPEDA, FINTRAC, provincial regulators) have not had a legal review.
 3. Native-speaker review of the French pages and the rewritten French FAQ answers.
 4. In Search Console: request indexing for `/pricing`, `/features/import-contacts`, `/fr/importer-contacts-csv`, and read the sitemap warning.
+
+## 16. Keyword-driven pages and a second statistics sweep (12 October 2026)
+
+Brief: audit with OpenSEO, research high-intent low-competition keywords for Canada and the USA, and build pages for them, with English and French hreflang.
+
+**Data used.** OpenSEO keyword research for Canada (2124) and the USA (2840), keyword metrics for English and French candidate lists, SERP competitors for both markets, and Search Console and GA4 through the same connection. Baseline for the week of 3 to 9 October: 106 to 118 impressions, 1 click, 17 pages with impressions, average position about 24.
+
+**New pages (six).**
+
+| URL | Target queries (monthly volume, difficulty) | Source of every claim |
+|---|---|---|
+| `/follow-up-boss-pricing` | follow up boss pricing (US 1,000 KD 18; CA 170 KD 19) | followupboss.com/pricing, read 12 Oct 2026 |
+| `/resources/open-house-sign-in-sheet-template` | open house sign in sheet (US 4,400 KD 0; CA 320 KD 0) | Real PDF and CSV in `public/downloads`; consent wording from SOR/2012-36 s. 4 |
+| `/ai-tools-for-real-estate-agents` | ai for real estate agents (US 590 KD 27), ai tools for real estate agents (US 320 KD 8) | No rankings; two vendor statements read from the vendors' sites |
+| `/resources/casl-implied-consent-calculator` | casl compliance (CA 590), casl implied consent (CA 90), casl consent (CA 70) | S.C. 2010, c. 23, ss. 1(3), 10(10), 10(14), 11(3), 13 |
+| `/law-25-quebec-real-estate` | law 25 quebec (CA 320 KD 4) | Commission d'accès à l'information du Québec summary, read 12 Oct 2026 |
+| `/fr/loi-25-courtier-immobilier` | loi 25 (CA 6,600 KD 18), loi 25 québec (CA 210 KD 13) | Same, in the Commission's own vocabulary |
+
+**hreflang pairs.** `src/config/hreflangPairs.ts` lists English pages that have a standalone French translation. Both `SEO.tsx` and `scripts/prerender-pages.js` read it, and each page of a pair now names the other (`hreflangPairs.test.ts`). Two pairs: Law 25, and import contacts. `/fr/crm-immobilier` and `/fr/lcap-courriels-immobilier` have no English twin and stay self-referencing.
+
+**Existing pages changed, and why.**
+
+- `/resources/real-estate-crm-pricing`: every vendor page re-read. Top Producer now publishes prices, Follow Up Boss was missing, and a section per vendor was added for "<vendor> pricing" queries.
+- `/compare/top-producer-alternative`: said Top Producer does not publish pricing. It now does (without a currency, with Canadian pricing on request), so three statements were corrected.
+- `/blog/real-estate-drip-campaign-templates-canada-2025` and `/blog/open-house-digital-sign-in-sheets-vs-paper-2025`: rewritten. Both still carried invented figures ("$12M in commissions", open and click rates, an ROI section, a capture-rate table) that the first two passes missed.
+- `/blog/real-estate-lead-generation-strategies-canada-2025`, `/sell-home-fast-canada-2025`, `/first-time-home-buyer-guide-canada-2025`, `/edmonton-real-estate-market-2025`: unsourced figures removed; government figures checked against canada.ca, CMHC and provincial pages and corrected where wrong (Home Buyers' Plan limit, the 20% down payment threshold, the B.C. exemption); Edmonton statistics replaced with the REALTORS Association of Edmonton's December 2024 release.
+- Titles: `/what-is-a-real-estate-crm`, `/resources/real-estate-crm-template`, `/fr/lcap-courriels-immobilier`.
+- `index.html`: the Google Fonts stylesheet no longer blocks first paint.
+
+**Not done, on purpose.** No US-only landing pages (the product is priced in CAD and positioned for Canada). No investor or commercial CRM keywords. No "best CRM" ranking page. Lazy-loading `/features`, `/pricing` and `/compare/boldtrail` was measured and saved under 3% of the entry bundle, so it was not shipped.
+
+**Open.** The entry bundle is about 1.06 MB (332 KB gzipped) and is the main Core Web Vitals cost; it needs a bundle analysis, not a quick fix. `/sell-home-fast-canada-2025` and `/edmonton-real-estate-market-2025` are now accurate but thin and would benefit from a rewrite or removal. The French on the Loi 25 page has not had a native review, and the Law 25 and CASL pages have not had a legal review.

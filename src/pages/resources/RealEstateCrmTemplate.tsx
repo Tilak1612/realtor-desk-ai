@@ -35,7 +35,7 @@ const RealEstateCrmTemplate = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Real Estate CRM Spreadsheet Template"
+        title="Free Real Estate CRM Spreadsheet Template"
         description="A free CSV lead tracker for real estate agents: contacts, stages, next actions and CASL consent. Opens in Excel, Numbers and Google Sheets. No signup."
         keywords="real estate crm excel template, real estate crm google sheets, lead follow-up spreadsheet, real estate lead tracker"
         canonicalUrl="https://www.realtordesk.ai/resources/real-estate-crm-template"

@@ -18,7 +18,15 @@ import { SEO } from "@/components/SEO";
 // (HouseValues), Real Estate Leads (Social Connect), AI-Powered Farming (Smart
 // Targeting), Lead Routing (FiveStreet), Agent Website, email and SMS, Dynamic
 // Workflows, Transaction Manager, Market Snapshot Reports, AI Author, Follow Up
-// Coach, Property Insights and 150+ lead source integrations. No pricing shown.
+// Coach, Property Insights and 150+ lead source integrations.
+//
+// PRICING, re-read 12 October 2026 at topproducer.com/pricing: the page now
+// lists prices (it showed none on 28 September). Pro is $179 per user per month
+// and Pro Teams starts at $399 a month for up to five users; no currency is
+// stated; a second set of plans on the same page shows Pro at $98; and there is
+// a separate "Request pricing for Canadians" link. So "they do not publish
+// pricing" is no longer true and was removed. What is true for a Canadian
+// buyer is that the Canadian price is on request.
 
 const FAQS = [
   {
@@ -27,7 +35,7 @@ const FAQS = [
   },
   {
     q: "What does Top Producer cost?",
-    a: "They do not publish pricing on their product site; it is quoted on enquiry. Ask for seats, setup fee, contract length and which lead products are billed separately, in writing.",
+    a: "On 12 October 2026 its pricing page listed the Pro plan at $179 per user per month and Pro Teams from $399 a month for up to five users, without stating a currency, and carried a separate link to request pricing for Canadians. Ask for seats, setup fee, contract length and which lead products are billed separately, in writing.",
   },
   {
     q: "What does Top Producer do that Realtor Desk does not?",
@@ -48,7 +56,7 @@ const TopProducerAlternative = () => {
     <div className="min-h-screen">
       <SEO
         title="Top Producer Alternative for Canadian Agents"
-        description="Top Producer bundles CRM, lead generation and websites and quotes its pricing privately. A comparison against a published CAD price, on facts we can check."
+        description="Top Producer bundles CRM, lead generation and websites, and asks Canadians to request pricing. A comparison against a published CAD price, on checkable facts."
         keywords="top producer alternative, top producer crm alternative, top producer vs realtor desk"
         canonicalUrl="https://www.realtordesk.ai/compare/top-producer-alternative"
         structuredData={[
@@ -92,7 +100,7 @@ const TopProducerAlternative = () => {
                 It would be convenient to frame this as Canadian versus American. It is not true. Top Producer&rsquo;s own footer names Constellation1 Inc. and Emphasys Canada Holdings Inc., so it is a Canadian-operated business with a long history in this market. Anyone selling you a nationality argument against them has not read their site.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                What is true is narrower and checkable: they do not publish pricing, and they make no published statement about French-language support. We publish $149 and $299 CAD on the pricing page, and the interface and client email both work in French.
+                What is true is narrower and checkable: their pricing page lists prices without a currency and asks Canadians to request pricing, and they make no published statement about French-language support. We publish $149 and $299 CAD on the pricing page, and the interface and client email both work in French.
               </p>
             </div>
             <div>

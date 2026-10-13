@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { normalizeLocale } from '@/lib/i18n/format';
 import { OG_IMAGE_SLUGS } from '@/config/ogImages';
+import { englishTwinOf, frenchTwinOf } from '@/config/hreflangPairs';
 
 // Mirrors slugFor() in scripts/generate-og-images.mjs.
 const ogSlugFor = (pathname: string) =>
@@ -74,8 +75,13 @@ export const SEO = ({
   // the English page lived at a URL that canonicalises elsewhere, and Search
   // Console showed /?lang=en earning impressions as a second copy of the
   // homepage. French has no path of its own yet, so it stays at ?lang=fr.
-  const altEn = `${siteUrl}${basePath}`;
-  const altFr = `${siteUrl}${basePath}?lang=fr`;
+  //
+  // The exception is a page with a standalone translation under /fr/
+  // (src/config/hreflangPairs.ts). There the two URLs name each other.
+  const frTwin = frenchTwinOf(basePath);
+  const enTwin = englishTwinOf(basePath);
+  const altEn = `${siteUrl}${enTwin ?? basePath}`;
+  const altFr = frTwin ? `${siteUrl}${frTwin}` : `${siteUrl}${basePath}?lang=fr`;
 
   // Title already lives in the locale-specific page copy, so don't
   // double-append the brand. If the caller passed a generic non-brand
@@ -88,11 +94,12 @@ export const SEO = ({
 
   const ogLocale = locale === 'fr-CA' ? 'fr_CA' : 'en_CA';
   const ogLocaleAlt = locale === 'fr-CA' ? 'en_CA' : 'fr_CA';
-  // A route under /fr/ is a standalone French page with no English twin, so its
-  // document language is French whatever the visitor's UI language is, and it has
-  // no en-CA / x-default alternate to declare. scripts/prerender-pages.js applies
-  // the same rule to the static HTML; the two must agree because a rendering
-  // crawler sees this effect's output replace the static tags.
+  // A route under /fr/ is a standalone French page, so its document language is
+  // French whatever the visitor's UI language is. Unless it is paired with an
+  // English page (enTwin above) it has no en-CA / x-default alternate to declare.
+  // scripts/prerender-pages.js applies the same rule to the static HTML; the two
+  // must agree because a rendering crawler sees this effect's output replace the
+  // static tags.
   const isFrenchRoute = basePath.startsWith('/fr/');
   const htmlLang = isFrenchRoute || locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
 
@@ -164,13 +171,18 @@ export const SEO = ({
     upsertMeta("name", "twitter:image", ogImage);
 
     upsertLink("canonical", currentUrl);
-    if (isFrenchRoute) {
+    if (isFrenchRoute && !enTwin) {
       // One self-referencing fr-CA entry. Drop anything the static head carried
       // for other languages: those alternates would point at this same page.
       document.head
         .querySelectorAll('link[rel="alternate"][hreflang="en-CA"], link[rel="alternate"][hreflang="x-default"]')
         .forEach((n) => n.remove());
       upsertLink("alternate", currentUrl, "fr-CA");
+    } else if (isFrenchRoute) {
+      // A French page with an English twin: name both, default to English.
+      upsertLink("alternate", altEn, "en-CA");
+      upsertLink("alternate", currentUrl, "fr-CA");
+      upsertLink("alternate", altEn, "x-default");
     } else {
       upsertLink("alternate", altEn, "en-CA");
       upsertLink("alternate", altFr, "fr-CA");
@@ -197,7 +209,7 @@ export const SEO = ({
     };
   }, [
     fullTitle, description, keywords, noindex, article, currentUrl, image, ogImage, ogIsWide,
-    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, isFrenchRoute, basePath, publishedTime, modifiedTime,
+    ogLocale, ogLocaleAlt, htmlLang, altEn, altFr, isFrenchRoute, enTwin, basePath, publishedTime, modifiedTime,
     author, structuredData,
   ]);
 

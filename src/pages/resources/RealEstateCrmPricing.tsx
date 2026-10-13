@@ -15,6 +15,12 @@ import { SEO } from "@/components/SEO";
 // states it. Every "not published" below was confirmed on the vendor's own
 // pricing page that day, not assumed.
 //
+// Re-read on 12 October 2026, every vendor page again. Two things had changed:
+// Top Producer now publishes prices (it quoted on enquiry in September), and
+// Follow Up Boss, which was missing from the table, is added. The per-vendor
+// sections below exist because people search "<vendor> pricing" one vendor at a
+// time; each is the same sourced fact as its table row, with nothing estimated.
+//
 // Do not add a price here that a vendor does not publish. Two of the three
 // fabrications removed from this site in September were invented competitor
 // prices; this page is the one most likely to attract them back.
@@ -27,7 +33,7 @@ type Row = {
   note: string;
 };
 
-const CHECKED = "28 September 2026";
+const CHECKED = "12 October 2026";
 
 const ROWS: Row[] = [
   {
@@ -38,10 +44,17 @@ const ROWS: Row[] = [
     note: "Solo and Team. $999 / $2,997 billed annually. No setup fee. 14-day trial, card required to start.",
   },
   {
+    vendor: "Follow Up Boss",
+    published: true,
+    price: "$58 – $69 per user per month",
+    currency: "Not stated",
+    note: "Grow plan, annual vs monthly billing. Calling is a paid add-on on Grow. Pro is $499 a month including 10 users.",
+  },
+  {
     vendor: "IXACT Contact",
     published: true,
     price: "$46.75 – $55 per month",
-    currency: "USD",
+    currency: "Not stated",
     note: "Annual vs monthly billing. Team member seats listed separately. Add-ons priced individually.",
   },
   {
@@ -56,28 +69,75 @@ const ROWS: Row[] = [
     published: false,
     price: "Not published",
     currency: "—",
-    note: "Four tiers listed behind Request Pricing. States cost varies with package, seat count, upgrades and lead-gen programmes.",
+    note: "Four plans (Agent, Team, Broker, Enterprise), each behind Request Pricing.",
   },
   {
-    vendor: "BoldTrail",
+    vendor: "BoldTrail (formerly kvCORE)",
     published: false,
     price: "Not published",
     currency: "—",
-    note: "No pricing shown. Agent, team, broker and enterprise routes all lead to contact forms.",
+    note: "The pricing address leads to a demo request form headed \"Watch demo & get Pricing\".",
   },
   {
     vendor: "Top Producer",
-    published: false,
-    price: "Not published",
-    currency: "—",
-    note: "No pricing on the product site; quoted on enquiry.",
+    published: true,
+    price: "$179 per user per month",
+    currency: "Not stated",
+    note: "Pro plan. The same page also shows a Pro plan at $98 per user in a second set of plans, and a separate link to request pricing for Canadians.",
+  },
+];
+
+// One short section per vendor, for the reader who arrived asking about one of
+// them. Same sources and date as ROWS.
+const VENDORS: { name: string; heading: string; body: string; source: string; link?: { to: string; label: string } }[] = [
+  {
+    name: "Follow Up Boss",
+    heading: "Follow Up Boss pricing",
+    body: "Grow is $69 per user per month, or $58 on annual billing, with calling as an add-on at $39 per user. Pro is $499 a month including 10 users, and Platform is $1,000 a month including 30 users. Every plan lists a 14-day free trial and no contract. The page does not state a currency.",
+    source: "followupboss.com/pricing",
+    link: { to: "/follow-up-boss-pricing", label: "Follow Up Boss pricing, with worked totals" },
+  },
+  {
+    name: "Lofty",
+    heading: "Lofty pricing",
+    body: "Lofty does not publish prices. Its packages page lists four plans, Agent, Team, Broker and Enterprise, and each one shows a Request Pricing button in place of a figure. Lead-generation packages on the same page are also quoted on request.",
+    source: "lofty.com/price-packages",
+    link: { to: "/vs/lofty", label: "Realtor Desk vs Lofty" },
+  },
+  {
+    name: "BoldTrail",
+    heading: "BoldTrail and kvCORE pricing",
+    body: "BoldTrail, the product formerly sold as kvCORE, does not publish prices. Its pricing address leads to a demo request form that asks for your role and team size before anyone gives you a number.",
+    source: "boldtrail.com/pricing",
+    link: { to: "/compare/boldtrail", label: "Realtor Desk vs BoldTrail" },
+  },
+  {
+    name: "Wise Agent",
+    heading: "Wise Agent pricing",
+    body: "Wise Agent publishes its prices in US dollars. The CRM plan is $49 a month, or $42 a month billed annually ($499 a year). CRM plus WiseSocial is $69 a month, or $59 billed annually. Both carry a 14-day free trial and include up to five team members on a shared login. Enterprise, for teams of 15 or more, is quoted.",
+    source: "wiseagent.com/pricing",
+    link: { to: "/vs/wise-agent", label: "Wise Agent vs Realtor Desk" },
+  },
+  {
+    name: "IXACT Contact",
+    heading: "IXACT Contact pricing",
+    body: "IXACT Contact lists $55 a month on monthly billing and $46.75 a month on the annual plan. On its teams version the team leader pays the same and each team member is $34 monthly or $28.90 on the annual plan. Website, IDX and social add-ons are priced separately.",
+    source: "ixactcontact.com/real-estate-crm-pricing",
+    link: { to: "/vs/ixact", label: "IXACT Contact vs Realtor Desk" },
+  },
+  {
+    name: "Top Producer",
+    heading: "Top Producer pricing",
+    body: "Top Producer lists its Pro plan at $179 per user per month, with Pro Teams from $399 a month for up to five users. Plans that bundle leads or farming are shown as starting prices that vary with volume. The same page shows a second set of plans with Pro at $98 per user, and a separate link to request pricing for Canadians, so confirm which applies to you.",
+    source: "topproducer.com/pricing",
+    link: { to: "/compare/top-producer-alternative", label: "A Top Producer alternative" },
   },
 ];
 
 const FAQS = [
   {
     q: "How much does a real estate CRM cost?",
-    a: "Where vendors publish a price, the range for a single agent runs from roughly USD $47 to USD $69 a month, and Realtor Desk is CAD $149. But half the category does not publish at all — Lofty, BoldTrail and Top Producer all quote on enquiry — so a single headline number for the market would be misleading.",
+    a: "Where vendors publish a price, a single agent pays from about $42 to $179 a month, in whichever currency each page uses, and Realtor Desk is CAD $149. Two of the larger platforms, Lofty and BoldTrail, publish nothing and quote on enquiry, so a single headline number for the market would be misleading.",
   },
   {
     q: "Why do so many CRMs hide their pricing?",
@@ -89,7 +149,7 @@ const FAQS = [
   },
   {
     q: "Is a cheaper CRM worse?",
-    a: "Not inherently. Wise Agent is among the least expensive and is widely used by solo agents. Price tends to track breadth — websites, lead generation and back office bundled in — rather than quality of the core CRM. Pay for the scope you will actually use.",
+    a: "Not inherently. Wise Agent is among the least expensive in the table above. Price tends to track breadth — websites, lead generation and back office bundled in — rather than quality of the core CRM. Pay for the scope you will actually use.",
   },
   {
     q: "What does currency do to the comparison?",
@@ -124,11 +184,11 @@ const RealEstateCrmPricing = () => {
           <div className="container-custom max-w-3xl">
             <h1 className="mb-6">How much does a real estate CRM cost?</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Among vendors that publish a price, a single agent pays roughly USD
-              $47 to $69 a month, and Realtor Desk is CAD $149. The more useful
-              finding is that half of this category publishes nothing at all — so
-              the first question is not what a CRM costs, but whether the vendor
-              will tell you before a sales call.
+              Among vendors that publish a price, a single agent pays from about $42
+              to $179 a month, and Realtor Desk is CAD $149. The more useful finding
+              is that two of the larger platforms publish nothing at all, so the
+              first question is not what a CRM costs, but whether the vendor will
+              tell you before a sales call.
             </p>
           </div>
         </section>
@@ -171,6 +231,33 @@ const RealEstateCrmPricing = () => {
                 Prices change. Treat this as a dated snapshot and confirm on the
                 vendor&rsquo;s site before deciding.
               </p>
+            </div>
+
+            <div>
+              <h2 className="mb-3">Vendor by vendor</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                What each vendor&rsquo;s own pricing page said on {CHECKED}.
+              </p>
+              <div className="space-y-8">
+                {VENDORS.map((v) => (
+                  <div key={v.name}>
+                    <h3 className="text-lg font-semibold mb-2">{v.heading}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{v.body}</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Source: {v.source}.
+                      {v.link && (
+                        <>
+                          {" "}
+                          <Link to={v.link.to} className="underline">
+                            {v.link.label}
+                          </Link>
+                          .
+                        </>
+                      )}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div>

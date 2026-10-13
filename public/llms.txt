@@ -47,6 +47,15 @@ No customer counts, revenue, closing-rate increases, hours-saved figures, respon
 - [AI in the CRM](https://www.realtordesk.ai/features/ai-powered-crm): the specific places AI helps, and where it stops.
 - [What is a real estate CRM?](https://www.realtordesk.ai/what-is-a-real-estate-crm): a plain definition for agents still on a spreadsheet.
 
+## Guides and tools
+
+- [Open house sign-in sheet template](https://www.realtordesk.ai/resources/open-house-sign-in-sheet-template): a free printable sheet (PDF and CSV, no signup) with a consent tick box and the wording explained.
+- [CASL implied consent calculator](https://www.realtordesk.ai/resources/casl-implied-consent-calculator): six months from an inquiry, two years from a purchase or the end of a written contract, per subsection 10(10) of the Act. Realtor Desk itself does not calculate this expiry.
+- [Law 25 for Quebec real estate brokers](https://www.realtordesk.ai/law-25-quebec-real-estate): the obligations as summarised by the Commission d'accès à l'information, and seven questions to ask a CRM vendor. French version: [La Loi 25 pour le courtier immobilier](https://www.realtordesk.ai/fr/loi-25-courtier-immobilier).
+- [AI tools for real estate agents](https://www.realtordesk.ai/ai-tools-for-real-estate-agents): seven kinds of tool and what to check before using one with client information. It ranks no products.
+- [Follow Up Boss pricing, explained](https://www.realtordesk.ai/follow-up-boss-pricing): Grow $69 per user per month, Pro $499 including 10 users, Platform $1,000 including 30 users, as published on 12 October 2026. The vendor's page states no currency.
+- [What real estate CRMs cost](https://www.realtordesk.ai/resources/real-estate-crm-pricing): each vendor's published price with the date read. Lofty and BoldTrail publish none.
+
 ## Who it is for
 
 - [Solo agents](https://www.realtordesk.ai/use-cases/solo-agent): the product's actual audience.

@@ -49,6 +49,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/ai-tools-for-real-estate-agents",
+      "destination": "/index.html"
+    },
+    {
       "source": "/app",
       "destination": "/index.html"
     },
@@ -313,6 +317,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/follow-up-boss-pricing",
+      "destination": "/index.html"
+    },
+    {
       "source": "/forgot-password",
       "destination": "/index.html"
     },
@@ -329,11 +337,19 @@
       "destination": "/index.html"
     },
     {
+      "source": "/fr/loi-25-courtier-immobilier",
+      "destination": "/index.html"
+    },
+    {
       "source": "/how-it-works",
       "destination": "/index.html"
     },
     {
       "source": "/integrations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/law-25-quebec-real-estate",
       "destination": "/index.html"
     },
     {
@@ -421,7 +437,15 @@
       "destination": "/index.html"
     },
     {
+      "source": "/resources/casl-implied-consent-calculator",
+      "destination": "/index.html"
+    },
+    {
       "source": "/resources/cost-of-missed-real-estate-leads-canada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/open-house-sign-in-sheet-template",
       "destination": "/index.html"
     },
     {

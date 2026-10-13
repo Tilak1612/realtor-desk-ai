@@ -52,6 +52,13 @@ const repoRoot = path.join(__dirname, '..');
 const distDir = path.join(repoRoot, 'dist');
 const SITE = 'https://www.realtordesk.ai';
 
+// English path -> French translation, read from the same file SEO.tsx imports so
+// the static head and the hydrated head cannot disagree.
+const HREFLANG_PAIRS = Object.fromEntries(
+  [...fs.readFileSync(path.join(repoRoot, 'src/config/hreflangPairs.ts'), 'utf8')
+    .matchAll(/^\s*"(\/[^"]+)":\s*"(\/fr\/[^"]+)"/gm)].map((m) => [m[1], m[2]]),
+);
+
 // The one value both the nav registry and the @/content modules import. Read
 // once, from its own config, and injected into every sandbox below — without
 // it those modules throw on evaluation and their copy silently vanishes from
@@ -920,16 +927,32 @@ function buildHead(baseHtml, { route, title, description, canonical, structuredD
   // content are ignored at best. These pages emit one self-referencing fr-CA
   // entry instead, and are marked lang="fr-CA" so the language is declared on the
   // document and not only inside <main>.
+  //
+  // The exception, in both directions, is a page with a real translation at its
+  // own URL (src/config/hreflangPairs.ts). Those two pages name each other.
   const isFrenchRoute = route.startsWith('/fr/');
   if (isFrenchRoute) head = head.replace(/<html lang="[^"]*"/, '<html lang="fr-CA"');
-  const linkBlock = isFrenchRoute
-    ? `<link rel="canonical" href="${esc(url)}" />` +
-      `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}" />`
-    : `<link rel="canonical" href="${esc(url)}" />` +
+  const frTwin = HREFLANG_PAIRS[route];
+  const enTwin = Object.keys(HREFLANG_PAIRS).find((en) => HREFLANG_PAIRS[en] === route);
+  let linkBlock;
+  if (isFrenchRoute && enTwin) {
+    linkBlock =
+      `<link rel="canonical" href="${esc(url)}" />` +
+      `<link rel="alternate" hreflang="en-CA" href="${esc(SITE + enTwin)}" />` +
+      `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}" />` +
+      `<link rel="alternate" hreflang="x-default" href="${esc(SITE + enTwin)}" />`;
+  } else if (isFrenchRoute) {
+    linkBlock =
+      `<link rel="canonical" href="${esc(url)}" />` +
+      `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}" />`;
+  } else {
+    linkBlock =
+      `<link rel="canonical" href="${esc(url)}" />` +
       // en-CA is the canonical (clean) URL, matching src/components/SEO.tsx.
       `<link rel="alternate" hreflang="en-CA" href="${esc(url)}" />` +
-      `<link rel="alternate" hreflang="fr-CA" href="${esc(url)}?lang=fr" />` +
+      `<link rel="alternate" hreflang="fr-CA" href="${esc(frTwin ? SITE + frTwin : url + '?lang=fr')}" />` +
       `<link rel="alternate" hreflang="x-default" href="${esc(url)}" />`;
+  }
   if (/<link\s+rel="canonical"[^>]*>/.test(head)) {
     head = head.replace(/<link\s+rel="canonical"[^>]*>/, linkBlock);
   } else {
