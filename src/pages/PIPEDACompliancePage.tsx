@@ -240,14 +240,14 @@ const PIPEDACompliance = () => {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-2">4. Data Access & Portability</h3>
                     <p className="text-muted-foreground mb-3">
-                      When a client asks what you hold about them, you can export your data from Settings and export contacts to CSV. That helps you answer the request; answering it is still your job.
+                      When a client asks what you hold about them, you can export your data from Settings as a JSON file and export contacts to CSV from the Leads page. That helps you answer the request; answering it is still your job.
                     </p>
                     <div className="bg-muted/50 p-4 rounded-lg">
                       <p className="text-sm font-medium mb-2">✅ What this means for you:</p>
                       <ul className="text-sm text-muted-foreground space-y-1">
                         <li>• PIPEDA expects a response to an access request within 30 days</li>
                         <li>• Export client data for portability</li>
-                        <li>• Your data in CSV and JSON, on request from Settings</li>
+                        <li>• Your data as a JSON file from Settings; contacts as a CSV from the Leads page</li>
                       </ul>
                     </div>
                   </div>
