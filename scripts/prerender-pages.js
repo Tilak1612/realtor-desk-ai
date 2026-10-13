@@ -54,10 +54,25 @@ const SITE = 'https://www.realtordesk.ai';
 
 // English path -> French translation, read from the same file SEO.tsx imports so
 // the static head and the hydrated head cannot disagree.
-const HREFLANG_PAIRS = Object.fromEntries(
-  [...fs.readFileSync(path.join(repoRoot, 'src/config/hreflangPairs.ts'), 'utf8')
-    .matchAll(/^\s*"(\/[^"]+)":\s*"(\/fr\/[^"]+)"/gm)].map((m) => [m[1], m[2]]),
-);
+//
+// This is a text read, so it only understands one pair per line in the form
+// "/en": "/fr/...". Anything else (single quotes, the object on one line) parses
+// to nothing, and the pages would then ship unpaired with no error. So it throws
+// when it finds no pairs, and src/test/seo/hreflangPairs.test.ts compares the
+// result with the TypeScript object on every test run.
+export function readHreflangPairs() {
+  const src = fs.readFileSync(path.join(repoRoot, 'src/config/hreflangPairs.ts'), 'utf8');
+  const pairs = Object.fromEntries(
+    [...src.matchAll(/^\s*"(\/[^"]+)":\s*"(\/fr\/[^"]+)"/gm)].map((m) => [m[1], m[2]]),
+  );
+  if (Object.keys(pairs).length === 0) {
+    throw new Error(
+      'No hreflang pairs parsed from src/config/hreflangPairs.ts. Keep each pair on its own line as "/en": "/fr/...".',
+    );
+  }
+  return pairs;
+}
+const HREFLANG_PAIRS = readHreflangPairs();
 
 // The one value both the nav registry and the @/content modules import. Read
 // once, from its own config, and injected into every sandbox below — without
@@ -616,7 +631,9 @@ function textOf(inner, tag = '') {
 // evaluated values and take the human-readable strings. Anything that looks
 // like a slug, class name, URL, icon or single word is skipped, so this emits
 // prose rather than markup fragments.
-function extractDataStrings(src, { limit = 60 } = {}) {
+// 60 cut /blog/real-estate-drip-campaign-templates-canada-2025 in half: six of
+// its twelve templates never reached the static HTML.
+function extractDataStrings(src, { limit = 140 } = {}) {
   const prelude = localConstPrelude(src);
   const declared = new Set([...prelude.matchAll(/^const\s+([A-Za-z_$][\w$]*)/gm)].map((m) => m[1]));
   // `faqs.map(` may be indented as well, which the caller's regex allows.
@@ -875,7 +892,11 @@ function buildHead(baseHtml, { route, title, description, canonical, structuredD
   // holds this page's real h1 and description, that block would put a second,
   // wrong h1 and the homepage's description on all 67 pages. Drop it — a
   // browser without JS reads the #root content, which is strictly better.
-  let head = baseHtml.replace(/<noscript>[\s\S]*?<\/noscript>/g, '');
+  //
+  // Only that block goes. The <noscript> in <head> is the font stylesheet for
+  // browsers without JavaScript (the normal link waits for an onload handler),
+  // and removing it left those visitors in the fallback face on every page.
+  let head = baseHtml.replace(/<noscript>(?:(?!<\/noscript>)[\s\S])*?<h1[\s\S]*?<\/noscript>/g, '');
   const url = canonical || SITE + (route === '/' ? '/' : route);
 
   const setTag = (pattern, replacement) => {

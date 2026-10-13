@@ -37,4 +37,10 @@ describe("consentWindow", () => {
     expect(consentWindow("inquiry", "2026-02-31", "2026-10-12")).toBeNull();
     expect(consentWindow("inquiry", "12/04/2026", "2026-10-12")).toBeNull();
   });
+
+  it("ignores a year that is still being typed", () => {
+    // <input type="date"> emits 0002-04-12, then 0020-, then 0202- on the way to 2026.
+    expect(consentWindow("inquiry", "0002-04-12", "2026-10-12")).toBeNull();
+    expect(consentWindow("inquiry", "0202-04-12", "2026-10-12")).toBeNull();
+  });
 });

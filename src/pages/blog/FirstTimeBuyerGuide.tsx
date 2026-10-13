@@ -317,7 +317,7 @@ const FirstTimeBuyerGuide = () => {
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary mb-2">GST/HST New Housing Rebate</h4>
-                <p className="text-sm text-muted-foreground">A partial GST rebate on a new or substantially renovated home, up to $6,300, reduced above $350,000 and not available at $450,000 or more (CRA guide RC4028). The CRA also lists a separate first-time home buyers' GST/HST rebate that has received Royal Assent. See canada.ca for its terms.</p>
+                <p className="text-sm text-muted-foreground">A partial GST rebate on a new or substantially renovated home, up to $6,300, reduced above $350,000 and not available at $450,000 or more (CRA guide RC4028). Separately, the CRA lists a first-time home buyers' GST/HST rebate with applications open as of October 2026: it describes a rebate of 100% of the GST (or the federal part of the HST) on a new home valued up to $1 million, reduced between $1 million and $1.5 million. Check the CRA page for eligibility before you rely on either.</p>
               </Card>
             </div>
 

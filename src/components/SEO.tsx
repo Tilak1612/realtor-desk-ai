@@ -101,7 +101,10 @@ export const SEO = ({
   // must agree because a rendering crawler sees this effect's output replace the
   // static tags.
   const isFrenchRoute = basePath.startsWith('/fr/');
-  const htmlLang = isFrenchRoute || locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
+  // An English page that has a French twin is English by definition: its French
+  // lives at the other URL, so a visitor with a French interface still gets an
+  // English document here and the language has to say so.
+  const htmlLang = isFrenchRoute ? 'fr-CA' : frTwin ? 'en-CA' : locale === 'fr-CA' ? 'fr-CA' : 'en-CA';
 
   // react-helmet-async 2.0.5 is inert under React 19 — verified in production:
   // every page carried the homepage <title> and description, and there were

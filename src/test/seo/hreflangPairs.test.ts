@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { HREFLANG_PAIRS, englishTwinOf, frenchTwinOf } from "@/config/hreflangPairs";
+import { readHreflangPairs } from "../../../scripts/prerender-pages.js";
 
 // An English page and its standalone French translation are alternates of each
 // other. hreflang only counts when it is reciprocal: each page has to name the
@@ -33,15 +34,29 @@ describe("hreflang pair list", () => {
   it("leaves a French page with no English twin unpaired", () => {
     expect(englishTwinOf("/fr/crm-immobilier")).toBeUndefined();
   });
+
+  // The prerenderer reads the pair file as text. If its parse ever differs from
+  // the object the app imports (a pair written with single quotes, two on one
+  // line), the static HTML and the hydrated page disagree. This needs no build.
+  it("is read identically by the prerenderer", () => {
+    expect(readHreflangPairs()).toEqual(HREFLANG_PAIRS);
+  });
 });
 
-const built = pairs.every(([en, fr]) => fs.existsSync(fileFor(en)) && fs.existsSync(fileFor(fr)));
+// Gated on the build existing, not on the paired files existing: a pair whose
+// page is missing from dist has to fail below, not switch the suite off.
+const built = fs.existsSync(path.join(DIST, "pricing/index.html"));
 
 describe.skipIf(!built)("paired pages in the prerendered HTML", () => {
   const read = (route: string) => fs.readFileSync(fileFor(route), "utf8");
   const href = (html: string, lang: string) =>
     html.match(new RegExp('<link[^>]+hreflang="' + lang + '"[^>]+href="([^"]+)"'))?.[1];
   const canonical = (html: string) => html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+
+  it.each(pairs)("%s and %s are both prerendered", (en, fr) => {
+    expect(fs.existsSync(fileFor(en))).toBe(true);
+    expect(fs.existsSync(fileFor(fr))).toBe(true);
+  });
 
   it.each(pairs)("%s and %s name each other", (en, fr) => {
     const enHtml = read(en);

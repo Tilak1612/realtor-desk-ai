@@ -148,7 +148,7 @@ const EdmontonMarket2025 = () => {
             {/* Market Overview */}
             <h2 className="text-3xl font-bold mt-12 mb-6 flex items-center">
               <TrendingUp className="w-8 h-8 mr-3 text-primary" />
-              Edmonton Real Estate Market Overview: January 2025
+              Edmonton Real Estate Market Overview: December 2024 Figures
             </h2>
 
             <p className="text-muted-foreground mb-6">
@@ -210,7 +210,7 @@ const EdmontonMarket2025 = () => {
             </div>
 
             <p className="text-sm text-muted-foreground mb-8">
-              Source: <a className="underline" href="https://realtorsofedmonton.com/wp-content/uploads/2025/01/DECEMBER_2024_YEGMediastats.pdf" rel="noopener noreferrer" target="_blank">REALTORS Association of Edmonton, media release of January 3, 2025</a>. The association notes that average prices indicate market trends only and do not show the change in value of any particular property. For the latest month, see realtorsofedmonton.com.
+              Source: <a className="underline" href="https://realtorsofedmonton.com/wp-content/uploads/2025/01/DECEMBER_2024_YEGMediastats.pdf" rel="noopener noreferrer" target="_blank">REALTORS Association of Edmonton, media release of January 3, 2025</a>. The association notes that average prices indicate market trends only and do not show the change in value of any particular property, and that its trading area includes communities beyond the Greater Edmonton Area, so average and median prices include some properties sold outside it. For the latest month, see realtorsofedmonton.com.
             </p>
 
             {/* Price Comparison */}
@@ -251,7 +251,7 @@ const EdmontonMarket2025 = () => {
             </h2>
 
             <p className="text-muted-foreground mb-6">
-              The association's monthly release does not break prices out by neighbourhood, so this section quotes none. Ask a local REALTOR for recent comparable sales in any area you are considering.
+              The association's monthly release gives average and median prices by city zone and by municipality, not by neighbourhood, so this section quotes no neighbourhood prices. See the release for the zone figures, and ask a local REALTOR for recent comparable sales in any area you are considering.
             </p>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">For Families</h3>
@@ -376,7 +376,7 @@ const EdmontonMarket2025 = () => {
             <div className="space-y-4 mb-8">
               {[
                 { q: "Is Edmonton real estate a good investment in 2025?", a: "That depends on the property, the price you pay, the rent it earns and your costs, and this page cannot answer it for you. Work through the outline in the investment section with current figures, and speak to a licensed REALTOR and an accountant before you buy." },
-                { q: "What neighborhoods should first-time buyers target?", a: "Summerside, Ritchie, Bonnie Doon and Mill Woods are among the areas covered above. Ask a local REALTOR for recent sale prices in each, because the association's monthly release does not break prices out by neighbourhood." },
+                { q: "What neighborhoods should first-time buyers target?", a: "Summerside, Ritchie, Bonnie Doon and Mill Woods are among the areas covered above. Ask a local REALTOR for recent sale prices in each, because the association's monthly release reports prices by city zone and municipality, not by neighbourhood." },
                 { q: "Are condos or houses better investments in Edmonton?", a: "In December 2024, detached homes in the Greater Edmonton Area averaged $540,232, up 10.6% from a year earlier, and apartment condominiums averaged $203,920, up 19.8% (REALTORS Association of Edmonton). One month of averages does not predict returns. A house costs more to buy and maintain. A condo comes with condo fees and less upkeep." },
                 { q: "How much do I need for a down payment in Edmonton?", a: "The federal minimum is 5% of a purchase price of $500,000 or less, so $20,000 on a $400,000 home (Financial Consumer Agency of Canada, as of October 2026). CMHC advises budgeting a further 1.5% to 4% of the price for closing costs, which is $6,000 to $16,000 on $400,000." },
                 { q: "Should I buy in Edmonton or Calgary?", a: "Compare the two using the Canadian Real Estate Association's figures for each board, for the same month and the same measure, then weigh where your work is. This page quotes no Calgary figure because it has none from the same source and period." },
