@@ -26,7 +26,7 @@ const HousingForecast2025 = () => {
         article
         publishedTime="2025-01-02"
         modifiedTime="2025-01-02"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/canada-housing-market-forecast-2025-2026"
         structuredData={[
           {
@@ -34,8 +34,8 @@ const HousingForecast2025 = () => {
             "@type": "Article",
             "headline": "Canada Housing Market Forecast 2025-2026",
             "description": "Expert analysis of Canada's housing market forecast for 2025-2026 with interest rates, regional trends, and strategies for Canadian Realtors.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-02",
             "dateModified": "2025-01-02"
           }

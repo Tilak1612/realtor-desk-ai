@@ -20,7 +20,7 @@ import { SEO } from "@/components/SEO";
 const FAQS = [
   {
     q: "Does Realtor Desk connect to Greater Vancouver REALTORS?",
-    a: "No. There is no GVR integration and none is scheduled. Listings import from a Realtor.ca URL or MLS number; native CREA DDF® sync is Q3 2026 roadmap.",
+    a: "No. There is no GVR integration and none is scheduled. Listings import from a Realtor.ca URL or MLS number; native CREA DDF® sync is on the roadmap and is not live.",
   },
   {
     q: "What tools does GVR provide?",
@@ -95,7 +95,7 @@ const VancouverRealtorCrm = () => {
             <div>
               <h2 className="mb-4">Listings and language</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Import a property from a Realtor.ca URL or MLS number today. Native CREA DDF® sync is on the roadmap for Q3 2026 and is not live; there is no board-specific feed.
+                Import a property from a Realtor.ca URL or MLS number today. Native CREA DDF® sync is on the roadmap and is not live; there is no board-specific feed.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 The bilingual side matters less in Vancouver than in Montreal and more than people assume — and the same mechanism that serves a francophone client is what lets you keep one client&rsquo;s correspondence in a different language from your own working interface.

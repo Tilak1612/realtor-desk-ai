@@ -26,7 +26,7 @@ const OpenHouseDigitalSignIn = () => {
         article
         publishedTime="2025-01-29"
         modifiedTime="2025-01-29"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025"
         structuredData={[
           {
@@ -34,8 +34,8 @@ const OpenHouseDigitalSignIn = () => {
             "@type": "Article",
             "headline": "Open House Sign-In Sheets: Digital vs Paper in 2025 (CASL Compliance Guide)",
             "description": "Digital open house sign-in sheets vs paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-29",
             "dateModified": "2025-01-29"
           }

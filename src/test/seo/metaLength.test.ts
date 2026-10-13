@@ -20,7 +20,10 @@ type Meta = { route: string; title: string; description: string };
 
 function fromDist(): Meta[] | null {
   const dist = path.join(repoRoot, 'dist');
-  if (!fs.existsSync(dist)) return null;
+  // Only a prerendered build counts. After a plain `vite build`, dist holds one
+  // index.html carrying the template's default description, and this suite
+  // failed on it; fall back to the prerenderer's own extraction instead.
+  if (!fs.existsSync(path.join(dist, 'pricing/index.html'))) return null;
   const out: Meta[] = [];
   const walk = (dir: string) => {
     for (const e of fs.readdirSync(dir)) {

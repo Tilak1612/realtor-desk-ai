@@ -321,7 +321,7 @@ const Billing = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 mb-6">
-                  {[t('billing.features.unlimitedContacts', 'Unlimited contacts & leads'), t('billing.features.aiCrm', 'AI-powered predictive CRM'), t('billing.features.chatbot', '24/7 AI chatbot'), t('billing.features.emailSms', 'Email & SMS automation'), t('billing.features.mobileApp', 'Works in any mobile browser')].map((feature) => (
+                  {[t('billing.features.unlimitedContacts', 'Unlimited contacts & leads'), t('billing.features.aiCrm', 'Lead scoring and suggested next actions'), t('billing.features.chatbot', 'In-app drafting assistant'), t('billing.features.emailSms', 'Email and SMS, gated on consent'), t('billing.features.mobileApp', 'Works in any mobile browser')].map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
                       <Check className="w-4 h-4 text-rd-terra-800 flex-shrink-0 mt-0.5" />
                       <span className="text-xs">{feature}</span>
@@ -414,7 +414,7 @@ const Billing = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground mb-6">
-                  {t('billing.brokerageBlurb', 'SSO, dedicated CSM, custom FINTRAC tooling, and SLA.')}
+                  {t('billing.brokerageBlurb', 'Custom contract. SSO, a dedicated CSM and FINTRAC tooling are on the roadmap.')}
                 </p>
                 <Button
                   onClick={() => navigate('/contact')}

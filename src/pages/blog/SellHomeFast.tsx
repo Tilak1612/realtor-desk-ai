@@ -21,7 +21,7 @@ const SellHomeFast = () => {
         article
         publishedTime="2025-01-01"
         modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/sell-home-fast-canada-2025"
         structuredData={[
           {
@@ -29,8 +29,8 @@ const SellHomeFast = () => {
             "@type": "Article",
             "headline": "How to Sell Your Home Fast in Canada",
             "description": "Learn how to sell your home fast in Canada with 10 proven strategies. From pricing to staging and marketing, get expert tips for quick sales.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
             "dateModified": "2025-01-01"
           }
@@ -364,15 +364,14 @@ const SellHomeFast = () => {
                 <div>
                   <h3 className="font-bold text-xl mb-2">Strategy #10: Work with a Tech-Savvy Agent</h3>
                   <p className="text-muted-foreground mb-4">
-                    The right agent sells your home 30-50% faster. Top agents respond in under 5 minutes using AI automation vs. 2-4 hours for average agents.
+                    An agent who answers buyer enquiries quickly and keeps every conversation organised gives your listing a better chance while interest is fresh. Ask how they handle enquiries that arrive in the evening or on a weekend.
                   </p>
                   <div className="bg-primary/10 p-4 rounded-lg">
-                    <p className="font-bold text-primary mb-2">AI-Powered Agents Deliver:</p>
+                    <p className="font-bold text-primary mb-2">Questions to ask an agent:</p>
                     <ul className="text-sm space-y-1">
-                      <li>✅ Sub-3-second response times to buyer inquiries</li>
-                      <li>✅ 24/7 automated showing scheduling</li>
-                      <li>✅ Predictive buyer matching</li>
-                      <li>✅ Homes sold in 14 days average vs. 30-40 days</li>
+                      <li>✅ How quickly do you usually reply to a buyer enquiry?</li>
+                      <li>✅ How do you keep track of who has asked about my home?</li>
+                      <li>✅ How will you keep me updated on showings and feedback?</li>
                     </ul>
                   </div>
                 </div>

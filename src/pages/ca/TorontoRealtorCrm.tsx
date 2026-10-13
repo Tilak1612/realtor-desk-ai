@@ -20,7 +20,7 @@ import { SEO } from "@/components/SEO";
 const FAQS = [
   {
     q: "Does Realtor Desk integrate with TRREB?",
-    a: "No. There is no TRREB integration and none is scheduled. You can import a listing from a Realtor.ca URL or MLS number today; native CREA DDF® sync is on the Q3 2026 roadmap.",
+    a: "No. There is no TRREB integration and none is scheduled. You can import a listing from a Realtor.ca URL or MLS number today; native CREA DDF® sync is on the roadmap and is not live.",
   },
   {
     q: "What does TRREB stand for?",
@@ -95,7 +95,7 @@ const TorontoRealtorCrm = () => {
             <div>
               <h2 className="mb-4">Listings, honestly</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                You can import a listing into Realtor Desk from a Realtor.ca URL or an MLS number today, which covers the common case of attaching a property to a client record. Native CREA DDF® sync is on the roadmap for Q3 2026 and is not live. There is no TRREB-specific integration and none is scheduled.
+                You can import a listing into Realtor Desk from a Realtor.ca URL or an MLS number today, which covers the common case of attaching a property to a client record. Native CREA DDF® sync is on the roadmap and is not live. There is no TRREB-specific integration and none is scheduled.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 If automatic board-feed sync is the thing you are shopping for, that is a reason to look at a platform that already has it rather than at us.

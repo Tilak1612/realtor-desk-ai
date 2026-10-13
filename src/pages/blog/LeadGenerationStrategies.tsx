@@ -1,7 +1,20 @@
+// Rewritten 2026-10-11 to follow the Realtor Desk fact sheet of that date.
+//
+// Removed: every cost-per-lead, conversion-rate, budget and "expected result"
+// figure (none had a source on the page), including the "2,400+ agents / 5.2x"
+// key takeaway, the "Canadian Market Reality Check" card, the worked ROI
+// scenario, and the "78%", "80%", "73%", "3.2x", "35-60%" and "$10,000 fine"
+// claims. Also removed: the section crediting Realtor Desk with a 24/7 chatbot,
+// automatic booking, drip campaigns, lead capture from ad platforms and MLS,
+// and built-in CASL/PIPEDA compliance, and the "Join 50+ Canadian agents"
+// customer count.
+//
+// The seventeen strategies stay as steps a reader can follow. The order is no
+// longer presented as a ranking.
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Target, TrendingUp, Users, Zap, CheckCircle2, DollarSign, BarChart3, Megaphone, XCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Target, TrendingUp, Users, Zap, CheckCircle2, DollarSign, BarChart3, XCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -21,24 +34,24 @@ const LeadGenerationStrategies = () => {
     <div className="min-h-screen">
       <SEO
         title="Real Estate Lead Generation in Canada"
-        description="17 proven real estate lead generation strategies for Canadian agents in 2025. Includes digital marketing, social media, referrals, and AI automation."
+        description="17 real estate lead generation strategies for Canadian agents, with steps for each: sphere of influence, referrals, ads, content, open houses and follow-up."
         keywords="real estate lead generation Canada, realtor marketing strategies, real estate leads Canada, lead generation for realtors, real estate digital marketing"
         image={blogImage}
         article
         publishedTime="2025-01-29"
-        modifiedTime="2025-01-29"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "17 Proven Real Estate Lead Generation Strategies for Canadian Agents in 2025",
-            "description": "17 proven real estate lead generation strategies for Canadian agents in 2025. Includes digital marketing, social media, referrals, and AI automation.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "headline": "17 Real Estate Lead Generation Strategies for Canadian Agents",
+            "description": "17 real estate lead generation strategies for Canadian agents, with steps for each: sphere of influence, referrals, ads, content, open houses and follow-up.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-29",
-            "dateModified": "2025-01-29"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
@@ -65,17 +78,17 @@ const LeadGenerationStrategies = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>16 min read</span>
+                <span>11 min read</span>
               </div>
             </div>
-            
+
             <h1 className="mb-6">
-              17 Proven Real Estate Lead Generation Strategies for Canadian Agents in 2025
+              17 Real Estate Lead Generation Strategies for Canadian Agents
             </h1>
             <ProductScopeNote className="mb-6" />
-            
+
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Generate more qualified real estate leads with these battle-tested strategies. Includes cost breakdowns, ROI expectations, and free templates. Updated for the 2025 Canadian market.
+              Seventeen ways Canadian agents find clients, with steps you can follow for each. This guide quotes no cost or conversion figures, because we have none we can source. It shows you how to track your own.
             </p>
           </header>
 
@@ -99,7 +112,7 @@ const LeadGenerationStrategies = () => {
               Key Takeaway
             </h3>
             <p className="text-base mb-0">
-              After analyzing 2,400+ Canadian real estate agents, the top 10% generate 5.2x more leads by combining 3-4 complementary strategies rather than focusing on just one channel. This guide reveals the exact combinations that work best for different market sizes and budgets.
+              Do not rely on one channel. Pick three or four strategies you can keep up, and track each one so that you know what it costs you and what it brings in.
             </p>
           </Card>
 
@@ -110,51 +123,39 @@ const LeadGenerationStrategies = () => {
             </h2>
 
             <p>
-              The Canadian real estate market has unique characteristics that require adjusted lead generation strategies. With CASL (Canada's Anti-Spam Legislation), PIPEDA privacy requirements, bilingual markets in Quebec, and different MLS systems across provinces, what works in the US often fails here.
+              Lead generation advice written for the United States needs adjusting before it fits Canada. CASL (Canada's Anti-Spam Legislation) governs commercial email and text messages, PIPEDA and provincial privacy laws govern personal information, Quebec and other markets work in French, and MLS systems differ by province.
             </p>
 
             <Card className="p-6 mb-6 border-l-4 border-l-amber-500 bg-amber-50 dark:bg-amber-950/20">
-              <h4 className="text-lg font-bold mb-2">Canadian Market Reality Check</h4>
+              <h4 className="text-lg font-bold mb-2">Five Numbers to Track Yourself</h4>
               <ul className="space-y-2 mb-0">
-                <li>Average cost per qualified lead: $85-$320 (varies by city)</li>
-                <li>Lead-to-appointment conversion rate: 8-15% (national average)</li>
-                <li>Appointment-to-deal conversion rate: 22-35%</li>
-                <li>Average customer acquisition cost: $1,200-$3,800</li>
-                <li>Average commission per deal: $8,000-$15,000</li>
+                <li>Cost per lead, by source</li>
+                <li>Lead-to-appointment rate</li>
+                <li>Appointment-to-deal rate</li>
+                <li>Cost to acquire one client</li>
+                <li>Your average commission per deal</li>
               </ul>
+              <p className="mt-3 mb-0 text-sm">
+                We publish no benchmarks for these. They vary by city, source and agent, and the only figures worth planning around are your own.
+              </p>
             </Card>
 
             <h2 className="flex items-center gap-2">
               <TrendingUp className="w-6 h-6 text-primary" />
-              The 17 Most Effective Lead Generation Strategies
+              17 Lead Generation Strategies
             </h2>
 
             <p>
-              We've ranked these strategies by ROI, time investment, and scalability for Canadian agents. Each includes implementation steps, cost breakdown, and realistic expectations.
+              The order below is not a ranking. Each strategy comes with steps to carry it out. What it costs and how well it converts depends on your market, so measure it.
             </p>
 
-            <h3 className="flex items-center gap-2">
-              <span className="text-2xl">🥇</span>
+            <h3>
               1. Sphere of Influence (SOI) Marketing
             </h3>
 
             <Card className="p-6 mb-6">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Cost Per Lead</p>
-                  <p className="text-2xl font-bold text-green-700">$12-$45</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Conversion Rate</p>
-                  <p className="text-2xl font-bold">25-40%</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Time to First Lead</p>
-                  <p className="text-2xl font-bold">2-4 weeks</p>
-                </div>
-              </div>
               <p className="mb-4">
-                <strong>Why it works:</strong> Your sphere of influence (friends, family, past clients, acquaintances) already trusts you. They're 8x more likely to use your services than cold leads.
+                <strong>Why agents use it:</strong> Your sphere of influence (friends, family, past clients, acquaintances) already knows you, so you are not starting from nothing.
               </p>
               <div>
                 <p className="font-semibold mb-2">Implementation Steps:</p>
@@ -177,39 +178,24 @@ const LeadGenerationStrategies = () => {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                    <span>Send personalized birthday/anniversary cards (automate with CRM)</span>
+                    <span>Send personalized birthday/anniversary cards (set a reminder in your CRM)</span>
                   </li>
                 </ul>
               </div>
             </Card>
 
-            <h3 className="flex items-center gap-2">
-              <span className="text-2xl">🥈</span>
+            <h3>
               2. Referral Partnership Program
             </h3>
 
             <Card className="p-6 mb-6">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Cost Per Lead</p>
-                  <p className="text-2xl font-bold text-green-700">$25-$80</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Conversion Rate</p>
-                  <p className="text-2xl font-bold">30-45%</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Time to First Lead</p>
-                  <p className="text-2xl font-bold">4-8 weeks</p>
-                </div>
-              </div>
               <p className="mb-4">
-                <strong>Why it works:</strong> Referrals from trusted sources (mortgage brokers, home inspectors, lawyers) come pre-qualified and ready to transact.
+                <strong>Why agents use it:</strong> A referral from someone the client already trusts (a mortgage broker, home inspector or lawyer) arrives with some of that trust attached.
               </p>
               <div>
-                <p className="font-semibold mb-2">Best Referral Partners:</p>
+                <p className="font-semibold mb-2">Referral Partners to Approach:</p>
                 <ul className="space-y-2">
-                  <li>• Mortgage brokers (highest quality referrals)</li>
+                  <li>• Mortgage brokers</li>
                   <li>• Home inspectors</li>
                   <li>• Real estate lawyers/notaries</li>
                   <li>• Financial advisors</li>
@@ -218,90 +204,73 @@ const LeadGenerationStrategies = () => {
                   <li>• Property managers</li>
                 </ul>
                 <p className="mt-4 text-sm text-muted-foreground">
-                  <strong>Pro tip:</strong> Offer 20-25% referral fee (industry standard in Canada) or create reciprocal referral agreements.
+                  <strong>Before you offer a referral fee:</strong> check your provincial regulator's and your brokerage's rules on who may be paid one. A reciprocal referral arrangement is a common alternative.
                 </p>
               </div>
             </Card>
 
-            <h3 className="flex items-center gap-2">
-              <span className="text-2xl">🥉</span>
-              3. Facebook & Instagram Ads (Hyperlocal Targeting)
+            <h3>
+              3. Facebook & Instagram Ads (Local Targeting)
             </h3>
 
             <Card className="p-6 mb-6">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Cost Per Lead</p>
-                  <p className="text-2xl font-bold text-amber-600">$45-$180</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Conversion Rate</p>
-                  <p className="text-2xl font-bold">5-12%</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Time to First Lead</p>
-                  <p className="text-2xl font-bold">1-2 weeks</p>
-                </div>
-              </div>
               <p className="mb-4">
-                <strong>Why it works:</strong> Facebook's granular targeting lets you reach homeowners aged 30-55 within specific neighborhoods who are showing buying signals.
+                <strong>Why agents use it:</strong> You can show an ad to people in the area you work. Housing ads are subject to Meta's own targeting restrictions, so read the current rules before you plan a campaign.
               </p>
               <div>
-                <p className="font-semibold mb-2">Top Performing Ad Types:</p>
+                <p className="font-semibold mb-2">Ad Types to Test:</p>
                 <ul className="space-y-2">
-                  <li>• Home valuation lead magnets (best performer - 2-3x better than others)</li>
+                  <li>• A home valuation offer</li>
                   <li>• First-time buyer guides with mortgage calculator</li>
-                  <li>• "Just Sold" case studies with before/after photos</li>
-                  <li>• Virtual tour videos of hot listings</li>
+                  <li>• "Just Sold" posts with photos (with your client's permission)</li>
+                  <li>• Virtual tour videos of current listings</li>
                   <li>• Neighborhood market reports (monthly)</li>
                 </ul>
-                <p className="mt-4 font-semibold">Recommended Budget:</p>
-                <ul className="space-y-1 text-sm">
-                  <li>• Small market (under 100K population): $500-$1,200/month</li>
-                  <li>• Mid-size market (100K-500K): $1,500-$3,500/month</li>
-                  <li>• Large market (500K+): $3,000-$7,000/month</li>
-                </ul>
+                <p className="mt-4 font-semibold">Setting a Budget:</p>
+                <p className="text-sm mb-0">
+                  Start with an amount you can afford to spend for two or three months while you learn what a lead costs in your market. Run one ad type at a time so you can tell which one is working.
+                </p>
               </div>
             </Card>
 
-            <h3>4. Google Local Service Ads (LSA)</h3>
+            <h3>4. Google Local Services Ads (LSA)</h3>
 
             <p>
-              Google Local Service Ads appear above regular Google Ads and organic results with a green "Google Guaranteed" badge. You only pay when someone contacts you directly (not per click).
+              Google Local Services Ads are a pay-per-lead format that Google shows above its regular search ads. Whether the format is offered to real estate agents depends on where you work.
             </p>
 
             <Card className="p-5 mb-6 bg-primary/5">
-              <p className="mb-2"><strong>Cost:</strong> $25-$75 per qualified lead</p>
-              <p className="mb-2"><strong>Pros:</strong> High-intent leads, pay-per-lead model, Google verification badge</p>
-              <p className="mb-0"><strong>Cons:</strong> Limited to certain markets, requires background check, competitive in major cities</p>
+              <p className="mb-2"><strong>Cost:</strong> set by Google and varies by market. Check Google's own page for current pricing.</p>
+              <p className="mb-2"><strong>For:</strong> you pay for a lead rather than a click, and the person contacting you was searching for an agent.</p>
+              <p className="mb-0"><strong>Against:</strong> not offered everywhere, and Google sets its own verification requirements.</p>
             </Card>
 
             <h3>5. SEO & Content Marketing (Long-term Play)</h3>
 
             <p>
-              Creating valuable content that ranks in Google for buyer/seller search queries generates free, high-quality leads month after month.
+              Useful content that ranks in search for the questions buyers and sellers ask can bring enquiries without an advertising cost. It takes time to write and time to rank.
             </p>
 
             <Card className="p-6 mb-6">
-              <p className="font-semibold mb-3">Top SEO Content Ideas for Canadian Agents:</p>
+              <p className="font-semibold mb-3">SEO Content Ideas for Canadian Agents:</p>
               <ul className="space-y-2">
-                <li>• "[Your City] neighborhood guides" (highest ROI)</li>
+                <li>• "[Your City] neighborhood guides"</li>
                 <li>• "Houses for sale in [neighborhood]"</li>
                 <li>• "First-time home buyer guide [province]"</li>
-                <li>• "[City] real estate market report 2025"</li>
+                <li>• "[City] real estate market report" (name your data source)</li>
                 <li>• "How much does it cost to buy a house in [city]"</li>
                 <li>• "Best schools in [neighborhood]"</li>
                 <li>• "CMHC insurance requirements Canada"</li>
               </ul>
               <p className="mt-4 text-sm">
-                <strong>Timeline:</strong> 6-12 months to see meaningful results, but compounds over time. Agents who started 2 years ago now get 30-60 organic leads/month for $0 acquisition cost.
+                <strong>Timeline:</strong> this is slow. Expect months rather than weeks before search traffic arrives, and there is no guarantee that it will.
               </p>
             </Card>
 
-            <h3>6. Open House Sign-In with Instant Follow-Up</h3>
+            <h3>6. Open House Sign-In with Same-Day Follow-Up</h3>
 
             <p>
-              Open houses aren't dead—but the traditional sign-in sheet is. Use digital sign-in tablets that trigger instant automated follow-up.
+              A paper sign-in sheet is hard to read and easy to lose. A digital form on a tablet gives you legible details and a record of who agreed to hear from you.
             </p>
 
             <Card className="p-5 mb-6 bg-green-50 dark:bg-green-950/20">
@@ -309,19 +278,19 @@ const LeadGenerationStrategies = () => {
               <ul className="space-y-2 mb-0">
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <span>Use tablet with digital sign-in form (CASL-compliant)</span>
+                  <span>Use a tablet with a digital sign-in form that asks for consent to follow up</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <span>Trigger instant text message with property details + your contact</span>
+                  <span>Send a text the same day with the property details and your contact information, to visitors who agreed</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <span>Follow-up email within 2 hours with similar listings</span>
+                  <span>Follow up by email that evening with similar listings</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <span>Call hot leads (those who asked detailed questions) within 24 hours</span>
+                  <span>Call the visitors who asked detailed questions within 24 hours</span>
                 </li>
               </ul>
             </Card>
@@ -329,7 +298,7 @@ const LeadGenerationStrategies = () => {
             <h3>7. Email Drip Campaigns (Automated Nurturing)</h3>
 
             <p>
-              Most leads aren't ready to transact immediately. Automated email sequences keep you top-of-mind until they are.
+              Most leads aren't ready to transact immediately. A scheduled series of emails from an email marketing tool keeps you in touch until they are. Under CASL, every message needs the recipient's consent and a working unsubscribe link. Realtor Desk has a sequence builder, but scheduled sending is not switched on, so it does not run drip campaigns today.
             </p>
 
             <Card className="p-6 mb-6">
@@ -359,72 +328,72 @@ const LeadGenerationStrategies = () => {
             <h3>8. Video Marketing (YouTube & Social)</h3>
 
             <p>
-              Video content generates 3.2x more engagement than static posts and builds trust faster than any other medium.
+              Video lets a prospective client see and hear you before they ever get in touch, which a static post cannot do.
             </p>
 
             <Card className="p-5 mb-6 bg-primary/5">
-              <p className="font-semibold mb-3">Top Video Types (by performance):</p>
+              <p className="font-semibold mb-3">Video Types to Try:</p>
               <ol className="space-y-2 mb-0">
-                <li><strong>1. Virtual home tours</strong> (highest views + lead generation)</li>
-                <li><strong>2. Neighborhood walkthrough videos</strong> (great for SEO)</li>
-                <li><strong>3. Market update videos</strong> (monthly, 3-5 minutes)</li>
-                <li><strong>4. "Just Sold" client testimonials</strong> (best for credibility)</li>
-                <li><strong>5. First-time buyer tips</strong> (evergreen content)</li>
-                <li><strong>6. Q&A videos</strong> (address common objections)</li>
+                <li><strong>1. Virtual home tours</strong></li>
+                <li><strong>2. Neighborhood walkthrough videos</strong></li>
+                <li><strong>3. Market update videos</strong> (monthly, 3-5 minutes, with your data source named)</li>
+                <li><strong>4. "Just Sold" client testimonials</strong> (real clients, with their permission)</li>
+                <li><strong>5. First-time buyer tips</strong></li>
+                <li><strong>6. Q&A videos</strong> (answer the questions you are asked most)</li>
               </ol>
             </Card>
 
-            <h3>9. AI Chatbot on Your Website (24/7 Lead Capture)</h3>
+            <h3>9. A Website Chatbot (a Tool From Other Vendors)</h3>
 
             <p>
-              73% of website visitors browse outside business hours. An AI chatbot captures these leads automatically and qualifies them while they're hot.
+              People browse listings in the evening and at weekends, when you are not at your desk. A website chatbot is one way to acknowledge those visitors and collect their details. Realtor Desk does not offer a website chatbot; this describes a category of product sold by other vendors.
             </p>
 
             <Card className="p-6 mb-6 border-l-4 border-l-primary">
               <p className="mb-3">
-                <strong>What makes an effective real estate chatbot:</strong>
+                <strong>What to look for if you trial one:</strong>
               </p>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <Zap className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                  <span>Instant response (within 2 seconds)</span>
+                  <span>It replies straight away and says clearly that it is automated</span>
                 </li>
                 <li className="flex items-start">
                   <Zap className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                  <span>Asks qualifying questions (budget, timeline, property type)</span>
+                  <span>It asks a few useful questions (budget, timeline, property type)</span>
                 </li>
                 <li className="flex items-start">
                   <Zap className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                  <span>Suggests relevant listings based on preferences</span>
+                  <span>You can see where its listing information comes from</span>
                 </li>
                 <li className="flex items-start">
                   <Zap className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                  <span>Books appointments directly into your calendar</span>
+                  <span>It records consent before you follow up by email or text</span>
                 </li>
                 <li className="flex items-start">
                   <Zap className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                  <span>Hands off to you for complex questions</span>
+                  <span>It hands over to you for anything it cannot answer</span>
                 </li>
               </ul>
-              <p className="mt-4 text-sm text-primary font-semibold">
-                Average increase in lead capture: 35-60% vs. traditional contact forms
+              <p className="mt-4 text-sm">
+                Ask the vendor for a trial and compare enquiries received during it with the same period before. Do not rely on a vendor's quoted uplift.
               </p>
             </Card>
 
             <h3>10. LinkedIn Networking (B2B Opportunities)</h3>
 
             <p>
-              LinkedIn is underutilized by real estate agents but offers huge opportunities for corporate relocation deals, investor connections, and high-net-worth clients.
+              LinkedIn is where you can reach people who handle corporate relocation, investors and other professionals. It is worth a look if those are the clients you want.
             </p>
 
-            <h3>11. Direct Mail (Yes, It Still Works)</h3>
+            <h3>11. Direct Mail</h3>
 
             <p>
-              While everyone has gone digital, strategic direct mail has less competition and higher response rates in certain demographics.
+              Direct mail can reach homeowners who do not see or respond to online ads. Make each piece specific to the street or the home rather than sending a generic flyer.
             </p>
 
             <Card className="p-5 mb-6 bg-amber-50 dark:bg-amber-950/20">
-              <p className="font-semibold mb-2">What Works in 2025:</p>
+              <p className="font-semibold mb-2">Formats to Try:</p>
               <ul className="space-y-2 mb-0">
                 <li>• "Just Sold" postcards to neighbors (30-50 homes around each sale)</li>
                 <li>• Personalized market reports to homeowners (not generic flyers)</li>
@@ -437,120 +406,114 @@ const LeadGenerationStrategies = () => {
 
             <div className="space-y-4">
               <Card className="p-4">
-                <h4 className="font-bold mb-2">12. Zillow Premier Agent / Realtor.ca Advertising</h4>
-                <p className="text-sm mb-2">Cost per lead: $80-$250 | Conversion: 3-8%</p>
-                <p className="text-sm text-muted-foreground mb-0">High-intent leads but expensive and competitive</p>
+                <h4 className="font-bold mb-2">12. Paid Placement on Listing Portals</h4>
+                <p className="text-sm text-muted-foreground mb-0">Portals sell advertising and lead programs to agents. Check each portal's own pricing page, and ask how many other agents receive the same lead.</p>
               </Card>
 
               <Card className="p-4">
                 <h4 className="font-bold mb-2">13. Community Sponsorships & Events</h4>
-                <p className="text-sm mb-2">Cost per lead: $40-$120 | Conversion: 10-18%</p>
-                <p className="text-sm text-muted-foreground mb-0">Great for building local brand recognition</p>
+                <p className="text-sm text-muted-foreground mb-0">Builds local name recognition. Hard to trace to individual deals, so ask new clients how they heard of you.</p>
               </Card>
 
               <Card className="p-4">
                 <h4 className="font-bold mb-2">14. Door Knocking & Expired Listings</h4>
-                <p className="text-sm mb-2">Cost per lead: $5-$25 | Conversion: 8-15%</p>
-                <p className="text-sm text-muted-foreground mb-0">Time-intensive but extremely cost-effective</p>
+                <p className="text-sm text-muted-foreground mb-0">Costs time rather than money. Check your regulator's rules, the National Do Not Call List and any no-soliciting bylaws first.</p>
               </Card>
 
               <Card className="p-4">
                 <h4 className="font-bold mb-2">15. Retargeting Ads (Pixel-Based)</h4>
-                <p className="text-sm mb-2">Cost per lead: $35-$95 | Conversion: 12-20%</p>
-                <p className="text-sm text-muted-foreground mb-0">Re-engage website visitors who didn't convert</p>
+                <p className="text-sm text-muted-foreground mb-0">Shows your ads to people who visited your website and left. Disclose the tracking in your privacy policy.</p>
               </Card>
 
               <Card className="p-4">
                 <h4 className="font-bold mb-2">16. Webinars & Virtual Seminars</h4>
-                <p className="text-sm mb-2">Cost per lead: $25-$70 | Conversion: 15-25%</p>
-                <p className="text-sm text-muted-foreground mb-0">High-quality leads but requires preparation</p>
+                <p className="text-sm text-muted-foreground mb-0">Attendees have chosen to spend time with you. Takes preparation and a topic people want.</p>
               </Card>
 
               <Card className="p-4">
                 <h4 className="font-bold mb-2">17. Partnership with New Construction Developers</h4>
-                <p className="text-sm mb-2">Cost per lead: $0-$50 | Conversion: 20-35%</p>
-                <p className="text-sm text-muted-foreground mb-0">Pre-qualified buyers, often exclusive arrangements</p>
+                <p className="text-sm text-muted-foreground mb-0">Introductions to buyers of new builds. Terms vary by developer, so get them in writing.</p>
               </Card>
             </div>
 
             <h2 className="flex items-center gap-2 mt-12">
               <BarChart3 className="w-6 h-6 text-primary" />
-              Recommended Lead Generation Mix by Budget
+              Example Lead Generation Mix by Budget
             </h2>
 
+            <p>
+              These splits are starting points to adjust, not benchmarks. We give no expected lead counts, because we have no data to base them on.
+            </p>
+
             <Card className="p-6 mb-6">
-              <h4 className="font-bold mb-4">Starter Budget ($500-$1,500/month)</h4>
+              <h4 className="font-bold mb-4">Small Budget: Mostly Your Own Time</h4>
               <ul className="space-y-2">
                 <li>• 60% - Sphere of Influence marketing (time investment)</li>
-                <li>• 20% - Facebook/Instagram ads ($300-500)</li>
+                <li>• 20% - Facebook/Instagram ads</li>
                 <li>• 10% - Open house strategy with follow-up</li>
                 <li>• 10% - Content marketing (SEO - write 2 blogs/month)</li>
               </ul>
-              <p className="mt-4 text-sm text-muted-foreground">Expected result: 15-30 leads/month</p>
             </Card>
 
             <Card className="p-6 mb-6">
-              <h4 className="font-bold mb-4">Growth Budget ($2,000-$5,000/month)</h4>
+              <h4 className="font-bold mb-4">Medium Budget: Adding Paid Channels</h4>
               <ul className="space-y-2">
-                <li>• 30% - Facebook/Instagram ads ($800-1,500)</li>
-                <li>• 25% - Google Local Service Ads ($600-1,200)</li>
+                <li>• 30% - Facebook/Instagram ads</li>
+                <li>• 25% - Search ads</li>
                 <li>• 20% - SOI marketing + referral program</li>
                 <li>• 15% - Video marketing production</li>
-                <li>• 10% - Website AI chatbot + automation tools</li>
+                <li>• 10% - Software: CRM and any other tools you choose</li>
               </ul>
-              <p className="mt-4 text-sm text-muted-foreground">Expected result: 40-80 leads/month</p>
             </Card>
 
             <Card className="p-6 mb-6">
-              <h4 className="font-bold mb-4">Scale Budget ($5,000-$15,000/month)</h4>
+              <h4 className="font-bold mb-4">Larger Budget: Several Paid Channels</h4>
               <ul className="space-y-2">
-                <li>• 35% - Facebook/Instagram ads ($2,000-5,000)</li>
-                <li>• 25% - Google Ads + LSA ($1,500-3,500)</li>
-                <li>• 15% - Zillow/Realtor.ca leads ($1,000-2,000)</li>
-                <li>• 10% - Content marketing + SEO agency</li>
+                <li>• 35% - Facebook/Instagram ads</li>
+                <li>• 25% - Search ads</li>
+                <li>• 15% - Listing portal advertising</li>
+                <li>• 10% - Content marketing + SEO help</li>
                 <li>• 10% - Retargeting campaigns</li>
                 <li>• 5% - Community sponsorships</li>
               </ul>
-              <p className="mt-4 text-sm text-muted-foreground">Expected result: 100-200+ leads/month</p>
             </Card>
 
             <h2 className="flex items-center gap-2">
               <DollarSign className="w-6 h-6 text-primary" />
-              ROI Calculator: What to Expect
+              How to Work Out Your Own Return
             </h2>
 
             <Card className="p-6 mb-8 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950">
-              <h4 className="font-bold mb-4">Example ROI Scenario (Mid-Size Market)</h4>
+              <h4 className="font-bold mb-4">The Arithmetic, Using Your Figures</h4>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between border-b pb-2">
                   <span>Monthly marketing spend:</span>
-                  <span className="font-semibold">$3,000</span>
+                  <span className="font-semibold">your figure</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                   <span>Leads generated per month:</span>
-                  <span className="font-semibold">50 leads</span>
+                  <span className="font-semibold">your count</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
-                  <span>Lead-to-appointment rate:</span>
-                  <span className="font-semibold">12% = 6 appointments</span>
+                  <span>Appointments:</span>
+                  <span className="font-semibold">leads × your lead-to-appointment rate</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
-                  <span>Appointment-to-deal rate:</span>
-                  <span className="font-semibold">30% = 1.8 deals/month</span>
+                  <span>Deals:</span>
+                  <span className="font-semibold">appointments × your appointment-to-deal rate</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
-                  <span>Average commission per deal:</span>
-                  <span className="font-semibold">$10,000</span>
+                  <span>Revenue from leads:</span>
+                  <span className="font-semibold">deals × your average commission</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold text-green-700 pt-2">
-                  <span>Monthly revenue from leads:</span>
-                  <span>$18,000</span>
-                </div>
-                <div className="flex justify-between text-xl font-bold text-green-700">
-                  <span>ROI:</span>
-                  <span>500% ($15,000 profit)</span>
+                  <span>Return:</span>
+                  <span>(revenue − spend) ÷ spend</span>
                 </div>
               </div>
+              <p className="mt-4 mb-0 text-sm">
+                Use at least three months of your own records. One good or bad month tells you very little.
+              </p>
             </Card>
 
             <h2>Common Lead Generation Mistakes to Avoid</h2>
@@ -560,7 +523,7 @@ const LeadGenerationStrategies = () => {
                 <li className="flex items-start">
                   <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong>Not responding fast enough:</strong> 78% of buyers choose the first agent who responds. Aim for under 5 minutes.
+                    <strong>Replying late:</strong> Someone who enquires may contact more than one agent. Decide in advance how enquiries get answered while you are with clients.
                   </div>
                 </li>
                 <li className="flex items-start">
@@ -572,28 +535,28 @@ const LeadGenerationStrategies = () => {
                 <li className="flex items-start">
                   <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong>No follow-up system:</strong> 80% of sales require 5+ follow-ups. Without automation, leads go cold.
+                    <strong>No follow-up system:</strong> One reply is rarely enough. Set a date for the next contact every time you speak to someone.
                   </div>
                 </li>
                 <li className="flex items-start">
                   <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong>Ignoring CASL compliance:</strong> Can result in $10,000 fines per violation in Canada.
+                    <strong>Ignoring CASL:</strong> Commercial emails and texts need consent and a working unsubscribe mechanism, and the law provides for monetary penalties. The official guidance is at fightspam.gc.ca.
                   </div>
                 </li>
                 <li className="flex items-start">
                   <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong>Not tracking metrics:</strong> What gets measured gets improved. Track cost per lead, conversion rates, ROI.
+                    <strong>Not tracking metrics:</strong> Track cost per lead, conversion rates and return for each source, or you cannot tell which ones to keep.
                   </div>
                 </li>
               </ul>
             </Card>
 
-            <h2>How RealtorDesk AI Amplifies Your Lead Generation</h2>
+            <h2>Where Realtor Desk Fits</h2>
 
             <p>
-              The best lead generation strategy fails without proper follow-up. RealtorDesk AI automates the heavy lifting:
+              Realtor Desk does not generate leads, run ads or capture visitors on your website. It is a CRM for a single Canadian real estate agent, for keeping track of the leads these strategies bring in:
             </p>
 
             <Card className="p-6 mb-8">
@@ -601,45 +564,45 @@ const LeadGenerationStrategies = () => {
                 <div className="flex items-start gap-3">
                   <Zap className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Instant Lead Response (Under 60 Seconds)</h4>
-                    <p className="text-sm text-muted-foreground mb-0">AI chatbot engages leads 24/7, qualifies them, and books appointments automatically.</p>
+                    <h4 className="font-bold mb-1">One List of Leads</h4>
+                    <p className="text-sm text-muted-foreground mb-0">Contacts with one conversation timeline per client. Zapier, Make and n8n can push leads in from your other tools.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Zap className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Automated Drip Campaigns</h4>
-                    <p className="text-sm text-muted-foreground mb-0">Pre-built email and SMS sequences nurture leads until they're ready to transact.</p>
+                    <h4 className="font-bold mb-1">A Rule-Based Lead Score</h4>
+                    <p className="text-sm text-muted-foreground mb-0">Each lead gets a score from 0 to 100, with the breakdown shown: engagement, behaviour, budget match, timeline and qualification.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Zap className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Lead Scoring & Prioritization</h4>
-                    <p className="text-sm text-muted-foreground mb-0">AI analyzes behavior and scores leads so you focus on the hottest prospects first.</p>
+                    <h4 className="font-bold mb-1">A Suggested Next Action</h4>
+                    <p className="text-sm text-muted-foreground mb-0">It suggests what to do next and a time to do it.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Zap className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Multi-Channel Lead Capture</h4>
-                    <p className="text-sm text-muted-foreground mb-0">Integrates with Facebook, Google, your website, and MLS systems—all leads in one place.</p>
+                    <h4 className="font-bold mb-1">A Drafting Assistant</h4>
+                    <p className="text-sm text-muted-foreground mb-0">An in-app assistant drafts a reply or summarises the conversation on the contact you have open. Nothing is sent to a client without you.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Zap className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">CASL & PIPEDA Compliant</h4>
-                    <p className="text-sm text-muted-foreground mb-0">Built-in compliance features protect you from fines while maximizing engagement.</p>
+                    <h4 className="font-bold mb-1">A Consent Record, and French per Contact</h4>
+                    <p className="text-sm text-muted-foreground mb-0">It records the date and source of consent on each contact and refuses to send from the inbox or by SMS when none is on file. Language is set to French or English per contact. Software does not make anyone compliant.</p>
                   </div>
                 </div>
               </div>
             </Card>
 
             <Card className="p-8 mb-8 bg-gradient-to-br from-primary/10 to-secondary/10">
-              <h3 className="text-2xl font-bold mb-4 text-center">Ready to 3x Your Lead Generation?</h3>
+              <h3 className="text-2xl font-bold mb-4 text-center">Keep the Leads You Generate in One Place</h3>
               <p className="text-center text-muted-foreground mb-6">
-                Join 50+ Canadian agents using RealtorDesk AI to generate more leads and close more deals.
+                Realtor Desk is CAD $149 a month for a single agent, with a 14-day trial. A card is collected up front and nothing is charged before day 14.
               </p>
               <div className="flex justify-center gap-4">
                 <Link to="/pricing">
@@ -649,7 +612,7 @@ const LeadGenerationStrategies = () => {
                 </Link>
                 <Link to="/demo">
                   <Button size="lg" variant="outline" className="text-base">
-                    Watch Demo
+                    Book a Demo
                   </Button>
                 </Link>
               </div>
@@ -660,20 +623,20 @@ const LeadGenerationStrategies = () => {
               <h3 className="text-xl font-bold mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <Link to="/lead-response-time-canadian-realtors" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">Lead Response Time Study: Why 5 Minutes Matters</h4>
-                  <p className="text-sm text-muted-foreground">Research shows 78% of buyers choose the first responsive agent</p>
+                  <h4 className="font-semibold mb-2">Why Canadian Agents Lose Hot Leads</h4>
+                  <p className="text-sm text-muted-foreground">Where new enquiries go cold, and a routine for replying sooner</p>
                 </Link>
                 <Link to="/blog/ai-chatbot-real-estate-websites-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
                   <h4 className="font-semibold mb-2">AI Chatbots for Real Estate Websites</h4>
-                  <p className="text-sm text-muted-foreground">How AI increases lead capture by 35-60%</p>
+                  <p className="text-sm text-muted-foreground">A category guide. Realtor Desk does not offer a chatbot</p>
                 </Link>
                 <Link to="/resources/cost-of-missed-real-estate-leads-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">The Real Cost of Missed Leads</h4>
-                  <p className="text-sm text-muted-foreground">Each missed lead costs $12,000+ in lost commission</p>
+                  <h4 className="font-semibold mb-2">The Cost of Missed Real Estate Leads</h4>
+                  <p className="text-sm text-muted-foreground">Work out what slow follow-up costs, using your own numbers</p>
                 </Link>
                 <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">CASL Compliance Guide for Realtors</h4>
-                  <p className="text-sm text-muted-foreground">Avoid $10,000+ fines with proper email marketing</p>
+                  <h4 className="font-semibold mb-2">CASL Guide for Realtors</h4>
+                  <p className="text-sm text-muted-foreground">Consent and unsubscribe rules for real estate email</p>
                 </Link>
               </div>
             </div>

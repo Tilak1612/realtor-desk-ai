@@ -1,3 +1,16 @@
+// Rewritten 2026-10-11 to follow the Realtor Desk fact sheet of that date.
+//
+// Removed: unsourced claims presented as findings ("surveys consistently
+// find", "marketing educators routinely point to", "industry sources
+// frequently cite", "three or four times more contacts", "the highest-ROI
+// marketing you will ever do"); and every passage crediting Realtor Desk with
+// automatic segmentation, CASL tracking that yields a "compliant list",
+// scheduled recurring touches, 24/7 AI follow-up that replies and qualifies
+// on its own, and being "PIPEDA-native".
+//
+// The FAQ answers changed with the body. The FAQPage JSON-LD and the visible
+// FAQ are both rendered from the one `faqs` array, so they stay word for word
+// the same.
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,7 +28,7 @@ const DatabaseReactivation = () => {
   const faqs = [
     {
       q: "What is real estate database reactivation?",
-      a: "Database reactivation is the structured process of reconnecting with past clients and dormant contacts who already know you, so they think of you first when they or someone they know is ready to buy or sell. Instead of buying new leads, you re-engage the relationships you have already earned to generate repeat and referral business.",
+      a: "Database reactivation is the structured process of reconnecting with past clients and dormant contacts who already know you, so that you are the agent they think of when they or someone they know is ready to buy or sell. Instead of buying new leads, you get back in touch with people you have already worked with or spoken to.",
     },
     {
       q: "Is it legal to email old real estate contacts under CASL?",
@@ -23,15 +36,15 @@ const DatabaseReactivation = () => {
     },
     {
       q: "How often should I contact my past clients?",
-      a: "A common benchmark among top agents is roughly monthly contact, often described as a 12-touch annual plan that mixes value, personal check-ins, and occasional direct offers. Consistency matters more than volume. The goal is to stay top of mind without becoming noise.",
+      a: "A reasonable starting point is roughly monthly contact, sometimes described as a 12-touch annual plan that mixes useful information, personal check-ins, and the occasional direct offer. Consistency matters more than volume. The goal is to stay in touch without becoming noise.",
     },
     {
       q: "What is the ROI of reactivating a database versus buying leads?",
-      a: "Industry sources frequently cite far higher returns from database and referral marketing than from paid portal leads, because the acquisition cost of an existing contact is effectively zero and trust is already established. Your exact results depend on database size, segmentation, and follow-up consistency.",
+      a: "We have no measured figures to offer. The reasoning is that you have already paid to acquire an existing contact and some trust already exists, whereas a purchased lead costs money before any conversation starts. Track both yourself: what each source costs, how many replies it produces, and how many deals follow over a year.",
     },
     {
       q: "Can a CRM automate database reactivation for me?",
-      a: "Yes. A CRM built for Canadian agents can segment your contacts, manage consent records, schedule recurring touches, and use AI to respond instantly when a dormant contact replies. Automation handles the consistency that manual follow-up rarely sustains, while you stay in control of the relationship.",
+      a: "Partly, and it depends on the product. Some tools schedule and send recurring messages on their own. Realtor Desk does not: it has a sequence builder, but scheduled sending is not switched on, and nothing is sent to a client without you. What it does is keep your contacts in one list, record the date and source of consent on each, score leads with a visible rule-based breakdown, suggest a next action, and draft a reply for you to review.",
     },
   ];
 
@@ -39,28 +52,28 @@ const DatabaseReactivation = () => {
     <>
       <SEO
         title="Real Estate Database Reactivation"
-        description="Turn cold past clients into repeat and referral business. A CASL-aware database reactivation playbook for Canadian real estate agents."
+        description="A CASL-aware playbook for Canadian real estate agents: how to reconnect with past clients and dormant contacts for repeat and referral business."
         keywords="real estate database reactivation, past client follow-up real estate, sphere of influence real estate Canada, repeat and referral business real estate, real estate CRM Canada, CASL email marketing real estate"
         image={blogDatabaseReactivation}
         article
         publishedTime="2026-06-20"
-        modifiedTime="2026-06-20"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/real-estate-database-reactivation-canada"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Real Estate Database Reactivation: The Canadian Agent's Guide to Repeat and Referral Business",
-            "description": "A CASL-aware playbook for Canadian real estate agents to reactivate dormant past clients and turn an existing database into repeat and referral business.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "A CASL-aware playbook for Canadian real estate agents: how to reconnect with past clients and dormant contacts for repeat and referral business.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": {
               "@type": "Organization",
-              "name": "RealtorDesk AI",
+              "name": "Realtor Desk",
               "logo": { "@type": "ImageObject", "url": "https://www.realtordesk.ai/og-image.png" }
             },
             "datePublished": "2026-06-20",
-            "dateModified": "2026-06-20",
+            "dateModified": "2026-10-11",
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": "https://www.realtordesk.ai/real-estate-database-reactivation-canada"
@@ -123,7 +136,7 @@ const DatabaseReactivation = () => {
                 already paid them a commission at least once.
               </p>
               <p>
-                That list is the most undervalued asset in your business. The people in it are
+                That list is easy to undervalue. The people in it are
                 not strangers. They are the buyer you helped close in Mississauga three years ago,
                 the seller in Halifax who cried when the deal firmed up, the friend-of-a-friend
                 who asked you a question at a barbecue and never followed up. They have moved on
@@ -133,27 +146,25 @@ const DatabaseReactivation = () => {
                 Database reactivation is the discipline of reconnecting with those dormant
                 contacts in a structured, consistent way so that you — not a competitor — are
                 the agent they think of when they, or someone they know, is ready to make a move.
-                Done properly, it is the highest-ROI marketing you will ever do. Done carelessly
+                Done properly, it costs little beyond your time. Done carelessly
                 in Canada, it can also put you offside with anti-spam law. This guide covers both.
               </p>
 
-              <h2>Why Your Database Is Your Most Undervalued Asset</h2>
+              <h2>Why Your Database Is Worth the Effort</h2>
               <p>
-                The numbers on past-client business are uncomfortable for most agents, because
-                they expose a gap between intention and execution. Surveys of home sellers
-                consistently find that the large majority say they would happily use their agent
-                again — and yet only a small fraction actually do. The reason is almost never
-                dissatisfaction. It is silence. The client liked you fine; you simply were not in
-                front of them when the next decision arrived, and someone else was.
+                There is often a gap between intention and execution with past clients. A client
+                who was happy with you may still end up working with another agent next time,
+                and where that happens the cause is frequently not dissatisfaction. It is
+                silence. You were not in front of them when the next decision arrived, and
+                someone else was.
               </p>
               <p>
                 That gap is not a relationship problem. It is a follow-up problem, and follow-up
-                problems are fixable with systems. The economics are compelling: the cost to
-                acquire a contact you already have is effectively zero, while a fresh portal lead
-                can cost well over a hundred dollars before it ever picks up the phone. Marketing
-                educators routinely point to database and referral marketing delivering returns
-                many times higher than paid lead sources, precisely because trust is already
-                built and you are not paying to manufacture it.
+                problems can be fixed with a routine. The reasoning is straightforward: you have
+                already paid, in time or money, to acquire the contacts you have, whereas a
+                purchased lead costs money before any conversation starts. We have no measured
+                figures comparing the two, so track both in your own business rather than
+                relying on a quoted multiple.
               </p>
               <p>
                 For broader context on how Canadian agents balance paid lead generation against
@@ -165,23 +176,24 @@ const DatabaseReactivation = () => {
                 <Link to="/lead-response-time-canadian-realtors">
                   true cost of slow lead response
                 </Link>
-                . The throughline is the same: the leads you already have are cheaper and warmer
-                than the ones you are buying.
+                . The throughline is the same: look after the contacts you already have before
+                you pay for new ones.
               </p>
 
-              <h2>The CASL Problem Nobody Warns You About</h2>
+              <h2>The CASL Problem to Deal With First</h2>
               <p>
-                Here is where most reactivation advice — almost all of it written for the U.S.
-                market — quietly puts Canadian agents at risk. Canada's Anti-Spam Legislation
-                (CASL) is one of the strictest commercial email laws in the world, and reactivating
-                a cold database is exactly the scenario it was designed to scrutinize.
+                Reactivation advice written for the U.S. market can put Canadian agents at
+                risk. Canada's Anti-Spam Legislation (CASL) is a strict commercial email law,
+                and emailing a cold database is exactly the kind of sending it covers.
               </p>
               <p>
                 In simple terms, CASL generally requires that you have consent before sending a
                 commercial electronic message. That consent can be express (the person clearly
                 opted in) or implied. A completed real estate transaction can create implied
                 consent — but that implied consent does not last forever. As a general rule, it
-                expires roughly two years after the transaction or inquiry. So the past client you
+                expires roughly two years after the transaction, and the period that follows a
+                simple inquiry is shorter; check the official guidance linked below for the
+                current rules. So the past client you
                 closed four years ago and never emailed may no longer be someone you can legally
                 send marketing to without re-establishing consent.
               </p>
@@ -205,26 +217,25 @@ const DatabaseReactivation = () => {
                 .
               </p>
               <p>
-                The practical takeaway is liberating, not paralyzing: a CASL-aware reactivation
-                actually performs better, because re-permissioning forces you to lead with value
-                and a genuine reason to reconnect, rather than blasting a stale list and hoping.
+                The practical takeaway need not be paralyzing. A CASL-aware reactivation has an
+                upside: re-permissioning makes you lead with something useful and a genuine
+                reason to reconnect, rather than blasting a stale list and hoping.
               </p>
 
               <h2>Step 1: Audit and Segment Your Database</h2>
               <p>
                 You cannot reactivate what you cannot see. Before any message goes out, pull every
                 contact you have — your CRM, your phone, old transaction files, your email account,
-                social connections — into one place. Most agents are shocked to discover they have
-                three or four times more contacts than they thought, scattered across systems that
-                never talked to each other.
+                social connections — into one place. You may find you have more contacts than you
+                thought, scattered across systems that never talked to each other.
               </p>
-              <p>Then segment. The four segments that matter most for reactivation are:</p>
+              <p>Then segment. Four segments are useful for reactivation:</p>
 
               <h3>1. Past clients (closed a transaction with you)</h3>
               <p>
-                Your highest-value segment by far. These people have already trusted you with the
-                largest financial transaction of their lives. They are your most likely source of
-                both repeat business and referrals. Note the transaction date — it determines your
+                Start here. These people have already trusted you with a very large
+                financial transaction, and they are a natural source of
+                both repeat business and referrals. Note the transaction date, because it affects your
                 CASL consent position.
               </p>
 
@@ -246,27 +257,29 @@ const DatabaseReactivation = () => {
 
               <h3>4. Referral sources (other agents, lenders, lawyers)</h3>
               <p>
-                The professionals who can send you business repeatedly. A handful of strong
-                referral relationships can outproduce an entire paid-lead budget over time.
+                The professionals who can send you business repeatedly. A few strong referral
+                relationships are worth looking after as carefully as your past clients.
               </p>
 
               {/* Inline CTA */}
               <div className="not-prose my-10 rounded-xl border border-primary/20 bg-primary/5 p-6">
                 <p className="text-sm font-semibold uppercase tracking-wide text-primary mb-1">
-                  Built for this
+                  Where Realtor Desk helps
                 </p>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  One organized database, consent records included
+                  One list of contacts, with a consent record on each
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  RealtorDesk centralizes every contact, tracks CASL consent status, and segments
-                  your sphere automatically — so reactivation starts from a clean, compliant list.
+                  Realtor Desk keeps your contacts in one list and records the date and source
+                  of consent on each. Contacts import from a CSV, but the import does not bring
+                  in consent, does not merge duplicates, and does not segment the list for you.
+                  Software does not make anyone compliant.
                 </p>
                 <Link
                   to="/features"
                   className="inline-flex items-center bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors"
                 >
-                  See how RealtorDesk organizes your database →
+                  See what Realtor Desk does →
                 </Link>
               </div>
 
@@ -287,11 +300,11 @@ const DatabaseReactivation = () => {
                 complaint ever lands.
               </p>
 
-              <h2>Step 3: The Reactivation Sequence That Works</h2>
+              <h2>Step 3: A Reactivation Sequence to Follow</h2>
               <p>
-                Once consent is sorted, reactivation becomes a rhythm, not a one-off blast. The most
-                effective agents run something close to a 12-touch annual plan: roughly monthly
-                contact that alternates between value, personal connection, and the occasional direct
+                Once consent is sorted, reactivation becomes a rhythm, not a one-off blast. A
+                reasonable starting point is something close to a 12-touch annual plan: roughly monthly
+                contact that alternates between useful information, personal connection, and the occasional direct
                 offer. The mix matters more than any single message.
               </p>
 
@@ -314,8 +327,8 @@ const DatabaseReactivation = () => {
                   },
                   {
                     step: "4",
-                    title: "Respond instantly when they re-engage",
-                    body: "The moment a dormant contact replies, speed wins. A reply that sits for hours cools fast. This is where automation and AI follow-up turn a reactivation into a booked conversation.",
+                    title: "Reply promptly when they re-engage",
+                    body: "When a dormant contact replies, answer while they are still thinking about it. Decide in advance how you will notice replies on a busy day, and answer each one yourself.",
                   },
                 ].map(({ step, title, body }) => (
                   <div key={step} className="flex gap-4 p-4 rounded-lg bg-muted/50">
@@ -330,20 +343,22 @@ const DatabaseReactivation = () => {
                 ))}
               </div>
 
-              <h2>Step 4: Let AI Carry the Follow-Up</h2>
+              <h2>Step 4: Make the Follow-Up Sustainable</h2>
               <p>
-                The reason most reactivation campaigns die is not strategy — it is stamina. Monthly
-                touches across hundreds of contacts, segmented by consent and relationship, with an
-                instant response every time someone replies, is simply more than a working agent can
-                sustain by hand. This is exactly the constraint AI removes.
+                Reactivation campaigns tend to fail on stamina rather than strategy. Monthly
+                touches across hundreds of contacts, segmented by consent and relationship, with a
+                prompt answer every time someone replies, is a lot for a working agent to
+                sustain from memory.
               </p>
               <p>
-                A CRM built for Canadian agents can schedule the recurring touches, keep consent
-                records attached to each contact, and use a 24/7 AI assistant to respond the instant
-                a dormant contact re-engages — qualifying them while the conversation is hot and
-                handing you a warm, ready lead instead of a cold callback. You stay in control of the
-                relationship; the system handles the consistency that human willpower never quite
-                manages. For more on how always-on follow-up changes the math, see our piece on{" "}
+                Tools can carry part of that load, and they differ in how. Some email marketing
+                products send scheduled messages on their own; if you use one, make sure it
+                respects consent and unsubscribes. Others, Realtor Desk among them, do not send
+                anything by themselves: Realtor Desk keeps a consent record on each contact,
+                suggests a next action and a time to take it, and drafts a reply for you to
+                review. Its sequence builder exists, but scheduled sending is not switched on.
+                Either way you stay in control of the relationship. For more on replying
+                promptly, see our piece on{" "}
                 <Link to="/lead-response-time-canadian-realtors">
                   lead response time for Canadian realtors
                 </Link>
@@ -386,21 +401,43 @@ const DatabaseReactivation = () => {
 
               <h2>Your Database Is a Pipeline. Start Working It.</h2>
               <p>
-                You do not need more leads to grow this year. You need to reconnect with the people
-                who already chose you once — consistently, with value, and in a way that respects
-                Canadian privacy and anti-spam law. That is a systems problem, and systems problems
-                are exactly what the right CRM solves.
+                Before you pay for more leads, reconnect with the people
+                who already chose you once — consistently, with something useful to say, and in a way that respects
+                Canadian privacy and anti-spam law. That is mostly a matter of routine, and a CRM
+                can help you keep to it.
               </p>
+
+              <h2>Where Realtor Desk Fits</h2>
+              <p>
+                Realtor Desk is a CRM for a single Canadian real estate agent. It does not run a
+                reactivation campaign for you. It gives you the working parts:
+              </p>
+              <ul>
+                <li>One list of contacts, with one conversation timeline per client.</li>
+                <li>A rule-based lead score from 0 to 100, with the breakdown shown.</li>
+                <li>A suggested next action and a time to take it.</li>
+                <li>
+                  An in-app assistant that drafts a reply for you to review. Nothing is sent to
+                  a client without you.
+                </li>
+                <li>
+                  The date and source of consent recorded on each contact. It refuses to send
+                  from the inbox or by SMS when no consent is on file, and stops automated
+                  email to a contact who has withdrawn.
+                </li>
+                <li>French or English set per contact.</li>
+              </ul>
 
               {/* Primary CTA block */}
               <div className="not-prose mt-12 rounded-xl bg-gradient-to-r from-primary to-primary/80 p-8 text-white">
                 <h3 className="text-2xl font-bold mb-2">
-                  Reactivate your database — compliantly, automatically.
+                  Keep your past clients in one place, with consent on record.
                 </h3>
                 <p className="text-white/85 mb-6">
-                  RealtorDesk AI is the Canadian-built CRM that centralizes your contacts, tracks
-                  CASL consent, and uses 24/7 AI follow-up to turn dormant past clients into booked
-                  conversations. Bilingual, PIPEDA-native, CAD pricing from $149/month.
+                  Realtor Desk is a CRM for Canadian real estate agents. It keeps your contacts
+                  in one list, records the date and source of consent on each, suggests a next
+                  action and drafts replies for you to send. French or English per contact.
+                  CAD $149 a month for a single agent.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link

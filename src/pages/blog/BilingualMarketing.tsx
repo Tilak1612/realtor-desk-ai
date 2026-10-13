@@ -25,7 +25,7 @@ const BilingualMarketing = () => {
         article
         publishedTime="2024-12-20"
         modifiedTime="2024-12-20"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/bilingual-marketing"
         structuredData={[
           {
@@ -33,8 +33,8 @@ const BilingualMarketing = () => {
             "@type": "Article",
             "headline": "Bilingual Real Estate Marketing in Canada",
             "description": "Master true bilingual real estate marketing for Canadian markets with cultural localization, compliance, and SEO in both languages.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2024-12-20",
             "dateModified": "2024-12-20"
           }

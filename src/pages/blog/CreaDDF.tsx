@@ -25,7 +25,7 @@ const CreaDDF = () => {
         article
         publishedTime="2025-01-10"
         modifiedTime="2025-01-10"
-        author="RealtorDesk AI"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/crea-ddf"
         structuredData={[
           {
@@ -33,8 +33,8 @@ const CreaDDF = () => {
             "@type": "Article",
             "headline": "The Complete Guide to CREA DDF Integration",
             "description": "Everything you need to know about accessing national MLS data and integrating CREA DDF into your real estate workflow.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-10",
             "dateModified": "2025-01-10"
           }
@@ -106,7 +106,7 @@ const CreaDDF = () => {
 
             <h2>How DDF® Integration Works</h2>
             <p>
-              Modern platforms connect directly to the CREA DDF® feed, pulling listing data in real-time. (RealtorDesk AI's CREA DDF® integration is on the Q3 2026 roadmap.) When available, this means:
+              Modern platforms connect directly to the CREA DDF® feed, pulling listing data in real-time. (Realtor Desk does not have native DDF® sync yet; it is on the roadmap.) Where a platform offers it, this means:
             </p>
             <ol>
               <li><strong>Automatic Sync:</strong> New listings appear in your system within minutes of being posted to MLS®</li>
@@ -164,22 +164,15 @@ const CreaDDF = () => {
               <li>VOW (Virtual Office Website) compliance is required for client portals</li>
             </ul>
 
-            <h2>Getting Started</h2>
+            <h2>What Realtor Desk does today</h2>
             <p>
-              CREA DDF® integration in RealtorDesk AI is planned for Q3 2026. When it launches, the setup flow will be:
+              Native CREA DDF® sync is on the Realtor Desk roadmap and is not live. Today you can import a single listing from a Realtor.ca address or an MLS® number and attach it to a client record. For how DDF® access works and who qualifies, check with CREA and your local board.
             </p>
-            <ol>
-              <li>Verify your CREA membership and local board standing</li>
-              <li>Complete the DDF® authorization process</li>
-              <li>Connect your account through our secure integration</li>
-              <li>Configure your preferences and filters</li>
-              <li>Access national MLS® data directly inside your CRM</li>
-            </ol>
 
             <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg my-8">
-              <h3 className="text-2xl font-bold mb-4">Ready to Access National MLS® Data?</h3>
+              <h3 className="text-2xl font-bold mb-4">See the listing importer</h3>
               <p className="mb-6">
-                Connect your CREA membership and start leveraging the power of centralized Canadian real estate data.
+                Import a listing from a Realtor.ca address or an MLS® number and keep it beside the client it belongs to.
               </p>
               <Link to="/signup">
                 <Button size="lg" className="btn-gradient">

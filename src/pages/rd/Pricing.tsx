@@ -65,7 +65,9 @@ const PLANS: PlanData[] = [
     ctaVariant: "terra",
     featureKeys: [
       "__team_every", // sentinel resolved to "Everything in Solo, plus —" via t(planFor=solo)
-      "pricingRd.featTeamAiUnl",
+      // "Unlimited AI messages" was listed here against "500 msgs/mo" on Solo.
+      // Nothing counts or limits assistant messages, so there was no difference
+      // to sell. Removed 2026-10-12 by the owner's decision.
       "pricingRd.featTeamDdfUnl",
       "pricingRd.featTeamRouting",
       "pricingRd.featTeamReports",
@@ -181,8 +183,10 @@ export default function Pricing() {
 
           <h3 className="text-lg font-semibold mb-2">What is not included yet?</h3>
           <p className="text-rd-ink-600 leading-[1.6] mb-6">
-            Native CREA DDF® listing sync is on the roadmap for Q3 2026 — until
-            then, listings come in through the Realtor.ca importer. Google
+            Native CREA DDF® listing sync is on the roadmap and is not live yet.
+            Until then, listings come in through the Realtor.ca importer. Seats,
+            a shared pipeline and team reports on the Team plan are also on the
+            roadmap: today every plan is used by one agent. Google
             Calendar and Outlook connect today, but pushing appointments to them
             automatically is still in build. We would rather you read that here
             than discover it in week two.
@@ -191,8 +195,9 @@ export default function Pricing() {
           <h3 className="text-lg font-semibold mb-2">Can I change plan or leave?</h3>
           <p className="text-rd-ink-600 leading-[1.6]">
             Plans change from billing settings and take effect on the next cycle.
-            There is no contract and no cancellation fee. Your contacts export to
-            CSV at any point, including after you cancel — the data is yours.
+            There is no contract and no cancellation fee. While you subscribe you
+            can export your contacts to CSV, and you can export your data from
+            Settings at any point, including after you cancel — the data is yours.
           </p>
         </div>
       </section>
@@ -420,7 +425,7 @@ function FeatureMatrix({ t }: { t: TFn }) {
     {
       labelKey: "pricingRd.matrixSecAi",
       rows: [
-        { labelKey: "pricingRd.matrixRowDeskMsgs", solo: "500", team: t("pricingRd.matrixValUnl"), bk: t("pricingRd.matrixValUnl") },
+        { labelKey: "pricingRd.matrixRowDeskMsgs", solo: true, team: true, bk: true },
         { labelKey: "pricingRd.matrixRowBilingual", solo: true, team: true, bk: true },
         { labelKey: "pricingRd.matrixRowVoice", solo: false, team: true, bk: true },
         { labelKey: "pricingRd.matrixRowScoring", solo: true, team: true, bk: true },

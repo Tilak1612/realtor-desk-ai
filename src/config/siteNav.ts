@@ -208,7 +208,7 @@ export const SOLUTIONS_PANES: NavPane[] = [
         labelKey: "siteNav.listingImport",
         label: "Listing import",
         descKey: "siteNav.listingImportDesc",
-        desc: "Realtor.ca and MLS import today; native DDF\u00ae is Q3 2026.",
+        desc: "Realtor.ca and MLS import today; native DDF\u00ae is on the roadmap.",
       },
       {
         to: "/roadmap",

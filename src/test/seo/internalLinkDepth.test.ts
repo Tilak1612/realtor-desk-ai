@@ -16,7 +16,11 @@ import path from "node:path";
 
 const ROOT = path.resolve(__dirname, "../../..");
 const DIST = path.join(ROOT, "dist");
-const built = fs.existsSync(path.join(DIST, "index.html"));
+// A prerendered route's file, not dist/index.html: a plain `vite build` (which
+// the screenshot and parity harnesses run) leaves an index.html with no
+// prerendered pages beside it, and this test then reported every page as an
+// orphan. It needs `npm run build:seo`.
+const built = fs.existsSync(path.join(DIST, "pricing/index.html"));
 
 const MIN_INBOUND = 3;
 

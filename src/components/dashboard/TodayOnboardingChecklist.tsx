@@ -130,7 +130,7 @@ const TodayOnboardingChecklist = ({ userId }: TodayOnboardingChecklistProps) => 
         titleKey: "onboarding.step.widget.title",
         defaultTitle: "Set up your website widget",
         descKey: "onboarding.step.widget.desc",
-        defaultDesc: "Launches Q3 2026 — see roadmap.",
+        defaultDesc: "Not live yet — see roadmap.",
         href: "/roadmap",
         checkCompleted: async () => {
           // Not shipped yet; user can acknowledge to clear the step.

@@ -41,7 +41,7 @@ const resources = {
       },
       hero: {
         title: "Close More Deals with AI Built for Canadian Realtors",
-        subtitle: "24/7 AI-powered lead capture, call handling, and email automation—designed for the Canadian market with full bilingual support. CREA DDF® integration on the roadmap for Q3 2026.",
+        subtitle: "The bilingual CRM for Canadian real estate: lead scoring, a drag-and-drop pipeline and one conversation timeline per client. Native CREA DDF® sync is on the roadmap and not live yet.",
         getStarted: "Start Your 14-Day Free Trial",
         watchDemo: "Book your free demo",
         trustLine: "14-day free trial • A card is required to start • Cancel before day 14 and you are not charged",
@@ -53,7 +53,7 @@ const resources = {
         bullet1: "AI responds to leads instantly, 24/7",
         bullet2: "Built for Canadian agents — PIPEDA, CASL, bilingual EN/FR",
         bullet3: "Bilingual EN/FR",
-        testimonial: "\"Captured 3 leads in my first 48 hours I would have lost\"",
+        testimonial: "",
         joinAgents: "Join 50+ Canadian agents",
         activeAgents: "Active Agents",
         leads: "Leads",
@@ -159,7 +159,7 @@ const resources = {
           feature: "Feature",
           leadScoring: "Predictive Lead Scoring", advancedAI: "✓ Advanced AI", basic: "Basic", manual: "Manual", limited: "Limited",
           chatbot: "24/7 AI Chatbot", bilingual: "✓ Bilingual", addon: "Add-on",
-          ddf: "CREA DDF® Integration", comingQ3: "Coming Q3 2026", thirdParty: "Third-party",
+          ddf: "CREA DDF® Integration", comingQ3: "On the roadmap", thirdParty: "Third-party",
           transactionAI: "Transaction AI", fullAutomation: "✓ Full automation",
           compliance: "Canadian Compliance", builtIn: "✓ Built-in",
           marketingAuto: "Marketing Automation", aiGenerated: "✓ AI-generated", templates: "Templates",
@@ -207,7 +207,7 @@ const resources = {
             feature6: "Canadian market intelligence",
             feature7: "Bilingual support (EN/FR)",
             feature8: "Mobile app included",
-            feature9: "Free migration assistance",
+            feature9: "Contact import by CSV",
             feature10: "No setup fees",
             feature11: "Priority support"
           },
@@ -261,11 +261,11 @@ const resources = {
           setupFee: "Setup Fee",
           aiScoring: "AI Predictive Lead Scoring",
           chatbot: "24/7 Bilingual AI Chatbot",
-          migration: "Free Migration",
+          migration: "CSV import",
           compliance: "Canadian Compliance (RECO, BCFSA)",
           mobileApp: "Mobile App",
           totalCost: "Total First Year Cost",
-          comingQ3: "(Coming Q3 2026)",
+          comingQ3: "(On the roadmap)",
           comingSoon: "Coming Soon",
           extraCost: "Extra Cost",
           partial: "Partial",
@@ -312,7 +312,7 @@ const resources = {
           noContracts: "No Contracts, Cancel Anytime",
           noContractsDesc: "All plans are month-to-month. Cancel anytime with one click. No penalties, no hassles.",
           freeSetup: "Free Setup & Migration",
-          freeSetupDesc: "We'll migrate your contacts and data from any CRM for free. Plus complimentary onboarding and training.",
+          freeSetupDesc: "Import your contacts from any CRM with a CSV file you export yourself.",
           badge1: "No contracts",
           badge2: "No setup fees",
           badge3: "Cancel anytime"
@@ -546,14 +546,14 @@ const resources = {
           rowHosting: "Canadian hosting (PIPEDA)",
           rowBilingual: "Bilingual EN/FR out of the box",
           rowCasl: "CASL-compliant email",
-          rowDdf: "CREA DDF® native integration (Q3 2026)",
+          rowDdf: "CREA DDF® native integration (roadmap)",
           rowCad: "CAD pricing",
           valAddon: "Add-on",
           valManual: "Manual",
           valThirdParty: "3rd-party",
           valUsdPremium: "USD, +20%",
           valIncluded: "Included",
-          valRoadmap: "Q3 2026",
+          valRoadmap: "Roadmap",
           seeFull: "See the full comparison"
         },
         testimonial: {
@@ -652,7 +652,7 @@ const resources = {
         importContacts: "Import contacts",
         importContactsDesc: "Bring contacts in from a CSV; imported contacts carry no consent.",
         listingImport: "Listing import",
-        listingImportDesc: "Realtor.ca and MLS import today; native DDF\u00ae is Q3 2026.",
+        listingImportDesc: "Realtor.ca and MLS import today; native DDF\u00ae is on the roadmap.",
         leadScoring: "Lead scoring",
         leadScoringDesc: "A 0\u2013100 score per lead, with the reasons shown rather than hidden.",
         followUp: "Follow-up",
@@ -709,12 +709,12 @@ const resources = {
       },
       pricingRd: {
         seoTitle: "Real Estate CRM Pricing in CAD | Realtor Desk",
-        seoDesc: "One price in CAD. Bilingual EN/FR and Realtor.ca import today, CREA DDF® on the Q3 2026 roadmap. 14-day trial; a card is required to start.",
+        seoDesc: "One price in CAD. Bilingual EN/FR and Realtor.ca import today; CREA DDF® is on the roadmap, not live. 14-day trial; a card is required to start.",
         eyebrow: "Pricing in CAD",
         heading1: "One price.",
         heading2: "Every",
         heading3: "feature.",
-        subtitle: "No AI quotas on Team or Brokerage. No \"growth\" tier that hides the integrations. 14-day free trial.",
+        subtitle: "No AI message quotas on any plan. No \"growth\" tier that hides the integrations. 14-day free trial.",
         toggleMonthly: "Monthly",
         toggleAnnual: "Annual · save up to $789/yr",
         taxNote: "Prices shown in CAD, before tax. GST/HST — plus QST in Quebec or PST where it applies — is calculated at checkout from your billing province.",
@@ -725,11 +725,11 @@ const resources = {
         planSoloSavings: "Save $789 vs monthly",
         planTeamName: "Team",
         planTeamTag: "For 2–10 agents",
-        planTeamDesc: "Shared pipeline, round-robin routing, team reports.",
+        planTeamDesc: "Shared pipeline, round-robin routing and team reports are on the roadmap.",
         planTeamSavings: "Save $591 vs monthly",
         planBrokerageName: "Brokerage",
         planBrokerageTag: "For 10+ agents",
-        planBrokerageDesc: "Multi-tenant, SSO, dedicated CSM, FINTRAC tooling.",
+        planBrokerageDesc: "Multi-tenant accounts, SSO, a dedicated CSM and FINTRAC tooling are on the roadmap.",
         featuredTag: "Most agents pick this",
         ctaStart: "Start free trial",
         ctaTalkSales: "Talk to sales",
@@ -741,30 +741,30 @@ const resources = {
         customAnnualLabel: "Annual · CAD",
         perMoEffective: "CAD · ${{amount}}/mo effective",
         featEveryIn: "Everything in {{plan}}, plus —",
-        featSoloDesk: "Desk AI chatbot, 500 msgs/mo",
+        featSoloDesk: "Desk AI drafting assistant",
         featSoloBilingual: "Bilingual EN · FR",
-        featSoloDdf1: "Realtor.ca listing import (native CREA DDF® feed — Q3 2026)",
+        featSoloDdf1: "Realtor.ca listing import (native CREA DDF® feed — roadmap)",
         featSoloScoring: "Lead scoring + pipeline",
         featSoloCasl: "CASL email footer + instant unsubscribe",
         featSoloUser: "1 user",
         featTeamAiUnl: "Unlimited AI messages",
-        featTeamDdfUnl: "CREA DDF® feed, unlimited boards (Q3 2026)",
+        featTeamDdfUnl: "CREA DDF® feed, unlimited boards (roadmap)",
         featTeamRouting: "Round-robin lead routing (roadmap)",
-        featTeamReports: "Team reports & leaderboard",
-        featTeamSeats: "5 users included",
+        featTeamReports: "Team reports & leaderboard (roadmap)",
+        featTeamSeats: "5 users included (roadmap)",
         featBrokerageSso: "SAML SSO + Azure AD (roadmap)",
         featBrokerageCompliance: "FINTRAC & provincial regulator workflows (roadmap)",
-        featBrokerageDdfCustom: "Custom DDF mappings (Q3 2026)",
-        featBrokerageCsm: "Dedicated Canadian CSM",
+        featBrokerageDdfCustom: "Custom DDF mappings (roadmap)",
+        featBrokerageCsm: "Dedicated Canadian CSM (roadmap)",
         featBrokerageSla: "Uptime commitment, agreed in your contract",
         matrixSecAi: "AI & automation",
         matrixSecIntegrations: "Integrations",
         matrixSecCompliance: "Compliance · Canada",
-        matrixRowDeskMsgs: "Desk AI chatbot (msgs/mo)",
+        matrixRowDeskMsgs: "Desk AI drafting assistant",
         matrixRowBilingual: "Bilingual EN · FR",
         matrixRowVoice: "Custom voice training (roadmap)",
         matrixRowScoring: "AI lead scoring",
-        matrixRowDdfBoards: "CREA DDF® boards (Q3 2026)",
+        matrixRowDdfBoards: "CREA DDF® boards (roadmap)",
         matrixRowStack: "Stripe / Twilio / Resend",
         matrixRowSso: "SAML SSO (roadmap)",
         matrixRowPipeda: "PIPEDA hosting (Canada)",
@@ -859,7 +859,7 @@ const resources = {
         capBilingualTitle: "Bilingual EN · FR",
         capBilingualBody: "The app, your emails and every lead record run in either language. Set it per contact.",
         capDdfTitle: "CREA DDF® sync",
-        capDdfBody: "Listings pulled straight from your board. Waiting on CREA credentials; targeted for Q3 2026.",
+        capDdfBody: "Listings pulled straight from your board. Waiting on CREA credentials; not live yet.",
         capSequencesTitle: "Automated email sequences",
         capSequencesBody: "The sequence builder — email, wait, tag, task — is in the app today. Scheduled sending is not switched on yet.",
         capChatTitle: "Website chat widget",
@@ -884,7 +884,7 @@ const resources = {
         signupTitle: "Start your 14-day free trial — Realtor Desk",
         signupDesc: "Start your 14-day free trial of Realtor Desk. AI lead response, 24/7 chatbot, Realtor.ca import, CAD pricing. A card is required to start; you're not charged until the trial ends.",
         integrationsTitle: "Real Estate CRM Integrations | Realtor Desk",
-        integrationsDesc: "Integrate Realtor Desk via Zapier, Make, and n8n (5,000+ apps). Native connectors on the roadmap. CREA DDF® coming Q3 2026.",
+        integrationsDesc: "Connect Realtor Desk through Zapier, Make and n8n, with Twilio for SMS. Native CREA DDF® sync is on the roadmap and not live yet.",
         roadmapTitle: "Product Roadmap — Realtor Desk",
         roadmapDesc: "See what's shipping next. Voice AI, CREA DDF, Centris sync, and more on the Realtor Desk roadmap for 2026.",
         contactTitle: "Contact — Realtor Desk",
@@ -1240,7 +1240,7 @@ const resources = {
         savings: "Save",
         firstYear: "first year!",
         complaints: "Common Complaints We Hear",
-        schedule: "Schedule Free Migration Call"
+        schedule: "Book a demo"
       },
       problem: {
         badge: "The Bottleneck",
@@ -1353,7 +1353,7 @@ const resources = {
         },
         q3: {
           question: "Can I trust the platform with my client data?",
-          answer: "Absolutely. We use bank-level encryption (AES-256), host data on Canadian-optimized infrastructure, and are designed with PIPEDA principles — including right-to-erasure and breach notification protocols."
+          answer: "Your client data sits in a database hosted in Canada and is encrypted in transit and at rest. Each account can only read its own records. Some outside services, such as SMS and email delivery, may process data outside Canada. We do not hold a SOC 2 certification."
         },
         q4: {
           question: "What if the platform doesn't work as described?",
@@ -1365,63 +1365,63 @@ const resources = {
         },
         q6: {
           question: "What certifications do you actually have?",
-          answer: "We are built on enterprise-grade infrastructure with strong security practices, designed with PIPEDA principles, and use Canadian MLS data integration. As we grow, we plan to pursue formal third-party security certifications and display them proudly."
+          answer: "None yet. We hold no formal security certification such as SOC 2, and CREA DDF® is not live. What is in place today: a database hosted in Canada, encryption in transit and at rest, a consent record on each contact, and CSV import."
         },
         q7: {
-          question: "Does the AI sound robotic?",
-          answer: "Our AI uses advanced natural language processing and sounds remarkably human. For voice calls, we use Canadian-accented voices that clients find warm and professional."
+          question: "What does the AI actually do?",
+          answer: "Three things. The product scores each lead from 0 to 100 using rules you can see, it suggests a next action and a time to take it, and an in-app assistant drafts a reply or summarises the thread on the contact you have open. It does not message your leads on its own, and there is no voice agent."
         },
         q8: {
           question: "How long does setup take?",
-          answer: "Most agents are set up in about 10 minutes: your profile, a first contact, a first listing, and connecting your calendar. The setup wizard walks you through each step, and you can come back to any of them later."
+          answer: "The setup wizard covers your profile, a first contact, a first listing and connecting your calendar. You can skip any step and come back to it later. Importing contacts from a CSV is a separate step."
         },
         q9: {
-          question: "What if the AI can't answer a question?",
-          answer: "The AI seamlessly escalates complex questions to you via SMS or phone. It provides full conversation context so you can pick up exactly where it left off."
+          question: "Does the AI ever reply to a lead without me?",
+          answer: "No. Nothing is sent to a client without you. The assistant drafts; you read, edit and send. That is deliberate: under CASL, a message sent in your name is your responsibility."
         },
         q10: {
           question: "Is this CASL compliant?",
-          answer: "Absolutely. RealtorDesk.ai is built specifically for Canadian regulations. All emails include proper sender identification, consent tracking, and easy unsubscribe options."
+          answer: "No software makes you compliant. What Realtor Desk does: it records the date and source of consent on each contact, refuses to send from the inbox or by SMS when no consent is on file, and stops automated email to a contact who has withdrawn. How you collect consent remains your responsibility."
         },
         q11: {
-          question: "Which CRMs do you integrate with?",
-          answer: "Today: native Zapier, Make, and n8n — which cover 5,000+ apps including Follow Up Boss, Brivity, HubSpot, and Salesforce via Zapier. Direct connectors for Salesforce, Zoho CRM, Pipedrive, Freshsales, and Microsoft Dynamics are on the roadmap. You can also bulk-import any CRM via CSV."
+          question: "Which tools does it connect to?",
+          answer: "Zapier, Make and n8n can push new leads in, Twilio sends SMS, and you can send email through your own SMTP server. Google Calendar and Outlook connect, but appointment sync is not live yet. Contacts from another CRM come in by CSV. There are no direct connectors to other CRMs today."
         },
         q12: {
-          question: "Can I customize the AI's responses?",
-          answer: "Yes! You control the AI's personality, response templates, and which questions it handles vs. escalates to you. It learns your style over time."
+          question: "Can I change what the assistant drafts?",
+          answer: "Yes, every time. A draft is only a starting point: you edit it before it is sent, and nothing goes out until you send it."
         },
         q13: {
-          question: "How does RealtorDesk AI compare to Follow Up Boss?",
-          answer: "RealtorDesk AI offers AI-powered instant lead response (under 3 seconds) and bilingual support starting at $149/mo CAD, with CREA DDF® integration on the Q3 2026 roadmap. Follow Up Boss requires manual follow-up, lacks AI features, and costs $49-$99 USD/user/month without Canadian-specific features."
+          question: "How does Realtor Desk compare to Follow Up Boss?",
+          answer: "They suit different agents. Follow Up Boss lists lead routing, a team inbox, calling and 250+ integrations, which Realtor Desk does not have, and its Grow plan is shown at $69 per user a month on its pricing page (currency not stated, checked October 2026). Realtor Desk is CAD $149 a month for a single agent, with French set per contact, a consent record for CASL and a database in Canada."
         },
         q14: {
-          question: "Does RealtorDesk AI work with CREA DDF®?",
-          answer: "CREA DDF® integration is on the Q3 2026 roadmap for RealtorDesk AI. When it launches, you'll be able to sync MLS listings automatically, match buyers to properties in real-time, and manage listing data directly within the CRM. In the meantime, you can import listings from Realtor.ca via the built-in importer."
+          question: "Does Realtor Desk work with CREA DDF®?",
+          answer: "Not yet. Native CREA DDF® sync is on the roadmap and is not live. Today you can import a listing from a Realtor.ca address or an MLS number."
         },
         q15: {
           question: "What's the average ROI for agents using RealtorDesk AI?",
           answer: "We do not publish an average. We are in public beta and do not have a defensible sample, so any ROI figure we quoted would be a guess dressed up as data. The arithmetic that matters is yours: your commission per deal against the subscription cost. The trial runs 14 days so you can measure it on your own pipeline."
         },
         q16: {
-          question: "Can RealtorDesk AI handle phone calls?",
-          answer: "Not yet. Desk handles chat, web forms and email today, and drafts SMS replies for you to send. An inbound AI voice agent is something we are exploring — it is not on the 2026 roadmap, and we would rather tell you that than sell it to you."
+          question: "Can Realtor Desk handle phone calls?",
+          answer: "No. There is no voice agent, and one is not on the 2026 roadmap. Text messages go through Twilio, only to numbers with recorded consent."
         },
         q17: {
-          question: "Is RealtorDesk AI suitable for real estate teams?",
-          answer: "Absolutely. Our Teams plan supports unlimited users with shared inbox, team performance analytics, round-robin lead distribution, and custom AI training. Perfect for brokerages and teams of 2-50+ agents."
+          question: "Is Realtor Desk suitable for real estate teams?",
+          answer: "Not yet. Today it is a single-agent product: there are no seats, no lead assignment and no shared pipeline. Our Teams and Brokerages pages say what that means for you."
         },
         q18: {
-          question: "How long does it take to see results with RealtorDesk AI?",
-          answer: "Most agents see immediate improvements in response time (instant instead of hours/days). Within the first 30 days, agents typically see 25-40% more qualified appointments booked. Measurable deal increases usually show within 60-90 days."
+          question: "How soon will I see results?",
+          answer: "We do not publish typical results, because we do not have a sample that would stand behind a number. What you can check in the 14-day trial is practical: whether your leads are in one place, whether the follow-up list is useful, and whether the French and consent handling fit how you work."
         },
         q19: {
-          question: "Does RealtorDesk AI integrate with my existing website?",
-          answer: "Yes! Our AI chatbot widget installs on any website with a simple code snippet (works with WordPress, Wix, Squarespace, custom sites). It takes less than 5 minutes to set up and starts capturing leads immediately."
+          question: "Does it work with my existing website?",
+          answer: "There is no chat widget to install. If your website form can send to Zapier, Make or n8n, new enquiries arrive in Realtor Desk as leads with their source attached."
         },
         q20: {
-          question: "What makes RealtorDesk AI different from traditional CRMs?",
-          answer: "Traditional CRMs organize contacts but require YOU to do all the follow-up. RealtorDesk AI actively engages leads 24/7 via chat, email, SMS, and voice—qualifying them and booking appointments while you focus on closings. It's the difference between a filing cabinet and an AI assistant."
+          question: "How is Realtor Desk different from a general CRM?",
+          answer: "A general CRM stores contacts. Realtor Desk is built around a Canadian agent's follow-up: a score and a suggested next action for each lead, one conversation timeline per client, French or English per contact, a consent record for CASL, and a database in Canada. It does not follow up for you."
         },
         cta: {
           title: "Still Have Questions?",
@@ -2067,7 +2067,7 @@ const resources = {
             quickAdd: "🚀 Quick Add from MLS Listing URL",
             pasteUrl: "Paste Listing URL (Coming Soon: Auto-fill from CREA DDF)",
             urlPlaceholder: "https://realtor.ca/listing/...",
-            urlNote: "Phase 1: We'll scrape basic info. Phase 2: CREA DDF integration is planned for Q3 2026.",
+            urlNote: "This imports basic details from the listing page. Native CREA DDF sync is on the roadmap and not live yet.",
             propertyTitle: "Property Title",
             titlePlaceholder: "Beautiful 3BR Family Home",
             address: "Address",
@@ -2446,7 +2446,7 @@ const resources = {
           },
           aiTransformation: {
             title: "How AI Is Transforming Canadian Real Estate",
-            excerpt: "Discover the latest AI innovations revolutionizing how Canadian realtors work, from predictive analytics to automated transaction management."
+            excerpt: "What AI tools are being sold to Canadian agents, and what to ask before you buy one."
           },
           creaDdf: {
             title: "The Complete Guide to CREA DDF® Integration",
@@ -2454,11 +2454,11 @@ const resources = {
           },
           compliance: {
             title: "Provincial Compliance Checklist for Agents",
-            excerpt: "Stay compliant with regulations across Canada. A comprehensive guide to RECO, BCFSA, RECA, and AMF requirements."
+            excerpt: "An overview of what RECO, BCFSA, RECA and OACIQ expect of agents, plus the federal rules, with a link to each regulator."
           },
           leadConversion: {
             title: "Increase Lead Conversion with Lead Scoring",
-            excerpt: "Learn how AI-powered lead scoring and predictive analytics can increase your conversion rate from 5% to 18%."
+            excerpt: "What a lead score is, how to use one to decide who to call first, and what it cannot tell you."
           },
           bilingual: {
             title: "Bilingual Real Estate Marketing in Canada",
@@ -2638,15 +2638,15 @@ const resources = {
         brokerageDesc: "For 10+ agents",
         customPrice: "Custom",
         contactSales: "Contact sales",
-        brokerageBlurb: "SSO, dedicated CSM, custom FINTRAC tooling, and SLA.",
+        brokerageBlurb: "Custom contract. SSO, a dedicated CSM and FINTRAC tooling are on the roadmap.",
         switchAgent: "Switch to Solo plan",
         upgradeAgent: "Upgrade to Solo plan",
         upgradeTeam: "Upgrade to Team plan",
         features: {
           unlimitedContacts: "Unlimited contacts & leads",
-          aiCrm: "AI-powered predictive CRM",
-          chatbot: "24/7 AI chatbot",
-          emailSms: "Email & SMS automation",
+          aiCrm: "Lead scoring and suggested next actions",
+          chatbot: "In-app drafting assistant",
+          emailSms: "Email and SMS, gated on consent",
           mobileApp: "Mobile app included",
           everythingAgent: "Everything in Solo, plus:",
           teamCollab: "Team collaboration tools",
@@ -2731,7 +2731,7 @@ const resources = {
           },
           widget: {
             title: "Set up your website widget",
-            desc: "Launches Q3 2026 — see roadmap."
+            desc: "Not live yet — see roadmap."
           },
           calendar: {
             title: "Connect Google or Outlook Calendar",
@@ -2875,11 +2875,11 @@ const resources = {
       boldtrail: {
         compare: {
           heading: "Four rows. Not forty.",
-          sub: "We do not compare on feature breadth. BoldTrail has 400,000+ agents on their platform; we have fewer than a hundred. These are the four axes where we can defend the claim, each sourced from BoldTrail's own help center, pricing signals, or public reviews."
+          sub: "We do not compare on feature breadth: BoldTrail is a far larger product. These are four things worth checking, with what BoldTrail's own site showed when we read it and what to ask where it says nothing."
         },
         betterWhen: {
           heading: "When BoldTrail is the better choice",
-          body: "If you run a large brokerage in the United States, need BackOffice commission splits, or require deep integration with US-specific MLS systems that our CREA DDF work does not yet cover, BoldTrail is the more mature choice today. We are built for the independent Canadian agent or boutique team \u2014 we are smaller, more focused, and will remain so for the foreseeable future. Pick the tool that fits, not the longer feature list."
+          body: "If you run a large brokerage in the United States, need BackOffice commission splits, or require deep integration with US-specific MLS systems that Realtor Desk does not connect to, BoldTrail is the more mature choice today. We are built for the independent Canadian agent or boutique team \u2014 we are smaller, more focused, and will remain so for the foreseeable future. Pick the tool that fits, not the longer feature list."
         }
       },
       leadScore: {
@@ -2890,7 +2890,7 @@ const resources = {
         daysSinceContact: "Days since last contact",
         loading: "Loading signals\u2026",
         noSignals: "No behavioural signals yet. Log calls, emails, and property views to see this panel populate.",
-        manualNotice: "Your score is currently derived from a fixed formula. AI-derived scoring trained on your own conversion history ships Q2 2026."
+        manualNotice: "Your score is derived from a fixed formula. Scoring trained on your own conversion history is planned and has no date."
       },
       onboardingChecklist: {
         heading: "Getting started — about 10 minutes, guided",
@@ -2911,7 +2911,7 @@ const resources = {
           },
           widget: {
             title: "Set up your website widget",
-            desc: "Launches Q3 2026 — see roadmap."
+            desc: "Not live yet — see roadmap."
           },
           calendar: {
             title: "Connect Google or Outlook Calendar",
@@ -2923,7 +2923,7 @@ const resources = {
         badge: "Public roadmap",
         title: "What we are shipping — and what we are not.",
         subtitle: "Honesty is a feature. This page lists dated commitments for the capabilities our customers and competitors ask about most. If a date slips, we move it — we don't silently drop it.",
-        lastUpdated: "Last updated: 2026-04-20",
+        lastUpdated: "Last updated: 2026-10-11",
         status: {
           shipping: "Shipping",
           shipped: "Shipped",
@@ -2937,10 +2937,12 @@ const resources = {
           q2_2026: "Q2 2026",
           q3_2026: "Q3 2026",
           q1_2027: "Q1 2027",
+          none: "No date",
           tbd: "—"
         },
         section: {
-          now: { heading: "Shipping This Sprint (April 2026)" },
+          now: { heading: "Shipped in April 2026" },
+          planned: { heading: "Planned, no date" },
           q2: { heading: "Q2 2026" },
           q3: { heading: "Q3 2026" },
           q1_2027: { heading: "Q1 2027 — Teams tier" },
@@ -3237,7 +3239,7 @@ const resources = {
             titleBrand: "RealtorDesk",
             subtitle: "Let's get your AI deskmate on duty. In about five minutes, she'll be answering leads in French and English.",
             helperCanadaTitle: "Hosted in Canada",
-            helperCanadaBody: "Your leads, messages, and MLS data stay on Canadian soil. PIPEDA-compliant from minute one.",
+            helperCanadaBody: "Your leads and messages are stored in a database hosted in Canada.",
             helperMarketTitle: "Built for our market",
             helperMarketBody: "Designed with brokers from Toronto, Montreal, Vancouver, Calgary — not retrofit from a US tool.",
             helperLiveTitle: "Five minutes, live",
@@ -3393,7 +3395,7 @@ const resources = {
       },
       hero: {
         title: "Concluez Plus de Transactions avec une IA Conçue pour les Courtiers Canadiens",
-        subtitle: "Capture de prospects 24/7, gestion d'appels et automation par courriel—conçue pour le marché canadien avec support bilingue complet. Intégration CREA DDF® prévue pour Q3 2026.",
+        subtitle: "Le CRM bilingue pour l'immobilier canadien : notation des prospects, pipeline glisser-déposer et un fil de conversation unique par client. La synchronisation native du SDD® de l'ACI est sur la feuille de route et n'est pas encore active.",
         getStarted: "Commencez Votre Essai Gratuit de 14 Jours",
         watchDemo: "Réservez votre démo gratuite",
         trustLine: "Essai gratuit de 14 jours • Une carte est requise pour commencer • Annulez avant le 14e jour et rien ne vous est prélevé",
@@ -3504,7 +3506,7 @@ const resources = {
           feature: "Fonctionnalité",
           leadScoring: "Score Prédictif de Prospects", advancedAI: "✓ IA Avancée", basic: "Basique", manual: "Manuel", limited: "Limité",
           chatbot: "Chatbot IA 24/7", bilingual: "✓ Bilingue", addon: "Module complémentaire",
-          ddf: "Intégration CREA DDF®", comingQ3: "Disponible T3 2026", thirdParty: "Tiers",
+          ddf: "Intégration CREA DDF®", comingQ3: "Sur la feuille de route", thirdParty: "Tiers",
           transactionAI: "IA de Transactions", fullAutomation: "✓ Automatisation complète",
           compliance: "Conformité canadienne", builtIn: "✓ Intégré",
           marketingAuto: "Automatisation Marketing", aiGenerated: "✓ Généré par IA", templates: "Modèles",
@@ -3552,7 +3554,7 @@ const resources = {
             feature6: "Intelligence du marché canadien",
             feature7: "Support bilingue (EN/FR)",
             feature8: "Application mobile incluse",
-            feature9: "Assistance à la migration gratuite",
+            feature9: "Importation de contacts par CSV",
             feature10: "Aucuns frais d'installation",
             feature11: "Support prioritaire"
           },
@@ -3606,11 +3608,11 @@ const resources = {
           setupFee: "Frais d'Installation",
           aiScoring: "Score Prédictif de Prospects par IA",
           chatbot: "Chatbot IA Bilingue 24/7",
-          migration: "Migration Gratuite",
+          migration: "Importation CSV",
           compliance: "Conformité canadienne (RECO, BCFSA)",
           mobileApp: "Application Mobile",
           totalCost: "Coût Total Première Année",
-          comingQ3: "(Disponible T3 2026)",
+          comingQ3: "(Sur la feuille de route)",
           comingSoon: "Bientôt disponible",
           extraCost: "Coût supplémentaire",
           partial: "Partielle",
@@ -3657,7 +3659,7 @@ const resources = {
           noContracts: "Sans Contrat, Annulez à Tout Moment",
           noContractsDesc: "Tous les plans sont mensuels. Annulez à tout moment en un clic. Sans pénalités, sans tracas.",
           freeSetup: "Installation et Migration Gratuites",
-          freeSetupDesc: "Nous migrerons vos contacts et données depuis n'importe quel CRM gratuitement. Plus une intégration et une formation offertes.",
+          freeSetupDesc: "Importez vos contacts depuis n'importe quel CRM à l'aide d'un fichier CSV que vous exportez vous-même.",
           badge1: "Sans contrat",
           badge2: "Aucuns frais d'installation",
           badge3: "Annulez à tout moment"
@@ -3888,14 +3890,14 @@ const resources = {
           rowHosting: "Hébergement canadien (LPRPDE)",
           rowBilingual: "Bilingue FR/EN dès le départ",
           rowCasl: "Courriel conforme à la LCAP",
-          rowDdf: "Intégration native du SDD® de l'ACI (T3 2026)",
+          rowDdf: "Intégration native du SDD® de l'ACI (feuille de route)",
           rowCad: "Tarifs en CAD",
           valAddon: "Module additionnel",
           valManual: "Manuel",
           valThirdParty: "Tiers",
           valUsdPremium: "USD, +20 %",
           valIncluded: "Inclus",
-          valRoadmap: "T3 2026",
+          valRoadmap: "Feuille de route",
           seeFull: "Voir la comparaison complète"
         },
         testimonial: {
@@ -3994,7 +3996,7 @@ const resources = {
         importContacts: "Import de contacts",
         importContactsDesc: "Importez vos contacts par CSV; les contacts import\u00e9s n\u2019ont aucun consentement enregistr\u00e9.",
         listingImport: "Import de fiches",
-        listingImportDesc: "Import Realtor.ca et MLS aujourd\u2019hui; le SDD\u00ae natif est pr\u00e9vu au T3 2026.",
+        listingImportDesc: "Import Realtor.ca et MLS aujourd\u2019hui; le SDD\u00ae natif est sur la feuille de route.",
         leadScoring: "Notation des prospects",
         leadScoringDesc: "Une note de 0 \u00e0 100 par prospect, avec le d\u00e9tail visible.",
         followUp: "Relances",
@@ -4056,7 +4058,7 @@ const resources = {
         heading1: "Un seul prix.",
         heading2: "Toutes",
         heading3: "les fonctionnalités.",
-        subtitle: "Pas de quotas d'IA sur Équipe ou Agence. Pas de forfait « croissance » qui cache les intégrations. Essai de 14 jours, annulez avant la fin de l'essai.",
+        subtitle: "Aucun quota de messages IA, quel que soit le forfait. Pas de forfait « croissance » qui cache les intégrations. Essai de 14 jours, annulez avant la fin de l'essai.",
         toggleMonthly: "Mensuel",
         toggleAnnual: "Annuel · économisez jusqu'à 789 $/an",
         taxNote: "Prix affichés en CAD, avant taxes. La TPS/TVH — plus la TVQ au Québec ou la TVP là où elle s'applique — est calculée au paiement selon votre province de facturation.",
@@ -4067,11 +4069,11 @@ const resources = {
         planSoloSavings: "Économisez 789 $ vs mensuel",
         planTeamName: "Équipe",
         planTeamTag: "Pour 2 à 10 agents",
-        planTeamDesc: "Pipeline partagé, distribution round-robin, rapports d'équipe.",
+        planTeamDesc: "Pipeline partagé, distribution round-robin et rapports d'équipe : sur la feuille de route.",
         planTeamSavings: "Économisez 591 $ vs mensuel",
         planBrokerageName: "Agence",
         planBrokerageTag: "Pour 10+ agents",
-        planBrokerageDesc: "Multi-locataire, SSO, gestion de compte dédiée, outils CANAFE.",
+        planBrokerageDesc: "Comptes multi-locataires, SSO, gestion de compte dédiée et outils CANAFE : sur la feuille de route.",
         featuredTag: "Le plus choisi",
         ctaStart: "Essai gratuit",
         ctaTalkSales: "Parler aux ventes",
@@ -4083,30 +4085,30 @@ const resources = {
         customAnnualLabel: "Annuel · CAD",
         perMoEffective: "CAD · {{amount}} $/mois effectif",
         featEveryIn: "Tout ce qui est dans {{plan}}, plus —",
-        featSoloDesk: "Desk IA, 500 messages/mois",
+        featSoloDesk: "Assistant de rédaction Desk IA",
         featSoloBilingual: "Bilingue FR · EN",
-        featSoloDdf1: "Import de fiches Realtor.ca (flux SDD® de l'ACI natif — T3 2026)",
+        featSoloDdf1: "Import de fiches Realtor.ca (flux SDD® de l'ACI natif — feuille de route)",
         featSoloScoring: "Notation de prospects + pipeline",
         featSoloCasl: "Pied de page LCAP + désabonnement instantané",
         featSoloUser: "1 utilisateur",
         featTeamAiUnl: "Messages IA illimités",
-        featTeamDdfUnl: "Flux SDD® de l'ACI, chambres illimitées (T3 2026)",
+        featTeamDdfUnl: "Flux SDD® de l'ACI, chambres illimitées (feuille de route)",
         featTeamRouting: "Distribution round-robin des prospects (feuille de route)",
-        featTeamReports: "Rapports d'équipe et classement",
-        featTeamSeats: "5 utilisateurs inclus",
+        featTeamReports: "Rapports d'équipe et classement (feuille de route)",
+        featTeamSeats: "5 utilisateurs inclus (feuille de route)",
         featBrokerageSso: "SAML SSO + Azure AD (feuille de route)",
         featBrokerageCompliance: "Flux CANAFE et régulateurs provinciaux (feuille de route)",
-        featBrokerageDdfCustom: "Mappages SDD personnalisés (T3 2026)",
-        featBrokerageCsm: "Gestion de compte canadienne dédiée",
+        featBrokerageDdfCustom: "Mappages SDD personnalisés (feuille de route)",
+        featBrokerageCsm: "Gestion de compte canadienne dédiée (feuille de route)",
         featBrokerageSla: "Engagement de disponibilité, convenu au contrat",
         matrixSecAi: "IA et automatisation",
         matrixSecIntegrations: "Intégrations",
         matrixSecCompliance: "Conformité · Canada",
-        matrixRowDeskMsgs: "Desk IA (messages/mois)",
+        matrixRowDeskMsgs: "Assistant de rédaction Desk IA",
         matrixRowBilingual: "Bilingue FR · EN",
         matrixRowVoice: "Entraînement de la voix personnalisée (feuille de route)",
         matrixRowScoring: "Notation IA des prospects",
-        matrixRowDdfBoards: "Chambres SDD® de l'ACI (T3 2026)",
+        matrixRowDdfBoards: "Chambres SDD® de l'ACI (feuille de route)",
         matrixRowStack: "Stripe / Twilio / Resend",
         matrixRowSso: "SAML SSO (feuille de route)",
         matrixRowPipeda: "Hébergement LPRPDE (Canada)",
@@ -4201,7 +4203,7 @@ const resources = {
         capBilingualTitle: "Bilingue FR · EN",
         capBilingualBody: "L'application, vos courriels et chaque fiche fonctionnent dans l'une ou l'autre langue. Réglable par contact.",
         capDdfTitle: "Synchronisation SDD® de l'ACI",
-        capDdfBody: "Inscriptions tirées directement de votre chambre. En attente des accès de l'ACI; visé pour le T3 2026.",
+        capDdfBody: "Inscriptions tirées directement de votre chambre. En attente des accès de l'ACI; pas encore actif.",
         capSequencesTitle: "Séquences courriel automatisées",
         capSequencesBody: "Le constructeur de séquences — courriel, délai, étiquette, tâche — est dans l'application. L'envoi planifié n'est pas encore activé.",
         capChatTitle: "Widget de clavardage Web",
@@ -4226,7 +4228,7 @@ const resources = {
         signupTitle: "Commencez votre essai gratuit de 14 jours — Realtor Desk",
         signupDesc: "Commencez votre essai gratuit de 14 jours de Realtor Desk. Réponse IA aux prospects, agent 24/7, compatible SDD de l'ACI, tarifs en CAD. Annulez avant la fin de l'essai.",
         integrationsTitle: "Intégrations du CRM immobilier | Realtor Desk",
-        integrationsDesc: "Intégrez Realtor Desk via Zapier, Make et n8n (5 000+ applications). Connecteurs natifs sur la feuille de route. SDD de l'ACI prévu pour le T3 2026.",
+        integrationsDesc: "Connectez Realtor Desk par Zapier, Make et n8n, avec Twilio pour les textos. La synchronisation native du SDD de l'ACI est sur la feuille de route et n'est pas encore active.",
         roadmapTitle: "Feuille de route du produit — Realtor Desk",
         roadmapDesc: "Découvrez ce qui arrive. IA vocale, SDD de l'ACI, synchronisation Centris et plus encore sur la feuille de route Realtor Desk 2026.",
         contactTitle: "Contact — Realtor Desk",
@@ -4695,7 +4697,7 @@ const resources = {
         },
         q3: {
           question: "Puis-je faire confiance à la plateforme avec les données de mes clients?",
-          answer: "Absolument. Nous utilisons un chiffrement de niveau bancaire (AES-256), hébergeons les données sur une infrastructure optimisée pour le Canada, et sommes conçus selon les principes de la LPRPDE — y compris le droit à l'effacement et les protocoles de notification de violation."
+          answer: "Les données de vos clients se trouvent dans une base de données hébergée au Canada et sont chiffrées en transit et au repos. Chaque compte ne peut lire que ses propres dossiers. Certains services externes, comme l\u2019envoi de SMS et de courriels, peuvent traiter des données hors du Canada. Nous ne détenons pas de certification SOC 2."
         },
         q4: {
           question: "Que se passe-t-il si la plateforme ne fonctionne pas comme décrit?",
@@ -4707,63 +4709,63 @@ const resources = {
         },
         q6: {
           question: "Quelles certifications avez-vous réellement?",
-          answer: "RealtorDesk AI est conçu autour des principes de la LPRPDE et des meilleures pratiques de sécurité. Nous sommes honnêtes : nous n'avons pas encore de certification SOC 2 formelle ni de badge CREA DDF® — ces étapes sont prévues à mesure que nous sortons de la bêta. Ce qui est actif aujourd'hui : chiffrement, suivi du consentement et exportation des données. Nous publierons les certifications dès qu'elles seront obtenues."
+          answer: "Aucune pour l'instant. Nous ne détenons aucune certification de sécurité formelle comme SOC 2, et le SDD® de l'ACI n'est pas actif. Ce qui est en place aujourd'hui : une base de données hébergée au Canada, le chiffrement en transit et au repos, un enregistrement du consentement pour chaque contact et l'importation par CSV."
         },
         q7: {
-          question: "L'IA sonne-t-elle robotique?",
-          answer: "Notre IA utilise un traitement du langage naturel avancé et sonne remarquablement humaine. Pour les appels vocaux, nous utilisons des voix à accent canadien que les clients trouvent chaleureuses et professionnelles."
+          question: "Que fait réellement l'IA?",
+          answer: "Trois choses. Le produit attribue à chaque prospect une note de 0 à 100 selon des règles que vous pouvez consulter, propose une prochaine action et un moment pour l'effectuer, et un assistant intégré rédige une réponse ou résume le fil du contact ouvert. Il n'écrit pas à vos prospects de lui-même, et il n'y a pas d'agent vocal."
         },
         q8: {
           question: "Combien de temps prend la configuration?",
-          answer: "La plupart des agents sont configurés en environ 10 minutes : votre profil, un premier contact, une première fiche et la connexion de votre calendrier. L'assistant vous guide à chaque étape, et vous pouvez y revenir plus tard."
+          answer: "L'assistant de configuration couvre votre profil, un premier contact, une première fiche et la connexion de votre calendrier. Vous pouvez sauter une étape et y revenir plus tard. L'importation de contacts par CSV se fait séparément."
         },
         q9: {
-          question: "Que se passe-t-il si l'IA ne peut pas répondre à une question?",
-          answer: "L'IA transmet de manière transparente les questions complexes vers vous par SMS ou téléphone. Elle fournit le contexte complet de la conversation afin que vous puissiez reprendre exactement là où elle s'est arrêtée."
+          question: "L'IA répond-elle parfois à un prospect sans moi?",
+          answer: "Non. Rien n'est envoyé à un client sans vous. L'assistant rédige; vous lisez, modifiez et envoyez. C'est voulu : sous la LCAP, un message envoyé en votre nom relève de votre responsabilité."
         },
         q10: {
           question: "Est-ce conforme à la LCAP?",
-          answer: "Absolument. RealtorDesk.ai est construit spécifiquement pour les réglementations canadiennes. Tous les emails incluent une identification appropriée de l'expéditeur, un suivi du consentement et des options de désinscription faciles."
+          answer: "Aucun logiciel ne vous rend conforme. Ce que fait Realtor Desk : il enregistre la date et la source du consentement de chaque contact, refuse l'envoi depuis la boîte de réception ou par texto lorsqu'aucun consentement n'est au dossier, et cesse les courriels automatisés à un contact qui a retiré son consentement. La façon d'obtenir le consentement demeure votre responsabilité."
         },
         q11: {
-          question: "Avec quels CRM vous intégrez-vous?",
-          answer: "Aujourd'hui : Zapier, Make et n8n natifs — qui couvrent plus de 5 000 applications dont Follow Up Boss, Brivity, HubSpot et Salesforce via Zapier. Les connecteurs directs Salesforce, Zoho CRM, Pipedrive, Freshsales et Microsoft Dynamics sont prévus. Vous pouvez aussi importer en masse depuis n'importe quel CRM par CSV."
+          question: "À quels outils se connecte-t-il?",
+          answer: "Zapier, Make et n8n peuvent y envoyer les nouveaux prospects, Twilio envoie les textos, et vous pouvez envoyer vos courriels par votre propre serveur SMTP. Google Agenda et Outlook se connectent, mais la synchronisation des rendez-vous n'est pas encore active. Les contacts d'un autre CRM arrivent par CSV. Il n'existe pas de connecteur direct vers d'autres CRM pour l'instant."
         },
         q12: {
-          question: "Puis-je personnaliser les réponses de l'IA?",
-          answer: "Oui! Vous contrôlez la personnalité de l'IA, les modèles de réponse et les questions qu'elle gère par rapport à celles qu'elle vous transmet. Elle apprend votre style au fil du temps."
+          question: "Puis-je modifier ce que l'assistant rédige?",
+          answer: "Oui, chaque fois. Un brouillon n'est qu'un point de départ : vous le modifiez avant l'envoi, et rien ne part tant que vous n'avez pas envoyé."
         },
         q13: {
-          question: "Comment RealtorDesk AI se compare-t-il à Follow Up Boss?",
-          answer: "RealtorDesk AI offre une réponse instantanée aux prospects par IA (moins de 3 secondes) et un support bilingue à partir de 149$/mois CAD, avec l'intégration CREA DDF® prévue pour le 3e trimestre 2026. Follow Up Boss nécessite un suivi manuel, manque de fonctionnalités IA et coûte 49-99$ USD/utilisateur/mois sans fonctionnalités spécifiques au Canada."
+          question: "Comment Realtor Desk se compare-t-il à Follow Up Boss?",
+          answer: "Ils conviennent à des courtiers différents. Follow Up Boss annonce l'attribution des prospects, une boîte de réception d'équipe, les appels et plus de 250 intégrations, que Realtor Desk n'offre pas; son forfait Grow est affiché à 69 $ par utilisateur par mois sur sa page de tarifs (devise non précisée, vérifié en octobre 2026). Realtor Desk coûte 149 $ CA par mois pour un courtier seul, avec le français réglé par contact, un enregistrement du consentement pour la LCAP et une base de données au Canada."
         },
         q14: {
-          question: "RealtorDesk AI fonctionne-t-il avec CREA DDF®?",
-          answer: "L'intégration CREA DDF® est prévue pour le 3e trimestre 2026 pour RealtorDesk AI. Lors du lancement, vous pourrez synchroniser les inscriptions MLS automatiquement, jumeler les acheteurs aux propriétés en temps réel et gérer les données d'inscription directement dans le CRM. En attendant, vous pouvez importer les inscriptions de Realtor.ca via l'outil d'importation intégré."
+          question: "Realtor Desk fonctionne-t-il avec le SDD® de l'ACI?",
+          answer: "Pas encore. La synchronisation native du SDD® de l'ACI est sur la feuille de route et n'est pas active. Aujourd'hui, vous pouvez importer une fiche à partir d'une adresse Realtor.ca ou d'un numéro MLS."
         },
         q15: {
           question: "Quel est le ROI moyen pour les agents utilisant RealtorDesk AI?",
           answer: "Nous ne publions pas de moyenne. Nous sommes en bêta publique et nous n'avons pas d'échantillon défendable : tout chiffre de rendement que nous citerions serait une supposition déguisée en données. Le calcul qui compte est le vôtre : votre commission par transaction par rapport au coût de l'abonnement. L'essai dure 14 jours, de quoi le mesurer sur votre propre portefeuille."
         },
         q16: {
-          question: "RealtorDesk AI peut-il gérer les appels téléphoniques?",
-          answer: "Pas encore. Desk gère aujourd'hui le clavardage, les formulaires web et le courriel, et rédige des réponses SMS que vous envoyez. Un agent vocal IA entrant est à l'étude — il ne figure pas à la feuille de route 2026, et nous préférons vous le dire plutôt que de vous le vendre."
+          question: "Realtor Desk peut-il gérer les appels téléphoniques?",
+          answer: "Non. Il n'y a pas d'agent vocal, et il ne figure pas à la feuille de route 2026. Les textos passent par Twilio, uniquement vers les numéros dont le consentement est enregistré."
         },
         q17: {
-          question: "RealtorDesk AI convient-il aux équipes immobilières?",
-          answer: "Absolument. Notre plan Teams prend en charge un nombre illimité d'utilisateurs avec boîte de réception partagée, analyses de performance d'équipe, distribution de prospects en rotation et formation IA personnalisée. Parfait pour les courtages et équipes de 2 à 50+ agents."
+          question: "Realtor Desk convient-il aux équipes immobilières?",
+          answer: "Pas encore. C'est aujourd'hui un produit pour un courtier seul : pas de sièges, pas d'attribution de prospects, pas de pipeline partagé. Nos pages Équipes et Agences expliquent ce que cela signifie pour vous."
         },
         q18: {
-          question: "Combien de temps faut-il pour voir des résultats avec RealtorDesk AI?",
-          answer: "La plupart des agents voient des améliorations immédiates du temps de réponse (instantané au lieu d'heures/jours). Dans les 30 premiers jours, les agents voient généralement 25-40% plus de rendez-vous qualifiés réservés. Les augmentations mesurables de transactions apparaissent généralement dans les 60-90 jours."
+          question: "Quand verrai-je des résultats?",
+          answer: "Nous ne publions pas de résultats typiques, faute d'un échantillon qui soutiendrait un chiffre. Ce que vous pouvez vérifier pendant l'essai de 14 jours est concret : vos prospects sont-ils au même endroit, la liste de suivis est-elle utile, et la gestion du français et du consentement convient-elle à votre façon de travailler."
         },
         q19: {
-          question: "RealtorDesk AI s'intègre-t-il avec mon site web existant?",
-          answer: "Oui! Notre widget de chatbot IA s'installe sur n'importe quel site web avec un simple extrait de code (fonctionne avec WordPress, Wix, Squarespace, sites personnalisés). La configuration prend moins de 5 minutes et commence à capturer des prospects immédiatement."
+          question: "Fonctionne-t-il avec mon site web actuel?",
+          answer: "Il n'y a pas de widget de clavardage à installer. Si le formulaire de votre site peut envoyer vers Zapier, Make ou n8n, les nouvelles demandes arrivent dans Realtor Desk comme prospects, avec leur source."
         },
         q20: {
-          question: "Qu'est-ce qui rend RealtorDesk AI différent des CRM traditionnels?",
-          answer: "Les CRM traditionnels organisent les contacts mais nécessitent que VOUS fassiez tout le suivi. RealtorDesk AI engage activement les prospects 24/7 via chat, courriel, SMS et voix—les qualifiant et réservant des rendez-vous pendant que vous vous concentrez sur les clôtures. C'est la différence entre un classeur et un assistant IA."
+          question: "En quoi Realtor Desk diffère-t-il d'un CRM général?",
+          answer: "Un CRM général conserve des contacts. Realtor Desk est conçu autour du suivi d'un courtier canadien : une note et une prochaine action proposée pour chaque prospect, un fil de conversation unique par client, le français ou l'anglais par contact, un enregistrement du consentement pour la LCAP et une base de données au Canada. Il ne fait pas le suivi à votre place."
         },
         cta: {
           title: "Vous Avez Encore des Questions?",
@@ -4903,7 +4905,7 @@ const resources = {
           pipedaTitle: "Conforme PIPEDA par Conception",
           pipedaDesc: "Construit autour des principes canadiens de confidentialité",
           creaTitle: "Intégration CREA DDF®",
-          creaDesc: "Intégration CREA DDF® prévue pour Q3 2026"
+          creaDesc: "Intégration CREA DDF® sur la feuille de route"
         },
         problemStatement: {
           title: "Les Coûts Cachés de la Technologie Immobilière Désuète",
@@ -5788,7 +5790,7 @@ const resources = {
           },
           aiTransformation: {
             title: "Comment l'IA Transforme l'Immobilier Canadien en 2025",
-            excerpt: "Découvrez les dernières innovations IA qui révolutionnent le travail des agents immobiliers canadiens, de l'analyse prédictive à la gestion automatisée des transactions."
+            excerpt: "Les outils d'IA proposés aux courtiers canadiens, et les questions à poser avant d'en acheter un."
           },
           creaDdf: {
             title: "Le Guide Complet de l'Intégration CREA DDF®",
@@ -5796,11 +5798,11 @@ const resources = {
           },
           compliance: {
             title: "Liste de Contrôle de Conformité Provinciale : ON, BC, AB, QC",
-            excerpt: "Restez conforme aux réglementations à travers le Canada. Un guide complet des exigences RECO, BCFSA, RECA et AMF."
+            excerpt: "Un aperçu de ce que RECO, BCFSA, RECA et l\u2019OACIQ attendent des courtiers, ainsi que des règles fédérales, avec un lien vers chaque organisme."
           },
           leadConversion: {
             title: "10 Façons d'Augmenter la Conversion des Prospects avec l'Analyse Prédictive",
-            excerpt: "Apprenez comment la notation des prospects et l'analyse prédictive alimentées par l'IA peuvent augmenter votre taux de conversion de 5% à 18%."
+            excerpt: "Ce qu'est une note de prospect, comment l'utiliser pour décider qui appeler en premier, et ce qu'elle ne peut pas vous dire."
           },
           bilingual: {
             title: "Marketing Immobilier Bilingue : Au-delà de la Traduction",
@@ -5980,15 +5982,15 @@ const resources = {
         brokerageDesc: "Pour 10 courtiers et plus",
         customPrice: "Sur mesure",
         contactSales: "Nous contacter",
-        brokerageBlurb: "SSO, gestion de compte dédiée, outils CANAFE personnalisés et SLA.",
+        brokerageBlurb: "Contrat sur mesure. SSO, gestion de compte dédiée et outils CANAFE : sur la feuille de route.",
         switchAgent: "Passer au forfait Solo",
         upgradeAgent: "Passer au forfait Solo",
         upgradeTeam: "Passer au forfait Équipe",
         features: {
           unlimitedContacts: "Contacts et prospects illimités",
-          aiCrm: "CRM prédictif propulsé par l'IA",
-          chatbot: "Chatbot IA 24/7",
-          emailSms: "Automatisation courriel et SMS",
+          aiCrm: "Notation des prospects et prochaines actions proposées",
+          chatbot: "Assistant de rédaction intégré",
+          emailSms: "Courriels et textos, conditionnés au consentement",
           mobileApp: "Application mobile incluse",
           everythingAgent: "Tout le forfait Solo, plus :",
           teamCollab: "Outils de collaboration d'équipe",
@@ -6073,7 +6075,7 @@ const resources = {
           },
           widget: {
             title: "Configurer votre widget Web",
-            desc: "Disponible au T3 2026 — voir la feuille de route."
+            desc: "Pas encore actif — voir la feuille de route."
           },
           calendar: {
             title: "Connecter votre agenda Google ou Outlook",
@@ -6215,11 +6217,11 @@ const resources = {
       boldtrail: {
         compare: {
           heading: "Quatre lignes. Pas quarante.",
-          sub: "Nous ne nous comparons pas sur l'étendue des fonctionnalités. BoldTrail compte plus de 400\u00a0000 agents; nous en avons moins d'une centaine. Voici les quatre axes que nous pouvons défendre, chacun sourcé du centre d'aide de BoldTrail, de signaux tarifaires ou d'avis publics."
+          sub: "Nous ne nous comparons pas sur l'étendue des fonctionnalités : BoldTrail est un produit beaucoup plus vaste. Voici quatre points à vérifier, avec ce que le site de BoldTrail affichait lorsque nous l'avons consulté et les questions à poser lorsqu'il ne dit rien."
         },
         betterWhen: {
           heading: "Quand BoldTrail est le meilleur choix",
-          body: "Si vous dirigez un grand courtage aux États-Unis, avez besoin de BackOffice pour les partages de commissions, ou d'une intégration profonde avec des systèmes MLS propres aux États-Unis que notre travail CREA DDF ne couvre pas encore, BoldTrail est aujourd'hui l'option plus mature. Nous sommes bâtis pour l'agent canadien indépendant ou la petite équipe — nous sommes plus petits, plus ciblés, et le resterons dans un avenir prévisible. Choisissez l'outil qui convient, pas la liste la plus longue."
+          body: "Si vous dirigez un grand courtage aux États-Unis, avez besoin de BackOffice pour les partages de commissions, ou d'une intégration profonde avec des systèmes MLS propres aux États-Unis auxquels Realtor Desk ne se connecte pas, BoldTrail est aujourd'hui l'option plus mature. Nous sommes bâtis pour l'agent canadien indépendant ou la petite équipe — nous sommes plus petits, plus ciblés, et le resterons dans un avenir prévisible. Choisissez l'outil qui convient, pas la liste la plus longue."
         }
       },
       leadScore: {
@@ -6230,7 +6232,7 @@ const resources = {
         daysSinceContact: "Jours depuis le dernier contact",
         loading: "Chargement des signaux\u2026",
         noSignals: "Aucun signal comportemental pour le moment. Consignez des appels, courriels et vues de propriétés pour alimenter ce panneau.",
-        manualNotice: "Votre score est actuellement calculé par une formule fixe. Le scoring dérivé par IA, entraîné sur votre propre historique de conversion, sera livré au T2 2026."
+        manualNotice: "Votre score est calculé par une formule fixe. Un score entraîné sur votre propre historique de conversion est prévu, sans date pour l'instant."
       },
       onboardingChecklist: {
         heading: "Démarrage — environ 10 minutes, guidé",
@@ -6251,7 +6253,7 @@ const resources = {
           },
           widget: {
             title: "Configurez votre widget de site web",
-            desc: "Livraison au T3 2026 — voir la feuille de route."
+            desc: "Pas encore actif — voir la feuille de route."
           },
           calendar: {
             title: "Connectez Google ou Outlook Calendar",
@@ -6263,7 +6265,7 @@ const resources = {
         badge: "Feuille de route publique",
         title: "Ce que nous livrons — et ce que nous ne livrons pas.",
         subtitle: "L'honnêteté est une fonctionnalité. Cette page liste nos engagements datés sur les capacités que nos clients et concurrents demandent le plus. Si une date glisse, nous la déplaçons — nous ne l'abandonnons pas en silence.",
-        lastUpdated: "Dernière mise à jour : 2026-04-20",
+        lastUpdated: "Dernière mise à jour : 2026-10-11",
         status: {
           shipping: "En livraison",
           shipped: "Livré",
@@ -6277,10 +6279,12 @@ const resources = {
           q2_2026: "T2 2026",
           q3_2026: "T3 2026",
           q1_2027: "T1 2027",
+          none: "Sans date",
           tbd: "—"
         },
         section: {
-          now: { heading: "Livraisons du sprint en cours (avril 2026)" },
+          now: { heading: "Livré en avril 2026" },
+          planned: { heading: "Prévu, sans date" },
           q2: { heading: "T2 2026" },
           q3: { heading: "T3 2026" },
           q1_2027: { heading: "T1 2027 — palier Équipes" },
@@ -6575,7 +6579,7 @@ const resources = {
             titleBrand: "RealtorDesk",
             subtitle: "Mettons votre adjoint IA en service. En environ cinq minutes, il répondra aux clients potentiels en français et en anglais.",
             helperCanadaTitle: "Hébergé au Canada",
-            helperCanadaBody: "Vos clients, messages et données MLS restent en territoire canadien. Conforme à la LPRPDE dès la première minute.",
+            helperCanadaBody: "Vos clients potentiels et vos messages sont conservés dans une base de données hébergée au Canada.",
             helperMarketTitle: "Conçu pour notre marché",
             helperMarketBody: "Conçu avec des courtiers de Toronto, Montréal, Vancouver et Calgary — pas une adaptation d'un outil américain.",
             helperLiveTitle: "Cinq minutes, en direct",

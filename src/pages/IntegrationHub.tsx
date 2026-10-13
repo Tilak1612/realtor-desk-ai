@@ -55,8 +55,8 @@ const TOOLS: Tool[] = [
   // Contacts & Lead Sources
   { slug: "google-contacts", name: "Google Contacts", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "oauth", description: "Account connection works; contact import is in build", logoUrl: "https://logo.clearbit.com/google.com" },
   { slug: "microsoft-contacts", name: "Microsoft Contacts", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "oauth", description: "Account connection works; contact import is in build", logoUrl: "https://logo.clearbit.com/microsoft.com" },
-  { slug: "linkedin-lead-gen", name: "LinkedIn Lead Gen", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "oauth", description: "Auto-import leads from LinkedIn forms", logoUrl: "https://logo.clearbit.com/linkedin.com", eta: "Q3 2026" },
-  { slug: "facebook-lead-ads", name: "Facebook Lead Ads", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "oauth", description: "Auto-import leads from Facebook ad forms", logoUrl: "https://logo.clearbit.com/facebook.com", eta: "Q3 2026" },
+  { slug: "linkedin-lead-gen", name: "LinkedIn Lead Gen", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "oauth", description: "Auto-import leads from LinkedIn forms", logoUrl: "https://logo.clearbit.com/linkedin.com", eta: "Planned" },
+  { slug: "facebook-lead-ads", name: "Facebook Lead Ads", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "oauth", description: "Auto-import leads from Facebook ad forms", logoUrl: "https://logo.clearbit.com/facebook.com", eta: "Planned" },
   { slug: "centris", name: "Centris (Quebec MLS)", category: "Contacts & Leads", status: "coming_soon", connectionMethod: "api_key", description: "Quebec MLS listing data integration", logoUrl: "https://logo.clearbit.com/centris.ca", eta: "Q4 2026" },
 ];
 

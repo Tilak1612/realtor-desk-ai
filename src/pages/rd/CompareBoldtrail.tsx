@@ -203,7 +203,7 @@ export default function CompareBoldtrail() {
             for Team, bilingual EN/FR in the interface and in client-facing email,
             and CASL consent recorded per contact with sends refused when consent
             is missing. Listings import from Realtor.ca today; native CREA DDF®
-            sync is on the roadmap for Q3 2026 and is not live.
+            sync is on the roadmap and is not live.
           </p>
 
           <h3 className="text-lg font-semibold mb-2">Who should pick which</h3>

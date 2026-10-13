@@ -2,37 +2,57 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, CheckCircle2, XCircle, DollarSign, Clock, Zap, Brain, Building2, Users, Shield } from 'lucide-react';
+import { ArrowRight, CheckCircle2, XCircle, DollarSign, Brain, Building2, Users, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
+
+// 2026-10-11: rewritten against the 2026-10-11 fact sheet.
+//
+// Removed, about Propertybase: every price ($600-1,200+ USD a user, $10,000-
+// 50,000 implementation, $150-250/hour consulting, "$214,000 over 3 years"),
+// every timeline ("3-6 months", "6-12 month learning curve"), "No built-in AI",
+// "contracts are typically 36 months" and the Salesforce characterisations.
+// None had a source on the page. The Propertybase column now says "Ask the
+// vendor" and the Propertybase section is a list of questions to put to them.
+//
+// Removed, about Realtor Desk: "Advanced AI (chat + voice + predictive)",
+// "Sub-3-second AI chatbot (GPT-powered)", "Voice AI for phone automation",
+// "Predictive lead scoring", "Built-in PIPEDA/CASL", "PIPEDA compliance by
+// default", "AWS Canada data residency", "30+ pre-built integrations", "1-3
+// day implementation", the "1-50 agents" positioning (it is a single-agent
+// product), the five-user cost model, "3-Year Savings: $203,236", the invented
+// ten-agent scenario with its conversion rates, "95% of Canadian real estate
+// businesses" and every "Winner" verdict.
+//
+// Left as they were: the two plan-price lines in the pricing card.
 
 const VsPropertybase = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <SEO
         title="Propertybase vs Realtor Desk"
-        description="Propertybase and Realtor Desk compared for Canadian agents: what each does, how each is priced, and who each suits. Realtor Desk is a single-agent product."
-        keywords="Propertybase vs RealtorDesk AI, Canadian real estate CRM comparison, Salesforce real estate CRM alternative"
+        description="Propertybase vs Realtor Desk for Canadian agents: what Realtor Desk does and does not do, and the questions to put to Propertybase before you choose."
+        keywords="Propertybase vs Realtor Desk, Canadian real estate CRM comparison, Propertybase alternative Canada"
         article
         publishedTime="2025-01-01"
-        modifiedTime="2025-01-01"
-        author="RealtorDesk AI"
+        modifiedTime="2026-10-11"
+        author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/vs-propertybase"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
             "headline": "Propertybase vs Realtor Desk",
-            "description": "Propertybase is enterprise-grade. Compare costs, complexity, and results vs RealtorDesk AI for Canadian real estate teams.",
-            "author": { "@type": "Organization", "name": "RealtorDesk AI" },
-            "publisher": { "@type": "Organization", "name": "RealtorDesk AI" },
+            "description": "Propertybase vs Realtor Desk for Canadian agents: what Realtor Desk does and does not do, and the questions to put to Propertybase before you choose.",
+            "author": { "@type": "Organization", "name": "Realtor Desk" },
+            "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
-            "dateModified": "2025-01-01"
+            "dateModified": "2026-10-11"
           }
         ]}
       />
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto max-w-4xl">
@@ -41,25 +61,24 @@ const VsPropertybase = () => {
               Propertybase vs Realtor Desk
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Propertybase is enterprise-grade. But do you need enterprise complexity, or do you need results?
+              Realtor Desk is a CRM for a single Canadian agent. This page sets out what it does, what it does not, and what to ask Propertybase.
             </p>
             <div className="flex flex-wrap gap-4 justify-center text-sm text-gray-500">
-              <span>📅 Updated: January 2025</span>
-              <span>⏱️ 9 min read</span>
-              <span>🎯 Comparison Guide</span>
+              <span>Updated: October 2026</span>
+              <span>Comparison Guide</span>
             </div>
           </div>
 
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-lg text-gray-700 leading-relaxed">
-              Propertybase brings enterprise-level Salesforce power to real estate. That sounds impressive—until you realize it comes with enterprise-level complexity, enterprise-level implementation times, and enterprise-level costs.
+              We build one of the products compared here, so weigh this accordingly.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              For Canadian real estate teams, the question isn't "Can Propertybase do it?" The question is "Do you need a Salesforce developer and 4 months of implementation to run your real estate business?"
+              This page does not state Propertybase&rsquo;s prices, features or contract terms, because we have no dated reading of its own pages to cite. Where the table says &ldquo;Ask the vendor&rdquo;, that is the reason. An earlier version of this page quoted figures for Propertybase that had no source; they have been removed.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              This comparison shows you the real differences between enterprise complexity and agile simplicity—and why most Canadian teams are choosing the latter.
+              What we can describe accurately is our own product. Realtor Desk is built for one agent. It has no seats, no lead assignment or routing, no shared pipeline and no team inbox, so a brokerage or a team should look elsewhere.
             </p>
           </div>
 
@@ -72,58 +91,69 @@ const VsPropertybase = () => {
                   <tr className="border-b">
                     <th className="pb-3 font-semibold">Feature</th>
                     <th className="pb-3 font-semibold">Propertybase</th>
-                    <th className="pb-3 font-semibold">RealtorDesk AI</th>
-                    <th className="pb-3 font-semibold text-primary">Winner</th>
+                    <th className="pb-3 font-semibold">Realtor Desk</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
                   <tr className="border-b">
                     <td className="py-3">Monthly Cost</td>
-                    <td className="py-3">$600-1,200+ USD</td>
+                    <td className="py-3">Ask the vendor</td>
                     <td className="py-3">$149-299 CAD</td>
-                    <td className="py-3 text-primary font-semibold">RealtorDesk AI</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3">Implementation Time</td>
-                    <td className="py-3">3-6 months</td>
-                    <td className="py-3">1-3 days</td>
-                    <td className="py-3 text-primary font-semibold">RealtorDesk AI</td>
+                    <td className="py-3">Built for</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">A single agent</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3">Implementation Cost</td>
-                    <td className="py-3">$10,000-50,000</td>
-                    <td className="py-3">$0</td>
-                    <td className="py-3 text-primary font-semibold">RealtorDesk AI</td>
+                    <td className="py-3">Seats, lead routing, shared pipeline</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Not available</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3">AI Capabilities</td>
-                    <td className="py-3">None built-in</td>
-                    <td className="py-3">Advanced (chat + voice + predictive)</td>
-                    <td className="py-3 text-primary font-semibold">RealtorDesk AI</td>
+                    <td className="py-3">AI</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">An in-app assistant drafts a reply or summarises a thread; you send every message</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3">Canadian Compliance</td>
-                    <td className="py-3">Manual setup required</td>
-                    <td className="py-3">Built-in PIPEDA/CASL</td>
-                    <td className="py-3 text-primary font-semibold">RealtorDesk AI</td>
+                    <td className="py-3">Lead score</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Rule-based, 0 to 100, with a visible breakdown</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3">Customization</td>
-                    <td className="py-3">Unlimited (requires developer)</td>
-                    <td className="py-3">Pre-configured for real estate</td>
-                    <td className="py-3 text-gray-600 font-semibold">Propertybase</td>
+                    <td className="py-3">Voice agent or lead-facing chatbot</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Not available</td>
                   </tr>
                   <tr className="border-b">
-                    <td className="py-3">Learning Curve</td>
-                    <td className="py-3">6-12 months</td>
-                    <td className="py-3">1-2 weeks</td>
-                    <td className="py-3 text-primary font-semibold">RealtorDesk AI</td>
+                    <td className="py-3">French</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">French or English set per contact</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3">Consent records</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Date and source of consent on each contact</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3">Data hosting</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Production database hosted in Canada</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3">Transaction management, e-signature, back office</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Not available</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3">IDX website, lead generation</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Not available</td>
                   </tr>
                   <tr>
-                    <td className="py-3">Best For</td>
-                    <td className="py-3">Large brokerages (100+ agents)</td>
-                    <td className="py-3">Solo to mid-size (1-50 agents)</td>
-                    <td className="py-3 text-gray-600 font-semibold">Depends</td>
+                    <td className="py-3">Native mobile app</td>
+                    <td className="py-3">Ask the vendor</td>
+                    <td className="py-3">Not available (responsive web app)</td>
                   </tr>
                 </tbody>
               </table>
@@ -132,125 +162,105 @@ const VsPropertybase = () => {
 
           {/* What is Propertybase */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">What is Propertybase?</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">What to ask Propertybase</h2>
+
             <Card className="p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <Building2 className="w-8 h-8 text-blue-600" />
-                <h3 className="text-xl font-bold">The Salesforce-Powered CRM</h3>
+                <h3 className="text-xl font-bold">Get the answers in writing</h3>
               </div>
-              
+
               <div className="space-y-4">
                 <p className="text-gray-700">
-                  <strong>Foundation:</strong> Built on Salesforce platform (enterprise CRM infrastructure)
-                </p>
-                <p className="text-gray-700">
-                  <strong>Target Market:</strong> Large brokerages and enterprise real estate operations
-                </p>
-                <p className="text-gray-700">
-                  <strong>Core Promise:</strong> "Unlimited customization with Salesforce power"
-                </p>
-                <p className="text-gray-700">
-                  <strong>Reality:</strong> Unlimited customization requires unlimited budget and technical expertise
+                  We do not describe Propertybase here, because we have nothing sourced to say. Its own site and its sales team are the right place for that. These are the questions worth putting to them before you compare.
                 </p>
               </div>
             </Card>
 
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6 bg-blue-50 border-blue-200">
-                <h3 className="font-bold mb-3 text-blue-900">Propertybase Strengths:</h3>
+                <h3 className="font-bold mb-3 text-blue-900">About the product:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5" />
-                    <span>Built on proven Salesforce infrastructure</span>
+                    <span>Who is it built for: one agent, a team or a brokerage?</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5" />
-                    <span>Unlimited customization potential</span>
+                    <span>Do the interface and client email work in French?</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5" />
-                    <span>Enterprise-grade security and reliability</span>
+                    <span>Is a consent date and source stored on each contact?</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5" />
-                    <span>Scales to thousands of agents</span>
+                    <span>Where is the customer database hosted?</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-blue-600 mt-0.5" />
-                    <span>Access to Salesforce ecosystem</span>
+                    <span>What does it support for Canadian listing data?</span>
                   </li>
                 </ul>
               </Card>
 
-              <Card className="p-6 bg-red-50 border-red-200">
-                <h3 className="font-bold mb-3 text-red-900">Propertybase Challenges:</h3>
+              <Card className="p-6 bg-gray-100">
+                <h3 className="font-bold mb-3">About the cost:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
-                    <span>Expensive ($600-1,200+ USD/month + implementation)</span>
+                    <DollarSign className="w-4 h-4 text-gray-600 mt-0.5" />
+                    <span>What is the price per user, and in which currency?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
-                    <span>3-6 month implementation timeline</span>
+                    <DollarSign className="w-4 h-4 text-gray-600 mt-0.5" />
+                    <span>Is there an implementation or setup fee?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
-                    <span>Requires Salesforce expertise (consultants needed)</span>
+                    <DollarSign className="w-4 h-4 text-gray-600 mt-0.5" />
+                    <span>How long does setup take, and who does it?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
-                    <span>Complex interface (6-12 month learning curve)</span>
+                    <DollarSign className="w-4 h-4 text-gray-600 mt-0.5" />
+                    <span>What is the contract length, and what does leaving early cost?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <XCircle className="w-4 h-4 text-red-700 mt-0.5" />
-                    <span>No built-in AI automation</span>
+                    <DollarSign className="w-4 h-4 text-gray-600 mt-0.5" />
+                    <span>In what format can you export your contacts?</span>
                   </li>
                 </ul>
               </Card>
             </div>
-
-            <Card className="p-6 bg-gray-100">
-              <h3 className="font-bold mb-3">Pricing (USD):</h3>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li>• Base Platform: $600-1,200/month per user</li>
-                <li>• Implementation: $10,000-50,000 (one-time)</li>
-                <li>• Training: $5,000-15,000</li>
-                <li>• Ongoing Consulting: $150-250/hour</li>
-                <li className="font-bold text-base pt-2">First Year (5 users): $60,000-100,000+</li>
-              </ul>
-            </Card>
           </section>
 
-          {/* What is RealtorDesk AI */}
+          {/* What is Realtor Desk */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">What is RealtorDesk AI?</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">What is Realtor Desk?</h2>
+
             <Card className="p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <Brain className="w-8 h-8 text-primary" />
-                <h3 className="text-xl font-bold">The AI-First Agile CRM</h3>
+                <h3 className="text-xl font-bold">A CRM for one Canadian agent</h3>
               </div>
-              
+
               <div className="space-y-4">
                 <p className="text-gray-700">
-                  <strong>Foundation:</strong> Purpose-built for Canadian real estate (standalone platform)
+                  <strong>What it holds:</strong> Contacts, one conversation timeline per client, a drag-and-drop deal pipeline with totals in CAD, and basic reports.
                 </p>
                 <p className="text-gray-700">
-                  <strong>Target Market:</strong> Solo agents to mid-size teams (1-50 agents)
+                  <strong>Who it is for:</strong> A single agent. There are no seats, no lead assignment or routing, no shared pipeline and no team inbox.
                 </p>
                 <p className="text-gray-700">
-                  <strong>Core Promise:</strong> "AI automation that works out of the box"
+                  <strong>The AI:</strong> A rule-based lead score from 0 to 100 with a visible breakdown, a suggested next action, and an in-app assistant that drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you.
                 </p>
                 <p className="text-gray-700">
-                  <strong>Reality:</strong> Delivers on promise with minimal setup
+                  <strong>Form:</strong> A responsive web app. There is no native mobile app.
                 </p>
               </div>
             </Card>
 
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <Card className="p-6 bg-green-50 border-green-200">
-                <h3 className="font-bold mb-3 text-green-900">RealtorDesk AI Strengths:</h3>
+                <h3 className="font-bold mb-3 text-green-900">Realtor Desk at a glance:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
@@ -258,45 +268,53 @@ const VsPropertybase = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
-                    <span>1-3 day implementation</span>
+                    <span>French or English set per contact; the interface and client email both work in French</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
-                    <span>No technical expertise required</span>
+                    <span>Records the date and source of consent on each contact, and refuses to send from the inbox or by SMS when none is on file</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
-                    <span>Simple interface (1-2 week learning curve)</span>
+                    <span>Production database hosted in Canada</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
-                    <span>Advanced AI built-in (chat + voice + predictive)</span>
+                    <span>Zapier, Make and n8n can push leads in; SMS goes through Twilio and email through your own SMTP server</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-700 mt-0.5" />
-                    <span>Canadian compliance built-in (PIPEDA/CASL)</span>
+                    <span>Contacts import from a CSV file</span>
                   </li>
                 </ul>
               </Card>
 
               <Card className="p-6 bg-yellow-50 border-yellow-200">
-                <h3 className="font-bold mb-3 text-yellow-900">RealtorDesk AI Limitations:</h3>
+                <h3 className="font-bold mb-3 text-yellow-900">What Realtor Desk does not do:</h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
                     <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
-                    <span>Limited customization (pre-configured workflows)</span>
+                    <span>No seats, lead routing, shared pipeline or team reports</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
-                    <span>Not built for enterprises (100+ agents)</span>
+                    <span>No transaction management, e-signature, document storage or back office</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
-                    <span>No Salesforce ecosystem access</span>
+                    <span>No lead-facing chatbot, automatic replies or voice agent</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
-                    <span>Newer platform (less brand recognition)</span>
+                    <span>No automated email sequences switched on</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
+                    <span>No IDX website, lead generation or market data</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <XCircle className="w-4 h-4 text-yellow-700 mt-0.5" />
+                    <span>Native CREA DDF® sync is on the roadmap and is not live yet</span>
                   </li>
                 </ul>
               </Card>
@@ -307,469 +325,249 @@ const VsPropertybase = () => {
               <ul className="space-y-2 text-sm text-gray-700">
                 <li>• Agent Plan: $149/month</li>
                 <li>• Team Plan: $299/month</li>
-                <li>• Implementation: $0</li>
-                <li>• Training: $0 (15-min video)</li>
-                <li>• Support: Included</li>
-                <li className="font-bold text-base pt-2 text-primary">First Year (5 users): $3,588</li>
+                <li>• 14-day trial; a card is collected up front and nothing is charged before day 14</li>
               </ul>
             </Card>
           </section>
 
           {/* Key Differences */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Key Differences: Enterprise vs Agile</h2>
+            <h2 className="text-3xl font-bold mb-6">What to compare, and how</h2>
 
-            {/* Platform Foundation */}
+            {/* Who it is built for */}
             <Card className="p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <Building2 className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-bold">1. Platform Foundation</h3>
+                <Users className="w-6 h-6 text-primary" />
+                <h3 className="text-xl font-bold">1. Who it is built for</h3>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Propertybase:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Built on Salesforce (complex, powerful)</p>
+                  <h4 className="font-semibold mb-2">Ask Propertybase:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Requires Salesforce knowledge</li>
-                    <li>• Inherits Salesforce complexity</li>
-                    <li>• Unlimited customization potential</li>
-                    <li>• Needs ongoing developer support</li>
+                    <li>• How many users does each plan cover?</li>
+                    <li>• How are leads assigned across a team?</li>
+                    <li>• What does an administrator need to set up?</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">RealtorDesk AI:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Built as standalone (simple, focused)</p>
+                  <h4 className="font-semibold mb-2">Realtor Desk:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• No technical knowledge required</li>
-                    <li>• Purpose-built for real estate</li>
+                    <li>• Built for a single agent</li>
+                    <li>• No seats, lead routing or shared pipeline</li>
+                    <li>• Contacts import from a CSV file</li>
                     <li>• French set per contact</li>
-                    <li>• Self-service platform</li>
                   </ul>
                 </div>
               </div>
-              
-              <p className="text-sm font-semibold text-gray-600">Winner: Depends on need (Propertybase for unlimited customization, RealtorDesk AI for simplicity)</p>
+
+              <p className="text-sm font-semibold text-gray-600">If you need more than one user, Realtor Desk is the wrong choice.</p>
             </Card>
 
-            {/* Implementation Time */}
-            <Card className="p-6 mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Clock className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-bold">2. Implementation Time</h3>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <h4 className="font-semibold mb-2">Propertybase: 3-6 months</h4>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Month 1: Requirements gathering</li>
-                    <li>• Month 2-3: Salesforce configuration</li>
-                    <li>• Month 4: Data migration</li>
-                    <li>• Month 5: Testing</li>
-                    <li>• Month 6: Training and go-live</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">RealtorDesk AI: 1-3 days</h4>
-                  <ul className="text-sm text-gray-700 space-y-1">
-                    <li>• Day 1: Account setup (automated)</li>
-                    <li>• Day 2: Data import (CSV upload)</li>
-                    <li>• Day 3: Team onboarding (15-min video)</li>
-                    <li>• Go-live: Immediate</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <p className="text-lg font-bold text-primary">Winner: RealtorDesk AI</p>
-            </Card>
-
-            {/* AI Capabilities */}
+            {/* AI */}
             <Card className="p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <Brain className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-bold">3. AI Capabilities</h3>
+                <h3 className="text-xl font-bold">2. What the AI does</h3>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Propertybase:</h4>
-                  <p className="text-sm text-gray-700 mb-2">No built-in AI</p>
+                  <h4 className="font-semibold mb-2">Ask Propertybase:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Can integrate third-party AI tools</li>
-                    <li>• Requires custom development</li>
-                    <li>• Additional cost per integration</li>
-                    <li>• No native voice AI</li>
+                    <li>• Which AI features are included, and which cost extra?</li>
+                    <li>• Does anything send to a client without your approval?</li>
+                    <li>• Can you see why a lead was scored as it was?</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">RealtorDesk AI:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Advanced AI built-in</p>
+                  <h4 className="font-semibold mb-2">Realtor Desk:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Sub-3-second AI chatbot (GPT-powered)</li>
-                    <li>• Voice AI for phone automation</li>
-                    <li>• Predictive lead scoring</li>
-                    <li>• Works out of the box</li>
+                    <li>• A rule-based lead score from 0 to 100, with a visible breakdown</li>
+                    <li>• A suggested next action and a time to take it</li>
+                    <li>• An in-app assistant that drafts a reply or summarises a thread</li>
+                    <li>• No lead-facing chatbot, no automatic replies and no voice agent</li>
                   </ul>
                 </div>
               </div>
-              
-              <p className="text-lg font-bold text-primary">Winner: RealtorDesk AI</p>
+
+              <p className="text-sm font-semibold text-gray-600">The score is rule-based. It is not machine learning.</p>
             </Card>
 
-            {/* Canadian Compliance */}
+            {/* Canadian specifics. This was "Canadian Compliance ... Built-in
+                PIPEDA/CASL". Software does not make anyone compliant, so the
+                card now says what the product records and where the data sits. */}
             <Card className="p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <Shield className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-bold">4. Canadian Compliance</h3>
+                <h3 className="text-xl font-bold">3. Consent, language and data location</h3>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6 mb-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Propertybase:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Manual setup required</p>
+                  <h4 className="font-semibold mb-2">Ask Propertybase:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Salesforce can be configured for PIPEDA</li>
-                    <li>• Requires legal consultation</li>
-                    <li>• Must build custom consent workflows</li>
-                    <li>• No bilingual templates</li>
+                    <li>• Is a consent date and source stored on each contact?</li>
+                    <li>• What happens when you try to send without consent?</li>
+                    <li>• Do the interface and client email work in French?</li>
+                    <li>• Where is the customer database hosted?</li>
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">RealtorDesk AI:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Built-in PIPEDA/CASL</p>
+                  <h4 className="font-semibold mb-2">Realtor Desk:</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• PIPEDA compliance by default</li>
-                    <li>• CASL-compliant email templates</li>
-                    <li>• Automated consent tracking</li>
-                    <li>• Bilingual (English/French)</li>
-                    <li>• AWS Canada data residency</li>
+                    <li>• Records the date and source of consent on each contact</li>
+                    <li>• Refuses to send from the inbox or by SMS when no consent is on file</li>
+                    <li>• Stops automated email to a contact who has withdrawn</li>
+                    <li>• French or English set per contact</li>
+                    <li>• Production database hosted in Canada</li>
                   </ul>
                 </div>
               </div>
-              
-              <p className="text-lg font-bold text-primary">Winner: RealtorDesk AI</p>
+
+              <p className="text-sm font-semibold text-gray-600">Software does not make anyone compliant. Some outside services Realtor Desk uses (SMS, email delivery, AI drafting) may process data outside Canada.</p>
             </Card>
 
-            {/* Customization */}
-            <Card className="p-6 mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Zap className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-bold">5. Customization</h3>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div>
-                  <h4 className="font-semibold mb-2">Propertybase:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Unlimited (requires Salesforce developer)</p>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Custom objects and fields</li>
-                    <li>• Custom workflows and automation</li>
-                    <li>• Custom integrations via API</li>
-                    <li>• Cost: $150-250/hour for development</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">RealtorDesk AI:</h4>
-                  <p className="text-sm text-gray-700 mb-2">Pre-configured for real estate</p>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Standard real estate workflows</li>
-                    <li>• Configurable fields and tags</li>
-                    <li>• 30+ pre-built integrations</li>
-                    <li>• No coding required</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <p className="text-sm font-semibold text-gray-600">Winner: Propertybase (if you need unlimited custom development)</p>
-            </Card>
-
-            {/* Cost */}
+            {/* Cost. The five-user, three-year cost model that stood here was
+                built on Propertybase figures with no source, and on a seat
+                count Realtor Desk does not sell. */}
             <Card className="p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <DollarSign className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-bold">6. Total Cost of Ownership</h3>
+                <h3 className="text-xl font-bold">4. Cost</h3>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6 mb-4">
-                <div className="bg-red-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-3">Propertybase (5 users):</h4>
-                  <ul className="text-sm text-gray-700 space-y-2">
-                    <li><strong>Year 1:</strong></li>
-                    <li>• Platform: $800/user/mo × 5 × 12 = $48,000</li>
-                    <li>• Implementation: $25,000</li>
-                    <li>• Training: $10,000</li>
-                    <li>• Consulting: $15,000</li>
-                    <li className="font-bold text-base pt-2">Total: $98,000</li>
-                    
-                    <li className="pt-3"><strong>Year 2-3:</strong></li>
-                    <li>• Platform: $48,000/year</li>
-                    <li>• Ongoing support: $10,000/year</li>
-                    <li className="font-bold text-base pt-2">Total: $58,000/year</li>
-                    
-                    <li className="pt-3 font-bold text-lg text-red-900">3-Year Total: $214,000</li>
+                <div>
+                  <h4 className="font-semibold mb-2">Ask Propertybase:</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• For a written quote covering every user you need</li>
+                    <li>• Whether setup, training and support are billed separately</li>
+                    <li>• The contract length and the cost of leaving early</li>
                   </ul>
                 </div>
-                
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-3">RealtorDesk AI (5 users):</h4>
-                  <ul className="text-sm text-gray-700 space-y-2">
-                    <li><strong>Year 1:</strong></li>
-                    <li>• Platform: $299/mo × 12 = $3,588</li>
-                    <li>• Implementation: $0</li>
-                    <li>• Training: $0</li>
-                    <li>• Support: Included</li>
-                    <li className="font-bold text-base pt-2">Total: $3,588</li>
-                    
-                    <li className="pt-3"><strong>Year 2-3:</strong></li>
-                    <li>• Platform: $3,588/year</li>
-                    <li>• Support: Included</li>
-                    <li className="font-bold text-base pt-2">Total: $3,588/year</li>
-                    
-                    <li className="pt-3 font-bold text-lg text-green-900">3-Year Total: $10,764</li>
+                <div>
+                  <h4 className="font-semibold mb-2">Realtor Desk:</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• CAD $149 a month for a single agent</li>
+                    <li>• 14-day trial, with a card collected up front</li>
+                    <li>• Nothing is charged before day 14</li>
                   </ul>
                 </div>
               </div>
 
-              <div className="bg-primary text-white p-6 rounded-lg">
-                <p className="text-2xl font-bold">3-Year Savings: $203,236</p>
-              </div>
-
-              <p className="text-lg font-bold text-primary mt-4">Winner: RealtorDesk AI</p>
+              <p className="text-sm font-semibold text-gray-600">Compare the written quote with our published price. We are not going to guess the other side of that sum.</p>
             </Card>
           </section>
 
           {/* Use Case Analysis */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Use Case Analysis: Who Should Choose Which?</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">Who Should Consider Realtor Desk?</h2>
+
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="p-6">
-                <h3 className="text-xl font-bold mb-4">Choose Propertybase If:</h3>
+                <h3 className="text-xl font-bold mb-4">Look Elsewhere If:</h3>
                 <ul className="space-y-3 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Large brokerage (100+ agents)</span>
+                    <XCircle className="w-5 h-5 text-gray-500 mt-0.5" />
+                    <span>You run a team or a brokerage and need seats</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Need custom Salesforce integrations</span>
+                    <XCircle className="w-5 h-5 text-gray-500 mt-0.5" />
+                    <span>You need lead assignment, a shared pipeline or a team inbox</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Have dedicated IT team</span>
+                    <XCircle className="w-5 h-5 text-gray-500 mt-0.5" />
+                    <span>You need transaction management, e-signature or a back office</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Budget $100,000+/year for CRM</span>
+                    <XCircle className="w-5 h-5 text-gray-500 mt-0.5" />
+                    <span>You want an IDX website or lead generation from the same vendor</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Complex custom workflows required</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Already using Salesforce ecosystem</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <span>Can wait 4-6 months for implementation</span>
+                    <XCircle className="w-5 h-5 text-gray-500 mt-0.5" />
+                    <span>You need a native mobile app</span>
                   </li>
                 </ul>
                 <p className="text-sm font-semibold mt-4 text-gray-600 italic">
-                  Reality: This describes &lt;5% of Canadian real estate businesses
+                  Realtor Desk does none of these. Ask Propertybase which of them it covers.
                 </p>
               </Card>
 
               <Card className="p-6 border-2 border-primary bg-primary/5">
-                <h3 className="text-xl font-bold mb-4">Choose RealtorDesk AI If:</h3>
+                <h3 className="text-xl font-bold mb-4">Consider Realtor Desk If:</h3>
                 <ul className="space-y-3 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>Solo agent to mid-size team (1-50 agents)</span>
+                    <span>You work alone</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>Want AI automation that works immediately</span>
+                    <span>You want contacts, one timeline per client and a pipeline in CAD</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>No IT staff (need self-service platform)</span>
+                    <span>Some of your clients are served in French</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>Budget under $5,000/year for CRM</span>
+                    <span>You want the date and source of consent kept on each contact</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>Standard real estate workflows sufficient</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>Canadian compliance is priority (PIPEDA/CASL)</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-primary mt-0.5" />
-                    <span>Need to be productive within days, not months</span>
+                    <span>You want a price you can read before you speak to anyone</span>
                   </li>
                 </ul>
                 <p className="text-sm font-semibold mt-4 text-primary italic">
-                  Reality: This describes 95% of Canadian real estate businesses
+                  The 14-day trial is the way to check the fit on your own leads.
                 </p>
               </Card>
             </div>
           </section>
 
-          {/* Real-World Comparison */}
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">Real-World Scenario: Team of 10 Agents</h2>
-            
-            <p className="text-gray-700 mb-6">
-              <strong>Context:</strong> Team of 10 agents, 200 leads/month, $12,000 avg commission
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="p-6 bg-red-50 border-red-200">
-                <h3 className="text-xl font-bold mb-4">Propertybase Path</h3>
-                <div className="space-y-3 text-sm">
-                  <div>
-                    <p className="font-semibold">Cost:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• $8,000/month subscription</li>
-                      <li>• $25,000 implementation</li>
-                      <li>• Year 1 total: $121,000</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <p className="font-semibold">Timeline:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• Month 1-4: Implementation</li>
-                      <li>• Month 5-6: Training</li>
-                      <li>• Month 7+: Full productivity</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <p className="font-semibold">Lead Response:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• Manual follow-up (no AI)</li>
-                      <li>• 10-15 minute response time</li>
-                      <li>• 2.1% conversion rate</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <p className="font-semibold">Training Required:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• 40+ hours per user</li>
-                      <li>• Ongoing Salesforce training</li>
-                      <li>• Complex workflows</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="pt-3">
-                    <p className="font-bold">Result:</p>
-                    <p className="text-gray-700">High cost, long implementation, manual processes</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-6 bg-green-50 border-green-200">
-                <h3 className="text-xl font-bold mb-4">RealtorDesk AI Path</h3>
-                <div className="space-y-3 text-sm">
-                  <div>
-                    <p className="font-semibold">Cost:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• $299/month subscription</li>
-                      <li>• $0 implementation</li>
-                      <li>• Year 1 total: $3,588</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <p className="font-semibold">Timeline:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• Day 1: Setup complete</li>
-                      <li>• Day 2: Data imported</li>
-                      <li>• Day 3+: Full productivity</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <p className="font-semibold">Lead Response:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• Scores each lead and suggests a next action</li>
-                      <li>• You send every message</li>
-                      <li>• Consent date and source recorded per contact</li>
-                    </ul>
-                  </div>
-                  
-                  <div>
-                    <p className="font-semibold">Training Required:</p>
-                    <ul className="ml-4 space-y-1 text-gray-700">
-                      <li>• A guided onboarding checklist</li>
-                      <li>• One conversation timeline per client</li>
-                      <li>• Pre-configured workflows</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="pt-3">
-                    <p className="font-bold text-green-900">Result:</p>
-                    <p className="text-gray-700">A smaller product at a published CAD price</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-
-            <Card className="p-6 bg-primary text-white mt-6">
-              <h3 className="text-xl font-bold mb-4">Comparison Summary:</h3>
-              <ul className="space-y-2">
-                <li>✓ RealtorDesk AI costs $117,412 LESS in Year 1</li>
-                <li>✓ RealtorDesk AI productive 6 months faster</li>
-                <li>✓ RealtorDesk AI 2x conversion rate (due to AI speed)</li>
-                <li>✓ RealtorDesk AI requires 1% of the training time</li>
-              </ul>
-            </Card>
-          </section>
+          {/* A "Real-World Scenario: Team of 10 Agents" section stood here. It
+              was not a real scenario: the lead volume, response times and
+              conversion rates on both sides were invented, and it modelled a
+              ten-agent team on a product built for one agent. Removed
+              2026-10-11. */}
 
           {/* FAQ */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">FAQ: Propertybase vs RealtorDesk AI</h2>
-            
+            <h2 className="text-3xl font-bold mb-6">FAQ: Propertybase vs Realtor Desk</h2>
+
             <div className="space-y-4">
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Is Propertybase overkill for most teams?</h3>
+                <h3 className="font-bold mb-2">Is Realtor Desk a replacement for Propertybase?</h3>
                 <p className="text-gray-700">
-                  Yes. Unless you need Salesforce-level customization for enterprise workflows, simpler alternatives like RealtorDesk AI work better and cost 95% less.
+                  Only for a single agent who wants a CRM and nothing wider. Realtor Desk has no seats, no lead routing, no transaction management and no back office, so it cannot stand in for a platform that a team or a brokerage runs on.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Can RealtorDesk AI scale to enterprise?</h3>
+                <h3 className="font-bold mb-2">Can Realtor Desk scale to a team or a brokerage?</h3>
                 <p className="text-gray-700">
-                  The Brokerage plan supports up to 50 agents. For true enterprise operations (500+ agents), Propertybase may be more appropriate. Enterprise plan coming 2026.
+                  No. It is a single-agent product: no seats, no lead assignment or routing, no shared pipeline and no team inbox. If you need those, look at products built for teams.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Is Salesforce expertise required for Propertybase?</h3>
+                <h3 className="font-bold mb-2">What should I ask Propertybase before I compare?</h3>
                 <p className="text-gray-700">
-                  Yes. Implementation and ongoing management require Salesforce developers. Expect to pay $150-250/hour for consulting.
+                  The price per user and its currency, any implementation or setup fee, how long setup takes and who does it, the contract length, and the format your contacts export in. Get the answers in writing.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Can I migrate from Propertybase to RealtorDesk AI?</h3>
+                <h3 className="font-bold mb-2">Can I bring my contacts from Propertybase into Realtor Desk?</h3>
                 <p className="text-gray-700">
-                  Yes, but consider contract terms. Propertybase contracts are typically 36 months with early termination penalties. Data export is straightforward (CSV).
+                  If you can export them to a CSV file, yes. The import brings in contacts only: consent records, deals and history are not imported, and duplicates are not merged. Check your Propertybase contract terms with Propertybase before you move.
                 </p>
               </Card>
 
               <Card className="p-6">
-                <h3 className="font-bold mb-2">Which has better AI capabilities?</h3>
+                <h3 className="font-bold mb-2">What does the AI in Realtor Desk do?</h3>
                 <p className="text-gray-700">
-                  RealtorDesk AI by far. Propertybase has no built-in AI—you'd need to integrate third-party tools at additional cost.
+                  It scores each lead from 0 to 100 by rule and shows the breakdown, suggests a next action, and drafts a reply or summarises the thread on the contact you have open. Nothing is sent to a client without you. There is no lead-facing chatbot and no voice agent.
                 </p>
               </Card>
             </div>
@@ -781,16 +579,13 @@ const VsPropertybase = () => {
               <h2 className="text-3xl font-bold mb-4">Conclusion</h2>
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg">
-                  <strong>Propertybase = Enterprise power, enterprise complexity, enterprise cost</strong>
+                  Realtor Desk is a CRM for one Canadian agent, at a published price, with French per contact and a consent record on each contact.
                 </p>
                 <p className="text-lg">
-                  <strong>RealtorDesk AI = Focused features, AI automation, affordable pricing</strong>
+                  It is not a platform for a team or a brokerage. If that is what you need, it is the wrong product; ask Propertybase and other vendors what they offer for teams.
                 </p>
                 <p className="text-lg">
-                  For 95% of Canadian real estate teams, RealtorDesk AI is the smarter choice.
-                </p>
-                <p className="text-xl font-bold text-primary pt-4">
-                  Save $200,000+ over 3 years while getting better AI automation and faster results.
+                  Ask Propertybase for a written quote, then put the two side by side on what you actually use.
                 </p>
               </div>
             </Card>
@@ -798,13 +593,13 @@ const VsPropertybase = () => {
 
           {/* Final CTA */}
           <section className="text-center py-12">
-            <h2 className="text-3xl font-bold mb-4">Choose Agile Over Enterprise Complexity</h2>
+            <h2 className="text-3xl font-bold mb-4">Try It on Your Own Leads</h2>
             <p className="text-xl text-gray-600 mb-8">
-              Try RealtorDesk AI free for 14 days. A card is required to start; you're not charged until the trial ends.
+              Try Realtor Desk free for 14 days. A card is required to start; you're not charged until the trial ends.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8">
-                <Link to="/demo">
+                <Link to="/signup">
                   Start Free Trial <ArrowRight className="ml-2" />
                 </Link>
               </Button>
@@ -821,19 +616,19 @@ const VsPropertybase = () => {
               <Link to="/blog/best-crm-canada-2025">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">Best CRM for Canadian Agents 2025</h3>
-                  <p className="text-sm text-gray-600">Comprehensive top 10 ranking</p>
+                  <p className="text-sm text-gray-600">How the options compare</p>
                 </Card>
               </Link>
               <Link to="/blog/vs-lofty-crm">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
-                  <h3 className="font-bold mb-2">Lofty CRM vs RealtorDesk AI</h3>
-                  <p className="text-sm text-gray-600">Feature bloat vs simplicity</p>
+                  <h3 className="font-bold mb-2">Lofty CRM vs Realtor Desk</h3>
+                  <p className="text-sm text-gray-600">Side-by-side comparison</p>
                 </Card>
               </Link>
               <Link to="/blog/boomtown-alternative-canada">
                 <Card className="p-4 hover:shadow-lg transition-shadow">
                   <h3 className="font-bold mb-2">BoomTown Alternatives</h3>
-                  <p className="text-sm text-gray-600">Top 5 for Canadian agents</p>
+                  <p className="text-sm text-gray-600">Options for Canadian agents</p>
                 </Card>
               </Link>
             </div>

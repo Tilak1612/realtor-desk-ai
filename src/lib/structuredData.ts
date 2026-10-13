@@ -1,5 +1,12 @@
 // Structured Data Schemas for SEO
 
+// Four unused exports were deleted on 2026-10-11: softwareApplicationSchema,
+// localBusinessSchema, homepageFAQSchema and pricingPageFAQSchema. Nothing
+// imported them, and they described a product that does not exist ("AI Voice
+// Agent", "AI Chatbot (24/7)", "WhatsApp Messaging", "PIPEDA Compliance", a
+// walk-in LocalBusiness). The live SoftwareApplication and Product blocks are in
+// index.html; page FAQs are emitted by each page from its own visible text.
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -7,7 +14,7 @@ export const organizationSchema = {
   "legalName": "Brainfy AI Inc.",
   "url": "https://www.realtordesk.ai",
   "logo": "https://www.realtordesk.ai/logo.png",
-  "description": "AI-first real estate CRM built for Canadian agents with PIPEDA compliance, bilingual support, and CREA DDF® integration on the roadmap.",
+  "description": "A CRM for Canadian real estate agents: bilingual, with a consent record on each contact and a database hosted in Canada.",
   "foundingDate": "2024",
   "address": {
     "@type": "PostalAddress",
@@ -33,169 +40,6 @@ export const organizationSchema = {
   ]
 };
 
-export const softwareApplicationSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Realtor Desk",
-  "applicationCategory": "BusinessApplication",
-  // There is no native app: no ios/ or android/ project in the repo, no store
-  // listing, and capacitor.config.ts still holds a default app.lovable.* id
-  // pointing at a scaffold URL. The roadmap FAQ already says a native app is
-  // not planned for 2026 — this line contradicted it, in machine-readable
-  // form, on every page of the site.
-  "operatingSystem": "Web browser",
-  "description": "AI-powered real estate CRM with 24/7 chatbot, lead scoring, and automated follow-ups for Canadian agents. CREA DDF® integration is on the roadmap.",
-  "offers": {
-    "@type": "AggregateOffer",
-    "lowPrice": "149.00",
-    "highPrice": "299.00",
-    "priceCurrency": "CAD",
-    "priceSpecification": {
-      "@type": "UnitPriceSpecification",
-      "billingDuration": "P1M"
-    },
-    "availability": "https://schema.org/InStock"
-  },
-  // aggregateRating removed — no real on-page reviews exist yet. A static
-  // rating is a Google rich-results policy violation + Competition Act
-  // s.74.01 risk. Matches the pre-launch removal already done in index.html.
-  "provider": {
-    "@type": "Organization",
-    "name": "Brainfy AI Inc.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Edmonton",
-      "addressRegion": "AB",
-      "addressCountry": "CA"
-    }
-  },
-  "featureList": [
-    "AI Chatbot (24/7)",
-    "AI Voice Agent",
-    "CREA DDF® Integration (coming Q3 2026)",
-    "Predictive Lead Scoring",
-    "Email & SMS Automation",
-    "WhatsApp Messaging",
-    "Pipeline Management",
-    "PIPEDA Compliance",
-    "Bilingual Support (EN/FR)"
-  ]
-};
-
-export const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Realtor Desk",
-  "image": "https://www.realtordesk.ai/logo.png",
-  "url": "https://www.realtordesk.ai",
-  "telephone": "+1-XXX-XXX-XXXX",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Edmonton",
-    "addressRegion": "AB",
-    "addressCountry": "CA"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "53.5461",
-    "longitude": "-113.4938"
-  },
-  "priceRange": "$149 - $299 CAD/month",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "09:00",
-      "closes": "17:00"
-    }
-  ]
-};
-
-export const homepageFAQSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is Realtor Desk PIPEDA compliant?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Realtor Desk is designed with PIPEDA principles — encryption at rest and in transit, consent management, automated compliance logging, and Canadian-optimized infrastructure. We follow PIPEDA's 10 fair information principles in our data practices."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Realtor Desk integrate with CREA DDF®?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CREA DDF® (Canadian MLS) integration is on the Q3 2026 roadmap for Realtor Desk. Today you can import listings from Realtor.ca via the built-in importer and manage listing information directly within the CRM."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much does Realtor Desk cost compared to Lofty?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Realtor Desk starts at CAD $149/month with no setup fees. Lofty does not publish prices — its pricing page directs you to request a quote — so a like-for-like figure is not available; see /pricing for Realtor Desk pricing."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does Realtor Desk support French/bilingual features?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, Realtor Desk offers full bilingual support with English and French interfaces, bilingual AI chatbot responses, and Quebec market-ready features for serving French-speaking clients."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What AI features does Realtor Desk include?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Realtor Desk includes a 24/7 AI chatbot, predictive lead scoring, automated follow-ups, smart email/SMS sequences, and custom AI training for your specific needs. AI voice agent and WhatsApp integration are coming soon."
-      }
-    }
-  ]
-};
-
-export const pricingPageFAQSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is there a free trial?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, Realtor Desk offers a 14-day free trial. A payment method is required to start, and you won't be charged until the trial ends — cancel any time before then. You get full access to all features during the trial."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are there setup fees?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, Realtor Desk has zero setup fees on all plans. Several competitors quote setup fees privately rather than publishing them, so confirm the total first-year cost with any vendor before you compare."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel anytime?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, all Realtor Desk plans are month-to-month with no long-term contracts. You can cancel anytime from your billing settings."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What payment methods do you accept?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We accept all major credit cards (Visa, Mastercard, American Express) and debit cards through Stripe. Invoicing is available for Enterprise plans."
-      }
-    }
-  ]
-};
 
 export const productSchema = (planName: string, price: number, description: string) => ({
   "@context": "https://schema.org",

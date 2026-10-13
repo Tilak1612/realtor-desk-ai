@@ -297,7 +297,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
         contacts,
         deals,
         exportDate: new Date().toISOString(),
-        notice: "This data export complies with PIPEDA regulations"
+        notice: "Exported from Realtor Desk at the account holder's request."
       };
 
       const blob = new Blob([JSON.stringify(exportData, null, 2)], {
