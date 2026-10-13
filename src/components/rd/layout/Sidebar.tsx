@@ -90,7 +90,8 @@ export function Sidebar({
   // are lives in one place, native/routes.ts, shared with the route guard, so
   // a link is never rendered that the guard would only bounce. On the web
   // every item stays.
-  const resolvedItems = isNativeApp()
+  const native = isNativeApp();
+  const resolvedItems = native
     ? allItems.filter((item) => !isHiddenInNative(item.to))
     : allItems;
 
@@ -149,9 +150,19 @@ export function Sidebar({
         </div>
         <div className="flex-1 min-w-0">
           <div className="text-xs font-semibold truncate">{resolvedWorkspace.name}</div>
-          <div className="text-[10px] text-white/50">{resolvedWorkspace.tier}</div>
+          {/* The second line is the subscription: "Solo plan", "Team plan",
+              "Brokerage plan", or "Trial" (useWorkspaceIdentity). The iOS /
+              Android app names no plan anywhere: it is a companion to a
+              subscription bought on the website and shows nothing that reads
+              as something to buy or upgrade (App Store guideline 3.1.3(f),
+              Google Play payments policy). The workspace name stays. */}
+          {!native && <div className="text-[10px] text-white/50">{resolvedWorkspace.tier}</div>}
         </div>
-        <IconChevron className="text-white/50" />
+        {/* This chevron is a drawing, not a control: the card has no handler
+            and opens nothing. On a touch screen it is the only hint the card
+            gives, and it says "tap me", so the app leaves it out. (The other
+            chevron, at the top of the drawer, is real: it closes the drawer.) */}
+        {!native && <IconChevron className="text-white/50" />}
       </div>
 
       {/* Nav */}

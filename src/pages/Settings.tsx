@@ -698,12 +698,13 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                 disabled={loading || !userId}
                 onExport={handleExportData}
               />
-
-              <div className="bg-muted p-4 rounded-lg">
-                <p className="text-xs">
-                  <strong>{t('app.settings.security')}:</strong> PIPEDA
-                </p>
-              </div>
+              {/* A grey box reading "Security: PIPEDA" used to close this card,
+                  on the web and in the app. It was a label with nothing after
+                  it: the name of a statute, saying nothing about what is done
+                  with the data, and readable as a claim of compliance that
+                  nobody had worded or approved. Removed rather than replaced,
+                  so that no new privacy statement is introduced here; where the
+                  data is kept is described in the privacy policy. */}
             </CardContent>
           </Card>
 

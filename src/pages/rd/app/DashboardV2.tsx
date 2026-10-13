@@ -14,6 +14,7 @@ import { useDashboardData } from "@/hooks/rd/useDashboardData";
 import { useActivityFeed } from "@/hooks/rd/useDashboardFeed";
 import { MIN_RESPONSE_SAMPLE, pctChange, type DashSummary } from "@/lib/rd/dashboard";
 import { appLocale, formatCad, formatClock, formatCount, formatLongDate, formatPct, type AppLocale } from "@/lib/rd/format";
+import { isNativeApp } from "@/lib/native/platform";
 import type { TFunction } from "i18next";
 
 // /app — dashboard v2 (Sprint A of docs/DASHBOARD_AUDIT_2026-10.md).
@@ -33,6 +34,11 @@ export default function DashboardV2() {
   const { summary, queue, names, loading, error, refetch, updatedAt } = useDashboardData();
   const { activity, loading: activityLoading } = useActivityFeed();
   const [addOpen, setAddOpen] = useState(false);
+  // On the web this page is an opt-in preview and says so, with a link back to
+  // the current dashboard. Inside the iOS / Android app it is the only
+  // dashboard (useDashboardV2Flag), so "Preview" would be untrue there, and
+  // the way back leads to the v1 wording the app exists to avoid.
+  const isPreview = !isNativeApp();
 
   const firstName = (() => {
     const meta = user?.user_metadata as Record<string, unknown> | undefined;
@@ -57,7 +63,7 @@ export default function DashboardV2() {
               <span className="text-[13px] text-rd-terra-800 font-semibold tracking-[0.02em]">
                 {formatLongDate(new Date(), locale)}
               </span>
-              <RDBadge tone="terra" size="sm">{t("rd.dash.kpi.previewBadge")}</RDBadge>
+              {isPreview && <RDBadge tone="terra" size="sm">{t("rd.dash.kpi.previewBadge")}</RDBadge>}
             </div>
             <h1 className="text-[26px] sm:text-[30px] font-semibold tracking-[-0.02em] mt-1">
               {firstName ? `${salute}, ${firstName}.` : `${salute}.`}{" "}
@@ -118,12 +124,14 @@ export default function DashboardV2() {
           <ActivityCard activity={activity} loading={activityLoading} names={names} />
         </div>
 
-        <p className="mt-6 text-xs text-rd-ink-500">
-          {t("rd.dash.kpi.previewNote")}{" "}
-          <Link to="/app?v=1" className="font-semibold text-rd-navy-800 hover:underline">
-            {t("rd.dash.kpi.previewExit")}
-          </Link>
-        </p>
+        {isPreview && (
+          <p className="mt-6 text-xs text-rd-ink-500">
+            {t("rd.dash.kpi.previewNote")}{" "}
+            <Link to="/app?v=1" className="font-semibold text-rd-navy-800 hover:underline">
+              {t("rd.dash.kpi.previewExit")}
+            </Link>
+          </p>
+        )}
       </div>
     </AppShell>
   );

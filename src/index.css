@@ -919,18 +919,45 @@ html.native .max-h-screen { max-height: var(--rd-screen); }
 
 @media (max-width: 1023.98px) {
   /* Both navigation drawers (Sidebar.tsx in the /app shell, DashboardSidebar
-     in the legacy one) are fixed, full-height and navy below lg. Inset rather
-     than padded: a navy panel under the status bar would hide the clock, which
-     is drawn dark for the app's light background. Done here, by id, so neither
-     component has to know about the app. */
+     in the legacy one) are fixed, full-height and navy below lg. Done here, by
+     id, so neither component has to know about the app.
+
+     The two edges are treated differently, on purpose.
+
+     TOP: inset. The box starts below the status bar, because a navy panel
+     under it would hide the clock, which is drawn dark for the app's light
+     background. That leaves no gap: the strip above the drawer is already
+     painted, opaquely, by body::before above (z-45, so it sits over both
+     shells' backdrops at z-30 / z-40). What shows above the drawer is the same
+     solid status-bar strip every other screen has, never the dimmed page.
+
+     BOTTOM: the box runs to the edge of the screen and the safe area is
+     padding inside it. BEFORE, this was `bottom: var(--rd-safe-bottom)`, the
+     same inset as the top, but nothing paints the home-indicator area the way
+     body::before paints the status bar. The backdrop is `fixed inset-0`, so
+     the drawer stopped ~34px short and a band of dimmed page showed under the
+     navy, the full width of the drawer. AFTER, the navy reaches the bottom
+     edge and the padding keeps the last link above the home indicator (in the
+     /app drawer that padding is the end of its own scroll area; in the legacy
+     one it sits under the scrolling <nav>). */
   html.native #rd-app-nav,
   html.native #app-sidebar {
     top: var(--rd-safe-top);
-    bottom: var(--rd-safe-bottom);
+    bottom: 0;
   }
-  /* The legacy drawer sets its height explicitly (h-screen); with a top offset
-     that would push its foot under the home indicator. */
-  html.native #app-sidebar { height: auto; }
+  /* 1.25rem is the drawer's own py-5; the inset is added to it, not swapped
+     for it. */
+  html.native #rd-app-nav {
+    padding-bottom: calc(1.25rem + var(--rd-safe-bottom));
+  }
+  /* The legacy drawer has no padding of its own and sets its height explicitly
+     (h-screen, which the app redefines as the height BETWEEN the insets). With
+     a top offset that height would stop it short of the bottom edge again, so
+     top and bottom decide the height instead. */
+  html.native #app-sidebar {
+    height: auto;
+    padding-bottom: var(--rd-safe-bottom);
+  }
   /* The legacy shell's floating menu button (fixed top-3). */
   html.native button[aria-controls="app-sidebar"] {
     top: calc(0.75rem + var(--rd-safe-top));
