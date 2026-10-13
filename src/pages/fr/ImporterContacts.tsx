@@ -149,6 +149,10 @@ const ImporterContacts = () => {
                   <Link className="underline" to="/fr/lcap-courriels-immobilier">
                     la LCAP et les courriels d&rsquo;un courtier
                   </Link>
+                  . Pour les renseignements personnels eux-mêmes, voir{" "}
+                  <Link className="underline" to="/fr/loi-25-courtier-immobilier">
+                    la Loi 25 pour le courtier immobilier
+                  </Link>
                   .
                 </li>
               </ol>

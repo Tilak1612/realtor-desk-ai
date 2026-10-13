@@ -98,6 +98,12 @@ const BrokerageCrm = lazyWithRetry(() => import("./pages/use-cases/BrokerageCrm"
 const CrmImmobilier = lazyWithRetry(() => import("./pages/fr/CrmImmobilier"));
 const FrLcapCourriels = lazyWithRetry(() => import("./pages/fr/LcapCourriels"));
 const FrImporterContacts = lazyWithRetry(() => import("./pages/fr/ImporterContacts"));
+const FrLoi25 = lazyWithRetry(() => import("./pages/fr/Loi25CourtierImmobilier"));
+const Law25QuebecRealEstate = lazyWithRetry(() => import("./pages/Law25QuebecRealEstate"));
+const FollowUpBossPricing = lazyWithRetry(() => import("./pages/compare/FollowUpBossPricing"));
+const OpenHouseSignInSheetTemplate = lazyWithRetry(() => import("./pages/resources/OpenHouseSignInSheetTemplate"));
+const CaslImpliedConsentCalculator = lazyWithRetry(() => import("./pages/resources/CaslImpliedConsentCalculator"));
+const AIToolsForRealEstateAgents = lazyWithRetry(() => import("./pages/AIToolsForRealEstateAgents"));
 const Demo = lazyWithRetry(() => import("./pages/Demo"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const Roadmap = lazyWithRetry(() => import("./pages/Roadmap"));
@@ -345,6 +351,12 @@ const App = () => (
           <Route path="/fr/crm-immobilier" element={<CrmImmobilier />} />
           <Route path="/fr/lcap-courriels-immobilier" element={<FrLcapCourriels />} />
           <Route path="/fr/importer-contacts-csv" element={<FrImporterContacts />} />
+          <Route path="/fr/loi-25-courtier-immobilier" element={<FrLoi25 />} />
+          <Route path="/law-25-quebec-real-estate" element={<Law25QuebecRealEstate />} />
+          <Route path="/follow-up-boss-pricing" element={<FollowUpBossPricing />} />
+          <Route path="/resources/open-house-sign-in-sheet-template" element={<OpenHouseSignInSheetTemplate />} />
+          <Route path="/resources/casl-implied-consent-calculator" element={<CaslImpliedConsentCalculator />} />
+          <Route path="/ai-tools-for-real-estate-agents" element={<AIToolsForRealEstateAgents />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/resources" element={<Resources />} />

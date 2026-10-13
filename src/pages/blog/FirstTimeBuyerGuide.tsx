@@ -1,3 +1,21 @@
+// Fact-checked 2026-10-12 against the Realtor Desk fact sheet of that date.
+//
+// Kept, each checked against the body that sets it and named in the text:
+// minimum down payment tiers (FCAC), CMHC premium rates and the 1.5% to 4%
+// closing-cost guidance (CMHC), CMHC's 600 credit score minimum, the Home
+// Buyers' Plan limit and home buyers' amount (CRA), the GST new housing rebate
+// (CRA guide RC4028), the Ontario and Toronto land transfer tax rebates, the
+// B.C. first time home buyers' exemption, and Alberta's land titles fees.
+//
+// Removed (no source on the page): mortgage rate ranges, itemised closing-cost
+// dollar ranges, the "$500 inspection saves $50,000" line, credit score tiers
+// above 600, the "60-90 days" timeline, the self-employed down payment range,
+// the market and interest rate outlook, the Quebec "$50,000" loan figure, and
+// the call to action implying an agent tool that replies instantly.
+//
+// Corrected because the rule changed: the 20% tier starts at $1.5 million, the
+// Home Buyers' Plan limit is $60,000, and the First-Time Home Buyer Incentive
+// is closed.
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -21,7 +39,7 @@ const FirstTimeBuyerGuide = () => {
         image={blogImage}
         article
         publishedTime="2025-01-01"
-        modifiedTime="2025-01-01"
+        modifiedTime="2026-10-12"
         author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/first-time-home-buyer-guide-canada-2025"
         structuredData={[
@@ -33,7 +51,7 @@ const FirstTimeBuyerGuide = () => {
             "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-01",
-            "dateModified": "2025-01-01"
+            "dateModified": "2026-10-12"
           }
         ]}
       />
@@ -59,7 +77,7 @@ const FirstTimeBuyerGuide = () => {
               </div>
               <div className="flex items-center text-muted-foreground text-sm">
                 <Calendar className="w-4 h-4 mr-1" />
-                January 2025
+                January 2025 · Updated October 12, 2026
               </div>
             </div>
 
@@ -67,9 +85,13 @@ const FirstTimeBuyerGuide = () => {
               First-Time Home Buyer Guide for Canada 2025: Everything You Need to Know
             </h1>
 
-            <ContentVintage published="2026-01-09" className="mb-6" />
+            <ContentVintage
+              published="2026-01-09"
+              className="mb-6"
+              note="One exception: on October 12, 2026 the government rules and program limits on this page were checked against the official sources named beside them, and figures without a source were removed. Nothing else was refreshed."
+            />
             <p className="text-xl text-muted-foreground">
-              Buying your first home in Canada is one of the most significant financial decisions you'll ever make. This comprehensive guide walks you through every step with province-specific insights and expert advice.
+              Buying your first home in Canada is one of the most significant financial decisions you'll ever make. This guide walks through each step and names the official source for every government rule it quotes.
             </p>
           </div>
         </div>
@@ -115,7 +137,7 @@ const FirstTimeBuyerGuide = () => {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  How to avoid common mistakes that cost first-time buyers thousands
+                  Common first-time buyer mistakes and how to avoid them
                 </li>
                 <li className="flex items-start">
                   <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
@@ -132,29 +154,32 @@ const FirstTimeBuyerGuide = () => {
 
             <h3 className="text-2xl font-bold mt-8 mb-4">Down Payment Requirements</h3>
             <p className="text-muted-foreground mb-6">
-              In Canada, your down payment amount depends on the purchase price:
+              The federal government sets the minimum down payment by purchase price. These are the tiers published by the Financial Consumer Agency of Canada, as of October 2026:
             </p>
 
             <div className="grid md:grid-cols-3 gap-4 mb-8">
               <Card className="p-4 text-center">
-                <h4 className="font-bold text-primary mb-2">Under $500,000</h4>
+                <h4 className="font-bold text-primary mb-2">$500,000 or less</h4>
                 <p className="text-2xl font-bold">5%</p>
                 <p className="text-sm text-muted-foreground">Minimum down</p>
-                <p className="text-xs text-muted-foreground mt-2">Example: $25,000 on $500k</p>
+                <p className="text-xs text-muted-foreground mt-2">Example: $25,000 on $500,000</p>
               </Card>
               <Card className="p-4 text-center">
-                <h4 className="font-bold text-primary mb-2">$500k - $999,999</h4>
+                <h4 className="font-bold text-primary mb-2">$500,000 to $1.5 million</h4>
                 <p className="text-2xl font-bold">5% + 10%</p>
-                <p className="text-sm text-muted-foreground">Split calculation</p>
-                <p className="text-xs text-muted-foreground mt-2">Example: $45,000 on $700k</p>
+                <p className="text-sm text-muted-foreground">5% of the first $500,000, 10% of the rest</p>
+                <p className="text-xs text-muted-foreground mt-2">Example: $45,000 on $700,000</p>
               </Card>
               <Card className="p-4 text-center">
-                <h4 className="font-bold text-primary mb-2">$1 Million+</h4>
+                <h4 className="font-bold text-primary mb-2">$1.5 million or more</h4>
                 <p className="text-2xl font-bold">20%</p>
                 <p className="text-sm text-muted-foreground">Minimum required</p>
-                <p className="text-xs text-muted-foreground mt-2">Example: $200,000 on $1M</p>
+                <p className="text-xs text-muted-foreground mt-2">Example: $300,000 on $1.5 million</p>
               </Card>
             </div>
+            <p className="text-sm text-muted-foreground mb-8">
+              Source: <a className="underline" href="https://www.canada.ca/en/financial-consumer-agency/services/mortgages/down-payment.html" rel="noopener noreferrer" target="_blank">Financial Consumer Agency of Canada, "Down payment"</a>. These tiers have changed before, so check that page before you rely on them.
+            </p>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">CMHC Mortgage Default Insurance</h3>
             <p className="text-muted-foreground mb-4">
@@ -162,7 +187,7 @@ const FirstTimeBuyerGuide = () => {
             </p>
 
             <Card className="p-6 mb-8">
-              <h4 className="font-bold mb-4">CMHC Insurance Premium Rates (2025)</h4>
+              <h4 className="font-bold mb-4">CMHC Insurance Premium Rates (as of October 2026)</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>5-9.99% down:</span>
@@ -178,13 +203,16 @@ const FirstTimeBuyerGuide = () => {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mt-4">
-                Example: On a $500,000 home with 5% down ($25,000), your CMHC premium would be $19,000, which is added to your mortgage.
+                Example: on a $500,000 home with 5% down ($25,000), the loan is $475,000 and the CMHC premium at 4.00% is $19,000, which can be added to your mortgage.
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Source: <a className="underline" href="https://www.cmhc-schl.gc.ca/consumers/home-buying/mortgage-loan-insurance-for-consumers/cmhc-mortgage-loan-insurance-cost" rel="noopener noreferrer" target="_blank">CMHC, "CMHC Mortgage Loan Insurance Cost"</a>. The premium is a percentage of the loan. CMHC notes that premiums in Quebec, Ontario and Saskatchewan are subject to provincial sales tax, which cannot be added to the loan. Sagen and Canada Guaranty publish their own rates.
               </p>
             </Card>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">Closing Costs to Budget For</h3>
             <p className="text-muted-foreground mb-4">
-              Beyond your down payment, expect to pay 1.5% - 4% of the purchase price in closing costs:
+              Beyond your down payment, CMHC advises budgeting for closing costs (for example, legal and land transfer fees) equal to 1.5% to 4% of the purchase price. The items below are the usual ones. We quote no dollar range for each, because they vary by province, property and provider.
             </p>
 
             <Card className="p-6 mb-8">
@@ -193,29 +221,29 @@ const FirstTimeBuyerGuide = () => {
                 <div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Land Transfer Tax</span>
-                    <span>0.5% - 4%</span>
+                    <span>Set by your province or city</span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Home Inspection</span>
-                    <span>$400 - $700</span>
+                    <span>Quote from an inspector</span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Appraisal Fee</span>
-                    <span>$300 - $500</span>
+                    <span>Ask your lender</span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Legal Fees</span>
-                    <span>$1,000 - $2,000</span>
+                    <span>Quote from a lawyer or notary</span>
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Title Insurance</span>
-                    <span>$200 - $400</span>
+                    <span>Ask your lawyer</span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Property Insurance</span>
-                    <span>~$1,500/year</span>
+                    <span>Quote from an insurer</span>
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Property Tax Adjustment</span>
@@ -223,12 +251,15 @@ const FirstTimeBuyerGuide = () => {
                   </div>
                   <div className="flex justify-between py-2 border-b">
                     <span>Utility Connections</span>
-                    <span>$100 - $300</span>
+                    <span>Ask each provider</span>
                   </div>
                 </div>
               </div>
               <p className="text-sm font-bold mt-4 text-primary">
-                Total Example on $500,000 home: $10,000 - $20,000
+                At CMHC's 1.5% to 4%, that is $7,500 to $20,000 on a $500,000 home.
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Source: <a className="underline" href="https://www.cmhc-schl.gc.ca/consumers/home-buying/mortgage-loan-insurance-for-consumers/what-are-the-general-requirements-to-qualify-for-homeowner-mortgage-loan-insurance" rel="noopener noreferrer" target="_blank">CMHC, general requirements for homeowner mortgage loan insurance</a>.
               </p>
             </Card>
 
@@ -241,11 +272,11 @@ const FirstTimeBuyerGuide = () => {
             <div className="space-y-6">
               {[
                 { step: 1, title: "Get Mortgage Pre-Approval", desc: "Before you start house hunting, get pre-approved for a mortgage. This tells you how much you can afford and what interest rate you qualify for." },
-                { step: 2, title: "Find the Right Real Estate Agent", desc: "Working with a buyer's agent costs you nothing—the seller pays the commission. A good agent will understand your budget and needs." },
+                { step: 2, title: "Find the Right Real Estate Agent", desc: "Ask any agent you interview how they are paid and what agreement you would sign, since this varies by province and brokerage. A good agent will understand your budget and needs." },
                 { step: 3, title: "Start House Hunting", desc: "Create your must-have list including location, home type, bedrooms/bathrooms, outdoor space, and parking requirements." },
                 { step: 4, title: "Make an Offer", desc: "When you find 'the one,' your agent will help you craft a competitive offer including purchase price, deposit, conditions, and closing date." },
-                { step: 5, title: "Home Inspection", desc: "A $500 inspection can save you from $50,000+ in repairs. Never waive inspection condition without strong advice from your agent." },
-                { step: 6, title: "Finalize Your Mortgage", desc: "Once conditions are removed, finalize your mortgage. Choose between fixed (5.5-6.2%) or variable rates (5.0-5.8%)." },
+                { step: 5, title: "Home Inspection", desc: "An inspection can find problems that are expensive to repair before you are committed to the purchase. Talk to your agent before you waive an inspection condition." },
+                { step: 6, title: "Finalize Your Mortgage", desc: "Once conditions are removed, finalize your mortgage and choose between a fixed and a variable rate. Rates change often, so compare current quotes from several lenders or a mortgage broker." },
                 { step: 7, title: "Hire a Real Estate Lawyer", desc: "Your lawyer handles title search, title insurance, reviewing purchase agreement, and registering property in your name." },
                 { step: 8, title: "Closing Day & Moving In", desc: "Final walk-through, lawyer finalizes paperwork, you receive keys, and you're officially a homeowner!" },
               ].map((item) => (
@@ -274,40 +305,44 @@ const FirstTimeBuyerGuide = () => {
             <div className="grid md:grid-cols-2 gap-4 mb-8">
               <Card className="p-4">
                 <h4 className="font-bold text-primary mb-2">First-Time Home Buyer Incentive (FTHBI)</h4>
-                <p className="text-sm text-muted-foreground">5-10% shared-equity mortgage from government. Income cap: $120,000</p>
+                <p className="text-sm text-muted-foreground">Closed. CMHC states that the program is no longer accepting applications. The deadline for new submissions was March 21, 2024.</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary mb-2">Home Buyers' Plan (HBP)</h4>
-                <p className="text-sm text-muted-foreground">Withdraw up to $35,000 from RRSP tax-free. Repay over 15 years.</p>
+                <p className="text-sm text-muted-foreground">Withdraw up to $60,000 from your RRSP to buy or build a qualifying home (Canada Revenue Agency limit, as of October 2026). You repay it to your RRSP over 15 years. The CRA sets out when repayments start.</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary mb-2">First-Time Home Buyers' Tax Credit</h4>
-                <p className="text-sm text-muted-foreground">$10,000 non-refundable tax credit (~$1,500 refund)</p>
+                <p className="text-sm text-muted-foreground">The home buyers' amount: a non-refundable federal credit claimed on up to $10,000 for a qualifying home bought in 2025 (Canada Revenue Agency, line 31270). Check the CRA page for the year you buy.</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold text-primary mb-2">GST/HST New Housing Rebate</h4>
-                <p className="text-sm text-muted-foreground">Rebate on new construction purchases up to $6,300</p>
+                <p className="text-sm text-muted-foreground">A partial GST rebate on a new or substantially renovated home, up to $6,300, reduced above $350,000 and not available at $450,000 or more (CRA guide RC4028). Separately, the CRA lists a first-time home buyers' GST/HST rebate with applications open as of October 2026: it describes a rebate of 100% of the GST (or the federal part of the HST) on a new home valued up to $1 million, reduced between $1 million and $1.5 million. Check the CRA page for eligibility before you rely on either.</p>
               </Card>
             </div>
+
+            <p className="text-sm text-muted-foreground mb-8">
+              Program limits change. Each figure in this section names the body that sets it, checked in October 2026. Confirm on that body's own site before you rely on it.
+            </p>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">Provincial Programs</h3>
             
             <div className="space-y-4 mb-8">
               <Card className="p-4">
                 <h4 className="font-bold mb-2">🍁 Ontario</h4>
-                <p className="text-sm text-muted-foreground">Land Transfer Tax Refund up to $4,000. Toronto offers additional $4,475 rebate.</p>
+                <p className="text-sm text-muted-foreground">Land transfer tax refund for first-time homebuyers of up to $4,000 (Ontario Ministry of Finance). Toronto's municipal land transfer tax has its own first-time purchaser rebate of up to $4,475 (City of Toronto). Both as of October 2026.</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold mb-2">🏔️ British Columbia</h4>
-                <p className="text-sm text-muted-foreground">Property Transfer Tax Exemption on homes up to $500,000 (partial up to $835k)</p>
+                <p className="text-sm text-muted-foreground">First time home buyers' program: a property transfer tax exemption on the first $500,000 of a home with a fair market value of $835,000 or less, and a partial exemption below $860,000, for purchases from April 1, 2024 (Government of British Columbia, as of October 2026).</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold mb-2">🛢️ Alberta</h4>
-                <p className="text-sm text-muted-foreground">No provincial land transfer tax (major savings vs. ON/BC)</p>
+                <p className="text-sm text-muted-foreground">No land transfer tax of the kind Ontario and B.C. charge. Alberta charges land titles registration fees instead: $50 plus $5 per $5,000 of the property's value on the transfer, and the same on the mortgage principal (Government of Alberta, Land Titles fee schedule effective October 1, 2026).</p>
               </Card>
               <Card className="p-4">
                 <h4 className="font-bold mb-2">⚜️ Quebec</h4>
-                <p className="text-sm text-muted-foreground">Accès Famille Program: Interest-free loan up to $50,000 for down payment</p>
+                <p className="text-sm text-muted-foreground">Some municipalities run their own programs, such as the City of Québec's Accès Famille. Amounts and eligibility differ, so check your municipality's site and Revenu Québec.</p>
               </Card>
             </div>
 
@@ -320,10 +355,10 @@ const FirstTimeBuyerGuide = () => {
             <div className="space-y-4 mb-8">
               {[
                 { mistake: "Skipping Pre-Approval", risk: "Falling in love with homes you can't afford", fix: "Get pre-approved before attending open houses" },
-                { mistake: "Maxing Out Your Budget", risk: "No financial cushion for repairs or rate increases", fix: "Buy 10-15% below your maximum approval" },
-                { mistake: "Ignoring Hidden Costs", risk: "Underestimating taxes, fees, and maintenance", fix: "Budget $300-500/month for unexpected repairs" },
-                { mistake: "Waiving Home Inspection", risk: "Discovering $50,000+ in repairs after closing", fix: "Only waive in extreme situations with agent guidance" },
-                { mistake: "Not Shopping Around for Mortgages", risk: "Accepting higher rates than necessary", fix: "Compare rates from 3+ lenders" },
+                { mistake: "Maxing Out Your Budget", risk: "No financial cushion for repairs or rate increases", fix: "Buy below your maximum approval and keep a cushion" },
+                { mistake: "Ignoring Hidden Costs", risk: "Underestimating taxes, fees, and maintenance", fix: "Set aside money every month for repairs and maintenance" },
+                { mistake: "Waiving Home Inspection", risk: "Discovering expensive repairs after closing", fix: "Only waive in extreme situations with agent guidance" },
+                { mistake: "Not Shopping Around for Mortgages", risk: "Accepting higher rates than necessary", fix: "Compare rates from several lenders or use a mortgage broker" },
               ].map((item, idx) => (
                 <Card key={idx} className="p-4 border-l-4 border-orange-500">
                   <h4 className="font-bold text-orange-700 mb-2">❌ {item.mistake}</h4>
@@ -341,11 +376,11 @@ const FirstTimeBuyerGuide = () => {
 
             <div className="space-y-4 mb-8">
               {[
-                { q: "How much credit score do I need to buy a home in Canada?", a: "Minimum 600 for insured mortgages (CMHC), but 680+ gets you better rates. Above 750 qualifies for the best rates." },
-                { q: "Can I buy a home with less than 5% down?", a: "No. 5% is the legal minimum in Canada for homes under $500k." },
-                { q: "How long does the home buying process take?", a: "60-90 days on average from pre-approval to closing. Competitive markets may move faster (30-45 days)." },
-                { q: "Should I buy or rent in 2025?", a: "If you plan to stay 5+ years, buying builds equity. If uncertain about location or career, renting offers flexibility." },
-                { q: "What if I'm self-employed?", a: "You'll need 2 years of tax returns and may require a larger down payment (10-20%). Work with a mortgage broker experienced in self-employed applications." },
+                { q: "How much credit score do I need to buy a home in Canada?", a: "For an insured mortgage, CMHC requires at least one borrower or guarantor to have a credit score of 600 or higher (as of October 2026). Lenders set their own requirements on top of that, so ask a lender or mortgage broker what applies to you." },
+                { q: "Can I buy a home with less than 5% down?", a: "No. 5% is the federal minimum, and it applies to a purchase price of $500,000 or less. Above that the minimum rises, as set out in the tiers above (Financial Consumer Agency of Canada, as of October 2026)." },
+                { q: "How long does the home buying process take?", a: "It varies with the market, your financing and the closing date you negotiate. Your agent and lender can tell you what is usual where you are buying." },
+                { q: "Should I buy or rent in 2025?", a: "It depends on how long you expect to stay, your savings and your local market. Buying builds equity over time. Renting keeps you flexible if your location or career is uncertain." },
+                { q: "What if I'm self-employed?", a: "Expect to show more documents than a salaried buyer, such as tax returns and notices of assessment. Requirements differ by lender, so work with a mortgage broker experienced in self-employed applications." },
               ].map((item, idx) => (
                 <Card key={idx} className="p-4">
                   <h4 className="font-bold mb-2">{item.q}</h4>
@@ -360,14 +395,14 @@ const FirstTimeBuyerGuide = () => {
               Buying your first home in Canada in 2025 is an achievable goal with proper planning, expert guidance, and financial discipline. By understanding down payment requirements, leveraging first-time buyer incentives, and working with knowledgeable real estate professionals, you can navigate the process with confidence.
             </p>
             <p className="text-muted-foreground mb-8">
-              <strong>The Canadian market is showing signs of stabilization</strong>, making this an opportune time for first-time buyers to enter—especially with interest rates expected to moderate through 2025-2026.
+              <strong>This guide makes no market or interest rate forecast.</strong> For current conditions, see the Bank of Canada for the policy rate, CMHC for its Housing Market Outlook and the Canadian Real Estate Association for national sales and price statistics.
             </p>
 
             {/* CTA */}
             <Card className="p-8 bg-gradient-to-r from-rd-navy-800 to-rd-navy-600 text-white text-center">
               <h3 className="text-2xl font-bold mb-4 text-white">Ready to Start Your Home Buying Journey?</h3>
               <p className="mb-6 text-white/90">
-                Connect with a real estate agent who uses modern AI-powered tools to respond to your questions instantly and keep you updated every step of the way.
+                Realtor Desk is a CRM for Canadian real estate agents. If you are an agent, see how it keeps your leads and follow-ups in one place.
               </p>
               <Link to="/demo">
                 <Button size="lg" variant="secondary">

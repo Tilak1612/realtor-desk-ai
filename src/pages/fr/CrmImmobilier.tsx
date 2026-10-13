@@ -155,6 +155,11 @@ const CrmImmobilier = () => {
                 respecter vos obligations sous la LPRPDE, la LCAP et la Loi 25 du
                 Québec; cela ne les remplace pas. La façon dont vous obtenez le
                 consentement et traitez les demandes demeure votre responsabilité.
+                Voir{" "}
+                <Link className="underline" to="/fr/loi-25-courtier-immobilier">
+                  la Loi 25 pour le courtier immobilier
+                </Link>
+                .
               </p>
             </div>
 

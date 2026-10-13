@@ -1,15 +1,136 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Shield, Smartphone, Zap, CheckCircle2, XCircle, TrendingUp, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
+import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
 import blogImage from "@/assets/blog-open-house-digital.jpg";
 import blogImageAvif from "@/assets/blog-open-house-digital.avif";
 import blogImageWebp from "@/assets/blog-open-house-digital.webp";
 import { Picture } from "@/components/Picture";
+
+// /blog/open-house-digital-sign-in-sheets-vs-paper-2025, rewritten 2026-10-12.
+//
+// WHAT WAS REMOVED, AND WHY. None of it had a source.
+//   - Intro: "capture 3x more contact details", "instant follow-up", "conversion
+//     rate differences", "free templates", and a garbled "Research Finding" card.
+//   - "8-15 qualified visitors" per open house, "$8,000-$15,000 commission" each,
+//     "68% of visitors provide fake phone numbers", "22% of contact info unusable",
+//     "follow-up delayed by 2-4 hours minimum".
+//   - The whole comparison table of figures: capture rate 32% against 87%, accuracy
+//     64% against 98%, follow-up "under 60 sec", lead-to-appointment 4.2% against
+//     14.6% ("3.5x better"), cost per lead $47 against $18, setup cost $5 against
+//     $0-$49 a month, and CASL compliance described as "Automatic, documented".
+//   - CASL: "$10,000+ fines per violation", "keep records proving consent for 3
+//     years", separate checkboxes for email, SMS and phone presented as a legal
+//     requirement, and "paper sign-in sheets rarely meet these requirements".
+//   - The "CASL-Compliant Digital Sign-In Template" block. The sheet, its columns
+//     and the consent wording now live on /resources/open-house-sign-in-sheet-template
+//     and are deliberately not repeated here.
+//   - "Best Digital Sign-In Solutions": Realtor Desk listed first with a
+//     "Recommended" badge and a wrong price ($69 a month), plus unsourced reviews
+//     and prices for two other tools. Realtor Desk is not a sign-in tool at all.
+//   - "The Perfect Open House Follow-Up Sequence": an "Automated Follow-Up
+//     Timeline" (a text within two minutes, automated listing emails, a monthly
+//     drip "until they convert or unsubscribe"). The product sends nothing on its
+//     own, and "the sequence top agents use" had nobody behind it.
+//   - "ROI Analysis: Is Digital Worth It?" in full: 240 visitors a year, $32,000
+//     against $92,000, "$59,292 a year" of additional revenue, "186% more revenue".
+//   - Implementation checklist with hardware prices, "automated email/SMS
+//     templates" and "just takes 30 seconds".
+//   - Common questions: "8-12% of visitors prefer paper", "most apps work
+//     offline", "most Canadian carriers include" a hotspot, and a two-minute
+//     text being "expected and appreciated".
+//   - Related-article blurbs ("Avoid $10,000+ fines", "converts 3.5x better"),
+//     the "Capture More Open House Leads" close, and an alt text describing a
+//     tablet that is not in the picture.
+//
+// WHAT THIS PAGE CLAIMS, AND FROM WHERE
+//   paper against digital rows        properties of the two media that anyone can
+//                                     observe; no measurement, no figure
+//   CASL statements                   the Act, S.C. 2010, c. 23, limited to the
+//                                     points on the verified fact sheet: onus of
+//                                     proof on the sender, what a request for
+//                                     express consent must contain, six months for
+//                                     an inquiry, two years for a purchase or
+//                                     written contract, what a message must
+//                                     carry, ten business days to unsubscribe
+//   no sign-in kiosk, tablet or QR    verified fact sheet ("does NOT do")
+//   manual entry, CSV import, webhook verified fact sheet; CSV limits as on
+//                                     /features/import-contacts
+//   consent date and source, refusal  verified fact sheet
+//     to send without consent
+//   price and trial wording           verified fact sheet
+// It makes no claim about capture rates, conversion, time saved or revenue.
+
+const ROWS: { row: string; paper: string; digital: string }[] = [
+  {
+    row: "Setup",
+    paper: "Print the sheet, bring a pen and a clipboard.",
+    digital: "Build the form once, then charge the device and test it in the property before each open house.",
+  },
+  {
+    row: "Legibility",
+    paper: "Depends on handwriting. Some entries cannot be read afterwards.",
+    digital: "Typed, so it can be read. A visitor can still mistype an address.",
+  },
+  {
+    row: "Getting contacts into your CRM",
+    paper: "Typed in by hand after the open house.",
+    digital: "Exported as a file or passed on by the form tool, with no retyping.",
+  },
+  {
+    row: "Proof of consent",
+    paper: "The sheet itself, if the consent request is printed on it. Keep the original or a scan.",
+    digital: "The form record with its date, if the consent request was on the form. Keep an export.",
+  },
+  {
+    row: "With no signal",
+    paper: "Not affected by signal or battery.",
+    digital: "Depends on the tool. Some forms need a connection to submit, so test on site and keep a paper sheet as a fallback.",
+  },
+  {
+    row: "Visitor comfort",
+    paper: "Familiar. Nobody needs instructions.",
+    digital: "Some visitors will not want to type on a device that is not theirs.",
+  },
+  {
+    row: "Privacy between visitors",
+    paper: "The next visitor can read earlier entries unless you cover them or use one slip per person.",
+    digital: "Earlier entries stay hidden, as long as the form clears after each visitor.",
+  },
+  {
+    row: "Cost",
+    paper: "Printing and a pen.",
+    digital: "A device you already own, plus a form tool that may be free or paid.",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Is a digital open house sign-in sheet better than paper?",
+    a: "Neither is better in every case. A form gives you typed contacts you can read and move into a CRM without retyping. Paper needs no device, battery or signal, and some visitors are more comfortable with a pen. What matters more is that you ask for consent clearly and enter the contacts the same day. Running a form with a paper sheet beside it covers both.",
+  },
+  {
+    q: "Do visitors have to sign in at an open house?",
+    a: "Nothing in CASL requires a visitor to sign in. Whether signing in is a condition of entry is for the seller and the listing brokerage to decide, and your brokerage or provincial regulator may have its own expectations. Either way, giving a name at the door is separate from agreeing to marketing email, so ask for that on its own line.",
+  },
+  {
+    q: "Can I email everyone who signed my sheet?",
+    a: "Not on the strength of the signature alone. Signing in records that someone visited. It is not the same as agreeing to receive marketing email. Under CASL the sender has the onus of proving consent, so ask for it explicitly on the sheet or form and keep the record. This is general information, not legal advice.",
+  },
+  {
+    q: "What should an open house sign-in sheet include?",
+    a: "Keep it to what you will use: a name, one way to reach the person, and a separate request for consent to marketing messages that names who is asking, gives your contact details and says consent can be withdrawn. The printable sheet linked from this page has the full column list and the wording, so they are not repeated here.",
+  },
+  {
+    q: "How long can I keep following up after an open house?",
+    a: "It depends on the consent you have. Under CASL, implied consent that arises from an inquiry lasts six months, and from a purchase or written contract, two years. Whether a visit counts as an inquiry depends on the facts, so express consent, asked for clearly and recorded, is the firmer footing. An unsubscribe must be given effect within 10 business days. This is general information, not legal advice.",
+  },
+];
 
 const OpenHouseDigitalSignIn = () => {
   useEffect(() => {
@@ -20,30 +141,39 @@ const OpenHouseDigitalSignIn = () => {
     <div className="min-h-screen">
       <SEO
         title="Open House Sign-In Sheets: Digital vs Paper"
-        description="Digital open house sign-in sheets vs paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents."
-        keywords="open house sign in sheet Canada, digital sign in sheet, CASL compliant open house, real estate open house leads, open house follow up"
+        description="Paper or digital open house sign-in sheet? An honest comparison for Canadian agents, CASL consent basics and what to do after, with a link to a printable sheet."
+        keywords="open house sign in sheet, digital open house sign in sheet, open house sign in sheet paper vs digital, open house CASL consent, open house follow up"
         image={blogImage}
         article
         publishedTime="2025-01-29"
-        modifiedTime="2025-01-29"
+        modifiedTime="2026-10-12"
         author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/open-house-digital-sign-in-sheets-vs-paper-2025"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "Article",
-            "headline": "Open House Sign-In Sheets: Digital vs Paper in 2025 (CASL Compliance Guide)",
-            "description": "Digital open house sign-in sheets vs paper: CASL compliance, lead capture rates, and instant follow-up. Includes free templates for Canadian agents.",
+            "headline": "Open House Sign-In Sheets: Digital vs Paper",
+            "description": "Paper or digital open house sign-in sheet? An honest comparison for Canadian agents, CASL consent basics and what to do after, with a link to a printable sheet.",
             "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-29",
-            "dateModified": "2025-01-29"
-          }
+            "dateModified": "2026-10-12"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
         ]}
       />
 
       <Navbar />
-      
+
       <article className="pt-32 md:pt-40 pb-20">
         <div className="container-custom max-w-4xl">
           <Link to="/resources">
@@ -56,525 +186,188 @@ const OpenHouseDigitalSignIn = () => {
           <header className="mb-8">
             <div className="flex items-center gap-4 mb-6 text-sm text-muted-foreground flex-wrap">
               <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold">
-                Lead Generation
+                Open houses
               </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>January 29, 2025</span>
+                <span>Rewritten October 12, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                <span>12 min read</span>
+                <span>7 min read</span>
               </div>
             </div>
-            
+
             <h1 className="mb-6">
-              Open House Sign-In Sheets: Digital vs Paper in 2025 (CASL Compliance Guide)
+              Open House Sign-In Sheets: Digital vs Paper
             </h1>
-            
+
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Digital open house sign-in sheets capture 3x more contact details and enable instant follow-up. Learn CASL requirements, conversion rate differences, and get free templates for Canadian agents.
+              Use a form on a tablet or phone if you will set it up and test it before the doors open, and keep a paper sheet beside it. Paper needs no setup and no battery, but it has to be typed in afterwards and some handwriting cannot be read. A form gives you typed contacts straight away, but it is one more thing to set up and some visitors will not use it.
+            </p>
+
+            <p className="mt-6 text-base leading-relaxed">
+              Looking for the sheet itself? Our{" "}
+              <Link to="/resources/open-house-sign-in-sheet-template" className="underline font-semibold text-primary">printable open house sign-in sheet</Link>{" "}
+              has its own page, with the columns and the consent wording. This article compares paper with a form and covers what to do once the open house is over.
             </p>
           </header>
 
-          {/* Featured Image */}
-          <div className="mb-12">
-            <Picture
+          <Picture
             src={blogImage}
             avif={blogImageAvif}
             webp={blogImageWebp}
             width={1200}
             height={630}
-            alt="Modern digital tablet for open house sign-in"
-            className="w-full rounded-2xl shadow-xl"
+            alt="Model house and a set of keys on a wooden table"
+            className="w-full rounded-2xl shadow-xl mb-12"
             priority
           />
-          </div>
-
-          <Card className="p-6 mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
-            <h3 className="text-lg font-bold mb-3 flex items-center">
-              <TrendingUp className="w-5 h-5 mr-2 text-primary" />
-              Research Finding
-            </h3>
-            <p className="text-base mb-0">
-              Paper captures what a visitor can read and what you can decipher later; a tablet captures what they type. Either way, the thing that decides whether you can follow up is whether you have a clean email or number and a record of consent, so build the sheet around those two. We have not measured capture rates across open houses and do not quote any0%.
-            </p>
-          </Card>
 
           <div className="prose prose-lg max-w-none">
-            <h2>Why Open House Sign-In Matters More Than Ever</h2>
-
+            <h2>Paper against digital, row by row</h2>
             <p>
-              Open houses remain one of the most cost-effective lead generation strategies for real estate agents. The average open house attracts 8-15 qualified visitors, each representing a potential $8,000-$15,000 commission. Yet most agents leave money on the table with outdated paper sign-in sheets.
+              By digital we mean any form a visitor fills in on a tablet or phone, whether you hand them the device or they open the form on their own. The table describes how each option behaves. It has no percentages in it, because we have not measured open houses and will not quote figures we cannot stand behind.
             </p>
-
-            <Card className="p-6 mb-6 border-l-4 border-l-red-500 bg-red-50 dark:bg-red-950/20">
-              <h4 className="text-lg font-bold mb-3">The Paper Sign-In Problem</h4>
-              <ul className="space-y-2 mb-0">
-                <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
-                  <span>68% of visitors provide fake phone numbers on paper sheets</span>
-                </li>
-                <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
-                  <span>Illegible handwriting makes 22% of contact info unusable</span>
-                </li>
-                <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
-                  <span>Privacy concerns—visitors can see previous guests' information</span>
-                </li>
-                <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
-                  <span>No CASL compliance tracking or consent documentation</span>
-                </li>
-                <li className="flex items-start">
-                  <XCircle className="w-5 h-5 mr-2 text-red-700 flex-shrink-0 mt-0.5" />
-                  <span>Follow-up delayed by 2-4 hours minimum (manual data entry)</span>
-                </li>
-              </ul>
-            </Card>
-
-            <h2>Digital vs Paper: The Complete Comparison</h2>
-
-            <div className="overflow-x-auto mb-8">
-              <table className="min-w-full border-collapse border border-border">
-                <thead>
-                  <tr className="bg-muted">
-                    <th className="border border-border p-3 text-left">Feature</th>
-                    <th className="border border-border p-3 text-left">Paper Sign-In</th>
-                    <th className="border border-border p-3 text-left">Digital Sign-In</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Complete Contact Capture Rate</td>
-                    <td className="border border-border p-3">32%</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">87%</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Data Accuracy</td>
-                    <td className="border border-border p-3">64% (handwriting issues)</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">98% (validated)</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Follow-Up Speed</td>
-                    <td className="border border-border p-3">2-4 hours</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">Instant (under 60 sec)</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">CASL Compliance</td>
-                    <td className="border border-border p-3">Manual, risky</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">Automatic, documented</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Lead-to-Appointment Rate</td>
-                    <td className="border border-border p-3">4.2%</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">14.6% (3.5x better)</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Privacy Protection</td>
-                    <td className="border border-border p-3">❌ Visible to all</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">✅ Private</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Cost per Lead</td>
-                    <td className="border border-border p-3">$47 (factoring unusable data)</td>
-                    <td className="border border-border p-3 bg-green-50 dark:bg-green-950/20 font-semibold">$18</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-border p-3 font-semibold">Setup Cost</td>
-                    <td className="border border-border p-3">$5 (paper + printing)</td>
-                    <td className="border border-border p-3">$0-$49/month (app subscription)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <h2 className="flex items-center gap-2">
-              <Shield className="w-6 h-6 text-primary" />
-              CASL Compliance Requirements for Open Houses
-            </h2>
-
-            <p>
-              Canada's Anti-Spam Legislation (CASL) requires explicit consent before sending commercial electronic messages. Paper sign-in sheets rarely meet these requirements, putting agents at risk of $10,000+ fines per violation.
-            </p>
-
-            <Card className="p-6 mb-6 border-l-4 border-l-primary">
-              <h4 className="font-bold mb-3">What CASL Requires for Open House Sign-Ins:</h4>
-              <ul className="space-y-2 mb-0">
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>1. Clear Purpose Statement:</strong> "By signing, you consent to receive property updates, market information, and follow-up communications from [Agent Name]."
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>2. Contact Information Displayed:</strong> Your business name, address, phone, and email must be visible.
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>3. Opt-Out Mechanism:</strong> Each communication must include an easy unsubscribe option.
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>4. Consent Documentation:</strong> You must keep records proving consent for 3 years.
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>5. Granular Consent Options:</strong> Separate checkboxes for email, SMS, and phone calls.
-                  </div>
-                </li>
-              </ul>
-            </Card>
-
-            <Card className="p-6 mb-8 bg-amber-50 dark:bg-amber-950/20">
-              <h4 className="font-bold mb-3 flex items-center">
-                <AlertTriangle className="w-5 h-5 mr-2 text-amber-600" />
-                CASL-Compliant Digital Sign-In Template
-              </h4>
-              <div className="bg-white dark:bg-gray-900 p-4 rounded-lg border border-gray-300 text-sm font-mono">
-                <p className="mb-3"><strong>Welcome to [Property Address] Open House!</strong></p>
-                <p className="mb-3">Hosted by: [Your Name], [Brokerage]<br/>
-                Phone: [Your Phone] | Email: [Your Email]</p>
-                
-                <p className="mb-2 font-bold">Please provide your contact information:</p>
-                <p className="mb-1">☐ Name: _______________</p>
-                <p className="mb-1">☐ Email: _______________</p>
-                <p className="mb-3">☐ Phone: _______________</p>
-                
-                <p className="mb-2 font-bold">I consent to receive (check all that apply):</p>
-                <p className="mb-1">☐ Email updates about similar properties and market reports</p>
-                <p className="mb-1">☐ Text messages for urgent property alerts</p>
-                <p className="mb-3">☐ Phone calls for property inquiries and follow-up</p>
-                
-                <p className="text-xs">You can unsubscribe at any time by replying "STOP" to messages or clicking unsubscribe in emails. We respect your privacy and comply with CASL and PIPEDA regulations.</p>
-              </div>
-            </Card>
-
-            <h2 className="flex items-center gap-2">
-              <Smartphone className="w-6 h-6 text-primary" />
-              Best Digital Sign-In Solutions for Canadian Agents
-            </h2>
-
-            <div className="space-y-4 mb-8">
-              <Card className="p-6">
-                <div className="flex justify-between items-start mb-3">
-                  <h4 className="text-xl font-bold">1. Realtor Desk (a CRM, not a sign-in app)</h4>
-                  <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">Recommended</span>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  A CRM that can hold the contacts you collect, record the date and source of consent on each one, and rank them. It has no dedicated open-house sign-in mode and does not work offline, so you would enter or import visitors afterwards.
-                </p>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-semibold mb-1">Pros:</p>
-                    <ul className="space-y-1 text-muted-foreground">
-                      <li>• Consent date and source recorded per contact</li>
-                      <li>• In-app assistant drafts a reply for you to send</li>
-                      <li>• One conversation timeline per client</li>
-                      <li>• French set per contact</li>
-                      <li>• Lead scoring and prioritization</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Pricing:</p>
-                    <p className="text-2xl font-bold text-primary">$69/month</p>
-                    <p className="text-muted-foreground">14-day free trial</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-6">
-                <h4 className="text-xl font-bold mb-3">2. Spacio (Popular Choice)</h4>
-                <p className="text-muted-foreground mb-4">
-                  Dedicated open house sign-in app with iPad support. Simple interface, good for agents who want just sign-in functionality.
-                </p>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-semibold mb-1">Pros:</p>
-                    <ul className="space-y-1 text-muted-foreground">
-                      <li>• Very easy to use</li>
-                      <li>• Professional iPad kiosk mode</li>
-                      <li>• Photo capture of visitors</li>
-                      <li>• Instant email follow-up</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Cons:</p>
-                    <ul className="space-y-1 text-muted-foreground">
-                      <li>• No CRM integration</li>
-                      <li>• Limited automation</li>
-                      <li>• US-focused (CASL compliance unclear)</li>
-                    </ul>
-                    <p className="text-xl font-bold mt-2">$40/month</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-6">
-                <h4 className="text-xl font-bold mb-3">3. Google Forms (Budget Option)</h4>
-                <p className="text-muted-foreground mb-4">
-                  Free solution using Google Forms on a tablet. Requires manual follow-up but works for low-volume agents.
-                </p>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-semibold mb-1">Pros:</p>
-                    <ul className="space-y-1 text-muted-foreground">
-                      <li>• Completely free</li>
-                      <li>• Customizable fields</li>
-                      <li>• Data exports to Google Sheets</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1">Cons:</p>
-                    <ul className="space-y-1 text-muted-foreground">
-                      <li>• No automation</li>
-                      <li>• Manual follow-up required</li>
-                      <li>• Less professional appearance</li>
-                      <li>• No offline mode</li>
-                    </ul>
-                    <p className="text-xl font-bold text-green-700 mt-2">Free</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-
-            <h2 className="flex items-center gap-2">
-              <Zap className="w-6 h-6 text-primary" />
-              The Perfect Open House Follow-Up Sequence
-            </h2>
-
-            <p>
-              Digital sign-in is only half the battle. The real ROI comes from instant, personalized follow-up. Here's the sequence top agents use:
-            </p>
-
-            <Card className="p-6 mb-8 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950">
-              <h4 className="font-bold mb-4">Automated Follow-Up Timeline</h4>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">1</div>
-                  <div>
-                    <p className="font-semibold">0-2 Minutes: Instant Thank You Text</p>
-                    <p className="text-sm text-muted-foreground">"Hi [Name], thanks for visiting [Address] today! Here's the listing link and my contact info. Any questions? - [Your Name]"</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">2</div>
-                  <div>
-                    <p className="font-semibold">30-60 Minutes: Email with Similar Listings</p>
-                    <p className="text-sm text-muted-foreground">Send automated email with 3-5 similar properties based on the open house property type/price.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">3</div>
-                  <div>
-                    <p className="font-semibold">2-4 Hours: Personal Phone Call (Hot Leads Only)</p>
-                    <p className="text-sm text-muted-foreground">Call visitors who stayed 10+ minutes or asked detailed questions. "Hi [Name], just following up on your visit today. What did you think of the property?"</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">4</div>
-                  <div>
-                    <p className="font-semibold">Day 2: Educational Email</p>
-                    <p className="text-sm text-muted-foreground">"The Complete Buyer's Guide for [Neighborhood]" - provide valuable content, build trust.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">5</div>
-                  <div>
-                    <p className="font-semibold">Day 5: Market Update</p>
-                    <p className="text-sm text-muted-foreground">Send hyperlocal market stats for the neighborhood they're interested in.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">6</div>
-                  <div>
-                    <p className="font-semibold">Day 10: Check-In Call</p>
-                    <p className="text-sm text-muted-foreground">"Just checking in—have you found anything? I have 2 new listings that might interest you."</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">7</div>
-                  <div>
-                    <p className="font-semibold">Ongoing: Monthly Drip Campaign</p>
-                    <p className="text-sm text-muted-foreground">Automated emails with new listings, market reports, and home buying tips until they convert or unsubscribe.</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* "Real Agent Success Stories" removed: two fabricated testimonials
-                with invented names, cities, conversion rates and a "$60,000+ in
-                annual commissions" figure. The same invented name appeared on
-                another page as "Sarah Chen, RE/MAX Toronto" — different city,
-                different brokerage — which is how the fabrication surfaced.
-                No real customer outcomes exist to publish yet. */}
-
-            <h2>ROI Analysis: Is Digital Worth It?</h2>
-
-            <Card className="p-6 mb-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950">
-              <h4 className="font-bold mb-4">Cost-Benefit Breakdown (12-Month Period)</h4>
-              
-              <div className="mb-6">
-                <p className="font-semibold mb-2 text-primary">Paper Sign-In Sheets:</p>
-                <ul className="space-y-1 text-sm">
-                  <li>• 24 open houses per year × 10 visitors = 240 total visitors</li>
-                  <li>• 32% capture rate = 77 usable contacts</li>
-                  <li>• 4.2% conversion = 3.2 deals closed</li>
-                  <li>• 3.2 deals × $10,000 avg commission = <strong className="text-lg">$32,000 revenue</strong></li>
-                  <li>• Cost: $120 (printing, forms)</li>
-                  <li>• <strong className="text-green-700 text-lg">Net: $31,880</strong></li>
-                </ul>
-              </div>
-
-              <div>
-                <p className="font-semibold mb-2 text-primary">Digital Sign-In System:</p>
-                <ul className="space-y-1 text-sm">
-                  <li>• 24 open houses per year × 10 visitors = 240 total visitors</li>
-                  <li>• 87% capture rate = 209 usable contacts</li>
-                  <li>• 14.6% conversion = 30.5 appointments = 9.2 deals closed</li>
-                  <li>• 9.2 deals × $10,000 avg commission = <strong className="text-lg">$92,000 revenue</strong></li>
-                  <li>• Cost: $828/year (RealtorDesk AI subscription)</li>
-                  <li>• <strong className="text-green-700 text-xl">Net: $91,172</strong></li>
-                </ul>
-              </div>
-
-              <div className="mt-6 pt-6 border-t-2 border-primary">
-                <p className="text-2xl font-bold text-primary">Additional Revenue: $59,292/year</p>
-                <p className="text-sm text-muted-foreground mt-1">That's 186% more revenue from the same open houses</p>
-              </div>
-            </Card>
-
-            <h2>Implementation Checklist</h2>
-
-            <Card className="p-6 mb-8">
-              <h4 className="font-bold mb-4">Getting Started with Digital Sign-In (Step-by-Step)</h4>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>Week 1: Choose Your Platform</strong>
-                    <p className="text-sm text-muted-foreground">Evaluate RealtorDesk AI, Spacio, or Google Forms based on your needs and budget.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>Week 1: Get Hardware</strong>
-                    <p className="text-sm text-muted-foreground">iPad ($449+) or Android tablet ($199+). Add a stand ($30-80) for professional presentation.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>Week 1-2: Configure CASL Compliance</strong>
-                    <p className="text-sm text-muted-foreground">Add consent language, disclosure information, and unsubscribe mechanisms.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>Week 2: Build Follow-Up Sequences</strong>
-                    <p className="text-sm text-muted-foreground">Create automated email/SMS templates for instant and drip follow-up.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>Week 2: Test Run</strong>
-                    <p className="text-sm text-muted-foreground">Do a mock open house with friends/family to test the full workflow.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-700 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong>Week 3: Launch at Real Open House</strong>
-                    <p className="text-sm text-muted-foreground">Greet visitors: "We're going digital to protect your privacy and send you instant property updates—just takes 30 seconds!"</p>
-                  </div>
-                </li>
-              </ul>
-            </Card>
-
-            <h2>Common Questions</h2>
-
-            <div className="space-y-4 mb-8">
-              <Card className="p-5">
-                <h4 className="font-bold mb-2">What if visitors refuse to sign in digitally?</h4>
-                <p className="text-sm text-muted-foreground mb-0">Have a paper backup sheet with CASL language. About 8-12% of visitors (usually older demographics) prefer paper. The key is offering choice while encouraging digital.</p>
-              </Card>
-
-              <Card className="p-5">
-                <h4 className="font-bold mb-2">Do I need WiFi at the open house?</h4>
-                <p className="text-sm text-muted-foreground mb-0">Most apps work offline and sync when you get back to WiFi. Alternatively, use your phone as a mobile hotspot (most Canadian carriers include this).</p>
-              </Card>
-
-              <Card className="p-5">
-                <h4 className="font-bold mb-2">What about privacy—can visitors see each other's info?</h4>
-                <p className="text-sm text-muted-foreground mb-0">No. Digital systems keep all information private. This is actually a huge advantage over paper sheets where everyone can see previous visitors' details.</p>
-              </Card>
-
-              <Card className="p-5">
-                <h4 className="font-bold mb-2">Is instant follow-up too aggressive?</h4>
-                <p className="text-sm text-muted-foreground mb-0">Not if done right. A simple "Thanks for visiting—here's the listing link" text within 2 minutes is expected and appreciated. It's the delayed follow-up 2 days later that feels stalkerish because it's less timely.</p>
-              </Card>
-            </div>
-
-            <Card className="p-8 mb-8 bg-gradient-to-br from-primary/10 to-secondary/10">
-              <h3 className="text-2xl font-bold mb-4 text-center">Ready to Capture More Open House Leads?</h3>
-              <p className="text-center text-muted-foreground mb-6">
-                Realtor Desk can hold the contacts you collect and record when and how each one consented. It does not have a dedicated sign-in tablet mode.
-              </p>
-              <div className="flex justify-center gap-4">
-                <Link to="/pricing">
-                  <Button size="lg" className="text-base">
-                    Start Free 14-Day Trial
-                  </Button>
-                </Link>
-                <Link to="/demo">
-                  <Button size="lg" variant="outline" className="text-base">
-                    Watch Demo
-                  </Button>
-                </Link>
-              </div>
-            </Card>
-
-            {/* Related Articles */}
-            <div className="mt-12 pt-8 border-t">
-              <h3 className="text-xl font-bold mb-6">Related Articles</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <Link to="/blog/real-estate-lead-generation-strategies-canada-2025" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">17 Lead Generation Strategies for 2025</h4>
-                  <p className="text-sm text-muted-foreground">Complete guide to generating more qualified real estate leads</p>
-                </Link>
-                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">CASL Compliance Guide for Realtors</h4>
-                  <p className="text-sm text-muted-foreground">Avoid $10,000+ fines with proper email marketing compliance</p>
-                </Link>
-                <Link to="/lead-response-time-canadian-realtors" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">Lead Response Time: Why 5 Minutes Matters</h4>
-                  <p className="text-sm text-muted-foreground">Data shows instant follow-up converts 3.5x better</p>
-                </Link>
-                <Link to="/canadian-realtors-thrive-slower-market-ai-automation" className="block p-4 rounded-lg border hover:border-primary transition-colors">
-                  <h4 className="font-semibold mb-2">AI Automation in Slower Markets</h4>
-                  <p className="text-sm text-muted-foreground">How to do more with less when inventory is tight</p>
-                </Link>
-              </div>
-            </div>
           </div>
+
+          <div className="overflow-x-auto my-6">
+            <table className="min-w-full text-sm">
+              <caption className="text-left text-muted-foreground pb-3">
+                A paper open house sign-in sheet compared with a digital form, on eight practical points.
+              </caption>
+              <thead>
+                <tr className="border-b-2 text-left">
+                  <th scope="col" className="py-2 pr-4 font-semibold">What you are comparing</th>
+                  <th scope="col" className="py-2 pr-4 font-semibold">Paper sheet</th>
+                  <th scope="col" className="py-2 font-semibold">Digital form</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ROWS.map((r) => (
+                  <tr key={r.row} className="border-b align-top">
+                    <th scope="row" className="py-3 pr-4 text-left font-semibold">{r.row}</th>
+                    <td className="py-3 pr-4 text-muted-foreground">{r.paper}</td>
+                    <td className="py-3 text-muted-foreground">{r.digital}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="prose prose-lg max-w-none">
+            <p>
+              Neither column wins every row. A form is stronger on legibility and on getting contacts into your CRM. Paper is stronger on setup, on working anywhere and on being familiar to every visitor. If you only want one, pick the one you are sure you will enter into your CRM that evening.
+            </p>
+
+            <h2>What to collect, and what to leave out</h2>
+            <p>
+              Ask only for what you will use in the next few weeks. Every extra field slows the line at the door, and it is one more piece of personal information you then have to store and look after.
+            </p>
+            <ul>
+              <li><strong>Collect:</strong> who the visitor is, one way to reach them, and whether they agree to hear from you about more than this property.</li>
+              <li><strong>Leave out:</strong> anything you would not act on, such as a home address, a budget or a detailed questionnaire. You can ask those questions in a conversation later.</li>
+              <li><strong>Do not make consent a condition of signing.</strong> A visitor should be able to give a name and still say no to marketing messages.</li>
+            </ul>
+            <p>
+              The exact column list is on the{" "}
+              <Link to="/resources/open-house-sign-in-sheet-template">open house sign-in sheet template</Link>{" "}
+              page.
+            </p>
+
+            <h2>Consent in Canada: signing in is not agreeing to email</h2>
+            <p>
+              This section is general information, not legal advice. It is limited to a few points from Canada's Anti-Spam Legislation (CASL, S.C. 2010, c. 23). For your own situation, ask your brokerage or a lawyer.
+            </p>
+            <p>
+              A name and an email address on a sign-in sheet show that someone visited. On their own they do not show that the person agreed to receive marketing email from you. If you plan to send any, ask for it explicitly, on the sheet or the form, as a separate line the visitor answers for themselves.
+            </p>
+            <ul>
+              <li><strong>Say who is asking.</strong> A request for express consent must name who is asking, give a mailing address plus a phone number, email address or web address, and say that consent can be withdrawn.</li>
+              <li><strong>Keep the record.</strong> The sender has the onus of proving consent. Keep the paper sheet or a scan of it, or the form export with its dates.</li>
+              <li><strong>Do not lean on implied consent for long.</strong> Implied consent that arises from an inquiry lasts six months. Whether an open house visit counts as an inquiry depends on the facts, which is one more reason to ask outright.</li>
+              <li><strong>Make each message complete.</strong> A commercial message must identify the sender, give contact information and include an unsubscribe mechanism, and an unsubscribe must be given effect within 10 business days.</li>
+            </ul>
+            <p>
+              For more detail, read our{" "}
+              <Link to="/resources/casl-compliance-real-estate-email-marketing-canada">CASL guide for real estate email</Link>.
+            </p>
+
+            <h2>After the open house</h2>
+            <p>
+              The sheet is only useful if something happens with it. This is a short process that works the same way for paper and for a form.
+            </p>
+            <ol>
+              <li>
+                <strong>Enter or import the contacts the same day.</strong> Type in the paper entries while you still remember who was who, or export the form results as a CSV. If you use Realtor Desk, you can{" "}
+                <Link to="/features/import-contacts">import contacts from a CSV</Link>. The import brings in contacts only: it carries no consent and does not merge duplicates.
+              </li>
+              <li>
+                <strong>Record the consent date and source.</strong> For each visitor who agreed to marketing messages, note the date and where the consent came from, for example the sign-in sheet for that address. File the sheet, a scan or the form export where you can find it again.
+              </li>
+              <li>
+                <strong>Send a personal note.</strong> Write to the people who agreed to hear from you, and mention something from the conversation you had. If you want a starting point, our{" "}
+                <Link to="/blog/real-estate-drip-campaign-templates-canada-2025">drip campaign email templates</Link>{" "}
+                are text to adapt and send yourself.
+              </li>
+              <li>
+                <strong>Set a follow-up date.</strong> Give each contact a date for the next step, so nobody depends on your memory. If someone unsubscribes or asks you to stop, stop.
+              </li>
+            </ol>
+
+            <h2>Where Realtor Desk fits</h2>
+            <p>
+              Realtor Desk is a CRM for Canadian real estate agents, not a sign-in tool. It has no sign-in kiosk, no tablet sign-in screen and no QR code sign-in. Open house contacts reach it in one of three ways:
+            </p>
+            <ul>
+              <li>You type them in.</li>
+              <li>You import a CSV, which creates contacts only and brings no consent with it.</li>
+              <li>A webhook delivers them, for example from a form tool connected through Zapier, Make or n8n.</li>
+            </ul>
+            <p>
+              Once a contact is in, Realtor Desk records a consent date and source for it, and the inbox and SMS refuse to send without consent. Nothing is sent without you. An in-app assistant can draft a note for you to review, and you decide whether it goes.
+            </p>
+          </div>
+
+          <div className="mt-12">
+            <h2 className="mb-6">Open house sign-in sheet questions</h2>
+            <FAQAccordion items={FAQS} />
+          </div>
+
+          <div className="prose prose-lg max-w-none mt-12">
+            <h2>Next steps</h2>
+            <ul>
+              <li>
+                Download the{" "}
+                <Link to="/resources/open-house-sign-in-sheet-template">printable open house sign-in sheet</Link>, as a PDF or a CSV.
+              </li>
+              <li>
+                Read the{" "}
+                <Link to="/resources/casl-compliance-real-estate-email-marketing-canada">CASL guide for real estate email</Link>{" "}
+                before you send anything.
+              </li>
+              <li>
+                See how to{" "}
+                <Link to="/features/import-contacts">import contacts from a CSV</Link>{" "}
+                and what the import leaves out.
+              </li>
+            </ul>
+          </div>
+
+          <Card className="p-8 mt-12 text-center">
+            <h2 className="mb-3">Keep your open house contacts and their consent in one place</h2>
+            <p className="text-muted-foreground mb-6">
+              14-day trial, then CAD $149 a month. A card is collected up front and nothing is charged before day 14.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button asChild size="lg">
+                <Link to="/demo">Book a demo</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/signup">Start free trial</Link>
+              </Button>
+            </div>
+          </Card>
         </div>
       </article>
 

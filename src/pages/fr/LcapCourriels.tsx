@@ -58,7 +58,7 @@ const LcapCourriels = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="LCAP et courriels pour courtiers immobiliers"
+        title="LCAP : la loi anti-pourriel en immobilier"
         description="Ce que la LCAP exige pour écrire à un client ou à un prospect : délais de consentement, contenu du message, désabonnement et preuve. Information générale."
         keywords="LCAP courriel courtier immobilier, loi anti-pourriel immobilier, consentement implicite 6 mois, LCAP courtier immobilier Québec"
         canonicalUrl="https://www.realtordesk.ai/fr/lcap-courriels-immobilier"
@@ -185,6 +185,19 @@ const LcapCourriels = () => {
                   décision, et la preuve qui la soutient, restent les vôtres.
                 </li>
               </ul>
+            </div>
+
+            <div>
+              <h2 className="mb-4">Et la Loi 25 ?</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                La LCAP encadre les messages commerciaux. La protection des renseignements
+                personnels que vous détenez relève d&rsquo;une autre loi : au Québec, la Loi sur
+                le privé, modifiée par la Loi 25. Voir{" "}
+                <Link className="underline" to="/fr/loi-25-courtier-immobilier">
+                  la Loi 25 pour le courtier immobilier
+                </Link>
+                .
+              </p>
             </div>
 
             <div>

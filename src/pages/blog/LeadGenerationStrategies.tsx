@@ -11,6 +11,12 @@
 //
 // The seventeen strategies stay as steps a reader can follow. The order is no
 // longer presented as a ranking.
+//
+// Second pass 2026-10-12: removed the remaining unsourced quantities (the
+// "200-500 contacts" database size, "10 contacts per day / 50 min", "30-50
+// homes" and the percentage budget splits), and two product statements the
+// fact sheet does not support (a "sequence builder", and the assistant
+// summarising conversations).
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -39,7 +45,7 @@ const LeadGenerationStrategies = () => {
         image={blogImage}
         article
         publishedTime="2025-01-29"
-        modifiedTime="2026-10-11"
+        modifiedTime="2026-10-12"
         author="Realtor Desk"
         canonicalUrl="https://www.realtordesk.ai/blog/real-estate-lead-generation-strategies-canada-2025"
         structuredData={[
@@ -51,7 +57,7 @@ const LeadGenerationStrategies = () => {
             "author": { "@type": "Organization", "name": "Realtor Desk" },
             "publisher": { "@type": "Organization", "name": "Realtor Desk" },
             "datePublished": "2025-01-29",
-            "dateModified": "2026-10-11"
+            "dateModified": "2026-10-12"
           }
         ]}
       />
@@ -74,7 +80,7 @@ const LeadGenerationStrategies = () => {
               </span>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>January 29, 2025</span>
+                <span>January 29, 2025 · Updated October 12, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
@@ -162,7 +168,7 @@ const LeadGenerationStrategies = () => {
                 <ul className="space-y-2">
                   <li className="flex items-start">
                     <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                    <span>Create a database of 200-500 contacts (CRM essential)</span>
+                    <span>Put everyone you know into one contact database (a CRM helps)</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
@@ -170,7 +176,7 @@ const LeadGenerationStrategies = () => {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
-                    <span>Call/text 10 contacts per day (5 min each = 50 min/day)</span>
+                    <span>Set a number of contacts to call or text each day, and keep to it</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="w-5 h-5 mr-2 text-green-700 flex-shrink-0 mt-0.5" />
@@ -298,7 +304,7 @@ const LeadGenerationStrategies = () => {
             <h3>7. Email Drip Campaigns (Automated Nurturing)</h3>
 
             <p>
-              Most leads aren't ready to transact immediately. A scheduled series of emails from an email marketing tool keeps you in touch until they are. Under CASL, every message needs the recipient's consent and a working unsubscribe link. Realtor Desk has a sequence builder, but scheduled sending is not switched on, so it does not run drip campaigns today.
+              Most leads aren't ready to transact immediately. A scheduled series of emails from an email marketing tool keeps you in touch until they are. Under CASL, every message needs the recipient's consent and a working unsubscribe link. Realtor Desk does not run email sequences unattended, so it does not send drip campaigns.
             </p>
 
             <Card className="p-6 mb-6">
@@ -310,7 +316,7 @@ const LeadGenerationStrategies = () => {
                     <li>• Email 1: Welcome + market overview</li>
                     <li>• Emails 2-4: Buyer education (mortgage, neighborhoods, process)</li>
                     <li>• Emails 5-8: New listings matching their criteria (weekly)</li>
-                    <li>• Emails 9-12: Success stories + urgency (market conditions)</li>
+                    <li>• Emails 9-12: Client stories (with permission) and current market conditions, with your data source named</li>
                   </ul>
                 </li>
                 <li>
@@ -319,7 +325,7 @@ const LeadGenerationStrategies = () => {
                     <li>• Email 1: Free home valuation</li>
                     <li>• Email 2: Preparing your home for sale checklist</li>
                     <li>• Emails 3-5: Recent sales in their neighborhood</li>
-                    <li>• Emails 6-8: Why now is the right time (market data)</li>
+                    <li>• Emails 6-8: Local market data, with your data source named</li>
                   </ul>
                 </li>
               </ul>
@@ -395,7 +401,7 @@ const LeadGenerationStrategies = () => {
             <Card className="p-5 mb-6 bg-amber-50 dark:bg-amber-950/20">
               <p className="font-semibold mb-2">Formats to Try:</p>
               <ul className="space-y-2 mb-0">
-                <li>• "Just Sold" postcards to neighbors (30-50 homes around each sale)</li>
+                <li>• "Just Sold" postcards to the homes around each sale</li>
                 <li>• Personalized market reports to homeowners (not generic flyers)</li>
                 <li>• Handwritten notes to high-value prospects</li>
                 <li>• Home anniversary cards ("You bought 5 years ago - let's talk equity")</li>
@@ -442,39 +448,39 @@ const LeadGenerationStrategies = () => {
             </h2>
 
             <p>
-              These splits are starting points to adjust, not benchmarks. We give no expected lead counts, because we have no data to base them on.
+              Each list runs from the channel to lean on most to the one to lean on least. We give no percentage splits and no expected lead counts, because we have no data to base them on.
             </p>
 
             <Card className="p-6 mb-6">
               <h4 className="font-bold mb-4">Small Budget: Mostly Your Own Time</h4>
               <ul className="space-y-2">
-                <li>• 60% - Sphere of Influence marketing (time investment)</li>
-                <li>• 20% - Facebook/Instagram ads</li>
-                <li>• 10% - Open house strategy with follow-up</li>
-                <li>• 10% - Content marketing (SEO - write 2 blogs/month)</li>
+                <li>• Sphere of Influence marketing (time investment)</li>
+                <li>• Facebook/Instagram ads</li>
+                <li>• Open house strategy with follow-up</li>
+                <li>• Content marketing (SEO: write on a schedule you can keep)</li>
               </ul>
             </Card>
 
             <Card className="p-6 mb-6">
               <h4 className="font-bold mb-4">Medium Budget: Adding Paid Channels</h4>
               <ul className="space-y-2">
-                <li>• 30% - Facebook/Instagram ads</li>
-                <li>• 25% - Search ads</li>
-                <li>• 20% - SOI marketing + referral program</li>
-                <li>• 15% - Video marketing production</li>
-                <li>• 10% - Software: CRM and any other tools you choose</li>
+                <li>• Facebook/Instagram ads</li>
+                <li>• Search ads</li>
+                <li>• SOI marketing + referral program</li>
+                <li>• Video marketing production</li>
+                <li>• Software: CRM and any other tools you choose</li>
               </ul>
             </Card>
 
             <Card className="p-6 mb-6">
               <h4 className="font-bold mb-4">Larger Budget: Several Paid Channels</h4>
               <ul className="space-y-2">
-                <li>• 35% - Facebook/Instagram ads</li>
-                <li>• 25% - Search ads</li>
-                <li>• 15% - Listing portal advertising</li>
-                <li>• 10% - Content marketing + SEO help</li>
-                <li>• 10% - Retargeting campaigns</li>
-                <li>• 5% - Community sponsorships</li>
+                <li>• Facebook/Instagram ads</li>
+                <li>• Search ads</li>
+                <li>• Listing portal advertising</li>
+                <li>• Content marketing + SEO help</li>
+                <li>• Retargeting campaigns</li>
+                <li>• Community sponsorships</li>
               </ul>
             </Card>
 
@@ -586,7 +592,7 @@ const LeadGenerationStrategies = () => {
                   <Zap className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-bold mb-1">A Drafting Assistant</h4>
-                    <p className="text-sm text-muted-foreground mb-0">An in-app assistant drafts a reply or summarises the conversation on the contact you have open. Nothing is sent to a client without you.</p>
+                    <p className="text-sm text-muted-foreground mb-0">An in-app assistant drafts text for you to review. Nothing is sent to a client without you.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
