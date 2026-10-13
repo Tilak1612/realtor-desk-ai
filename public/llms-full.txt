@@ -104,8 +104,8 @@ assignment or shared pipeline today, so a team cannot yet work in one shared
 account. Round-robin routing is on the roadmap and is labelled as such on the
 pricing page. The team and brokerage pages explain what to look for.
 
-**Brokerage** — custom annual contract. Everything in Team, plus a dedicated
-Canadian CSM and an uptime commitment agreed in the contract. SAML SSO, FINTRAC
+**Brokerage** — custom annual contract. Everything in Team, plus an uptime
+commitment agreed in the contract. A dedicated Canadian CSM, SAML SSO, FINTRAC
 workflows and custom DDF mappings are roadmap items, labelled as such.
 
 **Trial:** 14 days, full feature access. A card is collected at Stripe-hosted

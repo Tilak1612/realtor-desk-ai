@@ -567,9 +567,13 @@ Not changed, on purpose: any price, plan name, trial term, money-back guarantee 
 - **No migration service.** Every "free migration", "we handle everything", "live in 48 hours" and migration-call button on the nine switch and comparison pages is replaced by the true process: a CSV the agent exports and imports themselves, contacts only, consent not included.
 - **Team plan: marked as roadmap.** "5 users included", "Team reports & leaderboard" and the plan description now carry "(roadmap)", in English and French, and the pricing page says every plan is used by one agent today. The price is unchanged.
 
+### Owner decisions taken on 2026-10-12, and applied
+- **AI wording on the plans.** Solo reads "Desk AI drafting assistant" (it said "Desk AI chatbot, 500 msgs/mo"); "Unlimited AI messages" is gone from Team; the comparison row is a tick on every plan. Nothing in the code counts or limits assistant messages, so there was no difference to sell.
+- **Export sentence.** The pricing page now says contacts export to CSV while you subscribe and your data exports from Settings at any point, including after you cancel. Settings is outside the billing gate and exports JSON; the CSV export is on the Leads page, inside it.
+- **Brokerage CSM.** "Dedicated Canadian CSM" carries "(roadmap)", and the Brokerage description and billing blurb say so too.
+
 ### Still waiting on the owner
-1. Pricing page, remaining wording: "Desk AI chatbot, 500 msgs/mo" on Solo (other pages say there is no chatbot, only an in-app assistant), "Dedicated Canadian CSM" on Brokerage (unverified), and "Your contacts export to CSV at any point, including after you cancel" (export exists; access after cancellation not verified).
-2. Team-plan price mentions elsewhere ("$149-299 CAD/month") sit beside copy that says the product is single-agent.
-3. PIPEDA hosting wording and the softened legal summaries (CASL, PIPEDA, FINTRAC, provincial regulators) have not had a legal review.
-4. Native-speaker review of the French pages and the rewritten French FAQ answers.
-5. In Search Console: request indexing for `/pricing`, `/features/import-contacts`, `/fr/importer-contacts-csv`, and read the sitemap warning.
+1. Team-plan price mentions on other pages ("$149-299 CAD/month") sit beside copy that says the product is single-agent. Kept, because the Team plan and price stay on sale.
+2. PIPEDA hosting wording and the softened legal summaries (CASL, PIPEDA, FINTRAC, provincial regulators) have not had a legal review.
+3. Native-speaker review of the French pages and the rewritten French FAQ answers.
+4. In Search Console: request indexing for `/pricing`, `/features/import-contacts`, `/fr/importer-contacts-csv`, and read the sitemap warning.

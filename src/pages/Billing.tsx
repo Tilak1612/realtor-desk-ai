@@ -414,7 +414,7 @@ const Billing = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground mb-6">
-                  {t('billing.brokerageBlurb', 'SSO, dedicated CSM, custom FINTRAC tooling, and SLA.')}
+                  {t('billing.brokerageBlurb', 'Custom contract. SSO, a dedicated CSM and FINTRAC tooling are on the roadmap.')}
                 </p>
                 <Button
                   onClick={() => navigate('/contact')}
