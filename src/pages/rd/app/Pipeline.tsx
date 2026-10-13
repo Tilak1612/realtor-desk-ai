@@ -27,6 +27,7 @@ import { openLeads, openPipelineValue } from "@/lib/rd/pipeline";
 import { DataError } from "@/components/rd/DataState";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { isNativeApp } from "@/lib/native/platform";
 import { useLeads } from "@/hooks/rd/useLeads";
 import { useUpdateLeadStage } from "@/hooks/rd/useUpdateLeadStage";
 
@@ -213,7 +214,12 @@ function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode
   const items: { value: ViewMode; label: string }[] = [
     { value: "kanban", label: t("rd.pipelinePage.viewKanban", "Kanban") },
     { value: "list", label: t("rd.pipelinePage.viewList", "List") },
-    { value: "forecast", label: t("rd.pipelinePage.viewForecast", "Forecast") },
+    // Leads only to "Forecast is not available yet." Not offered in the iOS /
+    // Android app, which must not expose unfinished features; the web keeps
+    // the tab as it is.
+    ...(isNativeApp()
+      ? []
+      : [{ value: "forecast" as const, label: t("rd.pipelinePage.viewForecast", "Forecast") }]),
   ];
   return (
     <div className="flex p-[3px] bg-white border border-rd-line rounded-rd-sm">

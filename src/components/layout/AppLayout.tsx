@@ -5,6 +5,8 @@ import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { OfflineBanner } from "@/components/native/OfflineBanner";
+import { isNativeApp } from "@/lib/native/platform";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -22,6 +24,9 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
 
       <div className="flex-1 flex flex-col min-w-0">
         <DashboardNavbar user={user} profile={profile} />
+        {/* iOS / Android app only; see OfflineBanner. Safe-area insets are
+            handled for every shell at once in src/index.css. */}
+        {isNativeApp() && <OfflineBanner />}
 
         {/* Six items in the /app sidebar (Tasks, Calendar, Properties,
             Campaigns, Market, Integrations) point at these legacy routes.

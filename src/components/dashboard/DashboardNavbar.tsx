@@ -20,7 +20,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { useDueTasks } from "@/hooks/useDueTasks";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
-import { signOutIntentionally } from "@/lib/auth/signOut";
+import { signOutIntentionally, signedOutLanding } from "@/lib/auth/signOut";
 
 interface DashboardNavbarProps {
   user: any;
@@ -116,7 +116,9 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const handleSignOut = async () => {
     await signOutIntentionally();
     toast.success(t('nav.signedOut', 'Signed out successfully'));
-    navigate("/");
+    // The website's home page on the web. Inside the iOS / Android app there is
+    // no marketing site to return to, so it is the sign-in screen.
+    navigate(signedOutLanding("/"));
   };
 
   const getInitials = (name: string) => {

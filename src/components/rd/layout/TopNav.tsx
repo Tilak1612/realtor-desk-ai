@@ -6,6 +6,8 @@ import { RDAvatar } from "../Avatar";
 import { IconDot, IconMenu } from "../icons";
 import { cn } from "@/lib/utils";
 import { signOutIntentionally } from "@/lib/auth/signOut";
+import { isNativeApp } from "@/lib/native/platform";
+import { isHiddenInNative } from "@/lib/native/routes";
 
 // Product topbar (AppShell topbar in rd-app.jsx). Command search, a live
 // status pill, EN/FR toggle (now wired to i18n.changeLanguage), bell
@@ -146,6 +148,11 @@ export function TopNav({ agent, isLive = false, onMenuClick, navOpen = false }: 
                   {t("rd.topnav.settings", "Settings")}
                 </Link>
               </DropdownMenu.Item>
+              {/* Not in the iOS / Android app: it is a companion to a
+                  subscription bought on the website and carries no link to
+                  plans, checkout or the billing portal (App Store guideline
+                  3.1.3(f), Google Play payments policy). */}
+              {!(isNativeApp() && isHiddenInNative("/billing")) && (
               <DropdownMenu.Item asChild>
                 <Link
                   to="/billing"
@@ -154,6 +161,7 @@ export function TopNav({ agent, isLive = false, onMenuClick, navOpen = false }: 
                   {t("rd.topnav.billing", "Plan & billing")}
                 </Link>
               </DropdownMenu.Item>
+              )}
               <DropdownMenu.Separator className="h-px bg-rd-line my-1" />
               <DropdownMenu.Item
                 onSelect={async () => {

@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { useDrawerA11y } from "@/hooks/useDrawerA11y";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
+import { isNativeApp } from "@/lib/native/platform";
+import { isHiddenInNative } from "@/lib/native/routes";
 import { RDWordmark } from "../Logo";
 import { IconBolt, IconCalendar, IconCheck, IconChevron, IconCog, IconGlobe, IconHome, IconLead, IconMail, IconPie, IconPipeline, IconSparkles } from "../icons";
 
@@ -58,7 +60,7 @@ export function Sidebar({
   });
 
 
-  const resolvedItems: SidebarItem[] = items ?? [
+  const allItems: SidebarItem[] = items ?? [
     { label: t("rd.sidebar.nav.dashboard", "Dashboard"), to: "/app", icon: <IconHome /> },
     { label: t("rd.sidebar.nav.leads", "Leads"), to: "/app/leads", icon: <IconLead /> },
     { label: t("rd.sidebar.nav.conversations", "Conversations"), to: "/app/inbox", icon: <IconMail /> },
@@ -81,6 +83,16 @@ export function Sidebar({
     { label: t("rd.sidebar.nav.integrations", "Integrations"), to: "/dashboard/integrations", icon: <IconBolt /> },
     { label: t("rd.sidebar.nav.settings", "Settings"), to: "/app/settings", icon: <IconCog /> },
   ];
+
+  // Inside the iOS / Android app, drop the destinations the app does not
+  // have: the legacy screens that are still unfinished (Calendar, Campaigns,
+  // Market, Integrations) and anything commercial. The list of which those
+  // are lives in one place, native/routes.ts, shared with the route guard, so
+  // a link is never rendered that the guard would only bounce. On the web
+  // every item stays.
+  const resolvedItems = isNativeApp()
+    ? allItems.filter((item) => !isHiddenInNative(item.to))
+    : allItems;
 
   // No fabricated tenant here. AppShell supplies the real profile; if it is
   // still loading we show a neutral placeholder rather than someone else's

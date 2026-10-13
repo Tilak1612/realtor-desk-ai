@@ -8,6 +8,8 @@ import { useToast } from "@/hooks/use-toast";
 import AppLayout from "@/components/layout/AppLayout";
 import { useTranslation } from "react-i18next";
 import { AgentAvatar, AgentFigure } from "@/components/AgentMascot";
+import ReportAIResponse from "@/components/feedback/ReportAIResponse";
+import { aiReportEn } from "@/i18n/aiResponseReport";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -223,9 +225,14 @@ const AIAssistant = () => {
                       : 'bg-primary text-primary-foreground'
                   }`}>
                     {message.role === 'assistant' ? (
-                      <div className="prose prose-sm max-w-none dark:prose-invert">
-                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                      </div>
+                      <>
+                        <div className="prose prose-sm max-w-none dark:prose-invert">
+                          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        </div>
+                        {/* Every model answer can be flagged from where it is
+                            read (Google Play AI-generated content policy). */}
+                        <ReportAIResponse responseText={message.content} />
+                      </>
                     ) : (
                       <p className="text-sm">{message.content}</p>
                     )}
@@ -265,6 +272,9 @@ const AIAssistant = () => {
             <Send className="w-4 h-4" />
           </Button>
         </form>
+        {/* Said where the answers are read, not buried in the terms: this is
+            generated text and it can be wrong. */}
+        <p className="mt-2 text-xs text-muted-foreground">{t('aiReport.disclaimer', aiReportEn.disclaimer)}</p>
       </div>
     </AppLayout>
   );

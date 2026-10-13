@@ -15,6 +15,7 @@ import {
 
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { isNativeApp } from "@/lib/native/platform";
 import { useLeads } from "@/hooks/rd/useLeads";
 import {
   useConversation,
@@ -419,6 +420,11 @@ function ActivePane({
               : t("rd.inbox.manualHandling", "Manual handling")}
           </div>
         </div>
+        {/* Call, Book showing and Take over have no onClick: nothing happens
+            when they are pressed. They are left out of the iOS / Android app,
+            where a button that does nothing is a store-review rejection and a
+            worse first impression on a touch screen. Unchanged on the web. */}
+        {!isNativeApp() && (
         <div className="flex gap-1.5">
           <IconActionBtn aria-label={t("rd.actions.call", "Call")}>
             <IconPhone />
@@ -430,6 +436,7 @@ function ActivePane({
             {t("rd.actions.takeOver", "Take over")}
           </RDButton>
         </div>
+        )}
       </div>
 
       {/* Thread */}

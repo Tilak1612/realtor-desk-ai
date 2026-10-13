@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# Web bundle for the iOS / Android app (npm run build:mobile); Capacitor copies it into the native projects
+dist-mobile
 *.local
 
 # Temporary / scratch files — never commit binaries or scratch work
@@ -23,6 +25,7 @@ supabase/.branches/
 .env
 .env.local
 .env.production
+.env.mobile
 
 # Editor directories and files
 .vscode/*

@@ -8,6 +8,10 @@
     "build": "vite build",
     "build:seo": "vite build && node scripts/prerender-pages.js",
     "build:dev": "vite build --mode development",
+    "build:mobile": "vite build --mode mobile --outDir dist-mobile",
+    "cap:sync": "npm run build:mobile && npx cap sync",
+    "cap:ios": "npm run cap:sync && npx cap open ios",
+    "cap:android": "npm run cap:sync && npx cap open android",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
@@ -24,7 +28,18 @@
     "verify:auth": "node scripts/verify-auth-flows.mjs"
   },
   "dependencies": {
+    "@aparajita/capacitor-secure-storage": "^8.0.1",
     "@calcom/embed-react": "^1.5.3",
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/browser": "^8.0.5",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/filesystem": "^8.1.4",
+    "@capacitor/ios": "^8.5.3",
+    "@capacitor/keyboard": "^8.0.6",
+    "@capacitor/share": "^8.0.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
@@ -89,6 +104,8 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.3",
     "@eslint/js": "^9.32.0",
     "@sentry/vite-plugin": "^5.1.1",
     "@tailwindcss/typography": "^0.5.16",
