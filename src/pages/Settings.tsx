@@ -6,6 +6,7 @@ import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Shield } 
 import MFASetup from "@/components/settings/MFASetup";
 import DeleteAccountDialog from "@/components/settings/DeleteAccountDialog";
 import { saveExportFile } from "@/lib/account/exportFile";
+import { settingsDataEn } from "@/i18n/settingsData";
 import { isNativeApp } from "@/lib/native/platform";
 import GoogleCalendarCard from "@/components/integrations/GoogleCalendarCard";
 import ChangePassword, { useHasPasswordAuth } from "@/components/settings/ChangePassword";
@@ -653,15 +654,19 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
             </Card>
           )}
 
-          {/* PIPEDA Compliance - Data Rights */}
+          {/* Data card: export and delete. The wording says where the database
+              is and what can be done here, and names no statute: the card used
+              to be titled "Security (PIPEDA)" and described as "PIPEDA & CASL
+              Compliant", which is a claim of compliance (see
+              src/i18n/settingsData.ts). */}
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
                 <Shield className="w-4 h-4" />
-                {t('app.settings.security')} (PIPEDA)
+                {t('settingsData.title', settingsDataEn.title)}
               </CardTitle>
               <CardDescription className="text-xs">
-                {t('canadian.compliant')}
+                {t('settingsData.description', settingsDataEn.description)}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -671,10 +676,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                     {t("app.settings.dataRights.exportTitle", "Export my data")}
                   </h3>
                   <p className="text-xs text-muted-foreground">
-                    {t(
-                      "app.settings.dataRights.exportDesc",
-                      "Download everything we store about you as a JSON file (PIPEDA access right)."
-                    )}
+                    {t('settingsData.exportDesc', settingsDataEn.exportDesc)}
                   </p>
                 </div>
                 <Button

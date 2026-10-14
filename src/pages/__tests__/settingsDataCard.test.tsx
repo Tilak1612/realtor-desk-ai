@@ -52,6 +52,7 @@ vi.mock("@/components/settings/ChangePassword", () => ({ default: () => null, us
 vi.mock("@/components/settings/DeleteAccountDialog", () => ({ default: () => <p>delete account control</p> }));
 
 import Settings from "../Settings";
+import { settingsDataEn, settingsDataFr } from "@/i18n/settingsData";
 
 beforeEach(async () => {
   h.native = false;
@@ -73,5 +74,42 @@ describe.each([
     // The box was a <strong>Security:</strong> followed by the one word.
     expect(container.textContent).not.toMatch(/Security:\s*PIPEDA/);
     expect(Array.from(container.querySelectorAll("strong")).map((el) => el.textContent)).not.toContain("Security:");
+  });
+});
+
+/**
+ * The card's own wording. It was titled "Security (PIPEDA)", described as
+ * "PIPEDA & CASL Compliant" and its export line ended "(PIPEDA access right)":
+ * three claims of compliance on a card that exports and deletes data. It now
+ * says where the database is and what can be done here, in both languages.
+ */
+describe.each([
+  ["en", settingsDataEn, "Export my data"],
+  ["fr", settingsDataFr, "Exporter mes données"],
+] as const)("Settings data card wording (%s)", (lng, copy, exportTitle) => {
+  it("names the card, says where the database is, and claims no compliance", async () => {
+    await act(async () => {
+      await (await import("@/i18n/config")).default.changeLanguage(lng);
+    });
+    renderWithProviders(<Settings appChrome />, { route: "/app/settings" });
+
+    expect(await screen.findByText(exportTitle)).toBeInTheDocument();
+    expect(screen.getByText(copy.description)).toBeInTheDocument();
+    expect(screen.getByText(copy.exportDesc)).toBeInTheDocument();
+
+    // The whole card (shadcn Card root): heading, description, export row.
+    const card = screen.getByText(copy.title).closest(".rounded-lg.border");
+    expect(card).not.toBeNull();
+    const text = card!.textContent ?? "";
+    expect(text).toContain(copy.description);
+    expect(text).toContain(copy.exportDesc);
+    expect(text).not.toMatch(/PIPEDA|LPRPDE|CASL|LCAP|complian|conforme/i);
+  });
+
+  it("makes no legal claim in the strings themselves", () => {
+    for (const value of Object.values(copy)) {
+      expect(value).not.toMatch(/PIPEDA|LPRPDE|CASL|LCAP|complian|conforme|certif/i);
+    }
+    expect(copy.description).toMatch(/Canada/);
   });
 });

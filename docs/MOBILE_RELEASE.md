@@ -53,7 +53,7 @@ Not tested, and why:
 
 | Artefact | Location | Status |
 |---|---|---|
-| Android App Bundle | `android/app/build/outputs/bundle/release/app-release.aab` | Signed with the upload key below |
+| Android App Bundle | `android/app/build/outputs/bundle/release/app-release.aab` | Signed with the upload key below. Rebuilt 13 October after the audit fixes |
 | Android debug APK | `android/app/build/outputs/apk/debug/app-debug.apk` | For sideloading on a test phone |
 | iOS archive | `/tmp/rd-ios-archive/RealtorDesk.xcarchive` | Unsigned. Proves the release configuration compiles; it cannot be uploaded |
 
@@ -171,3 +171,20 @@ Only if you want provider sign-in in the app later: add `com.brainfyai.realtorde
 - **Consent records are deleted with the account.** `sms_consent` and the consent fields on contacts cascade. Keeping proof of consent after deletion would need an archive table; that is a retention decision.
 - **No password re-prompt before deletion.** A signed-in session plus the typed word is enough.
 - **Known gaps:** iPhone only (iPad not targeted); the two iOS permission prompts are in English only; fonts load from Google at launch; the bundle is about 15 MB because unreachable marketing media is included; universal links and app links are not configured; the data export covers profile, contacts and deals only.
+
+## 7. After the signed-in simulator audit (13 October 2026)
+
+Fixed and committed:
+
+- **AI Assistant.** `claude-chat` now calls the Anthropic Messages API with `ANTHROPIC_API_KEY`, the secret the landing-page bot already uses; the Lovable gateway key it used before is rejected in production. Its system prompt no longer says it creates tasks, schedules follow-ups or has market data. Three bugs fixed (contact count capped at 5, pipeline value including closed deals, writes to a table that does not exist). The page shows a lasting error with a retry when a request fails. **The function is NOT deployed:** run `supabase functions deploy claude-chat --project-ref vxkqwkeqincbxrgglmca`, then ask it a question.
+- **Model and cost.** The function defaults to `claude-opus-5-5` at low effort; the landing-page bot uses `claude-haiku-4-5`. Set the `CLAUDE_CHAT_MODEL` secret (for example `claude-haiku-5-5`) to change it without a deploy.
+- **Launch screen.** iOS was rejecting the launch storyboard because the splash image decoded to 29.9 MB against a 25 MB limit, so launch showed black. The launch screen is now the paper colour with a small mark, the app is fixed to light appearance, and Android's dark-mode splash variants are removed.
+- **Dashboard.** The new dashboard is the default in the app; its "Live" badge and "Desk AI replied to" wording are gone.
+- **Wording.** Privacy Policy section 9 now matches the PIPEDA page (database in Canada, some providers may process content outside Canada). The Settings data card no longer says "PIPEDA & CASL Compliant".
+
+Still open for the owner:
+
+- Review the Privacy Policy change and bump `PRIVACY_VERSION` in `src/config/legal.ts` when it ships. Lines 62-63 of the same policy still say data is stored "exclusively" in "Toronto and Vancouver regions"; the database is in ca-central-1.
+- Other compliance claims still on the site: `SignupAside.tsx:112`, "Conforme PIPEDA par Conception" in the i18n file, and several "CASL-compliant" feature strings.
+- `ai-chatbot` still uses the rejected Lovable key (nothing calls it). `docs/OWNERS-MANUAL.md:34` still lists that key as required.
+- Nobody is notified of AI response reports, and the legacy feedback form saves nothing.
