@@ -63,7 +63,7 @@ describe("Signup form", () => {
     await waitFor(() => expect(signUp).toHaveBeenCalled(), { timeout: 5000 });
     const meta = signUp.mock.calls[0][0].options.data;
     expect(meta.terms_version).toBe("2026-04-22");
-    expect(meta.privacy_version).toBe("2026-04-24");
+    expect(meta.privacy_version).toBe("2026-10-15");
     expect(Date.parse(meta.terms_accepted_at)).not.toBeNaN();
     // Untouched marketing box must never record consent.
     expect(meta.marketing_consent).toBe(false);

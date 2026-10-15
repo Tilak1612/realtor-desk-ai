@@ -15,7 +15,7 @@
 // corresponding page's terms actually change.
 
 export const TERMS_VERSION = "2026-04-22";
-export const PRIVACY_VERSION = "2026-04-24";
+export const PRIVACY_VERSION = "2026-10-15";
 
 export const LEGAL_ROUTES = {
   terms: "/terms-of-service",

@@ -59,8 +59,9 @@ const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">3. Data Storage and Security</h2>
               <p className="mb-4">
-                Your data is stored exclusively in secure Canadian data centers (Toronto and Vancouver regions) 
-                to ensure compliance with Canadian privacy laws and data sovereignty requirements.
+                Your account data is stored in a secure Canadian data centre (AWS ca-central-1, Montréal)
+                to support compliance with Canadian privacy laws. See section 10 for the limited processing
+                that happens outside Canada.
               </p>
               <p className="mb-4"><strong>Security Measures:</strong></p>
               <ul className="list-disc pl-6 space-y-2 mb-4">
@@ -101,7 +102,51 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">5. Your Rights</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">5. Google User Data</h2>
+              <p className="mb-4">
+                <strong>Sign in with Google:</strong> If you sign in with Google, RealtorDesk receives your name,
+                email address and profile picture from your Google account.
+              </p>
+              <p className="mb-4">
+                <strong>Google Calendar (optional):</strong> If you connect Google Calendar in Settings, RealtorDesk
+                asks for your Google email address and permission to manage calendars it creates
+                (the <code>calendar.app.created</code> scope). We create one calendar named "RealtorDesk AI" in your
+                Google account and add the showings, appointments and follow-ups you choose to it. We cannot see
+                or change your other calendars or events.
+              </p>
+              <p className="mb-4">
+                <strong>How we use it:</strong> Only to create and authenticate your account, show your name and
+                avatar in the app, and provide features you turn on. We do not use Google user data for
+                advertising, do not sell it, do not use it to train AI models, and do not allow people to read it
+                except with your consent, for security purposes, or where required by law.
+              </p>
+              <p className="mb-4">
+                <strong>Storage and security:</strong> Account data is stored with Supabase in Canada (AWS
+                ca-central-1). Google Calendar access tokens are encrypted before they are stored. Requests to
+                Google are handled by our hosting provider, Vercel, which may process them in the United States.
+                All data is encrypted in transit and at rest.
+              </p>
+              <p className="mb-4">
+                <strong>Sharing:</strong> We do not share Google user data with third parties, except the service
+                providers that run RealtorDesk (Supabase for authentication and database, Vercel for hosting), or
+                where required by law.
+              </p>
+              <p className="mb-4">
+                <strong>Retention and deletion:</strong> We keep this data while your account is active.
+                Disconnecting Google Calendar in Settings revokes our access at Google and deletes the stored
+                tokens immediately. To delete your account, email privacy@realtordesk.ai; we delete
+                Google-derived data within 30 days. You can also revoke access at any time at{" "}
+                <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">myaccount.google.com/permissions</a>.
+              </p>
+              <p>
+                RealtorDesk's use and transfer of information received from Google APIs adheres to the{" "}
+                <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Google API Services User Data Policy</a>,
+                including the Limited Use requirements.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Your Rights</h2>
               <p>Under Canadian privacy law (PIPEDA), you have the right to:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Access your personal information</li>
@@ -113,7 +158,7 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">6. Cookies and Tracking</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">7. Cookies and Tracking</h2>
               <p className="mb-4">
                 We use cookies and similar tracking technologies to enhance your experience and understand how 
                 you use our platform. Analytics and marketing cookies stay switched
@@ -140,7 +185,7 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">7. Changes to This Policy</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. Changes to This Policy</h2>
               <p>
                 We may update our Privacy Policy from time to time. We will notify you of any changes by 
                 posting the new Privacy Policy on this page and updating the "Last updated" date.
@@ -148,7 +193,7 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">8. PIPEDA Accountability</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. PIPEDA Accountability</h2>
               <p className="mb-4">
                 As required by the Personal Information Protection and Electronic Documents Act (PIPEDA), 
                 Brainfy AI Inc. is accountable for all personal information under our control.
@@ -167,16 +212,17 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. International Data Transfers</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">10. International Data Transfers</h2>
               <p>
-                Your personal information is stored and processed exclusively in Canada. We do not transfer 
-                personal information outside of Canada, ensuring full compliance with Canadian data residency 
-                requirements and PIPEDA regulations.
+                Your account data is stored in Canada. Some service providers that help us run RealtorDesk may
+                process limited data outside Canada; for example, our hosting provider Vercel may handle requests
+                to Google APIs in the United States (see section 5). Where this happens, the data remains subject
+                to the safeguards described in this policy and to PIPEDA.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">10. Children's Privacy</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">11. Children's Privacy</h2>
               <p>
                 Our services are intended for real estate professionals aged 18 and older. We do not knowingly 
                 collect personal information from individuals under 18. If we become aware that we have collected 
@@ -185,7 +231,7 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">11. Contact Us</h2>
+              <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">12. Contact Us</h2>
               <p className="mb-4">
                 If you have any questions about this Privacy Policy or wish to exercise your privacy rights, 
                 please contact us:
