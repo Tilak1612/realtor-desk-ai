@@ -16,6 +16,8 @@ import {
 import type { ConversationMessage, Lead } from "@/types/rd";
 import { cn } from "@/lib/utils";
 import { isNativeApp } from "@/lib/native/platform";
+import { appLocale } from "@/lib/rd/format";
+import { leadActivity, messageTime, tempLabel } from "@/lib/rd/relativeTime";
 import { useLeads } from "@/hooks/rd/useLeads";
 import {
   useConversation,
@@ -264,9 +266,11 @@ function ThreadRow({
   onSelect: () => void;
   lastMessage: ConversationMessage | undefined;
 }) {
+  const { t, i18n } = useTranslation();
+  const locale = appLocale(i18n.language);
   const last = lastMessage;
-  const preview = last?.body ?? "No messages yet.";
-  const timeLabel = last ? new Date(last.sentAt).toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" }) : lead.lastActivity;
+  const preview = last?.body ?? t("rd.shared.inbox.noMessages");
+  const timeLabel = last ? messageTime(last.sentAt, t, locale) : leadActivity(lead, t, locale);
   const hasUnread = !active && last?.author === "lead";
 
   const stageLabel = lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold";
@@ -330,7 +334,7 @@ function ThreadRow({
               stageLabel === "Cold" && "bg-rd-ink-100 text-rd-ink-700"
             )}
           >
-            {stageLabel} · {lead.score}
+            {tempLabel(lead.score, t)} · {lead.score}
           </span>
         </div>
       </div>
@@ -406,7 +410,7 @@ function ActivePane({
               tone={lead.score >= 80 ? "terra" : lead.score >= 60 ? "navy" : "neutral"}
               size="sm"
             >
-              {lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold"} · {lead.score}
+              {tempLabel(lead.score, t)} · {lead.score}
             </RDBadge>
             {lead.listing && (
               <span className="text-[11px] text-rd-ink-500">· {lead.listing}</span>
@@ -536,8 +540,9 @@ function IconActionBtn({ children, ...rest }: React.ButtonHTMLAttributes<HTMLBut
 }
 
 function MsgBubble({ message, flag }: { message: ConversationMessage; flag: boolean }) {
+  const { t, i18n } = useTranslation();
   const { author, authorName, body, sentAt, language } = message;
-  const time = new Date(sentAt).toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" });
+  const time = messageTime(sentAt, t, appLocale(i18n.language));
 
   if (author === "system") {
     return (
@@ -572,7 +577,7 @@ function MsgBubble({ message, flag }: { message: ConversationMessage; flag: bool
           )}
         >
           <span className="font-semibold text-rd-ink-700">
-            {isAI ? "Desk AI" : isSelf ? "You" : authorName}
+            {isAI ? "Desk AI" : isSelf ? t("rd.shared.inbox.you") : authorName}
           </span>
           {language && (
             <span
@@ -601,7 +606,7 @@ function MsgBubble({ message, flag }: { message: ConversationMessage; flag: bool
         </div>
         {flag && (
           <div className="text-right text-[10px] text-rd-terra-700 font-bold mt-1 tracking-[0.04em]">
-            ⚑ FLAGGED FOR YOU
+            ⚑ {t("rd.shared.inbox.flagged").toLocaleUpperCase(i18n.language)}
           </div>
         )}
       </div>

@@ -30,6 +30,8 @@ import { cn } from "@/lib/utils";
 import { isNativeApp } from "@/lib/native/platform";
 import { useLeads } from "@/hooks/rd/useLeads";
 import { useUpdateLeadStage } from "@/hooks/rd/useUpdateLeadStage";
+import { appLocale } from "@/lib/rd/format";
+import { leadActivity, tempLabel } from "@/lib/rd/relativeTime";
 
 // /app/pipeline — Kanban per rd-app.jsx Artboard_Pipeline, now with
 // @dnd-kit drag-drop wired to useUpdateLeadStage. Drags are only armed
@@ -333,6 +335,7 @@ function KanbanCard({ lead, isLive }: { lead: Lead; isLive: boolean }) {
 }
 
 function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
+  const { t, i18n } = useTranslation();
   const band: "Hot" | "Warm" | "Cold" =
     lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold";
   const tagTone = {
@@ -367,7 +370,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
             tagTone
           )}
         >
-          {band} · {lead.score}
+          {tempLabel(lead.score, t)} · {lead.score}
         </span>
       </div>
       <div className="text-[11px] text-rd-ink-600 mb-2 leading-[1.35] line-clamp-2">
@@ -376,7 +379,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
       <div className="flex justify-between items-center text-[10px] text-rd-ink-500 gap-2">
         <span className="flex items-center gap-1 truncate">
           <RDAvatar name={lead.name} size={18} />
-          {lead.lastActivity}
+          {leadActivity(lead, t, appLocale(i18n.language))}
         </span>
         {lead.aiHandling && (
           <span className="text-rd-terra-700 flex items-center gap-1 font-semibold flex-shrink-0">
