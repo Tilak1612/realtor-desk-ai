@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
@@ -15,6 +16,7 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
+  const { t } = useTranslation();
   const { trialExpired, trialDaysLeft } = useSubscription();
 
   return (
@@ -46,7 +48,7 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-            Back to Desk
+            {t("rd.shared.backToDesk")}
           </Link>
         </div>
 

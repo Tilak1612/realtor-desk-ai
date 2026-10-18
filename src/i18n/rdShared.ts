@@ -5,6 +5,7 @@
 // tièdes / froids" as on the Leads tabs.
 
 export const rdSharedEn = {
+  backToDesk: "Back to Desk",
   leadCounts: "{{total}} total · {{hot}} hot",
   temp: { hot: "Hot", warm: "Warm", cold: "Cold" },
   source: {
@@ -32,6 +33,7 @@ export const rdSharedEn = {
 };
 
 export const rdSharedFr: typeof rdSharedEn = {
+  backToDesk: "Retour au bureau",
   leadCounts: "{{total}} au total · {{hot}} chauds",
   temp: { hot: "Chaud", warm: "Tiède", cold: "Froid" },
   source: {
