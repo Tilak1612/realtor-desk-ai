@@ -28,6 +28,10 @@ verify_jwt = false
 # Same pattern as create-checkout — function validates JWT itself.
 verify_jwt = false
 
+[functions.delete-account]
+# Validates the JWT itself and takes the user id only from the verified token.
+verify_jwt = false
+
 [functions.claude-chat]
 verify_jwt = true
 

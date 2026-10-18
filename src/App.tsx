@@ -15,6 +15,10 @@ import RequireBilling from "./components/RequireBilling";
 import CookieConsent from "./components/CookieConsent";
 import SiteAssistant from "./components/marketing/SiteAssistant";
 import { SkipToContent } from "./components/SkipToContent";
+import { isNativeApp } from "@/lib/native/platform";
+import NativeRouteGuard from "./components/native/NativeRouteGuard";
+import NativeAuthBridge from "./components/native/NativeAuthBridge";
+import NativeLoadError from "./components/native/NativeLoadError";
 
 // Critical path — eagerly loaded (landing, auth, 404)
 // Phase 2 redesign: new marketing pages live under src/pages/rd/.
@@ -116,6 +120,7 @@ const PartnersApply = lazyWithRetry(() => import("./pages/PartnersApply"));
 const PartnersTerms = lazyWithRetry(() => import("./pages/PartnersTerms"));
 const PIPEDACompliancePage = lazyWithRetry(() => import("./pages/PIPEDACompliancePage"));
 const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"));
+const AccountDeletion = lazyWithRetry(() => import("./pages/AccountDeletion"));
 const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"));
 const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const Unsubscribe = lazyWithRetry(() => import("./pages/Unsubscribe"));
@@ -307,7 +312,10 @@ const RouteAnalytics = () => {
 
 // Preview refresh marker: harmless no-op comment to trigger a fresh rebuild.
 const App = () => (
-  <ErrorBoundary>
+  // In the iOS / Android app the boundary shows a "couldn't load, try again"
+  // screen in EN/FR instead of its browser-worded default. `undefined` on the
+  // web, which is what the prop already was.
+  <ErrorBoundary fallback={isNativeApp() ? <NativeLoadError /> : undefined}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -323,6 +331,13 @@ const App = () => (
               programmatically focusable without being in the Tab order.
               Every route renders inside this container. */}
           <div id="main-content" tabIndex={-1} className="outline-none">
+          {/* Native app only: redirects every non-product path (marketing,
+              pricing, sign-up, billing) to /app, which is also how "/" becomes
+              the dashboard there. Renders its children untouched on the web.
+              The allow-list is src/lib/native/routes.ts. */}
+          {/* Deep links and session refresh for the iOS/Android app. Renders nothing; a no-op on the web. */}
+          <NativeAuthBridge />
+          <NativeRouteGuard>
           <Routes>
           <Route path="/" element={<RDHome />} />
           <Route path="/features" element={<RDFeatures />} />
@@ -409,6 +424,7 @@ const App = () => (
           <Route path="/partners/terms" element={<PartnersTerms />} />
           <Route path="/pipeda-compliance" element={<PIPEDACompliancePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/account-deletion" element={<AccountDeletion />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/unsubscribe" element={<Unsubscribe />} />
@@ -494,6 +510,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
           </Routes>
+          </NativeRouteGuard>
           </div>
           </Suspense>
           </SubscriptionProvider>

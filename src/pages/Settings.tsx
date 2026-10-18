@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import { signOutIntentionally } from "@/lib/auth/signOut";
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Trash2, Shield, Upload } from "lucide-react";
+import { LogOut, User, Bell, Lock, Globe, Crown, CreditCard, Download, Shield } from "lucide-react";
 import MFASetup from "@/components/settings/MFASetup";
+import DeleteAccountDialog from "@/components/settings/DeleteAccountDialog";
+import { saveExportFile } from "@/lib/account/exportFile";
+import { settingsDataEn } from "@/i18n/settingsData";
+import { isNativeApp } from "@/lib/native/platform";
 import GoogleCalendarCard from "@/components/integrations/GoogleCalendarCard";
 import ChangePassword, { useHasPasswordAuth } from "@/components/settings/ChangePassword";
 import { Button } from "@/components/ui/button";
@@ -81,17 +85,6 @@ const EMPTY_PROFILE_FORM: ProfileFormState = {
   primary_language: "english",
   avatar_url: "",
 };
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 
 // The app has two shells: the legacy AppLayout (Today/Contacts/Deals/Tasks)
 // and the newer AppShell used by every /app/* route. Settings was only ever
@@ -137,6 +130,16 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
   const hasPasswordAuth = useHasPasswordAuth();
   const [profileForm, setProfileForm] = useState<ProfileFormState>(EMPTY_PROFILE_FORM);
   const { subscribed, trialDaysLeft, trialExpired, subscriptionTier, trialEndsAt, subscriptionEnd } = useSubscription();
+  // The iOS / Android app is a sign-in companion to a subscription bought on
+  // the website, and it must not show anything unfinished. In the app only,
+  // this page drops: the link to Billing and the line telling an expired trial
+  // to subscribe (no purchase path in the app), the Google Calendar card (it
+  // calls /api/integrations/google on its own origin, and the app's origin has
+  // no such endpoint), and the two notification rows that are still "Coming
+  // Soon". Always false on the web, where none of this changes.
+  const native = isNativeApp();
+  // The shared demo / reviewer account cannot delete itself.
+  const isDemo = (profile as { is_demo?: boolean } | null)?.is_demo === true;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -300,14 +303,12 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
         notice: "Exported from Realtor Desk at the account holder's request."
       };
 
-      const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-        type: "application/json",
-      });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `realtordesk-data-export-${new Date().toISOString().split('T')[0]}.json`;
-      a.click();
+      // A browser downloads the file; the app has no download manager behind
+      // an <a download>, so there it goes through the system share sheet.
+      await saveExportFile(
+        `realtordesk-data-export-${new Date().toISOString().split('T')[0]}.json`,
+        JSON.stringify(exportData, null, 2),
+      );
 
       toast({
         title: t('app.common.success'),
@@ -322,13 +323,6 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleDeleteAccount = () => {
-    toast({
-      title: t('app.common.info'),
-      description: "Please contact support@realtordesk.ai to request account deletion. We'll process your request within 30 days as required by PIPEDA.",
-    });
   };
 
   return (
@@ -497,8 +491,8 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
             </CardContent>
           </Card>
 
-          {/* Google Calendar integration */}
-          <GoogleCalendarCard />
+          {/* Google Calendar integration (web only, see `native` above) */}
+          {!native && <GoogleCalendarCard />}
 
           {/* Subscription Status Section */}
           <Card className={subscribed ? "border-accent/30 bg-accent/5" : trialExpired ? "border-destructive/30 bg-destructive/5" : "border-primary/30 bg-primary/5"}>
@@ -539,9 +533,11 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                       <Badge variant="destructive" className="text-xs">
                         {t('trial.status.trialExpired', 'Trial Expired')}
                       </Badge>
-                      <p className="text-xs text-muted-foreground">
-                        {t('trial.expired.description', 'Subscribe now to continue using Realtor Desk')}
-                      </p>
+                      {!native && (
+                        <p className="text-xs text-muted-foreground">
+                          {t('trial.expired.description', 'Subscribe now to continue using Realtor Desk')}
+                        </p>
+                      )}
                     </>
                   ) : (
                     <>
@@ -557,12 +553,14 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                     </>
                   )}
                 </div>
-                <Link to="/billing">
-                  <Button variant={subscribed ? "outline" : "default"} size="sm" className="h-8 text-xs">
-                    <CreditCard className="w-3.5 h-3.5 mr-1.5" />
-                    {subscribed ? t('app.billing.manageBilling', 'Manage Billing') : t('trial.upgradeNow', 'Upgrade Now')}
-                  </Button>
-                </Link>
+                {!native && (
+                  <Link to="/billing">
+                    <Button variant={subscribed ? "outline" : "default"} size="sm" className="h-8 text-xs">
+                      <CreditCard className="w-3.5 h-3.5 mr-1.5" />
+                      {subscribed ? t('app.billing.manageBilling', 'Manage Billing') : t('trial.upgradeNow', 'Upgrade Now')}
+                    </Button>
+                  </Link>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -624,44 +622,51 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
             </CardContent>
           </Card>
 
-          {/* Notifications Section */}
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base font-medium flex items-center gap-2">
-                <Bell className="w-4 h-4" />
-                {t('app.settings.notifications.label', 'Notifications')}
-              </CardTitle>
-              <CardDescription className="text-xs">
-                {t('app.settings.notifications.desc', 'Manage your email and push notification preferences')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-sm font-medium">{t('app.settings.notifications.email', 'Email notifications')}</h3>
-                  <p className="text-xs text-muted-foreground">{t('app.settings.notifications.emailDesc', 'Receive email alerts for new leads and deal updates')}</p>
+          {/* Notifications Section. Both rows are "Coming Soon", so in the app
+              the whole card is left out rather than shown empty. */}
+          {!native && (
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-medium flex items-center gap-2">
+                  <Bell className="w-4 h-4" />
+                  {t('app.settings.notifications.label', 'Notifications')}
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  {t('app.settings.notifications.desc', 'Manage your email and push notification preferences')}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium">{t('app.settings.notifications.email', 'Email notifications')}</h3>
+                    <p className="text-xs text-muted-foreground">{t('app.settings.notifications.emailDesc', 'Receive email alerts for new leads and deal updates')}</p>
+                  </div>
+                  <Badge variant="secondary" className="text-xs">{t('app.settings.notifications.comingSoon', 'Coming Soon')}</Badge>
                 </div>
-                <Badge variant="secondary" className="text-xs">{t('app.settings.notifications.comingSoon', 'Coming Soon')}</Badge>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-sm font-medium">{t('app.settings.notifications.sms', 'SMS notifications')}</h3>
-                  <p className="text-xs text-muted-foreground">{t('app.settings.notifications.smsDesc', 'Get text alerts for urgent follow-ups')}</p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-medium">{t('app.settings.notifications.sms', 'SMS notifications')}</h3>
+                    <p className="text-xs text-muted-foreground">{t('app.settings.notifications.smsDesc', 'Get text alerts for urgent follow-ups')}</p>
+                  </div>
+                  <Badge variant="secondary" className="text-xs">{t('app.settings.notifications.comingSoon', 'Coming Soon')}</Badge>
                 </div>
-                <Badge variant="secondary" className="text-xs">{t('app.settings.notifications.comingSoon', 'Coming Soon')}</Badge>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          )}
 
-          {/* PIPEDA Compliance - Data Rights */}
+          {/* Data card: export and delete. The wording says where the database
+              is and what can be done here, and names no statute: the card used
+              to be titled "Security (PIPEDA)" and described as "PIPEDA & CASL
+              Compliant", which is a claim of compliance (see
+              src/i18n/settingsData.ts). */}
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
                 <Shield className="w-4 h-4" />
-                {t('app.settings.security')} (PIPEDA)
+                {t('settingsData.title', settingsDataEn.title)}
               </CardTitle>
               <CardDescription className="text-xs">
-                {t('canadian.compliant')}
+                {t('settingsData.description', settingsDataEn.description)}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -671,10 +676,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
                     {t("app.settings.dataRights.exportTitle", "Export my data")}
                   </h3>
                   <p className="text-xs text-muted-foreground">
-                    {t(
-                      "app.settings.dataRights.exportDesc",
-                      "Download everything we store about you as a JSON file (PIPEDA access right)."
-                    )}
+                    {t('settingsData.exportDesc', settingsDataEn.exportDesc)}
                   </p>
                 </div>
                 <Button
@@ -691,55 +693,20 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
 
               <Separator />
 
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-sm font-medium">
-                    {t("app.settings.dataRights.deleteTitle", "Delete my account")}
-                  </h3>
-                  <p className="text-xs text-muted-foreground">
-                    {t(
-                      "app.settings.dataRights.deleteDesc",
-                      "Erase your profile and all associated data (PIPEDA right to erasure). Processed within 30 days."
-                    )}
-                  </p>
-                </div>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="destructive" disabled={loading} size="sm" className="h-8 text-xs">
-                      <Trash2 className="w-3.5 h-3.5 mr-1.5" />
-                      {t('app.common.delete')}
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        {t("app.settings.dataRights.confirmTitle", "Delete your account?")}
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        {t(
-                          "app.settings.dataRights.confirmBody",
-                          "This is a PIPEDA right-to-erasure request. We'll confirm by email and fully erase your data within 30 days. Undo is not available once processed."
-                        )}
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>{t('app.common.cancel')}</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={handleDeleteAccount}
-                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                      >
-                        {t('app.common.delete')}
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>
-
-              <div className="bg-muted p-4 rounded-lg">
-                <p className="text-xs">
-                  <strong>{t('app.settings.security')}:</strong> PIPEDA
-                </p>
-              </div>
+              {/* The old dialog here ended in a toast asking the person to email
+                  support. This one deletes the account: see DeleteAccountDialog. */}
+              <DeleteAccountDialog
+                isDemo={isDemo}
+                disabled={loading || !userId}
+                onExport={handleExportData}
+              />
+              {/* A grey box reading "Security: PIPEDA" used to close this card,
+                  on the web and in the app. It was a label with nothing after
+                  it: the name of a statute, saying nothing about what is done
+                  with the data, and readable as a claim of compliance that
+                  nobody had worded or approved. Removed rather than replaced,
+                  so that no new privacy statement is introduced here; where the
+                  data is kept is described in the privacy policy. */}
             </CardContent>
           </Card>
 

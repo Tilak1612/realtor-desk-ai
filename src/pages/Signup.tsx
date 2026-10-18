@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormAnalytics } from "@/hooks/useFormAnalytics";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -23,8 +23,9 @@ import { TRIAL_PERIOD_DAYS } from "@/config/billing";
 import ContinueConsentNotice from "@/components/auth/ContinueConsentNotice";
 import OAuthButtons from "@/components/auth/OAuthButtons";
 import { buildConsentRecord } from "@/config/legal";
+import { authLinkOrigin, isNativeApp } from "@/lib/native/platform";
 
-const Signup = () => {
+const SignupPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -112,7 +113,10 @@ const Signup = () => {
     setStatusMessage(t('auth.signup.status.creating', 'Creating your account…'));
     setLoading(true);
     try {
-      const redirectUrl = `${window.location.origin}/dashboard`;
+      // The page's own origin in a browser (authLinkOrigin() is exactly
+      // window.location.origin there), so preview and production each send a
+      // confirmation link back to themselves.
+      const redirectUrl = `${authLinkOrigin()}/dashboard`;
       const { data, error } = await supabase.auth.signUp({
         email: formData.email!,
         password: formData.password!,
@@ -421,6 +425,17 @@ const Signup = () => {
       </AuthCard>
     </AuthLayout>
   );
+};
+
+// Sign-up collects a card at Stripe Checkout, so it does not exist inside the
+// iOS / Android app, which is a sign-in companion to an account created on the
+// website (App Store guideline 3.1.3(f), Google Play payments policy). The
+// app's route guard already refuses /signup; this is the page's own lock, so
+// the form cannot be reached by a route or link added later. In the app the
+// component above never mounts.
+const Signup = () => {
+  if (isNativeApp()) return <Navigate to="/login" replace />;
+  return <SignupPage />;
 };
 
 export default Signup;

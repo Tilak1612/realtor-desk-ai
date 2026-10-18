@@ -20,19 +20,26 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { useDueTasks } from "@/hooks/useDueTasks";
 import { COMMUNITY_URL, isCommunityEnabled } from "@/lib/community";
-import { signOutIntentionally } from "@/lib/auth/signOut";
+import { signOutIntentionally, signedOutLanding } from "@/lib/auth/signOut";
+import { isNativeApp } from "@/lib/native/platform";
+import { isAllowedInNative } from "@/lib/native/routes";
 
 interface DashboardNavbarProps {
   user: any;
   profile: any;
 }
 
-const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
+// The bell and its dropdown of due tasks.
+//
+// A component of its own, not inline in the header, so that leaving it out
+// also leaves out its query: the iOS / Android app does not render it (the
+// product has no notification system, and a bell in an app reads as push
+// notifications, which the app does not have and does not ask permission for),
+// and a hook called in the header would still fetch tasks nobody is shown.
+// On the web it renders exactly what the inline version did.
+const NotificationBell = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
-  const [avatarUploading, setAvatarUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   // Real signal, not a constant. See useDueTasks for why `tasks` is the honest
   // source and why an unknown count must not be rendered as zero.
   const {
@@ -41,6 +48,99 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
     loading: notifLoading,
     error: notifError,
   } = useDueTasks();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative h-8 w-8"
+          aria-label={t('a11y.notifications', 'Notifications')}
+        >
+          <Bell className="h-4 w-4" />
+          {notificationCount > 0 && (
+            <Badge
+              variant="destructive"
+              className="absolute -top-0.5 -right-0.5 h-4 w-4 flex items-center justify-center p-0 text-[10px]"
+            >
+              {notificationCount}
+            </Badge>
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-72">
+        <DropdownMenuLabel className="text-sm">{t('nav.notifications', 'Notifications')}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {notifLoading ? (
+          <div className="p-4 space-y-2" aria-hidden="true">
+            <div className="h-3 w-3/4 bg-muted rounded animate-pulse" />
+            <div className="h-3 w-1/2 bg-muted rounded animate-pulse" />
+          </div>
+        ) : notifError ? (
+          /* Never report an empty inbox on a failed query -- that is the
+             same false negative as the hardcoded 0, only harder to spot. */
+          <div className="p-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              {t('nav.notificationsUnavailable', "Couldn't load notifications")}
+            </p>
+          </div>
+        ) : dueTasks.length === 0 ? (
+          <div className="p-4 text-center">
+            <Bell className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+            <p className="text-sm text-muted-foreground">{t('nav.noNotifications', 'No new notifications')}</p>
+          </div>
+        ) : (
+          <div className="max-h-72 overflow-y-auto">
+            {dueTasks.map((task) => (
+              <DropdownMenuItem
+                key={task.id}
+                onClick={() => navigate('/tasks')}
+                className="flex flex-col items-start gap-0.5 cursor-pointer"
+              >
+                <span className="text-sm truncate w-full">{task.title}</span>
+                <span className={task.overdue ? 'text-[11px] text-destructive' : 'text-[11px] text-muted-foreground'}>
+                  {task.overdue
+                    ? t('nav.taskOverdue', 'Overdue')
+                    : t('nav.taskDueToday', 'Due today')}
+                </span>
+              </DropdownMenuItem>
+            ))}
+          </div>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  // Every difference below is for the iOS / Android app; in a browser this is
+  // false and the header is exactly what it was. What the app leaves out, and
+  // why, control by control:
+  //
+  //   globe (language)   kept. Switches EN / FR.
+  //   chat icon          hidden. It opens "Send Feedback", but FeedbackDialog
+  //                      only logs the form to the console and then thanks the
+  //                      person: nothing is stored or sent. A control that
+  //                      accepts input and drops it is a dead control.
+  //   "+" (quick add)    kept. Contact, Property, Deal and Task each go to a
+  //                      screen the app has (/contacts, /properties, /deals,
+  //                      /tasks).
+  //   bell               hidden. The product has no notifications; the newer
+  //                      /app header (TopNav) removed its bell for the same
+  //                      reason. See NotificationBell.
+  //   avatar menu        kept, minus "Profile". /profile is not a screen the
+  //                      app has: the route guard sends it to /app/settings,
+  //                      which is where "Settings", the next row, already
+  //                      goes. Photo upload / removal, Settings, Community (an
+  //                      outside link, shown only when configured) and Sign
+  //                      out all stay.
+  const native = isNativeApp();
 
   useEffect(() => {
     setAvatarUrl(profile?.avatar_url ?? null);
@@ -116,7 +216,9 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const handleSignOut = async () => {
     await signOutIntentionally();
     toast.success(t('nav.signedOut', 'Signed out successfully'));
-    navigate("/");
+    // The website's home page on the web. Inside the iOS / Android app there is
+    // no marketing site to return to, so it is the sign-in screen.
+    navigate(signedOutLanding("/"));
   };
 
   const getInitials = (name: string) => {
@@ -167,7 +269,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
           <LanguageSwitcher />
 
           {/* Feedback Button */}
-          <FeedbackDialog />
+          {!native && <FeedbackDialog />}
 
           {/* Quick Add Button — inverted to pop on the navy header. */}
           <DropdownMenu>
@@ -205,67 +307,8 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Notifications */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative h-8 w-8"
-                aria-label={t('a11y.notifications', 'Notifications')}
-              >
-                <Bell className="h-4 w-4" />
-                {notificationCount > 0 && (
-                  <Badge
-                    variant="destructive"
-                    className="absolute -top-0.5 -right-0.5 h-4 w-4 flex items-center justify-center p-0 text-[10px]"
-                  >
-                    {notificationCount}
-                  </Badge>
-                )}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-72">
-              <DropdownMenuLabel className="text-sm">{t('nav.notifications', 'Notifications')}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {notifLoading ? (
-                <div className="p-4 space-y-2" aria-hidden="true">
-                  <div className="h-3 w-3/4 bg-muted rounded animate-pulse" />
-                  <div className="h-3 w-1/2 bg-muted rounded animate-pulse" />
-                </div>
-              ) : notifError ? (
-                /* Never report an empty inbox on a failed query -- that is the
-                   same false negative as the hardcoded 0, only harder to spot. */
-                <div className="p-4 text-center">
-                  <p className="text-sm text-muted-foreground">
-                    {t('nav.notificationsUnavailable', "Couldn't load notifications")}
-                  </p>
-                </div>
-              ) : dueTasks.length === 0 ? (
-                <div className="p-4 text-center">
-                  <Bell className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground">{t('nav.noNotifications', 'No new notifications')}</p>
-                </div>
-              ) : (
-                <div className="max-h-72 overflow-y-auto">
-                  {dueTasks.map((task) => (
-                    <DropdownMenuItem
-                      key={task.id}
-                      onClick={() => navigate('/tasks')}
-                      className="flex flex-col items-start gap-0.5 cursor-pointer"
-                    >
-                      <span className="text-sm truncate w-full">{task.title}</span>
-                      <span className={task.overdue ? 'text-[11px] text-destructive' : 'text-[11px] text-muted-foreground'}>
-                        {task.overdue
-                          ? t('nav.taskOverdue', 'Overdue')
-                          : t('nav.taskDueToday', 'Due today')}
-                      </span>
-                    </DropdownMenuItem>
-                  ))}
-                </div>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {/* Notifications. Not in the iOS / Android app: see NotificationBell. */}
+          {!native && <NotificationBell />}
 
           {/* Hidden avatar file input — triggered from dropdown menu item */}
           <input
@@ -330,10 +373,15 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
                   {t('nav.removePhoto', 'Remove photo')}
                 </DropdownMenuItem>
               )}
+              {/* In the app a link is only drawn if the route guard would
+                  render its target (native/routes.ts); otherwise it is a row
+                  that bounces. */}
+              {!(native && !isAllowedInNative("/profile")) && (
               <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer text-sm">
                 <User className="mr-2 h-4 w-4" />
                 {t('nav.profile', 'Profile')}
               </DropdownMenuItem>
+              )}
               <DropdownMenuItem onClick={() => navigate("/settings")} className="cursor-pointer text-sm">
                 <Settings className="mr-2 h-4 w-4" />
                 {t('nav.settings', 'Settings')}

@@ -1,4 +1,5 @@
 import { MarketingFooter } from "@/components/rd/marketing/MarketingFooter";
+import { isNativeApp } from "@/lib/native/platform";
 
 // Backwards-compat shim, mirroring the one already in place for Navbar.
 //
@@ -18,6 +19,10 @@ import { MarketingFooter } from "@/components/rd/marketing/MarketingFooter";
 // so no page loses a destination in the swap.
 //
 // Delete this shim once the remaining imports are migrated.
-const Footer = () => <MarketingFooter />;
+//
+// Not rendered in the iOS / Android app: its twenty links are all marketing
+// routes the app redirects away from, pricing among them. Only the two legal
+// pages can reach this there.
+const Footer = () => (isNativeApp() ? null : <MarketingFooter />);
 
 export default Footer;

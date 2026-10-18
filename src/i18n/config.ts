@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { rdDashEn, rdDashFr } from './rdDashboard';
+import { rdSharedEn, rdSharedFr } from './rdShared';
 
 const resources = {
   en: {
@@ -6703,6 +6704,8 @@ const resources = {
 // Dashboard v2 copy lives in ./rdDashboard so it can be reviewed on its own.
 (resources.en.translation.rd as Record<string, unknown>).dash = rdDashEn;
 (resources.fr.translation.rd as Record<string, unknown>).dash = rdDashFr;
+(resources.en.translation.rd as Record<string, unknown>).shared = rdSharedEn;
+(resources.fr.translation.rd as Record<string, unknown>).shared = rdSharedFr;
 
 i18n
   .use(LanguageDetector)

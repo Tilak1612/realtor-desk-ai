@@ -5,7 +5,10 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  // dist-mobile is the app bundle; android/ and ios/ hold the native projects and
+  // the copies of Capacitor's own JavaScript their builds generate. None of it is
+  // source we lint.
+  { ignores: ["dist", "dist-mobile", "android", "ios"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],

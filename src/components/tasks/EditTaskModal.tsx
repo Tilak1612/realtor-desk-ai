@@ -14,6 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { parseDateOnly, toDateOnly } from "@/lib/dateOnly";
 
 interface EditTaskModalProps {
   task: any;
@@ -41,7 +42,7 @@ const EditTaskModal = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskModa
       setFormData({
         title: task.title || "",
         description: task.description || "",
-        due_date: task.due_date ? new Date(task.due_date) : undefined,
+        due_date: task.due_date ? parseDateOnly(task.due_date) : undefined,
         due_time: task.due_time || "",
         priority: task.priority || "medium",
         task_type: task.metadata?.task_type || "other",
@@ -66,7 +67,7 @@ const EditTaskModal = ({ task, open, onOpenChange, onTaskUpdated }: EditTaskModa
       .update({
         title: formData.title,
         description: formData.description || null,
-        due_date: formData.due_date.toISOString().split('T')[0],
+        due_date: toDateOnly(formData.due_date),
         due_time: formData.due_time || null,
         priority: formData.priority,
         status: formData.status,

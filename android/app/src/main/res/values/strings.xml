@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Realtor Desk</string>
+    <string name="title_activity_main">Realtor Desk</string>
+    <string name="package_name">com.brainfyai.realtordesk</string>
+    <string name="custom_url_scheme">com.brainfyai.realtordesk</string>
+</resources>

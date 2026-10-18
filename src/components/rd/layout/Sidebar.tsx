@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { useDrawerA11y } from "@/hooks/useDrawerA11y";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
+import { isNativeApp } from "@/lib/native/platform";
+import { isHiddenInNative } from "@/lib/native/routes";
 import { RDWordmark } from "../Logo";
 import { IconBolt, IconCalendar, IconCheck, IconChevron, IconCog, IconGlobe, IconHome, IconLead, IconMail, IconPie, IconPipeline, IconSparkles } from "../icons";
 
@@ -58,7 +60,7 @@ export function Sidebar({
   });
 
 
-  const resolvedItems: SidebarItem[] = items ?? [
+  const allItems: SidebarItem[] = items ?? [
     { label: t("rd.sidebar.nav.dashboard", "Dashboard"), to: "/app", icon: <IconHome /> },
     { label: t("rd.sidebar.nav.leads", "Leads"), to: "/app/leads", icon: <IconLead /> },
     { label: t("rd.sidebar.nav.conversations", "Conversations"), to: "/app/inbox", icon: <IconMail /> },
@@ -81,6 +83,17 @@ export function Sidebar({
     { label: t("rd.sidebar.nav.integrations", "Integrations"), to: "/dashboard/integrations", icon: <IconBolt /> },
     { label: t("rd.sidebar.nav.settings", "Settings"), to: "/app/settings", icon: <IconCog /> },
   ];
+
+  // Inside the iOS / Android app, drop the destinations the app does not
+  // have: the legacy screens that are still unfinished (Calendar, Campaigns,
+  // Market, Integrations) and anything commercial. The list of which those
+  // are lives in one place, native/routes.ts, shared with the route guard, so
+  // a link is never rendered that the guard would only bounce. On the web
+  // every item stays.
+  const native = isNativeApp();
+  const resolvedItems = native
+    ? allItems.filter((item) => !isHiddenInNative(item.to))
+    : allItems;
 
   // No fabricated tenant here. AppShell supplies the real profile; if it is
   // still loading we show a neutral placeholder rather than someone else's
@@ -137,9 +150,19 @@ export function Sidebar({
         </div>
         <div className="flex-1 min-w-0">
           <div className="text-xs font-semibold truncate">{resolvedWorkspace.name}</div>
-          <div className="text-[10px] text-white/50">{resolvedWorkspace.tier}</div>
+          {/* The second line is the subscription: "Solo plan", "Team plan",
+              "Brokerage plan", or "Trial" (useWorkspaceIdentity). The iOS /
+              Android app names no plan anywhere: it is a companion to a
+              subscription bought on the website and shows nothing that reads
+              as something to buy or upgrade (App Store guideline 3.1.3(f),
+              Google Play payments policy). The workspace name stays. */}
+          {!native && <div className="text-[10px] text-white/50">{resolvedWorkspace.tier}</div>}
         </div>
-        <IconChevron className="text-white/50" />
+        {/* This chevron is a drawing, not a control: the card has no handler
+            and opens nothing. On a touch screen it is the only hint the card
+            gives, and it says "tap me", so the app leaves it out. (The other
+            chevron, at the top of the drawer, is real: it closes the drawer.) */}
+        {!native && <IconChevron className="text-white/50" />}
       </div>
 
       {/* Nav */}

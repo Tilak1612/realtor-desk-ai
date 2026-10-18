@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { RDMark } from "@/components/rd/Logo";
 import { AgentNavIcon } from "@/components/AgentMascot";
+import { isNativeApp } from "@/lib/native/platform";
+import { isHiddenInNative } from "@/lib/native/routes";
 
 interface DashboardSidebarProps {
   trialDaysLeft?: number;
@@ -75,7 +77,15 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
     fetchCounts();
   }, []);
 
-  const menuItems = [
+  // Inside the iOS / Android app, links to the unfinished legacy screens
+  // (Calendar, Campaigns, Market, Integrations) and to Billing are dropped.
+  // native/routes.ts is the one list of which those are, shared with the route
+  // guard. On the web both lists are returned untouched.
+  const native = isNativeApp();
+  const forThisPlatform = <T extends { path: string }>(list: T[]): T[] =>
+    native ? list.filter((item) => !isHiddenInNative(item.path)) : list;
+
+  const menuItems = forThisPlatform([
     { icon: LayoutDashboard, label: t('app.sidebar.today', 'Today'), path: "/today", featured: true },
     { icon: Users, label: t('app.sidebar.contacts'), path: "/contacts", count: counts.contacts },
     { icon: Briefcase, label: t('app.sidebar.deals'), path: "/deals", count: counts.deals },
@@ -87,9 +97,9 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
     { icon: Calendar, label: t('app.sidebar.calendar'), path: "/calendar" },
     { icon: Mail, label: t('app.sidebar.campaigns'), path: "/campaigns" },
     { icon: TrendingUp, label: t('app.sidebar.reports'), path: "/reports" },
-  ];
+  ]);
 
-  const advancedItems = [
+  const advancedItems = forThisPlatform([
     { icon: AgentNavIcon, label: t('app.sidebar.aiAssistant'), path: "/ai-assistant" },
     { icon: Zap, label: t('app.sidebar.automations', 'Automations'), path: "/automations" },
     { icon: Building2, label: t('app.sidebar.properties'), path: "/properties", count: counts.properties },
@@ -97,7 +107,7 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
     { icon: Plug, label: t('app.sidebar.integrations', 'Integrations'), path: "/dashboard/integrations" },
     { icon: CreditCard, label: t('app.sidebar.billing'), path: "/billing" },
     { icon: Settings, label: t('app.sidebar.settings'), path: "/settings" },
-  ];
+  ]);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -220,8 +230,11 @@ const DashboardSidebar = ({ trialDaysLeft = 14 }: DashboardSidebarProps) => {
           </div>
         </nav>
 
-        {/* Upgrade Badge */}
-        {trialDaysLeft > 0 && (
+        {/* Upgrade Badge. Never in the iOS / Android app: a trial countdown
+            with an "Upgrade now" button into /billing is a purchase prompt,
+            which the app may not show (App Store guideline 3.1.3(f), Google
+            Play payments policy). */}
+        {trialDaysLeft > 0 && !native && (
           <div className="p-3 border-t border-white/10">
             <div className="bg-white/5 p-3 rounded-lg space-y-2">
               <div className="flex items-center gap-2">

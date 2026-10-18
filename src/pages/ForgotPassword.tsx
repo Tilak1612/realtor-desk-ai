@@ -10,12 +10,19 @@ import { ArrowLeft, Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
+import { authLinkOrigin, isNativeApp } from "@/lib/native/platform";
+import "@/i18n/nativeAuth";
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  // Inside the iOS / Android app the reset is requested differently and the
+  // confirmation says where the emailed link will open. (The header and footer
+  // below already turn into a plain back bar and nothing there: see Navbar.tsx
+  // and Footer.tsx.)
+  const native = isNativeApp();
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,12 +34,25 @@ const ForgotPassword = () => {
 
     setLoading(true);
     try {
-      const redirectUrl = `${window.location.origin}/reset-password`;
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: redirectUrl,
-      });
+      if (native) {
+        // The app's own origin (capacitor://localhost) is not an address an
+        // email can link to, and a PKCE reset started here could only ever be
+        // finished here. The app asks for a link that opens the public
+        // website and works in whichever browser opens it. The reasoning is
+        // in lib/native/auth/passwordRecovery.ts.
+        const { requestPasswordResetFromApp } = await import("@/lib/native/auth/passwordRecovery");
+        const { error } = await requestPasswordResetFromApp(email);
+        if (error) throw error;
+      } else {
+        // authLinkOrigin() is window.location.origin in a browser, so preview
+        // and production each still link back to themselves.
+        const redirectUrl = `${authLinkOrigin()}/reset-password`;
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: redirectUrl,
+        });
 
-      if (error) throw error;
+        if (error) throw error;
+      }
 
       setSent(true);
       toast.success(t('auth.forgot.emailSent', 'Password reset email sent!'));
@@ -103,6 +123,19 @@ const ForgotPassword = () => {
               <CardContent className="space-y-6">
                 <div className="space-y-4 text-center text-sm text-muted-foreground">
                   <p>{t('auth.forgot.linkExpiry', 'Click the link in the email to reset your password. The link will expire in 1 hour.')}</p>
+                  {/* App only. The link does not come back into the app: it
+                      opens the website in the phone's browser, the password is
+                      changed there, and the person signs in here afterwards.
+                      Said plainly, or the browser opening looks like a fault
+                      and nobody knows to come back. */}
+                  {native && (
+                    <p className="text-foreground font-medium">
+                      {t(
+                        'nativeAuth.forgot.whereLinkOpens',
+                        'The link opens realtordesk.ai in your browser. Set your new password there, then come back to this app and sign in with it.'
+                      )}
+                    </p>
+                  )}
                   <p>{t('auth.forgot.checkSpam', "If you don't see the email, check your spam folder.")}</p>
                   {/* Without this, a user whose reset mail never arrives has no
                       next step and simply loses the account. Support can issue a
