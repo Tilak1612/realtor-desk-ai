@@ -138,6 +138,20 @@ describe("the pipeline view switch", () => {
     expect(screen.queryByRole("button", { name: "Forecast" })).toBeNull();
   });
 
+  it("opens the lead list from List instead of a panel that points at it", async () => {
+    const { default: Pipeline } = await import("@/pages/rd/app/Pipeline");
+    renderWithProviders(
+      <Routes>
+        <Route path="/app/pipeline" element={<Pipeline />} />
+        <Route path="/app/leads" element={<p>lead list</p>} />
+      </Routes>,
+      { route: "/app/pipeline" }
+    );
+    fireEvent.click(screen.getByRole("button", { name: "List" }));
+    expect(await screen.findByText("lead list")).toBeInTheDocument();
+    expect(screen.queryByText(/Opens the full lead list/)).toBeNull();
+  });
+
   it("still offers Forecast on the website", async () => {
     h.native = false;
     await renderPipeline();

@@ -42,7 +42,11 @@ const COLUMNS: PipelineStage[] = ["new", "contacted", "qualified", "showing", "o
 
 export default function Pipeline() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [view, setView] = useState<ViewMode>("kanban");
+  // The lead list already exists at /app/leads. "List" goes there instead of
+  // rendering a panel that only points at it.
+  const changeView = (v: ViewMode) => (v === "list" ? navigate("/app/leads") : setView(v));
   const { leads: liveLeads, loading, error } = useLeads();
   // Live-only. Fixtures previously stood in on empty AND on error, which
   // meant a failed query showed a full, fake pipeline.
@@ -130,7 +134,7 @@ export default function Pipeline() {
             </h1>
           </div>
           <div className="flex gap-2">
-            <ViewToggle view={view} onChange={setView} />
+            <ViewToggle view={view} onChange={changeView} />
             {/* "All agents" removed. It had no handler, and it filtered a
                 dimension the schema cannot express — there is no assigned-agent
                 column and no team/member/seat model anywhere in production. It
@@ -181,20 +185,6 @@ export default function Pipeline() {
               {activeLead ? <CardBody lead={activeLead} dragging /> : null}
             </DragOverlay>
           </DndContext>
-        )}
-
-        {view === "list" && (
-          <div className="flex-1 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm overflow-hidden">
-            <div className="px-5 py-4 text-sm text-rd-ink-500">
-              {t(
-                "rd.pipelinePage.listViewLives",
-                "Opens the full lead list."
-              )}{" "}
-              <Link to="/app/leads" className="text-rd-navy-800 underline">
-                /app/leads
-              </Link>
-            </div>
-          </div>
         )}
 
         {view === "forecast" && (
