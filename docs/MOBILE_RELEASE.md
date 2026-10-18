@@ -188,3 +188,9 @@ Still open for the owner:
 - Other compliance claims still on the site: `SignupAside.tsx:112`, "Conforme PIPEDA par Conception" in the i18n file, and several "CASL-compliant" feature strings.
 - `ai-chatbot` still uses the rejected Lovable key (nothing calls it). `docs/OWNERS-MANUAL.md:34` still lists that key as required.
 - Nobody is notified of AI response reports, and the legacy feedback form saves nothing.
+
+## 8. Store records (17 October 2026)
+
+- **Apple:** App ID "Realtor Desk iOS" (`com.brainfyai.realtordesk`) registered under team Brainfy AI Inc (Team ID `73GZ9A6C7V`), no extra capabilities. App Store Connect app "Realtor Desk" created: app ID `6824152247`, primary language English (Canada), SKU `realtordesk-ios`, full user access. The Xcode project now carries `DEVELOPMENT_TEAM = 73GZ9A6C7V`, so automatic signing can create the distribution profile when you archive from Xcode.
+- **iOS archive** now lives at `ios/App/build/RealtorDesk.xcarchive` (unsigned, gitignored); the `/tmp` copy in section 3 was cleared by the system.
+- **Google Play:** create-app form filled (Realtor Desk, `com.brainfyai.realtordesk` confirmed available, English (United States), App, Free) and waiting on the owner to accept the two declarations (Developer Program Policies, US export laws).
