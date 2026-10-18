@@ -197,10 +197,12 @@ Still open for the owner:
   - App content saved as drafts, nothing sent for review: privacy policy URL; ads: none; advertising ID: not used; government app: no; financial features: none; health features: none; target audience 18 and over; Sign in details "Reviewer demo account" with access instructions but **no username or password yet**; Data safety (below).
   - Data safety: collected, not shared, encrypted in transit. The app does not create accounts; users sign in with accounts created outside the app (service subscription). Types: name, email, user IDs, phone number, other info, other in-app messages, photos, files and docs, other user-generated content. All are for app functionality, none are processed ephemerally, and name, email and user IDs are required. Name, email, user IDs and phone are also for account management, and email for developer communications (the lifecycle emails). Deletion URL `https://www.realtordesk.ai/account-deletion` (Play warned it returns 404 until the website deploy). Play labels that URL as deleting data "without deleting your entire account", but the page deletes the whole account; review this wording.
   - Store settings: category Business, contact email support@realtordesk.ai, website www.realtordesk.ai. Default store listing (en-US): short and full description from section 4, saved as a draft. Icon, feature graphic and screenshots are not uploaded.
-  - Still open: Content ratings (IARC questionnaire; the owner must accept the IARC Terms of Use), reviewer username and password, graphics, AAB upload to a testing track.
+  - Content ratings applied on 18 October 2026, after the owner accepted the IARC Terms of Use: All Other App Types; the only Yes is online content (AI-generated); no user-to-user interaction; no location sharing; no digital purchases. Ratings: ESRB Everyone, PEGI 3, IARC 3+.
+  - Still open: reviewer username and password, graphics, AAB upload to a testing track.
 - **App Store Connect, filled and saved (not submitted):**
   - App Information: subtitle "CRM for Canadian agents", categories Business / Productivity.
-  - App Privacy: privacy policy URL. Data types: name, email, phone, customer support, other user content, user ID; all used for app functionality, linked to the user, not used for tracking. The answers are entered but **not published**.
-  - Pricing: base country Canada, $0.00.
+  - App Privacy: privacy policy URL. Data types: name, email, phone, customer support, other user content, user ID; all used for app functionality, linked to the user, not used for tracking. Published on 18 October 2026 with the owner's approval.
+  - Pricing: base country Canada, $0.00. Availability: Canada only.
+  - Age rating: calculated 4+ (every feature and content answer is no or none; no override, because the Terms set no minimum age).
   - Version 1.0: description, keywords, support URL `/contact`, marketing URL, copyright "2026 Brainfy AI Inc.", App Review notes from section 4 (no credentials), manual release.
-  - Still open: age rating, content rights, app availability (countries), App Review contact name, phone and email, demo account username and password, screenshots, build upload, French localization.
+  - Still open: content rights, App Review contact name, phone and email, demo account username and password, screenshots, build upload, French localization.
