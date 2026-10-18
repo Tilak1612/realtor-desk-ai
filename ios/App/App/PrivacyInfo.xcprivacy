@@ -10,7 +10,8 @@
   frameworks for the APIs they use themselves.
 
   Collected data mirrors docs/MOBILE_RELEASE.md, section 4 ("Privacy answers"):
-  the account profile, the user id and the CRM records the agent enters, all
+  the account profile, the user id, the CRM records the agent enters and the
+  photos or videos they upload (profile picture, attachments), all
   linked to the user, none used for tracking. Keep the two in step. If a Sentry
   DSN is added to the mobile build, add crash data and performance data here.
 -->
@@ -75,6 +76,16 @@
 		<dict>
 			<key>NSPrivacyCollectedDataType</key>
 			<string>NSPrivacyCollectedDataTypeCustomerSupport</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array><string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string></array>
+		</dict>
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypePhotosorVideos</string>
 			<key>NSPrivacyCollectedDataTypeLinked</key>
 			<true/>
 			<key>NSPrivacyCollectedDataTypeTracking</key>

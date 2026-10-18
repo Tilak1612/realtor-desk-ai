@@ -120,8 +120,9 @@ Tracking: none. No advertising SDK, no analytics in the app.
 | User ID | Yes | Yes | App functionality |
 | Other user content: the CRM records the agent enters (their clients' names and contact details, notes, tasks, deals, uploaded documents) and messages typed to the assistant | Yes | Yes | App functionality |
 | Customer support: feedback and AI response reports | Yes | Yes | App functionality |
+| Photos or videos the agent uploads (profile picture, attachments) | Yes | Yes | App functionality |
 | Crash and performance data | Only if a Sentry DSN is added to the mobile build (it is not set today) | Yes (user id and email are attached) | App functionality |
-| Payment info, location, device contacts, photos library, browsing history, advertising data | No | | |
+| Payment info, location, device contacts, browsing history, advertising data | No | | |
 
 Processors to name where the form asks: Supabase (database and files, hosted in Canada), the AI providers behind the assistant (prompts are sent to them), Sentry if enabled. The app also requests fonts from Google at launch.
 
