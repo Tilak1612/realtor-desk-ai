@@ -37,6 +37,9 @@ vi.mock("@/hooks/use-toast", () => ({
   useToast: () => ({ toast: (...a: unknown[]) => toast(...a) }),
 }));
 // The page test below needs the assistant, not the dashboard chrome around it.
+vi.mock("@/hooks/rd/useSession", () => ({
+  useSession: () => ({ user: { id: "user-1" }, session: null, loading: false }),
+}));
 vi.mock("@/components/layout/AppLayout", () => ({
   default: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));

@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import AICallSummaryPanel from "@/components/call-workflow/AICallSummaryPanel";
+import { useAiConsent } from "@/hooks/useAiConsent";
 import WorkflowFeedbackWidget from "@/components/feedback/WorkflowFeedbackWidget";
 import { Spinner } from "@/components/rd";
 
@@ -50,6 +51,7 @@ interface Contact {
 }
 
 const CallWorkflow = () => {
+  const aiConsent = useAiConsent();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -141,6 +143,8 @@ const CallWorkflow = () => {
       toast.error("Please add some call notes first");
       return;
     }
+    // Call notes go to the AI provider only after the person allows it.
+    if (!(await aiConsent.ensure())) return;
 
     setGeneratingAI(true);
     try {
@@ -403,6 +407,7 @@ const CallWorkflow = () => {
 
   return (
     <AppLayout user={user} profile={profile}>
+      {aiConsent.dialog}
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">

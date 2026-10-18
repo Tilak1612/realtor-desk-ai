@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "@/test/render";
@@ -27,6 +27,14 @@ vi.mock("@/integrations/supabase/client", () => ({
     from: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null, error: null }) }) }) }),
     functions: { invoke: (...a: unknown[]) => invoke(...a) },
   },
+}));
+vi.mock("@/hooks/rd/useSession", () => ({
+  useSession: () => ({ user: { id: "user-1" }, session: null, loading: false }),
+}));
+const platform = vi.hoisted(() => ({ native: false }));
+vi.mock("@/lib/native/platform", async (original) => ({
+  ...(await original<typeof import("@/lib/native/platform")>()),
+  isNativeApp: () => platform.native,
 }));
 // The assistant is under test, not the dashboard chrome around it.
 vi.mock("@/components/layout/AppLayout", () => ({
@@ -232,5 +240,37 @@ describe("AI assistant: what the page says it can do", () => {
     const values = (o: Record<string, unknown>): string[] =>
       Object.values(o).flatMap((v) => (typeof v === "string" ? [v] : values(v as Record<string, unknown>)));
     for (const v of [...values(aiChatEn), ...values(aiChatFr)]) expect(v.trim()).not.toBe("");
+  });
+});
+
+describe("AI assistant: permission before data goes to the AI provider (app only)", () => {
+  beforeEach(() => {
+    invoke.mockReset();
+    invoke.mockResolvedValue({ data: { message: "Draft ready." }, error: null });
+    localStorage.clear();
+    platform.native = true;
+  });
+  afterEach(() => {
+    platform.native = false;
+  });
+
+  it("asks first, names both providers, and sends nothing on Not now", async () => {
+    renderWithProviders(<AIAssistant />, { route: "/ai-assistant" });
+    fireEvent.click(screen.getByRole("button", { name: "Draft follow-up email" }));
+    const dialog = await screen.findByRole("alertdialog");
+    expect(dialog.textContent).toMatch(/Anthropic/);
+    expect(dialog.textContent).toMatch(/OpenAI/);
+    fireEvent.click(screen.getByRole("button", { name: "Not now" }));
+    await waitFor(() => expect(screen.queryByRole("alertdialog")).toBeNull());
+    expect(invoke).not.toHaveBeenCalled();
+  });
+
+  it("sends after Allow and does not ask again", async () => {
+    renderWithProviders(<AIAssistant />, { route: "/ai-assistant" });
+    fireEvent.click(screen.getByRole("button", { name: "Draft follow-up email" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Allow" }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledTimes(1));
+    expect(await screen.findByText("Draft ready.")).toBeInTheDocument();
+    expect(localStorage.getItem("rd.aiConsent.v1.user-1")).toBeTruthy();
   });
 });

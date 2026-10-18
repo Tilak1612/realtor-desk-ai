@@ -8,6 +8,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import { useTranslation } from "react-i18next";
 import { AgentAvatar, AgentFigure } from "@/components/AgentMascot";
 import ReportAIResponse from "@/components/feedback/ReportAIResponse";
+import { useAiConsent } from "@/hooks/useAiConsent";
 import { aiReportEn } from "@/i18n/aiResponseReport";
 import { aiChatEn } from "@/i18n/aiAssistant";
 
@@ -25,6 +26,7 @@ const AIAssistant = () => {
   // the conversation, not a notification: it stays until a request that
   // carries that question succeeds or the chat is cleared.
   const [failed, setFailed] = useState(false);
+  const aiConsent = useAiConsent();
   // `loading` only changes on the next render, so two taps in the same frame
   // both see false. The ref is what actually stops a second request.
   const inFlight = useRef(false);
@@ -125,9 +127,11 @@ const AIAssistant = () => {
     }
   };
 
-  const ask = (question: string) => {
+  const ask = async (question: string) => {
     const content = question.trim();
     if (!content || inFlight.current) return;
+    // Nothing reaches the AI provider before the person allows it (App Store 5.1.2(i)).
+    if (!(await aiConsent.ensure())) return;
 
     const history: Message[] = [...messages, { role: 'user', content }];
     setMessages(history);
@@ -137,13 +141,15 @@ const AIAssistant = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
-    ask(input);
+    const text = input;
     setInput("");
+    void ask(text);
   };
 
   // Resends the conversation as it is. The unanswered question is already its
   // last message, so nothing is appended.
-  const retry = () => {
+  const retry = async () => {
+    if (!(await aiConsent.ensure())) return;
     void requestAnswer(messages);
   };
 
@@ -155,6 +161,7 @@ const AIAssistant = () => {
 
   return (
     <AppLayout user={user} profile={profile}>
+      {aiConsent.dialog}
       <div className="h-full flex flex-col max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

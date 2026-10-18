@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Json } from "@/integrations/supabase/types";
 import { useSession } from "./useSession";
+import { hasAiConsent } from "@/lib/aiConsent";
 import type { PipelineStage } from "@/types/rd";
 
 // Create a contact for the signed-in user.
@@ -73,7 +74,10 @@ export function useCreateLead() {
       // Deliberately non-blocking: a scoring failure must not fail lead
       // creation. An unscored lead is recoverable; a lost lead is not.
       void supabase.functions
-        .invoke("calculate-lead-score", { body: { contact_id: data.id } })
+        .invoke("calculate-lead-score", {
+          // Without AI consent the scorer keeps to its rule-based insights.
+          body: { contact_id: data.id, skip_ai: !hasAiConsent(userId) },
+        })
         .then(() => qc.invalidateQueries({ queryKey: ["rd.leads", userId] }))
         .catch((e) => console.warn("[useCreateLead] scoring failed (non-fatal):", e));
 
