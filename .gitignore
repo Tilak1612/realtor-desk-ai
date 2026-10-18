@@ -42,3 +42,4 @@ supabase/.branches/
 .claude/scheduled_tasks.lock
 .claude/settings.local.json
 deno.lock
+store-assets/
