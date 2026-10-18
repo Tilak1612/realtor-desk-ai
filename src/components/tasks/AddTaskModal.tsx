@@ -15,6 +15,7 @@ import { CalendarIcon, Repeat, ChevronDown, ChevronUp } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import TaskTemplates, { TaskTemplate } from "./TaskTemplates";
+import { toDateOnly } from "@/lib/dateOnly";
 
 interface AddTaskModalProps {
   open: boolean;
@@ -135,7 +136,7 @@ const AddTaskModal = ({ open, onOpenChange, onTaskAdded }: AddTaskModalProps) =>
       user_id: user.id,
       title: formData.title,
       description: formData.description || null,
-      due_date: formData.due_date.toISOString().split('T')[0],
+      due_date: toDateOnly(formData.due_date),
       due_time: formData.due_time || null,
       priority: formData.priority,
       status: "pending",

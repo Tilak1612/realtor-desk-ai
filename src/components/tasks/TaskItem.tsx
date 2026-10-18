@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import EditTaskModal from "./EditTaskModal";
+import { parseDateOnly } from "@/lib/dateOnly";
 
 interface TaskItemProps {
   task: any;
@@ -131,7 +132,7 @@ const TaskItem = ({ task, isSelected, onSelect, onTaskUpdated }: TaskItemProps) 
           <div className="flex items-center gap-3 mt-2 text-sm text-muted-foreground flex-wrap">
             <div className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
-              {new Date(task.due_date).toLocaleDateString()}
+              {parseDateOnly(task.due_date).toLocaleDateString()}
               {task.due_time && <span className="ml-1">{formatTime(task.due_time)}</span>}
             </div>
 
