@@ -207,4 +207,5 @@ Still open for the owner:
   - Version 1.0: description, keywords, support URL `/contact`, marketing URL, copyright "2026 Brainfy AI Inc.", App Review notes from section 4 (no credentials), manual release.
   - 18 October 2026: version string changed from 1.0 to 1.0.0 to match `MARKETING_VERSION`; promotional text added; French (Canada) localization added (subtitle, description, keywords, promotional text, support and marketing URLs, privacy policy URL) from the section 4 copy, which has not had a native French review.
   - Signed build 1.0.0 (1) archived and exported with the App Store profile for team 73GZ9A6C7V: `ios/App/build/RealtorDesk-1.0.0-1.xcarchive`, IPA in `ios/App/build/export/` (both gitignored). **Not uploaded**; the owner runs the upload.
-  - Still open: content rights, App Review contact (Apple requires a phone number before it saves the section), demo account username and password, screenshots, build upload.
+  - App Review contact saved: Tilak Raj, +1 780 394 2451, info@realtordesk.ai. Reviewer username `appreview@realtordesk.ai` entered in both App Store Connect and Play Console; the password is left for the owner.
+  - Still open: create the `appreview@realtordesk.ai` account (set `is_demo`, seed it), enter its password in both consoles, content rights, screenshots, build upload.
