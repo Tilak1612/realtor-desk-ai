@@ -10,6 +10,7 @@ import { NextUpCard } from "@/components/rd/dashboard/NextUpCard";
 import { ActivityCard } from "@/components/rd/dashboard/ActivityCard";
 import { ConsentCard, PipelineStagesCard, SourcesCard } from "@/components/rd/dashboard/SummaryCards";
 import { useSession } from "@/hooks/rd/useSession";
+import { useWorkspaceIdentity } from "@/hooks/rd/useWorkspaceIdentity";
 import { useDashboardData } from "@/hooks/rd/useDashboardData";
 import { useActivityFeed } from "@/hooks/rd/useDashboardFeed";
 import { MIN_RESPONSE_SAMPLE, pctChange, type DashSummary } from "@/lib/rd/dashboard";
@@ -31,6 +32,7 @@ export default function DashboardV2() {
   const { t, i18n } = useTranslation();
   const locale = appLocale(i18n.language);
   const { user } = useSession();
+  const identity = useWorkspaceIdentity();
   const { summary, queue, names, loading, error, refetch, updatedAt } = useDashboardData();
   const { activity, loading: activityLoading } = useActivityFeed();
   const [addOpen, setAddOpen] = useState(false);
@@ -41,8 +43,11 @@ export default function DashboardV2() {
   const isPreview = !isNativeApp();
 
   const firstName = (() => {
+    // Settings edits profiles.full_name; the auth metadata keeps the name typed
+    // at sign-up forever, so it is only the fallback while the profile loads.
     const meta = user?.user_metadata as Record<string, unknown> | undefined;
-    const full = typeof meta?.full_name === "string" ? meta.full_name : user?.email ?? "";
+    const metaName = typeof meta?.full_name === "string" ? meta.full_name : "";
+    const full = (!identity.loading && identity.agentName) || metaName || user?.email || "";
     return full.split(/\s+|@/)[0] || "";
   })();
   const hour = new Date().getHours();
