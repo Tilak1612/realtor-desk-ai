@@ -1,3 +1,4 @@
+import { COMPANY } from "@/config/company";
 // Structured Data Schemas for SEO
 
 // Four unused exports were deleted on 2026-10-11: softwareApplicationSchema,
@@ -18,8 +19,8 @@ export const organizationSchema = {
   "foundingDate": "2024",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Edmonton",
-    "addressRegion": "AB",
+    "addressLocality": COMPANY.city,
+    "addressRegion": COMPANY.regionCode,
     "addressCountry": "CA"
   },
   "contactPoint": {

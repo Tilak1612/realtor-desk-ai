@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import { COMPANY } from "@/config/company";
 
 // /about — the one page in the redesign brief with no existing route.
 //
@@ -24,7 +25,7 @@ import { SEO } from "@/components/SEO";
 const FAQS = [
   {
     q: "Who builds Realtor Desk?",
-    a: "Brainfy AI Inc., a Canadian company based in Edmonton, Alberta. Realtor Desk is its real estate product. Mail reaches us in Edmonton, but there is no walk-in office — support runs by email.",
+    a: "Brainfy AI Inc., a Canadian company based in Langley, BC. Realtor Desk is its real estate product. Mail reaches us in Langley, but there is no walk-in office — support runs by email.",
   },
   {
     q: "Where is my data stored?",
@@ -68,8 +69,8 @@ const About = () => {
     <div className="min-h-screen">
       <SEO
         title="About Realtor Desk"
-        description="Realtor Desk is built by Brainfy AI Inc. in Edmonton, Alberta. Client data is stored in Canada. Independent — not affiliated with CREA or any real estate board."
-        keywords="about realtor desk, brainfy ai, canadian real estate crm company, edmonton software company"
+        description="Realtor Desk is built by Brainfy AI Inc. in Langley, BC. Client data is stored in Canada. Independent — not affiliated with CREA or any real estate board."
+        keywords="about realtor desk, brainfy ai, canadian real estate crm company, canadian software company"
         canonicalUrl="https://www.realtordesk.ai/about"
         structuredData={[
           {
@@ -85,8 +86,8 @@ const About = () => {
               foundingDate: "2024",
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Edmonton",
-                addressRegion: "AB",
+                addressLocality: COMPANY.city,
+                addressRegion: COMPANY.regionCode,
                 addressCountry: "CA",
               },
             },
@@ -110,7 +111,7 @@ const About = () => {
             <h1 className="mb-6">About Realtor Desk</h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Realtor Desk is a CRM for Canadian real estate agents, built by
-              Brainfy AI Inc. in Edmonton, Alberta. Client data is stored in
+              Brainfy AI Inc. in Langley, BC. Client data is stored in
               Canada. We are an independent software company with no affiliation
               to CREA, any real estate board, or any regulator.
             </p>
@@ -155,7 +156,7 @@ const About = () => {
                   Legal entity: Brainfy AI Inc., incorporated in Canada, operating
                   since 2024.
                 </li>
-                <li>Based in Edmonton, Alberta. Mailing address only — no walk-in office.</li>
+                <li>Based in Langley, BC. Mailing address only — no walk-in office.</li>
                 <li>
                   Support runs by email at{" "}
                   <a className="underline" href="mailto:support@realtordesk.ai">

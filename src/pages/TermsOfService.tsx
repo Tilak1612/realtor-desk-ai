@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { TERMS_VERSION, formatLegalDate } from "@/config/legal";
+import { COMPANY_ADDRESS_LINE } from "@/config/company";
 
 const TermsOfService = () => {
   const { t, i18n } = useTranslation();
@@ -127,7 +128,7 @@ const TermsOfService = () => {
               </p>
               <ul className="list-none space-y-2">
                 <li>Email: support@realtordesk.ai</li>
-                <li>Address: Edmonton, Alberta, Canada</li>
+                <li>Address: {COMPANY_ADDRESS_LINE}</li>
               </ul>
             </section>
           </div>
