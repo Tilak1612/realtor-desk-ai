@@ -27,6 +27,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { COMPANY_CITY_COUNTRY } from "@/config/company";
 
 // Form validation schema
 const demoFormSchema = z.object({
@@ -415,7 +416,7 @@ const Demo = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">{ t("demo.contact.address", "Address") }</p>
-                    <p className="font-semibold">Edmonton, Alberta, Canada</p>
+                    <p className="font-semibold">{COMPANY_CITY_COUNTRY}</p>
                   </div>
                 </div>
               </Card>

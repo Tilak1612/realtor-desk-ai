@@ -806,7 +806,7 @@ const resources = {
         itemTerms: "Terms",
         itemUnsubscribe: "Unsubscribe",
         itemCookieSettings: "Cookie settings",
-        copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
+        copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Langley, BC"
       },
       featuresRd: {
         seoTitle: "CRM Features for Canadian Real Estate Agents | Realtor Desk",
@@ -2503,7 +2503,7 @@ const resources = {
         privacy: "Privacy Policy",
         terms: "Terms of Service",
         casl: "CASL Compliance",
-        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Edmonton, AB",
+        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Langley, BC",
         madeInCanada: "Made in Canada 🇨🇦 for Canadian Realtors",
         poweredBy: "Powered by Brainfy AI Inc",
         cookieSettings: "Cookie Settings",
@@ -4150,7 +4150,7 @@ const resources = {
         itemTerms: "Conditions",
         itemUnsubscribe: "Se désabonner",
         itemCookieSettings: "Paramètres des témoins",
-        copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Edmonton, AB"
+        copyright: "© {{year}} Realtor Desk · Brainfy AI Inc. · Langley, BC"
       },
       featuresRd: {
         seoTitle: "Fonctionnalités CRM pour courtiers canadiens | Realtor Desk",
@@ -5847,7 +5847,7 @@ const resources = {
         privacy: "Politique de confidentialité",
         terms: "Conditions d'utilisation",
         casl: "Conformité LCAP",
-        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Edmonton, AB",
+        copyright: "© 2026 Realtor Desk · Brainfy AI Inc. · Langley, BC",
         madeInCanada: "Fabriqué au Canada 🇨🇦 pour les agents immobiliers canadiens",
         poweredBy: "Propulsé par Brainfy AI Inc",
         cookieSettings: "Paramètres des cookies",

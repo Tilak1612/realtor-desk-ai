@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Shield, Check, Lock, Database, FileCheck, AlertCircle, MapPin, Clock } from "lucide-react";
+import { COMPANY_ADDRESS_LINE } from "@/config/company";
 
 const PIPEDACompliance = () => {
   const faqSchema = {
@@ -326,7 +327,7 @@ const PIPEDACompliance = () => {
             </div>
             <div className="border-t border-border bg-muted/50 px-5 py-4 text-[11px] leading-relaxed">
               <p className="text-muted-foreground mb-1">
-                Sent by: <strong className="text-foreground">RealtorDesk AI</strong> (Brainfy AI Inc.), Edmonton, Alberta, Canada.
+                Sent by: <strong className="text-foreground">RealtorDesk AI</strong> (Brainfy AI Inc.), {COMPANY_ADDRESS_LINE}.
               </p>
               <p className="text-muted-foreground mb-1">
                 Contact: <span className="underline">support@realtordesk.ai</span> · <span className="underline">realtordesk.ai</span>

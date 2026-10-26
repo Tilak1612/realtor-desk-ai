@@ -9,7 +9,7 @@ BRAND
   Product name:  Realtor Desk  (two words; the .ai in the domain is the TLD,
                  not part of the name)
   Company:       Brainfy AI Inc.
-  Location:      Edmonton, Alberta, Canada
+  Location:      Langley, BC, Canada
   Website:       https://www.realtordesk.ai
   Support:       support@realtordesk.ai
   Stage:         Public beta

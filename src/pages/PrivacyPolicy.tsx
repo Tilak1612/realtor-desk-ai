@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { PRIVACY_VERSION, formatLegalDate } from "@/config/legal";
+import { COMPANY, COMPANY_ADDRESS_LINE } from "@/config/company";
 
 const PrivacyPolicy = () => {
   const { t, i18n } = useTranslation();
@@ -157,7 +158,7 @@ const PrivacyPolicy = () => {
               <ul className="list-none space-y-2 mb-4">
                 <li><strong>Name:</strong> Privacy Officer</li>
                 <li><strong>Email:</strong> privacy@realtordesk.ai</li>
-                <li><strong>Mailing Address:</strong> Edmonton, Alberta, Canada</li>
+                <li><strong>Mailing Address:</strong> {COMPANY_ADDRESS_LINE}</li>
               </ul>
               <p className="mb-4">
                 Our Privacy Officer is responsible for ensuring compliance with PIPEDA and addressing all 
@@ -193,7 +194,7 @@ const PrivacyPolicy = () => {
               <ul className="list-none space-y-2 mb-4">
                 <li><strong>General Inquiries:</strong> support@realtordesk.ai</li>
                 <li><strong>Privacy Matters:</strong> privacy@realtordesk.ai</li>
-                <li><strong>Mailing Address:</strong> Brainfy AI Inc., Edmonton, Alberta, Canada</li>
+                <li><strong>Mailing Address:</strong> {COMPANY.legalName}, {COMPANY_ADDRESS_LINE}</li>
               </ul>
               <p>
                 <strong>Filing a Complaint:</strong> If you believe we have not addressed your privacy concerns 

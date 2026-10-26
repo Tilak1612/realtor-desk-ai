@@ -14,6 +14,7 @@ import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link as RouterLink } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import { COMPANY_CITY_COUNTRY } from "@/config/company";
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your full name (at least 2 characters)").max(100, "Name cannot exceed 100 characters"),
@@ -139,7 +140,7 @@ const Contact = () => {
                 <MapPin className="w-8 h-8 text-primary mb-4" />
                 <h3 className="font-bold mb-2">{t('contact.info.visitUs')}</h3>
                 <p className="text-muted-foreground">
-                  Edmonton, Alberta, Canada
+                  {COMPANY_CITY_COUNTRY}
                 </p>
                 <p className="text-xs text-muted-foreground mt-2">
                   {t('contact.info.noWalkIn', 'Mailing address only — no walk-in office.')}
@@ -245,7 +246,7 @@ const Contact = () => {
           <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg flex items-center justify-center">
             <div className="text-center">
               <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-              <p className="text-base font-semibold text-foreground">Edmonton, Alberta, Canada</p>
+              <p className="text-base font-semibold text-foreground">{COMPANY_CITY_COUNTRY}</p>
             </div>
           </div>
         </div>

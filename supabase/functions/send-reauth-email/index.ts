@@ -117,7 +117,7 @@ Re-connect ${toolName} →
 <tr><td style="padding:24px 32px;border-top:1px solid #2a2a2a;">
 <p style="color:#404040;font-size:12px;margin:0;">
 RealtorDesk AI — Built for Canadian Real Estate Agents 🇨🇦<br>
-Powered by Brainfy AI Inc · Edmonton, Alberta, Canada
+Powered by Brainfy AI Inc · Langley, BC, Canada
 </p></td></tr>
 <tr><td>${caslFooter}</td></tr>
 </table></td></tr></table>
