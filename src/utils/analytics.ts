@@ -1,3 +1,5 @@
+import { isNativeApp } from '@/lib/native/platform';
+
 const PRODUCT = 'realtordesk';
 const IS_DEV = import.meta.env.DEV;
 // Window.gtag is declared in vite-env.d.ts
@@ -16,6 +18,11 @@ const IS_DEV = import.meta.env.DEV;
  * assumed consent.
  */
 function analyticsAllowed(): boolean {
+  // Never from the iOS / Android app. Its build has no Google tag in the first
+  // place; this is the second lock, so that a tag reintroduced by mistake, or a
+  // consent value restored into the webview's storage, still sends nothing.
+  // The store privacy declarations say the app does no analytics.
+  if (isNativeApp()) return false;
   try {
     const raw = localStorage.getItem('cookie-consent');
     if (!raw) return false;

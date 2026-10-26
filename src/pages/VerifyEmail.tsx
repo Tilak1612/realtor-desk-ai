@@ -9,10 +9,17 @@ import { toast } from "sonner";
 import { Mail, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useTranslation } from "react-i18next";
+import { isNativeApp } from "@/lib/native/platform";
+import "@/i18n/nativeAuth";
 
 const VerifyEmail = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  // Inside the iOS / Android app: one extra line saying where the emailed link
+  // opens. It does not come back into the app.
+  const native = isNativeApp();
   const email = location.state?.email || "";
   const userId = location.state?.userId || "";
   
@@ -103,6 +110,14 @@ const VerifyEmail = () => {
                   <p className="text-sm text-muted-foreground text-center">
                     Please click the link in your email to verify your account.
                   </p>
+                  {native && (
+                    <p className="text-sm text-foreground font-medium text-center">
+                      {t(
+                        'nativeAuth.verify.whereLinkOpens',
+                        'The link opens realtordesk.ai in your browser. Once your email is confirmed, come back to this app and sign in.'
+                      )}
+                    </p>
+                  )}
                   <Button
                     variant="outline"
                     className="w-full"

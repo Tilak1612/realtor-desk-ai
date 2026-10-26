@@ -19,6 +19,8 @@ import { cn } from "@/lib/utils";
 import { useLeads } from "@/hooks/rd/useLeads";
 import { AddLeadDialog } from "@/components/rd/AddLeadDialog";
 import { applyLeadView, isLeadView, isStage } from "@/lib/rd/leadViews";
+import { appLocale } from "@/lib/rd/format";
+import { leadActivity, sourceLabel } from "@/lib/rd/relativeTime";
 
 // /app/leads — Leads table per rd-app.jsx Artboard_Leads.
 //
@@ -117,7 +119,7 @@ export default function Leads() {
         <div className="flex flex-wrap justify-between items-end gap-4 mb-5">
           <div>
             <div className="text-xs text-rd-ink-500 font-semibold tracking-[0.02em]">
-              {source.length} total · {counts.hot} hot
+              {t("rd.shared.leadCounts", { total: source.length, hot: counts.hot })}
               {loading && <span className="ml-2 text-rd-ink-400">· loading…</span>}
               {error && (
                 <span className="ml-2 text-rd-danger">
@@ -263,7 +265,8 @@ export default function Leads() {
  * meta line. "Open" is gone -- it duplicated the row link.
  */
 function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const activity = leadActivity(lead, t, appLocale(i18n.language));
   // Webhook-created leads with no email get a placeholder address
   // (no-email-<uuid>@placeholder.invalid). Never offer to mail it.
   const email = lead.email && !lead.email.endsWith("@placeholder.invalid") ? lead.email : "";
@@ -309,7 +312,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
       </div>
       <div className="mt-2 flex flex-wrap items-center gap-2 lg:mt-0 lg:block">
         <span className="text-[11px] px-2 py-[2px] bg-rd-ink-100 text-rd-ink-700 rounded-[4px] font-semibold">
-          {lead.source}
+          {sourceLabel(lead.source, t)}
         </span>
         {/* Listing, score, stage and last activity ride along in the mobile
             meta line. At lg they render in their own columns instead. */}
@@ -330,7 +333,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
               <IconSparkles className="w-3 h-3" />
             </span>
           )}
-          {lead.lastActivity}
+          {activity}
         </span>
       </div>
       <div className="hidden lg:block">
@@ -345,7 +348,7 @@ function LeadRow({ lead, isLast }: { lead: Lead; isLast: boolean }) {
             <IconSparkles className="w-3 h-3" />
           </span>
         )}
-        {lead.lastActivity}
+        {activity}
       </div>
       {/* relative z-10 lifts the actions above the stretched name link, so a
           tap on Call calls rather than opening the lead. */}

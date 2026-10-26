@@ -15,6 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { signOutIntentionally } from "@/lib/auth/signOut";
+import { isNativeApp } from "@/lib/native/platform";
 
 interface TrialExpiredModalProps {
   isOpen: boolean;
@@ -48,6 +49,14 @@ const TrialExpiredModal = ({ isOpen }: TrialExpiredModalProps) => {
       setLoading(null);
     }
   };
+
+  // Prices, plan names and two buttons into Stripe Checkout: nothing in this
+  // dialog may be shown inside the iOS / Android app (App Store guideline
+  // 3.1.3(f), Google Play payments policy). There, an account without access
+  // gets the neutral NoAccessScreen from RequireBilling instead; the legacy
+  // shell that mounts this modal renders nothing in its place. Placed after
+  // the hooks so their order never changes.
+  if (isNativeApp()) return null;
 
   const features = [
     t('trial.feature.unlimitedContacts', 'Unlimited contacts & leads'),

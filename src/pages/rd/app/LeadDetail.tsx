@@ -16,6 +16,7 @@ import { SkeletonConversation } from "@/components/rd/Skeleton";
 
 import type { ConversationMessage, Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { isNativeApp } from "@/lib/native/platform";
 import { useLead } from "@/hooks/rd/useLeads";
 import { useConversation, useSendMessage } from "@/hooks/rd/useConversation";
 import { useLeadScoreDetail } from "@/hooks/rd/useLeadScoreDetail";
@@ -135,6 +136,10 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
         >
           {lead.language}
         </span>
+        {/* Call, Book showing and Take over have no onClick. Left out of the
+            iOS / Android app, which must not ship buttons that do nothing.
+            Unchanged on the web. */}
+        {!isNativeApp() && (
         <div className="ml-auto flex gap-2">
           <RDButton variant="outline" size="sm" icon={<IconPhone />}>
             Call
@@ -146,6 +151,7 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
             Take over
           </RDButton>
         </div>
+        )}
       </div>
 
       {/* AI banner */}
@@ -205,6 +211,12 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
             <div className="text-[11px] text-rd-danger">{send.error.message}</div>
           )}
           <div className="flex items-center justify-between">
+            {/* "Draft with AI", "Attach listing" and "Template" have no
+                handler. Not in the iOS / Android app; the empty div keeps Send
+                on the right, as the Inbox composer already does. */}
+            {isNativeApp() ? (
+              <div />
+            ) : (
             <div className="flex gap-4 text-xs text-rd-ink-500">
               <SuggestionBtn>
                 <IconSparkles className="w-3 h-3" />
@@ -213,6 +225,7 @@ function ConversationPane({ lead, messages }: { lead: Lead; messages: Conversati
               <SuggestionBtn>Attach listing</SuggestionBtn>
               <SuggestionBtn>Template ▾</SuggestionBtn>
             </div>
+            )}
             <RDButton
               variant="primary"
               size="sm"

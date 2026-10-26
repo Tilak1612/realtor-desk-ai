@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { trackEvent } from '@/utils/analytics';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import AppLayout from '@/components/layout/AppLayout';
 import { useSubscription, SUBSCRIPTION_PRODUCTS } from '@/contexts/SubscriptionContext';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from "@/components/rd";
+import { isNativeApp } from "@/lib/native/platform";
 
 // Locale-aware plan price formatter. Canadian English: "$149/mo".
 // Canadian French: "149 $/mois" — number, NBSP, $, no decimal when whole.
@@ -23,7 +24,7 @@ function formatPlanPrice(amount: number, lang: string | undefined): string {
   }).format(amount);
 }
 
-const Billing = () => {
+const BillingPage = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -430,6 +431,22 @@ const Billing = () => {
       </div>
     </AppLayout>
   );
+};
+
+// The page above is plans, prices, Stripe Checkout and the customer portal.
+// None of it may appear inside the iOS / Android app, which is a companion to
+// a subscription bought on the website (App Store guideline 3.1.3(f), Google
+// Play payments policy).
+//
+// The app's route guard already refuses /billing. This is the second lock, on
+// the page itself, so that a future route, a stale link or a refactor of the
+// guard cannot put a checkout button on a phone: in the app this component
+// never mounts BillingPage at all, so none of its handlers exist to be called.
+// An account without a subscription lands on /app, where RequireBilling shows
+// the neutral NoAccessScreen.
+const Billing = () => {
+  if (isNativeApp()) return <Navigate to="/app" replace />;
+  return <BillingPage />;
 };
 
 export default Billing;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -13,10 +13,24 @@ import ContinueConsentNotice from "@/components/auth/ContinueConsentNotice";
 import OAuthButtons from "@/components/auth/OAuthButtons";
 import { setRememberMe, isRemembered } from "@/lib/auth/sessionPersistence";
 import { consumeSessionExpired } from "@/lib/auth/signOut";
+import { isNativeApp } from "@/lib/native/platform";
+import { oauthOffer } from "@/lib/native/auth/oauth";
+import "@/i18n/nativeAuth";
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { search } = useLocation();
+  // Inside the iOS / Android app this screen is sign-in only: the app is a
+  // companion to an account and subscription created on the website, so it
+  // offers no sign-up and no route to one (App Store guideline 3.1.3(f),
+  // Google Play payments policy). Every difference below is behind `native`,
+  // which is false in any browser.
+  const native = isNativeApp();
+  // Provider buttons: always on the web; in the app only when switched on by
+  // build flag (see lib/native/auth/oauth.ts). The divider follows the buttons.
+  const offer = oauthOffer();
+  const showProviders = offer.thirdParty || offer.apple;
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +69,12 @@ const Login = () => {
         : t("auth.oauth.failed", "Could not start sign-in with that provider. Please try again.")
     );
     window.history.replaceState({}, "", window.location.pathname);
-  }, [t]);
+    // `search` is here only to re-run this when the router is sent to
+    // /login?error=... while this page is already mounted. That is how the
+    // app reports a provider round-trip that failed in the system browser
+    // (lib/native/auth/deepLinks.ts). On the web the page always mounts fresh
+    // from the provider's redirect, so the extra dependency changes nothing.
+  }, [t, search]);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -134,6 +153,8 @@ const Login = () => {
         subtitle={t('auth.login.subtitle', 'Sign in to your workspace')}
       >
         <div className="space-y-6">
+          {showProviders && (
+            <>
           {/* Continue with Google / Microsoft — full width, stacked. */}
           <OAuthButtons remember={remember} redirectPath="/today" />
 
@@ -146,6 +167,8 @@ const Login = () => {
               <span className="px-3 bg-white text-rd-ink-500 font-medium">{t('auth.login.orEmail', 'Or continue with email')}</span>
             </div>
           </div>
+            </>
+          )}
 
           {/* Form */}
           <form noValidate onSubmit={handleLogin} className="space-y-5">
@@ -210,6 +233,10 @@ const Login = () => {
 
             {/* Remember me · Forgot password */}
             <div className="flex items-center justify-between gap-3 flex-wrap">
+              {/* Not in the app. Unticked, this means "forget me when I close
+                  the tab"; an app has no tab, and its session is kept in the
+                  phone's keystore either way. See sessionPersistence.ts. */}
+              {!native && (
               <label
                 htmlFor="remember"
                 className="inline-flex items-center gap-2 text-sm text-rd-ink-700 cursor-pointer min-h-[24px]"
@@ -224,6 +251,7 @@ const Login = () => {
                 />
                 {t('auth.login.rememberMe', 'Remember me')}
               </label>
+              )}
               <Link
                 to="/forgot-password"
                 className="text-sm text-rd-navy-700 hover:text-rd-navy-800 font-medium underline underline-offset-2 transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-500 inline-flex items-center min-h-[24px]"
@@ -255,13 +283,22 @@ const Login = () => {
 
           </form>
 
-          {/* Sign Up Link */}
+          {/* Sign Up Link. In the app: one neutral line and no link. It says
+              which account to use and nothing about how to get one, because
+              pointing at sign-up or a trial from inside the app is steering to
+              a purchase. */}
+          {native ? (
+            <p className="text-center text-sm text-rd-ink-600">
+              {t('nativeAuth.login.accountLine', 'Sign in with your Realtor Desk account.')}
+            </p>
+          ) : (
           <p className="text-center text-sm text-rd-ink-600">
             {t('auth.login.noAccount', "Don't have an account?")}{" "}
             <Link to="/signup" className="text-rd-navy-700 font-medium underline underline-offset-2 hover:text-rd-navy-800 transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-500">
               {t('auth.login.startTrial', 'Start your free trial')}
             </Link>
           </p>
+          )}
         </div>
       </AuthCard>
     </AuthLayout>

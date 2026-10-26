@@ -170,9 +170,9 @@ const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-bold text-foreground mt-8 mb-4">9. International Data Transfers</h2>
               <p>
-                Your personal information is stored and processed exclusively in Canada. We do not transfer 
-                personal information outside of Canada, ensuring full compliance with Canadian data residency 
-                requirements and PIPEDA regulations.
+                The production database and file storage run in Canada, in the ca-central-1 region. Some
+                features send content to outside providers, such as SMS, email delivery and AI-assisted
+                drafting, which may process it outside Canada.
               </p>
             </section>
 
