@@ -1,0 +1,3 @@
+/* Invites d'autorisation. Même sens que la version anglaise dans Info.plist et en.lproj. */
+"NSCameraUsageDescription" = "Realtor Desk utilise l'appareil photo seulement lorsque vous choisissez de prendre une photo ou une vidéo pour votre photo de profil ou pour la joindre à un contact.";
+"NSMicrophoneUsageDescription" = "Realtor Desk utilise le microphone seulement lorsque vous choisissez d'enregistrer une vidéo à joindre à un contact.";
