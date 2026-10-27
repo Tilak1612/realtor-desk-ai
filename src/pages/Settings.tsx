@@ -494,7 +494,20 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
           {/* Google Calendar integration (web only, see `native` above) */}
           {!native && <GoogleCalendarCard />}
 
-          {/* Subscription Status Section */}
+          {/* Subscription Status Section.
+
+              In the iOS / Android app it is shown only to a subscribed
+              account. For anyone else the card would read "Trial Active, N
+              days left" or "Trial Expired": that is the database's 14-day
+              trial, which grants no access (RequireBilling needs a Stripe
+              subscription), so the app's own no-access screen says "No active
+              subscription" while this card would count down a trial. The
+              reviewer demo account would show "Trial Expired" once its
+              sign-up date is two weeks old. A trial countdown is also the one
+              thing left on this page that reads as a nudge to buy (App Store
+              guideline 3.1.3(f)). The web is unchanged: Billing explains the
+              status there. */}
+          {(!native || subscribed) && (
           <Card className={subscribed ? "border-accent/30 bg-accent/5" : trialExpired ? "border-destructive/30 bg-destructive/5" : "border-primary/30 bg-primary/5"}>
             <CardHeader className="pb-3">
               <CardTitle className="text-base font-medium flex items-center gap-2">
@@ -564,6 +577,7 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
               </div>
             </CardContent>
           </Card>
+          )}
 
           {/* Language Settings */}
           <Card>
