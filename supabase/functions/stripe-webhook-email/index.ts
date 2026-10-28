@@ -124,10 +124,12 @@ const handler = async (req: Request): Promise<Response> => {
 
       // The subscription payload carries a customer id, not an email.
       let customerEmail: string | null = null;
+      let customerUserId: string | null = null;
       try {
         const customer = await stripe.customers.retrieve(subscription.customer as string);
         if (customer && !("deleted" in customer && customer.deleted)) {
           customerEmail = (customer as Stripe.Customer).email;
+          customerUserId = (customer as Stripe.Customer).metadata?.user_id ?? null;
         }
       } catch (err) {
         console.error("trial_will_end: could not retrieve customer:", err instanceof Error ? err.message : String(err));
@@ -140,11 +142,21 @@ const handler = async (req: Request): Promise<Response> => {
         });
       }
 
-      const { data: profile } = await supabaseAdmin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("email", customerEmail)
-        .single();
+      // send-lifecycle-email rejects a null userId with a 400, so the warning
+      // never went out for anyone whose profile email differed from the Stripe
+      // customer email. Resolve the user from the id Stripe carries first
+      // (subscription, then customer metadata), and fall back to the email.
+      const stampedUserId = subscription.metadata?.user_id || customerUserId;
+      const { data: profile } = stampedUserId
+        ? await supabaseAdmin.from("profiles").select("id, full_name").eq("id", stampedUserId).maybeSingle()
+        : await supabaseAdmin.from("profiles").select("id, full_name").eq("email", customerEmail).maybeSingle();
+
+      if (!profile?.id) {
+        console.error("trial_will_end: no RealtorDesk user for Stripe customer", subscription.customer);
+        return new Response(JSON.stringify({ received: true }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
 
       const trialEndMs = subscription.trial_end ? subscription.trial_end * 1000 : null;
       const daysRemaining = trialEndMs
@@ -164,10 +176,10 @@ const handler = async (req: Request): Promise<Response> => {
       const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
         body: {
           eventType: "trial_ending",
-          userId: profile?.id || null,
+          userId: profile.id,
           recipientEmail: customerEmail,
           data: {
-            firstName: profile?.full_name?.split(" ")[0] || "",
+            firstName: profile.full_name?.split(" ")[0] || "",
             days_remaining: daysRemaining,
             trial_end_date: trialEndDate,
             amount,
@@ -178,98 +190,24 @@ const handler = async (req: Request): Promise<Response> => {
       if (fnError) console.error("trial_will_end: send-lifecycle-email failed:", fnError);
     }
 
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
-      const customerEmail = session.customer_email || (session.customer_details?.email ?? null);
-
-      if (!customerEmail) {
-        console.log("No customer email on checkout session, skipping");
-        return new Response(JSON.stringify({ received: true }), {
-          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
-        });
-      }
-
-      const { data: profile } = await supabaseAdmin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("email", customerEmail)
-        .single();
-
-      const firstName = profile?.full_name?.split(" ")[0] || "";
-
-      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
-        body: {
-          eventType: "realtordesk_onboarding_welcome",
-          userId: profile?.id || null,
-          recipientEmail: customerEmail,
-          data: { firstName },
-        },
-      });
-
-      if (fnError) console.error("Error calling send-lifecycle-email:", fnError);
-
-    } else if (event.type === "customer.subscription.updated") {
-      const subscription = event.data.object as Stripe.Subscription;
-      const customer = await stripe.customers.retrieve(subscription.customer as string) as Stripe.Customer;
-      const customerEmail = customer.email;
-
-      if (!customerEmail) {
-        return new Response(JSON.stringify({ received: true }), {
-          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
-        });
-      }
-
-      const { data: profile } = await supabaseAdmin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("email", customerEmail)
-        .single();
-
-      const firstName = profile?.full_name?.split(" ")[0] || "";
-      const trialEnd = subscription.trial_end
-        ? new Date(subscription.trial_end * 1000).toLocaleDateString("en-CA")
-        : null;
-
-      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
-        body: {
-          eventType: "realtordesk_onboarding_trialnudge",
-          userId: profile?.id || null,
-          recipientEmail: customerEmail,
-          data: { firstName, trial_end_date: trialEnd },
-        },
-      });
-
-      if (fnError) console.error("Error calling send-lifecycle-email:", fnError);
-
-    } else if (event.type === "customer.subscription.deleted") {
-      const subscription = event.data.object as Stripe.Subscription;
-      const customer = await stripe.customers.retrieve(subscription.customer as string) as Stripe.Customer;
-      const customerEmail = customer.email;
-
-      if (!customerEmail) {
-        return new Response(JSON.stringify({ received: true }), {
-          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
-        });
-      }
-
-      const { data: profile } = await supabaseAdmin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("email", customerEmail)
-        .single();
-
-      const firstName = profile?.full_name?.split(" ")[0] || "";
-
-      const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
-        body: {
-          eventType: "realtordesk_subscription_cancelled",
-          userId: profile?.id || null,
-          recipientEmail: customerEmail,
-          data: { firstName },
-        },
-      });
-
-      if (fnError) console.error("Error calling send-lifecycle-email:", fnError);
+    // These three branches used to request realtordesk_onboarding_welcome,
+    // realtordesk_onboarding_trialnudge and realtordesk_subscription_cancelled.
+    // send-lifecycle-email accepts none of them and answered 400, so none of
+    // these emails has ever been sent. They are left off on purpose rather
+    // than pointed at the nearest valid template:
+    //   - checkout.session.completed: send-welcome-email already welcomes the
+    //     user at signup, and onboarding_step1 says "you haven't completed
+    //     your profile", which is wrong right after checkout.
+    //   - customer.subscription.updated fires on every plan, card and renewal
+    //     change; trial_will_end above already sends the trial warning.
+    //   - customer.subscription.deleted: no cancellation template exists, and
+    //     winback is implied-consent marketing copy, not a confirmation.
+    if (
+      event.type === "checkout.session.completed" ||
+      event.type === "customer.subscription.updated" ||
+      event.type === "customer.subscription.deleted"
+    ) {
+      console.log(`${event.type}: no lifecycle email for this event`);
     }
 
     return new Response(JSON.stringify({ received: true }), {
