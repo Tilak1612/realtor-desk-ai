@@ -1,7 +1,9 @@
 -- Resend delivery events (bounces, complaints, delays, suppressions) received
 -- by the resend-webhook edge function. Written only with the service role;
 -- RLS is on with no policies, so the browser can neither read nor write it.
--- Additive and idempotent. email_suppressions already exists (baseline).
+-- Additive and idempotent. Apply to production FIRST, then regenerate the
+-- baseline with scripts/generate-schema-baseline.sh (CI allows only the
+-- generated baseline in supabase/migrations). email_suppressions already exists.
 
 create table if not exists public.resend_email_events (
   svix_id text primary key,
