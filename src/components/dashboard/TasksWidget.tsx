@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+// Nullable as the tasks row and its contact / deal joins are; the render
+// below already shows nothing for a missing value.
 interface Task {
   id: string;
   title: string;
-  due_time?: string;
-  priority: string;
-  status: string;
-  contact?: { first_name: string; last_name: string };
-  deal?: { title: string };
+  due_time?: string | null;
+  priority: string | null;
+  status: string | null;
+  contact?: { first_name: string | null; last_name: string | null } | null;
+  deal?: { title: string } | null;
 }
 
 interface TasksWidgetProps {
@@ -23,7 +25,7 @@ interface TasksWidgetProps {
 }
 
 const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
-  const getPriorityColor = (priority: string) => {
+  const getPriorityColor = (priority: string | null) => {
     switch (priority) {
       case "high":
         return "bg-destructive";
@@ -34,7 +36,7 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
     }
   };
 
-  const handleTaskToggle = async (taskId: string, currentStatus: string) => {
+  const handleTaskToggle = async (taskId: string, currentStatus: string | null) => {
     const newStatus = currentStatus === "completed" ? "pending" : "completed";
     const { error } = await supabase
       .from("tasks")
@@ -50,7 +52,7 @@ const TasksWidget = ({ tasks, onTaskComplete }: TasksWidgetProps) => {
     toast.success(newStatus === "completed" ? "Task completed!" : "Task reopened");
   };
 
-  const isOverdue = (dueTime?: string) => {
+  const isOverdue = (dueTime?: string | null) => {
     if (!dueTime) return false;
     const now = new Date();
     const [hours, minutes] = dueTime.split(":");

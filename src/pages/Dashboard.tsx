@@ -261,8 +261,8 @@ const Dashboard = () => {
           <StatCard
             title={t('app.dashboard.newLeadsThisMonth')}
             value={analytics?.monthly_leads || 0}
-            change={analytics?.leads_change_percent || 0}
-            trend={analytics?.leads_change_percent >= 0 ? "up" : "down"}
+            change={analytics ? analytics.leads_change_percent : undefined}
+            trend={analytics ? (analytics.leads_change_percent >= 0 ? "up" : "down") : "neutral"}
             icon={Users}
           />
           <StatCard
@@ -328,7 +328,7 @@ const Dashboard = () => {
             {user?.id && <TodayOnboardingChecklist userId={user.id} />}
 
             {/* Market Widget */}
-            <MarketWidget defaultCity={profile?.city} />
+            <MarketWidget defaultCity={profile?.city ?? undefined} />
           </div>
         </div>
 
