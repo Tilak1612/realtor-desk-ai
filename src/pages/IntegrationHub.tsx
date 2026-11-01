@@ -62,9 +62,9 @@ const TOOLS: Tool[] = [
 
 const CATEGORIES = [...new Set(TOOLS.map(t => t.category))];
 
-const integrationConnectionsTable = () => (supabase as any).from("integration_connections");
-const integrationInterestTable = () => (supabase as any).from("integration_interest");
-const integrationRequestsTable = () => (supabase as any).from("integration_requests");
+const integrationConnectionsTable = () => supabase.from("integration_connections");
+const integrationInterestTable = () => supabase.from("integration_interest");
+const integrationRequestsTable = () => supabase.from("integration_requests");
 
 const TOOL_COLORS: Record<string, string> = {
   salesforce: "#00A1E0", "zoho-crm": "#D32F2F", pipedrive: "#4CAF50",

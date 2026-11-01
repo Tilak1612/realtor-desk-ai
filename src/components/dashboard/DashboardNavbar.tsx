@@ -25,9 +25,17 @@ import { isNativeApp } from "@/lib/native/platform";
 import { isAllowedInNative } from "@/lib/native/routes";
 
 interface DashboardNavbarProps {
-  user: any;
-  profile: any;
+  // AppLayout passes these through untyped (each legacy page holds its own
+  // user/profile state); the navbar reads four string fields from them.
+  user: unknown;
+  profile: unknown;
 }
+
+/** A string property of the untyped user or profile object, else undefined. */
+const str = (o: unknown, key: string): string | undefined => {
+  const v = typeof o === "object" && o !== null ? (o as Record<string, unknown>)[key] : undefined;
+  return typeof v === "string" ? v : undefined;
+};
 
 // The bell and its dropdown of due tasks.
 //
@@ -116,7 +124,11 @@ const NotificationBell = () => {
 const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(profile?.avatar_url ?? null);
+  const userId = str(user, "id");
+  const profileAvatar = str(profile, "avatar_url");
+  const fullName = str(profile, "full_name");
+  const email = str(profile, "email");
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(profileAvatar ?? null);
   const [avatarUploading, setAvatarUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   // Every difference below is for the iOS / Android app; in a browser this is
@@ -143,13 +155,13 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   const native = isNativeApp();
 
   useEffect(() => {
-    setAvatarUrl(profile?.avatar_url ?? null);
-  }, [profile?.avatar_url]);
+    setAvatarUrl(profileAvatar ?? null);
+  }, [profileAvatar]);
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     e.target.value = "";
-    if (!file || !user?.id) return;
+    if (!file || !userId) return;
 
     if (!file.type.startsWith("image/")) {
       toast.error(t("nav.avatarInvalidType", "Please select an image file"));
@@ -165,7 +177,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
     setAvatarUploading(true);
     try {
       const fileExt = file.name.split(".").pop();
-      const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+      const fileName = `${userId}/${Date.now()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from("avatars")
@@ -180,7 +192,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
       const { error: updateError } = await supabase
         .from("profiles")
         .update({ avatar_url: publicUrl, updated_at: new Date().toISOString() })
-        .eq("id", user.id);
+        .eq("id", userId);
 
       if (updateError) throw updateError;
 
@@ -194,13 +206,13 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
   };
 
   const handleAvatarRemove = async () => {
-    if (!user?.id) return;
+    if (!userId) return;
     setAvatarUploading(true);
     try {
       const { error } = await supabase
         .from("profiles")
         .update({ avatar_url: null, updated_at: new Date().toISOString() })
-        .eq("id", user.id);
+        .eq("id", userId);
 
       if (error) throw error;
 
@@ -333,7 +345,7 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
                   {/* Fallback must pop against the navy header — bg-primary
                       here would render navy-on-navy. */}
                   <AvatarFallback className="bg-white/15 text-white text-xs">
-                    {profile?.full_name ? getInitials(profile.full_name) : "U"}
+                    {fullName ? getInitials(fullName) : "U"}
                   </AvatarFallback>
                 </Avatar>
                 {avatarUploading && (
@@ -346,8 +358,8 @@ const DashboardNavbar = ({ user, profile }: DashboardNavbarProps) => {
             <DropdownMenuContent align="end" className="w-52">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-0.5">
-                  <p className="text-sm font-medium">{profile?.full_name || "User"}</p>
-                  <p className="text-xs text-muted-foreground">{profile?.email}</p>
+                  <p className="text-sm font-medium">{fullName || "User"}</p>
+                  <p className="text-xs text-muted-foreground">{email}</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />

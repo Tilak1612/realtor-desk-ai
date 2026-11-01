@@ -36,6 +36,11 @@ import AICallSummaryPanel from "@/components/call-workflow/AICallSummaryPanel";
 import { useAiConsent } from "@/hooks/useAiConsent";
 import WorkflowFeedbackWidget from "@/components/feedback/WorkflowFeedbackWidget";
 import { Spinner } from "@/components/rd";
+import type { User } from "@supabase/supabase-js";
+import type { Tables, TablesUpdate } from "@/integrations/supabase/types";
+
+/** What generate-call-summary returns: its prompt asks for this JSON and its fallback has the same keys. */
+type CallSummary = { summary: string[]; intent: string; tone: string; suggestedAction: string };
 
 interface Contact {
   id: string;
@@ -58,8 +63,8 @@ const CallWorkflow = () => {
   const { contactId } = useParams<{ contactId: string }>();
   const contactQueueState = location.state?.contactQueue as string[] | undefined;
   
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Tables<"profiles"> | null>(null);
   const [contact, setContact] = useState<Contact | null>(null);
   const [contactQueue, setContactQueue] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,7 +79,7 @@ const CallWorkflow = () => {
   
   // AI panel state
   const [showAIPanel, setShowAIPanel] = useState(true);
-  const [aiSummary, setAISummary] = useState<any>(null);
+  const [aiSummary, setAISummary] = useState<CallSummary | null>(null);
   const [generatingAI, setGeneratingAI] = useState(false);
   
   const [loading, setLoading] = useState(true);
@@ -90,8 +95,7 @@ const CallWorkflow = () => {
 
       if (error) throw error;
 
-      // Type assertion for contact data with optional fields
-      const contactData: any = data;
+      const contactData = data;
       setContact(contactData);
       setNewStage(contactData.stage || "");
       setCallNotes(contactData.notes || "");
@@ -233,7 +237,7 @@ const CallWorkflow = () => {
     setSaving(true);
     try {
       // Update contact
-      const updates: any = {
+      const updates: TablesUpdate<"contacts"> = {
         notes: callNotes,
         stage: newStage || contact.stage,
         last_contact_date: new Date().toISOString(),

@@ -59,7 +59,7 @@ const ConnectPanel = ({ open, onOpenChange, tool, connection, userId, onConnecti
 
   if (!tool) return null;
 
-  const integrationConnectionsTable = () => (supabase as any).from("integration_connections");
+  const integrationConnectionsTable = () => supabase.from("integration_connections");
 
   const isConnected = connection?.status === "connected";
   const isWebhook = tool.connectionMethod === "webhook";

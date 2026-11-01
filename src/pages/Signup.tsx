@@ -24,6 +24,7 @@ import ContinueConsentNotice from "@/components/auth/ContinueConsentNotice";
 import OAuthButtons from "@/components/auth/OAuthButtons";
 import { buildConsentRecord } from "@/config/legal";
 import { authLinkOrigin, isNativeApp } from "@/lib/native/platform";
+import { errorMessage } from "@/lib/errorMessage";
 
 const SignupPage = () => {
   const { t } = useTranslation();
@@ -163,10 +164,10 @@ const SignupPage = () => {
           });
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Every entered value is preserved: formData is untouched on failure,
       // so the user never retypes the form because the network blipped.
-      const message = error?.message || t('app.notifications.errorOccurred');
+      const message = errorMessage(error) || t('app.notifications.errorOccurred');
       setSubmitError(message);
       setStatusMessage(t('auth.signup.status.failed', 'We could not create your account. {{message}}', { message }));
       toast.error(t('app.common.error'), { description: message, duration: 6000 });

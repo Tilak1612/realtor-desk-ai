@@ -24,6 +24,7 @@ import { useSubscription } from "@/contexts/SubscriptionContext";
 import { Badge } from "@/components/ui/badge";
 import AppLayout from "@/components/layout/AppLayout";
 import { AppShell } from "@/components/rd/layout/AppShell";
+import { errorMessage } from "@/lib/errorMessage";
 
 // Canonical DB value is the English name (so existing records don't
 // need a migration); the FR label is a locale-scoped lookup. Official
@@ -263,10 +264,10 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
       });
       
       navigate("/login");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t('app.common.error'),
-        description: error.message || t('app.notifications.errorOccurred'),
+        description: errorMessage(error) || t('app.notifications.errorOccurred'),
         variant: "destructive",
       });
     } finally {
@@ -314,10 +315,10 @@ const Settings = ({ appChrome = false }: SettingsProps) => {
         title: t('app.common.success'),
         description: t('app.common.export'),
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t('app.common.error'),
-        description: error.message || t('app.notifications.errorOccurred'),
+        description: errorMessage(error) || t('app.notifications.errorOccurred'),
         variant: "destructive",
       });
     } finally {

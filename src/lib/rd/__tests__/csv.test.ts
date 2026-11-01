@@ -6,7 +6,7 @@ import { toCsv, datedFilename } from "../csv";
 // column and the file will not parse. These cases pin the behaviour that
 // replaces it.
 describe("toCsv", () => {
-  const strip = (s: string) => s.replace(/^﻿/, "");
+  const strip = (s: string) => s.replace(/^\uFEFF/, "");
 
   it("emits a UTF-8 BOM so Excel renders accented French names correctly", () => {
     expect(toCsv(["a"], [["Émilie"]]).startsWith("﻿")).toBe(true);

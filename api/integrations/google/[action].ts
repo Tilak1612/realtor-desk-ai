@@ -148,9 +148,7 @@ async function tokenRequest(params: Record<string, string>) {
   });
   const data = await r.json().catch(() => ({}));
   if (!r.ok) {
-    const err = new Error(data.error || `token_${r.status}`);
-    (err as any).code = data.error;
-    throw err;
+    throw Object.assign(new Error(data.error || `token_${r.status}`), { code: data.error as string | undefined });
   }
   return data as { access_token: string; expires_in: number; refresh_token?: string; scope?: string; id_token?: string };
 }
@@ -173,8 +171,16 @@ async function ensureCalendar(accessToken: string, existingId?: string | null) {
   return (await r.json()).id as string;
 }
 
+/** The fields of a stored connection row that the token refresh reads. */
+type ConnectionRow = { user_id: string; encrypted_tokens: string };
+
+/** One property of a thrown value, without assuming it is an Error. */
+function prop(err: unknown, key: string): unknown {
+  return typeof err === "object" && err !== null ? (err as Record<string, unknown>)[key] : undefined;
+}
+
 /** Returns a valid access token for the user's stored connection, refreshing if needed. */
-async function accessTokenFor(row: any, e: ReturnType<typeof env>, db: ReturnType<typeof rest>) {
+async function accessTokenFor(row: ConnectionRow, e: ReturnType<typeof env>, db: ReturnType<typeof rest>) {
   const tokens = JSON.parse(decrypt(row.encrypted_tokens, e.clientSecret!));
   if (tokens.access_token && tokens.expires_at && tokens.expires_at - 60_000 > Date.now()) return tokens.access_token as string;
   try {
@@ -187,12 +193,10 @@ async function accessTokenFor(row: any, e: ReturnType<typeof env>, db: ReturnTyp
     const next = { ...tokens, access_token: t.access_token, expires_at: Date.now() + t.expires_in * 1000 };
     await db.upsert({ user_id: row.user_id, encrypted_tokens: encrypt(JSON.stringify(next), e.clientSecret!), status: "connected", updated_at: new Date().toISOString() });
     return t.access_token;
-  } catch (err: any) {
-    if (err.code === "invalid_grant") {
+  } catch (err: unknown) {
+    if (prop(err, "code") === "invalid_grant") {
       await db.upsert({ user_id: row.user_id, status: "disconnected", updated_at: new Date().toISOString() });
-      const e2 = new Error("reconnect_required");
-      (e2 as any).status = 409;
-      throw e2;
+      throw Object.assign(new Error("reconnect_required"), { status: 409 });
     }
     throw err;
   }
@@ -280,7 +284,7 @@ async function finalize(req: Request) {
   const clear = setCookie(PENDING_COOKIE, "", 0, secure);
   const raw = cookies(req)[PENDING_COOKIE];
   if (!raw) return json({ error: "nothing_pending" }, 400, { "set-cookie": clear });
-  let pending: any;
+  let pending: { uid: string; exp: number; tokens: { access_token: string; refresh_token?: string; expires_at: number; scope?: string } };
   try {
     pending = JSON.parse(decrypt(raw, e.clientSecret!));
   } catch {
@@ -380,8 +384,8 @@ async function events(req: Request) {
     const data = await r.json();
     if (!r.ok) return json({ error: "google_error", detail: data?.error?.message }, 502);
     return json({ id: data.id, htmlLink: data.htmlLink });
-  } catch (err: any) {
-    return json({ error: err.message || "failed" }, err.status || 500);
+  } catch (err: unknown) {
+    return json({ error: (prop(err, "message") as string) || "failed" }, (prop(err, "status") as number) || 500);
   }
 }
 
@@ -392,8 +396,8 @@ function action(req: Request) {
 async function safe(fn: () => Promise<Response>) {
   try {
     return await fn();
-  } catch (err: any) {
-    console.error("[google-calendar]", err?.message);
+  } catch (err: unknown) {
+    console.error("[google-calendar]", prop(err, "message"));
     return json({ error: "internal_error" }, 500);
   }
 }

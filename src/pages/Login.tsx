@@ -15,6 +15,7 @@ import { setRememberMe, isRemembered } from "@/lib/auth/sessionPersistence";
 import { consumeSessionExpired } from "@/lib/auth/signOut";
 import { isNativeApp } from "@/lib/native/platform";
 import { oauthOffer } from "@/lib/native/auth/oauth";
+import { errorMessage } from "@/lib/errorMessage";
 import "@/i18n/nativeAuth";
 
 const Login = () => {
@@ -128,11 +129,11 @@ const Login = () => {
           navigate("/onboarding");
         }
       }
-    } catch (error: any) {
-      if (error.message.includes("Invalid login credentials")) {
+    } catch (error: unknown) {
+      if ((errorMessage(error) ?? "").includes("Invalid login credentials")) {
         toast.error(t('app.auth.invalidCredentials'));
       } else {
-        toast.error(error.message || t('app.notifications.errorOccurred'));
+        toast.error(errorMessage(error) || t('app.notifications.errorOccurred'));
       }
     } finally {
       setLoading(false);

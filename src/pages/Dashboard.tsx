@@ -7,7 +7,7 @@ import AppLayout from "@/components/layout/AppLayout";
 import StatCard from "@/components/dashboard/StatCard";
 import HotLeadsWidget from "@/components/dashboard/HotLeadsWidget";
 import TasksWidget from "@/components/dashboard/TasksWidget";
-import DealsWidget from "@/components/dashboard/DealsWidget";
+import DealsWidget, { type DealStats } from "@/components/dashboard/DealsWidget";
 import MarketWidget from "@/components/dashboard/MarketWidget";
 import TrialBanner from "@/components/dashboard/TrialBanner";
 import TodayOnboardingChecklist from "@/components/dashboard/TodayOnboardingChecklist";
@@ -17,22 +17,37 @@ import RevenueBreakdownWidget from "@/components/dashboard/RevenueBreakdownWidge
 import DataImportCard from "@/components/dashboard/DataImportCard";
 import { Users, Briefcase, CheckSquare, DollarSign, Home, MapPin, Brain } from "lucide-react";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import type { User } from "@supabase/supabase-js";
+import type { Tables } from "@/integrations/supabase/types";
+import type { ContactName } from "@/types/rows";
+
+/** Figures computed in fetchDashboardData (annual_goal is a fixed target there). */
+type DashboardAnalytics = {
+  monthly_leads: number;
+  leads_change_percent: number;
+  active_deals_count: number;
+  pipeline_value: number;
+  ytd_revenue: number;
+  annual_goal: number;
+};
+type HotLead = Tables<"contacts"> & { name: string; insight: string };
+type TodayTask = Tables<"tasks"> & { contact: ContactName | null; deal: { title: string } | null };
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
-  const [analytics, setAnalytics] = useState<any>(null);
-  const [hotLeads, setHotLeads] = useState<any[]>([]);
-  const [todayTasks, setTodayTasks] = useState<any[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Tables<"profiles"> | null>(null);
+  const [analytics, setAnalytics] = useState<DashboardAnalytics | null>(null);
+  const [hotLeads, setHotLeads] = useState<HotLead[]>([]);
+  const [todayTasks, setTodayTasks] = useState<TodayTask[]>([]);
   const [revenueData, setRevenueData] = useState({
     ytdRevenue: 0,
     closedDealsCount: 0,
     grossVolume: 0,
     commissionRate: 2.5,
   });
-  const [dealStats, setDealStats] = useState<any>({
+  const [dealStats, setDealStats] = useState<DealStats>({
     lead: { count: 0, value: 0 },
     viewing: { count: 0, value: 0 },
     offer: { count: 0, value: 0 },
@@ -139,7 +154,7 @@ const Dashboard = () => {
     }
 
     if (dealsData) {
-      const stats: any = {
+      const stats: DealStats = {
         lead: { count: 0, value: 0 },
         viewing: { count: 0, value: 0 },
         offer: { count: 0, value: 0 },

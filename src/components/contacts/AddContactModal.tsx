@@ -33,6 +33,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { trackEvent } from "@/utils/analytics";
+import { errorMessage } from "@/lib/errorMessage";
 
 // Schema factory so validation messages track the active i18n locale.
 // react-hook-form + zod runs validation synchronously, so we rebuild the
@@ -146,10 +147,10 @@ const AddContactModal = ({ open, onOpenChange, onSuccess }: AddContactModalProps
       form.reset();
       onOpenChange(false);
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t("app.modals.addContact.errorAdding"),
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {

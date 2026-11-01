@@ -13,9 +13,11 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import type { TablesUpdate } from "@/integrations/supabase/types";
+import type { DealRow } from "@/types/rows";
 
 interface WinLossModalProps {
-  deal: any;
+  deal: Pick<DealRow, "id" | "metadata" | "value">;
   type: "won" | "lost";
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -38,7 +40,7 @@ const WinLossModal = ({ deal, type, open, onOpenChange, onSuccess }: WinLossModa
     e.preventDefault();
     setLoading(true);
 
-    const updateData: Record<string, any> = {
+    const updateData: TablesUpdate<"deals"> = {
       stage: type === "won" ? "sold" : "withdrawn",
       status: type === "won" ? "closed" : "withdrawn",
       updated_at: new Date().toISOString()

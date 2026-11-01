@@ -21,6 +21,13 @@ async function authHeaders(): Promise<Record<string, string>> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+/** A non-2xx answer from the endpoint, with its parsed body and HTTP status. */
+class CallError extends Error {
+  constructor(message: string, readonly body: { error?: string }, readonly status: number) {
+    super(message);
+  }
+}
+
 async function call(path: string, init: RequestInit = {}) {
   const res = await fetch(`${BASE}/${path}`, {
     credentials: "same-origin",
@@ -28,7 +35,7 @@ async function call(path: string, init: RequestInit = {}) {
     headers: { "Content-Type": "application/json", ...(await authHeaders()), ...(init.headers || {}) },
   });
   const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw Object.assign(new Error(body.error || `HTTP ${res.status}`), { body, status: res.status });
+  if (!res.ok) throw new CallError(body.error || `HTTP ${res.status}`, body, res.status);
   return body;
 }
 
@@ -66,7 +73,7 @@ export default function GoogleCalendarCard() {
         try {
           const r = await call("finalize", { method: "POST" });
           setMessage({ kind: "ok", text: `Google Calendar connected${r.email ? ` as ${r.email}` : ""}.` });
-        } catch (e: any) {
+        } catch {
           setMessage({ kind: "error", text: "Couldn't finish connecting Google Calendar. Please try again." });
         } finally {
           setBusy(false);
@@ -86,9 +93,10 @@ export default function GoogleCalendarCard() {
     try {
       const { url } = await call("start", { method: "POST" });
       window.location.assign(url);
-    } catch (e: any) {
+    } catch (e: unknown) {
       setBusy(false);
-      setMessage({ kind: "error", text: e.status === 503 ? RESULT_MESSAGES.not_configured : "Couldn't start the Google connection." });
+      const notConfigured = e instanceof CallError && e.status === 503;
+      setMessage({ kind: "error", text: notConfigured ? RESULT_MESSAGES.not_configured : "Couldn't start the Google connection." });
     }
   };
 
@@ -124,9 +132,10 @@ export default function GoogleCalendarCard() {
         }),
       });
       setMessage({ kind: "ok", text: "Test event added to your Google Calendar." });
-    } catch (e: any) {
-      if (e.body?.error === "reconnect_required") await refresh();
-      setMessage({ kind: "error", text: e.body?.error === "reconnect_required" ? "Please reconnect Google Calendar." : "Couldn't create the test event." });
+    } catch (e: unknown) {
+      const reconnect = e instanceof CallError && e.body?.error === "reconnect_required";
+      if (reconnect) await refresh();
+      setMessage({ kind: "error", text: reconnect ? "Please reconnect Google Calendar." : "Couldn't create the test event." });
     } finally {
       setBusy(false);
     }

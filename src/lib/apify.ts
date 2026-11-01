@@ -238,7 +238,7 @@ const callApifyRunner = async (actorId: string, input: Record<string, unknown>) 
   if (response.error) {
     // Try to extract the function's JSON error body (more reliable than error.message)
     try {
-      const resp = (response as any).response as Response | undefined;
+      const resp = response.response;
       if (resp) {
         const contentType = resp.headers.get("Content-Type") || "";
         if (contentType.includes("application/json")) {

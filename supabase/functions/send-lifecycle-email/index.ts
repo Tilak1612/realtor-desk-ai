@@ -18,7 +18,7 @@ interface EmailTemplate {
   html: string;
 }
 
-function getTemplate(eventType: string, data: Record<string, any> = {}, caslFooter = ""): EmailTemplate | null {
+function getTemplate(eventType: string, data: Record<string, unknown> = {}, caslFooter = ""): EmailTemplate | null {
   const name = data.name || "there";
 
   const templates: Record<string, EmailTemplate> = {

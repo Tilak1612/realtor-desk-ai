@@ -11,6 +11,7 @@ import { PasswordInput, validatePassword } from "@/components/ui/password-input"
 import { useTranslation } from "react-i18next";
 import { parseRecoveryFragment } from "@/lib/auth/recoveryLink";
 import { isNativeApp } from "@/lib/native/platform";
+import { errorMessage } from "@/lib/errorMessage";
 import "@/i18n/nativeAuth";
 
 const ResetPassword = () => {
@@ -113,8 +114,8 @@ const ResetPassword = () => {
 
       toast.success(t('auth.reset.updated', 'Password updated successfully!'));
       navigate("/login");
-    } catch (error: any) {
-      toast.error(error.message || t('auth.reset.failed', 'Failed to reset password'));
+    } catch (error: unknown) {
+      toast.error(errorMessage(error) || t('auth.reset.failed', 'Failed to reset password'));
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { hasAiConsent } from "@/lib/aiConsent";
+import { errorMessage } from "@/lib/errorMessage";
 
 export interface LeadScoreData {
   contact_id: string;
@@ -67,10 +68,10 @@ export const useLeadScore = (contactId: string) => {
 
       await fetchLeadScore();
       return data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error calculating lead score",
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {
