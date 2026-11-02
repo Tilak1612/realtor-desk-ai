@@ -10,7 +10,6 @@ import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
 import {
   RDButton,
   RDBadge,
-  RDAvatar,
   RDMark,
   IconArrow,
   IconCheck,
@@ -28,6 +27,7 @@ import { ProductTour } from "@/components/marketing/ProductTour";
 import { AudienceCards } from "@/components/rd/marketing/AudienceCards";
 import { ResourceCards } from "@/components/rd/marketing/ResourceCards";
 import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
+import { HeroScorer } from "@/components/rd/marketing/HeroScorer";
 import { HOME_FAQS, HOME_RESOURCES, HOME_WORKFLOW } from "@/content/homeSections";
 
 // /  — Home page per rd-marketing.jsx Artboard_Home.
@@ -232,125 +232,9 @@ function HeroSection({ t }: { t: TFn }) {
           </div>
         </div>
 
-        <HeroProduct t={t} />
+        <HeroScorer />
       </div>
     </section>
-  );
-}
-
-function HeroProduct({ t }: { t: TFn }) {
-  // The hero's product visual: the /app/leads surface, rendered from the same
-  // RD components the real screen uses (RDBadge for score tone, RDAvatar for
-  // the lead, the same column order).
-  //
-  // It is NOT dressed up as a photograph. DeviceFrame's contract is that its
-  // children are a capture of the running app, never a reconstruction, and
-  // DashboardPreview returns null rather than show an empty bezel -- a frame
-  // with no screenshot in it makes a claim the page cannot back. So this sits
-  // in a plain app window instead, which is what it honestly is: a live
-  // composition, the same category of thing the conversation card it replaced
-  // always was.
-  //
-  // The moment scripts/capture-screenshots.mjs runs, <DashboardPreview
-  // shot="shot-leads-desktop" /> is the drop-in upgrade for this block.
-  //
-  // Every string is keyed, because the FR site is a RECO requirement and an
-  // English-only hero would strand a Quebec visitor on the one element that
-  // is supposed to prove the product speaks their language.
-  // Six rows, because the card is square and three left the lower third
-  // visibly empty -- which reads as a screen that failed to load rather than
-  // as a product surface. Neighbourhoods and names are illustrative, and the
-  // mix of anglophone and francophone leads is the point: it is the same
-  // bilingual claim the headline makes, shown rather than asserted.
-  //
-  // Names and neighbourhoods are NOT keyed. They are proper nouns, identical
-  // in both locales, and routing them through t() would invite a translator
-  // to "localize" a person's name. Only the stage labels are keyed.
-  //
-  // Exactly three rows score >= 80, which is what "3 hot" in the summary
-  // counts. If you add a row above 80, update the summary key too or the
-  // header contradicts the table under it.
-  const rows: { name: string; area: string; score: number; stage: string }[] = [
-    { name: "Sarah Mitchell", area: "Riverdale", score: 94, stage: t("landing.heroDash.stageShowing") },
-    { name: "James Okafor", area: "Leslieville", score: 81, stage: t("landing.heroDash.stageQualified") },
-    { name: "Marc Lévesque", area: "Le Plateau", score: 80, stage: t("landing.heroDash.stageQualified") },
-    { name: "Priya Raman", area: "The Beaches", score: 67, stage: t("landing.heroDash.stageContacted") },
-    { name: "Chloé Bergeron", area: "Mile End", score: 58, stage: t("landing.heroDash.stageContacted") },
-    { name: "Daniel Roy", area: "Kitsilano", score: 45, stage: t("landing.heroDash.stageNew") },
-  ];
-
-  return (
-    <div className="relative aspect-square w-full max-w-[540px] mx-auto">
-      <div className="absolute inset-0 rd-depth-surface rounded-rd-xl overflow-hidden p-2.5 md:p-3">
-        {/* App window title bar */}
-        <div className="flex items-center gap-2 px-1.5 pb-2.5">
-          <div className="w-5 h-5 bg-rd-terra-600 rounded-[5px] flex items-center justify-center">
-            <IconSparkles />
-          </div>
-          <span className="text-white font-semibold text-[12px]">
-            {t("landing.heroDash.appLabel")}
-          </span>
-          <span className="text-white/45 text-[12px]">/</span>
-          <span className="text-white/75 text-[12px]">{t("landing.heroDash.screen")}</span>
-        </div>
-
-        {/* The product surface itself, on the app's own paper ground. */}
-        <div className="bg-white rounded-rd-md h-[calc(100%-2rem)] overflow-hidden flex flex-col">
-          <div className="px-4 pt-3.5 pb-3 border-b border-rd-line">
-            <div className="text-[10px] font-semibold tracking-[0.02em] text-rd-ink-500">
-              {t("landing.heroDash.summary")}
-            </div>
-            <div className="flex items-end justify-between gap-3 mt-0.5">
-              <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-rd-ink-900">
-                {t("landing.heroDash.screen")}
-              </h3>
-              <RDBadge tone="navy" size="sm">{t("landing.heroDash.langTag")}</RDBadge>
-            </div>
-            <div className="flex gap-3 mt-2.5 text-[11px] font-semibold">
-              <span className="text-rd-ink-900 border-b-2 border-rd-terra-600 pb-1">
-                {t("landing.heroDash.tabAll")}
-              </span>
-              <span className="text-rd-ink-500 pb-1">{t("landing.heroDash.tabHot")}</span>
-              <span className="text-rd-ink-500 pb-1">{t("landing.heroDash.tabWarm")}</span>
-            </div>
-          </div>
-
-          {/* Column head — same order as /app/leads. */}
-          <div // ink-500 (#6B7280) on ink-50 measures 4.42:1 at this size -- under the 4.5
-          // AA floor, and axe caught it. ink-600 is 7.02:1 and reads identically at
-          // a glance. The real /app/leads header has the same pairing; it has never
-          // been scanned because /app sits behind auth.
-          className="grid grid-cols-[1.5fr_1fr_auto] gap-2 px-4 py-2 bg-rd-ink-50 border-b border-rd-line text-[9px] font-bold uppercase tracking-[0.06em] text-rd-ink-600">
-            <div>{t("landing.heroDash.colLead")}</div>
-            <div>{t("landing.heroDash.colListing")}</div>
-            <div>{t("landing.heroDash.colScore")}</div>
-          </div>
-
-          <div className="flex-1 min-h-0">
-            {rows.map((r) => (
-              <div
-                key={r.name}
-                className="grid grid-cols-[1.5fr_1fr_auto] gap-2 items-center px-4 py-[9px] border-b border-rd-line last:border-0"
-              >
-                <div className="flex items-center gap-2 min-w-0">
-                  <RDAvatar name={r.name} size={24} tone="var(--rd-navy-700)" />
-                  <div className="min-w-0">
-                    <div className="text-[12px] font-semibold text-rd-ink-900 truncate">
-                      {r.name}
-                    </div>
-                    <div className="text-[10px] text-rd-ink-500 truncate">{r.stage}</div>
-                  </div>
-                </div>
-                <div className="text-[11px] text-rd-ink-600 truncate">{r.area}</div>
-                <RDBadge tone={r.score >= 80 ? "terra" : "neutral"} size="sm">
-                  {r.score}
-                </RDBadge>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
