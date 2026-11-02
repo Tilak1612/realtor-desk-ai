@@ -16,6 +16,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { signOutIntentionally } from "@/lib/auth/signOut";
 import { isNativeApp } from "@/lib/native/platform";
+import { errorMessage } from "@/lib/errorMessage";
 
 interface TrialExpiredModalProps {
   isOpen: boolean;
@@ -43,8 +44,8 @@ const TrialExpiredModal = ({ isOpen }: TrialExpiredModalProps) => {
       if (data?.url) {
         window.open(data.url, '_blank');
       }
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to start checkout');
+    } catch (error: unknown) {
+      toast.error(errorMessage(error) || 'Failed to start checkout');
     } finally {
       setLoading(null);
     }

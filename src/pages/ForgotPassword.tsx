@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 import { authLinkOrigin, isNativeApp } from "@/lib/native/platform";
+import { errorMessage } from "@/lib/errorMessage";
 import "@/i18n/nativeAuth";
 
 const ForgotPassword = () => {
@@ -56,8 +57,8 @@ const ForgotPassword = () => {
 
       setSent(true);
       toast.success(t('auth.forgot.emailSent', 'Password reset email sent!'));
-    } catch (error: any) {
-      toast.error(error.message || t('auth.forgot.sendFailed', 'Failed to send reset email'));
+    } catch (error: unknown) {
+      toast.error(errorMessage(error) || t('auth.forgot.sendFailed', 'Failed to send reset email'));
     } finally {
       setLoading(false);
     }

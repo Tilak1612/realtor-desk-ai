@@ -12,6 +12,9 @@ import { useSubscription, SUBSCRIPTION_PRODUCTS } from '@/contexts/SubscriptionC
 import { useTranslation } from 'react-i18next';
 import { Spinner } from "@/components/rd";
 import { isNativeApp } from "@/lib/native/platform";
+import { errorMessage } from "@/lib/errorMessage";
+import type { User } from "@supabase/supabase-js";
+import type { Tables } from "@/integrations/supabase/types";
 
 // Locale-aware plan price formatter. Canadian English: "$149/mo".
 // Canadian French: "149 $/mois" — number, NBSP, $, no decimal when whole.
@@ -28,8 +31,8 @@ const BillingPage = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Tables<"profiles"> | null>(null);
   const [loading, setLoading] = useState(true);
   const [profileError, setProfileError] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
@@ -91,8 +94,8 @@ const BillingPage = () => {
       if (data.url) {
         window.open(data.url, '_blank');
       }
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to start checkout');
+    } catch (error: unknown) {
+      toast.error(errorMessage(error) || 'Failed to start checkout');
     } finally {
       setCheckoutLoading(null);
     }
@@ -110,8 +113,8 @@ const BillingPage = () => {
       if (data.url) {
         window.open(data.url, '_blank');
       }
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to open billing portal');
+    } catch (error: unknown) {
+      toast.error(errorMessage(error) || 'Failed to open billing portal');
     } finally {
       setPortalLoading(false);
     }

@@ -13,6 +13,8 @@ import { Phone, Calendar, Tag, Clock, TrendingUp } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Spinner } from "@/components/rd";
+import type { User } from "@supabase/supabase-js";
+import type { Tables } from "@/integrations/supabase/types";
 
 interface ContactToCall {
   id: string;
@@ -36,8 +38,8 @@ interface WeeklySummary {
 const Today = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Tables<"profiles"> | null>(null);
   const [contactsToCall, setContactsToCall] = useState<ContactToCall[]>([]);
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary>({
     callsLogged: 0,
@@ -101,7 +103,7 @@ const Today = () => {
       if (contactsError) throw contactsError;
 
       // Calculate priority and reason to call for each contact
-      const enrichedContacts: ContactToCall[] = (contactsData || []).map((contact: any) => {
+      const enrichedContacts: ContactToCall[] = (contactsData || []).map((contact: Tables<"contacts">) => {
         const lastContactDate = contact.last_contact_date;
         const nextFollowupDate = contact.next_followup_date || null;
         const stage = contact.stage || 'new_lead';

@@ -1,0 +1,3 @@
+/* Permission prompts. The fr.lproj copy carries the French; Info.plist holds the same English as the fallback. Keep all three in step. */
+"NSCameraUsageDescription" = "Realtor Desk uses the camera only when you choose to take a photo or video to use as your profile picture or to attach to a contact.";
+"NSMicrophoneUsageDescription" = "Realtor Desk uses the microphone only when you choose to record a video to attach to a contact.";

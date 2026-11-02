@@ -299,6 +299,16 @@ export function setupGlobalErrorHandling(): void {
 }
 
 /**
+ * One property of whatever was thrown, without assuming it is an Error: the
+ * helpers below log status, message and stack from Errors, Supabase error
+ * objects and fetch responses alike. Non-objects (a thrown string, null) give
+ * undefined.
+ */
+function errorField(error: unknown, key: string): unknown {
+  return typeof error === "object" && error !== null ? (error as Record<string, unknown>)[key] : undefined;
+}
+
+/**
  * Helper function to wrap async operations with error logging
  */
 export async function withErrorLogging<T>(
@@ -311,13 +321,13 @@ export async function withErrorLogging<T>(
     const result = await fn();
     errorMonitor.logInfo(category, `${operation} succeeded`);
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     errorMonitor.logError(
       category,
       `${operation} failed`,
       {
-        error: error.message,
-        stack: error.stack,
+        error: errorField(error, "message"),
+        stack: errorField(error, "stack"),
       },
       userId
     );
@@ -340,15 +350,15 @@ export async function measureAPICall<T>(
     const duration = performance.now() - startTime;
     errorMonitor.logAPICall(endpoint, method, 200, duration, undefined, userId);
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     const duration = performance.now() - startTime;
-    const statusCode = error.status || error.statusCode || 500;
+    const statusCode = (errorField(error, "status") || errorField(error, "statusCode") || 500) as number;
     errorMonitor.logAPICall(
       endpoint,
       method,
       statusCode,
       duration,
-      error.message,
+      errorField(error, "message") as string | undefined,
       userId
     );
     throw error;

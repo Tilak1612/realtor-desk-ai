@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, AlertCircle, Search, CheckCircle } from "lucide-react";
 import { validateField, ValidationErrors } from "./PropertyValidation";
+import { errorMessage } from "@/lib/errorMessage";
 
 interface AddPropertyModalProps {
   open: boolean;
@@ -235,10 +236,10 @@ const AddPropertyModal = ({ open, onOpenChange, onSuccess }: AddPropertyModalPro
       });
       setErrors({});
       setTouched(new Set());
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t("app.modals.addProperty.errorAdding"),
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {

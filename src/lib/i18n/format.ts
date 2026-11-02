@@ -7,7 +7,7 @@
 //   locked in one place with tests.
 // - Every price/date/time render in the marketing + dashboard surfaces
 //   flows through here, so an audit-driven correction (e.g. switching
-//   to the ISO unicode thin space ` `) is a one-file change.
+//   to the ISO unicode thin space `U+202F`) is a one-file change.
 //
 // Locale normalization: i18next reports `fr`, `fr-CA`, `en`, `en-CA`
 // depending on the detection path. We treat any `fr*` as fr-CA and any

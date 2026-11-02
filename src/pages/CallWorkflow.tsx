@@ -36,19 +36,25 @@ import AICallSummaryPanel from "@/components/call-workflow/AICallSummaryPanel";
 import { useAiConsent } from "@/hooks/useAiConsent";
 import WorkflowFeedbackWidget from "@/components/feedback/WorkflowFeedbackWidget";
 import { Spinner } from "@/components/rd";
+import type { User } from "@supabase/supabase-js";
+import type { Tables, TablesUpdate } from "@/integrations/supabase/types";
 
-interface Contact {
-  id: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  email: string;
-  tags: string[];
-  stage: string;
-  notes: string;
-  last_contact_date: string | null;
-  next_followup_date: string | null;
-}
+/** What generate-call-summary returns: its prompt asks for this JSON and its fallback has the same keys. */
+type CallSummary = { summary: string[]; intent: string; tone: string; suggestedAction: string };
+
+/** The contacts columns this screen reads, nullable exactly as in the database. */
+type Contact = Pick<
+  Tables<"contacts">,
+  "id" | "first_name" | "last_name" | "phone" | "email" | "tags" | "stage" | "notes" | "last_contact_date" | "next_followup_date"
+>;
+
+/**
+ * "First Last" from whichever name parts exist, or "" when neither does. Used
+ * in stored titles too, so it never returns a placeholder; display code adds
+ * its own neutral fallback.
+ */
+const contactName = (c: Pick<Contact, "first_name" | "last_name">): string =>
+  [c.first_name, c.last_name].filter(Boolean).join(" ");
 
 const CallWorkflow = () => {
   const aiConsent = useAiConsent();
@@ -58,8 +64,8 @@ const CallWorkflow = () => {
   const { contactId } = useParams<{ contactId: string }>();
   const contactQueueState = location.state?.contactQueue as string[] | undefined;
   
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Tables<"profiles"> | null>(null);
   const [contact, setContact] = useState<Contact | null>(null);
   const [contactQueue, setContactQueue] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,7 +80,7 @@ const CallWorkflow = () => {
   
   // AI panel state
   const [showAIPanel, setShowAIPanel] = useState(true);
-  const [aiSummary, setAISummary] = useState<any>(null);
+  const [aiSummary, setAISummary] = useState<CallSummary | null>(null);
   const [generatingAI, setGeneratingAI] = useState(false);
   
   const [loading, setLoading] = useState(true);
@@ -90,8 +96,7 @@ const CallWorkflow = () => {
 
       if (error) throw error;
 
-      // Type assertion for contact data with optional fields
-      const contactData: any = data;
+      const contactData = data;
       setContact(contactData);
       setNewStage(contactData.stage || "");
       setCallNotes(contactData.notes || "");
@@ -121,12 +126,16 @@ const CallWorkflow = () => {
 
         setProfile(profileData);
 
+        // No contact id in the URL: nothing to load, so no queue and no query.
+        // The page then shows "Contact not found".
+        if (!contactId) return;
+
         // Get contact queue from location state
         const queue = contactQueueState || [contactId];
         setContactQueue(queue);
         setCurrentIndex(queue.indexOf(contactId));
 
-        await fetchContactData(contactId!);
+        await fetchContactData(contactId);
       } catch (error: unknown) {
         console.error("Error:", error);
         toast.error("Failed to load contact");
@@ -151,7 +160,7 @@ const CallWorkflow = () => {
       const { data, error } = await supabase.functions.invoke('generate-call-summary', {
         body: { 
           notes: callNotes,
-          contactName: `${contact?.first_name} ${contact?.last_name}`,
+          contactName: contact ? contactName(contact) : "",
           currentStage: contact?.stage,
         }
       });
@@ -228,14 +237,26 @@ const CallWorkflow = () => {
   };
 
   const handleSave = async (andNext: boolean = false) => {
-    if (!contact) return;
+    // Both are needed before anything is written: the contact update comes
+    // first, and the activity and follow-up task are written as this user.
+    const currentContact = contact;
+    const currentUser = user;
+    if (!currentContact) return;
+    if (!currentUser) {
+      toast.error("You're signed out, so nothing was saved", {
+        description: "Sign in again, then save this call.",
+        action: { label: "Sign in", onClick: () => navigate("/login") },
+      });
+      return;
+    }
+    const name = contactName(currentContact);
 
     setSaving(true);
     try {
       // Update contact
-      const updates: any = {
+      const updates: TablesUpdate<"contacts"> = {
         notes: callNotes,
-        stage: newStage || contact.stage,
+        stage: newStage || currentContact.stage,
         last_contact_date: new Date().toISOString(),
       };
 
@@ -247,7 +268,7 @@ const CallWorkflow = () => {
       const { error: updateError } = await supabase
         .from("contacts")
         .update(updates)
-        .eq("id", contact.id);
+        .eq("id", currentContact.id);
 
       if (updateError) throw updateError;
 
@@ -262,10 +283,10 @@ const CallWorkflow = () => {
         const { error: activityError } = await supabase
           .from("contact_activities")
           .insert({
-            user_id: user.id,
-            contact_id: contact.id,
+            user_id: currentUser.id,
+            contact_id: currentContact.id,
             activity_type: "call_made",
-            title: `Call with ${contact.first_name} ${contact.last_name || ''}`,
+            title: name ? `Call with ${name}` : "Call",
             description: `Outcome: ${callOutcome}${callNotes ? '\n\n' + callNotes : ''}`,
           });
         if (activityError) {
@@ -277,42 +298,54 @@ const CallWorkflow = () => {
 
         // Log adoption event
         await logAdoptionEvent("call_logged", { 
-          contact_id: contact.id,
+          contact_id: currentContact.id,
           outcome: callOutcome 
         });
       }
 
-      // Create follow-up task
+      // Create follow-up task. Like the timeline entry above it is written
+      // after the contact update, so a failure here leaves the call saved but
+      // the follow-up missing; say exactly that rather than report success.
+      let followupFailed = false;
       if (nextStepType && nextStepDate) {
         const datetime = `${nextStepDate}T${nextStepTime}:00`;
-        await supabase.from("tasks").insert({
-          user_id: user.id,
-          contact_id: contact.id,
-          title: `${nextStepType.charAt(0).toUpperCase() + nextStepType.slice(1)} follow-up: ${contact.first_name} ${contact.last_name}`,
+        const followupLabel = `${nextStepType.charAt(0).toUpperCase() + nextStepType.slice(1)} follow-up`;
+        const { error: taskError } = await supabase.from("tasks").insert({
+          user_id: currentUser.id,
+          contact_id: currentContact.id,
+          title: name ? `${followupLabel}: ${name}` : followupLabel,
           description: callNotes,
           due_date: datetime,
           priority: "medium",
           status: "pending",
         });
 
-        // Log adoption event
-        await logAdoptionEvent("followup_scheduled", {
-          contact_id: contact.id,
-          type: nextStepType,
-          date: datetime,
-        });
+        if (taskError) {
+          followupFailed = true;
+          console.error("Error creating follow-up task:", taskError);
+          toast.error("Call saved, but the follow-up task was not created", {
+            description: `${taskError.message} Add the follow-up from Tasks.`,
+          });
+        } else {
+          // Log adoption event
+          await logAdoptionEvent("followup_scheduled", {
+            contact_id: currentContact.id,
+            type: nextStepType,
+            date: datetime,
+          });
+        }
       }
 
       // Log stage change
-      if (newStage && newStage !== contact.stage) {
+      if (newStage && newStage !== currentContact.stage) {
         await logAdoptionEvent("deal_stage_changed", {
-          contact_id: contact.id,
-          old_stage: contact.stage,
+          contact_id: currentContact.id,
+          old_stage: currentContact.stage,
           new_stage: newStage,
         });
       }
 
-      toast.success("Call saved successfully!");
+      if (!followupFailed) toast.success("Call saved successfully!");
 
       if (andNext) {
         handleNextContact();
@@ -455,12 +488,18 @@ const CallWorkflow = () => {
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
                     <CardTitle className="text-2xl">
-                      {contact.first_name} {contact.last_name}
+                      {contactName(contact) || "Unnamed contact"}
                     </CardTitle>
                     <div className="flex flex-wrap items-center gap-2">
-                      <Badge className="bg-primary/10 text-primary">
-                        {getStageLabel(contact.stage)}
-                      </Badge>
+                      {contact.stage ? (
+                        <Badge className="bg-primary/10 text-primary">
+                          {getStageLabel(contact.stage)}
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-muted-foreground">
+                          No stage set
+                        </Badge>
+                      )}
                       {contact.tags?.map((tag) => (
                         <Badge key={tag} variant="outline">
                           <Tag className="w-3 h-3 mr-1" />
@@ -499,15 +538,22 @@ const CallWorkflow = () => {
                 <CardTitle className="text-lg">Call Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <a href={`tel:${contact.phone}`} className="block">
-                  <Button 
-                    size="lg" 
-                    className="w-full h-14 text-lg font-semibold"
-                  >
+                {contact.phone ? (
+                  <a href={`tel:${contact.phone}`} className="block">
+                    <Button 
+                      size="lg" 
+                      className="w-full h-14 text-lg font-semibold"
+                    >
+                      <Phone className="w-5 h-5 mr-2" />
+                      Call Now
+                    </Button>
+                  </a>
+                ) : (
+                  <Button size="lg" className="w-full h-14 text-lg font-semibold" disabled>
                     <Phone className="w-5 h-5 mr-2" />
-                    Call Now
+                    No phone number
                   </Button>
-                </a>
+                )}
                 
                 <div>
                   <Label htmlFor="call-outcome">Call Outcome</Label>

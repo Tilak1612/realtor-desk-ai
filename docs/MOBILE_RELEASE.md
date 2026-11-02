@@ -2,7 +2,9 @@
 
 Prepared 13 October 2026 on branch `feat/mobile-capacitor`. Nothing here has been deployed, submitted or pushed, and no production data was changed.
 
-App id (both stores): `com.brainfyai.realtordesk`. Display name: Realtor Desk. Publisher: Brainfy AI Inc. Version 1.0.0 (build 1).
+App id (both stores): `com.brainfyai.realtordesk`. Display name: Realtor Desk. Publisher: Brainfy AI Inc. Version 1.0.0 (iOS build 3, Android versionCode 1 as of 20 October 2026).
+
+Later audit: [release-readiness.md](release-readiness.md) (20 October 2026) records what was re-verified, what was fixed and what is still the owner's.
 
 Related: [MOBILE_ACCOUNT_DELETION.md](MOBILE_ACCOUNT_DELETION.md) (data inventory and the deletion function's contract).
 
@@ -140,7 +142,7 @@ Age rating: complete the questionnaires yourself. The app has no user-to-user co
 >
 > AI content: the Assistant screen generates draft text. Each response has a "Report this response" control.
 >
-> The app requests no notification, location, contacts or tracking permission. The camera and microphone are requested only if you choose to take a photo or video when attaching a file.
+> The app requests no notification, location, contacts or tracking permission. On iOS the camera and microphone are requested only if you choose to take a photo or video when attaching a file. The Android app declares no camera or microphone permission, so its file picker offers existing files only.
 
 ### Screenshots
 
@@ -151,7 +153,7 @@ Not produced. Store screenshots have to show the signed-in product with data, wh
 Approvals (nothing below has been done):
 
 1. **Deploy the website from this branch.** Carries the reset-password change, the `/account-deletion` page and real deletion in Settings.
-2. **Deploy the `delete-account` edge function** (`supabase functions deploy delete-account`), then test it once with a throwaway subscribed account. If the Stripe key is restricted it needs Customers read and Subscriptions write.
+2. ~~Deploy the `delete-account` edge function~~ Deployed 18 October 2026 (version 1 on `realtordesk-prod`, `verify_jwt` off as `config.toml` says). Still to do: test it once with a throwaway subscribed account. If the Stripe key is restricted it needs Customers read and Subscriptions write.
 3. **Reviewer account in production.** Four accounts are already flagged `is_demo` (they bypass the subscription check) but hold contacts only, no deals or tasks. Recommended: create `appreview@realtordesk.ai` through the normal sign-up, set `is_demo`, and run `scripts/seed-demo-account.sql` for it. This writes to production, so it was not done.
 4. **Confirm the payment model.** The app ships as a sign-in companion with no purchase. The alternative is Apple and Google in-app purchase, which is a separate project.
 
@@ -171,13 +173,13 @@ Only if you want provider sign-in in the app later: add `com.brainfyai.realtorde
 - **Inbox "Send" records a message; it does not deliver one.** This is how the website behaves today. A reviewer or a customer will expect a sent message to reach the client. Decide whether to relabel it or wire delivery before submission.
 - **Consent records are deleted with the account.** `sms_consent` and the consent fields on contacts cascade. Keeping proof of consent after deletion would need an archive table; that is a retention decision.
 - **No password re-prompt before deletion.** A signed-in session plus the typed word is enough.
-- **Known gaps:** iPhone only (iPad not targeted); the two iOS permission prompts are in English only; fonts load from Google at launch; the bundle is about 15 MB because unreachable marketing media is included; universal links and app links are not configured; the data export covers profile, contacts and deals only.
+- **Known gaps:** iPhone only (iPad not targeted); fonts load from Google at launch; the bundle is about 15 MB because unreachable marketing media is included; universal links and app links are not configured; the data export covers profile, contacts and deals only.
 
 ## 7. After the signed-in simulator audit (13 October 2026)
 
 Fixed and committed:
 
-- **AI Assistant.** `claude-chat` now calls the Anthropic Messages API with `ANTHROPIC_API_KEY`, the secret the landing-page bot already uses; the Lovable gateway key it used before is rejected in production. Its system prompt no longer says it creates tasks, schedules follow-ups or has market data. Three bugs fixed (contact count capped at 5, pipeline value including closed deals, writes to a table that does not exist). The page shows a lasting error with a retry when a request fails. **The function is NOT deployed:** run `supabase functions deploy claude-chat --project-ref vxkqwkeqincbxrgglmca`, then ask it a question.
+- **AI Assistant.** `claude-chat` now calls the Anthropic Messages API with `ANTHROPIC_API_KEY`, the secret the landing-page bot already uses; the Lovable gateway key it used before is rejected in production. Its system prompt no longer says it creates tasks, schedules follow-ups or has market data. Three bugs fixed (contact count capped at 5, pipeline value including closed deals, writes to a table that does not exist). The page shows a lasting error with a retry when a request fails. Deployed 18 October 2026 (version 20 on `realtordesk-prod`); ask it a question from the app to confirm.
 - **Model and cost.** The function defaults to `claude-opus-5-5` at low effort; the landing-page bot uses `claude-haiku-4-5`. Set the `CLAUDE_CHAT_MODEL` secret (for example `claude-haiku-5-5`) to change it without a deploy.
 - **Launch screen.** iOS was rejecting the launch storyboard because the splash image decoded to 29.9 MB against a 25 MB limit, so launch showed black. The launch screen is now the paper colour with a small mark, the app is fixed to light appearance, and Android's dark-mode splash variants are removed.
 - **Dashboard.** The new dashboard is the default in the app; its "Live" badge and "Desk AI replied to" wording are gone.

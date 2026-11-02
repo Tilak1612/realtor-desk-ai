@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 import { isNativeApp } from "@/lib/native/platform";
+import { errorMessage } from "@/lib/errorMessage";
 import "@/i18n/nativeAuth";
 
 const VerifyEmail = () => {
@@ -71,8 +72,8 @@ const VerifyEmail = () => {
 
       setEmailSent(true);
       toast.success("Verification email resent!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to resend email");
+    } catch (error: unknown) {
+      toast.error(errorMessage(error) || "Failed to resend email");
     } finally {
       setLoading(false);
     }

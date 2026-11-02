@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Pencil, Trash2, Phone, Mail, Calendar, Home, User, MoreHorizontal } from "lucide-react";
+import { Pencil, Trash2, Phone, Mail, Calendar, Home, User, MoreHorizontal, type LucideIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -73,7 +73,7 @@ const TaskItem = ({ task, isSelected, onSelect, onTaskUpdated }: TaskItemProps) 
 
   const getTaskTypeIcon = (metadata: any) => {
     const type = metadata?.task_type || "other";
-    const icons: Record<string, any> = {
+    const icons: Record<string, LucideIcon> = {
       call: Phone,
       email: Mail,
       meeting: Calendar,

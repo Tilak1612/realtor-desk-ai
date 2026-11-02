@@ -12,6 +12,7 @@ import PropertiesGrid from "@/components/properties/PropertiesGrid";
 import PropertiesList from "@/components/properties/PropertiesList";
 import PropertyFilters from "@/components/properties/PropertyFilters";
 import AddPropertyModal from "@/components/properties/AddPropertyModal";
+import { errorMessage } from "@/lib/errorMessage";
 
 export interface Property {
   id: string;
@@ -81,10 +82,10 @@ const Properties = () => {
 
       if (error) throw error;
       setProperties(data || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t('app.common.error'),
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {

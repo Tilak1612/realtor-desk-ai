@@ -13,6 +13,7 @@ import { Upload, CheckCircle, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { parseCsv, mapRowToContact } from "@/lib/csvImport";
+import { errorMessage } from "@/lib/errorMessage";
 
 interface ImportContactsModalProps {
   open: boolean;
@@ -107,10 +108,10 @@ const ImportContactsModal = ({ open, onOpenChange, onSuccess }: ImportContactsMo
       });
 
       onSuccess();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t("app.modals.importContacts.importFailed"),
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {
