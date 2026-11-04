@@ -1,6 +1,8 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { isEmailSuppressed } from "../_shared/email-suppression.ts";
+import { deliveryMode, sendEmail } from "../_shared/outbound-email.ts";
+import { buildUnsubscribeLink } from "../_shared/casl-footer.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -228,9 +230,19 @@ const handler = async (req: Request): Promise<Response> => {
     };
 
     const template = templates[type];
+    const mode = deliveryMode();
 
     // Schedule or send immediately
     if (parsedDelay > 0) {
+      // A scheduled_emails row is indistinguishable from a real one, so outside
+      // production nothing is stored for later (the row would be a real
+      // contact's pending email).
+      if (!mode.production) {
+        return new Response(
+          JSON.stringify({ success: false, scheduled: false, message: `Not scheduled outside production (${mode.environment})` }),
+          { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
       // Log scheduled email
       await supabase.from("scheduled_emails").insert({
         contact_id: contactId,
@@ -261,23 +273,28 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const sendRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: Deno.env.get("EMAIL_FROM") ?? "RealtorDesk AI <support@realtordesk.ai>",
-        to: [contact.email],
-        subject: template.subject,
-        html: template.html,
-      }),
-    });
+    // The contact's own signed opt-out link (process-unsubscribe suppresses
+    // the address and marks the contact unsubscribed).
+    const unsubscribeLink = await buildUnsubscribeLink({ recipientEmail: contact.email, userId: user.id, contactId });
 
-    if (!sendRes.ok) {
-      const detail = await sendRes.text();
-      console.error("[EMAIL-AUTOMATION] Resend rejected the send:", sendRes.status, detail);
+    const sendResult = await sendEmail({
+      from: Deno.env.get("EMAIL_FROM") ?? "RealtorDesk AI <support@realtordesk.ai>",
+      to: [contact.email],
+      subject: template.subject,
+      html: template.html + unsubscribeLink,
+    }, { apiKey: resendApiKey, environment: mode.environment });
+
+    // A test copy went only to the test inbox: record nothing against the
+    // real contact.
+    if (sendResult.rerouted) {
+      return new Response(
+        JSON.stringify({ success: sendResult.status === "sent", action: "test_rerouted", environment: sendResult.environment }),
+        { status: sendResult.status === "sent" ? 200 : 502, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (sendResult.status !== "sent") {
+      console.error("[EMAIL-AUTOMATION] Resend rejected the send:", sendResult.httpStatus, sendResult.error);
       // Record the failure honestly rather than logging it as sent.
       await supabase.from("email_log").insert({
         contact_id: contactId,

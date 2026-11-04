@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 import { buildCaslFooter } from "../_shared/casl-footer.ts";
 import { isEmailSuppressed } from "../_shared/email-suppression.ts";
+import { sendEmail } from "../_shared/outbound-email.ts";
 
 const TOOL_NAMES: Record<string, string> = {
   "google-calendar": "Google Calendar",
@@ -56,27 +57,19 @@ serve(async (req) => {
       consentBasis: "transactional",
     });
 
-    const emailRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${resendApiKey}`,
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [profile.email],
-        subject: `Action needed: Re-connect your ${toolName} integration`,
-        html: buildEmailHtml(profile.full_name || profile.email, toolName, reauthUrl, caslFooter),
-      }),
-    });
+    const sendResult = await sendEmail({
+      from: FROM_EMAIL,
+      to: [profile.email],
+      subject: `Action needed: Re-connect your ${toolName} integration`,
+      html: buildEmailHtml(profile.full_name || profile.email, toolName, reauthUrl, caslFooter),
+    }, { apiKey: resendApiKey });
 
-    if (!emailRes.ok) {
-      const err = await emailRes.text();
-      console.error("[REAUTH-EMAIL] Send failed:", err);
+    if (sendResult.status !== "sent") {
+      console.error("[REAUTH-EMAIL] Send failed:", sendResult.httpStatus, sendResult.error);
       return new Response(JSON.stringify({ error: "Email failed" }), { status: 500 });
     }
 
-    console.log("[REAUTH-EMAIL] Sent to:", profile.email, "for:", toolName);
+    console.log("[REAUTH-EMAIL] Sent for:", toolName, { rerouted: sendResult.rerouted });
     return new Response(JSON.stringify({ sent: true }), { status: 200 });
   } catch (error) {
     console.error("[REAUTH-EMAIL] Error:", error instanceof Error ? error.message : String(error));

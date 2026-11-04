@@ -2,6 +2,8 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 import { isEmailSuppressed } from "../_shared/email-suppression.ts";
 import { buildCaslFooter } from "../_shared/casl-footer.ts";
+import { deliveryEventKey, deliveryMode, sendEmail } from "../_shared/outbound-email.ts";
+import { isExcludedFromScheduledMail } from "../_shared/mail-eligibility.ts";
 
 /**
  * Lifecycle Cron — Automated User Retention Engine
@@ -20,7 +22,6 @@ import { buildCaslFooter } from "../_shared/casl-footer.ts";
  * Bilingual: Reads profiles.preferred_language for EN/FR templates.
  */
 
-const RESEND_API_URL = "https://api.resend.com/emails";
 const FROM_EMAIL = "RealtorDesk AI <support@realtordesk.ai>";
 const APP_URL = "https://www.realtordesk.ai";
 
@@ -226,7 +227,7 @@ serve(async (req) => {
     // Get all trial users
     const { data: trialUsers, error } = await supabase
       .from("profiles")
-      .select("id, email, full_name, created_at, trial_ends_at, onboarding_completed, first_contact_added_at, preferred_language")
+      .select("id, email, full_name, created_at, trial_ends_at, onboarding_completed, first_contact_added_at, preferred_language, is_demo")
       .eq("subscription_status", "trial");
 
     if (error) {
@@ -239,8 +240,17 @@ serve(async (req) => {
     logStep("Found trial users", { count: trialUsers?.length ?? 0 });
 
     const results = { sent: 0, skipped: 0, errors: 0 };
+    // Outside production every send is a test copy to the test inbox, so it is
+    // recorded under a namespaced key and never consumes a real user's step.
+    const mode = deliveryMode();
 
     for (const user of trialUsers || []) {
+      // Demo workspaces (profiles.is_demo) get no scheduled lifecycle mail.
+      if (isExcludedFromScheduledMail(user)) {
+        logStep("Demo workspace, no scheduled mail", { userId: user.id });
+        results.skipped++;
+        continue;
+      }
       const daysSinceSignup = Math.floor((Date.now() - new Date(user.created_at).getTime()) / (1000 * 60 * 60 * 24));
       const daysUntilExpiry = user.trial_ends_at
         ? Math.ceil((new Date(user.trial_ends_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
@@ -292,7 +302,7 @@ serve(async (req) => {
         .from("email_events")
         .select("id")
         .eq("user_id", user.id)
-        .eq("event_type", eventType)
+        .eq("event_type", deliveryEventKey(eventType, mode))
         .limit(1);
 
       if (existing && existing.length > 0) {
@@ -347,22 +357,15 @@ serve(async (req) => {
 
       // Send via Resend
       try {
-        const emailRes = await fetch(RESEND_API_URL, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${resendApiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: FROM_EMAIL,
-            to: [user.email],
-            subject: template.subject,
-            html: htmlWithFooter,
-          }),
-        });
+        const sendResult = await sendEmail({
+          from: FROM_EMAIL,
+          to: [user.email],
+          subject: template.subject,
+          html: htmlWithFooter,
+        }, { apiKey: resendApiKey, environment: mode.environment });
 
-        if (!emailRes.ok) {
-          logStep("Resend error", { userId: user.id, event: eventType, status: emailRes.status });
+        if (sendResult.status !== "sent") {
+          logStep("Resend error", { userId: user.id, event: eventType, status: sendResult.httpStatus });
           results.errors++;
           continue;
         }
@@ -370,9 +373,9 @@ serve(async (req) => {
         // Log the event (prevents re-sending)
         await supabase.from("email_events").insert({
           user_id: user.id,
-          event_type: eventType,
+          event_type: deliveryEventKey(eventType, mode),
           recipient_email: user.email,
-          metadata: { day: daysSinceSignup, lang },
+          metadata: { day: daysSinceSignup, lang, email_environment: sendResult.environment, rerouted: sendResult.rerouted },
         });
 
         results.sent++;

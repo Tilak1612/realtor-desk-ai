@@ -1,12 +1,67 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
+import { trialEndingApplies } from "../_shared/mail-eligibility.ts";
+import { classifyInvokeError } from "./invoke-outcome.ts";
+
+const retryLater = (reason: string) =>
+  new Response(JSON.stringify({ error: reason }), {
+    status: 500, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+  });
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type, stripe-signature",
 };
+
+type ProfileLookup =
+  | { kind: "found"; id: string; fullName: string }
+  | { kind: "absent" }
+  | { kind: "ambiguous" }
+  | { kind: "error"; reason: string };
+
+type ProfileQuery = {
+  from(table: "profiles"): {
+    select(columns: string): {
+      eq(column: string, value: string): {
+        maybeSingle(): PromiseLike<{ data: { id?: unknown; full_name?: unknown } | null; error: { code?: string } | null }>;
+      };
+    };
+  };
+};
+
+/**
+ * Map a Stripe customer email to exactly one profile, or say why not. A
+ * database error, or a row without a usable id, is unknown state (the caller
+ * asks Stripe to retry and sends nothing). No row is a verified absence and
+ * several rows an ambiguous mapping: retrying cannot change either, so the
+ * caller acknowledges the event and sends nothing. No mapping is invented.
+ * profiles.email carries no unique constraint in the baseline schema, hence
+ * the ambiguous case (maybeSingle reports more than one row as PGRST116).
+ */
+async function lookupProfile(db: ProfileQuery, email: string): Promise<ProfileLookup> {
+  const { data, error } = await db.from("profiles").select("id, full_name").eq("email", email).maybeSingle();
+  if (error) {
+    if (error.code === "PGRST116") return { kind: "ambiguous" };
+    return { kind: "error", reason: error.code ?? "query failed" };
+  }
+  if (data === null || data === undefined) return { kind: "absent" };
+  if (typeof data.id !== "string" || data.id.length === 0) return { kind: "error", reason: "malformed profile row" };
+  return { kind: "found", id: data.id, fullName: typeof data.full_name === "string" ? data.full_name : "" };
+}
+
+/** The answer for a lookup that is not "found", logged without the address. */
+function unresolvedProfile(lookup: Exclude<ProfileLookup, { kind: "found" }>, context: string): Response {
+  if (lookup.kind === "error") {
+    console.error(`${context}: profile lookup failed, not sending; asking Stripe to retry`, { reason: lookup.reason });
+    return retryLater("could not read profile");
+  }
+  console.log(`${context}: ${lookup.kind === "absent" ? "no profile" : "several profiles"} for the customer email, not sending`);
+  return new Response(JSON.stringify({ received: true }), {
+    status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+  });
+}
 
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
@@ -78,19 +133,9 @@ const handler = async (req: Request): Promise<Response> => {
         });
       }
 
-      // Find user by email
-      const { data: profile } = await supabaseAdmin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("email", customerEmail)
-        .single();
-
-      if (!profile) {
-        console.log("No profile found for email:", customerEmail);
-        return new Response(JSON.stringify({ received: true }), {
-          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
-        });
-      }
+      // Find user by email: exactly one profile, or no send.
+      const profile = await lookupProfile(supabaseAdmin, customerEmail);
+      if (profile.kind !== "found") return unresolvedProfile(profile, event.type);
 
       const eventType = event.type === "invoice.payment_succeeded"
         ? "payment_success"
@@ -107,12 +152,16 @@ const handler = async (req: Request): Promise<Response> => {
           userId: profile.id,
           recipientEmail: customerEmail,
           data: { amount, invoice_id: invoice.id },
+          sourceEventId: event.id,
         },
       });
 
-      if (fnError) {
-        console.error("Error calling send-lifecycle-email:", fnError);
+      const outcome = classifyInvokeError(fnError);
+      if (outcome === "retry") {
+        console.error("send-lifecycle-email failed, asking Stripe to retry:", fnError);
+        return retryLater("lifecycle email failed");
       }
+      if (outcome === "permanent") console.error("send-lifecycle-email rejected the request:", fnError);
     }
 
 
@@ -120,10 +169,33 @@ const handler = async (req: Request): Promise<Response> => {
     // trial charges the customer with no warning at all -- the single most
     // complaint- and chargeback-generating gap in a trial-to-paid model.
     if (event.type === "customer.subscription.trial_will_end") {
-      const subscription = event.data.object as Stripe.Subscription;
+      // The event carries a snapshot taken when Stripe created it; a retried
+      // or delayed delivery can be days old. Decide on the subscription as it
+      // is now, and send nothing if that cannot be read.
+      const snapshot = event.data.object as Stripe.Subscription;
+      let subscription: Stripe.Subscription;
+      try {
+        subscription = await stripe.subscriptions.retrieve(snapshot.id);
+      } catch (err) {
+        console.error("trial_will_end: could not read the current subscription, not sending:", err instanceof Error ? err.message : String(err));
+        return retryLater("could not read subscription");
+      }
+      // The trial_ending email says the card will be charged automatically.
+      // Not true once the subscription is cancelled or set to cancel, so no
+      // email then (and no customer lookup).
+      if (!trialEndingApplies(subscription)) {
+        console.log("trial_will_end: subscription cancelled or not trialing, no trial_ending email", {
+          status: subscription.status,
+          cancel_at_period_end: subscription.cancel_at_period_end,
+        });
+        return new Response(JSON.stringify({ received: true }), {
+          status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
 
       // The subscription payload carries a customer id, not an email.
       let customerEmail: string | null = null;
+      let customerLookupFailed = false;
       try {
         const customer = await stripe.customers.retrieve(subscription.customer as string);
         if (customer && !("deleted" in customer && customer.deleted)) {
@@ -131,7 +203,9 @@ const handler = async (req: Request): Promise<Response> => {
         }
       } catch (err) {
         console.error("trial_will_end: could not retrieve customer:", err instanceof Error ? err.message : String(err));
+        customerLookupFailed = true;
       }
+      if (customerLookupFailed) return retryLater("could not read customer");
 
       if (!customerEmail) {
         console.log("trial_will_end: no customer email, skipping");
@@ -140,11 +214,10 @@ const handler = async (req: Request): Promise<Response> => {
         });
       }
 
-      const { data: profile } = await supabaseAdmin
-        .from("profiles")
-        .select("id, full_name")
-        .eq("email", customerEmail)
-        .single();
+      // Exactly one profile, or no send (previously a failed or empty lookup
+      // invoked the callee with userId null, which answered 400 -> webhook 200).
+      const profile = await lookupProfile(supabaseAdmin, customerEmail);
+      if (profile.kind !== "found") return unresolvedProfile(profile, "trial_will_end");
 
       const trialEndMs = subscription.trial_end ? subscription.trial_end * 1000 : null;
       const daysRemaining = trialEndMs
@@ -164,18 +237,24 @@ const handler = async (req: Request): Promise<Response> => {
       const { error: fnError } = await supabaseAdmin.functions.invoke("send-lifecycle-email", {
         body: {
           eventType: "trial_ending",
-          userId: profile?.id || null,
+          userId: profile.id,
           recipientEmail: customerEmail,
           data: {
-            firstName: profile?.full_name?.split(" ")[0] || "",
+            firstName: profile.fullName.split(" ")[0] || "",
             days_remaining: daysRemaining,
             trial_end_date: trialEndDate,
             amount,
           },
+          sourceEventId: event.id,
         },
       });
 
-      if (fnError) console.error("trial_will_end: send-lifecycle-email failed:", fnError);
+      const outcome = classifyInvokeError(fnError);
+      if (outcome === "retry") {
+        console.error("trial_will_end: send-lifecycle-email failed, asking Stripe to retry:", fnError);
+        return retryLater("lifecycle email failed");
+      }
+      if (outcome === "permanent") console.error("trial_will_end: send-lifecycle-email rejected the request:", fnError);
     }
 
     if (event.type === "checkout.session.completed") {

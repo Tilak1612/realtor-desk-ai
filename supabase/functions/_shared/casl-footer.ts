@@ -68,6 +68,21 @@ export async function buildUnsubscribeUrl(opts: CaslFooterOptions): Promise<stri
   return `${APP_URL}/unsubscribe?${q.toString()}`;
 }
 
+/**
+ * Just the signed unsubscribe link, with the existing label, for mail an agent
+ * sends to their own contacts. The full footer above names RealtorDesk AI as
+ * the sender and states a consent basis, which is not right for agent mail;
+ * what the agent's own sender identification should say is an open question
+ * (see the email hygiene report). Throws, like buildUnsubscribeUrl, when the
+ * signing secret is missing, so the send aborts rather than going out
+ * without an opt-out.
+ */
+export async function buildUnsubscribeLink(opts: CaslFooterOptions): Promise<string> {
+  const unsubUrl = await buildUnsubscribeUrl(opts);
+  const lines = (opts.locale ?? "en") === "fr" ? frLines : enLines;
+  return `<p style="font-size:11px;color:#9ca3af;line-height:1.6;margin:24px 0 0;"><a href="${unsubUrl}" style="color:#6b7280;text-decoration:underline;">${lines.unsubscribe}</a></p>`;
+}
+
 export async function buildCaslFooter(opts: CaslFooterOptions): Promise<string> {
   const legal = Deno.env.get("COMPANY_LEGAL_NAME") ?? "Brainfy AI Inc.";
   const trade = Deno.env.get("COMPANY_TRADE_NAME") ?? "RealtorDesk AI";

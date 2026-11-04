@@ -1,14 +1,14 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { Resend } from "https://esm.sh/resend@2.0.0";
 import { isEmailSuppressed } from "../_shared/email-suppression.ts";
+import { deliveryMode, sendEmail } from "../_shared/outbound-email.ts";
+import { buildUnsubscribeLink } from "../_shared/casl-footer.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 interface AutomationStep {
   id: string;
@@ -174,16 +174,83 @@ const handler = async (req: Request): Promise<Response> => {
         );
       }
 
+      // The enrollment must be this user's, for this contact, before anything
+      // reads or writes it with the service role. The request's enrollmentId
+      // was trusted as-is, so any signed-in user could complete, advance or
+      // fail another workspace's enrollment. Ownership uses the documented
+      // columns (automation_enrollments.user_id, contact_id); this function's
+      // automation_id link is not in the baseline schema and is not checked.
+      const { data: enrollment, error: enrollmentError } = await supabase
+        .from("automation_enrollments")
+        .select("id, status, current_step")
+        .eq("id", enrollmentId)
+        .eq("user_id", user.id)
+        .eq("contact_id", contactId)
+        .maybeSingle();
+
+      if (enrollmentError) {
+        console.error("Enrollment lookup failed:", enrollmentError.message);
+        return new Response(
+          JSON.stringify({ error: "Could not verify the enrollment" }),
+          { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+      if (!enrollment) {
+        return new Response(
+          JSON.stringify({ error: "Enrollment not found" }),
+          { status: 404, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+
+      // Only the enrollment's own current step runs, and only while it is
+      // active. The step index in the body was trusted as-is, so a completed
+      // or cancelled enrollment, or a stale or replayed request, still sent
+      // and advanced. Checked before any email or write; the request's step
+      // must equal the stored one.
+      if (enrollment.status !== "active") {
+        return new Response(
+          JSON.stringify({ error: "Enrollment is not active", status: enrollment.status }),
+          { status: 409, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+      if (!Number.isInteger(stepIndex) || stepIndex < 0 || enrollment.current_step !== stepIndex) {
+        return new Response(
+          JSON.stringify({ error: "Step is not the enrollment's current step", currentStep: enrollment.current_step }),
+          { status: 409, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+
+      // Every progression write is conditional on the state just checked
+      // (status active, current_step unchanged), so of two concurrent requests
+      // for one step only one moves the enrollment. This is NOT exactly-once
+      // delivery: the send happens before the conditional write, so both
+      // requests can still reach the provider. Closing that needs a claim
+      // written before the send, which this change does not add.
+      const progress = async (patch: Record<string, unknown>): Promise<boolean> => {
+        const { data, error } = await supabase
+          .from("automation_enrollments")
+          .update(patch)
+          .eq("id", enrollmentId)
+          .eq("user_id", user.id)
+          .eq("contact_id", contactId)
+          .eq("status", "active")
+          .eq("current_step", stepIndex)
+          .select("id");
+        if (error) {
+          console.error("Enrollment progression failed:", error.message);
+          return false;
+        }
+        return Array.isArray(data) && data.length > 0;
+      };
+      let advanced = false;
+
       const step = steps[stepIndex] as AutomationStep;
       if (!step) {
         // No more steps, mark as completed
-        await supabase
-          .from("automation_enrollments")
-          .update({ status: "completed", completed_at: new Date().toISOString() })
-          .eq("id", enrollmentId);
+        advanced = await progress({ status: "completed", completed_at: new Date().toISOString() });
 
         return new Response(
-          JSON.stringify({ success: true, message: "Automation completed" }),
+          JSON.stringify({ success: true, message: "Automation completed", advanced }),
           { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
         );
       }
@@ -213,18 +280,29 @@ const handler = async (req: Request): Promise<Response> => {
               .map(line => `<p>${line}</p>`)
               .join("");
 
-            const emailResult = await resend.emails.send({
+            // The Resend SDK returned { data, error } without throwing, and the
+            // result was only logged, so a rejected send was recorded as a
+            // successful step and the enrollment moved on. A failed send now
+            // fails the step.
+            const emailResult = await sendEmail({
               from: Deno.env.get("EMAIL_FROM") ?? "RealtorDesk AI <support@realtordesk.ai>",
               to: [contact.email],
               subject,
               html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                   ${bodyHtml}
+                  ${await buildUnsubscribeLink({ recipientEmail: contact.email, userId: user.id, contactId })}
                 </div>
               `,
-            });
+            }, { apiKey: Deno.env.get("RESEND_API_KEY"), environment: deliveryMode().environment });
 
-            console.log("Email sent:", emailResult);
+            if (emailResult.status !== "sent") {
+              throw new Error(`Email send failed (${emailResult.httpStatus ?? "no response"}): ${emailResult.error}`);
+            }
+            console.log("[RUN-AUTOMATION] email sent", { id: emailResult.id, rerouted: emailResult.rerouted });
+            // A test copy went only to the test inbox: log it as such and do
+            // not move the real enrollment on (only "success" advances).
+            if (emailResult.rerouted) executionStatus = "test_rerouted";
             break;
           }
 
@@ -232,13 +310,10 @@ const handler = async (req: Request): Promise<Response> => {
             const delayDays = step.action_config.delay_days || 1;
             const nextActionAt = new Date(Date.now() + delayDays * 24 * 60 * 60 * 1000);
 
-            await supabase
-              .from("automation_enrollments")
-              .update({ 
-                current_step: stepIndex + 1,
-                next_action_at: nextActionAt.toISOString() 
-              })
-              .eq("id", enrollmentId);
+            advanced = await progress({
+              current_step: stepIndex + 1,
+              next_action_at: nextActionAt.toISOString(),
+            });
 
             console.log(`Wait step: next action at ${nextActionAt.toISOString()}`);
             break;
@@ -368,17 +443,15 @@ const handler = async (req: Request): Promise<Response> => {
 
       // Move to next step if not a wait step
       if (step.action_type !== "wait" && executionStatus === "success") {
-        await supabase
-          .from("automation_enrollments")
-          .update({ current_step: stepIndex + 1 })
-          .eq("id", enrollmentId);
+        advanced = await progress({ current_step: stepIndex + 1 });
       }
 
       return new Response(
         JSON.stringify({ 
           success: executionStatus === "success", 
           message: `Step ${stepIndex + 1} executed`,
-          status: executionStatus 
+          status: executionStatus,
+          advanced,
         }),
         { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );

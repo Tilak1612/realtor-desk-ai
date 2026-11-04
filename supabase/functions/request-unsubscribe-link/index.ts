@@ -8,6 +8,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { buildUnsubscribeUrl } from "../_shared/casl-footer.ts";
+import { deliveryEventKey, deliveryMode, sendEmail } from "../_shared/outbound-email.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -48,7 +49,7 @@ serve(async (req) => {
     const { data: recent } = await admin
       .from("email_events")
       .select("id")
-      .eq("event_type", "unsubscribe_link_request")
+      .eq("event_type", deliveryEventKey("unsubscribe_link_request", deliveryMode()))
       .eq("recipient_email", rawEmail)
       .gte("sent_at", sinceIso)
       .limit(1);
@@ -111,28 +112,17 @@ This link expires in 30 days. If you did not request this, you can ignore the em
 </table>
 </body></html>`;
 
-    const send = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${resendKey}`,
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [rawEmail],
-        subject,
-        html,
-      }),
-    });
+    const mode = deliveryMode();
+    const send = await sendEmail({ from: FROM_EMAIL, to: [rawEmail], subject, html }, { apiKey: resendKey, environment: mode.environment });
 
-    if (!send.ok) {
-      console.error("[REQUEST-UNSUB] Resend error:", await send.text());
+    if (send.status !== "sent") {
+      console.error("[REQUEST-UNSUB] Resend error:", send.httpStatus, send.error);
       return ok();
     }
 
     await admin.from("email_events").insert({
       user_id: userId,
-      event_type: "unsubscribe_link_request",
+      event_type: deliveryEventKey("unsubscribe_link_request", mode),
       recipient_email: rawEmail,
       metadata: { matched_contact: contactId ?? null },
     });

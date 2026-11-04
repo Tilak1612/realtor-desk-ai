@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { buildCaslFooter } from "../_shared/casl-footer.ts";
 import { isEmailSuppressed } from "../_shared/email-suppression.ts";
+import { deliveryEventKey, deliveryMode, sendEmail } from "../_shared/outbound-email.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,7 +10,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-const RESEND_API_URL = "https://api.resend.com/emails";
 const FROM_EMAIL = Deno.env.get("EMAIL_FROM") ?? "RealtorDesk AI <support@realtordesk.ai>";
 const APP_URL = "https://www.realtordesk.ai";
 
@@ -60,12 +60,17 @@ const handler = async (req: Request): Promise<Response> => {
 
     const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
 
+    // Outside production the welcome is a test copy: recorded and deduplicated
+    // under a namespaced key, so it never marks the real user as welcomed.
+    const mode = deliveryMode();
+    const welcomeKey = deliveryEventKey("welcome", mode);
+
     // Check for duplicate welcome email
     const { data: existing } = await supabaseAdmin
       .from("email_events")
       .select("id")
       .eq("user_id", userId)
-      .eq("event_type", "welcome")
+      .eq("event_type", welcomeKey)
       .limit(1);
 
     if (existing && existing.length > 0) {
@@ -99,13 +104,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     // Send via Resend
-    const emailRes = await fetch(RESEND_API_URL, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${resendApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const sendResult = await sendEmail({
         from: FROM_EMAIL,
         to: [recipientEmail],
         subject: "Welcome to RealtorDesk AI — Your 14-Day Trial Starts Now!",
@@ -156,12 +155,10 @@ const handler = async (req: Request): Promise<Response> => {
 </table>
 </body>
 </html>`,
-      }),
-    });
+    }, { apiKey: resendApiKey, environment: mode.environment });
 
-    if (!emailRes.ok) {
-      const errBody = await emailRes.text();
-      console.error("Resend API error:", errBody);
+    if (sendResult.status !== "sent") {
+      console.error("Resend API error:", sendResult.httpStatus, sendResult.error);
       return new Response(
         JSON.stringify({ error: "Failed to send email" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
@@ -171,9 +168,9 @@ const handler = async (req: Request): Promise<Response> => {
     // Log to email_events
     await supabaseAdmin.from("email_events").insert({
       user_id: userId,
-      event_type: "welcome",
+      event_type: welcomeKey,
       recipient_email: recipientEmail,
-      metadata: { resend_response: await emailRes.json() },
+      metadata: { resend_response: { id: sendResult.id }, email_environment: sendResult.environment, rerouted: sendResult.rerouted },
     });
 
     return new Response(

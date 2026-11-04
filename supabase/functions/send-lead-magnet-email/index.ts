@@ -1,12 +1,13 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { deliveryMode, sendEmail } from "../_shared/outbound-email.ts";
+import { getAdminClient, isEmailSuppressed } from "../_shared/email-suppression.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const RESEND_API_URL = "https://api.resend.com/emails";
 const FROM_EMAIL = "Alex from RealtorDesk AI <support@realtordesk.ai>";
 const APP_URL = "https://www.realtordesk.ai";
 
@@ -109,39 +110,45 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Rate limit: silently succeed so we don't leak whether an email is in our system
     if (await isRateLimited(email)) {
-      console.log("Rate limited (already sent in past 24h):", email);
+      console.log("Rate limited (already sent in past 24h)");
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // An address on the suppression list (unsubscribed, bounced, complained)
+    // gets nothing. Same silent success as the rate limit, so the answer does
+    // not reveal whether an address is on the list. Fails closed: a failed
+    // check counts as suppressed. Whether a fresh request should override an
+    // earlier opt-out is an open question (see the email hygiene report).
+    if (await isEmailSuppressed(getAdminClient(), email)) {
+      console.log("Suppressed recipient, lead magnet not sent");
       return new Response(JSON.stringify({ success: true }), {
         status: 200, headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
     const name = (firstName ?? "").trim() || "there";
+    const mode = deliveryMode();
 
-    const emailRes = await fetch(RESEND_API_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [email],
-        subject: "Your follow-up calculator + 5 scripts (RealtorDesk)",
-        html: deliveryEmailHtml(name),
-      }),
-    });
+    const sendResult = await sendEmail({
+      from: FROM_EMAIL,
+      to: [email],
+      subject: "Your follow-up calculator + 5 scripts (RealtorDesk)",
+      html: deliveryEmailHtml(name),
+    }, { apiKey: resendApiKey, environment: mode.environment });
 
-    if (!emailRes.ok) {
-      const errBody = await emailRes.text();
-      console.error("Resend API error:", errBody);
+    if (sendResult.status !== "sent") {
+      console.error("Resend API error:", sendResult.httpStatus, sendResult.error);
       return new Response(
         JSON.stringify({ error: "Failed to send email" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    // Record the send for rate-limiting future requests from the same address
-    await recordSend(email);
+    // Record the send for rate-limiting future requests from the same address.
+    // Not for a test copy: it would block the real person for 24 hours.
+    if (!sendResult.rerouted) await recordSend(email);
 
     return new Response(
       JSON.stringify({ success: true }),
