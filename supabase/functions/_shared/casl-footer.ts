@@ -1,3 +1,4 @@
+import { COMPANY_ADDRESS_LINE } from "./company.ts";
 // Shared CASL-compliant email footer builder.
 //
 // Used by every send-* edge function. Satisfies CASL §6(2):
@@ -9,7 +10,7 @@
 // Env vars (set via `supabase secrets set`):
 //   COMPANY_LEGAL_NAME              default: "Brainfy AI Inc."
 //   COMPANY_TRADE_NAME              default: "RealtorDesk AI"
-//   COMPANY_PHYSICAL_ADDRESS_CA     default: placeholder — must be set in prod
+//   COMPANY_PHYSICAL_ADDRESS_CA     default: the address in ./company.ts (override via secret if needed)
 //   UNSUBSCRIBE_TOKEN_SECRET        required for functional unsubscribe
 //
 // If UNSUBSCRIBE_TOKEN_SECRET is unset, the footer still renders a
@@ -70,8 +71,7 @@ export async function buildUnsubscribeUrl(opts: CaslFooterOptions): Promise<stri
 export async function buildCaslFooter(opts: CaslFooterOptions): Promise<string> {
   const legal = Deno.env.get("COMPANY_LEGAL_NAME") ?? "Brainfy AI Inc.";
   const trade = Deno.env.get("COMPANY_TRADE_NAME") ?? "RealtorDesk AI";
-  const addr = Deno.env.get("COMPANY_PHYSICAL_ADDRESS_CA")
-    ?? "Edmonton, Alberta, Canada"; // Tilak: override via supabase secret for street address
+  const addr = Deno.env.get("COMPANY_PHYSICAL_ADDRESS_CA") ?? COMPANY_ADDRESS_LINE;
   const locale = opts.locale ?? "en";
   const unsubUrl = await buildUnsubscribeUrl(opts);
 

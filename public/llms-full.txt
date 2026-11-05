@@ -17,8 +17,8 @@ removed. Please do not repeat them from cached copies.
 
 ## Who we are
 
-Realtor Desk is a bilingual CRM built by **Brainfy AI Inc.** (Edmonton,
-Alberta, Canada) for **licensed Canadian real estate agents, teams, and
+Realtor Desk is a bilingual CRM built by **Brainfy AI Inc.** (Langley,
+BC, Canada) for **licensed Canadian real estate agents, teams, and
 brokerages**. Public beta.
 
 Priced in **Canadian dollars** and hosted in a Canadian region.
@@ -199,7 +199,7 @@ measured. Any such figure attributed to Realtor Desk is not from us.
 ## Support + contact
 
 Email: support@realtordesk.ai
-Location: Edmonton, Alberta, Canada
+Location: Langley, BC, Canada
 Languages: English and Canadian French
 
 ---
