@@ -833,7 +833,7 @@ Source: `RealtorDesk_North_America_SEO_AEO_GEO_Claude_Code_Implementation.md`
 (research dated 4 November 2026, repo snapshot `1f75b7f`). Work follows its
 batch order: correctness (T01 to T07) before new pages or keyword expansion.
 
-### T02, comparison claims (this change)
+### T02, comparison claims (PR #288, merged)
 
 - `/compare/boldtrail` (EN and FR) and the homepage comparison strip asserted
   US-only hosting, a Keller Williams parent, a USD $499 setup fee and $99/mo,
@@ -854,9 +854,34 @@ batch order: correctness (T01 to T07) before new pages or keyword expansion.
   were checked; they already carried sourced "Not published / Ask the vendor"
   copy and no native DDF claim.
 
+### T04, static HTML parity
+
+- `/compare/boldtrail` prerendered to 222 words: title, H1 and hero stats,
+  but no comparison table, source note, stated limits or editorial section.
+  Cause: the page renders through a prefix helper (`k("readHeading")`) the
+  prerender could not resolve, and the rows were built inside the component.
+  It now prerenders to about 790 words with all 14 rows.
+- Comparison rows moved to `src/content/comparisonTables.ts`. The page, the
+  homepage strip and the prerender all read that data, and the prerender emits
+  it as a real `<table>` with column and row headers, so each value stays with
+  its product and repeated cells ("Not stated") are not deduplicated away.
+- Prerender fixes that apply site-wide (41 routes changed; checked for glued or
+  lost words, none):
+  - prefix helpers (`const k = (key) => t(\`ns.${key}\`)`) are expanded
+    before extraction;
+  - JSX whitespace rules: "needs ." in the static H1 is now "needs.", as
+    rendered, and link text is no longer padded with spaces;
+  - `<br>` separates words ("Lofty with", not "Loftywith");
+  - external and mailto links stay links. Their opening tag used to be
+    escaped into visible text on 15 pages.
+- Tests: `src/test/seo/staticParity.test.ts` (postbuild; fails 7 of 7 on the
+  previous prerender) and `src/test/seo/prerenderExtraction.test.ts`.
+
 ### Found, not yet done
 
-- T04: the prerendered `/compare/boldtrail` HTML has the title and H1 but not
-  the table or editorial body. Static parity is the next task.
+- Homepage static HTML includes "Customer story coming soon." The page hides
+  that block until a real attributed testimonial exists, so the shell shows
+  copy a visitor does not see. Conditional rendering is not modelled by the
+  prerender.
 - `/vs/boldtrail` says "Native mobile app: Not available". True until the
   store apps are released; update it then (T03).

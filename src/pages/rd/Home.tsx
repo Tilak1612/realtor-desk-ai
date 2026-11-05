@@ -29,6 +29,7 @@ import { ResourceCards } from "@/components/rd/marketing/ResourceCards";
 import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
 import { HeroScorer } from "@/components/rd/marketing/HeroScorer";
 import { HOME_FAQS, HOME_RESOURCES, HOME_WORKFLOW } from "@/content/homeSections";
+import { HOME_COMPARE_STRIP } from "@/content/comparisonTables";
 
 // /  — Home page per rd-marketing.jsx Artboard_Home.
 //
@@ -542,15 +543,13 @@ function CompareStrip({ t }: { t: TFn }) {
   // DDF plugin and "USD, +20%": none were sourced. Neither was "Time to first
   // AI response", removed earlier: nothing invokes run-automation in
   // production, so there is no automatic first response to time.
+  // The rows live in @/content/comparisonTables so the prerendered HTML
+  // carries the same table a visitor sees.
   const c = (key: string) => t(`landing.compareStrip.${key}`);
-  const rows: { cap: string; them: string | boolean; us: string | boolean }[] = [
-    { cap: c("rowWhat"), them: c("valWhatThem"), us: c("valWhatUs") },
-    { cap: c("rowPrice"), them: c("valPriceThem"), us: c("valPriceUs") },
-    { cap: c("rowData"), them: c("valNotStated"), us: c("valDataUs") },
-    { cap: c("rowBilingual"), them: c("valNotStated"), us: true },
-    { cap: c("rowCasl"), them: c("valNotStated"), us: true },
-    { cap: c("rowDdf"), them: c("valNotStated"), us: c("valRoadmap") },
-  ];
+  const cell = (v: string | true) => (v === true ? true : c(v));
+  const rows = HOME_COMPARE_STRIP.sections.flatMap((s) =>
+    s.rows.map(([cap, them, us]) => ({ cap: c(cap), them: cell(them), us: cell(us) })),
+  );
 
   return (
     <section className="px-4 sm:px-8 md:px-14 py-[100px] bg-white">
@@ -583,8 +582,6 @@ function CompareStrip({ t }: { t: TFn }) {
             <div className="text-center text-sm text-rd-ink-500">
               {r.them === true ? (
                 <IconCheck className="text-rd-success inline" />
-              ) : r.them === false ? (
-                <span className="text-rd-danger font-semibold">✕</span>
               ) : (
                 r.them
               )}
