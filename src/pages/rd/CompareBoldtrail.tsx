@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
 import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
-import { RDButton, IconArrow } from "@/components/rd";
+import { IconArrow } from "@/components/rd";
 import { cn } from "@/lib/utils";
 
 // /compare/boldtrail — Compare page per rd-marketing.jsx Artboard_Compare.
@@ -21,45 +21,59 @@ interface CompareItem {
 export default function CompareBoldtrail() {
   const { t } = useTranslation();
 
+  // Every BoldTrail cell comes from boldtrail.com/faq, read 4 November 2026.
+  // Where that page is silent the cell says so ("Not stated"): a missing
+  // public statement is an unknown, not a "no". The version this replaced
+  // asserted US-only hosting, a Keller Williams parent, USD setup fees, a
+  // CAD $15 extra-user price, native DDF on our side and a contract-match
+  // offer, none of which were sourced or true.
+  const k = (key: string) => t(`compareBoldtrail.${key}`);
   const SECTIONS: { section: string; items: CompareItem[] }[] = [
     {
-      section: t("compareBoldtrail.secCanadianFit"),
+      section: k("secScope"),
       items: [
-        { f: t("compareBoldtrail.fCanadianHosted"), bt: t("compareBoldtrail.vThemUsOnly"), rd: t("compareBoldtrail.vUsCanadianCenters") },
-        { f: t("compareBoldtrail.fBilingual"), bt: t("compareBoldtrail.vThemAddonCost"), rd: t("compareBoldtrail.vUsBuiltIn") },
-        { f: t("compareBoldtrail.fCaslFooters"), bt: t("compareBoldtrail.vThemManualTemplate"), rd: t("compareBoldtrail.vUsAutomatic") },
-        { f: t("compareBoldtrail.fDdfIntegration"), bt: t("compareBoldtrail.vThemThirdParty"), rd: t("compareBoldtrail.vUsNative") },
-        { f: t("compareBoldtrail.fCadPricing"), bt: t("compareBoldtrail.vThemUsdPremium"), rd: t("compareBoldtrail.vUsPureCad") },
+        { f: k("fProduct"), bt: k("vProductThem"), rd: k("vProductUs") },
+        { f: k("fIdx"), bt: k("vIncluded"), rd: k("vNotOffered") },
+        { f: k("fBackOffice"), bt: k("vBackOfficeThem"), rd: k("vNotOffered") },
+        { f: k("fTeams"), bt: k("vTeamsThem"), rd: k("vPlanned") },
       ],
     },
     {
-      section: t("compareBoldtrail.secAiSpeed"),
+      section: k("secCanadianFit"),
       items: [
-        { f: t("compareBoldtrail.fAiResponseTime"), bt: t("compareBoldtrail.vThemMinutes"), rd: t("compareBoldtrail.vUsFast") },
-        { f: t("compareBoldtrail.fBilingualAiOob"), bt: t("compareBoldtrail.vNo"), rd: t("compareBoldtrail.vYes") },
-        { f: t("compareBoldtrail.fVoiceAi2026"), bt: t("compareBoldtrail.vThemUnknown"), rd: t("compareBoldtrail.vUsQ3Beta") },
+        { f: k("fDataRegion"), bt: k("vNotStated"), rd: k("vDataUs") },
+        { f: k("fFrench"), bt: k("vNotStated"), rd: k("vFrenchUs") },
+        { f: k("fCasl"), bt: k("vNotStated"), rd: k("vCaslUs") },
+        { f: k("fDdf"), bt: k("vNotStated"), rd: k("vDdfUs") },
       ],
     },
     {
-      section: t("compareBoldtrail.secCost"),
+      section: k("secFollowUp"),
       items: [
-        { f: t("compareBoldtrail.fStartingPrice"), bt: t("compareBoldtrail.vThemPriceSetup"), rd: t("compareBoldtrail.vUsPriceNoSetup") },
-        { f: t("compareBoldtrail.fAnnualSingle"), bt: t("compareBoldtrail.vThemAnnual"), rd: t("compareBoldtrail.vUsAnnualSave") },
-        { f: t("compareBoldtrail.fPerUserAfter5"), bt: t("compareBoldtrail.vThemPerUser"), rd: t("compareBoldtrail.vUsPerUser") },
-        { f: t("compareBoldtrail.fOnboardingFee"), bt: t("compareBoldtrail.vThemOnboardingFee"), rd: t("compareBoldtrail.vUsIncluded") },
+        { f: k("fScoring"), bt: k("vScoringThem"), rd: k("vScoringUs") },
+        { f: k("fCampaigns"), bt: k("vIncluded"), rd: k("vCampaignsUs") },
+        { f: k("fCalling"), bt: k("vCallingThem"), rd: k("vNotOffered") },
+      ],
+    },
+    {
+      section: k("secCost"),
+      items: [
+        { f: k("fStartingPrice"), bt: k("vPriceQuoteThem"), rd: k("vPriceListUs") },
+        { f: k("fTrial"), bt: k("vNotStated"), rd: k("vTrialUs") },
+        { f: k("fSetupFee"), bt: k("vSetupThem"), rd: k("vSetupUs") },
       ],
     },
   ];
 
   const BT_STATS: [string, string][] = [
-    ["2008", t("compareBoldtrail.statFounded")],
-    ["KW", t("compareBoldtrail.statParent")],
-    ["USD", t("compareBoldtrail.statPricing")],
+    [k("vVendorThem"), k("statVendor")],
+    [k("vTypeThem"), k("statType")],
+    [k("vPriceThem"), k("statPricing")],
   ];
   const RD_STATS: [string, string][] = [
-    ["2025", t("compareBoldtrail.statLaunched")],
-    ["YEG", t("compareBoldtrail.statHq")],
-    ["CAD", t("compareBoldtrail.statPricing")],
+    [k("vVendorUs"), k("statVendor")],
+    [k("vTypeUs"), k("statType")],
+    [k("vPriceUs"), k("statPricing")],
   ];
 
   return (
@@ -131,6 +145,9 @@ export default function CompareBoldtrail() {
             </Fragment>
           ))}
         </div>
+        <p className="mx-auto max-w-[1100px] mt-4 text-[13px] leading-[1.5] text-rd-ink-600">
+          {k("sourceNote")}
+        </p>
       </section>
 
       {/* Closing CTA */}
@@ -153,7 +170,7 @@ export default function CompareBoldtrail() {
                 {t("compareBoldtrail.closingCtaPrimary")}
             </CtaLink>
             <CtaLink
-              to="/contact"
+              to="/switch-from-boldtrail"
               location="compare_boldtrail_secondary"
               variant="light"
               size="lg"
@@ -166,60 +183,26 @@ export default function CompareBoldtrail() {
       <section className="px-8 md:px-14 py-[100px] border-t border-rd-line">
         <div className="mx-auto max-w-[760px]">
           <h2 className="text-[28px] md:text-[36px] font-semibold tracking-[-0.02em] mb-4">
-            How to read this comparison
+            {k("readHeading")}
           </h2>
-          <p className="text-rd-ink-600 leading-[1.6] mb-8">
-            We build one of these two products, so treat the framing accordingly.
-            Everything below about BoldTrail comes from their own site, read on
-            26 September 2026. Product details change — check
-            boldtrail.com before you decide, and hold us to the same standard.
-          </p>
+          <p className="text-rd-ink-600 leading-[1.6] mb-8">{k("readIntro")}</p>
 
-          <h3 className="text-lg font-semibold mb-2">They are not the same kind of product</h3>
-          <p className="text-rd-ink-600 leading-[1.6] mb-6">
-            BoldTrail, from Inside Real Estate, is a broad platform. Their site
-            markets to &ldquo;agents, teams, brokers, and enterprise-level
-            organizations&rdquo; and spans four modules: the main platform with
-            IDX websites, lead generation and CRM; BackOffice for commissions and
-            accounting; Recruit for brokerage growth; and a marketplace of add-ons.
-            Realtor Desk is a CRM for the working agent. If you need agent
-            billing, commission accounting and a recruiting pipeline in one
-            system, that is a real requirement and we do not meet it.
-          </p>
+          <h3 className="text-lg font-semibold mb-2">{k("readKindH")}</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-6">{k("readKind")}</p>
 
-          <h3 className="text-lg font-semibold mb-2">What their site does not say</h3>
-          <p className="text-rd-ink-600 leading-[1.6] mb-6">
-            Their homepage states no pricing, and makes no statement about Canadian
-            data residency, CREA DDF, or French-language support. That is an
-            observation about what is published, not a claim that the product
-            lacks those things — ask them directly if those matter to you. They
-            are the things we build around, so they are where we would expect the
-            difference to sit.
-          </p>
+          <h3 className="text-lg font-semibold mb-2">{k("readSilentH")}</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-6">{k("readSilent")}</p>
 
-          <h3 className="text-lg font-semibold mb-2">What we will say about ourselves</h3>
-          <p className="text-rd-ink-600 leading-[1.6] mb-6">
-            Data hosted in Canada, pricing in CAD at $149/month for Solo and $299
-            for Team, bilingual EN/FR in the interface and in client-facing email,
-            and CASL consent recorded per contact with sends refused when consent
-            is missing. Listings import from Realtor.ca today; native CREA DDF®
-            sync is on the roadmap and is not live.
-          </p>
+          <h3 className="text-lg font-semibold mb-2">{k("readUsH")}</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-6">{k("readUs")}</p>
 
-          <h3 className="text-lg font-semibold mb-2">Who should pick which</h3>
-          <p className="text-rd-ink-600 leading-[1.6]">
-            A brokerage that needs back office, recruiting and IDX websites in one
-            platform should look at BoldTrail. A Canadian agent or small team who
-            wants lead follow-up handled properly, in two languages, billed in
-            dollars that do not move, is who we built for. Our{" "}
-            <Link to="/blog/best-crm-canada-2025" className="underline">
-              comparison of Canadian CRM options
-            </Link>{" "}
-            covers the rest of the field, and{" "}
-            <Link to="/blog/real-estate-crm-buying-guide" className="underline">
-              the buying guide
-            </Link>{" "}
-            sets out how to run the evaluation yourself.
+          <h3 className="text-lg font-semibold mb-2">{k("readWhoH")}</h3>
+          <p className="text-rd-ink-600 leading-[1.6] mb-4">{k("readWho")}</p>
+          <p className="text-rd-ink-600 leading-[1.6] flex flex-wrap gap-x-5 gap-y-1">
+            <Link to="/blog/best-crm-canada-2025" className="underline">{k("readLinkCompare")}</Link>
+            <Link to="/blog/real-estate-crm-buying-guide" className="underline">{k("readLinkGuide")}</Link>
+            <Link to="/pricing" className="underline">{t("siteNav.pricing")}</Link>
+            <Link to="/roadmap" className="underline">{t("siteNav.roadmap", "Roadmap")}</Link>
           </p>
         </div>
       </section>

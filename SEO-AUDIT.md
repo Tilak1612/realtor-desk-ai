@@ -824,3 +824,39 @@ already reads "(roadmap)" or "(Q3 2026)".
 The `metaLength` guard rejected four of the eight new pages on first build —
 two titles over 60 characters and three descriptions over 160. Copy was
 tightened rather than the budget raised.
+
+---
+
+## 2026-11-04: North America SEO/AEO/GEO guide, batch 1
+
+Source: `RealtorDesk_North_America_SEO_AEO_GEO_Claude_Code_Implementation.md`
+(research dated 4 November 2026, repo snapshot `1f75b7f`). Work follows its
+batch order: correctness (T01 to T07) before new pages or keyword expansion.
+
+### T02, comparison claims (this change)
+
+- `/compare/boldtrail` (EN and FR) and the homepage comparison strip asserted
+  US-only hosting, a Keller Williams parent, a USD $499 setup fee and $99/mo,
+  a "~20%" USD premium, a CAD $15 extra-user price, native DDF on our side,
+  one-click import and a contract-match offer. All removed.
+- BoldTrail facts now come only from https://boldtrail.com/faq, read
+  4 November 2026: Inside Real Estate's platform, next generation of kvCORE;
+  CRM, IDX websites, campaigns, calling, transactions, BackOffice and Recruit;
+  quote-only pricing. Where the FAQ is silent (data location, French, CASL,
+  DDF, trial) the cell reads "Not stated in their FAQ", not "no".
+- Our column states current limits: single agent, no IDX, no back office, team
+  seats planned, DDF on the roadmap, nothing sends without the agent.
+- The "How to read this comparison" section was hardcoded English on the
+  French page; it is now in i18n in both languages.
+- Regression test: `src/test/content/boldtrailComparison.test.ts` (fails on the
+  previous copy, 13 of 14).
+- Sibling pages `/vs/boldtrail`, `/switch-from-boldtrail`, `/blog/vs-kvcore`
+  were checked; they already carried sourced "Not published / Ask the vendor"
+  copy and no native DDF claim.
+
+### Found, not yet done
+
+- T04: the prerendered `/compare/boldtrail` HTML has the title and H1 but not
+  the table or editorial body. Static parity is the next task.
+- `/vs/boldtrail` says "Native mobile app: Not available". True until the
+  store apps are released; update it then (T03).

@@ -99,7 +99,7 @@ export default function Home() {
       <Reveal><ProductTour /></Reveal>
       <Reveal><FeatureGrid t={t} /></Reveal>
       <Reveal><PipelinePreview t={t} /></Reveal>
-      <Reveal><CompareStrip t={t} locale={locale} /></Reveal>
+      <Reveal><CompareStrip t={t} /></Reveal>
       <Reveal>
         <section className="px-8 md:px-14 py-[100px] border-t border-rd-line">
           <div className="mx-auto max-w-[760px]">
@@ -535,20 +535,21 @@ function MiniPipeline({ t }: { t: TFn }) {
 /* ──────────────────────────────────────────────────────────
  * COMPARE STRIP
  * ────────────────────────────────────────────────────────── */
-function CompareStrip({ t, locale }: { t: TFn; locale: "en-CA" | "fr-CA" }) {
-  const isFr = locale === "fr-CA";
+function CompareStrip({ t }: { t: TFn }) {
+  // BoldTrail cells come from boldtrail.com/faq, read 4 November 2026, and say
+  // "Not stated" where that page is silent. The strip this replaced showed an
+  // ✕ for BoldTrail hosting, a paid French add-on, manual CASL, a third-party
+  // DDF plugin and "USD, +20%": none were sourced. Neither was "Time to first
+  // AI response", removed earlier: nothing invokes run-automation in
+  // production, so there is no automatic first response to time.
+  const c = (key: string) => t(`landing.compareStrip.${key}`);
   const rows: { cap: string; them: string | boolean; us: string | boolean }[] = [
-    { cap: t("landing.compareStrip.rowHosting"), them: false, us: true },
-    { cap: t("landing.compareStrip.rowBilingual"), them: t("landing.compareStrip.valAddon"), us: true },
-    { cap: t("landing.compareStrip.rowCasl"), them: t("landing.compareStrip.valManual"), us: true },
-    // DDF is on OUR roadmap too, so "Included" was wrong in our own column --
-    // the row caption said Q3 2026 while the tick beside it said shipped.
-    { cap: t("landing.compareStrip.rowDdf"), them: t("landing.compareStrip.valThirdParty"), us: t("landing.compareStrip.valRoadmap") },
-    { cap: t("landing.compareStrip.rowCad"), them: isFr ? "USD, +20 %" : "USD, +20%", us: true },
-    // "Time to first AI response: 2-3 days vs 5 minutes" is gone. Neither
-    // number was sourced: we have no published measurement of BoldTrail, and
-    // on our side nothing invokes run-automation in production, so there is
-    // no automatic first response to time.
+    { cap: c("rowWhat"), them: c("valWhatThem"), us: c("valWhatUs") },
+    { cap: c("rowPrice"), them: c("valPriceThem"), us: c("valPriceUs") },
+    { cap: c("rowData"), them: c("valNotStated"), us: c("valDataUs") },
+    { cap: c("rowBilingual"), them: c("valNotStated"), us: true },
+    { cap: c("rowCasl"), them: c("valNotStated"), us: true },
+    { cap: c("rowDdf"), them: c("valNotStated"), us: c("valRoadmap") },
   ];
 
   return (
@@ -601,6 +602,10 @@ function CompareStrip({ t, locale }: { t: TFn; locale: "en-CA" | "fr-CA" }) {
           </div>
         ))}
       </div>
+
+      <p className="mx-auto max-w-[1100px] mt-4 text-[13px] leading-[1.5] text-rd-ink-600">
+        {c("sourceNote")}
+      </p>
 
       <div className="text-center mt-8">
         <CtaLink
