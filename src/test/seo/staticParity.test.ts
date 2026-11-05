@@ -19,8 +19,16 @@ import {
 // quietly remove them from both sides at once.
 
 const DIST = path.resolve(__dirname, "../../../dist");
-const read = (route: string) =>
-  fs.readFileSync(path.join(DIST, route === "/" ? "" : route, "index.html"), "utf8");
+// Read lazily. describe.skipIf still runs the suite body while collecting,
+// and `npm test` runs before the build in CI, so a read at collection time
+// throws ENOENT instead of skipping.
+const cache = new Map<string, string>();
+const read = (route: string) => {
+  if (!cache.has(route)) {
+    cache.set(route, fs.readFileSync(path.join(DIST, route === "/" ? "" : route, "index.html"), "utf8"));
+  }
+  return cache.get(route)!;
+};
 const main = (html: string) => html.slice(html.indexOf("<main>"), html.indexOf("</main>"));
 const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -36,19 +44,22 @@ function expectedRows(table: ComparisonTable) {
 
 describe.skipIf(!fs.existsSync(path.join(DIST, "index.html")))("static HTML parity", () => {
   describe("/compare/boldtrail", () => {
-    const html = main(read("/compare/boldtrail"));
+    const page = () => main(read("/compare/boldtrail"));
     const k = (key: string) => en(`compareBoldtrail.${key}`);
 
     it("has the H1 exactly as the page renders it", () => {
+      const html = page();
       expect(html).toContain(`<h1>${esc(`${k("headline1")} ${k("headline2")}.`)}</h1>`);
     });
 
     it("carries every comparison row, each in one table row", () => {
+      const html = page();
       for (const row of expectedRows(BOLDTRAIL_COMPARE_TABLE)) expect(html).toContain(row);
       for (const col of BOLDTRAIL_COMPARE_TABLE.columns) expect(html).toContain(`<th scope="col">${esc(k(col))}</th>`);
     });
 
     it("states the source, the date and our own limits before JavaScript runs", () => {
+      const html = page();
       for (const fact of [
         "boldtrail.com/faq",
         "4 November 2026",
@@ -64,6 +75,7 @@ describe.skipIf(!fs.existsSync(path.join(DIST, "index.html")))("static HTML pari
     });
 
     it("includes the editorial section and its links", () => {
+      const html = page();
       for (const key of ["readHeading", "readKindH", "readSilentH", "readUsH", "readWhoH"]) {
         expect(html).toMatch(new RegExp(`<h[23]>${esc(k(key)).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</h[23]>`));
       }
@@ -73,6 +85,7 @@ describe.skipIf(!fs.existsSync(path.join(DIST, "index.html")))("static HTML pari
     });
 
     it("puts the table after the introduction and before the editorial", () => {
+      const html = page();
       const table = html.indexOf("<table>");
       expect(table).toBeGreaterThan(html.indexOf(esc(k("subtitle"))));
       expect(table).toBeLessThan(html.indexOf(esc(k("readHeading"))));
@@ -80,10 +93,11 @@ describe.skipIf(!fs.existsSync(path.join(DIST, "index.html")))("static HTML pari
   });
 
   describe("homepage comparison strip", () => {
-    const html = main(read("/"));
+    const page = () => main(read("/"));
     const c = (key: string) => en(`landing.compareStrip.${key}`);
 
     it("carries every row under its own heading, with the source note once", () => {
+      const html = page();
       for (const row of expectedRows(HOME_COMPARE_STRIP)) expect(html).toContain(row);
       expect(html.indexOf("<table>")).toBeGreaterThan(html.indexOf(esc(c("heading"))));
       expect(html.split(esc(c("sourceNote"))).length - 1).toBe(1);
