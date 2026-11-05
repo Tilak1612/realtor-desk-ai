@@ -61,6 +61,11 @@ verify_jwt = true
 [functions.stripe-webhook-email]
 verify_jwt = false
 
+# Resend sends no Supabase JWT. The function verifies the Svix signature
+# with RESEND_WEBHOOK_SECRET instead.
+[functions.resend-webhook]
+verify_jwt = false
+
 # OAuth initiation: client calls with user JWT. Function body does its
 # own auth.getUser(token) check. Gateway verify was 401'ing the call
 # same way it did for check-subscription / create-checkout.
