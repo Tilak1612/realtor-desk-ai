@@ -188,6 +188,114 @@ function resolveT(expr) {
   return out;
 }
 
+// Pages that render most of a namespace declare a prefix helper,
+//   const k = (key: string) => t(`compareBoldtrail.${key}`);
+// and write {k("readHeading")}. resolveT only knows t(), so every one of those
+// strings fell out of the static HTML: /compare/boldtrail shipped 222 words
+// with no table, no source note and no editorial section. Rewrite each literal
+// call back to the t("prefix.key") it stands for before anything is extracted.
+// Calls with a non-literal argument (k(sec.heading)) are left alone; the
+// prose filter drops them and the table extractor below covers that data.
+export function expandPrefixHelpers(src) {
+  let out = src;
+  const helpers = [
+    ...src.matchAll(
+      /const\s+([A-Za-z_$][\w$]*)\s*=\s*\(\s*([A-Za-z_$][\w$]*)\s*(?::\s*string)?\s*\)\s*=>\s*t\(\s*`([\w.]+)\.\$\{\s*\2\s*\}`\s*\)/g,
+    ),
+  ];
+  for (const [, name, , prefix] of helpers) {
+    out = out.replace(
+      new RegExp(`(?<![\\w.$])${name.replace(/\$/g, '\\$')}\\(\\s*(["'])([\\w.]+)\\1\\s*\\)`, 'g'),
+      (_m, _q, key) => `t("${prefix}.${key}")`,
+    );
+  }
+  return out;
+}
+
+// A comparison table as data (src/content/comparisonTables.ts): an i18n
+// prefix, three column keys and sections of [label, them, us] rows, where
+// `true` means "included". Recognised by shape so any page that imports one
+// gets it emitted as a real <table>: rows kept together, column headers
+// kept, repeated values ("Not stated") kept. The prose walker used to dedupe
+// those cells into loose paragraphs, which told a crawler nothing about which
+// value belonged to which product.
+function isComparisonTable(v) {
+  return (
+    v != null &&
+    typeof v === 'object' &&
+    typeof v.prefix === 'string' &&
+    Array.isArray(v.columns) &&
+    v.columns.length === 3 &&
+    Array.isArray(v.sections) &&
+    v.sections.every((s) => Array.isArray(s.rows) && s.rows.every((r) => Array.isArray(r) && r.length === 3))
+  );
+}
+
+function renderComparisonTable(table) {
+  const tr = (key) => {
+    const v = lookup(`${table.prefix}.${key}`);
+    if (typeof v !== 'string' || !v.trim()) {
+      throw new Error(`prerender: comparison table key ${table.prefix}.${key} has no English string`);
+    }
+    return esc(v);
+  };
+  const cell = (v) => (v === true ? tr(table.included ?? 'vIncluded') : tr(v));
+  const [c0, c1, c2] = table.columns.map(tr);
+  const head = `<thead><tr><th scope="col">${c0}</th><th scope="col">${c1}</th><th scope="col">${c2}</th></tr></thead>`;
+  const bodies = table.sections
+    .map((s) => {
+      const heading = s.heading ? `<tr><th scope="rowgroup" colspan="3">${tr(s.heading)}</th></tr>` : '';
+      const rows = s.rows
+        .map(([f, a, b]) => `<tr><th scope="row">${tr(f)}</th><td>${cell(a)}</td><td>${cell(b)}</td></tr>`)
+        .join('');
+      return `<tbody>${heading}${rows}</tbody>`;
+    })
+    .join('');
+  const note = table.note ? `<p>${tr(table.note)}</p>` : '';
+  return `<table>${head}${bodies}</table>${note}`;
+}
+
+// Every comparison table the page imports, with the source offset of its
+// first use after the imports so it lands in reading order in the shell.
+function extractTables(src) {
+  const prelude = importedContentPrelude(src);
+  const names = [...prelude.matchAll(/^const\s+([A-Za-z_$][\w$]*)/gm)].map((m) => m[1]);
+  if (names.length === 0) return [];
+  let values;
+  try {
+    values = new Function('t', 'CAL_ROUTE', `${prelude}\nreturn [${names.join(',')}];`)(sandboxT, CAL_ROUTE);
+  } catch {
+    return [];
+  }
+  const importsEnd = [...src.matchAll(/^import[^;]*;/gm)].reduce((at, m) => Math.max(at, m.index + m[0].length), 0);
+  const out = [];
+  names.forEach((name, i) => {
+    if (!isComparisonTable(values[i])) return;
+    // Placed where the page renders it. That is its first use after the
+    // imports, unless that use is inside a declaration
+    // (`const TABLE = BOLDTRAIL_COMPARE_TABLE;`,
+    // `const rows = HOME_COMPARE_STRIP.sections.flatMap(...)`), in which case
+    // follow the declared name to its next standalone use: the JSX.
+    let pos = Infinity;
+    const use = new RegExp(`(?<![\\w.$])${name}\\b`).exec(src.slice(importsEnd));
+    if (use) {
+      pos = importsEnd + use.index;
+      const before = src.slice(0, pos);
+      const decl = [...before.matchAll(/const\s+([A-Za-z_$][\w$]*)\s*(?::[^=]+)?=/g)].pop();
+      if (decl && !before.slice(decl.index).includes(';')) {
+        const stmtEnd = src.indexOf(';', pos);
+        if (stmtEnd !== -1) {
+          const next = new RegExp(`(?<![\\w.$])${decl[1]}\\b`).exec(src.slice(stmtEnd));
+          if (next) pos = stmtEnd + next.index;
+        }
+      }
+    }
+    const note = values[i].note && lookup(`${values[i].prefix}.${values[i].note}`);
+    out.push({ tag: 'table', html: renderComparisonTable(values[i]), pos, note: typeof note === 'string' ? esc(note) : null });
+  });
+  return out;
+}
+
 /* --------------------------------------------------------- *
  * 2. Route -> page source file, from the App.tsx route table *
  * --------------------------------------------------------- */
@@ -511,6 +619,19 @@ function extractStructuredData(block, src = '') {
   }
 }
 
+// JSX drops a whitespace run that contains a newline when it touches a tag or
+// an {expression}; only text-to-text line breaks become a space. Collapsing
+// every run to a space instead put "needs ." in the static H1 of
+// /compare/boldtrail where the page renders "needs.". Apply the JSX rule
+// before tags and expressions are flattened.
+export function jsxWhitespace(s) {
+  // A <br> is a visible break, so it separates words like a space does.
+  return s
+    .replace(/(>|\})[ \t]*\n\s*/g, '$1')
+    .replace(/\s*\n[ \t]*(<|\{)/g, '$1')
+    .replace(/<br\s*\/?>/gi, ' ');
+}
+
 function extractH1(src) {
   // A page can hold more than one <h1> across conditional branches — a form
   // page renders "Application received" when submitted, and that block often
@@ -521,7 +642,7 @@ function extractH1(src) {
   const isConfirmation = (raw) =>
     /received|thank ?you|success|confirmed|submitted|all set/i.test(raw);
   const preferred = all.length > 1 ? all.filter((raw) => !isConfirmation(raw)) : all;
-  let inner = (preferred.length ? preferred : all)[0];
+  let inner = jsxWhitespace((preferred.length ? preferred : all)[0]);
   // Resolve any t('key') segments against the English bundle. If a key is
   // missing the caller falls back to the SEO title rather than ship a
   // half-empty H1.
@@ -566,13 +687,18 @@ function normaliseLinks(html) {
   return html
     .replace(/<Link\s+([^>]*?)to="(\/[^"]*)"([^>]*)>/g, '<a href="$2">')
     .replace(/<\/Link>/g, '</a>')
-    .replace(/<a\s+([^>]*?)href="(\/[^"]*)"([^>]*)>/g, '<a href="$2">');
+    .replace(/<a\s+([^>]*?)href="(\/[^"]*)"([^>]*)>/g, '<a href="$2">')
+    // External and mailto anchors too. Left alone, their opening tag was
+    // escaped into visible text (`<a className="underline" href=...>`) on 15
+    // pages while the `</a>` stayed raw, so a crawler read markup a visitor
+    // never sees.
+    .replace(/<a\s+([^>]*?)href="((?:https?:|mailto:)[^"]*)"([^>]*)>/g, '<a href="$2">');
 }
 
 // Escape text but leave the anchors we just normalised intact.
 function escapeAroundAnchors(html) {
   return html
-    .split(/(<a href="\/[^"]*">|<\/a>)/g)
+    .split(/(<a href="(?:\/|https?:|mailto:)[^"]*">|<\/a>)/g)
     .map((part) => (/^<\/?a(\s|>)/.test(part) ? part : esc(part)))
     .join('');
 }
@@ -583,7 +709,7 @@ function textOf(inner, tag = '') {
   const tags = [...inner.matchAll(/<\/?([A-Za-z][\w.]*)/g)].map((m) => m[1]);
   if (tags.some((tag) => !INLINE_OK.test(tag))) return null;
 
-  let s = normaliseLinks(inner);
+  let s = normaliseLinks(jsxWhitespace(inner));
   if (/\bt\(/.test(s)) {
     const resolved = resolveT(s);
     if (!resolved) return null;
@@ -679,6 +805,8 @@ function extractDataStrings(src, { limit = 140 } = {}) {
       // lead score) are interface decoration, not page copy, and a crawler
       // would read them as real people. Skip the whole row.
       if ('name' in node && 'score' in node) return;
+      // Emitted whole, as a <table>, by extractTables.
+      if (isComparisonTable(node)) return;
       Object.values(node).forEach(walk);
     } else if (typeof node === 'string') {
       // Data arrays on these pages hold i18n keys rather than copy
@@ -713,7 +841,7 @@ function extractBody(src, { limit = 140 } = {}) {
     const text = textOf(m[2], m[1]);
     if (!text) continue;
     if (out.some((b) => b.text === text)) continue;
-    out.push({ tag: m[1] === 'li' ? 'li' : m[1], text });
+    out.push({ tag: m[1] === 'li' ? 'li' : m[1], text, pos: m.index });
     if (out.length >= limit) break;
   }
   return out;
@@ -738,7 +866,7 @@ function localComponentSources(src, depth = 1, seen = new Set()) {
       const full = path.join(repoRoot, rel + ext);
       if (!fs.existsSync(full) || seen.has(full)) continue;
       seen.add(full);
-      const body = fs.readFileSync(full, 'utf-8');
+      const body = expandPrefixHelpers(fs.readFileSync(full, 'utf-8'));
       out.push(body);
       out.push(...localComponentSources(body, depth - 1, seen));
       break;
@@ -1030,6 +1158,14 @@ function buildShell({ route, h1, description, body }) {
   const bodyHtml = [];
   let inList = false;
   for (const block of body) {
+    if (block.tag === 'table') {
+      if (inList) {
+        bodyHtml.push('</ul>');
+        inList = false;
+      }
+      bodyHtml.push(block.html);
+      continue;
+    }
     if (block.tag === 'li' && !inList) {
       bodyHtml.push('<ul>');
       inList = true;
@@ -1074,7 +1210,7 @@ export function collectMeta() {
     if (redirectRoutes.has(route)) continue;
     const file = routeToFile.get(route);
     if (!file) continue;
-    const src = fs.readFileSync(file, 'utf-8');
+    const src = expandPrefixHelpers(fs.readFileSync(file, 'utf-8'));
     const block = extractSeoBlock(src);
     const title = block && literalProp(block, 'title');
     const description = block && literalProp(block, 'description');
@@ -1138,7 +1274,7 @@ for (const route of routes) {
     continue;
   }
 
-  const src = fs.readFileSync(file, 'utf-8');
+  const src = expandPrefixHelpers(fs.readFileSync(file, 'utf-8'));
   const block = extractSeoBlock(src);
   const title = block && literalProp(block, 'title');
   const description = block && literalProp(block, 'description');
@@ -1160,6 +1296,18 @@ for (const route of routes) {
 
   const body = extractBody(src);
 
+  // Tables go where the page renders them: before the first block extracted
+  // from later in the same source file.
+  // The table carries its own source note, so drop the page's copy of it.
+  for (const table of extractTables(src)) {
+    if (table.note) {
+      const dup = body.findIndex((b) => b.text === table.note);
+      if (dup !== -1) body.splice(dup, 1);
+    }
+    const at = body.findIndex((b) => b.pos > table.pos);
+    body.splice(at === -1 ? body.length : at, 0, table);
+  }
+
   // Copy that lives in mapped data arrays, on the page and in its own
   // components.
   const childSources = localComponentSources(src);
@@ -1169,10 +1317,10 @@ for (const route of routes) {
       if (!body.some((b) => b.text === blk.text)) body.push(blk);
     }
   }
-  const seenText = new Set(body.map((b) => b.text));
+  const seenText = new Set(body.filter((b) => b.text).map((b) => b.text));
   for (const t of dataStrings) {
     const esced = esc(t);
-    if (seenText.has(esced) || body.some((b) => b.text.includes(t))) continue;
+    if (seenText.has(esced) || body.some((b) => (b.text ?? b.html).includes(esc(t)) || (b.text ?? "").includes(t))) continue;
     seenText.add(esced);
     body.push({ tag: 'p', text: esced });
   }

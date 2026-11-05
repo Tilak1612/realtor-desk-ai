@@ -7,16 +7,11 @@ import { MarketingLayout } from "@/components/rd/marketing/MarketingLayout";
 import { Eyebrow } from "@/components/rd/marketing/Eyebrow";
 import { IconArrow } from "@/components/rd";
 import { cn } from "@/lib/utils";
+import { BOLDTRAIL_COMPARE_TABLE } from "@/content/comparisonTables";
 
 // /compare/boldtrail — Compare page per rd-marketing.jsx Artboard_Compare.
 // Static content backed by the `compareBoldtrail.*` i18n namespace so
 // the whole table (not just the hero) swaps on FR toggle.
-
-interface CompareItem {
-  f: string;
-  bt: string;
-  rd: string;
-}
 
 export default function CompareBoldtrail() {
   const { t } = useTranslation();
@@ -26,44 +21,10 @@ export default function CompareBoldtrail() {
   // public statement is an unknown, not a "no". The version this replaced
   // asserted US-only hosting, a Keller Williams parent, USD setup fees, a
   // CAD $15 extra-user price, native DDF on our side and a contract-match
-  // offer, none of which were sourced or true.
+  // offer, none of which were sourced or true. The rows live in
+  // @/content/comparisonTables so the prerendered HTML carries the same table.
   const k = (key: string) => t(`compareBoldtrail.${key}`);
-  const SECTIONS: { section: string; items: CompareItem[] }[] = [
-    {
-      section: k("secScope"),
-      items: [
-        { f: k("fProduct"), bt: k("vProductThem"), rd: k("vProductUs") },
-        { f: k("fIdx"), bt: k("vIncluded"), rd: k("vNotOffered") },
-        { f: k("fBackOffice"), bt: k("vBackOfficeThem"), rd: k("vNotOffered") },
-        { f: k("fTeams"), bt: k("vTeamsThem"), rd: k("vPlanned") },
-      ],
-    },
-    {
-      section: k("secCanadianFit"),
-      items: [
-        { f: k("fDataRegion"), bt: k("vNotStated"), rd: k("vDataUs") },
-        { f: k("fFrench"), bt: k("vNotStated"), rd: k("vFrenchUs") },
-        { f: k("fCasl"), bt: k("vNotStated"), rd: k("vCaslUs") },
-        { f: k("fDdf"), bt: k("vNotStated"), rd: k("vDdfUs") },
-      ],
-    },
-    {
-      section: k("secFollowUp"),
-      items: [
-        { f: k("fScoring"), bt: k("vScoringThem"), rd: k("vScoringUs") },
-        { f: k("fCampaigns"), bt: k("vIncluded"), rd: k("vCampaignsUs") },
-        { f: k("fCalling"), bt: k("vCallingThem"), rd: k("vNotOffered") },
-      ],
-    },
-    {
-      section: k("secCost"),
-      items: [
-        { f: k("fStartingPrice"), bt: k("vPriceQuoteThem"), rd: k("vPriceListUs") },
-        { f: k("fTrial"), bt: k("vNotStated"), rd: k("vTrialUs") },
-        { f: k("fSetupFee"), bt: k("vSetupThem"), rd: k("vSetupUs") },
-      ],
-    },
-  ];
+  const TABLE = BOLDTRAIL_COMPARE_TABLE;
 
   const BT_STATS: [string, string][] = [
     [k("vVendorThem"), k("statVendor")],
@@ -123,31 +84,35 @@ export default function CompareBoldtrail() {
       <section className="px-8 md:px-14 py-14">
         <div className="mx-auto max-w-[1100px] bg-white border border-rd-line rounded-rd-lg overflow-hidden shadow-rd-sm">
           <div className="grid grid-cols-[1.8fr_1fr_1fr] px-7 py-5 bg-rd-ink-50 border-b border-rd-line text-xs font-bold uppercase tracking-[0.08em] text-rd-ink-700">
-            <div />
-            <div className="text-center">BoldTrail</div>
-            <div className="text-center text-rd-navy-800">Realtor Desk</div>
+            <div className="sr-only">{k(TABLE.columns[0])}</div>
+            <div className="text-center">{k(TABLE.columns[1])}</div>
+            <div className="text-center text-rd-navy-800">{k(TABLE.columns[2])}</div>
           </div>
-          {SECTIONS.map((sec) => (
-            <Fragment key={sec.section}>
-              <div className="px-7 py-3.5 bg-white border-t border-rd-line text-xs font-bold uppercase tracking-[0.08em] text-rd-terra-700">
-                {sec.section}
-              </div>
-              {sec.items.map((it) => (
+          {TABLE.sections.map((sec) => (
+            <Fragment key={sec.heading}>
+              {sec.heading && (
+                <div className="px-7 py-3.5 bg-white border-t border-rd-line text-xs font-bold uppercase tracking-[0.08em] text-rd-terra-700">
+                  {k(sec.heading)}
+                </div>
+              )}
+              {sec.rows.map(([f, bt, rd]) => (
                 <div
-                  key={it.f}
+                  key={f}
                   className="grid grid-cols-[1.8fr_1fr_1fr] px-7 py-[18px] border-t border-rd-line items-center text-sm"
                 >
-                  <div className="text-rd-ink-900 font-medium">{it.f}</div>
-                  <div className="text-center text-rd-ink-500">{it.bt}</div>
-                  <div className="text-center text-rd-navy-800 font-semibold">{it.rd}</div>
+                  <div className="text-rd-ink-900 font-medium">{k(f)}</div>
+                  <div className="text-center text-rd-ink-500">{bt === true ? k("vIncluded") : k(bt)}</div>
+                  <div className="text-center text-rd-navy-800 font-semibold">{rd === true ? k("vIncluded") : k(rd)}</div>
                 </div>
               ))}
             </Fragment>
           ))}
         </div>
-        <p className="mx-auto max-w-[1100px] mt-4 text-[13px] leading-[1.5] text-rd-ink-600">
-          {k("sourceNote")}
-        </p>
+        {TABLE.note && (
+          <p className="mx-auto max-w-[1100px] mt-4 text-[13px] leading-[1.5] text-rd-ink-600">
+            {k(TABLE.note)}
+          </p>
+        )}
       </section>
 
       {/* Closing CTA */}
