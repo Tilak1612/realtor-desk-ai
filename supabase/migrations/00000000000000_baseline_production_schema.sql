@@ -349,6 +349,17 @@ CREATE TABLE IF NOT EXISTS public.engagement_stats (
   updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS public.google_calendar_connections (
+  user_id uuid NOT NULL,
+  google_email text,
+  calendar_id text,
+  scope text,
+  encrypted_tokens text,
+  status text DEFAULT 'connected'::text NOT NULL,
+  created_at timestamp with time zone DEFAULT now() NOT NULL,
+  updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS public.import_history (
   id uuid DEFAULT gen_random_uuid() NOT NULL,
   user_id uuid NOT NULL,
@@ -438,7 +449,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   role text DEFAULT 'agent'::text,
   subscription_tier subscription_tier DEFAULT 'agent'::subscription_tier,
   subscription_status subscription_status DEFAULT 'trial'::subscription_status,
-  trial_ends_at timestamp with time zone,
+  trial_ends_at timestamp with time zone DEFAULT (now() + '14 days'::interval),
   onboarding_completed boolean DEFAULT false,
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
@@ -503,6 +514,20 @@ CREATE TABLE IF NOT EXISTS public.property_listings (
   photos_json jsonb DEFAULT '[]'::jsonb,
   raw_source_payload jsonb,
   data_source text
+);
+
+CREATE TABLE IF NOT EXISTS public.resend_email_events (
+  svix_id text NOT NULL,
+  event_type text NOT NULL,
+  resend_email_id text,
+  recipient text,
+  from_address text,
+  subject text,
+  bounce_type text,
+  bounce_subtype text,
+  payload jsonb NOT NULL,
+  occurred_at timestamp with time zone,
+  received_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.scheduled_emails (
@@ -663,6 +688,9 @@ DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'email_s
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'engagement_stats_contact_id_key' AND conrelid = 'public.engagement_stats'::regclass) THEN ALTER TABLE public.engagement_stats ADD CONSTRAINT engagement_stats_contact_id_key UNIQUE (contact_id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'engagement_stats_pkey' AND conrelid = 'public.engagement_stats'::regclass) THEN ALTER TABLE public.engagement_stats ADD CONSTRAINT engagement_stats_pkey PRIMARY KEY (id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'engagement_stats_contact_id_fkey' AND conrelid = 'public.engagement_stats'::regclass) THEN ALTER TABLE public.engagement_stats ADD CONSTRAINT engagement_stats_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE CASCADE; END IF; END $c$;
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_pkey' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_pkey PRIMARY KEY (user_id); END IF; END $c$;
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_user_id_fkey' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE; END IF; END $c$;
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_status_check' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_status_check CHECK ((status = ANY (ARRAY['connected'::text, 'disconnected'::text]))); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'import_history_pkey' AND conrelid = 'public.import_history'::regclass) THEN ALTER TABLE public.import_history ADD CONSTRAINT import_history_pkey PRIMARY KEY (id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'import_history_user_id_fkey' AND conrelid = 'public.import_history'::regclass) THEN ALTER TABLE public.import_history ADD CONSTRAINT import_history_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE; END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'integration_connections_pkey' AND conrelid = 'public.integration_connections'::regclass) THEN ALTER TABLE public.integration_connections ADD CONSTRAINT integration_connections_pkey PRIMARY KEY (id); END IF; END $c$;
@@ -689,6 +717,7 @@ DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'propert
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'property_interests_contact_id_fkey' AND conrelid = 'public.property_interests'::regclass) THEN ALTER TABLE public.property_interests ADD CONSTRAINT property_interests_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE CASCADE; END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'property_listings_pkey' AND conrelid = 'public.property_listings'::regclass) THEN ALTER TABLE public.property_listings ADD CONSTRAINT property_listings_pkey PRIMARY KEY (id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'property_listings_source_check' AND conrelid = 'public.property_listings'::regclass) THEN ALTER TABLE public.property_listings ADD CONSTRAINT property_listings_source_check CHECK ((source = ANY (ARRAY['manual'::text, 'crea_ddf'::text, 'url_scrape'::text]))); END IF; END $c$;
+DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'resend_email_events_pkey' AND conrelid = 'public.resend_email_events'::regclass) THEN ALTER TABLE public.resend_email_events ADD CONSTRAINT resend_email_events_pkey PRIMARY KEY (svix_id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'scheduled_emails_pkey' AND conrelid = 'public.scheduled_emails'::regclass) THEN ALTER TABLE public.scheduled_emails ADD CONSTRAINT scheduled_emails_pkey PRIMARY KEY (id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'sms_consent_contact_key' AND conrelid = 'public.sms_consent'::regclass) THEN ALTER TABLE public.sms_consent ADD CONSTRAINT sms_consent_contact_key UNIQUE (contact_id); END IF; END $c$;
 DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'sms_consent_pkey' AND conrelid = 'public.sms_consent'::regclass) THEN ALTER TABLE public.sms_consent ADD CONSTRAINT sms_consent_pkey PRIMARY KEY (id); END IF; END $c$;
@@ -763,6 +792,8 @@ CREATE INDEX IF NOT EXISTS idx_user_feedback_created_at ON public.user_feedback 
 CREATE INDEX IF NOT EXISTS idx_user_feedback_user_id ON public.user_feedback USING btree (user_id);
 CREATE INDEX IF NOT EXISTS idx_user_onboarding_user ON public.user_onboarding USING btree (user_id);
 CREATE INDEX IF NOT EXISTS idx_webhook_events_received ON public.webhook_events USING btree (received_at);
+CREATE INDEX IF NOT EXISTS resend_email_events_recipient_idx ON public.resend_email_events USING btree (recipient, received_at DESC);
+CREATE INDEX IF NOT EXISTS resend_email_events_type_idx ON public.resend_email_events USING btree (event_type, received_at DESC);
 CREATE INDEX IF NOT EXISTS webhook_events_user_received_idx ON public.webhook_events USING btree (user_id, received_at DESC);
 
 -- ── Functions ──────────────────────────────────────────────────────────
@@ -770,11 +801,11 @@ CREATE OR REPLACE FUNCTION public.check_apify_rate_limit(checking_user_id uuid, 
  RETURNS boolean
  LANGUAGE sql
  SECURITY DEFINER
- SET search_path TO 'public'
+ SET search_path TO 'public', 'pg_temp'
 AS $function$
   SELECT COUNT(*) < max_daily_imports
   FROM public.import_history
-  WHERE user_id = checking_user_id
+  WHERE user_id = auth.uid()
     AND created_at >= date_trunc('day', now());
 $function$
 ;
@@ -783,13 +814,12 @@ CREATE OR REPLACE FUNCTION public.check_concurrent_import(checking_user_id uuid)
  RETURNS boolean
  LANGUAGE sql
  SECURITY DEFINER
- SET search_path TO 'public'
+ SET search_path TO 'public', 'pg_temp'
 AS $function$
   SELECT NOT EXISTS (
     SELECT 1 FROM public.import_history
-    WHERE user_id = checking_user_id
+    WHERE user_id = auth.uid()
       AND status IN ('pending', 'running')
-      -- Stale guard: a crashed import must not lock the user out forever.
       AND created_at > now() - interval '1 hour'
   );
 $function$
@@ -836,6 +866,8 @@ $function$
 CREATE OR REPLACE FUNCTION public.handle_updated_at()
  RETURNS trigger
  LANGUAGE plpgsql
+ SECURITY DEFINER
+ SET search_path TO 'public', 'pg_temp'
 AS $function$
 BEGIN
   NEW.updated_at = now();
@@ -895,6 +927,7 @@ ALTER TABLE public.email_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.email_log ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.email_suppressions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.engagement_stats ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.google_calendar_connections ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.import_history ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.integration_connections ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.integration_interest ENABLE ROW LEVEL SECURITY;
@@ -905,6 +938,7 @@ ALTER TABLE public.oauth_state_store ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.property_interests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.property_listings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.resend_email_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.scheduled_emails ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sms_consent ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;
@@ -1041,6 +1075,14 @@ CREATE POLICY owner_update ON public.engagement_stats AS PERMISSIVE FOR UPDATE T
   WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid)))))) WITH CHECK ((EXISTS ( SELECT 1
    FROM contacts c
   WHERE ((c.id = engagement_stats.contact_id) AND (c.user_id = ( SELECT auth.uid() AS uid))))));
+DROP POLICY IF EXISTS gcal_delete_own ON public.google_calendar_connections;
+CREATE POLICY gcal_delete_own ON public.google_calendar_connections AS PERMISSIVE FOR DELETE TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS gcal_insert_own ON public.google_calendar_connections;
+CREATE POLICY gcal_insert_own ON public.google_calendar_connections AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS gcal_select_own ON public.google_calendar_connections;
+CREATE POLICY gcal_select_own ON public.google_calendar_connections AS PERMISSIVE FOR SELECT TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS gcal_update_own ON public.google_calendar_connections;
+CREATE POLICY gcal_update_own ON public.google_calendar_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid))) WITH CHECK ((user_id = ( SELECT auth.uid() AS uid)));
 DROP POLICY IF EXISTS owner_all ON public.import_history;
 CREATE POLICY owner_all ON public.import_history AS PERMISSIVE FOR ALL TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)) WITH CHECK ((( SELECT auth.uid() AS uid) = user_id));
 DROP POLICY IF EXISTS "Users can delete own connections" ON public.integration_connections;
@@ -1150,71 +1192,37 @@ CREATE TRIGGER update_property_listings_updated_at BEFORE UPDATE ON public.prope
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION handle_new_user();
 
--- ── Storage policies and helper grants ─────────────────────────────────────
--- storage.objects is outside the public schema the generator walks, so these
--- are appended by the same script's STORAGE section. They are here because
--- rebuilding from this file without them leaves contact-documents with RLS on
--- and no policy: every upload, download and delete from the browser is denied
--- and the feature is dead.
---
--- The grants matter for the same reason. Policies that call is_admin() raise
--- "permission denied for function is_admin" for a role that cannot execute it,
--- so a non-admin SELECT on storage.objects ERRORS instead of returning no
--- rows. Granting EXECUTE lets the function return false, which is the intended
--- deny.
+-- ── Storage policies and helper grants ─────────────────────────────────
+-- storage.objects sits outside the public schema walked above. Without
+-- these, a rebuild leaves contact-documents with RLS on and no policy, so
+-- every browser upload and download is denied. The grants stop policies
+-- that call is_admin() from raising "permission denied for function"
+-- instead of evaluating to false.
 GRANT EXECUTE ON FUNCTION public.is_admin() TO authenticated;
 GRANT EXECUTE ON FUNCTION public.has_role(uuid, public.app_role) TO authenticated;
-
--- Path scheme written by DocumentsTab.tsx: {user_id}/{contact_id}/{ts}.{ext},
--- so the first folder segment is the owner.
-DROP POLICY IF EXISTS contact_documents_select_own ON storage.objects;
-CREATE POLICY contact_documents_select_own ON storage.objects AS PERMISSIVE FOR SELECT TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
-DROP POLICY IF EXISTS contact_documents_insert_own ON storage.objects;
-CREATE POLICY contact_documents_insert_own ON storage.objects AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
-DROP POLICY IF EXISTS contact_documents_update_own ON storage.objects;
-CREATE POLICY contact_documents_update_own ON storage.objects AS PERMISSIVE FOR UPDATE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text))) WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+DROP POLICY IF EXISTS "Admins can delete career resumes" ON storage.objects;
+CREATE POLICY "Admins can delete career resumes" ON storage.objects AS PERMISSIVE FOR DELETE TO authenticated USING (((bucket_id = 'career-resumes'::text) AND is_admin()));
+DROP POLICY IF EXISTS "Admins can update career resumes" ON storage.objects;
+CREATE POLICY "Admins can update career resumes" ON storage.objects AS PERMISSIVE FOR UPDATE TO authenticated USING (((bucket_id = 'career-resumes'::text) AND is_admin())) WITH CHECK (((bucket_id = 'career-resumes'::text) AND is_admin()));
+DROP POLICY IF EXISTS "Admins can view career resumes" ON storage.objects;
+CREATE POLICY "Admins can view career resumes" ON storage.objects AS PERMISSIVE FOR SELECT TO authenticated USING (((bucket_id = 'career-resumes'::text) AND is_admin()));
+DROP POLICY IF EXISTS "Public can upload career resumes" ON storage.objects;
+CREATE POLICY "Public can upload career resumes" ON storage.objects AS PERMISSIVE FOR INSERT TO authenticated, anon WITH CHECK (((bucket_id = 'career-resumes'::text) AND (name ~~ 'applications/%'::text)));
+DROP POLICY IF EXISTS avatars_delete_own ON storage.objects;
+CREATE POLICY avatars_delete_own ON storage.objects AS PERMISSIVE FOR DELETE TO authenticated USING (((bucket_id = 'avatars'::text) AND ((storage.foldername(name))[1] = (auth.uid())::text)));
+DROP POLICY IF EXISTS avatars_insert_own ON storage.objects;
+CREATE POLICY avatars_insert_own ON storage.objects AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (((bucket_id = 'avatars'::text) AND ((storage.foldername(name))[1] = (auth.uid())::text)));
+DROP POLICY IF EXISTS avatars_public_read ON storage.objects;
+CREATE POLICY avatars_public_read ON storage.objects AS PERMISSIVE FOR SELECT TO public USING ((bucket_id = 'avatars'::text));
+DROP POLICY IF EXISTS avatars_select_public ON storage.objects;
+CREATE POLICY avatars_select_public ON storage.objects AS PERMISSIVE FOR SELECT TO public USING ((bucket_id = 'avatars'::text));
+DROP POLICY IF EXISTS avatars_update_own ON storage.objects;
+CREATE POLICY avatars_update_own ON storage.objects AS PERMISSIVE FOR UPDATE TO authenticated USING (((bucket_id = 'avatars'::text) AND ((storage.foldername(name))[1] = (auth.uid())::text))) WITH CHECK (((bucket_id = 'avatars'::text) AND ((storage.foldername(name))[1] = (auth.uid())::text)));
 DROP POLICY IF EXISTS contact_documents_delete_own ON storage.objects;
 CREATE POLICY contact_documents_delete_own ON storage.objects AS PERMISSIVE FOR DELETE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
-
--- ─────────────────────────────────────────────────────────────────────────────
--- google_calendar_connections
---
--- Added to production ahead of this baseline by
--- supabase/migrations/20260921000001_google_calendar_connections.sql, which is
--- now archived: the drift check allows exactly one applied migration, and two
--- files in supabase/migrations/ failed it on main.
---
--- The DDL below was read back from the live database (columns via
--- information_schema, policies via pg_policies) rather than copied from that
--- file, so it records what production actually has. Both agreed.
---
--- Written by api/integrations/google/[action].ts, the Vercel function. Tokens
--- are encrypted before they reach this table; encrypted_tokens is never plain.
-CREATE TABLE IF NOT EXISTS public.google_calendar_connections (
-    user_id uuid NOT NULL,
-    google_email text,
-    calendar_id text,
-    scope text,
-    encrypted_tokens text,
-    status text DEFAULT 'connected'::text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_pkey' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_pkey PRIMARY KEY (user_id); END IF; END $c$;
-DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_status_check' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_status_check CHECK (status = ANY (ARRAY['connected'::text, 'disconnected'::text])); END IF; END $c$;
-DO $c$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'google_calendar_connections_user_id_fkey' AND conrelid = 'public.google_calendar_connections'::regclass) THEN ALTER TABLE public.google_calendar_connections ADD CONSTRAINT google_calendar_connections_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE; END IF; END $c$;
-
-ALTER TABLE public.google_calendar_connections ENABLE ROW LEVEL SECURITY;
-
-REVOKE ALL ON TABLE public.google_calendar_connections FROM anon;
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.google_calendar_connections TO authenticated;
-
-DROP POLICY IF EXISTS gcal_select_own ON public.google_calendar_connections;
-CREATE POLICY gcal_select_own ON public.google_calendar_connections AS PERMISSIVE FOR SELECT TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid)));
-DROP POLICY IF EXISTS gcal_insert_own ON public.google_calendar_connections;
-CREATE POLICY gcal_insert_own ON public.google_calendar_connections AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK ((user_id = ( SELECT auth.uid() AS uid)));
-DROP POLICY IF EXISTS gcal_update_own ON public.google_calendar_connections;
-CREATE POLICY gcal_update_own ON public.google_calendar_connections AS PERMISSIVE FOR UPDATE TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid))) WITH CHECK ((user_id = ( SELECT auth.uid() AS uid)));
-DROP POLICY IF EXISTS gcal_delete_own ON public.google_calendar_connections;
-CREATE POLICY gcal_delete_own ON public.google_calendar_connections AS PERMISSIVE FOR DELETE TO authenticated USING ((user_id = ( SELECT auth.uid() AS uid)));
+DROP POLICY IF EXISTS contact_documents_insert_own ON storage.objects;
+CREATE POLICY contact_documents_insert_own ON storage.objects AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+DROP POLICY IF EXISTS contact_documents_select_own ON storage.objects;
+CREATE POLICY contact_documents_select_own ON storage.objects AS PERMISSIVE FOR SELECT TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
+DROP POLICY IF EXISTS contact_documents_update_own ON storage.objects;
+CREATE POLICY contact_documents_update_own ON storage.objects AS PERMISSIVE FOR UPDATE TO authenticated USING (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text))) WITH CHECK (((bucket_id = 'contact-documents'::text) AND ((storage.foldername(name))[1] = (( SELECT auth.uid() AS uid))::text)));
