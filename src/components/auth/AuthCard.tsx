@@ -3,6 +3,7 @@ import { ShieldCheck, MapPin, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RDMark } from '@/components/rd/Logo';
+import { isNativeApp } from '@/lib/native/platform';
 
 interface AuthCardProps {
   children: ReactNode;
@@ -24,9 +25,14 @@ interface AuthCardProps {
 //     "Now in public beta" pill on the marketing hero.
 const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
   const { t } = useTranslation();
+  // Inside the iOS / Android app there is no website behind this card: the
+  // marketing pages are not part of the app, so "/" is not a place to go back
+  // to. The link is left out and the mark is a plain image, not a link home.
+  const native = isNativeApp();
   return (
     <div className="relative z-10 w-full max-w-md px-6 lg:px-0 animate-fade-in">
       {/* Back to Website */}
+      {!native && (
       <div className="mb-6">
         <Link
           to="/"
@@ -36,10 +42,16 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
           {t('auth.backToWebsite', 'Back to realtordesk.ai')}
         </Link>
       </div>
+      )}
 
       {/* Brand lockup — the real RDMark (navy house-R + terra accent), on
           paper rather than reversed out of a dark shell. */}
       <div className="text-center mb-8">
+        {native ? (
+          <div className="inline-flex items-center justify-center mb-4">
+            {logoIcon || <RDMark size={56} tone="navy" />}
+          </div>
+        ) : (
         <Link
           to="/"
           className="inline-flex items-center justify-center mb-4 cursor-pointer hover:scale-105 transition-transform"
@@ -47,6 +59,7 @@ const AuthCard = ({ children, title, subtitle, logoIcon }: AuthCardProps) => {
         >
           {logoIcon || <RDMark size={56} tone="navy" />}
         </Link>
+        )}
         <h1 className="text-[28px] leading-tight font-bold text-rd-navy-900 tracking-tight mb-2">
           {title}
         </h1>

@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { hasAiConsent } from "@/lib/aiConsent";
+import { errorMessage } from "@/lib/errorMessage";
 
 export interface LeadScoreData {
   contact_id: string;
@@ -51,8 +53,10 @@ export const useLeadScore = (contactId: string) => {
     try {
       setCalculating(true);
 
+      const { data: { user } } = await supabase.auth.getUser();
       const { data, error } = await supabase.functions.invoke("calculate-lead-score", {
-        body: { contact_id: contactId },
+        // Without AI consent the scorer keeps to its rule-based insights.
+        body: { contact_id: contactId, skip_ai: !hasAiConsent(user?.id) },
       });
 
       if (error) throw error;
@@ -64,10 +68,10 @@ export const useLeadScore = (contactId: string) => {
 
       await fetchLeadScore();
       return data;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error calculating lead score",
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {

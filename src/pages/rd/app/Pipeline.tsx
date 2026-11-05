@@ -27,8 +27,11 @@ import { openLeads, openPipelineValue } from "@/lib/rd/pipeline";
 import { DataError } from "@/components/rd/DataState";
 import type { Lead, PipelineStage } from "@/types/rd";
 import { cn } from "@/lib/utils";
+import { isNativeApp } from "@/lib/native/platform";
 import { useLeads } from "@/hooks/rd/useLeads";
 import { useUpdateLeadStage } from "@/hooks/rd/useUpdateLeadStage";
+import { appLocale } from "@/lib/rd/format";
+import { leadActivity, tempLabel } from "@/lib/rd/relativeTime";
 
 // /app/pipeline — Kanban per rd-app.jsx Artboard_Pipeline, now with
 // @dnd-kit drag-drop wired to useUpdateLeadStage. Drags are only armed
@@ -41,7 +44,11 @@ const COLUMNS: PipelineStage[] = ["new", "contacted", "qualified", "showing", "o
 
 export default function Pipeline() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [view, setView] = useState<ViewMode>("kanban");
+  // The lead list already exists at /app/leads. "List" goes there instead of
+  // rendering a panel that only points at it.
+  const changeView = (v: ViewMode) => (v === "list" ? navigate("/app/leads") : setView(v));
   const { leads: liveLeads, loading, error } = useLeads();
   // Live-only. Fixtures previously stood in on empty AND on error, which
   // meant a failed query showed a full, fake pipeline.
@@ -129,7 +136,7 @@ export default function Pipeline() {
             </h1>
           </div>
           <div className="flex gap-2">
-            <ViewToggle view={view} onChange={setView} />
+            <ViewToggle view={view} onChange={changeView} />
             {/* "All agents" removed. It had no handler, and it filtered a
                 dimension the schema cannot express — there is no assigned-agent
                 column and no team/member/seat model anywhere in production. It
@@ -182,20 +189,6 @@ export default function Pipeline() {
           </DndContext>
         )}
 
-        {view === "list" && (
-          <div className="flex-1 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm overflow-hidden">
-            <div className="px-5 py-4 text-sm text-rd-ink-500">
-              {t(
-                "rd.pipelinePage.listViewLives",
-                "Opens the full lead list."
-              )}{" "}
-              <Link to="/app/leads" className="text-rd-navy-800 underline">
-                /app/leads
-              </Link>
-            </div>
-          </div>
-        )}
-
         {view === "forecast" && (
           <div className="flex-1 bg-white border border-rd-line rounded-rd-lg shadow-rd-sm flex items-center justify-center text-sm text-rd-ink-500">
             {t("rd.pipelinePage.forecastShips", "Forecast is not available yet.")}
@@ -213,7 +206,12 @@ function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode
   const items: { value: ViewMode; label: string }[] = [
     { value: "kanban", label: t("rd.pipelinePage.viewKanban", "Kanban") },
     { value: "list", label: t("rd.pipelinePage.viewList", "List") },
-    { value: "forecast", label: t("rd.pipelinePage.viewForecast", "Forecast") },
+    // Leads only to "Forecast is not available yet." Not offered in the iOS /
+    // Android app, which must not expose unfinished features; the web keeps
+    // the tab as it is.
+    ...(isNativeApp()
+      ? []
+      : [{ value: "forecast" as const, label: t("rd.pipelinePage.viewForecast", "Forecast") }]),
   ];
   return (
     <div className="flex p-[3px] bg-white border border-rd-line rounded-rd-sm">
@@ -337,6 +335,7 @@ function KanbanCard({ lead, isLive }: { lead: Lead; isLive: boolean }) {
 }
 
 function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
+  const { t, i18n } = useTranslation();
   const band: "Hot" | "Warm" | "Cold" =
     lead.score >= 80 ? "Hot" : lead.score >= 60 ? "Warm" : "Cold";
   const tagTone = {
@@ -371,7 +370,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
             tagTone
           )}
         >
-          {band} · {lead.score}
+          {tempLabel(lead.score, t)} · {lead.score}
         </span>
       </div>
       <div className="text-[11px] text-rd-ink-600 mb-2 leading-[1.35] line-clamp-2">
@@ -380,7 +379,7 @@ function CardBody({ lead, dragging }: { lead: Lead; dragging?: boolean }) {
       <div className="flex justify-between items-center text-[10px] text-rd-ink-500 gap-2">
         <span className="flex items-center gap-1 truncate">
           <RDAvatar name={lead.name} size={18} />
-          {lead.lastActivity}
+          {leadActivity(lead, t, appLocale(i18n.language))}
         </span>
         {lead.aiHandling && (
           <span className="text-rd-terra-700 flex items-center gap-1 font-semibold flex-shrink-0">

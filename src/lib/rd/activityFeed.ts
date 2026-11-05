@@ -32,6 +32,8 @@ export function isMessage(a: ActivityItem): boolean {
   return a.id.startsWith("msg:");
 }
 
+const isDeskAiActor = (actor: string | undefined): boolean => /^\s*desk\s*ai\s*$/i.test(actor ?? "");
+
 /** True when the message row's author is Desk AI rather than the agent. */
 export function isAiAuthored(a: ActivityItem): boolean {
   return isMessage(a) && a.kind === "ai_reply";
@@ -50,6 +52,12 @@ export function feedSentence(a: ActivityItem): FeedSentence {
     a.kind === "agent_called" ||
     a.kind === "agent_note";
   if (needsActor && a.actor === a.summary) return "logged";
+  // A logged email or meeting whose recorded actor is Desk AI would render as
+  // "Desk AI replied to Lucas" or "Desk AI booked a showing for Lucas". Nothing
+  // in the product sends a reply or books a showing on its own, so a row like
+  // that (seeded demo data, or an import) gets the neutral form too. A human
+  // actor keeps the sentence: "Maya replied to Lucas" is a true thing to log.
+  if ((a.kind === "ai_reply" || a.kind === "ai_booked_showing") && isDeskAiActor(a.actor)) return "logged";
   return a.kind;
 }
 

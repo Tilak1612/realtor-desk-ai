@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 interface Lead {
   id: string;
   name: string;
-  email?: string;
-  ai_score?: number;
+  email?: string | null;
+  ai_score?: number | null;
   insight?: string;
 }
 

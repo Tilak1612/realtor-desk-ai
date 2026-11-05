@@ -14,6 +14,7 @@ import AddContactModal from "@/components/contacts/AddContactModal";
 import ImportContactsModal from "@/components/contacts/ImportContactsModal";
 import ContactFilters from "@/components/contacts/ContactFilters";
 import BulkActionsToolbar from "@/components/contacts/BulkActionsToolbar";
+import { errorMessage } from "@/lib/errorMessage";
 
 export interface Contact {
   id: string;
@@ -74,10 +75,10 @@ const Contacts = () => {
 
       if (error) throw error;
       setContacts(data || []);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: t('app.common.error'),
-        description: error.message,
+        description: errorMessage(error),
         variant: "destructive",
       });
     } finally {

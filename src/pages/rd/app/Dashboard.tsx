@@ -25,6 +25,7 @@ import { useLeads, useLead } from "@/hooks/rd/useLeads";
 import { useSession } from "@/hooks/rd/useSession";
 import { useActivityFeed, useLeadsPerDay } from "@/hooks/rd/useDashboardFeed";
 import { useDashboardV2Flag } from "@/hooks/rd/useDashboardV2Flag";
+import { isNativeApp } from "@/lib/native/platform";
 
 // v2 ships in its own chunk so accounts without the flag never download it.
 const DashboardV2 = lazy(() => import("./DashboardV2"));
@@ -45,17 +46,32 @@ const DashboardV2 = lazy(() => import("./DashboardV2"));
  * useDashboardV2Flag (?v=2, or profiles.business_preferences.dashboard_v2).
  * While an account flag is still being read, v1 renders — the default must
  * never wait on the flag.
+ *
+ * Inside the iOS / Android app the flag is always on (see the hook for why),
+ * and there v1 must not be what shows while the v2 chunk loads either: it is
+ * the wording the app is avoiding, and it would flash on every cold start.
  */
 export default function Dashboard() {
   const { enabled } = useDashboardV2Flag();
   if (enabled) {
     return (
-      <Suspense fallback={<DashboardV1 />}>
+      <Suspense fallback={isNativeApp() ? <DashboardLoading /> : <DashboardV1 />}>
         <DashboardV2 />
       </Suspense>
     );
   }
   return <DashboardV1 />;
+}
+
+/** App only: the shell with placeholders, no figures and no copy. */
+function DashboardLoading() {
+  return (
+    <AppShell>
+      <div className="px-4 py-5 sm:px-6 lg:px-7 lg:py-7 pb-10">
+        <SkeletonStatRow count={6} className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3" />
+      </div>
+    </AppShell>
+  );
 }
 
 function DashboardV1() {

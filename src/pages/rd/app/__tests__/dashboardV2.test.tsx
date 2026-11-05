@@ -13,6 +13,13 @@ vi.mock("@/components/rd/AddLeadDialog", () => ({ AddLeadDialog: () => null }));
 vi.mock("@/hooks/rd/useSession", () => ({
   useSession: () => ({ user: { id: "u1", email: "maya@example.com", user_metadata: { full_name: "Maya Singh" } }, loading: false }),
 }));
+const identity = vi.fn(() => ({
+  agentName: "Maya Singh",
+  isDemo: false,
+  workspace: { name: "Maya Singh", tier: "Solo plan", mark: "MS" },
+  loading: false,
+}));
+vi.mock("@/hooks/rd/useWorkspaceIdentity", () => ({ useWorkspaceIdentity: () => identity() }));
 vi.mock("@/hooks/rd/useDashboardFeed", () => ({
   useActivityFeed: () => ({ activity: [], loading: false, error: null }),
 }));
@@ -81,6 +88,28 @@ describe("dashboard v2", () => {
     const { container } = renderWithProviders(<DashboardV2 />, { route: "/app?v=2" });
     expect(container.textContent).not.toMatch(/\$\s?0\b/);
     expect(container.querySelectorAll(".animate-pulse").length).toBeGreaterThan(0);
+  });
+
+  it("greets by the profile name, not the name typed at sign-up", () => {
+    identity.mockReturnValueOnce({
+      agentName: "Jordan Tremblay",
+      isDemo: false,
+      workspace: { name: "Jordan Tremblay", tier: "Solo plan", mark: "JT" },
+      loading: false,
+    });
+    renderWithProviders(<DashboardV2 />, { route: "/app?v=2" });
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toMatch(/, Jordan\./);
+  });
+
+  it("falls back to the sign-up name while the profile loads", () => {
+    identity.mockReturnValueOnce({
+      agentName: "maya",
+      isDemo: false,
+      workspace: { name: "maya", tier: "Trial", mark: "M" },
+      loading: true,
+    });
+    renderWithProviders(<DashboardV2 />, { route: "/app?v=2" });
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toMatch(/, Maya\./);
   });
 
   it("links every KPI tile to the list it counts", () => {

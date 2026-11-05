@@ -5,6 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { X, Cookie, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { isNativeApp } from "@/lib/native/platform";
 
 
 type ConsentChoice = {
@@ -88,6 +89,12 @@ const CookieConsent = () => {
     }));
   };
 
+  // The iOS / Android app has no analytics at all: the Google tag is stripped
+  // from its index.html at build time (vite.config.ts, mode "mobile") and
+  // utils/analytics.ts refuses to send there. With nothing to consent to, a
+  // cookie banner would be asking a question that has no effect, fixed over the
+  // bottom of a phone screen.
+  if (isNativeApp()) return null;
   if (!showBanner) return null;
 
   return (

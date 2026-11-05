@@ -41,3 +41,19 @@ export function MicrosoftIcon({ className = "w-5 h-5" }: { className?: string })
     </svg>
   );
 }
+
+/**
+ * Apple's mark, in currentColor: on the black "Continue with Apple" button it
+ * is white, as Apple's Human Interface Guidelines require. Used only inside
+ * the iOS / Android app, and only when Sign in with Apple is switched on.
+ */
+export function AppleIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        fill="currentColor"
+        d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3.01-.79-1.55.02-2.98.9-3.78 2.29-1.61 2.79-.41 6.92 1.16 9.19.77 1.11 1.68 2.35 2.88 2.31 1.16-.05 1.6-.75 3-.75s1.79.75 3.01.72c1.24-.02 2.03-1.13 2.79-2.25.88-1.29 1.24-2.54 1.26-2.6-.03-.01-2.45-.94-2.47-3.69ZM14.07 5.8c.64-.77 1.07-1.85.95-2.92-.92.04-2.03.61-2.69 1.38-.59.68-1.11 1.78-.97 2.83 1.03.08 2.07-.52 2.71-1.29Z"
+      />
+    </svg>
+  );
+}

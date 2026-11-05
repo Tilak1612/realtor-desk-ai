@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { RDCard } from "../Card";
-import { RDBadge } from "../Badge";
 import { SkeletonRows } from "../Skeleton";
-import { IconDot } from "../icons";
 import type { ActivityItem } from "@/types/rd";
 import { appLocale, formatClock } from "@/lib/rd/format";
 import { dedupeFeed, feedSentence, isAiAuthored, isMessage } from "@/lib/rd/activityFeed";
@@ -54,12 +52,10 @@ export function ActivityCard({
           <h2 id="dash-activity" className="text-[15px] font-semibold">
             {t("rd.dash.activity.title")}
           </h2>
-          {activity.length > 0 && (
-            <RDBadge tone="success" size="sm">
-              <IconDot />
-              {t("rd.dash.activity.live")}
-            </RDBadge>
-          )}
+          {/* There was a green "Live" badge here whenever the feed had a row. The
+              feed is a log of what was recorded, read when the page loads; nothing
+              about it is live, and beside "Desk AI" it read as an assistant working
+              in real time. Removed rather than reworded. */}
         </div>
         {activity.length > 0 && (
           <div className="flex gap-1" role="group" aria-label={t("rd.dash.activity.filter")}>

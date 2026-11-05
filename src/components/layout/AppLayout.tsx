@@ -1,10 +1,13 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import TrialExpiredModal from "@/components/dashboard/TrialExpiredModal";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { OfflineBanner } from "@/components/native/OfflineBanner";
+import { isNativeApp } from "@/lib/native/platform";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -13,6 +16,7 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
+  const { t } = useTranslation();
   const { trialExpired, trialDaysLeft } = useSubscription();
 
   return (
@@ -22,6 +26,9 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
 
       <div className="flex-1 flex flex-col min-w-0">
         <DashboardNavbar user={user} profile={profile} />
+        {/* iOS / Android app only; see OfflineBanner. Safe-area insets are
+            handled for every shell at once in src/index.css. */}
+        {isNativeApp() && <OfflineBanner />}
 
         {/* Six items in the /app sidebar (Tasks, Calendar, Properties,
             Campaigns, Market, Integrations) point at these legacy routes.
@@ -41,7 +48,7 @@ const AppLayout = ({ children, user, profile }: AppLayoutProps) => {
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-            Back to Desk
+            {t("rd.shared.backToDesk")}
           </Link>
         </div>
 

@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import type { Tables } from "@/integrations/supabase/types";
 
 interface AddDealModalProps {
   open: boolean;
@@ -24,7 +25,7 @@ interface AddDealModalProps {
 
 const AddDealModal = ({ open, onOpenChange, onDealAdded }: AddDealModalProps) => {
   const { t } = useTranslation();
-  const [contacts, setContacts] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<Pick<Tables<"contacts">, "id" | "first_name" | "last_name" | "email">[]>([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     contact_id: "",

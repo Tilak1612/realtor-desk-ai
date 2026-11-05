@@ -2,6 +2,7 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 import { authStorage } from '@/lib/auth/sessionPersistence';
+import { isNativeApp } from '@/lib/native/platform';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
@@ -12,13 +13,20 @@ const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     // localStorage by default; sessionStorage when "Remember me" is cleared,
-    // so an unremembered session dies with the tab. See sessionPersistence.ts.
+    // so an unremembered session dies with the tab. Inside the iOS / Android
+    // app the same object stores to the platform keystore instead. See
+    // sessionPersistence.ts.
     storage: authStorage,
     persistSession: true,
     autoRefreshToken: true,
     // The OAuth callback comes back with the code in the URL; let the client
     // complete the PKCE exchange and then strip it from the address bar.
-    detectSessionInUrl: true,
+    //
+    // Off inside the app: its own address is capacitor://localhost or
+    // https://localhost and never carries auth parameters. A provider or an
+    // emailed link returns to the app as a deep link, which is handled
+    // explicitly in src/lib/native/auth/deepLinks.ts.
+    detectSessionInUrl: !isNativeApp(),
     flowType: 'pkce',
   }
 });

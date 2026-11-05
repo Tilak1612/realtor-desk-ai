@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import { LEGAL_ROUTES } from "@/config/legal";
+import { isNativeApp } from "@/lib/native/platform";
 
 // "By continuing, you agree to our Terms of Service and Privacy Policy."
 //
@@ -27,8 +28,17 @@ import { LEGAL_ROUTES } from "@/config/legal";
 const linkClass =
   "text-rd-navy-700 underline underline-offset-2 hover:text-rd-navy-800 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rd-navy-500";
 
+// A NEW TAB ON THE WEB, THE SAME VIEW IN THE APP. On the website both links
+// open in a new tab so a half-filled form is not lost. Inside the iOS / Android
+// app there are no tabs: target="_blank" would throw the reader out to the
+// phone's browser and the public site. Both documents are routes inside the
+// app, so there the links simply navigate. That also keeps them readable with
+// no connection, and the back gesture returns to the form.
+const newTab = { target: "_blank", rel: "noopener noreferrer" } as const;
+
 export function ContinueConsentNotice({ className = "" }: { className?: string }) {
   const { t } = useTranslation();
+  const linkTarget = isNativeApp() ? {} : newTab;
 
   return (
     <p className={`text-center text-xs leading-relaxed text-rd-ink-600 ${className}`}>
@@ -40,16 +50,14 @@ export function ContinueConsentNotice({ className = "" }: { className?: string }
           terms: (
             <Link
               to={LEGAL_ROUTES.terms}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...linkTarget}
               className={linkClass}
             />
           ),
           privacy: (
             <Link
               to={LEGAL_ROUTES.privacy}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...linkTarget}
               className={linkClass}
             />
           ),

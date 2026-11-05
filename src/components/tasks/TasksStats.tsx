@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { AlertCircle, CheckCircle2, Calendar, Clock } from "lucide-react";
+import { toDateOnly } from "@/lib/dateOnly";
 
 interface TasksStatsProps {
   quickFilter: string;
@@ -29,11 +30,11 @@ const TasksStats = ({ quickFilter, refreshTrigger, filters }: TasksStatsProps) =
 
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const todayStr = today.toISOString().split('T')[0];
+    const todayStr = toDateOnly(today);
     
     const weekFromNow = new Date(today);
     weekFromNow.setDate(weekFromNow.getDate() + 7);
-    const weekStr = weekFromNow.toISOString().split('T')[0];
+    const weekStr = toDateOnly(weekFromNow);
 
     // Due today
     const { data: todayTasks } = await supabase

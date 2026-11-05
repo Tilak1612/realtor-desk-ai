@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import { errorMessage } from "@/lib/errorMessage";
 import { 
   UserPlus, 
   TrendingUp, 
@@ -149,9 +150,9 @@ const CreateAutomationModal = ({ open, onOpenChange, onCreated }: CreateAutomati
       toast.success("Automation created successfully!");
       handleClose();
       onCreated();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error creating automation:", error);
-      toast.error(error.message || "Failed to create automation");
+      toast.error(errorMessage(error) || "Failed to create automation");
     } finally {
       setLoading(false);
     }

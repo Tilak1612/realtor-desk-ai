@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { X, Send } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { AgentAvatar } from "@/components/AgentMascot";
+import { isNativeApp } from "@/lib/native/platform";
 
 // Public marketing-site assistant widget. Answers are rendered as PLAIN TEXT
 // (whitespace-pre-line) — the endpoint strips markdown, so no parser is needed.
@@ -28,7 +29,11 @@ const SiteAssistant = () => {
     "/market", "/ai-assistant", "/billing", "/settings", "/profile",
     "/onboarding", "/call-workflow", "/admin",
   ];
+  // Never in the iOS / Android app, on any route: it is the pre-sales
+  // assistant, its opening chips are "What does it cost?" and "Is there a free
+  // trial?", and the app shows no pricing (App Store guideline 3.1.3(f)).
   const hiddenOnRoute =
+    isNativeApp() ||
     ["/signup", "/login", "/verify-email"].includes(pathname) ||
     APP_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"));
 

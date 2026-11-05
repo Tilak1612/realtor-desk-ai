@@ -2,6 +2,8 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useWorkspaceIdentity } from "@/hooks/rd/useWorkspaceIdentity";
 import { Spinner } from "@/components/rd";
+import { isNativeApp } from "@/lib/native/platform";
+import NoAccessScreen from "@/components/native/NoAccessScreen";
 
 // Card-at-signup gate.
 //
@@ -48,6 +50,15 @@ export default function RequireBilling({ children }: { children: JSX.Element }) 
   }
 
   if (!subscribed && !isDemo) {
+    // Inside the iOS / Android app there is no checkout to send anyone to: the
+    // app is a companion to a subscription bought on the website and must not
+    // show or link to a purchase (App Store guideline 3.1.3(f), Google Play
+    // payments policy). It states the account's status instead. The two
+    // fail-open branches above are untouched, so a failed check still lets a
+    // paying customer through in the app exactly as it does on the web.
+    if (isNativeApp()) {
+      return <NoAccessScreen />;
+    }
     // `from` lets Billing send the user back where they were headed once
     // checkout completes.
     return <Navigate to="/billing?required=1" replace state={{ from: location.pathname }} />;

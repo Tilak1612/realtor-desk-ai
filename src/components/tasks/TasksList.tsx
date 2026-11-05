@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TaskItem from "./TaskItem";
 import { toast } from "sonner";
+import { parseDateOnly, toDateOnly } from "@/lib/dateOnly";
 
 interface Task {
   id: string;
@@ -52,7 +53,7 @@ const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTask
 
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const todayStr = today.toISOString().split('T')[0];
+    const todayStr = toDateOnly(today);
     
     let query = supabase
       .from("tasks")
@@ -68,7 +69,7 @@ const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTask
     } else if (quickFilter === "week") {
       const weekFromNow = new Date(today);
       weekFromNow.setDate(weekFromNow.getDate() + 7);
-      query = query.gte("due_date", todayStr).lte("due_date", weekFromNow.toISOString().split('T')[0]).eq("status", "pending");
+      query = query.gte("due_date", todayStr).lte("due_date", toDateOnly(weekFromNow)).eq("status", "pending");
     } else if (quickFilter === "overdue") {
       query = query.lt("due_date", todayStr).eq("status", "pending");
     }
@@ -122,8 +123,7 @@ const TasksList = ({ quickFilter, refreshTrigger, filters, selectedTasks, onTask
     tasks.forEach(task => {
       if (task.status === "completed") return;
       
-      const dueDate = new Date(task.due_date);
-      const dueDateOnly = new Date(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate());
+      const dueDateOnly = parseDateOnly(task.due_date);
 
       if (dueDateOnly < today) {
         groups.overdue.push(task);

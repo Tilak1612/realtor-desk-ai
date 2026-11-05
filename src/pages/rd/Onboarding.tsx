@@ -1,3 +1,4 @@
+import { isNativeApp } from "@/lib/native/platform";
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -92,7 +93,9 @@ export default function Onboarding() {
     // subscription, so routing to /app would bounce the user to /billing
     // anyway -- as a redirect that reads like a wall rather than a step.
     complete()
-      .then(() => navigate("/billing?required=1"))
+      // The app has no checkout (see src/lib/native/platform.ts), so it goes to
+      // the dashboard; RequireBilling decides what an unsubscribed account sees.
+      .then(() => navigate(isNativeApp() ? "/app" : "/billing?required=1"))
       .catch(() => {
         toast.error(
           t(

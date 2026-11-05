@@ -171,7 +171,7 @@ interface ManualFormProps {
 
 // Wrapper to satisfy our simple t signature against i18next's TFunction overloads.
 const tWrap = (tFn: ReturnType<typeof useTranslation>["t"]) =>
-  (key: string, def?: string): string => (def !== undefined ? (tFn as any)(key, def) : (tFn as any)(key));
+  (key: string, def?: string): string => (def !== undefined ? tFn(key, def) : tFn(key));
 
 const ManualForm = ({ email, setEmail, onSubmit, t }: ManualFormProps) => (
   <form noValidate onSubmit={onSubmit} className="space-y-4 text-left">

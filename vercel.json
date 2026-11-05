@@ -37,6 +37,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/account-deletion",
+      "destination": "/index.html"
+    },
+    {
       "source": "/admin/demo-requests",
       "destination": "/index.html"
     },

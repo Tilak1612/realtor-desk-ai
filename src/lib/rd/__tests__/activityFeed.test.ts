@@ -48,6 +48,12 @@ describe("feedSentence", () => {
     expect(feedSentence(logged("note_added", "Prefers evenings"))).toBe("logged");
   });
 
+  it("does not say Desk AI replied or booked a showing for a logged activity", () => {
+    // Seeded demo rows carry metadata.actor "Desk AI". The product sends and books nothing itself.
+    expect(feedSentence(logged("email_sent", "Reply", { metadata: { actor: "Desk AI" } }))).toBe("logged");
+    expect(feedSentence(logged("meeting_held", "Showing", { metadata: { actor: "Desk AI" } }))).toBe("logged");
+  });
+
   it("keeps the kind's own sentence when an actor is recorded or none is needed", () => {
     expect(feedSentence(logged("call_made", "Call", { metadata: { actor: "Maya" } }))).toBe("agent_called");
     expect(feedSentence(logged("status_changed", "Moved to Qualified"))).toBe("stage_changed");

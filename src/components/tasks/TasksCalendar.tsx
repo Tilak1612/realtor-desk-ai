@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import TaskItem from "./TaskItem";
+import type { TaskWithContact } from "@/types/rows";
 
 interface TaskFilters {
   search: string;
@@ -22,8 +23,8 @@ interface TasksCalendarProps {
 
 const TasksCalendar = ({ refreshTrigger, filters, onTaskUpdated }: TasksCalendarProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-  const [tasks, setTasks] = useState<any[]>([]);
-  const [tasksForSelectedDate, setTasksForSelectedDate] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<TaskWithContact[]>([]);
+  const [tasksForSelectedDate, setTasksForSelectedDate] = useState<TaskWithContact[]>([]);
 
   const fetchTasks = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();

@@ -69,6 +69,9 @@ serve(async (req) => {
     }
 
     const { contact_id } = body;
+    // The app sends skip_ai: true when the person has not allowed AI features;
+    // the rule-based insights below are used instead of OpenAI.
+    const skipAi = body?.skip_ai === true;
 
     if (!contact_id) {
       return new Response(
@@ -298,7 +301,7 @@ serve(async (req) => {
     let insights = "";
     const openaiKey = Deno.env.get("OPENAI_API_KEY");
 
-    if (openaiKey) {
+    if (openaiKey && !skipAi) {
       try {
         const llmPrompt = `You are a Canadian real estate CRM lead scoring analyst. Analyze this lead and provide a 2-sentence insight plus 3 specific next-step recommendations.
 

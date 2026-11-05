@@ -48,6 +48,7 @@ export function mapContactToLead(row: ContactRow): Lead {
     stage: normalizeStage(row.stage),
     score: row.ai_score ?? 0,
     lastActivity: formatLastActivity(row.last_contact_date),
+    lastActivityAt: row.last_contact_date ?? null,
     aiHandling: meta.aiHandling === true,
     aiNextBest: asString(meta.aiNextBest),
     budgetCad: typeof meta.budgetCad === "number" ? meta.budgetCad : undefined,

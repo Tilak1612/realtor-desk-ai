@@ -14,6 +14,7 @@ import {
 import { toast } from "sonner";
 import DealDetailSidebar from "./DealDetailSidebar";
 import EditDealModal from "./EditDealModal";
+import type { Json } from "@/integrations/supabase/types";
 
 interface Deal {
   id: string;
@@ -30,7 +31,7 @@ interface Deal {
   listing_price?: number;
   commission_percentage?: number;
   closing_date?: string;
-  metadata?: any;
+  metadata?: Json | null;
   contacts?: {
     first_name: string;
     last_name: string;

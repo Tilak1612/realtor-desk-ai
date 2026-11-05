@@ -833,3 +833,162 @@
     animation: none;
   }
 }
+
+/* ── Native app shell (iOS / Android via Capacitor) ───────────────────────────
+   Everything in this block is scoped to `html.native`, a class that
+   src/lib/native/bootstrap.ts adds only inside the app. In a browser none of
+   these selectors match, so the website renders exactly as it did before.
+
+   It is deliberately outside every @layer: these rules have to beat Tailwind's
+   .h-screen / .min-h-screen utilities on specificity, and unlayered CSS is
+   never purged.
+
+   THE MODEL. The app draws edge to edge on both platforms (iOS because
+   index.html says viewport-fit=cover; Android because 15+ enforces it and
+   Capacitor 8 no longer offers margins as an alternative). So the webview
+   extends under the status bar and under the home indicator, and the insets
+   are applied ONCE, here, to <body>. Every screen then starts below the status
+   bar and ends above the home indicator without knowing it is in an app:
+   the /app shell, the legacy shell, sign-in, onboarding and the legal pages
+   all get it for free, including any screen added later.
+
+   The cost of padding <body> is that "one screen tall" is no longer 100vh, so
+   the two utilities that mean that are redefined below. */
+
+html.native {
+  /* Android: Capacitor's SystemBars plugin writes --safe-area-inset-* onto
+     <html> because env() reports wrong values in WebView < 140 (there it pads
+     the webview natively and writes 0, so nothing is applied twice). iOS never
+     sets them and falls through to env(). */
+  --rd-safe-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  --rd-safe-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  --rd-safe-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
+  --rd-safe-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
+  /* The height left for a full-screen layout. dvh, not vh: it follows the
+     webview when the keyboard resizes it. This vh version is the fallback for
+     iOS 15.0-15.3 and old Android WebViews, which have no dvh; it is swapped
+     by @supports rather than by a second declaration because a custom
+     property never fails to parse, it just poisons whatever uses it. */
+  --rd-screen: calc(100vh - var(--rd-safe-top) - var(--rd-safe-bottom));
+}
+@supports (height: 100dvh) {
+  html.native {
+    --rd-screen: calc(100dvh - var(--rd-safe-top) - var(--rd-safe-bottom));
+  }
+}
+
+html.native,
+html.native body {
+  /* No rubber-band on the document itself; the scrolling regions inside the
+     shells keep theirs. */
+  overscroll-behavior: none;
+}
+
+html.native body {
+  padding-top: var(--rd-safe-top);
+  padding-bottom: var(--rd-safe-bottom);
+  /* Replaces the env()-only left/right padding in the base layer, so landscape
+     on an old Android WebView is covered too. */
+  padding-left: var(--rd-safe-left);
+  padding-right: var(--rd-safe-right);
+}
+
+/* A solid strip behind the status bar. Without it, a screen that scrolls the
+   document (the legal pages, a tall sign-in form with the keyboard up) slides
+   its text underneath the clock. z-index 45 puts it over page-level sticky and
+   fixed headers (z-30 / z-40) and under dialogs and their backdrops (z-50),
+   which dim the whole screen as they should. */
+html.native body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--rd-safe-top);
+  background: hsl(var(--background));
+  z-index: 45;
+  pointer-events: none;
+}
+
+html.native .h-screen { height: var(--rd-screen); }
+html.native .min-h-screen { min-height: var(--rd-screen); }
+html.native .max-h-screen { max-height: var(--rd-screen); }
+
+/* position: fixed ignores the padding on <body>, so anything pinned to an edge
+   of the viewport needs its inset spelled out. */
+
+@media (max-width: 1023.98px) {
+  /* Both navigation drawers (Sidebar.tsx in the /app shell, DashboardSidebar
+     in the legacy one) are fixed, full-height and navy below lg. Done here, by
+     id, so neither component has to know about the app.
+
+     The two edges are treated differently, on purpose.
+
+     TOP: inset. The box starts below the status bar, because a navy panel
+     under it would hide the clock, which is drawn dark for the app's light
+     background. That leaves no gap: the strip above the drawer is already
+     painted, opaquely, by body::before above (z-45, so it sits over both
+     shells' backdrops at z-30 / z-40). What shows above the drawer is the same
+     solid status-bar strip every other screen has, never the dimmed page.
+
+     BOTTOM: the box runs to the edge of the screen and the safe area is
+     padding inside it. BEFORE, this was `bottom: var(--rd-safe-bottom)`, the
+     same inset as the top, but nothing paints the home-indicator area the way
+     body::before paints the status bar. The backdrop is `fixed inset-0`, so
+     the drawer stopped ~34px short and a band of dimmed page showed under the
+     navy, the full width of the drawer. AFTER, the navy reaches the bottom
+     edge and the padding keeps the last link above the home indicator (in the
+     /app drawer that padding is the end of its own scroll area; in the legacy
+     one it sits under the scrolling <nav>). */
+  html.native #rd-app-nav,
+  html.native #app-sidebar {
+    top: var(--rd-safe-top);
+    bottom: 0;
+  }
+  /* 1.25rem is the drawer's own py-5; the inset is added to it, not swapped
+     for it. */
+  html.native #rd-app-nav {
+    padding-bottom: calc(1.25rem + var(--rd-safe-bottom));
+  }
+  /* The legacy drawer has no padding of its own and sets its height explicitly
+     (h-screen, which the app redefines as the height BETWEEN the insets). With
+     a top offset that height would stop it short of the bottom edge again, so
+     top and bottom decide the height instead. */
+  html.native #app-sidebar {
+    height: auto;
+    padding-bottom: var(--rd-safe-bottom);
+  }
+  /* The legacy shell's floating menu button (fixed top-3). */
+  html.native button[aria-controls="app-sidebar"] {
+    top: calc(0.75rem + var(--rd-safe-top));
+  }
+}
+
+/* Centred dialogs are centred on the viewport, not on the safe area, so a tall
+   one would reach under the status bar or the home indicator. Cap them to what
+   fits between the larger of the two insets, top and bottom. Sheets (inset-y-0)
+   are excluded: they are edge-anchored, not centred. */
+html.native [role="dialog"][data-state]:not([class*="inset-y-0"]),
+html.native [role="alertdialog"][data-state] {
+  max-height: calc(100vh - 2 * max(var(--rd-safe-top), var(--rd-safe-bottom)) - 1.5rem);
+  overflow-y: auto;
+}
+@supports (height: 100dvh) {
+  html.native [role="dialog"][data-state]:not([class*="inset-y-0"]),
+  html.native [role="alertdialog"][data-state] {
+    max-height: calc(100dvh - 2 * max(var(--rd-safe-top), var(--rd-safe-bottom)) - 1.5rem);
+  }
+}
+
+/* Toasts. The shadcn viewport is fixed to the top on phones and to the bottom
+   from sm up; sonner is fixed to whichever corner it was given. */
+html.native [data-toast-viewport] {
+  padding-top: calc(1rem + var(--rd-safe-top));
+  padding-bottom: calc(1rem + var(--rd-safe-bottom));
+}
+html.native [data-sonner-toaster][data-y-position="top"] {
+  top: calc(16px + var(--rd-safe-top));
+}
+html.native [data-sonner-toaster][data-y-position="bottom"] {
+  bottom: calc(16px + var(--rd-safe-bottom));
+}

@@ -49,6 +49,9 @@ export interface Lead {
   /** Relative label like "32s ago" / "yesterday". Prefer pre-formatted
    *  strings so locale switches happen in one helper, not in every row. */
   lastActivity: string;
+  /** The timestamp behind lastActivity, so a row can format it in the
+   *  viewer's language. Absent on fixtures, which carry only the label. */
+  lastActivityAt?: string | null;
   /** Whether the AI is currently handling this lead autonomously. */
   aiHandling: boolean;
   /** Suggested next step surfaced by the AI. */

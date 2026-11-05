@@ -1,25 +1,43 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, relative } from "node:path";
 
-// There is no native mobile app, and the site must not imply one.
+// The site must not say there is a mobile app until one can be installed.
 //
-// EVIDENCE, checked 2026-09-29: no `ios/` or `android/` project directory in
-// the repo; no App Store or Google Play URL anywhere in src/ or public/;
-// capacitor.config.ts still carries the default `app.lovable.*` appId pointing
-// at a scaffold URL; and the roadmap FAQ in src/i18n/config.ts states in both
-// languages that a native iOS/Android app is not planned for 2026.
+// THE RULE, as of 2026-10-13. Native projects now exist in this repo: `ios/`
+// and `android/` are Capacitor wrappers around this same web app
+// (capacitor.config.ts, appId com.brainfyai.realtordesk, bundle built by
+// `npm run build:mobile`). That is a build target, not a product a customer
+// can get. Until the App Store and Google Play listings are actually live,
+// every claim below is still false and still banned: no store links, no
+// "available on iOS", no "mobile app included", no iOS/Android in structured
+// data or in our column of a comparison table. The roadmap FAQ in
+// src/i18n/config.ts still says a native app is not planned, and the public
+// copy stays as it is until someone changes it on purpose.
 //
-// Despite that, five places claimed one — including
+// What changed in this file: it used to assert that `ios/` and `android/` did
+// not exist, as a tripwire ("if an app ever ships, this fails and whoever
+// ships it updates the claims deliberately"). The tripwire has done its job
+// and that one assertion is gone, because the directories are about to exist
+// long before the listing does. Nothing else was loosened. The copy assertions
+// are what protect the site, and they do not care whether a project directory
+// is present; they pass or fail on what the pages say.
+//
+// When the listings ARE live, the change is deliberate and made here: allow
+// the two store URLs, update "operatingSystem", and revise the roadmap FAQ in
+// the same commit, so the claims and the product move together.
+//
+// HISTORY, checked 2026-09-29, and the reason this file exists. With no app at
+// all, five places claimed one -- including
 // `"operatingSystem": "Web, iOS, Android"` in the Organization/SoftwareApplication
 // JSON-LD emitted on EVERY page, and "Mobile app included" on /billing, shown
 // to paying customers. A sixth block in the i18n bundle advertised App Store
 // downloads, an offline mode and voice commands; nothing rendered it, but it
 // shipped in the JS and was one import away from looking true.
 //
-// The first assertion below is the one that matters: if a native app ever does
-// ship, this test starts failing and whoever ships it updates the claims
-// deliberately instead of the claims having quietly run ahead of the product.
+// The scan covers all of src/, which includes the app-only code under
+// src/lib/native, src/components/native and src/i18n/native*.ts. That is
+// intended: strings written for the app are held to the same wording rules.
 
 const ROOT = resolve(__dirname, "../../../");
 const SRC = join(ROOT, "src");
@@ -44,11 +62,6 @@ const stripComments = (s: string) =>
     .replace(/^\s*\/\/.*$/gm, "");
 
 describe("native mobile app claims", () => {
-  it("still has no native app project, so the claims below must stay false", () => {
-    expect(existsSync(join(ROOT, "ios")), "an ios/ project appeared").toBe(false);
-    expect(existsSync(join(ROOT, "android")), "an android/ project appeared").toBe(false);
-  });
-
   it("links to no app store", () => {
     const offenders = walk(SRC)
       .filter((f) => /apps\.apple\.com|play\.google\.com\/store/.test(stripComments(readFileSync(f, "utf8"))))

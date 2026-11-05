@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { toDateOnly } from "@/lib/dateOnly";
 
 interface BulkActionsProps {
   selectedTasks: string[];
@@ -94,7 +95,7 @@ const BulkActions = ({ selectedTasks, onClearSelection, onTasksUpdated }: BulkAc
     setLoading(true);
     const { error } = await supabase
       .from("tasks")
-      .update({ due_date: rescheduleDate.toISOString().split('T')[0] })
+      .update({ due_date: toDateOnly(rescheduleDate) })
       .in("id", selectedTasks);
 
     setLoading(false);

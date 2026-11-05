@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { Sidebar, type SidebarItem } from "./Sidebar";
 import { TopNav } from "./TopNav";
 import { useWorkspaceIdentity } from "@/hooks/rd/useWorkspaceIdentity";
+import { OfflineBanner } from "@/components/native/OfflineBanner";
+import { isNativeApp } from "@/lib/native/platform";
 
 // Full product shell. Renders the sidebar + topbar + scrollable main
 // region. Drop this at the root of each /app/* page. The child region
@@ -87,6 +89,11 @@ export function AppShell({
           onMenuClick={() => setNavOpen(true)}
           navOpen={navOpen}
         />
+        {/* iOS / Android app only. Safe-area insets need nothing here: the
+            app pads <body> and redefines h-screen (src/index.css, "Native app
+            shell"), so this shell already starts below the status bar and
+            ends above the home indicator. */}
+        {isNativeApp() && <OfflineBanner />}
         <div className="flex-1 overflow-y-auto overflow-x-hidden">{children}</div>
       </main>
     </div>

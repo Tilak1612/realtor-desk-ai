@@ -345,7 +345,7 @@ INSERT INTO public.property_listings (
    '4242 Rue Saint-Denis, Montréal, QC H2J', '4242 Rue Saint-Denis',
    'Montreal', 'Quebec', 'Canada', 'H2J 2L1', 'condo', 'sale',
    749000::numeric, 'CAD', 3, 2::numeric, 1250, 1920,
-   'active', 'MTL-SEED-0001', NULL, 'demo_seed', 'demo_seed',
+   'active', 'MTL-SEED-0001', NULL, 'demo_seed', 'manual',  -- source is CHECKed: manual | crea_ddf | url_scrape
    '{"staging_consult": true}'::jsonb,
    now() - interval '25 days', now() - interval '3 days'),
 
@@ -354,7 +354,7 @@ INSERT INTO public.property_listings (
    '87 Bank Street, Ottawa, ON K1P', '87 Bank Street',
    'Ottawa', 'Ontario', 'Canada', 'K1P 5N5', 'townhouse', 'sale',
    895000::numeric, 'CAD', 4, 3::numeric, 1850, 1965,
-   'active', 'OTT-SEED-0002', NULL, 'demo_seed', 'demo_seed',
+   'active', 'OTT-SEED-0002', NULL, 'demo_seed', 'manual',  -- source is CHECKed: manual | crea_ddf | url_scrape
    '{"offer_in_motion": true}'::jsonb,
    now() - interval '18 days', now() - interval '2 days'),
 
@@ -363,7 +363,7 @@ INSERT INTO public.property_listings (
    '1205 Boulevard de l''Île-des-Sœurs, Verdun, QC H3E', '1205 Boulevard de l''Île-des-Sœurs',
    'Verdun', 'Quebec', 'Canada', 'H3E 1Y7', 'condo', 'sale',
    1100000::numeric, 'CAD', 2, 2::numeric, 1400, 2005,
-   'sold', 'MTL-SEED-0003', NULL, 'demo_seed', 'demo_seed',
+   'sold', 'MTL-SEED-0003', NULL, 'demo_seed', 'manual',  -- source is CHECKed: manual | crea_ddf | url_scrape
    '{"closing_date":"2026-05-12"}'::jsonb,
    now() - interval '65 days', now() - interval '5 days');
 

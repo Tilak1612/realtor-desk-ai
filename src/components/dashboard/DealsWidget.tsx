@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { TrendingUp, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-interface DealStats {
+export interface DealStats {
   lead: { count: number; value: number };
   viewing: { count: number; value: number };
   offer: { count: number; value: number };
