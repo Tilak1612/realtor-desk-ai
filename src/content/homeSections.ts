@@ -262,3 +262,134 @@ export function HOME_WORKFLOW(isFr: boolean): { heading: string; blocks: ProseBl
     ],
   };
 }
+
+// ---------------------------------------------------------------------------
+// The closing section: what the 14 days actually look like.
+//
+// The hero already says "Card required"; that is the objection a visitor
+// carries to the bottom of the page. This answers it at the decision point
+// instead of asking for a click on a bare "Claim your desk".
+//
+// EVERY STEP TRACES TO SOMETHING SHIPPED:
+//   account first, no card at signup        → src/config/billing.ts header
+//   card stored at checkout, $0 charged      → create-checkout: trial_period_days,
+//                                              payment_method_collection "always"
+//   14 days start at checkout                → same; BillingDisclosure wording
+//   full plan, not a reduced version         → /pricing "What does the trial include?"
+//   cancel from Billing, not billed          → create-checkout custom_text
+//   no contract, no cancellation fee         → /pricing "Can I change plan or leave?"
+//   tax at checkout from billing province    → /pricing, automatic_tax
+//   prices                                   → PLAN_SUMMARIES (billing.ts)
+// It does not promise a reminder email: delivery of the trial-ending email is
+// not verified, so the page does not lean on it.
+
+export interface TrialStep {
+  when: string;
+  title: string;
+  body: string;
+}
+
+export interface TrialPlanCopy {
+  eyebrow: string;
+  heading: string;
+  lede: string;
+  steps: TrialStep[];
+  card: {
+    plan: string;
+    today: string;
+    todayLabel: string;
+    /** {price} is replaced with the formatted Solo price. */
+    then: string;
+    /** {date} is replaced client-side; rendered only after mount. */
+    chargeDate: string;
+    cta: string;
+    demo: string;
+    /** {price} is replaced with the formatted Team price. */
+    team: string;
+    teamLink: string;
+    footnote: string;
+  };
+}
+
+export function HOME_TRIAL_PLAN(isFr: boolean): TrialPlanCopy {
+  if (isFr) {
+    return {
+      eyebrow: "Vos 14 premiers jours",
+      heading: "Aucune surprise entre aujourd’hui et votre première facture.",
+      lede: "Une carte est demandée au départ. Voici exactement ce qui se passe ensuite, et quand vous pouvez partir sans payer.",
+      steps: [
+        {
+          when: "Aujourd’hui",
+          title: "Créez votre compte",
+          body: "Votre nom, un courriel et un mot de passe. Aucune carte à cette étape.",
+        },
+        {
+          when: "Au paiement",
+          title: "Choisissez Solo ou Équipe",
+          body: "Stripe enregistre votre carte, rien n’est prélevé. Vos 14 jours commencent à ce moment.",
+        },
+        {
+          when: "Jours 1 à 13",
+          title: "Travaillez dans votre vrai poste",
+          body: "Le forfait complet, pas une version réduite. Importez un prospect, envoyez une réponse bilingue, faites avancer une transaction.",
+        },
+        {
+          when: "Jour 14",
+          title: "Continuez, ou partez sans payer",
+          body: "Annulez à tout moment avant le 14e jour depuis Facturation et rien n’est facturé. Sans contrat ni frais d’annulation.",
+        },
+      ],
+      card: {
+        plan: "Solo · un courtier",
+        today: "0 $",
+        todayLabel: "aujourd’hui",
+        then: "puis {price} CAD par mois après 14 jours, taxes en sus selon votre province.",
+        chargeDate: "Si vous commencez l’essai aujourd’hui, le premier prélèvement aurait lieu le {date}.",
+        cta: "Commencer l’essai de 14 jours",
+        demo: "Réserver une démo de 30 min",
+        team: "Équipe : {price} CAD par mois.",
+        teamLink: "Comparer les forfaits",
+        footnote: "Vos données s’exportent à tout moment, même après l’annulation.",
+      },
+    };
+  }
+  return {
+    eyebrow: "Your first 14 days",
+    heading: "No surprises between today and your first bill.",
+    lede: "A card is required to start. Here is exactly what happens next, and when you can walk away without paying.",
+    steps: [
+      {
+        when: "Today",
+        title: "Create your account",
+        body: "Your name, an email and a password. No card at this step.",
+      },
+      {
+        when: "At checkout",
+        title: "Pick Solo or Team",
+        body: "Stripe stores your card and charges nothing. Your 14 days start here.",
+      },
+      {
+        when: "Days 1–13",
+        title: "Work in your real desk",
+        body: "The full plan, not a reduced version. Import one lead, send one bilingual reply, move one deal.",
+      },
+      {
+        when: "Day 14",
+        title: "Keep going, or leave without paying",
+        body: "Cancel any time before day 14 from Billing and you are not billed. No contract, no cancellation fee.",
+      },
+    ],
+    card: {
+      plan: "Solo · one agent",
+      today: "$0",
+      todayLabel: "today",
+      then: "then {price} CAD a month after 14 days, plus tax for your province.",
+      chargeDate: "If you start the trial today, the first charge would be on {date}.",
+      cta: "Start 14-day free trial",
+      demo: "Book a 30-min demo",
+      team: "Team is {price} CAD a month.",
+      teamLink: "Compare plans",
+      footnote: "Your data exports at any time, including after you cancel.",
+    },
+  };
+}

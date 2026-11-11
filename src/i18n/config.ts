@@ -565,11 +565,6 @@ const resources = {
           quote: "Customer story coming soon.",
           author: "",
           role: ""
-        },
-        closingCta: {
-          title: "Start your 14-day trial.",
-          body: "Full access for 14 days. Import one lead, send one bilingual reply — then decide.",
-          cta: "Claim your desk"
         }
       },
       compareBoldtrail: {
@@ -3933,11 +3928,6 @@ const resources = {
           quote: "Histoire client à venir.",
           author: "",
           role: ""
-        },
-        closingCta: {
-          title: "Commencez votre essai de 14 jours.",
-          body: "Accès complet pendant 14 jours. Importez un prospect, envoyez une réponse bilingue — puis décidez.",
-          cta: "Réservez votre poste"
         }
       },
       compareBoldtrail: {
