@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CtaLink } from "@/components/rd/marketing/CtaLink";
 import { CAL_ROUTE } from "@/config/booking";
@@ -28,7 +29,13 @@ import { AudienceCards } from "@/components/rd/marketing/AudienceCards";
 import { ResourceCards } from "@/components/rd/marketing/ResourceCards";
 import { FAQAccordion } from "@/components/rd/marketing/FAQAccordion";
 import { HeroScorer } from "@/components/rd/marketing/HeroScorer";
-import { HOME_FAQS, HOME_RESOURCES, HOME_WORKFLOW } from "@/content/homeSections";
+import { HOME_FAQS, HOME_RESOURCES, HOME_TRIAL_PLAN, HOME_WORKFLOW } from "@/content/homeSections";
+import {
+  PLAN_SUMMARIES,
+  formatBillingDate,
+  formatCad,
+  projectedFirstChargeDate,
+} from "@/config/billing";
 import { HOME_COMPARE_STRIP } from "@/content/comparisonTables";
 
 // /  — Home page per rd-marketing.jsx Artboard_Home.
@@ -164,7 +171,7 @@ export default function Home() {
         </section>
       </Reveal>
 
-      <Reveal><TestimonialAndCTA t={t} /></Reveal>
+      <Reveal><TrialPlanCTA t={t} isFr={isFr} /></Reveal>
     </MarketingLayout>
   );
 }
@@ -620,68 +627,152 @@ function CompareStrip({ t }: { t: TFn }) {
 }
 
 /* ──────────────────────────────────────────────────────────
- * TESTIMONIAL + CTA
+ * CLOSING: YOUR FIRST 14 DAYS
+ *
+ * Was a navy card with one full-width "Claim your desk" button. The hero
+ * already tells a visitor a card is required; that is the question they
+ * carry to the bottom of the page, and the old card did not answer it.
+ * This lays the trial out step by step beside the price, so the decision
+ * point carries the facts: $0 today, when the 14 days start, how to leave
+ * without paying, and what it costs after. Copy and sources live in
+ * HOME_TRIAL_PLAN; prices come from PLAN_SUMMARIES, the same source the
+ * signup disclosure uses, so the two cannot disagree.
  * ────────────────────────────────────────────────────────── */
-function TestimonialAndCTA({ t }: { t: TFn }) {
+function TrialPlanCTA({ t, isFr }: { t: TFn; isFr: boolean }) {
+  const { i18n } = useTranslation();
+  const copy = HOME_TRIAL_PLAN(isFr);
+  const price = (key: "solo" | "team") =>
+    formatCad(PLAN_SUMMARIES.find((p) => p.key === key)!.monthlyCad, i18n.language);
+
+  // The projected first-charge date depends on the visitor's "today", so it
+  // is filled in after mount: the prerendered HTML must not carry the date
+  // the site happened to be built on.
+  const [chargeDate, setChargeDate] = useState<string | null>(null);
+  useEffect(() => {
+    setChargeDate(formatBillingDate(projectedFirstChargeDate(), i18n.language));
+  }, [i18n.language]);
+
   // Only render the testimonial block when a real attribution exists
-  // (landing.testimonial.author is non-empty). Until then the CTA
-  // card takes the full width — avoids broadcasting "zero customer
-  // references" with a placeholder card (2026-04-24 audit).
+  // (landing.testimonial.author is non-empty), as before.
   const hasAttributedTestimonial = Boolean(t("landing.testimonial.author"));
 
   return (
-    <section className="px-4 sm:px-8 md:px-14 pt-[100px] pb-[120px]">
-      <div
-        className={`mx-auto max-w-[1200px] grid grid-cols-1 ${
-          hasAttributedTestimonial ? "lg:grid-cols-[1.2fr_1fr]" : ""
-        } gap-12 items-stretch`}
-      >
-        {hasAttributedTestimonial && (
-          <div className="bg-white border border-rd-line rounded-rd-xl p-10 md:p-12 relative">
-            <div className="text-[72px] leading-none text-rd-terra-600 font-rd-serif">"</div>
-            <p className="text-[20px] md:text-[22px] leading-[1.45] text-rd-ink-900 font-medium -mt-5">
-              {t("landing.testimonial.quote")}
+    <section
+      aria-labelledby="trial-plan-heading"
+      className="px-4 sm:px-8 md:px-14 pt-[100px] pb-[120px]"
+    >
+      {hasAttributedTestimonial && (
+        <figure className="mx-auto max-w-[1200px] mb-12 bg-white border border-rd-line rounded-rd-xl p-10 md:p-12">
+          <blockquote className="text-[20px] md:text-[22px] leading-[1.45] text-rd-ink-900 font-medium">
+            {t("landing.testimonial.quote")}
+          </blockquote>
+          <figcaption className="mt-6 text-sm">
+            <span className="font-semibold">{t("landing.testimonial.author")}</span>{" "}
+            <span className="text-rd-ink-500">{t("landing.testimonial.role")}</span>
+          </figcaption>
+        </figure>
+      )}
+
+      <div className="relative overflow-hidden mx-auto max-w-[1200px] bg-rd-navy-800 text-white rounded-rd-xl px-6 py-10 sm:px-10 md:px-14 md:py-16">
+        {/* The page's one depth idiom: a contained radial, pointer-transparent
+            so it cannot swallow a click. */}
+        <div
+          aria-hidden="true"
+          className="absolute -left-24 -top-24 w-[420px] h-[420px] rounded-full opacity-25 pointer-events-none"
+          style={{ background: "radial-gradient(circle, var(--rd-terra-600) 0%, transparent 62%)" }}
+        />
+
+        <div className="relative grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-16 items-start lg:items-center">
+          <div>
+            <Eyebrow tone="dark">{copy.eyebrow}</Eyebrow>
+            <h2
+              id="trial-plan-heading"
+              className="mt-2.5 text-[30px] md:text-[42px] font-semibold tracking-[-0.02em] leading-[1.1]"
+            >
+              {copy.heading}
+            </h2>
+            <p className="text-[16px] md:text-[17px] leading-[1.6] text-white/75 mt-4 max-w-[520px]">
+              {copy.lede}
             </p>
-            <div className="flex items-center gap-3 mt-8">
-              <div>
-                <div className="font-semibold text-sm">{t("landing.testimonial.author")}</div>
-                <div className="text-[13px] text-rd-ink-500">{t("landing.testimonial.role")}</div>
-              </div>
+
+            <ol className="mt-10 space-y-0">
+              {copy.steps.map((step, i) => {
+                const last = i === copy.steps.length - 1;
+                return (
+                  <li key={step.when} className="relative grid grid-cols-[36px_1fr] gap-4">
+                    {/* Rail and marker. The rail stops at the last step. */}
+                    <div className="relative flex justify-center" aria-hidden="true">
+                      {!last && <span className="absolute top-9 bottom-0 w-px bg-white/20" />}
+                      <span
+                        className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-bold ${
+                          last
+                            ? "bg-rd-terra-600 text-white"
+                            : "bg-white/10 text-white ring-1 ring-white/25"
+                        }`}
+                      >
+                        {i + 1}
+                      </span>
+                    </div>
+                    <div className={last ? "pb-0" : "pb-7"}>
+                      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-rd-terra-400">
+                        {step.when}
+                      </div>
+                      <h3 className="mt-1 text-[17px] font-semibold leading-snug">{step.title}</h3>
+                      <p className="mt-1 text-[15px] leading-[1.55] text-white/75">{step.body}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          {/* Price card: the decision, with the number on it. */}
+          <div className="bg-white text-rd-ink-900 rounded-rd-lg shadow-rd-sm p-7 md:p-9">
+            <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-rd-ink-600">
+              {copy.card.plan}
+            </div>
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="text-[56px] md:text-[64px] font-semibold tracking-[-0.03em] leading-none">
+                {copy.card.today}
+              </span>
+              <span className="text-lg text-rd-ink-600">{copy.card.todayLabel}</span>
+            </div>
+            <p className="mt-3 text-[15px] leading-[1.5] text-rd-ink-700">
+              {copy.card.then.replace("{price}", price("solo"))}
+            </p>
+            <p className="mt-2 min-h-[42px] text-[13px] leading-[1.5] text-rd-ink-600" aria-live="polite">
+              {chargeDate ? copy.card.chargeDate.replace("{date}", chargeDate) : null}
+            </p>
+
+            <div className="mt-6 flex flex-col gap-3">
+              <CtaLink
+                to="/signup"
+                location="closing_trial_plan"
+                variant="terra"
+                size="lg"
+                full
+                trailingIcon={<IconArrow />}
+              >
+                {copy.card.cta}
+              </CtaLink>
+              <CtaLink to={CAL_ROUTE} location="closing_trial_plan" variant="outline" size="lg" full>
+                {copy.card.demo}
+              </CtaLink>
+            </div>
+
+            <div className="mt-6 pt-5 border-t border-rd-line text-[13px] leading-[1.5] text-rd-ink-600 space-y-2">
+              <p>
+                {copy.card.team.replace("{price}", price("team"))}{" "}
+                <Link to="/pricing" className="font-semibold text-rd-navy-800 underline underline-offset-2">
+                  {copy.card.teamLink}
+                </Link>
+              </p>
+              <p className="flex items-start gap-1.5">
+                <IconCheck className="text-rd-success mt-[3px] shrink-0" />
+                {copy.card.footnote}
+              </p>
             </div>
           </div>
-        )}
-
-        {/* CTA */}
-        <div className="relative overflow-hidden bg-rd-navy-800 rounded-rd-xl p-10 md:p-12 text-white flex flex-col justify-between gap-8">
-          {/* The same contained radial the big feature card already uses,
-              so the page has one depth idiom rather than two. Decorative,
-              and pointer-transparent so it cannot swallow a CTA click. */}
-          <div
-            aria-hidden="true"
-            className="absolute -right-16 -bottom-16 w-[300px] h-[300px] rounded-full opacity-30 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle, var(--rd-terra-600) 0%, transparent 62%)",
-            }}
-          />
-          <div className="relative z-10">
-            <h3 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.01em] leading-[1.15]">
-              {t("landing.closingCta.title")}
-            </h3>
-            <p className="text-[15px] text-white/70 mt-3 leading-[1.55]">
-              {t("landing.closingCta.body")}
-            </p>
-          </div>
-          <CtaLink
-            to="/signup"
-            location="closing"
-            variant="terra"
-            size="lg"
-            className="relative z-10"
-            trailingIcon={<IconArrow />}
-          >
-              {t("landing.closingCta.cta")}
-          </CtaLink>
         </div>
       </div>
     </section>
